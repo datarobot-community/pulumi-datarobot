@@ -1,0 +1,1464 @@
+{
+    "name": "datarobot",
+    "displayName": "DataRobot",
+    "description": "A Pulumi package for creating and managing DataRobot resources.",
+    "keywords": [
+        "datarobot",
+        "ai",
+        "category/cloud"
+    ],
+    "homepage": "https://www.datarobot.com",
+    "license": "Apache-2.0",
+    "attribution": "This Pulumi package is based on the [`datarobot` Terraform Provider](https://github.com/datarobot-community/terraform-provider-datarobot).",
+    "repository": "https://github.com/datarobot-community/pulumi-datarobot",
+    "logoUrl": "https://www.datarobot.com/wp-content/uploads/2021/08/DataRobot-logo-color.svg",
+    "publisher": "DataRobot, Inc.",
+    "meta": {
+        "moduleFormat": "(.*)(?:/[^/]*)"
+    },
+    "language": {
+        "csharp": {
+            "packageReferences": {
+                "Pulumi": "3.*"
+            },
+            "compatibility": "tfbridge20"
+        },
+        "go": {
+            "importBasePath": "github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot",
+            "generateResourceContainerTypes": true,
+            "generateExtraInputTypes": true
+        },
+        "nodejs": {
+            "packageDescription": "A Pulumi package for creating and managing DataRobot resources.",
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/datarobot-community/terraform-provider-datarobot)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-datarobot` repo](https://github.com/datarobot-community/pulumi-datarobot/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-datarobot` repo](https://github.com/datarobot-community/terraform-provider-datarobot/issues).",
+            "dependencies": {
+                "@pulumi/pulumi": "^3.0.0"
+            },
+            "devDependencies": {
+                "@types/mime": "^2.0.0",
+                "@types/node": "^10.0.0"
+            },
+            "compatibility": "tfbridge20",
+            "disableUnionOutputTypes": true
+        },
+        "python": {
+            "requires": {
+                "pulumi": "\u003e=3.0.0,\u003c4.0.0"
+            },
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/datarobot-community/terraform-provider-datarobot)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-datarobot` repo](https://github.com/datarobot-community/pulumi-datarobot/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-datarobot` repo](https://github.com/datarobot-community/terraform-provider-datarobot/issues).",
+            "compatibility": "tfbridge20",
+            "pyproject": {}
+        }
+    },
+    "config": {
+        "variables": {
+            "apikey": {
+                "type": "string",
+                "description": "Key to access DataRobot API\n",
+                "secret": true
+            },
+            "endpoint": {
+                "type": "string",
+                "description": "Endpoint for the DataRobot API\n",
+                "secret": true
+            }
+        }
+    },
+    "types": {
+        "datarobot:index/CustomModelGuardConfiguration:CustomModelGuardConfiguration": {
+            "properties": {
+                "deploymentId": {
+                    "type": "string",
+                    "description": "The deployment ID of this guard.\n"
+                },
+                "inputColumnName": {
+                    "type": "string",
+                    "description": "The input column name of this guard.\n"
+                },
+                "intervention": {
+                    "$ref": "#/types/datarobot:index/CustomModelGuardConfigurationIntervention:CustomModelGuardConfigurationIntervention",
+                    "description": "The intervention for the guard configuration.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the guard configuration.\n"
+                },
+                "outputColumnName": {
+                    "type": "string",
+                    "description": "The output column name of this guard.\n"
+                },
+                "stages": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The list of stages for the guard configuration.\n"
+                },
+                "templateName": {
+                    "type": "string",
+                    "description": "The template name of the guard configuration.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "intervention",
+                "name",
+                "stages",
+                "templateName"
+            ]
+        },
+        "datarobot:index/CustomModelGuardConfigurationIntervention:CustomModelGuardConfigurationIntervention": {
+            "properties": {
+                "action": {
+                    "type": "string",
+                    "description": "The action of the guard intervention.\n"
+                },
+                "condition": {
+                    "$ref": "#/types/datarobot:index/CustomModelGuardConfigurationInterventionCondition:CustomModelGuardConfigurationInterventionCondition",
+                    "description": "The list of conditions for the guard intervention.\n"
+                },
+                "message": {
+                    "type": "string",
+                    "description": "The message of the guard intervention.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "action",
+                "condition"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "action",
+                        "condition",
+                        "message"
+                    ]
+                }
+            }
+        },
+        "datarobot:index/CustomModelGuardConfigurationInterventionCondition:CustomModelGuardConfigurationInterventionCondition": {
+            "properties": {
+                "comparand": {
+                    "type": "number",
+                    "description": "The comparand of the guard condition.\n"
+                },
+                "comparator": {
+                    "type": "string",
+                    "description": "The comparator of the guard condition.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "comparand",
+                "comparator"
+            ]
+        },
+        "datarobot:index/CustomModelOverallModerationConfiguration:CustomModelOverallModerationConfiguration": {
+            "properties": {
+                "timeoutAction": {
+                    "type": "string",
+                    "description": "The timeout action of the overall moderation configuration.\n"
+                },
+                "timeoutSec": {
+                    "type": "integer",
+                    "description": "The timeout in seconds of the overall moderation configuration.\n"
+                }
+            },
+            "type": "object",
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "timeoutAction",
+                        "timeoutSec"
+                    ]
+                }
+            }
+        },
+        "datarobot:index/CustomModelRuntimeParameter:CustomModelRuntimeParameter": {
+            "properties": {
+                "key": {
+                    "type": "string",
+                    "description": "The name of the runtime parameter.\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The type of the runtime parameter.\n"
+                },
+                "value": {
+                    "type": "string",
+                    "description": "The value of the runtime parameter.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "key",
+                "type",
+                "value"
+            ]
+        },
+        "datarobot:index/CustomModelSourceRemoteRepository:CustomModelSourceRemoteRepository": {
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "The ID of the source remote repository.\n"
+                },
+                "ref": {
+                    "type": "string",
+                    "description": "The reference of the source remote repository.\n"
+                },
+                "sourcePaths": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The list of source paths in the source remote repository.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "id",
+                "ref",
+                "sourcePaths"
+            ]
+        },
+        "datarobot:index/DeploymentSettings:DeploymentSettings": {
+            "properties": {
+                "associationId": {
+                    "$ref": "#/types/datarobot:index/DeploymentSettingsAssociationId:DeploymentSettingsAssociationId",
+                    "description": "Used to associate predictions back to your actual data.\n"
+                },
+                "challengerAnalysis": {
+                    "type": "boolean",
+                    "description": "Used to compare the performance of the deployed model with the challenger models.\n"
+                },
+                "predictionRowStorage": {
+                    "type": "boolean",
+                    "description": "Used to score predictions made by the challenger models and compare performance with the deployed model.\n"
+                },
+                "predictionsSettings": {
+                    "$ref": "#/types/datarobot:index/DeploymentSettingsPredictionsSettings:DeploymentSettingsPredictionsSettings",
+                    "description": "Settings for the predictions.\n"
+                }
+            },
+            "type": "object"
+        },
+        "datarobot:index/DeploymentSettingsAssociationId:DeploymentSettingsAssociationId": {
+            "properties": {
+                "autoGenerateId": {
+                    "type": "boolean",
+                    "description": "Whether to automatically generate an association ID.\n"
+                },
+                "featureName": {
+                    "type": "string",
+                    "description": "The name of the feature to use as the association ID.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "autoGenerateId",
+                "featureName"
+            ]
+        },
+        "datarobot:index/DeploymentSettingsPredictionsSettings:DeploymentSettingsPredictionsSettings": {
+            "properties": {
+                "maxComputes": {
+                    "type": "number",
+                    "description": "The maximum number of computes to use for predictions.\n"
+                },
+                "minComputes": {
+                    "type": "number",
+                    "description": "The minimum number of computes to use for predictions.\n"
+                },
+                "realTime": {
+                    "type": "boolean",
+                    "description": "Whether to use real-time predictions.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "maxComputes",
+                "minComputes",
+                "realTime"
+            ]
+        },
+        "datarobot:index/VectorDatabaseChunkingParameters:VectorDatabaseChunkingParameters": {
+            "properties": {
+                "chunkOverlapPercentage": {
+                    "type": "number",
+                    "description": "The percentage of overlap between chunks.\n"
+                },
+                "chunkSize": {
+                    "type": "number",
+                    "description": "The size of the chunks.\n"
+                },
+                "chunkingMethod": {
+                    "type": "string",
+                    "description": "The method used to chunk the data.\n"
+                },
+                "embeddingModel": {
+                    "type": "string",
+                    "description": "The id of the Embedding Model.\n"
+                },
+                "isSeparatorRegex": {
+                    "type": "boolean",
+                    "description": "Whether the separator is a regex.\n"
+                },
+                "separators": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The separators used to split the data.\n"
+                }
+            },
+            "type": "object",
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "chunkOverlapPercentage",
+                        "chunkSize",
+                        "chunkingMethod",
+                        "embeddingModel",
+                        "isSeparatorRegex",
+                        "separators"
+                    ]
+                }
+            }
+        }
+    },
+    "provider": {
+        "description": "The provider type for the datarobot package. By default, resources use package-wide configuration\nsettings, however an explicit `Provider` instance may be created and passed during resource\nconstruction to achieve fine-grained programmatic control over provider settings. See the\n[documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.\n",
+        "properties": {
+            "apikey": {
+                "type": "string",
+                "description": "Key to access DataRobot API\n",
+                "secret": true
+            },
+            "endpoint": {
+                "type": "string",
+                "description": "Endpoint for the DataRobot API\n",
+                "secret": true
+            }
+        },
+        "inputProperties": {
+            "apikey": {
+                "type": "string",
+                "description": "Key to access DataRobot API\n",
+                "secret": true
+            },
+            "endpoint": {
+                "type": "string",
+                "description": "Endpoint for the DataRobot API\n",
+                "secret": true
+            }
+        }
+    },
+    "resources": {
+        "datarobot:index/apiTokenCredential:ApiTokenCredential": {
+            "description": "Api Token Credential\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@pulumi/datarobot\";\n\nconst example = new datarobot.ApiTokenCredential(\"example\", {\n    apiToken: \"[the API Key value here]\",\n    description: \"Description for the example API token\",\n});\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample = datarobot.ApiTokenCredential(\"example\",\n    api_token=\"[the API Key value here]\",\n    description=\"Description for the example API token\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = Pulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Datarobot.ApiTokenCredential(\"example\", new()\n    {\n        ApiToken = \"[the API Key value here]\",\n        Description = \"Description for the example API token\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := datarobot.NewApiTokenCredential(ctx, \"example\", \u0026datarobot.ApiTokenCredentialArgs{\n\t\t\tApiToken:    pulumi.String(\"[the API Key value here]\"),\n\t\t\tDescription: pulumi.String(\"Description for the example API token\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.ApiTokenCredential;\nimport com.pulumi.datarobot.ApiTokenCredentialArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new ApiTokenCredential(\"example\", ApiTokenCredentialArgs.builder()\n            .apiToken(\"[the API Key value here]\")\n            .description(\"Description for the example API token\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: datarobot:ApiTokenCredential\n    properties:\n      apiToken: '[the API Key value here]'\n      description: Description for the example API token\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "properties": {
+                "apiToken": {
+                    "type": "string",
+                    "description": "The description of the Api Token Credential.\n",
+                    "secret": true
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The description of the Api Token Credential.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the Api Token Credential.\n"
+                }
+            },
+            "required": [
+                "apiToken",
+                "description",
+                "name"
+            ],
+            "inputProperties": {
+                "apiToken": {
+                    "type": "string",
+                    "description": "The description of the Api Token Credential.\n",
+                    "secret": true
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The description of the Api Token Credential.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the Api Token Credential.\n"
+                }
+            },
+            "requiredInputs": [
+                "apiToken",
+                "description"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering ApiTokenCredential resources.\n",
+                "properties": {
+                    "apiToken": {
+                        "type": "string",
+                        "description": "The description of the Api Token Credential.\n",
+                        "secret": true
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "The description of the Api Token Credential.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the Api Token Credential.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "datarobot:index/basicCredential:BasicCredential": {
+            "description": "Basic Credential\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@pulumi/datarobot\";\n\nconst example = new datarobot.BasicCredential(\"example\", {\n    description: \"Description for the example basic credential\",\n    password: \"example_password\",\n    user: \"example_user\",\n});\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample = datarobot.BasicCredential(\"example\",\n    description=\"Description for the example basic credential\",\n    password=\"example_password\",\n    user=\"example_user\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = Pulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Datarobot.BasicCredential(\"example\", new()\n    {\n        Description = \"Description for the example basic credential\",\n        Password = \"example_password\",\n        User = \"example_user\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := datarobot.NewBasicCredential(ctx, \"example\", \u0026datarobot.BasicCredentialArgs{\n\t\t\tDescription: pulumi.String(\"Description for the example basic credential\"),\n\t\t\tPassword:    pulumi.String(\"example_password\"),\n\t\t\tUser:        pulumi.String(\"example_user\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.BasicCredential;\nimport com.pulumi.datarobot.BasicCredentialArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new BasicCredential(\"example\", BasicCredentialArgs.builder()\n            .description(\"Description for the example basic credential\")\n            .password(\"example_password\")\n            .user(\"example_user\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: datarobot:BasicCredential\n    properties:\n      description: Description for the example basic credential\n      password: example_password\n      user: example_user\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "properties": {
+                "description": {
+                    "type": "string",
+                    "description": "The description of the Basic Credential.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the Basic Credential.\n"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "The password of the Basic Credential.\n",
+                    "secret": true
+                },
+                "user": {
+                    "type": "string",
+                    "description": "The user of the Basic Credential.\n",
+                    "secret": true
+                }
+            },
+            "required": [
+                "description",
+                "name",
+                "password",
+                "user"
+            ],
+            "inputProperties": {
+                "description": {
+                    "type": "string",
+                    "description": "The description of the Basic Credential.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the Basic Credential.\n"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "The password of the Basic Credential.\n",
+                    "secret": true
+                },
+                "user": {
+                    "type": "string",
+                    "description": "The user of the Basic Credential.\n",
+                    "secret": true
+                }
+            },
+            "requiredInputs": [
+                "description",
+                "password",
+                "user"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering BasicCredential resources.\n",
+                "properties": {
+                    "description": {
+                        "type": "string",
+                        "description": "The description of the Basic Credential.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the Basic Credential.\n"
+                    },
+                    "password": {
+                        "type": "string",
+                        "description": "The password of the Basic Credential.\n",
+                        "secret": true
+                    },
+                    "user": {
+                        "type": "string",
+                        "description": "The user of the Basic Credential.\n",
+                        "secret": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "datarobot:index/chatApplication:ChatApplication": {
+            "description": "Application\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@pulumi/datarobot\";\n\nconst example = new datarobot.ChatApplication(\"example\", {deploymentId: datarobot_deployment.example.id});\nexport const datarobotChatApplicationUrl = example.applicationUrl;\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample = datarobot.ChatApplication(\"example\", deployment_id=datarobot_deployment[\"example\"][\"id\"])\npulumi.export(\"datarobotChatApplicationUrl\", example.application_url)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = Pulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Datarobot.ChatApplication(\"example\", new()\n    {\n        DeploymentId = datarobot_deployment.Example.Id,\n    });\n\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"datarobotChatApplicationUrl\"] = example.ApplicationUrl,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texample, err := datarobot.NewChatApplication(ctx, \"example\", \u0026datarobot.ChatApplicationArgs{\n\t\t\tDeploymentId: pulumi.Any(datarobot_deployment.Example.Id),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"datarobotChatApplicationUrl\", example.ApplicationUrl)\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.ChatApplication;\nimport com.pulumi.datarobot.ChatApplicationArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new ChatApplication(\"example\", ChatApplicationArgs.builder()\n            .deploymentId(datarobot_deployment.example().id())\n            .build());\n\n        ctx.export(\"datarobotChatApplicationUrl\", example.applicationUrl());\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: datarobot:ChatApplication\n    properties:\n      deploymentId: ${datarobot_deployment.example.id}\noutputs:\n  datarobotChatApplicationUrl: ${example.applicationUrl}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "properties": {
+                "applicationUrl": {
+                    "type": "string",
+                    "description": "The URL of the Application.\n"
+                },
+                "deploymentId": {
+                    "type": "string",
+                    "description": "The deployment ID of the Application.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the Application.\n"
+                },
+                "versionId": {
+                    "type": "string",
+                    "description": "The version ID of the Application.\n"
+                }
+            },
+            "required": [
+                "applicationUrl",
+                "deploymentId",
+                "name",
+                "versionId"
+            ],
+            "inputProperties": {
+                "deploymentId": {
+                    "type": "string",
+                    "description": "The deployment ID of the Application.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the Application.\n"
+                }
+            },
+            "requiredInputs": [
+                "deploymentId"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering ChatApplication resources.\n",
+                "properties": {
+                    "applicationUrl": {
+                        "type": "string",
+                        "description": "The URL of the Application.\n"
+                    },
+                    "deploymentId": {
+                        "type": "string",
+                        "description": "The deployment ID of the Application.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the Application.\n"
+                    },
+                    "versionId": {
+                        "type": "string",
+                        "description": "The version ID of the Application.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "datarobot:index/customModel:CustomModel": {
+            "description": "Data set from file\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.RemoteRepository;\nimport com.pulumi.datarobot.RemoteRepositoryArgs;\nimport com.pulumi.datarobot.CustomModel;\nimport com.pulumi.datarobot.CustomModelArgs;\nimport com.pulumi.datarobot.inputs.CustomModelSourceRemoteRepositoryArgs;\nimport com.pulumi.datarobot.inputs.CustomModelGuardConfigurationArgs;\nimport com.pulumi.datarobot.inputs.CustomModelGuardConfigurationInterventionArgs;\nimport com.pulumi.datarobot.inputs.CustomModelGuardConfigurationInterventionConditionArgs;\nimport com.pulumi.datarobot.inputs.CustomModelOverallModerationConfigurationArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var exampleRemoteRepository = new RemoteRepository(\"exampleRemoteRepository\", RemoteRepositoryArgs.builder()\n            .description(\"GitHub repository with Datarobot user models\")\n            .location(\"https://github.com/datarobot/datarobot-user-models\")\n            .sourceType(\"github\")\n            .build());\n\n        // set the credential id for private repositories\n        // credential_id = datarobot_api_token_credential.example.id\n        var exampleCustomModel = new CustomModel(\"exampleCustomModel\", CustomModelArgs.builder()\n            .description(\"An example custom model from GitHub repository\")\n            .sourceRemoteRepositories(CustomModelSourceRemoteRepositoryArgs.builder()\n                .id(exampleRemoteRepository.id())\n                .ref(\"master\")\n                .source_paths(\"model_templates/python3_dummy_binary\")\n                .build())\n            .localFiles(            \n                \"file1.py\",\n                \"file2.py\")\n            .targetType(\"Binary\")\n            .target(\"my_label\")\n            .baseEnvironmentName(\"[GenAI] Python 3.11 with Moderations\")\n            .guardConfigurations(            \n                CustomModelGuardConfigurationArgs.builder()\n                    .template_name(\"Rouge 1\")\n                    .name(\"Rouge 1 response\")\n                    .stages(\"response\")\n                    .intervention(CustomModelGuardConfigurationInterventionArgs.builder()\n                        .action(\"block\")\n                        .message(\"response has been blocked by Rogue 1 guard\")\n                        .condition(CustomModelGuardConfigurationInterventionConditionArgs.builder()\n                            .comparand(0.8)\n                            .comparator(\"lessThan\")\n                            .build())\n                        .build())\n                    .build(),\n                CustomModelGuardConfigurationArgs.builder()\n                    .template_name(\"Toxicity\")\n                    .name(\"Toxicity\")\n                    .stages(\"response\")\n                    .intervention(CustomModelGuardConfigurationInterventionArgs.builder()\n                        .action(\"block\")\n                        .message(\"response has been blocked by toxicity guard\")\n                        .condition(CustomModelGuardConfigurationInterventionConditionArgs.builder()\n                            .comparand(0.5)\n                            .comparator(\"greaterThan\")\n                            .build())\n                        .build())\n                    .deployment_id(datarobot_deployment.toxicity_classifier_deployment().id())\n                    .build(),\n                CustomModelGuardConfigurationArgs.builder()\n                    .template_name(\"Custom Deployment\")\n                    .name(\"Custom Guard\")\n                    .stages(                    \n                        \"prompt\",\n                        \"response\")\n                    .intervention(CustomModelGuardConfigurationInterventionArgs.builder()\n                        .action(\"report\")\n                        .condition(CustomModelGuardConfigurationInterventionConditionArgs.builder()\n                            .comparand(0.9)\n                            .comparator(\"greaterThan\")\n                            .build())\n                        .inputColumnName(\"inputCol\")\n                        .outputColumnName(\"outputCol\")\n                        .build())\n                    .deployment_id(datarobot_deployment.toxicity_classifier_deployment().id())\n                    .build())\n            .overallModerationConfiguration(CustomModelOverallModerationConfigurationArgs.builder()\n                .timeout_sec(120)\n                .timeout_action(\"score\")\n                .build())\n            .build());\n\n        ctx.export(\"exampleId\", exampleCustomModel.id());\n    }\n}\n```\n```yaml\nresources:\n  exampleRemoteRepository:\n    type: datarobot:RemoteRepository\n    properties:\n      description: GitHub repository with Datarobot user models\n      location: https://github.com/datarobot/datarobot-user-models\n      sourceType: github\n  exampleCustomModel:\n    type: datarobot:CustomModel\n    properties:\n      description: An example custom model from GitHub repository\n      sourceRemoteRepositories:\n        - id: ${exampleRemoteRepository.id}\n          ref: master\n          source_paths:\n            - model_templates/python3_dummy_binary\n      localFiles:\n        - file1.py\n        - file2.py\n      targetType: Binary\n      target: my_label\n      baseEnvironmentName: '[GenAI] Python 3.11 with Moderations'\n      # Guards\n      guardConfigurations:\n        - template_name: Rouge 1\n          name: Rouge 1 response\n          stages:\n            - response\n          intervention:\n            action: block\n            message: response has been blocked by Rogue 1 guard\n            condition:\n              comparand: 0.8\n              comparator: lessThan\n        - template_name: Toxicity\n          name: Toxicity\n          stages:\n            - response\n          intervention:\n            action: block\n            message: response has been blocked by toxicity guard\n            condition:\n              comparand: 0.5\n              comparator: greaterThan\n          deployment_id: ${datarobot_deployment.toxicity_classifier_deployment.id}\n        - template_name: Custom Deployment\n          name: Custom Guard\n          stages:\n            - prompt\n            - response\n          intervention:\n            action: report\n            condition:\n              comparand: 0.9\n              comparator: greaterThan\n            inputColumnName: inputCol\n            outputColumnName: outputCol\n          deployment_id: ${datarobot_deployment.toxicity_classifier_deployment.id}\n      overallModerationConfiguration:\n        timeout_sec: 120\n        timeout_action: score\noutputs:\n  exampleId: ${exampleCustomModel.id}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "properties": {
+                "baseEnvironmentId": {
+                    "type": "string",
+                    "description": "The ID of the base environment for the Custom Model.\n"
+                },
+                "baseEnvironmentName": {
+                    "type": "string",
+                    "description": "The name of the base environment for the Custom Model.\n"
+                },
+                "baseEnvironmentVersionId": {
+                    "type": "string",
+                    "description": "The ID of the base environment version for the Custom Model.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The description of the Custom Model.\n"
+                },
+                "guardConfigurations": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/datarobot:index/CustomModelGuardConfiguration:CustomModelGuardConfiguration"
+                    },
+                    "description": "The guard configurations for the Custom Model.\n"
+                },
+                "isProxy": {
+                    "type": "boolean",
+                    "description": "The flag indicating if the Custom Model is a proxy model.\n"
+                },
+                "localFiles": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The list of local file paths used to build the Custom Model.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the Custom Model.\n"
+                },
+                "overallModerationConfiguration": {
+                    "$ref": "#/types/datarobot:index/CustomModelOverallModerationConfiguration:CustomModelOverallModerationConfiguration",
+                    "description": "The overall moderation configuration for the Custom Model.\n"
+                },
+                "runtimeParameters": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/datarobot:index/CustomModelRuntimeParameter:CustomModelRuntimeParameter"
+                    },
+                    "description": "The runtime parameter values for the Custom Model.\n"
+                },
+                "sourceLlmBlueprintId": {
+                    "type": "string",
+                    "description": "The ID of the source LLM Blueprint for the Custom Model.\n"
+                },
+                "sourceRemoteRepositories": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/datarobot:index/CustomModelSourceRemoteRepository:CustomModelSourceRemoteRepository"
+                    },
+                    "description": "The source remote repositories for the Custom Model.\n"
+                },
+                "target": {
+                    "type": "string",
+                    "description": "The target of the Custom Model.\n"
+                },
+                "targetType": {
+                    "type": "string",
+                    "description": "The target type of the Custom Model.\n"
+                },
+                "versionId": {
+                    "type": "string",
+                    "description": "The ID of the latest Custom Model version.\n"
+                }
+            },
+            "required": [
+                "baseEnvironmentId",
+                "baseEnvironmentVersionId",
+                "description",
+                "name",
+                "runtimeParameters",
+                "versionId"
+            ],
+            "inputProperties": {
+                "baseEnvironmentId": {
+                    "type": "string",
+                    "description": "The ID of the base environment for the Custom Model.\n"
+                },
+                "baseEnvironmentName": {
+                    "type": "string",
+                    "description": "The name of the base environment for the Custom Model.\n"
+                },
+                "baseEnvironmentVersionId": {
+                    "type": "string",
+                    "description": "The ID of the base environment version for the Custom Model.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The description of the Custom Model.\n"
+                },
+                "guardConfigurations": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/datarobot:index/CustomModelGuardConfiguration:CustomModelGuardConfiguration"
+                    },
+                    "description": "The guard configurations for the Custom Model.\n"
+                },
+                "isProxy": {
+                    "type": "boolean",
+                    "description": "The flag indicating if the Custom Model is a proxy model.\n"
+                },
+                "localFiles": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The list of local file paths used to build the Custom Model.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the Custom Model.\n"
+                },
+                "overallModerationConfiguration": {
+                    "$ref": "#/types/datarobot:index/CustomModelOverallModerationConfiguration:CustomModelOverallModerationConfiguration",
+                    "description": "The overall moderation configuration for the Custom Model.\n"
+                },
+                "runtimeParameters": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/datarobot:index/CustomModelRuntimeParameter:CustomModelRuntimeParameter"
+                    },
+                    "description": "The runtime parameter values for the Custom Model.\n"
+                },
+                "sourceLlmBlueprintId": {
+                    "type": "string",
+                    "description": "The ID of the source LLM Blueprint for the Custom Model.\n"
+                },
+                "sourceRemoteRepositories": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/datarobot:index/CustomModelSourceRemoteRepository:CustomModelSourceRemoteRepository"
+                    },
+                    "description": "The source remote repositories for the Custom Model.\n"
+                },
+                "target": {
+                    "type": "string",
+                    "description": "The target of the Custom Model.\n"
+                },
+                "targetType": {
+                    "type": "string",
+                    "description": "The target type of the Custom Model.\n"
+                }
+            },
+            "requiredInputs": [
+                "description"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering CustomModel resources.\n",
+                "properties": {
+                    "baseEnvironmentId": {
+                        "type": "string",
+                        "description": "The ID of the base environment for the Custom Model.\n"
+                    },
+                    "baseEnvironmentName": {
+                        "type": "string",
+                        "description": "The name of the base environment for the Custom Model.\n"
+                    },
+                    "baseEnvironmentVersionId": {
+                        "type": "string",
+                        "description": "The ID of the base environment version for the Custom Model.\n"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "The description of the Custom Model.\n"
+                    },
+                    "guardConfigurations": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/datarobot:index/CustomModelGuardConfiguration:CustomModelGuardConfiguration"
+                        },
+                        "description": "The guard configurations for the Custom Model.\n"
+                    },
+                    "isProxy": {
+                        "type": "boolean",
+                        "description": "The flag indicating if the Custom Model is a proxy model.\n"
+                    },
+                    "localFiles": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "The list of local file paths used to build the Custom Model.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the Custom Model.\n"
+                    },
+                    "overallModerationConfiguration": {
+                        "$ref": "#/types/datarobot:index/CustomModelOverallModerationConfiguration:CustomModelOverallModerationConfiguration",
+                        "description": "The overall moderation configuration for the Custom Model.\n"
+                    },
+                    "runtimeParameters": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/datarobot:index/CustomModelRuntimeParameter:CustomModelRuntimeParameter"
+                        },
+                        "description": "The runtime parameter values for the Custom Model.\n"
+                    },
+                    "sourceLlmBlueprintId": {
+                        "type": "string",
+                        "description": "The ID of the source LLM Blueprint for the Custom Model.\n"
+                    },
+                    "sourceRemoteRepositories": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/datarobot:index/CustomModelSourceRemoteRepository:CustomModelSourceRemoteRepository"
+                        },
+                        "description": "The source remote repositories for the Custom Model.\n"
+                    },
+                    "target": {
+                        "type": "string",
+                        "description": "The target of the Custom Model.\n"
+                    },
+                    "targetType": {
+                        "type": "string",
+                        "description": "The target type of the Custom Model.\n"
+                    },
+                    "versionId": {
+                        "type": "string",
+                        "description": "The ID of the latest Custom Model version.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "datarobot:index/datasetFromFile:DatasetFromFile": {
+            "description": "Data set from file\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@pulumi/datarobot\";\n\nconst example = new datarobot.DatasetFromFile(\"example\", {\n    sourceFile: \"[Path to file to upload]\",\n    useCaseId: datarobot_use_case.example.id,\n});\nexport const exampleId = example.id;\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample = datarobot.DatasetFromFile(\"example\",\n    source_file=\"[Path to file to upload]\",\n    use_case_id=datarobot_use_case[\"example\"][\"id\"])\npulumi.export(\"exampleId\", example.id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = Pulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Datarobot.DatasetFromFile(\"example\", new()\n    {\n        SourceFile = \"[Path to file to upload]\",\n        UseCaseId = datarobot_use_case.Example.Id,\n    });\n\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"exampleId\"] = example.Id,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texample, err := datarobot.NewDatasetFromFile(ctx, \"example\", \u0026datarobot.DatasetFromFileArgs{\n\t\t\tSourceFile: pulumi.String(\"[Path to file to upload]\"),\n\t\t\tUseCaseId:  pulumi.Any(datarobot_use_case.Example.Id),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"exampleId\", example.ID())\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.DatasetFromFile;\nimport com.pulumi.datarobot.DatasetFromFileArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new DatasetFromFile(\"example\", DatasetFromFileArgs.builder()\n            .sourceFile(\"[Path to file to upload]\")\n            .useCaseId(datarobot_use_case.example().id())\n            .build());\n\n        ctx.export(\"exampleId\", example.id());\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: datarobot:DatasetFromFile\n    properties:\n      sourceFile: '[Path to file to upload]'\n      useCaseId: ${datarobot_use_case.example.id}\noutputs:\n  exampleId: ${example.id}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "properties": {
+                "sourceFile": {
+                    "type": "string",
+                    "description": "The path to the file to upload.\n"
+                },
+                "useCaseId": {
+                    "type": "string",
+                    "description": "The id of the Use Case.\n"
+                }
+            },
+            "required": [
+                "sourceFile",
+                "useCaseId"
+            ],
+            "inputProperties": {
+                "sourceFile": {
+                    "type": "string",
+                    "description": "The path to the file to upload.\n"
+                },
+                "useCaseId": {
+                    "type": "string",
+                    "description": "The id of the Use Case.\n"
+                }
+            },
+            "requiredInputs": [
+                "sourceFile",
+                "useCaseId"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering DatasetFromFile resources.\n",
+                "properties": {
+                    "sourceFile": {
+                        "type": "string",
+                        "description": "The path to the file to upload.\n"
+                    },
+                    "useCaseId": {
+                        "type": "string",
+                        "description": "The id of the Use Case.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "datarobot:index/deployment:Deployment": {
+            "description": "Deployment\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.Deployment;\nimport com.pulumi.datarobot.DeploymentArgs;\nimport com.pulumi.datarobot.inputs.DeploymentSettingsArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new Deployment(\"example\", DeploymentArgs.builder()\n            .label(\"An example deployment\")\n            .predictionEnvironmentId(datarobot_prediction_environment.example().id())\n            .registeredModelVersionId(datarobot_registered_model.example().version_id())\n            .settings(DeploymentSettingsArgs.builder()\n                .prediction_row_storage(true)\n                .association_id(%!v(PANIC=Format method: runtime error: invalid memory address or nil pointer dereference))\n                .build())\n            .build());\n\n        ctx.export(\"datarobotDeploymentId\", example.id());\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: datarobot:Deployment\n    properties:\n      label: An example deployment\n      predictionEnvironmentId: ${datarobot_prediction_environment.example.id}\n      registeredModelVersionId: ${datarobot_registered_model.example.version_id}\n      # Optional settings\n      settings:\n        prediction_row_storage: true\n        association_id:\n          autoGenerateId: true\n          featureName: example_feature\noutputs:\n  datarobotDeploymentId: ${example.id}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "properties": {
+                "label": {
+                    "type": "string",
+                    "description": "The label of the Deployment.\n"
+                },
+                "predictionEnvironmentId": {
+                    "type": "string",
+                    "description": "The ID of the predication environment for this Deployment.\n"
+                },
+                "registeredModelVersionId": {
+                    "type": "string",
+                    "description": "The ID of the registered model version for this Deployment.\n"
+                },
+                "settings": {
+                    "$ref": "#/types/datarobot:index/DeploymentSettings:DeploymentSettings",
+                    "description": "The settings for the Deployment.\n"
+                }
+            },
+            "required": [
+                "label",
+                "predictionEnvironmentId",
+                "registeredModelVersionId"
+            ],
+            "inputProperties": {
+                "label": {
+                    "type": "string",
+                    "description": "The label of the Deployment.\n"
+                },
+                "predictionEnvironmentId": {
+                    "type": "string",
+                    "description": "The ID of the predication environment for this Deployment.\n"
+                },
+                "registeredModelVersionId": {
+                    "type": "string",
+                    "description": "The ID of the registered model version for this Deployment.\n"
+                },
+                "settings": {
+                    "$ref": "#/types/datarobot:index/DeploymentSettings:DeploymentSettings",
+                    "description": "The settings for the Deployment.\n"
+                }
+            },
+            "requiredInputs": [
+                "label",
+                "predictionEnvironmentId",
+                "registeredModelVersionId"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Deployment resources.\n",
+                "properties": {
+                    "label": {
+                        "type": "string",
+                        "description": "The label of the Deployment.\n"
+                    },
+                    "predictionEnvironmentId": {
+                        "type": "string",
+                        "description": "The ID of the predication environment for this Deployment.\n"
+                    },
+                    "registeredModelVersionId": {
+                        "type": "string",
+                        "description": "The ID of the registered model version for this Deployment.\n"
+                    },
+                    "settings": {
+                        "$ref": "#/types/datarobot:index/DeploymentSettings:DeploymentSettings",
+                        "description": "The settings for the Deployment.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "datarobot:index/googleCloudCredential:GoogleCloudCredential": {
+            "description": "Api Token Credential\n",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "The name of the Google Cloud Credential.\n"
+                },
+                "sourceFile": {
+                    "type": "string",
+                    "description": "The source file of the Google Cloud Credential.\n"
+                }
+            },
+            "required": [
+                "name",
+                "sourceFile"
+            ],
+            "inputProperties": {
+                "name": {
+                    "type": "string",
+                    "description": "The name of the Google Cloud Credential.\n"
+                },
+                "sourceFile": {
+                    "type": "string",
+                    "description": "The source file of the Google Cloud Credential.\n"
+                }
+            },
+            "requiredInputs": [
+                "sourceFile"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering GoogleCloudCredential resources.\n",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the Google Cloud Credential.\n"
+                    },
+                    "sourceFile": {
+                        "type": "string",
+                        "description": "The source file of the Google Cloud Credential.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "datarobot:index/llmBlueprint:LlmBlueprint": {
+            "description": "LLMBlueprint\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@pulumi/datarobot\";\n\nconst example = new datarobot.LlmBlueprint(\"example\", {\n    description: \"Description for the example LLM blueprint\",\n    playgroundId: datarobot_playground.example.id,\n    vectorDatabaseId: datarobot_vector_database.example.id,\n    llmId: \"azure-openai-gpt-3.5-turbo\",\n});\nexport const exampleId = example.id;\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample = datarobot.LlmBlueprint(\"example\",\n    description=\"Description for the example LLM blueprint\",\n    playground_id=datarobot_playground[\"example\"][\"id\"],\n    vector_database_id=datarobot_vector_database[\"example\"][\"id\"],\n    llm_id=\"azure-openai-gpt-3.5-turbo\")\npulumi.export(\"exampleId\", example.id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = Pulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Datarobot.LlmBlueprint(\"example\", new()\n    {\n        Description = \"Description for the example LLM blueprint\",\n        PlaygroundId = datarobot_playground.Example.Id,\n        VectorDatabaseId = datarobot_vector_database.Example.Id,\n        LlmId = \"azure-openai-gpt-3.5-turbo\",\n    });\n\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"exampleId\"] = example.Id,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texample, err := datarobot.NewLlmBlueprint(ctx, \"example\", \u0026datarobot.LlmBlueprintArgs{\n\t\t\tDescription:      pulumi.String(\"Description for the example LLM blueprint\"),\n\t\t\tPlaygroundId:     pulumi.Any(datarobot_playground.Example.Id),\n\t\t\tVectorDatabaseId: pulumi.Any(datarobot_vector_database.Example.Id),\n\t\t\tLlmId:            pulumi.String(\"azure-openai-gpt-3.5-turbo\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"exampleId\", example.ID())\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.LlmBlueprint;\nimport com.pulumi.datarobot.LlmBlueprintArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new LlmBlueprint(\"example\", LlmBlueprintArgs.builder()\n            .description(\"Description for the example LLM blueprint\")\n            .playgroundId(datarobot_playground.example().id())\n            .vectorDatabaseId(datarobot_vector_database.example().id())\n            .llmId(\"azure-openai-gpt-3.5-turbo\")\n            .build());\n\n        ctx.export(\"exampleId\", example.id());\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: datarobot:LlmBlueprint\n    properties:\n      description: Description for the example LLM blueprint\n      playgroundId: ${datarobot_playground.example.id}\n      vectorDatabaseId: ${datarobot_vector_database.example.id}\n      llmId: azure-openai-gpt-3.5-turbo\noutputs:\n  exampleId: ${example.id}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "properties": {
+                "description": {
+                    "type": "string",
+                    "description": "The description of the LLM Blueprint.\n"
+                },
+                "llmId": {
+                    "type": "string",
+                    "description": "The id of the LLM for the LLM Blueprint.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the LLM Blueprint.\n"
+                },
+                "playgroundId": {
+                    "type": "string",
+                    "description": "The id of the Playground for the LLM Blueprint.\n"
+                },
+                "vectorDatabaseId": {
+                    "type": "string",
+                    "description": "The id of the Vector Database for the LLM Blueprint.\n"
+                }
+            },
+            "required": [
+                "description",
+                "llmId",
+                "name",
+                "playgroundId"
+            ],
+            "inputProperties": {
+                "description": {
+                    "type": "string",
+                    "description": "The description of the LLM Blueprint.\n"
+                },
+                "llmId": {
+                    "type": "string",
+                    "description": "The id of the LLM for the LLM Blueprint.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the LLM Blueprint.\n"
+                },
+                "playgroundId": {
+                    "type": "string",
+                    "description": "The id of the Playground for the LLM Blueprint.\n"
+                },
+                "vectorDatabaseId": {
+                    "type": "string",
+                    "description": "The id of the Vector Database for the LLM Blueprint.\n"
+                }
+            },
+            "requiredInputs": [
+                "description",
+                "llmId",
+                "playgroundId"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering LlmBlueprint resources.\n",
+                "properties": {
+                    "description": {
+                        "type": "string",
+                        "description": "The description of the LLM Blueprint.\n"
+                    },
+                    "llmId": {
+                        "type": "string",
+                        "description": "The id of the LLM for the LLM Blueprint.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the LLM Blueprint.\n"
+                    },
+                    "playgroundId": {
+                        "type": "string",
+                        "description": "The id of the Playground for the LLM Blueprint.\n"
+                    },
+                    "vectorDatabaseId": {
+                        "type": "string",
+                        "description": "The id of the Vector Database for the LLM Blueprint.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "datarobot:index/playground:Playground": {
+            "description": "Playground\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@pulumi/datarobot\";\n\nconst example = new datarobot.Playground(\"example\", {\n    description: \"Description for the example playground\",\n    useCaseId: datarobot_use_case.example.id,\n});\nexport const exampleId = example.id;\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample = datarobot.Playground(\"example\",\n    description=\"Description for the example playground\",\n    use_case_id=datarobot_use_case[\"example\"][\"id\"])\npulumi.export(\"exampleId\", example.id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = Pulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Datarobot.Playground(\"example\", new()\n    {\n        Description = \"Description for the example playground\",\n        UseCaseId = datarobot_use_case.Example.Id,\n    });\n\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"exampleId\"] = example.Id,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texample, err := datarobot.NewPlayground(ctx, \"example\", \u0026datarobot.PlaygroundArgs{\n\t\t\tDescription: pulumi.String(\"Description for the example playground\"),\n\t\t\tUseCaseId:   pulumi.Any(datarobot_use_case.Example.Id),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"exampleId\", example.ID())\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.Playground;\nimport com.pulumi.datarobot.PlaygroundArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new Playground(\"example\", PlaygroundArgs.builder()\n            .description(\"Description for the example playground\")\n            .useCaseId(datarobot_use_case.example().id())\n            .build());\n\n        ctx.export(\"exampleId\", example.id());\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: datarobot:Playground\n    properties:\n      description: Description for the example playground\n      useCaseId: ${datarobot_use_case.example.id}\noutputs:\n  exampleId: ${example.id}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "properties": {
+                "description": {
+                    "type": "string",
+                    "description": "The description of the Playground.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the Playground.\n"
+                },
+                "useCaseId": {
+                    "type": "string",
+                    "description": "The id of the Playground.\n"
+                }
+            },
+            "required": [
+                "description",
+                "name",
+                "useCaseId"
+            ],
+            "inputProperties": {
+                "description": {
+                    "type": "string",
+                    "description": "The description of the Playground.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the Playground.\n"
+                },
+                "useCaseId": {
+                    "type": "string",
+                    "description": "The id of the Playground.\n"
+                }
+            },
+            "requiredInputs": [
+                "description",
+                "useCaseId"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Playground resources.\n",
+                "properties": {
+                    "description": {
+                        "type": "string",
+                        "description": "The description of the Playground.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the Playground.\n"
+                    },
+                    "useCaseId": {
+                        "type": "string",
+                        "description": "The id of the Playground.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "datarobot:index/predictionEnvironment:PredictionEnvironment": {
+            "description": "prediction environment\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@pulumi/datarobot\";\n\nconst toxicityPredictionEnvironment = new datarobot.PredictionEnvironment(\"toxicityPredictionEnvironment\", {\n    description: \"Description for the example prediction environment\",\n    platform: \"aws\",\n});\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\ntoxicity_prediction_environment = datarobot.PredictionEnvironment(\"toxicityPredictionEnvironment\",\n    description=\"Description for the example prediction environment\",\n    platform=\"aws\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = Pulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var toxicityPredictionEnvironment = new Datarobot.PredictionEnvironment(\"toxicityPredictionEnvironment\", new()\n    {\n        Description = \"Description for the example prediction environment\",\n        Platform = \"aws\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := datarobot.NewPredictionEnvironment(ctx, \"toxicityPredictionEnvironment\", \u0026datarobot.PredictionEnvironmentArgs{\n\t\t\tDescription: pulumi.String(\"Description for the example prediction environment\"),\n\t\t\tPlatform:    pulumi.String(\"aws\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.PredictionEnvironment;\nimport com.pulumi.datarobot.PredictionEnvironmentArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var toxicityPredictionEnvironment = new PredictionEnvironment(\"toxicityPredictionEnvironment\", PredictionEnvironmentArgs.builder()\n            .description(\"Description for the example prediction environment\")\n            .platform(\"aws\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  toxicityPredictionEnvironment:\n    type: datarobot:PredictionEnvironment\n    properties:\n      description: Description for the example prediction environment\n      platform: aws\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "properties": {
+                "description": {
+                    "type": "string",
+                    "description": "The description of the Prediction Environment.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the Prediction Environment.\n"
+                },
+                "platform": {
+                    "type": "string",
+                    "description": "The platform for the Prediction Environment.\n"
+                }
+            },
+            "required": [
+                "description",
+                "name",
+                "platform"
+            ],
+            "inputProperties": {
+                "description": {
+                    "type": "string",
+                    "description": "The description of the Prediction Environment.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the Prediction Environment.\n"
+                },
+                "platform": {
+                    "type": "string",
+                    "description": "The platform for the Prediction Environment.\n"
+                }
+            },
+            "requiredInputs": [
+                "description",
+                "platform"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering PredictionEnvironment resources.\n",
+                "properties": {
+                    "description": {
+                        "type": "string",
+                        "description": "The description of the Prediction Environment.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the Prediction Environment.\n"
+                    },
+                    "platform": {
+                        "type": "string",
+                        "description": "The platform for the Prediction Environment.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "datarobot:index/registeredModel:RegisteredModel": {
+            "description": "registered model\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@pulumi/datarobot\";\n\nconst example = new datarobot.RegisteredModel(\"example\", {\n    description: \"Description for the example registered model\",\n    customModelVersionId: datarobot_custom_model.example.version_id,\n});\nexport const datarobotRegisteredModelId = example.id;\nexport const datarobotRegisteredModelVersionId = example.versionId;\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample = datarobot.RegisteredModel(\"example\",\n    description=\"Description for the example registered model\",\n    custom_model_version_id=datarobot_custom_model[\"example\"][\"version_id\"])\npulumi.export(\"datarobotRegisteredModelId\", example.id)\npulumi.export(\"datarobotRegisteredModelVersionId\", example.version_id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = Pulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Datarobot.RegisteredModel(\"example\", new()\n    {\n        Description = \"Description for the example registered model\",\n        CustomModelVersionId = datarobot_custom_model.Example.Version_id,\n    });\n\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"datarobotRegisteredModelId\"] = example.Id,\n        [\"datarobotRegisteredModelVersionId\"] = example.VersionId,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texample, err := datarobot.NewRegisteredModel(ctx, \"example\", \u0026datarobot.RegisteredModelArgs{\n\t\t\tDescription:          pulumi.String(\"Description for the example registered model\"),\n\t\t\tCustomModelVersionId: pulumi.Any(datarobot_custom_model.Example.Version_id),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"datarobotRegisteredModelId\", example.ID())\n\t\tctx.Export(\"datarobotRegisteredModelVersionId\", example.VersionId)\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.RegisteredModel;\nimport com.pulumi.datarobot.RegisteredModelArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new RegisteredModel(\"example\", RegisteredModelArgs.builder()\n            .description(\"Description for the example registered model\")\n            .customModelVersionId(datarobot_custom_model.example().version_id())\n            .build());\n\n        ctx.export(\"datarobotRegisteredModelId\", example.id());\n        ctx.export(\"datarobotRegisteredModelVersionId\", example.versionId());\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: datarobot:RegisteredModel\n    properties:\n      description: Description for the example registered model\n      customModelVersionId: ${datarobot_custom_model.example.version_id}\noutputs:\n  datarobotRegisteredModelId: ${example.id}\n  datarobotRegisteredModelVersionId: ${example.versionId}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "properties": {
+                "customModelVersionId": {
+                    "type": "string",
+                    "description": "The ID of the custom model version for this Registered Model.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The description of the Registered Model.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the Registered Model.\n"
+                },
+                "versionId": {
+                    "type": "string",
+                    "description": "The ID of the Registered Model Version.\n"
+                }
+            },
+            "required": [
+                "customModelVersionId",
+                "description",
+                "name",
+                "versionId"
+            ],
+            "inputProperties": {
+                "customModelVersionId": {
+                    "type": "string",
+                    "description": "The ID of the custom model version for this Registered Model.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The description of the Registered Model.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the Registered Model.\n"
+                }
+            },
+            "requiredInputs": [
+                "customModelVersionId",
+                "description"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering RegisteredModel resources.\n",
+                "properties": {
+                    "customModelVersionId": {
+                        "type": "string",
+                        "description": "The ID of the custom model version for this Registered Model.\n"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "The description of the Registered Model.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the Registered Model.\n"
+                    },
+                    "versionId": {
+                        "type": "string",
+                        "description": "The ID of the Registered Model Version.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "datarobot:index/remoteRepository:RemoteRepository": {
+            "description": "remote repository\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@pulumi/datarobot\";\n\nconst example = new datarobot.RemoteRepository(\"example\", {\n    description: \"Description for the example remote repository\",\n    location: \"https://github.com/datarobot/datarobot-user-models\",\n    sourceType: \"github\",\n});\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample = datarobot.RemoteRepository(\"example\",\n    description=\"Description for the example remote repository\",\n    location=\"https://github.com/datarobot/datarobot-user-models\",\n    source_type=\"github\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = Pulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Datarobot.RemoteRepository(\"example\", new()\n    {\n        Description = \"Description for the example remote repository\",\n        Location = \"https://github.com/datarobot/datarobot-user-models\",\n        SourceType = \"github\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := datarobot.NewRemoteRepository(ctx, \"example\", \u0026datarobot.RemoteRepositoryArgs{\n\t\t\tDescription: pulumi.String(\"Description for the example remote repository\"),\n\t\t\tLocation:    pulumi.String(\"https://github.com/datarobot/datarobot-user-models\"),\n\t\t\tSourceType:  pulumi.String(\"github\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.RemoteRepository;\nimport com.pulumi.datarobot.RemoteRepositoryArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new RemoteRepository(\"example\", RemoteRepositoryArgs.builder()\n            .description(\"Description for the example remote repository\")\n            .location(\"https://github.com/datarobot/datarobot-user-models\")\n            .sourceType(\"github\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: datarobot:RemoteRepository\n    properties:\n      description: Description for the example remote repository\n      location: https://github.com/datarobot/datarobot-user-models\n      sourceType: github\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "properties": {
+                "description": {
+                    "type": "string",
+                    "description": "The description of the Remote Repository.\n"
+                },
+                "location": {
+                    "type": "string",
+                    "description": "The location of the Remote Repository.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the Remote Repository.\n"
+                },
+                "personalAccessToken": {
+                    "type": "string",
+                    "description": "The personal access token for the Remote Repository.\n"
+                },
+                "sourceType": {
+                    "type": "string",
+                    "description": "The source type of the Remote Repository.\n"
+                }
+            },
+            "required": [
+                "description",
+                "location",
+                "name",
+                "sourceType"
+            ],
+            "inputProperties": {
+                "description": {
+                    "type": "string",
+                    "description": "The description of the Remote Repository.\n"
+                },
+                "location": {
+                    "type": "string",
+                    "description": "The location of the Remote Repository.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the Remote Repository.\n"
+                },
+                "personalAccessToken": {
+                    "type": "string",
+                    "description": "The personal access token for the Remote Repository.\n"
+                },
+                "sourceType": {
+                    "type": "string",
+                    "description": "The source type of the Remote Repository.\n"
+                }
+            },
+            "requiredInputs": [
+                "description",
+                "location",
+                "sourceType"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering RemoteRepository resources.\n",
+                "properties": {
+                    "description": {
+                        "type": "string",
+                        "description": "The description of the Remote Repository.\n"
+                    },
+                    "location": {
+                        "type": "string",
+                        "description": "The location of the Remote Repository.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the Remote Repository.\n"
+                    },
+                    "personalAccessToken": {
+                        "type": "string",
+                        "description": "The personal access token for the Remote Repository.\n"
+                    },
+                    "sourceType": {
+                        "type": "string",
+                        "description": "The source type of the Remote Repository.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "datarobot:index/useCase:UseCase": {
+            "description": "Use case\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@pulumi/datarobot\";\n\nconst example = new datarobot.UseCase(\"example\", {description: \"Description for the example use case\"});\nexport const exampleId = example.id;\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample = datarobot.UseCase(\"example\", description=\"Description for the example use case\")\npulumi.export(\"exampleId\", example.id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = Pulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Datarobot.UseCase(\"example\", new()\n    {\n        Description = \"Description for the example use case\",\n    });\n\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"exampleId\"] = example.Id,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texample, err := datarobot.NewUseCase(ctx, \"example\", \u0026datarobot.UseCaseArgs{\n\t\t\tDescription: pulumi.String(\"Description for the example use case\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"exampleId\", example.ID())\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.UseCase;\nimport com.pulumi.datarobot.UseCaseArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new UseCase(\"example\", UseCaseArgs.builder()\n            .description(\"Description for the example use case\")\n            .build());\n\n        ctx.export(\"exampleId\", example.id());\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: datarobot:UseCase\n    properties:\n      description: Description for the example use case\noutputs:\n  exampleId: ${example.id}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "properties": {
+                "description": {
+                    "type": "string",
+                    "description": "The description of the Use Case.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the Use Case.\n"
+                }
+            },
+            "required": [
+                "description",
+                "name"
+            ],
+            "inputProperties": {
+                "description": {
+                    "type": "string",
+                    "description": "The description of the Use Case.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the Use Case.\n"
+                }
+            },
+            "requiredInputs": [
+                "description"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering UseCase resources.\n",
+                "properties": {
+                    "description": {
+                        "type": "string",
+                        "description": "The description of the Use Case.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the Use Case.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "datarobot:index/vectorDatabase:VectorDatabase": {
+            "description": "Vector database\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.VectorDatabase;\nimport com.pulumi.datarobot.VectorDatabaseArgs;\nimport com.pulumi.datarobot.inputs.VectorDatabaseChunkingParametersArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new VectorDatabase(\"example\", VectorDatabaseArgs.builder()\n            .useCaseId(datarobot_use_case.example().id())\n            .datasetId(datarobot_dataset_from_file.example().id())\n            .chunkingParameters(VectorDatabaseChunkingParametersArgs.builder()\n                .chunk_overlap_percentage(0)\n                .chunk_size(256)\n                .chunking_method(\"recursive\")\n                .embedding_model(\"jinaai/jina-embedding-t-en-v1\")\n                .build())\n            .build());\n\n        ctx.export(\"exampleId\", example.id());\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: datarobot:VectorDatabase\n    properties:\n      useCaseId: ${datarobot_use_case.example.id}\n      datasetId: ${datarobot_dataset_from_file.example.id}\n      chunkingParameters:\n        chunk_overlap_percentage: 0\n        chunk_size: 256\n        chunking_method: recursive\n        embedding_model: jinaai/jina-embedding-t-en-v1\noutputs:\n  exampleId: ${example.id}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "properties": {
+                "chunkingParameters": {
+                    "$ref": "#/types/datarobot:index/VectorDatabaseChunkingParameters:VectorDatabaseChunkingParameters",
+                    "description": "The chunking parameters for the Model.\n"
+                },
+                "datasetId": {
+                    "type": "string",
+                    "description": "The id of the Vector Database.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the VectorDatabase.\n"
+                },
+                "useCaseId": {
+                    "type": "string",
+                    "description": "The id of the Use Case.\n"
+                }
+            },
+            "required": [
+                "chunkingParameters",
+                "datasetId",
+                "name",
+                "useCaseId"
+            ],
+            "inputProperties": {
+                "chunkingParameters": {
+                    "$ref": "#/types/datarobot:index/VectorDatabaseChunkingParameters:VectorDatabaseChunkingParameters",
+                    "description": "The chunking parameters for the Model.\n"
+                },
+                "datasetId": {
+                    "type": "string",
+                    "description": "The id of the Vector Database.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the VectorDatabase.\n"
+                },
+                "useCaseId": {
+                    "type": "string",
+                    "description": "The id of the Use Case.\n"
+                }
+            },
+            "requiredInputs": [
+                "chunkingParameters",
+                "datasetId",
+                "useCaseId"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering VectorDatabase resources.\n",
+                "properties": {
+                    "chunkingParameters": {
+                        "$ref": "#/types/datarobot:index/VectorDatabaseChunkingParameters:VectorDatabaseChunkingParameters",
+                        "description": "The chunking parameters for the Model.\n"
+                    },
+                    "datasetId": {
+                        "type": "string",
+                        "description": "The id of the Vector Database.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the VectorDatabase.\n"
+                    },
+                    "useCaseId": {
+                        "type": "string",
+                        "description": "The id of the Use Case.\n"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "functions": {
+        "datarobot:index/getGlobalModel:getGlobalModel": {
+            "description": "Global Model\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@pulumi/datarobot\";\n\nconst dummyBinaryClassification = datarobot.getGlobalModel({\n    name: \"[DataRobot] Dummy Binary Classification\",\n});\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\ndummy_binary_classification = datarobot.get_global_model(name=\"[DataRobot] Dummy Binary Classification\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = Pulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var dummyBinaryClassification = Datarobot.GetGlobalModel.Invoke(new()\n    {\n        Name = \"[DataRobot] Dummy Binary Classification\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := datarobot.GetGlobalModel(ctx, \u0026datarobot.GetGlobalModelArgs{\n\t\t\tName: \"[DataRobot] Dummy Binary Classification\",\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.DatarobotFunctions;\nimport com.pulumi.datarobot.inputs.GetGlobalModelArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var dummyBinaryClassification = DatarobotFunctions.getGlobalModel(GetGlobalModelArgs.builder()\n            .name(\"[DataRobot] Dummy Binary Classification\")\n            .build());\n\n    }\n}\n```\n```yaml\nvariables:\n  dummyBinaryClassification:\n    fn::invoke:\n      Function: datarobot:getGlobalModel\n      Arguments:\n        name: '[DataRobot] Dummy Binary Classification'\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "inputs": {
+                "description": "A collection of arguments for invoking getGlobalModel.\n",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the Registered Model.\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "name"
+                ]
+            },
+            "outputs": {
+                "description": "A collection of values returned by getGlobalModel.\n",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "The ID of the Global Model.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the Registered Model.\n"
+                    },
+                    "versionId": {
+                        "type": "string",
+                        "description": "The ID of the Global Model Version.\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "id",
+                    "name",
+                    "versionId"
+                ]
+            }
+        }
+    }
+}
