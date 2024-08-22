@@ -1,0 +1,91 @@
+{
+    "auto-aliasing": {
+        "resources": {
+            "datarobot_api_token_credential": {
+                "current": "datarobot:index/apiTokenCredential:ApiTokenCredential"
+            },
+            "datarobot_basic_credential": {
+                "current": "datarobot:index/basicCredential:BasicCredential"
+            },
+            "datarobot_chat_application": {
+                "current": "datarobot:index/chatApplication:ChatApplication"
+            },
+            "datarobot_custom_model": {
+                "current": "datarobot:index/customModel:CustomModel",
+                "fields": {
+                    "guard_configurations": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "stages": {
+                                    "maxItemsOne": false
+                                }
+                            }
+                        }
+                    },
+                    "local_files": {
+                        "maxItemsOne": false
+                    },
+                    "runtime_parameters": {
+                        "maxItemsOne": false
+                    },
+                    "source_remote_repositories": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "source_paths": {
+                                    "maxItemsOne": false
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "datarobot_dataset_from_file": {
+                "current": "datarobot:index/datasetFromFile:DatasetFromFile"
+            },
+            "datarobot_deployment": {
+                "current": "datarobot:index/deployment:Deployment"
+            },
+            "datarobot_google_cloud_credential": {
+                "current": "datarobot:index/googleCloudCredential:GoogleCloudCredential"
+            },
+            "datarobot_llm_blueprint": {
+                "current": "datarobot:index/llmBlueprint:LlmBlueprint"
+            },
+            "datarobot_playground": {
+                "current": "datarobot:index/playground:Playground"
+            },
+            "datarobot_prediction_environment": {
+                "current": "datarobot:index/predictionEnvironment:PredictionEnvironment"
+            },
+            "datarobot_registered_model": {
+                "current": "datarobot:index/registeredModel:RegisteredModel"
+            },
+            "datarobot_remote_repository": {
+                "current": "datarobot:index/remoteRepository:RemoteRepository"
+            },
+            "datarobot_use_case": {
+                "current": "datarobot:index/useCase:UseCase"
+            },
+            "datarobot_vector_database": {
+                "current": "datarobot:index/vectorDatabase:VectorDatabase",
+                "fields": {
+                    "chunking_parameters": {
+                        "fields": {
+                            "separators": {
+                                "maxItemsOne": false
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "datasources": {
+            "datarobot_global_model": {
+                "current": "datarobot:index/getGlobalModel:getGlobalModel"
+            }
+        }
+    },
+    "auto-settings": {}
+}
