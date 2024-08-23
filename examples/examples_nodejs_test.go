@@ -10,10 +10,10 @@ import (
 )
 
 func getJSBaseOptions(t *testing.T) integration.ProgramTestOptions {
-	base := getBaseOptions()
+	base := getBaseOptions(t)
 	baseJS := base.With(integration.ProgramTestOptions{
 		Dependencies: []string{
-			"@pulumi/foo",
+			"@pulumi/datarobot",
 		},
 	})
 

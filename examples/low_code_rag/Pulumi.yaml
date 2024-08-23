@@ -1,13 +1,13 @@
 name: yaml
 runtime: yaml
-description: A minimal Pulumi YAML program
+description: Low Code RAG example using Pulumi YAML 
 config: {'pulumi:tags': {value: {'pulumi:template': yaml}}}
 resources:
   datarobotUseCase:
     type: datarobot:UseCase
     properties:
-      name: An example using pulumi YAML
-      description: Description for the example use case
+      name: Low Code Rag Example
+      description: Low Code Rag Example
 
   datarobotDatasetFromFile:
     type: datarobot:DatasetFromFile
@@ -37,14 +37,13 @@ resources:
       description: ${datarobotUseCase.description}
       playgroundId: ${datarobotPlayground.id}
       vectorDatabaseId: ${datarobotVectorDatabase.id}
-      llmId: azure-openai-gpt-3.5-turbo
+      llmId: google-bison
 
-  datarobotApiTokenCredential:
-    type: datarobot:ApiTokenCredential
+  datarobotGoogleCloudCredential:
+    type: datarobot:GoogleCloudCredential
     properties:
-      name: An example API token from pulumi YAML
-      description: Description for the example API token
-      apiToken: "[the API Key value here]"
+      name: Google Cloud Service Account
+      sourceFile: google_credentials.json
 
   datarobotCustomModel:
     type: datarobot:CustomModel
@@ -53,12 +52,9 @@ resources:
       description: ${datarobotUseCase.description}
       sourceLlmBlueprintId: ${datarobotLlmBlueprint.id}
       runtimeParameters:
-        - key: OPENAI_API_BASE
-          type: string
-          value: https://datarobot-genai-enablement.openai.azure.com/
-        - key: OPENAI_API_KEY
+        - key: GOOGLE_SERVICE_ACCOUNT
           type: credential
-          value: ${datarobotApiTokenCredential.id}
+          value: ${datarobotGoogleCloudCredential.id}
 
   datarobotRegisteredModel:
     type: datarobot:RegisteredModel
@@ -70,9 +66,9 @@ resources:
   datarobotPredictionEnvironment:
     type: datarobot:PredictionEnvironment
     properties:
-      name: An example prediction server
-      description: Description for the example prediction server
-      platform: aws
+      name: ${datarobotUseCase.name}
+      description: ${datarobotUseCase.description}
+      platform: datarobotServerless
 
   datarobotDeployment:
     type: datarobot:Deployment
@@ -80,6 +76,8 @@ resources:
       label: ${datarobotUseCase.name}
       predictionEnvironmentId: ${datarobotPredictionEnvironment.id}
       registeredModelVersionId: ${datarobotRegisteredModel.versionId}
+      settings:
+        predictionRowStorage: true
 
   datarobotChatApplication:
     type: datarobot:ChatApplication
@@ -88,44 +86,5 @@ resources:
       deploymentId: ${datarobotDeployment.id}
 
 outputs:
-  exampleUseCaseId:
-    value: ${datarobotUseCase.id}
-
-  exampleDatasetId:
-    value: ${datarobotDatasetFromFile.id}
-
-  datarobotPlaygroundId:
-    value: ${datarobotPlayground.id}
-
-  datarobotVectorDatabaseId:
-    value: ${datarobotVectorDatabase.id}
-
-  datarobotLlmBlueprintId:
-    value: ${datarobotLlmBlueprint.id}
-
-  datarobotCustomModelId:
-    value: ${datarobotCustomModel.id}
-
-  datarobotCustomModelLatestVersionId:
-    value: ${datarobotCustomModel.versionId}
-
-  datarobotApiTokenCredentialId:
-    value: ${datarobotApiTokenCredential.id}
-
-  datarobotRegisteredModelId:
-    value: ${datarobotRegisteredModel.id}
-
-  datarobotRegisteredModelVersionId:
-    value: ${datarobotRegisteredModel.versionId}
-
-  datarobotPredictionEnvironmentId:
-    value: ${datarobotPredictionEnvironment.id}
-
-  datarobotDeploymentId:
-    value: ${datarobotDeployment.id}
-
-  datarobotChatApplicationId:
-    value: ${datarobotChatApplication.id}
-
   datarobotChatApplicationUrl:
     value: ${datarobotChatApplication.applicationUrl}

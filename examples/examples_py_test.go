@@ -11,12 +11,21 @@ import (
 )
 
 func getPythonBaseOptions(t *testing.T) integration.ProgramTestOptions {
-	base := getBaseOptions()
+	base := getBaseOptions(t)
 	basePython := base.With(integration.ProgramTestOptions{
+		ExpectRefreshChanges: true,
 		Dependencies: []string{
-			filepath.Join("..", "sdk", "python", "bin"),
+			filepath.Join("..", "sdk", "python"),
 		},
 	})
 
 	return basePython
+}
+
+func TestAccDatarobotPy(t *testing.T) {
+	test := getPythonBaseOptions(t).
+		With(integration.ProgramTestOptions{
+			Dir: filepath.Join(getCwd(t), "py"),
+		})
+	integration.ProgramTest(t, &test)
 }
