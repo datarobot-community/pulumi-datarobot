@@ -7,6 +7,15 @@ import (
 	"github.com/pulumi/pulumi/pkg/v3/testing/integration"
 )
 
+func getApiKey(t *testing.T) string {
+	name := os.Getenv("DATAROBOT_API_KEY")
+	if name == "" {
+		t.Skipf("Skipping test due to missing DATAROBOT_API_KEY environment variable")
+	}
+
+	return name
+}
+
 func getCwd(t *testing.T) string {
 	cwd, err := os.Getwd()
 	if err != nil {
@@ -16,9 +25,11 @@ func getCwd(t *testing.T) string {
 	return cwd
 }
 
-func getBaseOptions() integration.ProgramTestOptions {
+func getBaseOptions(t *testing.T) integration.ProgramTestOptions {
+	key := getApiKey(t)
 	return integration.ProgramTestOptions{
-		RunUpdateTest:        false,
-		ExpectRefreshChanges: true,
+		Config: map[string]string{
+			"apiKey": key,
+		},
 	}
 }
