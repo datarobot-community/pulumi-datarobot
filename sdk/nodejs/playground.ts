@@ -13,11 +13,9 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as datarobot from "@pulumi/datarobot";
  *
- * const example = new datarobot.Playground("example", {
- *     description: "Description for the example playground",
- *     useCaseId: datarobot_use_case.example.id,
- * });
- * export const exampleId = example.id;
+ * const exampleUseCase = new datarobot.UseCase("exampleUseCase", {});
+ * const examplePlayground = new datarobot.Playground("examplePlayground", {useCaseId: exampleUseCase.id});
+ * export const exampleId = examplePlayground.id;
  * ```
  */
 export class Playground extends pulumi.CustomResource {
@@ -51,7 +49,7 @@ export class Playground extends pulumi.CustomResource {
     /**
      * The description of the Playground.
      */
-    public readonly description!: pulumi.Output<string>;
+    public readonly description!: pulumi.Output<string | undefined>;
     /**
      * The name of the Playground.
      */
@@ -79,9 +77,6 @@ export class Playground extends pulumi.CustomResource {
             resourceInputs["useCaseId"] = state ? state.useCaseId : undefined;
         } else {
             const args = argsOrState as PlaygroundArgs | undefined;
-            if ((!args || args.description === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'description'");
-            }
             if ((!args || args.useCaseId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'useCaseId'");
             }
@@ -119,7 +114,7 @@ export interface PlaygroundArgs {
     /**
      * The description of the Playground.
      */
-    description: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
     /**
      * The name of the Playground.
      */

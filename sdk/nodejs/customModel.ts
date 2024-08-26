@@ -52,7 +52,7 @@ export class CustomModel extends pulumi.CustomResource {
     /**
      * The description of the Custom Model.
      */
-    public readonly description!: pulumi.Output<string>;
+    public readonly description!: pulumi.Output<string | undefined>;
     /**
      * The guard configurations for the Custom Model.
      */
@@ -76,7 +76,7 @@ export class CustomModel extends pulumi.CustomResource {
     /**
      * The runtime parameter values for the Custom Model.
      */
-    public readonly runtimeParameters!: pulumi.Output<outputs.CustomModelRuntimeParameter[]>;
+    public readonly runtimeParameters!: pulumi.Output<outputs.CustomModelRuntimeParameter[] | undefined>;
     /**
      * The ID of the source LLM Blueprint for the Custom Model.
      */
@@ -105,7 +105,7 @@ export class CustomModel extends pulumi.CustomResource {
      * @param args The arguments to use to populate this resource's properties.
      * @param opts A bag of options that control this resource's behavior.
      */
-    constructor(name: string, args: CustomModelArgs, opts?: pulumi.CustomResourceOptions)
+    constructor(name: string, args?: CustomModelArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: CustomModelArgs | CustomModelState, opts?: pulumi.CustomResourceOptions) {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
@@ -128,9 +128,6 @@ export class CustomModel extends pulumi.CustomResource {
             resourceInputs["versionId"] = state ? state.versionId : undefined;
         } else {
             const args = argsOrState as CustomModelArgs | undefined;
-            if ((!args || args.description === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'description'");
-            }
             resourceInputs["baseEnvironmentId"] = args ? args.baseEnvironmentId : undefined;
             resourceInputs["baseEnvironmentName"] = args ? args.baseEnvironmentName : undefined;
             resourceInputs["baseEnvironmentVersionId"] = args ? args.baseEnvironmentVersionId : undefined;
@@ -237,7 +234,7 @@ export interface CustomModelArgs {
     /**
      * The description of the Custom Model.
      */
-    description: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
     /**
      * The guard configurations for the Custom Model.
      */

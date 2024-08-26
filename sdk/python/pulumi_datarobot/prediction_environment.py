@@ -14,31 +14,20 @@ __all__ = ['PredictionEnvironmentArgs', 'PredictionEnvironment']
 @pulumi.input_type
 class PredictionEnvironmentArgs:
     def __init__(__self__, *,
-                 description: pulumi.Input[str],
                  platform: pulumi.Input[str],
+                 description: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a PredictionEnvironment resource.
-        :param pulumi.Input[str] description: The description of the Prediction Environment.
         :param pulumi.Input[str] platform: The platform for the Prediction Environment.
+        :param pulumi.Input[str] description: The description of the Prediction Environment.
         :param pulumi.Input[str] name: The name of the Prediction Environment.
         """
-        pulumi.set(__self__, "description", description)
         pulumi.set(__self__, "platform", platform)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
         if name is not None:
             pulumi.set(__self__, "name", name)
-
-    @property
-    @pulumi.getter
-    def description(self) -> pulumi.Input[str]:
-        """
-        The description of the Prediction Environment.
-        """
-        return pulumi.get(self, "description")
-
-    @description.setter
-    def description(self, value: pulumi.Input[str]):
-        pulumi.set(self, "description", value)
 
     @property
     @pulumi.getter
@@ -51,6 +40,18 @@ class PredictionEnvironmentArgs:
     @platform.setter
     def platform(self, value: pulumi.Input[str]):
         pulumi.set(self, "platform", value)
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        The description of the Prediction Environment.
+        """
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "description", value)
 
     @property
     @pulumi.getter
@@ -139,9 +140,9 @@ class PredictionEnvironment(pulumi.CustomResource):
         import pulumi
         import pulumi_datarobot as datarobot
 
-        toxicity_prediction_environment = datarobot.PredictionEnvironment("toxicityPredictionEnvironment",
+        example = datarobot.PredictionEnvironment("example",
             description="Description for the example prediction environment",
-            platform="aws")
+            platform="datarobotServerless")
         ```
 
         :param str resource_name: The name of the resource.
@@ -165,9 +166,9 @@ class PredictionEnvironment(pulumi.CustomResource):
         import pulumi
         import pulumi_datarobot as datarobot
 
-        toxicity_prediction_environment = datarobot.PredictionEnvironment("toxicityPredictionEnvironment",
+        example = datarobot.PredictionEnvironment("example",
             description="Description for the example prediction environment",
-            platform="aws")
+            platform="datarobotServerless")
         ```
 
         :param str resource_name: The name of the resource.
@@ -197,8 +198,6 @@ class PredictionEnvironment(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = PredictionEnvironmentArgs.__new__(PredictionEnvironmentArgs)
 
-            if description is None and not opts.urn:
-                raise TypeError("Missing required property 'description'")
             __props__.__dict__["description"] = description
             __props__.__dict__["name"] = name
             if platform is None and not opts.urn:
@@ -239,7 +238,7 @@ class PredictionEnvironment(pulumi.CustomResource):
 
     @property
     @pulumi.getter
-    def description(self) -> pulumi.Output[str]:
+    def description(self) -> pulumi.Output[Optional[str]]:
         """
         The description of the Prediction Environment.
         """

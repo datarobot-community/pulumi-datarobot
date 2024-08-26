@@ -13,13 +13,17 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as datarobot from "@pulumi/datarobot";
  *
- * const example = new datarobot.LlmBlueprint("example", {
+ * const exampleUseCase = new datarobot.UseCase("exampleUseCase", {});
+ * const examplePlayground = new datarobot.Playground("examplePlayground", {
+ *     description: "Description for the example playground",
+ *     useCaseId: exampleUseCase.id,
+ * });
+ * const exampleLlmBlueprint = new datarobot.LlmBlueprint("exampleLlmBlueprint", {
  *     description: "Description for the example LLM blueprint",
- *     playgroundId: datarobot_playground.example.id,
- *     vectorDatabaseId: datarobot_vector_database.example.id,
+ *     playgroundId: examplePlayground.id,
  *     llmId: "azure-openai-gpt-3.5-turbo",
  * });
- * export const exampleId = example.id;
+ * export const exampleId = exampleLlmBlueprint.id;
  * ```
  */
 export class LlmBlueprint extends pulumi.CustomResource {
@@ -53,7 +57,7 @@ export class LlmBlueprint extends pulumi.CustomResource {
     /**
      * The description of the LLM Blueprint.
      */
-    public readonly description!: pulumi.Output<string>;
+    public readonly description!: pulumi.Output<string | undefined>;
     /**
      * The id of the LLM for the LLM Blueprint.
      */
@@ -91,9 +95,6 @@ export class LlmBlueprint extends pulumi.CustomResource {
             resourceInputs["vectorDatabaseId"] = state ? state.vectorDatabaseId : undefined;
         } else {
             const args = argsOrState as LlmBlueprintArgs | undefined;
-            if ((!args || args.description === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'description'");
-            }
             if ((!args || args.llmId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'llmId'");
             }
@@ -144,7 +145,7 @@ export interface LlmBlueprintArgs {
     /**
      * The description of the LLM Blueprint.
      */
-    description: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
     /**
      * The id of the LLM for the LLM Blueprint.
      */

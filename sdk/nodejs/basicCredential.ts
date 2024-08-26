@@ -51,7 +51,7 @@ export class BasicCredential extends pulumi.CustomResource {
     /**
      * The description of the Basic Credential.
      */
-    public readonly description!: pulumi.Output<string>;
+    public readonly description!: pulumi.Output<string | undefined>;
     /**
      * The name of the Basic Credential.
      */
@@ -84,9 +84,6 @@ export class BasicCredential extends pulumi.CustomResource {
             resourceInputs["user"] = state ? state.user : undefined;
         } else {
             const args = argsOrState as BasicCredentialArgs | undefined;
-            if ((!args || args.description === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'description'");
-            }
             if ((!args || args.password === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'password'");
             }
@@ -134,7 +131,7 @@ export interface BasicCredentialArgs {
     /**
      * The description of the Basic Credential.
      */
-    description: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
     /**
      * The name of the Basic Credential.
      */

@@ -13,10 +13,7 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as datarobot from "@pulumi/datarobot";
  *
- * const example = new datarobot.ApiTokenCredential("example", {
- *     apiToken: "[the API Key value here]",
- *     description: "Description for the example API token",
- * });
+ * const example = new datarobot.ApiTokenCredential("example", {apiToken: "[the API Key value here]"});
  * ```
  */
 export class ApiTokenCredential extends pulumi.CustomResource {
@@ -54,7 +51,7 @@ export class ApiTokenCredential extends pulumi.CustomResource {
     /**
      * The description of the Api Token Credential.
      */
-    public readonly description!: pulumi.Output<string>;
+    public readonly description!: pulumi.Output<string | undefined>;
     /**
      * The name of the Api Token Credential.
      */
@@ -80,9 +77,6 @@ export class ApiTokenCredential extends pulumi.CustomResource {
             const args = argsOrState as ApiTokenCredentialArgs | undefined;
             if ((!args || args.apiToken === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'apiToken'");
-            }
-            if ((!args || args.description === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'description'");
             }
             resourceInputs["apiToken"] = args?.apiToken ? pulumi.secret(args.apiToken) : undefined;
             resourceInputs["description"] = args ? args.description : undefined;
@@ -124,7 +118,7 @@ export interface ApiTokenCredentialArgs {
     /**
      * The description of the Api Token Credential.
      */
-    description: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
     /**
      * The name of the Api Token Credential.
      */

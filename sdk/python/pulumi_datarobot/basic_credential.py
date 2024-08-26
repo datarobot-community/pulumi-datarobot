@@ -14,34 +14,23 @@ __all__ = ['BasicCredentialArgs', 'BasicCredential']
 @pulumi.input_type
 class BasicCredentialArgs:
     def __init__(__self__, *,
-                 description: pulumi.Input[str],
                  password: pulumi.Input[str],
                  user: pulumi.Input[str],
+                 description: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a BasicCredential resource.
-        :param pulumi.Input[str] description: The description of the Basic Credential.
         :param pulumi.Input[str] password: The password of the Basic Credential.
         :param pulumi.Input[str] user: The user of the Basic Credential.
+        :param pulumi.Input[str] description: The description of the Basic Credential.
         :param pulumi.Input[str] name: The name of the Basic Credential.
         """
-        pulumi.set(__self__, "description", description)
         pulumi.set(__self__, "password", password)
         pulumi.set(__self__, "user", user)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
         if name is not None:
             pulumi.set(__self__, "name", name)
-
-    @property
-    @pulumi.getter
-    def description(self) -> pulumi.Input[str]:
-        """
-        The description of the Basic Credential.
-        """
-        return pulumi.get(self, "description")
-
-    @description.setter
-    def description(self, value: pulumi.Input[str]):
-        pulumi.set(self, "description", value)
 
     @property
     @pulumi.getter
@@ -66,6 +55,18 @@ class BasicCredentialArgs:
     @user.setter
     def user(self, value: pulumi.Input[str]):
         pulumi.set(self, "user", value)
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        The description of the Basic Credential.
+        """
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "description", value)
 
     @property
     @pulumi.getter
@@ -233,8 +234,6 @@ class BasicCredential(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = BasicCredentialArgs.__new__(BasicCredentialArgs)
 
-            if description is None and not opts.urn:
-                raise TypeError("Missing required property 'description'")
             __props__.__dict__["description"] = description
             __props__.__dict__["name"] = name
             if password is None and not opts.urn:
@@ -283,7 +282,7 @@ class BasicCredential(pulumi.CustomResource):
 
     @property
     @pulumi.getter
-    def description(self) -> pulumi.Output[str]:
+    def description(self) -> pulumi.Output[Optional[str]]:
         """
         The description of the Basic Credential.
         """
