@@ -56,7 +56,7 @@ export class RegisteredModel extends pulumi.CustomResource {
     /**
      * The description of the Registered Model.
      */
-    public readonly description!: pulumi.Output<string>;
+    public readonly description!: pulumi.Output<string | undefined>;
     /**
      * The name of the Registered Model.
      */
@@ -87,9 +87,6 @@ export class RegisteredModel extends pulumi.CustomResource {
             const args = argsOrState as RegisteredModelArgs | undefined;
             if ((!args || args.customModelVersionId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'customModelVersionId'");
-            }
-            if ((!args || args.description === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'description'");
             }
             resourceInputs["customModelVersionId"] = args ? args.customModelVersionId : undefined;
             resourceInputs["description"] = args ? args.description : undefined;
@@ -134,7 +131,7 @@ export interface RegisteredModelArgs {
     /**
      * The description of the Registered Model.
      */
-    description: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
     /**
      * The name of the Registered Model.
      */

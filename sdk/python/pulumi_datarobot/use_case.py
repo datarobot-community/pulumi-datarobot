@@ -14,27 +14,28 @@ __all__ = ['UseCaseArgs', 'UseCase']
 @pulumi.input_type
 class UseCaseArgs:
     def __init__(__self__, *,
-                 description: pulumi.Input[str],
+                 description: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a UseCase resource.
         :param pulumi.Input[str] description: The description of the Use Case.
         :param pulumi.Input[str] name: The name of the Use Case.
         """
-        pulumi.set(__self__, "description", description)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
         if name is not None:
             pulumi.set(__self__, "name", name)
 
     @property
     @pulumi.getter
-    def description(self) -> pulumi.Input[str]:
+    def description(self) -> Optional[pulumi.Input[str]]:
         """
         The description of the Use Case.
         """
         return pulumi.get(self, "description")
 
     @description.setter
-    def description(self, value: pulumi.Input[str]):
+    def description(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "description", value)
 
     @property
@@ -107,7 +108,7 @@ class UseCase(pulumi.CustomResource):
         import pulumi
         import pulumi_datarobot as datarobot
 
-        example = datarobot.UseCase("example", description="Description for the example use case")
+        example = datarobot.UseCase("example")
         pulumi.export("exampleId", example.id)
         ```
 
@@ -120,7 +121,7 @@ class UseCase(pulumi.CustomResource):
     @overload
     def __init__(__self__,
                  resource_name: str,
-                 args: UseCaseArgs,
+                 args: Optional[UseCaseArgs] = None,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Use case
@@ -131,7 +132,7 @@ class UseCase(pulumi.CustomResource):
         import pulumi
         import pulumi_datarobot as datarobot
 
-        example = datarobot.UseCase("example", description="Description for the example use case")
+        example = datarobot.UseCase("example")
         pulumi.export("exampleId", example.id)
         ```
 
@@ -161,8 +162,6 @@ class UseCase(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = UseCaseArgs.__new__(UseCaseArgs)
 
-            if description is None and not opts.urn:
-                raise TypeError("Missing required property 'description'")
             __props__.__dict__["description"] = description
             __props__.__dict__["name"] = name
         super(UseCase, __self__).__init__(
@@ -197,7 +196,7 @@ class UseCase(pulumi.CustomResource):
 
     @property
     @pulumi.getter
-    def description(self) -> pulumi.Output[str]:
+    def description(self) -> pulumi.Output[Optional[str]]:
         """
         The description of the Use Case.
         """

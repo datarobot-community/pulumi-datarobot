@@ -14,38 +14,27 @@ __all__ = ['LlmBlueprintArgs', 'LlmBlueprint']
 @pulumi.input_type
 class LlmBlueprintArgs:
     def __init__(__self__, *,
-                 description: pulumi.Input[str],
                  llm_id: pulumi.Input[str],
                  playground_id: pulumi.Input[str],
+                 description: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  vector_database_id: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a LlmBlueprint resource.
-        :param pulumi.Input[str] description: The description of the LLM Blueprint.
         :param pulumi.Input[str] llm_id: The id of the LLM for the LLM Blueprint.
         :param pulumi.Input[str] playground_id: The id of the Playground for the LLM Blueprint.
+        :param pulumi.Input[str] description: The description of the LLM Blueprint.
         :param pulumi.Input[str] name: The name of the LLM Blueprint.
         :param pulumi.Input[str] vector_database_id: The id of the Vector Database for the LLM Blueprint.
         """
-        pulumi.set(__self__, "description", description)
         pulumi.set(__self__, "llm_id", llm_id)
         pulumi.set(__self__, "playground_id", playground_id)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
         if name is not None:
             pulumi.set(__self__, "name", name)
         if vector_database_id is not None:
             pulumi.set(__self__, "vector_database_id", vector_database_id)
-
-    @property
-    @pulumi.getter
-    def description(self) -> pulumi.Input[str]:
-        """
-        The description of the LLM Blueprint.
-        """
-        return pulumi.get(self, "description")
-
-    @description.setter
-    def description(self, value: pulumi.Input[str]):
-        pulumi.set(self, "description", value)
 
     @property
     @pulumi.getter(name="llmId")
@@ -70,6 +59,18 @@ class LlmBlueprintArgs:
     @playground_id.setter
     def playground_id(self, value: pulumi.Input[str]):
         pulumi.set(self, "playground_id", value)
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        The description of the LLM Blueprint.
+        """
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "description", value)
 
     @property
     @pulumi.getter
@@ -204,12 +205,15 @@ class LlmBlueprint(pulumi.CustomResource):
         import pulumi
         import pulumi_datarobot as datarobot
 
-        example = datarobot.LlmBlueprint("example",
+        example_use_case = datarobot.UseCase("exampleUseCase")
+        example_playground = datarobot.Playground("examplePlayground",
+            description="Description for the example playground",
+            use_case_id=example_use_case.id)
+        example_llm_blueprint = datarobot.LlmBlueprint("exampleLlmBlueprint",
             description="Description for the example LLM blueprint",
-            playground_id=datarobot_playground["example"]["id"],
-            vector_database_id=datarobot_vector_database["example"]["id"],
+            playground_id=example_playground.id,
             llm_id="azure-openai-gpt-3.5-turbo")
-        pulumi.export("exampleId", example.id)
+        pulumi.export("exampleId", example_llm_blueprint.id)
         ```
 
         :param str resource_name: The name of the resource.
@@ -235,12 +239,15 @@ class LlmBlueprint(pulumi.CustomResource):
         import pulumi
         import pulumi_datarobot as datarobot
 
-        example = datarobot.LlmBlueprint("example",
+        example_use_case = datarobot.UseCase("exampleUseCase")
+        example_playground = datarobot.Playground("examplePlayground",
+            description="Description for the example playground",
+            use_case_id=example_use_case.id)
+        example_llm_blueprint = datarobot.LlmBlueprint("exampleLlmBlueprint",
             description="Description for the example LLM blueprint",
-            playground_id=datarobot_playground["example"]["id"],
-            vector_database_id=datarobot_vector_database["example"]["id"],
+            playground_id=example_playground.id,
             llm_id="azure-openai-gpt-3.5-turbo")
-        pulumi.export("exampleId", example.id)
+        pulumi.export("exampleId", example_llm_blueprint.id)
         ```
 
         :param str resource_name: The name of the resource.
@@ -272,8 +279,6 @@ class LlmBlueprint(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = LlmBlueprintArgs.__new__(LlmBlueprintArgs)
 
-            if description is None and not opts.urn:
-                raise TypeError("Missing required property 'description'")
             __props__.__dict__["description"] = description
             if llm_id is None and not opts.urn:
                 raise TypeError("Missing required property 'llm_id'")
@@ -324,7 +329,7 @@ class LlmBlueprint(pulumi.CustomResource):
 
     @property
     @pulumi.getter
-    def description(self) -> pulumi.Output[str]:
+    def description(self) -> pulumi.Output[Optional[str]]:
         """
         The description of the LLM Blueprint.
         """

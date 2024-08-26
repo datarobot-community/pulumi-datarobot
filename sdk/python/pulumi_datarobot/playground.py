@@ -14,31 +14,20 @@ __all__ = ['PlaygroundArgs', 'Playground']
 @pulumi.input_type
 class PlaygroundArgs:
     def __init__(__self__, *,
-                 description: pulumi.Input[str],
                  use_case_id: pulumi.Input[str],
+                 description: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a Playground resource.
-        :param pulumi.Input[str] description: The description of the Playground.
         :param pulumi.Input[str] use_case_id: The id of the Playground.
+        :param pulumi.Input[str] description: The description of the Playground.
         :param pulumi.Input[str] name: The name of the Playground.
         """
-        pulumi.set(__self__, "description", description)
         pulumi.set(__self__, "use_case_id", use_case_id)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
         if name is not None:
             pulumi.set(__self__, "name", name)
-
-    @property
-    @pulumi.getter
-    def description(self) -> pulumi.Input[str]:
-        """
-        The description of the Playground.
-        """
-        return pulumi.get(self, "description")
-
-    @description.setter
-    def description(self, value: pulumi.Input[str]):
-        pulumi.set(self, "description", value)
 
     @property
     @pulumi.getter(name="useCaseId")
@@ -51,6 +40,18 @@ class PlaygroundArgs:
     @use_case_id.setter
     def use_case_id(self, value: pulumi.Input[str]):
         pulumi.set(self, "use_case_id", value)
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        The description of the Playground.
+        """
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "description", value)
 
     @property
     @pulumi.getter
@@ -139,10 +140,9 @@ class Playground(pulumi.CustomResource):
         import pulumi
         import pulumi_datarobot as datarobot
 
-        example = datarobot.Playground("example",
-            description="Description for the example playground",
-            use_case_id=datarobot_use_case["example"]["id"])
-        pulumi.export("exampleId", example.id)
+        example_use_case = datarobot.UseCase("exampleUseCase")
+        example_playground = datarobot.Playground("examplePlayground", use_case_id=example_use_case.id)
+        pulumi.export("exampleId", example_playground.id)
         ```
 
         :param str resource_name: The name of the resource.
@@ -166,10 +166,9 @@ class Playground(pulumi.CustomResource):
         import pulumi
         import pulumi_datarobot as datarobot
 
-        example = datarobot.Playground("example",
-            description="Description for the example playground",
-            use_case_id=datarobot_use_case["example"]["id"])
-        pulumi.export("exampleId", example.id)
+        example_use_case = datarobot.UseCase("exampleUseCase")
+        example_playground = datarobot.Playground("examplePlayground", use_case_id=example_use_case.id)
+        pulumi.export("exampleId", example_playground.id)
         ```
 
         :param str resource_name: The name of the resource.
@@ -199,8 +198,6 @@ class Playground(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = PlaygroundArgs.__new__(PlaygroundArgs)
 
-            if description is None and not opts.urn:
-                raise TypeError("Missing required property 'description'")
             __props__.__dict__["description"] = description
             __props__.__dict__["name"] = name
             if use_case_id is None and not opts.urn:
@@ -241,7 +238,7 @@ class Playground(pulumi.CustomResource):
 
     @property
     @pulumi.getter
-    def description(self) -> pulumi.Output[str]:
+    def description(self) -> pulumi.Output[Optional[str]]:
         """
         The description of the Playground.
         """

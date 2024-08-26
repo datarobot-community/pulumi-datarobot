@@ -13,7 +13,7 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as datarobot from "@pulumi/datarobot";
  *
- * const example = new datarobot.UseCase("example", {description: "Description for the example use case"});
+ * const example = new datarobot.UseCase("example", {});
  * export const exampleId = example.id;
  * ```
  */
@@ -48,7 +48,7 @@ export class UseCase extends pulumi.CustomResource {
     /**
      * The description of the Use Case.
      */
-    public readonly description!: pulumi.Output<string>;
+    public readonly description!: pulumi.Output<string | undefined>;
     /**
      * The name of the Use Case.
      */
@@ -61,7 +61,7 @@ export class UseCase extends pulumi.CustomResource {
      * @param args The arguments to use to populate this resource's properties.
      * @param opts A bag of options that control this resource's behavior.
      */
-    constructor(name: string, args: UseCaseArgs, opts?: pulumi.CustomResourceOptions)
+    constructor(name: string, args?: UseCaseArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: UseCaseArgs | UseCaseState, opts?: pulumi.CustomResourceOptions) {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
@@ -71,9 +71,6 @@ export class UseCase extends pulumi.CustomResource {
             resourceInputs["name"] = state ? state.name : undefined;
         } else {
             const args = argsOrState as UseCaseArgs | undefined;
-            if ((!args || args.description === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'description'");
-            }
             resourceInputs["description"] = args ? args.description : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
         }
@@ -103,7 +100,7 @@ export interface UseCaseArgs {
     /**
      * The description of the Use Case.
      */
-    description: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
     /**
      * The name of the Use Case.
      */

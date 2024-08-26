@@ -15,7 +15,7 @@ __all__ = ['RegisteredModelArgs', 'RegisteredModel']
 class RegisteredModelArgs:
     def __init__(__self__, *,
                  custom_model_version_id: pulumi.Input[str],
-                 description: pulumi.Input[str],
+                 description: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a RegisteredModel resource.
@@ -24,7 +24,8 @@ class RegisteredModelArgs:
         :param pulumi.Input[str] name: The name of the Registered Model.
         """
         pulumi.set(__self__, "custom_model_version_id", custom_model_version_id)
-        pulumi.set(__self__, "description", description)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
         if name is not None:
             pulumi.set(__self__, "name", name)
 
@@ -42,14 +43,14 @@ class RegisteredModelArgs:
 
     @property
     @pulumi.getter
-    def description(self) -> pulumi.Input[str]:
+    def description(self) -> Optional[pulumi.Input[str]]:
         """
         The description of the Registered Model.
         """
         return pulumi.get(self, "description")
 
     @description.setter
-    def description(self, value: pulumi.Input[str]):
+    def description(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "description", value)
 
     @property
@@ -220,8 +221,6 @@ class RegisteredModel(pulumi.CustomResource):
             if custom_model_version_id is None and not opts.urn:
                 raise TypeError("Missing required property 'custom_model_version_id'")
             __props__.__dict__["custom_model_version_id"] = custom_model_version_id
-            if description is None and not opts.urn:
-                raise TypeError("Missing required property 'description'")
             __props__.__dict__["description"] = description
             __props__.__dict__["name"] = name
             __props__.__dict__["version_id"] = None
@@ -271,7 +270,7 @@ class RegisteredModel(pulumi.CustomResource):
 
     @property
     @pulumi.getter
-    def description(self) -> pulumi.Output[str]:
+    def description(self) -> pulumi.Output[Optional[str]]:
         """
         The description of the Registered Model.
         """

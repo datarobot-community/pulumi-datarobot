@@ -13,9 +13,9 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as datarobot from "@pulumi/datarobot";
  *
- * const toxicityPredictionEnvironment = new datarobot.PredictionEnvironment("toxicityPredictionEnvironment", {
+ * const example = new datarobot.PredictionEnvironment("example", {
  *     description: "Description for the example prediction environment",
- *     platform: "aws",
+ *     platform: "datarobotServerless",
  * });
  * ```
  */
@@ -50,7 +50,7 @@ export class PredictionEnvironment extends pulumi.CustomResource {
     /**
      * The description of the Prediction Environment.
      */
-    public readonly description!: pulumi.Output<string>;
+    public readonly description!: pulumi.Output<string | undefined>;
     /**
      * The name of the Prediction Environment.
      */
@@ -78,9 +78,6 @@ export class PredictionEnvironment extends pulumi.CustomResource {
             resourceInputs["platform"] = state ? state.platform : undefined;
         } else {
             const args = argsOrState as PredictionEnvironmentArgs | undefined;
-            if ((!args || args.description === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'description'");
-            }
             if ((!args || args.platform === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'platform'");
             }
@@ -118,7 +115,7 @@ export interface PredictionEnvironmentArgs {
     /**
      * The description of the Prediction Environment.
      */
-    description: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
     /**
      * The name of the Prediction Environment.
      */

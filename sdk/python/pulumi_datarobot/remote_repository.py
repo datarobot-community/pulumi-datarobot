@@ -14,38 +14,27 @@ __all__ = ['RemoteRepositoryArgs', 'RemoteRepository']
 @pulumi.input_type
 class RemoteRepositoryArgs:
     def __init__(__self__, *,
-                 description: pulumi.Input[str],
                  location: pulumi.Input[str],
                  source_type: pulumi.Input[str],
+                 description: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  personal_access_token: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a RemoteRepository resource.
-        :param pulumi.Input[str] description: The description of the Remote Repository.
         :param pulumi.Input[str] location: The location of the Remote Repository.
         :param pulumi.Input[str] source_type: The source type of the Remote Repository.
+        :param pulumi.Input[str] description: The description of the Remote Repository.
         :param pulumi.Input[str] name: The name of the Remote Repository.
         :param pulumi.Input[str] personal_access_token: The personal access token for the Remote Repository.
         """
-        pulumi.set(__self__, "description", description)
         pulumi.set(__self__, "location", location)
         pulumi.set(__self__, "source_type", source_type)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
         if name is not None:
             pulumi.set(__self__, "name", name)
         if personal_access_token is not None:
             pulumi.set(__self__, "personal_access_token", personal_access_token)
-
-    @property
-    @pulumi.getter
-    def description(self) -> pulumi.Input[str]:
-        """
-        The description of the Remote Repository.
-        """
-        return pulumi.get(self, "description")
-
-    @description.setter
-    def description(self, value: pulumi.Input[str]):
-        pulumi.set(self, "description", value)
 
     @property
     @pulumi.getter
@@ -70,6 +59,18 @@ class RemoteRepositoryArgs:
     @source_type.setter
     def source_type(self, value: pulumi.Input[str]):
         pulumi.set(self, "source_type", value)
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        The description of the Remote Repository.
+        """
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "description", value)
 
     @property
     @pulumi.getter
@@ -268,8 +269,6 @@ class RemoteRepository(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = RemoteRepositoryArgs.__new__(RemoteRepositoryArgs)
 
-            if description is None and not opts.urn:
-                raise TypeError("Missing required property 'description'")
             __props__.__dict__["description"] = description
             if location is None and not opts.urn:
                 raise TypeError("Missing required property 'location'")
@@ -320,7 +319,7 @@ class RemoteRepository(pulumi.CustomResource):
 
     @property
     @pulumi.getter
-    def description(self) -> pulumi.Output[str]:
+    def description(self) -> pulumi.Output[Optional[str]]:
         """
         The description of the Remote Repository.
         """
