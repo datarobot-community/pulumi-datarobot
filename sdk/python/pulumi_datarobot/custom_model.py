@@ -16,10 +16,10 @@ __all__ = ['CustomModelArgs', 'CustomModel']
 @pulumi.input_type
 class CustomModelArgs:
     def __init__(__self__, *,
-                 description: pulumi.Input[str],
                  base_environment_id: Optional[pulumi.Input[str]] = None,
                  base_environment_name: Optional[pulumi.Input[str]] = None,
                  base_environment_version_id: Optional[pulumi.Input[str]] = None,
+                 description: Optional[pulumi.Input[str]] = None,
                  guard_configurations: Optional[pulumi.Input[Sequence[pulumi.Input['CustomModelGuardConfigurationArgs']]]] = None,
                  is_proxy: Optional[pulumi.Input[bool]] = None,
                  local_files: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
@@ -32,10 +32,10 @@ class CustomModelArgs:
                  target_type: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a CustomModel resource.
-        :param pulumi.Input[str] description: The description of the Custom Model.
         :param pulumi.Input[str] base_environment_id: The ID of the base environment for the Custom Model.
         :param pulumi.Input[str] base_environment_name: The name of the base environment for the Custom Model.
         :param pulumi.Input[str] base_environment_version_id: The ID of the base environment version for the Custom Model.
+        :param pulumi.Input[str] description: The description of the Custom Model.
         :param pulumi.Input[Sequence[pulumi.Input['CustomModelGuardConfigurationArgs']]] guard_configurations: The guard configurations for the Custom Model.
         :param pulumi.Input[bool] is_proxy: The flag indicating if the Custom Model is a proxy model.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] local_files: The list of local file paths used to build the Custom Model.
@@ -47,13 +47,14 @@ class CustomModelArgs:
         :param pulumi.Input[str] target: The target of the Custom Model.
         :param pulumi.Input[str] target_type: The target type of the Custom Model.
         """
-        pulumi.set(__self__, "description", description)
         if base_environment_id is not None:
             pulumi.set(__self__, "base_environment_id", base_environment_id)
         if base_environment_name is not None:
             pulumi.set(__self__, "base_environment_name", base_environment_name)
         if base_environment_version_id is not None:
             pulumi.set(__self__, "base_environment_version_id", base_environment_version_id)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
         if guard_configurations is not None:
             pulumi.set(__self__, "guard_configurations", guard_configurations)
         if is_proxy is not None:
@@ -74,18 +75,6 @@ class CustomModelArgs:
             pulumi.set(__self__, "target", target)
         if target_type is not None:
             pulumi.set(__self__, "target_type", target_type)
-
-    @property
-    @pulumi.getter
-    def description(self) -> pulumi.Input[str]:
-        """
-        The description of the Custom Model.
-        """
-        return pulumi.get(self, "description")
-
-    @description.setter
-    def description(self, value: pulumi.Input[str]):
-        pulumi.set(self, "description", value)
 
     @property
     @pulumi.getter(name="baseEnvironmentId")
@@ -122,6 +111,18 @@ class CustomModelArgs:
     @base_environment_version_id.setter
     def base_environment_version_id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "base_environment_version_id", value)
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        The description of the Custom Model.
+        """
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "description", value)
 
     @property
     @pulumi.getter(name="guardConfigurations")
@@ -536,7 +537,7 @@ class CustomModel(pulumi.CustomResource):
     @overload
     def __init__(__self__,
                  resource_name: str,
-                 args: CustomModelArgs,
+                 args: Optional[CustomModelArgs] = None,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Data set from file
@@ -582,8 +583,6 @@ class CustomModel(pulumi.CustomResource):
             __props__.__dict__["base_environment_id"] = base_environment_id
             __props__.__dict__["base_environment_name"] = base_environment_name
             __props__.__dict__["base_environment_version_id"] = base_environment_version_id
-            if description is None and not opts.urn:
-                raise TypeError("Missing required property 'description'")
             __props__.__dict__["description"] = description
             __props__.__dict__["guard_configurations"] = guard_configurations
             __props__.__dict__["is_proxy"] = is_proxy
@@ -691,7 +690,7 @@ class CustomModel(pulumi.CustomResource):
 
     @property
     @pulumi.getter
-    def description(self) -> pulumi.Output[str]:
+    def description(self) -> pulumi.Output[Optional[str]]:
         """
         The description of the Custom Model.
         """
@@ -739,7 +738,7 @@ class CustomModel(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="runtimeParameters")
-    def runtime_parameters(self) -> pulumi.Output[Sequence['outputs.CustomModelRuntimeParameter']]:
+    def runtime_parameters(self) -> pulumi.Output[Optional[Sequence['outputs.CustomModelRuntimeParameter']]]:
         """
         The runtime parameter values for the Custom Model.
         """

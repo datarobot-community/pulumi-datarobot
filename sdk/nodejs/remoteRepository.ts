@@ -51,7 +51,7 @@ export class RemoteRepository extends pulumi.CustomResource {
     /**
      * The description of the Remote Repository.
      */
-    public readonly description!: pulumi.Output<string>;
+    public readonly description!: pulumi.Output<string | undefined>;
     /**
      * The location of the Remote Repository.
      */
@@ -89,9 +89,6 @@ export class RemoteRepository extends pulumi.CustomResource {
             resourceInputs["sourceType"] = state ? state.sourceType : undefined;
         } else {
             const args = argsOrState as RemoteRepositoryArgs | undefined;
-            if ((!args || args.description === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'description'");
-            }
             if ((!args || args.location === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'location'");
             }
@@ -142,7 +139,7 @@ export interface RemoteRepositoryArgs {
     /**
      * The description of the Remote Repository.
      */
-    description: pulumi.Input<string>;
+    description?: pulumi.Input<string>;
     /**
      * The location of the Remote Repository.
      */

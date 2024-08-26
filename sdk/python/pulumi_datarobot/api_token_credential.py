@@ -15,7 +15,7 @@ __all__ = ['ApiTokenCredentialArgs', 'ApiTokenCredential']
 class ApiTokenCredentialArgs:
     def __init__(__self__, *,
                  api_token: pulumi.Input[str],
-                 description: pulumi.Input[str],
+                 description: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a ApiTokenCredential resource.
@@ -24,7 +24,8 @@ class ApiTokenCredentialArgs:
         :param pulumi.Input[str] name: The name of the Api Token Credential.
         """
         pulumi.set(__self__, "api_token", api_token)
-        pulumi.set(__self__, "description", description)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
         if name is not None:
             pulumi.set(__self__, "name", name)
 
@@ -42,14 +43,14 @@ class ApiTokenCredentialArgs:
 
     @property
     @pulumi.getter
-    def description(self) -> pulumi.Input[str]:
+    def description(self) -> Optional[pulumi.Input[str]]:
         """
         The description of the Api Token Credential.
         """
         return pulumi.get(self, "description")
 
     @description.setter
-    def description(self, value: pulumi.Input[str]):
+    def description(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "description", value)
 
     @property
@@ -139,9 +140,7 @@ class ApiTokenCredential(pulumi.CustomResource):
         import pulumi
         import pulumi_datarobot as datarobot
 
-        example = datarobot.ApiTokenCredential("example",
-            api_token="[the API Key value here]",
-            description="Description for the example API token")
+        example = datarobot.ApiTokenCredential("example", api_token="[the API Key value here]")
         ```
 
         :param str resource_name: The name of the resource.
@@ -165,9 +164,7 @@ class ApiTokenCredential(pulumi.CustomResource):
         import pulumi
         import pulumi_datarobot as datarobot
 
-        example = datarobot.ApiTokenCredential("example",
-            api_token="[the API Key value here]",
-            description="Description for the example API token")
+        example = datarobot.ApiTokenCredential("example", api_token="[the API Key value here]")
         ```
 
         :param str resource_name: The name of the resource.
@@ -200,8 +197,6 @@ class ApiTokenCredential(pulumi.CustomResource):
             if api_token is None and not opts.urn:
                 raise TypeError("Missing required property 'api_token'")
             __props__.__dict__["api_token"] = None if api_token is None else pulumi.Output.secret(api_token)
-            if description is None and not opts.urn:
-                raise TypeError("Missing required property 'description'")
             __props__.__dict__["description"] = description
             __props__.__dict__["name"] = name
         secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["apiToken"])
@@ -249,7 +244,7 @@ class ApiTokenCredential(pulumi.CustomResource):
 
     @property
     @pulumi.getter
-    def description(self) -> pulumi.Output[str]:
+    def description(self) -> pulumi.Output[Optional[str]]:
         """
         The description of the Api Token Credential.
         """
