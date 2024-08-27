@@ -5,17 +5,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 /**
- * Application
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as datarobot from "@pulumi/datarobot";
- *
- * const example = new datarobot.ChatApplication("example", {deploymentId: datarobot_deployment.example.id});
- * export const datarobotChatApplicationUrl = example.applicationUrl;
- * ```
+ * Chat Application
  */
 export class ChatApplication extends pulumi.CustomResource {
     /**
@@ -46,19 +36,19 @@ export class ChatApplication extends pulumi.CustomResource {
     }
 
     /**
-     * The URL of the Application.
+     * The URL of the Chat Application.
      */
     public /*out*/ readonly applicationUrl!: pulumi.Output<string>;
     /**
-     * The deployment ID of the Application.
+     * The deployment ID of the Chat Application.
      */
     public readonly deploymentId!: pulumi.Output<string>;
     /**
-     * The name of the Application.
+     * The name of the Chat Application.
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * The version ID of the Application.
+     * The version ID of the Chat Application.
      */
     public /*out*/ readonly versionId!: pulumi.Output<string>;
 
@@ -99,19 +89,19 @@ export class ChatApplication extends pulumi.CustomResource {
  */
 export interface ChatApplicationState {
     /**
-     * The URL of the Application.
+     * The URL of the Chat Application.
      */
     applicationUrl?: pulumi.Input<string>;
     /**
-     * The deployment ID of the Application.
+     * The deployment ID of the Chat Application.
      */
     deploymentId?: pulumi.Input<string>;
     /**
-     * The name of the Application.
+     * The name of the Chat Application.
      */
     name?: pulumi.Input<string>;
     /**
-     * The version ID of the Application.
+     * The version ID of the Chat Application.
      */
     versionId?: pulumi.Input<string>;
 }
@@ -121,11 +111,11 @@ export interface ChatApplicationState {
  */
 export interface ChatApplicationArgs {
     /**
-     * The deployment ID of the Application.
+     * The deployment ID of the Chat Application.
      */
     deploymentId: pulumi.Input<string>;
     /**
-     * The name of the Application.
+     * The name of the Chat Application.
      */
     name?: pulumi.Input<string>;
 }

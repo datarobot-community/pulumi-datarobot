@@ -4,11 +4,22 @@
             "datarobot_api_token_credential": {
                 "current": "datarobot:index/apiTokenCredential:ApiTokenCredential"
             },
+            "datarobot_application_source": {
+                "current": "datarobot:index/applicationSource:ApplicationSource",
+                "fields": {
+                    "local_files": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
             "datarobot_basic_credential": {
                 "current": "datarobot:index/basicCredential:BasicCredential"
             },
             "datarobot_chat_application": {
                 "current": "datarobot:index/chatApplication:ChatApplication"
+            },
+            "datarobot_custom_application": {
+                "current": "datarobot:index/customApplication:CustomApplication"
             },
             "datarobot_custom_model": {
                 "current": "datarobot:index/customModel:CustomModel",
