@@ -6,8 +6,10 @@ from . import _utilities
 import typing
 # Export this package's modules as members:
 from .api_token_credential import *
+from .application_source import *
 from .basic_credential import *
 from .chat_application import *
+from .custom_application import *
 from .custom_model import *
 from .dataset_from_file import *
 from .deployment import *
@@ -44,6 +46,14 @@ _utilities.register(
  },
  {
   "pkg": "datarobot",
+  "mod": "index/applicationSource",
+  "fqn": "pulumi_datarobot",
+  "classes": {
+   "datarobot:index/applicationSource:ApplicationSource": "ApplicationSource"
+  }
+ },
+ {
+  "pkg": "datarobot",
   "mod": "index/basicCredential",
   "fqn": "pulumi_datarobot",
   "classes": {
@@ -56,6 +66,14 @@ _utilities.register(
   "fqn": "pulumi_datarobot",
   "classes": {
    "datarobot:index/chatApplication:ChatApplication": "ChatApplication"
+  }
+ },
+ {
+  "pkg": "datarobot",
+  "mod": "index/customApplication",
+  "fqn": "pulumi_datarobot",
+  "classes": {
+   "datarobot:index/customApplication:CustomApplication": "CustomApplication"
   }
  },
  {

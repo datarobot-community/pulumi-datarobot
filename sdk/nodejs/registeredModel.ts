@@ -13,12 +13,23 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as datarobot from "@pulumi/datarobot";
  *
- * const example = new datarobot.RegisteredModel("example", {
- *     description: "Description for the example registered model",
- *     customModelVersionId: datarobot_custom_model.example.version_id,
+ * const exampleCustomModel = new datarobot.CustomModel("exampleCustomModel", {
+ *     description: "Description for the example custom model",
+ *     targetType: "Binary",
+ *     target: "my_label",
+ *     baseEnvironmentName: "[GenAI] Python 3.11 with Moderations",
+ *     localFiles: ["example.py"],
  * });
- * export const datarobotRegisteredModelId = example.id;
- * export const datarobotRegisteredModelVersionId = example.versionId;
+ * const exampleRegisteredModel = new datarobot.RegisteredModel("exampleRegisteredModel", {
+ *     customModelVersionId: exampleCustomModel.versionId,
+ *     description: "Description for the example registered model",
+ * });
+ * const examplePredictionEnvironment = new datarobot.PredictionEnvironment("examplePredictionEnvironment", {
+ *     description: "Description for the example prediction environment",
+ *     platform: "datarobotServerless",
+ * });
+ * export const datarobotRegisteredModelId = exampleRegisteredModel.id;
+ * export const datarobotRegisteredModelVersionId = exampleRegisteredModel.versionId;
  * ```
  */
 export class RegisteredModel extends pulumi.CustomResource {

@@ -156,11 +156,20 @@ class RegisteredModel(pulumi.CustomResource):
         import pulumi
         import pulumi_datarobot as datarobot
 
-        example = datarobot.RegisteredModel("example",
-            description="Description for the example registered model",
-            custom_model_version_id=datarobot_custom_model["example"]["version_id"])
-        pulumi.export("datarobotRegisteredModelId", example.id)
-        pulumi.export("datarobotRegisteredModelVersionId", example.version_id)
+        example_custom_model = datarobot.CustomModel("exampleCustomModel",
+            description="Description for the example custom model",
+            target_type="Binary",
+            target="my_label",
+            base_environment_name="[GenAI] Python 3.11 with Moderations",
+            local_files=["example.py"])
+        example_registered_model = datarobot.RegisteredModel("exampleRegisteredModel",
+            custom_model_version_id=example_custom_model.version_id,
+            description="Description for the example registered model")
+        example_prediction_environment = datarobot.PredictionEnvironment("examplePredictionEnvironment",
+            description="Description for the example prediction environment",
+            platform="datarobotServerless")
+        pulumi.export("datarobotRegisteredModelId", example_registered_model.id)
+        pulumi.export("datarobotRegisteredModelVersionId", example_registered_model.version_id)
         ```
 
         :param str resource_name: The name of the resource.
@@ -184,11 +193,20 @@ class RegisteredModel(pulumi.CustomResource):
         import pulumi
         import pulumi_datarobot as datarobot
 
-        example = datarobot.RegisteredModel("example",
-            description="Description for the example registered model",
-            custom_model_version_id=datarobot_custom_model["example"]["version_id"])
-        pulumi.export("datarobotRegisteredModelId", example.id)
-        pulumi.export("datarobotRegisteredModelVersionId", example.version_id)
+        example_custom_model = datarobot.CustomModel("exampleCustomModel",
+            description="Description for the example custom model",
+            target_type="Binary",
+            target="my_label",
+            base_environment_name="[GenAI] Python 3.11 with Moderations",
+            local_files=["example.py"])
+        example_registered_model = datarobot.RegisteredModel("exampleRegisteredModel",
+            custom_model_version_id=example_custom_model.version_id,
+            description="Description for the example registered model")
+        example_prediction_environment = datarobot.PredictionEnvironment("examplePredictionEnvironment",
+            description="Description for the example prediction environment",
+            platform="datarobotServerless")
+        pulumi.export("datarobotRegisteredModelId", example_registered_model.id)
+        pulumi.export("datarobotRegisteredModelVersionId", example_registered_model.version_id)
         ```
 
         :param str resource_name: The name of the resource.
