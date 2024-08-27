@@ -14,10 +14,12 @@
     },
     "files": [
         "apiTokenCredential.ts",
+        "applicationSource.ts",
         "basicCredential.ts",
         "chatApplication.ts",
         "config/index.ts",
         "config/vars.ts",
+        "customApplication.ts",
         "customModel.ts",
         "datasetFromFile.ts",
         "deployment.ts",

@@ -10,6 +10,11 @@ export type ApiTokenCredential = import("./apiTokenCredential").ApiTokenCredenti
 export const ApiTokenCredential: typeof import("./apiTokenCredential").ApiTokenCredential = null as any;
 utilities.lazyLoad(exports, ["ApiTokenCredential"], () => require("./apiTokenCredential"));
 
+export { ApplicationSourceArgs, ApplicationSourceState } from "./applicationSource";
+export type ApplicationSource = import("./applicationSource").ApplicationSource;
+export const ApplicationSource: typeof import("./applicationSource").ApplicationSource = null as any;
+utilities.lazyLoad(exports, ["ApplicationSource"], () => require("./applicationSource"));
+
 export { BasicCredentialArgs, BasicCredentialState } from "./basicCredential";
 export type BasicCredential = import("./basicCredential").BasicCredential;
 export const BasicCredential: typeof import("./basicCredential").BasicCredential = null as any;
@@ -19,6 +24,11 @@ export { ChatApplicationArgs, ChatApplicationState } from "./chatApplication";
 export type ChatApplication = import("./chatApplication").ChatApplication;
 export const ChatApplication: typeof import("./chatApplication").ChatApplication = null as any;
 utilities.lazyLoad(exports, ["ChatApplication"], () => require("./chatApplication"));
+
+export { CustomApplicationArgs, CustomApplicationState } from "./customApplication";
+export type CustomApplication = import("./customApplication").CustomApplication;
+export const CustomApplication: typeof import("./customApplication").CustomApplication = null as any;
+utilities.lazyLoad(exports, ["CustomApplication"], () => require("./customApplication"));
 
 export { CustomModelArgs, CustomModelState } from "./customModel";
 export type CustomModel = import("./customModel").CustomModel;
@@ -101,10 +111,14 @@ const _module = {
         switch (type) {
             case "datarobot:index/apiTokenCredential:ApiTokenCredential":
                 return new ApiTokenCredential(name, <any>undefined, { urn })
+            case "datarobot:index/applicationSource:ApplicationSource":
+                return new ApplicationSource(name, <any>undefined, { urn })
             case "datarobot:index/basicCredential:BasicCredential":
                 return new BasicCredential(name, <any>undefined, { urn })
             case "datarobot:index/chatApplication:ChatApplication":
                 return new ChatApplication(name, <any>undefined, { urn })
+            case "datarobot:index/customApplication:CustomApplication":
+                return new CustomApplication(name, <any>undefined, { urn })
             case "datarobot:index/customModel:CustomModel":
                 return new CustomModel(name, <any>undefined, { urn })
             case "datarobot:index/datasetFromFile:DatasetFromFile":
@@ -133,8 +147,10 @@ const _module = {
     },
 };
 pulumi.runtime.registerResourceModule("datarobot", "index/apiTokenCredential", _module)
+pulumi.runtime.registerResourceModule("datarobot", "index/applicationSource", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/basicCredential", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/chatApplication", _module)
+pulumi.runtime.registerResourceModule("datarobot", "index/customApplication", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/customModel", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/datasetFromFile", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/deployment", _module)
