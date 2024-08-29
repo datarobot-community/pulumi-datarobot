@@ -16,34 +16,23 @@ __all__ = ['VectorDatabaseArgs', 'VectorDatabase']
 @pulumi.input_type
 class VectorDatabaseArgs:
     def __init__(__self__, *,
-                 chunking_parameters: pulumi.Input['VectorDatabaseChunkingParametersArgs'],
                  dataset_id: pulumi.Input[str],
                  use_case_id: pulumi.Input[str],
+                 chunking_parameters: Optional[pulumi.Input['VectorDatabaseChunkingParametersArgs']] = None,
                  name: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a VectorDatabase resource.
-        :param pulumi.Input['VectorDatabaseChunkingParametersArgs'] chunking_parameters: The chunking parameters for the Model.
         :param pulumi.Input[str] dataset_id: The id of the Vector Database.
         :param pulumi.Input[str] use_case_id: The id of the Use Case.
+        :param pulumi.Input['VectorDatabaseChunkingParametersArgs'] chunking_parameters: The chunking parameters for the Model.
         :param pulumi.Input[str] name: The name of the VectorDatabase.
         """
-        pulumi.set(__self__, "chunking_parameters", chunking_parameters)
         pulumi.set(__self__, "dataset_id", dataset_id)
         pulumi.set(__self__, "use_case_id", use_case_id)
+        if chunking_parameters is not None:
+            pulumi.set(__self__, "chunking_parameters", chunking_parameters)
         if name is not None:
             pulumi.set(__self__, "name", name)
-
-    @property
-    @pulumi.getter(name="chunkingParameters")
-    def chunking_parameters(self) -> pulumi.Input['VectorDatabaseChunkingParametersArgs']:
-        """
-        The chunking parameters for the Model.
-        """
-        return pulumi.get(self, "chunking_parameters")
-
-    @chunking_parameters.setter
-    def chunking_parameters(self, value: pulumi.Input['VectorDatabaseChunkingParametersArgs']):
-        pulumi.set(self, "chunking_parameters", value)
 
     @property
     @pulumi.getter(name="datasetId")
@@ -68,6 +57,18 @@ class VectorDatabaseArgs:
     @use_case_id.setter
     def use_case_id(self, value: pulumi.Input[str]):
         pulumi.set(self, "use_case_id", value)
+
+    @property
+    @pulumi.getter(name="chunkingParameters")
+    def chunking_parameters(self) -> Optional[pulumi.Input['VectorDatabaseChunkingParametersArgs']]:
+        """
+        The chunking parameters for the Model.
+        """
+        return pulumi.get(self, "chunking_parameters")
+
+    @chunking_parameters.setter
+    def chunking_parameters(self, value: Optional[pulumi.Input['VectorDatabaseChunkingParametersArgs']]):
+        pulumi.set(self, "chunking_parameters", value)
 
     @property
     @pulumi.getter
@@ -211,8 +212,6 @@ class VectorDatabase(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = VectorDatabaseArgs.__new__(VectorDatabaseArgs)
 
-            if chunking_parameters is None and not opts.urn:
-                raise TypeError("Missing required property 'chunking_parameters'")
             __props__.__dict__["chunking_parameters"] = chunking_parameters
             if dataset_id is None and not opts.urn:
                 raise TypeError("Missing required property 'dataset_id'")

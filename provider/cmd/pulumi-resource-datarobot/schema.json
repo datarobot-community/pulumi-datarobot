@@ -263,11 +263,11 @@
         "datarobot:index/DeploymentSettingsPredictionsSettings:DeploymentSettingsPredictionsSettings": {
             "properties": {
                 "maxComputes": {
-                    "type": "number",
+                    "type": "integer",
                     "description": "The maximum number of computes to use for predictions.\n"
                 },
                 "minComputes": {
-                    "type": "number",
+                    "type": "integer",
                     "description": "The minimum number of computes to use for predictions.\n"
                 },
                 "realTime": {
@@ -285,11 +285,11 @@
         "datarobot:index/VectorDatabaseChunkingParameters:VectorDatabaseChunkingParameters": {
             "properties": {
                 "chunkOverlapPercentage": {
-                    "type": "number",
+                    "type": "integer",
                     "description": "The percentage of overlap between chunks.\n"
                 },
                 "chunkSize": {
-                    "type": "number",
+                    "type": "integer",
                     "description": "The size of the chunks.\n"
                 },
                 "chunkingMethod": {
@@ -1440,7 +1440,7 @@
             }
         },
         "datarobot:index/vectorDatabase:VectorDatabase": {
-            "description": "Vector database\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.UseCase;\nimport com.pulumi.datarobot.UseCaseArgs;\nimport com.pulumi.datarobot.DatasetFromFile;\nimport com.pulumi.datarobot.DatasetFromFileArgs;\nimport com.pulumi.datarobot.VectorDatabase;\nimport com.pulumi.datarobot.VectorDatabaseArgs;\nimport com.pulumi.datarobot.inputs.VectorDatabaseChunkingParametersArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var exampleUseCase = new UseCase(\"exampleUseCase\", UseCaseArgs.builder()\n            .description(\"Description for the example use case\")\n            .build());\n\n        var exampleDatasetFromFile = new DatasetFromFile(\"exampleDatasetFromFile\", DatasetFromFileArgs.builder()\n            .sourceFile(\"[Path to file to upload]\")\n            .useCaseId(exampleUseCase.id())\n            .build());\n\n        var exampleVectorDatabase = new VectorDatabase(\"exampleVectorDatabase\", VectorDatabaseArgs.builder()\n            .useCaseId(exampleUseCase.id())\n            .datasetId(exampleDatasetFromFile.id())\n            .chunkingParameters(VectorDatabaseChunkingParametersArgs.builder()\n                .chunk_overlap_percentage(0)\n                .chunk_size(256)\n                .chunking_method(\"recursive\")\n                .embedding_model(\"jinaai/jina-embedding-t-en-v1\")\n                .build())\n            .build());\n\n        ctx.export(\"exampleId\", exampleVectorDatabase.id());\n    }\n}\n```\n```yaml\nresources:\n  exampleUseCase:\n    type: datarobot:UseCase\n    properties:\n      description: Description for the example use case\n  exampleDatasetFromFile:\n    type: datarobot:DatasetFromFile\n    properties:\n      sourceFile: '[Path to file to upload]'\n      useCaseId: ${exampleUseCase.id}\n  exampleVectorDatabase:\n    type: datarobot:VectorDatabase\n    properties:\n      useCaseId: ${exampleUseCase.id}\n      datasetId: ${exampleDatasetFromFile.id}\n      chunkingParameters:\n        chunk_overlap_percentage: 0\n        chunk_size: 256\n        chunking_method: recursive\n        embedding_model: jinaai/jina-embedding-t-en-v1\noutputs:\n  exampleId: ${exampleVectorDatabase.id}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "description": "Vector database\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.UseCase;\nimport com.pulumi.datarobot.UseCaseArgs;\nimport com.pulumi.datarobot.DatasetFromFile;\nimport com.pulumi.datarobot.DatasetFromFileArgs;\nimport com.pulumi.datarobot.VectorDatabase;\nimport com.pulumi.datarobot.VectorDatabaseArgs;\nimport com.pulumi.datarobot.inputs.VectorDatabaseChunkingParametersArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var exampleUseCase = new UseCase(\"exampleUseCase\", UseCaseArgs.builder()\n            .description(\"Description for the example use case\")\n            .build());\n\n        var exampleDatasetFromFile = new DatasetFromFile(\"exampleDatasetFromFile\", DatasetFromFileArgs.builder()\n            .sourceFile(\"[Path to file to upload]\")\n            .useCaseId(exampleUseCase.id())\n            .build());\n\n        var exampleVectorDatabase = new VectorDatabase(\"exampleVectorDatabase\", VectorDatabaseArgs.builder()\n            .useCaseId(exampleUseCase.id())\n            .datasetId(exampleDatasetFromFile.id())\n            .chunkingParameters(VectorDatabaseChunkingParametersArgs.builder()\n                .chunk_overlap_percentage(0)\n                .chunk_size(512)\n                .chunking_method(\"recursive\")\n                .embedding_model(\"jinaai/jina-embedding-t-en-v1\")\n                .separators(                \n                    \"\"\"\n\n                    \"\"\",\n                    \" \")\n                .build())\n            .build());\n\n        ctx.export(\"exampleId\", exampleVectorDatabase.id());\n    }\n}\n```\n```yaml\nresources:\n  exampleUseCase:\n    type: datarobot:UseCase\n    properties:\n      description: Description for the example use case\n  exampleDatasetFromFile:\n    type: datarobot:DatasetFromFile\n    properties:\n      sourceFile: '[Path to file to upload]'\n      useCaseId: ${exampleUseCase.id}\n  exampleVectorDatabase:\n    type: datarobot:VectorDatabase\n    properties:\n      useCaseId: ${exampleUseCase.id}\n      datasetId: ${exampleDatasetFromFile.id}\n      chunkingParameters:\n        chunk_overlap_percentage: 0\n        chunk_size: 512\n        chunking_method: recursive\n        embedding_model: jinaai/jina-embedding-t-en-v1\n        separators:\n          - |2+\n          - ' '\noutputs:\n  exampleId: ${exampleVectorDatabase.id}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
             "properties": {
                 "chunkingParameters": {
                     "$ref": "#/types/datarobot:index/VectorDatabaseChunkingParameters:VectorDatabaseChunkingParameters",
@@ -1484,7 +1484,6 @@
                 }
             },
             "requiredInputs": [
-                "chunkingParameters",
                 "datasetId",
                 "useCaseId"
             ],
