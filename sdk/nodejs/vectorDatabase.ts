@@ -73,9 +73,6 @@ export class VectorDatabase extends pulumi.CustomResource {
             resourceInputs["useCaseId"] = state ? state.useCaseId : undefined;
         } else {
             const args = argsOrState as VectorDatabaseArgs | undefined;
-            if ((!args || args.chunkingParameters === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'chunkingParameters'");
-            }
             if ((!args || args.datasetId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'datasetId'");
             }
@@ -121,7 +118,7 @@ export interface VectorDatabaseArgs {
     /**
      * The chunking parameters for the Model.
      */
-    chunkingParameters: pulumi.Input<inputs.VectorDatabaseChunkingParameters>;
+    chunkingParameters?: pulumi.Input<inputs.VectorDatabaseChunkingParameters>;
     /**
      * The id of the Vector Database.
      */

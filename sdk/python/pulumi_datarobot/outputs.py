@@ -500,12 +500,12 @@ class DeploymentSettingsPredictionsSettings(dict):
         return super().get(key, default)
 
     def __init__(__self__, *,
-                 max_computes: float,
-                 min_computes: float,
+                 max_computes: int,
+                 min_computes: int,
                  real_time: bool):
         """
-        :param float max_computes: The maximum number of computes to use for predictions.
-        :param float min_computes: The minimum number of computes to use for predictions.
+        :param int max_computes: The maximum number of computes to use for predictions.
+        :param int min_computes: The minimum number of computes to use for predictions.
         :param bool real_time: Whether to use real-time predictions.
         """
         pulumi.set(__self__, "max_computes", max_computes)
@@ -514,7 +514,7 @@ class DeploymentSettingsPredictionsSettings(dict):
 
     @property
     @pulumi.getter(name="maxComputes")
-    def max_computes(self) -> float:
+    def max_computes(self) -> int:
         """
         The maximum number of computes to use for predictions.
         """
@@ -522,7 +522,7 @@ class DeploymentSettingsPredictionsSettings(dict):
 
     @property
     @pulumi.getter(name="minComputes")
-    def min_computes(self) -> float:
+    def min_computes(self) -> int:
         """
         The minimum number of computes to use for predictions.
         """
@@ -565,15 +565,15 @@ class VectorDatabaseChunkingParameters(dict):
         return super().get(key, default)
 
     def __init__(__self__, *,
-                 chunk_overlap_percentage: Optional[float] = None,
-                 chunk_size: Optional[float] = None,
+                 chunk_overlap_percentage: Optional[int] = None,
+                 chunk_size: Optional[int] = None,
                  chunking_method: Optional[str] = None,
                  embedding_model: Optional[str] = None,
                  is_separator_regex: Optional[bool] = None,
                  separators: Optional[Sequence[str]] = None):
         """
-        :param float chunk_overlap_percentage: The percentage of overlap between chunks.
-        :param float chunk_size: The size of the chunks.
+        :param int chunk_overlap_percentage: The percentage of overlap between chunks.
+        :param int chunk_size: The size of the chunks.
         :param str chunking_method: The method used to chunk the data.
         :param str embedding_model: The id of the Embedding Model.
         :param bool is_separator_regex: Whether the separator is a regex.
@@ -594,7 +594,7 @@ class VectorDatabaseChunkingParameters(dict):
 
     @property
     @pulumi.getter(name="chunkOverlapPercentage")
-    def chunk_overlap_percentage(self) -> Optional[float]:
+    def chunk_overlap_percentage(self) -> Optional[int]:
         """
         The percentage of overlap between chunks.
         """
@@ -602,7 +602,7 @@ class VectorDatabaseChunkingParameters(dict):
 
     @property
     @pulumi.getter(name="chunkSize")
-    def chunk_size(self) -> Optional[float]:
+    def chunk_size(self) -> Optional[int]:
         """
         The size of the chunks.
         """
