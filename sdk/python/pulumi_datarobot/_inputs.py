@@ -481,12 +481,12 @@ class DeploymentSettingsAssociationIdArgs:
 @pulumi.input_type
 class DeploymentSettingsPredictionsSettingsArgs:
     def __init__(__self__, *,
-                 max_computes: pulumi.Input[float],
-                 min_computes: pulumi.Input[float],
+                 max_computes: pulumi.Input[int],
+                 min_computes: pulumi.Input[int],
                  real_time: pulumi.Input[bool]):
         """
-        :param pulumi.Input[float] max_computes: The maximum number of computes to use for predictions.
-        :param pulumi.Input[float] min_computes: The minimum number of computes to use for predictions.
+        :param pulumi.Input[int] max_computes: The maximum number of computes to use for predictions.
+        :param pulumi.Input[int] min_computes: The minimum number of computes to use for predictions.
         :param pulumi.Input[bool] real_time: Whether to use real-time predictions.
         """
         pulumi.set(__self__, "max_computes", max_computes)
@@ -495,26 +495,26 @@ class DeploymentSettingsPredictionsSettingsArgs:
 
     @property
     @pulumi.getter(name="maxComputes")
-    def max_computes(self) -> pulumi.Input[float]:
+    def max_computes(self) -> pulumi.Input[int]:
         """
         The maximum number of computes to use for predictions.
         """
         return pulumi.get(self, "max_computes")
 
     @max_computes.setter
-    def max_computes(self, value: pulumi.Input[float]):
+    def max_computes(self, value: pulumi.Input[int]):
         pulumi.set(self, "max_computes", value)
 
     @property
     @pulumi.getter(name="minComputes")
-    def min_computes(self) -> pulumi.Input[float]:
+    def min_computes(self) -> pulumi.Input[int]:
         """
         The minimum number of computes to use for predictions.
         """
         return pulumi.get(self, "min_computes")
 
     @min_computes.setter
-    def min_computes(self, value: pulumi.Input[float]):
+    def min_computes(self, value: pulumi.Input[int]):
         pulumi.set(self, "min_computes", value)
 
     @property
@@ -533,15 +533,15 @@ class DeploymentSettingsPredictionsSettingsArgs:
 @pulumi.input_type
 class VectorDatabaseChunkingParametersArgs:
     def __init__(__self__, *,
-                 chunk_overlap_percentage: Optional[pulumi.Input[float]] = None,
-                 chunk_size: Optional[pulumi.Input[float]] = None,
+                 chunk_overlap_percentage: Optional[pulumi.Input[int]] = None,
+                 chunk_size: Optional[pulumi.Input[int]] = None,
                  chunking_method: Optional[pulumi.Input[str]] = None,
                  embedding_model: Optional[pulumi.Input[str]] = None,
                  is_separator_regex: Optional[pulumi.Input[bool]] = None,
                  separators: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
-        :param pulumi.Input[float] chunk_overlap_percentage: The percentage of overlap between chunks.
-        :param pulumi.Input[float] chunk_size: The size of the chunks.
+        :param pulumi.Input[int] chunk_overlap_percentage: The percentage of overlap between chunks.
+        :param pulumi.Input[int] chunk_size: The size of the chunks.
         :param pulumi.Input[str] chunking_method: The method used to chunk the data.
         :param pulumi.Input[str] embedding_model: The id of the Embedding Model.
         :param pulumi.Input[bool] is_separator_regex: Whether the separator is a regex.
@@ -562,26 +562,26 @@ class VectorDatabaseChunkingParametersArgs:
 
     @property
     @pulumi.getter(name="chunkOverlapPercentage")
-    def chunk_overlap_percentage(self) -> Optional[pulumi.Input[float]]:
+    def chunk_overlap_percentage(self) -> Optional[pulumi.Input[int]]:
         """
         The percentage of overlap between chunks.
         """
         return pulumi.get(self, "chunk_overlap_percentage")
 
     @chunk_overlap_percentage.setter
-    def chunk_overlap_percentage(self, value: Optional[pulumi.Input[float]]):
+    def chunk_overlap_percentage(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "chunk_overlap_percentage", value)
 
     @property
     @pulumi.getter(name="chunkSize")
-    def chunk_size(self) -> Optional[pulumi.Input[float]]:
+    def chunk_size(self) -> Optional[pulumi.Input[int]]:
         """
         The size of the chunks.
         """
         return pulumi.get(self, "chunk_size")
 
     @chunk_size.setter
-    def chunk_size(self, value: Optional[pulumi.Input[float]]):
+    def chunk_size(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "chunk_size", value)
 
     @property
