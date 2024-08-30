@@ -9,6 +9,29 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Datarobot
 {
+    /// <summary>
+    /// Basic Credential
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Datarobot = Pulumi.Datarobot;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Datarobot.BasicCredential("example", new()
+    ///     {
+    ///         Description = "Description for the example basic credential",
+    ///         Password = "example_password",
+    ///         User = "example_user",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// </summary>
     [DatarobotResourceType("datarobot:index/basicCredential:BasicCredential")]
     public partial class BasicCredential : global::Pulumi.CustomResource
     {
@@ -16,7 +39,7 @@ namespace Pulumi.Datarobot
         /// The description of the Basic Credential.
         /// </summary>
         [Output("description")]
-        public Output<string> Description { get; private set; } = null!;
+        public Output<string?> Description { get; private set; } = null!;
 
         /// <summary>
         /// The name of the Basic Credential.
@@ -90,8 +113,8 @@ namespace Pulumi.Datarobot
         /// <summary>
         /// The description of the Basic Credential.
         /// </summary>
-        [Input("description", required: true)]
-        public Input<string> Description { get; set; } = null!;
+        [Input("description")]
+        public Input<string>? Description { get; set; }
 
         /// <summary>
         /// The name of the Basic Credential.

@@ -9,6 +9,9 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Datarobot
 {
+    /// <summary>
+    /// Deployment
+    /// </summary>
     [DatarobotResourceType("datarobot:index/deployment:Deployment")]
     public partial class Deployment : global::Pulumi.CustomResource
     {
@@ -29,6 +32,12 @@ namespace Pulumi.Datarobot
         /// </summary>
         [Output("registeredModelVersionId")]
         public Output<string> RegisteredModelVersionId { get; private set; } = null!;
+
+        /// <summary>
+        /// The settings for the Deployment.
+        /// </summary>
+        [Output("settings")]
+        public Output<Outputs.DeploymentSettings?> Settings { get; private set; } = null!;
 
 
         /// <summary>
@@ -94,6 +103,12 @@ namespace Pulumi.Datarobot
         [Input("registeredModelVersionId", required: true)]
         public Input<string> RegisteredModelVersionId { get; set; } = null!;
 
+        /// <summary>
+        /// The settings for the Deployment.
+        /// </summary>
+        [Input("settings")]
+        public Input<Inputs.DeploymentSettingsArgs>? Settings { get; set; }
+
         public DeploymentArgs()
         {
         }
@@ -119,6 +134,12 @@ namespace Pulumi.Datarobot
         /// </summary>
         [Input("registeredModelVersionId")]
         public Input<string>? RegisteredModelVersionId { get; set; }
+
+        /// <summary>
+        /// The settings for the Deployment.
+        /// </summary>
+        [Input("settings")]
+        public Input<Inputs.DeploymentSettingsGetArgs>? Settings { get; set; }
 
         public DeploymentState()
         {

@@ -12,11 +12,39 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// prediction environment
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := datarobot.NewPredictionEnvironment(ctx, "example", &datarobot.PredictionEnvironmentArgs{
+//				Description: pulumi.String("Description for the example prediction environment"),
+//				Platform:    pulumi.String("datarobotServerless"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 type PredictionEnvironment struct {
 	pulumi.CustomResourceState
 
 	// The description of the Prediction Environment.
-	Description pulumi.StringOutput `pulumi:"description"`
+	Description pulumi.StringPtrOutput `pulumi:"description"`
 	// The name of the Prediction Environment.
 	Name pulumi.StringOutput `pulumi:"name"`
 	// The platform for the Prediction Environment.
@@ -30,9 +58,6 @@ func NewPredictionEnvironment(ctx *pulumi.Context,
 		return nil, errors.New("missing one or more required arguments")
 	}
 
-	if args.Description == nil {
-		return nil, errors.New("invalid value for required argument 'Description'")
-	}
 	if args.Platform == nil {
 		return nil, errors.New("invalid value for required argument 'Platform'")
 	}
@@ -82,7 +107,7 @@ func (PredictionEnvironmentState) ElementType() reflect.Type {
 
 type predictionEnvironmentArgs struct {
 	// The description of the Prediction Environment.
-	Description string `pulumi:"description"`
+	Description *string `pulumi:"description"`
 	// The name of the Prediction Environment.
 	Name *string `pulumi:"name"`
 	// The platform for the Prediction Environment.
@@ -92,7 +117,7 @@ type predictionEnvironmentArgs struct {
 // The set of arguments for constructing a PredictionEnvironment resource.
 type PredictionEnvironmentArgs struct {
 	// The description of the Prediction Environment.
-	Description pulumi.StringInput
+	Description pulumi.StringPtrInput
 	// The name of the Prediction Environment.
 	Name pulumi.StringPtrInput
 	// The platform for the Prediction Environment.
@@ -187,8 +212,8 @@ func (o PredictionEnvironmentOutput) ToPredictionEnvironmentOutputWithContext(ct
 }
 
 // The description of the Prediction Environment.
-func (o PredictionEnvironmentOutput) Description() pulumi.StringOutput {
-	return o.ApplyT(func(v *PredictionEnvironment) pulumi.StringOutput { return v.Description }).(pulumi.StringOutput)
+func (o PredictionEnvironmentOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *PredictionEnvironment) pulumi.StringPtrOutput { return v.Description }).(pulumi.StringPtrOutput)
 }
 
 // The name of the Prediction Environment.

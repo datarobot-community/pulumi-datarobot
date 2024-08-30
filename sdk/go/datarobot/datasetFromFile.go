@@ -12,11 +12,38 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Data set from file
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			example, err := datarobot.NewDatasetFromFile(ctx, "example", &datarobot.DatasetFromFileArgs{
+//				SourceFile: pulumi.String("[Path to file to upload]"),
+//				UseCaseId:  pulumi.Any(datarobot_use_case.Example.Id),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			ctx.Export("exampleId", example.ID())
+//			return nil
+//		})
+//	}
+//
+// ```
 type DatasetFromFile struct {
 	pulumi.CustomResourceState
 
-	// The name of the Dataset.
-	Name pulumi.StringOutput `pulumi:"name"`
 	// The path to the file to upload.
 	SourceFile pulumi.StringOutput `pulumi:"sourceFile"`
 	// The id of the Use Case.
@@ -59,8 +86,6 @@ func GetDatasetFromFile(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering DatasetFromFile resources.
 type datasetFromFileState struct {
-	// The name of the Dataset.
-	Name *string `pulumi:"name"`
 	// The path to the file to upload.
 	SourceFile *string `pulumi:"sourceFile"`
 	// The id of the Use Case.
@@ -68,8 +93,6 @@ type datasetFromFileState struct {
 }
 
 type DatasetFromFileState struct {
-	// The name of the Dataset.
-	Name pulumi.StringPtrInput
 	// The path to the file to upload.
 	SourceFile pulumi.StringPtrInput
 	// The id of the Use Case.
@@ -81,8 +104,6 @@ func (DatasetFromFileState) ElementType() reflect.Type {
 }
 
 type datasetFromFileArgs struct {
-	// The name of the Dataset.
-	Name *string `pulumi:"name"`
 	// The path to the file to upload.
 	SourceFile string `pulumi:"sourceFile"`
 	// The id of the Use Case.
@@ -91,8 +112,6 @@ type datasetFromFileArgs struct {
 
 // The set of arguments for constructing a DatasetFromFile resource.
 type DatasetFromFileArgs struct {
-	// The name of the Dataset.
-	Name pulumi.StringPtrInput
 	// The path to the file to upload.
 	SourceFile pulumi.StringInput
 	// The id of the Use Case.
@@ -184,11 +203,6 @@ func (o DatasetFromFileOutput) ToDatasetFromFileOutput() DatasetFromFileOutput {
 
 func (o DatasetFromFileOutput) ToDatasetFromFileOutputWithContext(ctx context.Context) DatasetFromFileOutput {
 	return o
-}
-
-// The name of the Dataset.
-func (o DatasetFromFileOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v *DatasetFromFile) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
 // The path to the file to upload.

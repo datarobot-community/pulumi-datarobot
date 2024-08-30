@@ -9,6 +9,33 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Datarobot
 {
+    /// <summary>
+    /// Playground
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Datarobot = Pulumi.Datarobot;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var exampleUseCase = new Datarobot.UseCase("exampleUseCase");
+    /// 
+    ///     var examplePlayground = new Datarobot.Playground("examplePlayground", new()
+    ///     {
+    ///         UseCaseId = exampleUseCase.Id,
+    ///     });
+    /// 
+    ///     return new Dictionary&lt;string, object?&gt;
+    ///     {
+    ///         ["exampleId"] = examplePlayground.Id,
+    ///     };
+    /// });
+    /// ```
+    /// </summary>
     [DatarobotResourceType("datarobot:index/playground:Playground")]
     public partial class Playground : global::Pulumi.CustomResource
     {
@@ -16,7 +43,7 @@ namespace Pulumi.Datarobot
         /// The description of the Playground.
         /// </summary>
         [Output("description")]
-        public Output<string> Description { get; private set; } = null!;
+        public Output<string?> Description { get; private set; } = null!;
 
         /// <summary>
         /// The name of the Playground.
@@ -79,8 +106,8 @@ namespace Pulumi.Datarobot
         /// <summary>
         /// The description of the Playground.
         /// </summary>
-        [Input("description", required: true)]
-        public Input<string> Description { get; set; } = null!;
+        [Input("description")]
+        public Input<string>? Description { get; set; }
 
         /// <summary>
         /// The name of the Playground.

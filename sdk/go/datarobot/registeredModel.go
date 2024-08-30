@@ -12,13 +12,62 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// registered model
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			exampleCustomModel, err := datarobot.NewCustomModel(ctx, "exampleCustomModel", &datarobot.CustomModelArgs{
+//				Description:         pulumi.String("Description for the example custom model"),
+//				TargetType:          pulumi.String("Binary"),
+//				Target:              pulumi.String("my_label"),
+//				BaseEnvironmentName: pulumi.String("[GenAI] Python 3.11 with Moderations"),
+//				LocalFiles: pulumi.StringArray{
+//					pulumi.String("example.py"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleRegisteredModel, err := datarobot.NewRegisteredModel(ctx, "exampleRegisteredModel", &datarobot.RegisteredModelArgs{
+//				CustomModelVersionId: exampleCustomModel.VersionId,
+//				Description:          pulumi.String("Description for the example registered model"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = datarobot.NewPredictionEnvironment(ctx, "examplePredictionEnvironment", &datarobot.PredictionEnvironmentArgs{
+//				Description: pulumi.String("Description for the example prediction environment"),
+//				Platform:    pulumi.String("datarobotServerless"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			ctx.Export("datarobotRegisteredModelId", exampleRegisteredModel.ID())
+//			ctx.Export("datarobotRegisteredModelVersionId", exampleRegisteredModel.VersionId)
+//			return nil
+//		})
+//	}
+//
+// ```
 type RegisteredModel struct {
 	pulumi.CustomResourceState
 
 	// The ID of the custom model version for this Registered Model.
 	CustomModelVersionId pulumi.StringOutput `pulumi:"customModelVersionId"`
 	// The description of the Registered Model.
-	Description pulumi.StringOutput `pulumi:"description"`
+	Description pulumi.StringPtrOutput `pulumi:"description"`
 	// The name of the Registered Model.
 	Name pulumi.StringOutput `pulumi:"name"`
 	// The ID of the Registered Model Version.
@@ -34,9 +83,6 @@ func NewRegisteredModel(ctx *pulumi.Context,
 
 	if args.CustomModelVersionId == nil {
 		return nil, errors.New("invalid value for required argument 'CustomModelVersionId'")
-	}
-	if args.Description == nil {
-		return nil, errors.New("invalid value for required argument 'Description'")
 	}
 	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource RegisteredModel
@@ -90,7 +136,7 @@ type registeredModelArgs struct {
 	// The ID of the custom model version for this Registered Model.
 	CustomModelVersionId string `pulumi:"customModelVersionId"`
 	// The description of the Registered Model.
-	Description string `pulumi:"description"`
+	Description *string `pulumi:"description"`
 	// The name of the Registered Model.
 	Name *string `pulumi:"name"`
 }
@@ -100,7 +146,7 @@ type RegisteredModelArgs struct {
 	// The ID of the custom model version for this Registered Model.
 	CustomModelVersionId pulumi.StringInput
 	// The description of the Registered Model.
-	Description pulumi.StringInput
+	Description pulumi.StringPtrInput
 	// The name of the Registered Model.
 	Name pulumi.StringPtrInput
 }
@@ -198,8 +244,8 @@ func (o RegisteredModelOutput) CustomModelVersionId() pulumi.StringOutput {
 }
 
 // The description of the Registered Model.
-func (o RegisteredModelOutput) Description() pulumi.StringOutput {
-	return o.ApplyT(func(v *RegisteredModel) pulumi.StringOutput { return v.Description }).(pulumi.StringOutput)
+func (o RegisteredModelOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RegisteredModel) pulumi.StringPtrOutput { return v.Description }).(pulumi.StringPtrOutput)
 }
 
 // The name of the Registered Model.

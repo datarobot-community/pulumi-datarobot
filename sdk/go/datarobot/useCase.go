@@ -7,16 +7,41 @@ import (
 	"context"
 	"reflect"
 
-	"errors"
 	"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Use case
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			example, err := datarobot.NewUseCase(ctx, "example", nil)
+//			if err != nil {
+//				return err
+//			}
+//			ctx.Export("exampleId", example.ID())
+//			return nil
+//		})
+//	}
+//
+// ```
 type UseCase struct {
 	pulumi.CustomResourceState
 
 	// The description of the Use Case.
-	Description pulumi.StringOutput `pulumi:"description"`
+	Description pulumi.StringPtrOutput `pulumi:"description"`
 	// The name of the Use Case.
 	Name pulumi.StringOutput `pulumi:"name"`
 }
@@ -25,12 +50,9 @@ type UseCase struct {
 func NewUseCase(ctx *pulumi.Context,
 	name string, args *UseCaseArgs, opts ...pulumi.ResourceOption) (*UseCase, error) {
 	if args == nil {
-		return nil, errors.New("missing one or more required arguments")
+		args = &UseCaseArgs{}
 	}
 
-	if args.Description == nil {
-		return nil, errors.New("invalid value for required argument 'Description'")
-	}
 	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource UseCase
 	err := ctx.RegisterResource("datarobot:index/useCase:UseCase", name, args, &resource, opts...)
@@ -73,7 +95,7 @@ func (UseCaseState) ElementType() reflect.Type {
 
 type useCaseArgs struct {
 	// The description of the Use Case.
-	Description string `pulumi:"description"`
+	Description *string `pulumi:"description"`
 	// The name of the Use Case.
 	Name *string `pulumi:"name"`
 }
@@ -81,7 +103,7 @@ type useCaseArgs struct {
 // The set of arguments for constructing a UseCase resource.
 type UseCaseArgs struct {
 	// The description of the Use Case.
-	Description pulumi.StringInput
+	Description pulumi.StringPtrInput
 	// The name of the Use Case.
 	Name pulumi.StringPtrInput
 }
@@ -174,8 +196,8 @@ func (o UseCaseOutput) ToUseCaseOutputWithContext(ctx context.Context) UseCaseOu
 }
 
 // The description of the Use Case.
-func (o UseCaseOutput) Description() pulumi.StringOutput {
-	return o.ApplyT(func(v *UseCase) pulumi.StringOutput { return v.Description }).(pulumi.StringOutput)
+func (o UseCaseOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *UseCase) pulumi.StringPtrOutput { return v.Description }).(pulumi.StringPtrOutput)
 }
 
 // The name of the Use Case.

@@ -16,11 +16,11 @@ namespace Pulumi.Datarobot.Outputs
         /// <summary>
         /// The percentage of overlap between chunks.
         /// </summary>
-        public readonly double? ChunkOverlapPercentage;
+        public readonly int? ChunkOverlapPercentage;
         /// <summary>
         /// The size of the chunks.
         /// </summary>
-        public readonly double? ChunkSize;
+        public readonly int? ChunkSize;
         /// <summary>
         /// The method used to chunk the data.
         /// </summary>
@@ -40,9 +40,9 @@ namespace Pulumi.Datarobot.Outputs
 
         [OutputConstructor]
         private VectorDatabaseChunkingParameters(
-            double? chunkOverlapPercentage,
+            int? chunkOverlapPercentage,
 
-            double? chunkSize,
+            int? chunkSize,
 
             string? chunkingMethod,
 

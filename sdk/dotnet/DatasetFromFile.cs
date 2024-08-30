@@ -9,15 +9,35 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Datarobot
 {
+    /// <summary>
+    /// Data set from file
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Datarobot = Pulumi.Datarobot;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Datarobot.DatasetFromFile("example", new()
+    ///     {
+    ///         SourceFile = "[Path to file to upload]",
+    ///         UseCaseId = datarobot_use_case.Example.Id,
+    ///     });
+    /// 
+    ///     return new Dictionary&lt;string, object?&gt;
+    ///     {
+    ///         ["exampleId"] = example.Id,
+    ///     };
+    /// });
+    /// ```
+    /// </summary>
     [DatarobotResourceType("datarobot:index/datasetFromFile:DatasetFromFile")]
     public partial class DatasetFromFile : global::Pulumi.CustomResource
     {
-        /// <summary>
-        /// The name of the Dataset.
-        /// </summary>
-        [Output("name")]
-        public Output<string> Name { get; private set; } = null!;
-
         /// <summary>
         /// The path to the file to upload.
         /// </summary>
@@ -77,12 +97,6 @@ namespace Pulumi.Datarobot
     public sealed class DatasetFromFileArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The name of the Dataset.
-        /// </summary>
-        [Input("name")]
-        public Input<string>? Name { get; set; }
-
-        /// <summary>
         /// The path to the file to upload.
         /// </summary>
         [Input("sourceFile", required: true)]
@@ -102,12 +116,6 @@ namespace Pulumi.Datarobot
 
     public sealed class DatasetFromFileState : global::Pulumi.ResourceArgs
     {
-        /// <summary>
-        /// The name of the Dataset.
-        /// </summary>
-        [Input("name")]
-        public Input<string>? Name { get; set; }
-
         /// <summary>
         /// The path to the file to upload.
         /// </summary>

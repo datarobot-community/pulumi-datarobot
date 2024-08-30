@@ -9,6 +9,9 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Datarobot
 {
+    /// <summary>
+    /// Data set from file
+    /// </summary>
     [DatarobotResourceType("datarobot:index/customModel:CustomModel")]
     public partial class CustomModel : global::Pulumi.CustomResource
     {
@@ -17,6 +20,12 @@ namespace Pulumi.Datarobot
         /// </summary>
         [Output("baseEnvironmentId")]
         public Output<string> BaseEnvironmentId { get; private set; } = null!;
+
+        /// <summary>
+        /// The name of the base environment for the Custom Model.
+        /// </summary>
+        [Output("baseEnvironmentName")]
+        public Output<string?> BaseEnvironmentName { get; private set; } = null!;
 
         /// <summary>
         /// The ID of the base environment version for the Custom Model.
@@ -28,13 +37,37 @@ namespace Pulumi.Datarobot
         /// The description of the Custom Model.
         /// </summary>
         [Output("description")]
-        public Output<string> Description { get; private set; } = null!;
+        public Output<string?> Description { get; private set; } = null!;
+
+        /// <summary>
+        /// The guard configurations for the Custom Model.
+        /// </summary>
+        [Output("guardConfigurations")]
+        public Output<ImmutableArray<Outputs.CustomModelGuardConfiguration>> GuardConfigurations { get; private set; } = null!;
+
+        /// <summary>
+        /// The flag indicating if the Custom Model is a proxy model.
+        /// </summary>
+        [Output("isProxy")]
+        public Output<bool?> IsProxy { get; private set; } = null!;
+
+        /// <summary>
+        /// The list of local file paths used to build the Custom Model.
+        /// </summary>
+        [Output("localFiles")]
+        public Output<ImmutableArray<string>> LocalFiles { get; private set; } = null!;
 
         /// <summary>
         /// The name of the Custom Model.
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
+
+        /// <summary>
+        /// The overall moderation configuration for the Custom Model.
+        /// </summary>
+        [Output("overallModerationConfiguration")]
+        public Output<Outputs.CustomModelOverallModerationConfiguration?> OverallModerationConfiguration { get; private set; } = null!;
 
         /// <summary>
         /// The runtime parameter values for the Custom Model.
@@ -46,7 +79,25 @@ namespace Pulumi.Datarobot
         /// The ID of the source LLM Blueprint for the Custom Model.
         /// </summary>
         [Output("sourceLlmBlueprintId")]
-        public Output<string> SourceLlmBlueprintId { get; private set; } = null!;
+        public Output<string?> SourceLlmBlueprintId { get; private set; } = null!;
+
+        /// <summary>
+        /// The source remote repositories for the Custom Model.
+        /// </summary>
+        [Output("sourceRemoteRepositories")]
+        public Output<ImmutableArray<Outputs.CustomModelSourceRemoteRepository>> SourceRemoteRepositories { get; private set; } = null!;
+
+        /// <summary>
+        /// The target of the Custom Model.
+        /// </summary>
+        [Output("target")]
+        public Output<string?> Target { get; private set; } = null!;
+
+        /// <summary>
+        /// The target type of the Custom Model.
+        /// </summary>
+        [Output("targetType")]
+        public Output<string?> TargetType { get; private set; } = null!;
 
         /// <summary>
         /// The ID of the latest Custom Model version.
@@ -62,7 +113,7 @@ namespace Pulumi.Datarobot
         /// <param name="name">The unique name of the resource</param>
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public CustomModel(string name, CustomModelArgs args, CustomResourceOptions? options = null)
+        public CustomModel(string name, CustomModelArgs? args = null, CustomResourceOptions? options = null)
             : base("datarobot:index/customModel:CustomModel", name, args ?? new CustomModelArgs(), MakeResourceOptions(options, ""))
         {
         }
@@ -107,6 +158,12 @@ namespace Pulumi.Datarobot
         public Input<string>? BaseEnvironmentId { get; set; }
 
         /// <summary>
+        /// The name of the base environment for the Custom Model.
+        /// </summary>
+        [Input("baseEnvironmentName")]
+        public Input<string>? BaseEnvironmentName { get; set; }
+
+        /// <summary>
         /// The ID of the base environment version for the Custom Model.
         /// </summary>
         [Input("baseEnvironmentVersionId")]
@@ -115,14 +172,50 @@ namespace Pulumi.Datarobot
         /// <summary>
         /// The description of the Custom Model.
         /// </summary>
-        [Input("description", required: true)]
-        public Input<string> Description { get; set; } = null!;
+        [Input("description")]
+        public Input<string>? Description { get; set; }
+
+        [Input("guardConfigurations")]
+        private InputList<Inputs.CustomModelGuardConfigurationArgs>? _guardConfigurations;
+
+        /// <summary>
+        /// The guard configurations for the Custom Model.
+        /// </summary>
+        public InputList<Inputs.CustomModelGuardConfigurationArgs> GuardConfigurations
+        {
+            get => _guardConfigurations ?? (_guardConfigurations = new InputList<Inputs.CustomModelGuardConfigurationArgs>());
+            set => _guardConfigurations = value;
+        }
+
+        /// <summary>
+        /// The flag indicating if the Custom Model is a proxy model.
+        /// </summary>
+        [Input("isProxy")]
+        public Input<bool>? IsProxy { get; set; }
+
+        [Input("localFiles")]
+        private InputList<string>? _localFiles;
+
+        /// <summary>
+        /// The list of local file paths used to build the Custom Model.
+        /// </summary>
+        public InputList<string> LocalFiles
+        {
+            get => _localFiles ?? (_localFiles = new InputList<string>());
+            set => _localFiles = value;
+        }
 
         /// <summary>
         /// The name of the Custom Model.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
+
+        /// <summary>
+        /// The overall moderation configuration for the Custom Model.
+        /// </summary>
+        [Input("overallModerationConfiguration")]
+        public Input<Inputs.CustomModelOverallModerationConfigurationArgs>? OverallModerationConfiguration { get; set; }
 
         [Input("runtimeParameters")]
         private InputList<Inputs.CustomModelRuntimeParameterArgs>? _runtimeParameters;
@@ -139,8 +232,32 @@ namespace Pulumi.Datarobot
         /// <summary>
         /// The ID of the source LLM Blueprint for the Custom Model.
         /// </summary>
-        [Input("sourceLlmBlueprintId", required: true)]
-        public Input<string> SourceLlmBlueprintId { get; set; } = null!;
+        [Input("sourceLlmBlueprintId")]
+        public Input<string>? SourceLlmBlueprintId { get; set; }
+
+        [Input("sourceRemoteRepositories")]
+        private InputList<Inputs.CustomModelSourceRemoteRepositoryArgs>? _sourceRemoteRepositories;
+
+        /// <summary>
+        /// The source remote repositories for the Custom Model.
+        /// </summary>
+        public InputList<Inputs.CustomModelSourceRemoteRepositoryArgs> SourceRemoteRepositories
+        {
+            get => _sourceRemoteRepositories ?? (_sourceRemoteRepositories = new InputList<Inputs.CustomModelSourceRemoteRepositoryArgs>());
+            set => _sourceRemoteRepositories = value;
+        }
+
+        /// <summary>
+        /// The target of the Custom Model.
+        /// </summary>
+        [Input("target")]
+        public Input<string>? Target { get; set; }
+
+        /// <summary>
+        /// The target type of the Custom Model.
+        /// </summary>
+        [Input("targetType")]
+        public Input<string>? TargetType { get; set; }
 
         public CustomModelArgs()
         {
@@ -157,6 +274,12 @@ namespace Pulumi.Datarobot
         public Input<string>? BaseEnvironmentId { get; set; }
 
         /// <summary>
+        /// The name of the base environment for the Custom Model.
+        /// </summary>
+        [Input("baseEnvironmentName")]
+        public Input<string>? BaseEnvironmentName { get; set; }
+
+        /// <summary>
         /// The ID of the base environment version for the Custom Model.
         /// </summary>
         [Input("baseEnvironmentVersionId")]
@@ -168,11 +291,47 @@ namespace Pulumi.Datarobot
         [Input("description")]
         public Input<string>? Description { get; set; }
 
+        [Input("guardConfigurations")]
+        private InputList<Inputs.CustomModelGuardConfigurationGetArgs>? _guardConfigurations;
+
+        /// <summary>
+        /// The guard configurations for the Custom Model.
+        /// </summary>
+        public InputList<Inputs.CustomModelGuardConfigurationGetArgs> GuardConfigurations
+        {
+            get => _guardConfigurations ?? (_guardConfigurations = new InputList<Inputs.CustomModelGuardConfigurationGetArgs>());
+            set => _guardConfigurations = value;
+        }
+
+        /// <summary>
+        /// The flag indicating if the Custom Model is a proxy model.
+        /// </summary>
+        [Input("isProxy")]
+        public Input<bool>? IsProxy { get; set; }
+
+        [Input("localFiles")]
+        private InputList<string>? _localFiles;
+
+        /// <summary>
+        /// The list of local file paths used to build the Custom Model.
+        /// </summary>
+        public InputList<string> LocalFiles
+        {
+            get => _localFiles ?? (_localFiles = new InputList<string>());
+            set => _localFiles = value;
+        }
+
         /// <summary>
         /// The name of the Custom Model.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
+
+        /// <summary>
+        /// The overall moderation configuration for the Custom Model.
+        /// </summary>
+        [Input("overallModerationConfiguration")]
+        public Input<Inputs.CustomModelOverallModerationConfigurationGetArgs>? OverallModerationConfiguration { get; set; }
 
         [Input("runtimeParameters")]
         private InputList<Inputs.CustomModelRuntimeParameterGetArgs>? _runtimeParameters;
@@ -191,6 +350,30 @@ namespace Pulumi.Datarobot
         /// </summary>
         [Input("sourceLlmBlueprintId")]
         public Input<string>? SourceLlmBlueprintId { get; set; }
+
+        [Input("sourceRemoteRepositories")]
+        private InputList<Inputs.CustomModelSourceRemoteRepositoryGetArgs>? _sourceRemoteRepositories;
+
+        /// <summary>
+        /// The source remote repositories for the Custom Model.
+        /// </summary>
+        public InputList<Inputs.CustomModelSourceRemoteRepositoryGetArgs> SourceRemoteRepositories
+        {
+            get => _sourceRemoteRepositories ?? (_sourceRemoteRepositories = new InputList<Inputs.CustomModelSourceRemoteRepositoryGetArgs>());
+            set => _sourceRemoteRepositories = value;
+        }
+
+        /// <summary>
+        /// The target of the Custom Model.
+        /// </summary>
+        [Input("target")]
+        public Input<string>? Target { get; set; }
+
+        /// <summary>
+        /// The target type of the Custom Model.
+        /// </summary>
+        [Input("targetType")]
+        public Input<string>? TargetType { get; set; }
 
         /// <summary>
         /// The ID of the latest Custom Model version.

@@ -117,6 +117,20 @@ class ApplicationSource(pulumi.CustomResource):
         """
         Application Source
 
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_datarobot as datarobot
+
+        example = datarobot.ApplicationSource("example", local_files=[
+            "start-app.sh",
+            "streamlit-app.py",
+        ])
+        pulumi.export("datarobotApplicationSourceId", example.id)
+        pulumi.export("datarobotApplicationSourceVersionId", example.version_id)
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] local_files: The list of local file paths used to build the Application Source.
@@ -130,6 +144,20 @@ class ApplicationSource(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Application Source
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_datarobot as datarobot
+
+        example = datarobot.ApplicationSource("example", local_files=[
+            "start-app.sh",
+            "streamlit-app.py",
+        ])
+        pulumi.export("datarobotApplicationSourceId", example.id)
+        pulumi.export("datarobotApplicationSourceVersionId", example.version_id)
+        ```
 
         :param str resource_name: The name of the resource.
         :param ApplicationSourceArgs args: The arguments to use to populate this resource's properties.

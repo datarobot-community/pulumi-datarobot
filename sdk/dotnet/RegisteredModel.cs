@@ -9,6 +9,51 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Datarobot
 {
+    /// <summary>
+    /// registered model
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Datarobot = Pulumi.Datarobot;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var exampleCustomModel = new Datarobot.CustomModel("exampleCustomModel", new()
+    ///     {
+    ///         Description = "Description for the example custom model",
+    ///         TargetType = "Binary",
+    ///         Target = "my_label",
+    ///         BaseEnvironmentName = "[GenAI] Python 3.11 with Moderations",
+    ///         LocalFiles = new[]
+    ///         {
+    ///             "example.py",
+    ///         },
+    ///     });
+    /// 
+    ///     var exampleRegisteredModel = new Datarobot.RegisteredModel("exampleRegisteredModel", new()
+    ///     {
+    ///         CustomModelVersionId = exampleCustomModel.VersionId,
+    ///         Description = "Description for the example registered model",
+    ///     });
+    /// 
+    ///     var examplePredictionEnvironment = new Datarobot.PredictionEnvironment("examplePredictionEnvironment", new()
+    ///     {
+    ///         Description = "Description for the example prediction environment",
+    ///         Platform = "datarobotServerless",
+    ///     });
+    /// 
+    ///     return new Dictionary&lt;string, object?&gt;
+    ///     {
+    ///         ["datarobotRegisteredModelId"] = exampleRegisteredModel.Id,
+    ///         ["datarobotRegisteredModelVersionId"] = exampleRegisteredModel.VersionId,
+    ///     };
+    /// });
+    /// ```
+    /// </summary>
     [DatarobotResourceType("datarobot:index/registeredModel:RegisteredModel")]
     public partial class RegisteredModel : global::Pulumi.CustomResource
     {
@@ -22,7 +67,7 @@ namespace Pulumi.Datarobot
         /// The description of the Registered Model.
         /// </summary>
         [Output("description")]
-        public Output<string> Description { get; private set; } = null!;
+        public Output<string?> Description { get; private set; } = null!;
 
         /// <summary>
         /// The name of the Registered Model.
@@ -91,8 +136,8 @@ namespace Pulumi.Datarobot
         /// <summary>
         /// The description of the Registered Model.
         /// </summary>
-        [Input("description", required: true)]
-        public Input<string> Description { get; set; } = null!;
+        [Input("description")]
+        public Input<string>? Description { get; set; }
 
         /// <summary>
         /// The name of the Registered Model.

@@ -9,6 +9,28 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Datarobot
 {
+    /// <summary>
+    /// Use case
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Datarobot = Pulumi.Datarobot;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Datarobot.UseCase("example");
+    /// 
+    ///     return new Dictionary&lt;string, object?&gt;
+    ///     {
+    ///         ["exampleId"] = example.Id,
+    ///     };
+    /// });
+    /// ```
+    /// </summary>
     [DatarobotResourceType("datarobot:index/useCase:UseCase")]
     public partial class UseCase : global::Pulumi.CustomResource
     {
@@ -16,7 +38,7 @@ namespace Pulumi.Datarobot
         /// The description of the Use Case.
         /// </summary>
         [Output("description")]
-        public Output<string> Description { get; private set; } = null!;
+        public Output<string?> Description { get; private set; } = null!;
 
         /// <summary>
         /// The name of the Use Case.
@@ -32,7 +54,7 @@ namespace Pulumi.Datarobot
         /// <param name="name">The unique name of the resource</param>
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public UseCase(string name, UseCaseArgs args, CustomResourceOptions? options = null)
+        public UseCase(string name, UseCaseArgs? args = null, CustomResourceOptions? options = null)
             : base("datarobot:index/useCase:UseCase", name, args ?? new UseCaseArgs(), MakeResourceOptions(options, ""))
         {
         }
@@ -73,8 +95,8 @@ namespace Pulumi.Datarobot
         /// <summary>
         /// The description of the Use Case.
         /// </summary>
-        [Input("description", required: true)]
-        public Input<string> Description { get; set; } = null!;
+        [Input("description")]
+        public Input<string>? Description { get; set; }
 
         /// <summary>
         /// The name of the Use Case.

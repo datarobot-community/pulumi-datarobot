@@ -415,7 +415,7 @@
             }
         },
         "datarobot:index/applicationSource:ApplicationSource": {
-            "description": "Application Source\n",
+            "description": "Application Source\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@pulumi/datarobot\";\n\nconst example = new datarobot.ApplicationSource(\"example\", {localFiles: [\n    \"start-app.sh\",\n    \"streamlit-app.py\",\n]});\nexport const datarobotApplicationSourceId = example.id;\nexport const datarobotApplicationSourceVersionId = example.versionId;\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample = datarobot.ApplicationSource(\"example\", local_files=[\n    \"start-app.sh\",\n    \"streamlit-app.py\",\n])\npulumi.export(\"datarobotApplicationSourceId\", example.id)\npulumi.export(\"datarobotApplicationSourceVersionId\", example.version_id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = Pulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Datarobot.ApplicationSource(\"example\", new()\n    {\n        LocalFiles = new[]\n        {\n            \"start-app.sh\",\n            \"streamlit-app.py\",\n        },\n    });\n\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"datarobotApplicationSourceId\"] = example.Id,\n        [\"datarobotApplicationSourceVersionId\"] = example.VersionId,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texample, err := datarobot.NewApplicationSource(ctx, \"example\", \u0026datarobot.ApplicationSourceArgs{\n\t\t\tLocalFiles: pulumi.StringArray{\n\t\t\t\tpulumi.String(\"start-app.sh\"),\n\t\t\t\tpulumi.String(\"streamlit-app.py\"),\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"datarobotApplicationSourceId\", example.ID())\n\t\tctx.Export(\"datarobotApplicationSourceVersionId\", example.VersionId)\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.ApplicationSource;\nimport com.pulumi.datarobot.ApplicationSourceArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new ApplicationSource(\"example\", ApplicationSourceArgs.builder()\n            .localFiles(            \n                \"start-app.sh\",\n                \"streamlit-app.py\")\n            .build());\n\n        ctx.export(\"datarobotApplicationSourceId\", example.id());\n        ctx.export(\"datarobotApplicationSourceVersionId\", example.versionId());\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: datarobot:ApplicationSource\n    properties:\n      localFiles:\n        - start-app.sh\n        - streamlit-app.py\noutputs:\n  datarobotApplicationSourceId: ${example.id}\n  datarobotApplicationSourceVersionId: ${example.versionId}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
             "properties": {
                 "localFiles": {
                     "type": "array",
@@ -553,7 +553,7 @@
             }
         },
         "datarobot:index/chatApplication:ChatApplication": {
-            "description": "Chat Application\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.CustomModel;\nimport com.pulumi.datarobot.CustomModelArgs;\nimport com.pulumi.datarobot.RegisteredModel;\nimport com.pulumi.datarobot.RegisteredModelArgs;\nimport com.pulumi.datarobot.PredictionEnvironment;\nimport com.pulumi.datarobot.PredictionEnvironmentArgs;\nimport com.pulumi.datarobot.Deployment;\nimport com.pulumi.datarobot.DeploymentArgs;\nimport com.pulumi.datarobot.inputs.DeploymentSettingsArgs;\nimport com.pulumi.datarobot.ChatApplication;\nimport com.pulumi.datarobot.ChatApplicationArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var exampleCustomModel = new CustomModel(\"exampleCustomModel\", CustomModelArgs.builder()\n            .description(\"Description for the example custom model\")\n            .targetType(\"Binary\")\n            .target(\"my_label\")\n            .baseEnvironmentName(\"[GenAI] Python 3.11 with Moderations\")\n            .localFiles(\"example.py\")\n            .build());\n\n        var exampleRegisteredModel = new RegisteredModel(\"exampleRegisteredModel\", RegisteredModelArgs.builder()\n            .customModelVersionId(exampleCustomModel.versionId())\n            .description(\"Description for the example registered model\")\n            .build());\n\n        var examplePredictionEnvironment = new PredictionEnvironment(\"examplePredictionEnvironment\", PredictionEnvironmentArgs.builder()\n            .description(\"Description for the example prediction environment\")\n            .platform(\"datarobotServerless\")\n            .build());\n\n        var exampleDeployment = new Deployment(\"exampleDeployment\", DeploymentArgs.builder()\n            .label(\"An example deployment\")\n            .predictionEnvironmentId(examplePredictionEnvironment.id())\n            .registeredModelVersionId(exampleRegisteredModel.versionId())\n            .settings(DeploymentSettingsArgs.builder()\n                .prediction_row_storage(true)\n                .build())\n            .build());\n\n        var exampleChatApplication = new ChatApplication(\"exampleChatApplication\", ChatApplicationArgs.builder()\n            .deploymentId(exampleDeployment.id())\n            .build());\n\n        ctx.export(\"datarobotChatApplicationUrl\", exampleChatApplication.applicationUrl());\n    }\n}\n```\n```yaml\nresources:\n  exampleCustomModel:\n    type: datarobot:CustomModel\n    properties:\n      description: Description for the example custom model\n      targetType: Binary\n      target: my_label\n      baseEnvironmentName: '[GenAI] Python 3.11 with Moderations'\n      localFiles:\n        - example.py\n  exampleRegisteredModel:\n    type: datarobot:RegisteredModel\n    properties:\n      customModelVersionId: ${exampleCustomModel.versionId}\n      description: Description for the example registered model\n  examplePredictionEnvironment:\n    type: datarobot:PredictionEnvironment\n    properties:\n      description: Description for the example prediction environment\n      platform: datarobotServerless\n  exampleDeployment:\n    type: datarobot:Deployment\n    properties:\n      label: An example deployment\n      predictionEnvironmentId: ${examplePredictionEnvironment.id}\n      registeredModelVersionId: ${exampleRegisteredModel.versionId}\n      # Optional settings\n      settings:\n        prediction_row_storage: true\n  exampleChatApplication:\n    type: datarobot:ChatApplication\n    properties:\n      deploymentId: ${exampleDeployment.id}\noutputs:\n  datarobotChatApplicationUrl: ${exampleChatApplication.applicationUrl}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "description": "Chat Application\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.CustomModel;\nimport com.pulumi.datarobot.CustomModelArgs;\nimport com.pulumi.datarobot.RegisteredModel;\nimport com.pulumi.datarobot.RegisteredModelArgs;\nimport com.pulumi.datarobot.PredictionEnvironment;\nimport com.pulumi.datarobot.PredictionEnvironmentArgs;\nimport com.pulumi.datarobot.Deployment;\nimport com.pulumi.datarobot.DeploymentArgs;\nimport com.pulumi.datarobot.inputs.DeploymentSettingsArgs;\nimport com.pulumi.datarobot.ChatApplication;\nimport com.pulumi.datarobot.ChatApplicationArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var exampleCustomModel = new CustomModel(\"exampleCustomModel\", CustomModelArgs.builder()\n            .description(\"Description for the example custom model\")\n            .targetType(\"Binary\")\n            .target(\"my_label\")\n            .baseEnvironmentName(\"[GenAI] Python 3.11 with Moderations\")\n            .localFiles(\"example.py\")\n            .build());\n\n        var exampleRegisteredModel = new RegisteredModel(\"exampleRegisteredModel\", RegisteredModelArgs.builder()\n            .customModelVersionId(exampleCustomModel.versionId())\n            .description(\"Description for the example registered model\")\n            .build());\n\n        var examplePredictionEnvironment = new PredictionEnvironment(\"examplePredictionEnvironment\", PredictionEnvironmentArgs.builder()\n            .description(\"Description for the example prediction environment\")\n            .platform(\"datarobotServerless\")\n            .build());\n\n        var exampleDeployment = new Deployment(\"exampleDeployment\", DeploymentArgs.builder()\n            .label(\"An example deployment\")\n            .predictionEnvironmentId(examplePredictionEnvironment.id())\n            .registeredModelVersionId(exampleRegisteredModel.versionId())\n            .settings(DeploymentSettingsArgs.builder()\n                .prediction_row_storage(true)\n                .build())\n            .build());\n\n        var exampleChatApplication = new ChatApplication(\"exampleChatApplication\", ChatApplicationArgs.builder()\n            .deploymentId(exampleDeployment.id())\n            .externalAccessEnabled(true)\n            .externalAccessRecipients(\"recipient@example.com\")\n            .build());\n\n        ctx.export(\"datarobotChatApplicationId\", exampleChatApplication.id());\n        ctx.export(\"datarobotChatApplicationSourceId\", exampleChatApplication.sourceId());\n        ctx.export(\"datarobotChatApplicationSourceVersionId\", exampleChatApplication.sourceVersionId());\n        ctx.export(\"datarobotChatApplicationUrl\", exampleChatApplication.applicationUrl());\n    }\n}\n```\n```yaml\nresources:\n  exampleCustomModel:\n    type: datarobot:CustomModel\n    properties:\n      description: Description for the example custom model\n      targetType: Binary\n      target: my_label\n      baseEnvironmentName: '[GenAI] Python 3.11 with Moderations'\n      localFiles:\n        - example.py\n  exampleRegisteredModel:\n    type: datarobot:RegisteredModel\n    properties:\n      customModelVersionId: ${exampleCustomModel.versionId}\n      description: Description for the example registered model\n  examplePredictionEnvironment:\n    type: datarobot:PredictionEnvironment\n    properties:\n      description: Description for the example prediction environment\n      platform: datarobotServerless\n  exampleDeployment:\n    type: datarobot:Deployment\n    properties:\n      label: An example deployment\n      predictionEnvironmentId: ${examplePredictionEnvironment.id}\n      registeredModelVersionId: ${exampleRegisteredModel.versionId}\n      # Optional settings\n      settings:\n        prediction_row_storage: true\n  exampleChatApplication:\n    type: datarobot:ChatApplication\n    properties:\n      deploymentId: ${exampleDeployment.id}\n      externalAccessEnabled: true\n      externalAccessRecipients:\n        - recipient@example.com\noutputs:\n  datarobotChatApplicationId: ${exampleChatApplication.id}\n  datarobotChatApplicationSourceId: ${exampleChatApplication.sourceId}\n  datarobotChatApplicationSourceVersionId: ${exampleChatApplication.sourceVersionId}\n  datarobotChatApplicationUrl: ${exampleChatApplication.applicationUrl}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
             "properties": {
                 "applicationUrl": {
                     "type": "string",
@@ -563,25 +563,53 @@
                     "type": "string",
                     "description": "The deployment ID of the Chat Application.\n"
                 },
+                "externalAccessEnabled": {
+                    "type": "boolean",
+                    "description": "Whether external access is enabled for the Chat Application.\n"
+                },
+                "externalAccessRecipients": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The list of external email addresses that have access to the Chat Application.\n"
+                },
                 "name": {
                     "type": "string",
                     "description": "The name of the Chat Application.\n"
                 },
-                "versionId": {
+                "sourceId": {
                     "type": "string",
-                    "description": "The version ID of the Chat Application.\n"
+                    "description": "The ID of the Chat Application Source.\n"
+                },
+                "sourceVersionId": {
+                    "type": "string",
+                    "description": "The version ID of the Chat Application Source.\n"
                 }
             },
             "required": [
                 "applicationUrl",
                 "deploymentId",
+                "externalAccessEnabled",
                 "name",
-                "versionId"
+                "sourceId",
+                "sourceVersionId"
             ],
             "inputProperties": {
                 "deploymentId": {
                     "type": "string",
                     "description": "The deployment ID of the Chat Application.\n"
+                },
+                "externalAccessEnabled": {
+                    "type": "boolean",
+                    "description": "Whether external access is enabled for the Chat Application.\n"
+                },
+                "externalAccessRecipients": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The list of external email addresses that have access to the Chat Application.\n"
                 },
                 "name": {
                     "type": "string",
@@ -602,28 +630,58 @@
                         "type": "string",
                         "description": "The deployment ID of the Chat Application.\n"
                     },
+                    "externalAccessEnabled": {
+                        "type": "boolean",
+                        "description": "Whether external access is enabled for the Chat Application.\n"
+                    },
+                    "externalAccessRecipients": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "The list of external email addresses that have access to the Chat Application.\n"
+                    },
                     "name": {
                         "type": "string",
                         "description": "The name of the Chat Application.\n"
                     },
-                    "versionId": {
+                    "sourceId": {
                         "type": "string",
-                        "description": "The version ID of the Chat Application.\n"
+                        "description": "The ID of the Chat Application Source.\n"
+                    },
+                    "sourceVersionId": {
+                        "type": "string",
+                        "description": "The version ID of the Chat Application Source.\n"
                     }
                 },
                 "type": "object"
             }
         },
         "datarobot:index/customApplication:CustomApplication": {
-            "description": "Custom Application\n",
+            "description": "Custom Application\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@pulumi/datarobot\";\n\nconst exampleApplicationSource = new datarobot.ApplicationSource(\"exampleApplicationSource\", {localFiles: [\n    \"start-app.sh\",\n    \"streamlit-app.py\",\n]});\nconst exampleCustomApplication = new datarobot.CustomApplication(\"exampleCustomApplication\", {\n    sourceVersionId: exampleApplicationSource.versionId,\n    externalAccessEnabled: true,\n    externalAccessRecipients: [\"recipient@example.com\"],\n});\nexport const datarobotCustomApplicationId = exampleCustomApplication.id;\nexport const datarobotCustomApplicationSourceId = exampleCustomApplication.sourceId;\nexport const datarobotCustomApplicationSourceVersionId = exampleCustomApplication.sourceVersionId;\nexport const datarobotCustomApplicationUrl = exampleCustomApplication.applicationUrl;\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample_application_source = datarobot.ApplicationSource(\"exampleApplicationSource\", local_files=[\n    \"start-app.sh\",\n    \"streamlit-app.py\",\n])\nexample_custom_application = datarobot.CustomApplication(\"exampleCustomApplication\",\n    source_version_id=example_application_source.version_id,\n    external_access_enabled=True,\n    external_access_recipients=[\"recipient@example.com\"])\npulumi.export(\"datarobotCustomApplicationId\", example_custom_application.id)\npulumi.export(\"datarobotCustomApplicationSourceId\", example_custom_application.source_id)\npulumi.export(\"datarobotCustomApplicationSourceVersionId\", example_custom_application.source_version_id)\npulumi.export(\"datarobotCustomApplicationUrl\", example_custom_application.application_url)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = Pulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var exampleApplicationSource = new Datarobot.ApplicationSource(\"exampleApplicationSource\", new()\n    {\n        LocalFiles = new[]\n        {\n            \"start-app.sh\",\n            \"streamlit-app.py\",\n        },\n    });\n\n    var exampleCustomApplication = new Datarobot.CustomApplication(\"exampleCustomApplication\", new()\n    {\n        SourceVersionId = exampleApplicationSource.VersionId,\n        ExternalAccessEnabled = true,\n        ExternalAccessRecipients = new[]\n        {\n            \"recipient@example.com\",\n        },\n    });\n\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"datarobotCustomApplicationId\"] = exampleCustomApplication.Id,\n        [\"datarobotCustomApplicationSourceId\"] = exampleCustomApplication.SourceId,\n        [\"datarobotCustomApplicationSourceVersionId\"] = exampleCustomApplication.SourceVersionId,\n        [\"datarobotCustomApplicationUrl\"] = exampleCustomApplication.ApplicationUrl,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texampleApplicationSource, err := datarobot.NewApplicationSource(ctx, \"exampleApplicationSource\", \u0026datarobot.ApplicationSourceArgs{\n\t\t\tLocalFiles: pulumi.StringArray{\n\t\t\t\tpulumi.String(\"start-app.sh\"),\n\t\t\t\tpulumi.String(\"streamlit-app.py\"),\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\texampleCustomApplication, err := datarobot.NewCustomApplication(ctx, \"exampleCustomApplication\", \u0026datarobot.CustomApplicationArgs{\n\t\t\tSourceVersionId:       exampleApplicationSource.VersionId,\n\t\t\tExternalAccessEnabled: pulumi.Bool(true),\n\t\t\tExternalAccessRecipients: pulumi.StringArray{\n\t\t\t\tpulumi.String(\"recipient@example.com\"),\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"datarobotCustomApplicationId\", exampleCustomApplication.ID())\n\t\tctx.Export(\"datarobotCustomApplicationSourceId\", exampleCustomApplication.SourceId)\n\t\tctx.Export(\"datarobotCustomApplicationSourceVersionId\", exampleCustomApplication.SourceVersionId)\n\t\tctx.Export(\"datarobotCustomApplicationUrl\", exampleCustomApplication.ApplicationUrl)\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.ApplicationSource;\nimport com.pulumi.datarobot.ApplicationSourceArgs;\nimport com.pulumi.datarobot.CustomApplication;\nimport com.pulumi.datarobot.CustomApplicationArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var exampleApplicationSource = new ApplicationSource(\"exampleApplicationSource\", ApplicationSourceArgs.builder()\n            .localFiles(            \n                \"start-app.sh\",\n                \"streamlit-app.py\")\n            .build());\n\n        var exampleCustomApplication = new CustomApplication(\"exampleCustomApplication\", CustomApplicationArgs.builder()\n            .sourceVersionId(exampleApplicationSource.versionId())\n            .externalAccessEnabled(true)\n            .externalAccessRecipients(\"recipient@example.com\")\n            .build());\n\n        ctx.export(\"datarobotCustomApplicationId\", exampleCustomApplication.id());\n        ctx.export(\"datarobotCustomApplicationSourceId\", exampleCustomApplication.sourceId());\n        ctx.export(\"datarobotCustomApplicationSourceVersionId\", exampleCustomApplication.sourceVersionId());\n        ctx.export(\"datarobotCustomApplicationUrl\", exampleCustomApplication.applicationUrl());\n    }\n}\n```\n```yaml\nresources:\n  exampleApplicationSource:\n    type: datarobot:ApplicationSource\n    properties:\n      localFiles:\n        - start-app.sh\n        - streamlit-app.py\n  exampleCustomApplication:\n    type: datarobot:CustomApplication\n    properties:\n      sourceVersionId: ${exampleApplicationSource.versionId}\n      # optional settings\n      externalAccessEnabled: true\n      externalAccessRecipients:\n        - recipient@example.com\noutputs:\n  datarobotCustomApplicationId: ${exampleCustomApplication.id}\n  datarobotCustomApplicationSourceId: ${exampleCustomApplication.sourceId}\n  datarobotCustomApplicationSourceVersionId: ${exampleCustomApplication.sourceVersionId}\n  datarobotCustomApplicationUrl: ${exampleCustomApplication.applicationUrl}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
             "properties": {
                 "applicationUrl": {
                     "type": "string",
                     "description": "The URL of the Custom Application.\n"
                 },
+                "externalAccessEnabled": {
+                    "type": "boolean",
+                    "description": "Whether external access is enabled for the Custom Application.\n"
+                },
+                "externalAccessRecipients": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The list of external email addresses that have access to the Custom Application.\n"
+                },
                 "name": {
                     "type": "string",
                     "description": "The name of the Custom Application.\n"
+                },
+                "sourceId": {
+                    "type": "string",
+                    "description": "The ID of the Custom Application Source.\n"
                 },
                 "sourceVersionId": {
                     "type": "string",
@@ -632,10 +690,23 @@
             },
             "required": [
                 "applicationUrl",
+                "externalAccessEnabled",
                 "name",
+                "sourceId",
                 "sourceVersionId"
             ],
             "inputProperties": {
+                "externalAccessEnabled": {
+                    "type": "boolean",
+                    "description": "Whether external access is enabled for the Custom Application.\n"
+                },
+                "externalAccessRecipients": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The list of external email addresses that have access to the Custom Application.\n"
+                },
                 "name": {
                     "type": "string",
                     "description": "The name of the Custom Application.\n"
@@ -655,9 +726,24 @@
                         "type": "string",
                         "description": "The URL of the Custom Application.\n"
                     },
+                    "externalAccessEnabled": {
+                        "type": "boolean",
+                        "description": "Whether external access is enabled for the Custom Application.\n"
+                    },
+                    "externalAccessRecipients": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "The list of external email addresses that have access to the Custom Application.\n"
+                    },
                     "name": {
                         "type": "string",
                         "description": "The name of the Custom Application.\n"
+                    },
+                    "sourceId": {
+                        "type": "string",
+                        "description": "The ID of the Custom Application Source.\n"
                     },
                     "sourceVersionId": {
                         "type": "string",

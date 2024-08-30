@@ -12,6 +12,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Deployment
 type Deployment struct {
 	pulumi.CustomResourceState
 
@@ -21,6 +22,8 @@ type Deployment struct {
 	PredictionEnvironmentId pulumi.StringOutput `pulumi:"predictionEnvironmentId"`
 	// The ID of the registered model version for this Deployment.
 	RegisteredModelVersionId pulumi.StringOutput `pulumi:"registeredModelVersionId"`
+	// The settings for the Deployment.
+	Settings DeploymentSettingsPtrOutput `pulumi:"settings"`
 }
 
 // NewDeployment registers a new resource with the given unique name, arguments, and options.
@@ -68,6 +71,8 @@ type deploymentState struct {
 	PredictionEnvironmentId *string `pulumi:"predictionEnvironmentId"`
 	// The ID of the registered model version for this Deployment.
 	RegisteredModelVersionId *string `pulumi:"registeredModelVersionId"`
+	// The settings for the Deployment.
+	Settings *DeploymentSettings `pulumi:"settings"`
 }
 
 type DeploymentState struct {
@@ -77,6 +82,8 @@ type DeploymentState struct {
 	PredictionEnvironmentId pulumi.StringPtrInput
 	// The ID of the registered model version for this Deployment.
 	RegisteredModelVersionId pulumi.StringPtrInput
+	// The settings for the Deployment.
+	Settings DeploymentSettingsPtrInput
 }
 
 func (DeploymentState) ElementType() reflect.Type {
@@ -90,6 +97,8 @@ type deploymentArgs struct {
 	PredictionEnvironmentId string `pulumi:"predictionEnvironmentId"`
 	// The ID of the registered model version for this Deployment.
 	RegisteredModelVersionId string `pulumi:"registeredModelVersionId"`
+	// The settings for the Deployment.
+	Settings *DeploymentSettings `pulumi:"settings"`
 }
 
 // The set of arguments for constructing a Deployment resource.
@@ -100,6 +109,8 @@ type DeploymentArgs struct {
 	PredictionEnvironmentId pulumi.StringInput
 	// The ID of the registered model version for this Deployment.
 	RegisteredModelVersionId pulumi.StringInput
+	// The settings for the Deployment.
+	Settings DeploymentSettingsPtrInput
 }
 
 func (DeploymentArgs) ElementType() reflect.Type {
@@ -202,6 +213,11 @@ func (o DeploymentOutput) PredictionEnvironmentId() pulumi.StringOutput {
 // The ID of the registered model version for this Deployment.
 func (o DeploymentOutput) RegisteredModelVersionId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Deployment) pulumi.StringOutput { return v.RegisteredModelVersionId }).(pulumi.StringOutput)
+}
+
+// The settings for the Deployment.
+func (o DeploymentOutput) Settings() DeploymentSettingsPtrOutput {
+	return o.ApplyT(func(v *Deployment) DeploymentSettingsPtrOutput { return v.Settings }).(DeploymentSettingsPtrOutput)
 }
 
 type DeploymentArrayOutput struct{ *pulumi.OutputState }
