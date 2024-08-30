@@ -28,7 +28,6 @@ resources:
       name: ${datarobotUseCase.name}
       useCaseId: ${datarobotUseCase.id}
       datasetId: ${datarobotDatasetFromFile.id}
-      chunkingParameters: {}
 
   datarobotLlmBlueprint:
     type: datarobot:LlmBlueprint

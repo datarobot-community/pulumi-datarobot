@@ -12,13 +12,54 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// LLMBlueprint
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			exampleUseCase, err := datarobot.NewUseCase(ctx, "exampleUseCase", nil)
+//			if err != nil {
+//				return err
+//			}
+//			examplePlayground, err := datarobot.NewPlayground(ctx, "examplePlayground", &datarobot.PlaygroundArgs{
+//				Description: pulumi.String("Description for the example playground"),
+//				UseCaseId:   exampleUseCase.ID(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleLlmBlueprint, err := datarobot.NewLlmBlueprint(ctx, "exampleLlmBlueprint", &datarobot.LlmBlueprintArgs{
+//				Description:  pulumi.String("Description for the example LLM blueprint"),
+//				PlaygroundId: examplePlayground.ID(),
+//				LlmId:        pulumi.String("azure-openai-gpt-3.5-turbo"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			ctx.Export("exampleId", exampleLlmBlueprint.ID())
+//			return nil
+//		})
+//	}
+//
+// ```
 type LlmBlueprint struct {
 	pulumi.CustomResourceState
 
 	// The description of the LLM Blueprint.
-	Description pulumi.StringOutput `pulumi:"description"`
+	Description pulumi.StringPtrOutput `pulumi:"description"`
 	// The id of the LLM for the LLM Blueprint.
-	LlmId pulumi.StringPtrOutput `pulumi:"llmId"`
+	LlmId pulumi.StringOutput `pulumi:"llmId"`
 	// The name of the LLM Blueprint.
 	Name pulumi.StringOutput `pulumi:"name"`
 	// The id of the Playground for the LLM Blueprint.
@@ -34,8 +75,8 @@ func NewLlmBlueprint(ctx *pulumi.Context,
 		return nil, errors.New("missing one or more required arguments")
 	}
 
-	if args.Description == nil {
-		return nil, errors.New("invalid value for required argument 'Description'")
+	if args.LlmId == nil {
+		return nil, errors.New("invalid value for required argument 'LlmId'")
 	}
 	if args.PlaygroundId == nil {
 		return nil, errors.New("invalid value for required argument 'PlaygroundId'")
@@ -94,9 +135,9 @@ func (LlmBlueprintState) ElementType() reflect.Type {
 
 type llmBlueprintArgs struct {
 	// The description of the LLM Blueprint.
-	Description string `pulumi:"description"`
+	Description *string `pulumi:"description"`
 	// The id of the LLM for the LLM Blueprint.
-	LlmId *string `pulumi:"llmId"`
+	LlmId string `pulumi:"llmId"`
 	// The name of the LLM Blueprint.
 	Name *string `pulumi:"name"`
 	// The id of the Playground for the LLM Blueprint.
@@ -108,9 +149,9 @@ type llmBlueprintArgs struct {
 // The set of arguments for constructing a LlmBlueprint resource.
 type LlmBlueprintArgs struct {
 	// The description of the LLM Blueprint.
-	Description pulumi.StringInput
+	Description pulumi.StringPtrInput
 	// The id of the LLM for the LLM Blueprint.
-	LlmId pulumi.StringPtrInput
+	LlmId pulumi.StringInput
 	// The name of the LLM Blueprint.
 	Name pulumi.StringPtrInput
 	// The id of the Playground for the LLM Blueprint.
@@ -207,13 +248,13 @@ func (o LlmBlueprintOutput) ToLlmBlueprintOutputWithContext(ctx context.Context)
 }
 
 // The description of the LLM Blueprint.
-func (o LlmBlueprintOutput) Description() pulumi.StringOutput {
-	return o.ApplyT(func(v *LlmBlueprint) pulumi.StringOutput { return v.Description }).(pulumi.StringOutput)
+func (o LlmBlueprintOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *LlmBlueprint) pulumi.StringPtrOutput { return v.Description }).(pulumi.StringPtrOutput)
 }
 
 // The id of the LLM for the LLM Blueprint.
-func (o LlmBlueprintOutput) LlmId() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *LlmBlueprint) pulumi.StringPtrOutput { return v.LlmId }).(pulumi.StringPtrOutput)
+func (o LlmBlueprintOutput) LlmId() pulumi.StringOutput {
+	return o.ApplyT(func(v *LlmBlueprint) pulumi.StringOutput { return v.LlmId }).(pulumi.StringOutput)
 }
 
 // The name of the LLM Blueprint.

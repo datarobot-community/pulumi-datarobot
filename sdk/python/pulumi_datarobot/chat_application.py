@@ -15,13 +15,21 @@ __all__ = ['ChatApplicationArgs', 'ChatApplication']
 class ChatApplicationArgs:
     def __init__(__self__, *,
                  deployment_id: pulumi.Input[str],
+                 external_access_enabled: Optional[pulumi.Input[bool]] = None,
+                 external_access_recipients: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  name: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a ChatApplication resource.
         :param pulumi.Input[str] deployment_id: The deployment ID of the Chat Application.
+        :param pulumi.Input[bool] external_access_enabled: Whether external access is enabled for the Chat Application.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] external_access_recipients: The list of external email addresses that have access to the Chat Application.
         :param pulumi.Input[str] name: The name of the Chat Application.
         """
         pulumi.set(__self__, "deployment_id", deployment_id)
+        if external_access_enabled is not None:
+            pulumi.set(__self__, "external_access_enabled", external_access_enabled)
+        if external_access_recipients is not None:
+            pulumi.set(__self__, "external_access_recipients", external_access_recipients)
         if name is not None:
             pulumi.set(__self__, "name", name)
 
@@ -36,6 +44,30 @@ class ChatApplicationArgs:
     @deployment_id.setter
     def deployment_id(self, value: pulumi.Input[str]):
         pulumi.set(self, "deployment_id", value)
+
+    @property
+    @pulumi.getter(name="externalAccessEnabled")
+    def external_access_enabled(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether external access is enabled for the Chat Application.
+        """
+        return pulumi.get(self, "external_access_enabled")
+
+    @external_access_enabled.setter
+    def external_access_enabled(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "external_access_enabled", value)
+
+    @property
+    @pulumi.getter(name="externalAccessRecipients")
+    def external_access_recipients(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        The list of external email addresses that have access to the Chat Application.
+        """
+        return pulumi.get(self, "external_access_recipients")
+
+    @external_access_recipients.setter
+    def external_access_recipients(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "external_access_recipients", value)
 
     @property
     @pulumi.getter
@@ -55,23 +87,35 @@ class _ChatApplicationState:
     def __init__(__self__, *,
                  application_url: Optional[pulumi.Input[str]] = None,
                  deployment_id: Optional[pulumi.Input[str]] = None,
+                 external_access_enabled: Optional[pulumi.Input[bool]] = None,
+                 external_access_recipients: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  name: Optional[pulumi.Input[str]] = None,
-                 version_id: Optional[pulumi.Input[str]] = None):
+                 source_id: Optional[pulumi.Input[str]] = None,
+                 source_version_id: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering ChatApplication resources.
         :param pulumi.Input[str] application_url: The URL of the Chat Application.
         :param pulumi.Input[str] deployment_id: The deployment ID of the Chat Application.
+        :param pulumi.Input[bool] external_access_enabled: Whether external access is enabled for the Chat Application.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] external_access_recipients: The list of external email addresses that have access to the Chat Application.
         :param pulumi.Input[str] name: The name of the Chat Application.
-        :param pulumi.Input[str] version_id: The version ID of the Chat Application.
+        :param pulumi.Input[str] source_id: The ID of the Chat Application Source.
+        :param pulumi.Input[str] source_version_id: The version ID of the Chat Application Source.
         """
         if application_url is not None:
             pulumi.set(__self__, "application_url", application_url)
         if deployment_id is not None:
             pulumi.set(__self__, "deployment_id", deployment_id)
+        if external_access_enabled is not None:
+            pulumi.set(__self__, "external_access_enabled", external_access_enabled)
+        if external_access_recipients is not None:
+            pulumi.set(__self__, "external_access_recipients", external_access_recipients)
         if name is not None:
             pulumi.set(__self__, "name", name)
-        if version_id is not None:
-            pulumi.set(__self__, "version_id", version_id)
+        if source_id is not None:
+            pulumi.set(__self__, "source_id", source_id)
+        if source_version_id is not None:
+            pulumi.set(__self__, "source_version_id", source_version_id)
 
     @property
     @pulumi.getter(name="applicationUrl")
@@ -98,6 +142,30 @@ class _ChatApplicationState:
         pulumi.set(self, "deployment_id", value)
 
     @property
+    @pulumi.getter(name="externalAccessEnabled")
+    def external_access_enabled(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether external access is enabled for the Chat Application.
+        """
+        return pulumi.get(self, "external_access_enabled")
+
+    @external_access_enabled.setter
+    def external_access_enabled(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "external_access_enabled", value)
+
+    @property
+    @pulumi.getter(name="externalAccessRecipients")
+    def external_access_recipients(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        The list of external email addresses that have access to the Chat Application.
+        """
+        return pulumi.get(self, "external_access_recipients")
+
+    @external_access_recipients.setter
+    def external_access_recipients(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "external_access_recipients", value)
+
+    @property
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
         """
@@ -110,16 +178,28 @@ class _ChatApplicationState:
         pulumi.set(self, "name", value)
 
     @property
-    @pulumi.getter(name="versionId")
-    def version_id(self) -> Optional[pulumi.Input[str]]:
+    @pulumi.getter(name="sourceId")
+    def source_id(self) -> Optional[pulumi.Input[str]]:
         """
-        The version ID of the Chat Application.
+        The ID of the Chat Application Source.
         """
-        return pulumi.get(self, "version_id")
+        return pulumi.get(self, "source_id")
 
-    @version_id.setter
-    def version_id(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "version_id", value)
+    @source_id.setter
+    def source_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "source_id", value)
+
+    @property
+    @pulumi.getter(name="sourceVersionId")
+    def source_version_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The version ID of the Chat Application Source.
+        """
+        return pulumi.get(self, "source_version_id")
+
+    @source_version_id.setter
+    def source_version_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "source_version_id", value)
 
 
 class ChatApplication(pulumi.CustomResource):
@@ -128,6 +208,8 @@ class ChatApplication(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  deployment_id: Optional[pulumi.Input[str]] = None,
+                 external_access_enabled: Optional[pulumi.Input[bool]] = None,
+                 external_access_recipients: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
@@ -136,6 +218,8 @@ class ChatApplication(pulumi.CustomResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] deployment_id: The deployment ID of the Chat Application.
+        :param pulumi.Input[bool] external_access_enabled: Whether external access is enabled for the Chat Application.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] external_access_recipients: The list of external email addresses that have access to the Chat Application.
         :param pulumi.Input[str] name: The name of the Chat Application.
         """
         ...
@@ -163,6 +247,8 @@ class ChatApplication(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  deployment_id: Optional[pulumi.Input[str]] = None,
+                 external_access_enabled: Optional[pulumi.Input[bool]] = None,
+                 external_access_recipients: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
@@ -176,9 +262,12 @@ class ChatApplication(pulumi.CustomResource):
             if deployment_id is None and not opts.urn:
                 raise TypeError("Missing required property 'deployment_id'")
             __props__.__dict__["deployment_id"] = deployment_id
+            __props__.__dict__["external_access_enabled"] = external_access_enabled
+            __props__.__dict__["external_access_recipients"] = external_access_recipients
             __props__.__dict__["name"] = name
             __props__.__dict__["application_url"] = None
-            __props__.__dict__["version_id"] = None
+            __props__.__dict__["source_id"] = None
+            __props__.__dict__["source_version_id"] = None
         super(ChatApplication, __self__).__init__(
             'datarobot:index/chatApplication:ChatApplication',
             resource_name,
@@ -191,8 +280,11 @@ class ChatApplication(pulumi.CustomResource):
             opts: Optional[pulumi.ResourceOptions] = None,
             application_url: Optional[pulumi.Input[str]] = None,
             deployment_id: Optional[pulumi.Input[str]] = None,
+            external_access_enabled: Optional[pulumi.Input[bool]] = None,
+            external_access_recipients: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             name: Optional[pulumi.Input[str]] = None,
-            version_id: Optional[pulumi.Input[str]] = None) -> 'ChatApplication':
+            source_id: Optional[pulumi.Input[str]] = None,
+            source_version_id: Optional[pulumi.Input[str]] = None) -> 'ChatApplication':
         """
         Get an existing ChatApplication resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -202,8 +294,11 @@ class ChatApplication(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] application_url: The URL of the Chat Application.
         :param pulumi.Input[str] deployment_id: The deployment ID of the Chat Application.
+        :param pulumi.Input[bool] external_access_enabled: Whether external access is enabled for the Chat Application.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] external_access_recipients: The list of external email addresses that have access to the Chat Application.
         :param pulumi.Input[str] name: The name of the Chat Application.
-        :param pulumi.Input[str] version_id: The version ID of the Chat Application.
+        :param pulumi.Input[str] source_id: The ID of the Chat Application Source.
+        :param pulumi.Input[str] source_version_id: The version ID of the Chat Application Source.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -211,8 +306,11 @@ class ChatApplication(pulumi.CustomResource):
 
         __props__.__dict__["application_url"] = application_url
         __props__.__dict__["deployment_id"] = deployment_id
+        __props__.__dict__["external_access_enabled"] = external_access_enabled
+        __props__.__dict__["external_access_recipients"] = external_access_recipients
         __props__.__dict__["name"] = name
-        __props__.__dict__["version_id"] = version_id
+        __props__.__dict__["source_id"] = source_id
+        __props__.__dict__["source_version_id"] = source_version_id
         return ChatApplication(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -232,6 +330,22 @@ class ChatApplication(pulumi.CustomResource):
         return pulumi.get(self, "deployment_id")
 
     @property
+    @pulumi.getter(name="externalAccessEnabled")
+    def external_access_enabled(self) -> pulumi.Output[bool]:
+        """
+        Whether external access is enabled for the Chat Application.
+        """
+        return pulumi.get(self, "external_access_enabled")
+
+    @property
+    @pulumi.getter(name="externalAccessRecipients")
+    def external_access_recipients(self) -> pulumi.Output[Optional[Sequence[str]]]:
+        """
+        The list of external email addresses that have access to the Chat Application.
+        """
+        return pulumi.get(self, "external_access_recipients")
+
+    @property
     @pulumi.getter
     def name(self) -> pulumi.Output[str]:
         """
@@ -240,10 +354,18 @@ class ChatApplication(pulumi.CustomResource):
         return pulumi.get(self, "name")
 
     @property
-    @pulumi.getter(name="versionId")
-    def version_id(self) -> pulumi.Output[str]:
+    @pulumi.getter(name="sourceId")
+    def source_id(self) -> pulumi.Output[str]:
         """
-        The version ID of the Chat Application.
+        The ID of the Chat Application Source.
         """
-        return pulumi.get(self, "version_id")
+        return pulumi.get(self, "source_id")
+
+    @property
+    @pulumi.getter(name="sourceVersionId")
+    def source_version_id(self) -> pulumi.Output[str]:
+        """
+        The version ID of the Chat Application Source.
+        """
+        return pulumi.get(self, "source_version_id")
 

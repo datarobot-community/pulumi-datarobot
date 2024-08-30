@@ -12,17 +12,24 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Chat Application
 type ChatApplication struct {
 	pulumi.CustomResourceState
 
-	// The URL of the Application.
+	// The URL of the Chat Application.
 	ApplicationUrl pulumi.StringOutput `pulumi:"applicationUrl"`
-	// The deployment ID of the Application.
+	// The deployment ID of the Chat Application.
 	DeploymentId pulumi.StringOutput `pulumi:"deploymentId"`
-	// The name of the Application.
+	// Whether external access is enabled for the Chat Application.
+	ExternalAccessEnabled pulumi.BoolOutput `pulumi:"externalAccessEnabled"`
+	// The list of external email addresses that have access to the Chat Application.
+	ExternalAccessRecipients pulumi.StringArrayOutput `pulumi:"externalAccessRecipients"`
+	// The name of the Chat Application.
 	Name pulumi.StringOutput `pulumi:"name"`
-	// The version ID of the Application.
-	VersionId pulumi.StringOutput `pulumi:"versionId"`
+	// The ID of the Chat Application Source.
+	SourceId pulumi.StringOutput `pulumi:"sourceId"`
+	// The version ID of the Chat Application Source.
+	SourceVersionId pulumi.StringOutput `pulumi:"sourceVersionId"`
 }
 
 // NewChatApplication registers a new resource with the given unique name, arguments, and options.
@@ -58,25 +65,37 @@ func GetChatApplication(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering ChatApplication resources.
 type chatApplicationState struct {
-	// The URL of the Application.
+	// The URL of the Chat Application.
 	ApplicationUrl *string `pulumi:"applicationUrl"`
-	// The deployment ID of the Application.
+	// The deployment ID of the Chat Application.
 	DeploymentId *string `pulumi:"deploymentId"`
-	// The name of the Application.
+	// Whether external access is enabled for the Chat Application.
+	ExternalAccessEnabled *bool `pulumi:"externalAccessEnabled"`
+	// The list of external email addresses that have access to the Chat Application.
+	ExternalAccessRecipients []string `pulumi:"externalAccessRecipients"`
+	// The name of the Chat Application.
 	Name *string `pulumi:"name"`
-	// The version ID of the Application.
-	VersionId *string `pulumi:"versionId"`
+	// The ID of the Chat Application Source.
+	SourceId *string `pulumi:"sourceId"`
+	// The version ID of the Chat Application Source.
+	SourceVersionId *string `pulumi:"sourceVersionId"`
 }
 
 type ChatApplicationState struct {
-	// The URL of the Application.
+	// The URL of the Chat Application.
 	ApplicationUrl pulumi.StringPtrInput
-	// The deployment ID of the Application.
+	// The deployment ID of the Chat Application.
 	DeploymentId pulumi.StringPtrInput
-	// The name of the Application.
+	// Whether external access is enabled for the Chat Application.
+	ExternalAccessEnabled pulumi.BoolPtrInput
+	// The list of external email addresses that have access to the Chat Application.
+	ExternalAccessRecipients pulumi.StringArrayInput
+	// The name of the Chat Application.
 	Name pulumi.StringPtrInput
-	// The version ID of the Application.
-	VersionId pulumi.StringPtrInput
+	// The ID of the Chat Application Source.
+	SourceId pulumi.StringPtrInput
+	// The version ID of the Chat Application Source.
+	SourceVersionId pulumi.StringPtrInput
 }
 
 func (ChatApplicationState) ElementType() reflect.Type {
@@ -84,17 +103,25 @@ func (ChatApplicationState) ElementType() reflect.Type {
 }
 
 type chatApplicationArgs struct {
-	// The deployment ID of the Application.
+	// The deployment ID of the Chat Application.
 	DeploymentId string `pulumi:"deploymentId"`
-	// The name of the Application.
+	// Whether external access is enabled for the Chat Application.
+	ExternalAccessEnabled *bool `pulumi:"externalAccessEnabled"`
+	// The list of external email addresses that have access to the Chat Application.
+	ExternalAccessRecipients []string `pulumi:"externalAccessRecipients"`
+	// The name of the Chat Application.
 	Name *string `pulumi:"name"`
 }
 
 // The set of arguments for constructing a ChatApplication resource.
 type ChatApplicationArgs struct {
-	// The deployment ID of the Application.
+	// The deployment ID of the Chat Application.
 	DeploymentId pulumi.StringInput
-	// The name of the Application.
+	// Whether external access is enabled for the Chat Application.
+	ExternalAccessEnabled pulumi.BoolPtrInput
+	// The list of external email addresses that have access to the Chat Application.
+	ExternalAccessRecipients pulumi.StringArrayInput
+	// The name of the Chat Application.
 	Name pulumi.StringPtrInput
 }
 
@@ -185,24 +212,39 @@ func (o ChatApplicationOutput) ToChatApplicationOutputWithContext(ctx context.Co
 	return o
 }
 
-// The URL of the Application.
+// The URL of the Chat Application.
 func (o ChatApplicationOutput) ApplicationUrl() pulumi.StringOutput {
 	return o.ApplyT(func(v *ChatApplication) pulumi.StringOutput { return v.ApplicationUrl }).(pulumi.StringOutput)
 }
 
-// The deployment ID of the Application.
+// The deployment ID of the Chat Application.
 func (o ChatApplicationOutput) DeploymentId() pulumi.StringOutput {
 	return o.ApplyT(func(v *ChatApplication) pulumi.StringOutput { return v.DeploymentId }).(pulumi.StringOutput)
 }
 
-// The name of the Application.
+// Whether external access is enabled for the Chat Application.
+func (o ChatApplicationOutput) ExternalAccessEnabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v *ChatApplication) pulumi.BoolOutput { return v.ExternalAccessEnabled }).(pulumi.BoolOutput)
+}
+
+// The list of external email addresses that have access to the Chat Application.
+func (o ChatApplicationOutput) ExternalAccessRecipients() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *ChatApplication) pulumi.StringArrayOutput { return v.ExternalAccessRecipients }).(pulumi.StringArrayOutput)
+}
+
+// The name of the Chat Application.
 func (o ChatApplicationOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *ChatApplication) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// The version ID of the Application.
-func (o ChatApplicationOutput) VersionId() pulumi.StringOutput {
-	return o.ApplyT(func(v *ChatApplication) pulumi.StringOutput { return v.VersionId }).(pulumi.StringOutput)
+// The ID of the Chat Application Source.
+func (o ChatApplicationOutput) SourceId() pulumi.StringOutput {
+	return o.ApplyT(func(v *ChatApplication) pulumi.StringOutput { return v.SourceId }).(pulumi.StringOutput)
+}
+
+// The version ID of the Chat Application Source.
+func (o ChatApplicationOutput) SourceVersionId() pulumi.StringOutput {
+	return o.ApplyT(func(v *ChatApplication) pulumi.StringOutput { return v.SourceVersionId }).(pulumi.StringOutput)
 }
 
 type ChatApplicationArrayOutput struct{ *pulumi.OutputState }

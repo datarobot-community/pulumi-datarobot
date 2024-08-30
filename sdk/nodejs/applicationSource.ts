@@ -6,6 +6,20 @@ import * as utilities from "./utilities";
 
 /**
  * Application Source
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as datarobot from "@pulumi/datarobot";
+ *
+ * const example = new datarobot.ApplicationSource("example", {localFiles: [
+ *     "start-app.sh",
+ *     "streamlit-app.py",
+ * ]});
+ * export const datarobotApplicationSourceId = example.id;
+ * export const datarobotApplicationSourceVersionId = example.versionId;
+ * ```
  */
 export class ApplicationSource extends pulumi.CustomResource {
     /**

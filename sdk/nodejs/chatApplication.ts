@@ -44,13 +44,25 @@ export class ChatApplication extends pulumi.CustomResource {
      */
     public readonly deploymentId!: pulumi.Output<string>;
     /**
+     * Whether external access is enabled for the Chat Application.
+     */
+    public readonly externalAccessEnabled!: pulumi.Output<boolean>;
+    /**
+     * The list of external email addresses that have access to the Chat Application.
+     */
+    public readonly externalAccessRecipients!: pulumi.Output<string[] | undefined>;
+    /**
      * The name of the Chat Application.
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * The version ID of the Chat Application.
+     * The ID of the Chat Application Source.
      */
-    public /*out*/ readonly versionId!: pulumi.Output<string>;
+    public /*out*/ readonly sourceId!: pulumi.Output<string>;
+    /**
+     * The version ID of the Chat Application Source.
+     */
+    public /*out*/ readonly sourceVersionId!: pulumi.Output<string>;
 
     /**
      * Create a ChatApplication resource with the given unique name, arguments, and options.
@@ -67,17 +79,23 @@ export class ChatApplication extends pulumi.CustomResource {
             const state = argsOrState as ChatApplicationState | undefined;
             resourceInputs["applicationUrl"] = state ? state.applicationUrl : undefined;
             resourceInputs["deploymentId"] = state ? state.deploymentId : undefined;
+            resourceInputs["externalAccessEnabled"] = state ? state.externalAccessEnabled : undefined;
+            resourceInputs["externalAccessRecipients"] = state ? state.externalAccessRecipients : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
-            resourceInputs["versionId"] = state ? state.versionId : undefined;
+            resourceInputs["sourceId"] = state ? state.sourceId : undefined;
+            resourceInputs["sourceVersionId"] = state ? state.sourceVersionId : undefined;
         } else {
             const args = argsOrState as ChatApplicationArgs | undefined;
             if ((!args || args.deploymentId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'deploymentId'");
             }
             resourceInputs["deploymentId"] = args ? args.deploymentId : undefined;
+            resourceInputs["externalAccessEnabled"] = args ? args.externalAccessEnabled : undefined;
+            resourceInputs["externalAccessRecipients"] = args ? args.externalAccessRecipients : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["applicationUrl"] = undefined /*out*/;
-            resourceInputs["versionId"] = undefined /*out*/;
+            resourceInputs["sourceId"] = undefined /*out*/;
+            resourceInputs["sourceVersionId"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(ChatApplication.__pulumiType, name, resourceInputs, opts);
@@ -97,13 +115,25 @@ export interface ChatApplicationState {
      */
     deploymentId?: pulumi.Input<string>;
     /**
+     * Whether external access is enabled for the Chat Application.
+     */
+    externalAccessEnabled?: pulumi.Input<boolean>;
+    /**
+     * The list of external email addresses that have access to the Chat Application.
+     */
+    externalAccessRecipients?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
      * The name of the Chat Application.
      */
     name?: pulumi.Input<string>;
     /**
-     * The version ID of the Chat Application.
+     * The ID of the Chat Application Source.
      */
-    versionId?: pulumi.Input<string>;
+    sourceId?: pulumi.Input<string>;
+    /**
+     * The version ID of the Chat Application Source.
+     */
+    sourceVersionId?: pulumi.Input<string>;
 }
 
 /**
@@ -114,6 +144,14 @@ export interface ChatApplicationArgs {
      * The deployment ID of the Chat Application.
      */
     deploymentId: pulumi.Input<string>;
+    /**
+     * Whether external access is enabled for the Chat Application.
+     */
+    externalAccessEnabled?: pulumi.Input<boolean>;
+    /**
+     * The list of external email addresses that have access to the Chat Application.
+     */
+    externalAccessRecipients?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The name of the Chat Application.
      */

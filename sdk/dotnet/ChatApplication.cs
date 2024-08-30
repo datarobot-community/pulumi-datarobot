@@ -9,32 +9,53 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Datarobot
 {
+    /// <summary>
+    /// Chat Application
+    /// </summary>
     [DatarobotResourceType("datarobot:index/chatApplication:ChatApplication")]
     public partial class ChatApplication : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// The URL of the Application.
+        /// The URL of the Chat Application.
         /// </summary>
         [Output("applicationUrl")]
         public Output<string> ApplicationUrl { get; private set; } = null!;
 
         /// <summary>
-        /// The deployment ID of the Application.
+        /// The deployment ID of the Chat Application.
         /// </summary>
         [Output("deploymentId")]
         public Output<string> DeploymentId { get; private set; } = null!;
 
         /// <summary>
-        /// The name of the Application.
+        /// Whether external access is enabled for the Chat Application.
+        /// </summary>
+        [Output("externalAccessEnabled")]
+        public Output<bool> ExternalAccessEnabled { get; private set; } = null!;
+
+        /// <summary>
+        /// The list of external email addresses that have access to the Chat Application.
+        /// </summary>
+        [Output("externalAccessRecipients")]
+        public Output<ImmutableArray<string>> ExternalAccessRecipients { get; private set; } = null!;
+
+        /// <summary>
+        /// The name of the Chat Application.
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// The version ID of the Application.
+        /// The ID of the Chat Application Source.
         /// </summary>
-        [Output("versionId")]
-        public Output<string> VersionId { get; private set; } = null!;
+        [Output("sourceId")]
+        public Output<string> SourceId { get; private set; } = null!;
+
+        /// <summary>
+        /// The version ID of the Chat Application Source.
+        /// </summary>
+        [Output("sourceVersionId")]
+        public Output<string> SourceVersionId { get; private set; } = null!;
 
 
         /// <summary>
@@ -83,13 +104,31 @@ namespace Pulumi.Datarobot
     public sealed class ChatApplicationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The deployment ID of the Application.
+        /// The deployment ID of the Chat Application.
         /// </summary>
         [Input("deploymentId", required: true)]
         public Input<string> DeploymentId { get; set; } = null!;
 
         /// <summary>
-        /// The name of the Application.
+        /// Whether external access is enabled for the Chat Application.
+        /// </summary>
+        [Input("externalAccessEnabled")]
+        public Input<bool>? ExternalAccessEnabled { get; set; }
+
+        [Input("externalAccessRecipients")]
+        private InputList<string>? _externalAccessRecipients;
+
+        /// <summary>
+        /// The list of external email addresses that have access to the Chat Application.
+        /// </summary>
+        public InputList<string> ExternalAccessRecipients
+        {
+            get => _externalAccessRecipients ?? (_externalAccessRecipients = new InputList<string>());
+            set => _externalAccessRecipients = value;
+        }
+
+        /// <summary>
+        /// The name of the Chat Application.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
@@ -103,28 +142,52 @@ namespace Pulumi.Datarobot
     public sealed class ChatApplicationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The URL of the Application.
+        /// The URL of the Chat Application.
         /// </summary>
         [Input("applicationUrl")]
         public Input<string>? ApplicationUrl { get; set; }
 
         /// <summary>
-        /// The deployment ID of the Application.
+        /// The deployment ID of the Chat Application.
         /// </summary>
         [Input("deploymentId")]
         public Input<string>? DeploymentId { get; set; }
 
         /// <summary>
-        /// The name of the Application.
+        /// Whether external access is enabled for the Chat Application.
+        /// </summary>
+        [Input("externalAccessEnabled")]
+        public Input<bool>? ExternalAccessEnabled { get; set; }
+
+        [Input("externalAccessRecipients")]
+        private InputList<string>? _externalAccessRecipients;
+
+        /// <summary>
+        /// The list of external email addresses that have access to the Chat Application.
+        /// </summary>
+        public InputList<string> ExternalAccessRecipients
+        {
+            get => _externalAccessRecipients ?? (_externalAccessRecipients = new InputList<string>());
+            set => _externalAccessRecipients = value;
+        }
+
+        /// <summary>
+        /// The name of the Chat Application.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// The version ID of the Application.
+        /// The ID of the Chat Application Source.
         /// </summary>
-        [Input("versionId")]
-        public Input<string>? VersionId { get; set; }
+        [Input("sourceId")]
+        public Input<string>? SourceId { get; set; }
+
+        /// <summary>
+        /// The version ID of the Chat Application Source.
+        /// </summary>
+        [Input("sourceVersionId")]
+        public Input<string>? SourceVersionId { get; set; }
 
         public ChatApplicationState()
         {

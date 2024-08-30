@@ -16,13 +16,13 @@ namespace Pulumi.Datarobot.Inputs
         /// The percentage of overlap between chunks.
         /// </summary>
         [Input("chunkOverlapPercentage")]
-        public Input<double>? ChunkOverlapPercentage { get; set; }
+        public Input<int>? ChunkOverlapPercentage { get; set; }
 
         /// <summary>
         /// The size of the chunks.
         /// </summary>
         [Input("chunkSize")]
-        public Input<double>? ChunkSize { get; set; }
+        public Input<int>? ChunkSize { get; set; }
 
         /// <summary>
         /// The method used to chunk the data.

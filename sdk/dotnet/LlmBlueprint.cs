@@ -9,6 +9,41 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Datarobot
 {
+    /// <summary>
+    /// LLMBlueprint
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Datarobot = Pulumi.Datarobot;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var exampleUseCase = new Datarobot.UseCase("exampleUseCase");
+    /// 
+    ///     var examplePlayground = new Datarobot.Playground("examplePlayground", new()
+    ///     {
+    ///         Description = "Description for the example playground",
+    ///         UseCaseId = exampleUseCase.Id,
+    ///     });
+    /// 
+    ///     var exampleLlmBlueprint = new Datarobot.LlmBlueprint("exampleLlmBlueprint", new()
+    ///     {
+    ///         Description = "Description for the example LLM blueprint",
+    ///         PlaygroundId = examplePlayground.Id,
+    ///         LlmId = "azure-openai-gpt-3.5-turbo",
+    ///     });
+    /// 
+    ///     return new Dictionary&lt;string, object?&gt;
+    ///     {
+    ///         ["exampleId"] = exampleLlmBlueprint.Id,
+    ///     };
+    /// });
+    /// ```
+    /// </summary>
     [DatarobotResourceType("datarobot:index/llmBlueprint:LlmBlueprint")]
     public partial class LlmBlueprint : global::Pulumi.CustomResource
     {
@@ -16,13 +51,13 @@ namespace Pulumi.Datarobot
         /// The description of the LLM Blueprint.
         /// </summary>
         [Output("description")]
-        public Output<string> Description { get; private set; } = null!;
+        public Output<string?> Description { get; private set; } = null!;
 
         /// <summary>
         /// The id of the LLM for the LLM Blueprint.
         /// </summary>
         [Output("llmId")]
-        public Output<string?> LlmId { get; private set; } = null!;
+        public Output<string> LlmId { get; private set; } = null!;
 
         /// <summary>
         /// The name of the LLM Blueprint.
@@ -91,14 +126,14 @@ namespace Pulumi.Datarobot
         /// <summary>
         /// The description of the LLM Blueprint.
         /// </summary>
-        [Input("description", required: true)]
-        public Input<string> Description { get; set; } = null!;
+        [Input("description")]
+        public Input<string>? Description { get; set; }
 
         /// <summary>
         /// The id of the LLM for the LLM Blueprint.
         /// </summary>
-        [Input("llmId")]
-        public Input<string>? LlmId { get; set; }
+        [Input("llmId", required: true)]
+        public Input<string> LlmId { get; set; } = null!;
 
         /// <summary>
         /// The name of the LLM Blueprint.
