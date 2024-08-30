@@ -9,6 +9,27 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Datarobot
 {
+    /// <summary>
+    /// Api Token Credential
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Datarobot = Pulumi.Datarobot;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Datarobot.ApiTokenCredential("example", new()
+    ///     {
+    ///         ApiToken = "[the API Key value here]",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// </summary>
     [DatarobotResourceType("datarobot:index/apiTokenCredential:ApiTokenCredential")]
     public partial class ApiTokenCredential : global::Pulumi.CustomResource
     {
@@ -22,7 +43,7 @@ namespace Pulumi.Datarobot
         /// The description of the Api Token Credential.
         /// </summary>
         [Output("description")]
-        public Output<string> Description { get; private set; } = null!;
+        public Output<string?> Description { get; private set; } = null!;
 
         /// <summary>
         /// The name of the Api Token Credential.
@@ -99,8 +120,8 @@ namespace Pulumi.Datarobot
         /// <summary>
         /// The description of the Api Token Credential.
         /// </summary>
-        [Input("description", required: true)]
-        public Input<string> Description { get; set; } = null!;
+        [Input("description")]
+        public Input<string>? Description { get; set; }
 
         /// <summary>
         /// The name of the Api Token Credential.

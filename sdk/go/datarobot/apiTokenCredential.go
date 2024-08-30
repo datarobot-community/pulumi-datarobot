@@ -12,13 +12,40 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Api Token Credential
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := datarobot.NewApiTokenCredential(ctx, "example", &datarobot.ApiTokenCredentialArgs{
+//				ApiToken: pulumi.String("[the API Key value here]"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 type ApiTokenCredential struct {
 	pulumi.CustomResourceState
 
 	// The description of the Api Token Credential.
 	ApiToken pulumi.StringOutput `pulumi:"apiToken"`
 	// The description of the Api Token Credential.
-	Description pulumi.StringOutput `pulumi:"description"`
+	Description pulumi.StringPtrOutput `pulumi:"description"`
 	// The name of the Api Token Credential.
 	Name pulumi.StringOutput `pulumi:"name"`
 }
@@ -32,9 +59,6 @@ func NewApiTokenCredential(ctx *pulumi.Context,
 
 	if args.ApiToken == nil {
 		return nil, errors.New("invalid value for required argument 'ApiToken'")
-	}
-	if args.Description == nil {
-		return nil, errors.New("invalid value for required argument 'Description'")
 	}
 	if args.ApiToken != nil {
 		args.ApiToken = pulumi.ToSecret(args.ApiToken).(pulumi.StringInput)
@@ -91,7 +115,7 @@ type apiTokenCredentialArgs struct {
 	// The description of the Api Token Credential.
 	ApiToken string `pulumi:"apiToken"`
 	// The description of the Api Token Credential.
-	Description string `pulumi:"description"`
+	Description *string `pulumi:"description"`
 	// The name of the Api Token Credential.
 	Name *string `pulumi:"name"`
 }
@@ -101,7 +125,7 @@ type ApiTokenCredentialArgs struct {
 	// The description of the Api Token Credential.
 	ApiToken pulumi.StringInput
 	// The description of the Api Token Credential.
-	Description pulumi.StringInput
+	Description pulumi.StringPtrInput
 	// The name of the Api Token Credential.
 	Name pulumi.StringPtrInput
 }
@@ -199,8 +223,8 @@ func (o ApiTokenCredentialOutput) ApiToken() pulumi.StringOutput {
 }
 
 // The description of the Api Token Credential.
-func (o ApiTokenCredentialOutput) Description() pulumi.StringOutput {
-	return o.ApplyT(func(v *ApiTokenCredential) pulumi.StringOutput { return v.Description }).(pulumi.StringOutput)
+func (o ApiTokenCredentialOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ApiTokenCredential) pulumi.StringPtrOutput { return v.Description }).(pulumi.StringPtrOutput)
 }
 
 // The name of the Api Token Credential.

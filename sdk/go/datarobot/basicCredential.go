@@ -12,11 +12,40 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Basic Credential
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := datarobot.NewBasicCredential(ctx, "example", &datarobot.BasicCredentialArgs{
+//				Description: pulumi.String("Description for the example basic credential"),
+//				Password:    pulumi.String("example_password"),
+//				User:        pulumi.String("example_user"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
 type BasicCredential struct {
 	pulumi.CustomResourceState
 
 	// The description of the Basic Credential.
-	Description pulumi.StringOutput `pulumi:"description"`
+	Description pulumi.StringPtrOutput `pulumi:"description"`
 	// The name of the Basic Credential.
 	Name pulumi.StringOutput `pulumi:"name"`
 	// The password of the Basic Credential.
@@ -32,9 +61,6 @@ func NewBasicCredential(ctx *pulumi.Context,
 		return nil, errors.New("missing one or more required arguments")
 	}
 
-	if args.Description == nil {
-		return nil, errors.New("invalid value for required argument 'Description'")
-	}
 	if args.Password == nil {
 		return nil, errors.New("invalid value for required argument 'Password'")
 	}
@@ -102,7 +128,7 @@ func (BasicCredentialState) ElementType() reflect.Type {
 
 type basicCredentialArgs struct {
 	// The description of the Basic Credential.
-	Description string `pulumi:"description"`
+	Description *string `pulumi:"description"`
 	// The name of the Basic Credential.
 	Name *string `pulumi:"name"`
 	// The password of the Basic Credential.
@@ -114,7 +140,7 @@ type basicCredentialArgs struct {
 // The set of arguments for constructing a BasicCredential resource.
 type BasicCredentialArgs struct {
 	// The description of the Basic Credential.
-	Description pulumi.StringInput
+	Description pulumi.StringPtrInput
 	// The name of the Basic Credential.
 	Name pulumi.StringPtrInput
 	// The password of the Basic Credential.
@@ -211,8 +237,8 @@ func (o BasicCredentialOutput) ToBasicCredentialOutputWithContext(ctx context.Co
 }
 
 // The description of the Basic Credential.
-func (o BasicCredentialOutput) Description() pulumi.StringOutput {
-	return o.ApplyT(func(v *BasicCredential) pulumi.StringOutput { return v.Description }).(pulumi.StringOutput)
+func (o BasicCredentialOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BasicCredential) pulumi.StringPtrOutput { return v.Description }).(pulumi.StringPtrOutput)
 }
 
 // The name of the Basic Credential.

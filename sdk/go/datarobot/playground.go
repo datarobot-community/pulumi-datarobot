@@ -12,11 +12,43 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Playground
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			exampleUseCase, err := datarobot.NewUseCase(ctx, "exampleUseCase", nil)
+//			if err != nil {
+//				return err
+//			}
+//			examplePlayground, err := datarobot.NewPlayground(ctx, "examplePlayground", &datarobot.PlaygroundArgs{
+//				UseCaseId: exampleUseCase.ID(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			ctx.Export("exampleId", examplePlayground.ID())
+//			return nil
+//		})
+//	}
+//
+// ```
 type Playground struct {
 	pulumi.CustomResourceState
 
 	// The description of the Playground.
-	Description pulumi.StringOutput `pulumi:"description"`
+	Description pulumi.StringPtrOutput `pulumi:"description"`
 	// The name of the Playground.
 	Name pulumi.StringOutput `pulumi:"name"`
 	// The id of the Playground.
@@ -30,9 +62,6 @@ func NewPlayground(ctx *pulumi.Context,
 		return nil, errors.New("missing one or more required arguments")
 	}
 
-	if args.Description == nil {
-		return nil, errors.New("invalid value for required argument 'Description'")
-	}
 	if args.UseCaseId == nil {
 		return nil, errors.New("invalid value for required argument 'UseCaseId'")
 	}
@@ -82,7 +111,7 @@ func (PlaygroundState) ElementType() reflect.Type {
 
 type playgroundArgs struct {
 	// The description of the Playground.
-	Description string `pulumi:"description"`
+	Description *string `pulumi:"description"`
 	// The name of the Playground.
 	Name *string `pulumi:"name"`
 	// The id of the Playground.
@@ -92,7 +121,7 @@ type playgroundArgs struct {
 // The set of arguments for constructing a Playground resource.
 type PlaygroundArgs struct {
 	// The description of the Playground.
-	Description pulumi.StringInput
+	Description pulumi.StringPtrInput
 	// The name of the Playground.
 	Name pulumi.StringPtrInput
 	// The id of the Playground.
@@ -187,8 +216,8 @@ func (o PlaygroundOutput) ToPlaygroundOutputWithContext(ctx context.Context) Pla
 }
 
 // The description of the Playground.
-func (o PlaygroundOutput) Description() pulumi.StringOutput {
-	return o.ApplyT(func(v *Playground) pulumi.StringOutput { return v.Description }).(pulumi.StringOutput)
+func (o PlaygroundOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Playground) pulumi.StringPtrOutput { return v.Description }).(pulumi.StringPtrOutput)
 }
 
 // The name of the Playground.

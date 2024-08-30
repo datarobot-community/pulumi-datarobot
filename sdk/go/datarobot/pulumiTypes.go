@@ -13,6 +13,446 @@ import (
 
 var _ = internal.GetEnvOrDefault
 
+type CustomModelGuardConfiguration struct {
+	// The deployment ID of this guard.
+	DeploymentId *string `pulumi:"deploymentId"`
+	// The input column name of this guard.
+	InputColumnName *string `pulumi:"inputColumnName"`
+	// The intervention for the guard configuration.
+	Intervention CustomModelGuardConfigurationIntervention `pulumi:"intervention"`
+	// The name of the guard configuration.
+	Name string `pulumi:"name"`
+	// The output column name of this guard.
+	OutputColumnName *string `pulumi:"outputColumnName"`
+	// The list of stages for the guard configuration.
+	Stages []string `pulumi:"stages"`
+	// The template name of the guard configuration.
+	TemplateName string `pulumi:"templateName"`
+}
+
+// CustomModelGuardConfigurationInput is an input type that accepts CustomModelGuardConfigurationArgs and CustomModelGuardConfigurationOutput values.
+// You can construct a concrete instance of `CustomModelGuardConfigurationInput` via:
+//
+//	CustomModelGuardConfigurationArgs{...}
+type CustomModelGuardConfigurationInput interface {
+	pulumi.Input
+
+	ToCustomModelGuardConfigurationOutput() CustomModelGuardConfigurationOutput
+	ToCustomModelGuardConfigurationOutputWithContext(context.Context) CustomModelGuardConfigurationOutput
+}
+
+type CustomModelGuardConfigurationArgs struct {
+	// The deployment ID of this guard.
+	DeploymentId pulumi.StringPtrInput `pulumi:"deploymentId"`
+	// The input column name of this guard.
+	InputColumnName pulumi.StringPtrInput `pulumi:"inputColumnName"`
+	// The intervention for the guard configuration.
+	Intervention CustomModelGuardConfigurationInterventionInput `pulumi:"intervention"`
+	// The name of the guard configuration.
+	Name pulumi.StringInput `pulumi:"name"`
+	// The output column name of this guard.
+	OutputColumnName pulumi.StringPtrInput `pulumi:"outputColumnName"`
+	// The list of stages for the guard configuration.
+	Stages pulumi.StringArrayInput `pulumi:"stages"`
+	// The template name of the guard configuration.
+	TemplateName pulumi.StringInput `pulumi:"templateName"`
+}
+
+func (CustomModelGuardConfigurationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomModelGuardConfiguration)(nil)).Elem()
+}
+
+func (i CustomModelGuardConfigurationArgs) ToCustomModelGuardConfigurationOutput() CustomModelGuardConfigurationOutput {
+	return i.ToCustomModelGuardConfigurationOutputWithContext(context.Background())
+}
+
+func (i CustomModelGuardConfigurationArgs) ToCustomModelGuardConfigurationOutputWithContext(ctx context.Context) CustomModelGuardConfigurationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomModelGuardConfigurationOutput)
+}
+
+// CustomModelGuardConfigurationArrayInput is an input type that accepts CustomModelGuardConfigurationArray and CustomModelGuardConfigurationArrayOutput values.
+// You can construct a concrete instance of `CustomModelGuardConfigurationArrayInput` via:
+//
+//	CustomModelGuardConfigurationArray{ CustomModelGuardConfigurationArgs{...} }
+type CustomModelGuardConfigurationArrayInput interface {
+	pulumi.Input
+
+	ToCustomModelGuardConfigurationArrayOutput() CustomModelGuardConfigurationArrayOutput
+	ToCustomModelGuardConfigurationArrayOutputWithContext(context.Context) CustomModelGuardConfigurationArrayOutput
+}
+
+type CustomModelGuardConfigurationArray []CustomModelGuardConfigurationInput
+
+func (CustomModelGuardConfigurationArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CustomModelGuardConfiguration)(nil)).Elem()
+}
+
+func (i CustomModelGuardConfigurationArray) ToCustomModelGuardConfigurationArrayOutput() CustomModelGuardConfigurationArrayOutput {
+	return i.ToCustomModelGuardConfigurationArrayOutputWithContext(context.Background())
+}
+
+func (i CustomModelGuardConfigurationArray) ToCustomModelGuardConfigurationArrayOutputWithContext(ctx context.Context) CustomModelGuardConfigurationArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomModelGuardConfigurationArrayOutput)
+}
+
+type CustomModelGuardConfigurationOutput struct{ *pulumi.OutputState }
+
+func (CustomModelGuardConfigurationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomModelGuardConfiguration)(nil)).Elem()
+}
+
+func (o CustomModelGuardConfigurationOutput) ToCustomModelGuardConfigurationOutput() CustomModelGuardConfigurationOutput {
+	return o
+}
+
+func (o CustomModelGuardConfigurationOutput) ToCustomModelGuardConfigurationOutputWithContext(ctx context.Context) CustomModelGuardConfigurationOutput {
+	return o
+}
+
+// The deployment ID of this guard.
+func (o CustomModelGuardConfigurationOutput) DeploymentId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CustomModelGuardConfiguration) *string { return v.DeploymentId }).(pulumi.StringPtrOutput)
+}
+
+// The input column name of this guard.
+func (o CustomModelGuardConfigurationOutput) InputColumnName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CustomModelGuardConfiguration) *string { return v.InputColumnName }).(pulumi.StringPtrOutput)
+}
+
+// The intervention for the guard configuration.
+func (o CustomModelGuardConfigurationOutput) Intervention() CustomModelGuardConfigurationInterventionOutput {
+	return o.ApplyT(func(v CustomModelGuardConfiguration) CustomModelGuardConfigurationIntervention { return v.Intervention }).(CustomModelGuardConfigurationInterventionOutput)
+}
+
+// The name of the guard configuration.
+func (o CustomModelGuardConfigurationOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v CustomModelGuardConfiguration) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// The output column name of this guard.
+func (o CustomModelGuardConfigurationOutput) OutputColumnName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CustomModelGuardConfiguration) *string { return v.OutputColumnName }).(pulumi.StringPtrOutput)
+}
+
+// The list of stages for the guard configuration.
+func (o CustomModelGuardConfigurationOutput) Stages() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v CustomModelGuardConfiguration) []string { return v.Stages }).(pulumi.StringArrayOutput)
+}
+
+// The template name of the guard configuration.
+func (o CustomModelGuardConfigurationOutput) TemplateName() pulumi.StringOutput {
+	return o.ApplyT(func(v CustomModelGuardConfiguration) string { return v.TemplateName }).(pulumi.StringOutput)
+}
+
+type CustomModelGuardConfigurationArrayOutput struct{ *pulumi.OutputState }
+
+func (CustomModelGuardConfigurationArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CustomModelGuardConfiguration)(nil)).Elem()
+}
+
+func (o CustomModelGuardConfigurationArrayOutput) ToCustomModelGuardConfigurationArrayOutput() CustomModelGuardConfigurationArrayOutput {
+	return o
+}
+
+func (o CustomModelGuardConfigurationArrayOutput) ToCustomModelGuardConfigurationArrayOutputWithContext(ctx context.Context) CustomModelGuardConfigurationArrayOutput {
+	return o
+}
+
+func (o CustomModelGuardConfigurationArrayOutput) Index(i pulumi.IntInput) CustomModelGuardConfigurationOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CustomModelGuardConfiguration {
+		return vs[0].([]CustomModelGuardConfiguration)[vs[1].(int)]
+	}).(CustomModelGuardConfigurationOutput)
+}
+
+type CustomModelGuardConfigurationIntervention struct {
+	// The action of the guard intervention.
+	Action string `pulumi:"action"`
+	// The list of conditions for the guard intervention.
+	Condition CustomModelGuardConfigurationInterventionCondition `pulumi:"condition"`
+	// The message of the guard intervention.
+	Message *string `pulumi:"message"`
+}
+
+// CustomModelGuardConfigurationInterventionInput is an input type that accepts CustomModelGuardConfigurationInterventionArgs and CustomModelGuardConfigurationInterventionOutput values.
+// You can construct a concrete instance of `CustomModelGuardConfigurationInterventionInput` via:
+//
+//	CustomModelGuardConfigurationInterventionArgs{...}
+type CustomModelGuardConfigurationInterventionInput interface {
+	pulumi.Input
+
+	ToCustomModelGuardConfigurationInterventionOutput() CustomModelGuardConfigurationInterventionOutput
+	ToCustomModelGuardConfigurationInterventionOutputWithContext(context.Context) CustomModelGuardConfigurationInterventionOutput
+}
+
+type CustomModelGuardConfigurationInterventionArgs struct {
+	// The action of the guard intervention.
+	Action pulumi.StringInput `pulumi:"action"`
+	// The list of conditions for the guard intervention.
+	Condition CustomModelGuardConfigurationInterventionConditionInput `pulumi:"condition"`
+	// The message of the guard intervention.
+	Message pulumi.StringPtrInput `pulumi:"message"`
+}
+
+func (CustomModelGuardConfigurationInterventionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomModelGuardConfigurationIntervention)(nil)).Elem()
+}
+
+func (i CustomModelGuardConfigurationInterventionArgs) ToCustomModelGuardConfigurationInterventionOutput() CustomModelGuardConfigurationInterventionOutput {
+	return i.ToCustomModelGuardConfigurationInterventionOutputWithContext(context.Background())
+}
+
+func (i CustomModelGuardConfigurationInterventionArgs) ToCustomModelGuardConfigurationInterventionOutputWithContext(ctx context.Context) CustomModelGuardConfigurationInterventionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomModelGuardConfigurationInterventionOutput)
+}
+
+type CustomModelGuardConfigurationInterventionOutput struct{ *pulumi.OutputState }
+
+func (CustomModelGuardConfigurationInterventionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomModelGuardConfigurationIntervention)(nil)).Elem()
+}
+
+func (o CustomModelGuardConfigurationInterventionOutput) ToCustomModelGuardConfigurationInterventionOutput() CustomModelGuardConfigurationInterventionOutput {
+	return o
+}
+
+func (o CustomModelGuardConfigurationInterventionOutput) ToCustomModelGuardConfigurationInterventionOutputWithContext(ctx context.Context) CustomModelGuardConfigurationInterventionOutput {
+	return o
+}
+
+// The action of the guard intervention.
+func (o CustomModelGuardConfigurationInterventionOutput) Action() pulumi.StringOutput {
+	return o.ApplyT(func(v CustomModelGuardConfigurationIntervention) string { return v.Action }).(pulumi.StringOutput)
+}
+
+// The list of conditions for the guard intervention.
+func (o CustomModelGuardConfigurationInterventionOutput) Condition() CustomModelGuardConfigurationInterventionConditionOutput {
+	return o.ApplyT(func(v CustomModelGuardConfigurationIntervention) CustomModelGuardConfigurationInterventionCondition {
+		return v.Condition
+	}).(CustomModelGuardConfigurationInterventionConditionOutput)
+}
+
+// The message of the guard intervention.
+func (o CustomModelGuardConfigurationInterventionOutput) Message() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CustomModelGuardConfigurationIntervention) *string { return v.Message }).(pulumi.StringPtrOutput)
+}
+
+type CustomModelGuardConfigurationInterventionCondition struct {
+	// The comparand of the guard condition.
+	Comparand float64 `pulumi:"comparand"`
+	// The comparator of the guard condition.
+	Comparator string `pulumi:"comparator"`
+}
+
+// CustomModelGuardConfigurationInterventionConditionInput is an input type that accepts CustomModelGuardConfigurationInterventionConditionArgs and CustomModelGuardConfigurationInterventionConditionOutput values.
+// You can construct a concrete instance of `CustomModelGuardConfigurationInterventionConditionInput` via:
+//
+//	CustomModelGuardConfigurationInterventionConditionArgs{...}
+type CustomModelGuardConfigurationInterventionConditionInput interface {
+	pulumi.Input
+
+	ToCustomModelGuardConfigurationInterventionConditionOutput() CustomModelGuardConfigurationInterventionConditionOutput
+	ToCustomModelGuardConfigurationInterventionConditionOutputWithContext(context.Context) CustomModelGuardConfigurationInterventionConditionOutput
+}
+
+type CustomModelGuardConfigurationInterventionConditionArgs struct {
+	// The comparand of the guard condition.
+	Comparand pulumi.Float64Input `pulumi:"comparand"`
+	// The comparator of the guard condition.
+	Comparator pulumi.StringInput `pulumi:"comparator"`
+}
+
+func (CustomModelGuardConfigurationInterventionConditionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomModelGuardConfigurationInterventionCondition)(nil)).Elem()
+}
+
+func (i CustomModelGuardConfigurationInterventionConditionArgs) ToCustomModelGuardConfigurationInterventionConditionOutput() CustomModelGuardConfigurationInterventionConditionOutput {
+	return i.ToCustomModelGuardConfigurationInterventionConditionOutputWithContext(context.Background())
+}
+
+func (i CustomModelGuardConfigurationInterventionConditionArgs) ToCustomModelGuardConfigurationInterventionConditionOutputWithContext(ctx context.Context) CustomModelGuardConfigurationInterventionConditionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomModelGuardConfigurationInterventionConditionOutput)
+}
+
+type CustomModelGuardConfigurationInterventionConditionOutput struct{ *pulumi.OutputState }
+
+func (CustomModelGuardConfigurationInterventionConditionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomModelGuardConfigurationInterventionCondition)(nil)).Elem()
+}
+
+func (o CustomModelGuardConfigurationInterventionConditionOutput) ToCustomModelGuardConfigurationInterventionConditionOutput() CustomModelGuardConfigurationInterventionConditionOutput {
+	return o
+}
+
+func (o CustomModelGuardConfigurationInterventionConditionOutput) ToCustomModelGuardConfigurationInterventionConditionOutputWithContext(ctx context.Context) CustomModelGuardConfigurationInterventionConditionOutput {
+	return o
+}
+
+// The comparand of the guard condition.
+func (o CustomModelGuardConfigurationInterventionConditionOutput) Comparand() pulumi.Float64Output {
+	return o.ApplyT(func(v CustomModelGuardConfigurationInterventionCondition) float64 { return v.Comparand }).(pulumi.Float64Output)
+}
+
+// The comparator of the guard condition.
+func (o CustomModelGuardConfigurationInterventionConditionOutput) Comparator() pulumi.StringOutput {
+	return o.ApplyT(func(v CustomModelGuardConfigurationInterventionCondition) string { return v.Comparator }).(pulumi.StringOutput)
+}
+
+type CustomModelOverallModerationConfiguration struct {
+	// The timeout action of the overall moderation configuration.
+	TimeoutAction *string `pulumi:"timeoutAction"`
+	// The timeout in seconds of the overall moderation configuration.
+	TimeoutSec *int `pulumi:"timeoutSec"`
+}
+
+// CustomModelOverallModerationConfigurationInput is an input type that accepts CustomModelOverallModerationConfigurationArgs and CustomModelOverallModerationConfigurationOutput values.
+// You can construct a concrete instance of `CustomModelOverallModerationConfigurationInput` via:
+//
+//	CustomModelOverallModerationConfigurationArgs{...}
+type CustomModelOverallModerationConfigurationInput interface {
+	pulumi.Input
+
+	ToCustomModelOverallModerationConfigurationOutput() CustomModelOverallModerationConfigurationOutput
+	ToCustomModelOverallModerationConfigurationOutputWithContext(context.Context) CustomModelOverallModerationConfigurationOutput
+}
+
+type CustomModelOverallModerationConfigurationArgs struct {
+	// The timeout action of the overall moderation configuration.
+	TimeoutAction pulumi.StringPtrInput `pulumi:"timeoutAction"`
+	// The timeout in seconds of the overall moderation configuration.
+	TimeoutSec pulumi.IntPtrInput `pulumi:"timeoutSec"`
+}
+
+func (CustomModelOverallModerationConfigurationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomModelOverallModerationConfiguration)(nil)).Elem()
+}
+
+func (i CustomModelOverallModerationConfigurationArgs) ToCustomModelOverallModerationConfigurationOutput() CustomModelOverallModerationConfigurationOutput {
+	return i.ToCustomModelOverallModerationConfigurationOutputWithContext(context.Background())
+}
+
+func (i CustomModelOverallModerationConfigurationArgs) ToCustomModelOverallModerationConfigurationOutputWithContext(ctx context.Context) CustomModelOverallModerationConfigurationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomModelOverallModerationConfigurationOutput)
+}
+
+func (i CustomModelOverallModerationConfigurationArgs) ToCustomModelOverallModerationConfigurationPtrOutput() CustomModelOverallModerationConfigurationPtrOutput {
+	return i.ToCustomModelOverallModerationConfigurationPtrOutputWithContext(context.Background())
+}
+
+func (i CustomModelOverallModerationConfigurationArgs) ToCustomModelOverallModerationConfigurationPtrOutputWithContext(ctx context.Context) CustomModelOverallModerationConfigurationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomModelOverallModerationConfigurationOutput).ToCustomModelOverallModerationConfigurationPtrOutputWithContext(ctx)
+}
+
+// CustomModelOverallModerationConfigurationPtrInput is an input type that accepts CustomModelOverallModerationConfigurationArgs, CustomModelOverallModerationConfigurationPtr and CustomModelOverallModerationConfigurationPtrOutput values.
+// You can construct a concrete instance of `CustomModelOverallModerationConfigurationPtrInput` via:
+//
+//	        CustomModelOverallModerationConfigurationArgs{...}
+//
+//	or:
+//
+//	        nil
+type CustomModelOverallModerationConfigurationPtrInput interface {
+	pulumi.Input
+
+	ToCustomModelOverallModerationConfigurationPtrOutput() CustomModelOverallModerationConfigurationPtrOutput
+	ToCustomModelOverallModerationConfigurationPtrOutputWithContext(context.Context) CustomModelOverallModerationConfigurationPtrOutput
+}
+
+type customModelOverallModerationConfigurationPtrType CustomModelOverallModerationConfigurationArgs
+
+func CustomModelOverallModerationConfigurationPtr(v *CustomModelOverallModerationConfigurationArgs) CustomModelOverallModerationConfigurationPtrInput {
+	return (*customModelOverallModerationConfigurationPtrType)(v)
+}
+
+func (*customModelOverallModerationConfigurationPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**CustomModelOverallModerationConfiguration)(nil)).Elem()
+}
+
+func (i *customModelOverallModerationConfigurationPtrType) ToCustomModelOverallModerationConfigurationPtrOutput() CustomModelOverallModerationConfigurationPtrOutput {
+	return i.ToCustomModelOverallModerationConfigurationPtrOutputWithContext(context.Background())
+}
+
+func (i *customModelOverallModerationConfigurationPtrType) ToCustomModelOverallModerationConfigurationPtrOutputWithContext(ctx context.Context) CustomModelOverallModerationConfigurationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomModelOverallModerationConfigurationPtrOutput)
+}
+
+type CustomModelOverallModerationConfigurationOutput struct{ *pulumi.OutputState }
+
+func (CustomModelOverallModerationConfigurationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomModelOverallModerationConfiguration)(nil)).Elem()
+}
+
+func (o CustomModelOverallModerationConfigurationOutput) ToCustomModelOverallModerationConfigurationOutput() CustomModelOverallModerationConfigurationOutput {
+	return o
+}
+
+func (o CustomModelOverallModerationConfigurationOutput) ToCustomModelOverallModerationConfigurationOutputWithContext(ctx context.Context) CustomModelOverallModerationConfigurationOutput {
+	return o
+}
+
+func (o CustomModelOverallModerationConfigurationOutput) ToCustomModelOverallModerationConfigurationPtrOutput() CustomModelOverallModerationConfigurationPtrOutput {
+	return o.ToCustomModelOverallModerationConfigurationPtrOutputWithContext(context.Background())
+}
+
+func (o CustomModelOverallModerationConfigurationOutput) ToCustomModelOverallModerationConfigurationPtrOutputWithContext(ctx context.Context) CustomModelOverallModerationConfigurationPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v CustomModelOverallModerationConfiguration) *CustomModelOverallModerationConfiguration {
+		return &v
+	}).(CustomModelOverallModerationConfigurationPtrOutput)
+}
+
+// The timeout action of the overall moderation configuration.
+func (o CustomModelOverallModerationConfigurationOutput) TimeoutAction() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CustomModelOverallModerationConfiguration) *string { return v.TimeoutAction }).(pulumi.StringPtrOutput)
+}
+
+// The timeout in seconds of the overall moderation configuration.
+func (o CustomModelOverallModerationConfigurationOutput) TimeoutSec() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v CustomModelOverallModerationConfiguration) *int { return v.TimeoutSec }).(pulumi.IntPtrOutput)
+}
+
+type CustomModelOverallModerationConfigurationPtrOutput struct{ *pulumi.OutputState }
+
+func (CustomModelOverallModerationConfigurationPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**CustomModelOverallModerationConfiguration)(nil)).Elem()
+}
+
+func (o CustomModelOverallModerationConfigurationPtrOutput) ToCustomModelOverallModerationConfigurationPtrOutput() CustomModelOverallModerationConfigurationPtrOutput {
+	return o
+}
+
+func (o CustomModelOverallModerationConfigurationPtrOutput) ToCustomModelOverallModerationConfigurationPtrOutputWithContext(ctx context.Context) CustomModelOverallModerationConfigurationPtrOutput {
+	return o
+}
+
+func (o CustomModelOverallModerationConfigurationPtrOutput) Elem() CustomModelOverallModerationConfigurationOutput {
+	return o.ApplyT(func(v *CustomModelOverallModerationConfiguration) CustomModelOverallModerationConfiguration {
+		if v != nil {
+			return *v
+		}
+		var ret CustomModelOverallModerationConfiguration
+		return ret
+	}).(CustomModelOverallModerationConfigurationOutput)
+}
+
+// The timeout action of the overall moderation configuration.
+func (o CustomModelOverallModerationConfigurationPtrOutput) TimeoutAction() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CustomModelOverallModerationConfiguration) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TimeoutAction
+	}).(pulumi.StringPtrOutput)
+}
+
+// The timeout in seconds of the overall moderation configuration.
+func (o CustomModelOverallModerationConfigurationPtrOutput) TimeoutSec() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *CustomModelOverallModerationConfiguration) *int {
+		if v == nil {
+			return nil
+		}
+		return v.TimeoutSec
+	}).(pulumi.IntPtrOutput)
+}
+
 type CustomModelRuntimeParameter struct {
 	// The name of the runtime parameter.
 	Key string `pulumi:"key"`
@@ -128,11 +568,651 @@ func (o CustomModelRuntimeParameterArrayOutput) Index(i pulumi.IntInput) CustomM
 	}).(CustomModelRuntimeParameterOutput)
 }
 
+type CustomModelSourceRemoteRepository struct {
+	// The ID of the source remote repository.
+	Id string `pulumi:"id"`
+	// The reference of the source remote repository.
+	Ref string `pulumi:"ref"`
+	// The list of source paths in the source remote repository.
+	SourcePaths []string `pulumi:"sourcePaths"`
+}
+
+// CustomModelSourceRemoteRepositoryInput is an input type that accepts CustomModelSourceRemoteRepositoryArgs and CustomModelSourceRemoteRepositoryOutput values.
+// You can construct a concrete instance of `CustomModelSourceRemoteRepositoryInput` via:
+//
+//	CustomModelSourceRemoteRepositoryArgs{...}
+type CustomModelSourceRemoteRepositoryInput interface {
+	pulumi.Input
+
+	ToCustomModelSourceRemoteRepositoryOutput() CustomModelSourceRemoteRepositoryOutput
+	ToCustomModelSourceRemoteRepositoryOutputWithContext(context.Context) CustomModelSourceRemoteRepositoryOutput
+}
+
+type CustomModelSourceRemoteRepositoryArgs struct {
+	// The ID of the source remote repository.
+	Id pulumi.StringInput `pulumi:"id"`
+	// The reference of the source remote repository.
+	Ref pulumi.StringInput `pulumi:"ref"`
+	// The list of source paths in the source remote repository.
+	SourcePaths pulumi.StringArrayInput `pulumi:"sourcePaths"`
+}
+
+func (CustomModelSourceRemoteRepositoryArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomModelSourceRemoteRepository)(nil)).Elem()
+}
+
+func (i CustomModelSourceRemoteRepositoryArgs) ToCustomModelSourceRemoteRepositoryOutput() CustomModelSourceRemoteRepositoryOutput {
+	return i.ToCustomModelSourceRemoteRepositoryOutputWithContext(context.Background())
+}
+
+func (i CustomModelSourceRemoteRepositoryArgs) ToCustomModelSourceRemoteRepositoryOutputWithContext(ctx context.Context) CustomModelSourceRemoteRepositoryOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomModelSourceRemoteRepositoryOutput)
+}
+
+// CustomModelSourceRemoteRepositoryArrayInput is an input type that accepts CustomModelSourceRemoteRepositoryArray and CustomModelSourceRemoteRepositoryArrayOutput values.
+// You can construct a concrete instance of `CustomModelSourceRemoteRepositoryArrayInput` via:
+//
+//	CustomModelSourceRemoteRepositoryArray{ CustomModelSourceRemoteRepositoryArgs{...} }
+type CustomModelSourceRemoteRepositoryArrayInput interface {
+	pulumi.Input
+
+	ToCustomModelSourceRemoteRepositoryArrayOutput() CustomModelSourceRemoteRepositoryArrayOutput
+	ToCustomModelSourceRemoteRepositoryArrayOutputWithContext(context.Context) CustomModelSourceRemoteRepositoryArrayOutput
+}
+
+type CustomModelSourceRemoteRepositoryArray []CustomModelSourceRemoteRepositoryInput
+
+func (CustomModelSourceRemoteRepositoryArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CustomModelSourceRemoteRepository)(nil)).Elem()
+}
+
+func (i CustomModelSourceRemoteRepositoryArray) ToCustomModelSourceRemoteRepositoryArrayOutput() CustomModelSourceRemoteRepositoryArrayOutput {
+	return i.ToCustomModelSourceRemoteRepositoryArrayOutputWithContext(context.Background())
+}
+
+func (i CustomModelSourceRemoteRepositoryArray) ToCustomModelSourceRemoteRepositoryArrayOutputWithContext(ctx context.Context) CustomModelSourceRemoteRepositoryArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomModelSourceRemoteRepositoryArrayOutput)
+}
+
+type CustomModelSourceRemoteRepositoryOutput struct{ *pulumi.OutputState }
+
+func (CustomModelSourceRemoteRepositoryOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomModelSourceRemoteRepository)(nil)).Elem()
+}
+
+func (o CustomModelSourceRemoteRepositoryOutput) ToCustomModelSourceRemoteRepositoryOutput() CustomModelSourceRemoteRepositoryOutput {
+	return o
+}
+
+func (o CustomModelSourceRemoteRepositoryOutput) ToCustomModelSourceRemoteRepositoryOutputWithContext(ctx context.Context) CustomModelSourceRemoteRepositoryOutput {
+	return o
+}
+
+// The ID of the source remote repository.
+func (o CustomModelSourceRemoteRepositoryOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v CustomModelSourceRemoteRepository) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// The reference of the source remote repository.
+func (o CustomModelSourceRemoteRepositoryOutput) Ref() pulumi.StringOutput {
+	return o.ApplyT(func(v CustomModelSourceRemoteRepository) string { return v.Ref }).(pulumi.StringOutput)
+}
+
+// The list of source paths in the source remote repository.
+func (o CustomModelSourceRemoteRepositoryOutput) SourcePaths() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v CustomModelSourceRemoteRepository) []string { return v.SourcePaths }).(pulumi.StringArrayOutput)
+}
+
+type CustomModelSourceRemoteRepositoryArrayOutput struct{ *pulumi.OutputState }
+
+func (CustomModelSourceRemoteRepositoryArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CustomModelSourceRemoteRepository)(nil)).Elem()
+}
+
+func (o CustomModelSourceRemoteRepositoryArrayOutput) ToCustomModelSourceRemoteRepositoryArrayOutput() CustomModelSourceRemoteRepositoryArrayOutput {
+	return o
+}
+
+func (o CustomModelSourceRemoteRepositoryArrayOutput) ToCustomModelSourceRemoteRepositoryArrayOutputWithContext(ctx context.Context) CustomModelSourceRemoteRepositoryArrayOutput {
+	return o
+}
+
+func (o CustomModelSourceRemoteRepositoryArrayOutput) Index(i pulumi.IntInput) CustomModelSourceRemoteRepositoryOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CustomModelSourceRemoteRepository {
+		return vs[0].([]CustomModelSourceRemoteRepository)[vs[1].(int)]
+	}).(CustomModelSourceRemoteRepositoryOutput)
+}
+
+type DeploymentSettings struct {
+	// Used to associate predictions back to your actual data.
+	AssociationId *DeploymentSettingsAssociationId `pulumi:"associationId"`
+	// Used to compare the performance of the deployed model with the challenger models.
+	ChallengerAnalysis *bool `pulumi:"challengerAnalysis"`
+	// Used to score predictions made by the challenger models and compare performance with the deployed model.
+	PredictionRowStorage *bool `pulumi:"predictionRowStorage"`
+	// Settings for the predictions.
+	PredictionsSettings *DeploymentSettingsPredictionsSettings `pulumi:"predictionsSettings"`
+}
+
+// DeploymentSettingsInput is an input type that accepts DeploymentSettingsArgs and DeploymentSettingsOutput values.
+// You can construct a concrete instance of `DeploymentSettingsInput` via:
+//
+//	DeploymentSettingsArgs{...}
+type DeploymentSettingsInput interface {
+	pulumi.Input
+
+	ToDeploymentSettingsOutput() DeploymentSettingsOutput
+	ToDeploymentSettingsOutputWithContext(context.Context) DeploymentSettingsOutput
+}
+
+type DeploymentSettingsArgs struct {
+	// Used to associate predictions back to your actual data.
+	AssociationId DeploymentSettingsAssociationIdPtrInput `pulumi:"associationId"`
+	// Used to compare the performance of the deployed model with the challenger models.
+	ChallengerAnalysis pulumi.BoolPtrInput `pulumi:"challengerAnalysis"`
+	// Used to score predictions made by the challenger models and compare performance with the deployed model.
+	PredictionRowStorage pulumi.BoolPtrInput `pulumi:"predictionRowStorage"`
+	// Settings for the predictions.
+	PredictionsSettings DeploymentSettingsPredictionsSettingsPtrInput `pulumi:"predictionsSettings"`
+}
+
+func (DeploymentSettingsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentSettings)(nil)).Elem()
+}
+
+func (i DeploymentSettingsArgs) ToDeploymentSettingsOutput() DeploymentSettingsOutput {
+	return i.ToDeploymentSettingsOutputWithContext(context.Background())
+}
+
+func (i DeploymentSettingsArgs) ToDeploymentSettingsOutputWithContext(ctx context.Context) DeploymentSettingsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentSettingsOutput)
+}
+
+func (i DeploymentSettingsArgs) ToDeploymentSettingsPtrOutput() DeploymentSettingsPtrOutput {
+	return i.ToDeploymentSettingsPtrOutputWithContext(context.Background())
+}
+
+func (i DeploymentSettingsArgs) ToDeploymentSettingsPtrOutputWithContext(ctx context.Context) DeploymentSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentSettingsOutput).ToDeploymentSettingsPtrOutputWithContext(ctx)
+}
+
+// DeploymentSettingsPtrInput is an input type that accepts DeploymentSettingsArgs, DeploymentSettingsPtr and DeploymentSettingsPtrOutput values.
+// You can construct a concrete instance of `DeploymentSettingsPtrInput` via:
+//
+//	        DeploymentSettingsArgs{...}
+//
+//	or:
+//
+//	        nil
+type DeploymentSettingsPtrInput interface {
+	pulumi.Input
+
+	ToDeploymentSettingsPtrOutput() DeploymentSettingsPtrOutput
+	ToDeploymentSettingsPtrOutputWithContext(context.Context) DeploymentSettingsPtrOutput
+}
+
+type deploymentSettingsPtrType DeploymentSettingsArgs
+
+func DeploymentSettingsPtr(v *DeploymentSettingsArgs) DeploymentSettingsPtrInput {
+	return (*deploymentSettingsPtrType)(v)
+}
+
+func (*deploymentSettingsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentSettings)(nil)).Elem()
+}
+
+func (i *deploymentSettingsPtrType) ToDeploymentSettingsPtrOutput() DeploymentSettingsPtrOutput {
+	return i.ToDeploymentSettingsPtrOutputWithContext(context.Background())
+}
+
+func (i *deploymentSettingsPtrType) ToDeploymentSettingsPtrOutputWithContext(ctx context.Context) DeploymentSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentSettingsPtrOutput)
+}
+
+type DeploymentSettingsOutput struct{ *pulumi.OutputState }
+
+func (DeploymentSettingsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentSettings)(nil)).Elem()
+}
+
+func (o DeploymentSettingsOutput) ToDeploymentSettingsOutput() DeploymentSettingsOutput {
+	return o
+}
+
+func (o DeploymentSettingsOutput) ToDeploymentSettingsOutputWithContext(ctx context.Context) DeploymentSettingsOutput {
+	return o
+}
+
+func (o DeploymentSettingsOutput) ToDeploymentSettingsPtrOutput() DeploymentSettingsPtrOutput {
+	return o.ToDeploymentSettingsPtrOutputWithContext(context.Background())
+}
+
+func (o DeploymentSettingsOutput) ToDeploymentSettingsPtrOutputWithContext(ctx context.Context) DeploymentSettingsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DeploymentSettings) *DeploymentSettings {
+		return &v
+	}).(DeploymentSettingsPtrOutput)
+}
+
+// Used to associate predictions back to your actual data.
+func (o DeploymentSettingsOutput) AssociationId() DeploymentSettingsAssociationIdPtrOutput {
+	return o.ApplyT(func(v DeploymentSettings) *DeploymentSettingsAssociationId { return v.AssociationId }).(DeploymentSettingsAssociationIdPtrOutput)
+}
+
+// Used to compare the performance of the deployed model with the challenger models.
+func (o DeploymentSettingsOutput) ChallengerAnalysis() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v DeploymentSettings) *bool { return v.ChallengerAnalysis }).(pulumi.BoolPtrOutput)
+}
+
+// Used to score predictions made by the challenger models and compare performance with the deployed model.
+func (o DeploymentSettingsOutput) PredictionRowStorage() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v DeploymentSettings) *bool { return v.PredictionRowStorage }).(pulumi.BoolPtrOutput)
+}
+
+// Settings for the predictions.
+func (o DeploymentSettingsOutput) PredictionsSettings() DeploymentSettingsPredictionsSettingsPtrOutput {
+	return o.ApplyT(func(v DeploymentSettings) *DeploymentSettingsPredictionsSettings { return v.PredictionsSettings }).(DeploymentSettingsPredictionsSettingsPtrOutput)
+}
+
+type DeploymentSettingsPtrOutput struct{ *pulumi.OutputState }
+
+func (DeploymentSettingsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentSettings)(nil)).Elem()
+}
+
+func (o DeploymentSettingsPtrOutput) ToDeploymentSettingsPtrOutput() DeploymentSettingsPtrOutput {
+	return o
+}
+
+func (o DeploymentSettingsPtrOutput) ToDeploymentSettingsPtrOutputWithContext(ctx context.Context) DeploymentSettingsPtrOutput {
+	return o
+}
+
+func (o DeploymentSettingsPtrOutput) Elem() DeploymentSettingsOutput {
+	return o.ApplyT(func(v *DeploymentSettings) DeploymentSettings {
+		if v != nil {
+			return *v
+		}
+		var ret DeploymentSettings
+		return ret
+	}).(DeploymentSettingsOutput)
+}
+
+// Used to associate predictions back to your actual data.
+func (o DeploymentSettingsPtrOutput) AssociationId() DeploymentSettingsAssociationIdPtrOutput {
+	return o.ApplyT(func(v *DeploymentSettings) *DeploymentSettingsAssociationId {
+		if v == nil {
+			return nil
+		}
+		return v.AssociationId
+	}).(DeploymentSettingsAssociationIdPtrOutput)
+}
+
+// Used to compare the performance of the deployed model with the challenger models.
+func (o DeploymentSettingsPtrOutput) ChallengerAnalysis() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *DeploymentSettings) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.ChallengerAnalysis
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Used to score predictions made by the challenger models and compare performance with the deployed model.
+func (o DeploymentSettingsPtrOutput) PredictionRowStorage() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *DeploymentSettings) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.PredictionRowStorage
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Settings for the predictions.
+func (o DeploymentSettingsPtrOutput) PredictionsSettings() DeploymentSettingsPredictionsSettingsPtrOutput {
+	return o.ApplyT(func(v *DeploymentSettings) *DeploymentSettingsPredictionsSettings {
+		if v == nil {
+			return nil
+		}
+		return v.PredictionsSettings
+	}).(DeploymentSettingsPredictionsSettingsPtrOutput)
+}
+
+type DeploymentSettingsAssociationId struct {
+	// Whether to automatically generate an association ID.
+	AutoGenerateId bool `pulumi:"autoGenerateId"`
+	// The name of the feature to use as the association ID.
+	FeatureName string `pulumi:"featureName"`
+}
+
+// DeploymentSettingsAssociationIdInput is an input type that accepts DeploymentSettingsAssociationIdArgs and DeploymentSettingsAssociationIdOutput values.
+// You can construct a concrete instance of `DeploymentSettingsAssociationIdInput` via:
+//
+//	DeploymentSettingsAssociationIdArgs{...}
+type DeploymentSettingsAssociationIdInput interface {
+	pulumi.Input
+
+	ToDeploymentSettingsAssociationIdOutput() DeploymentSettingsAssociationIdOutput
+	ToDeploymentSettingsAssociationIdOutputWithContext(context.Context) DeploymentSettingsAssociationIdOutput
+}
+
+type DeploymentSettingsAssociationIdArgs struct {
+	// Whether to automatically generate an association ID.
+	AutoGenerateId pulumi.BoolInput `pulumi:"autoGenerateId"`
+	// The name of the feature to use as the association ID.
+	FeatureName pulumi.StringInput `pulumi:"featureName"`
+}
+
+func (DeploymentSettingsAssociationIdArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentSettingsAssociationId)(nil)).Elem()
+}
+
+func (i DeploymentSettingsAssociationIdArgs) ToDeploymentSettingsAssociationIdOutput() DeploymentSettingsAssociationIdOutput {
+	return i.ToDeploymentSettingsAssociationIdOutputWithContext(context.Background())
+}
+
+func (i DeploymentSettingsAssociationIdArgs) ToDeploymentSettingsAssociationIdOutputWithContext(ctx context.Context) DeploymentSettingsAssociationIdOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentSettingsAssociationIdOutput)
+}
+
+func (i DeploymentSettingsAssociationIdArgs) ToDeploymentSettingsAssociationIdPtrOutput() DeploymentSettingsAssociationIdPtrOutput {
+	return i.ToDeploymentSettingsAssociationIdPtrOutputWithContext(context.Background())
+}
+
+func (i DeploymentSettingsAssociationIdArgs) ToDeploymentSettingsAssociationIdPtrOutputWithContext(ctx context.Context) DeploymentSettingsAssociationIdPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentSettingsAssociationIdOutput).ToDeploymentSettingsAssociationIdPtrOutputWithContext(ctx)
+}
+
+// DeploymentSettingsAssociationIdPtrInput is an input type that accepts DeploymentSettingsAssociationIdArgs, DeploymentSettingsAssociationIdPtr and DeploymentSettingsAssociationIdPtrOutput values.
+// You can construct a concrete instance of `DeploymentSettingsAssociationIdPtrInput` via:
+//
+//	        DeploymentSettingsAssociationIdArgs{...}
+//
+//	or:
+//
+//	        nil
+type DeploymentSettingsAssociationIdPtrInput interface {
+	pulumi.Input
+
+	ToDeploymentSettingsAssociationIdPtrOutput() DeploymentSettingsAssociationIdPtrOutput
+	ToDeploymentSettingsAssociationIdPtrOutputWithContext(context.Context) DeploymentSettingsAssociationIdPtrOutput
+}
+
+type deploymentSettingsAssociationIdPtrType DeploymentSettingsAssociationIdArgs
+
+func DeploymentSettingsAssociationIdPtr(v *DeploymentSettingsAssociationIdArgs) DeploymentSettingsAssociationIdPtrInput {
+	return (*deploymentSettingsAssociationIdPtrType)(v)
+}
+
+func (*deploymentSettingsAssociationIdPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentSettingsAssociationId)(nil)).Elem()
+}
+
+func (i *deploymentSettingsAssociationIdPtrType) ToDeploymentSettingsAssociationIdPtrOutput() DeploymentSettingsAssociationIdPtrOutput {
+	return i.ToDeploymentSettingsAssociationIdPtrOutputWithContext(context.Background())
+}
+
+func (i *deploymentSettingsAssociationIdPtrType) ToDeploymentSettingsAssociationIdPtrOutputWithContext(ctx context.Context) DeploymentSettingsAssociationIdPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentSettingsAssociationIdPtrOutput)
+}
+
+type DeploymentSettingsAssociationIdOutput struct{ *pulumi.OutputState }
+
+func (DeploymentSettingsAssociationIdOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentSettingsAssociationId)(nil)).Elem()
+}
+
+func (o DeploymentSettingsAssociationIdOutput) ToDeploymentSettingsAssociationIdOutput() DeploymentSettingsAssociationIdOutput {
+	return o
+}
+
+func (o DeploymentSettingsAssociationIdOutput) ToDeploymentSettingsAssociationIdOutputWithContext(ctx context.Context) DeploymentSettingsAssociationIdOutput {
+	return o
+}
+
+func (o DeploymentSettingsAssociationIdOutput) ToDeploymentSettingsAssociationIdPtrOutput() DeploymentSettingsAssociationIdPtrOutput {
+	return o.ToDeploymentSettingsAssociationIdPtrOutputWithContext(context.Background())
+}
+
+func (o DeploymentSettingsAssociationIdOutput) ToDeploymentSettingsAssociationIdPtrOutputWithContext(ctx context.Context) DeploymentSettingsAssociationIdPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DeploymentSettingsAssociationId) *DeploymentSettingsAssociationId {
+		return &v
+	}).(DeploymentSettingsAssociationIdPtrOutput)
+}
+
+// Whether to automatically generate an association ID.
+func (o DeploymentSettingsAssociationIdOutput) AutoGenerateId() pulumi.BoolOutput {
+	return o.ApplyT(func(v DeploymentSettingsAssociationId) bool { return v.AutoGenerateId }).(pulumi.BoolOutput)
+}
+
+// The name of the feature to use as the association ID.
+func (o DeploymentSettingsAssociationIdOutput) FeatureName() pulumi.StringOutput {
+	return o.ApplyT(func(v DeploymentSettingsAssociationId) string { return v.FeatureName }).(pulumi.StringOutput)
+}
+
+type DeploymentSettingsAssociationIdPtrOutput struct{ *pulumi.OutputState }
+
+func (DeploymentSettingsAssociationIdPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentSettingsAssociationId)(nil)).Elem()
+}
+
+func (o DeploymentSettingsAssociationIdPtrOutput) ToDeploymentSettingsAssociationIdPtrOutput() DeploymentSettingsAssociationIdPtrOutput {
+	return o
+}
+
+func (o DeploymentSettingsAssociationIdPtrOutput) ToDeploymentSettingsAssociationIdPtrOutputWithContext(ctx context.Context) DeploymentSettingsAssociationIdPtrOutput {
+	return o
+}
+
+func (o DeploymentSettingsAssociationIdPtrOutput) Elem() DeploymentSettingsAssociationIdOutput {
+	return o.ApplyT(func(v *DeploymentSettingsAssociationId) DeploymentSettingsAssociationId {
+		if v != nil {
+			return *v
+		}
+		var ret DeploymentSettingsAssociationId
+		return ret
+	}).(DeploymentSettingsAssociationIdOutput)
+}
+
+// Whether to automatically generate an association ID.
+func (o DeploymentSettingsAssociationIdPtrOutput) AutoGenerateId() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *DeploymentSettingsAssociationId) *bool {
+		if v == nil {
+			return nil
+		}
+		return &v.AutoGenerateId
+	}).(pulumi.BoolPtrOutput)
+}
+
+// The name of the feature to use as the association ID.
+func (o DeploymentSettingsAssociationIdPtrOutput) FeatureName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DeploymentSettingsAssociationId) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.FeatureName
+	}).(pulumi.StringPtrOutput)
+}
+
+type DeploymentSettingsPredictionsSettings struct {
+	// The maximum number of computes to use for predictions.
+	MaxComputes int `pulumi:"maxComputes"`
+	// The minimum number of computes to use for predictions.
+	MinComputes int `pulumi:"minComputes"`
+	// Whether to use real-time predictions.
+	RealTime bool `pulumi:"realTime"`
+}
+
+// DeploymentSettingsPredictionsSettingsInput is an input type that accepts DeploymentSettingsPredictionsSettingsArgs and DeploymentSettingsPredictionsSettingsOutput values.
+// You can construct a concrete instance of `DeploymentSettingsPredictionsSettingsInput` via:
+//
+//	DeploymentSettingsPredictionsSettingsArgs{...}
+type DeploymentSettingsPredictionsSettingsInput interface {
+	pulumi.Input
+
+	ToDeploymentSettingsPredictionsSettingsOutput() DeploymentSettingsPredictionsSettingsOutput
+	ToDeploymentSettingsPredictionsSettingsOutputWithContext(context.Context) DeploymentSettingsPredictionsSettingsOutput
+}
+
+type DeploymentSettingsPredictionsSettingsArgs struct {
+	// The maximum number of computes to use for predictions.
+	MaxComputes pulumi.IntInput `pulumi:"maxComputes"`
+	// The minimum number of computes to use for predictions.
+	MinComputes pulumi.IntInput `pulumi:"minComputes"`
+	// Whether to use real-time predictions.
+	RealTime pulumi.BoolInput `pulumi:"realTime"`
+}
+
+func (DeploymentSettingsPredictionsSettingsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentSettingsPredictionsSettings)(nil)).Elem()
+}
+
+func (i DeploymentSettingsPredictionsSettingsArgs) ToDeploymentSettingsPredictionsSettingsOutput() DeploymentSettingsPredictionsSettingsOutput {
+	return i.ToDeploymentSettingsPredictionsSettingsOutputWithContext(context.Background())
+}
+
+func (i DeploymentSettingsPredictionsSettingsArgs) ToDeploymentSettingsPredictionsSettingsOutputWithContext(ctx context.Context) DeploymentSettingsPredictionsSettingsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentSettingsPredictionsSettingsOutput)
+}
+
+func (i DeploymentSettingsPredictionsSettingsArgs) ToDeploymentSettingsPredictionsSettingsPtrOutput() DeploymentSettingsPredictionsSettingsPtrOutput {
+	return i.ToDeploymentSettingsPredictionsSettingsPtrOutputWithContext(context.Background())
+}
+
+func (i DeploymentSettingsPredictionsSettingsArgs) ToDeploymentSettingsPredictionsSettingsPtrOutputWithContext(ctx context.Context) DeploymentSettingsPredictionsSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentSettingsPredictionsSettingsOutput).ToDeploymentSettingsPredictionsSettingsPtrOutputWithContext(ctx)
+}
+
+// DeploymentSettingsPredictionsSettingsPtrInput is an input type that accepts DeploymentSettingsPredictionsSettingsArgs, DeploymentSettingsPredictionsSettingsPtr and DeploymentSettingsPredictionsSettingsPtrOutput values.
+// You can construct a concrete instance of `DeploymentSettingsPredictionsSettingsPtrInput` via:
+//
+//	        DeploymentSettingsPredictionsSettingsArgs{...}
+//
+//	or:
+//
+//	        nil
+type DeploymentSettingsPredictionsSettingsPtrInput interface {
+	pulumi.Input
+
+	ToDeploymentSettingsPredictionsSettingsPtrOutput() DeploymentSettingsPredictionsSettingsPtrOutput
+	ToDeploymentSettingsPredictionsSettingsPtrOutputWithContext(context.Context) DeploymentSettingsPredictionsSettingsPtrOutput
+}
+
+type deploymentSettingsPredictionsSettingsPtrType DeploymentSettingsPredictionsSettingsArgs
+
+func DeploymentSettingsPredictionsSettingsPtr(v *DeploymentSettingsPredictionsSettingsArgs) DeploymentSettingsPredictionsSettingsPtrInput {
+	return (*deploymentSettingsPredictionsSettingsPtrType)(v)
+}
+
+func (*deploymentSettingsPredictionsSettingsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentSettingsPredictionsSettings)(nil)).Elem()
+}
+
+func (i *deploymentSettingsPredictionsSettingsPtrType) ToDeploymentSettingsPredictionsSettingsPtrOutput() DeploymentSettingsPredictionsSettingsPtrOutput {
+	return i.ToDeploymentSettingsPredictionsSettingsPtrOutputWithContext(context.Background())
+}
+
+func (i *deploymentSettingsPredictionsSettingsPtrType) ToDeploymentSettingsPredictionsSettingsPtrOutputWithContext(ctx context.Context) DeploymentSettingsPredictionsSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentSettingsPredictionsSettingsPtrOutput)
+}
+
+type DeploymentSettingsPredictionsSettingsOutput struct{ *pulumi.OutputState }
+
+func (DeploymentSettingsPredictionsSettingsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentSettingsPredictionsSettings)(nil)).Elem()
+}
+
+func (o DeploymentSettingsPredictionsSettingsOutput) ToDeploymentSettingsPredictionsSettingsOutput() DeploymentSettingsPredictionsSettingsOutput {
+	return o
+}
+
+func (o DeploymentSettingsPredictionsSettingsOutput) ToDeploymentSettingsPredictionsSettingsOutputWithContext(ctx context.Context) DeploymentSettingsPredictionsSettingsOutput {
+	return o
+}
+
+func (o DeploymentSettingsPredictionsSettingsOutput) ToDeploymentSettingsPredictionsSettingsPtrOutput() DeploymentSettingsPredictionsSettingsPtrOutput {
+	return o.ToDeploymentSettingsPredictionsSettingsPtrOutputWithContext(context.Background())
+}
+
+func (o DeploymentSettingsPredictionsSettingsOutput) ToDeploymentSettingsPredictionsSettingsPtrOutputWithContext(ctx context.Context) DeploymentSettingsPredictionsSettingsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DeploymentSettingsPredictionsSettings) *DeploymentSettingsPredictionsSettings {
+		return &v
+	}).(DeploymentSettingsPredictionsSettingsPtrOutput)
+}
+
+// The maximum number of computes to use for predictions.
+func (o DeploymentSettingsPredictionsSettingsOutput) MaxComputes() pulumi.IntOutput {
+	return o.ApplyT(func(v DeploymentSettingsPredictionsSettings) int { return v.MaxComputes }).(pulumi.IntOutput)
+}
+
+// The minimum number of computes to use for predictions.
+func (o DeploymentSettingsPredictionsSettingsOutput) MinComputes() pulumi.IntOutput {
+	return o.ApplyT(func(v DeploymentSettingsPredictionsSettings) int { return v.MinComputes }).(pulumi.IntOutput)
+}
+
+// Whether to use real-time predictions.
+func (o DeploymentSettingsPredictionsSettingsOutput) RealTime() pulumi.BoolOutput {
+	return o.ApplyT(func(v DeploymentSettingsPredictionsSettings) bool { return v.RealTime }).(pulumi.BoolOutput)
+}
+
+type DeploymentSettingsPredictionsSettingsPtrOutput struct{ *pulumi.OutputState }
+
+func (DeploymentSettingsPredictionsSettingsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentSettingsPredictionsSettings)(nil)).Elem()
+}
+
+func (o DeploymentSettingsPredictionsSettingsPtrOutput) ToDeploymentSettingsPredictionsSettingsPtrOutput() DeploymentSettingsPredictionsSettingsPtrOutput {
+	return o
+}
+
+func (o DeploymentSettingsPredictionsSettingsPtrOutput) ToDeploymentSettingsPredictionsSettingsPtrOutputWithContext(ctx context.Context) DeploymentSettingsPredictionsSettingsPtrOutput {
+	return o
+}
+
+func (o DeploymentSettingsPredictionsSettingsPtrOutput) Elem() DeploymentSettingsPredictionsSettingsOutput {
+	return o.ApplyT(func(v *DeploymentSettingsPredictionsSettings) DeploymentSettingsPredictionsSettings {
+		if v != nil {
+			return *v
+		}
+		var ret DeploymentSettingsPredictionsSettings
+		return ret
+	}).(DeploymentSettingsPredictionsSettingsOutput)
+}
+
+// The maximum number of computes to use for predictions.
+func (o DeploymentSettingsPredictionsSettingsPtrOutput) MaxComputes() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DeploymentSettingsPredictionsSettings) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.MaxComputes
+	}).(pulumi.IntPtrOutput)
+}
+
+// The minimum number of computes to use for predictions.
+func (o DeploymentSettingsPredictionsSettingsPtrOutput) MinComputes() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DeploymentSettingsPredictionsSettings) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.MinComputes
+	}).(pulumi.IntPtrOutput)
+}
+
+// Whether to use real-time predictions.
+func (o DeploymentSettingsPredictionsSettingsPtrOutput) RealTime() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *DeploymentSettingsPredictionsSettings) *bool {
+		if v == nil {
+			return nil
+		}
+		return &v.RealTime
+	}).(pulumi.BoolPtrOutput)
+}
+
 type VectorDatabaseChunkingParameters struct {
 	// The percentage of overlap between chunks.
-	ChunkOverlapPercentage *float64 `pulumi:"chunkOverlapPercentage"`
+	ChunkOverlapPercentage *int `pulumi:"chunkOverlapPercentage"`
 	// The size of the chunks.
-	ChunkSize *float64 `pulumi:"chunkSize"`
+	ChunkSize *int `pulumi:"chunkSize"`
 	// The method used to chunk the data.
 	ChunkingMethod *string `pulumi:"chunkingMethod"`
 	// The id of the Embedding Model.
@@ -156,9 +1236,9 @@ type VectorDatabaseChunkingParametersInput interface {
 
 type VectorDatabaseChunkingParametersArgs struct {
 	// The percentage of overlap between chunks.
-	ChunkOverlapPercentage pulumi.Float64PtrInput `pulumi:"chunkOverlapPercentage"`
+	ChunkOverlapPercentage pulumi.IntPtrInput `pulumi:"chunkOverlapPercentage"`
 	// The size of the chunks.
-	ChunkSize pulumi.Float64PtrInput `pulumi:"chunkSize"`
+	ChunkSize pulumi.IntPtrInput `pulumi:"chunkSize"`
 	// The method used to chunk the data.
 	ChunkingMethod pulumi.StringPtrInput `pulumi:"chunkingMethod"`
 	// The id of the Embedding Model.
@@ -247,13 +1327,13 @@ func (o VectorDatabaseChunkingParametersOutput) ToVectorDatabaseChunkingParamete
 }
 
 // The percentage of overlap between chunks.
-func (o VectorDatabaseChunkingParametersOutput) ChunkOverlapPercentage() pulumi.Float64PtrOutput {
-	return o.ApplyT(func(v VectorDatabaseChunkingParameters) *float64 { return v.ChunkOverlapPercentage }).(pulumi.Float64PtrOutput)
+func (o VectorDatabaseChunkingParametersOutput) ChunkOverlapPercentage() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v VectorDatabaseChunkingParameters) *int { return v.ChunkOverlapPercentage }).(pulumi.IntPtrOutput)
 }
 
 // The size of the chunks.
-func (o VectorDatabaseChunkingParametersOutput) ChunkSize() pulumi.Float64PtrOutput {
-	return o.ApplyT(func(v VectorDatabaseChunkingParameters) *float64 { return v.ChunkSize }).(pulumi.Float64PtrOutput)
+func (o VectorDatabaseChunkingParametersOutput) ChunkSize() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v VectorDatabaseChunkingParameters) *int { return v.ChunkSize }).(pulumi.IntPtrOutput)
 }
 
 // The method used to chunk the data.
@@ -301,23 +1381,23 @@ func (o VectorDatabaseChunkingParametersPtrOutput) Elem() VectorDatabaseChunking
 }
 
 // The percentage of overlap between chunks.
-func (o VectorDatabaseChunkingParametersPtrOutput) ChunkOverlapPercentage() pulumi.Float64PtrOutput {
-	return o.ApplyT(func(v *VectorDatabaseChunkingParameters) *float64 {
+func (o VectorDatabaseChunkingParametersPtrOutput) ChunkOverlapPercentage() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *VectorDatabaseChunkingParameters) *int {
 		if v == nil {
 			return nil
 		}
 		return v.ChunkOverlapPercentage
-	}).(pulumi.Float64PtrOutput)
+	}).(pulumi.IntPtrOutput)
 }
 
 // The size of the chunks.
-func (o VectorDatabaseChunkingParametersPtrOutput) ChunkSize() pulumi.Float64PtrOutput {
-	return o.ApplyT(func(v *VectorDatabaseChunkingParameters) *float64 {
+func (o VectorDatabaseChunkingParametersPtrOutput) ChunkSize() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *VectorDatabaseChunkingParameters) *int {
 		if v == nil {
 			return nil
 		}
 		return v.ChunkSize
-	}).(pulumi.Float64PtrOutput)
+	}).(pulumi.IntPtrOutput)
 }
 
 // The method used to chunk the data.
@@ -361,12 +1441,40 @@ func (o VectorDatabaseChunkingParametersPtrOutput) Separators() pulumi.StringArr
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelGuardConfigurationInput)(nil)).Elem(), CustomModelGuardConfigurationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelGuardConfigurationArrayInput)(nil)).Elem(), CustomModelGuardConfigurationArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelGuardConfigurationInterventionInput)(nil)).Elem(), CustomModelGuardConfigurationInterventionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelGuardConfigurationInterventionConditionInput)(nil)).Elem(), CustomModelGuardConfigurationInterventionConditionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelOverallModerationConfigurationInput)(nil)).Elem(), CustomModelOverallModerationConfigurationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelOverallModerationConfigurationPtrInput)(nil)).Elem(), CustomModelOverallModerationConfigurationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelRuntimeParameterInput)(nil)).Elem(), CustomModelRuntimeParameterArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelRuntimeParameterArrayInput)(nil)).Elem(), CustomModelRuntimeParameterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelSourceRemoteRepositoryInput)(nil)).Elem(), CustomModelSourceRemoteRepositoryArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelSourceRemoteRepositoryArrayInput)(nil)).Elem(), CustomModelSourceRemoteRepositoryArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentSettingsInput)(nil)).Elem(), DeploymentSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentSettingsPtrInput)(nil)).Elem(), DeploymentSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentSettingsAssociationIdInput)(nil)).Elem(), DeploymentSettingsAssociationIdArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentSettingsAssociationIdPtrInput)(nil)).Elem(), DeploymentSettingsAssociationIdArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentSettingsPredictionsSettingsInput)(nil)).Elem(), DeploymentSettingsPredictionsSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentSettingsPredictionsSettingsPtrInput)(nil)).Elem(), DeploymentSettingsPredictionsSettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*VectorDatabaseChunkingParametersInput)(nil)).Elem(), VectorDatabaseChunkingParametersArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*VectorDatabaseChunkingParametersPtrInput)(nil)).Elem(), VectorDatabaseChunkingParametersArgs{})
+	pulumi.RegisterOutputType(CustomModelGuardConfigurationOutput{})
+	pulumi.RegisterOutputType(CustomModelGuardConfigurationArrayOutput{})
+	pulumi.RegisterOutputType(CustomModelGuardConfigurationInterventionOutput{})
+	pulumi.RegisterOutputType(CustomModelGuardConfigurationInterventionConditionOutput{})
+	pulumi.RegisterOutputType(CustomModelOverallModerationConfigurationOutput{})
+	pulumi.RegisterOutputType(CustomModelOverallModerationConfigurationPtrOutput{})
 	pulumi.RegisterOutputType(CustomModelRuntimeParameterOutput{})
 	pulumi.RegisterOutputType(CustomModelRuntimeParameterArrayOutput{})
+	pulumi.RegisterOutputType(CustomModelSourceRemoteRepositoryOutput{})
+	pulumi.RegisterOutputType(CustomModelSourceRemoteRepositoryArrayOutput{})
+	pulumi.RegisterOutputType(DeploymentSettingsOutput{})
+	pulumi.RegisterOutputType(DeploymentSettingsPtrOutput{})
+	pulumi.RegisterOutputType(DeploymentSettingsAssociationIdOutput{})
+	pulumi.RegisterOutputType(DeploymentSettingsAssociationIdPtrOutput{})
+	pulumi.RegisterOutputType(DeploymentSettingsPredictionsSettingsOutput{})
+	pulumi.RegisterOutputType(DeploymentSettingsPredictionsSettingsPtrOutput{})
 	pulumi.RegisterOutputType(VectorDatabaseChunkingParametersOutput{})
 	pulumi.RegisterOutputType(VectorDatabaseChunkingParametersPtrOutput{})
 }

@@ -16,10 +16,20 @@
                 "current": "datarobot:index/basicCredential:BasicCredential"
             },
             "datarobot_chat_application": {
-                "current": "datarobot:index/chatApplication:ChatApplication"
+                "current": "datarobot:index/chatApplication:ChatApplication",
+                "fields": {
+                    "external_access_recipients": {
+                        "maxItemsOne": false
+                    }
+                }
             },
             "datarobot_custom_application": {
-                "current": "datarobot:index/customApplication:CustomApplication"
+                "current": "datarobot:index/customApplication:CustomApplication",
+                "fields": {
+                    "external_access_recipients": {
+                        "maxItemsOne": false
+                    }
+                }
             },
             "datarobot_custom_model": {
                 "current": "datarobot:index/customModel:CustomModel",

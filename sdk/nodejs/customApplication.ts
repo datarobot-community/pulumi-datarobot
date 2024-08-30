@@ -6,6 +6,27 @@ import * as utilities from "./utilities";
 
 /**
  * Custom Application
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as datarobot from "@pulumi/datarobot";
+ *
+ * const exampleApplicationSource = new datarobot.ApplicationSource("exampleApplicationSource", {localFiles: [
+ *     "start-app.sh",
+ *     "streamlit-app.py",
+ * ]});
+ * const exampleCustomApplication = new datarobot.CustomApplication("exampleCustomApplication", {
+ *     sourceVersionId: exampleApplicationSource.versionId,
+ *     externalAccessEnabled: true,
+ *     externalAccessRecipients: ["recipient@example.com"],
+ * });
+ * export const datarobotCustomApplicationId = exampleCustomApplication.id;
+ * export const datarobotCustomApplicationSourceId = exampleCustomApplication.sourceId;
+ * export const datarobotCustomApplicationSourceVersionId = exampleCustomApplication.sourceVersionId;
+ * export const datarobotCustomApplicationUrl = exampleCustomApplication.applicationUrl;
+ * ```
  */
 export class CustomApplication extends pulumi.CustomResource {
     /**
@@ -40,9 +61,21 @@ export class CustomApplication extends pulumi.CustomResource {
      */
     public /*out*/ readonly applicationUrl!: pulumi.Output<string>;
     /**
+     * Whether external access is enabled for the Custom Application.
+     */
+    public readonly externalAccessEnabled!: pulumi.Output<boolean>;
+    /**
+     * The list of external email addresses that have access to the Custom Application.
+     */
+    public readonly externalAccessRecipients!: pulumi.Output<string[] | undefined>;
+    /**
      * The name of the Custom Application.
      */
     public readonly name!: pulumi.Output<string>;
+    /**
+     * The ID of the Custom Application Source.
+     */
+    public /*out*/ readonly sourceId!: pulumi.Output<string>;
     /**
      * The version ID of the Custom Application Source.
      */
@@ -62,16 +95,22 @@ export class CustomApplication extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as CustomApplicationState | undefined;
             resourceInputs["applicationUrl"] = state ? state.applicationUrl : undefined;
+            resourceInputs["externalAccessEnabled"] = state ? state.externalAccessEnabled : undefined;
+            resourceInputs["externalAccessRecipients"] = state ? state.externalAccessRecipients : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
+            resourceInputs["sourceId"] = state ? state.sourceId : undefined;
             resourceInputs["sourceVersionId"] = state ? state.sourceVersionId : undefined;
         } else {
             const args = argsOrState as CustomApplicationArgs | undefined;
             if ((!args || args.sourceVersionId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'sourceVersionId'");
             }
+            resourceInputs["externalAccessEnabled"] = args ? args.externalAccessEnabled : undefined;
+            resourceInputs["externalAccessRecipients"] = args ? args.externalAccessRecipients : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["sourceVersionId"] = args ? args.sourceVersionId : undefined;
             resourceInputs["applicationUrl"] = undefined /*out*/;
+            resourceInputs["sourceId"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(CustomApplication.__pulumiType, name, resourceInputs, opts);
@@ -87,9 +126,21 @@ export interface CustomApplicationState {
      */
     applicationUrl?: pulumi.Input<string>;
     /**
+     * Whether external access is enabled for the Custom Application.
+     */
+    externalAccessEnabled?: pulumi.Input<boolean>;
+    /**
+     * The list of external email addresses that have access to the Custom Application.
+     */
+    externalAccessRecipients?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
      * The name of the Custom Application.
      */
     name?: pulumi.Input<string>;
+    /**
+     * The ID of the Custom Application Source.
+     */
+    sourceId?: pulumi.Input<string>;
     /**
      * The version ID of the Custom Application Source.
      */
@@ -100,6 +151,14 @@ export interface CustomApplicationState {
  * The set of arguments for constructing a CustomApplication resource.
  */
 export interface CustomApplicationArgs {
+    /**
+     * Whether external access is enabled for the Custom Application.
+     */
+    externalAccessEnabled?: pulumi.Input<boolean>;
+    /**
+     * The list of external email addresses that have access to the Custom Application.
+     */
+    externalAccessRecipients?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The name of the Custom Application.
      */

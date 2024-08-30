@@ -23,16 +23,22 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 	switch typ {
 	case "datarobot:index/apiTokenCredential:ApiTokenCredential":
 		r = &ApiTokenCredential{}
+	case "datarobot:index/applicationSource:ApplicationSource":
+		r = &ApplicationSource{}
 	case "datarobot:index/basicCredential:BasicCredential":
 		r = &BasicCredential{}
 	case "datarobot:index/chatApplication:ChatApplication":
 		r = &ChatApplication{}
+	case "datarobot:index/customApplication:CustomApplication":
+		r = &CustomApplication{}
 	case "datarobot:index/customModel:CustomModel":
 		r = &CustomModel{}
 	case "datarobot:index/datasetFromFile:DatasetFromFile":
 		r = &DatasetFromFile{}
 	case "datarobot:index/deployment:Deployment":
 		r = &Deployment{}
+	case "datarobot:index/googleCloudCredential:GoogleCloudCredential":
+		r = &GoogleCloudCredential{}
 	case "datarobot:index/llmBlueprint:LlmBlueprint":
 		r = &LlmBlueprint{}
 	case "datarobot:index/playground:Playground":
@@ -41,6 +47,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &PredictionEnvironment{}
 	case "datarobot:index/registeredModel:RegisteredModel":
 		r = &RegisteredModel{}
+	case "datarobot:index/remoteRepository:RemoteRepository":
+		r = &RemoteRepository{}
 	case "datarobot:index/useCase:UseCase":
 		r = &UseCase{}
 	case "datarobot:index/vectorDatabase:VectorDatabase":
@@ -83,12 +91,22 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"datarobot",
+		"index/applicationSource",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"datarobot",
 		"index/basicCredential",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"datarobot",
 		"index/chatApplication",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"datarobot",
+		"index/customApplication",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -104,6 +122,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"datarobot",
 		"index/deployment",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"datarobot",
+		"index/googleCloudCredential",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -124,6 +147,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"datarobot",
 		"index/registeredModel",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"datarobot",
+		"index/remoteRepository",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

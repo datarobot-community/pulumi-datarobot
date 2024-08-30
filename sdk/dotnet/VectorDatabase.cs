@@ -9,6 +9,9 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Datarobot
 {
+    /// <summary>
+    /// Vector database
+    /// </summary>
     [DatarobotResourceType("datarobot:index/vectorDatabase:VectorDatabase")]
     public partial class VectorDatabase : global::Pulumi.CustomResource
     {
@@ -85,8 +88,8 @@ namespace Pulumi.Datarobot
         /// <summary>
         /// The chunking parameters for the Model.
         /// </summary>
-        [Input("chunkingParameters", required: true)]
-        public Input<Inputs.VectorDatabaseChunkingParametersArgs> ChunkingParameters { get; set; } = null!;
+        [Input("chunkingParameters")]
+        public Input<Inputs.VectorDatabaseChunkingParametersArgs>? ChunkingParameters { get; set; }
 
         /// <summary>
         /// The id of the Vector Database.

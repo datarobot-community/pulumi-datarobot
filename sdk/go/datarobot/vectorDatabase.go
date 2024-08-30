@@ -12,6 +12,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Vector database
 type VectorDatabase struct {
 	pulumi.CustomResourceState
 
@@ -32,9 +33,6 @@ func NewVectorDatabase(ctx *pulumi.Context,
 		return nil, errors.New("missing one or more required arguments")
 	}
 
-	if args.ChunkingParameters == nil {
-		return nil, errors.New("invalid value for required argument 'ChunkingParameters'")
-	}
 	if args.DatasetId == nil {
 		return nil, errors.New("invalid value for required argument 'DatasetId'")
 	}
@@ -91,7 +89,7 @@ func (VectorDatabaseState) ElementType() reflect.Type {
 
 type vectorDatabaseArgs struct {
 	// The chunking parameters for the Model.
-	ChunkingParameters VectorDatabaseChunkingParameters `pulumi:"chunkingParameters"`
+	ChunkingParameters *VectorDatabaseChunkingParameters `pulumi:"chunkingParameters"`
 	// The id of the Vector Database.
 	DatasetId string `pulumi:"datasetId"`
 	// The name of the VectorDatabase.
@@ -103,7 +101,7 @@ type vectorDatabaseArgs struct {
 // The set of arguments for constructing a VectorDatabase resource.
 type VectorDatabaseArgs struct {
 	// The chunking parameters for the Model.
-	ChunkingParameters VectorDatabaseChunkingParametersInput
+	ChunkingParameters VectorDatabaseChunkingParametersPtrInput
 	// The id of the Vector Database.
 	DatasetId pulumi.StringInput
 	// The name of the VectorDatabase.

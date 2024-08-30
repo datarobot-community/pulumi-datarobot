@@ -7,26 +7,42 @@ import (
 	"context"
 	"reflect"
 
-	"errors"
 	"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// Data set from file
 type CustomModel struct {
 	pulumi.CustomResourceState
 
 	// The ID of the base environment for the Custom Model.
 	BaseEnvironmentId pulumi.StringOutput `pulumi:"baseEnvironmentId"`
+	// The name of the base environment for the Custom Model.
+	BaseEnvironmentName pulumi.StringPtrOutput `pulumi:"baseEnvironmentName"`
 	// The ID of the base environment version for the Custom Model.
 	BaseEnvironmentVersionId pulumi.StringOutput `pulumi:"baseEnvironmentVersionId"`
 	// The description of the Custom Model.
-	Description pulumi.StringOutput `pulumi:"description"`
+	Description pulumi.StringPtrOutput `pulumi:"description"`
+	// The guard configurations for the Custom Model.
+	GuardConfigurations CustomModelGuardConfigurationArrayOutput `pulumi:"guardConfigurations"`
+	// The flag indicating if the Custom Model is a proxy model.
+	IsProxy pulumi.BoolPtrOutput `pulumi:"isProxy"`
+	// The list of local file paths used to build the Custom Model.
+	LocalFiles pulumi.StringArrayOutput `pulumi:"localFiles"`
 	// The name of the Custom Model.
 	Name pulumi.StringOutput `pulumi:"name"`
+	// The overall moderation configuration for the Custom Model.
+	OverallModerationConfiguration CustomModelOverallModerationConfigurationPtrOutput `pulumi:"overallModerationConfiguration"`
 	// The runtime parameter values for the Custom Model.
 	RuntimeParameters CustomModelRuntimeParameterArrayOutput `pulumi:"runtimeParameters"`
 	// The ID of the source LLM Blueprint for the Custom Model.
-	SourceLlmBlueprintId pulumi.StringOutput `pulumi:"sourceLlmBlueprintId"`
+	SourceLlmBlueprintId pulumi.StringPtrOutput `pulumi:"sourceLlmBlueprintId"`
+	// The source remote repositories for the Custom Model.
+	SourceRemoteRepositories CustomModelSourceRemoteRepositoryArrayOutput `pulumi:"sourceRemoteRepositories"`
+	// The target of the Custom Model.
+	Target pulumi.StringPtrOutput `pulumi:"target"`
+	// The target type of the Custom Model.
+	TargetType pulumi.StringPtrOutput `pulumi:"targetType"`
 	// The ID of the latest Custom Model version.
 	VersionId pulumi.StringOutput `pulumi:"versionId"`
 }
@@ -35,15 +51,9 @@ type CustomModel struct {
 func NewCustomModel(ctx *pulumi.Context,
 	name string, args *CustomModelArgs, opts ...pulumi.ResourceOption) (*CustomModel, error) {
 	if args == nil {
-		return nil, errors.New("missing one or more required arguments")
+		args = &CustomModelArgs{}
 	}
 
-	if args.Description == nil {
-		return nil, errors.New("invalid value for required argument 'Description'")
-	}
-	if args.SourceLlmBlueprintId == nil {
-		return nil, errors.New("invalid value for required argument 'SourceLlmBlueprintId'")
-	}
 	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource CustomModel
 	err := ctx.RegisterResource("datarobot:index/customModel:CustomModel", name, args, &resource, opts...)
@@ -69,16 +79,32 @@ func GetCustomModel(ctx *pulumi.Context,
 type customModelState struct {
 	// The ID of the base environment for the Custom Model.
 	BaseEnvironmentId *string `pulumi:"baseEnvironmentId"`
+	// The name of the base environment for the Custom Model.
+	BaseEnvironmentName *string `pulumi:"baseEnvironmentName"`
 	// The ID of the base environment version for the Custom Model.
 	BaseEnvironmentVersionId *string `pulumi:"baseEnvironmentVersionId"`
 	// The description of the Custom Model.
 	Description *string `pulumi:"description"`
+	// The guard configurations for the Custom Model.
+	GuardConfigurations []CustomModelGuardConfiguration `pulumi:"guardConfigurations"`
+	// The flag indicating if the Custom Model is a proxy model.
+	IsProxy *bool `pulumi:"isProxy"`
+	// The list of local file paths used to build the Custom Model.
+	LocalFiles []string `pulumi:"localFiles"`
 	// The name of the Custom Model.
 	Name *string `pulumi:"name"`
+	// The overall moderation configuration for the Custom Model.
+	OverallModerationConfiguration *CustomModelOverallModerationConfiguration `pulumi:"overallModerationConfiguration"`
 	// The runtime parameter values for the Custom Model.
 	RuntimeParameters []CustomModelRuntimeParameter `pulumi:"runtimeParameters"`
 	// The ID of the source LLM Blueprint for the Custom Model.
 	SourceLlmBlueprintId *string `pulumi:"sourceLlmBlueprintId"`
+	// The source remote repositories for the Custom Model.
+	SourceRemoteRepositories []CustomModelSourceRemoteRepository `pulumi:"sourceRemoteRepositories"`
+	// The target of the Custom Model.
+	Target *string `pulumi:"target"`
+	// The target type of the Custom Model.
+	TargetType *string `pulumi:"targetType"`
 	// The ID of the latest Custom Model version.
 	VersionId *string `pulumi:"versionId"`
 }
@@ -86,16 +112,32 @@ type customModelState struct {
 type CustomModelState struct {
 	// The ID of the base environment for the Custom Model.
 	BaseEnvironmentId pulumi.StringPtrInput
+	// The name of the base environment for the Custom Model.
+	BaseEnvironmentName pulumi.StringPtrInput
 	// The ID of the base environment version for the Custom Model.
 	BaseEnvironmentVersionId pulumi.StringPtrInput
 	// The description of the Custom Model.
 	Description pulumi.StringPtrInput
+	// The guard configurations for the Custom Model.
+	GuardConfigurations CustomModelGuardConfigurationArrayInput
+	// The flag indicating if the Custom Model is a proxy model.
+	IsProxy pulumi.BoolPtrInput
+	// The list of local file paths used to build the Custom Model.
+	LocalFiles pulumi.StringArrayInput
 	// The name of the Custom Model.
 	Name pulumi.StringPtrInput
+	// The overall moderation configuration for the Custom Model.
+	OverallModerationConfiguration CustomModelOverallModerationConfigurationPtrInput
 	// The runtime parameter values for the Custom Model.
 	RuntimeParameters CustomModelRuntimeParameterArrayInput
 	// The ID of the source LLM Blueprint for the Custom Model.
 	SourceLlmBlueprintId pulumi.StringPtrInput
+	// The source remote repositories for the Custom Model.
+	SourceRemoteRepositories CustomModelSourceRemoteRepositoryArrayInput
+	// The target of the Custom Model.
+	Target pulumi.StringPtrInput
+	// The target type of the Custom Model.
+	TargetType pulumi.StringPtrInput
 	// The ID of the latest Custom Model version.
 	VersionId pulumi.StringPtrInput
 }
@@ -107,32 +149,64 @@ func (CustomModelState) ElementType() reflect.Type {
 type customModelArgs struct {
 	// The ID of the base environment for the Custom Model.
 	BaseEnvironmentId *string `pulumi:"baseEnvironmentId"`
+	// The name of the base environment for the Custom Model.
+	BaseEnvironmentName *string `pulumi:"baseEnvironmentName"`
 	// The ID of the base environment version for the Custom Model.
 	BaseEnvironmentVersionId *string `pulumi:"baseEnvironmentVersionId"`
 	// The description of the Custom Model.
-	Description string `pulumi:"description"`
+	Description *string `pulumi:"description"`
+	// The guard configurations for the Custom Model.
+	GuardConfigurations []CustomModelGuardConfiguration `pulumi:"guardConfigurations"`
+	// The flag indicating if the Custom Model is a proxy model.
+	IsProxy *bool `pulumi:"isProxy"`
+	// The list of local file paths used to build the Custom Model.
+	LocalFiles []string `pulumi:"localFiles"`
 	// The name of the Custom Model.
 	Name *string `pulumi:"name"`
+	// The overall moderation configuration for the Custom Model.
+	OverallModerationConfiguration *CustomModelOverallModerationConfiguration `pulumi:"overallModerationConfiguration"`
 	// The runtime parameter values for the Custom Model.
 	RuntimeParameters []CustomModelRuntimeParameter `pulumi:"runtimeParameters"`
 	// The ID of the source LLM Blueprint for the Custom Model.
-	SourceLlmBlueprintId string `pulumi:"sourceLlmBlueprintId"`
+	SourceLlmBlueprintId *string `pulumi:"sourceLlmBlueprintId"`
+	// The source remote repositories for the Custom Model.
+	SourceRemoteRepositories []CustomModelSourceRemoteRepository `pulumi:"sourceRemoteRepositories"`
+	// The target of the Custom Model.
+	Target *string `pulumi:"target"`
+	// The target type of the Custom Model.
+	TargetType *string `pulumi:"targetType"`
 }
 
 // The set of arguments for constructing a CustomModel resource.
 type CustomModelArgs struct {
 	// The ID of the base environment for the Custom Model.
 	BaseEnvironmentId pulumi.StringPtrInput
+	// The name of the base environment for the Custom Model.
+	BaseEnvironmentName pulumi.StringPtrInput
 	// The ID of the base environment version for the Custom Model.
 	BaseEnvironmentVersionId pulumi.StringPtrInput
 	// The description of the Custom Model.
-	Description pulumi.StringInput
+	Description pulumi.StringPtrInput
+	// The guard configurations for the Custom Model.
+	GuardConfigurations CustomModelGuardConfigurationArrayInput
+	// The flag indicating if the Custom Model is a proxy model.
+	IsProxy pulumi.BoolPtrInput
+	// The list of local file paths used to build the Custom Model.
+	LocalFiles pulumi.StringArrayInput
 	// The name of the Custom Model.
 	Name pulumi.StringPtrInput
+	// The overall moderation configuration for the Custom Model.
+	OverallModerationConfiguration CustomModelOverallModerationConfigurationPtrInput
 	// The runtime parameter values for the Custom Model.
 	RuntimeParameters CustomModelRuntimeParameterArrayInput
 	// The ID of the source LLM Blueprint for the Custom Model.
-	SourceLlmBlueprintId pulumi.StringInput
+	SourceLlmBlueprintId pulumi.StringPtrInput
+	// The source remote repositories for the Custom Model.
+	SourceRemoteRepositories CustomModelSourceRemoteRepositoryArrayInput
+	// The target of the Custom Model.
+	Target pulumi.StringPtrInput
+	// The target type of the Custom Model.
+	TargetType pulumi.StringPtrInput
 }
 
 func (CustomModelArgs) ElementType() reflect.Type {
@@ -227,19 +301,46 @@ func (o CustomModelOutput) BaseEnvironmentId() pulumi.StringOutput {
 	return o.ApplyT(func(v *CustomModel) pulumi.StringOutput { return v.BaseEnvironmentId }).(pulumi.StringOutput)
 }
 
+// The name of the base environment for the Custom Model.
+func (o CustomModelOutput) BaseEnvironmentName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CustomModel) pulumi.StringPtrOutput { return v.BaseEnvironmentName }).(pulumi.StringPtrOutput)
+}
+
 // The ID of the base environment version for the Custom Model.
 func (o CustomModelOutput) BaseEnvironmentVersionId() pulumi.StringOutput {
 	return o.ApplyT(func(v *CustomModel) pulumi.StringOutput { return v.BaseEnvironmentVersionId }).(pulumi.StringOutput)
 }
 
 // The description of the Custom Model.
-func (o CustomModelOutput) Description() pulumi.StringOutput {
-	return o.ApplyT(func(v *CustomModel) pulumi.StringOutput { return v.Description }).(pulumi.StringOutput)
+func (o CustomModelOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CustomModel) pulumi.StringPtrOutput { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// The guard configurations for the Custom Model.
+func (o CustomModelOutput) GuardConfigurations() CustomModelGuardConfigurationArrayOutput {
+	return o.ApplyT(func(v *CustomModel) CustomModelGuardConfigurationArrayOutput { return v.GuardConfigurations }).(CustomModelGuardConfigurationArrayOutput)
+}
+
+// The flag indicating if the Custom Model is a proxy model.
+func (o CustomModelOutput) IsProxy() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *CustomModel) pulumi.BoolPtrOutput { return v.IsProxy }).(pulumi.BoolPtrOutput)
+}
+
+// The list of local file paths used to build the Custom Model.
+func (o CustomModelOutput) LocalFiles() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *CustomModel) pulumi.StringArrayOutput { return v.LocalFiles }).(pulumi.StringArrayOutput)
 }
 
 // The name of the Custom Model.
 func (o CustomModelOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *CustomModel) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
+}
+
+// The overall moderation configuration for the Custom Model.
+func (o CustomModelOutput) OverallModerationConfiguration() CustomModelOverallModerationConfigurationPtrOutput {
+	return o.ApplyT(func(v *CustomModel) CustomModelOverallModerationConfigurationPtrOutput {
+		return v.OverallModerationConfiguration
+	}).(CustomModelOverallModerationConfigurationPtrOutput)
 }
 
 // The runtime parameter values for the Custom Model.
@@ -248,8 +349,23 @@ func (o CustomModelOutput) RuntimeParameters() CustomModelRuntimeParameterArrayO
 }
 
 // The ID of the source LLM Blueprint for the Custom Model.
-func (o CustomModelOutput) SourceLlmBlueprintId() pulumi.StringOutput {
-	return o.ApplyT(func(v *CustomModel) pulumi.StringOutput { return v.SourceLlmBlueprintId }).(pulumi.StringOutput)
+func (o CustomModelOutput) SourceLlmBlueprintId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CustomModel) pulumi.StringPtrOutput { return v.SourceLlmBlueprintId }).(pulumi.StringPtrOutput)
+}
+
+// The source remote repositories for the Custom Model.
+func (o CustomModelOutput) SourceRemoteRepositories() CustomModelSourceRemoteRepositoryArrayOutput {
+	return o.ApplyT(func(v *CustomModel) CustomModelSourceRemoteRepositoryArrayOutput { return v.SourceRemoteRepositories }).(CustomModelSourceRemoteRepositoryArrayOutput)
+}
+
+// The target of the Custom Model.
+func (o CustomModelOutput) Target() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CustomModel) pulumi.StringPtrOutput { return v.Target }).(pulumi.StringPtrOutput)
+}
+
+// The target type of the Custom Model.
+func (o CustomModelOutput) TargetType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CustomModel) pulumi.StringPtrOutput { return v.TargetType }).(pulumi.StringPtrOutput)
 }
 
 // The ID of the latest Custom Model version.
