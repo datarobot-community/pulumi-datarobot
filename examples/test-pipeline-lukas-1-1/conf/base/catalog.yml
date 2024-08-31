@@ -1,0 +1,52 @@
+# This is a registry of files that can be used as node inputs or for storing node outputs.
+#
+# When defining node inputs in the pipeline, reference a key from this yaml to indicate
+# that the pipeline should map the file defined here to the node's input at runtime.
+# Similarly, node outputs can be mapped and persisted to files defined in this yaml.
+#
+# Please see the Kedro Data Catalog documentation to learn more
+# https://docs.kedro.org/en/stable/data/data_catalog.html
+
+# rag_raw_docs:
+#   type: datarobotx.idp.common.archive_dataset.ArchiveDataset
+#   filepath: https://s3.amazonaws.com/datarobot_public_datasets/ai_accelerators/datarobot_english_documentation_docsassist.zip
+
+global_model_deployment_ids:
+  type: MemoryDataset
+  copy_mode: assign
+  # filepath: data/outputs/global_model_deployment_ids.pkl
+
+grading_deployment_id:
+  type: kedro_datasets.text.TextDataset
+  filepath: data/outputs/grading_deployment_id.txt
+
+guard_deployment:
+  type: MemoryDataset
+  copy_mode: assign
+
+rag_custom_model:
+  type: MemoryDataset
+  copy_mode: assign
+
+# rag_custom_model_version_id:
+#   type: test_pipeline_lukas_1_1.pulumi_dataset.PulumiResourceDataSet
+#   filepath: data/outputs/custom_model_version_id.txt
+
+guard_configs:
+  type: MemoryDataset
+  copy_mode: assign
+
+rag_deployment:
+  type: MemoryDataset
+  copy_mode: assign
+
+application_id:
+  type: kedro_datasets.text.TextDataset
+  filepath: data/outputs/application_id.txt
+
+# =====================================
+# Checksums for caching expensive nodes
+# =====================================
+"{node}_checksum":
+  type: kedro_datasets.text.TextDataset
+  filepath: "data/checksum/{node}_checksum.txt"

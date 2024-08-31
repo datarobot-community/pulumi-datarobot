@@ -1,0 +1,67 @@
+name: {{ custom_model_name }}
+type: inference
+targetType: {{ target_type | lower }}
+runtimeParameterDefinitions:
+- fieldName: dr_credential_name
+  type: string
+  defaultValue: {{ credential_name }}
+  description: Name of the DataRobot credential containing the RAG API token
+
+- fieldName: {{ credential_name }}
+  type: credential
+
+- fieldName: embedding_model_name
+  type: string
+  defaultValue: {{ embedding_model_name }}
+  description: Sentence transformer embedding model name
+
+- fieldName: azure_endpoint
+  type: string
+  defaultValue: {{ azure_endpoint }}
+  description: Base url for the Azure OpenAI API endpoint
+
+- fieldName: openai_api_type
+  type: string
+  defaultValue: {{ openai_api_type }}
+  description: OpenAI API endpoint type
+
+- fieldName: openai_api_version
+  type: string
+  defaultValue: "{{ openai_api_version }}"
+  description: OpenAI API version
+
+- fieldName: openai_deployment_name
+  type: string
+  defaultValue: {{ openai_deployment_name }}
+  description: Name of the Azure OpenAI deployment
+
+- fieldName: temperature
+  type: numeric
+  defaultValue: {{ temperature }}
+  description: Temperature setting to use with completion requests
+
+- fieldName: request_timeout
+  type: numeric
+  defaultValue: {{ request_timeout }}
+  description: Timeout in seconds for LLM completion requests
+
+- fieldName: max_retries
+  type: numeric
+  defaultValue: {{ max_retries }}
+  description: Number of times to attempt retrying completion requests
+
+- fieldName: prompt_feature_name
+  type: string
+  defaultValue: {{ prompt_feature_name }}
+  description: Name of the feature in the prediction data containing the prompt
+
+- fieldName: target_feature_name
+  type: string
+  defaultValue: {{ target_feature_name }}
+  description: Name of the target variable for the deployment
+
+- fieldName: stuff_prompt
+  type: string
+  defaultValue: |-
+    {{ stuff_prompt | indent(4) }}
+  description: Prompt to use with the langchain StuffDocumentsChain when summarizing retrieved documents

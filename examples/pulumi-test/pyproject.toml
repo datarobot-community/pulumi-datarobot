@@ -1,0 +1,34 @@
+[build-system]
+requires = [ "setuptools",]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pulumi_test"
+readme = "README.md"
+dynamic = [ "dependencies", "version",]
+
+[project.scripts]
+pulumi-test = "pulumi_test.__main__:main"
+
+[tool.kedro]
+package_name = "pulumi_test"
+project_name = "pulumi test"
+kedro_init_version = "0.19.6"
+tools = [ "None",]
+example_pipeline = "False"
+source_dir = "src"
+
+[project.entry-points."kedro.hooks"]
+
+[tool.setuptools.dynamic.dependencies]
+file = "requirements.txt"
+
+[tool.setuptools.dynamic.version]
+attr = "pulumi_test.__version__"
+
+[tool.setuptools.packages.find]
+where = [ "src",]
+namespaces = false
+
+[tool.kedro_telemetry]
+project_id = "d01be0752c1a4fffa59c8fd5752269ac"

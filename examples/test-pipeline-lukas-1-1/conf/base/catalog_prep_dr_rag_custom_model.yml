@@ -1,0 +1,35 @@
+# ==============================
+# Guardrail LLM Blueprint assets
+# ==============================
+
+prep_dr_rag_custom_model.custom_py:
+  type: kedro_datasets.text.TextDataset
+  filepath: include/test_pipeline_lukas_1_1/custom_model_assets/custom.py
+
+prep_dr_rag_custom_model.dr_credential:
+  type: MemoryDataset
+  copy_mode: assign
+
+prep_dr_rag_custom_model.llm_blueprint:
+  type: MemoryDataset
+  copy_mode: assign
+
+prep_dr_rag_custom_model.playground:
+  type: MemoryDataset
+  copy_mode: assign
+
+prep_dr_rag_custom_model.use_case:
+  type: MemoryDataset
+  copy_mode: assign
+
+prep_dr_rag_custom_model.vector_database_dataset:
+  type: MemoryDataset
+  copy_mode: assign
+
+prep_dr_rag_custom_model.vector_database:
+  type: MemoryDataset
+  copy_mode: assign
+
+prep_dr_rag_custom_model.custom_model_version_args:
+  type: MemoryDataset
+  copy_mode: assign

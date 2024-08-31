@@ -1,0 +1,9 @@
+# Here you can define all your data sets by using simple YAML syntax.
+#
+# Documentation for this file format can be found in "The Data Catalog"
+# Link: https://docs.kedro.org/en/stable/data/data_catalog.html
+
+use_case:
+  type: pulumi_test.pulumi_dataset.PulumiResourceDataSet
+  resource_type: datarobot.UseCase
+  resource_args:

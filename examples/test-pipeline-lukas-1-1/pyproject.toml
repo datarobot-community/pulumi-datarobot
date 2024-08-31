@@ -1,0 +1,60 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "test_pipeline_lukas_1_1"
+readme = "README.md"
+dynamic = ["dependencies", "version"]
+requires-python = ">=3.10,<3.12"           # datarobot-predict requires python<3.12
+target-version = "py310"
+
+[project.scripts]
+test-pipeline-lukas-1-1 = "test_pipeline_lukas_1_1.__main__:main"
+
+[project.entry-points."kedro.hooks"]
+
+[project.optional-dependencies]
+
+[tool.setuptools.dynamic]
+dependencies = { file = "requirements.txt" }
+version = { attr = "test_pipeline_lukas_1_1.__version__" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+namespaces = false
+
+[tool.kedro]
+tools = ['None']
+package_name = "test_pipeline_lukas_1_1"
+project_name = "test-pipeline-lukas-1-1"
+kedro_init_version = "0.19.6"
+example_pipeline = "False"
+source_dir = "src"
+
+[tool.pytest.ini_options]
+addopts = """
+--cov-report term-missing \
+--cov src/test_pipeline_lukas_1_1 -ra"""
+
+[tool.coverage.report]
+fail_under = 0
+show_missing = true
+exclude_lines = ["pragma: no cover", "raise NotImplementedError"]
+
+[tool.ruff.format]
+docstring-code-format = true
+
+[tool.ruff]
+line-length = 88
+show-fixes = true
+select = [
+    "F",    # Pyflakes
+    "W",    # pycodestyle
+    "E",    # pycodestyle
+    "I",    # isort
+    "UP",   # pyupgrade
+    "PL",   # Pylint
+    "T201", # Print Statement
+]
+ignore = ["E501"] # Ruff format takes care of line-too-long

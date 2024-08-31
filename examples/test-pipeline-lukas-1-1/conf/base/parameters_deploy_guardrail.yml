@@ -1,0 +1,22 @@
+deploy_guardrail:
+  deployment_name: test-pipeline-lukas-1-1 Guardrail
+  registered_model_name: test-pipeline-lukas-1-1 Guardrail
+  custom_model_name: test-pipeline-lukas-1-1 Guardrail
+  prompt_feature_name: guardrailText
+  target_name: flagged
+  target_type: Binary
+  positive_class_label: 'true'
+  negative_class_label: 'false'
+  base_environment_id: 64c964448dd3f0c07f47d040  # 3.9 GenAI drop-in env
+  blocklist:
+  - dataiku
+  - databrick
+  - h20
+  - aws
+  - amazon
+  - azure
+  - microsoft
+  - gcp
+  - google
+  - vertex\s*ai
+  - compet

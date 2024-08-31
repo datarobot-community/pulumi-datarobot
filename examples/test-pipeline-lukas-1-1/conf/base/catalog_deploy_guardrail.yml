@@ -1,0 +1,27 @@
+# ===========================
+# Guardrail deployment assets
+# ===========================
+
+deploy_guardrail.custom_py:
+  type: kedro_datasets.text.TextDataset
+  filepath: include/test_pipeline_lukas_1_1/guard/custom.py
+
+deploy_guardrail.parameters:
+  type: kedro_datasets.yaml.YAMLDataset
+  filepath: data/outputs/guard_parameters.yaml
+
+# deploy_guardrail.deployment_assets:
+#   type: datarobotx.idp.common.path_dataset.PathDataset
+#   filepath: data/outputs/guard_deployment_assets/
+
+deploy_guardrail.custom_model:
+  type: MemoryDataset
+  copy_mode: assign
+
+# deploy_guardrail.custom_model_version_id:
+#   type: kedro_datasets.text.TextDataset
+#   filepath: data/outputs/guard_custom_model_version_id.txt
+
+deploy_guardrail.registered_model:
+  type: MemoryDataset
+  copy_mode: assign

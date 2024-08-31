@@ -1,0 +1,13 @@
+blocklist:
+- dataiku
+- databrick
+- h20
+- aws
+- amazon
+- azure
+- microsoft
+- gcp
+- google
+- vertex\s*ai
+- compet
+prompt_feature_name: guardrailText

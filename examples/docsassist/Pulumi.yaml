@@ -1,16 +1,27 @@
 name: yaml
 runtime: yaml
-description: Low Code RAG example using Pulumi YAML
+description: Docsassist 1 1
 config: { "pulumi:tags": { value: { "pulumi:template": yaml } } }
 plugins:
   providers:
     - name: datarobot
       path: ../../bin
+variables:
+  datarobotGlobalModelToxicity:
+    fn::invoke:
+      function: datarobot:getGlobalModel
+      arguments:
+        name: "[Hugging Face] Toxicity Classifier"
+  datarobotGlobalModelInjection:
+    fn::invoke:
+      function: datarobot:getGlobalModel
+      arguments:
+        name: "[Guard] Prompt Injection Classifier from Hugging Face"
 resources:
   datarobotUseCase:
     type: datarobot:UseCase
     properties:
-      name: Low Code Rag Example
+      name: Docsassist 1 1
       description: Low Code Rag Example
 
   datarobotDatasetFromFile:
@@ -32,6 +43,7 @@ resources:
       name: ${datarobotUseCase.name}
       useCaseId: ${datarobotUseCase.id}
       datasetId: ${datarobotDatasetFromFile.id}
+      chunkingParameters: {}
 
   datarobotLlmBlueprint:
     type: datarobot:LlmBlueprint
@@ -45,8 +57,32 @@ resources:
   datarobotGoogleCloudCredential:
     type: datarobot:GoogleCloudCredential
     properties:
-      name: Google Cloud Service Account 2
+      name: ${datarobotUseCase.name} Google Cloud Service Account
       sourceFile: google_credentials.json
+
+  datarobotToxicityDeployment:
+    type: datarobot:Deployment
+    properties:
+      label: ${datarobotUseCase.name} Toxicity Deployment
+      predictionEnvironmentId: ${datarobotPredictionEnvironment.id}
+      registeredModelVersionId: ${datarobotGlobalModelToxicity.versionId}
+      settings:
+        predictionsSettings:
+          realTime: True
+          minComputes: 0.0
+          maxComputes: 1.0
+
+  datarobotInjectionDeployment:
+    type: datarobot:Deployment
+    properties:
+      label: ${datarobotUseCase.name} Injection Deployment
+      predictionEnvironmentId: ${datarobotPredictionEnvironment.id}
+      registeredModelVersionId: ${datarobotGlobalModelInjection.versionId}
+      settings:
+        predictionsSettings:
+          realTime: True
+          minComputes: 0.0
+          maxComputes: 1.0
 
   datarobotCustomModel:
     type: datarobot:CustomModel
@@ -58,6 +94,27 @@ resources:
         - key: GOOGLE_SERVICE_ACCOUNT
           type: credential
           value: ${datarobotGoogleCloudCredential.id}
+      guardConfigurations:
+        - templateName: "Toxicity"
+          name: "Global Toxicity Classifier"
+          stages: ["prompt"]
+          intervention:
+            action: "block"
+            message: "I have detected this question may violate my acceptable use guidelines and am unable to answer. [Toxicity]"
+            condition:
+              comparand: 0.5
+              comparator: "greaterThan"
+          deploymentId: ${datarobotToxicityDeployment.id}
+        - templateName: "Prompt Injection"
+          name: "Global Prompt Injection Classifier"
+          stages: ["prompt"]
+          intervention:
+            action: "block"
+            message: "I have detected this question may violate my acceptable use guidelines and am unable to answer. [Prompt Injection]"
+            condition:
+              comparand: 0.5
+              comparator: "greaterThan"
+          deploymentId: ${datarobotInjectionDeployment.id}
 
   datarobotRegisteredModel:
     type: datarobot:RegisteredModel

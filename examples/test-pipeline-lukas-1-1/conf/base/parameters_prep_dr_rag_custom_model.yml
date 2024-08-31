@@ -1,0 +1,38 @@
+prep_dr_rag_custom_model:
+  dr_credential:
+    name: docsassist_rag_api_token_pulumi # Cannot contain spaces for use in ML Ops
+    credential_type: api_token
+  rag_raw_docs: "include/test_pipeline_lukas_1_1/raw_docs/datarobot_english_documentation_docsassist.zip"
+  playground:
+    name: test-pipeline-lukas-1-1 Playground
+  custom_model:
+    name: test-pipeline-lukas-1-1 RAG
+    target_name: completion
+    prompt_feature_name: promptText
+    base_environment_id: 65f9b27eab986d30d4c64268 # [GenAI] Python 3.11 with Moderations
+  llm_blueprint:
+    name: test-pipeline-lukas-1-1 LLM Blueprint
+    llm_settings:
+      max_completion_length: 512
+      system_prompt: |-
+        Use the following pieces of context to answer the user's question.
+        If you don't know the answer, just say that you don't know, don't try to make up an answer.
+        ----------------
+        {context}
+    llm:
+      id: "azure-openai-gpt-3.5-turbo"
+    vector_database_settings:
+      max_documents_retrieved_per_prompt: 10
+  vector_database:
+    name: vectorstore
+    chunking_parameters:
+      embedding_model: jinaai/jina-embedding-t-en-v1
+      chunking_method: recursive
+      chunk_size: 256
+      chunk_overlap_percentage: 10
+      separators: []
+  use_case:
+    name: test-pipeline-lukas-1-1 Use Case
+    description: |
+      This use case is for the test-pipeline-lukas-1-1 project.
+  max_wait: 10000

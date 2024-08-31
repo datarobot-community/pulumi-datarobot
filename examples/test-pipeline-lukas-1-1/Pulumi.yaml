@@ -1,4 +1,4 @@
-name: py
+name: docsassist_py
 runtime:
   name: python
   options:
@@ -9,6 +9,10 @@ config:
   pulumi:tags:
     value:
       pulumi:template: python
+  use_case:
+    value:
+      description: asdasd
+      name: asd
 plugins:
   providers:
     - name: datarobot
