@@ -50,7 +50,7 @@ resources:
       name: ${datarobotUseCase.name}
       description: ${datarobotUseCase.description}
       sourceLlmBlueprintId: ${datarobotLlmBlueprint.id}
-      runtimeParameters:
+      runtimeParameterValues:
         - key: GOOGLE_SERVICE_ACCOUNT
           type: credential
           value: ${datarobotGoogleCloudCredential.id}
