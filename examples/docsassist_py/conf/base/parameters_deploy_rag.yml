@@ -1,0 +1,11 @@
+deploy_rag:
+  custom_app_name: test-pipeline-lukas-1-1 Streamlit
+  environment_name: test-pipeline-lukas-1-1 Streamlit Environment
+  base_environment_id: 6542cd582a9d3d51bf4ac71e # [Experimental] Python 3.9 Streamlit
+  environment_use_cases:
+    - customApplication
+  page_title: "DocsAssist"
+  render_grading_model_scores: false # toggle once you've retrained based on user feedback
+  rag_deployment_name: test-pipeline-lukas-1-1 RAG
+  registered_model_name: test-pipeline-lukas-1-1 RAG no kedro
+  max_wait: 10000

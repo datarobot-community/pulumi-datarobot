@@ -1,0 +1,13 @@
+deploy_grader:
+  deployment_name: test-pipeline-lukas-1-1 Grader
+  registered_model_name: test-pipeline-lukas-1-1 Grader
+  custom_model_name: test-pipeline-lukas-1-1 Grader
+  target_name: grade
+  target_type: Multiclass
+  class_labels:
+  - correct
+  - incorrect
+  - incomplete
+  - digress
+  - no_answer
+  base_environment_id: 64c964448dd3f0c07f47d040  # 3.9 GenAI drop-in env

@@ -1,0 +1,51 @@
+# ========================
+# Custom metric job assets
+# ========================
+
+setup_custom_metrics.custom_metric_ids:
+  type: kedro_datasets.yaml.YAMLDataset
+  filepath: data/outputs/custom_metric_ids.txt
+
+setup_custom_metrics.job_metadata_template:
+  type: kedro_datasets.text.TextDataset
+  filepath: include/test_pipeline_lukas_1_1/custom_metric_job/metadata.yaml.jinja
+
+setup_custom_metrics.run_script:
+  type: kedro_datasets.text.TextDataset
+  filepath: include/test_pipeline_lukas_1_1/custom_metric_job/run.sh
+
+setup_custom_metrics.calc_script:
+  type: kedro_datasets.text.TextDataset
+  filepath: include/test_pipeline_lukas_1_1/custom_metric_job/calculate_metrics.py
+
+setup_custom_metrics.job_metadata:
+  type: kedro_datasets.text.TextDataset
+  filepath: data/outputs/custom_metric_job_metadata.yaml
+
+setup_custom_metrics.job_assets:
+  type: datarobotx.idp.common.archive_dataset.ArchiveDataset
+  filepath: data/outputs/custom_metric_job_assets.tar.gz
+
+setup_custom_metrics.base_environment_id:
+  type: kedro_datasets.text.TextDataset
+  filepath: data/outputs/custom_metric_job_base_environment_id.txt
+
+setup_custom_metrics.custom_metric_job_id:
+  type: kedro_datasets.text.TextDataset
+  filepath: data/outputs/custom_metric_job_id.txt
+
+setup_custom_metrics.keyword_guard_settings:
+  type: MemoryDataset
+  copy_mode: assign
+
+setup_custom_metrics.keyword_guard_config:
+  type: MemoryDataset
+  copy_mode: assign
+
+setup_custom_metrics.prompt_injection_guard_config:
+  type: MemoryDataset
+  copy_mode: assign
+
+setup_custom_metrics.toxicity_guard_config:
+  type: MemoryDataset
+  copy_mode: assign

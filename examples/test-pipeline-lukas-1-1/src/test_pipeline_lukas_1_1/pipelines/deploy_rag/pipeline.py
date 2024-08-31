@@ -26,7 +26,7 @@ def create_pipeline(**kwargs) -> Pipeline:
         node(
             func=lambda custom_model, registered_model_name: datarobot.RegisteredModel(
                 resource_name="rag_registered_model",
-                custom_model_version_id=custom_model.id,
+                custom_model_version_id=custom_model.version_id,
                 name=registered_model_name,
             ),
             inputs={
@@ -46,7 +46,7 @@ def create_pipeline(**kwargs) -> Pipeline:
             label: datarobot.Deployment(
                 resource_name="rag_deployment",
                 prediction_environment_id=default_prediction_server_id,
-                registered_model_version_id=registered_model.id,
+                registered_model_version_id=registered_model.version_id,
                 label=label,
                 settings=datarobot.DeploymentSettingsArgs(
                     association_id=datarobot.DeploymentSettingsAssociationIdArgs(

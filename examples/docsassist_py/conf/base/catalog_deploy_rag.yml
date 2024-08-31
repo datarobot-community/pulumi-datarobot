@@ -1,0 +1,7 @@
+# ===========================
+# Streamlit custom app assets
+# ===========================
+
+deploy_rag.registered_model:
+  type: MemoryDataset
+  copy_mode: assign

@@ -1,0 +1,3 @@
+deploy_dr_streamlit_app:
+  custom_app_name: test-pipeline-lukas-1-1 Streamlit App no kedro
+  base_environment_id: 6542cd582a9d3d51bf4ac71e # [Experimental] Python 3.9 Streamlit
