@@ -10,7 +10,7 @@ using Pulumi.Serialization;
 namespace Pulumi.Datarobot.Inputs
 {
 
-    public sealed class CustomModelRuntimeParameterArgs : global::Pulumi.ResourceArgs
+    public sealed class CustomModelRuntimeParameterValueGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The name of the runtime parameter.
@@ -30,9 +30,9 @@ namespace Pulumi.Datarobot.Inputs
         [Input("value", required: true)]
         public Input<string> Value { get; set; } = null!;
 
-        public CustomModelRuntimeParameterArgs()
+        public CustomModelRuntimeParameterValueGetArgs()
         {
         }
-        public static new CustomModelRuntimeParameterArgs Empty => new CustomModelRuntimeParameterArgs();
+        public static new CustomModelRuntimeParameterValueGetArgs Empty => new CustomModelRuntimeParameterValueGetArgs();
     }
 }

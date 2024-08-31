@@ -14,7 +14,7 @@ __all__ = [
     'CustomModelGuardConfigurationInterventionArgs',
     'CustomModelGuardConfigurationInterventionConditionArgs',
     'CustomModelOverallModerationConfigurationArgs',
-    'CustomModelRuntimeParameterArgs',
+    'CustomModelRuntimeParameterValueArgs',
     'CustomModelSourceRemoteRepositoryArgs',
     'DeploymentSettingsArgs',
     'DeploymentSettingsAssociationIdArgs',
@@ -267,7 +267,7 @@ class CustomModelOverallModerationConfigurationArgs:
 
 
 @pulumi.input_type
-class CustomModelRuntimeParameterArgs:
+class CustomModelRuntimeParameterValueArgs:
     def __init__(__self__, *,
                  key: pulumi.Input[str],
                  type: pulumi.Input[str],

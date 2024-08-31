@@ -31,10 +31,14 @@ type CustomModel struct {
 	LocalFiles pulumi.StringArrayOutput `pulumi:"localFiles"`
 	// The name of the Custom Model.
 	Name pulumi.StringOutput `pulumi:"name"`
+	// The negative class label of the Custom Model.
+	NegativeClassLabel pulumi.StringPtrOutput `pulumi:"negativeClassLabel"`
 	// The overall moderation configuration for the Custom Model.
 	OverallModerationConfiguration CustomModelOverallModerationConfigurationPtrOutput `pulumi:"overallModerationConfiguration"`
+	// The positive class label of the Custom Model.
+	PositiveClassLabel pulumi.StringPtrOutput `pulumi:"positiveClassLabel"`
 	// The runtime parameter values for the Custom Model.
-	RuntimeParameters CustomModelRuntimeParameterArrayOutput `pulumi:"runtimeParameters"`
+	RuntimeParameterValues CustomModelRuntimeParameterValueArrayOutput `pulumi:"runtimeParameterValues"`
 	// The ID of the source LLM Blueprint for the Custom Model.
 	SourceLlmBlueprintId pulumi.StringPtrOutput `pulumi:"sourceLlmBlueprintId"`
 	// The source remote repositories for the Custom Model.
@@ -93,10 +97,14 @@ type customModelState struct {
 	LocalFiles []string `pulumi:"localFiles"`
 	// The name of the Custom Model.
 	Name *string `pulumi:"name"`
+	// The negative class label of the Custom Model.
+	NegativeClassLabel *string `pulumi:"negativeClassLabel"`
 	// The overall moderation configuration for the Custom Model.
 	OverallModerationConfiguration *CustomModelOverallModerationConfiguration `pulumi:"overallModerationConfiguration"`
+	// The positive class label of the Custom Model.
+	PositiveClassLabel *string `pulumi:"positiveClassLabel"`
 	// The runtime parameter values for the Custom Model.
-	RuntimeParameters []CustomModelRuntimeParameter `pulumi:"runtimeParameters"`
+	RuntimeParameterValues []CustomModelRuntimeParameterValue `pulumi:"runtimeParameterValues"`
 	// The ID of the source LLM Blueprint for the Custom Model.
 	SourceLlmBlueprintId *string `pulumi:"sourceLlmBlueprintId"`
 	// The source remote repositories for the Custom Model.
@@ -126,10 +134,14 @@ type CustomModelState struct {
 	LocalFiles pulumi.StringArrayInput
 	// The name of the Custom Model.
 	Name pulumi.StringPtrInput
+	// The negative class label of the Custom Model.
+	NegativeClassLabel pulumi.StringPtrInput
 	// The overall moderation configuration for the Custom Model.
 	OverallModerationConfiguration CustomModelOverallModerationConfigurationPtrInput
+	// The positive class label of the Custom Model.
+	PositiveClassLabel pulumi.StringPtrInput
 	// The runtime parameter values for the Custom Model.
-	RuntimeParameters CustomModelRuntimeParameterArrayInput
+	RuntimeParameterValues CustomModelRuntimeParameterValueArrayInput
 	// The ID of the source LLM Blueprint for the Custom Model.
 	SourceLlmBlueprintId pulumi.StringPtrInput
 	// The source remote repositories for the Custom Model.
@@ -163,10 +175,14 @@ type customModelArgs struct {
 	LocalFiles []string `pulumi:"localFiles"`
 	// The name of the Custom Model.
 	Name *string `pulumi:"name"`
+	// The negative class label of the Custom Model.
+	NegativeClassLabel *string `pulumi:"negativeClassLabel"`
 	// The overall moderation configuration for the Custom Model.
 	OverallModerationConfiguration *CustomModelOverallModerationConfiguration `pulumi:"overallModerationConfiguration"`
+	// The positive class label of the Custom Model.
+	PositiveClassLabel *string `pulumi:"positiveClassLabel"`
 	// The runtime parameter values for the Custom Model.
-	RuntimeParameters []CustomModelRuntimeParameter `pulumi:"runtimeParameters"`
+	RuntimeParameterValues []CustomModelRuntimeParameterValue `pulumi:"runtimeParameterValues"`
 	// The ID of the source LLM Blueprint for the Custom Model.
 	SourceLlmBlueprintId *string `pulumi:"sourceLlmBlueprintId"`
 	// The source remote repositories for the Custom Model.
@@ -195,10 +211,14 @@ type CustomModelArgs struct {
 	LocalFiles pulumi.StringArrayInput
 	// The name of the Custom Model.
 	Name pulumi.StringPtrInput
+	// The negative class label of the Custom Model.
+	NegativeClassLabel pulumi.StringPtrInput
 	// The overall moderation configuration for the Custom Model.
 	OverallModerationConfiguration CustomModelOverallModerationConfigurationPtrInput
+	// The positive class label of the Custom Model.
+	PositiveClassLabel pulumi.StringPtrInput
 	// The runtime parameter values for the Custom Model.
-	RuntimeParameters CustomModelRuntimeParameterArrayInput
+	RuntimeParameterValues CustomModelRuntimeParameterValueArrayInput
 	// The ID of the source LLM Blueprint for the Custom Model.
 	SourceLlmBlueprintId pulumi.StringPtrInput
 	// The source remote repositories for the Custom Model.
@@ -336,6 +356,11 @@ func (o CustomModelOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *CustomModel) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
+// The negative class label of the Custom Model.
+func (o CustomModelOutput) NegativeClassLabel() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CustomModel) pulumi.StringPtrOutput { return v.NegativeClassLabel }).(pulumi.StringPtrOutput)
+}
+
 // The overall moderation configuration for the Custom Model.
 func (o CustomModelOutput) OverallModerationConfiguration() CustomModelOverallModerationConfigurationPtrOutput {
 	return o.ApplyT(func(v *CustomModel) CustomModelOverallModerationConfigurationPtrOutput {
@@ -343,9 +368,14 @@ func (o CustomModelOutput) OverallModerationConfiguration() CustomModelOverallMo
 	}).(CustomModelOverallModerationConfigurationPtrOutput)
 }
 
+// The positive class label of the Custom Model.
+func (o CustomModelOutput) PositiveClassLabel() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CustomModel) pulumi.StringPtrOutput { return v.PositiveClassLabel }).(pulumi.StringPtrOutput)
+}
+
 // The runtime parameter values for the Custom Model.
-func (o CustomModelOutput) RuntimeParameters() CustomModelRuntimeParameterArrayOutput {
-	return o.ApplyT(func(v *CustomModel) CustomModelRuntimeParameterArrayOutput { return v.RuntimeParameters }).(CustomModelRuntimeParameterArrayOutput)
+func (o CustomModelOutput) RuntimeParameterValues() CustomModelRuntimeParameterValueArrayOutput {
+	return o.ApplyT(func(v *CustomModel) CustomModelRuntimeParameterValueArrayOutput { return v.RuntimeParameterValues }).(CustomModelRuntimeParameterValueArrayOutput)
 }
 
 // The ID of the source LLM Blueprint for the Custom Model.

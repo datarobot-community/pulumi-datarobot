@@ -453,7 +453,7 @@ func (o CustomModelOverallModerationConfigurationPtrOutput) TimeoutSec() pulumi.
 	}).(pulumi.IntPtrOutput)
 }
 
-type CustomModelRuntimeParameter struct {
+type CustomModelRuntimeParameterValue struct {
 	// The name of the runtime parameter.
 	Key string `pulumi:"key"`
 	// The type of the runtime parameter.
@@ -462,18 +462,18 @@ type CustomModelRuntimeParameter struct {
 	Value string `pulumi:"value"`
 }
 
-// CustomModelRuntimeParameterInput is an input type that accepts CustomModelRuntimeParameterArgs and CustomModelRuntimeParameterOutput values.
-// You can construct a concrete instance of `CustomModelRuntimeParameterInput` via:
+// CustomModelRuntimeParameterValueInput is an input type that accepts CustomModelRuntimeParameterValueArgs and CustomModelRuntimeParameterValueOutput values.
+// You can construct a concrete instance of `CustomModelRuntimeParameterValueInput` via:
 //
-//	CustomModelRuntimeParameterArgs{...}
-type CustomModelRuntimeParameterInput interface {
+//	CustomModelRuntimeParameterValueArgs{...}
+type CustomModelRuntimeParameterValueInput interface {
 	pulumi.Input
 
-	ToCustomModelRuntimeParameterOutput() CustomModelRuntimeParameterOutput
-	ToCustomModelRuntimeParameterOutputWithContext(context.Context) CustomModelRuntimeParameterOutput
+	ToCustomModelRuntimeParameterValueOutput() CustomModelRuntimeParameterValueOutput
+	ToCustomModelRuntimeParameterValueOutputWithContext(context.Context) CustomModelRuntimeParameterValueOutput
 }
 
-type CustomModelRuntimeParameterArgs struct {
+type CustomModelRuntimeParameterValueArgs struct {
 	// The name of the runtime parameter.
 	Key pulumi.StringInput `pulumi:"key"`
 	// The type of the runtime parameter.
@@ -482,90 +482,90 @@ type CustomModelRuntimeParameterArgs struct {
 	Value pulumi.StringInput `pulumi:"value"`
 }
 
-func (CustomModelRuntimeParameterArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CustomModelRuntimeParameter)(nil)).Elem()
+func (CustomModelRuntimeParameterValueArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomModelRuntimeParameterValue)(nil)).Elem()
 }
 
-func (i CustomModelRuntimeParameterArgs) ToCustomModelRuntimeParameterOutput() CustomModelRuntimeParameterOutput {
-	return i.ToCustomModelRuntimeParameterOutputWithContext(context.Background())
+func (i CustomModelRuntimeParameterValueArgs) ToCustomModelRuntimeParameterValueOutput() CustomModelRuntimeParameterValueOutput {
+	return i.ToCustomModelRuntimeParameterValueOutputWithContext(context.Background())
 }
 
-func (i CustomModelRuntimeParameterArgs) ToCustomModelRuntimeParameterOutputWithContext(ctx context.Context) CustomModelRuntimeParameterOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CustomModelRuntimeParameterOutput)
+func (i CustomModelRuntimeParameterValueArgs) ToCustomModelRuntimeParameterValueOutputWithContext(ctx context.Context) CustomModelRuntimeParameterValueOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomModelRuntimeParameterValueOutput)
 }
 
-// CustomModelRuntimeParameterArrayInput is an input type that accepts CustomModelRuntimeParameterArray and CustomModelRuntimeParameterArrayOutput values.
-// You can construct a concrete instance of `CustomModelRuntimeParameterArrayInput` via:
+// CustomModelRuntimeParameterValueArrayInput is an input type that accepts CustomModelRuntimeParameterValueArray and CustomModelRuntimeParameterValueArrayOutput values.
+// You can construct a concrete instance of `CustomModelRuntimeParameterValueArrayInput` via:
 //
-//	CustomModelRuntimeParameterArray{ CustomModelRuntimeParameterArgs{...} }
-type CustomModelRuntimeParameterArrayInput interface {
+//	CustomModelRuntimeParameterValueArray{ CustomModelRuntimeParameterValueArgs{...} }
+type CustomModelRuntimeParameterValueArrayInput interface {
 	pulumi.Input
 
-	ToCustomModelRuntimeParameterArrayOutput() CustomModelRuntimeParameterArrayOutput
-	ToCustomModelRuntimeParameterArrayOutputWithContext(context.Context) CustomModelRuntimeParameterArrayOutput
+	ToCustomModelRuntimeParameterValueArrayOutput() CustomModelRuntimeParameterValueArrayOutput
+	ToCustomModelRuntimeParameterValueArrayOutputWithContext(context.Context) CustomModelRuntimeParameterValueArrayOutput
 }
 
-type CustomModelRuntimeParameterArray []CustomModelRuntimeParameterInput
+type CustomModelRuntimeParameterValueArray []CustomModelRuntimeParameterValueInput
 
-func (CustomModelRuntimeParameterArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CustomModelRuntimeParameter)(nil)).Elem()
+func (CustomModelRuntimeParameterValueArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CustomModelRuntimeParameterValue)(nil)).Elem()
 }
 
-func (i CustomModelRuntimeParameterArray) ToCustomModelRuntimeParameterArrayOutput() CustomModelRuntimeParameterArrayOutput {
-	return i.ToCustomModelRuntimeParameterArrayOutputWithContext(context.Background())
+func (i CustomModelRuntimeParameterValueArray) ToCustomModelRuntimeParameterValueArrayOutput() CustomModelRuntimeParameterValueArrayOutput {
+	return i.ToCustomModelRuntimeParameterValueArrayOutputWithContext(context.Background())
 }
 
-func (i CustomModelRuntimeParameterArray) ToCustomModelRuntimeParameterArrayOutputWithContext(ctx context.Context) CustomModelRuntimeParameterArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CustomModelRuntimeParameterArrayOutput)
+func (i CustomModelRuntimeParameterValueArray) ToCustomModelRuntimeParameterValueArrayOutputWithContext(ctx context.Context) CustomModelRuntimeParameterValueArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomModelRuntimeParameterValueArrayOutput)
 }
 
-type CustomModelRuntimeParameterOutput struct{ *pulumi.OutputState }
+type CustomModelRuntimeParameterValueOutput struct{ *pulumi.OutputState }
 
-func (CustomModelRuntimeParameterOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CustomModelRuntimeParameter)(nil)).Elem()
+func (CustomModelRuntimeParameterValueOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomModelRuntimeParameterValue)(nil)).Elem()
 }
 
-func (o CustomModelRuntimeParameterOutput) ToCustomModelRuntimeParameterOutput() CustomModelRuntimeParameterOutput {
+func (o CustomModelRuntimeParameterValueOutput) ToCustomModelRuntimeParameterValueOutput() CustomModelRuntimeParameterValueOutput {
 	return o
 }
 
-func (o CustomModelRuntimeParameterOutput) ToCustomModelRuntimeParameterOutputWithContext(ctx context.Context) CustomModelRuntimeParameterOutput {
+func (o CustomModelRuntimeParameterValueOutput) ToCustomModelRuntimeParameterValueOutputWithContext(ctx context.Context) CustomModelRuntimeParameterValueOutput {
 	return o
 }
 
 // The name of the runtime parameter.
-func (o CustomModelRuntimeParameterOutput) Key() pulumi.StringOutput {
-	return o.ApplyT(func(v CustomModelRuntimeParameter) string { return v.Key }).(pulumi.StringOutput)
+func (o CustomModelRuntimeParameterValueOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v CustomModelRuntimeParameterValue) string { return v.Key }).(pulumi.StringOutput)
 }
 
 // The type of the runtime parameter.
-func (o CustomModelRuntimeParameterOutput) Type() pulumi.StringOutput {
-	return o.ApplyT(func(v CustomModelRuntimeParameter) string { return v.Type }).(pulumi.StringOutput)
+func (o CustomModelRuntimeParameterValueOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v CustomModelRuntimeParameterValue) string { return v.Type }).(pulumi.StringOutput)
 }
 
 // The value of the runtime parameter.
-func (o CustomModelRuntimeParameterOutput) Value() pulumi.StringOutput {
-	return o.ApplyT(func(v CustomModelRuntimeParameter) string { return v.Value }).(pulumi.StringOutput)
+func (o CustomModelRuntimeParameterValueOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v CustomModelRuntimeParameterValue) string { return v.Value }).(pulumi.StringOutput)
 }
 
-type CustomModelRuntimeParameterArrayOutput struct{ *pulumi.OutputState }
+type CustomModelRuntimeParameterValueArrayOutput struct{ *pulumi.OutputState }
 
-func (CustomModelRuntimeParameterArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CustomModelRuntimeParameter)(nil)).Elem()
+func (CustomModelRuntimeParameterValueArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CustomModelRuntimeParameterValue)(nil)).Elem()
 }
 
-func (o CustomModelRuntimeParameterArrayOutput) ToCustomModelRuntimeParameterArrayOutput() CustomModelRuntimeParameterArrayOutput {
+func (o CustomModelRuntimeParameterValueArrayOutput) ToCustomModelRuntimeParameterValueArrayOutput() CustomModelRuntimeParameterValueArrayOutput {
 	return o
 }
 
-func (o CustomModelRuntimeParameterArrayOutput) ToCustomModelRuntimeParameterArrayOutputWithContext(ctx context.Context) CustomModelRuntimeParameterArrayOutput {
+func (o CustomModelRuntimeParameterValueArrayOutput) ToCustomModelRuntimeParameterValueArrayOutputWithContext(ctx context.Context) CustomModelRuntimeParameterValueArrayOutput {
 	return o
 }
 
-func (o CustomModelRuntimeParameterArrayOutput) Index(i pulumi.IntInput) CustomModelRuntimeParameterOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CustomModelRuntimeParameter {
-		return vs[0].([]CustomModelRuntimeParameter)[vs[1].(int)]
-	}).(CustomModelRuntimeParameterOutput)
+func (o CustomModelRuntimeParameterValueArrayOutput) Index(i pulumi.IntInput) CustomModelRuntimeParameterValueOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CustomModelRuntimeParameterValue {
+		return vs[0].([]CustomModelRuntimeParameterValue)[vs[1].(int)]
+	}).(CustomModelRuntimeParameterValueOutput)
 }
 
 type CustomModelSourceRemoteRepository struct {
@@ -1447,8 +1447,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelGuardConfigurationInterventionConditionInput)(nil)).Elem(), CustomModelGuardConfigurationInterventionConditionArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelOverallModerationConfigurationInput)(nil)).Elem(), CustomModelOverallModerationConfigurationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelOverallModerationConfigurationPtrInput)(nil)).Elem(), CustomModelOverallModerationConfigurationArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelRuntimeParameterInput)(nil)).Elem(), CustomModelRuntimeParameterArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelRuntimeParameterArrayInput)(nil)).Elem(), CustomModelRuntimeParameterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelRuntimeParameterValueInput)(nil)).Elem(), CustomModelRuntimeParameterValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelRuntimeParameterValueArrayInput)(nil)).Elem(), CustomModelRuntimeParameterValueArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelSourceRemoteRepositoryInput)(nil)).Elem(), CustomModelSourceRemoteRepositoryArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelSourceRemoteRepositoryArrayInput)(nil)).Elem(), CustomModelSourceRemoteRepositoryArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentSettingsInput)(nil)).Elem(), DeploymentSettingsArgs{})
@@ -1465,8 +1465,8 @@ func init() {
 	pulumi.RegisterOutputType(CustomModelGuardConfigurationInterventionConditionOutput{})
 	pulumi.RegisterOutputType(CustomModelOverallModerationConfigurationOutput{})
 	pulumi.RegisterOutputType(CustomModelOverallModerationConfigurationPtrOutput{})
-	pulumi.RegisterOutputType(CustomModelRuntimeParameterOutput{})
-	pulumi.RegisterOutputType(CustomModelRuntimeParameterArrayOutput{})
+	pulumi.RegisterOutputType(CustomModelRuntimeParameterValueOutput{})
+	pulumi.RegisterOutputType(CustomModelRuntimeParameterValueArrayOutput{})
 	pulumi.RegisterOutputType(CustomModelSourceRemoteRepositoryOutput{})
 	pulumi.RegisterOutputType(CustomModelSourceRemoteRepositoryArrayOutput{})
 	pulumi.RegisterOutputType(DeploymentSettingsOutput{})

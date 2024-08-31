@@ -64,16 +64,28 @@ namespace Pulumi.Datarobot
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
+        /// The negative class label of the Custom Model.
+        /// </summary>
+        [Output("negativeClassLabel")]
+        public Output<string?> NegativeClassLabel { get; private set; } = null!;
+
+        /// <summary>
         /// The overall moderation configuration for the Custom Model.
         /// </summary>
         [Output("overallModerationConfiguration")]
         public Output<Outputs.CustomModelOverallModerationConfiguration?> OverallModerationConfiguration { get; private set; } = null!;
 
         /// <summary>
+        /// The positive class label of the Custom Model.
+        /// </summary>
+        [Output("positiveClassLabel")]
+        public Output<string?> PositiveClassLabel { get; private set; } = null!;
+
+        /// <summary>
         /// The runtime parameter values for the Custom Model.
         /// </summary>
-        [Output("runtimeParameters")]
-        public Output<ImmutableArray<Outputs.CustomModelRuntimeParameter>> RuntimeParameters { get; private set; } = null!;
+        [Output("runtimeParameterValues")]
+        public Output<ImmutableArray<Outputs.CustomModelRuntimeParameterValue>> RuntimeParameterValues { get; private set; } = null!;
 
         /// <summary>
         /// The ID of the source LLM Blueprint for the Custom Model.
@@ -212,21 +224,33 @@ namespace Pulumi.Datarobot
         public Input<string>? Name { get; set; }
 
         /// <summary>
+        /// The negative class label of the Custom Model.
+        /// </summary>
+        [Input("negativeClassLabel")]
+        public Input<string>? NegativeClassLabel { get; set; }
+
+        /// <summary>
         /// The overall moderation configuration for the Custom Model.
         /// </summary>
         [Input("overallModerationConfiguration")]
         public Input<Inputs.CustomModelOverallModerationConfigurationArgs>? OverallModerationConfiguration { get; set; }
 
-        [Input("runtimeParameters")]
-        private InputList<Inputs.CustomModelRuntimeParameterArgs>? _runtimeParameters;
+        /// <summary>
+        /// The positive class label of the Custom Model.
+        /// </summary>
+        [Input("positiveClassLabel")]
+        public Input<string>? PositiveClassLabel { get; set; }
+
+        [Input("runtimeParameterValues")]
+        private InputList<Inputs.CustomModelRuntimeParameterValueArgs>? _runtimeParameterValues;
 
         /// <summary>
         /// The runtime parameter values for the Custom Model.
         /// </summary>
-        public InputList<Inputs.CustomModelRuntimeParameterArgs> RuntimeParameters
+        public InputList<Inputs.CustomModelRuntimeParameterValueArgs> RuntimeParameterValues
         {
-            get => _runtimeParameters ?? (_runtimeParameters = new InputList<Inputs.CustomModelRuntimeParameterArgs>());
-            set => _runtimeParameters = value;
+            get => _runtimeParameterValues ?? (_runtimeParameterValues = new InputList<Inputs.CustomModelRuntimeParameterValueArgs>());
+            set => _runtimeParameterValues = value;
         }
 
         /// <summary>
@@ -328,21 +352,33 @@ namespace Pulumi.Datarobot
         public Input<string>? Name { get; set; }
 
         /// <summary>
+        /// The negative class label of the Custom Model.
+        /// </summary>
+        [Input("negativeClassLabel")]
+        public Input<string>? NegativeClassLabel { get; set; }
+
+        /// <summary>
         /// The overall moderation configuration for the Custom Model.
         /// </summary>
         [Input("overallModerationConfiguration")]
         public Input<Inputs.CustomModelOverallModerationConfigurationGetArgs>? OverallModerationConfiguration { get; set; }
 
-        [Input("runtimeParameters")]
-        private InputList<Inputs.CustomModelRuntimeParameterGetArgs>? _runtimeParameters;
+        /// <summary>
+        /// The positive class label of the Custom Model.
+        /// </summary>
+        [Input("positiveClassLabel")]
+        public Input<string>? PositiveClassLabel { get; set; }
+
+        [Input("runtimeParameterValues")]
+        private InputList<Inputs.CustomModelRuntimeParameterValueGetArgs>? _runtimeParameterValues;
 
         /// <summary>
         /// The runtime parameter values for the Custom Model.
         /// </summary>
-        public InputList<Inputs.CustomModelRuntimeParameterGetArgs> RuntimeParameters
+        public InputList<Inputs.CustomModelRuntimeParameterValueGetArgs> RuntimeParameterValues
         {
-            get => _runtimeParameters ?? (_runtimeParameters = new InputList<Inputs.CustomModelRuntimeParameterGetArgs>());
-            set => _runtimeParameters = value;
+            get => _runtimeParameterValues ?? (_runtimeParameterValues = new InputList<Inputs.CustomModelRuntimeParameterValueGetArgs>());
+            set => _runtimeParameterValues = value;
         }
 
         /// <summary>
