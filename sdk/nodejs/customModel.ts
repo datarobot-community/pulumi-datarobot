@@ -70,13 +70,21 @@ export class CustomModel extends pulumi.CustomResource {
      */
     public readonly name!: pulumi.Output<string>;
     /**
+     * The negative class label of the Custom Model.
+     */
+    public readonly negativeClassLabel!: pulumi.Output<string | undefined>;
+    /**
      * The overall moderation configuration for the Custom Model.
      */
     public readonly overallModerationConfiguration!: pulumi.Output<outputs.CustomModelOverallModerationConfiguration | undefined>;
     /**
+     * The positive class label of the Custom Model.
+     */
+    public readonly positiveClassLabel!: pulumi.Output<string | undefined>;
+    /**
      * The runtime parameter values for the Custom Model.
      */
-    public readonly runtimeParameters!: pulumi.Output<outputs.CustomModelRuntimeParameter[] | undefined>;
+    public readonly runtimeParameterValues!: pulumi.Output<outputs.CustomModelRuntimeParameterValue[]>;
     /**
      * The ID of the source LLM Blueprint for the Custom Model.
      */
@@ -119,8 +127,10 @@ export class CustomModel extends pulumi.CustomResource {
             resourceInputs["isProxy"] = state ? state.isProxy : undefined;
             resourceInputs["localFiles"] = state ? state.localFiles : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
+            resourceInputs["negativeClassLabel"] = state ? state.negativeClassLabel : undefined;
             resourceInputs["overallModerationConfiguration"] = state ? state.overallModerationConfiguration : undefined;
-            resourceInputs["runtimeParameters"] = state ? state.runtimeParameters : undefined;
+            resourceInputs["positiveClassLabel"] = state ? state.positiveClassLabel : undefined;
+            resourceInputs["runtimeParameterValues"] = state ? state.runtimeParameterValues : undefined;
             resourceInputs["sourceLlmBlueprintId"] = state ? state.sourceLlmBlueprintId : undefined;
             resourceInputs["sourceRemoteRepositories"] = state ? state.sourceRemoteRepositories : undefined;
             resourceInputs["target"] = state ? state.target : undefined;
@@ -136,8 +146,10 @@ export class CustomModel extends pulumi.CustomResource {
             resourceInputs["isProxy"] = args ? args.isProxy : undefined;
             resourceInputs["localFiles"] = args ? args.localFiles : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
+            resourceInputs["negativeClassLabel"] = args ? args.negativeClassLabel : undefined;
             resourceInputs["overallModerationConfiguration"] = args ? args.overallModerationConfiguration : undefined;
-            resourceInputs["runtimeParameters"] = args ? args.runtimeParameters : undefined;
+            resourceInputs["positiveClassLabel"] = args ? args.positiveClassLabel : undefined;
+            resourceInputs["runtimeParameterValues"] = args ? args.runtimeParameterValues : undefined;
             resourceInputs["sourceLlmBlueprintId"] = args ? args.sourceLlmBlueprintId : undefined;
             resourceInputs["sourceRemoteRepositories"] = args ? args.sourceRemoteRepositories : undefined;
             resourceInputs["target"] = args ? args.target : undefined;
@@ -186,13 +198,21 @@ export interface CustomModelState {
      */
     name?: pulumi.Input<string>;
     /**
+     * The negative class label of the Custom Model.
+     */
+    negativeClassLabel?: pulumi.Input<string>;
+    /**
      * The overall moderation configuration for the Custom Model.
      */
     overallModerationConfiguration?: pulumi.Input<inputs.CustomModelOverallModerationConfiguration>;
     /**
+     * The positive class label of the Custom Model.
+     */
+    positiveClassLabel?: pulumi.Input<string>;
+    /**
      * The runtime parameter values for the Custom Model.
      */
-    runtimeParameters?: pulumi.Input<pulumi.Input<inputs.CustomModelRuntimeParameter>[]>;
+    runtimeParameterValues?: pulumi.Input<pulumi.Input<inputs.CustomModelRuntimeParameterValue>[]>;
     /**
      * The ID of the source LLM Blueprint for the Custom Model.
      */
@@ -252,13 +272,21 @@ export interface CustomModelArgs {
      */
     name?: pulumi.Input<string>;
     /**
+     * The negative class label of the Custom Model.
+     */
+    negativeClassLabel?: pulumi.Input<string>;
+    /**
      * The overall moderation configuration for the Custom Model.
      */
     overallModerationConfiguration?: pulumi.Input<inputs.CustomModelOverallModerationConfiguration>;
     /**
+     * The positive class label of the Custom Model.
+     */
+    positiveClassLabel?: pulumi.Input<string>;
+    /**
      * The runtime parameter values for the Custom Model.
      */
-    runtimeParameters?: pulumi.Input<pulumi.Input<inputs.CustomModelRuntimeParameter>[]>;
+    runtimeParameterValues?: pulumi.Input<pulumi.Input<inputs.CustomModelRuntimeParameterValue>[]>;
     /**
      * The ID of the source LLM Blueprint for the Custom Model.
      */

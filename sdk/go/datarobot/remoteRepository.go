@@ -28,10 +28,32 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := datarobot.NewRemoteRepository(ctx, "example", &datarobot.RemoteRepositoryArgs{
+//			_, err := datarobot.NewRemoteRepository(ctx, "githubExample", &datarobot.RemoteRepositoryArgs{
 //				Description: pulumi.String("Description for the example remote repository"),
 //				Location:    pulumi.String("https://github.com/datarobot/datarobot-user-models"),
 //				SourceType:  pulumi.String("github"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = datarobot.NewRemoteRepository(ctx, "gitlabExample", &datarobot.RemoteRepositoryArgs{
+//				Location:            pulumi.String("https://gitlab.yourcompany.com/username/repository"),
+//				PersonalAccessToken: pulumi.String("your_personal_access_token"),
+//				SourceType:          pulumi.String("gitlab-cloud"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = datarobot.NewRemoteRepository(ctx, "bitbucketExample", &datarobot.RemoteRepositoryArgs{
+//				Location:   pulumi.String("https://bitbucket.yourcompany.com/projects/PROJECTKEY/repos/REPONAME/browse"),
+//				SourceType: pulumi.String("bitbucket-server"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = datarobot.NewRemoteRepository(ctx, "s3Example", &datarobot.RemoteRepositoryArgs{
+//				Location:   pulumi.String("my-s3-bucket"),
+//				SourceType: pulumi.String("s3"),
 //			})
 //			if err != nil {
 //				return err
@@ -44,9 +66,15 @@ import (
 type RemoteRepository struct {
 	pulumi.CustomResourceState
 
+	// The AWS access key ID for the Remote Repository.
+	AwsAccessKeyId pulumi.StringPtrOutput `pulumi:"awsAccessKeyId"`
+	// The AWS secret access key for the Remote Repository.
+	AwsSecretAccessKey pulumi.StringPtrOutput `pulumi:"awsSecretAccessKey"`
+	// The AWS session token for the Remote Repository.
+	AwsSessionToken pulumi.StringPtrOutput `pulumi:"awsSessionToken"`
 	// The description of the Remote Repository.
 	Description pulumi.StringPtrOutput `pulumi:"description"`
-	// The location of the Remote Repository.
+	// The location of the Remote Repository. (Bucket name for S3)
 	Location pulumi.StringOutput `pulumi:"location"`
 	// The name of the Remote Repository.
 	Name pulumi.StringOutput `pulumi:"name"`
@@ -92,9 +120,15 @@ func GetRemoteRepository(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering RemoteRepository resources.
 type remoteRepositoryState struct {
+	// The AWS access key ID for the Remote Repository.
+	AwsAccessKeyId *string `pulumi:"awsAccessKeyId"`
+	// The AWS secret access key for the Remote Repository.
+	AwsSecretAccessKey *string `pulumi:"awsSecretAccessKey"`
+	// The AWS session token for the Remote Repository.
+	AwsSessionToken *string `pulumi:"awsSessionToken"`
 	// The description of the Remote Repository.
 	Description *string `pulumi:"description"`
-	// The location of the Remote Repository.
+	// The location of the Remote Repository. (Bucket name for S3)
 	Location *string `pulumi:"location"`
 	// The name of the Remote Repository.
 	Name *string `pulumi:"name"`
@@ -105,9 +139,15 @@ type remoteRepositoryState struct {
 }
 
 type RemoteRepositoryState struct {
+	// The AWS access key ID for the Remote Repository.
+	AwsAccessKeyId pulumi.StringPtrInput
+	// The AWS secret access key for the Remote Repository.
+	AwsSecretAccessKey pulumi.StringPtrInput
+	// The AWS session token for the Remote Repository.
+	AwsSessionToken pulumi.StringPtrInput
 	// The description of the Remote Repository.
 	Description pulumi.StringPtrInput
-	// The location of the Remote Repository.
+	// The location of the Remote Repository. (Bucket name for S3)
 	Location pulumi.StringPtrInput
 	// The name of the Remote Repository.
 	Name pulumi.StringPtrInput
@@ -122,9 +162,15 @@ func (RemoteRepositoryState) ElementType() reflect.Type {
 }
 
 type remoteRepositoryArgs struct {
+	// The AWS access key ID for the Remote Repository.
+	AwsAccessKeyId *string `pulumi:"awsAccessKeyId"`
+	// The AWS secret access key for the Remote Repository.
+	AwsSecretAccessKey *string `pulumi:"awsSecretAccessKey"`
+	// The AWS session token for the Remote Repository.
+	AwsSessionToken *string `pulumi:"awsSessionToken"`
 	// The description of the Remote Repository.
 	Description *string `pulumi:"description"`
-	// The location of the Remote Repository.
+	// The location of the Remote Repository. (Bucket name for S3)
 	Location string `pulumi:"location"`
 	// The name of the Remote Repository.
 	Name *string `pulumi:"name"`
@@ -136,9 +182,15 @@ type remoteRepositoryArgs struct {
 
 // The set of arguments for constructing a RemoteRepository resource.
 type RemoteRepositoryArgs struct {
+	// The AWS access key ID for the Remote Repository.
+	AwsAccessKeyId pulumi.StringPtrInput
+	// The AWS secret access key for the Remote Repository.
+	AwsSecretAccessKey pulumi.StringPtrInput
+	// The AWS session token for the Remote Repository.
+	AwsSessionToken pulumi.StringPtrInput
 	// The description of the Remote Repository.
 	Description pulumi.StringPtrInput
-	// The location of the Remote Repository.
+	// The location of the Remote Repository. (Bucket name for S3)
 	Location pulumi.StringInput
 	// The name of the Remote Repository.
 	Name pulumi.StringPtrInput
@@ -235,12 +287,27 @@ func (o RemoteRepositoryOutput) ToRemoteRepositoryOutputWithContext(ctx context.
 	return o
 }
 
+// The AWS access key ID for the Remote Repository.
+func (o RemoteRepositoryOutput) AwsAccessKeyId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RemoteRepository) pulumi.StringPtrOutput { return v.AwsAccessKeyId }).(pulumi.StringPtrOutput)
+}
+
+// The AWS secret access key for the Remote Repository.
+func (o RemoteRepositoryOutput) AwsSecretAccessKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RemoteRepository) pulumi.StringPtrOutput { return v.AwsSecretAccessKey }).(pulumi.StringPtrOutput)
+}
+
+// The AWS session token for the Remote Repository.
+func (o RemoteRepositoryOutput) AwsSessionToken() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RemoteRepository) pulumi.StringPtrOutput { return v.AwsSessionToken }).(pulumi.StringPtrOutput)
+}
+
 // The description of the Remote Repository.
 func (o RemoteRepositoryOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *RemoteRepository) pulumi.StringPtrOutput { return v.Description }).(pulumi.StringPtrOutput)
 }
 
-// The location of the Remote Repository.
+// The location of the Remote Repository. (Bucket name for S3)
 func (o RemoteRepositoryOutput) Location() pulumi.StringOutput {
 	return o.ApplyT(func(v *RemoteRepository) pulumi.StringOutput { return v.Location }).(pulumi.StringOutput)
 }

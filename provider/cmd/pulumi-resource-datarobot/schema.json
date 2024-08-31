@@ -175,7 +175,7 @@
                 }
             }
         },
-        "datarobot:index/CustomModelRuntimeParameter:CustomModelRuntimeParameter": {
+        "datarobot:index/CustomModelRuntimeParameterValue:CustomModelRuntimeParameterValue": {
             "properties": {
                 "key": {
                     "type": "string",
@@ -794,14 +794,22 @@
                     "type": "string",
                     "description": "The name of the Custom Model.\n"
                 },
+                "negativeClassLabel": {
+                    "type": "string",
+                    "description": "The negative class label of the Custom Model.\n"
+                },
                 "overallModerationConfiguration": {
                     "$ref": "#/types/datarobot:index/CustomModelOverallModerationConfiguration:CustomModelOverallModerationConfiguration",
                     "description": "The overall moderation configuration for the Custom Model.\n"
                 },
-                "runtimeParameters": {
+                "positiveClassLabel": {
+                    "type": "string",
+                    "description": "The positive class label of the Custom Model.\n"
+                },
+                "runtimeParameterValues": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/types/datarobot:index/CustomModelRuntimeParameter:CustomModelRuntimeParameter"
+                        "$ref": "#/types/datarobot:index/CustomModelRuntimeParameterValue:CustomModelRuntimeParameterValue"
                     },
                     "description": "The runtime parameter values for the Custom Model.\n"
                 },
@@ -833,6 +841,7 @@
                 "baseEnvironmentId",
                 "baseEnvironmentVersionId",
                 "name",
+                "runtimeParameterValues",
                 "versionId"
             ],
             "inputProperties": {
@@ -874,14 +883,22 @@
                     "type": "string",
                     "description": "The name of the Custom Model.\n"
                 },
+                "negativeClassLabel": {
+                    "type": "string",
+                    "description": "The negative class label of the Custom Model.\n"
+                },
                 "overallModerationConfiguration": {
                     "$ref": "#/types/datarobot:index/CustomModelOverallModerationConfiguration:CustomModelOverallModerationConfiguration",
                     "description": "The overall moderation configuration for the Custom Model.\n"
                 },
-                "runtimeParameters": {
+                "positiveClassLabel": {
+                    "type": "string",
+                    "description": "The positive class label of the Custom Model.\n"
+                },
+                "runtimeParameterValues": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/types/datarobot:index/CustomModelRuntimeParameter:CustomModelRuntimeParameter"
+                        "$ref": "#/types/datarobot:index/CustomModelRuntimeParameterValue:CustomModelRuntimeParameterValue"
                     },
                     "description": "The runtime parameter values for the Custom Model.\n"
                 },
@@ -946,14 +963,22 @@
                         "type": "string",
                         "description": "The name of the Custom Model.\n"
                     },
+                    "negativeClassLabel": {
+                        "type": "string",
+                        "description": "The negative class label of the Custom Model.\n"
+                    },
                     "overallModerationConfiguration": {
                         "$ref": "#/types/datarobot:index/CustomModelOverallModerationConfiguration:CustomModelOverallModerationConfiguration",
                         "description": "The overall moderation configuration for the Custom Model.\n"
                     },
-                    "runtimeParameters": {
+                    "positiveClassLabel": {
+                        "type": "string",
+                        "description": "The positive class label of the Custom Model.\n"
+                    },
+                    "runtimeParameterValues": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/types/datarobot:index/CustomModelRuntimeParameter:CustomModelRuntimeParameter"
+                            "$ref": "#/types/datarobot:index/CustomModelRuntimeParameterValue:CustomModelRuntimeParameterValue"
                         },
                         "description": "The runtime parameter values for the Custom Model.\n"
                     },
@@ -1404,15 +1429,27 @@
             }
         },
         "datarobot:index/remoteRepository:RemoteRepository": {
-            "description": "remote repository\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@pulumi/datarobot\";\n\nconst example = new datarobot.RemoteRepository(\"example\", {\n    description: \"Description for the example remote repository\",\n    location: \"https://github.com/datarobot/datarobot-user-models\",\n    sourceType: \"github\",\n});\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample = datarobot.RemoteRepository(\"example\",\n    description=\"Description for the example remote repository\",\n    location=\"https://github.com/datarobot/datarobot-user-models\",\n    source_type=\"github\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = Pulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Datarobot.RemoteRepository(\"example\", new()\n    {\n        Description = \"Description for the example remote repository\",\n        Location = \"https://github.com/datarobot/datarobot-user-models\",\n        SourceType = \"github\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := datarobot.NewRemoteRepository(ctx, \"example\", \u0026datarobot.RemoteRepositoryArgs{\n\t\t\tDescription: pulumi.String(\"Description for the example remote repository\"),\n\t\t\tLocation:    pulumi.String(\"https://github.com/datarobot/datarobot-user-models\"),\n\t\t\tSourceType:  pulumi.String(\"github\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.RemoteRepository;\nimport com.pulumi.datarobot.RemoteRepositoryArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new RemoteRepository(\"example\", RemoteRepositoryArgs.builder()\n            .description(\"Description for the example remote repository\")\n            .location(\"https://github.com/datarobot/datarobot-user-models\")\n            .sourceType(\"github\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: datarobot:RemoteRepository\n    properties:\n      description: Description for the example remote repository\n      location: https://github.com/datarobot/datarobot-user-models\n      sourceType: github\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "description": "remote repository\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@pulumi/datarobot\";\n\nconst githubExample = new datarobot.RemoteRepository(\"githubExample\", {\n    description: \"Description for the example remote repository\",\n    location: \"https://github.com/datarobot/datarobot-user-models\",\n    sourceType: \"github\",\n});\nconst gitlabExample = new datarobot.RemoteRepository(\"gitlabExample\", {\n    location: \"https://gitlab.yourcompany.com/username/repository\",\n    personalAccessToken: \"your_personal_access_token\",\n    sourceType: \"gitlab-cloud\",\n});\nconst bitbucketExample = new datarobot.RemoteRepository(\"bitbucketExample\", {\n    location: \"https://bitbucket.yourcompany.com/projects/PROJECTKEY/repos/REPONAME/browse\",\n    sourceType: \"bitbucket-server\",\n});\nconst s3Example = new datarobot.RemoteRepository(\"s3Example\", {\n    location: \"my-s3-bucket\",\n    sourceType: \"s3\",\n});\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\ngithub_example = datarobot.RemoteRepository(\"githubExample\",\n    description=\"Description for the example remote repository\",\n    location=\"https://github.com/datarobot/datarobot-user-models\",\n    source_type=\"github\")\ngitlab_example = datarobot.RemoteRepository(\"gitlabExample\",\n    location=\"https://gitlab.yourcompany.com/username/repository\",\n    personal_access_token=\"your_personal_access_token\",\n    source_type=\"gitlab-cloud\")\nbitbucket_example = datarobot.RemoteRepository(\"bitbucketExample\",\n    location=\"https://bitbucket.yourcompany.com/projects/PROJECTKEY/repos/REPONAME/browse\",\n    source_type=\"bitbucket-server\")\ns3_example = datarobot.RemoteRepository(\"s3Example\",\n    location=\"my-s3-bucket\",\n    source_type=\"s3\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = Pulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var githubExample = new Datarobot.RemoteRepository(\"githubExample\", new()\n    {\n        Description = \"Description for the example remote repository\",\n        Location = \"https://github.com/datarobot/datarobot-user-models\",\n        SourceType = \"github\",\n    });\n\n    var gitlabExample = new Datarobot.RemoteRepository(\"gitlabExample\", new()\n    {\n        Location = \"https://gitlab.yourcompany.com/username/repository\",\n        PersonalAccessToken = \"your_personal_access_token\",\n        SourceType = \"gitlab-cloud\",\n    });\n\n    var bitbucketExample = new Datarobot.RemoteRepository(\"bitbucketExample\", new()\n    {\n        Location = \"https://bitbucket.yourcompany.com/projects/PROJECTKEY/repos/REPONAME/browse\",\n        SourceType = \"bitbucket-server\",\n    });\n\n    var s3Example = new Datarobot.RemoteRepository(\"s3Example\", new()\n    {\n        Location = \"my-s3-bucket\",\n        SourceType = \"s3\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := datarobot.NewRemoteRepository(ctx, \"githubExample\", \u0026datarobot.RemoteRepositoryArgs{\n\t\t\tDescription: pulumi.String(\"Description for the example remote repository\"),\n\t\t\tLocation:    pulumi.String(\"https://github.com/datarobot/datarobot-user-models\"),\n\t\t\tSourceType:  pulumi.String(\"github\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = datarobot.NewRemoteRepository(ctx, \"gitlabExample\", \u0026datarobot.RemoteRepositoryArgs{\n\t\t\tLocation:            pulumi.String(\"https://gitlab.yourcompany.com/username/repository\"),\n\t\t\tPersonalAccessToken: pulumi.String(\"your_personal_access_token\"),\n\t\t\tSourceType:          pulumi.String(\"gitlab-cloud\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = datarobot.NewRemoteRepository(ctx, \"bitbucketExample\", \u0026datarobot.RemoteRepositoryArgs{\n\t\t\tLocation:   pulumi.String(\"https://bitbucket.yourcompany.com/projects/PROJECTKEY/repos/REPONAME/browse\"),\n\t\t\tSourceType: pulumi.String(\"bitbucket-server\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = datarobot.NewRemoteRepository(ctx, \"s3Example\", \u0026datarobot.RemoteRepositoryArgs{\n\t\t\tLocation:   pulumi.String(\"my-s3-bucket\"),\n\t\t\tSourceType: pulumi.String(\"s3\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.RemoteRepository;\nimport com.pulumi.datarobot.RemoteRepositoryArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var githubExample = new RemoteRepository(\"githubExample\", RemoteRepositoryArgs.builder()\n            .description(\"Description for the example remote repository\")\n            .location(\"https://github.com/datarobot/datarobot-user-models\")\n            .sourceType(\"github\")\n            .build());\n\n        var gitlabExample = new RemoteRepository(\"gitlabExample\", RemoteRepositoryArgs.builder()\n            .location(\"https://gitlab.yourcompany.com/username/repository\")\n            .personalAccessToken(\"your_personal_access_token\")\n            .sourceType(\"gitlab-cloud\")\n            .build());\n\n        var bitbucketExample = new RemoteRepository(\"bitbucketExample\", RemoteRepositoryArgs.builder()\n            .location(\"https://bitbucket.yourcompany.com/projects/PROJECTKEY/repos/REPONAME/browse\")\n            .sourceType(\"bitbucket-server\")\n            .build());\n\n        var s3Example = new RemoteRepository(\"s3Example\", RemoteRepositoryArgs.builder()\n            .location(\"my-s3-bucket\")\n            .sourceType(\"s3\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  githubExample:\n    type: datarobot:RemoteRepository\n    properties:\n      description: Description for the example remote repository\n      location: https://github.com/datarobot/datarobot-user-models\n      sourceType: github\n  gitlabExample:\n    type: datarobot:RemoteRepository\n    properties:\n      location: https://gitlab.yourcompany.com/username/repository\n      personalAccessToken: your_personal_access_token\n      sourceType: gitlab-cloud\n  bitbucketExample:\n    type: datarobot:RemoteRepository\n    properties:\n      location: https://bitbucket.yourcompany.com/projects/PROJECTKEY/repos/REPONAME/browse\n      sourceType: bitbucket-server\n  s3Example:\n    type: datarobot:RemoteRepository\n    properties:\n      location: my-s3-bucket\n      sourceType: s3\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
             "properties": {
+                "awsAccessKeyId": {
+                    "type": "string",
+                    "description": "The AWS access key ID for the Remote Repository.\n"
+                },
+                "awsSecretAccessKey": {
+                    "type": "string",
+                    "description": "The AWS secret access key for the Remote Repository.\n"
+                },
+                "awsSessionToken": {
+                    "type": "string",
+                    "description": "The AWS session token for the Remote Repository.\n"
+                },
                 "description": {
                     "type": "string",
                     "description": "The description of the Remote Repository.\n"
                 },
                 "location": {
                     "type": "string",
-                    "description": "The location of the Remote Repository.\n"
+                    "description": "The location of the Remote Repository. (Bucket name for S3)\n"
                 },
                 "name": {
                     "type": "string",
@@ -1433,13 +1470,25 @@
                 "sourceType"
             ],
             "inputProperties": {
+                "awsAccessKeyId": {
+                    "type": "string",
+                    "description": "The AWS access key ID for the Remote Repository.\n"
+                },
+                "awsSecretAccessKey": {
+                    "type": "string",
+                    "description": "The AWS secret access key for the Remote Repository.\n"
+                },
+                "awsSessionToken": {
+                    "type": "string",
+                    "description": "The AWS session token for the Remote Repository.\n"
+                },
                 "description": {
                     "type": "string",
                     "description": "The description of the Remote Repository.\n"
                 },
                 "location": {
                     "type": "string",
-                    "description": "The location of the Remote Repository.\n"
+                    "description": "The location of the Remote Repository. (Bucket name for S3)\n"
                 },
                 "name": {
                     "type": "string",
@@ -1461,13 +1510,25 @@
             "stateInputs": {
                 "description": "Input properties used for looking up and filtering RemoteRepository resources.\n",
                 "properties": {
+                    "awsAccessKeyId": {
+                        "type": "string",
+                        "description": "The AWS access key ID for the Remote Repository.\n"
+                    },
+                    "awsSecretAccessKey": {
+                        "type": "string",
+                        "description": "The AWS secret access key for the Remote Repository.\n"
+                    },
+                    "awsSessionToken": {
+                        "type": "string",
+                        "description": "The AWS session token for the Remote Repository.\n"
+                    },
                     "description": {
                         "type": "string",
                         "description": "The description of the Remote Repository.\n"
                     },
                     "location": {
                         "type": "string",
-                        "description": "The location of the Remote Repository.\n"
+                        "description": "The location of the Remote Repository. (Bucket name for S3)\n"
                     },
                     "name": {
                         "type": "string",
