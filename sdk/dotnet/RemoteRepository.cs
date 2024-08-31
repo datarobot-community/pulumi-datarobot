@@ -22,11 +22,30 @@ namespace Pulumi.Datarobot
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var example = new Datarobot.RemoteRepository("example", new()
+    ///     var githubExample = new Datarobot.RemoteRepository("githubExample", new()
     ///     {
     ///         Description = "Description for the example remote repository",
     ///         Location = "https://github.com/datarobot/datarobot-user-models",
     ///         SourceType = "github",
+    ///     });
+    /// 
+    ///     var gitlabExample = new Datarobot.RemoteRepository("gitlabExample", new()
+    ///     {
+    ///         Location = "https://gitlab.yourcompany.com/username/repository",
+    ///         PersonalAccessToken = "your_personal_access_token",
+    ///         SourceType = "gitlab-cloud",
+    ///     });
+    /// 
+    ///     var bitbucketExample = new Datarobot.RemoteRepository("bitbucketExample", new()
+    ///     {
+    ///         Location = "https://bitbucket.yourcompany.com/projects/PROJECTKEY/repos/REPONAME/browse",
+    ///         SourceType = "bitbucket-server",
+    ///     });
+    /// 
+    ///     var s3Example = new Datarobot.RemoteRepository("s3Example", new()
+    ///     {
+    ///         Location = "my-s3-bucket",
+    ///         SourceType = "s3",
     ///     });
     /// 
     /// });
@@ -36,13 +55,31 @@ namespace Pulumi.Datarobot
     public partial class RemoteRepository : global::Pulumi.CustomResource
     {
         /// <summary>
+        /// The AWS access key ID for the Remote Repository.
+        /// </summary>
+        [Output("awsAccessKeyId")]
+        public Output<string?> AwsAccessKeyId { get; private set; } = null!;
+
+        /// <summary>
+        /// The AWS secret access key for the Remote Repository.
+        /// </summary>
+        [Output("awsSecretAccessKey")]
+        public Output<string?> AwsSecretAccessKey { get; private set; } = null!;
+
+        /// <summary>
+        /// The AWS session token for the Remote Repository.
+        /// </summary>
+        [Output("awsSessionToken")]
+        public Output<string?> AwsSessionToken { get; private set; } = null!;
+
+        /// <summary>
         /// The description of the Remote Repository.
         /// </summary>
         [Output("description")]
         public Output<string?> Description { get; private set; } = null!;
 
         /// <summary>
-        /// The location of the Remote Repository.
+        /// The location of the Remote Repository. (Bucket name for S3)
         /// </summary>
         [Output("location")]
         public Output<string> Location { get; private set; } = null!;
@@ -112,13 +149,31 @@ namespace Pulumi.Datarobot
     public sealed class RemoteRepositoryArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// The AWS access key ID for the Remote Repository.
+        /// </summary>
+        [Input("awsAccessKeyId")]
+        public Input<string>? AwsAccessKeyId { get; set; }
+
+        /// <summary>
+        /// The AWS secret access key for the Remote Repository.
+        /// </summary>
+        [Input("awsSecretAccessKey")]
+        public Input<string>? AwsSecretAccessKey { get; set; }
+
+        /// <summary>
+        /// The AWS session token for the Remote Repository.
+        /// </summary>
+        [Input("awsSessionToken")]
+        public Input<string>? AwsSessionToken { get; set; }
+
+        /// <summary>
         /// The description of the Remote Repository.
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// The location of the Remote Repository.
+        /// The location of the Remote Repository. (Bucket name for S3)
         /// </summary>
         [Input("location", required: true)]
         public Input<string> Location { get; set; } = null!;
@@ -150,13 +205,31 @@ namespace Pulumi.Datarobot
     public sealed class RemoteRepositoryState : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// The AWS access key ID for the Remote Repository.
+        /// </summary>
+        [Input("awsAccessKeyId")]
+        public Input<string>? AwsAccessKeyId { get; set; }
+
+        /// <summary>
+        /// The AWS secret access key for the Remote Repository.
+        /// </summary>
+        [Input("awsSecretAccessKey")]
+        public Input<string>? AwsSecretAccessKey { get; set; }
+
+        /// <summary>
+        /// The AWS session token for the Remote Repository.
+        /// </summary>
+        [Input("awsSessionToken")]
+        public Input<string>? AwsSessionToken { get; set; }
+
+        /// <summary>
         /// The description of the Remote Repository.
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// The location of the Remote Repository.
+        /// The location of the Remote Repository. (Bucket name for S3)
         /// </summary>
         [Input("location")]
         public Input<string>? Location { get; set; }

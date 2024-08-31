@@ -11,7 +11,7 @@ namespace Pulumi.Datarobot.Outputs
 {
 
     [OutputType]
-    public sealed class CustomModelRuntimeParameter
+    public sealed class CustomModelRuntimeParameterValue
     {
         /// <summary>
         /// The name of the runtime parameter.
@@ -27,7 +27,7 @@ namespace Pulumi.Datarobot.Outputs
         public readonly string Value;
 
         [OutputConstructor]
-        private CustomModelRuntimeParameter(
+        private CustomModelRuntimeParameterValue(
             string key,
 
             string type,

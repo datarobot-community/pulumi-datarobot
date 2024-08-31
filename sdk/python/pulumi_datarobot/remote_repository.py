@@ -16,19 +16,31 @@ class RemoteRepositoryArgs:
     def __init__(__self__, *,
                  location: pulumi.Input[str],
                  source_type: pulumi.Input[str],
+                 aws_access_key_id: Optional[pulumi.Input[str]] = None,
+                 aws_secret_access_key: Optional[pulumi.Input[str]] = None,
+                 aws_session_token: Optional[pulumi.Input[str]] = None,
                  description: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  personal_access_token: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a RemoteRepository resource.
-        :param pulumi.Input[str] location: The location of the Remote Repository.
+        :param pulumi.Input[str] location: The location of the Remote Repository. (Bucket name for S3)
         :param pulumi.Input[str] source_type: The source type of the Remote Repository.
+        :param pulumi.Input[str] aws_access_key_id: The AWS access key ID for the Remote Repository.
+        :param pulumi.Input[str] aws_secret_access_key: The AWS secret access key for the Remote Repository.
+        :param pulumi.Input[str] aws_session_token: The AWS session token for the Remote Repository.
         :param pulumi.Input[str] description: The description of the Remote Repository.
         :param pulumi.Input[str] name: The name of the Remote Repository.
         :param pulumi.Input[str] personal_access_token: The personal access token for the Remote Repository.
         """
         pulumi.set(__self__, "location", location)
         pulumi.set(__self__, "source_type", source_type)
+        if aws_access_key_id is not None:
+            pulumi.set(__self__, "aws_access_key_id", aws_access_key_id)
+        if aws_secret_access_key is not None:
+            pulumi.set(__self__, "aws_secret_access_key", aws_secret_access_key)
+        if aws_session_token is not None:
+            pulumi.set(__self__, "aws_session_token", aws_session_token)
         if description is not None:
             pulumi.set(__self__, "description", description)
         if name is not None:
@@ -40,7 +52,7 @@ class RemoteRepositoryArgs:
     @pulumi.getter
     def location(self) -> pulumi.Input[str]:
         """
-        The location of the Remote Repository.
+        The location of the Remote Repository. (Bucket name for S3)
         """
         return pulumi.get(self, "location")
 
@@ -59,6 +71,42 @@ class RemoteRepositoryArgs:
     @source_type.setter
     def source_type(self, value: pulumi.Input[str]):
         pulumi.set(self, "source_type", value)
+
+    @property
+    @pulumi.getter(name="awsAccessKeyId")
+    def aws_access_key_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The AWS access key ID for the Remote Repository.
+        """
+        return pulumi.get(self, "aws_access_key_id")
+
+    @aws_access_key_id.setter
+    def aws_access_key_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "aws_access_key_id", value)
+
+    @property
+    @pulumi.getter(name="awsSecretAccessKey")
+    def aws_secret_access_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        The AWS secret access key for the Remote Repository.
+        """
+        return pulumi.get(self, "aws_secret_access_key")
+
+    @aws_secret_access_key.setter
+    def aws_secret_access_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "aws_secret_access_key", value)
+
+    @property
+    @pulumi.getter(name="awsSessionToken")
+    def aws_session_token(self) -> Optional[pulumi.Input[str]]:
+        """
+        The AWS session token for the Remote Repository.
+        """
+        return pulumi.get(self, "aws_session_token")
+
+    @aws_session_token.setter
+    def aws_session_token(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "aws_session_token", value)
 
     @property
     @pulumi.getter
@@ -100,6 +148,9 @@ class RemoteRepositoryArgs:
 @pulumi.input_type
 class _RemoteRepositoryState:
     def __init__(__self__, *,
+                 aws_access_key_id: Optional[pulumi.Input[str]] = None,
+                 aws_secret_access_key: Optional[pulumi.Input[str]] = None,
+                 aws_session_token: Optional[pulumi.Input[str]] = None,
                  description: Optional[pulumi.Input[str]] = None,
                  location: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
@@ -107,12 +158,21 @@ class _RemoteRepositoryState:
                  source_type: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering RemoteRepository resources.
+        :param pulumi.Input[str] aws_access_key_id: The AWS access key ID for the Remote Repository.
+        :param pulumi.Input[str] aws_secret_access_key: The AWS secret access key for the Remote Repository.
+        :param pulumi.Input[str] aws_session_token: The AWS session token for the Remote Repository.
         :param pulumi.Input[str] description: The description of the Remote Repository.
-        :param pulumi.Input[str] location: The location of the Remote Repository.
+        :param pulumi.Input[str] location: The location of the Remote Repository. (Bucket name for S3)
         :param pulumi.Input[str] name: The name of the Remote Repository.
         :param pulumi.Input[str] personal_access_token: The personal access token for the Remote Repository.
         :param pulumi.Input[str] source_type: The source type of the Remote Repository.
         """
+        if aws_access_key_id is not None:
+            pulumi.set(__self__, "aws_access_key_id", aws_access_key_id)
+        if aws_secret_access_key is not None:
+            pulumi.set(__self__, "aws_secret_access_key", aws_secret_access_key)
+        if aws_session_token is not None:
+            pulumi.set(__self__, "aws_session_token", aws_session_token)
         if description is not None:
             pulumi.set(__self__, "description", description)
         if location is not None:
@@ -123,6 +183,42 @@ class _RemoteRepositoryState:
             pulumi.set(__self__, "personal_access_token", personal_access_token)
         if source_type is not None:
             pulumi.set(__self__, "source_type", source_type)
+
+    @property
+    @pulumi.getter(name="awsAccessKeyId")
+    def aws_access_key_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The AWS access key ID for the Remote Repository.
+        """
+        return pulumi.get(self, "aws_access_key_id")
+
+    @aws_access_key_id.setter
+    def aws_access_key_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "aws_access_key_id", value)
+
+    @property
+    @pulumi.getter(name="awsSecretAccessKey")
+    def aws_secret_access_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        The AWS secret access key for the Remote Repository.
+        """
+        return pulumi.get(self, "aws_secret_access_key")
+
+    @aws_secret_access_key.setter
+    def aws_secret_access_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "aws_secret_access_key", value)
+
+    @property
+    @pulumi.getter(name="awsSessionToken")
+    def aws_session_token(self) -> Optional[pulumi.Input[str]]:
+        """
+        The AWS session token for the Remote Repository.
+        """
+        return pulumi.get(self, "aws_session_token")
+
+    @aws_session_token.setter
+    def aws_session_token(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "aws_session_token", value)
 
     @property
     @pulumi.getter
@@ -140,7 +236,7 @@ class _RemoteRepositoryState:
     @pulumi.getter
     def location(self) -> Optional[pulumi.Input[str]]:
         """
-        The location of the Remote Repository.
+        The location of the Remote Repository. (Bucket name for S3)
         """
         return pulumi.get(self, "location")
 
@@ -190,6 +286,9 @@ class RemoteRepository(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 aws_access_key_id: Optional[pulumi.Input[str]] = None,
+                 aws_secret_access_key: Optional[pulumi.Input[str]] = None,
+                 aws_session_token: Optional[pulumi.Input[str]] = None,
                  description: Optional[pulumi.Input[str]] = None,
                  location: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
@@ -205,16 +304,29 @@ class RemoteRepository(pulumi.CustomResource):
         import pulumi
         import pulumi_datarobot as datarobot
 
-        example = datarobot.RemoteRepository("example",
+        github_example = datarobot.RemoteRepository("githubExample",
             description="Description for the example remote repository",
             location="https://github.com/datarobot/datarobot-user-models",
             source_type="github")
+        gitlab_example = datarobot.RemoteRepository("gitlabExample",
+            location="https://gitlab.yourcompany.com/username/repository",
+            personal_access_token="your_personal_access_token",
+            source_type="gitlab-cloud")
+        bitbucket_example = datarobot.RemoteRepository("bitbucketExample",
+            location="https://bitbucket.yourcompany.com/projects/PROJECTKEY/repos/REPONAME/browse",
+            source_type="bitbucket-server")
+        s3_example = datarobot.RemoteRepository("s3Example",
+            location="my-s3-bucket",
+            source_type="s3")
         ```
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[str] aws_access_key_id: The AWS access key ID for the Remote Repository.
+        :param pulumi.Input[str] aws_secret_access_key: The AWS secret access key for the Remote Repository.
+        :param pulumi.Input[str] aws_session_token: The AWS session token for the Remote Repository.
         :param pulumi.Input[str] description: The description of the Remote Repository.
-        :param pulumi.Input[str] location: The location of the Remote Repository.
+        :param pulumi.Input[str] location: The location of the Remote Repository. (Bucket name for S3)
         :param pulumi.Input[str] name: The name of the Remote Repository.
         :param pulumi.Input[str] personal_access_token: The personal access token for the Remote Repository.
         :param pulumi.Input[str] source_type: The source type of the Remote Repository.
@@ -234,10 +346,20 @@ class RemoteRepository(pulumi.CustomResource):
         import pulumi
         import pulumi_datarobot as datarobot
 
-        example = datarobot.RemoteRepository("example",
+        github_example = datarobot.RemoteRepository("githubExample",
             description="Description for the example remote repository",
             location="https://github.com/datarobot/datarobot-user-models",
             source_type="github")
+        gitlab_example = datarobot.RemoteRepository("gitlabExample",
+            location="https://gitlab.yourcompany.com/username/repository",
+            personal_access_token="your_personal_access_token",
+            source_type="gitlab-cloud")
+        bitbucket_example = datarobot.RemoteRepository("bitbucketExample",
+            location="https://bitbucket.yourcompany.com/projects/PROJECTKEY/repos/REPONAME/browse",
+            source_type="bitbucket-server")
+        s3_example = datarobot.RemoteRepository("s3Example",
+            location="my-s3-bucket",
+            source_type="s3")
         ```
 
         :param str resource_name: The name of the resource.
@@ -255,6 +377,9 @@ class RemoteRepository(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 aws_access_key_id: Optional[pulumi.Input[str]] = None,
+                 aws_secret_access_key: Optional[pulumi.Input[str]] = None,
+                 aws_session_token: Optional[pulumi.Input[str]] = None,
                  description: Optional[pulumi.Input[str]] = None,
                  location: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
@@ -269,6 +394,9 @@ class RemoteRepository(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = RemoteRepositoryArgs.__new__(RemoteRepositoryArgs)
 
+            __props__.__dict__["aws_access_key_id"] = aws_access_key_id
+            __props__.__dict__["aws_secret_access_key"] = aws_secret_access_key
+            __props__.__dict__["aws_session_token"] = aws_session_token
             __props__.__dict__["description"] = description
             if location is None and not opts.urn:
                 raise TypeError("Missing required property 'location'")
@@ -288,6 +416,9 @@ class RemoteRepository(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
+            aws_access_key_id: Optional[pulumi.Input[str]] = None,
+            aws_secret_access_key: Optional[pulumi.Input[str]] = None,
+            aws_session_token: Optional[pulumi.Input[str]] = None,
             description: Optional[pulumi.Input[str]] = None,
             location: Optional[pulumi.Input[str]] = None,
             name: Optional[pulumi.Input[str]] = None,
@@ -300,8 +431,11 @@ class RemoteRepository(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[str] aws_access_key_id: The AWS access key ID for the Remote Repository.
+        :param pulumi.Input[str] aws_secret_access_key: The AWS secret access key for the Remote Repository.
+        :param pulumi.Input[str] aws_session_token: The AWS session token for the Remote Repository.
         :param pulumi.Input[str] description: The description of the Remote Repository.
-        :param pulumi.Input[str] location: The location of the Remote Repository.
+        :param pulumi.Input[str] location: The location of the Remote Repository. (Bucket name for S3)
         :param pulumi.Input[str] name: The name of the Remote Repository.
         :param pulumi.Input[str] personal_access_token: The personal access token for the Remote Repository.
         :param pulumi.Input[str] source_type: The source type of the Remote Repository.
@@ -310,12 +444,39 @@ class RemoteRepository(pulumi.CustomResource):
 
         __props__ = _RemoteRepositoryState.__new__(_RemoteRepositoryState)
 
+        __props__.__dict__["aws_access_key_id"] = aws_access_key_id
+        __props__.__dict__["aws_secret_access_key"] = aws_secret_access_key
+        __props__.__dict__["aws_session_token"] = aws_session_token
         __props__.__dict__["description"] = description
         __props__.__dict__["location"] = location
         __props__.__dict__["name"] = name
         __props__.__dict__["personal_access_token"] = personal_access_token
         __props__.__dict__["source_type"] = source_type
         return RemoteRepository(resource_name, opts=opts, __props__=__props__)
+
+    @property
+    @pulumi.getter(name="awsAccessKeyId")
+    def aws_access_key_id(self) -> pulumi.Output[Optional[str]]:
+        """
+        The AWS access key ID for the Remote Repository.
+        """
+        return pulumi.get(self, "aws_access_key_id")
+
+    @property
+    @pulumi.getter(name="awsSecretAccessKey")
+    def aws_secret_access_key(self) -> pulumi.Output[Optional[str]]:
+        """
+        The AWS secret access key for the Remote Repository.
+        """
+        return pulumi.get(self, "aws_secret_access_key")
+
+    @property
+    @pulumi.getter(name="awsSessionToken")
+    def aws_session_token(self) -> pulumi.Output[Optional[str]]:
+        """
+        The AWS session token for the Remote Repository.
+        """
+        return pulumi.get(self, "aws_session_token")
 
     @property
     @pulumi.getter
@@ -329,7 +490,7 @@ class RemoteRepository(pulumi.CustomResource):
     @pulumi.getter
     def location(self) -> pulumi.Output[str]:
         """
-        The location of the Remote Repository.
+        The location of the Remote Repository. (Bucket name for S3)
         """
         return pulumi.get(self, "location")
 

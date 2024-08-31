@@ -73,7 +73,7 @@ export interface CustomModelOverallModerationConfiguration {
     timeoutSec?: pulumi.Input<number>;
 }
 
-export interface CustomModelRuntimeParameter {
+export interface CustomModelRuntimeParameterValue {
     /**
      * The name of the runtime parameter.
      */

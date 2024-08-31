@@ -15,7 +15,7 @@ __all__ = [
     'CustomModelGuardConfigurationIntervention',
     'CustomModelGuardConfigurationInterventionCondition',
     'CustomModelOverallModerationConfiguration',
-    'CustomModelRuntimeParameter',
+    'CustomModelRuntimeParameterValue',
     'CustomModelSourceRemoteRepository',
     'DeploymentSettings',
     'DeploymentSettingsAssociationId',
@@ -254,7 +254,7 @@ class CustomModelOverallModerationConfiguration(dict):
 
 
 @pulumi.output_type
-class CustomModelRuntimeParameter(dict):
+class CustomModelRuntimeParameterValue(dict):
     def __init__(__self__, *,
                  key: str,
                  type: str,

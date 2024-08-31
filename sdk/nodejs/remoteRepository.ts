@@ -13,10 +13,23 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as datarobot from "@pulumi/datarobot";
  *
- * const example = new datarobot.RemoteRepository("example", {
+ * const githubExample = new datarobot.RemoteRepository("githubExample", {
  *     description: "Description for the example remote repository",
  *     location: "https://github.com/datarobot/datarobot-user-models",
  *     sourceType: "github",
+ * });
+ * const gitlabExample = new datarobot.RemoteRepository("gitlabExample", {
+ *     location: "https://gitlab.yourcompany.com/username/repository",
+ *     personalAccessToken: "your_personal_access_token",
+ *     sourceType: "gitlab-cloud",
+ * });
+ * const bitbucketExample = new datarobot.RemoteRepository("bitbucketExample", {
+ *     location: "https://bitbucket.yourcompany.com/projects/PROJECTKEY/repos/REPONAME/browse",
+ *     sourceType: "bitbucket-server",
+ * });
+ * const s3Example = new datarobot.RemoteRepository("s3Example", {
+ *     location: "my-s3-bucket",
+ *     sourceType: "s3",
  * });
  * ```
  */
@@ -49,11 +62,23 @@ export class RemoteRepository extends pulumi.CustomResource {
     }
 
     /**
+     * The AWS access key ID for the Remote Repository.
+     */
+    public readonly awsAccessKeyId!: pulumi.Output<string | undefined>;
+    /**
+     * The AWS secret access key for the Remote Repository.
+     */
+    public readonly awsSecretAccessKey!: pulumi.Output<string | undefined>;
+    /**
+     * The AWS session token for the Remote Repository.
+     */
+    public readonly awsSessionToken!: pulumi.Output<string | undefined>;
+    /**
      * The description of the Remote Repository.
      */
     public readonly description!: pulumi.Output<string | undefined>;
     /**
-     * The location of the Remote Repository.
+     * The location of the Remote Repository. (Bucket name for S3)
      */
     public readonly location!: pulumi.Output<string>;
     /**
@@ -82,6 +107,9 @@ export class RemoteRepository extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as RemoteRepositoryState | undefined;
+            resourceInputs["awsAccessKeyId"] = state ? state.awsAccessKeyId : undefined;
+            resourceInputs["awsSecretAccessKey"] = state ? state.awsSecretAccessKey : undefined;
+            resourceInputs["awsSessionToken"] = state ? state.awsSessionToken : undefined;
             resourceInputs["description"] = state ? state.description : undefined;
             resourceInputs["location"] = state ? state.location : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
@@ -95,6 +123,9 @@ export class RemoteRepository extends pulumi.CustomResource {
             if ((!args || args.sourceType === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'sourceType'");
             }
+            resourceInputs["awsAccessKeyId"] = args ? args.awsAccessKeyId : undefined;
+            resourceInputs["awsSecretAccessKey"] = args ? args.awsSecretAccessKey : undefined;
+            resourceInputs["awsSessionToken"] = args ? args.awsSessionToken : undefined;
             resourceInputs["description"] = args ? args.description : undefined;
             resourceInputs["location"] = args ? args.location : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
@@ -111,11 +142,23 @@ export class RemoteRepository extends pulumi.CustomResource {
  */
 export interface RemoteRepositoryState {
     /**
+     * The AWS access key ID for the Remote Repository.
+     */
+    awsAccessKeyId?: pulumi.Input<string>;
+    /**
+     * The AWS secret access key for the Remote Repository.
+     */
+    awsSecretAccessKey?: pulumi.Input<string>;
+    /**
+     * The AWS session token for the Remote Repository.
+     */
+    awsSessionToken?: pulumi.Input<string>;
+    /**
      * The description of the Remote Repository.
      */
     description?: pulumi.Input<string>;
     /**
-     * The location of the Remote Repository.
+     * The location of the Remote Repository. (Bucket name for S3)
      */
     location?: pulumi.Input<string>;
     /**
@@ -137,11 +180,23 @@ export interface RemoteRepositoryState {
  */
 export interface RemoteRepositoryArgs {
     /**
+     * The AWS access key ID for the Remote Repository.
+     */
+    awsAccessKeyId?: pulumi.Input<string>;
+    /**
+     * The AWS secret access key for the Remote Repository.
+     */
+    awsSecretAccessKey?: pulumi.Input<string>;
+    /**
+     * The AWS session token for the Remote Repository.
+     */
+    awsSessionToken?: pulumi.Input<string>;
+    /**
      * The description of the Remote Repository.
      */
     description?: pulumi.Input<string>;
     /**
-     * The location of the Remote Repository.
+     * The location of the Remote Repository. (Bucket name for S3)
      */
     location: pulumi.Input<string>;
     /**

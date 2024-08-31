@@ -47,7 +47,7 @@
                     "local_files": {
                         "maxItemsOne": false
                     },
-                    "runtime_parameters": {
+                    "runtime_parameter_values": {
                         "maxItemsOne": false
                     },
                     "source_remote_repositories": {
