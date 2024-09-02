@@ -9,6 +9,9 @@
                 "fields": {
                     "local_files": {
                         "maxItemsOne": false
+                    },
+                    "runtime_parameter_values": {
+                        "maxItemsOne": false
                     }
                 }
             },
