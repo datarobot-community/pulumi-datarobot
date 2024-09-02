@@ -2,8 +2,6 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import * as inputs from "./types/input";
-import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
 /**
@@ -60,14 +58,6 @@ export class ApplicationSource extends pulumi.CustomResource {
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * The resource settings for the Application Source.
-     */
-    public readonly resourceSettings!: pulumi.Output<outputs.ApplicationSourceResourceSettings>;
-    /**
-     * The runtime parameter values for the Application Source.
-     */
-    public readonly runtimeParameterValues!: pulumi.Output<outputs.ApplicationSourceRuntimeParameterValue[]>;
-    /**
      * The version ID of the Application Source.
      */
     public /*out*/ readonly versionId!: pulumi.Output<string>;
@@ -87,8 +77,6 @@ export class ApplicationSource extends pulumi.CustomResource {
             const state = argsOrState as ApplicationSourceState | undefined;
             resourceInputs["localFiles"] = state ? state.localFiles : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
-            resourceInputs["resourceSettings"] = state ? state.resourceSettings : undefined;
-            resourceInputs["runtimeParameterValues"] = state ? state.runtimeParameterValues : undefined;
             resourceInputs["versionId"] = state ? state.versionId : undefined;
         } else {
             const args = argsOrState as ApplicationSourceArgs | undefined;
@@ -97,8 +85,6 @@ export class ApplicationSource extends pulumi.CustomResource {
             }
             resourceInputs["localFiles"] = args ? args.localFiles : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
-            resourceInputs["resourceSettings"] = args ? args.resourceSettings : undefined;
-            resourceInputs["runtimeParameterValues"] = args ? args.runtimeParameterValues : undefined;
             resourceInputs["versionId"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -119,14 +105,6 @@ export interface ApplicationSourceState {
      */
     name?: pulumi.Input<string>;
     /**
-     * The resource settings for the Application Source.
-     */
-    resourceSettings?: pulumi.Input<inputs.ApplicationSourceResourceSettings>;
-    /**
-     * The runtime parameter values for the Application Source.
-     */
-    runtimeParameterValues?: pulumi.Input<pulumi.Input<inputs.ApplicationSourceRuntimeParameterValue>[]>;
-    /**
      * The version ID of the Application Source.
      */
     versionId?: pulumi.Input<string>;
@@ -144,12 +122,4 @@ export interface ApplicationSourceArgs {
      * The name of the Application Source.
      */
     name?: pulumi.Input<string>;
-    /**
-     * The resource settings for the Application Source.
-     */
-    resourceSettings?: pulumi.Input<inputs.ApplicationSourceResourceSettings>;
-    /**
-     * The runtime parameter values for the Application Source.
-     */
-    runtimeParameterValues?: pulumi.Input<pulumi.Input<inputs.ApplicationSourceRuntimeParameterValue>[]>;
 }

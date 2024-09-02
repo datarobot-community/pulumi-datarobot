@@ -82,12 +82,6 @@ namespace Pulumi.Datarobot
         public Output<string?> PositiveClassLabel { get; private set; } = null!;
 
         /// <summary>
-        /// The resource settings for the Custom Model.
-        /// </summary>
-        [Output("resourceSettings")]
-        public Output<Outputs.CustomModelResourceSettings> ResourceSettings { get; private set; } = null!;
-
-        /// <summary>
         /// The runtime parameter values for the Custom Model.
         /// </summary>
         [Output("runtimeParameterValues")]
@@ -247,12 +241,6 @@ namespace Pulumi.Datarobot
         [Input("positiveClassLabel")]
         public Input<string>? PositiveClassLabel { get; set; }
 
-        /// <summary>
-        /// The resource settings for the Custom Model.
-        /// </summary>
-        [Input("resourceSettings")]
-        public Input<Inputs.CustomModelResourceSettingsArgs>? ResourceSettings { get; set; }
-
         [Input("runtimeParameterValues")]
         private InputList<Inputs.CustomModelRuntimeParameterValueArgs>? _runtimeParameterValues;
 
@@ -380,12 +368,6 @@ namespace Pulumi.Datarobot
         /// </summary>
         [Input("positiveClassLabel")]
         public Input<string>? PositiveClassLabel { get; set; }
-
-        /// <summary>
-        /// The resource settings for the Custom Model.
-        /// </summary>
-        [Input("resourceSettings")]
-        public Input<Inputs.CustomModelResourceSettingsGetArgs>? ResourceSettings { get; set; }
 
         [Input("runtimeParameterValues")]
         private InputList<Inputs.CustomModelRuntimeParameterValueGetArgs>? _runtimeParameterValues;
