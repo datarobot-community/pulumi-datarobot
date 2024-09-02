@@ -37,6 +37,8 @@ type CustomModel struct {
 	OverallModerationConfiguration CustomModelOverallModerationConfigurationPtrOutput `pulumi:"overallModerationConfiguration"`
 	// The positive class label of the Custom Model.
 	PositiveClassLabel pulumi.StringPtrOutput `pulumi:"positiveClassLabel"`
+	// The resource settings for the Custom Model.
+	ResourceSettings CustomModelResourceSettingsOutput `pulumi:"resourceSettings"`
 	// The runtime parameter values for the Custom Model.
 	RuntimeParameterValues CustomModelRuntimeParameterValueArrayOutput `pulumi:"runtimeParameterValues"`
 	// The ID of the source LLM Blueprint for the Custom Model.
@@ -103,6 +105,8 @@ type customModelState struct {
 	OverallModerationConfiguration *CustomModelOverallModerationConfiguration `pulumi:"overallModerationConfiguration"`
 	// The positive class label of the Custom Model.
 	PositiveClassLabel *string `pulumi:"positiveClassLabel"`
+	// The resource settings for the Custom Model.
+	ResourceSettings *CustomModelResourceSettings `pulumi:"resourceSettings"`
 	// The runtime parameter values for the Custom Model.
 	RuntimeParameterValues []CustomModelRuntimeParameterValue `pulumi:"runtimeParameterValues"`
 	// The ID of the source LLM Blueprint for the Custom Model.
@@ -140,6 +144,8 @@ type CustomModelState struct {
 	OverallModerationConfiguration CustomModelOverallModerationConfigurationPtrInput
 	// The positive class label of the Custom Model.
 	PositiveClassLabel pulumi.StringPtrInput
+	// The resource settings for the Custom Model.
+	ResourceSettings CustomModelResourceSettingsPtrInput
 	// The runtime parameter values for the Custom Model.
 	RuntimeParameterValues CustomModelRuntimeParameterValueArrayInput
 	// The ID of the source LLM Blueprint for the Custom Model.
@@ -181,6 +187,8 @@ type customModelArgs struct {
 	OverallModerationConfiguration *CustomModelOverallModerationConfiguration `pulumi:"overallModerationConfiguration"`
 	// The positive class label of the Custom Model.
 	PositiveClassLabel *string `pulumi:"positiveClassLabel"`
+	// The resource settings for the Custom Model.
+	ResourceSettings *CustomModelResourceSettings `pulumi:"resourceSettings"`
 	// The runtime parameter values for the Custom Model.
 	RuntimeParameterValues []CustomModelRuntimeParameterValue `pulumi:"runtimeParameterValues"`
 	// The ID of the source LLM Blueprint for the Custom Model.
@@ -217,6 +225,8 @@ type CustomModelArgs struct {
 	OverallModerationConfiguration CustomModelOverallModerationConfigurationPtrInput
 	// The positive class label of the Custom Model.
 	PositiveClassLabel pulumi.StringPtrInput
+	// The resource settings for the Custom Model.
+	ResourceSettings CustomModelResourceSettingsPtrInput
 	// The runtime parameter values for the Custom Model.
 	RuntimeParameterValues CustomModelRuntimeParameterValueArrayInput
 	// The ID of the source LLM Blueprint for the Custom Model.
@@ -371,6 +381,11 @@ func (o CustomModelOutput) OverallModerationConfiguration() CustomModelOverallMo
 // The positive class label of the Custom Model.
 func (o CustomModelOutput) PositiveClassLabel() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *CustomModel) pulumi.StringPtrOutput { return v.PositiveClassLabel }).(pulumi.StringPtrOutput)
+}
+
+// The resource settings for the Custom Model.
+func (o CustomModelOutput) ResourceSettings() CustomModelResourceSettingsOutput {
+	return o.ApplyT(func(v *CustomModel) CustomModelResourceSettingsOutput { return v.ResourceSettings }).(CustomModelResourceSettingsOutput)
 }
 
 // The runtime parameter values for the Custom Model.
