@@ -65,44 +65,6 @@
         }
     },
     "types": {
-        "datarobot:index/ApplicationSourceResourceSettings:ApplicationSourceResourceSettings": {
-            "properties": {
-                "replicas": {
-                    "type": "integer",
-                    "description": "The replicas for the Application Source.\n"
-                }
-            },
-            "type": "object",
-            "language": {
-                "nodejs": {
-                    "requiredOutputs": [
-                        "replicas"
-                    ]
-                }
-            }
-        },
-        "datarobot:index/ApplicationSourceRuntimeParameterValue:ApplicationSourceRuntimeParameterValue": {
-            "properties": {
-                "key": {
-                    "type": "string",
-                    "description": "The name of the runtime parameter.\n"
-                },
-                "type": {
-                    "type": "string",
-                    "description": "The type of the runtime parameter.\n"
-                },
-                "value": {
-                    "type": "string",
-                    "description": "The value of the runtime parameter.\n"
-                }
-            },
-            "type": "object",
-            "required": [
-                "key",
-                "type",
-                "value"
-            ]
-        },
         "datarobot:index/CustomModelGuardConfiguration:CustomModelGuardConfiguration": {
             "properties": {
                 "deploymentId": {
@@ -209,32 +171,6 @@
                     "requiredOutputs": [
                         "timeoutAction",
                         "timeoutSec"
-                    ]
-                }
-            }
-        },
-        "datarobot:index/CustomModelResourceSettings:CustomModelResourceSettings": {
-            "properties": {
-                "memoryMb": {
-                    "type": "integer",
-                    "description": "The memory in MB for the Custom Model.\n"
-                },
-                "networkAccess": {
-                    "type": "string",
-                    "description": "The network access for the Custom Model.\n"
-                },
-                "replicas": {
-                    "type": "integer",
-                    "description": "The replicas for the Custom Model.\n"
-                }
-            },
-            "type": "object",
-            "language": {
-                "nodejs": {
-                    "requiredOutputs": [
-                        "memoryMb",
-                        "networkAccess",
-                        "replicas"
                     ]
                 }
             }
@@ -492,17 +428,6 @@
                     "type": "string",
                     "description": "The name of the Application Source.\n"
                 },
-                "resourceSettings": {
-                    "$ref": "#/types/datarobot:index/ApplicationSourceResourceSettings:ApplicationSourceResourceSettings",
-                    "description": "The resource settings for the Application Source.\n"
-                },
-                "runtimeParameterValues": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/types/datarobot:index/ApplicationSourceRuntimeParameterValue:ApplicationSourceRuntimeParameterValue"
-                    },
-                    "description": "The runtime parameter values for the Application Source.\n"
-                },
                 "versionId": {
                     "type": "string",
                     "description": "The version ID of the Application Source.\n"
@@ -511,8 +436,6 @@
             "required": [
                 "localFiles",
                 "name",
-                "resourceSettings",
-                "runtimeParameterValues",
                 "versionId"
             ],
             "inputProperties": {
@@ -526,17 +449,6 @@
                 "name": {
                     "type": "string",
                     "description": "The name of the Application Source.\n"
-                },
-                "resourceSettings": {
-                    "$ref": "#/types/datarobot:index/ApplicationSourceResourceSettings:ApplicationSourceResourceSettings",
-                    "description": "The resource settings for the Application Source.\n"
-                },
-                "runtimeParameterValues": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/types/datarobot:index/ApplicationSourceRuntimeParameterValue:ApplicationSourceRuntimeParameterValue"
-                    },
-                    "description": "The runtime parameter values for the Application Source.\n"
                 }
             },
             "requiredInputs": [
@@ -555,17 +467,6 @@
                     "name": {
                         "type": "string",
                         "description": "The name of the Application Source.\n"
-                    },
-                    "resourceSettings": {
-                        "$ref": "#/types/datarobot:index/ApplicationSourceResourceSettings:ApplicationSourceResourceSettings",
-                        "description": "The resource settings for the Application Source.\n"
-                    },
-                    "runtimeParameterValues": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/types/datarobot:index/ApplicationSourceRuntimeParameterValue:ApplicationSourceRuntimeParameterValue"
-                        },
-                        "description": "The runtime parameter values for the Application Source.\n"
                     },
                     "versionId": {
                         "type": "string",
@@ -853,7 +754,7 @@
             }
         },
         "datarobot:index/customModel:CustomModel": {
-            "description": "Data set from file\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.RemoteRepository;\nimport com.pulumi.datarobot.RemoteRepositoryArgs;\nimport com.pulumi.datarobot.CustomModel;\nimport com.pulumi.datarobot.CustomModelArgs;\nimport com.pulumi.datarobot.inputs.CustomModelSourceRemoteRepositoryArgs;\nimport com.pulumi.datarobot.inputs.CustomModelGuardConfigurationArgs;\nimport com.pulumi.datarobot.inputs.CustomModelGuardConfigurationInterventionArgs;\nimport com.pulumi.datarobot.inputs.CustomModelGuardConfigurationInterventionConditionArgs;\nimport com.pulumi.datarobot.inputs.CustomModelOverallModerationConfigurationArgs;\nimport com.pulumi.datarobot.inputs.CustomModelResourceSettingsArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var exampleRemoteRepository = new RemoteRepository(\"exampleRemoteRepository\", RemoteRepositoryArgs.builder()\n            .description(\"GitHub repository with Datarobot user models\")\n            .location(\"https://github.com/datarobot/datarobot-user-models\")\n            .sourceType(\"github\")\n            .build());\n\n        // set the credential id for private repositories\n        // credential_id = datarobot_api_token_credential.example.id\n        var exampleCustomModel = new CustomModel(\"exampleCustomModel\", CustomModelArgs.builder()\n            .description(\"An example custom model from GitHub repository\")\n            .sourceRemoteRepositories(CustomModelSourceRemoteRepositoryArgs.builder()\n                .id(exampleRemoteRepository.id())\n                .ref(\"master\")\n                .source_paths(\"model_templates/python3_dummy_binary\")\n                .build())\n            .localFiles(            \n                \"file1.py\",\n                \"file2.py\")\n            .targetType(\"Binary\")\n            .target(\"my_label\")\n            .baseEnvironmentName(\"[GenAI] Python 3.11 with Moderations\")\n            .guardConfigurations(CustomModelGuardConfigurationArgs.builder()\n                .template_name(\"Rouge 1\")\n                .name(\"Rouge 1 response\")\n                .stages(\"response\")\n                .intervention(CustomModelGuardConfigurationInterventionArgs.builder()\n                    .action(\"block\")\n                    .message(\"response has been blocked by Rogue 1 guard\")\n                    .condition(CustomModelGuardConfigurationInterventionConditionArgs.builder()\n                        .comparand(0.8)\n                        .comparator(\"lessThan\")\n                        .build())\n                    .build())\n                .build())\n            .overallModerationConfiguration(CustomModelOverallModerationConfigurationArgs.builder()\n                .timeout_sec(120)\n                .timeout_action(\"score\")\n                .build())\n            .resourceSettings(CustomModelResourceSettingsArgs.builder()\n                .memory_mb(512)\n                .replicas(2)\n                .network_access(\"NONE\")\n                .build())\n            .build());\n\n        ctx.export(\"exampleId\", exampleCustomModel.id());\n    }\n}\n```\n```yaml\nresources:\n  exampleRemoteRepository:\n    type: datarobot:RemoteRepository\n    properties:\n      description: GitHub repository with Datarobot user models\n      location: https://github.com/datarobot/datarobot-user-models\n      sourceType: github\n  exampleCustomModel:\n    type: datarobot:CustomModel\n    properties:\n      description: An example custom model from GitHub repository\n      sourceRemoteRepositories:\n        - id: ${exampleRemoteRepository.id}\n          ref: master\n          source_paths:\n            - model_templates/python3_dummy_binary\n      localFiles:\n        - file1.py\n        - file2.py\n      targetType: Binary\n      target: my_label\n      baseEnvironmentName: '[GenAI] Python 3.11 with Moderations'\n      # Guards\n      guardConfigurations:\n        - template_name: Rouge 1\n          name: Rouge 1 response\n          stages:\n            - response\n          intervention:\n            action: block\n            message: response has been blocked by Rogue 1 guard\n            condition:\n              comparand: 0.8\n              comparator: lessThan\n      overallModerationConfiguration:\n        timeout_sec: 120\n        timeout_action: score\n      resourceSettings:\n        memory_mb: 512\n        replicas: 2\n        network_access: NONE\noutputs:\n  exampleId: ${exampleCustomModel.id}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "description": "Data set from file\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.RemoteRepository;\nimport com.pulumi.datarobot.RemoteRepositoryArgs;\nimport com.pulumi.datarobot.CustomModel;\nimport com.pulumi.datarobot.CustomModelArgs;\nimport com.pulumi.datarobot.inputs.CustomModelSourceRemoteRepositoryArgs;\nimport com.pulumi.datarobot.inputs.CustomModelGuardConfigurationArgs;\nimport com.pulumi.datarobot.inputs.CustomModelGuardConfigurationInterventionArgs;\nimport com.pulumi.datarobot.inputs.CustomModelGuardConfigurationInterventionConditionArgs;\nimport com.pulumi.datarobot.inputs.CustomModelOverallModerationConfigurationArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var exampleRemoteRepository = new RemoteRepository(\"exampleRemoteRepository\", RemoteRepositoryArgs.builder()\n            .description(\"GitHub repository with Datarobot user models\")\n            .location(\"https://github.com/datarobot/datarobot-user-models\")\n            .sourceType(\"github\")\n            .build());\n\n        // set the credential id for private repositories\n        // credential_id = datarobot_api_token_credential.example.id\n        var exampleCustomModel = new CustomModel(\"exampleCustomModel\", CustomModelArgs.builder()\n            .description(\"An example custom model from GitHub repository\")\n            .sourceRemoteRepositories(CustomModelSourceRemoteRepositoryArgs.builder()\n                .id(exampleRemoteRepository.id())\n                .ref(\"master\")\n                .source_paths(\"model_templates/python3_dummy_binary\")\n                .build())\n            .localFiles(            \n                \"file1.py\",\n                \"file2.py\")\n            .targetType(\"Binary\")\n            .target(\"my_label\")\n            .baseEnvironmentName(\"[GenAI] Python 3.11 with Moderations\")\n            .guardConfigurations(CustomModelGuardConfigurationArgs.builder()\n                .template_name(\"Rouge 1\")\n                .name(\"Rouge 1 response\")\n                .stages(\"response\")\n                .intervention(CustomModelGuardConfigurationInterventionArgs.builder()\n                    .action(\"block\")\n                    .message(\"response has been blocked by Rogue 1 guard\")\n                    .condition(CustomModelGuardConfigurationInterventionConditionArgs.builder()\n                        .comparand(0.8)\n                        .comparator(\"lessThan\")\n                        .build())\n                    .build())\n                .build())\n            .overallModerationConfiguration(CustomModelOverallModerationConfigurationArgs.builder()\n                .timeout_sec(120)\n                .timeout_action(\"score\")\n                .build())\n            .build());\n\n        ctx.export(\"exampleId\", exampleCustomModel.id());\n    }\n}\n```\n```yaml\nresources:\n  exampleRemoteRepository:\n    type: datarobot:RemoteRepository\n    properties:\n      description: GitHub repository with Datarobot user models\n      location: https://github.com/datarobot/datarobot-user-models\n      sourceType: github\n  exampleCustomModel:\n    type: datarobot:CustomModel\n    properties:\n      description: An example custom model from GitHub repository\n      sourceRemoteRepositories:\n        - id: ${exampleRemoteRepository.id}\n          ref: master\n          source_paths:\n            - model_templates/python3_dummy_binary\n      localFiles:\n        - file1.py\n        - file2.py\n      targetType: Binary\n      target: my_label\n      baseEnvironmentName: '[GenAI] Python 3.11 with Moderations'\n      # Guards\n      guardConfigurations:\n        - template_name: Rouge 1\n          name: Rouge 1 response\n          stages:\n            - response\n          intervention:\n            action: block\n            message: response has been blocked by Rogue 1 guard\n            condition:\n              comparand: 0.8\n              comparator: lessThan\n      overallModerationConfiguration:\n        timeout_sec: 120\n        timeout_action: score\noutputs:\n  exampleId: ${exampleCustomModel.id}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
             "properties": {
                 "baseEnvironmentId": {
                     "type": "string",
@@ -905,10 +806,6 @@
                     "type": "string",
                     "description": "The positive class label of the Custom Model.\n"
                 },
-                "resourceSettings": {
-                    "$ref": "#/types/datarobot:index/CustomModelResourceSettings:CustomModelResourceSettings",
-                    "description": "The resource settings for the Custom Model.\n"
-                },
                 "runtimeParameterValues": {
                     "type": "array",
                     "items": {
@@ -944,7 +841,6 @@
                 "baseEnvironmentId",
                 "baseEnvironmentVersionId",
                 "name",
-                "resourceSettings",
                 "runtimeParameterValues",
                 "versionId"
             ],
@@ -998,10 +894,6 @@
                 "positiveClassLabel": {
                     "type": "string",
                     "description": "The positive class label of the Custom Model.\n"
-                },
-                "resourceSettings": {
-                    "$ref": "#/types/datarobot:index/CustomModelResourceSettings:CustomModelResourceSettings",
-                    "description": "The resource settings for the Custom Model.\n"
                 },
                 "runtimeParameterValues": {
                     "type": "array",
@@ -1082,10 +974,6 @@
                     "positiveClassLabel": {
                         "type": "string",
                         "description": "The positive class label of the Custom Model.\n"
-                    },
-                    "resourceSettings": {
-                        "$ref": "#/types/datarobot:index/CustomModelResourceSettings:CustomModelResourceSettings",
-                        "description": "The resource settings for the Custom Model.\n"
                     },
                     "runtimeParameterValues": {
                         "type": "array",

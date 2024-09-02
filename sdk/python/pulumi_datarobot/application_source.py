@@ -8,8 +8,6 @@ import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
-from . import outputs
-from ._inputs import *
 
 __all__ = ['ApplicationSourceArgs', 'ApplicationSource']
 
@@ -17,23 +15,15 @@ __all__ = ['ApplicationSourceArgs', 'ApplicationSource']
 class ApplicationSourceArgs:
     def __init__(__self__, *,
                  local_files: pulumi.Input[Sequence[pulumi.Input[str]]],
-                 name: Optional[pulumi.Input[str]] = None,
-                 resource_settings: Optional[pulumi.Input['ApplicationSourceResourceSettingsArgs']] = None,
-                 runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input['ApplicationSourceRuntimeParameterValueArgs']]]] = None):
+                 name: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a ApplicationSource resource.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] local_files: The list of local file paths used to build the Application Source.
         :param pulumi.Input[str] name: The name of the Application Source.
-        :param pulumi.Input['ApplicationSourceResourceSettingsArgs'] resource_settings: The resource settings for the Application Source.
-        :param pulumi.Input[Sequence[pulumi.Input['ApplicationSourceRuntimeParameterValueArgs']]] runtime_parameter_values: The runtime parameter values for the Application Source.
         """
         pulumi.set(__self__, "local_files", local_files)
         if name is not None:
             pulumi.set(__self__, "name", name)
-        if resource_settings is not None:
-            pulumi.set(__self__, "resource_settings", resource_settings)
-        if runtime_parameter_values is not None:
-            pulumi.set(__self__, "runtime_parameter_values", runtime_parameter_values)
 
     @property
     @pulumi.getter(name="localFiles")
@@ -59,55 +49,23 @@ class ApplicationSourceArgs:
     def name(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "name", value)
 
-    @property
-    @pulumi.getter(name="resourceSettings")
-    def resource_settings(self) -> Optional[pulumi.Input['ApplicationSourceResourceSettingsArgs']]:
-        """
-        The resource settings for the Application Source.
-        """
-        return pulumi.get(self, "resource_settings")
-
-    @resource_settings.setter
-    def resource_settings(self, value: Optional[pulumi.Input['ApplicationSourceResourceSettingsArgs']]):
-        pulumi.set(self, "resource_settings", value)
-
-    @property
-    @pulumi.getter(name="runtimeParameterValues")
-    def runtime_parameter_values(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ApplicationSourceRuntimeParameterValueArgs']]]]:
-        """
-        The runtime parameter values for the Application Source.
-        """
-        return pulumi.get(self, "runtime_parameter_values")
-
-    @runtime_parameter_values.setter
-    def runtime_parameter_values(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ApplicationSourceRuntimeParameterValueArgs']]]]):
-        pulumi.set(self, "runtime_parameter_values", value)
-
 
 @pulumi.input_type
 class _ApplicationSourceState:
     def __init__(__self__, *,
                  local_files: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  name: Optional[pulumi.Input[str]] = None,
-                 resource_settings: Optional[pulumi.Input['ApplicationSourceResourceSettingsArgs']] = None,
-                 runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input['ApplicationSourceRuntimeParameterValueArgs']]]] = None,
                  version_id: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering ApplicationSource resources.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] local_files: The list of local file paths used to build the Application Source.
         :param pulumi.Input[str] name: The name of the Application Source.
-        :param pulumi.Input['ApplicationSourceResourceSettingsArgs'] resource_settings: The resource settings for the Application Source.
-        :param pulumi.Input[Sequence[pulumi.Input['ApplicationSourceRuntimeParameterValueArgs']]] runtime_parameter_values: The runtime parameter values for the Application Source.
         :param pulumi.Input[str] version_id: The version ID of the Application Source.
         """
         if local_files is not None:
             pulumi.set(__self__, "local_files", local_files)
         if name is not None:
             pulumi.set(__self__, "name", name)
-        if resource_settings is not None:
-            pulumi.set(__self__, "resource_settings", resource_settings)
-        if runtime_parameter_values is not None:
-            pulumi.set(__self__, "runtime_parameter_values", runtime_parameter_values)
         if version_id is not None:
             pulumi.set(__self__, "version_id", version_id)
 
@@ -136,30 +94,6 @@ class _ApplicationSourceState:
         pulumi.set(self, "name", value)
 
     @property
-    @pulumi.getter(name="resourceSettings")
-    def resource_settings(self) -> Optional[pulumi.Input['ApplicationSourceResourceSettingsArgs']]:
-        """
-        The resource settings for the Application Source.
-        """
-        return pulumi.get(self, "resource_settings")
-
-    @resource_settings.setter
-    def resource_settings(self, value: Optional[pulumi.Input['ApplicationSourceResourceSettingsArgs']]):
-        pulumi.set(self, "resource_settings", value)
-
-    @property
-    @pulumi.getter(name="runtimeParameterValues")
-    def runtime_parameter_values(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ApplicationSourceRuntimeParameterValueArgs']]]]:
-        """
-        The runtime parameter values for the Application Source.
-        """
-        return pulumi.get(self, "runtime_parameter_values")
-
-    @runtime_parameter_values.setter
-    def runtime_parameter_values(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ApplicationSourceRuntimeParameterValueArgs']]]]):
-        pulumi.set(self, "runtime_parameter_values", value)
-
-    @property
     @pulumi.getter(name="versionId")
     def version_id(self) -> Optional[pulumi.Input[str]]:
         """
@@ -179,8 +113,6 @@ class ApplicationSource(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  local_files: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  name: Optional[pulumi.Input[str]] = None,
-                 resource_settings: Optional[pulumi.Input[pulumi.InputType['ApplicationSourceResourceSettingsArgs']]] = None,
-                 runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ApplicationSourceRuntimeParameterValueArgs']]]]] = None,
                  __props__=None):
         """
         Application Source
@@ -203,8 +135,6 @@ class ApplicationSource(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] local_files: The list of local file paths used to build the Application Source.
         :param pulumi.Input[str] name: The name of the Application Source.
-        :param pulumi.Input[pulumi.InputType['ApplicationSourceResourceSettingsArgs']] resource_settings: The resource settings for the Application Source.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ApplicationSourceRuntimeParameterValueArgs']]]] runtime_parameter_values: The runtime parameter values for the Application Source.
         """
         ...
     @overload
@@ -246,8 +176,6 @@ class ApplicationSource(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  local_files: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  name: Optional[pulumi.Input[str]] = None,
-                 resource_settings: Optional[pulumi.Input[pulumi.InputType['ApplicationSourceResourceSettingsArgs']]] = None,
-                 runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ApplicationSourceRuntimeParameterValueArgs']]]]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -261,8 +189,6 @@ class ApplicationSource(pulumi.CustomResource):
                 raise TypeError("Missing required property 'local_files'")
             __props__.__dict__["local_files"] = local_files
             __props__.__dict__["name"] = name
-            __props__.__dict__["resource_settings"] = resource_settings
-            __props__.__dict__["runtime_parameter_values"] = runtime_parameter_values
             __props__.__dict__["version_id"] = None
         super(ApplicationSource, __self__).__init__(
             'datarobot:index/applicationSource:ApplicationSource',
@@ -276,8 +202,6 @@ class ApplicationSource(pulumi.CustomResource):
             opts: Optional[pulumi.ResourceOptions] = None,
             local_files: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             name: Optional[pulumi.Input[str]] = None,
-            resource_settings: Optional[pulumi.Input[pulumi.InputType['ApplicationSourceResourceSettingsArgs']]] = None,
-            runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ApplicationSourceRuntimeParameterValueArgs']]]]] = None,
             version_id: Optional[pulumi.Input[str]] = None) -> 'ApplicationSource':
         """
         Get an existing ApplicationSource resource's state with the given name, id, and optional extra
@@ -288,8 +212,6 @@ class ApplicationSource(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] local_files: The list of local file paths used to build the Application Source.
         :param pulumi.Input[str] name: The name of the Application Source.
-        :param pulumi.Input[pulumi.InputType['ApplicationSourceResourceSettingsArgs']] resource_settings: The resource settings for the Application Source.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ApplicationSourceRuntimeParameterValueArgs']]]] runtime_parameter_values: The runtime parameter values for the Application Source.
         :param pulumi.Input[str] version_id: The version ID of the Application Source.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -298,8 +220,6 @@ class ApplicationSource(pulumi.CustomResource):
 
         __props__.__dict__["local_files"] = local_files
         __props__.__dict__["name"] = name
-        __props__.__dict__["resource_settings"] = resource_settings
-        __props__.__dict__["runtime_parameter_values"] = runtime_parameter_values
         __props__.__dict__["version_id"] = version_id
         return ApplicationSource(resource_name, opts=opts, __props__=__props__)
 
@@ -318,22 +238,6 @@ class ApplicationSource(pulumi.CustomResource):
         The name of the Application Source.
         """
         return pulumi.get(self, "name")
-
-    @property
-    @pulumi.getter(name="resourceSettings")
-    def resource_settings(self) -> pulumi.Output['outputs.ApplicationSourceResourceSettings']:
-        """
-        The resource settings for the Application Source.
-        """
-        return pulumi.get(self, "resource_settings")
-
-    @property
-    @pulumi.getter(name="runtimeParameterValues")
-    def runtime_parameter_values(self) -> pulumi.Output[Sequence['outputs.ApplicationSourceRuntimeParameterValue']]:
-        """
-        The runtime parameter values for the Application Source.
-        """
-        return pulumi.get(self, "runtime_parameter_values")
 
     @property
     @pulumi.getter(name="versionId")

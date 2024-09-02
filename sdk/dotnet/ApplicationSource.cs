@@ -55,18 +55,6 @@ namespace Pulumi.Datarobot
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// The resource settings for the Application Source.
-        /// </summary>
-        [Output("resourceSettings")]
-        public Output<Outputs.ApplicationSourceResourceSettings> ResourceSettings { get; private set; } = null!;
-
-        /// <summary>
-        /// The runtime parameter values for the Application Source.
-        /// </summary>
-        [Output("runtimeParameterValues")]
-        public Output<ImmutableArray<Outputs.ApplicationSourceRuntimeParameterValue>> RuntimeParameterValues { get; private set; } = null!;
-
-        /// <summary>
         /// The version ID of the Application Source.
         /// </summary>
         [Output("versionId")]
@@ -136,24 +124,6 @@ namespace Pulumi.Datarobot
         [Input("name")]
         public Input<string>? Name { get; set; }
 
-        /// <summary>
-        /// The resource settings for the Application Source.
-        /// </summary>
-        [Input("resourceSettings")]
-        public Input<Inputs.ApplicationSourceResourceSettingsArgs>? ResourceSettings { get; set; }
-
-        [Input("runtimeParameterValues")]
-        private InputList<Inputs.ApplicationSourceRuntimeParameterValueArgs>? _runtimeParameterValues;
-
-        /// <summary>
-        /// The runtime parameter values for the Application Source.
-        /// </summary>
-        public InputList<Inputs.ApplicationSourceRuntimeParameterValueArgs> RuntimeParameterValues
-        {
-            get => _runtimeParameterValues ?? (_runtimeParameterValues = new InputList<Inputs.ApplicationSourceRuntimeParameterValueArgs>());
-            set => _runtimeParameterValues = value;
-        }
-
         public ApplicationSourceArgs()
         {
         }
@@ -179,24 +149,6 @@ namespace Pulumi.Datarobot
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
-
-        /// <summary>
-        /// The resource settings for the Application Source.
-        /// </summary>
-        [Input("resourceSettings")]
-        public Input<Inputs.ApplicationSourceResourceSettingsGetArgs>? ResourceSettings { get; set; }
-
-        [Input("runtimeParameterValues")]
-        private InputList<Inputs.ApplicationSourceRuntimeParameterValueGetArgs>? _runtimeParameterValues;
-
-        /// <summary>
-        /// The runtime parameter values for the Application Source.
-        /// </summary>
-        public InputList<Inputs.ApplicationSourceRuntimeParameterValueGetArgs> RuntimeParameterValues
-        {
-            get => _runtimeParameterValues ?? (_runtimeParameterValues = new InputList<Inputs.ApplicationSourceRuntimeParameterValueGetArgs>());
-            set => _runtimeParameterValues = value;
-        }
 
         /// <summary>
         /// The version ID of the Application Source.

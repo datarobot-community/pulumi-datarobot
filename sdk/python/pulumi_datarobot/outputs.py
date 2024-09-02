@@ -11,13 +11,10 @@ from . import _utilities
 from . import outputs
 
 __all__ = [
-    'ApplicationSourceResourceSettings',
-    'ApplicationSourceRuntimeParameterValue',
     'CustomModelGuardConfiguration',
     'CustomModelGuardConfigurationIntervention',
     'CustomModelGuardConfigurationInterventionCondition',
     'CustomModelOverallModerationConfiguration',
-    'CustomModelResourceSettings',
     'CustomModelRuntimeParameterValue',
     'CustomModelSourceRemoteRepository',
     'DeploymentSettings',
@@ -25,65 +22,6 @@ __all__ = [
     'DeploymentSettingsPredictionsSettings',
     'VectorDatabaseChunkingParameters',
 ]
-
-@pulumi.output_type
-class ApplicationSourceResourceSettings(dict):
-    def __init__(__self__, *,
-                 replicas: Optional[int] = None):
-        """
-        :param int replicas: The replicas for the Application Source.
-        """
-        if replicas is not None:
-            pulumi.set(__self__, "replicas", replicas)
-
-    @property
-    @pulumi.getter
-    def replicas(self) -> Optional[int]:
-        """
-        The replicas for the Application Source.
-        """
-        return pulumi.get(self, "replicas")
-
-
-@pulumi.output_type
-class ApplicationSourceRuntimeParameterValue(dict):
-    def __init__(__self__, *,
-                 key: str,
-                 type: str,
-                 value: str):
-        """
-        :param str key: The name of the runtime parameter.
-        :param str type: The type of the runtime parameter.
-        :param str value: The value of the runtime parameter.
-        """
-        pulumi.set(__self__, "key", key)
-        pulumi.set(__self__, "type", type)
-        pulumi.set(__self__, "value", value)
-
-    @property
-    @pulumi.getter
-    def key(self) -> str:
-        """
-        The name of the runtime parameter.
-        """
-        return pulumi.get(self, "key")
-
-    @property
-    @pulumi.getter
-    def type(self) -> str:
-        """
-        The type of the runtime parameter.
-        """
-        return pulumi.get(self, "type")
-
-    @property
-    @pulumi.getter
-    def value(self) -> str:
-        """
-        The value of the runtime parameter.
-        """
-        return pulumi.get(self, "value")
-
 
 @pulumi.output_type
 class CustomModelGuardConfiguration(dict):
@@ -313,68 +251,6 @@ class CustomModelOverallModerationConfiguration(dict):
         The timeout in seconds of the overall moderation configuration.
         """
         return pulumi.get(self, "timeout_sec")
-
-
-@pulumi.output_type
-class CustomModelResourceSettings(dict):
-    @staticmethod
-    def __key_warning(key: str):
-        suggest = None
-        if key == "memoryMb":
-            suggest = "memory_mb"
-        elif key == "networkAccess":
-            suggest = "network_access"
-
-        if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in CustomModelResourceSettings. Access the value via the '{suggest}' property getter instead.")
-
-    def __getitem__(self, key: str) -> Any:
-        CustomModelResourceSettings.__key_warning(key)
-        return super().__getitem__(key)
-
-    def get(self, key: str, default = None) -> Any:
-        CustomModelResourceSettings.__key_warning(key)
-        return super().get(key, default)
-
-    def __init__(__self__, *,
-                 memory_mb: Optional[int] = None,
-                 network_access: Optional[str] = None,
-                 replicas: Optional[int] = None):
-        """
-        :param int memory_mb: The memory in MB for the Custom Model.
-        :param str network_access: The network access for the Custom Model.
-        :param int replicas: The replicas for the Custom Model.
-        """
-        if memory_mb is not None:
-            pulumi.set(__self__, "memory_mb", memory_mb)
-        if network_access is not None:
-            pulumi.set(__self__, "network_access", network_access)
-        if replicas is not None:
-            pulumi.set(__self__, "replicas", replicas)
-
-    @property
-    @pulumi.getter(name="memoryMb")
-    def memory_mb(self) -> Optional[int]:
-        """
-        The memory in MB for the Custom Model.
-        """
-        return pulumi.get(self, "memory_mb")
-
-    @property
-    @pulumi.getter(name="networkAccess")
-    def network_access(self) -> Optional[str]:
-        """
-        The network access for the Custom Model.
-        """
-        return pulumi.get(self, "network_access")
-
-    @property
-    @pulumi.getter
-    def replicas(self) -> Optional[int]:
-        """
-        The replicas for the Custom Model.
-        """
-        return pulumi.get(self, "replicas")
 
 
 @pulumi.output_type

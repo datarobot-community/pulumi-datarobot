@@ -82,10 +82,6 @@ export class CustomModel extends pulumi.CustomResource {
      */
     public readonly positiveClassLabel!: pulumi.Output<string | undefined>;
     /**
-     * The resource settings for the Custom Model.
-     */
-    public readonly resourceSettings!: pulumi.Output<outputs.CustomModelResourceSettings>;
-    /**
      * The runtime parameter values for the Custom Model.
      */
     public readonly runtimeParameterValues!: pulumi.Output<outputs.CustomModelRuntimeParameterValue[]>;
@@ -134,7 +130,6 @@ export class CustomModel extends pulumi.CustomResource {
             resourceInputs["negativeClassLabel"] = state ? state.negativeClassLabel : undefined;
             resourceInputs["overallModerationConfiguration"] = state ? state.overallModerationConfiguration : undefined;
             resourceInputs["positiveClassLabel"] = state ? state.positiveClassLabel : undefined;
-            resourceInputs["resourceSettings"] = state ? state.resourceSettings : undefined;
             resourceInputs["runtimeParameterValues"] = state ? state.runtimeParameterValues : undefined;
             resourceInputs["sourceLlmBlueprintId"] = state ? state.sourceLlmBlueprintId : undefined;
             resourceInputs["sourceRemoteRepositories"] = state ? state.sourceRemoteRepositories : undefined;
@@ -154,7 +149,6 @@ export class CustomModel extends pulumi.CustomResource {
             resourceInputs["negativeClassLabel"] = args ? args.negativeClassLabel : undefined;
             resourceInputs["overallModerationConfiguration"] = args ? args.overallModerationConfiguration : undefined;
             resourceInputs["positiveClassLabel"] = args ? args.positiveClassLabel : undefined;
-            resourceInputs["resourceSettings"] = args ? args.resourceSettings : undefined;
             resourceInputs["runtimeParameterValues"] = args ? args.runtimeParameterValues : undefined;
             resourceInputs["sourceLlmBlueprintId"] = args ? args.sourceLlmBlueprintId : undefined;
             resourceInputs["sourceRemoteRepositories"] = args ? args.sourceRemoteRepositories : undefined;
@@ -215,10 +209,6 @@ export interface CustomModelState {
      * The positive class label of the Custom Model.
      */
     positiveClassLabel?: pulumi.Input<string>;
-    /**
-     * The resource settings for the Custom Model.
-     */
-    resourceSettings?: pulumi.Input<inputs.CustomModelResourceSettings>;
     /**
      * The runtime parameter values for the Custom Model.
      */
@@ -293,10 +283,6 @@ export interface CustomModelArgs {
      * The positive class label of the Custom Model.
      */
     positiveClassLabel?: pulumi.Input<string>;
-    /**
-     * The resource settings for the Custom Model.
-     */
-    resourceSettings?: pulumi.Input<inputs.CustomModelResourceSettings>;
     /**
      * The runtime parameter values for the Custom Model.
      */

@@ -27,7 +27,6 @@ class CustomModelArgs:
                  negative_class_label: Optional[pulumi.Input[str]] = None,
                  overall_moderation_configuration: Optional[pulumi.Input['CustomModelOverallModerationConfigurationArgs']] = None,
                  positive_class_label: Optional[pulumi.Input[str]] = None,
-                 resource_settings: Optional[pulumi.Input['CustomModelResourceSettingsArgs']] = None,
                  runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input['CustomModelRuntimeParameterValueArgs']]]] = None,
                  source_llm_blueprint_id: Optional[pulumi.Input[str]] = None,
                  source_remote_repositories: Optional[pulumi.Input[Sequence[pulumi.Input['CustomModelSourceRemoteRepositoryArgs']]]] = None,
@@ -46,7 +45,6 @@ class CustomModelArgs:
         :param pulumi.Input[str] negative_class_label: The negative class label of the Custom Model.
         :param pulumi.Input['CustomModelOverallModerationConfigurationArgs'] overall_moderation_configuration: The overall moderation configuration for the Custom Model.
         :param pulumi.Input[str] positive_class_label: The positive class label of the Custom Model.
-        :param pulumi.Input['CustomModelResourceSettingsArgs'] resource_settings: The resource settings for the Custom Model.
         :param pulumi.Input[Sequence[pulumi.Input['CustomModelRuntimeParameterValueArgs']]] runtime_parameter_values: The runtime parameter values for the Custom Model.
         :param pulumi.Input[str] source_llm_blueprint_id: The ID of the source LLM Blueprint for the Custom Model.
         :param pulumi.Input[Sequence[pulumi.Input['CustomModelSourceRemoteRepositoryArgs']]] source_remote_repositories: The source remote repositories for the Custom Model.
@@ -75,8 +73,6 @@ class CustomModelArgs:
             pulumi.set(__self__, "overall_moderation_configuration", overall_moderation_configuration)
         if positive_class_label is not None:
             pulumi.set(__self__, "positive_class_label", positive_class_label)
-        if resource_settings is not None:
-            pulumi.set(__self__, "resource_settings", resource_settings)
         if runtime_parameter_values is not None:
             pulumi.set(__self__, "runtime_parameter_values", runtime_parameter_values)
         if source_llm_blueprint_id is not None:
@@ -221,18 +217,6 @@ class CustomModelArgs:
         pulumi.set(self, "positive_class_label", value)
 
     @property
-    @pulumi.getter(name="resourceSettings")
-    def resource_settings(self) -> Optional[pulumi.Input['CustomModelResourceSettingsArgs']]:
-        """
-        The resource settings for the Custom Model.
-        """
-        return pulumi.get(self, "resource_settings")
-
-    @resource_settings.setter
-    def resource_settings(self, value: Optional[pulumi.Input['CustomModelResourceSettingsArgs']]):
-        pulumi.set(self, "resource_settings", value)
-
-    @property
     @pulumi.getter(name="runtimeParameterValues")
     def runtime_parameter_values(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CustomModelRuntimeParameterValueArgs']]]]:
         """
@@ -307,7 +291,6 @@ class _CustomModelState:
                  negative_class_label: Optional[pulumi.Input[str]] = None,
                  overall_moderation_configuration: Optional[pulumi.Input['CustomModelOverallModerationConfigurationArgs']] = None,
                  positive_class_label: Optional[pulumi.Input[str]] = None,
-                 resource_settings: Optional[pulumi.Input['CustomModelResourceSettingsArgs']] = None,
                  runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input['CustomModelRuntimeParameterValueArgs']]]] = None,
                  source_llm_blueprint_id: Optional[pulumi.Input[str]] = None,
                  source_remote_repositories: Optional[pulumi.Input[Sequence[pulumi.Input['CustomModelSourceRemoteRepositoryArgs']]]] = None,
@@ -327,7 +310,6 @@ class _CustomModelState:
         :param pulumi.Input[str] negative_class_label: The negative class label of the Custom Model.
         :param pulumi.Input['CustomModelOverallModerationConfigurationArgs'] overall_moderation_configuration: The overall moderation configuration for the Custom Model.
         :param pulumi.Input[str] positive_class_label: The positive class label of the Custom Model.
-        :param pulumi.Input['CustomModelResourceSettingsArgs'] resource_settings: The resource settings for the Custom Model.
         :param pulumi.Input[Sequence[pulumi.Input['CustomModelRuntimeParameterValueArgs']]] runtime_parameter_values: The runtime parameter values for the Custom Model.
         :param pulumi.Input[str] source_llm_blueprint_id: The ID of the source LLM Blueprint for the Custom Model.
         :param pulumi.Input[Sequence[pulumi.Input['CustomModelSourceRemoteRepositoryArgs']]] source_remote_repositories: The source remote repositories for the Custom Model.
@@ -357,8 +339,6 @@ class _CustomModelState:
             pulumi.set(__self__, "overall_moderation_configuration", overall_moderation_configuration)
         if positive_class_label is not None:
             pulumi.set(__self__, "positive_class_label", positive_class_label)
-        if resource_settings is not None:
-            pulumi.set(__self__, "resource_settings", resource_settings)
         if runtime_parameter_values is not None:
             pulumi.set(__self__, "runtime_parameter_values", runtime_parameter_values)
         if source_llm_blueprint_id is not None:
@@ -505,18 +485,6 @@ class _CustomModelState:
         pulumi.set(self, "positive_class_label", value)
 
     @property
-    @pulumi.getter(name="resourceSettings")
-    def resource_settings(self) -> Optional[pulumi.Input['CustomModelResourceSettingsArgs']]:
-        """
-        The resource settings for the Custom Model.
-        """
-        return pulumi.get(self, "resource_settings")
-
-    @resource_settings.setter
-    def resource_settings(self, value: Optional[pulumi.Input['CustomModelResourceSettingsArgs']]):
-        pulumi.set(self, "resource_settings", value)
-
-    @property
     @pulumi.getter(name="runtimeParameterValues")
     def runtime_parameter_values(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CustomModelRuntimeParameterValueArgs']]]]:
         """
@@ -605,7 +573,6 @@ class CustomModel(pulumi.CustomResource):
                  negative_class_label: Optional[pulumi.Input[str]] = None,
                  overall_moderation_configuration: Optional[pulumi.Input[pulumi.InputType['CustomModelOverallModerationConfigurationArgs']]] = None,
                  positive_class_label: Optional[pulumi.Input[str]] = None,
-                 resource_settings: Optional[pulumi.Input[pulumi.InputType['CustomModelResourceSettingsArgs']]] = None,
                  runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CustomModelRuntimeParameterValueArgs']]]]] = None,
                  source_llm_blueprint_id: Optional[pulumi.Input[str]] = None,
                  source_remote_repositories: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CustomModelSourceRemoteRepositoryArgs']]]]] = None,
@@ -628,7 +595,6 @@ class CustomModel(pulumi.CustomResource):
         :param pulumi.Input[str] negative_class_label: The negative class label of the Custom Model.
         :param pulumi.Input[pulumi.InputType['CustomModelOverallModerationConfigurationArgs']] overall_moderation_configuration: The overall moderation configuration for the Custom Model.
         :param pulumi.Input[str] positive_class_label: The positive class label of the Custom Model.
-        :param pulumi.Input[pulumi.InputType['CustomModelResourceSettingsArgs']] resource_settings: The resource settings for the Custom Model.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CustomModelRuntimeParameterValueArgs']]]] runtime_parameter_values: The runtime parameter values for the Custom Model.
         :param pulumi.Input[str] source_llm_blueprint_id: The ID of the source LLM Blueprint for the Custom Model.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CustomModelSourceRemoteRepositoryArgs']]]] source_remote_repositories: The source remote repositories for the Custom Model.
@@ -670,7 +636,6 @@ class CustomModel(pulumi.CustomResource):
                  negative_class_label: Optional[pulumi.Input[str]] = None,
                  overall_moderation_configuration: Optional[pulumi.Input[pulumi.InputType['CustomModelOverallModerationConfigurationArgs']]] = None,
                  positive_class_label: Optional[pulumi.Input[str]] = None,
-                 resource_settings: Optional[pulumi.Input[pulumi.InputType['CustomModelResourceSettingsArgs']]] = None,
                  runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CustomModelRuntimeParameterValueArgs']]]]] = None,
                  source_llm_blueprint_id: Optional[pulumi.Input[str]] = None,
                  source_remote_repositories: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CustomModelSourceRemoteRepositoryArgs']]]]] = None,
@@ -696,7 +661,6 @@ class CustomModel(pulumi.CustomResource):
             __props__.__dict__["negative_class_label"] = negative_class_label
             __props__.__dict__["overall_moderation_configuration"] = overall_moderation_configuration
             __props__.__dict__["positive_class_label"] = positive_class_label
-            __props__.__dict__["resource_settings"] = resource_settings
             __props__.__dict__["runtime_parameter_values"] = runtime_parameter_values
             __props__.__dict__["source_llm_blueprint_id"] = source_llm_blueprint_id
             __props__.__dict__["source_remote_repositories"] = source_remote_repositories
@@ -724,7 +688,6 @@ class CustomModel(pulumi.CustomResource):
             negative_class_label: Optional[pulumi.Input[str]] = None,
             overall_moderation_configuration: Optional[pulumi.Input[pulumi.InputType['CustomModelOverallModerationConfigurationArgs']]] = None,
             positive_class_label: Optional[pulumi.Input[str]] = None,
-            resource_settings: Optional[pulumi.Input[pulumi.InputType['CustomModelResourceSettingsArgs']]] = None,
             runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CustomModelRuntimeParameterValueArgs']]]]] = None,
             source_llm_blueprint_id: Optional[pulumi.Input[str]] = None,
             source_remote_repositories: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CustomModelSourceRemoteRepositoryArgs']]]]] = None,
@@ -749,7 +712,6 @@ class CustomModel(pulumi.CustomResource):
         :param pulumi.Input[str] negative_class_label: The negative class label of the Custom Model.
         :param pulumi.Input[pulumi.InputType['CustomModelOverallModerationConfigurationArgs']] overall_moderation_configuration: The overall moderation configuration for the Custom Model.
         :param pulumi.Input[str] positive_class_label: The positive class label of the Custom Model.
-        :param pulumi.Input[pulumi.InputType['CustomModelResourceSettingsArgs']] resource_settings: The resource settings for the Custom Model.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CustomModelRuntimeParameterValueArgs']]]] runtime_parameter_values: The runtime parameter values for the Custom Model.
         :param pulumi.Input[str] source_llm_blueprint_id: The ID of the source LLM Blueprint for the Custom Model.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CustomModelSourceRemoteRepositoryArgs']]]] source_remote_repositories: The source remote repositories for the Custom Model.
@@ -772,7 +734,6 @@ class CustomModel(pulumi.CustomResource):
         __props__.__dict__["negative_class_label"] = negative_class_label
         __props__.__dict__["overall_moderation_configuration"] = overall_moderation_configuration
         __props__.__dict__["positive_class_label"] = positive_class_label
-        __props__.__dict__["resource_settings"] = resource_settings
         __props__.__dict__["runtime_parameter_values"] = runtime_parameter_values
         __props__.__dict__["source_llm_blueprint_id"] = source_llm_blueprint_id
         __props__.__dict__["source_remote_repositories"] = source_remote_repositories
@@ -868,14 +829,6 @@ class CustomModel(pulumi.CustomResource):
         The positive class label of the Custom Model.
         """
         return pulumi.get(self, "positive_class_label")
-
-    @property
-    @pulumi.getter(name="resourceSettings")
-    def resource_settings(self) -> pulumi.Output['outputs.CustomModelResourceSettings']:
-        """
-        The resource settings for the Custom Model.
-        """
-        return pulumi.get(self, "resource_settings")
 
     @property
     @pulumi.getter(name="runtimeParameterValues")
