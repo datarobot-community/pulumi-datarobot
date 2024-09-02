@@ -51,6 +51,10 @@ type ApplicationSource struct {
 	LocalFiles pulumi.StringArrayOutput `pulumi:"localFiles"`
 	// The name of the Application Source.
 	Name pulumi.StringOutput `pulumi:"name"`
+	// The resource settings for the Application Source.
+	ResourceSettings ApplicationSourceResourceSettingsOutput `pulumi:"resourceSettings"`
+	// The runtime parameter values for the Application Source.
+	RuntimeParameterValues ApplicationSourceRuntimeParameterValueArrayOutput `pulumi:"runtimeParameterValues"`
 	// The version ID of the Application Source.
 	VersionId pulumi.StringOutput `pulumi:"versionId"`
 }
@@ -92,6 +96,10 @@ type applicationSourceState struct {
 	LocalFiles []string `pulumi:"localFiles"`
 	// The name of the Application Source.
 	Name *string `pulumi:"name"`
+	// The resource settings for the Application Source.
+	ResourceSettings *ApplicationSourceResourceSettings `pulumi:"resourceSettings"`
+	// The runtime parameter values for the Application Source.
+	RuntimeParameterValues []ApplicationSourceRuntimeParameterValue `pulumi:"runtimeParameterValues"`
 	// The version ID of the Application Source.
 	VersionId *string `pulumi:"versionId"`
 }
@@ -101,6 +109,10 @@ type ApplicationSourceState struct {
 	LocalFiles pulumi.StringArrayInput
 	// The name of the Application Source.
 	Name pulumi.StringPtrInput
+	// The resource settings for the Application Source.
+	ResourceSettings ApplicationSourceResourceSettingsPtrInput
+	// The runtime parameter values for the Application Source.
+	RuntimeParameterValues ApplicationSourceRuntimeParameterValueArrayInput
 	// The version ID of the Application Source.
 	VersionId pulumi.StringPtrInput
 }
@@ -114,6 +126,10 @@ type applicationSourceArgs struct {
 	LocalFiles []string `pulumi:"localFiles"`
 	// The name of the Application Source.
 	Name *string `pulumi:"name"`
+	// The resource settings for the Application Source.
+	ResourceSettings *ApplicationSourceResourceSettings `pulumi:"resourceSettings"`
+	// The runtime parameter values for the Application Source.
+	RuntimeParameterValues []ApplicationSourceRuntimeParameterValue `pulumi:"runtimeParameterValues"`
 }
 
 // The set of arguments for constructing a ApplicationSource resource.
@@ -122,6 +138,10 @@ type ApplicationSourceArgs struct {
 	LocalFiles pulumi.StringArrayInput
 	// The name of the Application Source.
 	Name pulumi.StringPtrInput
+	// The resource settings for the Application Source.
+	ResourceSettings ApplicationSourceResourceSettingsPtrInput
+	// The runtime parameter values for the Application Source.
+	RuntimeParameterValues ApplicationSourceRuntimeParameterValueArrayInput
 }
 
 func (ApplicationSourceArgs) ElementType() reflect.Type {
@@ -219,6 +239,18 @@ func (o ApplicationSourceOutput) LocalFiles() pulumi.StringArrayOutput {
 // The name of the Application Source.
 func (o ApplicationSourceOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *ApplicationSource) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
+}
+
+// The resource settings for the Application Source.
+func (o ApplicationSourceOutput) ResourceSettings() ApplicationSourceResourceSettingsOutput {
+	return o.ApplyT(func(v *ApplicationSource) ApplicationSourceResourceSettingsOutput { return v.ResourceSettings }).(ApplicationSourceResourceSettingsOutput)
+}
+
+// The runtime parameter values for the Application Source.
+func (o ApplicationSourceOutput) RuntimeParameterValues() ApplicationSourceRuntimeParameterValueArrayOutput {
+	return o.ApplyT(func(v *ApplicationSource) ApplicationSourceRuntimeParameterValueArrayOutput {
+		return v.RuntimeParameterValues
+	}).(ApplicationSourceRuntimeParameterValueArrayOutput)
 }
 
 // The version ID of the Application Source.

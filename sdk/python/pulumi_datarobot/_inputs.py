@@ -10,10 +10,13 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = [
+    'ApplicationSourceResourceSettingsArgs',
+    'ApplicationSourceRuntimeParameterValueArgs',
     'CustomModelGuardConfigurationArgs',
     'CustomModelGuardConfigurationInterventionArgs',
     'CustomModelGuardConfigurationInterventionConditionArgs',
     'CustomModelOverallModerationConfigurationArgs',
+    'CustomModelResourceSettingsArgs',
     'CustomModelRuntimeParameterValueArgs',
     'CustomModelSourceRemoteRepositoryArgs',
     'DeploymentSettingsArgs',
@@ -21,6 +24,81 @@ __all__ = [
     'DeploymentSettingsPredictionsSettingsArgs',
     'VectorDatabaseChunkingParametersArgs',
 ]
+
+@pulumi.input_type
+class ApplicationSourceResourceSettingsArgs:
+    def __init__(__self__, *,
+                 replicas: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[int] replicas: The replicas for the Application Source.
+        """
+        if replicas is not None:
+            pulumi.set(__self__, "replicas", replicas)
+
+    @property
+    @pulumi.getter
+    def replicas(self) -> Optional[pulumi.Input[int]]:
+        """
+        The replicas for the Application Source.
+        """
+        return pulumi.get(self, "replicas")
+
+    @replicas.setter
+    def replicas(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "replicas", value)
+
+
+@pulumi.input_type
+class ApplicationSourceRuntimeParameterValueArgs:
+    def __init__(__self__, *,
+                 key: pulumi.Input[str],
+                 type: pulumi.Input[str],
+                 value: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] key: The name of the runtime parameter.
+        :param pulumi.Input[str] type: The type of the runtime parameter.
+        :param pulumi.Input[str] value: The value of the runtime parameter.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "type", type)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> pulumi.Input[str]:
+        """
+        The name of the runtime parameter.
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: pulumi.Input[str]):
+        pulumi.set(self, "key", value)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        The type of the runtime parameter.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> pulumi.Input[str]:
+        """
+        The value of the runtime parameter.
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: pulumi.Input[str]):
+        pulumi.set(self, "value", value)
+
 
 @pulumi.input_type
 class CustomModelGuardConfigurationArgs:
@@ -264,6 +342,61 @@ class CustomModelOverallModerationConfigurationArgs:
     @timeout_sec.setter
     def timeout_sec(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "timeout_sec", value)
+
+
+@pulumi.input_type
+class CustomModelResourceSettingsArgs:
+    def __init__(__self__, *,
+                 memory_mb: Optional[pulumi.Input[int]] = None,
+                 network_access: Optional[pulumi.Input[str]] = None,
+                 replicas: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[int] memory_mb: The memory in MB for the Custom Model.
+        :param pulumi.Input[str] network_access: The network access for the Custom Model.
+        :param pulumi.Input[int] replicas: The replicas for the Custom Model.
+        """
+        if memory_mb is not None:
+            pulumi.set(__self__, "memory_mb", memory_mb)
+        if network_access is not None:
+            pulumi.set(__self__, "network_access", network_access)
+        if replicas is not None:
+            pulumi.set(__self__, "replicas", replicas)
+
+    @property
+    @pulumi.getter(name="memoryMb")
+    def memory_mb(self) -> Optional[pulumi.Input[int]]:
+        """
+        The memory in MB for the Custom Model.
+        """
+        return pulumi.get(self, "memory_mb")
+
+    @memory_mb.setter
+    def memory_mb(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "memory_mb", value)
+
+    @property
+    @pulumi.getter(name="networkAccess")
+    def network_access(self) -> Optional[pulumi.Input[str]]:
+        """
+        The network access for the Custom Model.
+        """
+        return pulumi.get(self, "network_access")
+
+    @network_access.setter
+    def network_access(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "network_access", value)
+
+    @property
+    @pulumi.getter
+    def replicas(self) -> Optional[pulumi.Input[int]]:
+        """
+        The replicas for the Custom Model.
+        """
+        return pulumi.get(self, "replicas")
+
+    @replicas.setter
+    def replicas(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "replicas", value)
 
 
 @pulumi.input_type

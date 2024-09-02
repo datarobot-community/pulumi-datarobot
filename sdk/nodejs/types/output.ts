@@ -5,6 +5,28 @@ import * as pulumi from "@pulumi/pulumi";
 import * as inputs from "../types/input";
 import * as outputs from "../types/output";
 
+export interface ApplicationSourceResourceSettings {
+    /**
+     * The replicas for the Application Source.
+     */
+    replicas: number;
+}
+
+export interface ApplicationSourceRuntimeParameterValue {
+    /**
+     * The name of the runtime parameter.
+     */
+    key: string;
+    /**
+     * The type of the runtime parameter.
+     */
+    type: string;
+    /**
+     * The value of the runtime parameter.
+     */
+    value: string;
+}
+
 export interface CustomModelGuardConfiguration {
     /**
      * The deployment ID of this guard.
@@ -71,6 +93,21 @@ export interface CustomModelOverallModerationConfiguration {
      * The timeout in seconds of the overall moderation configuration.
      */
     timeoutSec: number;
+}
+
+export interface CustomModelResourceSettings {
+    /**
+     * The memory in MB for the Custom Model.
+     */
+    memoryMb: number;
+    /**
+     * The network access for the Custom Model.
+     */
+    networkAccess: string;
+    /**
+     * The replicas for the Custom Model.
+     */
+    replicas: number;
 }
 
 export interface CustomModelRuntimeParameterValue {

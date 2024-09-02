@@ -54,6 +54,8 @@ resources:
         - key: GOOGLE_SERVICE_ACCOUNT
           type: credential
           value: ${datarobotGoogleCloudCredential.id}
+      resourceSettings:
+        memoryMb: 1024
 
   datarobotRegisteredModel:
     type: datarobot:RegisteredModel
