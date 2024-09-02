@@ -13,6 +13,258 @@ import (
 
 var _ = internal.GetEnvOrDefault
 
+type ApplicationSourceResourceSettings struct {
+	// The replicas for the Application Source.
+	Replicas *int `pulumi:"replicas"`
+}
+
+// ApplicationSourceResourceSettingsInput is an input type that accepts ApplicationSourceResourceSettingsArgs and ApplicationSourceResourceSettingsOutput values.
+// You can construct a concrete instance of `ApplicationSourceResourceSettingsInput` via:
+//
+//	ApplicationSourceResourceSettingsArgs{...}
+type ApplicationSourceResourceSettingsInput interface {
+	pulumi.Input
+
+	ToApplicationSourceResourceSettingsOutput() ApplicationSourceResourceSettingsOutput
+	ToApplicationSourceResourceSettingsOutputWithContext(context.Context) ApplicationSourceResourceSettingsOutput
+}
+
+type ApplicationSourceResourceSettingsArgs struct {
+	// The replicas for the Application Source.
+	Replicas pulumi.IntPtrInput `pulumi:"replicas"`
+}
+
+func (ApplicationSourceResourceSettingsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ApplicationSourceResourceSettings)(nil)).Elem()
+}
+
+func (i ApplicationSourceResourceSettingsArgs) ToApplicationSourceResourceSettingsOutput() ApplicationSourceResourceSettingsOutput {
+	return i.ToApplicationSourceResourceSettingsOutputWithContext(context.Background())
+}
+
+func (i ApplicationSourceResourceSettingsArgs) ToApplicationSourceResourceSettingsOutputWithContext(ctx context.Context) ApplicationSourceResourceSettingsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ApplicationSourceResourceSettingsOutput)
+}
+
+func (i ApplicationSourceResourceSettingsArgs) ToApplicationSourceResourceSettingsPtrOutput() ApplicationSourceResourceSettingsPtrOutput {
+	return i.ToApplicationSourceResourceSettingsPtrOutputWithContext(context.Background())
+}
+
+func (i ApplicationSourceResourceSettingsArgs) ToApplicationSourceResourceSettingsPtrOutputWithContext(ctx context.Context) ApplicationSourceResourceSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ApplicationSourceResourceSettingsOutput).ToApplicationSourceResourceSettingsPtrOutputWithContext(ctx)
+}
+
+// ApplicationSourceResourceSettingsPtrInput is an input type that accepts ApplicationSourceResourceSettingsArgs, ApplicationSourceResourceSettingsPtr and ApplicationSourceResourceSettingsPtrOutput values.
+// You can construct a concrete instance of `ApplicationSourceResourceSettingsPtrInput` via:
+//
+//	        ApplicationSourceResourceSettingsArgs{...}
+//
+//	or:
+//
+//	        nil
+type ApplicationSourceResourceSettingsPtrInput interface {
+	pulumi.Input
+
+	ToApplicationSourceResourceSettingsPtrOutput() ApplicationSourceResourceSettingsPtrOutput
+	ToApplicationSourceResourceSettingsPtrOutputWithContext(context.Context) ApplicationSourceResourceSettingsPtrOutput
+}
+
+type applicationSourceResourceSettingsPtrType ApplicationSourceResourceSettingsArgs
+
+func ApplicationSourceResourceSettingsPtr(v *ApplicationSourceResourceSettingsArgs) ApplicationSourceResourceSettingsPtrInput {
+	return (*applicationSourceResourceSettingsPtrType)(v)
+}
+
+func (*applicationSourceResourceSettingsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ApplicationSourceResourceSettings)(nil)).Elem()
+}
+
+func (i *applicationSourceResourceSettingsPtrType) ToApplicationSourceResourceSettingsPtrOutput() ApplicationSourceResourceSettingsPtrOutput {
+	return i.ToApplicationSourceResourceSettingsPtrOutputWithContext(context.Background())
+}
+
+func (i *applicationSourceResourceSettingsPtrType) ToApplicationSourceResourceSettingsPtrOutputWithContext(ctx context.Context) ApplicationSourceResourceSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ApplicationSourceResourceSettingsPtrOutput)
+}
+
+type ApplicationSourceResourceSettingsOutput struct{ *pulumi.OutputState }
+
+func (ApplicationSourceResourceSettingsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ApplicationSourceResourceSettings)(nil)).Elem()
+}
+
+func (o ApplicationSourceResourceSettingsOutput) ToApplicationSourceResourceSettingsOutput() ApplicationSourceResourceSettingsOutput {
+	return o
+}
+
+func (o ApplicationSourceResourceSettingsOutput) ToApplicationSourceResourceSettingsOutputWithContext(ctx context.Context) ApplicationSourceResourceSettingsOutput {
+	return o
+}
+
+func (o ApplicationSourceResourceSettingsOutput) ToApplicationSourceResourceSettingsPtrOutput() ApplicationSourceResourceSettingsPtrOutput {
+	return o.ToApplicationSourceResourceSettingsPtrOutputWithContext(context.Background())
+}
+
+func (o ApplicationSourceResourceSettingsOutput) ToApplicationSourceResourceSettingsPtrOutputWithContext(ctx context.Context) ApplicationSourceResourceSettingsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ApplicationSourceResourceSettings) *ApplicationSourceResourceSettings {
+		return &v
+	}).(ApplicationSourceResourceSettingsPtrOutput)
+}
+
+// The replicas for the Application Source.
+func (o ApplicationSourceResourceSettingsOutput) Replicas() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ApplicationSourceResourceSettings) *int { return v.Replicas }).(pulumi.IntPtrOutput)
+}
+
+type ApplicationSourceResourceSettingsPtrOutput struct{ *pulumi.OutputState }
+
+func (ApplicationSourceResourceSettingsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ApplicationSourceResourceSettings)(nil)).Elem()
+}
+
+func (o ApplicationSourceResourceSettingsPtrOutput) ToApplicationSourceResourceSettingsPtrOutput() ApplicationSourceResourceSettingsPtrOutput {
+	return o
+}
+
+func (o ApplicationSourceResourceSettingsPtrOutput) ToApplicationSourceResourceSettingsPtrOutputWithContext(ctx context.Context) ApplicationSourceResourceSettingsPtrOutput {
+	return o
+}
+
+func (o ApplicationSourceResourceSettingsPtrOutput) Elem() ApplicationSourceResourceSettingsOutput {
+	return o.ApplyT(func(v *ApplicationSourceResourceSettings) ApplicationSourceResourceSettings {
+		if v != nil {
+			return *v
+		}
+		var ret ApplicationSourceResourceSettings
+		return ret
+	}).(ApplicationSourceResourceSettingsOutput)
+}
+
+// The replicas for the Application Source.
+func (o ApplicationSourceResourceSettingsPtrOutput) Replicas() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ApplicationSourceResourceSettings) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Replicas
+	}).(pulumi.IntPtrOutput)
+}
+
+type ApplicationSourceRuntimeParameterValue struct {
+	// The name of the runtime parameter.
+	Key string `pulumi:"key"`
+	// The type of the runtime parameter.
+	Type string `pulumi:"type"`
+	// The value of the runtime parameter.
+	Value string `pulumi:"value"`
+}
+
+// ApplicationSourceRuntimeParameterValueInput is an input type that accepts ApplicationSourceRuntimeParameterValueArgs and ApplicationSourceRuntimeParameterValueOutput values.
+// You can construct a concrete instance of `ApplicationSourceRuntimeParameterValueInput` via:
+//
+//	ApplicationSourceRuntimeParameterValueArgs{...}
+type ApplicationSourceRuntimeParameterValueInput interface {
+	pulumi.Input
+
+	ToApplicationSourceRuntimeParameterValueOutput() ApplicationSourceRuntimeParameterValueOutput
+	ToApplicationSourceRuntimeParameterValueOutputWithContext(context.Context) ApplicationSourceRuntimeParameterValueOutput
+}
+
+type ApplicationSourceRuntimeParameterValueArgs struct {
+	// The name of the runtime parameter.
+	Key pulumi.StringInput `pulumi:"key"`
+	// The type of the runtime parameter.
+	Type pulumi.StringInput `pulumi:"type"`
+	// The value of the runtime parameter.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (ApplicationSourceRuntimeParameterValueArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ApplicationSourceRuntimeParameterValue)(nil)).Elem()
+}
+
+func (i ApplicationSourceRuntimeParameterValueArgs) ToApplicationSourceRuntimeParameterValueOutput() ApplicationSourceRuntimeParameterValueOutput {
+	return i.ToApplicationSourceRuntimeParameterValueOutputWithContext(context.Background())
+}
+
+func (i ApplicationSourceRuntimeParameterValueArgs) ToApplicationSourceRuntimeParameterValueOutputWithContext(ctx context.Context) ApplicationSourceRuntimeParameterValueOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ApplicationSourceRuntimeParameterValueOutput)
+}
+
+// ApplicationSourceRuntimeParameterValueArrayInput is an input type that accepts ApplicationSourceRuntimeParameterValueArray and ApplicationSourceRuntimeParameterValueArrayOutput values.
+// You can construct a concrete instance of `ApplicationSourceRuntimeParameterValueArrayInput` via:
+//
+//	ApplicationSourceRuntimeParameterValueArray{ ApplicationSourceRuntimeParameterValueArgs{...} }
+type ApplicationSourceRuntimeParameterValueArrayInput interface {
+	pulumi.Input
+
+	ToApplicationSourceRuntimeParameterValueArrayOutput() ApplicationSourceRuntimeParameterValueArrayOutput
+	ToApplicationSourceRuntimeParameterValueArrayOutputWithContext(context.Context) ApplicationSourceRuntimeParameterValueArrayOutput
+}
+
+type ApplicationSourceRuntimeParameterValueArray []ApplicationSourceRuntimeParameterValueInput
+
+func (ApplicationSourceRuntimeParameterValueArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ApplicationSourceRuntimeParameterValue)(nil)).Elem()
+}
+
+func (i ApplicationSourceRuntimeParameterValueArray) ToApplicationSourceRuntimeParameterValueArrayOutput() ApplicationSourceRuntimeParameterValueArrayOutput {
+	return i.ToApplicationSourceRuntimeParameterValueArrayOutputWithContext(context.Background())
+}
+
+func (i ApplicationSourceRuntimeParameterValueArray) ToApplicationSourceRuntimeParameterValueArrayOutputWithContext(ctx context.Context) ApplicationSourceRuntimeParameterValueArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ApplicationSourceRuntimeParameterValueArrayOutput)
+}
+
+type ApplicationSourceRuntimeParameterValueOutput struct{ *pulumi.OutputState }
+
+func (ApplicationSourceRuntimeParameterValueOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ApplicationSourceRuntimeParameterValue)(nil)).Elem()
+}
+
+func (o ApplicationSourceRuntimeParameterValueOutput) ToApplicationSourceRuntimeParameterValueOutput() ApplicationSourceRuntimeParameterValueOutput {
+	return o
+}
+
+func (o ApplicationSourceRuntimeParameterValueOutput) ToApplicationSourceRuntimeParameterValueOutputWithContext(ctx context.Context) ApplicationSourceRuntimeParameterValueOutput {
+	return o
+}
+
+// The name of the runtime parameter.
+func (o ApplicationSourceRuntimeParameterValueOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v ApplicationSourceRuntimeParameterValue) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// The type of the runtime parameter.
+func (o ApplicationSourceRuntimeParameterValueOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v ApplicationSourceRuntimeParameterValue) string { return v.Type }).(pulumi.StringOutput)
+}
+
+// The value of the runtime parameter.
+func (o ApplicationSourceRuntimeParameterValueOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v ApplicationSourceRuntimeParameterValue) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type ApplicationSourceRuntimeParameterValueArrayOutput struct{ *pulumi.OutputState }
+
+func (ApplicationSourceRuntimeParameterValueArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ApplicationSourceRuntimeParameterValue)(nil)).Elem()
+}
+
+func (o ApplicationSourceRuntimeParameterValueArrayOutput) ToApplicationSourceRuntimeParameterValueArrayOutput() ApplicationSourceRuntimeParameterValueArrayOutput {
+	return o
+}
+
+func (o ApplicationSourceRuntimeParameterValueArrayOutput) ToApplicationSourceRuntimeParameterValueArrayOutputWithContext(ctx context.Context) ApplicationSourceRuntimeParameterValueArrayOutput {
+	return o
+}
+
+func (o ApplicationSourceRuntimeParameterValueArrayOutput) Index(i pulumi.IntInput) ApplicationSourceRuntimeParameterValueOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ApplicationSourceRuntimeParameterValue {
+		return vs[0].([]ApplicationSourceRuntimeParameterValue)[vs[1].(int)]
+	}).(ApplicationSourceRuntimeParameterValueOutput)
+}
+
 type CustomModelGuardConfiguration struct {
 	// The deployment ID of this guard.
 	DeploymentId *string `pulumi:"deploymentId"`
@@ -450,6 +702,181 @@ func (o CustomModelOverallModerationConfigurationPtrOutput) TimeoutSec() pulumi.
 			return nil
 		}
 		return v.TimeoutSec
+	}).(pulumi.IntPtrOutput)
+}
+
+type CustomModelResourceSettings struct {
+	// The memory in MB for the Custom Model.
+	MemoryMb *int `pulumi:"memoryMb"`
+	// The network access for the Custom Model.
+	NetworkAccess *string `pulumi:"networkAccess"`
+	// The replicas for the Custom Model.
+	Replicas *int `pulumi:"replicas"`
+}
+
+// CustomModelResourceSettingsInput is an input type that accepts CustomModelResourceSettingsArgs and CustomModelResourceSettingsOutput values.
+// You can construct a concrete instance of `CustomModelResourceSettingsInput` via:
+//
+//	CustomModelResourceSettingsArgs{...}
+type CustomModelResourceSettingsInput interface {
+	pulumi.Input
+
+	ToCustomModelResourceSettingsOutput() CustomModelResourceSettingsOutput
+	ToCustomModelResourceSettingsOutputWithContext(context.Context) CustomModelResourceSettingsOutput
+}
+
+type CustomModelResourceSettingsArgs struct {
+	// The memory in MB for the Custom Model.
+	MemoryMb pulumi.IntPtrInput `pulumi:"memoryMb"`
+	// The network access for the Custom Model.
+	NetworkAccess pulumi.StringPtrInput `pulumi:"networkAccess"`
+	// The replicas for the Custom Model.
+	Replicas pulumi.IntPtrInput `pulumi:"replicas"`
+}
+
+func (CustomModelResourceSettingsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomModelResourceSettings)(nil)).Elem()
+}
+
+func (i CustomModelResourceSettingsArgs) ToCustomModelResourceSettingsOutput() CustomModelResourceSettingsOutput {
+	return i.ToCustomModelResourceSettingsOutputWithContext(context.Background())
+}
+
+func (i CustomModelResourceSettingsArgs) ToCustomModelResourceSettingsOutputWithContext(ctx context.Context) CustomModelResourceSettingsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomModelResourceSettingsOutput)
+}
+
+func (i CustomModelResourceSettingsArgs) ToCustomModelResourceSettingsPtrOutput() CustomModelResourceSettingsPtrOutput {
+	return i.ToCustomModelResourceSettingsPtrOutputWithContext(context.Background())
+}
+
+func (i CustomModelResourceSettingsArgs) ToCustomModelResourceSettingsPtrOutputWithContext(ctx context.Context) CustomModelResourceSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomModelResourceSettingsOutput).ToCustomModelResourceSettingsPtrOutputWithContext(ctx)
+}
+
+// CustomModelResourceSettingsPtrInput is an input type that accepts CustomModelResourceSettingsArgs, CustomModelResourceSettingsPtr and CustomModelResourceSettingsPtrOutput values.
+// You can construct a concrete instance of `CustomModelResourceSettingsPtrInput` via:
+//
+//	        CustomModelResourceSettingsArgs{...}
+//
+//	or:
+//
+//	        nil
+type CustomModelResourceSettingsPtrInput interface {
+	pulumi.Input
+
+	ToCustomModelResourceSettingsPtrOutput() CustomModelResourceSettingsPtrOutput
+	ToCustomModelResourceSettingsPtrOutputWithContext(context.Context) CustomModelResourceSettingsPtrOutput
+}
+
+type customModelResourceSettingsPtrType CustomModelResourceSettingsArgs
+
+func CustomModelResourceSettingsPtr(v *CustomModelResourceSettingsArgs) CustomModelResourceSettingsPtrInput {
+	return (*customModelResourceSettingsPtrType)(v)
+}
+
+func (*customModelResourceSettingsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**CustomModelResourceSettings)(nil)).Elem()
+}
+
+func (i *customModelResourceSettingsPtrType) ToCustomModelResourceSettingsPtrOutput() CustomModelResourceSettingsPtrOutput {
+	return i.ToCustomModelResourceSettingsPtrOutputWithContext(context.Background())
+}
+
+func (i *customModelResourceSettingsPtrType) ToCustomModelResourceSettingsPtrOutputWithContext(ctx context.Context) CustomModelResourceSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomModelResourceSettingsPtrOutput)
+}
+
+type CustomModelResourceSettingsOutput struct{ *pulumi.OutputState }
+
+func (CustomModelResourceSettingsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomModelResourceSettings)(nil)).Elem()
+}
+
+func (o CustomModelResourceSettingsOutput) ToCustomModelResourceSettingsOutput() CustomModelResourceSettingsOutput {
+	return o
+}
+
+func (o CustomModelResourceSettingsOutput) ToCustomModelResourceSettingsOutputWithContext(ctx context.Context) CustomModelResourceSettingsOutput {
+	return o
+}
+
+func (o CustomModelResourceSettingsOutput) ToCustomModelResourceSettingsPtrOutput() CustomModelResourceSettingsPtrOutput {
+	return o.ToCustomModelResourceSettingsPtrOutputWithContext(context.Background())
+}
+
+func (o CustomModelResourceSettingsOutput) ToCustomModelResourceSettingsPtrOutputWithContext(ctx context.Context) CustomModelResourceSettingsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v CustomModelResourceSettings) *CustomModelResourceSettings {
+		return &v
+	}).(CustomModelResourceSettingsPtrOutput)
+}
+
+// The memory in MB for the Custom Model.
+func (o CustomModelResourceSettingsOutput) MemoryMb() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v CustomModelResourceSettings) *int { return v.MemoryMb }).(pulumi.IntPtrOutput)
+}
+
+// The network access for the Custom Model.
+func (o CustomModelResourceSettingsOutput) NetworkAccess() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CustomModelResourceSettings) *string { return v.NetworkAccess }).(pulumi.StringPtrOutput)
+}
+
+// The replicas for the Custom Model.
+func (o CustomModelResourceSettingsOutput) Replicas() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v CustomModelResourceSettings) *int { return v.Replicas }).(pulumi.IntPtrOutput)
+}
+
+type CustomModelResourceSettingsPtrOutput struct{ *pulumi.OutputState }
+
+func (CustomModelResourceSettingsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**CustomModelResourceSettings)(nil)).Elem()
+}
+
+func (o CustomModelResourceSettingsPtrOutput) ToCustomModelResourceSettingsPtrOutput() CustomModelResourceSettingsPtrOutput {
+	return o
+}
+
+func (o CustomModelResourceSettingsPtrOutput) ToCustomModelResourceSettingsPtrOutputWithContext(ctx context.Context) CustomModelResourceSettingsPtrOutput {
+	return o
+}
+
+func (o CustomModelResourceSettingsPtrOutput) Elem() CustomModelResourceSettingsOutput {
+	return o.ApplyT(func(v *CustomModelResourceSettings) CustomModelResourceSettings {
+		if v != nil {
+			return *v
+		}
+		var ret CustomModelResourceSettings
+		return ret
+	}).(CustomModelResourceSettingsOutput)
+}
+
+// The memory in MB for the Custom Model.
+func (o CustomModelResourceSettingsPtrOutput) MemoryMb() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *CustomModelResourceSettings) *int {
+		if v == nil {
+			return nil
+		}
+		return v.MemoryMb
+	}).(pulumi.IntPtrOutput)
+}
+
+// The network access for the Custom Model.
+func (o CustomModelResourceSettingsPtrOutput) NetworkAccess() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CustomModelResourceSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.NetworkAccess
+	}).(pulumi.StringPtrOutput)
+}
+
+// The replicas for the Custom Model.
+func (o CustomModelResourceSettingsPtrOutput) Replicas() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *CustomModelResourceSettings) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Replicas
 	}).(pulumi.IntPtrOutput)
 }
 
@@ -1441,12 +1868,18 @@ func (o VectorDatabaseChunkingParametersPtrOutput) Separators() pulumi.StringArr
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*ApplicationSourceResourceSettingsInput)(nil)).Elem(), ApplicationSourceResourceSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ApplicationSourceResourceSettingsPtrInput)(nil)).Elem(), ApplicationSourceResourceSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ApplicationSourceRuntimeParameterValueInput)(nil)).Elem(), ApplicationSourceRuntimeParameterValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ApplicationSourceRuntimeParameterValueArrayInput)(nil)).Elem(), ApplicationSourceRuntimeParameterValueArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelGuardConfigurationInput)(nil)).Elem(), CustomModelGuardConfigurationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelGuardConfigurationArrayInput)(nil)).Elem(), CustomModelGuardConfigurationArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelGuardConfigurationInterventionInput)(nil)).Elem(), CustomModelGuardConfigurationInterventionArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelGuardConfigurationInterventionConditionInput)(nil)).Elem(), CustomModelGuardConfigurationInterventionConditionArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelOverallModerationConfigurationInput)(nil)).Elem(), CustomModelOverallModerationConfigurationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelOverallModerationConfigurationPtrInput)(nil)).Elem(), CustomModelOverallModerationConfigurationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelResourceSettingsInput)(nil)).Elem(), CustomModelResourceSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelResourceSettingsPtrInput)(nil)).Elem(), CustomModelResourceSettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelRuntimeParameterValueInput)(nil)).Elem(), CustomModelRuntimeParameterValueArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelRuntimeParameterValueArrayInput)(nil)).Elem(), CustomModelRuntimeParameterValueArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelSourceRemoteRepositoryInput)(nil)).Elem(), CustomModelSourceRemoteRepositoryArgs{})
@@ -1459,12 +1892,18 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentSettingsPredictionsSettingsPtrInput)(nil)).Elem(), DeploymentSettingsPredictionsSettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*VectorDatabaseChunkingParametersInput)(nil)).Elem(), VectorDatabaseChunkingParametersArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*VectorDatabaseChunkingParametersPtrInput)(nil)).Elem(), VectorDatabaseChunkingParametersArgs{})
+	pulumi.RegisterOutputType(ApplicationSourceResourceSettingsOutput{})
+	pulumi.RegisterOutputType(ApplicationSourceResourceSettingsPtrOutput{})
+	pulumi.RegisterOutputType(ApplicationSourceRuntimeParameterValueOutput{})
+	pulumi.RegisterOutputType(ApplicationSourceRuntimeParameterValueArrayOutput{})
 	pulumi.RegisterOutputType(CustomModelGuardConfigurationOutput{})
 	pulumi.RegisterOutputType(CustomModelGuardConfigurationArrayOutput{})
 	pulumi.RegisterOutputType(CustomModelGuardConfigurationInterventionOutput{})
 	pulumi.RegisterOutputType(CustomModelGuardConfigurationInterventionConditionOutput{})
 	pulumi.RegisterOutputType(CustomModelOverallModerationConfigurationOutput{})
 	pulumi.RegisterOutputType(CustomModelOverallModerationConfigurationPtrOutput{})
+	pulumi.RegisterOutputType(CustomModelResourceSettingsOutput{})
+	pulumi.RegisterOutputType(CustomModelResourceSettingsPtrOutput{})
 	pulumi.RegisterOutputType(CustomModelRuntimeParameterValueOutput{})
 	pulumi.RegisterOutputType(CustomModelRuntimeParameterValueArrayOutput{})
 	pulumi.RegisterOutputType(CustomModelSourceRemoteRepositoryOutput{})
