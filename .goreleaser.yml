@@ -21,7 +21,7 @@ builds:
     ldflags:
       - -s
       - -w
-      - -X github.com/pulumiverse/pulumi-datarobot/provider/pkg/version.Version={{.Tag}}
+      - -X github.com/datarobot-community/pulumi-datarobot/provider/pkg/version.Version={{.Tag}}
     main: ./cmd/pulumi-resource-datarobot/
 release:
   disable: false
