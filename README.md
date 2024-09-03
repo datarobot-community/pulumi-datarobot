@@ -23,6 +23,9 @@ Ensure the following tools are installed and present in your `$PATH`:
 
 You may skip installing any languages that you are not interested in testing in right now. Go is the only language required to test in Pulumi YAML
 
+Although the steps below contain Unix commands, the Provider can also be tested on Windows.
+It is recommended to use Powershell to run the `make` commands and the Windows equivalents for `cp`, `export`, etc.
+
 ## Run the Low-Code Monitored RAG Example
 
 1. In a terminal clone the `pulumi-datarobot` repository:
@@ -38,7 +41,7 @@ This step is only required because we have not published the Provider to the Pul
     make provider
     ~~~
 
-1. Copy the generated binary into your GOPATH.
+1. Copy the generated binary into your PATH.
 
     ~~~ shell
     cp bin/pulumi-resource-datarobot $GOPATH/bin 
