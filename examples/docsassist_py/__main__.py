@@ -14,6 +14,7 @@ print("Creating a DataRobot use case...")
 with open("./conf/local/credentials.yml") as f:
     credentials = yaml.safe_load(f)
 
+stack_name = pulumi.get_stack()
 
 # ================================================================= #
 # Deploy Guardrail Model                                            #
@@ -59,7 +60,7 @@ def deploy_guardrail():
 
     guardrail_registered_model = datarobot.RegisteredModel(
         resource_name="guardrail_registered_model",
-        name=deploy_guardrail_config["registered_model_name"],
+        name=f'{deploy_guardrail_config["registered_model_name"]}_{stack_name}',
         custom_model_version_id=guardrail_custom_model.version_id,
     )
 
@@ -138,7 +139,7 @@ def prep_dr_rag_custom_model(guard_configs):
 
     openai_credentials = datarobot.ApiTokenCredential(
         resource_name="openai_credentials",
-        name=prep_dr_rag_custom_model_config["dr_credential"]["name"],
+        name=f'{prep_dr_rag_custom_model_config["dr_credential"]["name"]}_{stack_name}',
         api_token=credentials["azure_openai_llm_credentials"]["api_key"],
     )
     playground = datarobot.Playground(
@@ -342,7 +343,7 @@ def deploy_rag(rag_custom_model):
     rag_registered_model = datarobot.RegisteredModel(
         resource_name="rag_registered_model",
         custom_model_version_id=rag_custom_model.version_id,
-        name=deploy_rag_config["registered_model_name"],
+        name=f'{deploy_rag_config["registered_model_name"]}_{stack_name}',
     )
 
     rag_deployment = datarobot.Deployment(
@@ -374,7 +375,7 @@ def deploy_dr_streamlit_app(rag_deployment):
     chat_application = datarobot.ChatApplication(
         resource_name="chat_application",
         deployment_id=rag_deployment.id,
-        name=deploy_dr_streamlit_app_config["custom_app_name"],
+        name=f'{deploy_dr_streamlit_app_config["custom_app_name"]}_{stack_name}',
     )
     return chat_application
 

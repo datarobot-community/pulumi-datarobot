@@ -26,4 +26,11 @@ builds:
 release:
   disable: false
 snapshot:
-  name_template: "{{ .Tag }}-SNAPSHOT"
+  # Allows you to change the name of the generated snapshot
+  #
+  # Note that some pipes require this to be semantic version compliant (nfpm,
+  # for example).
+  #
+  # Default: `{{ .Version }}-SNAPSHOT-{{.ShortCommit}}`.
+  # Templates: allowed.
+  version_template: "{{ .Version }}"
