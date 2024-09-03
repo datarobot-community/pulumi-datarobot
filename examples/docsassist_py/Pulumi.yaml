@@ -9,7 +9,3 @@ config:
   pulumi:tags:
     value:
       pulumi:template: python
-plugins:
-  providers:
-    - name: datarobot
-      path: ../../bin
