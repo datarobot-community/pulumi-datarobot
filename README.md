@@ -48,7 +48,7 @@ This step is only required because we have not published the Provider to the Pul
     ~~~
 
     Depending on your setup, this could require `sudo` permissions.
-
+    Windows users may need to rename the `pulumi-resource-datarobot` binary to `pulumi-resource-datarobot.exe` to make it executable.
 
 1. Go to the `examples/low_code_rag` directory.
 
