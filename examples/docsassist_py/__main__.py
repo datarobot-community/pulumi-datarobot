@@ -25,12 +25,12 @@ def deploy_guardrail():
         deploy_guardrail_config = yaml.safe_load(f)["deploy_guardrail"]
 
     guardrail_runtime_parameters = [
-        datarobot.CustomModelRuntimeParameterArgs(
+        datarobot.CustomModelRuntimeParameterValueArgs(
             key="blocklist",
             type="string",
             value=json.dumps(deploy_guardrail_config["blocklist"]),
         ),
-        datarobot.CustomModelRuntimeParameterArgs(
+        datarobot.CustomModelRuntimeParameterValueArgs(
             key="prompt_feature_name",
             type="string",
             value=deploy_guardrail_config["prompt_feature_name"],
@@ -51,7 +51,7 @@ def deploy_guardrail():
         base_environment_name="[DataRobot] Python 3.9 GenAI",
         target=deploy_guardrail_config["target_name"],
         target_type=deploy_guardrail_config["target_type"],
-        runtime_parameters=guardrail_runtime_parameters,
+        runtime_parameter_values=guardrail_runtime_parameters,
         local_files=["custom.py", "model-metadata.yaml"],
         negative_class_label=deploy_guardrail_config["negative_class_label"],
         positive_class_label=deploy_guardrail_config["positive_class_label"],
@@ -172,12 +172,12 @@ def prep_dr_rag_custom_model(guard_configs):
     )
 
     runtime_parameters = [
-        datarobot.CustomModelRuntimeParameterArgs(
+        datarobot.CustomModelRuntimeParameterValueArgs(
             key="OPENAI_API_KEY",
             type="credential",
             value=openai_credentials.id,
         ),
-        datarobot.CustomModelRuntimeParameterArgs(
+        datarobot.CustomModelRuntimeParameterValueArgs(
             key="OPENAI_API_BASE",
             type="string",
             value=credentials["azure_openai_llm_credentials"]["azure_endpoint"],
@@ -193,7 +193,7 @@ def prep_dr_rag_custom_model(guard_configs):
             "base_environment_id"
         ],
         base_environment_name="[GenAI] Python 3.11 with Moderations",
-        runtime_parameters=runtime_parameters,
+        runtime_parameter_values=runtime_parameters,
         guard_configurations=guard_configs,
         # prompt_column_name=prompt_column_name,
         target=prep_dr_rag_custom_model_config["custom_model"]["target_name"],
