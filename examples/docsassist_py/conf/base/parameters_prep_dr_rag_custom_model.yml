@@ -1,8 +1,4 @@
 prep_dr_rag_custom_model:
-  dr_credential:
-    name: docsassist_rag_api_token_no_kedro # Cannot contain spaces for use in ML Ops
-    credential_type: api_token
-  rag_raw_docs: "include/raw_docs/datarobot_english_documentation_docsassist.zip"
   playground:
     name: test-pipeline-lukas-1-1 Playground
   custom_model:

@@ -7,7 +7,9 @@ deploy_guardrail:
   target_type: Binary
   positive_class_label: "true"
   negative_class_label: "false"
-  base_environment_id: 64c964448dd3f0c07f47d040 # 3.9 GenAI drop-in env
+  base_environment:
+    name: "[DataRobot] Python 3.9 GenAI"
+    id: 64c964448dd3f0c07f47d040 # 3.9 GenAI drop-in env
   blocklist:
     - dataiku
     - databrick

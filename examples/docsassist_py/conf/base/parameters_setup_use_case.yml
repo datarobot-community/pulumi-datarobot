@@ -1,0 +1,7 @@
+setup_use_case:
+  dr_credential:
+    name: docsassist_llm_credential
+    credential_type: api_token
+  serverless_predictions:
+    use: true # requires admin-only feature flags: REALTIME_ON_PREDICTION_ENVIRONMENTS, GENAI_REALTIME_ON_PREDICTION_ENVIRONMENTS
+    name: DocsAssist Serverless Prediction Environment

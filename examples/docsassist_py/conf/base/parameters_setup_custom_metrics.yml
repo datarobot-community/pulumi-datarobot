@@ -1,20 +1,8 @@
 setup_custom_metrics:
-  global_models:
-    toxicity:
-      registered_model_name: "[Hugging Face] Toxicity Classifier"
-      deployment_name: "Toxicity Classifier"
-    # sentiment:
-    #   registered_model_name: "[Hugging Face] Sentiment Classifier"
-    #   deployment_name: "Sentiment Classifier"
-    # refusal:
-    #   registered_model_name: "[DataRobot] LLM Refusal Score"
-    #   deployment_name: "Refusal Score"
-    prompt_injection:
-      registered_model_name: "[Guard] Prompt Injection Classifier from Hugging Face"
-      deployment_name: "Prompt Injection Classifier"
   guardrails:
     prompt_injection:
-      templateName: Prompt Injection
+      template_name: Prompt Injection
+      registered_model_name: "[Guard] Prompt Injection Classifier from Hugging Face"
       name: Prompt injection
       stages: [prompt]
       intervention:
@@ -28,7 +16,8 @@ setup_custom_metrics:
       # settings:
       #   deploymentId: <global model deployment>
     toxicity:
-      templateName: Toxicity
+      template_name: Toxicity
+      registered_model_name: "[Hugging Face] Toxicity Classifier"
       name: Toxicity
       stages: [prompt]
       intervention:
@@ -42,7 +31,7 @@ setup_custom_metrics:
       # settings:
       #   deploymentId: <global model deployment>
     keyword_guard:
-      templateName: Custom Deployment
+      template_name: Custom Deployment
       name: Keyword Guard
       metric_name: "Keyword Guard"
       stages: [prompt]

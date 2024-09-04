@@ -1,0 +1,947 @@
+[
+    {
+        "id": "azure-openai-gpt-3.5-turbo",
+        "name": "Azure OpenAI GPT-3.5 Turbo",
+        "description": "GPT-3.5 Turbo is the most capable and cost-effective model in the GPT-3.5 family. It has been optimized for chat and works well for traditional completion tasks as well.",
+        "vendor": "Microsoft",
+        "provider": "DataRobot",
+        "license": "Proprietary",
+        "supportedLanguages": "Multilingual",
+        "settings": [
+            {
+                "id": "systemPrompt",
+                "name": "System prompt",
+                "description": "System prompt guides the style of the LLM response. It is a \"universal\" prompt, prepended to all individual prompts.",
+                "type": "string",
+                "format": "multiline",
+                "isNullable": true,
+                "constraints": {
+                    "type": "string",
+                    "minLength": null,
+                    "maxLength": 500000,
+                    "allowedChoices": null
+                },
+                "defaultValue": ""
+            },
+            {
+                "id": "maxCompletionLength",
+                "name": "Max completion tokens",
+                "description": "Maximum number of tokens allowed in the completion. The combined count of this value and prompt tokens must be below the model's maximum context size (4096), where prompt token count is comprised of system prompt, user prompt, recent chat history, and vector database citations.",
+                "type": "integer",
+                "format": null,
+                "isNullable": true,
+                "constraints": {
+                    "type": "integer",
+                    "minValue": 1,
+                    "maxValue": 4096
+                },
+                "defaultValue": 1024
+            },
+            {
+                "id": "temperature",
+                "name": "Temperature",
+                "description": "Temperature controls the randomness of model output. Enter a value between 0 and 2, where higher values return more diverse output and lower values return more deterministic results. A value of 0 may return repetitive results.",
+                "type": "float",
+                "format": null,
+                "isNullable": true,
+                "constraints": {
+                    "type": "float",
+                    "minValue": 0.0,
+                    "maxValue": 2.0
+                },
+                "defaultValue": 1.0
+            },
+            {
+                "id": "topP",
+                "name": "Token selection probability cutoff (Top P)",
+                "description": "Top P sets a threshold that controls the selection of words included in the response, based on a cumulative probability cutoff for token selection. For example, 0.2 considers only the top 20% probability mass. Higher numbers return more diverse options for outputs.",
+                "type": "float",
+                "format": null,
+                "isNullable": true,
+                "constraints": {
+                    "type": "float",
+                    "minValue": 0.0,
+                    "maxValue": 1.0
+                },
+                "defaultValue": 1.0
+            }
+        ],
+        "contextSize": 4096,
+        "isDeprecated": false,
+        "supportedCustomModelLLMValidations": null
+    },
+    {
+        "id": "azure-openai-gpt-3.5-turbo-16k",
+        "name": "Azure OpenAI GPT-3.5 Turbo 16k",
+        "description": "GPT-3.5 Turbo is the most capable and cost-effective model in the GPT-3.5 family. It has been optimized for chat and works well for traditional completion tasks as well. GPT-3.5 Turbo 16k offers the same capabilities as the standard GPT-3.5 Turbo model, but with a 4x larger context window.",
+        "vendor": "Microsoft",
+        "provider": "DataRobot",
+        "license": "Proprietary",
+        "supportedLanguages": "Multilingual",
+        "settings": [
+            {
+                "id": "systemPrompt",
+                "name": "System prompt",
+                "description": "System prompt guides the style of the LLM response. It is a \"universal\" prompt, prepended to all individual prompts.",
+                "type": "string",
+                "format": "multiline",
+                "isNullable": true,
+                "constraints": {
+                    "type": "string",
+                    "minLength": null,
+                    "maxLength": 500000,
+                    "allowedChoices": null
+                },
+                "defaultValue": ""
+            },
+            {
+                "id": "maxCompletionLength",
+                "name": "Max completion tokens",
+                "description": "Maximum number of tokens allowed in the completion. The combined count of this value and prompt tokens must be below the model's maximum context size (16384), where prompt token count is comprised of system prompt, user prompt, recent chat history, and vector database citations.",
+                "type": "integer",
+                "format": null,
+                "isNullable": true,
+                "constraints": {
+                    "type": "integer",
+                    "minValue": 1,
+                    "maxValue": 16384
+                },
+                "defaultValue": 4096
+            },
+            {
+                "id": "temperature",
+                "name": "Temperature",
+                "description": "Temperature controls the randomness of model output. Enter a value between 0 and 2, where higher values return more diverse output and lower values return more deterministic results. A value of 0 may return repetitive results.",
+                "type": "float",
+                "format": null,
+                "isNullable": true,
+                "constraints": {
+                    "type": "float",
+                    "minValue": 0.0,
+                    "maxValue": 2.0
+                },
+                "defaultValue": 1.0
+            },
+            {
+                "id": "topP",
+                "name": "Token selection probability cutoff (Top P)",
+                "description": "Top P sets a threshold that controls the selection of words included in the response, based on a cumulative probability cutoff for token selection. For example, 0.2 considers only the top 20% probability mass. Higher numbers return more diverse options for outputs.",
+                "type": "float",
+                "format": null,
+                "isNullable": true,
+                "constraints": {
+                    "type": "float",
+                    "minValue": 0.0,
+                    "maxValue": 1.0
+                },
+                "defaultValue": 1.0
+            }
+        ],
+        "contextSize": 16384,
+        "isDeprecated": false,
+        "supportedCustomModelLLMValidations": null
+    },
+    {
+        "id": "azure-openai-gpt-4",
+        "name": "Azure OpenAI GPT-4",
+        "description": "GPT-4 is the most capable and cost-effective model in the GPT-4 family. It has been optimized for chat and works well for traditional completion tasks as well.",
+        "vendor": "Microsoft",
+        "provider": "DataRobot",
+        "license": "Proprietary",
+        "supportedLanguages": "Multilingual",
+        "settings": [
+            {
+                "id": "systemPrompt",
+                "name": "System prompt",
+                "description": "System prompt guides the style of the LLM response. It is a \"universal\" prompt, prepended to all individual prompts.",
+                "type": "string",
+                "format": "multiline",
+                "isNullable": true,
+                "constraints": {
+                    "type": "string",
+                    "minLength": null,
+                    "maxLength": 500000,
+                    "allowedChoices": null
+                },
+                "defaultValue": ""
+            },
+            {
+                "id": "maxCompletionLength",
+                "name": "Max completion tokens",
+                "description": "Maximum number of tokens allowed in the completion. The combined count of this value and prompt tokens must be below the model's maximum context size (8192), where prompt token count is comprised of system prompt, user prompt, recent chat history, and vector database citations.",
+                "type": "integer",
+                "format": null,
+                "isNullable": true,
+                "constraints": {
+                    "type": "integer",
+                    "minValue": 1,
+                    "maxValue": 8192
+                },
+                "defaultValue": 2048
+            },
+            {
+                "id": "temperature",
+                "name": "Temperature",
+                "description": "Temperature controls the randomness of model output. Enter a value between 0 and 2, where higher values return more diverse output and lower values return more deterministic results. A value of 0 may return repetitive results.",
+                "type": "float",
+                "format": null,
+                "isNullable": true,
+                "constraints": {
+                    "type": "float",
+                    "minValue": 0.0,
+                    "maxValue": 2.0
+                },
+                "defaultValue": 1.0
+            },
+            {
+                "id": "topP",
+                "name": "Token selection probability cutoff (Top P)",
+                "description": "Top P sets a threshold that controls the selection of words included in the response, based on a cumulative probability cutoff for token selection. For example, 0.2 considers only the top 20% probability mass. Higher numbers return more diverse options for outputs.",
+                "type": "float",
+                "format": null,
+                "isNullable": true,
+                "constraints": {
+                    "type": "float",
+                    "minValue": 0.0,
+                    "maxValue": 1.0
+                },
+                "defaultValue": 1.0
+            }
+        ],
+        "contextSize": 8192,
+        "isDeprecated": false,
+        "supportedCustomModelLLMValidations": null
+    },
+    {
+        "id": "azure-openai-gpt-4-32k",
+        "name": "Azure OpenAI GPT-4 32k",
+        "description": "GPT-4 is the most capable and cost-effective model in the GPT-4 family. It has been optimized for chat and works well for traditional completion tasks as well. GPT-4 32k offers the same capabilities as the standard GPT-4 model, but with a 4x larger context window.",
+        "vendor": "Microsoft",
+        "provider": "DataRobot",
+        "license": "Proprietary",
+        "supportedLanguages": "Multilingual",
+        "settings": [
+            {
+                "id": "systemPrompt",
+                "name": "System prompt",
+                "description": "System prompt guides the style of the LLM response. It is a \"universal\" prompt, prepended to all individual prompts.",
+                "type": "string",
+                "format": "multiline",
+                "isNullable": true,
+                "constraints": {
+                    "type": "string",
+                    "minLength": null,
+                    "maxLength": 500000,
+                    "allowedChoices": null
+                },
+                "defaultValue": ""
+            },
+            {
+                "id": "maxCompletionLength",
+                "name": "Max completion tokens",
+                "description": "Maximum number of tokens allowed in the completion. The combined count of this value and prompt tokens must be below the model's maximum context size (32768), where prompt token count is comprised of system prompt, user prompt, recent chat history, and vector database citations.",
+                "type": "integer",
+                "format": null,
+                "isNullable": true,
+                "constraints": {
+                    "type": "integer",
+                    "minValue": 1,
+                    "maxValue": 32768
+                },
+                "defaultValue": 8192
+            },
+            {
+                "id": "temperature",
+                "name": "Temperature",
+                "description": "Temperature controls the randomness of model output. Enter a value between 0 and 2, where higher values return more diverse output and lower values return more deterministic results. A value of 0 may return repetitive results.",
+                "type": "float",
+                "format": null,
+                "isNullable": true,
+                "constraints": {
+                    "type": "float",
+                    "minValue": 0.0,
+                    "maxValue": 2.0
+                },
+                "defaultValue": 1.0
+            },
+            {
+                "id": "topP",
+                "name": "Token selection probability cutoff (Top P)",
+                "description": "Top P sets a threshold that controls the selection of words included in the response, based on a cumulative probability cutoff for token selection. For example, 0.2 considers only the top 20% probability mass. Higher numbers return more diverse options for outputs.",
+                "type": "float",
+                "format": null,
+                "isNullable": true,
+                "constraints": {
+                    "type": "float",
+                    "minValue": 0.0,
+                    "maxValue": 1.0
+                },
+                "defaultValue": 1.0
+            }
+        ],
+        "contextSize": 32768,
+        "isDeprecated": false,
+        "supportedCustomModelLLMValidations": null
+    },
+    {
+        "id": "azure-openai-gpt-4-turbo",
+        "name": "Azure OpenAI GPT-4 Turbo",
+        "description": "GPT-4 Turbo is the most capable and cost-effective model in the GPT-4 family. It has been optimized for chat and works well for traditional completion tasks as well.",
+        "vendor": "Microsoft",
+        "provider": "DataRobot",
+        "license": "Proprietary",
+        "supportedLanguages": "Multilingual",
+        "settings": [
+            {
+                "id": "systemPrompt",
+                "name": "System prompt",
+                "description": "System prompt guides the style of the LLM response. It is a \"universal\" prompt, prepended to all individual prompts.",
+                "type": "string",
+                "format": "multiline",
+                "isNullable": true,
+                "constraints": {
+                    "type": "string",
+                    "minLength": null,
+                    "maxLength": 500000,
+                    "allowedChoices": null
+                },
+                "defaultValue": ""
+            },
+            {
+                "id": "maxCompletionLength",
+                "name": "Max completion tokens",
+                "description": "Maximum number of tokens allowed in the completion. The combined count of this value and prompt tokens must be below the model's maximum context size (128000), where prompt token count is comprised of system prompt, user prompt, recent chat history, and vector database citations.",
+                "type": "integer",
+                "format": null,
+                "isNullable": true,
+                "constraints": {
+                    "type": "integer",
+                    "minValue": 1,
+                    "maxValue": 4096
+                },
+                "defaultValue": 1024
+            },
+            {
+                "id": "temperature",
+                "name": "Temperature",
+                "description": "Temperature controls the randomness of model output. Enter a value between 0 and 2, where higher values return more diverse output and lower values return more deterministic results. A value of 0 may return repetitive results.",
+                "type": "float",
+                "format": null,
+                "isNullable": true,
+                "constraints": {
+                    "type": "float",
+                    "minValue": 0.0,
+                    "maxValue": 2.0
+                },
+                "defaultValue": 1.0
+            },
+            {
+                "id": "topP",
+                "name": "Token selection probability cutoff (Top P)",
+                "description": "Top P sets a threshold that controls the selection of words included in the response, based on a cumulative probability cutoff for token selection. For example, 0.2 considers only the top 20% probability mass. Higher numbers return more diverse options for outputs.",
+                "type": "float",
+                "format": null,
+                "isNullable": true,
+                "constraints": {
+                    "type": "float",
+                    "minValue": 0.0,
+                    "maxValue": 1.0
+                },
+                "defaultValue": 1.0
+            }
+        ],
+        "contextSize": 128000,
+        "isDeprecated": false,
+        "supportedCustomModelLLMValidations": null
+    },
+    {
+        "id": "amazon-titan",
+        "name": "Amazon Titan",
+        "description": "Amazon Titan is a generative LLM for tasks such as summarization, text generation, classification, open-ended Q&A, and information extraction.",
+        "vendor": "Amazon",
+        "provider": "DataRobot",
+        "license": "Proprietary",
+        "supportedLanguages": "Multilingual",
+        "settings": [
+            {
+                "id": "systemPrompt",
+                "name": "System prompt",
+                "description": "System prompt guides the style of the LLM response. It is a \"universal\" prompt, prepended to all individual prompts.",
+                "type": "string",
+                "format": "multiline",
+                "isNullable": true,
+                "constraints": {
+                    "type": "string",
+                    "minLength": null,
+                    "maxLength": 500000,
+                    "allowedChoices": null
+                },
+                "defaultValue": ""
+            },
+            {
+                "id": "maxCompletionLength",
+                "name": "Max completion tokens",
+                "description": "Maximum number of tokens allowed in the completion. The combined count of this value and prompt tokens must be below the model's maximum context size (8000), where prompt token count is comprised of system prompt, user prompt, recent chat history, and vector database citations.",
+                "type": "integer",
+                "format": null,
+                "isNullable": true,
+                "constraints": {
+                    "type": "integer",
+                    "minValue": 1,
+                    "maxValue": 8000
+                },
+                "defaultValue": 512
+            },
+            {
+                "id": "temperature",
+                "name": "Temperature",
+                "description": "Temperature controls the randomness of model output. Enter a value between 0 and 1, where higher values return more diverse output and lower values return more deterministic results. A value of 0 may return repetitive results.",
+                "type": "float",
+                "format": null,
+                "isNullable": true,
+                "constraints": {
+                    "type": "float",
+                    "minValue": 0.0,
+                    "maxValue": 1.0
+                },
+                "defaultValue": 0
+            },
+            {
+                "id": "topP",
+                "name": "Token selection probability cutoff (Top P)",
+                "description": "Top P sets a threshold that controls the selection of words included in the response, based on a cumulative probability cutoff for token selection. For example, 0.2 considers only the top 20% probability mass. Higher numbers return more diverse options for outputs.",
+                "type": "float",
+                "format": null,
+                "isNullable": true,
+                "constraints": {
+                    "type": "float",
+                    "minValue": 0.0,
+                    "maxValue": 1.0
+                },
+                "defaultValue": 1.0
+            }
+        ],
+        "contextSize": 8000,
+        "isDeprecated": false,
+        "supportedCustomModelLLMValidations": null
+    },
+    {
+        "id": "anthropic-claude-2",
+        "name": "Anthropic Claude 2.1",
+        "description": "Anthropic Claude 2.1 is a generative LLM for conversations, question answering, and workflow automation.",
+        "vendor": "Amazon",
+        "provider": "DataRobot",
+        "license": "Proprietary",
+        "supportedLanguages": "Multilingual",
+        "settings": [
+            {
+                "id": "systemPrompt",
+                "name": "System prompt",
+                "description": "System prompt guides the style of the LLM response. It is a \"universal\" prompt, prepended to all individual prompts.",
+                "type": "string",
+                "format": "multiline",
+                "isNullable": true,
+                "constraints": {
+                    "type": "string",
+                    "minLength": null,
+                    "maxLength": 500000,
+                    "allowedChoices": null
+                },
+                "defaultValue": ""
+            },
+            {
+                "id": "maxCompletionLength",
+                "name": "Max completion tokens",
+                "description": "Maximum number of tokens allowed in the completion. The combined count of this value and prompt tokens must be below the model's maximum context size (200000), where prompt token count is comprised of system prompt, user prompt, recent chat history, and vector database citations.",
+                "type": "integer",
+                "format": null,
+                "isNullable": true,
+                "constraints": {
+                    "type": "integer",
+                    "minValue": 1,
+                    "maxValue": 4096
+                },
+                "defaultValue": 200
+            },
+            {
+                "id": "temperature",
+                "name": "Temperature",
+                "description": "Temperature controls the randomness of model output. Enter a value between 0 and 1, where higher values return more diverse output and lower values return more deterministic results. A value of 0 may return repetitive results.",
+                "type": "float",
+                "format": null,
+                "isNullable": true,
+                "constraints": {
+                    "type": "float",
+                    "minValue": 0.0,
+                    "maxValue": 1.0
+                },
+                "defaultValue": 0.5
+            },
+            {
+                "id": "topP",
+                "name": "Token selection probability cutoff (Top P)",
+                "description": "Top P sets a threshold that controls the selection of words included in the response, based on a cumulative probability cutoff for token selection. For example, 0.2 considers only the top 20% probability mass. Higher numbers return more diverse options for outputs.",
+                "type": "float",
+                "format": null,
+                "isNullable": true,
+                "constraints": {
+                    "type": "float",
+                    "minValue": 0.0,
+                    "maxValue": 1.0
+                },
+                "defaultValue": 1.0
+            }
+        ],
+        "contextSize": 200000,
+        "isDeprecated": false,
+        "supportedCustomModelLLMValidations": null
+    },
+    {
+        "id": "anthropic-claude-3-haiku",
+        "name": "Anthropic Claude 3 Haiku",
+        "description": "Anthropic Claude 3 Haiku is a generative LLM for conversations, question answering, and workflow automation.",
+        "vendor": "Amazon",
+        "provider": "DataRobot",
+        "license": "Proprietary",
+        "supportedLanguages": "Multilingual",
+        "settings": [
+            {
+                "id": "systemPrompt",
+                "name": "System prompt",
+                "description": "System prompt guides the style of the LLM response. It is a \"universal\" prompt, prepended to all individual prompts.",
+                "type": "string",
+                "format": "multiline",
+                "isNullable": true,
+                "constraints": {
+                    "type": "string",
+                    "minLength": null,
+                    "maxLength": 500000,
+                    "allowedChoices": null
+                },
+                "defaultValue": ""
+            },
+            {
+                "id": "maxCompletionLength",
+                "name": "Max completion tokens",
+                "description": "Maximum number of tokens allowed in the completion. The combined count of this value and prompt tokens must be below the model's maximum context size (200000), where prompt token count is comprised of system prompt, user prompt, recent chat history, and vector database citations.",
+                "type": "integer",
+                "format": null,
+                "isNullable": true,
+                "constraints": {
+                    "type": "integer",
+                    "minValue": 1,
+                    "maxValue": 4096
+                },
+                "defaultValue": 1024
+            },
+            {
+                "id": "temperature",
+                "name": "Temperature",
+                "description": "Temperature controls the randomness of model output. Enter a value between 0 and 1, where higher values return more diverse output and lower values return more deterministic results. A value of 0 may return repetitive results.",
+                "type": "float",
+                "format": null,
+                "isNullable": true,
+                "constraints": {
+                    "type": "float",
+                    "minValue": 0.0,
+                    "maxValue": 1.0
+                },
+                "defaultValue": 0.5
+            },
+            {
+                "id": "topP",
+                "name": "Token selection probability cutoff (Top P)",
+                "description": "Top P sets a threshold that controls the selection of words included in the response, based on a cumulative probability cutoff for token selection. For example, 0.2 considers only the top 20% probability mass. Higher numbers return more diverse options for outputs.",
+                "type": "float",
+                "format": null,
+                "isNullable": true,
+                "constraints": {
+                    "type": "float",
+                    "minValue": 0.0,
+                    "maxValue": 1.0
+                },
+                "defaultValue": 1.0
+            }
+        ],
+        "contextSize": 200000,
+        "isDeprecated": false,
+        "supportedCustomModelLLMValidations": null
+    },
+    {
+        "id": "anthropic-claude-3-sonnet",
+        "name": "Anthropic Claude 3 Sonnet",
+        "description": "Anthropic Claude 3 Sonnet is a generative LLM for conversations, question answering, and workflow automation.",
+        "vendor": "Amazon",
+        "provider": "DataRobot",
+        "license": "Proprietary",
+        "supportedLanguages": "Multilingual",
+        "settings": [
+            {
+                "id": "systemPrompt",
+                "name": "System prompt",
+                "description": "System prompt guides the style of the LLM response. It is a \"universal\" prompt, prepended to all individual prompts.",
+                "type": "string",
+                "format": "multiline",
+                "isNullable": true,
+                "constraints": {
+                    "type": "string",
+                    "minLength": null,
+                    "maxLength": 500000,
+                    "allowedChoices": null
+                },
+                "defaultValue": ""
+            },
+            {
+                "id": "maxCompletionLength",
+                "name": "Max completion tokens",
+                "description": "Maximum number of tokens allowed in the completion. The combined count of this value and prompt tokens must be below the model's maximum context size (200000), where prompt token count is comprised of system prompt, user prompt, recent chat history, and vector database citations.",
+                "type": "integer",
+                "format": null,
+                "isNullable": true,
+                "constraints": {
+                    "type": "integer",
+                    "minValue": 1,
+                    "maxValue": 4096
+                },
+                "defaultValue": 1024
+            },
+            {
+                "id": "temperature",
+                "name": "Temperature",
+                "description": "Temperature controls the randomness of model output. Enter a value between 0 and 1, where higher values return more diverse output and lower values return more deterministic results. A value of 0 may return repetitive results.",
+                "type": "float",
+                "format": null,
+                "isNullable": true,
+                "constraints": {
+                    "type": "float",
+                    "minValue": 0.0,
+                    "maxValue": 1.0
+                },
+                "defaultValue": 0.5
+            },
+            {
+                "id": "topP",
+                "name": "Token selection probability cutoff (Top P)",
+                "description": "Top P sets a threshold that controls the selection of words included in the response, based on a cumulative probability cutoff for token selection. For example, 0.2 considers only the top 20% probability mass. Higher numbers return more diverse options for outputs.",
+                "type": "float",
+                "format": null,
+                "isNullable": true,
+                "constraints": {
+                    "type": "float",
+                    "minValue": 0.0,
+                    "maxValue": 1.0
+                },
+                "defaultValue": 1.0
+            }
+        ],
+        "contextSize": 200000,
+        "isDeprecated": false,
+        "supportedCustomModelLLMValidations": null
+    },
+    {
+        "id": "google-bison",
+        "name": "Google Bison",
+        "description": "Google Bison is a generative LLM for tasks such as classification, sentiment analysis, entity extraction, and summarization.",
+        "vendor": "Google",
+        "provider": "DataRobot",
+        "license": "Proprietary",
+        "supportedLanguages": "Multilingual",
+        "settings": [
+            {
+                "id": "systemPrompt",
+                "name": "System prompt",
+                "description": "System prompt guides the style of the LLM response. It is a \"universal\" prompt, prepended to all individual prompts.",
+                "type": "string",
+                "format": "multiline",
+                "isNullable": true,
+                "constraints": {
+                    "type": "string",
+                    "minLength": null,
+                    "maxLength": 500000,
+                    "allowedChoices": null
+                },
+                "defaultValue": ""
+            },
+            {
+                "id": "maxCompletionLength",
+                "name": "Max completion tokens",
+                "description": "Maximum number of tokens allowed in the completion. The combined count of this value and prompt tokens must be below the model's maximum context size (4096), where prompt token count is comprised of system prompt, user prompt, recent chat history, and vector database citations.",
+                "type": "integer",
+                "format": null,
+                "isNullable": true,
+                "constraints": {
+                    "type": "integer",
+                    "minValue": 1,
+                    "maxValue": 2048
+                },
+                "defaultValue": 1024
+            },
+            {
+                "id": "temperature",
+                "name": "Temperature",
+                "description": "Temperature controls the randomness of model output. Enter a value between 0 and 1, where higher values return more diverse output and lower values return more deterministic results. A value of 0 may return repetitive results.",
+                "type": "float",
+                "format": null,
+                "isNullable": true,
+                "constraints": {
+                    "type": "float",
+                    "minValue": 0.0,
+                    "maxValue": 1.0
+                },
+                "defaultValue": 0
+            },
+            {
+                "id": "topP",
+                "name": "Token selection probability cutoff (Top P)",
+                "description": "Top P sets a threshold that controls the selection of words included in the response, based on a cumulative probability cutoff for token selection. For example, 0.2 considers only the top 20% probability mass. Higher numbers return more diverse options for outputs.",
+                "type": "float",
+                "format": null,
+                "isNullable": true,
+                "constraints": {
+                    "type": "float",
+                    "minValue": 0.0,
+                    "maxValue": 1.0
+                },
+                "defaultValue": 0.95
+            }
+        ],
+        "contextSize": 4096,
+        "isDeprecated": false,
+        "supportedCustomModelLLMValidations": null
+    },
+    {
+        "id": "google-gemini-1.5-flash",
+        "name": "Google Gemini 1.5 Flash",
+        "description": "Google Gemini 1.5 Flash is a generative LLM for tasks such as classification, sentiment analysis, entity extraction, and summarization.",
+        "vendor": "Google",
+        "provider": "DataRobot",
+        "license": "Proprietary",
+        "supportedLanguages": "Multilingual",
+        "settings": [
+            {
+                "id": "systemPrompt",
+                "name": "System prompt",
+                "description": "System prompt guides the style of the LLM response. It is a \"universal\" prompt, prepended to all individual prompts.",
+                "type": "string",
+                "format": "multiline",
+                "isNullable": true,
+                "constraints": {
+                    "type": "string",
+                    "minLength": null,
+                    "maxLength": 500000,
+                    "allowedChoices": null
+                },
+                "defaultValue": ""
+            },
+            {
+                "id": "maxCompletionLength",
+                "name": "Max completion tokens",
+                "description": "Maximum number of tokens allowed in the completion. The combined count of this value and prompt tokens must be below the model's maximum context size (1048576), where prompt token count is comprised of system prompt, user prompt, recent chat history, and vector database citations.",
+                "type": "integer",
+                "format": null,
+                "isNullable": true,
+                "constraints": {
+                    "type": "integer",
+                    "minValue": 1,
+                    "maxValue": 8192
+                },
+                "defaultValue": 2048
+            },
+            {
+                "id": "temperature",
+                "name": "Temperature",
+                "description": "Temperature controls the randomness of model output. Enter a value between 0 and 1, where higher values return more diverse output and lower values return more deterministic results. A value of 0 may return repetitive results.",
+                "type": "float",
+                "format": null,
+                "isNullable": true,
+                "constraints": {
+                    "type": "float",
+                    "minValue": 0.0,
+                    "maxValue": 1.0
+                },
+                "defaultValue": 0
+            },
+            {
+                "id": "topP",
+                "name": "Token selection probability cutoff (Top P)",
+                "description": "Top P sets a threshold that controls the selection of words included in the response, based on a cumulative probability cutoff for token selection. For example, 0.2 considers only the top 20% probability mass. Higher numbers return more diverse options for outputs.",
+                "type": "float",
+                "format": null,
+                "isNullable": true,
+                "constraints": {
+                    "type": "float",
+                    "minValue": 0.0,
+                    "maxValue": 1.0
+                },
+                "defaultValue": 0.95
+            }
+        ],
+        "contextSize": 1048576,
+        "isDeprecated": false,
+        "supportedCustomModelLLMValidations": null
+    },
+    {
+        "id": "google-gemini-1.5-pro",
+        "name": "Google Gemini 1.5 Pro",
+        "description": "Google Gemini 1.5 Pro is a generative LLM for tasks such as classification, sentiment analysis, entity extraction, and summarization.",
+        "vendor": "Google",
+        "provider": "DataRobot",
+        "license": "Proprietary",
+        "supportedLanguages": "Multilingual",
+        "settings": [
+            {
+                "id": "systemPrompt",
+                "name": "System prompt",
+                "description": "System prompt guides the style of the LLM response. It is a \"universal\" prompt, prepended to all individual prompts.",
+                "type": "string",
+                "format": "multiline",
+                "isNullable": true,
+                "constraints": {
+                    "type": "string",
+                    "minLength": null,
+                    "maxLength": 500000,
+                    "allowedChoices": null
+                },
+                "defaultValue": ""
+            },
+            {
+                "id": "maxCompletionLength",
+                "name": "Max completion tokens",
+                "description": "Maximum number of tokens allowed in the completion. The combined count of this value and prompt tokens must be below the model's maximum context size (1048576), where prompt token count is comprised of system prompt, user prompt, recent chat history, and vector database citations.",
+                "type": "integer",
+                "format": null,
+                "isNullable": true,
+                "constraints": {
+                    "type": "integer",
+                    "minValue": 1,
+                    "maxValue": 8192
+                },
+                "defaultValue": 2048
+            },
+            {
+                "id": "temperature",
+                "name": "Temperature",
+                "description": "Temperature controls the randomness of model output. Enter a value between 0 and 1, where higher values return more diverse output and lower values return more deterministic results. A value of 0 may return repetitive results.",
+                "type": "float",
+                "format": null,
+                "isNullable": true,
+                "constraints": {
+                    "type": "float",
+                    "minValue": 0.0,
+                    "maxValue": 1.0
+                },
+                "defaultValue": 0
+            },
+            {
+                "id": "topP",
+                "name": "Token selection probability cutoff (Top P)",
+                "description": "Top P sets a threshold that controls the selection of words included in the response, based on a cumulative probability cutoff for token selection. For example, 0.2 considers only the top 20% probability mass. Higher numbers return more diverse options for outputs.",
+                "type": "float",
+                "format": null,
+                "isNullable": true,
+                "constraints": {
+                    "type": "float",
+                    "minValue": 0.0,
+                    "maxValue": 1.0
+                },
+                "defaultValue": 0.95
+            }
+        ],
+        "contextSize": 1048576,
+        "isDeprecated": false,
+        "supportedCustomModelLLMValidations": null
+    },
+    {
+        "id": "custom-model",
+        "name": "Deployed LLM",
+        "description": "LLMs deployed in DataRobot.",
+        "vendor": "DataRobot",
+        "provider": "User",
+        "license": "Proprietary",
+        "supportedLanguages": "Multilingual",
+        "settings": [
+            {
+                "id": "systemPrompt",
+                "name": "System prompt",
+                "description": "System prompt guides the style of the LLM response. It is a \"universal\" prompt, prepended to all individual prompts.",
+                "type": "string",
+                "format": "multiline",
+                "isNullable": true,
+                "constraints": {
+                    "type": "string",
+                    "minLength": null,
+                    "maxLength": 500000,
+                    "allowedChoices": null
+                },
+                "defaultValue": ""
+            },
+            {
+                "id": "validationId",
+                "name": "Validation ID",
+                "description": "The ID of the custom model LLM validation.",
+                "type": "object_id",
+                "format": null,
+                "isNullable": true,
+                "constraints": {
+                    "type": "object_id",
+                    "allowedChoices": [
+                        "655bd3de687faa00974e5187",
+                        "655777f8b0efe09b675969c6",
+                        "655a7a1cb0efe09b67596c76",
+                        "655a77c2d026969c034a6ed6",
+                        "655a787ad026969c034a6eda",
+                        "655a845db0efe09b67596c91",
+                        "6557767fb0efe09b675969c2"
+                    ]
+                },
+                "defaultValue": null
+            },
+            {
+                "id": "externalLlmContextSize",
+                "name": "External LLM context size",
+                "description": "The external LLM's context size, in tokens. This value is only used for pruning documents supplied to the LLM when a vector database is associated with the LLM blueprint. It does not affect the external LLM's actual context size in any way and is not supplied to the LLM.",
+                "type": "integer",
+                "format": null,
+                "isNullable": true,
+                "constraints": {
+                    "type": "integer",
+                    "minValue": 128,
+                    "maxValue": 128000
+                },
+                "defaultValue": 4096
+            }
+        ],
+        "contextSize": null,
+        "isDeprecated": false,
+        "supportedCustomModelLLMValidations": [
+            {
+                "id": "655bd3de687faa00974e5187",
+                "name": "Untitled"
+            },
+            {
+                "id": "655a845db0efe09b67596c91",
+                "name": "Untitled"
+            },
+            {
+                "id": "655a7a1cb0efe09b67596c76",
+                "name": "Untitled"
+            },
+            {
+                "id": "655a787ad026969c034a6eda",
+                "name": "Untitled"
+            },
+            {
+                "id": "655a77c2d026969c034a6ed6",
+                "name": "Untitled"
+            },
+            {
+                "id": "655777f8b0efe09b675969c6",
+                "name": "Untitled"
+            },
+            {
+                "id": "6557767fb0efe09b675969c2",
+                "name": "Untitled"
+            }
+        ]
+    }
+]
