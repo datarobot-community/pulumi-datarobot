@@ -65,17 +65,12 @@ jobs:
         go-version-file: provider/go.mod
         # Either this action or golangci-lint needs to disable the cache
         cache: true
-
-    - name: Install pulumictl
-      uses: jaxxstorm/action-install-gh-release@25d5e2dd555cd74f1fab9ac1e6ea117acde2c0c4
-      with:
-        repo: pulumi/pulumictl
-      
+    
     - name: Download dependencies
       run: make tidy
 
     - name: Build
-      run: make build
+      run: make tfgen
 
     - name: Test
       run: make test
