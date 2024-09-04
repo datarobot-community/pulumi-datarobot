@@ -38,18 +38,18 @@ jobs:
 
     steps:
     - name: Checkout Repo
-      uses: actions/checkout@v2
+      uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
 
     - name: Unshallow clone for tags
       run: git fetch --prune --unshallow --tags
 
     - name: Install Go
-      uses: actions/setup-go@v2
+      uses: actions/setup-go@0a12ed9d6a96ab950c8f026ed9f722fe0da7ef32 # v5.0.2
       with:
         go-version: ${{matrix.goversion}}
 
     - name: Install pulumictl
-      uses: jaxxstorm/action-install-gh-release@v1.5.0
+      uses: jaxxstorm/action-install-gh-release@25d5e2dd555cd74f1fab9ac1e6ea117acde2c0c4
       with:
         repo: pulumi/pulumictl
 
@@ -57,7 +57,7 @@ jobs:
       run: echo "GORELEASER_CURRENT_TAG=v$(pulumictl get version --language generic)" >> $GITHUB_ENV
 
     - name: Run GoReleaser
-      uses: goreleaser/goreleaser-action@v2
+      uses: goreleaser/goreleaser-action@286f3b13b1b49da4ac219696163fb8c1c93e1200
       with:
         args: -p 3 release --rm-dist
         version: latest
@@ -84,4 +84,4 @@ jobs:
           - "3.9"
     steps:
     - name: Publish SDKs
-      uses: pulumi/pulumi-package-publisher@v0.0.6
+      uses: pulumi/pulumi-package-publisher@9b71c3d99ee90f5e69909a40fc7da7f084575674

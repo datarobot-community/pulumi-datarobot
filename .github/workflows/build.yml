@@ -54,8 +54,10 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
+    
     - name: Checkout Repo
       uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+    
     - name: Install go
       uses: actions/setup-go@0a12ed9d6a96ab950c8f026ed9f722fe0da7ef32 # v5.0.2
       with:
@@ -63,7 +65,12 @@ jobs:
         go-version-file: provider/go.mod
         # Either this action or golangci-lint needs to disable the cache
         cache: true
-        
+
+    - name: Install pulumictl
+      uses: jaxxstorm/action-install-gh-release@25d5e2dd555cd74f1fab9ac1e6ea117acde2c0c4
+      with:
+        repo: pulumi/pulumictl
+      
     - name: Download dependencies
       run: make tidy
 
