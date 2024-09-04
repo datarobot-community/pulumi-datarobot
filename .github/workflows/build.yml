@@ -68,7 +68,7 @@ jobs:
       run: make tidy
 
     - name: Build
-      run: make tfgen
+      run: make build
 
     - name: Test
       run: make test
