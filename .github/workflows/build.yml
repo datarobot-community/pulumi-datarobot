@@ -1,4 +1,4 @@
-name: lint
+name: Build
 
 on:
   workflow_call:
@@ -13,10 +13,45 @@ on:
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  CGO_ENABLED: 0
 
 jobs:
   lint:
-    name: lint
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repo
+      uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+
+    - name: Install go
+      uses: actions/setup-go@0a12ed9d6a96ab950c8f026ed9f722fe0da7ef32 # v5.0.2
+      with:
+        # The versions of golangci-lint and setup-go here cross-depend and need to update together.
+        go-version-file: provider/go.mod
+        # Either this action or golangci-lint needs to disable the cache
+        cache: true
+
+    - name: disarm go:embed directives to enable lint
+      continue-on-error: true # this fails if there are no go:embed directives
+      run: |
+        git grep -l 'go:embed' -- provider | xargs sed -i 's/go:embed/ goembed/g'
+
+    - name: prepare upstream
+      continue-on-error: true
+      run: make upstream
+
+    - name: Download dependencies
+      run: make tidy
+
+    - name: golangci-lint
+      uses: golangci/golangci-lint-action@aaa42aa0628b4ae2578232a66b541047968fac86 # v6.1.0
+      with:
+        version: v1.60.2
+        working-directory: provider
+        skip-cache: true
+
+  build:
+    name: Build
     runs-on: ubuntu-latest
     steps:
     - name: Checkout Repo
@@ -25,20 +60,15 @@ jobs:
       uses: actions/setup-go@0a12ed9d6a96ab950c8f026ed9f722fe0da7ef32 # v5.0.2
       with:
         # The versions of golangci-lint and setup-go here cross-depend and need to update together.
-        go-version: 1.21
+        go-version-file: provider/go.mod
         # Either this action or golangci-lint needs to disable the cache
-        cache: false
-    - name: disarm go:embed directives to enable lint
-      continue-on-error: true # this fails if there are no go:embed directives
-      run: |
-        git grep -l 'go:embed' -- provider | xargs sed -i 's/go:embed/ goembed/g'
-    - name: prepare upstream
-      continue-on-error: true
-      run: make upstream
-    - run: cd provider && go mod tidy
-    - name: golangci-lint
-      uses: golangci/golangci-lint-action@aaa42aa0628b4ae2578232a66b541047968fac86 # v6.1.0
-      with:
-        version: v1.54.1
-        working-directory: provider
-        skip-cache: true
+        cache: true
+        
+    - name: Download dependencies
+      run: make tidy
+
+    - name: Build
+      run: make tfgen
+
+    - name: Test
+      run: make test
