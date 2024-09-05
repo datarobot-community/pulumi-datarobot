@@ -4,23 +4,13 @@ on:
     tags:
       - v*.*.*
 env:
-  # THIS GITHUB_TOKEN IS A REQUIREMENT TO BE ABLE TO WRITE TO GH RELEASES
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  # IF YOU NEED TO PUBLISH A NPM PACKAGE THEN ENSURE A NPM_TOKEN SECRET IS SET
-  # AND PUBLISH_NPM: TRUE. IF YOU WANT TO PUBLISH TO A PRIVATE NPM REGISTRY
-  # THEN ENSURE THE NPM_REGISTRY_URL IS CHANGED
   NODE_AUTH_TOKEN:  ${{ secrets.NPM_TOKEN }}
   NPM_REGISTRY_URL: https://registry.npmjs.org
-  # IF YOU NEED TO PUBLISH A NUGET PACKAGE THEN ENSURE AN NUGET_PUBLISH_KEY
-  # SECRET IS SET AND PUBLISH_NUGET: TRUE. IF YOU WANT TO PUBLISH TO AN ALTERNATIVE
-  # NPM REGISTRY THEN ENSURE THE NPM_REGISTRY_URL IS CHANGED
   NUGET_PUBLISH_KEY: ${{ secrets.NUGET_PUBLISH_KEY }}
   NUGET_FEED_URL: https://api.nuget.org/v3/index.json
-  # IF YOU NEED TO PUBLISH A PYPI PACKAGE SET PYPI_PASSWORD, PYPI_USERNAME TO YOUR CREDENTIALS.
-  # IF YOU WANT TO PUBLISH TO AN ALTERNATIVE PYPI REGISTRY THEN ENSURE THE PYPI_REPOSITORY_URL IS SET. 
   PYPI_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
-  PYPI_USERNAME: ${{ secrets.PYPI_USERNAME }}
-  PYPI_REPOSITORY_URL: ""
+  PYPI_USERNAME: __token__
   # MAVEN 
   SIGNING_KEY: ${{ secrets.JAVA_SIGNING_KEY }}
   SIGNING_KEY_ID: ${{ secrets.JAVA_SIGNING_KEY_ID }}
@@ -66,22 +56,77 @@ jobs:
     name: Publish SDKs
     runs-on: ubuntu-latest
     needs: publish_binary
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+      - name: Unshallow clone for tags
+        run: git fetch --prune --unshallow --tags
+      - name: Install Go
+        uses: actions/setup-go@0a12ed9d6a96ab950c8f026ed9f722fe0da7ef32 # v5.0.2
+        with:
+          go-version: ${{ matrix.goversion }}
+      - name: Install pulumictl
+        uses: jaxxstorm/action-install-gh-release@25d5e2dd555cd74f1fab9ac1e6ea117acde2c0c4 # v1.12.0
+        with:
+          repo: pulumi/pulumictl
+      - name: Install Pulumi CLI
+        uses: pulumi/action-install-pulumi-cli@b374ceb6168550de27c6eba92e01c1a774040e11 # tag=v2.0.0
+      - name: Setup Node
+        uses: actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b # v4.0.3
+        with:
+          node-version: ${{matrix.nodeversion}}
+          registry-url: ${{env.NPM_REGISTRY_URL}}
+      - name: Setup DotNet
+        uses: actions/setup-dotnet@6bd8b7f7774af54e05809fcc5431931b3eb1ddee # v4.0.1
+        with:
+          dotnet-version: ${{matrix.dotnetverson}}
+      - name: Setup Python
+        uses: actions/setup-python@f677139bbe7f9c59b41e40162b753c062f5d49a3 # v5.2.0
+        with:
+          python-version: ${{matrix.pythonversion}}
+      - name: Build SDK
+        run: make build_${{ matrix.language }}
+      - name: Check worktree clean
+        run: |
+          git update-index -q --refresh
+          if ! git diff-files --quiet; then
+              >&2 echo "error: working tree is not clean, aborting!"
+              git status
+              git diff
+              exit 1
+          fi
+      - if: ${{ matrix.language == 'python' }}
+        name: Publish package to PyPI
+        uses: pypa/gh-action-pypi-publish@8a08d616893759ef8e1aa1f2785787c0b97e20d6 # v1.10.0
+        with:
+          user: ${{ env.PYPI_USERNAME }}
+          password: ${{ env.PYPI_PASSWORD }}
+          packages_dir: ${{github.workspace}}/sdk/python/bin/dist
+      - if: ${{ matrix.language == 'nodejs' }}
+        uses: JS-DevTools/npm-publish@19c28f1ef146469e409470805ea4279d47c3d35c # v3.1.1
+        with:
+          access: "public"
+          token: ${{ env.NPM_TOKEN }}
+          package: ${{github.workspace}}/sdk/nodejs/bin/package.json
+          provenance: true
+      - if: ${{ matrix.language == 'dotnet' }}
+        name: publish nuget package
+        run: |
+          dotnet nuget push ${{github.workspace}}/sdk/dotnet/bin/Debug/*.nupkg -s ${{ env.NUGET_FEED_URL }} -k ${{ env.NUGET_PUBLISH_KEY }}
+          echo "done publishing packages"
     strategy:
       fail-fast: true
       matrix:
         dotnetversion:
           - 3.1.301
         goversion:
-          - 1.22.x
+          - 1.21
         language:
-          # - nodejs
+          - nodejs
           - python
-          # - dotnet
+          - dotnet
           - go
         nodeversion:
-          - 14.x
+          - 18
         pythonversion:
-          - "3.9"
-    steps:
-    - name: Publish SDKs
-      uses: pulumi/pulumi-package-publisher@9b71c3d99ee90f5e69909a40fc7da7f084575674
+          - 3.9
