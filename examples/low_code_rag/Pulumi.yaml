@@ -80,12 +80,12 @@ resources:
       settings:
         predictionRowStorage: true
 
-  datarobotChatApplication:
-    type: datarobot:ChatApplication
+  datarobotQaApplication:
+    type: datarobot:QaApplication
     properties:
       name: ${datarobotUseCase.name}
       deploymentId: ${datarobotDeployment.id}
 
 outputs:
-  datarobotChatApplicationUrl:
-    value: ${datarobotChatApplication.applicationUrl}
+  datarobotQaApplicationUrl:
+    value: ${datarobotQaApplication.applicationUrl}

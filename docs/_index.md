@@ -4,11 +4,11 @@ meta_desc: Provides an overview of the DataRobot Provider for Pulumi.
 layout: package
 ---
 
-The `DataRobot` provider for Pulumi can be used to provision any of the resources available with [DataRobot]((https://www.datarobot.com/).
+The `DataRobot` provider for Pulumi can be used to provision any of the resources available with [DataRobot](https://www.datarobot.com/).
 
 ## Example
 
-{{< chooser language "python,typescript,yaml" >}}
+{{< chooser language "python,yaml" >}}
 
 {{% /choosable %}}
 
@@ -28,6 +28,24 @@ playground = datarobot.Playground("playground",
                                 name="example playground",
                                 use_case_id=use_case.id,
 )
+```
+
+{{% /choosable %}}
+
+{{% /choosable %}}
+{{% choosable language yaml %}}
+
+```yaml
+name: yaml
+runtime: yaml
+description: Example using Pulumi YAML 
+config: {'pulumi:tags': {value: {'pulumi:template': yaml}}}
+resources:
+  datarobotUseCase:
+    type: datarobot:UseCase
+    properties:
+      name: Pulumi YAML Example
+      description: Example using Pulumi YAML
 ```
 
 {{% /choosable %}}

@@ -74,6 +74,7 @@ namespace Pulumi.Datarobot
             var defaultOptions = new CustomResourceOptions
             {
                 Version = Utilities.Version,
+                PluginDownloadURL = "github://api.github.com/datarobot-community/pulumi-datarobot",
                 AdditionalSecretOutputs =
                 {
                     "apiToken",

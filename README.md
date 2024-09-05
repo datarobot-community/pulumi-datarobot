@@ -26,6 +26,13 @@ You may skip installing any languages that you are not interested in testing in 
 Although the steps below contain Unix commands, the Provider can also be tested on Windows.
 It is recommended to use Powershell to run the `make` commands and the Windows equivalents for `cp`, `export`, etc.
 
+## Configuration
+
+The following configuration points are available for the DataRobot provider:
+
+- `datarobot:apikey` (environment: `DATAROBOT_API_KEY`) - the API key for DataRobot
+- `datarobot:endpoint` (environment: `DATAROBOT_ENDPOINT`) - the endpoint for DataRobot
+
 ## Run the Low-Code Monitored RAG Example
 
 1. In a terminal clone the `pulumi-datarobot` repository:
