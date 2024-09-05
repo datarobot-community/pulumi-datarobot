@@ -54,7 +54,7 @@ class ApplicationSourceRuntimeParameterValue(dict):
         """
         :param str key: The name of the runtime parameter.
         :param str type: The type of the runtime parameter.
-        :param str value: The value of the runtime parameter.
+        :param str value: The value of the runtime parameter (type conversion is handled internally).
         """
         pulumi.set(__self__, "key", key)
         pulumi.set(__self__, "type", type)
@@ -80,7 +80,7 @@ class ApplicationSourceRuntimeParameterValue(dict):
     @pulumi.getter
     def value(self) -> str:
         """
-        The value of the runtime parameter.
+        The value of the runtime parameter (type conversion is handled internally).
         """
         return pulumi.get(self, "value")
 
@@ -386,7 +386,7 @@ class CustomModelRuntimeParameterValue(dict):
         """
         :param str key: The name of the runtime parameter.
         :param str type: The type of the runtime parameter.
-        :param str value: The value of the runtime parameter.
+        :param str value: The value of the runtime parameter (type conversion is handled internally).
         """
         pulumi.set(__self__, "key", key)
         pulumi.set(__self__, "type", type)
@@ -412,7 +412,7 @@ class CustomModelRuntimeParameterValue(dict):
     @pulumi.getter
     def value(self) -> str:
         """
-        The value of the runtime parameter.
+        The value of the runtime parameter (type conversion is handled internally).
         """
         return pulumi.get(self, "value")
 

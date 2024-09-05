@@ -22,11 +22,13 @@ class CustomModelArgs:
                  description: Optional[pulumi.Input[str]] = None,
                  guard_configurations: Optional[pulumi.Input[Sequence[pulumi.Input['CustomModelGuardConfigurationArgs']]]] = None,
                  is_proxy: Optional[pulumi.Input[bool]] = None,
+                 language: Optional[pulumi.Input[str]] = None,
                  local_files: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  negative_class_label: Optional[pulumi.Input[str]] = None,
                  overall_moderation_configuration: Optional[pulumi.Input['CustomModelOverallModerationConfigurationArgs']] = None,
                  positive_class_label: Optional[pulumi.Input[str]] = None,
+                 prediction_threshold: Optional[pulumi.Input[float]] = None,
                  resource_settings: Optional[pulumi.Input['CustomModelResourceSettingsArgs']] = None,
                  runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input['CustomModelRuntimeParameterValueArgs']]]] = None,
                  source_llm_blueprint_id: Optional[pulumi.Input[str]] = None,
@@ -41,16 +43,18 @@ class CustomModelArgs:
         :param pulumi.Input[str] description: The description of the Custom Model.
         :param pulumi.Input[Sequence[pulumi.Input['CustomModelGuardConfigurationArgs']]] guard_configurations: The guard configurations for the Custom Model.
         :param pulumi.Input[bool] is_proxy: The flag indicating if the Custom Model is a proxy model.
+        :param pulumi.Input[str] language: The language used to build the Custom Model.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] local_files: The list of local file paths used to build the Custom Model.
         :param pulumi.Input[str] name: The name of the Custom Model.
         :param pulumi.Input[str] negative_class_label: The negative class label of the Custom Model.
         :param pulumi.Input['CustomModelOverallModerationConfigurationArgs'] overall_moderation_configuration: The overall moderation configuration for the Custom Model.
         :param pulumi.Input[str] positive_class_label: The positive class label of the Custom Model.
+        :param pulumi.Input[float] prediction_threshold: The prediction threshold of the Custom Model.
         :param pulumi.Input['CustomModelResourceSettingsArgs'] resource_settings: The resource settings for the Custom Model.
         :param pulumi.Input[Sequence[pulumi.Input['CustomModelRuntimeParameterValueArgs']]] runtime_parameter_values: The runtime parameter values for the Custom Model.
         :param pulumi.Input[str] source_llm_blueprint_id: The ID of the source LLM Blueprint for the Custom Model.
         :param pulumi.Input[Sequence[pulumi.Input['CustomModelSourceRemoteRepositoryArgs']]] source_remote_repositories: The source remote repositories for the Custom Model.
-        :param pulumi.Input[str] target: The target of the Custom Model.
+        :param pulumi.Input[str] target: The target name of the Custom Model.
         :param pulumi.Input[str] target_type: The target type of the Custom Model.
         """
         if base_environment_id is not None:
@@ -65,6 +69,8 @@ class CustomModelArgs:
             pulumi.set(__self__, "guard_configurations", guard_configurations)
         if is_proxy is not None:
             pulumi.set(__self__, "is_proxy", is_proxy)
+        if language is not None:
+            pulumi.set(__self__, "language", language)
         if local_files is not None:
             pulumi.set(__self__, "local_files", local_files)
         if name is not None:
@@ -75,6 +81,8 @@ class CustomModelArgs:
             pulumi.set(__self__, "overall_moderation_configuration", overall_moderation_configuration)
         if positive_class_label is not None:
             pulumi.set(__self__, "positive_class_label", positive_class_label)
+        if prediction_threshold is not None:
+            pulumi.set(__self__, "prediction_threshold", prediction_threshold)
         if resource_settings is not None:
             pulumi.set(__self__, "resource_settings", resource_settings)
         if runtime_parameter_values is not None:
@@ -161,6 +169,18 @@ class CustomModelArgs:
         pulumi.set(self, "is_proxy", value)
 
     @property
+    @pulumi.getter
+    def language(self) -> Optional[pulumi.Input[str]]:
+        """
+        The language used to build the Custom Model.
+        """
+        return pulumi.get(self, "language")
+
+    @language.setter
+    def language(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "language", value)
+
+    @property
     @pulumi.getter(name="localFiles")
     def local_files(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
@@ -221,6 +241,18 @@ class CustomModelArgs:
         pulumi.set(self, "positive_class_label", value)
 
     @property
+    @pulumi.getter(name="predictionThreshold")
+    def prediction_threshold(self) -> Optional[pulumi.Input[float]]:
+        """
+        The prediction threshold of the Custom Model.
+        """
+        return pulumi.get(self, "prediction_threshold")
+
+    @prediction_threshold.setter
+    def prediction_threshold(self, value: Optional[pulumi.Input[float]]):
+        pulumi.set(self, "prediction_threshold", value)
+
+    @property
     @pulumi.getter(name="resourceSettings")
     def resource_settings(self) -> Optional[pulumi.Input['CustomModelResourceSettingsArgs']]:
         """
@@ -272,7 +304,7 @@ class CustomModelArgs:
     @pulumi.getter
     def target(self) -> Optional[pulumi.Input[str]]:
         """
-        The target of the Custom Model.
+        The target name of the Custom Model.
         """
         return pulumi.get(self, "target")
 
@@ -302,11 +334,13 @@ class _CustomModelState:
                  description: Optional[pulumi.Input[str]] = None,
                  guard_configurations: Optional[pulumi.Input[Sequence[pulumi.Input['CustomModelGuardConfigurationArgs']]]] = None,
                  is_proxy: Optional[pulumi.Input[bool]] = None,
+                 language: Optional[pulumi.Input[str]] = None,
                  local_files: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  negative_class_label: Optional[pulumi.Input[str]] = None,
                  overall_moderation_configuration: Optional[pulumi.Input['CustomModelOverallModerationConfigurationArgs']] = None,
                  positive_class_label: Optional[pulumi.Input[str]] = None,
+                 prediction_threshold: Optional[pulumi.Input[float]] = None,
                  resource_settings: Optional[pulumi.Input['CustomModelResourceSettingsArgs']] = None,
                  runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input['CustomModelRuntimeParameterValueArgs']]]] = None,
                  source_llm_blueprint_id: Optional[pulumi.Input[str]] = None,
@@ -322,16 +356,18 @@ class _CustomModelState:
         :param pulumi.Input[str] description: The description of the Custom Model.
         :param pulumi.Input[Sequence[pulumi.Input['CustomModelGuardConfigurationArgs']]] guard_configurations: The guard configurations for the Custom Model.
         :param pulumi.Input[bool] is_proxy: The flag indicating if the Custom Model is a proxy model.
+        :param pulumi.Input[str] language: The language used to build the Custom Model.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] local_files: The list of local file paths used to build the Custom Model.
         :param pulumi.Input[str] name: The name of the Custom Model.
         :param pulumi.Input[str] negative_class_label: The negative class label of the Custom Model.
         :param pulumi.Input['CustomModelOverallModerationConfigurationArgs'] overall_moderation_configuration: The overall moderation configuration for the Custom Model.
         :param pulumi.Input[str] positive_class_label: The positive class label of the Custom Model.
+        :param pulumi.Input[float] prediction_threshold: The prediction threshold of the Custom Model.
         :param pulumi.Input['CustomModelResourceSettingsArgs'] resource_settings: The resource settings for the Custom Model.
         :param pulumi.Input[Sequence[pulumi.Input['CustomModelRuntimeParameterValueArgs']]] runtime_parameter_values: The runtime parameter values for the Custom Model.
         :param pulumi.Input[str] source_llm_blueprint_id: The ID of the source LLM Blueprint for the Custom Model.
         :param pulumi.Input[Sequence[pulumi.Input['CustomModelSourceRemoteRepositoryArgs']]] source_remote_repositories: The source remote repositories for the Custom Model.
-        :param pulumi.Input[str] target: The target of the Custom Model.
+        :param pulumi.Input[str] target: The target name of the Custom Model.
         :param pulumi.Input[str] target_type: The target type of the Custom Model.
         :param pulumi.Input[str] version_id: The ID of the latest Custom Model version.
         """
@@ -347,6 +383,8 @@ class _CustomModelState:
             pulumi.set(__self__, "guard_configurations", guard_configurations)
         if is_proxy is not None:
             pulumi.set(__self__, "is_proxy", is_proxy)
+        if language is not None:
+            pulumi.set(__self__, "language", language)
         if local_files is not None:
             pulumi.set(__self__, "local_files", local_files)
         if name is not None:
@@ -357,6 +395,8 @@ class _CustomModelState:
             pulumi.set(__self__, "overall_moderation_configuration", overall_moderation_configuration)
         if positive_class_label is not None:
             pulumi.set(__self__, "positive_class_label", positive_class_label)
+        if prediction_threshold is not None:
+            pulumi.set(__self__, "prediction_threshold", prediction_threshold)
         if resource_settings is not None:
             pulumi.set(__self__, "resource_settings", resource_settings)
         if runtime_parameter_values is not None:
@@ -445,6 +485,18 @@ class _CustomModelState:
         pulumi.set(self, "is_proxy", value)
 
     @property
+    @pulumi.getter
+    def language(self) -> Optional[pulumi.Input[str]]:
+        """
+        The language used to build the Custom Model.
+        """
+        return pulumi.get(self, "language")
+
+    @language.setter
+    def language(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "language", value)
+
+    @property
     @pulumi.getter(name="localFiles")
     def local_files(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
@@ -505,6 +557,18 @@ class _CustomModelState:
         pulumi.set(self, "positive_class_label", value)
 
     @property
+    @pulumi.getter(name="predictionThreshold")
+    def prediction_threshold(self) -> Optional[pulumi.Input[float]]:
+        """
+        The prediction threshold of the Custom Model.
+        """
+        return pulumi.get(self, "prediction_threshold")
+
+    @prediction_threshold.setter
+    def prediction_threshold(self, value: Optional[pulumi.Input[float]]):
+        pulumi.set(self, "prediction_threshold", value)
+
+    @property
     @pulumi.getter(name="resourceSettings")
     def resource_settings(self) -> Optional[pulumi.Input['CustomModelResourceSettingsArgs']]:
         """
@@ -556,7 +620,7 @@ class _CustomModelState:
     @pulumi.getter
     def target(self) -> Optional[pulumi.Input[str]]:
         """
-        The target of the Custom Model.
+        The target name of the Custom Model.
         """
         return pulumi.get(self, "target")
 
@@ -600,11 +664,13 @@ class CustomModel(pulumi.CustomResource):
                  description: Optional[pulumi.Input[str]] = None,
                  guard_configurations: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CustomModelGuardConfigurationArgs']]]]] = None,
                  is_proxy: Optional[pulumi.Input[bool]] = None,
+                 language: Optional[pulumi.Input[str]] = None,
                  local_files: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  negative_class_label: Optional[pulumi.Input[str]] = None,
                  overall_moderation_configuration: Optional[pulumi.Input[pulumi.InputType['CustomModelOverallModerationConfigurationArgs']]] = None,
                  positive_class_label: Optional[pulumi.Input[str]] = None,
+                 prediction_threshold: Optional[pulumi.Input[float]] = None,
                  resource_settings: Optional[pulumi.Input[pulumi.InputType['CustomModelResourceSettingsArgs']]] = None,
                  runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CustomModelRuntimeParameterValueArgs']]]]] = None,
                  source_llm_blueprint_id: Optional[pulumi.Input[str]] = None,
@@ -623,16 +689,18 @@ class CustomModel(pulumi.CustomResource):
         :param pulumi.Input[str] description: The description of the Custom Model.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CustomModelGuardConfigurationArgs']]]] guard_configurations: The guard configurations for the Custom Model.
         :param pulumi.Input[bool] is_proxy: The flag indicating if the Custom Model is a proxy model.
+        :param pulumi.Input[str] language: The language used to build the Custom Model.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] local_files: The list of local file paths used to build the Custom Model.
         :param pulumi.Input[str] name: The name of the Custom Model.
         :param pulumi.Input[str] negative_class_label: The negative class label of the Custom Model.
         :param pulumi.Input[pulumi.InputType['CustomModelOverallModerationConfigurationArgs']] overall_moderation_configuration: The overall moderation configuration for the Custom Model.
         :param pulumi.Input[str] positive_class_label: The positive class label of the Custom Model.
+        :param pulumi.Input[float] prediction_threshold: The prediction threshold of the Custom Model.
         :param pulumi.Input[pulumi.InputType['CustomModelResourceSettingsArgs']] resource_settings: The resource settings for the Custom Model.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CustomModelRuntimeParameterValueArgs']]]] runtime_parameter_values: The runtime parameter values for the Custom Model.
         :param pulumi.Input[str] source_llm_blueprint_id: The ID of the source LLM Blueprint for the Custom Model.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CustomModelSourceRemoteRepositoryArgs']]]] source_remote_repositories: The source remote repositories for the Custom Model.
-        :param pulumi.Input[str] target: The target of the Custom Model.
+        :param pulumi.Input[str] target: The target name of the Custom Model.
         :param pulumi.Input[str] target_type: The target type of the Custom Model.
         """
         ...
@@ -665,11 +733,13 @@ class CustomModel(pulumi.CustomResource):
                  description: Optional[pulumi.Input[str]] = None,
                  guard_configurations: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CustomModelGuardConfigurationArgs']]]]] = None,
                  is_proxy: Optional[pulumi.Input[bool]] = None,
+                 language: Optional[pulumi.Input[str]] = None,
                  local_files: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  negative_class_label: Optional[pulumi.Input[str]] = None,
                  overall_moderation_configuration: Optional[pulumi.Input[pulumi.InputType['CustomModelOverallModerationConfigurationArgs']]] = None,
                  positive_class_label: Optional[pulumi.Input[str]] = None,
+                 prediction_threshold: Optional[pulumi.Input[float]] = None,
                  resource_settings: Optional[pulumi.Input[pulumi.InputType['CustomModelResourceSettingsArgs']]] = None,
                  runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CustomModelRuntimeParameterValueArgs']]]]] = None,
                  source_llm_blueprint_id: Optional[pulumi.Input[str]] = None,
@@ -691,11 +761,13 @@ class CustomModel(pulumi.CustomResource):
             __props__.__dict__["description"] = description
             __props__.__dict__["guard_configurations"] = guard_configurations
             __props__.__dict__["is_proxy"] = is_proxy
+            __props__.__dict__["language"] = language
             __props__.__dict__["local_files"] = local_files
             __props__.__dict__["name"] = name
             __props__.__dict__["negative_class_label"] = negative_class_label
             __props__.__dict__["overall_moderation_configuration"] = overall_moderation_configuration
             __props__.__dict__["positive_class_label"] = positive_class_label
+            __props__.__dict__["prediction_threshold"] = prediction_threshold
             __props__.__dict__["resource_settings"] = resource_settings
             __props__.__dict__["runtime_parameter_values"] = runtime_parameter_values
             __props__.__dict__["source_llm_blueprint_id"] = source_llm_blueprint_id
@@ -719,11 +791,13 @@ class CustomModel(pulumi.CustomResource):
             description: Optional[pulumi.Input[str]] = None,
             guard_configurations: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CustomModelGuardConfigurationArgs']]]]] = None,
             is_proxy: Optional[pulumi.Input[bool]] = None,
+            language: Optional[pulumi.Input[str]] = None,
             local_files: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             name: Optional[pulumi.Input[str]] = None,
             negative_class_label: Optional[pulumi.Input[str]] = None,
             overall_moderation_configuration: Optional[pulumi.Input[pulumi.InputType['CustomModelOverallModerationConfigurationArgs']]] = None,
             positive_class_label: Optional[pulumi.Input[str]] = None,
+            prediction_threshold: Optional[pulumi.Input[float]] = None,
             resource_settings: Optional[pulumi.Input[pulumi.InputType['CustomModelResourceSettingsArgs']]] = None,
             runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CustomModelRuntimeParameterValueArgs']]]]] = None,
             source_llm_blueprint_id: Optional[pulumi.Input[str]] = None,
@@ -744,16 +818,18 @@ class CustomModel(pulumi.CustomResource):
         :param pulumi.Input[str] description: The description of the Custom Model.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CustomModelGuardConfigurationArgs']]]] guard_configurations: The guard configurations for the Custom Model.
         :param pulumi.Input[bool] is_proxy: The flag indicating if the Custom Model is a proxy model.
+        :param pulumi.Input[str] language: The language used to build the Custom Model.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] local_files: The list of local file paths used to build the Custom Model.
         :param pulumi.Input[str] name: The name of the Custom Model.
         :param pulumi.Input[str] negative_class_label: The negative class label of the Custom Model.
         :param pulumi.Input[pulumi.InputType['CustomModelOverallModerationConfigurationArgs']] overall_moderation_configuration: The overall moderation configuration for the Custom Model.
         :param pulumi.Input[str] positive_class_label: The positive class label of the Custom Model.
+        :param pulumi.Input[float] prediction_threshold: The prediction threshold of the Custom Model.
         :param pulumi.Input[pulumi.InputType['CustomModelResourceSettingsArgs']] resource_settings: The resource settings for the Custom Model.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CustomModelRuntimeParameterValueArgs']]]] runtime_parameter_values: The runtime parameter values for the Custom Model.
         :param pulumi.Input[str] source_llm_blueprint_id: The ID of the source LLM Blueprint for the Custom Model.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CustomModelSourceRemoteRepositoryArgs']]]] source_remote_repositories: The source remote repositories for the Custom Model.
-        :param pulumi.Input[str] target: The target of the Custom Model.
+        :param pulumi.Input[str] target: The target name of the Custom Model.
         :param pulumi.Input[str] target_type: The target type of the Custom Model.
         :param pulumi.Input[str] version_id: The ID of the latest Custom Model version.
         """
@@ -767,11 +843,13 @@ class CustomModel(pulumi.CustomResource):
         __props__.__dict__["description"] = description
         __props__.__dict__["guard_configurations"] = guard_configurations
         __props__.__dict__["is_proxy"] = is_proxy
+        __props__.__dict__["language"] = language
         __props__.__dict__["local_files"] = local_files
         __props__.__dict__["name"] = name
         __props__.__dict__["negative_class_label"] = negative_class_label
         __props__.__dict__["overall_moderation_configuration"] = overall_moderation_configuration
         __props__.__dict__["positive_class_label"] = positive_class_label
+        __props__.__dict__["prediction_threshold"] = prediction_threshold
         __props__.__dict__["resource_settings"] = resource_settings
         __props__.__dict__["runtime_parameter_values"] = runtime_parameter_values
         __props__.__dict__["source_llm_blueprint_id"] = source_llm_blueprint_id
@@ -830,6 +908,14 @@ class CustomModel(pulumi.CustomResource):
         return pulumi.get(self, "is_proxy")
 
     @property
+    @pulumi.getter
+    def language(self) -> pulumi.Output[Optional[str]]:
+        """
+        The language used to build the Custom Model.
+        """
+        return pulumi.get(self, "language")
+
+    @property
     @pulumi.getter(name="localFiles")
     def local_files(self) -> pulumi.Output[Optional[Sequence[str]]]:
         """
@@ -847,7 +933,7 @@ class CustomModel(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="negativeClassLabel")
-    def negative_class_label(self) -> pulumi.Output[Optional[str]]:
+    def negative_class_label(self) -> pulumi.Output[str]:
         """
         The negative class label of the Custom Model.
         """
@@ -863,11 +949,19 @@ class CustomModel(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="positiveClassLabel")
-    def positive_class_label(self) -> pulumi.Output[Optional[str]]:
+    def positive_class_label(self) -> pulumi.Output[str]:
         """
         The positive class label of the Custom Model.
         """
         return pulumi.get(self, "positive_class_label")
+
+    @property
+    @pulumi.getter(name="predictionThreshold")
+    def prediction_threshold(self) -> pulumi.Output[float]:
+        """
+        The prediction threshold of the Custom Model.
+        """
+        return pulumi.get(self, "prediction_threshold")
 
     @property
     @pulumi.getter(name="resourceSettings")
@@ -903,9 +997,9 @@ class CustomModel(pulumi.CustomResource):
 
     @property
     @pulumi.getter
-    def target(self) -> pulumi.Output[Optional[str]]:
+    def target(self) -> pulumi.Output[str]:
         """
-        The target of the Custom Model.
+        The target name of the Custom Model.
         """
         return pulumi.get(self, "target")
 

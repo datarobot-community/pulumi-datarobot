@@ -9,21 +9,21 @@ import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
-__all__ = ['ChatApplicationArgs', 'ChatApplication']
+__all__ = ['QaApplicationArgs', 'QaApplication']
 
 @pulumi.input_type
-class ChatApplicationArgs:
+class QaApplicationArgs:
     def __init__(__self__, *,
                  deployment_id: pulumi.Input[str],
                  external_access_enabled: Optional[pulumi.Input[bool]] = None,
                  external_access_recipients: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  name: Optional[pulumi.Input[str]] = None):
         """
-        The set of arguments for constructing a ChatApplication resource.
-        :param pulumi.Input[str] deployment_id: The deployment ID of the Chat Application.
-        :param pulumi.Input[bool] external_access_enabled: Whether external access is enabled for the Chat Application.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] external_access_recipients: The list of external email addresses that have access to the Chat Application.
-        :param pulumi.Input[str] name: The name of the Chat Application.
+        The set of arguments for constructing a QaApplication resource.
+        :param pulumi.Input[str] deployment_id: The deployment ID of the Q&A Application.
+        :param pulumi.Input[bool] external_access_enabled: Whether external access is enabled for the Q&A Application.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] external_access_recipients: The list of external email addresses that have access to the Q&A Application.
+        :param pulumi.Input[str] name: The name of the Q&A Application.
         """
         pulumi.set(__self__, "deployment_id", deployment_id)
         if external_access_enabled is not None:
@@ -37,7 +37,7 @@ class ChatApplicationArgs:
     @pulumi.getter(name="deploymentId")
     def deployment_id(self) -> pulumi.Input[str]:
         """
-        The deployment ID of the Chat Application.
+        The deployment ID of the Q&A Application.
         """
         return pulumi.get(self, "deployment_id")
 
@@ -49,7 +49,7 @@ class ChatApplicationArgs:
     @pulumi.getter(name="externalAccessEnabled")
     def external_access_enabled(self) -> Optional[pulumi.Input[bool]]:
         """
-        Whether external access is enabled for the Chat Application.
+        Whether external access is enabled for the Q&A Application.
         """
         return pulumi.get(self, "external_access_enabled")
 
@@ -61,7 +61,7 @@ class ChatApplicationArgs:
     @pulumi.getter(name="externalAccessRecipients")
     def external_access_recipients(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        The list of external email addresses that have access to the Chat Application.
+        The list of external email addresses that have access to the Q&A Application.
         """
         return pulumi.get(self, "external_access_recipients")
 
@@ -73,7 +73,7 @@ class ChatApplicationArgs:
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
         """
-        The name of the Chat Application.
+        The name of the Q&A Application.
         """
         return pulumi.get(self, "name")
 
@@ -83,7 +83,7 @@ class ChatApplicationArgs:
 
 
 @pulumi.input_type
-class _ChatApplicationState:
+class _QaApplicationState:
     def __init__(__self__, *,
                  application_url: Optional[pulumi.Input[str]] = None,
                  deployment_id: Optional[pulumi.Input[str]] = None,
@@ -93,14 +93,14 @@ class _ChatApplicationState:
                  source_id: Optional[pulumi.Input[str]] = None,
                  source_version_id: Optional[pulumi.Input[str]] = None):
         """
-        Input properties used for looking up and filtering ChatApplication resources.
-        :param pulumi.Input[str] application_url: The URL of the Chat Application.
-        :param pulumi.Input[str] deployment_id: The deployment ID of the Chat Application.
-        :param pulumi.Input[bool] external_access_enabled: Whether external access is enabled for the Chat Application.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] external_access_recipients: The list of external email addresses that have access to the Chat Application.
-        :param pulumi.Input[str] name: The name of the Chat Application.
-        :param pulumi.Input[str] source_id: The ID of the Chat Application Source.
-        :param pulumi.Input[str] source_version_id: The version ID of the Chat Application Source.
+        Input properties used for looking up and filtering QaApplication resources.
+        :param pulumi.Input[str] application_url: The URL of the Q&A Application.
+        :param pulumi.Input[str] deployment_id: The deployment ID of the Q&A Application.
+        :param pulumi.Input[bool] external_access_enabled: Whether external access is enabled for the Q&A Application.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] external_access_recipients: The list of external email addresses that have access to the Q&A Application.
+        :param pulumi.Input[str] name: The name of the Q&A Application.
+        :param pulumi.Input[str] source_id: The ID of the Q&A Application Source.
+        :param pulumi.Input[str] source_version_id: The version ID of the Q&A Application Source.
         """
         if application_url is not None:
             pulumi.set(__self__, "application_url", application_url)
@@ -121,7 +121,7 @@ class _ChatApplicationState:
     @pulumi.getter(name="applicationUrl")
     def application_url(self) -> Optional[pulumi.Input[str]]:
         """
-        The URL of the Chat Application.
+        The URL of the Q&A Application.
         """
         return pulumi.get(self, "application_url")
 
@@ -133,7 +133,7 @@ class _ChatApplicationState:
     @pulumi.getter(name="deploymentId")
     def deployment_id(self) -> Optional[pulumi.Input[str]]:
         """
-        The deployment ID of the Chat Application.
+        The deployment ID of the Q&A Application.
         """
         return pulumi.get(self, "deployment_id")
 
@@ -145,7 +145,7 @@ class _ChatApplicationState:
     @pulumi.getter(name="externalAccessEnabled")
     def external_access_enabled(self) -> Optional[pulumi.Input[bool]]:
         """
-        Whether external access is enabled for the Chat Application.
+        Whether external access is enabled for the Q&A Application.
         """
         return pulumi.get(self, "external_access_enabled")
 
@@ -157,7 +157,7 @@ class _ChatApplicationState:
     @pulumi.getter(name="externalAccessRecipients")
     def external_access_recipients(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        The list of external email addresses that have access to the Chat Application.
+        The list of external email addresses that have access to the Q&A Application.
         """
         return pulumi.get(self, "external_access_recipients")
 
@@ -169,7 +169,7 @@ class _ChatApplicationState:
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
         """
-        The name of the Chat Application.
+        The name of the Q&A Application.
         """
         return pulumi.get(self, "name")
 
@@ -181,7 +181,7 @@ class _ChatApplicationState:
     @pulumi.getter(name="sourceId")
     def source_id(self) -> Optional[pulumi.Input[str]]:
         """
-        The ID of the Chat Application Source.
+        The ID of the Q&A Application Source.
         """
         return pulumi.get(self, "source_id")
 
@@ -193,7 +193,7 @@ class _ChatApplicationState:
     @pulumi.getter(name="sourceVersionId")
     def source_version_id(self) -> Optional[pulumi.Input[str]]:
         """
-        The version ID of the Chat Application Source.
+        The version ID of the Q&A Application Source.
         """
         return pulumi.get(self, "source_version_id")
 
@@ -202,7 +202,7 @@ class _ChatApplicationState:
         pulumi.set(self, "source_version_id", value)
 
 
-class ChatApplication(pulumi.CustomResource):
+class QaApplication(pulumi.CustomResource):
     @overload
     def __init__(__self__,
                  resource_name: str,
@@ -213,31 +213,31 @@ class ChatApplication(pulumi.CustomResource):
                  name: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Chat Application
+        Q&A Application
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] deployment_id: The deployment ID of the Chat Application.
-        :param pulumi.Input[bool] external_access_enabled: Whether external access is enabled for the Chat Application.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] external_access_recipients: The list of external email addresses that have access to the Chat Application.
-        :param pulumi.Input[str] name: The name of the Chat Application.
+        :param pulumi.Input[str] deployment_id: The deployment ID of the Q&A Application.
+        :param pulumi.Input[bool] external_access_enabled: Whether external access is enabled for the Q&A Application.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] external_access_recipients: The list of external email addresses that have access to the Q&A Application.
+        :param pulumi.Input[str] name: The name of the Q&A Application.
         """
         ...
     @overload
     def __init__(__self__,
                  resource_name: str,
-                 args: ChatApplicationArgs,
+                 args: QaApplicationArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Chat Application
+        Q&A Application
 
         :param str resource_name: The name of the resource.
-        :param ChatApplicationArgs args: The arguments to use to populate this resource's properties.
+        :param QaApplicationArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
         """
         ...
     def __init__(__self__, resource_name: str, *args, **kwargs):
-        resource_args, opts = _utilities.get_resource_args_opts(ChatApplicationArgs, pulumi.ResourceOptions, *args, **kwargs)
+        resource_args, opts = _utilities.get_resource_args_opts(QaApplicationArgs, pulumi.ResourceOptions, *args, **kwargs)
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
@@ -257,7 +257,7 @@ class ChatApplication(pulumi.CustomResource):
         if opts.id is None:
             if __props__ is not None:
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
-            __props__ = ChatApplicationArgs.__new__(ChatApplicationArgs)
+            __props__ = QaApplicationArgs.__new__(QaApplicationArgs)
 
             if deployment_id is None and not opts.urn:
                 raise TypeError("Missing required property 'deployment_id'")
@@ -268,8 +268,8 @@ class ChatApplication(pulumi.CustomResource):
             __props__.__dict__["application_url"] = None
             __props__.__dict__["source_id"] = None
             __props__.__dict__["source_version_id"] = None
-        super(ChatApplication, __self__).__init__(
-            'datarobot:index/chatApplication:ChatApplication',
+        super(QaApplication, __self__).__init__(
+            'datarobot:index/qaApplication:QaApplication',
             resource_name,
             __props__,
             opts)
@@ -284,25 +284,25 @@ class ChatApplication(pulumi.CustomResource):
             external_access_recipients: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             name: Optional[pulumi.Input[str]] = None,
             source_id: Optional[pulumi.Input[str]] = None,
-            source_version_id: Optional[pulumi.Input[str]] = None) -> 'ChatApplication':
+            source_version_id: Optional[pulumi.Input[str]] = None) -> 'QaApplication':
         """
-        Get an existing ChatApplication resource's state with the given name, id, and optional extra
+        Get an existing QaApplication resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
 
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] application_url: The URL of the Chat Application.
-        :param pulumi.Input[str] deployment_id: The deployment ID of the Chat Application.
-        :param pulumi.Input[bool] external_access_enabled: Whether external access is enabled for the Chat Application.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] external_access_recipients: The list of external email addresses that have access to the Chat Application.
-        :param pulumi.Input[str] name: The name of the Chat Application.
-        :param pulumi.Input[str] source_id: The ID of the Chat Application Source.
-        :param pulumi.Input[str] source_version_id: The version ID of the Chat Application Source.
+        :param pulumi.Input[str] application_url: The URL of the Q&A Application.
+        :param pulumi.Input[str] deployment_id: The deployment ID of the Q&A Application.
+        :param pulumi.Input[bool] external_access_enabled: Whether external access is enabled for the Q&A Application.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] external_access_recipients: The list of external email addresses that have access to the Q&A Application.
+        :param pulumi.Input[str] name: The name of the Q&A Application.
+        :param pulumi.Input[str] source_id: The ID of the Q&A Application Source.
+        :param pulumi.Input[str] source_version_id: The version ID of the Q&A Application Source.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
-        __props__ = _ChatApplicationState.__new__(_ChatApplicationState)
+        __props__ = _QaApplicationState.__new__(_QaApplicationState)
 
         __props__.__dict__["application_url"] = application_url
         __props__.__dict__["deployment_id"] = deployment_id
@@ -311,13 +311,13 @@ class ChatApplication(pulumi.CustomResource):
         __props__.__dict__["name"] = name
         __props__.__dict__["source_id"] = source_id
         __props__.__dict__["source_version_id"] = source_version_id
-        return ChatApplication(resource_name, opts=opts, __props__=__props__)
+        return QaApplication(resource_name, opts=opts, __props__=__props__)
 
     @property
     @pulumi.getter(name="applicationUrl")
     def application_url(self) -> pulumi.Output[str]:
         """
-        The URL of the Chat Application.
+        The URL of the Q&A Application.
         """
         return pulumi.get(self, "application_url")
 
@@ -325,7 +325,7 @@ class ChatApplication(pulumi.CustomResource):
     @pulumi.getter(name="deploymentId")
     def deployment_id(self) -> pulumi.Output[str]:
         """
-        The deployment ID of the Chat Application.
+        The deployment ID of the Q&A Application.
         """
         return pulumi.get(self, "deployment_id")
 
@@ -333,7 +333,7 @@ class ChatApplication(pulumi.CustomResource):
     @pulumi.getter(name="externalAccessEnabled")
     def external_access_enabled(self) -> pulumi.Output[bool]:
         """
-        Whether external access is enabled for the Chat Application.
+        Whether external access is enabled for the Q&A Application.
         """
         return pulumi.get(self, "external_access_enabled")
 
@@ -341,7 +341,7 @@ class ChatApplication(pulumi.CustomResource):
     @pulumi.getter(name="externalAccessRecipients")
     def external_access_recipients(self) -> pulumi.Output[Optional[Sequence[str]]]:
         """
-        The list of external email addresses that have access to the Chat Application.
+        The list of external email addresses that have access to the Q&A Application.
         """
         return pulumi.get(self, "external_access_recipients")
 
@@ -349,7 +349,7 @@ class ChatApplication(pulumi.CustomResource):
     @pulumi.getter
     def name(self) -> pulumi.Output[str]:
         """
-        The name of the Chat Application.
+        The name of the Q&A Application.
         """
         return pulumi.get(self, "name")
 
@@ -357,7 +357,7 @@ class ChatApplication(pulumi.CustomResource):
     @pulumi.getter(name="sourceId")
     def source_id(self) -> pulumi.Output[str]:
         """
-        The ID of the Chat Application Source.
+        The ID of the Q&A Application Source.
         """
         return pulumi.get(self, "source_id")
 
@@ -365,7 +365,7 @@ class ChatApplication(pulumi.CustomResource):
     @pulumi.getter(name="sourceVersionId")
     def source_version_id(self) -> pulumi.Output[str]:
         """
-        The version ID of the Chat Application Source.
+        The version ID of the Q&A Application Source.
         """
         return pulumi.get(self, "source_version_id")
 

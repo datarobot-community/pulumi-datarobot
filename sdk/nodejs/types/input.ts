@@ -22,7 +22,7 @@ export interface ApplicationSourceRuntimeParameterValue {
      */
     type: pulumi.Input<string>;
     /**
-     * The value of the runtime parameter.
+     * The value of the runtime parameter (type conversion is handled internally).
      */
     value: pulumi.Input<string>;
 }
@@ -120,7 +120,7 @@ export interface CustomModelRuntimeParameterValue {
      */
     type: pulumi.Input<string>;
     /**
-     * The value of the runtime parameter.
+     * The value of the runtime parameter (type conversion is handled internally).
      */
     value: pulumi.Input<string>;
 }

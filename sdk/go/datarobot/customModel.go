@@ -27,16 +27,20 @@ type CustomModel struct {
 	GuardConfigurations CustomModelGuardConfigurationArrayOutput `pulumi:"guardConfigurations"`
 	// The flag indicating if the Custom Model is a proxy model.
 	IsProxy pulumi.BoolPtrOutput `pulumi:"isProxy"`
+	// The language used to build the Custom Model.
+	Language pulumi.StringPtrOutput `pulumi:"language"`
 	// The list of local file paths used to build the Custom Model.
 	LocalFiles pulumi.StringArrayOutput `pulumi:"localFiles"`
 	// The name of the Custom Model.
 	Name pulumi.StringOutput `pulumi:"name"`
 	// The negative class label of the Custom Model.
-	NegativeClassLabel pulumi.StringPtrOutput `pulumi:"negativeClassLabel"`
+	NegativeClassLabel pulumi.StringOutput `pulumi:"negativeClassLabel"`
 	// The overall moderation configuration for the Custom Model.
 	OverallModerationConfiguration CustomModelOverallModerationConfigurationPtrOutput `pulumi:"overallModerationConfiguration"`
 	// The positive class label of the Custom Model.
-	PositiveClassLabel pulumi.StringPtrOutput `pulumi:"positiveClassLabel"`
+	PositiveClassLabel pulumi.StringOutput `pulumi:"positiveClassLabel"`
+	// The prediction threshold of the Custom Model.
+	PredictionThreshold pulumi.Float64Output `pulumi:"predictionThreshold"`
 	// The resource settings for the Custom Model.
 	ResourceSettings CustomModelResourceSettingsOutput `pulumi:"resourceSettings"`
 	// The runtime parameter values for the Custom Model.
@@ -45,8 +49,8 @@ type CustomModel struct {
 	SourceLlmBlueprintId pulumi.StringPtrOutput `pulumi:"sourceLlmBlueprintId"`
 	// The source remote repositories for the Custom Model.
 	SourceRemoteRepositories CustomModelSourceRemoteRepositoryArrayOutput `pulumi:"sourceRemoteRepositories"`
-	// The target of the Custom Model.
-	Target pulumi.StringPtrOutput `pulumi:"target"`
+	// The target name of the Custom Model.
+	Target pulumi.StringOutput `pulumi:"target"`
 	// The target type of the Custom Model.
 	TargetType pulumi.StringPtrOutput `pulumi:"targetType"`
 	// The ID of the latest Custom Model version.
@@ -95,6 +99,8 @@ type customModelState struct {
 	GuardConfigurations []CustomModelGuardConfiguration `pulumi:"guardConfigurations"`
 	// The flag indicating if the Custom Model is a proxy model.
 	IsProxy *bool `pulumi:"isProxy"`
+	// The language used to build the Custom Model.
+	Language *string `pulumi:"language"`
 	// The list of local file paths used to build the Custom Model.
 	LocalFiles []string `pulumi:"localFiles"`
 	// The name of the Custom Model.
@@ -105,6 +111,8 @@ type customModelState struct {
 	OverallModerationConfiguration *CustomModelOverallModerationConfiguration `pulumi:"overallModerationConfiguration"`
 	// The positive class label of the Custom Model.
 	PositiveClassLabel *string `pulumi:"positiveClassLabel"`
+	// The prediction threshold of the Custom Model.
+	PredictionThreshold *float64 `pulumi:"predictionThreshold"`
 	// The resource settings for the Custom Model.
 	ResourceSettings *CustomModelResourceSettings `pulumi:"resourceSettings"`
 	// The runtime parameter values for the Custom Model.
@@ -113,7 +121,7 @@ type customModelState struct {
 	SourceLlmBlueprintId *string `pulumi:"sourceLlmBlueprintId"`
 	// The source remote repositories for the Custom Model.
 	SourceRemoteRepositories []CustomModelSourceRemoteRepository `pulumi:"sourceRemoteRepositories"`
-	// The target of the Custom Model.
+	// The target name of the Custom Model.
 	Target *string `pulumi:"target"`
 	// The target type of the Custom Model.
 	TargetType *string `pulumi:"targetType"`
@@ -134,6 +142,8 @@ type CustomModelState struct {
 	GuardConfigurations CustomModelGuardConfigurationArrayInput
 	// The flag indicating if the Custom Model is a proxy model.
 	IsProxy pulumi.BoolPtrInput
+	// The language used to build the Custom Model.
+	Language pulumi.StringPtrInput
 	// The list of local file paths used to build the Custom Model.
 	LocalFiles pulumi.StringArrayInput
 	// The name of the Custom Model.
@@ -144,6 +154,8 @@ type CustomModelState struct {
 	OverallModerationConfiguration CustomModelOverallModerationConfigurationPtrInput
 	// The positive class label of the Custom Model.
 	PositiveClassLabel pulumi.StringPtrInput
+	// The prediction threshold of the Custom Model.
+	PredictionThreshold pulumi.Float64PtrInput
 	// The resource settings for the Custom Model.
 	ResourceSettings CustomModelResourceSettingsPtrInput
 	// The runtime parameter values for the Custom Model.
@@ -152,7 +164,7 @@ type CustomModelState struct {
 	SourceLlmBlueprintId pulumi.StringPtrInput
 	// The source remote repositories for the Custom Model.
 	SourceRemoteRepositories CustomModelSourceRemoteRepositoryArrayInput
-	// The target of the Custom Model.
+	// The target name of the Custom Model.
 	Target pulumi.StringPtrInput
 	// The target type of the Custom Model.
 	TargetType pulumi.StringPtrInput
@@ -177,6 +189,8 @@ type customModelArgs struct {
 	GuardConfigurations []CustomModelGuardConfiguration `pulumi:"guardConfigurations"`
 	// The flag indicating if the Custom Model is a proxy model.
 	IsProxy *bool `pulumi:"isProxy"`
+	// The language used to build the Custom Model.
+	Language *string `pulumi:"language"`
 	// The list of local file paths used to build the Custom Model.
 	LocalFiles []string `pulumi:"localFiles"`
 	// The name of the Custom Model.
@@ -187,6 +201,8 @@ type customModelArgs struct {
 	OverallModerationConfiguration *CustomModelOverallModerationConfiguration `pulumi:"overallModerationConfiguration"`
 	// The positive class label of the Custom Model.
 	PositiveClassLabel *string `pulumi:"positiveClassLabel"`
+	// The prediction threshold of the Custom Model.
+	PredictionThreshold *float64 `pulumi:"predictionThreshold"`
 	// The resource settings for the Custom Model.
 	ResourceSettings *CustomModelResourceSettings `pulumi:"resourceSettings"`
 	// The runtime parameter values for the Custom Model.
@@ -195,7 +211,7 @@ type customModelArgs struct {
 	SourceLlmBlueprintId *string `pulumi:"sourceLlmBlueprintId"`
 	// The source remote repositories for the Custom Model.
 	SourceRemoteRepositories []CustomModelSourceRemoteRepository `pulumi:"sourceRemoteRepositories"`
-	// The target of the Custom Model.
+	// The target name of the Custom Model.
 	Target *string `pulumi:"target"`
 	// The target type of the Custom Model.
 	TargetType *string `pulumi:"targetType"`
@@ -215,6 +231,8 @@ type CustomModelArgs struct {
 	GuardConfigurations CustomModelGuardConfigurationArrayInput
 	// The flag indicating if the Custom Model is a proxy model.
 	IsProxy pulumi.BoolPtrInput
+	// The language used to build the Custom Model.
+	Language pulumi.StringPtrInput
 	// The list of local file paths used to build the Custom Model.
 	LocalFiles pulumi.StringArrayInput
 	// The name of the Custom Model.
@@ -225,6 +243,8 @@ type CustomModelArgs struct {
 	OverallModerationConfiguration CustomModelOverallModerationConfigurationPtrInput
 	// The positive class label of the Custom Model.
 	PositiveClassLabel pulumi.StringPtrInput
+	// The prediction threshold of the Custom Model.
+	PredictionThreshold pulumi.Float64PtrInput
 	// The resource settings for the Custom Model.
 	ResourceSettings CustomModelResourceSettingsPtrInput
 	// The runtime parameter values for the Custom Model.
@@ -233,7 +253,7 @@ type CustomModelArgs struct {
 	SourceLlmBlueprintId pulumi.StringPtrInput
 	// The source remote repositories for the Custom Model.
 	SourceRemoteRepositories CustomModelSourceRemoteRepositoryArrayInput
-	// The target of the Custom Model.
+	// The target name of the Custom Model.
 	Target pulumi.StringPtrInput
 	// The target type of the Custom Model.
 	TargetType pulumi.StringPtrInput
@@ -356,6 +376,11 @@ func (o CustomModelOutput) IsProxy() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *CustomModel) pulumi.BoolPtrOutput { return v.IsProxy }).(pulumi.BoolPtrOutput)
 }
 
+// The language used to build the Custom Model.
+func (o CustomModelOutput) Language() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CustomModel) pulumi.StringPtrOutput { return v.Language }).(pulumi.StringPtrOutput)
+}
+
 // The list of local file paths used to build the Custom Model.
 func (o CustomModelOutput) LocalFiles() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *CustomModel) pulumi.StringArrayOutput { return v.LocalFiles }).(pulumi.StringArrayOutput)
@@ -367,8 +392,8 @@ func (o CustomModelOutput) Name() pulumi.StringOutput {
 }
 
 // The negative class label of the Custom Model.
-func (o CustomModelOutput) NegativeClassLabel() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CustomModel) pulumi.StringPtrOutput { return v.NegativeClassLabel }).(pulumi.StringPtrOutput)
+func (o CustomModelOutput) NegativeClassLabel() pulumi.StringOutput {
+	return o.ApplyT(func(v *CustomModel) pulumi.StringOutput { return v.NegativeClassLabel }).(pulumi.StringOutput)
 }
 
 // The overall moderation configuration for the Custom Model.
@@ -379,8 +404,13 @@ func (o CustomModelOutput) OverallModerationConfiguration() CustomModelOverallMo
 }
 
 // The positive class label of the Custom Model.
-func (o CustomModelOutput) PositiveClassLabel() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CustomModel) pulumi.StringPtrOutput { return v.PositiveClassLabel }).(pulumi.StringPtrOutput)
+func (o CustomModelOutput) PositiveClassLabel() pulumi.StringOutput {
+	return o.ApplyT(func(v *CustomModel) pulumi.StringOutput { return v.PositiveClassLabel }).(pulumi.StringOutput)
+}
+
+// The prediction threshold of the Custom Model.
+func (o CustomModelOutput) PredictionThreshold() pulumi.Float64Output {
+	return o.ApplyT(func(v *CustomModel) pulumi.Float64Output { return v.PredictionThreshold }).(pulumi.Float64Output)
 }
 
 // The resource settings for the Custom Model.
@@ -403,9 +433,9 @@ func (o CustomModelOutput) SourceRemoteRepositories() CustomModelSourceRemoteRep
 	return o.ApplyT(func(v *CustomModel) CustomModelSourceRemoteRepositoryArrayOutput { return v.SourceRemoteRepositories }).(CustomModelSourceRemoteRepositoryArrayOutput)
 }
 
-// The target of the Custom Model.
-func (o CustomModelOutput) Target() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CustomModel) pulumi.StringPtrOutput { return v.Target }).(pulumi.StringPtrOutput)
+// The target name of the Custom Model.
+func (o CustomModelOutput) Target() pulumi.StringOutput {
+	return o.ApplyT(func(v *CustomModel) pulumi.StringOutput { return v.Target }).(pulumi.StringOutput)
 }
 
 // The target type of the Custom Model.

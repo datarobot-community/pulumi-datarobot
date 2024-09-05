@@ -22,7 +22,7 @@ namespace Pulumi.Datarobot.Outputs
         /// </summary>
         public readonly string Type;
         /// <summary>
-        /// The value of the runtime parameter.
+        /// The value of the runtime parameter (type conversion is handled internally).
         /// </summary>
         public readonly string Value;
 
