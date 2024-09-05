@@ -8,6 +8,39 @@ import * as utilities from "./utilities";
 
 /**
  * Deployment
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as datarobot from "@pulumi/datarobot";
+ *
+ * const exampleCustomModel = new datarobot.CustomModel("exampleCustomModel", {
+ *     description: "Description for the example custom model",
+ *     targetType: "Binary",
+ *     targetName: "my_label",
+ *     baseEnvironmentName: "[GenAI] Python 3.11 with Moderations",
+ *     localFiles: ["example.py"],
+ * });
+ * const exampleRegisteredModel = new datarobot.RegisteredModel("exampleRegisteredModel", {
+ *     customModelVersionId: exampleCustomModel.versionId,
+ *     description: "Description for the example registered model",
+ * });
+ * const examplePredictionEnvironment = new datarobot.PredictionEnvironment("examplePredictionEnvironment", {
+ *     description: "Description for the example prediction environment",
+ *     platform: "datarobotServerless",
+ * });
+ * const exampleDeployment = new datarobot.Deployment("exampleDeployment", {
+ *     label: "An example deployment",
+ *     predictionEnvironmentId: examplePredictionEnvironment.id,
+ *     registeredModelVersionId: exampleRegisteredModel.versionId,
+ * });
+ * // Optional settings
+ * // settings = {
+ * //   prediction_row_storage = true
+ * // }
+ * export const datarobotDeploymentId = exampleDeployment.id;
+ * ```
  */
 export class Deployment extends pulumi.CustomResource {
     /**

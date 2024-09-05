@@ -26,7 +26,7 @@ namespace Pulumi.Datarobot
     ///     {
     ///         Description = "Description for the example custom model",
     ///         TargetType = "Binary",
-    ///         Target = "my_label",
+    ///         TargetName = "my_label",
     ///         BaseEnvironmentName = "[GenAI] Python 3.11 with Moderations",
     ///         LocalFiles = new[]
     ///         {

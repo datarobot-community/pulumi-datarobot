@@ -11,6 +11,67 @@ namespace Pulumi.Datarobot
 {
     /// <summary>
     /// Q&amp;A Application
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Datarobot = Pulumi.Datarobot;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var exampleCustomModel = new Datarobot.CustomModel("exampleCustomModel", new()
+    ///     {
+    ///         Description = "Description for the example custom model",
+    ///         TargetType = "Binary",
+    ///         TargetName = "my_label",
+    ///         BaseEnvironmentName = "[GenAI] Python 3.11 with Moderations",
+    ///         LocalFiles = new[]
+    ///         {
+    ///             "example.py",
+    ///         },
+    ///     });
+    /// 
+    ///     var exampleRegisteredModel = new Datarobot.RegisteredModel("exampleRegisteredModel", new()
+    ///     {
+    ///         CustomModelVersionId = exampleCustomModel.VersionId,
+    ///         Description = "Description for the example registered model",
+    ///     });
+    /// 
+    ///     var examplePredictionEnvironment = new Datarobot.PredictionEnvironment("examplePredictionEnvironment", new()
+    ///     {
+    ///         Description = "Description for the example prediction environment",
+    ///         Platform = "datarobotServerless",
+    ///     });
+    /// 
+    ///     var exampleDeployment = new Datarobot.Deployment("exampleDeployment", new()
+    ///     {
+    ///         Label = "An example deployment",
+    ///         PredictionEnvironmentId = examplePredictionEnvironment.Id,
+    ///         RegisteredModelVersionId = exampleRegisteredModel.VersionId,
+    ///     });
+    /// 
+    ///     var exampleQaApplication = new Datarobot.QaApplication("exampleQaApplication", new()
+    ///     {
+    ///         DeploymentId = exampleDeployment.Id,
+    ///         ExternalAccessEnabled = true,
+    ///         ExternalAccessRecipients = new[]
+    ///         {
+    ///             "recipient@example.com",
+    ///         },
+    ///     });
+    /// 
+    ///     return new Dictionary&lt;string, object?&gt;
+    ///     {
+    ///         ["datarobotQaApplicationId"] = exampleQaApplication.Id,
+    ///         ["datarobotQaApplicationSourceId"] = exampleQaApplication.SourceId,
+    ///         ["datarobotQaApplicationSourceVersionId"] = exampleQaApplication.SourceVersionId,
+    ///         ["datarobotQaApplicationUrl"] = exampleQaApplication.ApplicationUrl,
+    ///     };
+    /// });
+    /// ```
     /// </summary>
     [DatarobotResourceType("datarobot:index/qaApplication:QaApplication")]
     public partial class QaApplication : global::Pulumi.CustomResource

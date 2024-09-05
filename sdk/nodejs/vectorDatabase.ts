@@ -8,6 +8,32 @@ import * as utilities from "./utilities";
 
 /**
  * Vector database
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as datarobot from "@pulumi/datarobot";
+ *
+ * const exampleUseCase = new datarobot.UseCase("exampleUseCase", {description: "Description for the example use case"});
+ * const exampleDatasetFromFile = new datarobot.DatasetFromFile("exampleDatasetFromFile", {
+ *     sourceFile: "[Path to file to upload]",
+ *     useCaseId: exampleUseCase.id,
+ * });
+ * const exampleVectorDatabase = new datarobot.VectorDatabase("exampleVectorDatabase", {
+ *     useCaseId: exampleUseCase.id,
+ *     datasetId: exampleDatasetFromFile.id,
+ * });
+ * // Optional
+ * // chunking_parameters = {
+ * //   chunk_overlap_percentage = 0
+ * //   chunk_size               = 512
+ * //   chunking_method          = "recursive"
+ * //   embedding_model          = "jinaai/jina-embedding-t-en-v1"
+ * //   separators               = ["\n", " "]
+ * // }
+ * export const exampleId = exampleVectorDatabase.id;
+ * ```
  */
 export class VectorDatabase extends pulumi.CustomResource {
     /**

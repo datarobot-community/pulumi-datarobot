@@ -6,6 +6,43 @@ import * as utilities from "./utilities";
 
 /**
  * Q&A Application
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as datarobot from "@pulumi/datarobot";
+ *
+ * const exampleCustomModel = new datarobot.CustomModel("exampleCustomModel", {
+ *     description: "Description for the example custom model",
+ *     targetType: "Binary",
+ *     targetName: "my_label",
+ *     baseEnvironmentName: "[GenAI] Python 3.11 with Moderations",
+ *     localFiles: ["example.py"],
+ * });
+ * const exampleRegisteredModel = new datarobot.RegisteredModel("exampleRegisteredModel", {
+ *     customModelVersionId: exampleCustomModel.versionId,
+ *     description: "Description for the example registered model",
+ * });
+ * const examplePredictionEnvironment = new datarobot.PredictionEnvironment("examplePredictionEnvironment", {
+ *     description: "Description for the example prediction environment",
+ *     platform: "datarobotServerless",
+ * });
+ * const exampleDeployment = new datarobot.Deployment("exampleDeployment", {
+ *     label: "An example deployment",
+ *     predictionEnvironmentId: examplePredictionEnvironment.id,
+ *     registeredModelVersionId: exampleRegisteredModel.versionId,
+ * });
+ * const exampleQaApplication = new datarobot.QaApplication("exampleQaApplication", {
+ *     deploymentId: exampleDeployment.id,
+ *     externalAccessEnabled: true,
+ *     externalAccessRecipients: ["recipient@example.com"],
+ * });
+ * export const datarobotQaApplicationId = exampleQaApplication.id;
+ * export const datarobotQaApplicationSourceId = exampleQaApplication.sourceId;
+ * export const datarobotQaApplicationSourceVersionId = exampleQaApplication.sourceVersionId;
+ * export const datarobotQaApplicationUrl = exampleQaApplication.applicationUrl;
+ * ```
  */
 export class QaApplication extends pulumi.CustomResource {
     /**

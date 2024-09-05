@@ -13,6 +13,47 @@ import (
 )
 
 // Vector database
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			exampleUseCase, err := datarobot.NewUseCase(ctx, "exampleUseCase", &datarobot.UseCaseArgs{
+//				Description: pulumi.String("Description for the example use case"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleDatasetFromFile, err := datarobot.NewDatasetFromFile(ctx, "exampleDatasetFromFile", &datarobot.DatasetFromFileArgs{
+//				SourceFile: pulumi.String("[Path to file to upload]"),
+//				UseCaseId:  exampleUseCase.ID(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleVectorDatabase, err := datarobot.NewVectorDatabase(ctx, "exampleVectorDatabase", &datarobot.VectorDatabaseArgs{
+//				UseCaseId: exampleUseCase.ID(),
+//				DatasetId: exampleDatasetFromFile.ID(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			ctx.Export("exampleId", exampleVectorDatabase.ID())
+//			return nil
+//		})
+//	}
+//
+// ```
 type VectorDatabase struct {
 	pulumi.CustomResourceState
 

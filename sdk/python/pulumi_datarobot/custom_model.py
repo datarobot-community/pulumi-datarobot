@@ -19,6 +19,8 @@ class CustomModelArgs:
                  base_environment_id: Optional[pulumi.Input[str]] = None,
                  base_environment_name: Optional[pulumi.Input[str]] = None,
                  base_environment_version_id: Optional[pulumi.Input[str]] = None,
+                 class_labels: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 class_labels_file: Optional[pulumi.Input[str]] = None,
                  description: Optional[pulumi.Input[str]] = None,
                  guard_configurations: Optional[pulumi.Input[Sequence[pulumi.Input['CustomModelGuardConfigurationArgs']]]] = None,
                  is_proxy: Optional[pulumi.Input[bool]] = None,
@@ -33,16 +35,20 @@ class CustomModelArgs:
                  runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input['CustomModelRuntimeParameterValueArgs']]]] = None,
                  source_llm_blueprint_id: Optional[pulumi.Input[str]] = None,
                  source_remote_repositories: Optional[pulumi.Input[Sequence[pulumi.Input['CustomModelSourceRemoteRepositoryArgs']]]] = None,
-                 target: Optional[pulumi.Input[str]] = None,
-                 target_type: Optional[pulumi.Input[str]] = None):
+                 target_name: Optional[pulumi.Input[str]] = None,
+                 target_type: Optional[pulumi.Input[str]] = None,
+                 training_data_partition_column: Optional[pulumi.Input[str]] = None,
+                 training_dataset_id: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a CustomModel resource.
         :param pulumi.Input[str] base_environment_id: The ID of the base environment for the Custom Model.
         :param pulumi.Input[str] base_environment_name: The name of the base environment for the Custom Model.
         :param pulumi.Input[str] base_environment_version_id: The ID of the base environment version for the Custom Model.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] class_labels: Class labels for multiclass classification. Cannot be used with class*labels*file.
+        :param pulumi.Input[str] class_labels_file: Path to file containing newline separated class labels for multiclass classification. Cannot be used with class_labels.
         :param pulumi.Input[str] description: The description of the Custom Model.
         :param pulumi.Input[Sequence[pulumi.Input['CustomModelGuardConfigurationArgs']]] guard_configurations: The guard configurations for the Custom Model.
-        :param pulumi.Input[bool] is_proxy: The flag indicating if the Custom Model is a proxy model.
+        :param pulumi.Input[bool] is_proxy: Flag indicating if the Custom Model is a proxy model.
         :param pulumi.Input[str] language: The language used to build the Custom Model.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] local_files: The list of local file paths used to build the Custom Model.
         :param pulumi.Input[str] name: The name of the Custom Model.
@@ -54,8 +60,10 @@ class CustomModelArgs:
         :param pulumi.Input[Sequence[pulumi.Input['CustomModelRuntimeParameterValueArgs']]] runtime_parameter_values: The runtime parameter values for the Custom Model.
         :param pulumi.Input[str] source_llm_blueprint_id: The ID of the source LLM Blueprint for the Custom Model.
         :param pulumi.Input[Sequence[pulumi.Input['CustomModelSourceRemoteRepositoryArgs']]] source_remote_repositories: The source remote repositories for the Custom Model.
-        :param pulumi.Input[str] target: The target name of the Custom Model.
+        :param pulumi.Input[str] target_name: The target name of the Custom Model.
         :param pulumi.Input[str] target_type: The target type of the Custom Model.
+        :param pulumi.Input[str] training_data_partition_column: The name of the partition column in the training dataset assigned to the Custom Model.
+        :param pulumi.Input[str] training_dataset_id: The ID of the training dataset assigned to the Custom Model.
         """
         if base_environment_id is not None:
             pulumi.set(__self__, "base_environment_id", base_environment_id)
@@ -63,6 +71,10 @@ class CustomModelArgs:
             pulumi.set(__self__, "base_environment_name", base_environment_name)
         if base_environment_version_id is not None:
             pulumi.set(__self__, "base_environment_version_id", base_environment_version_id)
+        if class_labels is not None:
+            pulumi.set(__self__, "class_labels", class_labels)
+        if class_labels_file is not None:
+            pulumi.set(__self__, "class_labels_file", class_labels_file)
         if description is not None:
             pulumi.set(__self__, "description", description)
         if guard_configurations is not None:
@@ -91,10 +103,14 @@ class CustomModelArgs:
             pulumi.set(__self__, "source_llm_blueprint_id", source_llm_blueprint_id)
         if source_remote_repositories is not None:
             pulumi.set(__self__, "source_remote_repositories", source_remote_repositories)
-        if target is not None:
-            pulumi.set(__self__, "target", target)
+        if target_name is not None:
+            pulumi.set(__self__, "target_name", target_name)
         if target_type is not None:
             pulumi.set(__self__, "target_type", target_type)
+        if training_data_partition_column is not None:
+            pulumi.set(__self__, "training_data_partition_column", training_data_partition_column)
+        if training_dataset_id is not None:
+            pulumi.set(__self__, "training_dataset_id", training_dataset_id)
 
     @property
     @pulumi.getter(name="baseEnvironmentId")
@@ -133,6 +149,30 @@ class CustomModelArgs:
         pulumi.set(self, "base_environment_version_id", value)
 
     @property
+    @pulumi.getter(name="classLabels")
+    def class_labels(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Class labels for multiclass classification. Cannot be used with class*labels*file.
+        """
+        return pulumi.get(self, "class_labels")
+
+    @class_labels.setter
+    def class_labels(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "class_labels", value)
+
+    @property
+    @pulumi.getter(name="classLabelsFile")
+    def class_labels_file(self) -> Optional[pulumi.Input[str]]:
+        """
+        Path to file containing newline separated class labels for multiclass classification. Cannot be used with class_labels.
+        """
+        return pulumi.get(self, "class_labels_file")
+
+    @class_labels_file.setter
+    def class_labels_file(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "class_labels_file", value)
+
+    @property
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
         """
@@ -160,7 +200,7 @@ class CustomModelArgs:
     @pulumi.getter(name="isProxy")
     def is_proxy(self) -> Optional[pulumi.Input[bool]]:
         """
-        The flag indicating if the Custom Model is a proxy model.
+        Flag indicating if the Custom Model is a proxy model.
         """
         return pulumi.get(self, "is_proxy")
 
@@ -301,16 +341,16 @@ class CustomModelArgs:
         pulumi.set(self, "source_remote_repositories", value)
 
     @property
-    @pulumi.getter
-    def target(self) -> Optional[pulumi.Input[str]]:
+    @pulumi.getter(name="targetName")
+    def target_name(self) -> Optional[pulumi.Input[str]]:
         """
         The target name of the Custom Model.
         """
-        return pulumi.get(self, "target")
+        return pulumi.get(self, "target_name")
 
-    @target.setter
-    def target(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "target", value)
+    @target_name.setter
+    def target_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "target_name", value)
 
     @property
     @pulumi.getter(name="targetType")
@@ -324,6 +364,30 @@ class CustomModelArgs:
     def target_type(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "target_type", value)
 
+    @property
+    @pulumi.getter(name="trainingDataPartitionColumn")
+    def training_data_partition_column(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of the partition column in the training dataset assigned to the Custom Model.
+        """
+        return pulumi.get(self, "training_data_partition_column")
+
+    @training_data_partition_column.setter
+    def training_data_partition_column(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "training_data_partition_column", value)
+
+    @property
+    @pulumi.getter(name="trainingDatasetId")
+    def training_dataset_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The ID of the training dataset assigned to the Custom Model.
+        """
+        return pulumi.get(self, "training_dataset_id")
+
+    @training_dataset_id.setter
+    def training_dataset_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "training_dataset_id", value)
+
 
 @pulumi.input_type
 class _CustomModelState:
@@ -331,6 +395,9 @@ class _CustomModelState:
                  base_environment_id: Optional[pulumi.Input[str]] = None,
                  base_environment_name: Optional[pulumi.Input[str]] = None,
                  base_environment_version_id: Optional[pulumi.Input[str]] = None,
+                 class_labels: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 class_labels_file: Optional[pulumi.Input[str]] = None,
+                 deployments_count: Optional[pulumi.Input[int]] = None,
                  description: Optional[pulumi.Input[str]] = None,
                  guard_configurations: Optional[pulumi.Input[Sequence[pulumi.Input['CustomModelGuardConfigurationArgs']]]] = None,
                  is_proxy: Optional[pulumi.Input[bool]] = None,
@@ -345,17 +412,24 @@ class _CustomModelState:
                  runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input['CustomModelRuntimeParameterValueArgs']]]] = None,
                  source_llm_blueprint_id: Optional[pulumi.Input[str]] = None,
                  source_remote_repositories: Optional[pulumi.Input[Sequence[pulumi.Input['CustomModelSourceRemoteRepositoryArgs']]]] = None,
-                 target: Optional[pulumi.Input[str]] = None,
+                 target_name: Optional[pulumi.Input[str]] = None,
                  target_type: Optional[pulumi.Input[str]] = None,
+                 training_data_partition_column: Optional[pulumi.Input[str]] = None,
+                 training_dataset_id: Optional[pulumi.Input[str]] = None,
+                 training_dataset_name: Optional[pulumi.Input[str]] = None,
+                 training_dataset_version_id: Optional[pulumi.Input[str]] = None,
                  version_id: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering CustomModel resources.
         :param pulumi.Input[str] base_environment_id: The ID of the base environment for the Custom Model.
         :param pulumi.Input[str] base_environment_name: The name of the base environment for the Custom Model.
         :param pulumi.Input[str] base_environment_version_id: The ID of the base environment version for the Custom Model.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] class_labels: Class labels for multiclass classification. Cannot be used with class*labels*file.
+        :param pulumi.Input[str] class_labels_file: Path to file containing newline separated class labels for multiclass classification. Cannot be used with class_labels.
+        :param pulumi.Input[int] deployments_count: The number of deployments for the Custom Model.
         :param pulumi.Input[str] description: The description of the Custom Model.
         :param pulumi.Input[Sequence[pulumi.Input['CustomModelGuardConfigurationArgs']]] guard_configurations: The guard configurations for the Custom Model.
-        :param pulumi.Input[bool] is_proxy: The flag indicating if the Custom Model is a proxy model.
+        :param pulumi.Input[bool] is_proxy: Flag indicating if the Custom Model is a proxy model.
         :param pulumi.Input[str] language: The language used to build the Custom Model.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] local_files: The list of local file paths used to build the Custom Model.
         :param pulumi.Input[str] name: The name of the Custom Model.
@@ -367,8 +441,12 @@ class _CustomModelState:
         :param pulumi.Input[Sequence[pulumi.Input['CustomModelRuntimeParameterValueArgs']]] runtime_parameter_values: The runtime parameter values for the Custom Model.
         :param pulumi.Input[str] source_llm_blueprint_id: The ID of the source LLM Blueprint for the Custom Model.
         :param pulumi.Input[Sequence[pulumi.Input['CustomModelSourceRemoteRepositoryArgs']]] source_remote_repositories: The source remote repositories for the Custom Model.
-        :param pulumi.Input[str] target: The target name of the Custom Model.
+        :param pulumi.Input[str] target_name: The target name of the Custom Model.
         :param pulumi.Input[str] target_type: The target type of the Custom Model.
+        :param pulumi.Input[str] training_data_partition_column: The name of the partition column in the training dataset assigned to the Custom Model.
+        :param pulumi.Input[str] training_dataset_id: The ID of the training dataset assigned to the Custom Model.
+        :param pulumi.Input[str] training_dataset_name: The name of the training dataset assigned to the Custom Model.
+        :param pulumi.Input[str] training_dataset_version_id: The version ID of the training dataset assigned to the Custom Model.
         :param pulumi.Input[str] version_id: The ID of the latest Custom Model version.
         """
         if base_environment_id is not None:
@@ -377,6 +455,12 @@ class _CustomModelState:
             pulumi.set(__self__, "base_environment_name", base_environment_name)
         if base_environment_version_id is not None:
             pulumi.set(__self__, "base_environment_version_id", base_environment_version_id)
+        if class_labels is not None:
+            pulumi.set(__self__, "class_labels", class_labels)
+        if class_labels_file is not None:
+            pulumi.set(__self__, "class_labels_file", class_labels_file)
+        if deployments_count is not None:
+            pulumi.set(__self__, "deployments_count", deployments_count)
         if description is not None:
             pulumi.set(__self__, "description", description)
         if guard_configurations is not None:
@@ -405,10 +489,18 @@ class _CustomModelState:
             pulumi.set(__self__, "source_llm_blueprint_id", source_llm_blueprint_id)
         if source_remote_repositories is not None:
             pulumi.set(__self__, "source_remote_repositories", source_remote_repositories)
-        if target is not None:
-            pulumi.set(__self__, "target", target)
+        if target_name is not None:
+            pulumi.set(__self__, "target_name", target_name)
         if target_type is not None:
             pulumi.set(__self__, "target_type", target_type)
+        if training_data_partition_column is not None:
+            pulumi.set(__self__, "training_data_partition_column", training_data_partition_column)
+        if training_dataset_id is not None:
+            pulumi.set(__self__, "training_dataset_id", training_dataset_id)
+        if training_dataset_name is not None:
+            pulumi.set(__self__, "training_dataset_name", training_dataset_name)
+        if training_dataset_version_id is not None:
+            pulumi.set(__self__, "training_dataset_version_id", training_dataset_version_id)
         if version_id is not None:
             pulumi.set(__self__, "version_id", version_id)
 
@@ -449,6 +541,42 @@ class _CustomModelState:
         pulumi.set(self, "base_environment_version_id", value)
 
     @property
+    @pulumi.getter(name="classLabels")
+    def class_labels(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Class labels for multiclass classification. Cannot be used with class*labels*file.
+        """
+        return pulumi.get(self, "class_labels")
+
+    @class_labels.setter
+    def class_labels(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "class_labels", value)
+
+    @property
+    @pulumi.getter(name="classLabelsFile")
+    def class_labels_file(self) -> Optional[pulumi.Input[str]]:
+        """
+        Path to file containing newline separated class labels for multiclass classification. Cannot be used with class_labels.
+        """
+        return pulumi.get(self, "class_labels_file")
+
+    @class_labels_file.setter
+    def class_labels_file(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "class_labels_file", value)
+
+    @property
+    @pulumi.getter(name="deploymentsCount")
+    def deployments_count(self) -> Optional[pulumi.Input[int]]:
+        """
+        The number of deployments for the Custom Model.
+        """
+        return pulumi.get(self, "deployments_count")
+
+    @deployments_count.setter
+    def deployments_count(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "deployments_count", value)
+
+    @property
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
         """
@@ -476,7 +604,7 @@ class _CustomModelState:
     @pulumi.getter(name="isProxy")
     def is_proxy(self) -> Optional[pulumi.Input[bool]]:
         """
-        The flag indicating if the Custom Model is a proxy model.
+        Flag indicating if the Custom Model is a proxy model.
         """
         return pulumi.get(self, "is_proxy")
 
@@ -617,16 +745,16 @@ class _CustomModelState:
         pulumi.set(self, "source_remote_repositories", value)
 
     @property
-    @pulumi.getter
-    def target(self) -> Optional[pulumi.Input[str]]:
+    @pulumi.getter(name="targetName")
+    def target_name(self) -> Optional[pulumi.Input[str]]:
         """
         The target name of the Custom Model.
         """
-        return pulumi.get(self, "target")
+        return pulumi.get(self, "target_name")
 
-    @target.setter
-    def target(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "target", value)
+    @target_name.setter
+    def target_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "target_name", value)
 
     @property
     @pulumi.getter(name="targetType")
@@ -639,6 +767,54 @@ class _CustomModelState:
     @target_type.setter
     def target_type(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "target_type", value)
+
+    @property
+    @pulumi.getter(name="trainingDataPartitionColumn")
+    def training_data_partition_column(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of the partition column in the training dataset assigned to the Custom Model.
+        """
+        return pulumi.get(self, "training_data_partition_column")
+
+    @training_data_partition_column.setter
+    def training_data_partition_column(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "training_data_partition_column", value)
+
+    @property
+    @pulumi.getter(name="trainingDatasetId")
+    def training_dataset_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The ID of the training dataset assigned to the Custom Model.
+        """
+        return pulumi.get(self, "training_dataset_id")
+
+    @training_dataset_id.setter
+    def training_dataset_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "training_dataset_id", value)
+
+    @property
+    @pulumi.getter(name="trainingDatasetName")
+    def training_dataset_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of the training dataset assigned to the Custom Model.
+        """
+        return pulumi.get(self, "training_dataset_name")
+
+    @training_dataset_name.setter
+    def training_dataset_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "training_dataset_name", value)
+
+    @property
+    @pulumi.getter(name="trainingDatasetVersionId")
+    def training_dataset_version_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The version ID of the training dataset assigned to the Custom Model.
+        """
+        return pulumi.get(self, "training_dataset_version_id")
+
+    @training_dataset_version_id.setter
+    def training_dataset_version_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "training_dataset_version_id", value)
 
     @property
     @pulumi.getter(name="versionId")
@@ -661,6 +837,8 @@ class CustomModel(pulumi.CustomResource):
                  base_environment_id: Optional[pulumi.Input[str]] = None,
                  base_environment_name: Optional[pulumi.Input[str]] = None,
                  base_environment_version_id: Optional[pulumi.Input[str]] = None,
+                 class_labels: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 class_labels_file: Optional[pulumi.Input[str]] = None,
                  description: Optional[pulumi.Input[str]] = None,
                  guard_configurations: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CustomModelGuardConfigurationArgs']]]]] = None,
                  is_proxy: Optional[pulumi.Input[bool]] = None,
@@ -675,8 +853,10 @@ class CustomModel(pulumi.CustomResource):
                  runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CustomModelRuntimeParameterValueArgs']]]]] = None,
                  source_llm_blueprint_id: Optional[pulumi.Input[str]] = None,
                  source_remote_repositories: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CustomModelSourceRemoteRepositoryArgs']]]]] = None,
-                 target: Optional[pulumi.Input[str]] = None,
+                 target_name: Optional[pulumi.Input[str]] = None,
                  target_type: Optional[pulumi.Input[str]] = None,
+                 training_data_partition_column: Optional[pulumi.Input[str]] = None,
+                 training_dataset_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
         Data set from file
@@ -686,9 +866,11 @@ class CustomModel(pulumi.CustomResource):
         :param pulumi.Input[str] base_environment_id: The ID of the base environment for the Custom Model.
         :param pulumi.Input[str] base_environment_name: The name of the base environment for the Custom Model.
         :param pulumi.Input[str] base_environment_version_id: The ID of the base environment version for the Custom Model.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] class_labels: Class labels for multiclass classification. Cannot be used with class*labels*file.
+        :param pulumi.Input[str] class_labels_file: Path to file containing newline separated class labels for multiclass classification. Cannot be used with class_labels.
         :param pulumi.Input[str] description: The description of the Custom Model.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CustomModelGuardConfigurationArgs']]]] guard_configurations: The guard configurations for the Custom Model.
-        :param pulumi.Input[bool] is_proxy: The flag indicating if the Custom Model is a proxy model.
+        :param pulumi.Input[bool] is_proxy: Flag indicating if the Custom Model is a proxy model.
         :param pulumi.Input[str] language: The language used to build the Custom Model.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] local_files: The list of local file paths used to build the Custom Model.
         :param pulumi.Input[str] name: The name of the Custom Model.
@@ -700,8 +882,10 @@ class CustomModel(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CustomModelRuntimeParameterValueArgs']]]] runtime_parameter_values: The runtime parameter values for the Custom Model.
         :param pulumi.Input[str] source_llm_blueprint_id: The ID of the source LLM Blueprint for the Custom Model.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CustomModelSourceRemoteRepositoryArgs']]]] source_remote_repositories: The source remote repositories for the Custom Model.
-        :param pulumi.Input[str] target: The target name of the Custom Model.
+        :param pulumi.Input[str] target_name: The target name of the Custom Model.
         :param pulumi.Input[str] target_type: The target type of the Custom Model.
+        :param pulumi.Input[str] training_data_partition_column: The name of the partition column in the training dataset assigned to the Custom Model.
+        :param pulumi.Input[str] training_dataset_id: The ID of the training dataset assigned to the Custom Model.
         """
         ...
     @overload
@@ -730,6 +914,8 @@ class CustomModel(pulumi.CustomResource):
                  base_environment_id: Optional[pulumi.Input[str]] = None,
                  base_environment_name: Optional[pulumi.Input[str]] = None,
                  base_environment_version_id: Optional[pulumi.Input[str]] = None,
+                 class_labels: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 class_labels_file: Optional[pulumi.Input[str]] = None,
                  description: Optional[pulumi.Input[str]] = None,
                  guard_configurations: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CustomModelGuardConfigurationArgs']]]]] = None,
                  is_proxy: Optional[pulumi.Input[bool]] = None,
@@ -744,8 +930,10 @@ class CustomModel(pulumi.CustomResource):
                  runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CustomModelRuntimeParameterValueArgs']]]]] = None,
                  source_llm_blueprint_id: Optional[pulumi.Input[str]] = None,
                  source_remote_repositories: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CustomModelSourceRemoteRepositoryArgs']]]]] = None,
-                 target: Optional[pulumi.Input[str]] = None,
+                 target_name: Optional[pulumi.Input[str]] = None,
                  target_type: Optional[pulumi.Input[str]] = None,
+                 training_data_partition_column: Optional[pulumi.Input[str]] = None,
+                 training_dataset_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -758,6 +946,8 @@ class CustomModel(pulumi.CustomResource):
             __props__.__dict__["base_environment_id"] = base_environment_id
             __props__.__dict__["base_environment_name"] = base_environment_name
             __props__.__dict__["base_environment_version_id"] = base_environment_version_id
+            __props__.__dict__["class_labels"] = class_labels
+            __props__.__dict__["class_labels_file"] = class_labels_file
             __props__.__dict__["description"] = description
             __props__.__dict__["guard_configurations"] = guard_configurations
             __props__.__dict__["is_proxy"] = is_proxy
@@ -772,8 +962,13 @@ class CustomModel(pulumi.CustomResource):
             __props__.__dict__["runtime_parameter_values"] = runtime_parameter_values
             __props__.__dict__["source_llm_blueprint_id"] = source_llm_blueprint_id
             __props__.__dict__["source_remote_repositories"] = source_remote_repositories
-            __props__.__dict__["target"] = target
+            __props__.__dict__["target_name"] = target_name
             __props__.__dict__["target_type"] = target_type
+            __props__.__dict__["training_data_partition_column"] = training_data_partition_column
+            __props__.__dict__["training_dataset_id"] = training_dataset_id
+            __props__.__dict__["deployments_count"] = None
+            __props__.__dict__["training_dataset_name"] = None
+            __props__.__dict__["training_dataset_version_id"] = None
             __props__.__dict__["version_id"] = None
         super(CustomModel, __self__).__init__(
             'datarobot:index/customModel:CustomModel',
@@ -788,6 +983,9 @@ class CustomModel(pulumi.CustomResource):
             base_environment_id: Optional[pulumi.Input[str]] = None,
             base_environment_name: Optional[pulumi.Input[str]] = None,
             base_environment_version_id: Optional[pulumi.Input[str]] = None,
+            class_labels: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+            class_labels_file: Optional[pulumi.Input[str]] = None,
+            deployments_count: Optional[pulumi.Input[int]] = None,
             description: Optional[pulumi.Input[str]] = None,
             guard_configurations: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CustomModelGuardConfigurationArgs']]]]] = None,
             is_proxy: Optional[pulumi.Input[bool]] = None,
@@ -802,8 +1000,12 @@ class CustomModel(pulumi.CustomResource):
             runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CustomModelRuntimeParameterValueArgs']]]]] = None,
             source_llm_blueprint_id: Optional[pulumi.Input[str]] = None,
             source_remote_repositories: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CustomModelSourceRemoteRepositoryArgs']]]]] = None,
-            target: Optional[pulumi.Input[str]] = None,
+            target_name: Optional[pulumi.Input[str]] = None,
             target_type: Optional[pulumi.Input[str]] = None,
+            training_data_partition_column: Optional[pulumi.Input[str]] = None,
+            training_dataset_id: Optional[pulumi.Input[str]] = None,
+            training_dataset_name: Optional[pulumi.Input[str]] = None,
+            training_dataset_version_id: Optional[pulumi.Input[str]] = None,
             version_id: Optional[pulumi.Input[str]] = None) -> 'CustomModel':
         """
         Get an existing CustomModel resource's state with the given name, id, and optional extra
@@ -815,9 +1017,12 @@ class CustomModel(pulumi.CustomResource):
         :param pulumi.Input[str] base_environment_id: The ID of the base environment for the Custom Model.
         :param pulumi.Input[str] base_environment_name: The name of the base environment for the Custom Model.
         :param pulumi.Input[str] base_environment_version_id: The ID of the base environment version for the Custom Model.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] class_labels: Class labels for multiclass classification. Cannot be used with class*labels*file.
+        :param pulumi.Input[str] class_labels_file: Path to file containing newline separated class labels for multiclass classification. Cannot be used with class_labels.
+        :param pulumi.Input[int] deployments_count: The number of deployments for the Custom Model.
         :param pulumi.Input[str] description: The description of the Custom Model.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CustomModelGuardConfigurationArgs']]]] guard_configurations: The guard configurations for the Custom Model.
-        :param pulumi.Input[bool] is_proxy: The flag indicating if the Custom Model is a proxy model.
+        :param pulumi.Input[bool] is_proxy: Flag indicating if the Custom Model is a proxy model.
         :param pulumi.Input[str] language: The language used to build the Custom Model.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] local_files: The list of local file paths used to build the Custom Model.
         :param pulumi.Input[str] name: The name of the Custom Model.
@@ -829,8 +1034,12 @@ class CustomModel(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CustomModelRuntimeParameterValueArgs']]]] runtime_parameter_values: The runtime parameter values for the Custom Model.
         :param pulumi.Input[str] source_llm_blueprint_id: The ID of the source LLM Blueprint for the Custom Model.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['CustomModelSourceRemoteRepositoryArgs']]]] source_remote_repositories: The source remote repositories for the Custom Model.
-        :param pulumi.Input[str] target: The target name of the Custom Model.
+        :param pulumi.Input[str] target_name: The target name of the Custom Model.
         :param pulumi.Input[str] target_type: The target type of the Custom Model.
+        :param pulumi.Input[str] training_data_partition_column: The name of the partition column in the training dataset assigned to the Custom Model.
+        :param pulumi.Input[str] training_dataset_id: The ID of the training dataset assigned to the Custom Model.
+        :param pulumi.Input[str] training_dataset_name: The name of the training dataset assigned to the Custom Model.
+        :param pulumi.Input[str] training_dataset_version_id: The version ID of the training dataset assigned to the Custom Model.
         :param pulumi.Input[str] version_id: The ID of the latest Custom Model version.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -840,6 +1049,9 @@ class CustomModel(pulumi.CustomResource):
         __props__.__dict__["base_environment_id"] = base_environment_id
         __props__.__dict__["base_environment_name"] = base_environment_name
         __props__.__dict__["base_environment_version_id"] = base_environment_version_id
+        __props__.__dict__["class_labels"] = class_labels
+        __props__.__dict__["class_labels_file"] = class_labels_file
+        __props__.__dict__["deployments_count"] = deployments_count
         __props__.__dict__["description"] = description
         __props__.__dict__["guard_configurations"] = guard_configurations
         __props__.__dict__["is_proxy"] = is_proxy
@@ -854,8 +1066,12 @@ class CustomModel(pulumi.CustomResource):
         __props__.__dict__["runtime_parameter_values"] = runtime_parameter_values
         __props__.__dict__["source_llm_blueprint_id"] = source_llm_blueprint_id
         __props__.__dict__["source_remote_repositories"] = source_remote_repositories
-        __props__.__dict__["target"] = target
+        __props__.__dict__["target_name"] = target_name
         __props__.__dict__["target_type"] = target_type
+        __props__.__dict__["training_data_partition_column"] = training_data_partition_column
+        __props__.__dict__["training_dataset_id"] = training_dataset_id
+        __props__.__dict__["training_dataset_name"] = training_dataset_name
+        __props__.__dict__["training_dataset_version_id"] = training_dataset_version_id
         __props__.__dict__["version_id"] = version_id
         return CustomModel(resource_name, opts=opts, __props__=__props__)
 
@@ -884,6 +1100,30 @@ class CustomModel(pulumi.CustomResource):
         return pulumi.get(self, "base_environment_version_id")
 
     @property
+    @pulumi.getter(name="classLabels")
+    def class_labels(self) -> pulumi.Output[Optional[Sequence[str]]]:
+        """
+        Class labels for multiclass classification. Cannot be used with class*labels*file.
+        """
+        return pulumi.get(self, "class_labels")
+
+    @property
+    @pulumi.getter(name="classLabelsFile")
+    def class_labels_file(self) -> pulumi.Output[Optional[str]]:
+        """
+        Path to file containing newline separated class labels for multiclass classification. Cannot be used with class_labels.
+        """
+        return pulumi.get(self, "class_labels_file")
+
+    @property
+    @pulumi.getter(name="deploymentsCount")
+    def deployments_count(self) -> pulumi.Output[int]:
+        """
+        The number of deployments for the Custom Model.
+        """
+        return pulumi.get(self, "deployments_count")
+
+    @property
     @pulumi.getter
     def description(self) -> pulumi.Output[Optional[str]]:
         """
@@ -901,9 +1141,9 @@ class CustomModel(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="isProxy")
-    def is_proxy(self) -> pulumi.Output[Optional[bool]]:
+    def is_proxy(self) -> pulumi.Output[bool]:
         """
-        The flag indicating if the Custom Model is a proxy model.
+        Flag indicating if the Custom Model is a proxy model.
         """
         return pulumi.get(self, "is_proxy")
 
@@ -996,12 +1236,12 @@ class CustomModel(pulumi.CustomResource):
         return pulumi.get(self, "source_remote_repositories")
 
     @property
-    @pulumi.getter
-    def target(self) -> pulumi.Output[str]:
+    @pulumi.getter(name="targetName")
+    def target_name(self) -> pulumi.Output[str]:
         """
         The target name of the Custom Model.
         """
-        return pulumi.get(self, "target")
+        return pulumi.get(self, "target_name")
 
     @property
     @pulumi.getter(name="targetType")
@@ -1010,6 +1250,38 @@ class CustomModel(pulumi.CustomResource):
         The target type of the Custom Model.
         """
         return pulumi.get(self, "target_type")
+
+    @property
+    @pulumi.getter(name="trainingDataPartitionColumn")
+    def training_data_partition_column(self) -> pulumi.Output[Optional[str]]:
+        """
+        The name of the partition column in the training dataset assigned to the Custom Model.
+        """
+        return pulumi.get(self, "training_data_partition_column")
+
+    @property
+    @pulumi.getter(name="trainingDatasetId")
+    def training_dataset_id(self) -> pulumi.Output[Optional[str]]:
+        """
+        The ID of the training dataset assigned to the Custom Model.
+        """
+        return pulumi.get(self, "training_dataset_id")
+
+    @property
+    @pulumi.getter(name="trainingDatasetName")
+    def training_dataset_name(self) -> pulumi.Output[str]:
+        """
+        The name of the training dataset assigned to the Custom Model.
+        """
+        return pulumi.get(self, "training_dataset_name")
+
+    @property
+    @pulumi.getter(name="trainingDatasetVersionId")
+    def training_dataset_version_id(self) -> pulumi.Output[str]:
+        """
+        The version ID of the training dataset assigned to the Custom Model.
+        """
+        return pulumi.get(self, "training_dataset_version_id")
 
     @property
     @pulumi.getter(name="versionId")

@@ -21,12 +21,18 @@ type CustomModel struct {
 	BaseEnvironmentName pulumi.StringPtrOutput `pulumi:"baseEnvironmentName"`
 	// The ID of the base environment version for the Custom Model.
 	BaseEnvironmentVersionId pulumi.StringOutput `pulumi:"baseEnvironmentVersionId"`
+	// Class labels for multiclass classification. Cannot be used with class*labels*file.
+	ClassLabels pulumi.StringArrayOutput `pulumi:"classLabels"`
+	// Path to file containing newline separated class labels for multiclass classification. Cannot be used with class_labels.
+	ClassLabelsFile pulumi.StringPtrOutput `pulumi:"classLabelsFile"`
+	// The number of deployments for the Custom Model.
+	DeploymentsCount pulumi.IntOutput `pulumi:"deploymentsCount"`
 	// The description of the Custom Model.
 	Description pulumi.StringPtrOutput `pulumi:"description"`
 	// The guard configurations for the Custom Model.
 	GuardConfigurations CustomModelGuardConfigurationArrayOutput `pulumi:"guardConfigurations"`
-	// The flag indicating if the Custom Model is a proxy model.
-	IsProxy pulumi.BoolPtrOutput `pulumi:"isProxy"`
+	// Flag indicating if the Custom Model is a proxy model.
+	IsProxy pulumi.BoolOutput `pulumi:"isProxy"`
 	// The language used to build the Custom Model.
 	Language pulumi.StringPtrOutput `pulumi:"language"`
 	// The list of local file paths used to build the Custom Model.
@@ -50,9 +56,17 @@ type CustomModel struct {
 	// The source remote repositories for the Custom Model.
 	SourceRemoteRepositories CustomModelSourceRemoteRepositoryArrayOutput `pulumi:"sourceRemoteRepositories"`
 	// The target name of the Custom Model.
-	Target pulumi.StringOutput `pulumi:"target"`
+	TargetName pulumi.StringOutput `pulumi:"targetName"`
 	// The target type of the Custom Model.
 	TargetType pulumi.StringPtrOutput `pulumi:"targetType"`
+	// The name of the partition column in the training dataset assigned to the Custom Model.
+	TrainingDataPartitionColumn pulumi.StringPtrOutput `pulumi:"trainingDataPartitionColumn"`
+	// The ID of the training dataset assigned to the Custom Model.
+	TrainingDatasetId pulumi.StringPtrOutput `pulumi:"trainingDatasetId"`
+	// The name of the training dataset assigned to the Custom Model.
+	TrainingDatasetName pulumi.StringOutput `pulumi:"trainingDatasetName"`
+	// The version ID of the training dataset assigned to the Custom Model.
+	TrainingDatasetVersionId pulumi.StringOutput `pulumi:"trainingDatasetVersionId"`
 	// The ID of the latest Custom Model version.
 	VersionId pulumi.StringOutput `pulumi:"versionId"`
 }
@@ -93,11 +107,17 @@ type customModelState struct {
 	BaseEnvironmentName *string `pulumi:"baseEnvironmentName"`
 	// The ID of the base environment version for the Custom Model.
 	BaseEnvironmentVersionId *string `pulumi:"baseEnvironmentVersionId"`
+	// Class labels for multiclass classification. Cannot be used with class*labels*file.
+	ClassLabels []string `pulumi:"classLabels"`
+	// Path to file containing newline separated class labels for multiclass classification. Cannot be used with class_labels.
+	ClassLabelsFile *string `pulumi:"classLabelsFile"`
+	// The number of deployments for the Custom Model.
+	DeploymentsCount *int `pulumi:"deploymentsCount"`
 	// The description of the Custom Model.
 	Description *string `pulumi:"description"`
 	// The guard configurations for the Custom Model.
 	GuardConfigurations []CustomModelGuardConfiguration `pulumi:"guardConfigurations"`
-	// The flag indicating if the Custom Model is a proxy model.
+	// Flag indicating if the Custom Model is a proxy model.
 	IsProxy *bool `pulumi:"isProxy"`
 	// The language used to build the Custom Model.
 	Language *string `pulumi:"language"`
@@ -122,9 +142,17 @@ type customModelState struct {
 	// The source remote repositories for the Custom Model.
 	SourceRemoteRepositories []CustomModelSourceRemoteRepository `pulumi:"sourceRemoteRepositories"`
 	// The target name of the Custom Model.
-	Target *string `pulumi:"target"`
+	TargetName *string `pulumi:"targetName"`
 	// The target type of the Custom Model.
 	TargetType *string `pulumi:"targetType"`
+	// The name of the partition column in the training dataset assigned to the Custom Model.
+	TrainingDataPartitionColumn *string `pulumi:"trainingDataPartitionColumn"`
+	// The ID of the training dataset assigned to the Custom Model.
+	TrainingDatasetId *string `pulumi:"trainingDatasetId"`
+	// The name of the training dataset assigned to the Custom Model.
+	TrainingDatasetName *string `pulumi:"trainingDatasetName"`
+	// The version ID of the training dataset assigned to the Custom Model.
+	TrainingDatasetVersionId *string `pulumi:"trainingDatasetVersionId"`
 	// The ID of the latest Custom Model version.
 	VersionId *string `pulumi:"versionId"`
 }
@@ -136,11 +164,17 @@ type CustomModelState struct {
 	BaseEnvironmentName pulumi.StringPtrInput
 	// The ID of the base environment version for the Custom Model.
 	BaseEnvironmentVersionId pulumi.StringPtrInput
+	// Class labels for multiclass classification. Cannot be used with class*labels*file.
+	ClassLabels pulumi.StringArrayInput
+	// Path to file containing newline separated class labels for multiclass classification. Cannot be used with class_labels.
+	ClassLabelsFile pulumi.StringPtrInput
+	// The number of deployments for the Custom Model.
+	DeploymentsCount pulumi.IntPtrInput
 	// The description of the Custom Model.
 	Description pulumi.StringPtrInput
 	// The guard configurations for the Custom Model.
 	GuardConfigurations CustomModelGuardConfigurationArrayInput
-	// The flag indicating if the Custom Model is a proxy model.
+	// Flag indicating if the Custom Model is a proxy model.
 	IsProxy pulumi.BoolPtrInput
 	// The language used to build the Custom Model.
 	Language pulumi.StringPtrInput
@@ -165,9 +199,17 @@ type CustomModelState struct {
 	// The source remote repositories for the Custom Model.
 	SourceRemoteRepositories CustomModelSourceRemoteRepositoryArrayInput
 	// The target name of the Custom Model.
-	Target pulumi.StringPtrInput
+	TargetName pulumi.StringPtrInput
 	// The target type of the Custom Model.
 	TargetType pulumi.StringPtrInput
+	// The name of the partition column in the training dataset assigned to the Custom Model.
+	TrainingDataPartitionColumn pulumi.StringPtrInput
+	// The ID of the training dataset assigned to the Custom Model.
+	TrainingDatasetId pulumi.StringPtrInput
+	// The name of the training dataset assigned to the Custom Model.
+	TrainingDatasetName pulumi.StringPtrInput
+	// The version ID of the training dataset assigned to the Custom Model.
+	TrainingDatasetVersionId pulumi.StringPtrInput
 	// The ID of the latest Custom Model version.
 	VersionId pulumi.StringPtrInput
 }
@@ -183,11 +225,15 @@ type customModelArgs struct {
 	BaseEnvironmentName *string `pulumi:"baseEnvironmentName"`
 	// The ID of the base environment version for the Custom Model.
 	BaseEnvironmentVersionId *string `pulumi:"baseEnvironmentVersionId"`
+	// Class labels for multiclass classification. Cannot be used with class*labels*file.
+	ClassLabels []string `pulumi:"classLabels"`
+	// Path to file containing newline separated class labels for multiclass classification. Cannot be used with class_labels.
+	ClassLabelsFile *string `pulumi:"classLabelsFile"`
 	// The description of the Custom Model.
 	Description *string `pulumi:"description"`
 	// The guard configurations for the Custom Model.
 	GuardConfigurations []CustomModelGuardConfiguration `pulumi:"guardConfigurations"`
-	// The flag indicating if the Custom Model is a proxy model.
+	// Flag indicating if the Custom Model is a proxy model.
 	IsProxy *bool `pulumi:"isProxy"`
 	// The language used to build the Custom Model.
 	Language *string `pulumi:"language"`
@@ -212,9 +258,13 @@ type customModelArgs struct {
 	// The source remote repositories for the Custom Model.
 	SourceRemoteRepositories []CustomModelSourceRemoteRepository `pulumi:"sourceRemoteRepositories"`
 	// The target name of the Custom Model.
-	Target *string `pulumi:"target"`
+	TargetName *string `pulumi:"targetName"`
 	// The target type of the Custom Model.
 	TargetType *string `pulumi:"targetType"`
+	// The name of the partition column in the training dataset assigned to the Custom Model.
+	TrainingDataPartitionColumn *string `pulumi:"trainingDataPartitionColumn"`
+	// The ID of the training dataset assigned to the Custom Model.
+	TrainingDatasetId *string `pulumi:"trainingDatasetId"`
 }
 
 // The set of arguments for constructing a CustomModel resource.
@@ -225,11 +275,15 @@ type CustomModelArgs struct {
 	BaseEnvironmentName pulumi.StringPtrInput
 	// The ID of the base environment version for the Custom Model.
 	BaseEnvironmentVersionId pulumi.StringPtrInput
+	// Class labels for multiclass classification. Cannot be used with class*labels*file.
+	ClassLabels pulumi.StringArrayInput
+	// Path to file containing newline separated class labels for multiclass classification. Cannot be used with class_labels.
+	ClassLabelsFile pulumi.StringPtrInput
 	// The description of the Custom Model.
 	Description pulumi.StringPtrInput
 	// The guard configurations for the Custom Model.
 	GuardConfigurations CustomModelGuardConfigurationArrayInput
-	// The flag indicating if the Custom Model is a proxy model.
+	// Flag indicating if the Custom Model is a proxy model.
 	IsProxy pulumi.BoolPtrInput
 	// The language used to build the Custom Model.
 	Language pulumi.StringPtrInput
@@ -254,9 +308,13 @@ type CustomModelArgs struct {
 	// The source remote repositories for the Custom Model.
 	SourceRemoteRepositories CustomModelSourceRemoteRepositoryArrayInput
 	// The target name of the Custom Model.
-	Target pulumi.StringPtrInput
+	TargetName pulumi.StringPtrInput
 	// The target type of the Custom Model.
 	TargetType pulumi.StringPtrInput
+	// The name of the partition column in the training dataset assigned to the Custom Model.
+	TrainingDataPartitionColumn pulumi.StringPtrInput
+	// The ID of the training dataset assigned to the Custom Model.
+	TrainingDatasetId pulumi.StringPtrInput
 }
 
 func (CustomModelArgs) ElementType() reflect.Type {
@@ -361,6 +419,21 @@ func (o CustomModelOutput) BaseEnvironmentVersionId() pulumi.StringOutput {
 	return o.ApplyT(func(v *CustomModel) pulumi.StringOutput { return v.BaseEnvironmentVersionId }).(pulumi.StringOutput)
 }
 
+// Class labels for multiclass classification. Cannot be used with class*labels*file.
+func (o CustomModelOutput) ClassLabels() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *CustomModel) pulumi.StringArrayOutput { return v.ClassLabels }).(pulumi.StringArrayOutput)
+}
+
+// Path to file containing newline separated class labels for multiclass classification. Cannot be used with class_labels.
+func (o CustomModelOutput) ClassLabelsFile() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CustomModel) pulumi.StringPtrOutput { return v.ClassLabelsFile }).(pulumi.StringPtrOutput)
+}
+
+// The number of deployments for the Custom Model.
+func (o CustomModelOutput) DeploymentsCount() pulumi.IntOutput {
+	return o.ApplyT(func(v *CustomModel) pulumi.IntOutput { return v.DeploymentsCount }).(pulumi.IntOutput)
+}
+
 // The description of the Custom Model.
 func (o CustomModelOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *CustomModel) pulumi.StringPtrOutput { return v.Description }).(pulumi.StringPtrOutput)
@@ -371,9 +444,9 @@ func (o CustomModelOutput) GuardConfigurations() CustomModelGuardConfigurationAr
 	return o.ApplyT(func(v *CustomModel) CustomModelGuardConfigurationArrayOutput { return v.GuardConfigurations }).(CustomModelGuardConfigurationArrayOutput)
 }
 
-// The flag indicating if the Custom Model is a proxy model.
-func (o CustomModelOutput) IsProxy() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v *CustomModel) pulumi.BoolPtrOutput { return v.IsProxy }).(pulumi.BoolPtrOutput)
+// Flag indicating if the Custom Model is a proxy model.
+func (o CustomModelOutput) IsProxy() pulumi.BoolOutput {
+	return o.ApplyT(func(v *CustomModel) pulumi.BoolOutput { return v.IsProxy }).(pulumi.BoolOutput)
 }
 
 // The language used to build the Custom Model.
@@ -434,13 +507,33 @@ func (o CustomModelOutput) SourceRemoteRepositories() CustomModelSourceRemoteRep
 }
 
 // The target name of the Custom Model.
-func (o CustomModelOutput) Target() pulumi.StringOutput {
-	return o.ApplyT(func(v *CustomModel) pulumi.StringOutput { return v.Target }).(pulumi.StringOutput)
+func (o CustomModelOutput) TargetName() pulumi.StringOutput {
+	return o.ApplyT(func(v *CustomModel) pulumi.StringOutput { return v.TargetName }).(pulumi.StringOutput)
 }
 
 // The target type of the Custom Model.
 func (o CustomModelOutput) TargetType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *CustomModel) pulumi.StringPtrOutput { return v.TargetType }).(pulumi.StringPtrOutput)
+}
+
+// The name of the partition column in the training dataset assigned to the Custom Model.
+func (o CustomModelOutput) TrainingDataPartitionColumn() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CustomModel) pulumi.StringPtrOutput { return v.TrainingDataPartitionColumn }).(pulumi.StringPtrOutput)
+}
+
+// The ID of the training dataset assigned to the Custom Model.
+func (o CustomModelOutput) TrainingDatasetId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CustomModel) pulumi.StringPtrOutput { return v.TrainingDatasetId }).(pulumi.StringPtrOutput)
+}
+
+// The name of the training dataset assigned to the Custom Model.
+func (o CustomModelOutput) TrainingDatasetName() pulumi.StringOutput {
+	return o.ApplyT(func(v *CustomModel) pulumi.StringOutput { return v.TrainingDatasetName }).(pulumi.StringOutput)
+}
+
+// The version ID of the training dataset assigned to the Custom Model.
+func (o CustomModelOutput) TrainingDatasetVersionId() pulumi.StringOutput {
+	return o.ApplyT(func(v *CustomModel) pulumi.StringOutput { return v.TrainingDatasetVersionId }).(pulumi.StringOutput)
 }
 
 // The ID of the latest Custom Model version.
