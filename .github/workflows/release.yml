@@ -34,7 +34,7 @@ jobs:
       fail-fast: true
       matrix:
         goversion:
-        - 1.17.x
+        - 1.22.x
 
     steps:
     - name: Checkout Repo
@@ -57,9 +57,9 @@ jobs:
       run: echo "GORELEASER_CURRENT_TAG=v$(pulumictl get version --language generic)" >> $GITHUB_ENV
 
     - name: Run GoReleaser
-      uses: goreleaser/goreleaser-action@286f3b13b1b49da4ac219696163fb8c1c93e1200
+      uses: goreleaser/goreleaser-action@v6.0.0
       with:
-        args: -p 3 --clean
+        args: -p 3 release --clean
         version: latest
 
   publish_sdk:
@@ -72,7 +72,7 @@ jobs:
         dotnetversion:
           - 3.1.301
         goversion:
-          - 1.17.x
+          - 1.22.x
         language:
           # - nodejs
           - python

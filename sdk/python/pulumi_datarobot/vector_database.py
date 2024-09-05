@@ -160,7 +160,7 @@ class VectorDatabase(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 chunking_parameters: Optional[pulumi.Input[pulumi.InputType['VectorDatabaseChunkingParametersArgs']]] = None,
+                 chunking_parameters: Optional[pulumi.Input[Union['VectorDatabaseChunkingParametersArgs', 'VectorDatabaseChunkingParametersArgsDict']]] = None,
                  dataset_id: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  use_case_id: Optional[pulumi.Input[str]] = None,
@@ -194,7 +194,7 @@ class VectorDatabase(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[pulumi.InputType['VectorDatabaseChunkingParametersArgs']] chunking_parameters: The chunking parameters for the Model.
+        :param pulumi.Input[Union['VectorDatabaseChunkingParametersArgs', 'VectorDatabaseChunkingParametersArgsDict']] chunking_parameters: The chunking parameters for the Model.
         :param pulumi.Input[str] dataset_id: The id of the Vector Database.
         :param pulumi.Input[str] name: The name of the VectorDatabase.
         :param pulumi.Input[str] use_case_id: The id of the Use Case.
@@ -247,7 +247,7 @@ class VectorDatabase(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 chunking_parameters: Optional[pulumi.Input[pulumi.InputType['VectorDatabaseChunkingParametersArgs']]] = None,
+                 chunking_parameters: Optional[pulumi.Input[Union['VectorDatabaseChunkingParametersArgs', 'VectorDatabaseChunkingParametersArgsDict']]] = None,
                  dataset_id: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  use_case_id: Optional[pulumi.Input[str]] = None,
@@ -278,7 +278,7 @@ class VectorDatabase(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            chunking_parameters: Optional[pulumi.Input[pulumi.InputType['VectorDatabaseChunkingParametersArgs']]] = None,
+            chunking_parameters: Optional[pulumi.Input[Union['VectorDatabaseChunkingParametersArgs', 'VectorDatabaseChunkingParametersArgsDict']]] = None,
             dataset_id: Optional[pulumi.Input[str]] = None,
             name: Optional[pulumi.Input[str]] = None,
             use_case_id: Optional[pulumi.Input[str]] = None) -> 'VectorDatabase':
@@ -289,7 +289,7 @@ class VectorDatabase(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[pulumi.InputType['VectorDatabaseChunkingParametersArgs']] chunking_parameters: The chunking parameters for the Model.
+        :param pulumi.Input[Union['VectorDatabaseChunkingParametersArgs', 'VectorDatabaseChunkingParametersArgsDict']] chunking_parameters: The chunking parameters for the Model.
         :param pulumi.Input[str] dataset_id: The id of the Vector Database.
         :param pulumi.Input[str] name: The name of the VectorDatabase.
         :param pulumi.Input[str] use_case_id: The id of the Use Case.
