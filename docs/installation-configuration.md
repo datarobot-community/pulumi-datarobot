@@ -10,7 +10,7 @@ The Pulumi `DataRobot` provider is available as a package in all Pulumi language
 
 - Python: [`pulumi-datarobot`](https://pypi.org/project/pulumi-datarobot/)
 - JavaScript/TypeScript: [`@pulumi/datarobot`](https://www.npmjs.com/package/@pulumi/datarobot)
-- Go: [`github.com/pulumi/pulumi-datarobot/sdk`](https://pkg.go.dev/github.com/pulumi/pulumi-datarobot/sdk)
+- Go: [`github.com/datarobot-community/pulumi-datarobot/sdk`](https://pkg.go.dev/github.com/datarobot-community/pulumi-datarobot/sdk)
 - .NET: [`Pulumi.datarobot`](https://www.nuget.org/packages/Pulumi.datarobot)
 
 ## Installing
