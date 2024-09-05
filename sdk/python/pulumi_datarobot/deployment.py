@@ -162,7 +162,7 @@ class Deployment(pulumi.CustomResource):
                  label: Optional[pulumi.Input[str]] = None,
                  prediction_environment_id: Optional[pulumi.Input[str]] = None,
                  registered_model_version_id: Optional[pulumi.Input[str]] = None,
-                 settings: Optional[pulumi.Input[pulumi.InputType['DeploymentSettingsArgs']]] = None,
+                 settings: Optional[pulumi.Input[Union['DeploymentSettingsArgs', 'DeploymentSettingsArgsDict']]] = None,
                  __props__=None):
         """
         Deployment
@@ -201,7 +201,7 @@ class Deployment(pulumi.CustomResource):
         :param pulumi.Input[str] label: The label of the Deployment.
         :param pulumi.Input[str] prediction_environment_id: The ID of the predication environment for this Deployment.
         :param pulumi.Input[str] registered_model_version_id: The ID of the registered model version for this Deployment.
-        :param pulumi.Input[pulumi.InputType['DeploymentSettingsArgs']] settings: The settings for the Deployment.
+        :param pulumi.Input[Union['DeploymentSettingsArgs', 'DeploymentSettingsArgsDict']] settings: The settings for the Deployment.
         """
         ...
     @overload
@@ -259,7 +259,7 @@ class Deployment(pulumi.CustomResource):
                  label: Optional[pulumi.Input[str]] = None,
                  prediction_environment_id: Optional[pulumi.Input[str]] = None,
                  registered_model_version_id: Optional[pulumi.Input[str]] = None,
-                 settings: Optional[pulumi.Input[pulumi.InputType['DeploymentSettingsArgs']]] = None,
+                 settings: Optional[pulumi.Input[Union['DeploymentSettingsArgs', 'DeploymentSettingsArgsDict']]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -292,7 +292,7 @@ class Deployment(pulumi.CustomResource):
             label: Optional[pulumi.Input[str]] = None,
             prediction_environment_id: Optional[pulumi.Input[str]] = None,
             registered_model_version_id: Optional[pulumi.Input[str]] = None,
-            settings: Optional[pulumi.Input[pulumi.InputType['DeploymentSettingsArgs']]] = None) -> 'Deployment':
+            settings: Optional[pulumi.Input[Union['DeploymentSettingsArgs', 'DeploymentSettingsArgsDict']]] = None) -> 'Deployment':
         """
         Get an existing Deployment resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -303,7 +303,7 @@ class Deployment(pulumi.CustomResource):
         :param pulumi.Input[str] label: The label of the Deployment.
         :param pulumi.Input[str] prediction_environment_id: The ID of the predication environment for this Deployment.
         :param pulumi.Input[str] registered_model_version_id: The ID of the registered model version for this Deployment.
-        :param pulumi.Input[pulumi.InputType['DeploymentSettingsArgs']] settings: The settings for the Deployment.
+        :param pulumi.Input[Union['DeploymentSettingsArgs', 'DeploymentSettingsArgsDict']] settings: The settings for the Deployment.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
