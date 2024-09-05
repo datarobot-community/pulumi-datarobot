@@ -62,6 +62,10 @@ export class CustomModel extends pulumi.CustomResource {
      */
     public readonly isProxy!: pulumi.Output<boolean | undefined>;
     /**
+     * The language used to build the Custom Model.
+     */
+    public readonly language!: pulumi.Output<string | undefined>;
+    /**
      * The list of local file paths used to build the Custom Model.
      */
     public readonly localFiles!: pulumi.Output<string[] | undefined>;
@@ -72,7 +76,7 @@ export class CustomModel extends pulumi.CustomResource {
     /**
      * The negative class label of the Custom Model.
      */
-    public readonly negativeClassLabel!: pulumi.Output<string | undefined>;
+    public readonly negativeClassLabel!: pulumi.Output<string>;
     /**
      * The overall moderation configuration for the Custom Model.
      */
@@ -80,7 +84,11 @@ export class CustomModel extends pulumi.CustomResource {
     /**
      * The positive class label of the Custom Model.
      */
-    public readonly positiveClassLabel!: pulumi.Output<string | undefined>;
+    public readonly positiveClassLabel!: pulumi.Output<string>;
+    /**
+     * The prediction threshold of the Custom Model.
+     */
+    public readonly predictionThreshold!: pulumi.Output<number>;
     /**
      * The resource settings for the Custom Model.
      */
@@ -98,9 +106,9 @@ export class CustomModel extends pulumi.CustomResource {
      */
     public readonly sourceRemoteRepositories!: pulumi.Output<outputs.CustomModelSourceRemoteRepository[] | undefined>;
     /**
-     * The target of the Custom Model.
+     * The target name of the Custom Model.
      */
-    public readonly target!: pulumi.Output<string | undefined>;
+    public readonly target!: pulumi.Output<string>;
     /**
      * The target type of the Custom Model.
      */
@@ -129,11 +137,13 @@ export class CustomModel extends pulumi.CustomResource {
             resourceInputs["description"] = state ? state.description : undefined;
             resourceInputs["guardConfigurations"] = state ? state.guardConfigurations : undefined;
             resourceInputs["isProxy"] = state ? state.isProxy : undefined;
+            resourceInputs["language"] = state ? state.language : undefined;
             resourceInputs["localFiles"] = state ? state.localFiles : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["negativeClassLabel"] = state ? state.negativeClassLabel : undefined;
             resourceInputs["overallModerationConfiguration"] = state ? state.overallModerationConfiguration : undefined;
             resourceInputs["positiveClassLabel"] = state ? state.positiveClassLabel : undefined;
+            resourceInputs["predictionThreshold"] = state ? state.predictionThreshold : undefined;
             resourceInputs["resourceSettings"] = state ? state.resourceSettings : undefined;
             resourceInputs["runtimeParameterValues"] = state ? state.runtimeParameterValues : undefined;
             resourceInputs["sourceLlmBlueprintId"] = state ? state.sourceLlmBlueprintId : undefined;
@@ -149,11 +159,13 @@ export class CustomModel extends pulumi.CustomResource {
             resourceInputs["description"] = args ? args.description : undefined;
             resourceInputs["guardConfigurations"] = args ? args.guardConfigurations : undefined;
             resourceInputs["isProxy"] = args ? args.isProxy : undefined;
+            resourceInputs["language"] = args ? args.language : undefined;
             resourceInputs["localFiles"] = args ? args.localFiles : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["negativeClassLabel"] = args ? args.negativeClassLabel : undefined;
             resourceInputs["overallModerationConfiguration"] = args ? args.overallModerationConfiguration : undefined;
             resourceInputs["positiveClassLabel"] = args ? args.positiveClassLabel : undefined;
+            resourceInputs["predictionThreshold"] = args ? args.predictionThreshold : undefined;
             resourceInputs["resourceSettings"] = args ? args.resourceSettings : undefined;
             resourceInputs["runtimeParameterValues"] = args ? args.runtimeParameterValues : undefined;
             resourceInputs["sourceLlmBlueprintId"] = args ? args.sourceLlmBlueprintId : undefined;
@@ -196,6 +208,10 @@ export interface CustomModelState {
      */
     isProxy?: pulumi.Input<boolean>;
     /**
+     * The language used to build the Custom Model.
+     */
+    language?: pulumi.Input<string>;
+    /**
      * The list of local file paths used to build the Custom Model.
      */
     localFiles?: pulumi.Input<pulumi.Input<string>[]>;
@@ -216,6 +232,10 @@ export interface CustomModelState {
      */
     positiveClassLabel?: pulumi.Input<string>;
     /**
+     * The prediction threshold of the Custom Model.
+     */
+    predictionThreshold?: pulumi.Input<number>;
+    /**
      * The resource settings for the Custom Model.
      */
     resourceSettings?: pulumi.Input<inputs.CustomModelResourceSettings>;
@@ -232,7 +252,7 @@ export interface CustomModelState {
      */
     sourceRemoteRepositories?: pulumi.Input<pulumi.Input<inputs.CustomModelSourceRemoteRepository>[]>;
     /**
-     * The target of the Custom Model.
+     * The target name of the Custom Model.
      */
     target?: pulumi.Input<string>;
     /**
@@ -274,6 +294,10 @@ export interface CustomModelArgs {
      */
     isProxy?: pulumi.Input<boolean>;
     /**
+     * The language used to build the Custom Model.
+     */
+    language?: pulumi.Input<string>;
+    /**
      * The list of local file paths used to build the Custom Model.
      */
     localFiles?: pulumi.Input<pulumi.Input<string>[]>;
@@ -294,6 +318,10 @@ export interface CustomModelArgs {
      */
     positiveClassLabel?: pulumi.Input<string>;
     /**
+     * The prediction threshold of the Custom Model.
+     */
+    predictionThreshold?: pulumi.Input<number>;
+    /**
      * The resource settings for the Custom Model.
      */
     resourceSettings?: pulumi.Input<inputs.CustomModelResourceSettings>;
@@ -310,7 +338,7 @@ export interface CustomModelArgs {
      */
     sourceRemoteRepositories?: pulumi.Input<pulumi.Input<inputs.CustomModelSourceRemoteRepository>[]>;
     /**
-     * The target of the Custom Model.
+     * The target name of the Custom Model.
      */
     target?: pulumi.Input<string>;
     /**

@@ -8,7 +8,6 @@ import typing
 from .api_token_credential import *
 from .application_source import *
 from .basic_credential import *
-from .chat_application import *
 from .custom_application import *
 from .custom_model import *
 from .dataset_from_file import *
@@ -19,6 +18,7 @@ from .llm_blueprint import *
 from .playground import *
 from .prediction_environment import *
 from .provider import *
+from .qa_application import *
 from .registered_model import *
 from .remote_repository import *
 from .use_case import *
@@ -58,14 +58,6 @@ _utilities.register(
   "fqn": "pulumi_datarobot",
   "classes": {
    "datarobot:index/basicCredential:BasicCredential": "BasicCredential"
-  }
- },
- {
-  "pkg": "datarobot",
-  "mod": "index/chatApplication",
-  "fqn": "pulumi_datarobot",
-  "classes": {
-   "datarobot:index/chatApplication:ChatApplication": "ChatApplication"
   }
  },
  {
@@ -130,6 +122,14 @@ _utilities.register(
   "fqn": "pulumi_datarobot",
   "classes": {
    "datarobot:index/predictionEnvironment:PredictionEnvironment": "PredictionEnvironment"
+  }
+ },
+ {
+  "pkg": "datarobot",
+  "mod": "index/qaApplication",
+  "fqn": "pulumi_datarobot",
+  "classes": {
+   "datarobot:index/qaApplication:QaApplication": "QaApplication"
   }
  },
  {

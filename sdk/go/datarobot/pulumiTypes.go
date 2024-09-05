@@ -155,7 +155,7 @@ type ApplicationSourceRuntimeParameterValue struct {
 	Key string `pulumi:"key"`
 	// The type of the runtime parameter.
 	Type string `pulumi:"type"`
-	// The value of the runtime parameter.
+	// The value of the runtime parameter (type conversion is handled internally).
 	Value string `pulumi:"value"`
 }
 
@@ -175,7 +175,7 @@ type ApplicationSourceRuntimeParameterValueArgs struct {
 	Key pulumi.StringInput `pulumi:"key"`
 	// The type of the runtime parameter.
 	Type pulumi.StringInput `pulumi:"type"`
-	// The value of the runtime parameter.
+	// The value of the runtime parameter (type conversion is handled internally).
 	Value pulumi.StringInput `pulumi:"value"`
 }
 
@@ -240,7 +240,7 @@ func (o ApplicationSourceRuntimeParameterValueOutput) Type() pulumi.StringOutput
 	return o.ApplyT(func(v ApplicationSourceRuntimeParameterValue) string { return v.Type }).(pulumi.StringOutput)
 }
 
-// The value of the runtime parameter.
+// The value of the runtime parameter (type conversion is handled internally).
 func (o ApplicationSourceRuntimeParameterValueOutput) Value() pulumi.StringOutput {
 	return o.ApplyT(func(v ApplicationSourceRuntimeParameterValue) string { return v.Value }).(pulumi.StringOutput)
 }
@@ -885,7 +885,7 @@ type CustomModelRuntimeParameterValue struct {
 	Key string `pulumi:"key"`
 	// The type of the runtime parameter.
 	Type string `pulumi:"type"`
-	// The value of the runtime parameter.
+	// The value of the runtime parameter (type conversion is handled internally).
 	Value string `pulumi:"value"`
 }
 
@@ -905,7 +905,7 @@ type CustomModelRuntimeParameterValueArgs struct {
 	Key pulumi.StringInput `pulumi:"key"`
 	// The type of the runtime parameter.
 	Type pulumi.StringInput `pulumi:"type"`
-	// The value of the runtime parameter.
+	// The value of the runtime parameter (type conversion is handled internally).
 	Value pulumi.StringInput `pulumi:"value"`
 }
 
@@ -970,7 +970,7 @@ func (o CustomModelRuntimeParameterValueOutput) Type() pulumi.StringOutput {
 	return o.ApplyT(func(v CustomModelRuntimeParameterValue) string { return v.Type }).(pulumi.StringOutput)
 }
 
-// The value of the runtime parameter.
+// The value of the runtime parameter (type conversion is handled internally).
 func (o CustomModelRuntimeParameterValueOutput) Value() pulumi.StringOutput {
 	return o.ApplyT(func(v CustomModelRuntimeParameterValue) string { return v.Value }).(pulumi.StringOutput)
 }

@@ -5,11 +5,11 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 /**
- * Chat Application
+ * Q&A Application
  */
-export class ChatApplication extends pulumi.CustomResource {
+export class QaApplication extends pulumi.CustomResource {
     /**
-     * Get an existing ChatApplication resource's state with the given name, ID, and optional extra
+     * Get an existing QaApplication resource's state with the given name, ID, and optional extra
      * properties used to qualify the lookup.
      *
      * @param name The _unique_ name of the resulting resource.
@@ -17,66 +17,66 @@ export class ChatApplication extends pulumi.CustomResource {
      * @param state Any extra arguments used during the lookup.
      * @param opts Optional settings to control the behavior of the CustomResource.
      */
-    public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: ChatApplicationState, opts?: pulumi.CustomResourceOptions): ChatApplication {
-        return new ChatApplication(name, <any>state, { ...opts, id: id });
+    public static get(name: string, id: pulumi.Input<pulumi.ID>, state?: QaApplicationState, opts?: pulumi.CustomResourceOptions): QaApplication {
+        return new QaApplication(name, <any>state, { ...opts, id: id });
     }
 
     /** @internal */
-    public static readonly __pulumiType = 'datarobot:index/chatApplication:ChatApplication';
+    public static readonly __pulumiType = 'datarobot:index/qaApplication:QaApplication';
 
     /**
-     * Returns true if the given object is an instance of ChatApplication.  This is designed to work even
+     * Returns true if the given object is an instance of QaApplication.  This is designed to work even
      * when multiple copies of the Pulumi SDK have been loaded into the same process.
      */
-    public static isInstance(obj: any): obj is ChatApplication {
+    public static isInstance(obj: any): obj is QaApplication {
         if (obj === undefined || obj === null) {
             return false;
         }
-        return obj['__pulumiType'] === ChatApplication.__pulumiType;
+        return obj['__pulumiType'] === QaApplication.__pulumiType;
     }
 
     /**
-     * The URL of the Chat Application.
+     * The URL of the Q&A Application.
      */
     public /*out*/ readonly applicationUrl!: pulumi.Output<string>;
     /**
-     * The deployment ID of the Chat Application.
+     * The deployment ID of the Q&A Application.
      */
     public readonly deploymentId!: pulumi.Output<string>;
     /**
-     * Whether external access is enabled for the Chat Application.
+     * Whether external access is enabled for the Q&A Application.
      */
     public readonly externalAccessEnabled!: pulumi.Output<boolean>;
     /**
-     * The list of external email addresses that have access to the Chat Application.
+     * The list of external email addresses that have access to the Q&A Application.
      */
     public readonly externalAccessRecipients!: pulumi.Output<string[] | undefined>;
     /**
-     * The name of the Chat Application.
+     * The name of the Q&A Application.
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * The ID of the Chat Application Source.
+     * The ID of the Q&A Application Source.
      */
     public /*out*/ readonly sourceId!: pulumi.Output<string>;
     /**
-     * The version ID of the Chat Application Source.
+     * The version ID of the Q&A Application Source.
      */
     public /*out*/ readonly sourceVersionId!: pulumi.Output<string>;
 
     /**
-     * Create a ChatApplication resource with the given unique name, arguments, and options.
+     * Create a QaApplication resource with the given unique name, arguments, and options.
      *
      * @param name The _unique_ name of the resource.
      * @param args The arguments to use to populate this resource's properties.
      * @param opts A bag of options that control this resource's behavior.
      */
-    constructor(name: string, args: ChatApplicationArgs, opts?: pulumi.CustomResourceOptions)
-    constructor(name: string, argsOrState?: ChatApplicationArgs | ChatApplicationState, opts?: pulumi.CustomResourceOptions) {
+    constructor(name: string, args: QaApplicationArgs, opts?: pulumi.CustomResourceOptions)
+    constructor(name: string, argsOrState?: QaApplicationArgs | QaApplicationState, opts?: pulumi.CustomResourceOptions) {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         if (opts.id) {
-            const state = argsOrState as ChatApplicationState | undefined;
+            const state = argsOrState as QaApplicationState | undefined;
             resourceInputs["applicationUrl"] = state ? state.applicationUrl : undefined;
             resourceInputs["deploymentId"] = state ? state.deploymentId : undefined;
             resourceInputs["externalAccessEnabled"] = state ? state.externalAccessEnabled : undefined;
@@ -85,7 +85,7 @@ export class ChatApplication extends pulumi.CustomResource {
             resourceInputs["sourceId"] = state ? state.sourceId : undefined;
             resourceInputs["sourceVersionId"] = state ? state.sourceVersionId : undefined;
         } else {
-            const args = argsOrState as ChatApplicationArgs | undefined;
+            const args = argsOrState as QaApplicationArgs | undefined;
             if ((!args || args.deploymentId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'deploymentId'");
             }
@@ -98,62 +98,62 @@ export class ChatApplication extends pulumi.CustomResource {
             resourceInputs["sourceVersionId"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
-        super(ChatApplication.__pulumiType, name, resourceInputs, opts);
+        super(QaApplication.__pulumiType, name, resourceInputs, opts);
     }
 }
 
 /**
- * Input properties used for looking up and filtering ChatApplication resources.
+ * Input properties used for looking up and filtering QaApplication resources.
  */
-export interface ChatApplicationState {
+export interface QaApplicationState {
     /**
-     * The URL of the Chat Application.
+     * The URL of the Q&A Application.
      */
     applicationUrl?: pulumi.Input<string>;
     /**
-     * The deployment ID of the Chat Application.
+     * The deployment ID of the Q&A Application.
      */
     deploymentId?: pulumi.Input<string>;
     /**
-     * Whether external access is enabled for the Chat Application.
+     * Whether external access is enabled for the Q&A Application.
      */
     externalAccessEnabled?: pulumi.Input<boolean>;
     /**
-     * The list of external email addresses that have access to the Chat Application.
+     * The list of external email addresses that have access to the Q&A Application.
      */
     externalAccessRecipients?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The name of the Chat Application.
+     * The name of the Q&A Application.
      */
     name?: pulumi.Input<string>;
     /**
-     * The ID of the Chat Application Source.
+     * The ID of the Q&A Application Source.
      */
     sourceId?: pulumi.Input<string>;
     /**
-     * The version ID of the Chat Application Source.
+     * The version ID of the Q&A Application Source.
      */
     sourceVersionId?: pulumi.Input<string>;
 }
 
 /**
- * The set of arguments for constructing a ChatApplication resource.
+ * The set of arguments for constructing a QaApplication resource.
  */
-export interface ChatApplicationArgs {
+export interface QaApplicationArgs {
     /**
-     * The deployment ID of the Chat Application.
+     * The deployment ID of the Q&A Application.
      */
     deploymentId: pulumi.Input<string>;
     /**
-     * Whether external access is enabled for the Chat Application.
+     * Whether external access is enabled for the Q&A Application.
      */
     externalAccessEnabled?: pulumi.Input<boolean>;
     /**
-     * The list of external email addresses that have access to the Chat Application.
+     * The list of external email addresses that have access to the Q&A Application.
      */
     externalAccessRecipients?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * The name of the Chat Application.
+     * The name of the Q&A Application.
      */
     name?: pulumi.Input<string>;
 }

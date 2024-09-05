@@ -20,11 +20,6 @@ export type BasicCredential = import("./basicCredential").BasicCredential;
 export const BasicCredential: typeof import("./basicCredential").BasicCredential = null as any;
 utilities.lazyLoad(exports, ["BasicCredential"], () => require("./basicCredential"));
 
-export { ChatApplicationArgs, ChatApplicationState } from "./chatApplication";
-export type ChatApplication = import("./chatApplication").ChatApplication;
-export const ChatApplication: typeof import("./chatApplication").ChatApplication = null as any;
-utilities.lazyLoad(exports, ["ChatApplication"], () => require("./chatApplication"));
-
 export { CustomApplicationArgs, CustomApplicationState } from "./customApplication";
 export type CustomApplication = import("./customApplication").CustomApplication;
 export const CustomApplication: typeof import("./customApplication").CustomApplication = null as any;
@@ -75,6 +70,11 @@ export type Provider = import("./provider").Provider;
 export const Provider: typeof import("./provider").Provider = null as any;
 utilities.lazyLoad(exports, ["Provider"], () => require("./provider"));
 
+export { QaApplicationArgs, QaApplicationState } from "./qaApplication";
+export type QaApplication = import("./qaApplication").QaApplication;
+export const QaApplication: typeof import("./qaApplication").QaApplication = null as any;
+utilities.lazyLoad(exports, ["QaApplication"], () => require("./qaApplication"));
+
 export { RegisteredModelArgs, RegisteredModelState } from "./registeredModel";
 export type RegisteredModel = import("./registeredModel").RegisteredModel;
 export const RegisteredModel: typeof import("./registeredModel").RegisteredModel = null as any;
@@ -115,8 +115,6 @@ const _module = {
                 return new ApplicationSource(name, <any>undefined, { urn })
             case "datarobot:index/basicCredential:BasicCredential":
                 return new BasicCredential(name, <any>undefined, { urn })
-            case "datarobot:index/chatApplication:ChatApplication":
-                return new ChatApplication(name, <any>undefined, { urn })
             case "datarobot:index/customApplication:CustomApplication":
                 return new CustomApplication(name, <any>undefined, { urn })
             case "datarobot:index/customModel:CustomModel":
@@ -133,6 +131,8 @@ const _module = {
                 return new Playground(name, <any>undefined, { urn })
             case "datarobot:index/predictionEnvironment:PredictionEnvironment":
                 return new PredictionEnvironment(name, <any>undefined, { urn })
+            case "datarobot:index/qaApplication:QaApplication":
+                return new QaApplication(name, <any>undefined, { urn })
             case "datarobot:index/registeredModel:RegisteredModel":
                 return new RegisteredModel(name, <any>undefined, { urn })
             case "datarobot:index/remoteRepository:RemoteRepository":
@@ -149,7 +149,6 @@ const _module = {
 pulumi.runtime.registerResourceModule("datarobot", "index/apiTokenCredential", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/applicationSource", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/basicCredential", _module)
-pulumi.runtime.registerResourceModule("datarobot", "index/chatApplication", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/customApplication", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/customModel", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/datasetFromFile", _module)
@@ -158,6 +157,7 @@ pulumi.runtime.registerResourceModule("datarobot", "index/googleCloudCredential"
 pulumi.runtime.registerResourceModule("datarobot", "index/llmBlueprint", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/playground", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/predictionEnvironment", _module)
+pulumi.runtime.registerResourceModule("datarobot", "index/qaApplication", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/registeredModel", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/remoteRepository", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/useCase", _module)

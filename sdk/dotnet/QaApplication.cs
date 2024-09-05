@@ -10,68 +10,68 @@ using Pulumi.Serialization;
 namespace Pulumi.Datarobot
 {
     /// <summary>
-    /// Chat Application
+    /// Q&amp;A Application
     /// </summary>
-    [DatarobotResourceType("datarobot:index/chatApplication:ChatApplication")]
-    public partial class ChatApplication : global::Pulumi.CustomResource
+    [DatarobotResourceType("datarobot:index/qaApplication:QaApplication")]
+    public partial class QaApplication : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// The URL of the Chat Application.
+        /// The URL of the Q&amp;A Application.
         /// </summary>
         [Output("applicationUrl")]
         public Output<string> ApplicationUrl { get; private set; } = null!;
 
         /// <summary>
-        /// The deployment ID of the Chat Application.
+        /// The deployment ID of the Q&amp;A Application.
         /// </summary>
         [Output("deploymentId")]
         public Output<string> DeploymentId { get; private set; } = null!;
 
         /// <summary>
-        /// Whether external access is enabled for the Chat Application.
+        /// Whether external access is enabled for the Q&amp;A Application.
         /// </summary>
         [Output("externalAccessEnabled")]
         public Output<bool> ExternalAccessEnabled { get; private set; } = null!;
 
         /// <summary>
-        /// The list of external email addresses that have access to the Chat Application.
+        /// The list of external email addresses that have access to the Q&amp;A Application.
         /// </summary>
         [Output("externalAccessRecipients")]
         public Output<ImmutableArray<string>> ExternalAccessRecipients { get; private set; } = null!;
 
         /// <summary>
-        /// The name of the Chat Application.
+        /// The name of the Q&amp;A Application.
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// The ID of the Chat Application Source.
+        /// The ID of the Q&amp;A Application Source.
         /// </summary>
         [Output("sourceId")]
         public Output<string> SourceId { get; private set; } = null!;
 
         /// <summary>
-        /// The version ID of the Chat Application Source.
+        /// The version ID of the Q&amp;A Application Source.
         /// </summary>
         [Output("sourceVersionId")]
         public Output<string> SourceVersionId { get; private set; } = null!;
 
 
         /// <summary>
-        /// Create a ChatApplication resource with the given unique name, arguments, and options.
+        /// Create a QaApplication resource with the given unique name, arguments, and options.
         /// </summary>
         ///
         /// <param name="name">The unique name of the resource</param>
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public ChatApplication(string name, ChatApplicationArgs args, CustomResourceOptions? options = null)
-            : base("datarobot:index/chatApplication:ChatApplication", name, args ?? new ChatApplicationArgs(), MakeResourceOptions(options, ""))
+        public QaApplication(string name, QaApplicationArgs args, CustomResourceOptions? options = null)
+            : base("datarobot:index/qaApplication:QaApplication", name, args ?? new QaApplicationArgs(), MakeResourceOptions(options, ""))
         {
         }
 
-        private ChatApplication(string name, Input<string> id, ChatApplicationState? state = null, CustomResourceOptions? options = null)
-            : base("datarobot:index/chatApplication:ChatApplication", name, state, MakeResourceOptions(options, id))
+        private QaApplication(string name, Input<string> id, QaApplicationState? state = null, CustomResourceOptions? options = null)
+            : base("datarobot:index/qaApplication:QaApplication", name, state, MakeResourceOptions(options, id))
         {
         }
 
@@ -87,7 +87,7 @@ namespace Pulumi.Datarobot
             return merged;
         }
         /// <summary>
-        /// Get an existing ChatApplication resource's state with the given name, ID, and optional extra
+        /// Get an existing QaApplication resource's state with the given name, ID, and optional extra
         /// properties used to qualify the lookup.
         /// </summary>
         ///
@@ -95,22 +95,22 @@ namespace Pulumi.Datarobot
         /// <param name="id">The unique provider ID of the resource to lookup.</param>
         /// <param name="state">Any extra arguments used during the lookup.</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public static ChatApplication Get(string name, Input<string> id, ChatApplicationState? state = null, CustomResourceOptions? options = null)
+        public static QaApplication Get(string name, Input<string> id, QaApplicationState? state = null, CustomResourceOptions? options = null)
         {
-            return new ChatApplication(name, id, state, options);
+            return new QaApplication(name, id, state, options);
         }
     }
 
-    public sealed class ChatApplicationArgs : global::Pulumi.ResourceArgs
+    public sealed class QaApplicationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The deployment ID of the Chat Application.
+        /// The deployment ID of the Q&amp;A Application.
         /// </summary>
         [Input("deploymentId", required: true)]
         public Input<string> DeploymentId { get; set; } = null!;
 
         /// <summary>
-        /// Whether external access is enabled for the Chat Application.
+        /// Whether external access is enabled for the Q&amp;A Application.
         /// </summary>
         [Input("externalAccessEnabled")]
         public Input<bool>? ExternalAccessEnabled { get; set; }
@@ -119,7 +119,7 @@ namespace Pulumi.Datarobot
         private InputList<string>? _externalAccessRecipients;
 
         /// <summary>
-        /// The list of external email addresses that have access to the Chat Application.
+        /// The list of external email addresses that have access to the Q&amp;A Application.
         /// </summary>
         public InputList<string> ExternalAccessRecipients
         {
@@ -128,33 +128,33 @@ namespace Pulumi.Datarobot
         }
 
         /// <summary>
-        /// The name of the Chat Application.
+        /// The name of the Q&amp;A Application.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
-        public ChatApplicationArgs()
+        public QaApplicationArgs()
         {
         }
-        public static new ChatApplicationArgs Empty => new ChatApplicationArgs();
+        public static new QaApplicationArgs Empty => new QaApplicationArgs();
     }
 
-    public sealed class ChatApplicationState : global::Pulumi.ResourceArgs
+    public sealed class QaApplicationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The URL of the Chat Application.
+        /// The URL of the Q&amp;A Application.
         /// </summary>
         [Input("applicationUrl")]
         public Input<string>? ApplicationUrl { get; set; }
 
         /// <summary>
-        /// The deployment ID of the Chat Application.
+        /// The deployment ID of the Q&amp;A Application.
         /// </summary>
         [Input("deploymentId")]
         public Input<string>? DeploymentId { get; set; }
 
         /// <summary>
-        /// Whether external access is enabled for the Chat Application.
+        /// Whether external access is enabled for the Q&amp;A Application.
         /// </summary>
         [Input("externalAccessEnabled")]
         public Input<bool>? ExternalAccessEnabled { get; set; }
@@ -163,7 +163,7 @@ namespace Pulumi.Datarobot
         private InputList<string>? _externalAccessRecipients;
 
         /// <summary>
-        /// The list of external email addresses that have access to the Chat Application.
+        /// The list of external email addresses that have access to the Q&amp;A Application.
         /// </summary>
         public InputList<string> ExternalAccessRecipients
         {
@@ -172,26 +172,26 @@ namespace Pulumi.Datarobot
         }
 
         /// <summary>
-        /// The name of the Chat Application.
+        /// The name of the Q&amp;A Application.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// The ID of the Chat Application Source.
+        /// The ID of the Q&amp;A Application Source.
         /// </summary>
         [Input("sourceId")]
         public Input<string>? SourceId { get; set; }
 
         /// <summary>
-        /// The version ID of the Chat Application Source.
+        /// The version ID of the Q&amp;A Application Source.
         /// </summary>
         [Input("sourceVersionId")]
         public Input<string>? SourceVersionId { get; set; }
 
-        public ChatApplicationState()
+        public QaApplicationState()
         {
         }
-        public static new ChatApplicationState Empty => new ChatApplicationState();
+        public static new QaApplicationState Empty => new QaApplicationState();
     }
 }

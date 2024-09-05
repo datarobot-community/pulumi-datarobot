@@ -52,6 +52,12 @@ namespace Pulumi.Datarobot
         public Output<bool?> IsProxy { get; private set; } = null!;
 
         /// <summary>
+        /// The language used to build the Custom Model.
+        /// </summary>
+        [Output("language")]
+        public Output<string?> Language { get; private set; } = null!;
+
+        /// <summary>
         /// The list of local file paths used to build the Custom Model.
         /// </summary>
         [Output("localFiles")]
@@ -67,7 +73,7 @@ namespace Pulumi.Datarobot
         /// The negative class label of the Custom Model.
         /// </summary>
         [Output("negativeClassLabel")]
-        public Output<string?> NegativeClassLabel { get; private set; } = null!;
+        public Output<string> NegativeClassLabel { get; private set; } = null!;
 
         /// <summary>
         /// The overall moderation configuration for the Custom Model.
@@ -79,7 +85,13 @@ namespace Pulumi.Datarobot
         /// The positive class label of the Custom Model.
         /// </summary>
         [Output("positiveClassLabel")]
-        public Output<string?> PositiveClassLabel { get; private set; } = null!;
+        public Output<string> PositiveClassLabel { get; private set; } = null!;
+
+        /// <summary>
+        /// The prediction threshold of the Custom Model.
+        /// </summary>
+        [Output("predictionThreshold")]
+        public Output<double> PredictionThreshold { get; private set; } = null!;
 
         /// <summary>
         /// The resource settings for the Custom Model.
@@ -106,10 +118,10 @@ namespace Pulumi.Datarobot
         public Output<ImmutableArray<Outputs.CustomModelSourceRemoteRepository>> SourceRemoteRepositories { get; private set; } = null!;
 
         /// <summary>
-        /// The target of the Custom Model.
+        /// The target name of the Custom Model.
         /// </summary>
         [Output("target")]
-        public Output<string?> Target { get; private set; } = null!;
+        public Output<string> Target { get; private set; } = null!;
 
         /// <summary>
         /// The target type of the Custom Model.
@@ -211,6 +223,12 @@ namespace Pulumi.Datarobot
         [Input("isProxy")]
         public Input<bool>? IsProxy { get; set; }
 
+        /// <summary>
+        /// The language used to build the Custom Model.
+        /// </summary>
+        [Input("language")]
+        public Input<string>? Language { get; set; }
+
         [Input("localFiles")]
         private InputList<string>? _localFiles;
 
@@ -246,6 +264,12 @@ namespace Pulumi.Datarobot
         /// </summary>
         [Input("positiveClassLabel")]
         public Input<string>? PositiveClassLabel { get; set; }
+
+        /// <summary>
+        /// The prediction threshold of the Custom Model.
+        /// </summary>
+        [Input("predictionThreshold")]
+        public Input<double>? PredictionThreshold { get; set; }
 
         /// <summary>
         /// The resource settings for the Custom Model.
@@ -284,7 +308,7 @@ namespace Pulumi.Datarobot
         }
 
         /// <summary>
-        /// The target of the Custom Model.
+        /// The target name of the Custom Model.
         /// </summary>
         [Input("target")]
         public Input<string>? Target { get; set; }
@@ -345,6 +369,12 @@ namespace Pulumi.Datarobot
         [Input("isProxy")]
         public Input<bool>? IsProxy { get; set; }
 
+        /// <summary>
+        /// The language used to build the Custom Model.
+        /// </summary>
+        [Input("language")]
+        public Input<string>? Language { get; set; }
+
         [Input("localFiles")]
         private InputList<string>? _localFiles;
 
@@ -380,6 +410,12 @@ namespace Pulumi.Datarobot
         /// </summary>
         [Input("positiveClassLabel")]
         public Input<string>? PositiveClassLabel { get; set; }
+
+        /// <summary>
+        /// The prediction threshold of the Custom Model.
+        /// </summary>
+        [Input("predictionThreshold")]
+        public Input<double>? PredictionThreshold { get; set; }
 
         /// <summary>
         /// The resource settings for the Custom Model.
@@ -418,7 +454,7 @@ namespace Pulumi.Datarobot
         }
 
         /// <summary>
-        /// The target of the Custom Model.
+        /// The target name of the Custom Model.
         /// </summary>
         [Input("target")]
         public Input<string>? Target { get; set; }

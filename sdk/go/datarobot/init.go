@@ -27,8 +27,6 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &ApplicationSource{}
 	case "datarobot:index/basicCredential:BasicCredential":
 		r = &BasicCredential{}
-	case "datarobot:index/chatApplication:ChatApplication":
-		r = &ChatApplication{}
 	case "datarobot:index/customApplication:CustomApplication":
 		r = &CustomApplication{}
 	case "datarobot:index/customModel:CustomModel":
@@ -45,6 +43,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &Playground{}
 	case "datarobot:index/predictionEnvironment:PredictionEnvironment":
 		r = &PredictionEnvironment{}
+	case "datarobot:index/qaApplication:QaApplication":
+		r = &QaApplication{}
 	case "datarobot:index/registeredModel:RegisteredModel":
 		r = &RegisteredModel{}
 	case "datarobot:index/remoteRepository:RemoteRepository":
@@ -101,11 +101,6 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"datarobot",
-		"index/chatApplication",
-		&module{version},
-	)
-	pulumi.RegisterResourceModule(
-		"datarobot",
 		"index/customApplication",
 		&module{version},
 	)
@@ -142,6 +137,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"datarobot",
 		"index/predictionEnvironment",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"datarobot",
+		"index/qaApplication",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

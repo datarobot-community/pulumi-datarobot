@@ -25,7 +25,7 @@ namespace Pulumi.Datarobot.Inputs
         public Input<string> Type { get; set; } = null!;
 
         /// <summary>
-        /// The value of the runtime parameter.
+        /// The value of the runtime parameter (type conversion is handled internally).
         /// </summary>
         [Input("value", required: true)]
         public Input<string> Value { get; set; } = null!;

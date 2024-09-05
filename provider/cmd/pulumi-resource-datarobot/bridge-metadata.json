@@ -18,14 +18,6 @@
             "datarobot_basic_credential": {
                 "current": "datarobot:index/basicCredential:BasicCredential"
             },
-            "datarobot_chat_application": {
-                "current": "datarobot:index/chatApplication:ChatApplication",
-                "fields": {
-                    "external_access_recipients": {
-                        "maxItemsOne": false
-                    }
-                }
-            },
             "datarobot_custom_application": {
                 "current": "datarobot:index/customApplication:CustomApplication",
                 "fields": {
@@ -82,6 +74,14 @@
             },
             "datarobot_prediction_environment": {
                 "current": "datarobot:index/predictionEnvironment:PredictionEnvironment"
+            },
+            "datarobot_qa_application": {
+                "current": "datarobot:index/qaApplication:QaApplication",
+                "fields": {
+                    "external_access_recipients": {
+                        "maxItemsOne": false
+                    }
+                }
             },
             "datarobot_registered_model": {
                 "current": "datarobot:index/registeredModel:RegisteredModel"

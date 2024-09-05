@@ -22,7 +22,7 @@ export interface ApplicationSourceRuntimeParameterValue {
      */
     type: string;
     /**
-     * The value of the runtime parameter.
+     * The value of the runtime parameter (type conversion is handled internally).
      */
     value: string;
 }
@@ -120,7 +120,7 @@ export interface CustomModelRuntimeParameterValue {
      */
     type: string;
     /**
-     * The value of the runtime parameter.
+     * The value of the runtime parameter (type conversion is handled internally).
      */
     value: string;
 }
