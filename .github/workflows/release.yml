@@ -1,0 +1,87 @@
+name: Release
+on:
+  push:
+    tags:
+      - v*.*.*
+env:
+  # THIS GITHUB_TOKEN IS A REQUIREMENT TO BE ABLE TO WRITE TO GH RELEASES
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  # IF YOU NEED TO PUBLISH A NPM PACKAGE THEN ENSURE A NPM_TOKEN SECRET IS SET
+  # AND PUBLISH_NPM: TRUE. IF YOU WANT TO PUBLISH TO A PRIVATE NPM REGISTRY
+  # THEN ENSURE THE NPM_REGISTRY_URL IS CHANGED
+  NODE_AUTH_TOKEN:  ${{ secrets.NPM_TOKEN }}
+  NPM_REGISTRY_URL: https://registry.npmjs.org
+  # IF YOU NEED TO PUBLISH A NUGET PACKAGE THEN ENSURE AN NUGET_PUBLISH_KEY
+  # SECRET IS SET AND PUBLISH_NUGET: TRUE. IF YOU WANT TO PUBLISH TO AN ALTERNATIVE
+  # NPM REGISTRY THEN ENSURE THE NPM_REGISTRY_URL IS CHANGED
+  NUGET_PUBLISH_KEY: ${{ secrets.NUGET_PUBLISH_KEY }}
+  NUGET_FEED_URL: https://api.nuget.org/v3/index.json
+  # IF YOU NEED TO PUBLISH A PYPI PACKAGE SET PYPI_PASSWORD, PYPI_USERNAME TO YOUR CREDENTIALS.
+  # IF YOU WANT TO PUBLISH TO AN ALTERNATIVE PYPI REGISTRY THEN ENSURE THE PYPI_REPOSITORY_URL IS SET. 
+  PYPI_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+  PYPI_USERNAME: ${{ secrets.PYPI_USERNAME }}
+  PYPI_REPOSITORY_URL: ""
+  # MAVEN 
+  SIGNING_KEY: ${{ secrets.JAVA_SIGNING_KEY }}
+  SIGNING_KEY_ID: ${{ secrets.JAVA_SIGNING_KEY_ID }}
+  SIGNING_PASSWORD: ${{ secrets.JAVA_SIGNING_PASSWORD }}
+
+jobs:
+  publish_binary:
+    name: publish
+    runs-on: ubuntu-latest    
+    strategy:
+      fail-fast: true
+      matrix:
+        goversion:
+        - 1.17.x
+
+    steps:
+    - name: Checkout Repo
+      uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+
+    - name: Unshallow clone for tags
+      run: git fetch --prune --unshallow --tags
+
+    - name: Install Go
+      uses: actions/setup-go@0a12ed9d6a96ab950c8f026ed9f722fe0da7ef32 # v5.0.2
+      with:
+        go-version: ${{matrix.goversion}}
+
+    - name: Install pulumictl
+      uses: jaxxstorm/action-install-gh-release@25d5e2dd555cd74f1fab9ac1e6ea117acde2c0c4
+      with:
+        repo: pulumi/pulumictl
+
+    - name: Set PreRelease Version
+      run: echo "GORELEASER_CURRENT_TAG=v$(pulumictl get version --language generic)" >> $GITHUB_ENV
+
+    - name: Run GoReleaser
+      uses: goreleaser/goreleaser-action@286f3b13b1b49da4ac219696163fb8c1c93e1200
+      with:
+        args: -p 3 release --rm-dist
+        version: latest
+
+  publish_sdk:
+    name: Publish SDKs
+    runs-on: ubuntu-latest
+    needs: publish_binary
+    strategy:
+      fail-fast: true
+      matrix:
+        dotnetversion:
+          - 3.1.301
+        goversion:
+          - 1.17.x
+        language:
+          # - nodejs
+          - python
+          # - dotnet
+          - go
+        nodeversion:
+          - 14.x
+        pythonversion:
+          - "3.9"
+    steps:
+    - name: Publish SDKs
+      uses: pulumi/pulumi-package-publisher@9b71c3d99ee90f5e69909a40fc7da7f084575674
