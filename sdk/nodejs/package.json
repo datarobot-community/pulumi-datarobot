@@ -23,6 +23,7 @@
     },
     "pulumi": {
         "resource": true,
-        "name": "datarobot"
+        "name": "datarobot",
+        "server": "github://api.github.com/datarobot-community/pulumi-datarobot"
     }
 }
