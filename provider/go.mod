@@ -1,11 +1,11 @@
 module github.com/datarobot-community/pulumi-datarobot/provider
 
-go 1.23.0
+go 1.23
 
 replace github.com/hashicorp/terraform-plugin-sdk/v2 => github.com/pulumi/terraform-plugin-sdk/v2 v2.0.0-20240229143312-4f60ee4e2975
 
 require (
-	github.com/datarobot-community/terraform-provider-datarobot v0.0.21
+	github.com/datarobot-community/terraform-provider-datarobot v0.0.22
 	github.com/pulumi/pulumi-terraform-bridge/pf v0.41.0
 	github.com/pulumi/pulumi-terraform-bridge/v3 v3.88.0
 )
