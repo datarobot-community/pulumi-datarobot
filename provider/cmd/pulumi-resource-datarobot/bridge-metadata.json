@@ -29,6 +29,9 @@
             "datarobot_custom_model": {
                 "current": "datarobot:index/customModel:CustomModel",
                 "fields": {
+                    "class_labels": {
+                        "maxItemsOne": false
+                    },
                     "guard_configurations": {
                         "maxItemsOne": false,
                         "elem": {

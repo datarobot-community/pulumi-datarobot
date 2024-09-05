@@ -11,6 +11,48 @@ namespace Pulumi.Datarobot
 {
     /// <summary>
     /// Vector database
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Datarobot = Pulumi.Datarobot;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var exampleUseCase = new Datarobot.UseCase("exampleUseCase", new()
+    ///     {
+    ///         Description = "Description for the example use case",
+    ///     });
+    /// 
+    ///     var exampleDatasetFromFile = new Datarobot.DatasetFromFile("exampleDatasetFromFile", new()
+    ///     {
+    ///         SourceFile = "[Path to file to upload]",
+    ///         UseCaseId = exampleUseCase.Id,
+    ///     });
+    /// 
+    ///     var exampleVectorDatabase = new Datarobot.VectorDatabase("exampleVectorDatabase", new()
+    ///     {
+    ///         UseCaseId = exampleUseCase.Id,
+    ///         DatasetId = exampleDatasetFromFile.Id,
+    ///     });
+    /// 
+    ///     // Optional
+    ///     // chunking_parameters = {
+    ///     //   chunk_overlap_percentage = 0
+    ///     //   chunk_size               = 512
+    ///     //   chunking_method          = "recursive"
+    ///     //   embedding_model          = "jinaai/jina-embedding-t-en-v1"
+    ///     //   separators               = ["\n", " "]
+    ///     // }
+    ///     return new Dictionary&lt;string, object?&gt;
+    ///     {
+    ///         ["exampleId"] = exampleVectorDatabase.Id,
+    ///     };
+    /// });
+    /// ```
     /// </summary>
     [DatarobotResourceType("datarobot:index/vectorDatabase:VectorDatabase")]
     public partial class VectorDatabase : global::Pulumi.CustomResource

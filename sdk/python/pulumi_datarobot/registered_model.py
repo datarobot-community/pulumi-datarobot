@@ -159,7 +159,7 @@ class RegisteredModel(pulumi.CustomResource):
         example_custom_model = datarobot.CustomModel("exampleCustomModel",
             description="Description for the example custom model",
             target_type="Binary",
-            target="my_label",
+            target_name="my_label",
             base_environment_name="[GenAI] Python 3.11 with Moderations",
             local_files=["example.py"])
         example_registered_model = datarobot.RegisteredModel("exampleRegisteredModel",
@@ -196,7 +196,7 @@ class RegisteredModel(pulumi.CustomResource):
         example_custom_model = datarobot.CustomModel("exampleCustomModel",
             description="Description for the example custom model",
             target_type="Binary",
-            target="my_label",
+            target_name="my_label",
             base_environment_name="[GenAI] Python 3.11 with Moderations",
             local_files=["example.py"])
         example_registered_model = datarobot.RegisteredModel("exampleRegisteredModel",

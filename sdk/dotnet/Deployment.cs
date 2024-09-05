@@ -11,6 +11,58 @@ namespace Pulumi.Datarobot
 {
     /// <summary>
     /// Deployment
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Datarobot = Pulumi.Datarobot;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var exampleCustomModel = new Datarobot.CustomModel("exampleCustomModel", new()
+    ///     {
+    ///         Description = "Description for the example custom model",
+    ///         TargetType = "Binary",
+    ///         TargetName = "my_label",
+    ///         BaseEnvironmentName = "[GenAI] Python 3.11 with Moderations",
+    ///         LocalFiles = new[]
+    ///         {
+    ///             "example.py",
+    ///         },
+    ///     });
+    /// 
+    ///     var exampleRegisteredModel = new Datarobot.RegisteredModel("exampleRegisteredModel", new()
+    ///     {
+    ///         CustomModelVersionId = exampleCustomModel.VersionId,
+    ///         Description = "Description for the example registered model",
+    ///     });
+    /// 
+    ///     var examplePredictionEnvironment = new Datarobot.PredictionEnvironment("examplePredictionEnvironment", new()
+    ///     {
+    ///         Description = "Description for the example prediction environment",
+    ///         Platform = "datarobotServerless",
+    ///     });
+    /// 
+    ///     var exampleDeployment = new Datarobot.Deployment("exampleDeployment", new()
+    ///     {
+    ///         Label = "An example deployment",
+    ///         PredictionEnvironmentId = examplePredictionEnvironment.Id,
+    ///         RegisteredModelVersionId = exampleRegisteredModel.VersionId,
+    ///     });
+    /// 
+    ///     // Optional settings
+    ///     // settings = {
+    ///     //   prediction_row_storage = true
+    ///     // }
+    ///     return new Dictionary&lt;string, object?&gt;
+    ///     {
+    ///         ["datarobotDeploymentId"] = exampleDeployment.Id,
+    ///     };
+    /// });
+    /// ```
     /// </summary>
     [DatarobotResourceType("datarobot:index/deployment:Deployment")]
     public partial class Deployment : global::Pulumi.CustomResource

@@ -34,6 +34,24 @@ namespace Pulumi.Datarobot
         public Output<string> BaseEnvironmentVersionId { get; private set; } = null!;
 
         /// <summary>
+        /// Class labels for multiclass classification. Cannot be used with class*labels*file.
+        /// </summary>
+        [Output("classLabels")]
+        public Output<ImmutableArray<string>> ClassLabels { get; private set; } = null!;
+
+        /// <summary>
+        /// Path to file containing newline separated class labels for multiclass classification. Cannot be used with class_labels.
+        /// </summary>
+        [Output("classLabelsFile")]
+        public Output<string?> ClassLabelsFile { get; private set; } = null!;
+
+        /// <summary>
+        /// The number of deployments for the Custom Model.
+        /// </summary>
+        [Output("deploymentsCount")]
+        public Output<int> DeploymentsCount { get; private set; } = null!;
+
+        /// <summary>
         /// The description of the Custom Model.
         /// </summary>
         [Output("description")]
@@ -46,10 +64,10 @@ namespace Pulumi.Datarobot
         public Output<ImmutableArray<Outputs.CustomModelGuardConfiguration>> GuardConfigurations { get; private set; } = null!;
 
         /// <summary>
-        /// The flag indicating if the Custom Model is a proxy model.
+        /// Flag indicating if the Custom Model is a proxy model.
         /// </summary>
         [Output("isProxy")]
-        public Output<bool?> IsProxy { get; private set; } = null!;
+        public Output<bool> IsProxy { get; private set; } = null!;
 
         /// <summary>
         /// The language used to build the Custom Model.
@@ -120,14 +138,38 @@ namespace Pulumi.Datarobot
         /// <summary>
         /// The target name of the Custom Model.
         /// </summary>
-        [Output("target")]
-        public Output<string> Target { get; private set; } = null!;
+        [Output("targetName")]
+        public Output<string> TargetName { get; private set; } = null!;
 
         /// <summary>
         /// The target type of the Custom Model.
         /// </summary>
         [Output("targetType")]
         public Output<string?> TargetType { get; private set; } = null!;
+
+        /// <summary>
+        /// The name of the partition column in the training dataset assigned to the Custom Model.
+        /// </summary>
+        [Output("trainingDataPartitionColumn")]
+        public Output<string?> TrainingDataPartitionColumn { get; private set; } = null!;
+
+        /// <summary>
+        /// The ID of the training dataset assigned to the Custom Model.
+        /// </summary>
+        [Output("trainingDatasetId")]
+        public Output<string?> TrainingDatasetId { get; private set; } = null!;
+
+        /// <summary>
+        /// The name of the training dataset assigned to the Custom Model.
+        /// </summary>
+        [Output("trainingDatasetName")]
+        public Output<string> TrainingDatasetName { get; private set; } = null!;
+
+        /// <summary>
+        /// The version ID of the training dataset assigned to the Custom Model.
+        /// </summary>
+        [Output("trainingDatasetVersionId")]
+        public Output<string> TrainingDatasetVersionId { get; private set; } = null!;
 
         /// <summary>
         /// The ID of the latest Custom Model version.
@@ -199,6 +241,24 @@ namespace Pulumi.Datarobot
         [Input("baseEnvironmentVersionId")]
         public Input<string>? BaseEnvironmentVersionId { get; set; }
 
+        [Input("classLabels")]
+        private InputList<string>? _classLabels;
+
+        /// <summary>
+        /// Class labels for multiclass classification. Cannot be used with class*labels*file.
+        /// </summary>
+        public InputList<string> ClassLabels
+        {
+            get => _classLabels ?? (_classLabels = new InputList<string>());
+            set => _classLabels = value;
+        }
+
+        /// <summary>
+        /// Path to file containing newline separated class labels for multiclass classification. Cannot be used with class_labels.
+        /// </summary>
+        [Input("classLabelsFile")]
+        public Input<string>? ClassLabelsFile { get; set; }
+
         /// <summary>
         /// The description of the Custom Model.
         /// </summary>
@@ -218,7 +278,7 @@ namespace Pulumi.Datarobot
         }
 
         /// <summary>
-        /// The flag indicating if the Custom Model is a proxy model.
+        /// Flag indicating if the Custom Model is a proxy model.
         /// </summary>
         [Input("isProxy")]
         public Input<bool>? IsProxy { get; set; }
@@ -310,14 +370,26 @@ namespace Pulumi.Datarobot
         /// <summary>
         /// The target name of the Custom Model.
         /// </summary>
-        [Input("target")]
-        public Input<string>? Target { get; set; }
+        [Input("targetName")]
+        public Input<string>? TargetName { get; set; }
 
         /// <summary>
         /// The target type of the Custom Model.
         /// </summary>
         [Input("targetType")]
         public Input<string>? TargetType { get; set; }
+
+        /// <summary>
+        /// The name of the partition column in the training dataset assigned to the Custom Model.
+        /// </summary>
+        [Input("trainingDataPartitionColumn")]
+        public Input<string>? TrainingDataPartitionColumn { get; set; }
+
+        /// <summary>
+        /// The ID of the training dataset assigned to the Custom Model.
+        /// </summary>
+        [Input("trainingDatasetId")]
+        public Input<string>? TrainingDatasetId { get; set; }
 
         public CustomModelArgs()
         {
@@ -345,6 +417,30 @@ namespace Pulumi.Datarobot
         [Input("baseEnvironmentVersionId")]
         public Input<string>? BaseEnvironmentVersionId { get; set; }
 
+        [Input("classLabels")]
+        private InputList<string>? _classLabels;
+
+        /// <summary>
+        /// Class labels for multiclass classification. Cannot be used with class*labels*file.
+        /// </summary>
+        public InputList<string> ClassLabels
+        {
+            get => _classLabels ?? (_classLabels = new InputList<string>());
+            set => _classLabels = value;
+        }
+
+        /// <summary>
+        /// Path to file containing newline separated class labels for multiclass classification. Cannot be used with class_labels.
+        /// </summary>
+        [Input("classLabelsFile")]
+        public Input<string>? ClassLabelsFile { get; set; }
+
+        /// <summary>
+        /// The number of deployments for the Custom Model.
+        /// </summary>
+        [Input("deploymentsCount")]
+        public Input<int>? DeploymentsCount { get; set; }
+
         /// <summary>
         /// The description of the Custom Model.
         /// </summary>
@@ -364,7 +460,7 @@ namespace Pulumi.Datarobot
         }
 
         /// <summary>
-        /// The flag indicating if the Custom Model is a proxy model.
+        /// Flag indicating if the Custom Model is a proxy model.
         /// </summary>
         [Input("isProxy")]
         public Input<bool>? IsProxy { get; set; }
@@ -456,14 +552,38 @@ namespace Pulumi.Datarobot
         /// <summary>
         /// The target name of the Custom Model.
         /// </summary>
-        [Input("target")]
-        public Input<string>? Target { get; set; }
+        [Input("targetName")]
+        public Input<string>? TargetName { get; set; }
 
         /// <summary>
         /// The target type of the Custom Model.
         /// </summary>
         [Input("targetType")]
         public Input<string>? TargetType { get; set; }
+
+        /// <summary>
+        /// The name of the partition column in the training dataset assigned to the Custom Model.
+        /// </summary>
+        [Input("trainingDataPartitionColumn")]
+        public Input<string>? TrainingDataPartitionColumn { get; set; }
+
+        /// <summary>
+        /// The ID of the training dataset assigned to the Custom Model.
+        /// </summary>
+        [Input("trainingDatasetId")]
+        public Input<string>? TrainingDatasetId { get; set; }
+
+        /// <summary>
+        /// The name of the training dataset assigned to the Custom Model.
+        /// </summary>
+        [Input("trainingDatasetName")]
+        public Input<string>? TrainingDatasetName { get; set; }
+
+        /// <summary>
+        /// The version ID of the training dataset assigned to the Custom Model.
+        /// </summary>
+        [Input("trainingDatasetVersionId")]
+        public Input<string>? TrainingDatasetVersionId { get; set; }
 
         /// <summary>
         /// The ID of the latest Custom Model version.

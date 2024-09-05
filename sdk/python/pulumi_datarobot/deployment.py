@@ -167,6 +167,35 @@ class Deployment(pulumi.CustomResource):
         """
         Deployment
 
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_datarobot as datarobot
+
+        example_custom_model = datarobot.CustomModel("exampleCustomModel",
+            description="Description for the example custom model",
+            target_type="Binary",
+            target_name="my_label",
+            base_environment_name="[GenAI] Python 3.11 with Moderations",
+            local_files=["example.py"])
+        example_registered_model = datarobot.RegisteredModel("exampleRegisteredModel",
+            custom_model_version_id=example_custom_model.version_id,
+            description="Description for the example registered model")
+        example_prediction_environment = datarobot.PredictionEnvironment("examplePredictionEnvironment",
+            description="Description for the example prediction environment",
+            platform="datarobotServerless")
+        example_deployment = datarobot.Deployment("exampleDeployment",
+            label="An example deployment",
+            prediction_environment_id=example_prediction_environment.id,
+            registered_model_version_id=example_registered_model.version_id)
+        # Optional settings
+        # settings = {
+        #   prediction_row_storage = true
+        # }
+        pulumi.export("datarobotDeploymentId", example_deployment.id)
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] label: The label of the Deployment.
@@ -182,6 +211,35 @@ class Deployment(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Deployment
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_datarobot as datarobot
+
+        example_custom_model = datarobot.CustomModel("exampleCustomModel",
+            description="Description for the example custom model",
+            target_type="Binary",
+            target_name="my_label",
+            base_environment_name="[GenAI] Python 3.11 with Moderations",
+            local_files=["example.py"])
+        example_registered_model = datarobot.RegisteredModel("exampleRegisteredModel",
+            custom_model_version_id=example_custom_model.version_id,
+            description="Description for the example registered model")
+        example_prediction_environment = datarobot.PredictionEnvironment("examplePredictionEnvironment",
+            description="Description for the example prediction environment",
+            platform="datarobotServerless")
+        example_deployment = datarobot.Deployment("exampleDeployment",
+            label="An example deployment",
+            prediction_environment_id=example_prediction_environment.id,
+            registered_model_version_id=example_registered_model.version_id)
+        # Optional settings
+        # settings = {
+        #   prediction_row_storage = true
+        # }
+        pulumi.export("datarobotDeploymentId", example_deployment.id)
+        ```
 
         :param str resource_name: The name of the resource.
         :param DeploymentArgs args: The arguments to use to populate this resource's properties.

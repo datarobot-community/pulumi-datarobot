@@ -50,6 +50,18 @@ export class CustomModel extends pulumi.CustomResource {
      */
     public readonly baseEnvironmentVersionId!: pulumi.Output<string>;
     /**
+     * Class labels for multiclass classification. Cannot be used with class*labels*file.
+     */
+    public readonly classLabels!: pulumi.Output<string[] | undefined>;
+    /**
+     * Path to file containing newline separated class labels for multiclass classification. Cannot be used with class_labels.
+     */
+    public readonly classLabelsFile!: pulumi.Output<string | undefined>;
+    /**
+     * The number of deployments for the Custom Model.
+     */
+    public /*out*/ readonly deploymentsCount!: pulumi.Output<number>;
+    /**
      * The description of the Custom Model.
      */
     public readonly description!: pulumi.Output<string | undefined>;
@@ -58,9 +70,9 @@ export class CustomModel extends pulumi.CustomResource {
      */
     public readonly guardConfigurations!: pulumi.Output<outputs.CustomModelGuardConfiguration[] | undefined>;
     /**
-     * The flag indicating if the Custom Model is a proxy model.
+     * Flag indicating if the Custom Model is a proxy model.
      */
-    public readonly isProxy!: pulumi.Output<boolean | undefined>;
+    public readonly isProxy!: pulumi.Output<boolean>;
     /**
      * The language used to build the Custom Model.
      */
@@ -108,11 +120,27 @@ export class CustomModel extends pulumi.CustomResource {
     /**
      * The target name of the Custom Model.
      */
-    public readonly target!: pulumi.Output<string>;
+    public readonly targetName!: pulumi.Output<string>;
     /**
      * The target type of the Custom Model.
      */
     public readonly targetType!: pulumi.Output<string | undefined>;
+    /**
+     * The name of the partition column in the training dataset assigned to the Custom Model.
+     */
+    public readonly trainingDataPartitionColumn!: pulumi.Output<string | undefined>;
+    /**
+     * The ID of the training dataset assigned to the Custom Model.
+     */
+    public readonly trainingDatasetId!: pulumi.Output<string | undefined>;
+    /**
+     * The name of the training dataset assigned to the Custom Model.
+     */
+    public /*out*/ readonly trainingDatasetName!: pulumi.Output<string>;
+    /**
+     * The version ID of the training dataset assigned to the Custom Model.
+     */
+    public /*out*/ readonly trainingDatasetVersionId!: pulumi.Output<string>;
     /**
      * The ID of the latest Custom Model version.
      */
@@ -134,6 +162,9 @@ export class CustomModel extends pulumi.CustomResource {
             resourceInputs["baseEnvironmentId"] = state ? state.baseEnvironmentId : undefined;
             resourceInputs["baseEnvironmentName"] = state ? state.baseEnvironmentName : undefined;
             resourceInputs["baseEnvironmentVersionId"] = state ? state.baseEnvironmentVersionId : undefined;
+            resourceInputs["classLabels"] = state ? state.classLabels : undefined;
+            resourceInputs["classLabelsFile"] = state ? state.classLabelsFile : undefined;
+            resourceInputs["deploymentsCount"] = state ? state.deploymentsCount : undefined;
             resourceInputs["description"] = state ? state.description : undefined;
             resourceInputs["guardConfigurations"] = state ? state.guardConfigurations : undefined;
             resourceInputs["isProxy"] = state ? state.isProxy : undefined;
@@ -148,14 +179,20 @@ export class CustomModel extends pulumi.CustomResource {
             resourceInputs["runtimeParameterValues"] = state ? state.runtimeParameterValues : undefined;
             resourceInputs["sourceLlmBlueprintId"] = state ? state.sourceLlmBlueprintId : undefined;
             resourceInputs["sourceRemoteRepositories"] = state ? state.sourceRemoteRepositories : undefined;
-            resourceInputs["target"] = state ? state.target : undefined;
+            resourceInputs["targetName"] = state ? state.targetName : undefined;
             resourceInputs["targetType"] = state ? state.targetType : undefined;
+            resourceInputs["trainingDataPartitionColumn"] = state ? state.trainingDataPartitionColumn : undefined;
+            resourceInputs["trainingDatasetId"] = state ? state.trainingDatasetId : undefined;
+            resourceInputs["trainingDatasetName"] = state ? state.trainingDatasetName : undefined;
+            resourceInputs["trainingDatasetVersionId"] = state ? state.trainingDatasetVersionId : undefined;
             resourceInputs["versionId"] = state ? state.versionId : undefined;
         } else {
             const args = argsOrState as CustomModelArgs | undefined;
             resourceInputs["baseEnvironmentId"] = args ? args.baseEnvironmentId : undefined;
             resourceInputs["baseEnvironmentName"] = args ? args.baseEnvironmentName : undefined;
             resourceInputs["baseEnvironmentVersionId"] = args ? args.baseEnvironmentVersionId : undefined;
+            resourceInputs["classLabels"] = args ? args.classLabels : undefined;
+            resourceInputs["classLabelsFile"] = args ? args.classLabelsFile : undefined;
             resourceInputs["description"] = args ? args.description : undefined;
             resourceInputs["guardConfigurations"] = args ? args.guardConfigurations : undefined;
             resourceInputs["isProxy"] = args ? args.isProxy : undefined;
@@ -170,8 +207,13 @@ export class CustomModel extends pulumi.CustomResource {
             resourceInputs["runtimeParameterValues"] = args ? args.runtimeParameterValues : undefined;
             resourceInputs["sourceLlmBlueprintId"] = args ? args.sourceLlmBlueprintId : undefined;
             resourceInputs["sourceRemoteRepositories"] = args ? args.sourceRemoteRepositories : undefined;
-            resourceInputs["target"] = args ? args.target : undefined;
+            resourceInputs["targetName"] = args ? args.targetName : undefined;
             resourceInputs["targetType"] = args ? args.targetType : undefined;
+            resourceInputs["trainingDataPartitionColumn"] = args ? args.trainingDataPartitionColumn : undefined;
+            resourceInputs["trainingDatasetId"] = args ? args.trainingDatasetId : undefined;
+            resourceInputs["deploymentsCount"] = undefined /*out*/;
+            resourceInputs["trainingDatasetName"] = undefined /*out*/;
+            resourceInputs["trainingDatasetVersionId"] = undefined /*out*/;
             resourceInputs["versionId"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -196,6 +238,18 @@ export interface CustomModelState {
      */
     baseEnvironmentVersionId?: pulumi.Input<string>;
     /**
+     * Class labels for multiclass classification. Cannot be used with class*labels*file.
+     */
+    classLabels?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Path to file containing newline separated class labels for multiclass classification. Cannot be used with class_labels.
+     */
+    classLabelsFile?: pulumi.Input<string>;
+    /**
+     * The number of deployments for the Custom Model.
+     */
+    deploymentsCount?: pulumi.Input<number>;
+    /**
      * The description of the Custom Model.
      */
     description?: pulumi.Input<string>;
@@ -204,7 +258,7 @@ export interface CustomModelState {
      */
     guardConfigurations?: pulumi.Input<pulumi.Input<inputs.CustomModelGuardConfiguration>[]>;
     /**
-     * The flag indicating if the Custom Model is a proxy model.
+     * Flag indicating if the Custom Model is a proxy model.
      */
     isProxy?: pulumi.Input<boolean>;
     /**
@@ -254,11 +308,27 @@ export interface CustomModelState {
     /**
      * The target name of the Custom Model.
      */
-    target?: pulumi.Input<string>;
+    targetName?: pulumi.Input<string>;
     /**
      * The target type of the Custom Model.
      */
     targetType?: pulumi.Input<string>;
+    /**
+     * The name of the partition column in the training dataset assigned to the Custom Model.
+     */
+    trainingDataPartitionColumn?: pulumi.Input<string>;
+    /**
+     * The ID of the training dataset assigned to the Custom Model.
+     */
+    trainingDatasetId?: pulumi.Input<string>;
+    /**
+     * The name of the training dataset assigned to the Custom Model.
+     */
+    trainingDatasetName?: pulumi.Input<string>;
+    /**
+     * The version ID of the training dataset assigned to the Custom Model.
+     */
+    trainingDatasetVersionId?: pulumi.Input<string>;
     /**
      * The ID of the latest Custom Model version.
      */
@@ -282,6 +352,14 @@ export interface CustomModelArgs {
      */
     baseEnvironmentVersionId?: pulumi.Input<string>;
     /**
+     * Class labels for multiclass classification. Cannot be used with class*labels*file.
+     */
+    classLabels?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Path to file containing newline separated class labels for multiclass classification. Cannot be used with class_labels.
+     */
+    classLabelsFile?: pulumi.Input<string>;
+    /**
      * The description of the Custom Model.
      */
     description?: pulumi.Input<string>;
@@ -290,7 +368,7 @@ export interface CustomModelArgs {
      */
     guardConfigurations?: pulumi.Input<pulumi.Input<inputs.CustomModelGuardConfiguration>[]>;
     /**
-     * The flag indicating if the Custom Model is a proxy model.
+     * Flag indicating if the Custom Model is a proxy model.
      */
     isProxy?: pulumi.Input<boolean>;
     /**
@@ -340,9 +418,17 @@ export interface CustomModelArgs {
     /**
      * The target name of the Custom Model.
      */
-    target?: pulumi.Input<string>;
+    targetName?: pulumi.Input<string>;
     /**
      * The target type of the Custom Model.
      */
     targetType?: pulumi.Input<string>;
+    /**
+     * The name of the partition column in the training dataset assigned to the Custom Model.
+     */
+    trainingDataPartitionColumn?: pulumi.Input<string>;
+    /**
+     * The ID of the training dataset assigned to the Custom Model.
+     */
+    trainingDatasetId?: pulumi.Input<string>;
 }

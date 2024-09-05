@@ -16,7 +16,7 @@ import * as utilities from "./utilities";
  * const exampleCustomModel = new datarobot.CustomModel("exampleCustomModel", {
  *     description: "Description for the example custom model",
  *     targetType: "Binary",
- *     target: "my_label",
+ *     targetName: "my_label",
  *     baseEnvironmentName: "[GenAI] Python 3.11 with Moderations",
  *     localFiles: ["example.py"],
  * });

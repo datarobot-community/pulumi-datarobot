@@ -215,6 +215,38 @@ class QaApplication(pulumi.CustomResource):
         """
         Q&A Application
 
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_datarobot as datarobot
+
+        example_custom_model = datarobot.CustomModel("exampleCustomModel",
+            description="Description for the example custom model",
+            target_type="Binary",
+            target_name="my_label",
+            base_environment_name="[GenAI] Python 3.11 with Moderations",
+            local_files=["example.py"])
+        example_registered_model = datarobot.RegisteredModel("exampleRegisteredModel",
+            custom_model_version_id=example_custom_model.version_id,
+            description="Description for the example registered model")
+        example_prediction_environment = datarobot.PredictionEnvironment("examplePredictionEnvironment",
+            description="Description for the example prediction environment",
+            platform="datarobotServerless")
+        example_deployment = datarobot.Deployment("exampleDeployment",
+            label="An example deployment",
+            prediction_environment_id=example_prediction_environment.id,
+            registered_model_version_id=example_registered_model.version_id)
+        example_qa_application = datarobot.QaApplication("exampleQaApplication",
+            deployment_id=example_deployment.id,
+            external_access_enabled=True,
+            external_access_recipients=["recipient@example.com"])
+        pulumi.export("datarobotQaApplicationId", example_qa_application.id)
+        pulumi.export("datarobotQaApplicationSourceId", example_qa_application.source_id)
+        pulumi.export("datarobotQaApplicationSourceVersionId", example_qa_application.source_version_id)
+        pulumi.export("datarobotQaApplicationUrl", example_qa_application.application_url)
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] deployment_id: The deployment ID of the Q&A Application.
@@ -230,6 +262,38 @@ class QaApplication(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Q&A Application
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_datarobot as datarobot
+
+        example_custom_model = datarobot.CustomModel("exampleCustomModel",
+            description="Description for the example custom model",
+            target_type="Binary",
+            target_name="my_label",
+            base_environment_name="[GenAI] Python 3.11 with Moderations",
+            local_files=["example.py"])
+        example_registered_model = datarobot.RegisteredModel("exampleRegisteredModel",
+            custom_model_version_id=example_custom_model.version_id,
+            description="Description for the example registered model")
+        example_prediction_environment = datarobot.PredictionEnvironment("examplePredictionEnvironment",
+            description="Description for the example prediction environment",
+            platform="datarobotServerless")
+        example_deployment = datarobot.Deployment("exampleDeployment",
+            label="An example deployment",
+            prediction_environment_id=example_prediction_environment.id,
+            registered_model_version_id=example_registered_model.version_id)
+        example_qa_application = datarobot.QaApplication("exampleQaApplication",
+            deployment_id=example_deployment.id,
+            external_access_enabled=True,
+            external_access_recipients=["recipient@example.com"])
+        pulumi.export("datarobotQaApplicationId", example_qa_application.id)
+        pulumi.export("datarobotQaApplicationSourceId", example_qa_application.source_id)
+        pulumi.export("datarobotQaApplicationSourceVersionId", example_qa_application.source_version_id)
+        pulumi.export("datarobotQaApplicationUrl", example_qa_application.application_url)
+        ```
 
         :param str resource_name: The name of the resource.
         :param QaApplicationArgs args: The arguments to use to populate this resource's properties.

@@ -13,6 +13,61 @@ import (
 )
 
 // Deployment
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			exampleCustomModel, err := datarobot.NewCustomModel(ctx, "exampleCustomModel", &datarobot.CustomModelArgs{
+//				Description:         pulumi.String("Description for the example custom model"),
+//				TargetType:          pulumi.String("Binary"),
+//				TargetName:          pulumi.String("my_label"),
+//				BaseEnvironmentName: pulumi.String("[GenAI] Python 3.11 with Moderations"),
+//				LocalFiles: pulumi.StringArray{
+//					pulumi.String("example.py"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleRegisteredModel, err := datarobot.NewRegisteredModel(ctx, "exampleRegisteredModel", &datarobot.RegisteredModelArgs{
+//				CustomModelVersionId: exampleCustomModel.VersionId,
+//				Description:          pulumi.String("Description for the example registered model"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			examplePredictionEnvironment, err := datarobot.NewPredictionEnvironment(ctx, "examplePredictionEnvironment", &datarobot.PredictionEnvironmentArgs{
+//				Description: pulumi.String("Description for the example prediction environment"),
+//				Platform:    pulumi.String("datarobotServerless"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleDeployment, err := datarobot.NewDeployment(ctx, "exampleDeployment", &datarobot.DeploymentArgs{
+//				Label:                    pulumi.String("An example deployment"),
+//				PredictionEnvironmentId:  examplePredictionEnvironment.ID(),
+//				RegisteredModelVersionId: exampleRegisteredModel.VersionId,
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			ctx.Export("datarobotDeploymentId", exampleDeployment.ID())
+//			return nil
+//		})
+//	}
+//
+// ```
 type Deployment struct {
 	pulumi.CustomResourceState
 

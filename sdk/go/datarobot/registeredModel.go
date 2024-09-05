@@ -31,7 +31,7 @@ import (
 //			exampleCustomModel, err := datarobot.NewCustomModel(ctx, "exampleCustomModel", &datarobot.CustomModelArgs{
 //				Description:         pulumi.String("Description for the example custom model"),
 //				TargetType:          pulumi.String("Binary"),
-//				Target:              pulumi.String("my_label"),
+//				TargetName:          pulumi.String("my_label"),
 //				BaseEnvironmentName: pulumi.String("[GenAI] Python 3.11 with Moderations"),
 //				LocalFiles: pulumi.StringArray{
 //					pulumi.String("example.py"),
