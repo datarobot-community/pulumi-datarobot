@@ -9,6 +9,7 @@ builds:
     dir: provider
     env:
       - CGO_ENABLED=0
+      - GO111MODULE=on
     goarch:
       - amd64
       - arm64
@@ -16,14 +17,27 @@ builds:
       - darwin
       - windows
       - linux
+    hooks:
+      post:
+      - env GOOS={{ .Os }} GOARCH={{ .Arch }} go clean -cache
+      - env GOOS={{ .Os }} GOARCH={{ .Arch }} go clean -modcache
+    ignore: []
     ldflags:
       # The line below MUST align with the module in current provider/go.mod
       - -X github.com/datarobot-community/pulumi-datarobot/provider/pkg/version.Version={{.Tag }}
     main: ./cmd/pulumi-resource-datarobot/
 changelog:
-  skip: true
+  filters:
+    exclude:
+    - Merge branch
+    - Merge pull request
+    - \Winternal\W
+    - \Wci\W
+    - \Wchore\W
+  sort: asc
+  use: git
 release:
   disable: false
-  prerelease: auto
 snapshot:
-  name_template: '{{ .Tag }}-SNAPSHOT'
+  name_template: "{{ .Tag }}-SNAPSHOT"
+project_name: "pulumi-datarobot"
