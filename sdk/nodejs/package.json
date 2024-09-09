@@ -1,5 +1,5 @@
 {
-    "name": "@pulumi/datarobot",
+    "name": "@datarobot/pulumi-datarobot",
     "version": "${VERSION}",
     "description": "A Pulumi package for creating and managing DataRobot resources.",
     "keywords": [

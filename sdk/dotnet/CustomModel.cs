@@ -58,6 +58,18 @@ namespace Pulumi.Datarobot
         public Output<string?> Description { get; private set; } = null!;
 
         /// <summary>
+        /// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Custom Model. If list is of strings, then basenames will be used for tuples.
+        /// </summary>
+        [Output("files")]
+        public Output<object?> Files { get; private set; } = null!;
+
+        /// <summary>
+        /// The path to a folder containing files to build the Custom Model. Each file in the folder is uploaded under path relative to a folder path.
+        /// </summary>
+        [Output("folderPath")]
+        public Output<string?> FolderPath { get; private set; } = null!;
+
+        /// <summary>
         /// The guard configurations for the Custom Model.
         /// </summary>
         [Output("guardConfigurations")]
@@ -74,12 +86,6 @@ namespace Pulumi.Datarobot
         /// </summary>
         [Output("language")]
         public Output<string?> Language { get; private set; } = null!;
-
-        /// <summary>
-        /// The list of local file paths used to build the Custom Model.
-        /// </summary>
-        [Output("localFiles")]
-        public Output<ImmutableArray<string>> LocalFiles { get; private set; } = null!;
 
         /// <summary>
         /// The name of the Custom Model.
@@ -266,6 +272,18 @@ namespace Pulumi.Datarobot
         [Input("description")]
         public Input<string>? Description { get; set; }
 
+        /// <summary>
+        /// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Custom Model. If list is of strings, then basenames will be used for tuples.
+        /// </summary>
+        [Input("files")]
+        public Input<object>? Files { get; set; }
+
+        /// <summary>
+        /// The path to a folder containing files to build the Custom Model. Each file in the folder is uploaded under path relative to a folder path.
+        /// </summary>
+        [Input("folderPath")]
+        public Input<string>? FolderPath { get; set; }
+
         [Input("guardConfigurations")]
         private InputList<Inputs.CustomModelGuardConfigurationArgs>? _guardConfigurations;
 
@@ -289,18 +307,6 @@ namespace Pulumi.Datarobot
         /// </summary>
         [Input("language")]
         public Input<string>? Language { get; set; }
-
-        [Input("localFiles")]
-        private InputList<string>? _localFiles;
-
-        /// <summary>
-        /// The list of local file paths used to build the Custom Model.
-        /// </summary>
-        public InputList<string> LocalFiles
-        {
-            get => _localFiles ?? (_localFiles = new InputList<string>());
-            set => _localFiles = value;
-        }
 
         /// <summary>
         /// The name of the Custom Model.
@@ -448,6 +454,18 @@ namespace Pulumi.Datarobot
         [Input("description")]
         public Input<string>? Description { get; set; }
 
+        /// <summary>
+        /// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Custom Model. If list is of strings, then basenames will be used for tuples.
+        /// </summary>
+        [Input("files")]
+        public Input<object>? Files { get; set; }
+
+        /// <summary>
+        /// The path to a folder containing files to build the Custom Model. Each file in the folder is uploaded under path relative to a folder path.
+        /// </summary>
+        [Input("folderPath")]
+        public Input<string>? FolderPath { get; set; }
+
         [Input("guardConfigurations")]
         private InputList<Inputs.CustomModelGuardConfigurationGetArgs>? _guardConfigurations;
 
@@ -471,18 +489,6 @@ namespace Pulumi.Datarobot
         /// </summary>
         [Input("language")]
         public Input<string>? Language { get; set; }
-
-        [Input("localFiles")]
-        private InputList<string>? _localFiles;
-
-        /// <summary>
-        /// The list of local file paths used to build the Custom Model.
-        /// </summary>
-        public InputList<string> LocalFiles
-        {
-            get => _localFiles ?? (_localFiles = new InputList<string>());
-            set => _localFiles = value;
-        }
 
         /// <summary>
         /// The name of the Custom Model.

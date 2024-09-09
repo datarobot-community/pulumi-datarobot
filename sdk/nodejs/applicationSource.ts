@@ -13,7 +13,7 @@ import * as utilities from "./utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as datarobot from "@pulumi/datarobot";
+ * import * as datarobot from "@datarobot/pulumi-datarobot";
  *
  * const example = new datarobot.ApplicationSource("example", {localFiles: [
  *     "start-app.sh",

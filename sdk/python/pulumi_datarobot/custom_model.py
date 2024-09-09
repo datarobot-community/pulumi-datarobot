@@ -22,10 +22,11 @@ class CustomModelArgs:
                  class_labels: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  class_labels_file: Optional[pulumi.Input[str]] = None,
                  description: Optional[pulumi.Input[str]] = None,
+                 files: Optional[Any] = None,
+                 folder_path: Optional[pulumi.Input[str]] = None,
                  guard_configurations: Optional[pulumi.Input[Sequence[pulumi.Input['CustomModelGuardConfigurationArgs']]]] = None,
                  is_proxy: Optional[pulumi.Input[bool]] = None,
                  language: Optional[pulumi.Input[str]] = None,
-                 local_files: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  negative_class_label: Optional[pulumi.Input[str]] = None,
                  overall_moderation_configuration: Optional[pulumi.Input['CustomModelOverallModerationConfigurationArgs']] = None,
@@ -47,10 +48,11 @@ class CustomModelArgs:
         :param pulumi.Input[Sequence[pulumi.Input[str]]] class_labels: Class labels for multiclass classification. Cannot be used with class*labels*file.
         :param pulumi.Input[str] class_labels_file: Path to file containing newline separated class labels for multiclass classification. Cannot be used with class_labels.
         :param pulumi.Input[str] description: The description of the Custom Model.
+        :param Any files: The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Custom Model. If list is of strings, then basenames will be used for tuples.
+        :param pulumi.Input[str] folder_path: The path to a folder containing files to build the Custom Model. Each file in the folder is uploaded under path relative to a folder path.
         :param pulumi.Input[Sequence[pulumi.Input['CustomModelGuardConfigurationArgs']]] guard_configurations: The guard configurations for the Custom Model.
         :param pulumi.Input[bool] is_proxy: Flag indicating if the Custom Model is a proxy model.
         :param pulumi.Input[str] language: The language used to build the Custom Model.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] local_files: The list of local file paths used to build the Custom Model.
         :param pulumi.Input[str] name: The name of the Custom Model.
         :param pulumi.Input[str] negative_class_label: The negative class label of the Custom Model.
         :param pulumi.Input['CustomModelOverallModerationConfigurationArgs'] overall_moderation_configuration: The overall moderation configuration for the Custom Model.
@@ -77,14 +79,16 @@ class CustomModelArgs:
             pulumi.set(__self__, "class_labels_file", class_labels_file)
         if description is not None:
             pulumi.set(__self__, "description", description)
+        if files is not None:
+            pulumi.set(__self__, "files", files)
+        if folder_path is not None:
+            pulumi.set(__self__, "folder_path", folder_path)
         if guard_configurations is not None:
             pulumi.set(__self__, "guard_configurations", guard_configurations)
         if is_proxy is not None:
             pulumi.set(__self__, "is_proxy", is_proxy)
         if language is not None:
             pulumi.set(__self__, "language", language)
-        if local_files is not None:
-            pulumi.set(__self__, "local_files", local_files)
         if name is not None:
             pulumi.set(__self__, "name", name)
         if negative_class_label is not None:
@@ -185,6 +189,30 @@ class CustomModelArgs:
         pulumi.set(self, "description", value)
 
     @property
+    @pulumi.getter
+    def files(self) -> Optional[Any]:
+        """
+        The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Custom Model. If list is of strings, then basenames will be used for tuples.
+        """
+        return pulumi.get(self, "files")
+
+    @files.setter
+    def files(self, value: Optional[Any]):
+        pulumi.set(self, "files", value)
+
+    @property
+    @pulumi.getter(name="folderPath")
+    def folder_path(self) -> Optional[pulumi.Input[str]]:
+        """
+        The path to a folder containing files to build the Custom Model. Each file in the folder is uploaded under path relative to a folder path.
+        """
+        return pulumi.get(self, "folder_path")
+
+    @folder_path.setter
+    def folder_path(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "folder_path", value)
+
+    @property
     @pulumi.getter(name="guardConfigurations")
     def guard_configurations(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CustomModelGuardConfigurationArgs']]]]:
         """
@@ -219,18 +247,6 @@ class CustomModelArgs:
     @language.setter
     def language(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "language", value)
-
-    @property
-    @pulumi.getter(name="localFiles")
-    def local_files(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
-        """
-        The list of local file paths used to build the Custom Model.
-        """
-        return pulumi.get(self, "local_files")
-
-    @local_files.setter
-    def local_files(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
-        pulumi.set(self, "local_files", value)
 
     @property
     @pulumi.getter
@@ -399,10 +415,11 @@ class _CustomModelState:
                  class_labels_file: Optional[pulumi.Input[str]] = None,
                  deployments_count: Optional[pulumi.Input[int]] = None,
                  description: Optional[pulumi.Input[str]] = None,
+                 files: Optional[Any] = None,
+                 folder_path: Optional[pulumi.Input[str]] = None,
                  guard_configurations: Optional[pulumi.Input[Sequence[pulumi.Input['CustomModelGuardConfigurationArgs']]]] = None,
                  is_proxy: Optional[pulumi.Input[bool]] = None,
                  language: Optional[pulumi.Input[str]] = None,
-                 local_files: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  negative_class_label: Optional[pulumi.Input[str]] = None,
                  overall_moderation_configuration: Optional[pulumi.Input['CustomModelOverallModerationConfigurationArgs']] = None,
@@ -428,10 +445,11 @@ class _CustomModelState:
         :param pulumi.Input[str] class_labels_file: Path to file containing newline separated class labels for multiclass classification. Cannot be used with class_labels.
         :param pulumi.Input[int] deployments_count: The number of deployments for the Custom Model.
         :param pulumi.Input[str] description: The description of the Custom Model.
+        :param Any files: The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Custom Model. If list is of strings, then basenames will be used for tuples.
+        :param pulumi.Input[str] folder_path: The path to a folder containing files to build the Custom Model. Each file in the folder is uploaded under path relative to a folder path.
         :param pulumi.Input[Sequence[pulumi.Input['CustomModelGuardConfigurationArgs']]] guard_configurations: The guard configurations for the Custom Model.
         :param pulumi.Input[bool] is_proxy: Flag indicating if the Custom Model is a proxy model.
         :param pulumi.Input[str] language: The language used to build the Custom Model.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] local_files: The list of local file paths used to build the Custom Model.
         :param pulumi.Input[str] name: The name of the Custom Model.
         :param pulumi.Input[str] negative_class_label: The negative class label of the Custom Model.
         :param pulumi.Input['CustomModelOverallModerationConfigurationArgs'] overall_moderation_configuration: The overall moderation configuration for the Custom Model.
@@ -463,14 +481,16 @@ class _CustomModelState:
             pulumi.set(__self__, "deployments_count", deployments_count)
         if description is not None:
             pulumi.set(__self__, "description", description)
+        if files is not None:
+            pulumi.set(__self__, "files", files)
+        if folder_path is not None:
+            pulumi.set(__self__, "folder_path", folder_path)
         if guard_configurations is not None:
             pulumi.set(__self__, "guard_configurations", guard_configurations)
         if is_proxy is not None:
             pulumi.set(__self__, "is_proxy", is_proxy)
         if language is not None:
             pulumi.set(__self__, "language", language)
-        if local_files is not None:
-            pulumi.set(__self__, "local_files", local_files)
         if name is not None:
             pulumi.set(__self__, "name", name)
         if negative_class_label is not None:
@@ -589,6 +609,30 @@ class _CustomModelState:
         pulumi.set(self, "description", value)
 
     @property
+    @pulumi.getter
+    def files(self) -> Optional[Any]:
+        """
+        The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Custom Model. If list is of strings, then basenames will be used for tuples.
+        """
+        return pulumi.get(self, "files")
+
+    @files.setter
+    def files(self, value: Optional[Any]):
+        pulumi.set(self, "files", value)
+
+    @property
+    @pulumi.getter(name="folderPath")
+    def folder_path(self) -> Optional[pulumi.Input[str]]:
+        """
+        The path to a folder containing files to build the Custom Model. Each file in the folder is uploaded under path relative to a folder path.
+        """
+        return pulumi.get(self, "folder_path")
+
+    @folder_path.setter
+    def folder_path(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "folder_path", value)
+
+    @property
     @pulumi.getter(name="guardConfigurations")
     def guard_configurations(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CustomModelGuardConfigurationArgs']]]]:
         """
@@ -623,18 +667,6 @@ class _CustomModelState:
     @language.setter
     def language(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "language", value)
-
-    @property
-    @pulumi.getter(name="localFiles")
-    def local_files(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
-        """
-        The list of local file paths used to build the Custom Model.
-        """
-        return pulumi.get(self, "local_files")
-
-    @local_files.setter
-    def local_files(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
-        pulumi.set(self, "local_files", value)
 
     @property
     @pulumi.getter
@@ -840,10 +872,11 @@ class CustomModel(pulumi.CustomResource):
                  class_labels: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  class_labels_file: Optional[pulumi.Input[str]] = None,
                  description: Optional[pulumi.Input[str]] = None,
+                 files: Optional[Any] = None,
+                 folder_path: Optional[pulumi.Input[str]] = None,
                  guard_configurations: Optional[pulumi.Input[Sequence[pulumi.Input[Union['CustomModelGuardConfigurationArgs', 'CustomModelGuardConfigurationArgsDict']]]]] = None,
                  is_proxy: Optional[pulumi.Input[bool]] = None,
                  language: Optional[pulumi.Input[str]] = None,
-                 local_files: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  negative_class_label: Optional[pulumi.Input[str]] = None,
                  overall_moderation_configuration: Optional[pulumi.Input[Union['CustomModelOverallModerationConfigurationArgs', 'CustomModelOverallModerationConfigurationArgsDict']]] = None,
@@ -869,10 +902,11 @@ class CustomModel(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[str]]] class_labels: Class labels for multiclass classification. Cannot be used with class*labels*file.
         :param pulumi.Input[str] class_labels_file: Path to file containing newline separated class labels for multiclass classification. Cannot be used with class_labels.
         :param pulumi.Input[str] description: The description of the Custom Model.
+        :param Any files: The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Custom Model. If list is of strings, then basenames will be used for tuples.
+        :param pulumi.Input[str] folder_path: The path to a folder containing files to build the Custom Model. Each file in the folder is uploaded under path relative to a folder path.
         :param pulumi.Input[Sequence[pulumi.Input[Union['CustomModelGuardConfigurationArgs', 'CustomModelGuardConfigurationArgsDict']]]] guard_configurations: The guard configurations for the Custom Model.
         :param pulumi.Input[bool] is_proxy: Flag indicating if the Custom Model is a proxy model.
         :param pulumi.Input[str] language: The language used to build the Custom Model.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] local_files: The list of local file paths used to build the Custom Model.
         :param pulumi.Input[str] name: The name of the Custom Model.
         :param pulumi.Input[str] negative_class_label: The negative class label of the Custom Model.
         :param pulumi.Input[Union['CustomModelOverallModerationConfigurationArgs', 'CustomModelOverallModerationConfigurationArgsDict']] overall_moderation_configuration: The overall moderation configuration for the Custom Model.
@@ -917,10 +951,11 @@ class CustomModel(pulumi.CustomResource):
                  class_labels: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  class_labels_file: Optional[pulumi.Input[str]] = None,
                  description: Optional[pulumi.Input[str]] = None,
+                 files: Optional[Any] = None,
+                 folder_path: Optional[pulumi.Input[str]] = None,
                  guard_configurations: Optional[pulumi.Input[Sequence[pulumi.Input[Union['CustomModelGuardConfigurationArgs', 'CustomModelGuardConfigurationArgsDict']]]]] = None,
                  is_proxy: Optional[pulumi.Input[bool]] = None,
                  language: Optional[pulumi.Input[str]] = None,
-                 local_files: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  negative_class_label: Optional[pulumi.Input[str]] = None,
                  overall_moderation_configuration: Optional[pulumi.Input[Union['CustomModelOverallModerationConfigurationArgs', 'CustomModelOverallModerationConfigurationArgsDict']]] = None,
@@ -949,10 +984,11 @@ class CustomModel(pulumi.CustomResource):
             __props__.__dict__["class_labels"] = class_labels
             __props__.__dict__["class_labels_file"] = class_labels_file
             __props__.__dict__["description"] = description
+            __props__.__dict__["files"] = files
+            __props__.__dict__["folder_path"] = folder_path
             __props__.__dict__["guard_configurations"] = guard_configurations
             __props__.__dict__["is_proxy"] = is_proxy
             __props__.__dict__["language"] = language
-            __props__.__dict__["local_files"] = local_files
             __props__.__dict__["name"] = name
             __props__.__dict__["negative_class_label"] = negative_class_label
             __props__.__dict__["overall_moderation_configuration"] = overall_moderation_configuration
@@ -987,10 +1023,11 @@ class CustomModel(pulumi.CustomResource):
             class_labels_file: Optional[pulumi.Input[str]] = None,
             deployments_count: Optional[pulumi.Input[int]] = None,
             description: Optional[pulumi.Input[str]] = None,
+            files: Optional[Any] = None,
+            folder_path: Optional[pulumi.Input[str]] = None,
             guard_configurations: Optional[pulumi.Input[Sequence[pulumi.Input[Union['CustomModelGuardConfigurationArgs', 'CustomModelGuardConfigurationArgsDict']]]]] = None,
             is_proxy: Optional[pulumi.Input[bool]] = None,
             language: Optional[pulumi.Input[str]] = None,
-            local_files: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             name: Optional[pulumi.Input[str]] = None,
             negative_class_label: Optional[pulumi.Input[str]] = None,
             overall_moderation_configuration: Optional[pulumi.Input[Union['CustomModelOverallModerationConfigurationArgs', 'CustomModelOverallModerationConfigurationArgsDict']]] = None,
@@ -1021,10 +1058,11 @@ class CustomModel(pulumi.CustomResource):
         :param pulumi.Input[str] class_labels_file: Path to file containing newline separated class labels for multiclass classification. Cannot be used with class_labels.
         :param pulumi.Input[int] deployments_count: The number of deployments for the Custom Model.
         :param pulumi.Input[str] description: The description of the Custom Model.
+        :param Any files: The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Custom Model. If list is of strings, then basenames will be used for tuples.
+        :param pulumi.Input[str] folder_path: The path to a folder containing files to build the Custom Model. Each file in the folder is uploaded under path relative to a folder path.
         :param pulumi.Input[Sequence[pulumi.Input[Union['CustomModelGuardConfigurationArgs', 'CustomModelGuardConfigurationArgsDict']]]] guard_configurations: The guard configurations for the Custom Model.
         :param pulumi.Input[bool] is_proxy: Flag indicating if the Custom Model is a proxy model.
         :param pulumi.Input[str] language: The language used to build the Custom Model.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] local_files: The list of local file paths used to build the Custom Model.
         :param pulumi.Input[str] name: The name of the Custom Model.
         :param pulumi.Input[str] negative_class_label: The negative class label of the Custom Model.
         :param pulumi.Input[Union['CustomModelOverallModerationConfigurationArgs', 'CustomModelOverallModerationConfigurationArgsDict']] overall_moderation_configuration: The overall moderation configuration for the Custom Model.
@@ -1053,10 +1091,11 @@ class CustomModel(pulumi.CustomResource):
         __props__.__dict__["class_labels_file"] = class_labels_file
         __props__.__dict__["deployments_count"] = deployments_count
         __props__.__dict__["description"] = description
+        __props__.__dict__["files"] = files
+        __props__.__dict__["folder_path"] = folder_path
         __props__.__dict__["guard_configurations"] = guard_configurations
         __props__.__dict__["is_proxy"] = is_proxy
         __props__.__dict__["language"] = language
-        __props__.__dict__["local_files"] = local_files
         __props__.__dict__["name"] = name
         __props__.__dict__["negative_class_label"] = negative_class_label
         __props__.__dict__["overall_moderation_configuration"] = overall_moderation_configuration
@@ -1132,6 +1171,22 @@ class CustomModel(pulumi.CustomResource):
         return pulumi.get(self, "description")
 
     @property
+    @pulumi.getter
+    def files(self) -> pulumi.Output[Optional[Any]]:
+        """
+        The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Custom Model. If list is of strings, then basenames will be used for tuples.
+        """
+        return pulumi.get(self, "files")
+
+    @property
+    @pulumi.getter(name="folderPath")
+    def folder_path(self) -> pulumi.Output[Optional[str]]:
+        """
+        The path to a folder containing files to build the Custom Model. Each file in the folder is uploaded under path relative to a folder path.
+        """
+        return pulumi.get(self, "folder_path")
+
+    @property
     @pulumi.getter(name="guardConfigurations")
     def guard_configurations(self) -> pulumi.Output[Optional[Sequence['outputs.CustomModelGuardConfiguration']]]:
         """
@@ -1154,14 +1209,6 @@ class CustomModel(pulumi.CustomResource):
         The language used to build the Custom Model.
         """
         return pulumi.get(self, "language")
-
-    @property
-    @pulumi.getter(name="localFiles")
-    def local_files(self) -> pulumi.Output[Optional[Sequence[str]]]:
-        """
-        The list of local file paths used to build the Custom Model.
-        """
-        return pulumi.get(self, "local_files")
 
     @property
     @pulumi.getter

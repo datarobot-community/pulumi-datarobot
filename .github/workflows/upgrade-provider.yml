@@ -11,6 +11,10 @@ jobs:
   upgrade_provider:
     name: upgrade-provider
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
     steps:
     - name: Call upgrade provider action
       uses: pulumi/pulumi-upgrade-provider-action@f399a75a5350242c291cc720eece1c72cb6ea712 # main

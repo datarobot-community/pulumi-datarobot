@@ -1,0 +1,4 @@
+# Upstream provider links:
+# - GitHub repo: https://github.com/datarobot-community/terraform-provider-datarobot
+# - Terraform registry: https://registry.terraform.io/providers/datarobot-community/datarobot
+upstream-provider-name: terraform-provider-datarobot

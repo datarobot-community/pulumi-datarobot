@@ -66,6 +66,14 @@ export class CustomModel extends pulumi.CustomResource {
      */
     public readonly description!: pulumi.Output<string | undefined>;
     /**
+     * The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Custom Model. If list is of strings, then basenames will be used for tuples.
+     */
+    public readonly files!: pulumi.Output<any | undefined>;
+    /**
+     * The path to a folder containing files to build the Custom Model. Each file in the folder is uploaded under path relative to a folder path.
+     */
+    public readonly folderPath!: pulumi.Output<string | undefined>;
+    /**
      * The guard configurations for the Custom Model.
      */
     public readonly guardConfigurations!: pulumi.Output<outputs.CustomModelGuardConfiguration[] | undefined>;
@@ -77,10 +85,6 @@ export class CustomModel extends pulumi.CustomResource {
      * The language used to build the Custom Model.
      */
     public readonly language!: pulumi.Output<string | undefined>;
-    /**
-     * The list of local file paths used to build the Custom Model.
-     */
-    public readonly localFiles!: pulumi.Output<string[] | undefined>;
     /**
      * The name of the Custom Model.
      */
@@ -166,10 +170,11 @@ export class CustomModel extends pulumi.CustomResource {
             resourceInputs["classLabelsFile"] = state ? state.classLabelsFile : undefined;
             resourceInputs["deploymentsCount"] = state ? state.deploymentsCount : undefined;
             resourceInputs["description"] = state ? state.description : undefined;
+            resourceInputs["files"] = state ? state.files : undefined;
+            resourceInputs["folderPath"] = state ? state.folderPath : undefined;
             resourceInputs["guardConfigurations"] = state ? state.guardConfigurations : undefined;
             resourceInputs["isProxy"] = state ? state.isProxy : undefined;
             resourceInputs["language"] = state ? state.language : undefined;
-            resourceInputs["localFiles"] = state ? state.localFiles : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["negativeClassLabel"] = state ? state.negativeClassLabel : undefined;
             resourceInputs["overallModerationConfiguration"] = state ? state.overallModerationConfiguration : undefined;
@@ -194,10 +199,11 @@ export class CustomModel extends pulumi.CustomResource {
             resourceInputs["classLabels"] = args ? args.classLabels : undefined;
             resourceInputs["classLabelsFile"] = args ? args.classLabelsFile : undefined;
             resourceInputs["description"] = args ? args.description : undefined;
+            resourceInputs["files"] = args ? args.files : undefined;
+            resourceInputs["folderPath"] = args ? args.folderPath : undefined;
             resourceInputs["guardConfigurations"] = args ? args.guardConfigurations : undefined;
             resourceInputs["isProxy"] = args ? args.isProxy : undefined;
             resourceInputs["language"] = args ? args.language : undefined;
-            resourceInputs["localFiles"] = args ? args.localFiles : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["negativeClassLabel"] = args ? args.negativeClassLabel : undefined;
             resourceInputs["overallModerationConfiguration"] = args ? args.overallModerationConfiguration : undefined;
@@ -254,6 +260,14 @@ export interface CustomModelState {
      */
     description?: pulumi.Input<string>;
     /**
+     * The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Custom Model. If list is of strings, then basenames will be used for tuples.
+     */
+    files?: any;
+    /**
+     * The path to a folder containing files to build the Custom Model. Each file in the folder is uploaded under path relative to a folder path.
+     */
+    folderPath?: pulumi.Input<string>;
+    /**
      * The guard configurations for the Custom Model.
      */
     guardConfigurations?: pulumi.Input<pulumi.Input<inputs.CustomModelGuardConfiguration>[]>;
@@ -265,10 +279,6 @@ export interface CustomModelState {
      * The language used to build the Custom Model.
      */
     language?: pulumi.Input<string>;
-    /**
-     * The list of local file paths used to build the Custom Model.
-     */
-    localFiles?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The name of the Custom Model.
      */
@@ -364,6 +374,14 @@ export interface CustomModelArgs {
      */
     description?: pulumi.Input<string>;
     /**
+     * The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Custom Model. If list is of strings, then basenames will be used for tuples.
+     */
+    files?: any;
+    /**
+     * The path to a folder containing files to build the Custom Model. Each file in the folder is uploaded under path relative to a folder path.
+     */
+    folderPath?: pulumi.Input<string>;
+    /**
      * The guard configurations for the Custom Model.
      */
     guardConfigurations?: pulumi.Input<pulumi.Input<inputs.CustomModelGuardConfiguration>[]>;
@@ -375,10 +393,6 @@ export interface CustomModelArgs {
      * The language used to build the Custom Model.
      */
     language?: pulumi.Input<string>;
-    /**
-     * The list of local file paths used to build the Custom Model.
-     */
-    localFiles?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The name of the Custom Model.
      */

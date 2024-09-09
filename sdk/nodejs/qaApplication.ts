@@ -11,14 +11,14 @@ import * as utilities from "./utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as datarobot from "@pulumi/datarobot";
+ * import * as datarobot from "@datarobot/pulumi-datarobot";
  *
  * const exampleCustomModel = new datarobot.CustomModel("exampleCustomModel", {
  *     description: "Description for the example custom model",
  *     targetType: "Binary",
  *     targetName: "my_label",
  *     baseEnvironmentName: "[GenAI] Python 3.11 with Moderations",
- *     localFiles: ["example.py"],
+ *     files: ["example.py"],
  * });
  * const exampleRegisteredModel = new datarobot.RegisteredModel("exampleRegisteredModel", {
  *     customModelVersionId: exampleCustomModel.versionId,

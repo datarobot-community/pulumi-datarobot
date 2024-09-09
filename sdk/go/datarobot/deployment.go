@@ -33,8 +33,8 @@ import (
 //				TargetType:          pulumi.String("Binary"),
 //				TargetName:          pulumi.String("my_label"),
 //				BaseEnvironmentName: pulumi.String("[GenAI] Python 3.11 with Moderations"),
-//				LocalFiles: pulumi.StringArray{
-//					pulumi.String("example.py"),
+//				Files: pulumi.Any{
+//					"example.py",
 //				},
 //			})
 //			if err != nil {
