@@ -3,9 +3,9 @@ module github.com/datarobot-community/pulumi-datarobot/provider
 go 1.23
 
 require (
-	github.com/datarobot-community/terraform-provider-datarobot v0.0.22
-	github.com/pulumi/pulumi-terraform-bridge/pf v0.42.0
-	github.com/pulumi/pulumi-terraform-bridge/v3 v3.89.1
+	github.com/datarobot-community/terraform-provider-datarobot v0.0.23
+	github.com/pulumi/pulumi-terraform-bridge/pf v0.43.0
+	github.com/pulumi/pulumi-terraform-bridge/v3 v3.90.0
 )
 
 require (
@@ -168,8 +168,8 @@ require (
 	github.com/pulumi/pulumi-java/pkg v0.14.0 // indirect
 	github.com/pulumi/pulumi-terraform-bridge/x/muxer v0.0.8 // indirect
 	github.com/pulumi/pulumi-yaml v1.9.2 // indirect
-	github.com/pulumi/pulumi/pkg/v3 v3.129.0 // indirect
-	github.com/pulumi/pulumi/sdk/v3 v3.129.0 // indirect
+	github.com/pulumi/pulumi/pkg/v3 v3.130.0 // indirect
+	github.com/pulumi/pulumi/sdk/v3 v3.130.0 // indirect
 	github.com/pulumi/schema-tools v0.1.2 // indirect
 	github.com/rivo/uniseg v0.4.4 // indirect
 	github.com/rogpeppe/go-internal v1.12.0 // indirect
