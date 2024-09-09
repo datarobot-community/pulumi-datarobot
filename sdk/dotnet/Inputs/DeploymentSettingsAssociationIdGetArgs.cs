@@ -24,6 +24,12 @@ namespace Pulumi.Datarobot.Inputs
         [Input("featureName", required: true)]
         public Input<string> FeatureName { get; set; } = null!;
 
+        /// <summary>
+        /// Whether the association ID is required in prediction requests.
+        /// </summary>
+        [Input("requiredInPredictionRequests", required: true)]
+        public Input<bool> RequiredInPredictionRequests { get; set; } = null!;
+
         public DeploymentSettingsAssociationIdGetArgs()
         {
         }

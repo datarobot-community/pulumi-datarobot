@@ -12,6 +12,48 @@ import (
 )
 
 // Data set from file
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := datarobot.NewRemoteRepository(ctx, "exampleRemoteRepository", &datarobot.RemoteRepositoryArgs{
+//				Description: pulumi.String("GitHub repository with Datarobot user models"),
+//				Location:    pulumi.String("https://github.com/datarobot/datarobot-user-models"),
+//				SourceType:  pulumi.String("github"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleCustomModel, err := datarobot.NewCustomModel(ctx, "exampleCustomModel", &datarobot.CustomModelArgs{
+//				Description: pulumi.String("An example custom model from GitHub repository"),
+//				Files: pulumi.Any{
+//					"file1.py",
+//					"file2.py",
+//				},
+//				TargetType:          pulumi.String("Binary"),
+//				TargetName:          pulumi.String("my_label"),
+//				BaseEnvironmentName: pulumi.String("[GenAI] Python 3.11 with Moderations"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			ctx.Export("exampleId", exampleCustomModel.ID())
+//			return nil
+//		})
+//	}
+//
+// ```
 type CustomModel struct {
 	pulumi.CustomResourceState
 

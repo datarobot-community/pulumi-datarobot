@@ -16,18 +16,23 @@ __all__ = ['ApplicationSourceArgs', 'ApplicationSource']
 @pulumi.input_type
 class ApplicationSourceArgs:
     def __init__(__self__, *,
-                 local_files: pulumi.Input[Sequence[pulumi.Input[str]]],
+                 files: Optional[Any] = None,
+                 folder_path: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  resource_settings: Optional[pulumi.Input['ApplicationSourceResourceSettingsArgs']] = None,
                  runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input['ApplicationSourceRuntimeParameterValueArgs']]]] = None):
         """
         The set of arguments for constructing a ApplicationSource resource.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] local_files: The list of local file paths used to build the Application Source.
+        :param Any files: The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
+        :param pulumi.Input[str] folder_path: The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
         :param pulumi.Input[str] name: The name of the Application Source.
         :param pulumi.Input['ApplicationSourceResourceSettingsArgs'] resource_settings: The resource settings for the Application Source.
         :param pulumi.Input[Sequence[pulumi.Input['ApplicationSourceRuntimeParameterValueArgs']]] runtime_parameter_values: The runtime parameter values for the Application Source.
         """
-        pulumi.set(__self__, "local_files", local_files)
+        if files is not None:
+            pulumi.set(__self__, "files", files)
+        if folder_path is not None:
+            pulumi.set(__self__, "folder_path", folder_path)
         if name is not None:
             pulumi.set(__self__, "name", name)
         if resource_settings is not None:
@@ -36,16 +41,28 @@ class ApplicationSourceArgs:
             pulumi.set(__self__, "runtime_parameter_values", runtime_parameter_values)
 
     @property
-    @pulumi.getter(name="localFiles")
-    def local_files(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+    @pulumi.getter
+    def files(self) -> Optional[Any]:
         """
-        The list of local file paths used to build the Application Source.
+        The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
         """
-        return pulumi.get(self, "local_files")
+        return pulumi.get(self, "files")
 
-    @local_files.setter
-    def local_files(self, value: pulumi.Input[Sequence[pulumi.Input[str]]]):
-        pulumi.set(self, "local_files", value)
+    @files.setter
+    def files(self, value: Optional[Any]):
+        pulumi.set(self, "files", value)
+
+    @property
+    @pulumi.getter(name="folderPath")
+    def folder_path(self) -> Optional[pulumi.Input[str]]:
+        """
+        The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
+        """
+        return pulumi.get(self, "folder_path")
+
+    @folder_path.setter
+    def folder_path(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "folder_path", value)
 
     @property
     @pulumi.getter
@@ -87,21 +104,25 @@ class ApplicationSourceArgs:
 @pulumi.input_type
 class _ApplicationSourceState:
     def __init__(__self__, *,
-                 local_files: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 files: Optional[Any] = None,
+                 folder_path: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  resource_settings: Optional[pulumi.Input['ApplicationSourceResourceSettingsArgs']] = None,
                  runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input['ApplicationSourceRuntimeParameterValueArgs']]]] = None,
                  version_id: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering ApplicationSource resources.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] local_files: The list of local file paths used to build the Application Source.
+        :param Any files: The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
+        :param pulumi.Input[str] folder_path: The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
         :param pulumi.Input[str] name: The name of the Application Source.
         :param pulumi.Input['ApplicationSourceResourceSettingsArgs'] resource_settings: The resource settings for the Application Source.
         :param pulumi.Input[Sequence[pulumi.Input['ApplicationSourceRuntimeParameterValueArgs']]] runtime_parameter_values: The runtime parameter values for the Application Source.
         :param pulumi.Input[str] version_id: The version ID of the Application Source.
         """
-        if local_files is not None:
-            pulumi.set(__self__, "local_files", local_files)
+        if files is not None:
+            pulumi.set(__self__, "files", files)
+        if folder_path is not None:
+            pulumi.set(__self__, "folder_path", folder_path)
         if name is not None:
             pulumi.set(__self__, "name", name)
         if resource_settings is not None:
@@ -112,16 +133,28 @@ class _ApplicationSourceState:
             pulumi.set(__self__, "version_id", version_id)
 
     @property
-    @pulumi.getter(name="localFiles")
-    def local_files(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+    @pulumi.getter
+    def files(self) -> Optional[Any]:
         """
-        The list of local file paths used to build the Application Source.
+        The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
         """
-        return pulumi.get(self, "local_files")
+        return pulumi.get(self, "files")
 
-    @local_files.setter
-    def local_files(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
-        pulumi.set(self, "local_files", value)
+    @files.setter
+    def files(self, value: Optional[Any]):
+        pulumi.set(self, "files", value)
+
+    @property
+    @pulumi.getter(name="folderPath")
+    def folder_path(self) -> Optional[pulumi.Input[str]]:
+        """
+        The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
+        """
+        return pulumi.get(self, "folder_path")
+
+    @folder_path.setter
+    def folder_path(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "folder_path", value)
 
     @property
     @pulumi.getter
@@ -177,7 +210,8 @@ class ApplicationSource(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 local_files: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 files: Optional[Any] = None,
+                 folder_path: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  resource_settings: Optional[pulumi.Input[Union['ApplicationSourceResourceSettingsArgs', 'ApplicationSourceResourceSettingsArgsDict']]] = None,
                  runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input[Union['ApplicationSourceRuntimeParameterValueArgs', 'ApplicationSourceRuntimeParameterValueArgsDict']]]]] = None,
@@ -191,9 +225,9 @@ class ApplicationSource(pulumi.CustomResource):
         import pulumi
         import pulumi_datarobot as datarobot
 
-        example = datarobot.ApplicationSource("example", local_files=[
-            "start-app.sh",
-            "streamlit-app.py",
+        example = datarobot.ApplicationSource("example", files=[
+            ["start-app.sh"],
+            ["streamlit-app.py"],
         ])
         pulumi.export("datarobotApplicationSourceId", example.id)
         pulumi.export("datarobotApplicationSourceVersionId", example.version_id)
@@ -201,7 +235,8 @@ class ApplicationSource(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] local_files: The list of local file paths used to build the Application Source.
+        :param Any files: The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
+        :param pulumi.Input[str] folder_path: The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
         :param pulumi.Input[str] name: The name of the Application Source.
         :param pulumi.Input[Union['ApplicationSourceResourceSettingsArgs', 'ApplicationSourceResourceSettingsArgsDict']] resource_settings: The resource settings for the Application Source.
         :param pulumi.Input[Sequence[pulumi.Input[Union['ApplicationSourceRuntimeParameterValueArgs', 'ApplicationSourceRuntimeParameterValueArgsDict']]]] runtime_parameter_values: The runtime parameter values for the Application Source.
@@ -210,7 +245,7 @@ class ApplicationSource(pulumi.CustomResource):
     @overload
     def __init__(__self__,
                  resource_name: str,
-                 args: ApplicationSourceArgs,
+                 args: Optional[ApplicationSourceArgs] = None,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Application Source
@@ -221,9 +256,9 @@ class ApplicationSource(pulumi.CustomResource):
         import pulumi
         import pulumi_datarobot as datarobot
 
-        example = datarobot.ApplicationSource("example", local_files=[
-            "start-app.sh",
-            "streamlit-app.py",
+        example = datarobot.ApplicationSource("example", files=[
+            ["start-app.sh"],
+            ["streamlit-app.py"],
         ])
         pulumi.export("datarobotApplicationSourceId", example.id)
         pulumi.export("datarobotApplicationSourceVersionId", example.version_id)
@@ -244,7 +279,8 @@ class ApplicationSource(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 local_files: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 files: Optional[Any] = None,
+                 folder_path: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  resource_settings: Optional[pulumi.Input[Union['ApplicationSourceResourceSettingsArgs', 'ApplicationSourceResourceSettingsArgsDict']]] = None,
                  runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input[Union['ApplicationSourceRuntimeParameterValueArgs', 'ApplicationSourceRuntimeParameterValueArgsDict']]]]] = None,
@@ -257,9 +293,8 @@ class ApplicationSource(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = ApplicationSourceArgs.__new__(ApplicationSourceArgs)
 
-            if local_files is None and not opts.urn:
-                raise TypeError("Missing required property 'local_files'")
-            __props__.__dict__["local_files"] = local_files
+            __props__.__dict__["files"] = files
+            __props__.__dict__["folder_path"] = folder_path
             __props__.__dict__["name"] = name
             __props__.__dict__["resource_settings"] = resource_settings
             __props__.__dict__["runtime_parameter_values"] = runtime_parameter_values
@@ -274,7 +309,8 @@ class ApplicationSource(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            local_files: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+            files: Optional[Any] = None,
+            folder_path: Optional[pulumi.Input[str]] = None,
             name: Optional[pulumi.Input[str]] = None,
             resource_settings: Optional[pulumi.Input[Union['ApplicationSourceResourceSettingsArgs', 'ApplicationSourceResourceSettingsArgsDict']]] = None,
             runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input[Union['ApplicationSourceRuntimeParameterValueArgs', 'ApplicationSourceRuntimeParameterValueArgsDict']]]]] = None,
@@ -286,7 +322,8 @@ class ApplicationSource(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] local_files: The list of local file paths used to build the Application Source.
+        :param Any files: The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
+        :param pulumi.Input[str] folder_path: The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
         :param pulumi.Input[str] name: The name of the Application Source.
         :param pulumi.Input[Union['ApplicationSourceResourceSettingsArgs', 'ApplicationSourceResourceSettingsArgsDict']] resource_settings: The resource settings for the Application Source.
         :param pulumi.Input[Sequence[pulumi.Input[Union['ApplicationSourceRuntimeParameterValueArgs', 'ApplicationSourceRuntimeParameterValueArgsDict']]]] runtime_parameter_values: The runtime parameter values for the Application Source.
@@ -296,7 +333,8 @@ class ApplicationSource(pulumi.CustomResource):
 
         __props__ = _ApplicationSourceState.__new__(_ApplicationSourceState)
 
-        __props__.__dict__["local_files"] = local_files
+        __props__.__dict__["files"] = files
+        __props__.__dict__["folder_path"] = folder_path
         __props__.__dict__["name"] = name
         __props__.__dict__["resource_settings"] = resource_settings
         __props__.__dict__["runtime_parameter_values"] = runtime_parameter_values
@@ -304,12 +342,20 @@ class ApplicationSource(pulumi.CustomResource):
         return ApplicationSource(resource_name, opts=opts, __props__=__props__)
 
     @property
-    @pulumi.getter(name="localFiles")
-    def local_files(self) -> pulumi.Output[Sequence[str]]:
+    @pulumi.getter
+    def files(self) -> pulumi.Output[Optional[Any]]:
         """
-        The list of local file paths used to build the Application Source.
+        The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
         """
-        return pulumi.get(self, "local_files")
+        return pulumi.get(self, "files")
+
+    @property
+    @pulumi.getter(name="folderPath")
+    def folder_path(self) -> pulumi.Output[Optional[str]]:
+        """
+        The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
+        """
+        return pulumi.get(self, "folder_path")
 
     @property
     @pulumi.getter

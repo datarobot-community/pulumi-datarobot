@@ -81,6 +81,12 @@ namespace Pulumi.Datarobot
         [Output("versionId")]
         public Output<string> VersionId { get; private set; } = null!;
 
+        /// <summary>
+        /// The name of the Registered Model Version.
+        /// </summary>
+        [Output("versionName")]
+        public Output<string> VersionName { get; private set; } = null!;
+
 
         /// <summary>
         /// Create a RegisteredModel resource with the given unique name, arguments, and options.
@@ -146,6 +152,12 @@ namespace Pulumi.Datarobot
         [Input("name")]
         public Input<string>? Name { get; set; }
 
+        /// <summary>
+        /// The name of the Registered Model Version.
+        /// </summary>
+        [Input("versionName")]
+        public Input<string>? VersionName { get; set; }
+
         public RegisteredModelArgs()
         {
         }
@@ -177,6 +189,12 @@ namespace Pulumi.Datarobot
         /// </summary>
         [Input("versionId")]
         public Input<string>? VersionId { get; set; }
+
+        /// <summary>
+        /// The name of the Registered Model Version.
+        /// </summary>
+        [Input("versionName")]
+        public Input<string>? VersionName { get; set; }
 
         public RegisteredModelState()
         {

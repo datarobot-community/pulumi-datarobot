@@ -24,10 +24,16 @@ namespace Pulumi.Datarobot
     /// {
     ///     var exampleApplicationSource = new Datarobot.ApplicationSource("exampleApplicationSource", new()
     ///     {
-    ///         LocalFiles = new[]
+    ///         Files = new[]
     ///         {
-    ///             "start-app.sh",
-    ///             "streamlit-app.py",
+    ///             new[]
+    ///             {
+    ///                 "start-app.sh",
+    ///             },
+    ///             new[]
+    ///             {
+    ///                 "streamlit-app.py",
+    ///             },
     ///         },
     ///     });
     /// 

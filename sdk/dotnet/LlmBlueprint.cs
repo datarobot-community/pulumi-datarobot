@@ -35,8 +35,20 @@ namespace Pulumi.Datarobot
     ///         Description = "Description for the example LLM blueprint",
     ///         PlaygroundId = examplePlayground.Id,
     ///         LlmId = "azure-openai-gpt-3.5-turbo",
+    ///         PromptType = "ONE_TIME_PROMPT",
     ///     });
     /// 
+    ///     // Optional
+    ///     // llm_settings {
+    ///     //   max_completion_length = 1000
+    ///     //   temperature           = 0.5
+    ///     //   top_p                 = 0.9
+    ///     //   system_prompt         = "My Prompt:"
+    ///     // }
+    ///     // vector_database_settings = {
+    ///     //   max_documents_retrieved_per_prompt = 5
+    ///     //   max_tokens = 1000
+    ///     // }
     ///     return new Dictionary&lt;string, object?&gt;
     ///     {
     ///         ["exampleId"] = exampleLlmBlueprint.Id,
@@ -60,6 +72,12 @@ namespace Pulumi.Datarobot
         public Output<string> LlmId { get; private set; } = null!;
 
         /// <summary>
+        /// The LLM settings for the LLM Blueprint.
+        /// </summary>
+        [Output("llmSettings")]
+        public Output<Outputs.LlmBlueprintLlmSettings?> LlmSettings { get; private set; } = null!;
+
+        /// <summary>
         /// The name of the LLM Blueprint.
         /// </summary>
         [Output("name")]
@@ -72,10 +90,22 @@ namespace Pulumi.Datarobot
         public Output<string> PlaygroundId { get; private set; } = null!;
 
         /// <summary>
+        /// The prompt type for the LLM Blueprint.
+        /// </summary>
+        [Output("promptType")]
+        public Output<string> PromptType { get; private set; } = null!;
+
+        /// <summary>
         /// The id of the Vector Database for the LLM Blueprint.
         /// </summary>
         [Output("vectorDatabaseId")]
         public Output<string?> VectorDatabaseId { get; private set; } = null!;
+
+        /// <summary>
+        /// The Vector Database settings for the LLM Blueprint.
+        /// </summary>
+        [Output("vectorDatabaseSettings")]
+        public Output<Outputs.LlmBlueprintVectorDatabaseSettings?> VectorDatabaseSettings { get; private set; } = null!;
 
 
         /// <summary>
@@ -137,6 +167,12 @@ namespace Pulumi.Datarobot
         public Input<string> LlmId { get; set; } = null!;
 
         /// <summary>
+        /// The LLM settings for the LLM Blueprint.
+        /// </summary>
+        [Input("llmSettings")]
+        public Input<Inputs.LlmBlueprintLlmSettingsArgs>? LlmSettings { get; set; }
+
+        /// <summary>
         /// The name of the LLM Blueprint.
         /// </summary>
         [Input("name")]
@@ -149,10 +185,22 @@ namespace Pulumi.Datarobot
         public Input<string> PlaygroundId { get; set; } = null!;
 
         /// <summary>
+        /// The prompt type for the LLM Blueprint.
+        /// </summary>
+        [Input("promptType")]
+        public Input<string>? PromptType { get; set; }
+
+        /// <summary>
         /// The id of the Vector Database for the LLM Blueprint.
         /// </summary>
         [Input("vectorDatabaseId")]
         public Input<string>? VectorDatabaseId { get; set; }
+
+        /// <summary>
+        /// The Vector Database settings for the LLM Blueprint.
+        /// </summary>
+        [Input("vectorDatabaseSettings")]
+        public Input<Inputs.LlmBlueprintVectorDatabaseSettingsArgs>? VectorDatabaseSettings { get; set; }
 
         public LlmBlueprintArgs()
         {
@@ -175,6 +223,12 @@ namespace Pulumi.Datarobot
         public Input<string>? LlmId { get; set; }
 
         /// <summary>
+        /// The LLM settings for the LLM Blueprint.
+        /// </summary>
+        [Input("llmSettings")]
+        public Input<Inputs.LlmBlueprintLlmSettingsGetArgs>? LlmSettings { get; set; }
+
+        /// <summary>
         /// The name of the LLM Blueprint.
         /// </summary>
         [Input("name")]
@@ -187,10 +241,22 @@ namespace Pulumi.Datarobot
         public Input<string>? PlaygroundId { get; set; }
 
         /// <summary>
+        /// The prompt type for the LLM Blueprint.
+        /// </summary>
+        [Input("promptType")]
+        public Input<string>? PromptType { get; set; }
+
+        /// <summary>
         /// The id of the Vector Database for the LLM Blueprint.
         /// </summary>
         [Input("vectorDatabaseId")]
         public Input<string>? VectorDatabaseId { get; set; }
+
+        /// <summary>
+        /// The Vector Database settings for the LLM Blueprint.
+        /// </summary>
+        [Input("vectorDatabaseSettings")]
+        public Input<Inputs.LlmBlueprintVectorDatabaseSettingsGetArgs>? VectorDatabaseSettings { get; set; }
 
         public LlmBlueprintState()
         {

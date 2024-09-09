@@ -272,8 +272,16 @@ type CustomModelGuardConfiguration struct {
 	InputColumnName *string `pulumi:"inputColumnName"`
 	// The intervention for the guard configuration.
 	Intervention CustomModelGuardConfigurationIntervention `pulumi:"intervention"`
+	// The LLM type for this guard.
+	LlmType *string `pulumi:"llmType"`
 	// The name of the guard configuration.
 	Name string `pulumi:"name"`
+	// The OpenAI API base URL for this guard.
+	OpenaiApiBase *string `pulumi:"openaiApiBase"`
+	// The ID of an OpenAI credential for this guard.
+	OpenaiCredential *string `pulumi:"openaiCredential"`
+	// The ID of an OpenAI deployment for this guard.
+	OpenaiDeploymentId *string `pulumi:"openaiDeploymentId"`
 	// The output column name of this guard.
 	OutputColumnName *string `pulumi:"outputColumnName"`
 	// The list of stages for the guard configuration.
@@ -300,8 +308,16 @@ type CustomModelGuardConfigurationArgs struct {
 	InputColumnName pulumi.StringPtrInput `pulumi:"inputColumnName"`
 	// The intervention for the guard configuration.
 	Intervention CustomModelGuardConfigurationInterventionInput `pulumi:"intervention"`
+	// The LLM type for this guard.
+	LlmType pulumi.StringPtrInput `pulumi:"llmType"`
 	// The name of the guard configuration.
 	Name pulumi.StringInput `pulumi:"name"`
+	// The OpenAI API base URL for this guard.
+	OpenaiApiBase pulumi.StringPtrInput `pulumi:"openaiApiBase"`
+	// The ID of an OpenAI credential for this guard.
+	OpenaiCredential pulumi.StringPtrInput `pulumi:"openaiCredential"`
+	// The ID of an OpenAI deployment for this guard.
+	OpenaiDeploymentId pulumi.StringPtrInput `pulumi:"openaiDeploymentId"`
 	// The output column name of this guard.
 	OutputColumnName pulumi.StringPtrInput `pulumi:"outputColumnName"`
 	// The list of stages for the guard configuration.
@@ -376,9 +392,29 @@ func (o CustomModelGuardConfigurationOutput) Intervention() CustomModelGuardConf
 	return o.ApplyT(func(v CustomModelGuardConfiguration) CustomModelGuardConfigurationIntervention { return v.Intervention }).(CustomModelGuardConfigurationInterventionOutput)
 }
 
+// The LLM type for this guard.
+func (o CustomModelGuardConfigurationOutput) LlmType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CustomModelGuardConfiguration) *string { return v.LlmType }).(pulumi.StringPtrOutput)
+}
+
 // The name of the guard configuration.
 func (o CustomModelGuardConfigurationOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v CustomModelGuardConfiguration) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// The OpenAI API base URL for this guard.
+func (o CustomModelGuardConfigurationOutput) OpenaiApiBase() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CustomModelGuardConfiguration) *string { return v.OpenaiApiBase }).(pulumi.StringPtrOutput)
+}
+
+// The ID of an OpenAI credential for this guard.
+func (o CustomModelGuardConfigurationOutput) OpenaiCredential() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CustomModelGuardConfiguration) *string { return v.OpenaiCredential }).(pulumi.StringPtrOutput)
+}
+
+// The ID of an OpenAI deployment for this guard.
+func (o CustomModelGuardConfigurationOutput) OpenaiDeploymentId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CustomModelGuardConfiguration) *string { return v.OpenaiDeploymentId }).(pulumi.StringPtrOutput)
 }
 
 // The output column name of this guard.
@@ -1309,6 +1345,8 @@ type DeploymentSettingsAssociationId struct {
 	AutoGenerateId bool `pulumi:"autoGenerateId"`
 	// The name of the feature to use as the association ID.
 	FeatureName string `pulumi:"featureName"`
+	// Whether the association ID is required in prediction requests.
+	RequiredInPredictionRequests bool `pulumi:"requiredInPredictionRequests"`
 }
 
 // DeploymentSettingsAssociationIdInput is an input type that accepts DeploymentSettingsAssociationIdArgs and DeploymentSettingsAssociationIdOutput values.
@@ -1327,6 +1365,8 @@ type DeploymentSettingsAssociationIdArgs struct {
 	AutoGenerateId pulumi.BoolInput `pulumi:"autoGenerateId"`
 	// The name of the feature to use as the association ID.
 	FeatureName pulumi.StringInput `pulumi:"featureName"`
+	// Whether the association ID is required in prediction requests.
+	RequiredInPredictionRequests pulumi.BoolInput `pulumi:"requiredInPredictionRequests"`
 }
 
 func (DeploymentSettingsAssociationIdArgs) ElementType() reflect.Type {
@@ -1416,6 +1456,11 @@ func (o DeploymentSettingsAssociationIdOutput) FeatureName() pulumi.StringOutput
 	return o.ApplyT(func(v DeploymentSettingsAssociationId) string { return v.FeatureName }).(pulumi.StringOutput)
 }
 
+// Whether the association ID is required in prediction requests.
+func (o DeploymentSettingsAssociationIdOutput) RequiredInPredictionRequests() pulumi.BoolOutput {
+	return o.ApplyT(func(v DeploymentSettingsAssociationId) bool { return v.RequiredInPredictionRequests }).(pulumi.BoolOutput)
+}
+
 type DeploymentSettingsAssociationIdPtrOutput struct{ *pulumi.OutputState }
 
 func (DeploymentSettingsAssociationIdPtrOutput) ElementType() reflect.Type {
@@ -1458,6 +1503,16 @@ func (o DeploymentSettingsAssociationIdPtrOutput) FeatureName() pulumi.StringPtr
 		}
 		return &v.FeatureName
 	}).(pulumi.StringPtrOutput)
+}
+
+// Whether the association ID is required in prediction requests.
+func (o DeploymentSettingsAssociationIdPtrOutput) RequiredInPredictionRequests() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *DeploymentSettingsAssociationId) *bool {
+		if v == nil {
+			return nil
+		}
+		return &v.RequiredInPredictionRequests
+	}).(pulumi.BoolPtrOutput)
 }
 
 type DeploymentSettingsPredictionsSettings struct {
@@ -1633,6 +1688,356 @@ func (o DeploymentSettingsPredictionsSettingsPtrOutput) RealTime() pulumi.BoolPt
 		}
 		return &v.RealTime
 	}).(pulumi.BoolPtrOutput)
+}
+
+type LlmBlueprintLlmSettings struct {
+	// The maximum number of tokens allowed in the completion. The combined count of this value and prompt tokens must be below the model's maximum context size, where prompt token count is comprised of system prompt, user prompt, recent chat history, and vector database citations.
+	MaxCompletionLength *int `pulumi:"maxCompletionLength"`
+	// Guides the style of the LLM response. It is a 'universal' prompt, prepended to all individual prompts.
+	SystemPrompt *string `pulumi:"systemPrompt"`
+	// Controls the randomness of model output, where higher values return more diverse output and lower values return more deterministic results.
+	Temperature *float64 `pulumi:"temperature"`
+	// Threshold that controls the selection of words included in the response, based on a cumulative probability cutoff for token selection. Higher numbers return more diverse options for outputs.
+	TopP *float64 `pulumi:"topP"`
+}
+
+// LlmBlueprintLlmSettingsInput is an input type that accepts LlmBlueprintLlmSettingsArgs and LlmBlueprintLlmSettingsOutput values.
+// You can construct a concrete instance of `LlmBlueprintLlmSettingsInput` via:
+//
+//	LlmBlueprintLlmSettingsArgs{...}
+type LlmBlueprintLlmSettingsInput interface {
+	pulumi.Input
+
+	ToLlmBlueprintLlmSettingsOutput() LlmBlueprintLlmSettingsOutput
+	ToLlmBlueprintLlmSettingsOutputWithContext(context.Context) LlmBlueprintLlmSettingsOutput
+}
+
+type LlmBlueprintLlmSettingsArgs struct {
+	// The maximum number of tokens allowed in the completion. The combined count of this value and prompt tokens must be below the model's maximum context size, where prompt token count is comprised of system prompt, user prompt, recent chat history, and vector database citations.
+	MaxCompletionLength pulumi.IntPtrInput `pulumi:"maxCompletionLength"`
+	// Guides the style of the LLM response. It is a 'universal' prompt, prepended to all individual prompts.
+	SystemPrompt pulumi.StringPtrInput `pulumi:"systemPrompt"`
+	// Controls the randomness of model output, where higher values return more diverse output and lower values return more deterministic results.
+	Temperature pulumi.Float64PtrInput `pulumi:"temperature"`
+	// Threshold that controls the selection of words included in the response, based on a cumulative probability cutoff for token selection. Higher numbers return more diverse options for outputs.
+	TopP pulumi.Float64PtrInput `pulumi:"topP"`
+}
+
+func (LlmBlueprintLlmSettingsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*LlmBlueprintLlmSettings)(nil)).Elem()
+}
+
+func (i LlmBlueprintLlmSettingsArgs) ToLlmBlueprintLlmSettingsOutput() LlmBlueprintLlmSettingsOutput {
+	return i.ToLlmBlueprintLlmSettingsOutputWithContext(context.Background())
+}
+
+func (i LlmBlueprintLlmSettingsArgs) ToLlmBlueprintLlmSettingsOutputWithContext(ctx context.Context) LlmBlueprintLlmSettingsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(LlmBlueprintLlmSettingsOutput)
+}
+
+func (i LlmBlueprintLlmSettingsArgs) ToLlmBlueprintLlmSettingsPtrOutput() LlmBlueprintLlmSettingsPtrOutput {
+	return i.ToLlmBlueprintLlmSettingsPtrOutputWithContext(context.Background())
+}
+
+func (i LlmBlueprintLlmSettingsArgs) ToLlmBlueprintLlmSettingsPtrOutputWithContext(ctx context.Context) LlmBlueprintLlmSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(LlmBlueprintLlmSettingsOutput).ToLlmBlueprintLlmSettingsPtrOutputWithContext(ctx)
+}
+
+// LlmBlueprintLlmSettingsPtrInput is an input type that accepts LlmBlueprintLlmSettingsArgs, LlmBlueprintLlmSettingsPtr and LlmBlueprintLlmSettingsPtrOutput values.
+// You can construct a concrete instance of `LlmBlueprintLlmSettingsPtrInput` via:
+//
+//	        LlmBlueprintLlmSettingsArgs{...}
+//
+//	or:
+//
+//	        nil
+type LlmBlueprintLlmSettingsPtrInput interface {
+	pulumi.Input
+
+	ToLlmBlueprintLlmSettingsPtrOutput() LlmBlueprintLlmSettingsPtrOutput
+	ToLlmBlueprintLlmSettingsPtrOutputWithContext(context.Context) LlmBlueprintLlmSettingsPtrOutput
+}
+
+type llmBlueprintLlmSettingsPtrType LlmBlueprintLlmSettingsArgs
+
+func LlmBlueprintLlmSettingsPtr(v *LlmBlueprintLlmSettingsArgs) LlmBlueprintLlmSettingsPtrInput {
+	return (*llmBlueprintLlmSettingsPtrType)(v)
+}
+
+func (*llmBlueprintLlmSettingsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**LlmBlueprintLlmSettings)(nil)).Elem()
+}
+
+func (i *llmBlueprintLlmSettingsPtrType) ToLlmBlueprintLlmSettingsPtrOutput() LlmBlueprintLlmSettingsPtrOutput {
+	return i.ToLlmBlueprintLlmSettingsPtrOutputWithContext(context.Background())
+}
+
+func (i *llmBlueprintLlmSettingsPtrType) ToLlmBlueprintLlmSettingsPtrOutputWithContext(ctx context.Context) LlmBlueprintLlmSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(LlmBlueprintLlmSettingsPtrOutput)
+}
+
+type LlmBlueprintLlmSettingsOutput struct{ *pulumi.OutputState }
+
+func (LlmBlueprintLlmSettingsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*LlmBlueprintLlmSettings)(nil)).Elem()
+}
+
+func (o LlmBlueprintLlmSettingsOutput) ToLlmBlueprintLlmSettingsOutput() LlmBlueprintLlmSettingsOutput {
+	return o
+}
+
+func (o LlmBlueprintLlmSettingsOutput) ToLlmBlueprintLlmSettingsOutputWithContext(ctx context.Context) LlmBlueprintLlmSettingsOutput {
+	return o
+}
+
+func (o LlmBlueprintLlmSettingsOutput) ToLlmBlueprintLlmSettingsPtrOutput() LlmBlueprintLlmSettingsPtrOutput {
+	return o.ToLlmBlueprintLlmSettingsPtrOutputWithContext(context.Background())
+}
+
+func (o LlmBlueprintLlmSettingsOutput) ToLlmBlueprintLlmSettingsPtrOutputWithContext(ctx context.Context) LlmBlueprintLlmSettingsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v LlmBlueprintLlmSettings) *LlmBlueprintLlmSettings {
+		return &v
+	}).(LlmBlueprintLlmSettingsPtrOutput)
+}
+
+// The maximum number of tokens allowed in the completion. The combined count of this value and prompt tokens must be below the model's maximum context size, where prompt token count is comprised of system prompt, user prompt, recent chat history, and vector database citations.
+func (o LlmBlueprintLlmSettingsOutput) MaxCompletionLength() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v LlmBlueprintLlmSettings) *int { return v.MaxCompletionLength }).(pulumi.IntPtrOutput)
+}
+
+// Guides the style of the LLM response. It is a 'universal' prompt, prepended to all individual prompts.
+func (o LlmBlueprintLlmSettingsOutput) SystemPrompt() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v LlmBlueprintLlmSettings) *string { return v.SystemPrompt }).(pulumi.StringPtrOutput)
+}
+
+// Controls the randomness of model output, where higher values return more diverse output and lower values return more deterministic results.
+func (o LlmBlueprintLlmSettingsOutput) Temperature() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v LlmBlueprintLlmSettings) *float64 { return v.Temperature }).(pulumi.Float64PtrOutput)
+}
+
+// Threshold that controls the selection of words included in the response, based on a cumulative probability cutoff for token selection. Higher numbers return more diverse options for outputs.
+func (o LlmBlueprintLlmSettingsOutput) TopP() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v LlmBlueprintLlmSettings) *float64 { return v.TopP }).(pulumi.Float64PtrOutput)
+}
+
+type LlmBlueprintLlmSettingsPtrOutput struct{ *pulumi.OutputState }
+
+func (LlmBlueprintLlmSettingsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**LlmBlueprintLlmSettings)(nil)).Elem()
+}
+
+func (o LlmBlueprintLlmSettingsPtrOutput) ToLlmBlueprintLlmSettingsPtrOutput() LlmBlueprintLlmSettingsPtrOutput {
+	return o
+}
+
+func (o LlmBlueprintLlmSettingsPtrOutput) ToLlmBlueprintLlmSettingsPtrOutputWithContext(ctx context.Context) LlmBlueprintLlmSettingsPtrOutput {
+	return o
+}
+
+func (o LlmBlueprintLlmSettingsPtrOutput) Elem() LlmBlueprintLlmSettingsOutput {
+	return o.ApplyT(func(v *LlmBlueprintLlmSettings) LlmBlueprintLlmSettings {
+		if v != nil {
+			return *v
+		}
+		var ret LlmBlueprintLlmSettings
+		return ret
+	}).(LlmBlueprintLlmSettingsOutput)
+}
+
+// The maximum number of tokens allowed in the completion. The combined count of this value and prompt tokens must be below the model's maximum context size, where prompt token count is comprised of system prompt, user prompt, recent chat history, and vector database citations.
+func (o LlmBlueprintLlmSettingsPtrOutput) MaxCompletionLength() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *LlmBlueprintLlmSettings) *int {
+		if v == nil {
+			return nil
+		}
+		return v.MaxCompletionLength
+	}).(pulumi.IntPtrOutput)
+}
+
+// Guides the style of the LLM response. It is a 'universal' prompt, prepended to all individual prompts.
+func (o LlmBlueprintLlmSettingsPtrOutput) SystemPrompt() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *LlmBlueprintLlmSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.SystemPrompt
+	}).(pulumi.StringPtrOutput)
+}
+
+// Controls the randomness of model output, where higher values return more diverse output and lower values return more deterministic results.
+func (o LlmBlueprintLlmSettingsPtrOutput) Temperature() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v *LlmBlueprintLlmSettings) *float64 {
+		if v == nil {
+			return nil
+		}
+		return v.Temperature
+	}).(pulumi.Float64PtrOutput)
+}
+
+// Threshold that controls the selection of words included in the response, based on a cumulative probability cutoff for token selection. Higher numbers return more diverse options for outputs.
+func (o LlmBlueprintLlmSettingsPtrOutput) TopP() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v *LlmBlueprintLlmSettings) *float64 {
+		if v == nil {
+			return nil
+		}
+		return v.TopP
+	}).(pulumi.Float64PtrOutput)
+}
+
+type LlmBlueprintVectorDatabaseSettings struct {
+	// The maximum number of documents to retrieve from the Vector Database.
+	MaxDocumentsRetrievedPerPrompt *int `pulumi:"maxDocumentsRetrievedPerPrompt"`
+	// The maximum number of tokens to retrieve from the Vector Database.
+	MaxTokens *int `pulumi:"maxTokens"`
+}
+
+// LlmBlueprintVectorDatabaseSettingsInput is an input type that accepts LlmBlueprintVectorDatabaseSettingsArgs and LlmBlueprintVectorDatabaseSettingsOutput values.
+// You can construct a concrete instance of `LlmBlueprintVectorDatabaseSettingsInput` via:
+//
+//	LlmBlueprintVectorDatabaseSettingsArgs{...}
+type LlmBlueprintVectorDatabaseSettingsInput interface {
+	pulumi.Input
+
+	ToLlmBlueprintVectorDatabaseSettingsOutput() LlmBlueprintVectorDatabaseSettingsOutput
+	ToLlmBlueprintVectorDatabaseSettingsOutputWithContext(context.Context) LlmBlueprintVectorDatabaseSettingsOutput
+}
+
+type LlmBlueprintVectorDatabaseSettingsArgs struct {
+	// The maximum number of documents to retrieve from the Vector Database.
+	MaxDocumentsRetrievedPerPrompt pulumi.IntPtrInput `pulumi:"maxDocumentsRetrievedPerPrompt"`
+	// The maximum number of tokens to retrieve from the Vector Database.
+	MaxTokens pulumi.IntPtrInput `pulumi:"maxTokens"`
+}
+
+func (LlmBlueprintVectorDatabaseSettingsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*LlmBlueprintVectorDatabaseSettings)(nil)).Elem()
+}
+
+func (i LlmBlueprintVectorDatabaseSettingsArgs) ToLlmBlueprintVectorDatabaseSettingsOutput() LlmBlueprintVectorDatabaseSettingsOutput {
+	return i.ToLlmBlueprintVectorDatabaseSettingsOutputWithContext(context.Background())
+}
+
+func (i LlmBlueprintVectorDatabaseSettingsArgs) ToLlmBlueprintVectorDatabaseSettingsOutputWithContext(ctx context.Context) LlmBlueprintVectorDatabaseSettingsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(LlmBlueprintVectorDatabaseSettingsOutput)
+}
+
+func (i LlmBlueprintVectorDatabaseSettingsArgs) ToLlmBlueprintVectorDatabaseSettingsPtrOutput() LlmBlueprintVectorDatabaseSettingsPtrOutput {
+	return i.ToLlmBlueprintVectorDatabaseSettingsPtrOutputWithContext(context.Background())
+}
+
+func (i LlmBlueprintVectorDatabaseSettingsArgs) ToLlmBlueprintVectorDatabaseSettingsPtrOutputWithContext(ctx context.Context) LlmBlueprintVectorDatabaseSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(LlmBlueprintVectorDatabaseSettingsOutput).ToLlmBlueprintVectorDatabaseSettingsPtrOutputWithContext(ctx)
+}
+
+// LlmBlueprintVectorDatabaseSettingsPtrInput is an input type that accepts LlmBlueprintVectorDatabaseSettingsArgs, LlmBlueprintVectorDatabaseSettingsPtr and LlmBlueprintVectorDatabaseSettingsPtrOutput values.
+// You can construct a concrete instance of `LlmBlueprintVectorDatabaseSettingsPtrInput` via:
+//
+//	        LlmBlueprintVectorDatabaseSettingsArgs{...}
+//
+//	or:
+//
+//	        nil
+type LlmBlueprintVectorDatabaseSettingsPtrInput interface {
+	pulumi.Input
+
+	ToLlmBlueprintVectorDatabaseSettingsPtrOutput() LlmBlueprintVectorDatabaseSettingsPtrOutput
+	ToLlmBlueprintVectorDatabaseSettingsPtrOutputWithContext(context.Context) LlmBlueprintVectorDatabaseSettingsPtrOutput
+}
+
+type llmBlueprintVectorDatabaseSettingsPtrType LlmBlueprintVectorDatabaseSettingsArgs
+
+func LlmBlueprintVectorDatabaseSettingsPtr(v *LlmBlueprintVectorDatabaseSettingsArgs) LlmBlueprintVectorDatabaseSettingsPtrInput {
+	return (*llmBlueprintVectorDatabaseSettingsPtrType)(v)
+}
+
+func (*llmBlueprintVectorDatabaseSettingsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**LlmBlueprintVectorDatabaseSettings)(nil)).Elem()
+}
+
+func (i *llmBlueprintVectorDatabaseSettingsPtrType) ToLlmBlueprintVectorDatabaseSettingsPtrOutput() LlmBlueprintVectorDatabaseSettingsPtrOutput {
+	return i.ToLlmBlueprintVectorDatabaseSettingsPtrOutputWithContext(context.Background())
+}
+
+func (i *llmBlueprintVectorDatabaseSettingsPtrType) ToLlmBlueprintVectorDatabaseSettingsPtrOutputWithContext(ctx context.Context) LlmBlueprintVectorDatabaseSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(LlmBlueprintVectorDatabaseSettingsPtrOutput)
+}
+
+type LlmBlueprintVectorDatabaseSettingsOutput struct{ *pulumi.OutputState }
+
+func (LlmBlueprintVectorDatabaseSettingsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*LlmBlueprintVectorDatabaseSettings)(nil)).Elem()
+}
+
+func (o LlmBlueprintVectorDatabaseSettingsOutput) ToLlmBlueprintVectorDatabaseSettingsOutput() LlmBlueprintVectorDatabaseSettingsOutput {
+	return o
+}
+
+func (o LlmBlueprintVectorDatabaseSettingsOutput) ToLlmBlueprintVectorDatabaseSettingsOutputWithContext(ctx context.Context) LlmBlueprintVectorDatabaseSettingsOutput {
+	return o
+}
+
+func (o LlmBlueprintVectorDatabaseSettingsOutput) ToLlmBlueprintVectorDatabaseSettingsPtrOutput() LlmBlueprintVectorDatabaseSettingsPtrOutput {
+	return o.ToLlmBlueprintVectorDatabaseSettingsPtrOutputWithContext(context.Background())
+}
+
+func (o LlmBlueprintVectorDatabaseSettingsOutput) ToLlmBlueprintVectorDatabaseSettingsPtrOutputWithContext(ctx context.Context) LlmBlueprintVectorDatabaseSettingsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v LlmBlueprintVectorDatabaseSettings) *LlmBlueprintVectorDatabaseSettings {
+		return &v
+	}).(LlmBlueprintVectorDatabaseSettingsPtrOutput)
+}
+
+// The maximum number of documents to retrieve from the Vector Database.
+func (o LlmBlueprintVectorDatabaseSettingsOutput) MaxDocumentsRetrievedPerPrompt() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v LlmBlueprintVectorDatabaseSettings) *int { return v.MaxDocumentsRetrievedPerPrompt }).(pulumi.IntPtrOutput)
+}
+
+// The maximum number of tokens to retrieve from the Vector Database.
+func (o LlmBlueprintVectorDatabaseSettingsOutput) MaxTokens() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v LlmBlueprintVectorDatabaseSettings) *int { return v.MaxTokens }).(pulumi.IntPtrOutput)
+}
+
+type LlmBlueprintVectorDatabaseSettingsPtrOutput struct{ *pulumi.OutputState }
+
+func (LlmBlueprintVectorDatabaseSettingsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**LlmBlueprintVectorDatabaseSettings)(nil)).Elem()
+}
+
+func (o LlmBlueprintVectorDatabaseSettingsPtrOutput) ToLlmBlueprintVectorDatabaseSettingsPtrOutput() LlmBlueprintVectorDatabaseSettingsPtrOutput {
+	return o
+}
+
+func (o LlmBlueprintVectorDatabaseSettingsPtrOutput) ToLlmBlueprintVectorDatabaseSettingsPtrOutputWithContext(ctx context.Context) LlmBlueprintVectorDatabaseSettingsPtrOutput {
+	return o
+}
+
+func (o LlmBlueprintVectorDatabaseSettingsPtrOutput) Elem() LlmBlueprintVectorDatabaseSettingsOutput {
+	return o.ApplyT(func(v *LlmBlueprintVectorDatabaseSettings) LlmBlueprintVectorDatabaseSettings {
+		if v != nil {
+			return *v
+		}
+		var ret LlmBlueprintVectorDatabaseSettings
+		return ret
+	}).(LlmBlueprintVectorDatabaseSettingsOutput)
+}
+
+// The maximum number of documents to retrieve from the Vector Database.
+func (o LlmBlueprintVectorDatabaseSettingsPtrOutput) MaxDocumentsRetrievedPerPrompt() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *LlmBlueprintVectorDatabaseSettings) *int {
+		if v == nil {
+			return nil
+		}
+		return v.MaxDocumentsRetrievedPerPrompt
+	}).(pulumi.IntPtrOutput)
+}
+
+// The maximum number of tokens to retrieve from the Vector Database.
+func (o LlmBlueprintVectorDatabaseSettingsPtrOutput) MaxTokens() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *LlmBlueprintVectorDatabaseSettings) *int {
+		if v == nil {
+			return nil
+		}
+		return v.MaxTokens
+	}).(pulumi.IntPtrOutput)
 }
 
 type VectorDatabaseChunkingParameters struct {
@@ -1890,6 +2295,10 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentSettingsAssociationIdPtrInput)(nil)).Elem(), DeploymentSettingsAssociationIdArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentSettingsPredictionsSettingsInput)(nil)).Elem(), DeploymentSettingsPredictionsSettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentSettingsPredictionsSettingsPtrInput)(nil)).Elem(), DeploymentSettingsPredictionsSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*LlmBlueprintLlmSettingsInput)(nil)).Elem(), LlmBlueprintLlmSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*LlmBlueprintLlmSettingsPtrInput)(nil)).Elem(), LlmBlueprintLlmSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*LlmBlueprintVectorDatabaseSettingsInput)(nil)).Elem(), LlmBlueprintVectorDatabaseSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*LlmBlueprintVectorDatabaseSettingsPtrInput)(nil)).Elem(), LlmBlueprintVectorDatabaseSettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*VectorDatabaseChunkingParametersInput)(nil)).Elem(), VectorDatabaseChunkingParametersArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*VectorDatabaseChunkingParametersPtrInput)(nil)).Elem(), VectorDatabaseChunkingParametersArgs{})
 	pulumi.RegisterOutputType(ApplicationSourceResourceSettingsOutput{})
@@ -1914,6 +2323,10 @@ func init() {
 	pulumi.RegisterOutputType(DeploymentSettingsAssociationIdPtrOutput{})
 	pulumi.RegisterOutputType(DeploymentSettingsPredictionsSettingsOutput{})
 	pulumi.RegisterOutputType(DeploymentSettingsPredictionsSettingsPtrOutput{})
+	pulumi.RegisterOutputType(LlmBlueprintLlmSettingsOutput{})
+	pulumi.RegisterOutputType(LlmBlueprintLlmSettingsPtrOutput{})
+	pulumi.RegisterOutputType(LlmBlueprintVectorDatabaseSettingsOutput{})
+	pulumi.RegisterOutputType(LlmBlueprintVectorDatabaseSettingsPtrOutput{})
 	pulumi.RegisterOutputType(VectorDatabaseChunkingParametersOutput{})
 	pulumi.RegisterOutputType(VectorDatabaseChunkingParametersPtrOutput{})
 }

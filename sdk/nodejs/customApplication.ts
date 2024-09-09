@@ -13,9 +13,9 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as datarobot from "@datarobot/pulumi-datarobot";
  *
- * const exampleApplicationSource = new datarobot.ApplicationSource("exampleApplicationSource", {localFiles: [
- *     "start-app.sh",
- *     "streamlit-app.py",
+ * const exampleApplicationSource = new datarobot.ApplicationSource("exampleApplicationSource", {files: [
+ *     ["start-app.sh"],
+ *     ["streamlit-app.py"],
  * ]});
  * const exampleCustomApplication = new datarobot.CustomApplication("exampleCustomApplication", {
  *     sourceVersionId: exampleApplicationSource.versionId,

@@ -2,6 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
+import * as inputs from "./types/input";
+import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
 /**
@@ -22,7 +24,19 @@ import * as utilities from "./utilities";
  *     description: "Description for the example LLM blueprint",
  *     playgroundId: examplePlayground.id,
  *     llmId: "azure-openai-gpt-3.5-turbo",
+ *     promptType: "ONE_TIME_PROMPT",
  * });
+ * // Optional
+ * // llm_settings {
+ * //   max_completion_length = 1000
+ * //   temperature           = 0.5
+ * //   top_p                 = 0.9
+ * //   system_prompt         = "My Prompt:"
+ * // }
+ * // vector_database_settings = {
+ * //   max_documents_retrieved_per_prompt = 5
+ * //   max_tokens = 1000
+ * // }
  * export const exampleId = exampleLlmBlueprint.id;
  * ```
  */
@@ -63,6 +77,10 @@ export class LlmBlueprint extends pulumi.CustomResource {
      */
     public readonly llmId!: pulumi.Output<string>;
     /**
+     * The LLM settings for the LLM Blueprint.
+     */
+    public readonly llmSettings!: pulumi.Output<outputs.LlmBlueprintLlmSettings | undefined>;
+    /**
      * The name of the LLM Blueprint.
      */
     public readonly name!: pulumi.Output<string>;
@@ -71,9 +89,17 @@ export class LlmBlueprint extends pulumi.CustomResource {
      */
     public readonly playgroundId!: pulumi.Output<string>;
     /**
+     * The prompt type for the LLM Blueprint.
+     */
+    public readonly promptType!: pulumi.Output<string>;
+    /**
      * The id of the Vector Database for the LLM Blueprint.
      */
     public readonly vectorDatabaseId!: pulumi.Output<string | undefined>;
+    /**
+     * The Vector Database settings for the LLM Blueprint.
+     */
+    public readonly vectorDatabaseSettings!: pulumi.Output<outputs.LlmBlueprintVectorDatabaseSettings | undefined>;
 
     /**
      * Create a LlmBlueprint resource with the given unique name, arguments, and options.
@@ -90,9 +116,12 @@ export class LlmBlueprint extends pulumi.CustomResource {
             const state = argsOrState as LlmBlueprintState | undefined;
             resourceInputs["description"] = state ? state.description : undefined;
             resourceInputs["llmId"] = state ? state.llmId : undefined;
+            resourceInputs["llmSettings"] = state ? state.llmSettings : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["playgroundId"] = state ? state.playgroundId : undefined;
+            resourceInputs["promptType"] = state ? state.promptType : undefined;
             resourceInputs["vectorDatabaseId"] = state ? state.vectorDatabaseId : undefined;
+            resourceInputs["vectorDatabaseSettings"] = state ? state.vectorDatabaseSettings : undefined;
         } else {
             const args = argsOrState as LlmBlueprintArgs | undefined;
             if ((!args || args.llmId === undefined) && !opts.urn) {
@@ -103,9 +132,12 @@ export class LlmBlueprint extends pulumi.CustomResource {
             }
             resourceInputs["description"] = args ? args.description : undefined;
             resourceInputs["llmId"] = args ? args.llmId : undefined;
+            resourceInputs["llmSettings"] = args ? args.llmSettings : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["playgroundId"] = args ? args.playgroundId : undefined;
+            resourceInputs["promptType"] = args ? args.promptType : undefined;
             resourceInputs["vectorDatabaseId"] = args ? args.vectorDatabaseId : undefined;
+            resourceInputs["vectorDatabaseSettings"] = args ? args.vectorDatabaseSettings : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(LlmBlueprint.__pulumiType, name, resourceInputs, opts);
@@ -125,6 +157,10 @@ export interface LlmBlueprintState {
      */
     llmId?: pulumi.Input<string>;
     /**
+     * The LLM settings for the LLM Blueprint.
+     */
+    llmSettings?: pulumi.Input<inputs.LlmBlueprintLlmSettings>;
+    /**
      * The name of the LLM Blueprint.
      */
     name?: pulumi.Input<string>;
@@ -133,9 +169,17 @@ export interface LlmBlueprintState {
      */
     playgroundId?: pulumi.Input<string>;
     /**
+     * The prompt type for the LLM Blueprint.
+     */
+    promptType?: pulumi.Input<string>;
+    /**
      * The id of the Vector Database for the LLM Blueprint.
      */
     vectorDatabaseId?: pulumi.Input<string>;
+    /**
+     * The Vector Database settings for the LLM Blueprint.
+     */
+    vectorDatabaseSettings?: pulumi.Input<inputs.LlmBlueprintVectorDatabaseSettings>;
 }
 
 /**
@@ -151,6 +195,10 @@ export interface LlmBlueprintArgs {
      */
     llmId: pulumi.Input<string>;
     /**
+     * The LLM settings for the LLM Blueprint.
+     */
+    llmSettings?: pulumi.Input<inputs.LlmBlueprintLlmSettings>;
+    /**
      * The name of the LLM Blueprint.
      */
     name?: pulumi.Input<string>;
@@ -159,7 +207,15 @@ export interface LlmBlueprintArgs {
      */
     playgroundId: pulumi.Input<string>;
     /**
+     * The prompt type for the LLM Blueprint.
+     */
+    promptType?: pulumi.Input<string>;
+    /**
      * The id of the Vector Database for the LLM Blueprint.
      */
     vectorDatabaseId?: pulumi.Input<string>;
+    /**
+     * The Vector Database settings for the LLM Blueprint.
+     */
+    vectorDatabaseSettings?: pulumi.Input<inputs.LlmBlueprintVectorDatabaseSettings>;
 }

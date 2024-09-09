@@ -29,9 +29,13 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			exampleApplicationSource, err := datarobot.NewApplicationSource(ctx, "exampleApplicationSource", &datarobot.ApplicationSourceArgs{
-//				LocalFiles: pulumi.StringArray{
-//					pulumi.String("start-app.sh"),
-//					pulumi.String("streamlit-app.py"),
+//				Files: pulumi.Any{
+//					[]string{
+//						"start-app.sh",
+//					},
+//					[]string{
+//						"streamlit-app.py",
+//					},
 //				},
 //			})
 //			if err != nil {

@@ -23,6 +23,8 @@ __all__ = [
     'DeploymentSettings',
     'DeploymentSettingsAssociationId',
     'DeploymentSettingsPredictionsSettings',
+    'LlmBlueprintLlmSettings',
+    'LlmBlueprintVectorDatabaseSettings',
     'VectorDatabaseChunkingParameters',
 ]
 
@@ -96,6 +98,14 @@ class CustomModelGuardConfiguration(dict):
             suggest = "deployment_id"
         elif key == "inputColumnName":
             suggest = "input_column_name"
+        elif key == "llmType":
+            suggest = "llm_type"
+        elif key == "openaiApiBase":
+            suggest = "openai_api_base"
+        elif key == "openaiCredential":
+            suggest = "openai_credential"
+        elif key == "openaiDeploymentId":
+            suggest = "openai_deployment_id"
         elif key == "outputColumnName":
             suggest = "output_column_name"
 
@@ -117,6 +127,10 @@ class CustomModelGuardConfiguration(dict):
                  template_name: str,
                  deployment_id: Optional[str] = None,
                  input_column_name: Optional[str] = None,
+                 llm_type: Optional[str] = None,
+                 openai_api_base: Optional[str] = None,
+                 openai_credential: Optional[str] = None,
+                 openai_deployment_id: Optional[str] = None,
                  output_column_name: Optional[str] = None):
         """
         :param 'CustomModelGuardConfigurationInterventionArgs' intervention: The intervention for the guard configuration.
@@ -125,6 +139,10 @@ class CustomModelGuardConfiguration(dict):
         :param str template_name: The template name of the guard configuration.
         :param str deployment_id: The deployment ID of this guard.
         :param str input_column_name: The input column name of this guard.
+        :param str llm_type: The LLM type for this guard.
+        :param str openai_api_base: The OpenAI API base URL for this guard.
+        :param str openai_credential: The ID of an OpenAI credential for this guard.
+        :param str openai_deployment_id: The ID of an OpenAI deployment for this guard.
         :param str output_column_name: The output column name of this guard.
         """
         pulumi.set(__self__, "intervention", intervention)
@@ -135,6 +153,14 @@ class CustomModelGuardConfiguration(dict):
             pulumi.set(__self__, "deployment_id", deployment_id)
         if input_column_name is not None:
             pulumi.set(__self__, "input_column_name", input_column_name)
+        if llm_type is not None:
+            pulumi.set(__self__, "llm_type", llm_type)
+        if openai_api_base is not None:
+            pulumi.set(__self__, "openai_api_base", openai_api_base)
+        if openai_credential is not None:
+            pulumi.set(__self__, "openai_credential", openai_credential)
+        if openai_deployment_id is not None:
+            pulumi.set(__self__, "openai_deployment_id", openai_deployment_id)
         if output_column_name is not None:
             pulumi.set(__self__, "output_column_name", output_column_name)
 
@@ -185,6 +211,38 @@ class CustomModelGuardConfiguration(dict):
         The input column name of this guard.
         """
         return pulumi.get(self, "input_column_name")
+
+    @property
+    @pulumi.getter(name="llmType")
+    def llm_type(self) -> Optional[str]:
+        """
+        The LLM type for this guard.
+        """
+        return pulumi.get(self, "llm_type")
+
+    @property
+    @pulumi.getter(name="openaiApiBase")
+    def openai_api_base(self) -> Optional[str]:
+        """
+        The OpenAI API base URL for this guard.
+        """
+        return pulumi.get(self, "openai_api_base")
+
+    @property
+    @pulumi.getter(name="openaiCredential")
+    def openai_credential(self) -> Optional[str]:
+        """
+        The ID of an OpenAI credential for this guard.
+        """
+        return pulumi.get(self, "openai_credential")
+
+    @property
+    @pulumi.getter(name="openaiDeploymentId")
+    def openai_deployment_id(self) -> Optional[str]:
+        """
+        The ID of an OpenAI deployment for this guard.
+        """
+        return pulumi.get(self, "openai_deployment_id")
 
     @property
     @pulumi.getter(name="outputColumnName")
@@ -561,6 +619,8 @@ class DeploymentSettingsAssociationId(dict):
             suggest = "auto_generate_id"
         elif key == "featureName":
             suggest = "feature_name"
+        elif key == "requiredInPredictionRequests":
+            suggest = "required_in_prediction_requests"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in DeploymentSettingsAssociationId. Access the value via the '{suggest}' property getter instead.")
@@ -575,13 +635,16 @@ class DeploymentSettingsAssociationId(dict):
 
     def __init__(__self__, *,
                  auto_generate_id: bool,
-                 feature_name: str):
+                 feature_name: str,
+                 required_in_prediction_requests: bool):
         """
         :param bool auto_generate_id: Whether to automatically generate an association ID.
         :param str feature_name: The name of the feature to use as the association ID.
+        :param bool required_in_prediction_requests: Whether the association ID is required in prediction requests.
         """
         pulumi.set(__self__, "auto_generate_id", auto_generate_id)
         pulumi.set(__self__, "feature_name", feature_name)
+        pulumi.set(__self__, "required_in_prediction_requests", required_in_prediction_requests)
 
     @property
     @pulumi.getter(name="autoGenerateId")
@@ -598,6 +661,14 @@ class DeploymentSettingsAssociationId(dict):
         The name of the feature to use as the association ID.
         """
         return pulumi.get(self, "feature_name")
+
+    @property
+    @pulumi.getter(name="requiredInPredictionRequests")
+    def required_in_prediction_requests(self) -> bool:
+        """
+        Whether the association ID is required in prediction requests.
+        """
+        return pulumi.get(self, "required_in_prediction_requests")
 
 
 @pulumi.output_type
@@ -659,6 +730,132 @@ class DeploymentSettingsPredictionsSettings(dict):
         Whether to use real-time predictions.
         """
         return pulumi.get(self, "real_time")
+
+
+@pulumi.output_type
+class LlmBlueprintLlmSettings(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "maxCompletionLength":
+            suggest = "max_completion_length"
+        elif key == "systemPrompt":
+            suggest = "system_prompt"
+        elif key == "topP":
+            suggest = "top_p"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in LlmBlueprintLlmSettings. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        LlmBlueprintLlmSettings.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        LlmBlueprintLlmSettings.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 max_completion_length: Optional[int] = None,
+                 system_prompt: Optional[str] = None,
+                 temperature: Optional[float] = None,
+                 top_p: Optional[float] = None):
+        """
+        :param int max_completion_length: The maximum number of tokens allowed in the completion. The combined count of this value and prompt tokens must be below the model's maximum context size, where prompt token count is comprised of system prompt, user prompt, recent chat history, and vector database citations.
+        :param str system_prompt: Guides the style of the LLM response. It is a 'universal' prompt, prepended to all individual prompts.
+        :param float temperature: Controls the randomness of model output, where higher values return more diverse output and lower values return more deterministic results.
+        :param float top_p: Threshold that controls the selection of words included in the response, based on a cumulative probability cutoff for token selection. Higher numbers return more diverse options for outputs.
+        """
+        if max_completion_length is not None:
+            pulumi.set(__self__, "max_completion_length", max_completion_length)
+        if system_prompt is not None:
+            pulumi.set(__self__, "system_prompt", system_prompt)
+        if temperature is not None:
+            pulumi.set(__self__, "temperature", temperature)
+        if top_p is not None:
+            pulumi.set(__self__, "top_p", top_p)
+
+    @property
+    @pulumi.getter(name="maxCompletionLength")
+    def max_completion_length(self) -> Optional[int]:
+        """
+        The maximum number of tokens allowed in the completion. The combined count of this value and prompt tokens must be below the model's maximum context size, where prompt token count is comprised of system prompt, user prompt, recent chat history, and vector database citations.
+        """
+        return pulumi.get(self, "max_completion_length")
+
+    @property
+    @pulumi.getter(name="systemPrompt")
+    def system_prompt(self) -> Optional[str]:
+        """
+        Guides the style of the LLM response. It is a 'universal' prompt, prepended to all individual prompts.
+        """
+        return pulumi.get(self, "system_prompt")
+
+    @property
+    @pulumi.getter
+    def temperature(self) -> Optional[float]:
+        """
+        Controls the randomness of model output, where higher values return more diverse output and lower values return more deterministic results.
+        """
+        return pulumi.get(self, "temperature")
+
+    @property
+    @pulumi.getter(name="topP")
+    def top_p(self) -> Optional[float]:
+        """
+        Threshold that controls the selection of words included in the response, based on a cumulative probability cutoff for token selection. Higher numbers return more diverse options for outputs.
+        """
+        return pulumi.get(self, "top_p")
+
+
+@pulumi.output_type
+class LlmBlueprintVectorDatabaseSettings(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "maxDocumentsRetrievedPerPrompt":
+            suggest = "max_documents_retrieved_per_prompt"
+        elif key == "maxTokens":
+            suggest = "max_tokens"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in LlmBlueprintVectorDatabaseSettings. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        LlmBlueprintVectorDatabaseSettings.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        LlmBlueprintVectorDatabaseSettings.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 max_documents_retrieved_per_prompt: Optional[int] = None,
+                 max_tokens: Optional[int] = None):
+        """
+        :param int max_documents_retrieved_per_prompt: The maximum number of documents to retrieve from the Vector Database.
+        :param int max_tokens: The maximum number of tokens to retrieve from the Vector Database.
+        """
+        if max_documents_retrieved_per_prompt is not None:
+            pulumi.set(__self__, "max_documents_retrieved_per_prompt", max_documents_retrieved_per_prompt)
+        if max_tokens is not None:
+            pulumi.set(__self__, "max_tokens", max_tokens)
+
+    @property
+    @pulumi.getter(name="maxDocumentsRetrievedPerPrompt")
+    def max_documents_retrieved_per_prompt(self) -> Optional[int]:
+        """
+        The maximum number of documents to retrieve from the Vector Database.
+        """
+        return pulumi.get(self, "max_documents_retrieved_per_prompt")
+
+    @property
+    @pulumi.getter(name="maxTokens")
+    def max_tokens(self) -> Optional[int]:
+        """
+        The maximum number of tokens to retrieve from the Vector Database.
+        """
+        return pulumi.get(self, "max_tokens")
 
 
 @pulumi.output_type

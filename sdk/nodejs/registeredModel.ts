@@ -76,6 +76,10 @@ export class RegisteredModel extends pulumi.CustomResource {
      * The ID of the Registered Model Version.
      */
     public /*out*/ readonly versionId!: pulumi.Output<string>;
+    /**
+     * The name of the Registered Model Version.
+     */
+    public readonly versionName!: pulumi.Output<string>;
 
     /**
      * Create a RegisteredModel resource with the given unique name, arguments, and options.
@@ -94,6 +98,7 @@ export class RegisteredModel extends pulumi.CustomResource {
             resourceInputs["description"] = state ? state.description : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["versionId"] = state ? state.versionId : undefined;
+            resourceInputs["versionName"] = state ? state.versionName : undefined;
         } else {
             const args = argsOrState as RegisteredModelArgs | undefined;
             if ((!args || args.customModelVersionId === undefined) && !opts.urn) {
@@ -102,6 +107,7 @@ export class RegisteredModel extends pulumi.CustomResource {
             resourceInputs["customModelVersionId"] = args ? args.customModelVersionId : undefined;
             resourceInputs["description"] = args ? args.description : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
+            resourceInputs["versionName"] = args ? args.versionName : undefined;
             resourceInputs["versionId"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -129,6 +135,10 @@ export interface RegisteredModelState {
      * The ID of the Registered Model Version.
      */
     versionId?: pulumi.Input<string>;
+    /**
+     * The name of the Registered Model Version.
+     */
+    versionName?: pulumi.Input<string>;
 }
 
 /**
@@ -147,4 +157,8 @@ export interface RegisteredModelArgs {
      * The name of the Registered Model.
      */
     name?: pulumi.Input<string>;
+    /**
+     * The name of the Registered Model Version.
+     */
+    versionName?: pulumi.Input<string>;
 }

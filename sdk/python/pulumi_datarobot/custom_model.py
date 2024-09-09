@@ -894,6 +894,64 @@ class CustomModel(pulumi.CustomResource):
         """
         Data set from file
 
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_datarobot as datarobot
+
+        example_remote_repository = datarobot.RemoteRepository("exampleRemoteRepository",
+            description="GitHub repository with Datarobot user models",
+            location="https://github.com/datarobot/datarobot-user-models",
+            source_type="github")
+        # set the credential id for private repositories
+        # credential_id = datarobot_api_token_credential.example.id
+        example_custom_model = datarobot.CustomModel("exampleCustomModel",
+            description="An example custom model from GitHub repository",
+            files=[
+                "file1.py",
+                "file2.py",
+            ],
+            target_type="Binary",
+            target_name="my_label",
+            base_environment_name="[GenAI] Python 3.11 with Moderations")
+        # Optional
+        # source_remote_repositories = [
+        #   {
+        #     id  = datarobot_remote_repository.example.id
+        #     ref = "master"
+        #     source_paths = [
+        #       "model_templates/python3_dummy_binary",
+        #     ]
+        #   }
+        # ]
+        # guard_configurations = [
+        #   {
+        #     template_name = "Rouge 1"
+        #     name          = "Rouge 1 response"
+        #     stages        = ["response"]
+        #     intervention = {
+        #       action  = "block"
+        #       message = "response has been blocked by Rogue 1 guard"
+        #       condition = {
+        #         comparand  = 0.8
+        #         comparator = "lessThan"
+        #       }
+        #     }
+        #   },
+        # ]
+        # overall_moderation_configuration = {
+        #   timeout_sec    = 120
+        #   timeout_action = "score"
+        # }
+        # resource_settings = {
+        #   memory_mb      = 512
+        #   replicas       = 2
+        #   network_access = "NONE"
+        # }
+        pulumi.export("exampleId", example_custom_model.id)
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] base_environment_id: The ID of the base environment for the Custom Model.
@@ -929,6 +987,64 @@ class CustomModel(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Data set from file
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_datarobot as datarobot
+
+        example_remote_repository = datarobot.RemoteRepository("exampleRemoteRepository",
+            description="GitHub repository with Datarobot user models",
+            location="https://github.com/datarobot/datarobot-user-models",
+            source_type="github")
+        # set the credential id for private repositories
+        # credential_id = datarobot_api_token_credential.example.id
+        example_custom_model = datarobot.CustomModel("exampleCustomModel",
+            description="An example custom model from GitHub repository",
+            files=[
+                "file1.py",
+                "file2.py",
+            ],
+            target_type="Binary",
+            target_name="my_label",
+            base_environment_name="[GenAI] Python 3.11 with Moderations")
+        # Optional
+        # source_remote_repositories = [
+        #   {
+        #     id  = datarobot_remote_repository.example.id
+        #     ref = "master"
+        #     source_paths = [
+        #       "model_templates/python3_dummy_binary",
+        #     ]
+        #   }
+        # ]
+        # guard_configurations = [
+        #   {
+        #     template_name = "Rouge 1"
+        #     name          = "Rouge 1 response"
+        #     stages        = ["response"]
+        #     intervention = {
+        #       action  = "block"
+        #       message = "response has been blocked by Rogue 1 guard"
+        #       condition = {
+        #         comparand  = 0.8
+        #         comparator = "lessThan"
+        #       }
+        #     }
+        #   },
+        # ]
+        # overall_moderation_configuration = {
+        #   timeout_sec    = 120
+        #   timeout_action = "score"
+        # }
+        # resource_settings = {
+        #   memory_mb      = 512
+        #   replicas       = 2
+        #   network_access = "NONE"
+        # }
+        pulumi.export("exampleId", example_custom_model.id)
+        ```
 
         :param str resource_name: The name of the resource.
         :param CustomModelArgs args: The arguments to use to populate this resource's properties.

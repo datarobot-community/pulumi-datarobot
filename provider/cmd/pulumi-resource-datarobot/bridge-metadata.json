@@ -7,9 +7,6 @@
             "datarobot_application_source": {
                 "current": "datarobot:index/applicationSource:ApplicationSource",
                 "fields": {
-                    "local_files": {
-                        "maxItemsOne": false
-                    },
                     "runtime_parameter_values": {
                         "maxItemsOne": false
                     }

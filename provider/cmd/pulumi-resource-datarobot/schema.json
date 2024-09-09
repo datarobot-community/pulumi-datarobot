@@ -119,9 +119,25 @@
                     "$ref": "#/types/datarobot:index/CustomModelGuardConfigurationIntervention:CustomModelGuardConfigurationIntervention",
                     "description": "The intervention for the guard configuration.\n"
                 },
+                "llmType": {
+                    "type": "string",
+                    "description": "The LLM type for this guard.\n"
+                },
                 "name": {
                     "type": "string",
                     "description": "The name of the guard configuration.\n"
+                },
+                "openaiApiBase": {
+                    "type": "string",
+                    "description": "The OpenAI API base URL for this guard.\n"
+                },
+                "openaiCredential": {
+                    "type": "string",
+                    "description": "The ID of an OpenAI credential for this guard.\n"
+                },
+                "openaiDeploymentId": {
+                    "type": "string",
+                    "description": "The ID of an OpenAI deployment for this guard.\n"
                 },
                 "outputColumnName": {
                     "type": "string",
@@ -318,12 +334,17 @@
                 "featureName": {
                     "type": "string",
                     "description": "The name of the feature to use as the association ID.\n"
+                },
+                "requiredInPredictionRequests": {
+                    "type": "boolean",
+                    "description": "Whether the association ID is required in prediction requests.\n"
                 }
             },
             "type": "object",
             "required": [
                 "autoGenerateId",
-                "featureName"
+                "featureName",
+                "requiredInPredictionRequests"
             ]
         },
         "datarobot:index/DeploymentSettingsPredictionsSettings:DeploymentSettingsPredictionsSettings": {
@@ -347,6 +368,40 @@
                 "minComputes",
                 "realTime"
             ]
+        },
+        "datarobot:index/LlmBlueprintLlmSettings:LlmBlueprintLlmSettings": {
+            "properties": {
+                "maxCompletionLength": {
+                    "type": "integer",
+                    "description": "The maximum number of tokens allowed in the completion. The combined count of this value and prompt tokens must be below the model's maximum context size, where prompt token count is comprised of system prompt, user prompt, recent chat history, and vector database citations.\n"
+                },
+                "systemPrompt": {
+                    "type": "string",
+                    "description": "Guides the style of the LLM response. It is a 'universal' prompt, prepended to all individual prompts.\n"
+                },
+                "temperature": {
+                    "type": "number",
+                    "description": "Controls the randomness of model output, where higher values return more diverse output and lower values return more deterministic results.\n"
+                },
+                "topP": {
+                    "type": "number",
+                    "description": "Threshold that controls the selection of words included in the response, based on a cumulative probability cutoff for token selection. Higher numbers return more diverse options for outputs.\n"
+                }
+            },
+            "type": "object"
+        },
+        "datarobot:index/LlmBlueprintVectorDatabaseSettings:LlmBlueprintVectorDatabaseSettings": {
+            "properties": {
+                "maxDocumentsRetrievedPerPrompt": {
+                    "type": "integer",
+                    "description": "The maximum number of documents to retrieve from the Vector Database.\n"
+                },
+                "maxTokens": {
+                    "type": "integer",
+                    "description": "The maximum number of tokens to retrieve from the Vector Database.\n"
+                }
+            },
+            "type": "object"
         },
         "datarobot:index/VectorDatabaseChunkingParameters:VectorDatabaseChunkingParameters": {
             "properties": {
@@ -481,14 +536,15 @@
             }
         },
         "datarobot:index/applicationSource:ApplicationSource": {
-            "description": "Application Source\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@datarobot/pulumi-datarobot\";\n\nconst example = new datarobot.ApplicationSource(\"example\", {localFiles: [\n    \"start-app.sh\",\n    \"streamlit-app.py\",\n]});\nexport const datarobotApplicationSourceId = example.id;\nexport const datarobotApplicationSourceVersionId = example.versionId;\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample = datarobot.ApplicationSource(\"example\", local_files=[\n    \"start-app.sh\",\n    \"streamlit-app.py\",\n])\npulumi.export(\"datarobotApplicationSourceId\", example.id)\npulumi.export(\"datarobotApplicationSourceVersionId\", example.version_id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = Pulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Datarobot.ApplicationSource(\"example\", new()\n    {\n        LocalFiles = new[]\n        {\n            \"start-app.sh\",\n            \"streamlit-app.py\",\n        },\n    });\n\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"datarobotApplicationSourceId\"] = example.Id,\n        [\"datarobotApplicationSourceVersionId\"] = example.VersionId,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texample, err := datarobot.NewApplicationSource(ctx, \"example\", \u0026datarobot.ApplicationSourceArgs{\n\t\t\tLocalFiles: pulumi.StringArray{\n\t\t\t\tpulumi.String(\"start-app.sh\"),\n\t\t\t\tpulumi.String(\"streamlit-app.py\"),\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"datarobotApplicationSourceId\", example.ID())\n\t\tctx.Export(\"datarobotApplicationSourceVersionId\", example.VersionId)\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.ApplicationSource;\nimport com.pulumi.datarobot.ApplicationSourceArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new ApplicationSource(\"example\", ApplicationSourceArgs.builder()\n            .localFiles(            \n                \"start-app.sh\",\n                \"streamlit-app.py\")\n            .build());\n\n        ctx.export(\"datarobotApplicationSourceId\", example.id());\n        ctx.export(\"datarobotApplicationSourceVersionId\", example.versionId());\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: datarobot:ApplicationSource\n    properties:\n      localFiles:\n        - start-app.sh\n        - streamlit-app.py\noutputs:\n  datarobotApplicationSourceId: ${example.id}\n  datarobotApplicationSourceVersionId: ${example.versionId}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "description": "Application Source\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@datarobot/pulumi-datarobot\";\n\nconst example = new datarobot.ApplicationSource(\"example\", {files: [\n    [\"start-app.sh\"],\n    [\"streamlit-app.py\"],\n]});\nexport const datarobotApplicationSourceId = example.id;\nexport const datarobotApplicationSourceVersionId = example.versionId;\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample = datarobot.ApplicationSource(\"example\", files=[\n    [\"start-app.sh\"],\n    [\"streamlit-app.py\"],\n])\npulumi.export(\"datarobotApplicationSourceId\", example.id)\npulumi.export(\"datarobotApplicationSourceVersionId\", example.version_id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = Pulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Datarobot.ApplicationSource(\"example\", new()\n    {\n        Files = new[]\n        {\n            new[]\n            {\n                \"start-app.sh\",\n            },\n            new[]\n            {\n                \"streamlit-app.py\",\n            },\n        },\n    });\n\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"datarobotApplicationSourceId\"] = example.Id,\n        [\"datarobotApplicationSourceVersionId\"] = example.VersionId,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texample, err := datarobot.NewApplicationSource(ctx, \"example\", \u0026datarobot.ApplicationSourceArgs{\n\t\t\tFiles: pulumi.Any{\n\t\t\t\t[]string{\n\t\t\t\t\t\"start-app.sh\",\n\t\t\t\t},\n\t\t\t\t[]string{\n\t\t\t\t\t\"streamlit-app.py\",\n\t\t\t\t},\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"datarobotApplicationSourceId\", example.ID())\n\t\tctx.Export(\"datarobotApplicationSourceVersionId\", example.VersionId)\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.ApplicationSource;\nimport com.pulumi.datarobot.ApplicationSourceArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new ApplicationSource(\"example\", ApplicationSourceArgs.builder()\n            .files(            \n                \"start-app.sh\",\n                \"streamlit-app.py\")\n            .build());\n\n        ctx.export(\"datarobotApplicationSourceId\", example.id());\n        ctx.export(\"datarobotApplicationSourceVersionId\", example.versionId());\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: datarobot:ApplicationSource\n    properties:\n      files:\n        - - start-app.sh\n        - - streamlit-app.py\noutputs:\n  datarobotApplicationSourceId: ${example.id}\n  datarobotApplicationSourceVersionId: ${example.versionId}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
             "properties": {
-                "localFiles": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
-                    "description": "The list of local file paths used to build the Application Source.\n"
+                "files": {
+                    "$ref": "pulumi.json#/Any",
+                    "description": "The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.\n"
+                },
+                "folderPath": {
+                    "type": "string",
+                    "description": "The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.\n"
                 },
                 "name": {
                     "type": "string",
@@ -511,19 +567,19 @@
                 }
             },
             "required": [
-                "localFiles",
                 "name",
                 "resourceSettings",
                 "runtimeParameterValues",
                 "versionId"
             ],
             "inputProperties": {
-                "localFiles": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
-                    "description": "The list of local file paths used to build the Application Source.\n"
+                "files": {
+                    "$ref": "pulumi.json#/Any",
+                    "description": "The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.\n"
+                },
+                "folderPath": {
+                    "type": "string",
+                    "description": "The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.\n"
                 },
                 "name": {
                     "type": "string",
@@ -541,18 +597,16 @@
                     "description": "The runtime parameter values for the Application Source.\n"
                 }
             },
-            "requiredInputs": [
-                "localFiles"
-            ],
             "stateInputs": {
                 "description": "Input properties used for looking up and filtering ApplicationSource resources.\n",
                 "properties": {
-                    "localFiles": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        },
-                        "description": "The list of local file paths used to build the Application Source.\n"
+                    "files": {
+                        "$ref": "pulumi.json#/Any",
+                        "description": "The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.\n"
+                    },
+                    "folderPath": {
+                        "type": "string",
+                        "description": "The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.\n"
                     },
                     "name": {
                         "type": "string",
@@ -654,7 +708,7 @@
             }
         },
         "datarobot:index/customApplication:CustomApplication": {
-            "description": "Custom Application\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@datarobot/pulumi-datarobot\";\n\nconst exampleApplicationSource = new datarobot.ApplicationSource(\"exampleApplicationSource\", {localFiles: [\n    \"start-app.sh\",\n    \"streamlit-app.py\",\n]});\nconst exampleCustomApplication = new datarobot.CustomApplication(\"exampleCustomApplication\", {\n    sourceVersionId: exampleApplicationSource.versionId,\n    externalAccessEnabled: true,\n    externalAccessRecipients: [\"recipient@example.com\"],\n});\nexport const datarobotCustomApplicationId = exampleCustomApplication.id;\nexport const datarobotCustomApplicationSourceId = exampleCustomApplication.sourceId;\nexport const datarobotCustomApplicationSourceVersionId = exampleCustomApplication.sourceVersionId;\nexport const datarobotCustomApplicationUrl = exampleCustomApplication.applicationUrl;\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample_application_source = datarobot.ApplicationSource(\"exampleApplicationSource\", local_files=[\n    \"start-app.sh\",\n    \"streamlit-app.py\",\n])\nexample_custom_application = datarobot.CustomApplication(\"exampleCustomApplication\",\n    source_version_id=example_application_source.version_id,\n    external_access_enabled=True,\n    external_access_recipients=[\"recipient@example.com\"])\npulumi.export(\"datarobotCustomApplicationId\", example_custom_application.id)\npulumi.export(\"datarobotCustomApplicationSourceId\", example_custom_application.source_id)\npulumi.export(\"datarobotCustomApplicationSourceVersionId\", example_custom_application.source_version_id)\npulumi.export(\"datarobotCustomApplicationUrl\", example_custom_application.application_url)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = Pulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var exampleApplicationSource = new Datarobot.ApplicationSource(\"exampleApplicationSource\", new()\n    {\n        LocalFiles = new[]\n        {\n            \"start-app.sh\",\n            \"streamlit-app.py\",\n        },\n    });\n\n    var exampleCustomApplication = new Datarobot.CustomApplication(\"exampleCustomApplication\", new()\n    {\n        SourceVersionId = exampleApplicationSource.VersionId,\n        ExternalAccessEnabled = true,\n        ExternalAccessRecipients = new[]\n        {\n            \"recipient@example.com\",\n        },\n    });\n\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"datarobotCustomApplicationId\"] = exampleCustomApplication.Id,\n        [\"datarobotCustomApplicationSourceId\"] = exampleCustomApplication.SourceId,\n        [\"datarobotCustomApplicationSourceVersionId\"] = exampleCustomApplication.SourceVersionId,\n        [\"datarobotCustomApplicationUrl\"] = exampleCustomApplication.ApplicationUrl,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texampleApplicationSource, err := datarobot.NewApplicationSource(ctx, \"exampleApplicationSource\", \u0026datarobot.ApplicationSourceArgs{\n\t\t\tLocalFiles: pulumi.StringArray{\n\t\t\t\tpulumi.String(\"start-app.sh\"),\n\t\t\t\tpulumi.String(\"streamlit-app.py\"),\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\texampleCustomApplication, err := datarobot.NewCustomApplication(ctx, \"exampleCustomApplication\", \u0026datarobot.CustomApplicationArgs{\n\t\t\tSourceVersionId:       exampleApplicationSource.VersionId,\n\t\t\tExternalAccessEnabled: pulumi.Bool(true),\n\t\t\tExternalAccessRecipients: pulumi.StringArray{\n\t\t\t\tpulumi.String(\"recipient@example.com\"),\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"datarobotCustomApplicationId\", exampleCustomApplication.ID())\n\t\tctx.Export(\"datarobotCustomApplicationSourceId\", exampleCustomApplication.SourceId)\n\t\tctx.Export(\"datarobotCustomApplicationSourceVersionId\", exampleCustomApplication.SourceVersionId)\n\t\tctx.Export(\"datarobotCustomApplicationUrl\", exampleCustomApplication.ApplicationUrl)\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.ApplicationSource;\nimport com.pulumi.datarobot.ApplicationSourceArgs;\nimport com.pulumi.datarobot.CustomApplication;\nimport com.pulumi.datarobot.CustomApplicationArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var exampleApplicationSource = new ApplicationSource(\"exampleApplicationSource\", ApplicationSourceArgs.builder()\n            .localFiles(            \n                \"start-app.sh\",\n                \"streamlit-app.py\")\n            .build());\n\n        var exampleCustomApplication = new CustomApplication(\"exampleCustomApplication\", CustomApplicationArgs.builder()\n            .sourceVersionId(exampleApplicationSource.versionId())\n            .externalAccessEnabled(true)\n            .externalAccessRecipients(\"recipient@example.com\")\n            .build());\n\n        ctx.export(\"datarobotCustomApplicationId\", exampleCustomApplication.id());\n        ctx.export(\"datarobotCustomApplicationSourceId\", exampleCustomApplication.sourceId());\n        ctx.export(\"datarobotCustomApplicationSourceVersionId\", exampleCustomApplication.sourceVersionId());\n        ctx.export(\"datarobotCustomApplicationUrl\", exampleCustomApplication.applicationUrl());\n    }\n}\n```\n```yaml\nresources:\n  exampleApplicationSource:\n    type: datarobot:ApplicationSource\n    properties:\n      localFiles:\n        - start-app.sh\n        - streamlit-app.py\n  exampleCustomApplication:\n    type: datarobot:CustomApplication\n    properties:\n      sourceVersionId: ${exampleApplicationSource.versionId}\n      # optional settings\n      externalAccessEnabled: true\n      externalAccessRecipients:\n        - recipient@example.com\noutputs:\n  datarobotCustomApplicationId: ${exampleCustomApplication.id}\n  datarobotCustomApplicationSourceId: ${exampleCustomApplication.sourceId}\n  datarobotCustomApplicationSourceVersionId: ${exampleCustomApplication.sourceVersionId}\n  datarobotCustomApplicationUrl: ${exampleCustomApplication.applicationUrl}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "description": "Custom Application\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@datarobot/pulumi-datarobot\";\n\nconst exampleApplicationSource = new datarobot.ApplicationSource(\"exampleApplicationSource\", {files: [\n    [\"start-app.sh\"],\n    [\"streamlit-app.py\"],\n]});\nconst exampleCustomApplication = new datarobot.CustomApplication(\"exampleCustomApplication\", {\n    sourceVersionId: exampleApplicationSource.versionId,\n    externalAccessEnabled: true,\n    externalAccessRecipients: [\"recipient@example.com\"],\n});\nexport const datarobotCustomApplicationId = exampleCustomApplication.id;\nexport const datarobotCustomApplicationSourceId = exampleCustomApplication.sourceId;\nexport const datarobotCustomApplicationSourceVersionId = exampleCustomApplication.sourceVersionId;\nexport const datarobotCustomApplicationUrl = exampleCustomApplication.applicationUrl;\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample_application_source = datarobot.ApplicationSource(\"exampleApplicationSource\", files=[\n    [\"start-app.sh\"],\n    [\"streamlit-app.py\"],\n])\nexample_custom_application = datarobot.CustomApplication(\"exampleCustomApplication\",\n    source_version_id=example_application_source.version_id,\n    external_access_enabled=True,\n    external_access_recipients=[\"recipient@example.com\"])\npulumi.export(\"datarobotCustomApplicationId\", example_custom_application.id)\npulumi.export(\"datarobotCustomApplicationSourceId\", example_custom_application.source_id)\npulumi.export(\"datarobotCustomApplicationSourceVersionId\", example_custom_application.source_version_id)\npulumi.export(\"datarobotCustomApplicationUrl\", example_custom_application.application_url)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = Pulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var exampleApplicationSource = new Datarobot.ApplicationSource(\"exampleApplicationSource\", new()\n    {\n        Files = new[]\n        {\n            new[]\n            {\n                \"start-app.sh\",\n            },\n            new[]\n            {\n                \"streamlit-app.py\",\n            },\n        },\n    });\n\n    var exampleCustomApplication = new Datarobot.CustomApplication(\"exampleCustomApplication\", new()\n    {\n        SourceVersionId = exampleApplicationSource.VersionId,\n        ExternalAccessEnabled = true,\n        ExternalAccessRecipients = new[]\n        {\n            \"recipient@example.com\",\n        },\n    });\n\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"datarobotCustomApplicationId\"] = exampleCustomApplication.Id,\n        [\"datarobotCustomApplicationSourceId\"] = exampleCustomApplication.SourceId,\n        [\"datarobotCustomApplicationSourceVersionId\"] = exampleCustomApplication.SourceVersionId,\n        [\"datarobotCustomApplicationUrl\"] = exampleCustomApplication.ApplicationUrl,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texampleApplicationSource, err := datarobot.NewApplicationSource(ctx, \"exampleApplicationSource\", \u0026datarobot.ApplicationSourceArgs{\n\t\t\tFiles: pulumi.Any{\n\t\t\t\t[]string{\n\t\t\t\t\t\"start-app.sh\",\n\t\t\t\t},\n\t\t\t\t[]string{\n\t\t\t\t\t\"streamlit-app.py\",\n\t\t\t\t},\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\texampleCustomApplication, err := datarobot.NewCustomApplication(ctx, \"exampleCustomApplication\", \u0026datarobot.CustomApplicationArgs{\n\t\t\tSourceVersionId:       exampleApplicationSource.VersionId,\n\t\t\tExternalAccessEnabled: pulumi.Bool(true),\n\t\t\tExternalAccessRecipients: pulumi.StringArray{\n\t\t\t\tpulumi.String(\"recipient@example.com\"),\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"datarobotCustomApplicationId\", exampleCustomApplication.ID())\n\t\tctx.Export(\"datarobotCustomApplicationSourceId\", exampleCustomApplication.SourceId)\n\t\tctx.Export(\"datarobotCustomApplicationSourceVersionId\", exampleCustomApplication.SourceVersionId)\n\t\tctx.Export(\"datarobotCustomApplicationUrl\", exampleCustomApplication.ApplicationUrl)\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.ApplicationSource;\nimport com.pulumi.datarobot.ApplicationSourceArgs;\nimport com.pulumi.datarobot.CustomApplication;\nimport com.pulumi.datarobot.CustomApplicationArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var exampleApplicationSource = new ApplicationSource(\"exampleApplicationSource\", ApplicationSourceArgs.builder()\n            .files(            \n                \"start-app.sh\",\n                \"streamlit-app.py\")\n            .build());\n\n        var exampleCustomApplication = new CustomApplication(\"exampleCustomApplication\", CustomApplicationArgs.builder()\n            .sourceVersionId(exampleApplicationSource.versionId())\n            .externalAccessEnabled(true)\n            .externalAccessRecipients(\"recipient@example.com\")\n            .build());\n\n        ctx.export(\"datarobotCustomApplicationId\", exampleCustomApplication.id());\n        ctx.export(\"datarobotCustomApplicationSourceId\", exampleCustomApplication.sourceId());\n        ctx.export(\"datarobotCustomApplicationSourceVersionId\", exampleCustomApplication.sourceVersionId());\n        ctx.export(\"datarobotCustomApplicationUrl\", exampleCustomApplication.applicationUrl());\n    }\n}\n```\n```yaml\nresources:\n  exampleApplicationSource:\n    type: datarobot:ApplicationSource\n    properties:\n      files:\n        - - start-app.sh\n        - - streamlit-app.py\n  exampleCustomApplication:\n    type: datarobot:CustomApplication\n    properties:\n      sourceVersionId: ${exampleApplicationSource.versionId}\n      # optional settings\n      externalAccessEnabled: true\n      externalAccessRecipients:\n        - recipient@example.com\noutputs:\n  datarobotCustomApplicationId: ${exampleCustomApplication.id}\n  datarobotCustomApplicationSourceId: ${exampleCustomApplication.sourceId}\n  datarobotCustomApplicationSourceVersionId: ${exampleCustomApplication.sourceVersionId}\n  datarobotCustomApplicationUrl: ${exampleCustomApplication.applicationUrl}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
             "properties": {
                 "applicationUrl": {
                     "type": "string",
@@ -750,7 +804,7 @@
             }
         },
         "datarobot:index/customModel:CustomModel": {
-            "description": "Data set from file\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.RemoteRepository;\nimport com.pulumi.datarobot.RemoteRepositoryArgs;\nimport com.pulumi.datarobot.CustomModel;\nimport com.pulumi.datarobot.CustomModelArgs;\nimport com.pulumi.datarobot.inputs.CustomModelGuardConfigurationArgs;\nimport com.pulumi.datarobot.inputs.CustomModelGuardConfigurationInterventionArgs;\nimport com.pulumi.datarobot.inputs.CustomModelGuardConfigurationInterventionConditionArgs;\nimport com.pulumi.datarobot.inputs.CustomModelOverallModerationConfigurationArgs;\nimport com.pulumi.datarobot.inputs.CustomModelResourceSettingsArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var exampleRemoteRepository = new RemoteRepository(\"exampleRemoteRepository\", RemoteRepositoryArgs.builder()\n            .description(\"GitHub repository with Datarobot user models\")\n            .location(\"https://github.com/datarobot/datarobot-user-models\")\n            .sourceType(\"github\")\n            .build());\n\n        // set the credential id for private repositories\n        // credential_id = datarobot_api_token_credential.example.id\n        var exampleCustomModel = new CustomModel(\"exampleCustomModel\", CustomModelArgs.builder()\n            .description(\"An example custom model from GitHub repository\")\n            .files(            \n                \"file1.py\",\n                \"file2.py\")\n            .targetType(\"Binary\")\n            .targetName(\"my_label\")\n            .baseEnvironmentName(\"[GenAI] Python 3.11 with Moderations\")\n            .guardConfigurations(CustomModelGuardConfigurationArgs.builder()\n                .template_name(\"Rouge 1\")\n                .name(\"Rouge 1 response\")\n                .stages(\"response\")\n                .intervention(CustomModelGuardConfigurationInterventionArgs.builder()\n                    .action(\"block\")\n                    .message(\"response has been blocked by Rogue 1 guard\")\n                    .condition(CustomModelGuardConfigurationInterventionConditionArgs.builder()\n                        .comparand(0.8)\n                        .comparator(\"lessThan\")\n                        .build())\n                    .build())\n                .build())\n            .overallModerationConfiguration(CustomModelOverallModerationConfigurationArgs.builder()\n                .timeout_sec(120)\n                .timeout_action(\"score\")\n                .build())\n            .resourceSettings(CustomModelResourceSettingsArgs.builder()\n                .memory_mb(512)\n                .replicas(2)\n                .network_access(\"NONE\")\n                .build())\n            .build());\n\n        // Optional\n        // source_remote_repositories = [\n        //   {\n        //     id  = datarobot_remote_repository.example.id\n        //     ref = \"master\"\n        //     source_paths = [\n        //       \"model_templates/python3_dummy_binary\",\n        //     ]\n        //   }\n        // ]\n        ctx.export(\"exampleId\", exampleCustomModel.id());\n    }\n}\n```\n```yaml\nresources:\n  exampleRemoteRepository:\n    type: datarobot:RemoteRepository\n    properties:\n      description: GitHub repository with Datarobot user models\n      location: https://github.com/datarobot/datarobot-user-models\n      sourceType: github\n  exampleCustomModel:\n    type: datarobot:CustomModel\n    properties:\n      description: An example custom model from GitHub repository\n      files:\n        - file1.py\n        - file2.py\n      targetType: Binary\n      targetName: my_label\n      baseEnvironmentName: '[GenAI] Python 3.11 with Moderations'\n      # Guards\n      guardConfigurations:\n        - template_name: Rouge 1\n          name: Rouge 1 response\n          stages:\n            - response\n          intervention:\n            action: block\n            message: response has been blocked by Rogue 1 guard\n            condition:\n              comparand: 0.8\n              comparator: lessThan\n      overallModerationConfiguration:\n        timeout_sec: 120\n        timeout_action: score\n      resourceSettings:\n        memory_mb: 512\n        replicas: 2\n        network_access: NONE\noutputs:\n  exampleId: ${exampleCustomModel.id}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "description": "Data set from file\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@datarobot/pulumi-datarobot\";\n\nconst exampleRemoteRepository = new datarobot.RemoteRepository(\"exampleRemoteRepository\", {\n    description: \"GitHub repository with Datarobot user models\",\n    location: \"https://github.com/datarobot/datarobot-user-models\",\n    sourceType: \"github\",\n});\n// set the credential id for private repositories\n// credential_id = datarobot_api_token_credential.example.id\nconst exampleCustomModel = new datarobot.CustomModel(\"exampleCustomModel\", {\n    description: \"An example custom model from GitHub repository\",\n    files: [\n        \"file1.py\",\n        \"file2.py\",\n    ],\n    targetType: \"Binary\",\n    targetName: \"my_label\",\n    baseEnvironmentName: \"[GenAI] Python 3.11 with Moderations\",\n});\n// Optional\n// source_remote_repositories = [\n//   {\n//     id  = datarobot_remote_repository.example.id\n//     ref = \"master\"\n//     source_paths = [\n//       \"model_templates/python3_dummy_binary\",\n//     ]\n//   }\n// ]\n// guard_configurations = [\n//   {\n//     template_name = \"Rouge 1\"\n//     name          = \"Rouge 1 response\"\n//     stages        = [\"response\"]\n//     intervention = {\n//       action  = \"block\"\n//       message = \"response has been blocked by Rogue 1 guard\"\n//       condition = {\n//         comparand  = 0.8\n//         comparator = \"lessThan\"\n//       }\n//     }\n//   },\n// ]\n// overall_moderation_configuration = {\n//   timeout_sec    = 120\n//   timeout_action = \"score\"\n// }\n// resource_settings = {\n//   memory_mb      = 512\n//   replicas       = 2\n//   network_access = \"NONE\"\n// }\nexport const exampleId = exampleCustomModel.id;\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample_remote_repository = datarobot.RemoteRepository(\"exampleRemoteRepository\",\n    description=\"GitHub repository with Datarobot user models\",\n    location=\"https://github.com/datarobot/datarobot-user-models\",\n    source_type=\"github\")\n# set the credential id for private repositories\n# credential_id = datarobot_api_token_credential.example.id\nexample_custom_model = datarobot.CustomModel(\"exampleCustomModel\",\n    description=\"An example custom model from GitHub repository\",\n    files=[\n        \"file1.py\",\n        \"file2.py\",\n    ],\n    target_type=\"Binary\",\n    target_name=\"my_label\",\n    base_environment_name=\"[GenAI] Python 3.11 with Moderations\")\n# Optional\n# source_remote_repositories = [\n#   {\n#     id  = datarobot_remote_repository.example.id\n#     ref = \"master\"\n#     source_paths = [\n#       \"model_templates/python3_dummy_binary\",\n#     ]\n#   }\n# ]\n# guard_configurations = [\n#   {\n#     template_name = \"Rouge 1\"\n#     name          = \"Rouge 1 response\"\n#     stages        = [\"response\"]\n#     intervention = {\n#       action  = \"block\"\n#       message = \"response has been blocked by Rogue 1 guard\"\n#       condition = {\n#         comparand  = 0.8\n#         comparator = \"lessThan\"\n#       }\n#     }\n#   },\n# ]\n# overall_moderation_configuration = {\n#   timeout_sec    = 120\n#   timeout_action = \"score\"\n# }\n# resource_settings = {\n#   memory_mb      = 512\n#   replicas       = 2\n#   network_access = \"NONE\"\n# }\npulumi.export(\"exampleId\", example_custom_model.id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = Pulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var exampleRemoteRepository = new Datarobot.RemoteRepository(\"exampleRemoteRepository\", new()\n    {\n        Description = \"GitHub repository with Datarobot user models\",\n        Location = \"https://github.com/datarobot/datarobot-user-models\",\n        SourceType = \"github\",\n    });\n\n    // set the credential id for private repositories\n    // credential_id = datarobot_api_token_credential.example.id\n    var exampleCustomModel = new Datarobot.CustomModel(\"exampleCustomModel\", new()\n    {\n        Description = \"An example custom model from GitHub repository\",\n        Files = new[]\n        {\n            \"file1.py\",\n            \"file2.py\",\n        },\n        TargetType = \"Binary\",\n        TargetName = \"my_label\",\n        BaseEnvironmentName = \"[GenAI] Python 3.11 with Moderations\",\n    });\n\n    // Optional\n    // source_remote_repositories = [\n    //   {\n    //     id  = datarobot_remote_repository.example.id\n    //     ref = \"master\"\n    //     source_paths = [\n    //       \"model_templates/python3_dummy_binary\",\n    //     ]\n    //   }\n    // ]\n    // guard_configurations = [\n    //   {\n    //     template_name = \"Rouge 1\"\n    //     name          = \"Rouge 1 response\"\n    //     stages        = [\"response\"]\n    //     intervention = {\n    //       action  = \"block\"\n    //       message = \"response has been blocked by Rogue 1 guard\"\n    //       condition = {\n    //         comparand  = 0.8\n    //         comparator = \"lessThan\"\n    //       }\n    //     }\n    //   },\n    // ]\n    // overall_moderation_configuration = {\n    //   timeout_sec    = 120\n    //   timeout_action = \"score\"\n    // }\n    // resource_settings = {\n    //   memory_mb      = 512\n    //   replicas       = 2\n    //   network_access = \"NONE\"\n    // }\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"exampleId\"] = exampleCustomModel.Id,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := datarobot.NewRemoteRepository(ctx, \"exampleRemoteRepository\", \u0026datarobot.RemoteRepositoryArgs{\n\t\t\tDescription: pulumi.String(\"GitHub repository with Datarobot user models\"),\n\t\t\tLocation:    pulumi.String(\"https://github.com/datarobot/datarobot-user-models\"),\n\t\t\tSourceType:  pulumi.String(\"github\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\texampleCustomModel, err := datarobot.NewCustomModel(ctx, \"exampleCustomModel\", \u0026datarobot.CustomModelArgs{\n\t\t\tDescription: pulumi.String(\"An example custom model from GitHub repository\"),\n\t\t\tFiles: pulumi.Any{\n\t\t\t\t\"file1.py\",\n\t\t\t\t\"file2.py\",\n\t\t\t},\n\t\t\tTargetType:          pulumi.String(\"Binary\"),\n\t\t\tTargetName:          pulumi.String(\"my_label\"),\n\t\t\tBaseEnvironmentName: pulumi.String(\"[GenAI] Python 3.11 with Moderations\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"exampleId\", exampleCustomModel.ID())\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.RemoteRepository;\nimport com.pulumi.datarobot.RemoteRepositoryArgs;\nimport com.pulumi.datarobot.CustomModel;\nimport com.pulumi.datarobot.CustomModelArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var exampleRemoteRepository = new RemoteRepository(\"exampleRemoteRepository\", RemoteRepositoryArgs.builder()\n            .description(\"GitHub repository with Datarobot user models\")\n            .location(\"https://github.com/datarobot/datarobot-user-models\")\n            .sourceType(\"github\")\n            .build());\n\n        // set the credential id for private repositories\n        // credential_id = datarobot_api_token_credential.example.id\n        var exampleCustomModel = new CustomModel(\"exampleCustomModel\", CustomModelArgs.builder()\n            .description(\"An example custom model from GitHub repository\")\n            .files(            \n                \"file1.py\",\n                \"file2.py\")\n            .targetType(\"Binary\")\n            .targetName(\"my_label\")\n            .baseEnvironmentName(\"[GenAI] Python 3.11 with Moderations\")\n            .build());\n\n        // Optional\n        // source_remote_repositories = [\n        //   {\n        //     id  = datarobot_remote_repository.example.id\n        //     ref = \"master\"\n        //     source_paths = [\n        //       \"model_templates/python3_dummy_binary\",\n        //     ]\n        //   }\n        // ]\n        // guard_configurations = [\n        //   {\n        //     template_name = \"Rouge 1\"\n        //     name          = \"Rouge 1 response\"\n        //     stages        = [\"response\"]\n        //     intervention = {\n        //       action  = \"block\"\n        //       message = \"response has been blocked by Rogue 1 guard\"\n        //       condition = {\n        //         comparand  = 0.8\n        //         comparator = \"lessThan\"\n        //       }\n        //     }\n        //   },\n        // ]\n        // overall_moderation_configuration = {\n        //   timeout_sec    = 120\n        //   timeout_action = \"score\"\n        // }\n        // resource_settings = {\n        //   memory_mb      = 512\n        //   replicas       = 2\n        //   network_access = \"NONE\"\n        // }\n        ctx.export(\"exampleId\", exampleCustomModel.id());\n    }\n}\n```\n```yaml\nresources:\n  exampleRemoteRepository:\n    type: datarobot:RemoteRepository\n    properties:\n      description: GitHub repository with Datarobot user models\n      location: https://github.com/datarobot/datarobot-user-models\n      sourceType: github\n  exampleCustomModel:\n    type: datarobot:CustomModel\n    properties:\n      description: An example custom model from GitHub repository\n      files:\n        - file1.py\n        - file2.py\n      targetType: Binary\n      targetName: my_label\n      baseEnvironmentName: '[GenAI] Python 3.11 with Moderations'\noutputs:\n  exampleId: ${exampleCustomModel.id}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
             "properties": {
                 "baseEnvironmentId": {
                     "type": "string",
@@ -1295,7 +1349,7 @@
             }
         },
         "datarobot:index/llmBlueprint:LlmBlueprint": {
-            "description": "LLMBlueprint\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@datarobot/pulumi-datarobot\";\n\nconst exampleUseCase = new datarobot.UseCase(\"exampleUseCase\", {});\nconst examplePlayground = new datarobot.Playground(\"examplePlayground\", {\n    description: \"Description for the example playground\",\n    useCaseId: exampleUseCase.id,\n});\nconst exampleLlmBlueprint = new datarobot.LlmBlueprint(\"exampleLlmBlueprint\", {\n    description: \"Description for the example LLM blueprint\",\n    playgroundId: examplePlayground.id,\n    llmId: \"azure-openai-gpt-3.5-turbo\",\n});\nexport const exampleId = exampleLlmBlueprint.id;\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample_use_case = datarobot.UseCase(\"exampleUseCase\")\nexample_playground = datarobot.Playground(\"examplePlayground\",\n    description=\"Description for the example playground\",\n    use_case_id=example_use_case.id)\nexample_llm_blueprint = datarobot.LlmBlueprint(\"exampleLlmBlueprint\",\n    description=\"Description for the example LLM blueprint\",\n    playground_id=example_playground.id,\n    llm_id=\"azure-openai-gpt-3.5-turbo\")\npulumi.export(\"exampleId\", example_llm_blueprint.id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = Pulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var exampleUseCase = new Datarobot.UseCase(\"exampleUseCase\");\n\n    var examplePlayground = new Datarobot.Playground(\"examplePlayground\", new()\n    {\n        Description = \"Description for the example playground\",\n        UseCaseId = exampleUseCase.Id,\n    });\n\n    var exampleLlmBlueprint = new Datarobot.LlmBlueprint(\"exampleLlmBlueprint\", new()\n    {\n        Description = \"Description for the example LLM blueprint\",\n        PlaygroundId = examplePlayground.Id,\n        LlmId = \"azure-openai-gpt-3.5-turbo\",\n    });\n\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"exampleId\"] = exampleLlmBlueprint.Id,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texampleUseCase, err := datarobot.NewUseCase(ctx, \"exampleUseCase\", nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\texamplePlayground, err := datarobot.NewPlayground(ctx, \"examplePlayground\", \u0026datarobot.PlaygroundArgs{\n\t\t\tDescription: pulumi.String(\"Description for the example playground\"),\n\t\t\tUseCaseId:   exampleUseCase.ID(),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\texampleLlmBlueprint, err := datarobot.NewLlmBlueprint(ctx, \"exampleLlmBlueprint\", \u0026datarobot.LlmBlueprintArgs{\n\t\t\tDescription:  pulumi.String(\"Description for the example LLM blueprint\"),\n\t\t\tPlaygroundId: examplePlayground.ID(),\n\t\t\tLlmId:        pulumi.String(\"azure-openai-gpt-3.5-turbo\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"exampleId\", exampleLlmBlueprint.ID())\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.UseCase;\nimport com.pulumi.datarobot.Playground;\nimport com.pulumi.datarobot.PlaygroundArgs;\nimport com.pulumi.datarobot.LlmBlueprint;\nimport com.pulumi.datarobot.LlmBlueprintArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var exampleUseCase = new UseCase(\"exampleUseCase\");\n\n        var examplePlayground = new Playground(\"examplePlayground\", PlaygroundArgs.builder()\n            .description(\"Description for the example playground\")\n            .useCaseId(exampleUseCase.id())\n            .build());\n\n        var exampleLlmBlueprint = new LlmBlueprint(\"exampleLlmBlueprint\", LlmBlueprintArgs.builder()\n            .description(\"Description for the example LLM blueprint\")\n            .playgroundId(examplePlayground.id())\n            .llmId(\"azure-openai-gpt-3.5-turbo\")\n            .build());\n\n        ctx.export(\"exampleId\", exampleLlmBlueprint.id());\n    }\n}\n```\n```yaml\nresources:\n  exampleUseCase:\n    type: datarobot:UseCase\n  examplePlayground:\n    type: datarobot:Playground\n    properties:\n      description: Description for the example playground\n      useCaseId: ${exampleUseCase.id}\n  exampleLlmBlueprint:\n    type: datarobot:LlmBlueprint\n    properties:\n      description: Description for the example LLM blueprint\n      playgroundId: ${examplePlayground.id}\n      llmId: azure-openai-gpt-3.5-turbo\noutputs:\n  exampleId: ${exampleLlmBlueprint.id}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "description": "LLMBlueprint\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@datarobot/pulumi-datarobot\";\n\nconst exampleUseCase = new datarobot.UseCase(\"exampleUseCase\", {});\nconst examplePlayground = new datarobot.Playground(\"examplePlayground\", {\n    description: \"Description for the example playground\",\n    useCaseId: exampleUseCase.id,\n});\nconst exampleLlmBlueprint = new datarobot.LlmBlueprint(\"exampleLlmBlueprint\", {\n    description: \"Description for the example LLM blueprint\",\n    playgroundId: examplePlayground.id,\n    llmId: \"azure-openai-gpt-3.5-turbo\",\n    promptType: \"ONE_TIME_PROMPT\",\n});\n// Optional\n// llm_settings {\n//   max_completion_length = 1000\n//   temperature           = 0.5\n//   top_p                 = 0.9\n//   system_prompt         = \"My Prompt:\"\n// }\n// vector_database_settings = {\n//   max_documents_retrieved_per_prompt = 5\n//   max_tokens = 1000\n// }\nexport const exampleId = exampleLlmBlueprint.id;\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample_use_case = datarobot.UseCase(\"exampleUseCase\")\nexample_playground = datarobot.Playground(\"examplePlayground\",\n    description=\"Description for the example playground\",\n    use_case_id=example_use_case.id)\nexample_llm_blueprint = datarobot.LlmBlueprint(\"exampleLlmBlueprint\",\n    description=\"Description for the example LLM blueprint\",\n    playground_id=example_playground.id,\n    llm_id=\"azure-openai-gpt-3.5-turbo\",\n    prompt_type=\"ONE_TIME_PROMPT\")\n# Optional\n# llm_settings {\n#   max_completion_length = 1000\n#   temperature           = 0.5\n#   top_p                 = 0.9\n#   system_prompt         = \"My Prompt:\"\n# }\n# vector_database_settings = {\n#   max_documents_retrieved_per_prompt = 5\n#   max_tokens = 1000\n# }\npulumi.export(\"exampleId\", example_llm_blueprint.id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = Pulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var exampleUseCase = new Datarobot.UseCase(\"exampleUseCase\");\n\n    var examplePlayground = new Datarobot.Playground(\"examplePlayground\", new()\n    {\n        Description = \"Description for the example playground\",\n        UseCaseId = exampleUseCase.Id,\n    });\n\n    var exampleLlmBlueprint = new Datarobot.LlmBlueprint(\"exampleLlmBlueprint\", new()\n    {\n        Description = \"Description for the example LLM blueprint\",\n        PlaygroundId = examplePlayground.Id,\n        LlmId = \"azure-openai-gpt-3.5-turbo\",\n        PromptType = \"ONE_TIME_PROMPT\",\n    });\n\n    // Optional\n    // llm_settings {\n    //   max_completion_length = 1000\n    //   temperature           = 0.5\n    //   top_p                 = 0.9\n    //   system_prompt         = \"My Prompt:\"\n    // }\n    // vector_database_settings = {\n    //   max_documents_retrieved_per_prompt = 5\n    //   max_tokens = 1000\n    // }\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"exampleId\"] = exampleLlmBlueprint.Id,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texampleUseCase, err := datarobot.NewUseCase(ctx, \"exampleUseCase\", nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\texamplePlayground, err := datarobot.NewPlayground(ctx, \"examplePlayground\", \u0026datarobot.PlaygroundArgs{\n\t\t\tDescription: pulumi.String(\"Description for the example playground\"),\n\t\t\tUseCaseId:   exampleUseCase.ID(),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\texampleLlmBlueprint, err := datarobot.NewLlmBlueprint(ctx, \"exampleLlmBlueprint\", \u0026datarobot.LlmBlueprintArgs{\n\t\t\tDescription:  pulumi.String(\"Description for the example LLM blueprint\"),\n\t\t\tPlaygroundId: examplePlayground.ID(),\n\t\t\tLlmId:        pulumi.String(\"azure-openai-gpt-3.5-turbo\"),\n\t\t\tPromptType:   pulumi.String(\"ONE_TIME_PROMPT\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"exampleId\", exampleLlmBlueprint.ID())\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.UseCase;\nimport com.pulumi.datarobot.Playground;\nimport com.pulumi.datarobot.PlaygroundArgs;\nimport com.pulumi.datarobot.LlmBlueprint;\nimport com.pulumi.datarobot.LlmBlueprintArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var exampleUseCase = new UseCase(\"exampleUseCase\");\n\n        var examplePlayground = new Playground(\"examplePlayground\", PlaygroundArgs.builder()\n            .description(\"Description for the example playground\")\n            .useCaseId(exampleUseCase.id())\n            .build());\n\n        var exampleLlmBlueprint = new LlmBlueprint(\"exampleLlmBlueprint\", LlmBlueprintArgs.builder()\n            .description(\"Description for the example LLM blueprint\")\n            .playgroundId(examplePlayground.id())\n            .llmId(\"azure-openai-gpt-3.5-turbo\")\n            .promptType(\"ONE_TIME_PROMPT\")\n            .build());\n\n        // Optional\n        // llm_settings {\n        //   max_completion_length = 1000\n        //   temperature           = 0.5\n        //   top_p                 = 0.9\n        //   system_prompt         = \"My Prompt:\"\n        // }\n        // vector_database_settings = {\n        //   max_documents_retrieved_per_prompt = 5\n        //   max_tokens = 1000\n        // }\n        ctx.export(\"exampleId\", exampleLlmBlueprint.id());\n    }\n}\n```\n```yaml\nresources:\n  exampleUseCase:\n    type: datarobot:UseCase\n  examplePlayground:\n    type: datarobot:Playground\n    properties:\n      description: Description for the example playground\n      useCaseId: ${exampleUseCase.id}\n  exampleLlmBlueprint:\n    type: datarobot:LlmBlueprint\n    properties:\n      description: Description for the example LLM blueprint\n      playgroundId: ${examplePlayground.id}\n      llmId: azure-openai-gpt-3.5-turbo\n      promptType: ONE_TIME_PROMPT\noutputs:\n  exampleId: ${exampleLlmBlueprint.id}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
             "properties": {
                 "description": {
                     "type": "string",
@@ -1305,6 +1359,10 @@
                     "type": "string",
                     "description": "The id of the LLM for the LLM Blueprint.\n"
                 },
+                "llmSettings": {
+                    "$ref": "#/types/datarobot:index/LlmBlueprintLlmSettings:LlmBlueprintLlmSettings",
+                    "description": "The LLM settings for the LLM Blueprint.\n"
+                },
                 "name": {
                     "type": "string",
                     "description": "The name of the LLM Blueprint.\n"
@@ -1313,15 +1371,24 @@
                     "type": "string",
                     "description": "The id of the Playground for the LLM Blueprint.\n"
                 },
+                "promptType": {
+                    "type": "string",
+                    "description": "The prompt type for the LLM Blueprint.\n"
+                },
                 "vectorDatabaseId": {
                     "type": "string",
                     "description": "The id of the Vector Database for the LLM Blueprint.\n"
+                },
+                "vectorDatabaseSettings": {
+                    "$ref": "#/types/datarobot:index/LlmBlueprintVectorDatabaseSettings:LlmBlueprintVectorDatabaseSettings",
+                    "description": "The Vector Database settings for the LLM Blueprint.\n"
                 }
             },
             "required": [
                 "llmId",
                 "name",
-                "playgroundId"
+                "playgroundId",
+                "promptType"
             ],
             "inputProperties": {
                 "description": {
@@ -1332,6 +1399,10 @@
                     "type": "string",
                     "description": "The id of the LLM for the LLM Blueprint.\n"
                 },
+                "llmSettings": {
+                    "$ref": "#/types/datarobot:index/LlmBlueprintLlmSettings:LlmBlueprintLlmSettings",
+                    "description": "The LLM settings for the LLM Blueprint.\n"
+                },
                 "name": {
                     "type": "string",
                     "description": "The name of the LLM Blueprint.\n"
@@ -1340,9 +1411,17 @@
                     "type": "string",
                     "description": "The id of the Playground for the LLM Blueprint.\n"
                 },
+                "promptType": {
+                    "type": "string",
+                    "description": "The prompt type for the LLM Blueprint.\n"
+                },
                 "vectorDatabaseId": {
                     "type": "string",
                     "description": "The id of the Vector Database for the LLM Blueprint.\n"
+                },
+                "vectorDatabaseSettings": {
+                    "$ref": "#/types/datarobot:index/LlmBlueprintVectorDatabaseSettings:LlmBlueprintVectorDatabaseSettings",
+                    "description": "The Vector Database settings for the LLM Blueprint.\n"
                 }
             },
             "requiredInputs": [
@@ -1360,6 +1439,10 @@
                         "type": "string",
                         "description": "The id of the LLM for the LLM Blueprint.\n"
                     },
+                    "llmSettings": {
+                        "$ref": "#/types/datarobot:index/LlmBlueprintLlmSettings:LlmBlueprintLlmSettings",
+                        "description": "The LLM settings for the LLM Blueprint.\n"
+                    },
                     "name": {
                         "type": "string",
                         "description": "The name of the LLM Blueprint.\n"
@@ -1368,9 +1451,17 @@
                         "type": "string",
                         "description": "The id of the Playground for the LLM Blueprint.\n"
                     },
+                    "promptType": {
+                        "type": "string",
+                        "description": "The prompt type for the LLM Blueprint.\n"
+                    },
                     "vectorDatabaseId": {
                         "type": "string",
                         "description": "The id of the Vector Database for the LLM Blueprint.\n"
+                    },
+                    "vectorDatabaseSettings": {
+                        "$ref": "#/types/datarobot:index/LlmBlueprintVectorDatabaseSettings:LlmBlueprintVectorDatabaseSettings",
+                        "description": "The Vector Database settings for the LLM Blueprint.\n"
                     }
                 },
                 "type": "object"
@@ -1611,12 +1702,17 @@
                 "versionId": {
                     "type": "string",
                     "description": "The ID of the Registered Model Version.\n"
+                },
+                "versionName": {
+                    "type": "string",
+                    "description": "The name of the Registered Model Version.\n"
                 }
             },
             "required": [
                 "customModelVersionId",
                 "name",
-                "versionId"
+                "versionId",
+                "versionName"
             ],
             "inputProperties": {
                 "customModelVersionId": {
@@ -1630,6 +1726,10 @@
                 "name": {
                     "type": "string",
                     "description": "The name of the Registered Model.\n"
+                },
+                "versionName": {
+                    "type": "string",
+                    "description": "The name of the Registered Model Version.\n"
                 }
             },
             "requiredInputs": [
@@ -1653,6 +1753,10 @@
                     "versionId": {
                         "type": "string",
                         "description": "The ID of the Registered Model Version.\n"
+                    },
+                    "versionName": {
+                        "type": "string",
+                        "description": "The name of the Registered Model Version.\n"
                     }
                 },
                 "type": "object"
