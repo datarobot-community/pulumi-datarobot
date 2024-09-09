@@ -11,7 +11,7 @@ import * as utilities from "./utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as datarobot from "@pulumi/datarobot";
+ * import * as datarobot from "@datarobot/pulumi-datarobot";
  *
  * const exampleUseCase = new datarobot.UseCase("exampleUseCase", {});
  * const examplePlayground = new datarobot.Playground("examplePlayground", {useCaseId: exampleUseCase.id});
