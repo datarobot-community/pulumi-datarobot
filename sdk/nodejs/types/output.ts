@@ -41,9 +41,25 @@ export interface CustomModelGuardConfiguration {
      */
     intervention: outputs.CustomModelGuardConfigurationIntervention;
     /**
+     * The LLM type for this guard.
+     */
+    llmType?: string;
+    /**
      * The name of the guard configuration.
      */
     name: string;
+    /**
+     * The OpenAI API base URL for this guard.
+     */
+    openaiApiBase?: string;
+    /**
+     * The ID of an OpenAI credential for this guard.
+     */
+    openaiCredential?: string;
+    /**
+     * The ID of an OpenAI deployment for this guard.
+     */
+    openaiDeploymentId?: string;
     /**
      * The output column name of this guard.
      */
@@ -168,6 +184,10 @@ export interface DeploymentSettingsAssociationId {
      * The name of the feature to use as the association ID.
      */
     featureName: string;
+    /**
+     * Whether the association ID is required in prediction requests.
+     */
+    requiredInPredictionRequests: boolean;
 }
 
 export interface DeploymentSettingsPredictionsSettings {
@@ -183,6 +203,36 @@ export interface DeploymentSettingsPredictionsSettings {
      * Whether to use real-time predictions.
      */
     realTime: boolean;
+}
+
+export interface LlmBlueprintLlmSettings {
+    /**
+     * The maximum number of tokens allowed in the completion. The combined count of this value and prompt tokens must be below the model's maximum context size, where prompt token count is comprised of system prompt, user prompt, recent chat history, and vector database citations.
+     */
+    maxCompletionLength?: number;
+    /**
+     * Guides the style of the LLM response. It is a 'universal' prompt, prepended to all individual prompts.
+     */
+    systemPrompt?: string;
+    /**
+     * Controls the randomness of model output, where higher values return more diverse output and lower values return more deterministic results.
+     */
+    temperature?: number;
+    /**
+     * Threshold that controls the selection of words included in the response, based on a cumulative probability cutoff for token selection. Higher numbers return more diverse options for outputs.
+     */
+    topP?: number;
+}
+
+export interface LlmBlueprintVectorDatabaseSettings {
+    /**
+     * The maximum number of documents to retrieve from the Vector Database.
+     */
+    maxDocumentsRetrievedPerPrompt?: number;
+    /**
+     * The maximum number of tokens to retrieve from the Vector Database.
+     */
+    maxTokens?: number;
 }
 
 export interface VectorDatabaseChunkingParameters {

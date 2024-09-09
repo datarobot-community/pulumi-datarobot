@@ -43,6 +43,7 @@ import (
 //				Description:  pulumi.String("Description for the example LLM blueprint"),
 //				PlaygroundId: examplePlayground.ID(),
 //				LlmId:        pulumi.String("azure-openai-gpt-3.5-turbo"),
+//				PromptType:   pulumi.String("ONE_TIME_PROMPT"),
 //			})
 //			if err != nil {
 //				return err
@@ -60,12 +61,18 @@ type LlmBlueprint struct {
 	Description pulumi.StringPtrOutput `pulumi:"description"`
 	// The id of the LLM for the LLM Blueprint.
 	LlmId pulumi.StringOutput `pulumi:"llmId"`
+	// The LLM settings for the LLM Blueprint.
+	LlmSettings LlmBlueprintLlmSettingsPtrOutput `pulumi:"llmSettings"`
 	// The name of the LLM Blueprint.
 	Name pulumi.StringOutput `pulumi:"name"`
 	// The id of the Playground for the LLM Blueprint.
 	PlaygroundId pulumi.StringOutput `pulumi:"playgroundId"`
+	// The prompt type for the LLM Blueprint.
+	PromptType pulumi.StringOutput `pulumi:"promptType"`
 	// The id of the Vector Database for the LLM Blueprint.
 	VectorDatabaseId pulumi.StringPtrOutput `pulumi:"vectorDatabaseId"`
+	// The Vector Database settings for the LLM Blueprint.
+	VectorDatabaseSettings LlmBlueprintVectorDatabaseSettingsPtrOutput `pulumi:"vectorDatabaseSettings"`
 }
 
 // NewLlmBlueprint registers a new resource with the given unique name, arguments, and options.
@@ -108,12 +115,18 @@ type llmBlueprintState struct {
 	Description *string `pulumi:"description"`
 	// The id of the LLM for the LLM Blueprint.
 	LlmId *string `pulumi:"llmId"`
+	// The LLM settings for the LLM Blueprint.
+	LlmSettings *LlmBlueprintLlmSettings `pulumi:"llmSettings"`
 	// The name of the LLM Blueprint.
 	Name *string `pulumi:"name"`
 	// The id of the Playground for the LLM Blueprint.
 	PlaygroundId *string `pulumi:"playgroundId"`
+	// The prompt type for the LLM Blueprint.
+	PromptType *string `pulumi:"promptType"`
 	// The id of the Vector Database for the LLM Blueprint.
 	VectorDatabaseId *string `pulumi:"vectorDatabaseId"`
+	// The Vector Database settings for the LLM Blueprint.
+	VectorDatabaseSettings *LlmBlueprintVectorDatabaseSettings `pulumi:"vectorDatabaseSettings"`
 }
 
 type LlmBlueprintState struct {
@@ -121,12 +134,18 @@ type LlmBlueprintState struct {
 	Description pulumi.StringPtrInput
 	// The id of the LLM for the LLM Blueprint.
 	LlmId pulumi.StringPtrInput
+	// The LLM settings for the LLM Blueprint.
+	LlmSettings LlmBlueprintLlmSettingsPtrInput
 	// The name of the LLM Blueprint.
 	Name pulumi.StringPtrInput
 	// The id of the Playground for the LLM Blueprint.
 	PlaygroundId pulumi.StringPtrInput
+	// The prompt type for the LLM Blueprint.
+	PromptType pulumi.StringPtrInput
 	// The id of the Vector Database for the LLM Blueprint.
 	VectorDatabaseId pulumi.StringPtrInput
+	// The Vector Database settings for the LLM Blueprint.
+	VectorDatabaseSettings LlmBlueprintVectorDatabaseSettingsPtrInput
 }
 
 func (LlmBlueprintState) ElementType() reflect.Type {
@@ -138,12 +157,18 @@ type llmBlueprintArgs struct {
 	Description *string `pulumi:"description"`
 	// The id of the LLM for the LLM Blueprint.
 	LlmId string `pulumi:"llmId"`
+	// The LLM settings for the LLM Blueprint.
+	LlmSettings *LlmBlueprintLlmSettings `pulumi:"llmSettings"`
 	// The name of the LLM Blueprint.
 	Name *string `pulumi:"name"`
 	// The id of the Playground for the LLM Blueprint.
 	PlaygroundId string `pulumi:"playgroundId"`
+	// The prompt type for the LLM Blueprint.
+	PromptType *string `pulumi:"promptType"`
 	// The id of the Vector Database for the LLM Blueprint.
 	VectorDatabaseId *string `pulumi:"vectorDatabaseId"`
+	// The Vector Database settings for the LLM Blueprint.
+	VectorDatabaseSettings *LlmBlueprintVectorDatabaseSettings `pulumi:"vectorDatabaseSettings"`
 }
 
 // The set of arguments for constructing a LlmBlueprint resource.
@@ -152,12 +177,18 @@ type LlmBlueprintArgs struct {
 	Description pulumi.StringPtrInput
 	// The id of the LLM for the LLM Blueprint.
 	LlmId pulumi.StringInput
+	// The LLM settings for the LLM Blueprint.
+	LlmSettings LlmBlueprintLlmSettingsPtrInput
 	// The name of the LLM Blueprint.
 	Name pulumi.StringPtrInput
 	// The id of the Playground for the LLM Blueprint.
 	PlaygroundId pulumi.StringInput
+	// The prompt type for the LLM Blueprint.
+	PromptType pulumi.StringPtrInput
 	// The id of the Vector Database for the LLM Blueprint.
 	VectorDatabaseId pulumi.StringPtrInput
+	// The Vector Database settings for the LLM Blueprint.
+	VectorDatabaseSettings LlmBlueprintVectorDatabaseSettingsPtrInput
 }
 
 func (LlmBlueprintArgs) ElementType() reflect.Type {
@@ -257,6 +288,11 @@ func (o LlmBlueprintOutput) LlmId() pulumi.StringOutput {
 	return o.ApplyT(func(v *LlmBlueprint) pulumi.StringOutput { return v.LlmId }).(pulumi.StringOutput)
 }
 
+// The LLM settings for the LLM Blueprint.
+func (o LlmBlueprintOutput) LlmSettings() LlmBlueprintLlmSettingsPtrOutput {
+	return o.ApplyT(func(v *LlmBlueprint) LlmBlueprintLlmSettingsPtrOutput { return v.LlmSettings }).(LlmBlueprintLlmSettingsPtrOutput)
+}
+
 // The name of the LLM Blueprint.
 func (o LlmBlueprintOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *LlmBlueprint) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
@@ -267,9 +303,19 @@ func (o LlmBlueprintOutput) PlaygroundId() pulumi.StringOutput {
 	return o.ApplyT(func(v *LlmBlueprint) pulumi.StringOutput { return v.PlaygroundId }).(pulumi.StringOutput)
 }
 
+// The prompt type for the LLM Blueprint.
+func (o LlmBlueprintOutput) PromptType() pulumi.StringOutput {
+	return o.ApplyT(func(v *LlmBlueprint) pulumi.StringOutput { return v.PromptType }).(pulumi.StringOutput)
+}
+
 // The id of the Vector Database for the LLM Blueprint.
 func (o LlmBlueprintOutput) VectorDatabaseId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *LlmBlueprint) pulumi.StringPtrOutput { return v.VectorDatabaseId }).(pulumi.StringPtrOutput)
+}
+
+// The Vector Database settings for the LLM Blueprint.
+func (o LlmBlueprintOutput) VectorDatabaseSettings() LlmBlueprintVectorDatabaseSettingsPtrOutput {
+	return o.ApplyT(func(v *LlmBlueprint) LlmBlueprintVectorDatabaseSettingsPtrOutput { return v.VectorDatabaseSettings }).(LlmBlueprintVectorDatabaseSettingsPtrOutput)
 }
 
 type LlmBlueprintArrayOutput struct{ *pulumi.OutputState }

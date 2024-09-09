@@ -8,7 +8,7 @@ The `DataRobot` provider for Pulumi can be used to provision any of the resource
 
 ## Example
 
-{{< chooser language "python,yaml" >}}
+{{< chooser language "python,yaml,typescript" >}}
 
 {{% /choosable %}}
 
@@ -46,6 +46,20 @@ resources:
     properties:
       name: Pulumi YAML Example
       description: Example using Pulumi YAML
+```
+
+{{% /choosable %}}
+
+{{% /choosable %}}
+{{% choosable language yaml %}}
+
+```typescript
+import * as datarobot from "@datarobot/pulumi-datarobot";
+
+const useCase = new datarobot.UseCase("example from Typescript", {
+    name: "example from TypeScript",
+    description: "An example use case from Typescript",
+});
 ```
 
 {{% /choosable %}}

@@ -7,7 +7,6 @@ import (
 	"context"
 	"reflect"
 
-	"errors"
 	"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
@@ -29,9 +28,13 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			example, err := datarobot.NewApplicationSource(ctx, "example", &datarobot.ApplicationSourceArgs{
-//				LocalFiles: pulumi.StringArray{
-//					pulumi.String("start-app.sh"),
-//					pulumi.String("streamlit-app.py"),
+//				Files: pulumi.Any{
+//					[]string{
+//						"start-app.sh",
+//					},
+//					[]string{
+//						"streamlit-app.py",
+//					},
 //				},
 //			})
 //			if err != nil {
@@ -47,8 +50,10 @@ import (
 type ApplicationSource struct {
 	pulumi.CustomResourceState
 
-	// The list of local file paths used to build the Application Source.
-	LocalFiles pulumi.StringArrayOutput `pulumi:"localFiles"`
+	// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
+	Files pulumi.AnyOutput `pulumi:"files"`
+	// The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
+	FolderPath pulumi.StringPtrOutput `pulumi:"folderPath"`
 	// The name of the Application Source.
 	Name pulumi.StringOutput `pulumi:"name"`
 	// The resource settings for the Application Source.
@@ -63,12 +68,9 @@ type ApplicationSource struct {
 func NewApplicationSource(ctx *pulumi.Context,
 	name string, args *ApplicationSourceArgs, opts ...pulumi.ResourceOption) (*ApplicationSource, error) {
 	if args == nil {
-		return nil, errors.New("missing one or more required arguments")
+		args = &ApplicationSourceArgs{}
 	}
 
-	if args.LocalFiles == nil {
-		return nil, errors.New("invalid value for required argument 'LocalFiles'")
-	}
 	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ApplicationSource
 	err := ctx.RegisterResource("datarobot:index/applicationSource:ApplicationSource", name, args, &resource, opts...)
@@ -92,8 +94,10 @@ func GetApplicationSource(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering ApplicationSource resources.
 type applicationSourceState struct {
-	// The list of local file paths used to build the Application Source.
-	LocalFiles []string `pulumi:"localFiles"`
+	// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
+	Files interface{} `pulumi:"files"`
+	// The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
+	FolderPath *string `pulumi:"folderPath"`
 	// The name of the Application Source.
 	Name *string `pulumi:"name"`
 	// The resource settings for the Application Source.
@@ -105,8 +109,10 @@ type applicationSourceState struct {
 }
 
 type ApplicationSourceState struct {
-	// The list of local file paths used to build the Application Source.
-	LocalFiles pulumi.StringArrayInput
+	// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
+	Files pulumi.Input
+	// The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
+	FolderPath pulumi.StringPtrInput
 	// The name of the Application Source.
 	Name pulumi.StringPtrInput
 	// The resource settings for the Application Source.
@@ -122,8 +128,10 @@ func (ApplicationSourceState) ElementType() reflect.Type {
 }
 
 type applicationSourceArgs struct {
-	// The list of local file paths used to build the Application Source.
-	LocalFiles []string `pulumi:"localFiles"`
+	// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
+	Files interface{} `pulumi:"files"`
+	// The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
+	FolderPath *string `pulumi:"folderPath"`
 	// The name of the Application Source.
 	Name *string `pulumi:"name"`
 	// The resource settings for the Application Source.
@@ -134,8 +142,10 @@ type applicationSourceArgs struct {
 
 // The set of arguments for constructing a ApplicationSource resource.
 type ApplicationSourceArgs struct {
-	// The list of local file paths used to build the Application Source.
-	LocalFiles pulumi.StringArrayInput
+	// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
+	Files pulumi.Input
+	// The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
+	FolderPath pulumi.StringPtrInput
 	// The name of the Application Source.
 	Name pulumi.StringPtrInput
 	// The resource settings for the Application Source.
@@ -231,9 +241,14 @@ func (o ApplicationSourceOutput) ToApplicationSourceOutputWithContext(ctx contex
 	return o
 }
 
-// The list of local file paths used to build the Application Source.
-func (o ApplicationSourceOutput) LocalFiles() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v *ApplicationSource) pulumi.StringArrayOutput { return v.LocalFiles }).(pulumi.StringArrayOutput)
+// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
+func (o ApplicationSourceOutput) Files() pulumi.AnyOutput {
+	return o.ApplyT(func(v *ApplicationSource) pulumi.AnyOutput { return v.Files }).(pulumi.AnyOutput)
+}
+
+// The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
+func (o ApplicationSourceOutput) FolderPath() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ApplicationSource) pulumi.StringPtrOutput { return v.FolderPath }).(pulumi.StringPtrOutput)
 }
 
 // The name of the Application Source.

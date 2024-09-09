@@ -31,10 +31,34 @@ namespace Pulumi.Datarobot.Inputs
         public Input<Inputs.CustomModelGuardConfigurationInterventionArgs> Intervention { get; set; } = null!;
 
         /// <summary>
+        /// The LLM type for this guard.
+        /// </summary>
+        [Input("llmType")]
+        public Input<string>? LlmType { get; set; }
+
+        /// <summary>
         /// The name of the guard configuration.
         /// </summary>
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
+
+        /// <summary>
+        /// The OpenAI API base URL for this guard.
+        /// </summary>
+        [Input("openaiApiBase")]
+        public Input<string>? OpenaiApiBase { get; set; }
+
+        /// <summary>
+        /// The ID of an OpenAI credential for this guard.
+        /// </summary>
+        [Input("openaiCredential")]
+        public Input<string>? OpenaiCredential { get; set; }
+
+        /// <summary>
+        /// The ID of an OpenAI deployment for this guard.
+        /// </summary>
+        [Input("openaiDeploymentId")]
+        public Input<string>? OpenaiDeploymentId { get; set; }
 
         /// <summary>
         /// The output column name of this guard.

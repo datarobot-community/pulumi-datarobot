@@ -21,15 +21,22 @@ namespace Pulumi.Datarobot.Outputs
         /// The name of the feature to use as the association ID.
         /// </summary>
         public readonly string FeatureName;
+        /// <summary>
+        /// Whether the association ID is required in prediction requests.
+        /// </summary>
+        public readonly bool RequiredInPredictionRequests;
 
         [OutputConstructor]
         private DeploymentSettingsAssociationId(
             bool autoGenerateId,
 
-            string featureName)
+            string featureName,
+
+            bool requiredInPredictionRequests)
         {
             AutoGenerateId = autoGenerateId;
             FeatureName = featureName;
+            RequiredInPredictionRequests = requiredInPredictionRequests;
         }
     }
 }

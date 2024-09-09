@@ -72,6 +72,8 @@ type RegisteredModel struct {
 	Name pulumi.StringOutput `pulumi:"name"`
 	// The ID of the Registered Model Version.
 	VersionId pulumi.StringOutput `pulumi:"versionId"`
+	// The name of the Registered Model Version.
+	VersionName pulumi.StringOutput `pulumi:"versionName"`
 }
 
 // NewRegisteredModel registers a new resource with the given unique name, arguments, and options.
@@ -115,6 +117,8 @@ type registeredModelState struct {
 	Name *string `pulumi:"name"`
 	// The ID of the Registered Model Version.
 	VersionId *string `pulumi:"versionId"`
+	// The name of the Registered Model Version.
+	VersionName *string `pulumi:"versionName"`
 }
 
 type RegisteredModelState struct {
@@ -126,6 +130,8 @@ type RegisteredModelState struct {
 	Name pulumi.StringPtrInput
 	// The ID of the Registered Model Version.
 	VersionId pulumi.StringPtrInput
+	// The name of the Registered Model Version.
+	VersionName pulumi.StringPtrInput
 }
 
 func (RegisteredModelState) ElementType() reflect.Type {
@@ -139,6 +145,8 @@ type registeredModelArgs struct {
 	Description *string `pulumi:"description"`
 	// The name of the Registered Model.
 	Name *string `pulumi:"name"`
+	// The name of the Registered Model Version.
+	VersionName *string `pulumi:"versionName"`
 }
 
 // The set of arguments for constructing a RegisteredModel resource.
@@ -149,6 +157,8 @@ type RegisteredModelArgs struct {
 	Description pulumi.StringPtrInput
 	// The name of the Registered Model.
 	Name pulumi.StringPtrInput
+	// The name of the Registered Model Version.
+	VersionName pulumi.StringPtrInput
 }
 
 func (RegisteredModelArgs) ElementType() reflect.Type {
@@ -256,6 +266,11 @@ func (o RegisteredModelOutput) Name() pulumi.StringOutput {
 // The ID of the Registered Model Version.
 func (o RegisteredModelOutput) VersionId() pulumi.StringOutput {
 	return o.ApplyT(func(v *RegisteredModel) pulumi.StringOutput { return v.VersionId }).(pulumi.StringOutput)
+}
+
+// The name of the Registered Model Version.
+func (o RegisteredModelOutput) VersionName() pulumi.StringOutput {
+	return o.ApplyT(func(v *RegisteredModel) pulumi.StringOutput { return v.VersionName }).(pulumi.StringOutput)
 }
 
 type RegisteredModelArrayOutput struct{ *pulumi.OutputState }

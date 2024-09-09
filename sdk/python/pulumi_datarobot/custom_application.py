@@ -205,9 +205,9 @@ class CustomApplication(pulumi.CustomResource):
         import pulumi
         import pulumi_datarobot as datarobot
 
-        example_application_source = datarobot.ApplicationSource("exampleApplicationSource", local_files=[
-            "start-app.sh",
-            "streamlit-app.py",
+        example_application_source = datarobot.ApplicationSource("exampleApplicationSource", files=[
+            ["start-app.sh"],
+            ["streamlit-app.py"],
         ])
         example_custom_application = datarobot.CustomApplication("exampleCustomApplication",
             source_version_id=example_application_source.version_id,
@@ -241,9 +241,9 @@ class CustomApplication(pulumi.CustomResource):
         import pulumi
         import pulumi_datarobot as datarobot
 
-        example_application_source = datarobot.ApplicationSource("exampleApplicationSource", local_files=[
-            "start-app.sh",
-            "streamlit-app.py",
+        example_application_source = datarobot.ApplicationSource("exampleApplicationSource", files=[
+            ["start-app.sh"],
+            ["streamlit-app.py"],
         ])
         example_custom_application = datarobot.CustomApplication("exampleCustomApplication",
             source_version_id=example_application_source.version_id,

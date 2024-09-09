@@ -26,9 +26,25 @@ namespace Pulumi.Datarobot.Outputs
         /// </summary>
         public readonly Outputs.CustomModelGuardConfigurationIntervention Intervention;
         /// <summary>
+        /// The LLM type for this guard.
+        /// </summary>
+        public readonly string? LlmType;
+        /// <summary>
         /// The name of the guard configuration.
         /// </summary>
         public readonly string Name;
+        /// <summary>
+        /// The OpenAI API base URL for this guard.
+        /// </summary>
+        public readonly string? OpenaiApiBase;
+        /// <summary>
+        /// The ID of an OpenAI credential for this guard.
+        /// </summary>
+        public readonly string? OpenaiCredential;
+        /// <summary>
+        /// The ID of an OpenAI deployment for this guard.
+        /// </summary>
+        public readonly string? OpenaiDeploymentId;
         /// <summary>
         /// The output column name of this guard.
         /// </summary>
@@ -50,7 +66,15 @@ namespace Pulumi.Datarobot.Outputs
 
             Outputs.CustomModelGuardConfigurationIntervention intervention,
 
+            string? llmType,
+
             string name,
+
+            string? openaiApiBase,
+
+            string? openaiCredential,
+
+            string? openaiDeploymentId,
 
             string? outputColumnName,
 
@@ -61,7 +85,11 @@ namespace Pulumi.Datarobot.Outputs
             DeploymentId = deploymentId;
             InputColumnName = inputColumnName;
             Intervention = intervention;
+            LlmType = llmType;
             Name = name;
+            OpenaiApiBase = openaiApiBase;
+            OpenaiCredential = openaiCredential;
+            OpenaiDeploymentId = openaiDeploymentId;
             OutputColumnName = outputColumnName;
             Stages = stages;
             TemplateName = templateName;

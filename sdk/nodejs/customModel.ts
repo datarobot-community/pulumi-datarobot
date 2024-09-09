@@ -8,6 +8,66 @@ import * as utilities from "./utilities";
 
 /**
  * Data set from file
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as datarobot from "@datarobot/pulumi-datarobot";
+ *
+ * const exampleRemoteRepository = new datarobot.RemoteRepository("exampleRemoteRepository", {
+ *     description: "GitHub repository with Datarobot user models",
+ *     location: "https://github.com/datarobot/datarobot-user-models",
+ *     sourceType: "github",
+ * });
+ * // set the credential id for private repositories
+ * // credential_id = datarobot_api_token_credential.example.id
+ * const exampleCustomModel = new datarobot.CustomModel("exampleCustomModel", {
+ *     description: "An example custom model from GitHub repository",
+ *     files: [
+ *         "file1.py",
+ *         "file2.py",
+ *     ],
+ *     targetType: "Binary",
+ *     targetName: "my_label",
+ *     baseEnvironmentName: "[GenAI] Python 3.11 with Moderations",
+ * });
+ * // Optional
+ * // source_remote_repositories = [
+ * //   {
+ * //     id  = datarobot_remote_repository.example.id
+ * //     ref = "master"
+ * //     source_paths = [
+ * //       "model_templates/python3_dummy_binary",
+ * //     ]
+ * //   }
+ * // ]
+ * // guard_configurations = [
+ * //   {
+ * //     template_name = "Rouge 1"
+ * //     name          = "Rouge 1 response"
+ * //     stages        = ["response"]
+ * //     intervention = {
+ * //       action  = "block"
+ * //       message = "response has been blocked by Rogue 1 guard"
+ * //       condition = {
+ * //         comparand  = 0.8
+ * //         comparator = "lessThan"
+ * //       }
+ * //     }
+ * //   },
+ * // ]
+ * // overall_moderation_configuration = {
+ * //   timeout_sec    = 120
+ * //   timeout_action = "score"
+ * // }
+ * // resource_settings = {
+ * //   memory_mb      = 512
+ * //   replicas       = 2
+ * //   network_access = "NONE"
+ * // }
+ * export const exampleId = exampleCustomModel.id;
+ * ```
  */
 export class CustomModel extends pulumi.CustomResource {
     /**

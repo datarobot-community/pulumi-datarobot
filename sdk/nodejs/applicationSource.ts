@@ -15,9 +15,9 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as datarobot from "@datarobot/pulumi-datarobot";
  *
- * const example = new datarobot.ApplicationSource("example", {localFiles: [
- *     "start-app.sh",
- *     "streamlit-app.py",
+ * const example = new datarobot.ApplicationSource("example", {files: [
+ *     ["start-app.sh"],
+ *     ["streamlit-app.py"],
  * ]});
  * export const datarobotApplicationSourceId = example.id;
  * export const datarobotApplicationSourceVersionId = example.versionId;
@@ -52,9 +52,13 @@ export class ApplicationSource extends pulumi.CustomResource {
     }
 
     /**
-     * The list of local file paths used to build the Application Source.
+     * The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
      */
-    public readonly localFiles!: pulumi.Output<string[]>;
+    public readonly files!: pulumi.Output<any | undefined>;
+    /**
+     * The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
+     */
+    public readonly folderPath!: pulumi.Output<string | undefined>;
     /**
      * The name of the Application Source.
      */
@@ -79,23 +83,22 @@ export class ApplicationSource extends pulumi.CustomResource {
      * @param args The arguments to use to populate this resource's properties.
      * @param opts A bag of options that control this resource's behavior.
      */
-    constructor(name: string, args: ApplicationSourceArgs, opts?: pulumi.CustomResourceOptions)
+    constructor(name: string, args?: ApplicationSourceArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: ApplicationSourceArgs | ApplicationSourceState, opts?: pulumi.CustomResourceOptions) {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as ApplicationSourceState | undefined;
-            resourceInputs["localFiles"] = state ? state.localFiles : undefined;
+            resourceInputs["files"] = state ? state.files : undefined;
+            resourceInputs["folderPath"] = state ? state.folderPath : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["resourceSettings"] = state ? state.resourceSettings : undefined;
             resourceInputs["runtimeParameterValues"] = state ? state.runtimeParameterValues : undefined;
             resourceInputs["versionId"] = state ? state.versionId : undefined;
         } else {
             const args = argsOrState as ApplicationSourceArgs | undefined;
-            if ((!args || args.localFiles === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'localFiles'");
-            }
-            resourceInputs["localFiles"] = args ? args.localFiles : undefined;
+            resourceInputs["files"] = args ? args.files : undefined;
+            resourceInputs["folderPath"] = args ? args.folderPath : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["resourceSettings"] = args ? args.resourceSettings : undefined;
             resourceInputs["runtimeParameterValues"] = args ? args.runtimeParameterValues : undefined;
@@ -111,9 +114,13 @@ export class ApplicationSource extends pulumi.CustomResource {
  */
 export interface ApplicationSourceState {
     /**
-     * The list of local file paths used to build the Application Source.
+     * The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
      */
-    localFiles?: pulumi.Input<pulumi.Input<string>[]>;
+    files?: any;
+    /**
+     * The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
+     */
+    folderPath?: pulumi.Input<string>;
     /**
      * The name of the Application Source.
      */
@@ -137,9 +144,13 @@ export interface ApplicationSourceState {
  */
 export interface ApplicationSourceArgs {
     /**
-     * The list of local file paths used to build the Application Source.
+     * The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
      */
-    localFiles: pulumi.Input<pulumi.Input<string>[]>;
+    files?: any;
+    /**
+     * The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
+     */
+    folderPath?: pulumi.Input<string>;
     /**
      * The name of the Application Source.
      */

@@ -41,9 +41,25 @@ export interface CustomModelGuardConfiguration {
      */
     intervention: pulumi.Input<inputs.CustomModelGuardConfigurationIntervention>;
     /**
+     * The LLM type for this guard.
+     */
+    llmType?: pulumi.Input<string>;
+    /**
      * The name of the guard configuration.
      */
     name: pulumi.Input<string>;
+    /**
+     * The OpenAI API base URL for this guard.
+     */
+    openaiApiBase?: pulumi.Input<string>;
+    /**
+     * The ID of an OpenAI credential for this guard.
+     */
+    openaiCredential?: pulumi.Input<string>;
+    /**
+     * The ID of an OpenAI deployment for this guard.
+     */
+    openaiDeploymentId?: pulumi.Input<string>;
     /**
      * The output column name of this guard.
      */
@@ -168,6 +184,10 @@ export interface DeploymentSettingsAssociationId {
      * The name of the feature to use as the association ID.
      */
     featureName: pulumi.Input<string>;
+    /**
+     * Whether the association ID is required in prediction requests.
+     */
+    requiredInPredictionRequests: pulumi.Input<boolean>;
 }
 
 export interface DeploymentSettingsPredictionsSettings {
@@ -183,6 +203,36 @@ export interface DeploymentSettingsPredictionsSettings {
      * Whether to use real-time predictions.
      */
     realTime: pulumi.Input<boolean>;
+}
+
+export interface LlmBlueprintLlmSettings {
+    /**
+     * The maximum number of tokens allowed in the completion. The combined count of this value and prompt tokens must be below the model's maximum context size, where prompt token count is comprised of system prompt, user prompt, recent chat history, and vector database citations.
+     */
+    maxCompletionLength?: pulumi.Input<number>;
+    /**
+     * Guides the style of the LLM response. It is a 'universal' prompt, prepended to all individual prompts.
+     */
+    systemPrompt?: pulumi.Input<string>;
+    /**
+     * Controls the randomness of model output, where higher values return more diverse output and lower values return more deterministic results.
+     */
+    temperature?: pulumi.Input<number>;
+    /**
+     * Threshold that controls the selection of words included in the response, based on a cumulative probability cutoff for token selection. Higher numbers return more diverse options for outputs.
+     */
+    topP?: pulumi.Input<number>;
+}
+
+export interface LlmBlueprintVectorDatabaseSettings {
+    /**
+     * The maximum number of documents to retrieve from the Vector Database.
+     */
+    maxDocumentsRetrievedPerPrompt?: pulumi.Input<number>;
+    /**
+     * The maximum number of tokens to retrieve from the Vector Database.
+     */
+    maxTokens?: pulumi.Input<number>;
 }
 
 export interface VectorDatabaseChunkingParameters {

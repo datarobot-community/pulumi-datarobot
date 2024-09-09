@@ -24,10 +24,16 @@ namespace Pulumi.Datarobot
     /// {
     ///     var example = new Datarobot.ApplicationSource("example", new()
     ///     {
-    ///         LocalFiles = new[]
+    ///         Files = new[]
     ///         {
-    ///             "start-app.sh",
-    ///             "streamlit-app.py",
+    ///             new[]
+    ///             {
+    ///                 "start-app.sh",
+    ///             },
+    ///             new[]
+    ///             {
+    ///                 "streamlit-app.py",
+    ///             },
     ///         },
     ///     });
     /// 
@@ -43,10 +49,16 @@ namespace Pulumi.Datarobot
     public partial class ApplicationSource : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// The list of local file paths used to build the Application Source.
+        /// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
         /// </summary>
-        [Output("localFiles")]
-        public Output<ImmutableArray<string>> LocalFiles { get; private set; } = null!;
+        [Output("files")]
+        public Output<object?> Files { get; private set; } = null!;
+
+        /// <summary>
+        /// The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
+        /// </summary>
+        [Output("folderPath")]
+        public Output<string?> FolderPath { get; private set; } = null!;
 
         /// <summary>
         /// The name of the Application Source.
@@ -80,7 +92,7 @@ namespace Pulumi.Datarobot
         /// <param name="name">The unique name of the resource</param>
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public ApplicationSource(string name, ApplicationSourceArgs args, CustomResourceOptions? options = null)
+        public ApplicationSource(string name, ApplicationSourceArgs? args = null, CustomResourceOptions? options = null)
             : base("datarobot:index/applicationSource:ApplicationSource", name, args ?? new ApplicationSourceArgs(), MakeResourceOptions(options, ""))
         {
         }
@@ -119,17 +131,17 @@ namespace Pulumi.Datarobot
 
     public sealed class ApplicationSourceArgs : global::Pulumi.ResourceArgs
     {
-        [Input("localFiles", required: true)]
-        private InputList<string>? _localFiles;
+        /// <summary>
+        /// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
+        /// </summary>
+        [Input("files")]
+        public Input<object>? Files { get; set; }
 
         /// <summary>
-        /// The list of local file paths used to build the Application Source.
+        /// The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
         /// </summary>
-        public InputList<string> LocalFiles
-        {
-            get => _localFiles ?? (_localFiles = new InputList<string>());
-            set => _localFiles = value;
-        }
+        [Input("folderPath")]
+        public Input<string>? FolderPath { get; set; }
 
         /// <summary>
         /// The name of the Application Source.
@@ -163,17 +175,17 @@ namespace Pulumi.Datarobot
 
     public sealed class ApplicationSourceState : global::Pulumi.ResourceArgs
     {
-        [Input("localFiles")]
-        private InputList<string>? _localFiles;
+        /// <summary>
+        /// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
+        /// </summary>
+        [Input("files")]
+        public Input<object>? Files { get; set; }
 
         /// <summary>
-        /// The list of local file paths used to build the Application Source.
+        /// The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
         /// </summary>
-        public InputList<string> LocalFiles
-        {
-            get => _localFiles ?? (_localFiles = new InputList<string>());
-            set => _localFiles = value;
-        }
+        [Input("folderPath")]
+        public Input<string>? FolderPath { get; set; }
 
         /// <summary>
         /// The name of the Application Source.

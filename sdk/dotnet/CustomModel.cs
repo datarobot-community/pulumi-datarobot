@@ -11,6 +11,79 @@ namespace Pulumi.Datarobot
 {
     /// <summary>
     /// Data set from file
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Datarobot = Pulumi.Datarobot;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var exampleRemoteRepository = new Datarobot.RemoteRepository("exampleRemoteRepository", new()
+    ///     {
+    ///         Description = "GitHub repository with Datarobot user models",
+    ///         Location = "https://github.com/datarobot/datarobot-user-models",
+    ///         SourceType = "github",
+    ///     });
+    /// 
+    ///     // set the credential id for private repositories
+    ///     // credential_id = datarobot_api_token_credential.example.id
+    ///     var exampleCustomModel = new Datarobot.CustomModel("exampleCustomModel", new()
+    ///     {
+    ///         Description = "An example custom model from GitHub repository",
+    ///         Files = new[]
+    ///         {
+    ///             "file1.py",
+    ///             "file2.py",
+    ///         },
+    ///         TargetType = "Binary",
+    ///         TargetName = "my_label",
+    ///         BaseEnvironmentName = "[GenAI] Python 3.11 with Moderations",
+    ///     });
+    /// 
+    ///     // Optional
+    ///     // source_remote_repositories = [
+    ///     //   {
+    ///     //     id  = datarobot_remote_repository.example.id
+    ///     //     ref = "master"
+    ///     //     source_paths = [
+    ///     //       "model_templates/python3_dummy_binary",
+    ///     //     ]
+    ///     //   }
+    ///     // ]
+    ///     // guard_configurations = [
+    ///     //   {
+    ///     //     template_name = "Rouge 1"
+    ///     //     name          = "Rouge 1 response"
+    ///     //     stages        = ["response"]
+    ///     //     intervention = {
+    ///     //       action  = "block"
+    ///     //       message = "response has been blocked by Rogue 1 guard"
+    ///     //       condition = {
+    ///     //         comparand  = 0.8
+    ///     //         comparator = "lessThan"
+    ///     //       }
+    ///     //     }
+    ///     //   },
+    ///     // ]
+    ///     // overall_moderation_configuration = {
+    ///     //   timeout_sec    = 120
+    ///     //   timeout_action = "score"
+    ///     // }
+    ///     // resource_settings = {
+    ///     //   memory_mb      = 512
+    ///     //   replicas       = 2
+    ///     //   network_access = "NONE"
+    ///     // }
+    ///     return new Dictionary&lt;string, object?&gt;
+    ///     {
+    ///         ["exampleId"] = exampleCustomModel.Id,
+    ///     };
+    /// });
+    /// ```
     /// </summary>
     [DatarobotResourceType("datarobot:index/customModel:CustomModel")]
     public partial class CustomModel : global::Pulumi.CustomResource

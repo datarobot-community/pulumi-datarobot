@@ -16,18 +16,22 @@ class RegisteredModelArgs:
     def __init__(__self__, *,
                  custom_model_version_id: pulumi.Input[str],
                  description: Optional[pulumi.Input[str]] = None,
-                 name: Optional[pulumi.Input[str]] = None):
+                 name: Optional[pulumi.Input[str]] = None,
+                 version_name: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a RegisteredModel resource.
         :param pulumi.Input[str] custom_model_version_id: The ID of the custom model version for this Registered Model.
         :param pulumi.Input[str] description: The description of the Registered Model.
         :param pulumi.Input[str] name: The name of the Registered Model.
+        :param pulumi.Input[str] version_name: The name of the Registered Model Version.
         """
         pulumi.set(__self__, "custom_model_version_id", custom_model_version_id)
         if description is not None:
             pulumi.set(__self__, "description", description)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if version_name is not None:
+            pulumi.set(__self__, "version_name", version_name)
 
     @property
     @pulumi.getter(name="customModelVersionId")
@@ -65,6 +69,18 @@ class RegisteredModelArgs:
     def name(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "name", value)
 
+    @property
+    @pulumi.getter(name="versionName")
+    def version_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of the Registered Model Version.
+        """
+        return pulumi.get(self, "version_name")
+
+    @version_name.setter
+    def version_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "version_name", value)
+
 
 @pulumi.input_type
 class _RegisteredModelState:
@@ -72,13 +88,15 @@ class _RegisteredModelState:
                  custom_model_version_id: Optional[pulumi.Input[str]] = None,
                  description: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
-                 version_id: Optional[pulumi.Input[str]] = None):
+                 version_id: Optional[pulumi.Input[str]] = None,
+                 version_name: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering RegisteredModel resources.
         :param pulumi.Input[str] custom_model_version_id: The ID of the custom model version for this Registered Model.
         :param pulumi.Input[str] description: The description of the Registered Model.
         :param pulumi.Input[str] name: The name of the Registered Model.
         :param pulumi.Input[str] version_id: The ID of the Registered Model Version.
+        :param pulumi.Input[str] version_name: The name of the Registered Model Version.
         """
         if custom_model_version_id is not None:
             pulumi.set(__self__, "custom_model_version_id", custom_model_version_id)
@@ -88,6 +106,8 @@ class _RegisteredModelState:
             pulumi.set(__self__, "name", name)
         if version_id is not None:
             pulumi.set(__self__, "version_id", version_id)
+        if version_name is not None:
+            pulumi.set(__self__, "version_name", version_name)
 
     @property
     @pulumi.getter(name="customModelVersionId")
@@ -137,6 +157,18 @@ class _RegisteredModelState:
     def version_id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "version_id", value)
 
+    @property
+    @pulumi.getter(name="versionName")
+    def version_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of the Registered Model Version.
+        """
+        return pulumi.get(self, "version_name")
+
+    @version_name.setter
+    def version_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "version_name", value)
+
 
 class RegisteredModel(pulumi.CustomResource):
     @overload
@@ -146,6 +178,7 @@ class RegisteredModel(pulumi.CustomResource):
                  custom_model_version_id: Optional[pulumi.Input[str]] = None,
                  description: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
+                 version_name: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
         registered model
@@ -177,6 +210,7 @@ class RegisteredModel(pulumi.CustomResource):
         :param pulumi.Input[str] custom_model_version_id: The ID of the custom model version for this Registered Model.
         :param pulumi.Input[str] description: The description of the Registered Model.
         :param pulumi.Input[str] name: The name of the Registered Model.
+        :param pulumi.Input[str] version_name: The name of the Registered Model Version.
         """
         ...
     @overload
@@ -227,6 +261,7 @@ class RegisteredModel(pulumi.CustomResource):
                  custom_model_version_id: Optional[pulumi.Input[str]] = None,
                  description: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
+                 version_name: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -241,6 +276,7 @@ class RegisteredModel(pulumi.CustomResource):
             __props__.__dict__["custom_model_version_id"] = custom_model_version_id
             __props__.__dict__["description"] = description
             __props__.__dict__["name"] = name
+            __props__.__dict__["version_name"] = version_name
             __props__.__dict__["version_id"] = None
         super(RegisteredModel, __self__).__init__(
             'datarobot:index/registeredModel:RegisteredModel',
@@ -255,7 +291,8 @@ class RegisteredModel(pulumi.CustomResource):
             custom_model_version_id: Optional[pulumi.Input[str]] = None,
             description: Optional[pulumi.Input[str]] = None,
             name: Optional[pulumi.Input[str]] = None,
-            version_id: Optional[pulumi.Input[str]] = None) -> 'RegisteredModel':
+            version_id: Optional[pulumi.Input[str]] = None,
+            version_name: Optional[pulumi.Input[str]] = None) -> 'RegisteredModel':
         """
         Get an existing RegisteredModel resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -267,6 +304,7 @@ class RegisteredModel(pulumi.CustomResource):
         :param pulumi.Input[str] description: The description of the Registered Model.
         :param pulumi.Input[str] name: The name of the Registered Model.
         :param pulumi.Input[str] version_id: The ID of the Registered Model Version.
+        :param pulumi.Input[str] version_name: The name of the Registered Model Version.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -276,6 +314,7 @@ class RegisteredModel(pulumi.CustomResource):
         __props__.__dict__["description"] = description
         __props__.__dict__["name"] = name
         __props__.__dict__["version_id"] = version_id
+        __props__.__dict__["version_name"] = version_name
         return RegisteredModel(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -309,4 +348,12 @@ class RegisteredModel(pulumi.CustomResource):
         The ID of the Registered Model Version.
         """
         return pulumi.get(self, "version_id")
+
+    @property
+    @pulumi.getter(name="versionName")
+    def version_name(self) -> pulumi.Output[str]:
+        """
+        The name of the Registered Model Version.
+        """
+        return pulumi.get(self, "version_name")
 

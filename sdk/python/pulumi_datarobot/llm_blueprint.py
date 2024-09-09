@@ -8,6 +8,8 @@ import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
+from . import outputs
+from ._inputs import *
 
 __all__ = ['LlmBlueprintArgs', 'LlmBlueprint']
 
@@ -17,24 +19,36 @@ class LlmBlueprintArgs:
                  llm_id: pulumi.Input[str],
                  playground_id: pulumi.Input[str],
                  description: Optional[pulumi.Input[str]] = None,
+                 llm_settings: Optional[pulumi.Input['LlmBlueprintLlmSettingsArgs']] = None,
                  name: Optional[pulumi.Input[str]] = None,
-                 vector_database_id: Optional[pulumi.Input[str]] = None):
+                 prompt_type: Optional[pulumi.Input[str]] = None,
+                 vector_database_id: Optional[pulumi.Input[str]] = None,
+                 vector_database_settings: Optional[pulumi.Input['LlmBlueprintVectorDatabaseSettingsArgs']] = None):
         """
         The set of arguments for constructing a LlmBlueprint resource.
         :param pulumi.Input[str] llm_id: The id of the LLM for the LLM Blueprint.
         :param pulumi.Input[str] playground_id: The id of the Playground for the LLM Blueprint.
         :param pulumi.Input[str] description: The description of the LLM Blueprint.
+        :param pulumi.Input['LlmBlueprintLlmSettingsArgs'] llm_settings: The LLM settings for the LLM Blueprint.
         :param pulumi.Input[str] name: The name of the LLM Blueprint.
+        :param pulumi.Input[str] prompt_type: The prompt type for the LLM Blueprint.
         :param pulumi.Input[str] vector_database_id: The id of the Vector Database for the LLM Blueprint.
+        :param pulumi.Input['LlmBlueprintVectorDatabaseSettingsArgs'] vector_database_settings: The Vector Database settings for the LLM Blueprint.
         """
         pulumi.set(__self__, "llm_id", llm_id)
         pulumi.set(__self__, "playground_id", playground_id)
         if description is not None:
             pulumi.set(__self__, "description", description)
+        if llm_settings is not None:
+            pulumi.set(__self__, "llm_settings", llm_settings)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if prompt_type is not None:
+            pulumi.set(__self__, "prompt_type", prompt_type)
         if vector_database_id is not None:
             pulumi.set(__self__, "vector_database_id", vector_database_id)
+        if vector_database_settings is not None:
+            pulumi.set(__self__, "vector_database_settings", vector_database_settings)
 
     @property
     @pulumi.getter(name="llmId")
@@ -73,6 +87,18 @@ class LlmBlueprintArgs:
         pulumi.set(self, "description", value)
 
     @property
+    @pulumi.getter(name="llmSettings")
+    def llm_settings(self) -> Optional[pulumi.Input['LlmBlueprintLlmSettingsArgs']]:
+        """
+        The LLM settings for the LLM Blueprint.
+        """
+        return pulumi.get(self, "llm_settings")
+
+    @llm_settings.setter
+    def llm_settings(self, value: Optional[pulumi.Input['LlmBlueprintLlmSettingsArgs']]):
+        pulumi.set(self, "llm_settings", value)
+
+    @property
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
         """
@@ -83,6 +109,18 @@ class LlmBlueprintArgs:
     @name.setter
     def name(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter(name="promptType")
+    def prompt_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        The prompt type for the LLM Blueprint.
+        """
+        return pulumi.get(self, "prompt_type")
+
+    @prompt_type.setter
+    def prompt_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "prompt_type", value)
 
     @property
     @pulumi.getter(name="vectorDatabaseId")
@@ -96,33 +134,57 @@ class LlmBlueprintArgs:
     def vector_database_id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "vector_database_id", value)
 
+    @property
+    @pulumi.getter(name="vectorDatabaseSettings")
+    def vector_database_settings(self) -> Optional[pulumi.Input['LlmBlueprintVectorDatabaseSettingsArgs']]:
+        """
+        The Vector Database settings for the LLM Blueprint.
+        """
+        return pulumi.get(self, "vector_database_settings")
+
+    @vector_database_settings.setter
+    def vector_database_settings(self, value: Optional[pulumi.Input['LlmBlueprintVectorDatabaseSettingsArgs']]):
+        pulumi.set(self, "vector_database_settings", value)
+
 
 @pulumi.input_type
 class _LlmBlueprintState:
     def __init__(__self__, *,
                  description: Optional[pulumi.Input[str]] = None,
                  llm_id: Optional[pulumi.Input[str]] = None,
+                 llm_settings: Optional[pulumi.Input['LlmBlueprintLlmSettingsArgs']] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  playground_id: Optional[pulumi.Input[str]] = None,
-                 vector_database_id: Optional[pulumi.Input[str]] = None):
+                 prompt_type: Optional[pulumi.Input[str]] = None,
+                 vector_database_id: Optional[pulumi.Input[str]] = None,
+                 vector_database_settings: Optional[pulumi.Input['LlmBlueprintVectorDatabaseSettingsArgs']] = None):
         """
         Input properties used for looking up and filtering LlmBlueprint resources.
         :param pulumi.Input[str] description: The description of the LLM Blueprint.
         :param pulumi.Input[str] llm_id: The id of the LLM for the LLM Blueprint.
+        :param pulumi.Input['LlmBlueprintLlmSettingsArgs'] llm_settings: The LLM settings for the LLM Blueprint.
         :param pulumi.Input[str] name: The name of the LLM Blueprint.
         :param pulumi.Input[str] playground_id: The id of the Playground for the LLM Blueprint.
+        :param pulumi.Input[str] prompt_type: The prompt type for the LLM Blueprint.
         :param pulumi.Input[str] vector_database_id: The id of the Vector Database for the LLM Blueprint.
+        :param pulumi.Input['LlmBlueprintVectorDatabaseSettingsArgs'] vector_database_settings: The Vector Database settings for the LLM Blueprint.
         """
         if description is not None:
             pulumi.set(__self__, "description", description)
         if llm_id is not None:
             pulumi.set(__self__, "llm_id", llm_id)
+        if llm_settings is not None:
+            pulumi.set(__self__, "llm_settings", llm_settings)
         if name is not None:
             pulumi.set(__self__, "name", name)
         if playground_id is not None:
             pulumi.set(__self__, "playground_id", playground_id)
+        if prompt_type is not None:
+            pulumi.set(__self__, "prompt_type", prompt_type)
         if vector_database_id is not None:
             pulumi.set(__self__, "vector_database_id", vector_database_id)
+        if vector_database_settings is not None:
+            pulumi.set(__self__, "vector_database_settings", vector_database_settings)
 
     @property
     @pulumi.getter
@@ -149,6 +211,18 @@ class _LlmBlueprintState:
         pulumi.set(self, "llm_id", value)
 
     @property
+    @pulumi.getter(name="llmSettings")
+    def llm_settings(self) -> Optional[pulumi.Input['LlmBlueprintLlmSettingsArgs']]:
+        """
+        The LLM settings for the LLM Blueprint.
+        """
+        return pulumi.get(self, "llm_settings")
+
+    @llm_settings.setter
+    def llm_settings(self, value: Optional[pulumi.Input['LlmBlueprintLlmSettingsArgs']]):
+        pulumi.set(self, "llm_settings", value)
+
+    @property
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
         """
@@ -173,6 +247,18 @@ class _LlmBlueprintState:
         pulumi.set(self, "playground_id", value)
 
     @property
+    @pulumi.getter(name="promptType")
+    def prompt_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        The prompt type for the LLM Blueprint.
+        """
+        return pulumi.get(self, "prompt_type")
+
+    @prompt_type.setter
+    def prompt_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "prompt_type", value)
+
+    @property
     @pulumi.getter(name="vectorDatabaseId")
     def vector_database_id(self) -> Optional[pulumi.Input[str]]:
         """
@@ -184,6 +270,18 @@ class _LlmBlueprintState:
     def vector_database_id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "vector_database_id", value)
 
+    @property
+    @pulumi.getter(name="vectorDatabaseSettings")
+    def vector_database_settings(self) -> Optional[pulumi.Input['LlmBlueprintVectorDatabaseSettingsArgs']]:
+        """
+        The Vector Database settings for the LLM Blueprint.
+        """
+        return pulumi.get(self, "vector_database_settings")
+
+    @vector_database_settings.setter
+    def vector_database_settings(self, value: Optional[pulumi.Input['LlmBlueprintVectorDatabaseSettingsArgs']]):
+        pulumi.set(self, "vector_database_settings", value)
+
 
 class LlmBlueprint(pulumi.CustomResource):
     @overload
@@ -192,9 +290,12 @@ class LlmBlueprint(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  description: Optional[pulumi.Input[str]] = None,
                  llm_id: Optional[pulumi.Input[str]] = None,
+                 llm_settings: Optional[pulumi.Input[Union['LlmBlueprintLlmSettingsArgs', 'LlmBlueprintLlmSettingsArgsDict']]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  playground_id: Optional[pulumi.Input[str]] = None,
+                 prompt_type: Optional[pulumi.Input[str]] = None,
                  vector_database_id: Optional[pulumi.Input[str]] = None,
+                 vector_database_settings: Optional[pulumi.Input[Union['LlmBlueprintVectorDatabaseSettingsArgs', 'LlmBlueprintVectorDatabaseSettingsArgsDict']]] = None,
                  __props__=None):
         """
         LLMBlueprint
@@ -212,7 +313,19 @@ class LlmBlueprint(pulumi.CustomResource):
         example_llm_blueprint = datarobot.LlmBlueprint("exampleLlmBlueprint",
             description="Description for the example LLM blueprint",
             playground_id=example_playground.id,
-            llm_id="azure-openai-gpt-3.5-turbo")
+            llm_id="azure-openai-gpt-3.5-turbo",
+            prompt_type="ONE_TIME_PROMPT")
+        # Optional
+        # llm_settings {
+        #   max_completion_length = 1000
+        #   temperature           = 0.5
+        #   top_p                 = 0.9
+        #   system_prompt         = "My Prompt:"
+        # }
+        # vector_database_settings = {
+        #   max_documents_retrieved_per_prompt = 5
+        #   max_tokens = 1000
+        # }
         pulumi.export("exampleId", example_llm_blueprint.id)
         ```
 
@@ -220,9 +333,12 @@ class LlmBlueprint(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] description: The description of the LLM Blueprint.
         :param pulumi.Input[str] llm_id: The id of the LLM for the LLM Blueprint.
+        :param pulumi.Input[Union['LlmBlueprintLlmSettingsArgs', 'LlmBlueprintLlmSettingsArgsDict']] llm_settings: The LLM settings for the LLM Blueprint.
         :param pulumi.Input[str] name: The name of the LLM Blueprint.
         :param pulumi.Input[str] playground_id: The id of the Playground for the LLM Blueprint.
+        :param pulumi.Input[str] prompt_type: The prompt type for the LLM Blueprint.
         :param pulumi.Input[str] vector_database_id: The id of the Vector Database for the LLM Blueprint.
+        :param pulumi.Input[Union['LlmBlueprintVectorDatabaseSettingsArgs', 'LlmBlueprintVectorDatabaseSettingsArgsDict']] vector_database_settings: The Vector Database settings for the LLM Blueprint.
         """
         ...
     @overload
@@ -246,7 +362,19 @@ class LlmBlueprint(pulumi.CustomResource):
         example_llm_blueprint = datarobot.LlmBlueprint("exampleLlmBlueprint",
             description="Description for the example LLM blueprint",
             playground_id=example_playground.id,
-            llm_id="azure-openai-gpt-3.5-turbo")
+            llm_id="azure-openai-gpt-3.5-turbo",
+            prompt_type="ONE_TIME_PROMPT")
+        # Optional
+        # llm_settings {
+        #   max_completion_length = 1000
+        #   temperature           = 0.5
+        #   top_p                 = 0.9
+        #   system_prompt         = "My Prompt:"
+        # }
+        # vector_database_settings = {
+        #   max_documents_retrieved_per_prompt = 5
+        #   max_tokens = 1000
+        # }
         pulumi.export("exampleId", example_llm_blueprint.id)
         ```
 
@@ -267,9 +395,12 @@ class LlmBlueprint(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  description: Optional[pulumi.Input[str]] = None,
                  llm_id: Optional[pulumi.Input[str]] = None,
+                 llm_settings: Optional[pulumi.Input[Union['LlmBlueprintLlmSettingsArgs', 'LlmBlueprintLlmSettingsArgsDict']]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  playground_id: Optional[pulumi.Input[str]] = None,
+                 prompt_type: Optional[pulumi.Input[str]] = None,
                  vector_database_id: Optional[pulumi.Input[str]] = None,
+                 vector_database_settings: Optional[pulumi.Input[Union['LlmBlueprintVectorDatabaseSettingsArgs', 'LlmBlueprintVectorDatabaseSettingsArgsDict']]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -283,11 +414,14 @@ class LlmBlueprint(pulumi.CustomResource):
             if llm_id is None and not opts.urn:
                 raise TypeError("Missing required property 'llm_id'")
             __props__.__dict__["llm_id"] = llm_id
+            __props__.__dict__["llm_settings"] = llm_settings
             __props__.__dict__["name"] = name
             if playground_id is None and not opts.urn:
                 raise TypeError("Missing required property 'playground_id'")
             __props__.__dict__["playground_id"] = playground_id
+            __props__.__dict__["prompt_type"] = prompt_type
             __props__.__dict__["vector_database_id"] = vector_database_id
+            __props__.__dict__["vector_database_settings"] = vector_database_settings
         super(LlmBlueprint, __self__).__init__(
             'datarobot:index/llmBlueprint:LlmBlueprint',
             resource_name,
@@ -300,9 +434,12 @@ class LlmBlueprint(pulumi.CustomResource):
             opts: Optional[pulumi.ResourceOptions] = None,
             description: Optional[pulumi.Input[str]] = None,
             llm_id: Optional[pulumi.Input[str]] = None,
+            llm_settings: Optional[pulumi.Input[Union['LlmBlueprintLlmSettingsArgs', 'LlmBlueprintLlmSettingsArgsDict']]] = None,
             name: Optional[pulumi.Input[str]] = None,
             playground_id: Optional[pulumi.Input[str]] = None,
-            vector_database_id: Optional[pulumi.Input[str]] = None) -> 'LlmBlueprint':
+            prompt_type: Optional[pulumi.Input[str]] = None,
+            vector_database_id: Optional[pulumi.Input[str]] = None,
+            vector_database_settings: Optional[pulumi.Input[Union['LlmBlueprintVectorDatabaseSettingsArgs', 'LlmBlueprintVectorDatabaseSettingsArgsDict']]] = None) -> 'LlmBlueprint':
         """
         Get an existing LlmBlueprint resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -312,9 +449,12 @@ class LlmBlueprint(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] description: The description of the LLM Blueprint.
         :param pulumi.Input[str] llm_id: The id of the LLM for the LLM Blueprint.
+        :param pulumi.Input[Union['LlmBlueprintLlmSettingsArgs', 'LlmBlueprintLlmSettingsArgsDict']] llm_settings: The LLM settings for the LLM Blueprint.
         :param pulumi.Input[str] name: The name of the LLM Blueprint.
         :param pulumi.Input[str] playground_id: The id of the Playground for the LLM Blueprint.
+        :param pulumi.Input[str] prompt_type: The prompt type for the LLM Blueprint.
         :param pulumi.Input[str] vector_database_id: The id of the Vector Database for the LLM Blueprint.
+        :param pulumi.Input[Union['LlmBlueprintVectorDatabaseSettingsArgs', 'LlmBlueprintVectorDatabaseSettingsArgsDict']] vector_database_settings: The Vector Database settings for the LLM Blueprint.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -322,9 +462,12 @@ class LlmBlueprint(pulumi.CustomResource):
 
         __props__.__dict__["description"] = description
         __props__.__dict__["llm_id"] = llm_id
+        __props__.__dict__["llm_settings"] = llm_settings
         __props__.__dict__["name"] = name
         __props__.__dict__["playground_id"] = playground_id
+        __props__.__dict__["prompt_type"] = prompt_type
         __props__.__dict__["vector_database_id"] = vector_database_id
+        __props__.__dict__["vector_database_settings"] = vector_database_settings
         return LlmBlueprint(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -344,6 +487,14 @@ class LlmBlueprint(pulumi.CustomResource):
         return pulumi.get(self, "llm_id")
 
     @property
+    @pulumi.getter(name="llmSettings")
+    def llm_settings(self) -> pulumi.Output[Optional['outputs.LlmBlueprintLlmSettings']]:
+        """
+        The LLM settings for the LLM Blueprint.
+        """
+        return pulumi.get(self, "llm_settings")
+
+    @property
     @pulumi.getter
     def name(self) -> pulumi.Output[str]:
         """
@@ -360,10 +511,26 @@ class LlmBlueprint(pulumi.CustomResource):
         return pulumi.get(self, "playground_id")
 
     @property
+    @pulumi.getter(name="promptType")
+    def prompt_type(self) -> pulumi.Output[str]:
+        """
+        The prompt type for the LLM Blueprint.
+        """
+        return pulumi.get(self, "prompt_type")
+
+    @property
     @pulumi.getter(name="vectorDatabaseId")
     def vector_database_id(self) -> pulumi.Output[Optional[str]]:
         """
         The id of the Vector Database for the LLM Blueprint.
         """
         return pulumi.get(self, "vector_database_id")
+
+    @property
+    @pulumi.getter(name="vectorDatabaseSettings")
+    def vector_database_settings(self) -> pulumi.Output[Optional['outputs.LlmBlueprintVectorDatabaseSettings']]:
+        """
+        The Vector Database settings for the LLM Blueprint.
+        """
+        return pulumi.get(self, "vector_database_settings")
 

@@ -1,4 +1,4 @@
-import * as datarobot from "@pulumi/datarobot";
+import * as datarobot from "@datarobot/pulumi-datarobot";
 
 console.log("Creating a DataRobot use case...");
 

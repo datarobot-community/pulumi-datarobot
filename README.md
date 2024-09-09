@@ -16,11 +16,21 @@ To use from Python, install using `pip`:
 pip install pulumi_datarobot
 ```
 
-### Go
-
-Coming soon...
-
 ### Javscript/Typescript
+
+To use from JavaScript or TypeScript in Node.js, install using either `npm`:
+
+```bash
+npm install @datarobot/pulumi-datarobot
+```
+
+or `yarn`:
+
+```bash
+yarn add @datarobot/pulumi-datarobot
+```
+
+### Go
 
 Coming soon...
 
