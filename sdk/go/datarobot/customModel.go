@@ -29,14 +29,16 @@ type CustomModel struct {
 	DeploymentsCount pulumi.IntOutput `pulumi:"deploymentsCount"`
 	// The description of the Custom Model.
 	Description pulumi.StringPtrOutput `pulumi:"description"`
+	// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Custom Model. If list is of strings, then basenames will be used for tuples.
+	Files pulumi.AnyOutput `pulumi:"files"`
+	// The path to a folder containing files to build the Custom Model. Each file in the folder is uploaded under path relative to a folder path.
+	FolderPath pulumi.StringPtrOutput `pulumi:"folderPath"`
 	// The guard configurations for the Custom Model.
 	GuardConfigurations CustomModelGuardConfigurationArrayOutput `pulumi:"guardConfigurations"`
 	// Flag indicating if the Custom Model is a proxy model.
 	IsProxy pulumi.BoolOutput `pulumi:"isProxy"`
 	// The language used to build the Custom Model.
 	Language pulumi.StringPtrOutput `pulumi:"language"`
-	// The list of local file paths used to build the Custom Model.
-	LocalFiles pulumi.StringArrayOutput `pulumi:"localFiles"`
 	// The name of the Custom Model.
 	Name pulumi.StringOutput `pulumi:"name"`
 	// The negative class label of the Custom Model.
@@ -115,14 +117,16 @@ type customModelState struct {
 	DeploymentsCount *int `pulumi:"deploymentsCount"`
 	// The description of the Custom Model.
 	Description *string `pulumi:"description"`
+	// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Custom Model. If list is of strings, then basenames will be used for tuples.
+	Files interface{} `pulumi:"files"`
+	// The path to a folder containing files to build the Custom Model. Each file in the folder is uploaded under path relative to a folder path.
+	FolderPath *string `pulumi:"folderPath"`
 	// The guard configurations for the Custom Model.
 	GuardConfigurations []CustomModelGuardConfiguration `pulumi:"guardConfigurations"`
 	// Flag indicating if the Custom Model is a proxy model.
 	IsProxy *bool `pulumi:"isProxy"`
 	// The language used to build the Custom Model.
 	Language *string `pulumi:"language"`
-	// The list of local file paths used to build the Custom Model.
-	LocalFiles []string `pulumi:"localFiles"`
 	// The name of the Custom Model.
 	Name *string `pulumi:"name"`
 	// The negative class label of the Custom Model.
@@ -172,14 +176,16 @@ type CustomModelState struct {
 	DeploymentsCount pulumi.IntPtrInput
 	// The description of the Custom Model.
 	Description pulumi.StringPtrInput
+	// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Custom Model. If list is of strings, then basenames will be used for tuples.
+	Files pulumi.Input
+	// The path to a folder containing files to build the Custom Model. Each file in the folder is uploaded under path relative to a folder path.
+	FolderPath pulumi.StringPtrInput
 	// The guard configurations for the Custom Model.
 	GuardConfigurations CustomModelGuardConfigurationArrayInput
 	// Flag indicating if the Custom Model is a proxy model.
 	IsProxy pulumi.BoolPtrInput
 	// The language used to build the Custom Model.
 	Language pulumi.StringPtrInput
-	// The list of local file paths used to build the Custom Model.
-	LocalFiles pulumi.StringArrayInput
 	// The name of the Custom Model.
 	Name pulumi.StringPtrInput
 	// The negative class label of the Custom Model.
@@ -231,14 +237,16 @@ type customModelArgs struct {
 	ClassLabelsFile *string `pulumi:"classLabelsFile"`
 	// The description of the Custom Model.
 	Description *string `pulumi:"description"`
+	// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Custom Model. If list is of strings, then basenames will be used for tuples.
+	Files interface{} `pulumi:"files"`
+	// The path to a folder containing files to build the Custom Model. Each file in the folder is uploaded under path relative to a folder path.
+	FolderPath *string `pulumi:"folderPath"`
 	// The guard configurations for the Custom Model.
 	GuardConfigurations []CustomModelGuardConfiguration `pulumi:"guardConfigurations"`
 	// Flag indicating if the Custom Model is a proxy model.
 	IsProxy *bool `pulumi:"isProxy"`
 	// The language used to build the Custom Model.
 	Language *string `pulumi:"language"`
-	// The list of local file paths used to build the Custom Model.
-	LocalFiles []string `pulumi:"localFiles"`
 	// The name of the Custom Model.
 	Name *string `pulumi:"name"`
 	// The negative class label of the Custom Model.
@@ -281,14 +289,16 @@ type CustomModelArgs struct {
 	ClassLabelsFile pulumi.StringPtrInput
 	// The description of the Custom Model.
 	Description pulumi.StringPtrInput
+	// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Custom Model. If list is of strings, then basenames will be used for tuples.
+	Files pulumi.Input
+	// The path to a folder containing files to build the Custom Model. Each file in the folder is uploaded under path relative to a folder path.
+	FolderPath pulumi.StringPtrInput
 	// The guard configurations for the Custom Model.
 	GuardConfigurations CustomModelGuardConfigurationArrayInput
 	// Flag indicating if the Custom Model is a proxy model.
 	IsProxy pulumi.BoolPtrInput
 	// The language used to build the Custom Model.
 	Language pulumi.StringPtrInput
-	// The list of local file paths used to build the Custom Model.
-	LocalFiles pulumi.StringArrayInput
 	// The name of the Custom Model.
 	Name pulumi.StringPtrInput
 	// The negative class label of the Custom Model.
@@ -439,6 +449,16 @@ func (o CustomModelOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *CustomModel) pulumi.StringPtrOutput { return v.Description }).(pulumi.StringPtrOutput)
 }
 
+// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Custom Model. If list is of strings, then basenames will be used for tuples.
+func (o CustomModelOutput) Files() pulumi.AnyOutput {
+	return o.ApplyT(func(v *CustomModel) pulumi.AnyOutput { return v.Files }).(pulumi.AnyOutput)
+}
+
+// The path to a folder containing files to build the Custom Model. Each file in the folder is uploaded under path relative to a folder path.
+func (o CustomModelOutput) FolderPath() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CustomModel) pulumi.StringPtrOutput { return v.FolderPath }).(pulumi.StringPtrOutput)
+}
+
 // The guard configurations for the Custom Model.
 func (o CustomModelOutput) GuardConfigurations() CustomModelGuardConfigurationArrayOutput {
 	return o.ApplyT(func(v *CustomModel) CustomModelGuardConfigurationArrayOutput { return v.GuardConfigurations }).(CustomModelGuardConfigurationArrayOutput)
@@ -452,11 +472,6 @@ func (o CustomModelOutput) IsProxy() pulumi.BoolOutput {
 // The language used to build the Custom Model.
 func (o CustomModelOutput) Language() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *CustomModel) pulumi.StringPtrOutput { return v.Language }).(pulumi.StringPtrOutput)
-}
-
-// The list of local file paths used to build the Custom Model.
-func (o CustomModelOutput) LocalFiles() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v *CustomModel) pulumi.StringArrayOutput { return v.LocalFiles }).(pulumi.StringArrayOutput)
 }
 
 // The name of the Custom Model.
