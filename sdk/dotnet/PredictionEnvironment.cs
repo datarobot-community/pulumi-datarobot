@@ -24,8 +24,18 @@ namespace Pulumi.Datarobot
     /// {
     ///     var example = new Datarobot.PredictionEnvironment("example", new()
     ///     {
+    ///         BatchJobsMaxConcurrent = 20,
+    ///         BatchJobsPriority = "high",
+    ///         CredentialId = "&lt;credential_id&gt;",
+    ///         DatastoreId = "&lt;datastore_id&gt;",
     ///         Description = "Description for the example prediction environment",
+    ///         ManagedBy = "selfManaged",
     ///         Platform = "datarobotServerless",
+    ///         SupportedModelFormats = new[]
+    ///         {
+    ///             "datarobot",
+    ///             "customModel",
+    ///         },
     ///     });
     /// 
     /// });
@@ -35,10 +45,40 @@ namespace Pulumi.Datarobot
     public partial class PredictionEnvironment : global::Pulumi.CustomResource
     {
         /// <summary>
+        /// The maximum number of concurrent batch prediction jobs.
+        /// </summary>
+        [Output("batchJobsMaxConcurrent")]
+        public Output<int?> BatchJobsMaxConcurrent { get; private set; } = null!;
+
+        /// <summary>
+        /// The importance of batch jobs.
+        /// </summary>
+        [Output("batchJobsPriority")]
+        public Output<string?> BatchJobsPriority { get; private set; } = null!;
+
+        /// <summary>
+        /// The ID of the credential associated with the data connection. Only applicable for external prediction environments managed by DataRobot.
+        /// </summary>
+        [Output("credentialId")]
+        public Output<string?> CredentialId { get; private set; } = null!;
+
+        /// <summary>
+        /// The ID of the data store connection configuration. Only applicable for external prediction environments managed by DataRobot.
+        /// </summary>
+        [Output("datastoreId")]
+        public Output<string?> DatastoreId { get; private set; } = null!;
+
+        /// <summary>
         /// The description of the Prediction Environment.
         /// </summary>
         [Output("description")]
         public Output<string?> Description { get; private set; } = null!;
+
+        /// <summary>
+        /// Determines if the prediction environment should be managed by the management agent, datarobot, or self-managed. Self-managed by default.
+        /// </summary>
+        [Output("managedBy")]
+        public Output<string> ManagedBy { get; private set; } = null!;
 
         /// <summary>
         /// The name of the Prediction Environment.
@@ -51,6 +91,12 @@ namespace Pulumi.Datarobot
         /// </summary>
         [Output("platform")]
         public Output<string> Platform { get; private set; } = null!;
+
+        /// <summary>
+        /// The list of supported model formats.
+        /// </summary>
+        [Output("supportedModelFormats")]
+        public Output<ImmutableArray<string>> SupportedModelFormats { get; private set; } = null!;
 
 
         /// <summary>
@@ -100,10 +146,40 @@ namespace Pulumi.Datarobot
     public sealed class PredictionEnvironmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// The maximum number of concurrent batch prediction jobs.
+        /// </summary>
+        [Input("batchJobsMaxConcurrent")]
+        public Input<int>? BatchJobsMaxConcurrent { get; set; }
+
+        /// <summary>
+        /// The importance of batch jobs.
+        /// </summary>
+        [Input("batchJobsPriority")]
+        public Input<string>? BatchJobsPriority { get; set; }
+
+        /// <summary>
+        /// The ID of the credential associated with the data connection. Only applicable for external prediction environments managed by DataRobot.
+        /// </summary>
+        [Input("credentialId")]
+        public Input<string>? CredentialId { get; set; }
+
+        /// <summary>
+        /// The ID of the data store connection configuration. Only applicable for external prediction environments managed by DataRobot.
+        /// </summary>
+        [Input("datastoreId")]
+        public Input<string>? DatastoreId { get; set; }
+
+        /// <summary>
         /// The description of the Prediction Environment.
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
+
+        /// <summary>
+        /// Determines if the prediction environment should be managed by the management agent, datarobot, or self-managed. Self-managed by default.
+        /// </summary>
+        [Input("managedBy")]
+        public Input<string>? ManagedBy { get; set; }
 
         /// <summary>
         /// The name of the Prediction Environment.
@@ -117,6 +193,18 @@ namespace Pulumi.Datarobot
         [Input("platform", required: true)]
         public Input<string> Platform { get; set; } = null!;
 
+        [Input("supportedModelFormats")]
+        private InputList<string>? _supportedModelFormats;
+
+        /// <summary>
+        /// The list of supported model formats.
+        /// </summary>
+        public InputList<string> SupportedModelFormats
+        {
+            get => _supportedModelFormats ?? (_supportedModelFormats = new InputList<string>());
+            set => _supportedModelFormats = value;
+        }
+
         public PredictionEnvironmentArgs()
         {
         }
@@ -126,10 +214,40 @@ namespace Pulumi.Datarobot
     public sealed class PredictionEnvironmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// The maximum number of concurrent batch prediction jobs.
+        /// </summary>
+        [Input("batchJobsMaxConcurrent")]
+        public Input<int>? BatchJobsMaxConcurrent { get; set; }
+
+        /// <summary>
+        /// The importance of batch jobs.
+        /// </summary>
+        [Input("batchJobsPriority")]
+        public Input<string>? BatchJobsPriority { get; set; }
+
+        /// <summary>
+        /// The ID of the credential associated with the data connection. Only applicable for external prediction environments managed by DataRobot.
+        /// </summary>
+        [Input("credentialId")]
+        public Input<string>? CredentialId { get; set; }
+
+        /// <summary>
+        /// The ID of the data store connection configuration. Only applicable for external prediction environments managed by DataRobot.
+        /// </summary>
+        [Input("datastoreId")]
+        public Input<string>? DatastoreId { get; set; }
+
+        /// <summary>
         /// The description of the Prediction Environment.
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
+
+        /// <summary>
+        /// Determines if the prediction environment should be managed by the management agent, datarobot, or self-managed. Self-managed by default.
+        /// </summary>
+        [Input("managedBy")]
+        public Input<string>? ManagedBy { get; set; }
 
         /// <summary>
         /// The name of the Prediction Environment.
@@ -142,6 +260,18 @@ namespace Pulumi.Datarobot
         /// </summary>
         [Input("platform")]
         public Input<string>? Platform { get; set; }
+
+        [Input("supportedModelFormats")]
+        private InputList<string>? _supportedModelFormats;
+
+        /// <summary>
+        /// The list of supported model formats.
+        /// </summary>
+        public InputList<string> SupportedModelFormats
+        {
+            get => _supportedModelFormats ?? (_supportedModelFormats = new InputList<string>());
+            set => _supportedModelFormats = value;
+        }
 
         public PredictionEnvironmentState()
         {

@@ -15,19 +15,43 @@ __all__ = ['PredictionEnvironmentArgs', 'PredictionEnvironment']
 class PredictionEnvironmentArgs:
     def __init__(__self__, *,
                  platform: pulumi.Input[str],
+                 batch_jobs_max_concurrent: Optional[pulumi.Input[int]] = None,
+                 batch_jobs_priority: Optional[pulumi.Input[str]] = None,
+                 credential_id: Optional[pulumi.Input[str]] = None,
+                 datastore_id: Optional[pulumi.Input[str]] = None,
                  description: Optional[pulumi.Input[str]] = None,
-                 name: Optional[pulumi.Input[str]] = None):
+                 managed_by: Optional[pulumi.Input[str]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 supported_model_formats: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         The set of arguments for constructing a PredictionEnvironment resource.
         :param pulumi.Input[str] platform: The platform for the Prediction Environment.
+        :param pulumi.Input[int] batch_jobs_max_concurrent: The maximum number of concurrent batch prediction jobs.
+        :param pulumi.Input[str] batch_jobs_priority: The importance of batch jobs.
+        :param pulumi.Input[str] credential_id: The ID of the credential associated with the data connection. Only applicable for external prediction environments managed by DataRobot.
+        :param pulumi.Input[str] datastore_id: The ID of the data store connection configuration. Only applicable for external prediction environments managed by DataRobot.
         :param pulumi.Input[str] description: The description of the Prediction Environment.
+        :param pulumi.Input[str] managed_by: Determines if the prediction environment should be managed by the management agent, datarobot, or self-managed. Self-managed by default.
         :param pulumi.Input[str] name: The name of the Prediction Environment.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] supported_model_formats: The list of supported model formats.
         """
         pulumi.set(__self__, "platform", platform)
+        if batch_jobs_max_concurrent is not None:
+            pulumi.set(__self__, "batch_jobs_max_concurrent", batch_jobs_max_concurrent)
+        if batch_jobs_priority is not None:
+            pulumi.set(__self__, "batch_jobs_priority", batch_jobs_priority)
+        if credential_id is not None:
+            pulumi.set(__self__, "credential_id", credential_id)
+        if datastore_id is not None:
+            pulumi.set(__self__, "datastore_id", datastore_id)
         if description is not None:
             pulumi.set(__self__, "description", description)
+        if managed_by is not None:
+            pulumi.set(__self__, "managed_by", managed_by)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if supported_model_formats is not None:
+            pulumi.set(__self__, "supported_model_formats", supported_model_formats)
 
     @property
     @pulumi.getter
@@ -42,6 +66,54 @@ class PredictionEnvironmentArgs:
         pulumi.set(self, "platform", value)
 
     @property
+    @pulumi.getter(name="batchJobsMaxConcurrent")
+    def batch_jobs_max_concurrent(self) -> Optional[pulumi.Input[int]]:
+        """
+        The maximum number of concurrent batch prediction jobs.
+        """
+        return pulumi.get(self, "batch_jobs_max_concurrent")
+
+    @batch_jobs_max_concurrent.setter
+    def batch_jobs_max_concurrent(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "batch_jobs_max_concurrent", value)
+
+    @property
+    @pulumi.getter(name="batchJobsPriority")
+    def batch_jobs_priority(self) -> Optional[pulumi.Input[str]]:
+        """
+        The importance of batch jobs.
+        """
+        return pulumi.get(self, "batch_jobs_priority")
+
+    @batch_jobs_priority.setter
+    def batch_jobs_priority(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "batch_jobs_priority", value)
+
+    @property
+    @pulumi.getter(name="credentialId")
+    def credential_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The ID of the credential associated with the data connection. Only applicable for external prediction environments managed by DataRobot.
+        """
+        return pulumi.get(self, "credential_id")
+
+    @credential_id.setter
+    def credential_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "credential_id", value)
+
+    @property
+    @pulumi.getter(name="datastoreId")
+    def datastore_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The ID of the data store connection configuration. Only applicable for external prediction environments managed by DataRobot.
+        """
+        return pulumi.get(self, "datastore_id")
+
+    @datastore_id.setter
+    def datastore_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "datastore_id", value)
+
+    @property
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
         """
@@ -52,6 +124,18 @@ class PredictionEnvironmentArgs:
     @description.setter
     def description(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "description", value)
+
+    @property
+    @pulumi.getter(name="managedBy")
+    def managed_by(self) -> Optional[pulumi.Input[str]]:
+        """
+        Determines if the prediction environment should be managed by the management agent, datarobot, or self-managed. Self-managed by default.
+        """
+        return pulumi.get(self, "managed_by")
+
+    @managed_by.setter
+    def managed_by(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "managed_by", value)
 
     @property
     @pulumi.getter
@@ -65,25 +149,109 @@ class PredictionEnvironmentArgs:
     def name(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "name", value)
 
+    @property
+    @pulumi.getter(name="supportedModelFormats")
+    def supported_model_formats(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        The list of supported model formats.
+        """
+        return pulumi.get(self, "supported_model_formats")
+
+    @supported_model_formats.setter
+    def supported_model_formats(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "supported_model_formats", value)
+
 
 @pulumi.input_type
 class _PredictionEnvironmentState:
     def __init__(__self__, *,
+                 batch_jobs_max_concurrent: Optional[pulumi.Input[int]] = None,
+                 batch_jobs_priority: Optional[pulumi.Input[str]] = None,
+                 credential_id: Optional[pulumi.Input[str]] = None,
+                 datastore_id: Optional[pulumi.Input[str]] = None,
                  description: Optional[pulumi.Input[str]] = None,
+                 managed_by: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
-                 platform: Optional[pulumi.Input[str]] = None):
+                 platform: Optional[pulumi.Input[str]] = None,
+                 supported_model_formats: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         Input properties used for looking up and filtering PredictionEnvironment resources.
+        :param pulumi.Input[int] batch_jobs_max_concurrent: The maximum number of concurrent batch prediction jobs.
+        :param pulumi.Input[str] batch_jobs_priority: The importance of batch jobs.
+        :param pulumi.Input[str] credential_id: The ID of the credential associated with the data connection. Only applicable for external prediction environments managed by DataRobot.
+        :param pulumi.Input[str] datastore_id: The ID of the data store connection configuration. Only applicable for external prediction environments managed by DataRobot.
         :param pulumi.Input[str] description: The description of the Prediction Environment.
+        :param pulumi.Input[str] managed_by: Determines if the prediction environment should be managed by the management agent, datarobot, or self-managed. Self-managed by default.
         :param pulumi.Input[str] name: The name of the Prediction Environment.
         :param pulumi.Input[str] platform: The platform for the Prediction Environment.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] supported_model_formats: The list of supported model formats.
         """
+        if batch_jobs_max_concurrent is not None:
+            pulumi.set(__self__, "batch_jobs_max_concurrent", batch_jobs_max_concurrent)
+        if batch_jobs_priority is not None:
+            pulumi.set(__self__, "batch_jobs_priority", batch_jobs_priority)
+        if credential_id is not None:
+            pulumi.set(__self__, "credential_id", credential_id)
+        if datastore_id is not None:
+            pulumi.set(__self__, "datastore_id", datastore_id)
         if description is not None:
             pulumi.set(__self__, "description", description)
+        if managed_by is not None:
+            pulumi.set(__self__, "managed_by", managed_by)
         if name is not None:
             pulumi.set(__self__, "name", name)
         if platform is not None:
             pulumi.set(__self__, "platform", platform)
+        if supported_model_formats is not None:
+            pulumi.set(__self__, "supported_model_formats", supported_model_formats)
+
+    @property
+    @pulumi.getter(name="batchJobsMaxConcurrent")
+    def batch_jobs_max_concurrent(self) -> Optional[pulumi.Input[int]]:
+        """
+        The maximum number of concurrent batch prediction jobs.
+        """
+        return pulumi.get(self, "batch_jobs_max_concurrent")
+
+    @batch_jobs_max_concurrent.setter
+    def batch_jobs_max_concurrent(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "batch_jobs_max_concurrent", value)
+
+    @property
+    @pulumi.getter(name="batchJobsPriority")
+    def batch_jobs_priority(self) -> Optional[pulumi.Input[str]]:
+        """
+        The importance of batch jobs.
+        """
+        return pulumi.get(self, "batch_jobs_priority")
+
+    @batch_jobs_priority.setter
+    def batch_jobs_priority(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "batch_jobs_priority", value)
+
+    @property
+    @pulumi.getter(name="credentialId")
+    def credential_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The ID of the credential associated with the data connection. Only applicable for external prediction environments managed by DataRobot.
+        """
+        return pulumi.get(self, "credential_id")
+
+    @credential_id.setter
+    def credential_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "credential_id", value)
+
+    @property
+    @pulumi.getter(name="datastoreId")
+    def datastore_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The ID of the data store connection configuration. Only applicable for external prediction environments managed by DataRobot.
+        """
+        return pulumi.get(self, "datastore_id")
+
+    @datastore_id.setter
+    def datastore_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "datastore_id", value)
 
     @property
     @pulumi.getter
@@ -96,6 +264,18 @@ class _PredictionEnvironmentState:
     @description.setter
     def description(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "description", value)
+
+    @property
+    @pulumi.getter(name="managedBy")
+    def managed_by(self) -> Optional[pulumi.Input[str]]:
+        """
+        Determines if the prediction environment should be managed by the management agent, datarobot, or self-managed. Self-managed by default.
+        """
+        return pulumi.get(self, "managed_by")
+
+    @managed_by.setter
+    def managed_by(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "managed_by", value)
 
     @property
     @pulumi.getter
@@ -121,15 +301,33 @@ class _PredictionEnvironmentState:
     def platform(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "platform", value)
 
+    @property
+    @pulumi.getter(name="supportedModelFormats")
+    def supported_model_formats(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        The list of supported model formats.
+        """
+        return pulumi.get(self, "supported_model_formats")
+
+    @supported_model_formats.setter
+    def supported_model_formats(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "supported_model_formats", value)
+
 
 class PredictionEnvironment(pulumi.CustomResource):
     @overload
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 batch_jobs_max_concurrent: Optional[pulumi.Input[int]] = None,
+                 batch_jobs_priority: Optional[pulumi.Input[str]] = None,
+                 credential_id: Optional[pulumi.Input[str]] = None,
+                 datastore_id: Optional[pulumi.Input[str]] = None,
                  description: Optional[pulumi.Input[str]] = None,
+                 managed_by: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  platform: Optional[pulumi.Input[str]] = None,
+                 supported_model_formats: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         """
         prediction environment
@@ -141,15 +339,30 @@ class PredictionEnvironment(pulumi.CustomResource):
         import pulumi_datarobot as datarobot
 
         example = datarobot.PredictionEnvironment("example",
+            batch_jobs_max_concurrent=20,
+            batch_jobs_priority="high",
+            credential_id="<credential_id>",
+            datastore_id="<datastore_id>",
             description="Description for the example prediction environment",
-            platform="datarobotServerless")
+            managed_by="selfManaged",
+            platform="datarobotServerless",
+            supported_model_formats=[
+                "datarobot",
+                "customModel",
+            ])
         ```
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[int] batch_jobs_max_concurrent: The maximum number of concurrent batch prediction jobs.
+        :param pulumi.Input[str] batch_jobs_priority: The importance of batch jobs.
+        :param pulumi.Input[str] credential_id: The ID of the credential associated with the data connection. Only applicable for external prediction environments managed by DataRobot.
+        :param pulumi.Input[str] datastore_id: The ID of the data store connection configuration. Only applicable for external prediction environments managed by DataRobot.
         :param pulumi.Input[str] description: The description of the Prediction Environment.
+        :param pulumi.Input[str] managed_by: Determines if the prediction environment should be managed by the management agent, datarobot, or self-managed. Self-managed by default.
         :param pulumi.Input[str] name: The name of the Prediction Environment.
         :param pulumi.Input[str] platform: The platform for the Prediction Environment.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] supported_model_formats: The list of supported model formats.
         """
         ...
     @overload
@@ -167,8 +380,17 @@ class PredictionEnvironment(pulumi.CustomResource):
         import pulumi_datarobot as datarobot
 
         example = datarobot.PredictionEnvironment("example",
+            batch_jobs_max_concurrent=20,
+            batch_jobs_priority="high",
+            credential_id="<credential_id>",
+            datastore_id="<datastore_id>",
             description="Description for the example prediction environment",
-            platform="datarobotServerless")
+            managed_by="selfManaged",
+            platform="datarobotServerless",
+            supported_model_formats=[
+                "datarobot",
+                "customModel",
+            ])
         ```
 
         :param str resource_name: The name of the resource.
@@ -186,9 +408,15 @@ class PredictionEnvironment(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 batch_jobs_max_concurrent: Optional[pulumi.Input[int]] = None,
+                 batch_jobs_priority: Optional[pulumi.Input[str]] = None,
+                 credential_id: Optional[pulumi.Input[str]] = None,
+                 datastore_id: Optional[pulumi.Input[str]] = None,
                  description: Optional[pulumi.Input[str]] = None,
+                 managed_by: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  platform: Optional[pulumi.Input[str]] = None,
+                 supported_model_formats: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -198,11 +426,17 @@ class PredictionEnvironment(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = PredictionEnvironmentArgs.__new__(PredictionEnvironmentArgs)
 
+            __props__.__dict__["batch_jobs_max_concurrent"] = batch_jobs_max_concurrent
+            __props__.__dict__["batch_jobs_priority"] = batch_jobs_priority
+            __props__.__dict__["credential_id"] = credential_id
+            __props__.__dict__["datastore_id"] = datastore_id
             __props__.__dict__["description"] = description
+            __props__.__dict__["managed_by"] = managed_by
             __props__.__dict__["name"] = name
             if platform is None and not opts.urn:
                 raise TypeError("Missing required property 'platform'")
             __props__.__dict__["platform"] = platform
+            __props__.__dict__["supported_model_formats"] = supported_model_formats
         super(PredictionEnvironment, __self__).__init__(
             'datarobot:index/predictionEnvironment:PredictionEnvironment',
             resource_name,
@@ -213,9 +447,15 @@ class PredictionEnvironment(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
+            batch_jobs_max_concurrent: Optional[pulumi.Input[int]] = None,
+            batch_jobs_priority: Optional[pulumi.Input[str]] = None,
+            credential_id: Optional[pulumi.Input[str]] = None,
+            datastore_id: Optional[pulumi.Input[str]] = None,
             description: Optional[pulumi.Input[str]] = None,
+            managed_by: Optional[pulumi.Input[str]] = None,
             name: Optional[pulumi.Input[str]] = None,
-            platform: Optional[pulumi.Input[str]] = None) -> 'PredictionEnvironment':
+            platform: Optional[pulumi.Input[str]] = None,
+            supported_model_formats: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None) -> 'PredictionEnvironment':
         """
         Get an existing PredictionEnvironment resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -223,18 +463,62 @@ class PredictionEnvironment(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[int] batch_jobs_max_concurrent: The maximum number of concurrent batch prediction jobs.
+        :param pulumi.Input[str] batch_jobs_priority: The importance of batch jobs.
+        :param pulumi.Input[str] credential_id: The ID of the credential associated with the data connection. Only applicable for external prediction environments managed by DataRobot.
+        :param pulumi.Input[str] datastore_id: The ID of the data store connection configuration. Only applicable for external prediction environments managed by DataRobot.
         :param pulumi.Input[str] description: The description of the Prediction Environment.
+        :param pulumi.Input[str] managed_by: Determines if the prediction environment should be managed by the management agent, datarobot, or self-managed. Self-managed by default.
         :param pulumi.Input[str] name: The name of the Prediction Environment.
         :param pulumi.Input[str] platform: The platform for the Prediction Environment.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] supported_model_formats: The list of supported model formats.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = _PredictionEnvironmentState.__new__(_PredictionEnvironmentState)
 
+        __props__.__dict__["batch_jobs_max_concurrent"] = batch_jobs_max_concurrent
+        __props__.__dict__["batch_jobs_priority"] = batch_jobs_priority
+        __props__.__dict__["credential_id"] = credential_id
+        __props__.__dict__["datastore_id"] = datastore_id
         __props__.__dict__["description"] = description
+        __props__.__dict__["managed_by"] = managed_by
         __props__.__dict__["name"] = name
         __props__.__dict__["platform"] = platform
+        __props__.__dict__["supported_model_formats"] = supported_model_formats
         return PredictionEnvironment(resource_name, opts=opts, __props__=__props__)
+
+    @property
+    @pulumi.getter(name="batchJobsMaxConcurrent")
+    def batch_jobs_max_concurrent(self) -> pulumi.Output[Optional[int]]:
+        """
+        The maximum number of concurrent batch prediction jobs.
+        """
+        return pulumi.get(self, "batch_jobs_max_concurrent")
+
+    @property
+    @pulumi.getter(name="batchJobsPriority")
+    def batch_jobs_priority(self) -> pulumi.Output[Optional[str]]:
+        """
+        The importance of batch jobs.
+        """
+        return pulumi.get(self, "batch_jobs_priority")
+
+    @property
+    @pulumi.getter(name="credentialId")
+    def credential_id(self) -> pulumi.Output[Optional[str]]:
+        """
+        The ID of the credential associated with the data connection. Only applicable for external prediction environments managed by DataRobot.
+        """
+        return pulumi.get(self, "credential_id")
+
+    @property
+    @pulumi.getter(name="datastoreId")
+    def datastore_id(self) -> pulumi.Output[Optional[str]]:
+        """
+        The ID of the data store connection configuration. Only applicable for external prediction environments managed by DataRobot.
+        """
+        return pulumi.get(self, "datastore_id")
 
     @property
     @pulumi.getter
@@ -243,6 +527,14 @@ class PredictionEnvironment(pulumi.CustomResource):
         The description of the Prediction Environment.
         """
         return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter(name="managedBy")
+    def managed_by(self) -> pulumi.Output[str]:
+        """
+        Determines if the prediction environment should be managed by the management agent, datarobot, or self-managed. Self-managed by default.
+        """
+        return pulumi.get(self, "managed_by")
 
     @property
     @pulumi.getter
@@ -259,4 +551,12 @@ class PredictionEnvironment(pulumi.CustomResource):
         The platform for the Prediction Environment.
         """
         return pulumi.get(self, "platform")
+
+    @property
+    @pulumi.getter(name="supportedModelFormats")
+    def supported_model_formats(self) -> pulumi.Output[Optional[Sequence[str]]]:
+        """
+        The list of supported model formats.
+        """
+        return pulumi.get(self, "supported_model_formats")
 

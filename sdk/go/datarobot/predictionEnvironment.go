@@ -29,8 +29,17 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := datarobot.NewPredictionEnvironment(ctx, "example", &datarobot.PredictionEnvironmentArgs{
-//				Description: pulumi.String("Description for the example prediction environment"),
-//				Platform:    pulumi.String("datarobotServerless"),
+//				BatchJobsMaxConcurrent: pulumi.Int(20),
+//				BatchJobsPriority:      pulumi.String("high"),
+//				CredentialId:           pulumi.String("<credential_id>"),
+//				DatastoreId:            pulumi.String("<datastore_id>"),
+//				Description:            pulumi.String("Description for the example prediction environment"),
+//				ManagedBy:              pulumi.String("selfManaged"),
+//				Platform:               pulumi.String("datarobotServerless"),
+//				SupportedModelFormats: pulumi.StringArray{
+//					pulumi.String("datarobot"),
+//					pulumi.String("customModel"),
+//				},
 //			})
 //			if err != nil {
 //				return err
@@ -43,12 +52,24 @@ import (
 type PredictionEnvironment struct {
 	pulumi.CustomResourceState
 
+	// The maximum number of concurrent batch prediction jobs.
+	BatchJobsMaxConcurrent pulumi.IntPtrOutput `pulumi:"batchJobsMaxConcurrent"`
+	// The importance of batch jobs.
+	BatchJobsPriority pulumi.StringPtrOutput `pulumi:"batchJobsPriority"`
+	// The ID of the credential associated with the data connection. Only applicable for external prediction environments managed by DataRobot.
+	CredentialId pulumi.StringPtrOutput `pulumi:"credentialId"`
+	// The ID of the data store connection configuration. Only applicable for external prediction environments managed by DataRobot.
+	DatastoreId pulumi.StringPtrOutput `pulumi:"datastoreId"`
 	// The description of the Prediction Environment.
 	Description pulumi.StringPtrOutput `pulumi:"description"`
+	// Determines if the prediction environment should be managed by the management agent, datarobot, or self-managed. Self-managed by default.
+	ManagedBy pulumi.StringOutput `pulumi:"managedBy"`
 	// The name of the Prediction Environment.
 	Name pulumi.StringOutput `pulumi:"name"`
 	// The platform for the Prediction Environment.
 	Platform pulumi.StringOutput `pulumi:"platform"`
+	// The list of supported model formats.
+	SupportedModelFormats pulumi.StringArrayOutput `pulumi:"supportedModelFormats"`
 }
 
 // NewPredictionEnvironment registers a new resource with the given unique name, arguments, and options.
@@ -84,21 +105,45 @@ func GetPredictionEnvironment(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering PredictionEnvironment resources.
 type predictionEnvironmentState struct {
+	// The maximum number of concurrent batch prediction jobs.
+	BatchJobsMaxConcurrent *int `pulumi:"batchJobsMaxConcurrent"`
+	// The importance of batch jobs.
+	BatchJobsPriority *string `pulumi:"batchJobsPriority"`
+	// The ID of the credential associated with the data connection. Only applicable for external prediction environments managed by DataRobot.
+	CredentialId *string `pulumi:"credentialId"`
+	// The ID of the data store connection configuration. Only applicable for external prediction environments managed by DataRobot.
+	DatastoreId *string `pulumi:"datastoreId"`
 	// The description of the Prediction Environment.
 	Description *string `pulumi:"description"`
+	// Determines if the prediction environment should be managed by the management agent, datarobot, or self-managed. Self-managed by default.
+	ManagedBy *string `pulumi:"managedBy"`
 	// The name of the Prediction Environment.
 	Name *string `pulumi:"name"`
 	// The platform for the Prediction Environment.
 	Platform *string `pulumi:"platform"`
+	// The list of supported model formats.
+	SupportedModelFormats []string `pulumi:"supportedModelFormats"`
 }
 
 type PredictionEnvironmentState struct {
+	// The maximum number of concurrent batch prediction jobs.
+	BatchJobsMaxConcurrent pulumi.IntPtrInput
+	// The importance of batch jobs.
+	BatchJobsPriority pulumi.StringPtrInput
+	// The ID of the credential associated with the data connection. Only applicable for external prediction environments managed by DataRobot.
+	CredentialId pulumi.StringPtrInput
+	// The ID of the data store connection configuration. Only applicable for external prediction environments managed by DataRobot.
+	DatastoreId pulumi.StringPtrInput
 	// The description of the Prediction Environment.
 	Description pulumi.StringPtrInput
+	// Determines if the prediction environment should be managed by the management agent, datarobot, or self-managed. Self-managed by default.
+	ManagedBy pulumi.StringPtrInput
 	// The name of the Prediction Environment.
 	Name pulumi.StringPtrInput
 	// The platform for the Prediction Environment.
 	Platform pulumi.StringPtrInput
+	// The list of supported model formats.
+	SupportedModelFormats pulumi.StringArrayInput
 }
 
 func (PredictionEnvironmentState) ElementType() reflect.Type {
@@ -106,22 +151,46 @@ func (PredictionEnvironmentState) ElementType() reflect.Type {
 }
 
 type predictionEnvironmentArgs struct {
+	// The maximum number of concurrent batch prediction jobs.
+	BatchJobsMaxConcurrent *int `pulumi:"batchJobsMaxConcurrent"`
+	// The importance of batch jobs.
+	BatchJobsPriority *string `pulumi:"batchJobsPriority"`
+	// The ID of the credential associated with the data connection. Only applicable for external prediction environments managed by DataRobot.
+	CredentialId *string `pulumi:"credentialId"`
+	// The ID of the data store connection configuration. Only applicable for external prediction environments managed by DataRobot.
+	DatastoreId *string `pulumi:"datastoreId"`
 	// The description of the Prediction Environment.
 	Description *string `pulumi:"description"`
+	// Determines if the prediction environment should be managed by the management agent, datarobot, or self-managed. Self-managed by default.
+	ManagedBy *string `pulumi:"managedBy"`
 	// The name of the Prediction Environment.
 	Name *string `pulumi:"name"`
 	// The platform for the Prediction Environment.
 	Platform string `pulumi:"platform"`
+	// The list of supported model formats.
+	SupportedModelFormats []string `pulumi:"supportedModelFormats"`
 }
 
 // The set of arguments for constructing a PredictionEnvironment resource.
 type PredictionEnvironmentArgs struct {
+	// The maximum number of concurrent batch prediction jobs.
+	BatchJobsMaxConcurrent pulumi.IntPtrInput
+	// The importance of batch jobs.
+	BatchJobsPriority pulumi.StringPtrInput
+	// The ID of the credential associated with the data connection. Only applicable for external prediction environments managed by DataRobot.
+	CredentialId pulumi.StringPtrInput
+	// The ID of the data store connection configuration. Only applicable for external prediction environments managed by DataRobot.
+	DatastoreId pulumi.StringPtrInput
 	// The description of the Prediction Environment.
 	Description pulumi.StringPtrInput
+	// Determines if the prediction environment should be managed by the management agent, datarobot, or self-managed. Self-managed by default.
+	ManagedBy pulumi.StringPtrInput
 	// The name of the Prediction Environment.
 	Name pulumi.StringPtrInput
 	// The platform for the Prediction Environment.
 	Platform pulumi.StringInput
+	// The list of supported model formats.
+	SupportedModelFormats pulumi.StringArrayInput
 }
 
 func (PredictionEnvironmentArgs) ElementType() reflect.Type {
@@ -211,9 +280,34 @@ func (o PredictionEnvironmentOutput) ToPredictionEnvironmentOutputWithContext(ct
 	return o
 }
 
+// The maximum number of concurrent batch prediction jobs.
+func (o PredictionEnvironmentOutput) BatchJobsMaxConcurrent() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *PredictionEnvironment) pulumi.IntPtrOutput { return v.BatchJobsMaxConcurrent }).(pulumi.IntPtrOutput)
+}
+
+// The importance of batch jobs.
+func (o PredictionEnvironmentOutput) BatchJobsPriority() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *PredictionEnvironment) pulumi.StringPtrOutput { return v.BatchJobsPriority }).(pulumi.StringPtrOutput)
+}
+
+// The ID of the credential associated with the data connection. Only applicable for external prediction environments managed by DataRobot.
+func (o PredictionEnvironmentOutput) CredentialId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *PredictionEnvironment) pulumi.StringPtrOutput { return v.CredentialId }).(pulumi.StringPtrOutput)
+}
+
+// The ID of the data store connection configuration. Only applicable for external prediction environments managed by DataRobot.
+func (o PredictionEnvironmentOutput) DatastoreId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *PredictionEnvironment) pulumi.StringPtrOutput { return v.DatastoreId }).(pulumi.StringPtrOutput)
+}
+
 // The description of the Prediction Environment.
 func (o PredictionEnvironmentOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *PredictionEnvironment) pulumi.StringPtrOutput { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// Determines if the prediction environment should be managed by the management agent, datarobot, or self-managed. Self-managed by default.
+func (o PredictionEnvironmentOutput) ManagedBy() pulumi.StringOutput {
+	return o.ApplyT(func(v *PredictionEnvironment) pulumi.StringOutput { return v.ManagedBy }).(pulumi.StringOutput)
 }
 
 // The name of the Prediction Environment.
@@ -224,6 +318,11 @@ func (o PredictionEnvironmentOutput) Name() pulumi.StringOutput {
 // The platform for the Prediction Environment.
 func (o PredictionEnvironmentOutput) Platform() pulumi.StringOutput {
 	return o.ApplyT(func(v *PredictionEnvironment) pulumi.StringOutput { return v.Platform }).(pulumi.StringOutput)
+}
+
+// The list of supported model formats.
+func (o PredictionEnvironmentOutput) SupportedModelFormats() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *PredictionEnvironment) pulumi.StringArrayOutput { return v.SupportedModelFormats }).(pulumi.StringArrayOutput)
 }
 
 type PredictionEnvironmentArrayOutput struct{ *pulumi.OutputState }
