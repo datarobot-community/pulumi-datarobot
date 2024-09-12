@@ -29,8 +29,10 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			example, err := datarobot.NewDatasetFromFile(ctx, "example", &datarobot.DatasetFromFileArgs{
-//				SourceFile: pulumi.String("[Path to file to upload]"),
-//				UseCaseId:  pulumi.Any(datarobot_use_case.Example.Id),
+//				FilePath: pulumi.String("[Path to file to upload]"),
+//				UseCaseIds: pulumi.StringArray{
+//					datarobot_use_case.Example.Id,
+//				},
 //			})
 //			if err != nil {
 //				return err
@@ -45,9 +47,11 @@ type DatasetFromFile struct {
 	pulumi.CustomResourceState
 
 	// The path to the file to upload.
-	SourceFile pulumi.StringOutput `pulumi:"sourceFile"`
-	// The id of the Use Case.
-	UseCaseId pulumi.StringOutput `pulumi:"useCaseId"`
+	FilePath pulumi.StringOutput `pulumi:"filePath"`
+	// The name of the Dataset. Defaults to the file name.
+	Name pulumi.StringOutput `pulumi:"name"`
+	// The list of Use Case IDs to add the Dataset to.
+	UseCaseIds pulumi.StringArrayOutput `pulumi:"useCaseIds"`
 }
 
 // NewDatasetFromFile registers a new resource with the given unique name, arguments, and options.
@@ -57,11 +61,8 @@ func NewDatasetFromFile(ctx *pulumi.Context,
 		return nil, errors.New("missing one or more required arguments")
 	}
 
-	if args.SourceFile == nil {
-		return nil, errors.New("invalid value for required argument 'SourceFile'")
-	}
-	if args.UseCaseId == nil {
-		return nil, errors.New("invalid value for required argument 'UseCaseId'")
+	if args.FilePath == nil {
+		return nil, errors.New("invalid value for required argument 'FilePath'")
 	}
 	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource DatasetFromFile
@@ -87,16 +88,20 @@ func GetDatasetFromFile(ctx *pulumi.Context,
 // Input properties used for looking up and filtering DatasetFromFile resources.
 type datasetFromFileState struct {
 	// The path to the file to upload.
-	SourceFile *string `pulumi:"sourceFile"`
-	// The id of the Use Case.
-	UseCaseId *string `pulumi:"useCaseId"`
+	FilePath *string `pulumi:"filePath"`
+	// The name of the Dataset. Defaults to the file name.
+	Name *string `pulumi:"name"`
+	// The list of Use Case IDs to add the Dataset to.
+	UseCaseIds []string `pulumi:"useCaseIds"`
 }
 
 type DatasetFromFileState struct {
 	// The path to the file to upload.
-	SourceFile pulumi.StringPtrInput
-	// The id of the Use Case.
-	UseCaseId pulumi.StringPtrInput
+	FilePath pulumi.StringPtrInput
+	// The name of the Dataset. Defaults to the file name.
+	Name pulumi.StringPtrInput
+	// The list of Use Case IDs to add the Dataset to.
+	UseCaseIds pulumi.StringArrayInput
 }
 
 func (DatasetFromFileState) ElementType() reflect.Type {
@@ -105,17 +110,21 @@ func (DatasetFromFileState) ElementType() reflect.Type {
 
 type datasetFromFileArgs struct {
 	// The path to the file to upload.
-	SourceFile string `pulumi:"sourceFile"`
-	// The id of the Use Case.
-	UseCaseId string `pulumi:"useCaseId"`
+	FilePath string `pulumi:"filePath"`
+	// The name of the Dataset. Defaults to the file name.
+	Name *string `pulumi:"name"`
+	// The list of Use Case IDs to add the Dataset to.
+	UseCaseIds []string `pulumi:"useCaseIds"`
 }
 
 // The set of arguments for constructing a DatasetFromFile resource.
 type DatasetFromFileArgs struct {
 	// The path to the file to upload.
-	SourceFile pulumi.StringInput
-	// The id of the Use Case.
-	UseCaseId pulumi.StringInput
+	FilePath pulumi.StringInput
+	// The name of the Dataset. Defaults to the file name.
+	Name pulumi.StringPtrInput
+	// The list of Use Case IDs to add the Dataset to.
+	UseCaseIds pulumi.StringArrayInput
 }
 
 func (DatasetFromFileArgs) ElementType() reflect.Type {
@@ -206,13 +215,18 @@ func (o DatasetFromFileOutput) ToDatasetFromFileOutputWithContext(ctx context.Co
 }
 
 // The path to the file to upload.
-func (o DatasetFromFileOutput) SourceFile() pulumi.StringOutput {
-	return o.ApplyT(func(v *DatasetFromFile) pulumi.StringOutput { return v.SourceFile }).(pulumi.StringOutput)
+func (o DatasetFromFileOutput) FilePath() pulumi.StringOutput {
+	return o.ApplyT(func(v *DatasetFromFile) pulumi.StringOutput { return v.FilePath }).(pulumi.StringOutput)
 }
 
-// The id of the Use Case.
-func (o DatasetFromFileOutput) UseCaseId() pulumi.StringOutput {
-	return o.ApplyT(func(v *DatasetFromFile) pulumi.StringOutput { return v.UseCaseId }).(pulumi.StringOutput)
+// The name of the Dataset. Defaults to the file name.
+func (o DatasetFromFileOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v *DatasetFromFile) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
+}
+
+// The list of Use Case IDs to add the Dataset to.
+func (o DatasetFromFileOutput) UseCaseIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *DatasetFromFile) pulumi.StringArrayOutput { return v.UseCaseIds }).(pulumi.StringArrayOutput)
 }
 
 type DatasetFromFileArrayOutput struct{ *pulumi.OutputState }

@@ -14,8 +14,17 @@ import * as utilities from "./utilities";
  * import * as datarobot from "@datarobot/pulumi-datarobot";
  *
  * const example = new datarobot.PredictionEnvironment("example", {
+ *     batchJobsMaxConcurrent: 20,
+ *     batchJobsPriority: "high",
+ *     credentialId: "<credential_id>",
+ *     datastoreId: "<datastore_id>",
  *     description: "Description for the example prediction environment",
+ *     managedBy: "selfManaged",
  *     platform: "datarobotServerless",
+ *     supportedModelFormats: [
+ *         "datarobot",
+ *         "customModel",
+ *     ],
  * });
  * ```
  */
@@ -48,9 +57,29 @@ export class PredictionEnvironment extends pulumi.CustomResource {
     }
 
     /**
+     * The maximum number of concurrent batch prediction jobs.
+     */
+    public readonly batchJobsMaxConcurrent!: pulumi.Output<number | undefined>;
+    /**
+     * The importance of batch jobs.
+     */
+    public readonly batchJobsPriority!: pulumi.Output<string | undefined>;
+    /**
+     * The ID of the credential associated with the data connection. Only applicable for external prediction environments managed by DataRobot.
+     */
+    public readonly credentialId!: pulumi.Output<string | undefined>;
+    /**
+     * The ID of the data store connection configuration. Only applicable for external prediction environments managed by DataRobot.
+     */
+    public readonly datastoreId!: pulumi.Output<string | undefined>;
+    /**
      * The description of the Prediction Environment.
      */
     public readonly description!: pulumi.Output<string | undefined>;
+    /**
+     * Determines if the prediction environment should be managed by the management agent, datarobot, or self-managed. Self-managed by default.
+     */
+    public readonly managedBy!: pulumi.Output<string>;
     /**
      * The name of the Prediction Environment.
      */
@@ -59,6 +88,10 @@ export class PredictionEnvironment extends pulumi.CustomResource {
      * The platform for the Prediction Environment.
      */
     public readonly platform!: pulumi.Output<string>;
+    /**
+     * The list of supported model formats.
+     */
+    public readonly supportedModelFormats!: pulumi.Output<string[] | undefined>;
 
     /**
      * Create a PredictionEnvironment resource with the given unique name, arguments, and options.
@@ -73,17 +106,29 @@ export class PredictionEnvironment extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as PredictionEnvironmentState | undefined;
+            resourceInputs["batchJobsMaxConcurrent"] = state ? state.batchJobsMaxConcurrent : undefined;
+            resourceInputs["batchJobsPriority"] = state ? state.batchJobsPriority : undefined;
+            resourceInputs["credentialId"] = state ? state.credentialId : undefined;
+            resourceInputs["datastoreId"] = state ? state.datastoreId : undefined;
             resourceInputs["description"] = state ? state.description : undefined;
+            resourceInputs["managedBy"] = state ? state.managedBy : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["platform"] = state ? state.platform : undefined;
+            resourceInputs["supportedModelFormats"] = state ? state.supportedModelFormats : undefined;
         } else {
             const args = argsOrState as PredictionEnvironmentArgs | undefined;
             if ((!args || args.platform === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'platform'");
             }
+            resourceInputs["batchJobsMaxConcurrent"] = args ? args.batchJobsMaxConcurrent : undefined;
+            resourceInputs["batchJobsPriority"] = args ? args.batchJobsPriority : undefined;
+            resourceInputs["credentialId"] = args ? args.credentialId : undefined;
+            resourceInputs["datastoreId"] = args ? args.datastoreId : undefined;
             resourceInputs["description"] = args ? args.description : undefined;
+            resourceInputs["managedBy"] = args ? args.managedBy : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["platform"] = args ? args.platform : undefined;
+            resourceInputs["supportedModelFormats"] = args ? args.supportedModelFormats : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(PredictionEnvironment.__pulumiType, name, resourceInputs, opts);
@@ -95,9 +140,29 @@ export class PredictionEnvironment extends pulumi.CustomResource {
  */
 export interface PredictionEnvironmentState {
     /**
+     * The maximum number of concurrent batch prediction jobs.
+     */
+    batchJobsMaxConcurrent?: pulumi.Input<number>;
+    /**
+     * The importance of batch jobs.
+     */
+    batchJobsPriority?: pulumi.Input<string>;
+    /**
+     * The ID of the credential associated with the data connection. Only applicable for external prediction environments managed by DataRobot.
+     */
+    credentialId?: pulumi.Input<string>;
+    /**
+     * The ID of the data store connection configuration. Only applicable for external prediction environments managed by DataRobot.
+     */
+    datastoreId?: pulumi.Input<string>;
+    /**
      * The description of the Prediction Environment.
      */
     description?: pulumi.Input<string>;
+    /**
+     * Determines if the prediction environment should be managed by the management agent, datarobot, or self-managed. Self-managed by default.
+     */
+    managedBy?: pulumi.Input<string>;
     /**
      * The name of the Prediction Environment.
      */
@@ -106,6 +171,10 @@ export interface PredictionEnvironmentState {
      * The platform for the Prediction Environment.
      */
     platform?: pulumi.Input<string>;
+    /**
+     * The list of supported model formats.
+     */
+    supportedModelFormats?: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 /**
@@ -113,9 +182,29 @@ export interface PredictionEnvironmentState {
  */
 export interface PredictionEnvironmentArgs {
     /**
+     * The maximum number of concurrent batch prediction jobs.
+     */
+    batchJobsMaxConcurrent?: pulumi.Input<number>;
+    /**
+     * The importance of batch jobs.
+     */
+    batchJobsPriority?: pulumi.Input<string>;
+    /**
+     * The ID of the credential associated with the data connection. Only applicable for external prediction environments managed by DataRobot.
+     */
+    credentialId?: pulumi.Input<string>;
+    /**
+     * The ID of the data store connection configuration. Only applicable for external prediction environments managed by DataRobot.
+     */
+    datastoreId?: pulumi.Input<string>;
+    /**
      * The description of the Prediction Environment.
      */
     description?: pulumi.Input<string>;
+    /**
+     * Determines if the prediction environment should be managed by the management agent, datarobot, or self-managed. Self-managed by default.
+     */
+    managedBy?: pulumi.Input<string>;
     /**
      * The name of the Prediction Environment.
      */
@@ -124,4 +213,8 @@ export interface PredictionEnvironmentArgs {
      * The platform for the Prediction Environment.
      */
     platform: pulumi.Input<string>;
+    /**
+     * The list of supported model formats.
+     */
+    supportedModelFormats?: pulumi.Input<pulumi.Input<string>[]>;
 }

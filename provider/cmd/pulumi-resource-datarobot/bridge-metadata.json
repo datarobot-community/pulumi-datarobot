@@ -55,7 +55,12 @@
                 }
             },
             "datarobot_dataset_from_file": {
-                "current": "datarobot:index/datasetFromFile:DatasetFromFile"
+                "current": "datarobot:index/datasetFromFile:DatasetFromFile",
+                "fields": {
+                    "use_case_ids": {
+                        "maxItemsOne": false
+                    }
+                }
             },
             "datarobot_deployment": {
                 "current": "datarobot:index/deployment:Deployment"
@@ -70,7 +75,12 @@
                 "current": "datarobot:index/playground:Playground"
             },
             "datarobot_prediction_environment": {
-                "current": "datarobot:index/predictionEnvironment:PredictionEnvironment"
+                "current": "datarobot:index/predictionEnvironment:PredictionEnvironment",
+                "fields": {
+                    "supported_model_formats": {
+                        "maxItemsOne": false
+                    }
+                }
             },
             "datarobot_qa_application": {
                 "current": "datarobot:index/qaApplication:QaApplication",

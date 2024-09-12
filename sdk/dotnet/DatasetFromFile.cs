@@ -24,8 +24,11 @@ namespace Pulumi.Datarobot
     /// {
     ///     var example = new Datarobot.DatasetFromFile("example", new()
     ///     {
-    ///         SourceFile = "[Path to file to upload]",
-    ///         UseCaseId = datarobot_use_case.Example.Id,
+    ///         FilePath = "[Path to file to upload]",
+    ///         UseCaseIds = new[]
+    ///         {
+    ///             datarobot_use_case.Example.Id,
+    ///         },
     ///     });
     /// 
     ///     return new Dictionary&lt;string, object?&gt;
@@ -41,14 +44,20 @@ namespace Pulumi.Datarobot
         /// <summary>
         /// The path to the file to upload.
         /// </summary>
-        [Output("sourceFile")]
-        public Output<string> SourceFile { get; private set; } = null!;
+        [Output("filePath")]
+        public Output<string> FilePath { get; private set; } = null!;
 
         /// <summary>
-        /// The id of the Use Case.
+        /// The name of the Dataset. Defaults to the file name.
         /// </summary>
-        [Output("useCaseId")]
-        public Output<string> UseCaseId { get; private set; } = null!;
+        [Output("name")]
+        public Output<string> Name { get; private set; } = null!;
+
+        /// <summary>
+        /// The list of Use Case IDs to add the Dataset to.
+        /// </summary>
+        [Output("useCaseIds")]
+        public Output<ImmutableArray<string>> UseCaseIds { get; private set; } = null!;
 
 
         /// <summary>
@@ -100,14 +109,26 @@ namespace Pulumi.Datarobot
         /// <summary>
         /// The path to the file to upload.
         /// </summary>
-        [Input("sourceFile", required: true)]
-        public Input<string> SourceFile { get; set; } = null!;
+        [Input("filePath", required: true)]
+        public Input<string> FilePath { get; set; } = null!;
 
         /// <summary>
-        /// The id of the Use Case.
+        /// The name of the Dataset. Defaults to the file name.
         /// </summary>
-        [Input("useCaseId", required: true)]
-        public Input<string> UseCaseId { get; set; } = null!;
+        [Input("name")]
+        public Input<string>? Name { get; set; }
+
+        [Input("useCaseIds")]
+        private InputList<string>? _useCaseIds;
+
+        /// <summary>
+        /// The list of Use Case IDs to add the Dataset to.
+        /// </summary>
+        public InputList<string> UseCaseIds
+        {
+            get => _useCaseIds ?? (_useCaseIds = new InputList<string>());
+            set => _useCaseIds = value;
+        }
 
         public DatasetFromFileArgs()
         {
@@ -120,14 +141,26 @@ namespace Pulumi.Datarobot
         /// <summary>
         /// The path to the file to upload.
         /// </summary>
-        [Input("sourceFile")]
-        public Input<string>? SourceFile { get; set; }
+        [Input("filePath")]
+        public Input<string>? FilePath { get; set; }
 
         /// <summary>
-        /// The id of the Use Case.
+        /// The name of the Dataset. Defaults to the file name.
         /// </summary>
-        [Input("useCaseId")]
-        public Input<string>? UseCaseId { get; set; }
+        [Input("name")]
+        public Input<string>? Name { get; set; }
+
+        [Input("useCaseIds")]
+        private InputList<string>? _useCaseIds;
+
+        /// <summary>
+        /// The list of Use Case IDs to add the Dataset to.
+        /// </summary>
+        public InputList<string> UseCaseIds
+        {
+            get => _useCaseIds ?? (_useCaseIds = new InputList<string>());
+            set => _useCaseIds = value;
+        }
 
         public DatasetFromFileState()
         {
