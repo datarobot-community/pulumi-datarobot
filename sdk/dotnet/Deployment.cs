@@ -54,9 +54,18 @@ namespace Pulumi.Datarobot
     ///     });
     /// 
     ///     // Optional settings
-    ///     // settings = {
-    ///     //   prediction_row_storage = true
-    ///     // }
+    ///     // challenger_models_settings = {}
+    ///     // challenger_replay_settings = {}
+    ///     // segment_analysis_settings  = {}
+    ///     // bias_and_fairness_settings = {}
+    ///     // predictions_by_forecast_date_settings = {}
+    ///     // drift_tracking_settings = {}
+    ///     // association_id_settings = {}
+    ///     // predictions_data_collection_settings = {}
+    ///     // prediction_warning_settings = {}
+    ///     // prediction_interval_settings = {}
+    ///     // predictions_settings = {}
+    ///     // health_settings = {}
     ///     return new Dictionary&lt;string, object?&gt;
     ///     {
     ///         ["datarobotDeploymentId"] = exampleDeployment.Id,
@@ -67,6 +76,48 @@ namespace Pulumi.Datarobot
     [DatarobotResourceType("datarobot:index/deployment:Deployment")]
     public partial class Deployment : global::Pulumi.CustomResource
     {
+        /// <summary>
+        /// Association ID settings for this Deployment.
+        /// </summary>
+        [Output("associationIdSettings")]
+        public Output<Outputs.DeploymentAssociationIdSettings?> AssociationIdSettings { get; private set; } = null!;
+
+        /// <summary>
+        /// Bias and fairness settings for the Deployment.
+        /// </summary>
+        [Output("biasAndFairnessSettings")]
+        public Output<Outputs.DeploymentBiasAndFairnessSettings?> BiasAndFairnessSettings { get; private set; } = null!;
+
+        /// <summary>
+        /// The challenger models settings for the Deployment.
+        /// </summary>
+        [Output("challengerModelsSettings")]
+        public Output<Outputs.DeploymentChallengerModelsSettings?> ChallengerModelsSettings { get; private set; } = null!;
+
+        /// <summary>
+        /// The challenger replay settings for the Deployment.
+        /// </summary>
+        [Output("challengerReplaySettings")]
+        public Output<Outputs.DeploymentChallengerReplaySettings?> ChallengerReplaySettings { get; private set; } = null!;
+
+        /// <summary>
+        /// The drift tracking settings for the Deployment.
+        /// </summary>
+        [Output("driftTrackingSettings")]
+        public Output<Outputs.DeploymentDriftTrackingSettings?> DriftTrackingSettings { get; private set; } = null!;
+
+        /// <summary>
+        /// The health settings for this Deployment.
+        /// </summary>
+        [Output("healthSettings")]
+        public Output<Outputs.DeploymentHealthSettings?> HealthSettings { get; private set; } = null!;
+
+        /// <summary>
+        /// The importance of the Deployment.
+        /// </summary>
+        [Output("importance")]
+        public Output<string> Importance { get; private set; } = null!;
+
         /// <summary>
         /// The label of the Deployment.
         /// </summary>
@@ -80,16 +131,46 @@ namespace Pulumi.Datarobot
         public Output<string> PredictionEnvironmentId { get; private set; } = null!;
 
         /// <summary>
+        /// The prediction intervals settings for this Deployment.
+        /// </summary>
+        [Output("predictionIntervalsSettings")]
+        public Output<Outputs.DeploymentPredictionIntervalsSettings?> PredictionIntervalsSettings { get; private set; } = null!;
+
+        /// <summary>
+        /// The prediction warning settings for the Deployment.
+        /// </summary>
+        [Output("predictionWarningSettings")]
+        public Output<Outputs.DeploymentPredictionWarningSettings?> PredictionWarningSettings { get; private set; } = null!;
+
+        /// <summary>
+        /// The predictions by forecase date settings for the Deployment.
+        /// </summary>
+        [Output("predictionsByForecastDateSettings")]
+        public Output<Outputs.DeploymentPredictionsByForecastDateSettings?> PredictionsByForecastDateSettings { get; private set; } = null!;
+
+        /// <summary>
+        /// The predictions data collection settings for the Deployment.
+        /// </summary>
+        [Output("predictionsDataCollectionSettings")]
+        public Output<Outputs.DeploymentPredictionsDataCollectionSettings?> PredictionsDataCollectionSettings { get; private set; } = null!;
+
+        /// <summary>
+        /// Settings for the predictions.
+        /// </summary>
+        [Output("predictionsSettings")]
+        public Output<Outputs.DeploymentPredictionsSettings?> PredictionsSettings { get; private set; } = null!;
+
+        /// <summary>
         /// The ID of the registered model version for this Deployment.
         /// </summary>
         [Output("registeredModelVersionId")]
         public Output<string> RegisteredModelVersionId { get; private set; } = null!;
 
         /// <summary>
-        /// The settings for the Deployment.
+        /// The segment analysis settings for the Deployment.
         /// </summary>
-        [Output("settings")]
-        public Output<Outputs.DeploymentSettings?> Settings { get; private set; } = null!;
+        [Output("segmentAnalysisSettings")]
+        public Output<Outputs.DeploymentSegmentAnalysisSettings?> SegmentAnalysisSettings { get; private set; } = null!;
 
 
         /// <summary>
@@ -139,6 +220,48 @@ namespace Pulumi.Datarobot
     public sealed class DeploymentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Association ID settings for this Deployment.
+        /// </summary>
+        [Input("associationIdSettings")]
+        public Input<Inputs.DeploymentAssociationIdSettingsArgs>? AssociationIdSettings { get; set; }
+
+        /// <summary>
+        /// Bias and fairness settings for the Deployment.
+        /// </summary>
+        [Input("biasAndFairnessSettings")]
+        public Input<Inputs.DeploymentBiasAndFairnessSettingsArgs>? BiasAndFairnessSettings { get; set; }
+
+        /// <summary>
+        /// The challenger models settings for the Deployment.
+        /// </summary>
+        [Input("challengerModelsSettings")]
+        public Input<Inputs.DeploymentChallengerModelsSettingsArgs>? ChallengerModelsSettings { get; set; }
+
+        /// <summary>
+        /// The challenger replay settings for the Deployment.
+        /// </summary>
+        [Input("challengerReplaySettings")]
+        public Input<Inputs.DeploymentChallengerReplaySettingsArgs>? ChallengerReplaySettings { get; set; }
+
+        /// <summary>
+        /// The drift tracking settings for the Deployment.
+        /// </summary>
+        [Input("driftTrackingSettings")]
+        public Input<Inputs.DeploymentDriftTrackingSettingsArgs>? DriftTrackingSettings { get; set; }
+
+        /// <summary>
+        /// The health settings for this Deployment.
+        /// </summary>
+        [Input("healthSettings")]
+        public Input<Inputs.DeploymentHealthSettingsArgs>? HealthSettings { get; set; }
+
+        /// <summary>
+        /// The importance of the Deployment.
+        /// </summary>
+        [Input("importance")]
+        public Input<string>? Importance { get; set; }
+
+        /// <summary>
         /// The label of the Deployment.
         /// </summary>
         [Input("label", required: true)]
@@ -151,16 +274,46 @@ namespace Pulumi.Datarobot
         public Input<string> PredictionEnvironmentId { get; set; } = null!;
 
         /// <summary>
+        /// The prediction intervals settings for this Deployment.
+        /// </summary>
+        [Input("predictionIntervalsSettings")]
+        public Input<Inputs.DeploymentPredictionIntervalsSettingsArgs>? PredictionIntervalsSettings { get; set; }
+
+        /// <summary>
+        /// The prediction warning settings for the Deployment.
+        /// </summary>
+        [Input("predictionWarningSettings")]
+        public Input<Inputs.DeploymentPredictionWarningSettingsArgs>? PredictionWarningSettings { get; set; }
+
+        /// <summary>
+        /// The predictions by forecase date settings for the Deployment.
+        /// </summary>
+        [Input("predictionsByForecastDateSettings")]
+        public Input<Inputs.DeploymentPredictionsByForecastDateSettingsArgs>? PredictionsByForecastDateSettings { get; set; }
+
+        /// <summary>
+        /// The predictions data collection settings for the Deployment.
+        /// </summary>
+        [Input("predictionsDataCollectionSettings")]
+        public Input<Inputs.DeploymentPredictionsDataCollectionSettingsArgs>? PredictionsDataCollectionSettings { get; set; }
+
+        /// <summary>
+        /// Settings for the predictions.
+        /// </summary>
+        [Input("predictionsSettings")]
+        public Input<Inputs.DeploymentPredictionsSettingsArgs>? PredictionsSettings { get; set; }
+
+        /// <summary>
         /// The ID of the registered model version for this Deployment.
         /// </summary>
         [Input("registeredModelVersionId", required: true)]
         public Input<string> RegisteredModelVersionId { get; set; } = null!;
 
         /// <summary>
-        /// The settings for the Deployment.
+        /// The segment analysis settings for the Deployment.
         /// </summary>
-        [Input("settings")]
-        public Input<Inputs.DeploymentSettingsArgs>? Settings { get; set; }
+        [Input("segmentAnalysisSettings")]
+        public Input<Inputs.DeploymentSegmentAnalysisSettingsArgs>? SegmentAnalysisSettings { get; set; }
 
         public DeploymentArgs()
         {
@@ -170,6 +323,48 @@ namespace Pulumi.Datarobot
 
     public sealed class DeploymentState : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Association ID settings for this Deployment.
+        /// </summary>
+        [Input("associationIdSettings")]
+        public Input<Inputs.DeploymentAssociationIdSettingsGetArgs>? AssociationIdSettings { get; set; }
+
+        /// <summary>
+        /// Bias and fairness settings for the Deployment.
+        /// </summary>
+        [Input("biasAndFairnessSettings")]
+        public Input<Inputs.DeploymentBiasAndFairnessSettingsGetArgs>? BiasAndFairnessSettings { get; set; }
+
+        /// <summary>
+        /// The challenger models settings for the Deployment.
+        /// </summary>
+        [Input("challengerModelsSettings")]
+        public Input<Inputs.DeploymentChallengerModelsSettingsGetArgs>? ChallengerModelsSettings { get; set; }
+
+        /// <summary>
+        /// The challenger replay settings for the Deployment.
+        /// </summary>
+        [Input("challengerReplaySettings")]
+        public Input<Inputs.DeploymentChallengerReplaySettingsGetArgs>? ChallengerReplaySettings { get; set; }
+
+        /// <summary>
+        /// The drift tracking settings for the Deployment.
+        /// </summary>
+        [Input("driftTrackingSettings")]
+        public Input<Inputs.DeploymentDriftTrackingSettingsGetArgs>? DriftTrackingSettings { get; set; }
+
+        /// <summary>
+        /// The health settings for this Deployment.
+        /// </summary>
+        [Input("healthSettings")]
+        public Input<Inputs.DeploymentHealthSettingsGetArgs>? HealthSettings { get; set; }
+
+        /// <summary>
+        /// The importance of the Deployment.
+        /// </summary>
+        [Input("importance")]
+        public Input<string>? Importance { get; set; }
+
         /// <summary>
         /// The label of the Deployment.
         /// </summary>
@@ -183,16 +378,46 @@ namespace Pulumi.Datarobot
         public Input<string>? PredictionEnvironmentId { get; set; }
 
         /// <summary>
+        /// The prediction intervals settings for this Deployment.
+        /// </summary>
+        [Input("predictionIntervalsSettings")]
+        public Input<Inputs.DeploymentPredictionIntervalsSettingsGetArgs>? PredictionIntervalsSettings { get; set; }
+
+        /// <summary>
+        /// The prediction warning settings for the Deployment.
+        /// </summary>
+        [Input("predictionWarningSettings")]
+        public Input<Inputs.DeploymentPredictionWarningSettingsGetArgs>? PredictionWarningSettings { get; set; }
+
+        /// <summary>
+        /// The predictions by forecase date settings for the Deployment.
+        /// </summary>
+        [Input("predictionsByForecastDateSettings")]
+        public Input<Inputs.DeploymentPredictionsByForecastDateSettingsGetArgs>? PredictionsByForecastDateSettings { get; set; }
+
+        /// <summary>
+        /// The predictions data collection settings for the Deployment.
+        /// </summary>
+        [Input("predictionsDataCollectionSettings")]
+        public Input<Inputs.DeploymentPredictionsDataCollectionSettingsGetArgs>? PredictionsDataCollectionSettings { get; set; }
+
+        /// <summary>
+        /// Settings for the predictions.
+        /// </summary>
+        [Input("predictionsSettings")]
+        public Input<Inputs.DeploymentPredictionsSettingsGetArgs>? PredictionsSettings { get; set; }
+
+        /// <summary>
         /// The ID of the registered model version for this Deployment.
         /// </summary>
         [Input("registeredModelVersionId")]
         public Input<string>? RegisteredModelVersionId { get; set; }
 
         /// <summary>
-        /// The settings for the Deployment.
+        /// The segment analysis settings for the Deployment.
         /// </summary>
-        [Input("settings")]
-        public Input<Inputs.DeploymentSettingsGetArgs>? Settings { get; set; }
+        [Input("segmentAnalysisSettings")]
+        public Input<Inputs.DeploymentSegmentAnalysisSettingsGetArgs>? SegmentAnalysisSettings { get; set; }
 
         public DeploymentState()
         {

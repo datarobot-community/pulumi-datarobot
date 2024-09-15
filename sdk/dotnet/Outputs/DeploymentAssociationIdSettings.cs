@@ -11,31 +11,31 @@ namespace Pulumi.Datarobot.Outputs
 {
 
     [OutputType]
-    public sealed class DeploymentSettingsAssociationId
+    public sealed class DeploymentAssociationIdSettings
     {
         /// <summary>
-        /// Whether to automatically generate an association ID.
+        /// Whether to auto generate ID.
         /// </summary>
-        public readonly bool AutoGenerateId;
+        public readonly bool? AutoGenerateId;
         /// <summary>
-        /// The name of the feature to use as the association ID.
+        /// Name of the columns to be used as association ID, currently only support a list of one string.
         /// </summary>
-        public readonly string FeatureName;
+        public readonly ImmutableArray<string> ColumnNames;
         /// <summary>
-        /// Whether the association ID is required in prediction requests.
+        /// Whether the association ID column is required in prediction requests.
         /// </summary>
-        public readonly bool RequiredInPredictionRequests;
+        public readonly bool? RequiredInPredictionRequests;
 
         [OutputConstructor]
-        private DeploymentSettingsAssociationId(
-            bool autoGenerateId,
+        private DeploymentAssociationIdSettings(
+            bool? autoGenerateId,
 
-            string featureName,
+            ImmutableArray<string> columnNames,
 
-            bool requiredInPredictionRequests)
+            bool? requiredInPredictionRequests)
         {
             AutoGenerateId = autoGenerateId;
-            FeatureName = featureName;
+            ColumnNames = columnNames;
             RequiredInPredictionRequests = requiredInPredictionRequests;
         }
     }

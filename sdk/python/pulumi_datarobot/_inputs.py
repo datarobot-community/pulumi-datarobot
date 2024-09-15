@@ -19,9 +19,28 @@ __all__ = [
     'CustomModelResourceSettingsArgs',
     'CustomModelRuntimeParameterValueArgs',
     'CustomModelSourceRemoteRepositoryArgs',
-    'DeploymentSettingsArgs',
-    'DeploymentSettingsAssociationIdArgs',
-    'DeploymentSettingsPredictionsSettingsArgs',
+    'DeploymentAssociationIdSettingsArgs',
+    'DeploymentBiasAndFairnessSettingsArgs',
+    'DeploymentChallengerModelsSettingsArgs',
+    'DeploymentChallengerReplaySettingsArgs',
+    'DeploymentDriftTrackingSettingsArgs',
+    'DeploymentHealthSettingsArgs',
+    'DeploymentHealthSettingsAccuracyArgs',
+    'DeploymentHealthSettingsActualsTimelinessArgs',
+    'DeploymentHealthSettingsCustomMetricsArgs',
+    'DeploymentHealthSettingsCustomMetricsFailingConditionArgs',
+    'DeploymentHealthSettingsCustomMetricsWarningConditionArgs',
+    'DeploymentHealthSettingsDataDriftArgs',
+    'DeploymentHealthSettingsFairnessArgs',
+    'DeploymentHealthSettingsPredictionsTimelinessArgs',
+    'DeploymentHealthSettingsServiceArgs',
+    'DeploymentPredictionIntervalsSettingsArgs',
+    'DeploymentPredictionWarningSettingsArgs',
+    'DeploymentPredictionWarningSettingsCustomBoundariesArgs',
+    'DeploymentPredictionsByForecastDateSettingsArgs',
+    'DeploymentPredictionsDataCollectionSettingsArgs',
+    'DeploymentPredictionsSettingsArgs',
+    'DeploymentSegmentAnalysisSettingsArgs',
     'LlmBlueprintLlmSettingsArgs',
     'LlmBlueprintVectorDatabaseSettingsArgs',
     'VectorDatabaseChunkingParametersArgs',
@@ -570,130 +589,1056 @@ class CustomModelSourceRemoteRepositoryArgs:
 
 
 @pulumi.input_type
-class DeploymentSettingsArgs:
+class DeploymentAssociationIdSettingsArgs:
     def __init__(__self__, *,
-                 association_id: Optional[pulumi.Input['DeploymentSettingsAssociationIdArgs']] = None,
-                 challenger_analysis: Optional[pulumi.Input[bool]] = None,
-                 prediction_row_storage: Optional[pulumi.Input[bool]] = None,
-                 predictions_settings: Optional[pulumi.Input['DeploymentSettingsPredictionsSettingsArgs']] = None):
+                 auto_generate_id: Optional[pulumi.Input[bool]] = None,
+                 column_names: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 required_in_prediction_requests: Optional[pulumi.Input[bool]] = None):
         """
-        :param pulumi.Input['DeploymentSettingsAssociationIdArgs'] association_id: Used to associate predictions back to your actual data.
-        :param pulumi.Input[bool] challenger_analysis: Used to compare the performance of the deployed model with the challenger models.
-        :param pulumi.Input[bool] prediction_row_storage: Used to score predictions made by the challenger models and compare performance with the deployed model.
-        :param pulumi.Input['DeploymentSettingsPredictionsSettingsArgs'] predictions_settings: Settings for the predictions.
+        :param pulumi.Input[bool] auto_generate_id: Whether to auto generate ID.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] column_names: Name of the columns to be used as association ID, currently only support a list of one string.
+        :param pulumi.Input[bool] required_in_prediction_requests: Whether the association ID column is required in prediction requests.
         """
-        if association_id is not None:
-            pulumi.set(__self__, "association_id", association_id)
-        if challenger_analysis is not None:
-            pulumi.set(__self__, "challenger_analysis", challenger_analysis)
-        if prediction_row_storage is not None:
-            pulumi.set(__self__, "prediction_row_storage", prediction_row_storage)
-        if predictions_settings is not None:
-            pulumi.set(__self__, "predictions_settings", predictions_settings)
-
-    @property
-    @pulumi.getter(name="associationId")
-    def association_id(self) -> Optional[pulumi.Input['DeploymentSettingsAssociationIdArgs']]:
-        """
-        Used to associate predictions back to your actual data.
-        """
-        return pulumi.get(self, "association_id")
-
-    @association_id.setter
-    def association_id(self, value: Optional[pulumi.Input['DeploymentSettingsAssociationIdArgs']]):
-        pulumi.set(self, "association_id", value)
-
-    @property
-    @pulumi.getter(name="challengerAnalysis")
-    def challenger_analysis(self) -> Optional[pulumi.Input[bool]]:
-        """
-        Used to compare the performance of the deployed model with the challenger models.
-        """
-        return pulumi.get(self, "challenger_analysis")
-
-    @challenger_analysis.setter
-    def challenger_analysis(self, value: Optional[pulumi.Input[bool]]):
-        pulumi.set(self, "challenger_analysis", value)
-
-    @property
-    @pulumi.getter(name="predictionRowStorage")
-    def prediction_row_storage(self) -> Optional[pulumi.Input[bool]]:
-        """
-        Used to score predictions made by the challenger models and compare performance with the deployed model.
-        """
-        return pulumi.get(self, "prediction_row_storage")
-
-    @prediction_row_storage.setter
-    def prediction_row_storage(self, value: Optional[pulumi.Input[bool]]):
-        pulumi.set(self, "prediction_row_storage", value)
-
-    @property
-    @pulumi.getter(name="predictionsSettings")
-    def predictions_settings(self) -> Optional[pulumi.Input['DeploymentSettingsPredictionsSettingsArgs']]:
-        """
-        Settings for the predictions.
-        """
-        return pulumi.get(self, "predictions_settings")
-
-    @predictions_settings.setter
-    def predictions_settings(self, value: Optional[pulumi.Input['DeploymentSettingsPredictionsSettingsArgs']]):
-        pulumi.set(self, "predictions_settings", value)
-
-
-@pulumi.input_type
-class DeploymentSettingsAssociationIdArgs:
-    def __init__(__self__, *,
-                 auto_generate_id: pulumi.Input[bool],
-                 feature_name: pulumi.Input[str],
-                 required_in_prediction_requests: pulumi.Input[bool]):
-        """
-        :param pulumi.Input[bool] auto_generate_id: Whether to automatically generate an association ID.
-        :param pulumi.Input[str] feature_name: The name of the feature to use as the association ID.
-        :param pulumi.Input[bool] required_in_prediction_requests: Whether the association ID is required in prediction requests.
-        """
-        pulumi.set(__self__, "auto_generate_id", auto_generate_id)
-        pulumi.set(__self__, "feature_name", feature_name)
-        pulumi.set(__self__, "required_in_prediction_requests", required_in_prediction_requests)
+        if auto_generate_id is not None:
+            pulumi.set(__self__, "auto_generate_id", auto_generate_id)
+        if column_names is not None:
+            pulumi.set(__self__, "column_names", column_names)
+        if required_in_prediction_requests is not None:
+            pulumi.set(__self__, "required_in_prediction_requests", required_in_prediction_requests)
 
     @property
     @pulumi.getter(name="autoGenerateId")
-    def auto_generate_id(self) -> pulumi.Input[bool]:
+    def auto_generate_id(self) -> Optional[pulumi.Input[bool]]:
         """
-        Whether to automatically generate an association ID.
+        Whether to auto generate ID.
         """
         return pulumi.get(self, "auto_generate_id")
 
     @auto_generate_id.setter
-    def auto_generate_id(self, value: pulumi.Input[bool]):
+    def auto_generate_id(self, value: Optional[pulumi.Input[bool]]):
         pulumi.set(self, "auto_generate_id", value)
 
     @property
-    @pulumi.getter(name="featureName")
-    def feature_name(self) -> pulumi.Input[str]:
+    @pulumi.getter(name="columnNames")
+    def column_names(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        The name of the feature to use as the association ID.
+        Name of the columns to be used as association ID, currently only support a list of one string.
         """
-        return pulumi.get(self, "feature_name")
+        return pulumi.get(self, "column_names")
 
-    @feature_name.setter
-    def feature_name(self, value: pulumi.Input[str]):
-        pulumi.set(self, "feature_name", value)
+    @column_names.setter
+    def column_names(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "column_names", value)
 
     @property
     @pulumi.getter(name="requiredInPredictionRequests")
-    def required_in_prediction_requests(self) -> pulumi.Input[bool]:
+    def required_in_prediction_requests(self) -> Optional[pulumi.Input[bool]]:
         """
-        Whether the association ID is required in prediction requests.
+        Whether the association ID column is required in prediction requests.
         """
         return pulumi.get(self, "required_in_prediction_requests")
 
     @required_in_prediction_requests.setter
-    def required_in_prediction_requests(self, value: pulumi.Input[bool]):
+    def required_in_prediction_requests(self, value: Optional[pulumi.Input[bool]]):
         pulumi.set(self, "required_in_prediction_requests", value)
 
 
 @pulumi.input_type
-class DeploymentSettingsPredictionsSettingsArgs:
+class DeploymentBiasAndFairnessSettingsArgs:
+    def __init__(__self__, *,
+                 fairness_metric_set: pulumi.Input[str],
+                 fairness_threshold: pulumi.Input[float],
+                 preferable_target_value: pulumi.Input[bool],
+                 protected_features: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        """
+        :param pulumi.Input[str] fairness_metric_set: A set of fairness metrics to use for calculating fairness.
+        :param pulumi.Input[float] fairness_threshold: Threshold value of the fairness metric. Cannot be less than 0 or greater than 1.
+        :param pulumi.Input[bool] preferable_target_value: A target value that should be treated as a positive outcome for the prediction.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] protected_features: A list of features to mark as protected.
+        """
+        pulumi.set(__self__, "fairness_metric_set", fairness_metric_set)
+        pulumi.set(__self__, "fairness_threshold", fairness_threshold)
+        pulumi.set(__self__, "preferable_target_value", preferable_target_value)
+        pulumi.set(__self__, "protected_features", protected_features)
+
+    @property
+    @pulumi.getter(name="fairnessMetricSet")
+    def fairness_metric_set(self) -> pulumi.Input[str]:
+        """
+        A set of fairness metrics to use for calculating fairness.
+        """
+        return pulumi.get(self, "fairness_metric_set")
+
+    @fairness_metric_set.setter
+    def fairness_metric_set(self, value: pulumi.Input[str]):
+        pulumi.set(self, "fairness_metric_set", value)
+
+    @property
+    @pulumi.getter(name="fairnessThreshold")
+    def fairness_threshold(self) -> pulumi.Input[float]:
+        """
+        Threshold value of the fairness metric. Cannot be less than 0 or greater than 1.
+        """
+        return pulumi.get(self, "fairness_threshold")
+
+    @fairness_threshold.setter
+    def fairness_threshold(self, value: pulumi.Input[float]):
+        pulumi.set(self, "fairness_threshold", value)
+
+    @property
+    @pulumi.getter(name="preferableTargetValue")
+    def preferable_target_value(self) -> pulumi.Input[bool]:
+        """
+        A target value that should be treated as a positive outcome for the prediction.
+        """
+        return pulumi.get(self, "preferable_target_value")
+
+    @preferable_target_value.setter
+    def preferable_target_value(self, value: pulumi.Input[bool]):
+        pulumi.set(self, "preferable_target_value", value)
+
+    @property
+    @pulumi.getter(name="protectedFeatures")
+    def protected_features(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        A list of features to mark as protected.
+        """
+        return pulumi.get(self, "protected_features")
+
+    @protected_features.setter
+    def protected_features(self, value: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        pulumi.set(self, "protected_features", value)
+
+
+@pulumi.input_type
+class DeploymentChallengerModelsSettingsArgs:
+    def __init__(__self__, *,
+                 enabled: pulumi.Input[bool]):
+        """
+        :param pulumi.Input[bool] enabled: Is 'True' if challenger models is enabled for this deployment.
+        """
+        pulumi.set(__self__, "enabled", enabled)
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> pulumi.Input[bool]:
+        """
+        Is 'True' if challenger models is enabled for this deployment.
+        """
+        return pulumi.get(self, "enabled")
+
+    @enabled.setter
+    def enabled(self, value: pulumi.Input[bool]):
+        pulumi.set(self, "enabled", value)
+
+
+@pulumi.input_type
+class DeploymentChallengerReplaySettingsArgs:
+    def __init__(__self__, *,
+                 enabled: pulumi.Input[bool]):
+        """
+        :param pulumi.Input[bool] enabled: If challenger replay is enabled.
+        """
+        pulumi.set(__self__, "enabled", enabled)
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> pulumi.Input[bool]:
+        """
+        If challenger replay is enabled.
+        """
+        return pulumi.get(self, "enabled")
+
+    @enabled.setter
+    def enabled(self, value: pulumi.Input[bool]):
+        pulumi.set(self, "enabled", value)
+
+
+@pulumi.input_type
+class DeploymentDriftTrackingSettingsArgs:
+    def __init__(__self__, *,
+                 feature_drift_enabled: Optional[pulumi.Input[bool]] = None,
+                 target_drift_enabled: Optional[pulumi.Input[bool]] = None):
+        """
+        :param pulumi.Input[bool] feature_drift_enabled: If feature drift tracking is to be turned on.
+        :param pulumi.Input[bool] target_drift_enabled: If target drift tracking is to be turned on.
+        """
+        if feature_drift_enabled is not None:
+            pulumi.set(__self__, "feature_drift_enabled", feature_drift_enabled)
+        if target_drift_enabled is not None:
+            pulumi.set(__self__, "target_drift_enabled", target_drift_enabled)
+
+    @property
+    @pulumi.getter(name="featureDriftEnabled")
+    def feature_drift_enabled(self) -> Optional[pulumi.Input[bool]]:
+        """
+        If feature drift tracking is to be turned on.
+        """
+        return pulumi.get(self, "feature_drift_enabled")
+
+    @feature_drift_enabled.setter
+    def feature_drift_enabled(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "feature_drift_enabled", value)
+
+    @property
+    @pulumi.getter(name="targetDriftEnabled")
+    def target_drift_enabled(self) -> Optional[pulumi.Input[bool]]:
+        """
+        If target drift tracking is to be turned on.
+        """
+        return pulumi.get(self, "target_drift_enabled")
+
+    @target_drift_enabled.setter
+    def target_drift_enabled(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "target_drift_enabled", value)
+
+
+@pulumi.input_type
+class DeploymentHealthSettingsArgs:
+    def __init__(__self__, *,
+                 accuracy: Optional[pulumi.Input['DeploymentHealthSettingsAccuracyArgs']] = None,
+                 actuals_timeliness: Optional[pulumi.Input['DeploymentHealthSettingsActualsTimelinessArgs']] = None,
+                 custom_metrics: Optional[pulumi.Input['DeploymentHealthSettingsCustomMetricsArgs']] = None,
+                 data_drift: Optional[pulumi.Input['DeploymentHealthSettingsDataDriftArgs']] = None,
+                 fairness: Optional[pulumi.Input['DeploymentHealthSettingsFairnessArgs']] = None,
+                 predictions_timeliness: Optional[pulumi.Input['DeploymentHealthSettingsPredictionsTimelinessArgs']] = None,
+                 service: Optional[pulumi.Input['DeploymentHealthSettingsServiceArgs']] = None):
+        """
+        :param pulumi.Input['DeploymentHealthSettingsAccuracyArgs'] accuracy: The accuracy health settings for this Deployment.
+        :param pulumi.Input['DeploymentHealthSettingsActualsTimelinessArgs'] actuals_timeliness: The actuals timeliness health settings for this Deployment.
+        :param pulumi.Input['DeploymentHealthSettingsCustomMetricsArgs'] custom_metrics: The custom metrics health settings for this Deployment.
+        :param pulumi.Input['DeploymentHealthSettingsDataDriftArgs'] data_drift: The data drift health settings for this Deployment.
+        :param pulumi.Input['DeploymentHealthSettingsFairnessArgs'] fairness: The fairness health settings for this Deployment.
+        :param pulumi.Input['DeploymentHealthSettingsPredictionsTimelinessArgs'] predictions_timeliness: The predictions timeliness health settings for this Deployment.
+        :param pulumi.Input['DeploymentHealthSettingsServiceArgs'] service: The service health settings for this Deployment.
+        """
+        if accuracy is not None:
+            pulumi.set(__self__, "accuracy", accuracy)
+        if actuals_timeliness is not None:
+            pulumi.set(__self__, "actuals_timeliness", actuals_timeliness)
+        if custom_metrics is not None:
+            pulumi.set(__self__, "custom_metrics", custom_metrics)
+        if data_drift is not None:
+            pulumi.set(__self__, "data_drift", data_drift)
+        if fairness is not None:
+            pulumi.set(__self__, "fairness", fairness)
+        if predictions_timeliness is not None:
+            pulumi.set(__self__, "predictions_timeliness", predictions_timeliness)
+        if service is not None:
+            pulumi.set(__self__, "service", service)
+
+    @property
+    @pulumi.getter
+    def accuracy(self) -> Optional[pulumi.Input['DeploymentHealthSettingsAccuracyArgs']]:
+        """
+        The accuracy health settings for this Deployment.
+        """
+        return pulumi.get(self, "accuracy")
+
+    @accuracy.setter
+    def accuracy(self, value: Optional[pulumi.Input['DeploymentHealthSettingsAccuracyArgs']]):
+        pulumi.set(self, "accuracy", value)
+
+    @property
+    @pulumi.getter(name="actualsTimeliness")
+    def actuals_timeliness(self) -> Optional[pulumi.Input['DeploymentHealthSettingsActualsTimelinessArgs']]:
+        """
+        The actuals timeliness health settings for this Deployment.
+        """
+        return pulumi.get(self, "actuals_timeliness")
+
+    @actuals_timeliness.setter
+    def actuals_timeliness(self, value: Optional[pulumi.Input['DeploymentHealthSettingsActualsTimelinessArgs']]):
+        pulumi.set(self, "actuals_timeliness", value)
+
+    @property
+    @pulumi.getter(name="customMetrics")
+    def custom_metrics(self) -> Optional[pulumi.Input['DeploymentHealthSettingsCustomMetricsArgs']]:
+        """
+        The custom metrics health settings for this Deployment.
+        """
+        return pulumi.get(self, "custom_metrics")
+
+    @custom_metrics.setter
+    def custom_metrics(self, value: Optional[pulumi.Input['DeploymentHealthSettingsCustomMetricsArgs']]):
+        pulumi.set(self, "custom_metrics", value)
+
+    @property
+    @pulumi.getter(name="dataDrift")
+    def data_drift(self) -> Optional[pulumi.Input['DeploymentHealthSettingsDataDriftArgs']]:
+        """
+        The data drift health settings for this Deployment.
+        """
+        return pulumi.get(self, "data_drift")
+
+    @data_drift.setter
+    def data_drift(self, value: Optional[pulumi.Input['DeploymentHealthSettingsDataDriftArgs']]):
+        pulumi.set(self, "data_drift", value)
+
+    @property
+    @pulumi.getter
+    def fairness(self) -> Optional[pulumi.Input['DeploymentHealthSettingsFairnessArgs']]:
+        """
+        The fairness health settings for this Deployment.
+        """
+        return pulumi.get(self, "fairness")
+
+    @fairness.setter
+    def fairness(self, value: Optional[pulumi.Input['DeploymentHealthSettingsFairnessArgs']]):
+        pulumi.set(self, "fairness", value)
+
+    @property
+    @pulumi.getter(name="predictionsTimeliness")
+    def predictions_timeliness(self) -> Optional[pulumi.Input['DeploymentHealthSettingsPredictionsTimelinessArgs']]:
+        """
+        The predictions timeliness health settings for this Deployment.
+        """
+        return pulumi.get(self, "predictions_timeliness")
+
+    @predictions_timeliness.setter
+    def predictions_timeliness(self, value: Optional[pulumi.Input['DeploymentHealthSettingsPredictionsTimelinessArgs']]):
+        pulumi.set(self, "predictions_timeliness", value)
+
+    @property
+    @pulumi.getter
+    def service(self) -> Optional[pulumi.Input['DeploymentHealthSettingsServiceArgs']]:
+        """
+        The service health settings for this Deployment.
+        """
+        return pulumi.get(self, "service")
+
+    @service.setter
+    def service(self, value: Optional[pulumi.Input['DeploymentHealthSettingsServiceArgs']]):
+        pulumi.set(self, "service", value)
+
+
+@pulumi.input_type
+class DeploymentHealthSettingsAccuracyArgs:
+    def __init__(__self__, *,
+                 batch_count: Optional[pulumi.Input[int]] = None,
+                 failing_threshold: Optional[pulumi.Input[float]] = None,
+                 measurement: Optional[pulumi.Input[str]] = None,
+                 metric: Optional[pulumi.Input[str]] = None,
+                 warning_threshold: Optional[pulumi.Input[float]] = None):
+        """
+        :param pulumi.Input[int] batch_count: The batch count for the accuracy health settings.
+        :param pulumi.Input[float] failing_threshold: The failing threshold for the accuracy health settings.
+        :param pulumi.Input[str] measurement: The measurement for the accuracy health settings.
+        :param pulumi.Input[str] metric: The metric for the accuracy health settings.
+        :param pulumi.Input[float] warning_threshold: The warning threshold for the accuracy health settings.
+        """
+        if batch_count is not None:
+            pulumi.set(__self__, "batch_count", batch_count)
+        if failing_threshold is not None:
+            pulumi.set(__self__, "failing_threshold", failing_threshold)
+        if measurement is not None:
+            pulumi.set(__self__, "measurement", measurement)
+        if metric is not None:
+            pulumi.set(__self__, "metric", metric)
+        if warning_threshold is not None:
+            pulumi.set(__self__, "warning_threshold", warning_threshold)
+
+    @property
+    @pulumi.getter(name="batchCount")
+    def batch_count(self) -> Optional[pulumi.Input[int]]:
+        """
+        The batch count for the accuracy health settings.
+        """
+        return pulumi.get(self, "batch_count")
+
+    @batch_count.setter
+    def batch_count(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "batch_count", value)
+
+    @property
+    @pulumi.getter(name="failingThreshold")
+    def failing_threshold(self) -> Optional[pulumi.Input[float]]:
+        """
+        The failing threshold for the accuracy health settings.
+        """
+        return pulumi.get(self, "failing_threshold")
+
+    @failing_threshold.setter
+    def failing_threshold(self, value: Optional[pulumi.Input[float]]):
+        pulumi.set(self, "failing_threshold", value)
+
+    @property
+    @pulumi.getter
+    def measurement(self) -> Optional[pulumi.Input[str]]:
+        """
+        The measurement for the accuracy health settings.
+        """
+        return pulumi.get(self, "measurement")
+
+    @measurement.setter
+    def measurement(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "measurement", value)
+
+    @property
+    @pulumi.getter
+    def metric(self) -> Optional[pulumi.Input[str]]:
+        """
+        The metric for the accuracy health settings.
+        """
+        return pulumi.get(self, "metric")
+
+    @metric.setter
+    def metric(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "metric", value)
+
+    @property
+    @pulumi.getter(name="warningThreshold")
+    def warning_threshold(self) -> Optional[pulumi.Input[float]]:
+        """
+        The warning threshold for the accuracy health settings.
+        """
+        return pulumi.get(self, "warning_threshold")
+
+    @warning_threshold.setter
+    def warning_threshold(self, value: Optional[pulumi.Input[float]]):
+        pulumi.set(self, "warning_threshold", value)
+
+
+@pulumi.input_type
+class DeploymentHealthSettingsActualsTimelinessArgs:
+    def __init__(__self__, *,
+                 enabled: pulumi.Input[bool],
+                 expected_frequency: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[bool] enabled: If acutals timeliness is enabled for this Deployment.
+        :param pulumi.Input[str] expected_frequency: The expected frequency for the actuals timeliness health settings.
+        """
+        pulumi.set(__self__, "enabled", enabled)
+        if expected_frequency is not None:
+            pulumi.set(__self__, "expected_frequency", expected_frequency)
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> pulumi.Input[bool]:
+        """
+        If acutals timeliness is enabled for this Deployment.
+        """
+        return pulumi.get(self, "enabled")
+
+    @enabled.setter
+    def enabled(self, value: pulumi.Input[bool]):
+        pulumi.set(self, "enabled", value)
+
+    @property
+    @pulumi.getter(name="expectedFrequency")
+    def expected_frequency(self) -> Optional[pulumi.Input[str]]:
+        """
+        The expected frequency for the actuals timeliness health settings.
+        """
+        return pulumi.get(self, "expected_frequency")
+
+    @expected_frequency.setter
+    def expected_frequency(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "expected_frequency", value)
+
+
+@pulumi.input_type
+class DeploymentHealthSettingsCustomMetricsArgs:
+    def __init__(__self__, *,
+                 failing_conditions: Optional[pulumi.Input[Sequence[pulumi.Input['DeploymentHealthSettingsCustomMetricsFailingConditionArgs']]]] = None,
+                 warning_conditions: Optional[pulumi.Input[Sequence[pulumi.Input['DeploymentHealthSettingsCustomMetricsWarningConditionArgs']]]] = None):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input['DeploymentHealthSettingsCustomMetricsFailingConditionArgs']]] failing_conditions: The failing conditions for the custom metrics health settings.
+        :param pulumi.Input[Sequence[pulumi.Input['DeploymentHealthSettingsCustomMetricsWarningConditionArgs']]] warning_conditions: The warning conditions for the custom metrics health settings.
+        """
+        if failing_conditions is not None:
+            pulumi.set(__self__, "failing_conditions", failing_conditions)
+        if warning_conditions is not None:
+            pulumi.set(__self__, "warning_conditions", warning_conditions)
+
+    @property
+    @pulumi.getter(name="failingConditions")
+    def failing_conditions(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['DeploymentHealthSettingsCustomMetricsFailingConditionArgs']]]]:
+        """
+        The failing conditions for the custom metrics health settings.
+        """
+        return pulumi.get(self, "failing_conditions")
+
+    @failing_conditions.setter
+    def failing_conditions(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['DeploymentHealthSettingsCustomMetricsFailingConditionArgs']]]]):
+        pulumi.set(self, "failing_conditions", value)
+
+    @property
+    @pulumi.getter(name="warningConditions")
+    def warning_conditions(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['DeploymentHealthSettingsCustomMetricsWarningConditionArgs']]]]:
+        """
+        The warning conditions for the custom metrics health settings.
+        """
+        return pulumi.get(self, "warning_conditions")
+
+    @warning_conditions.setter
+    def warning_conditions(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['DeploymentHealthSettingsCustomMetricsWarningConditionArgs']]]]):
+        pulumi.set(self, "warning_conditions", value)
+
+
+@pulumi.input_type
+class DeploymentHealthSettingsCustomMetricsFailingConditionArgs:
+    def __init__(__self__, *,
+                 compare_operator: pulumi.Input[str],
+                 metric_id: pulumi.Input[str],
+                 threshold: pulumi.Input[float]):
+        """
+        :param pulumi.Input[str] compare_operator: The compare operator for the failing condition of the custom metrics health settings.
+        :param pulumi.Input[str] metric_id: The metric ID for the failing condition of the custom metrics health settings.
+        :param pulumi.Input[float] threshold: The threshold for the failing condition of the custom metrics health settings.
+        """
+        pulumi.set(__self__, "compare_operator", compare_operator)
+        pulumi.set(__self__, "metric_id", metric_id)
+        pulumi.set(__self__, "threshold", threshold)
+
+    @property
+    @pulumi.getter(name="compareOperator")
+    def compare_operator(self) -> pulumi.Input[str]:
+        """
+        The compare operator for the failing condition of the custom metrics health settings.
+        """
+        return pulumi.get(self, "compare_operator")
+
+    @compare_operator.setter
+    def compare_operator(self, value: pulumi.Input[str]):
+        pulumi.set(self, "compare_operator", value)
+
+    @property
+    @pulumi.getter(name="metricId")
+    def metric_id(self) -> pulumi.Input[str]:
+        """
+        The metric ID for the failing condition of the custom metrics health settings.
+        """
+        return pulumi.get(self, "metric_id")
+
+    @metric_id.setter
+    def metric_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "metric_id", value)
+
+    @property
+    @pulumi.getter
+    def threshold(self) -> pulumi.Input[float]:
+        """
+        The threshold for the failing condition of the custom metrics health settings.
+        """
+        return pulumi.get(self, "threshold")
+
+    @threshold.setter
+    def threshold(self, value: pulumi.Input[float]):
+        pulumi.set(self, "threshold", value)
+
+
+@pulumi.input_type
+class DeploymentHealthSettingsCustomMetricsWarningConditionArgs:
+    def __init__(__self__, *,
+                 compare_operator: pulumi.Input[str],
+                 metric_id: pulumi.Input[str],
+                 threshold: pulumi.Input[float]):
+        """
+        :param pulumi.Input[str] compare_operator: The compare operator for the warning condition of the custom metrics health settings.
+        :param pulumi.Input[str] metric_id: The metric ID for the warning condition of the custom metrics health settings.
+        :param pulumi.Input[float] threshold: The threshold for the warning condition of the custom metrics health settings.
+        """
+        pulumi.set(__self__, "compare_operator", compare_operator)
+        pulumi.set(__self__, "metric_id", metric_id)
+        pulumi.set(__self__, "threshold", threshold)
+
+    @property
+    @pulumi.getter(name="compareOperator")
+    def compare_operator(self) -> pulumi.Input[str]:
+        """
+        The compare operator for the warning condition of the custom metrics health settings.
+        """
+        return pulumi.get(self, "compare_operator")
+
+    @compare_operator.setter
+    def compare_operator(self, value: pulumi.Input[str]):
+        pulumi.set(self, "compare_operator", value)
+
+    @property
+    @pulumi.getter(name="metricId")
+    def metric_id(self) -> pulumi.Input[str]:
+        """
+        The metric ID for the warning condition of the custom metrics health settings.
+        """
+        return pulumi.get(self, "metric_id")
+
+    @metric_id.setter
+    def metric_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "metric_id", value)
+
+    @property
+    @pulumi.getter
+    def threshold(self) -> pulumi.Input[float]:
+        """
+        The threshold for the warning condition of the custom metrics health settings.
+        """
+        return pulumi.get(self, "threshold")
+
+    @threshold.setter
+    def threshold(self, value: pulumi.Input[float]):
+        pulumi.set(self, "threshold", value)
+
+
+@pulumi.input_type
+class DeploymentHealthSettingsDataDriftArgs:
+    def __init__(__self__, *,
+                 batch_count: Optional[pulumi.Input[int]] = None,
+                 drift_threshold: Optional[pulumi.Input[float]] = None,
+                 exclude_features: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 high_importance_failing_count: Optional[pulumi.Input[int]] = None,
+                 high_importance_warning_count: Optional[pulumi.Input[int]] = None,
+                 importance_threshold: Optional[pulumi.Input[float]] = None,
+                 low_importance_failing_count: Optional[pulumi.Input[int]] = None,
+                 low_importance_warning_count: Optional[pulumi.Input[int]] = None,
+                 starred_features: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 time_interval: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[int] batch_count: The batch count for the data drift health settings.
+        :param pulumi.Input[float] drift_threshold: The drift threshold for the data drift health settings.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] exclude_features: The exclude features for the data drift health settings.
+        :param pulumi.Input[int] high_importance_failing_count: The high importance failing count for the data drift health settings.
+        :param pulumi.Input[int] high_importance_warning_count: The high importance warning count for the data drift health settings.
+        :param pulumi.Input[float] importance_threshold: The importance threshold for the data drift health settings.
+        :param pulumi.Input[int] low_importance_failing_count: The low importance failing count for the data drift health settings.
+        :param pulumi.Input[int] low_importance_warning_count: The low importance warning count for the data drift health settings.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] starred_features: The starred features for the data drift health settings.
+        :param pulumi.Input[str] time_interval: The time interval for the data drift health settings.
+        """
+        if batch_count is not None:
+            pulumi.set(__self__, "batch_count", batch_count)
+        if drift_threshold is not None:
+            pulumi.set(__self__, "drift_threshold", drift_threshold)
+        if exclude_features is not None:
+            pulumi.set(__self__, "exclude_features", exclude_features)
+        if high_importance_failing_count is not None:
+            pulumi.set(__self__, "high_importance_failing_count", high_importance_failing_count)
+        if high_importance_warning_count is not None:
+            pulumi.set(__self__, "high_importance_warning_count", high_importance_warning_count)
+        if importance_threshold is not None:
+            pulumi.set(__self__, "importance_threshold", importance_threshold)
+        if low_importance_failing_count is not None:
+            pulumi.set(__self__, "low_importance_failing_count", low_importance_failing_count)
+        if low_importance_warning_count is not None:
+            pulumi.set(__self__, "low_importance_warning_count", low_importance_warning_count)
+        if starred_features is not None:
+            pulumi.set(__self__, "starred_features", starred_features)
+        if time_interval is not None:
+            pulumi.set(__self__, "time_interval", time_interval)
+
+    @property
+    @pulumi.getter(name="batchCount")
+    def batch_count(self) -> Optional[pulumi.Input[int]]:
+        """
+        The batch count for the data drift health settings.
+        """
+        return pulumi.get(self, "batch_count")
+
+    @batch_count.setter
+    def batch_count(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "batch_count", value)
+
+    @property
+    @pulumi.getter(name="driftThreshold")
+    def drift_threshold(self) -> Optional[pulumi.Input[float]]:
+        """
+        The drift threshold for the data drift health settings.
+        """
+        return pulumi.get(self, "drift_threshold")
+
+    @drift_threshold.setter
+    def drift_threshold(self, value: Optional[pulumi.Input[float]]):
+        pulumi.set(self, "drift_threshold", value)
+
+    @property
+    @pulumi.getter(name="excludeFeatures")
+    def exclude_features(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        The exclude features for the data drift health settings.
+        """
+        return pulumi.get(self, "exclude_features")
+
+    @exclude_features.setter
+    def exclude_features(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "exclude_features", value)
+
+    @property
+    @pulumi.getter(name="highImportanceFailingCount")
+    def high_importance_failing_count(self) -> Optional[pulumi.Input[int]]:
+        """
+        The high importance failing count for the data drift health settings.
+        """
+        return pulumi.get(self, "high_importance_failing_count")
+
+    @high_importance_failing_count.setter
+    def high_importance_failing_count(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "high_importance_failing_count", value)
+
+    @property
+    @pulumi.getter(name="highImportanceWarningCount")
+    def high_importance_warning_count(self) -> Optional[pulumi.Input[int]]:
+        """
+        The high importance warning count for the data drift health settings.
+        """
+        return pulumi.get(self, "high_importance_warning_count")
+
+    @high_importance_warning_count.setter
+    def high_importance_warning_count(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "high_importance_warning_count", value)
+
+    @property
+    @pulumi.getter(name="importanceThreshold")
+    def importance_threshold(self) -> Optional[pulumi.Input[float]]:
+        """
+        The importance threshold for the data drift health settings.
+        """
+        return pulumi.get(self, "importance_threshold")
+
+    @importance_threshold.setter
+    def importance_threshold(self, value: Optional[pulumi.Input[float]]):
+        pulumi.set(self, "importance_threshold", value)
+
+    @property
+    @pulumi.getter(name="lowImportanceFailingCount")
+    def low_importance_failing_count(self) -> Optional[pulumi.Input[int]]:
+        """
+        The low importance failing count for the data drift health settings.
+        """
+        return pulumi.get(self, "low_importance_failing_count")
+
+    @low_importance_failing_count.setter
+    def low_importance_failing_count(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "low_importance_failing_count", value)
+
+    @property
+    @pulumi.getter(name="lowImportanceWarningCount")
+    def low_importance_warning_count(self) -> Optional[pulumi.Input[int]]:
+        """
+        The low importance warning count for the data drift health settings.
+        """
+        return pulumi.get(self, "low_importance_warning_count")
+
+    @low_importance_warning_count.setter
+    def low_importance_warning_count(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "low_importance_warning_count", value)
+
+    @property
+    @pulumi.getter(name="starredFeatures")
+    def starred_features(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        The starred features for the data drift health settings.
+        """
+        return pulumi.get(self, "starred_features")
+
+    @starred_features.setter
+    def starred_features(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "starred_features", value)
+
+    @property
+    @pulumi.getter(name="timeInterval")
+    def time_interval(self) -> Optional[pulumi.Input[str]]:
+        """
+        The time interval for the data drift health settings.
+        """
+        return pulumi.get(self, "time_interval")
+
+    @time_interval.setter
+    def time_interval(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "time_interval", value)
+
+
+@pulumi.input_type
+class DeploymentHealthSettingsFairnessArgs:
+    def __init__(__self__, *,
+                 protected_class_failing_count: Optional[pulumi.Input[int]] = None,
+                 protected_class_warning_count: Optional[pulumi.Input[int]] = None):
+        """
+        :param pulumi.Input[int] protected_class_failing_count: The protected class failing count for the fairness health settings.
+        :param pulumi.Input[int] protected_class_warning_count: The protected class warning count for the fairness health settings.
+        """
+        if protected_class_failing_count is not None:
+            pulumi.set(__self__, "protected_class_failing_count", protected_class_failing_count)
+        if protected_class_warning_count is not None:
+            pulumi.set(__self__, "protected_class_warning_count", protected_class_warning_count)
+
+    @property
+    @pulumi.getter(name="protectedClassFailingCount")
+    def protected_class_failing_count(self) -> Optional[pulumi.Input[int]]:
+        """
+        The protected class failing count for the fairness health settings.
+        """
+        return pulumi.get(self, "protected_class_failing_count")
+
+    @protected_class_failing_count.setter
+    def protected_class_failing_count(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "protected_class_failing_count", value)
+
+    @property
+    @pulumi.getter(name="protectedClassWarningCount")
+    def protected_class_warning_count(self) -> Optional[pulumi.Input[int]]:
+        """
+        The protected class warning count for the fairness health settings.
+        """
+        return pulumi.get(self, "protected_class_warning_count")
+
+    @protected_class_warning_count.setter
+    def protected_class_warning_count(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "protected_class_warning_count", value)
+
+
+@pulumi.input_type
+class DeploymentHealthSettingsPredictionsTimelinessArgs:
+    def __init__(__self__, *,
+                 enabled: pulumi.Input[bool],
+                 expected_frequency: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[bool] enabled: If predictions timeliness is enabled for this Deployment.
+        :param pulumi.Input[str] expected_frequency: The expected frequency for the predictions timeliness health settings.
+        """
+        pulumi.set(__self__, "enabled", enabled)
+        if expected_frequency is not None:
+            pulumi.set(__self__, "expected_frequency", expected_frequency)
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> pulumi.Input[bool]:
+        """
+        If predictions timeliness is enabled for this Deployment.
+        """
+        return pulumi.get(self, "enabled")
+
+    @enabled.setter
+    def enabled(self, value: pulumi.Input[bool]):
+        pulumi.set(self, "enabled", value)
+
+    @property
+    @pulumi.getter(name="expectedFrequency")
+    def expected_frequency(self) -> Optional[pulumi.Input[str]]:
+        """
+        The expected frequency for the predictions timeliness health settings.
+        """
+        return pulumi.get(self, "expected_frequency")
+
+    @expected_frequency.setter
+    def expected_frequency(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "expected_frequency", value)
+
+
+@pulumi.input_type
+class DeploymentHealthSettingsServiceArgs:
+    def __init__(__self__, *,
+                 batch_count: pulumi.Input[int]):
+        """
+        :param pulumi.Input[int] batch_count: The batch count for the service health settings.
+        """
+        pulumi.set(__self__, "batch_count", batch_count)
+
+    @property
+    @pulumi.getter(name="batchCount")
+    def batch_count(self) -> pulumi.Input[int]:
+        """
+        The batch count for the service health settings.
+        """
+        return pulumi.get(self, "batch_count")
+
+    @batch_count.setter
+    def batch_count(self, value: pulumi.Input[int]):
+        pulumi.set(self, "batch_count", value)
+
+
+@pulumi.input_type
+class DeploymentPredictionIntervalsSettingsArgs:
+    def __init__(__self__, *,
+                 enabled: pulumi.Input[bool],
+                 percentiles: Optional[pulumi.Input[Sequence[pulumi.Input[int]]]] = None):
+        """
+        :param pulumi.Input[bool] enabled: Whether prediction intervals are enabled for this deployment.
+        :param pulumi.Input[Sequence[pulumi.Input[int]]] percentiles: List of enabled prediction intervals’ sizes for this deployment.
+        """
+        pulumi.set(__self__, "enabled", enabled)
+        if percentiles is not None:
+            pulumi.set(__self__, "percentiles", percentiles)
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> pulumi.Input[bool]:
+        """
+        Whether prediction intervals are enabled for this deployment.
+        """
+        return pulumi.get(self, "enabled")
+
+    @enabled.setter
+    def enabled(self, value: pulumi.Input[bool]):
+        pulumi.set(self, "enabled", value)
+
+    @property
+    @pulumi.getter
+    def percentiles(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]:
+        """
+        List of enabled prediction intervals’ sizes for this deployment.
+        """
+        return pulumi.get(self, "percentiles")
+
+    @percentiles.setter
+    def percentiles(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[int]]]]):
+        pulumi.set(self, "percentiles", value)
+
+
+@pulumi.input_type
+class DeploymentPredictionWarningSettingsArgs:
+    def __init__(__self__, *,
+                 enabled: pulumi.Input[bool],
+                 custom_boundaries: Optional[pulumi.Input['DeploymentPredictionWarningSettingsCustomBoundariesArgs']] = None):
+        """
+        :param pulumi.Input[bool] enabled: If target prediction warning is enabled for this Deployment.
+        :param pulumi.Input['DeploymentPredictionWarningSettingsCustomBoundariesArgs'] custom_boundaries: The custom boundaries for prediction warnings.
+        """
+        pulumi.set(__self__, "enabled", enabled)
+        if custom_boundaries is not None:
+            pulumi.set(__self__, "custom_boundaries", custom_boundaries)
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> pulumi.Input[bool]:
+        """
+        If target prediction warning is enabled for this Deployment.
+        """
+        return pulumi.get(self, "enabled")
+
+    @enabled.setter
+    def enabled(self, value: pulumi.Input[bool]):
+        pulumi.set(self, "enabled", value)
+
+    @property
+    @pulumi.getter(name="customBoundaries")
+    def custom_boundaries(self) -> Optional[pulumi.Input['DeploymentPredictionWarningSettingsCustomBoundariesArgs']]:
+        """
+        The custom boundaries for prediction warnings.
+        """
+        return pulumi.get(self, "custom_boundaries")
+
+    @custom_boundaries.setter
+    def custom_boundaries(self, value: Optional[pulumi.Input['DeploymentPredictionWarningSettingsCustomBoundariesArgs']]):
+        pulumi.set(self, "custom_boundaries", value)
+
+
+@pulumi.input_type
+class DeploymentPredictionWarningSettingsCustomBoundariesArgs:
+    def __init__(__self__, *,
+                 lower_boundary: Optional[pulumi.Input[float]] = None,
+                 upper_boundary: Optional[pulumi.Input[float]] = None):
+        """
+        :param pulumi.Input[float] lower_boundary: All predictions less than provided value will be considered anomalous.
+        :param pulumi.Input[float] upper_boundary: All predictions greater than provided value will be considered anomalous.
+        """
+        if lower_boundary is not None:
+            pulumi.set(__self__, "lower_boundary", lower_boundary)
+        if upper_boundary is not None:
+            pulumi.set(__self__, "upper_boundary", upper_boundary)
+
+    @property
+    @pulumi.getter(name="lowerBoundary")
+    def lower_boundary(self) -> Optional[pulumi.Input[float]]:
+        """
+        All predictions less than provided value will be considered anomalous.
+        """
+        return pulumi.get(self, "lower_boundary")
+
+    @lower_boundary.setter
+    def lower_boundary(self, value: Optional[pulumi.Input[float]]):
+        pulumi.set(self, "lower_boundary", value)
+
+    @property
+    @pulumi.getter(name="upperBoundary")
+    def upper_boundary(self) -> Optional[pulumi.Input[float]]:
+        """
+        All predictions greater than provided value will be considered anomalous.
+        """
+        return pulumi.get(self, "upper_boundary")
+
+    @upper_boundary.setter
+    def upper_boundary(self, value: Optional[pulumi.Input[float]]):
+        pulumi.set(self, "upper_boundary", value)
+
+
+@pulumi.input_type
+class DeploymentPredictionsByForecastDateSettingsArgs:
+    def __init__(__self__, *,
+                 enabled: pulumi.Input[bool],
+                 column_name: Optional[pulumi.Input[str]] = None,
+                 datetime_format: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[bool] enabled: Is ’True’ if predictions by forecast date is enabled for this deployment.
+        :param pulumi.Input[str] column_name: The column name in prediction datasets to be used as forecast date.
+        :param pulumi.Input[str] datetime_format: The datetime format of the forecast date column in prediction datasets.
+        """
+        pulumi.set(__self__, "enabled", enabled)
+        if column_name is not None:
+            pulumi.set(__self__, "column_name", column_name)
+        if datetime_format is not None:
+            pulumi.set(__self__, "datetime_format", datetime_format)
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> pulumi.Input[bool]:
+        """
+        Is ’True’ if predictions by forecast date is enabled for this deployment.
+        """
+        return pulumi.get(self, "enabled")
+
+    @enabled.setter
+    def enabled(self, value: pulumi.Input[bool]):
+        pulumi.set(self, "enabled", value)
+
+    @property
+    @pulumi.getter(name="columnName")
+    def column_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The column name in prediction datasets to be used as forecast date.
+        """
+        return pulumi.get(self, "column_name")
+
+    @column_name.setter
+    def column_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "column_name", value)
+
+    @property
+    @pulumi.getter(name="datetimeFormat")
+    def datetime_format(self) -> Optional[pulumi.Input[str]]:
+        """
+        The datetime format of the forecast date column in prediction datasets.
+        """
+        return pulumi.get(self, "datetime_format")
+
+    @datetime_format.setter
+    def datetime_format(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "datetime_format", value)
+
+
+@pulumi.input_type
+class DeploymentPredictionsDataCollectionSettingsArgs:
+    def __init__(__self__, *,
+                 enabled: pulumi.Input[bool]):
+        """
+        :param pulumi.Input[bool] enabled: If predictions data collections is enabled for this Deployment.
+        """
+        pulumi.set(__self__, "enabled", enabled)
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> pulumi.Input[bool]:
+        """
+        If predictions data collections is enabled for this Deployment.
+        """
+        return pulumi.get(self, "enabled")
+
+    @enabled.setter
+    def enabled(self, value: pulumi.Input[bool]):
+        pulumi.set(self, "enabled", value)
+
+
+@pulumi.input_type
+class DeploymentPredictionsSettingsArgs:
     def __init__(__self__, *,
                  max_computes: pulumi.Input[int],
                  min_computes: pulumi.Input[int],
@@ -742,6 +1687,44 @@ class DeploymentSettingsPredictionsSettingsArgs:
     @real_time.setter
     def real_time(self, value: pulumi.Input[bool]):
         pulumi.set(self, "real_time", value)
+
+
+@pulumi.input_type
+class DeploymentSegmentAnalysisSettingsArgs:
+    def __init__(__self__, *,
+                 enabled: pulumi.Input[bool],
+                 attributes: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
+        """
+        :param pulumi.Input[bool] enabled: Set to 'True' if segment analysis is enabled for this deployment.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] attributes: A list of strings that gives the segment attributes selected for tracking.
+        """
+        pulumi.set(__self__, "enabled", enabled)
+        if attributes is not None:
+            pulumi.set(__self__, "attributes", attributes)
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> pulumi.Input[bool]:
+        """
+        Set to 'True' if segment analysis is enabled for this deployment.
+        """
+        return pulumi.get(self, "enabled")
+
+    @enabled.setter
+    def enabled(self, value: pulumi.Input[bool]):
+        pulumi.set(self, "enabled", value)
+
+    @property
+    @pulumi.getter
+    def attributes(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        A list of strings that gives the segment attributes selected for tracking.
+        """
+        return pulumi.get(self, "attributes")
+
+    @attributes.setter
+    def attributes(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "attributes", value)
 
 
 @pulumi.input_type

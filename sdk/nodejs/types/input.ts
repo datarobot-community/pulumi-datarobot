@@ -156,41 +156,299 @@ export interface CustomModelSourceRemoteRepository {
     sourcePaths: pulumi.Input<pulumi.Input<string>[]>;
 }
 
-export interface DeploymentSettings {
+export interface DeploymentAssociationIdSettings {
     /**
-     * Used to associate predictions back to your actual data.
+     * Whether to auto generate ID.
      */
-    associationId?: pulumi.Input<inputs.DeploymentSettingsAssociationId>;
+    autoGenerateId?: pulumi.Input<boolean>;
     /**
-     * Used to compare the performance of the deployed model with the challenger models.
+     * Name of the columns to be used as association ID, currently only support a list of one string.
      */
-    challengerAnalysis?: pulumi.Input<boolean>;
+    columnNames?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Used to score predictions made by the challenger models and compare performance with the deployed model.
+     * Whether the association ID column is required in prediction requests.
      */
-    predictionRowStorage?: pulumi.Input<boolean>;
-    /**
-     * Settings for the predictions.
-     */
-    predictionsSettings?: pulumi.Input<inputs.DeploymentSettingsPredictionsSettings>;
+    requiredInPredictionRequests?: pulumi.Input<boolean>;
 }
 
-export interface DeploymentSettingsAssociationId {
+export interface DeploymentBiasAndFairnessSettings {
     /**
-     * Whether to automatically generate an association ID.
+     * A set of fairness metrics to use for calculating fairness.
      */
-    autoGenerateId: pulumi.Input<boolean>;
+    fairnessMetricSet: pulumi.Input<string>;
     /**
-     * The name of the feature to use as the association ID.
+     * Threshold value of the fairness metric. Cannot be less than 0 or greater than 1.
      */
-    featureName: pulumi.Input<string>;
+    fairnessThreshold: pulumi.Input<number>;
     /**
-     * Whether the association ID is required in prediction requests.
+     * A target value that should be treated as a positive outcome for the prediction.
      */
-    requiredInPredictionRequests: pulumi.Input<boolean>;
+    preferableTargetValue: pulumi.Input<boolean>;
+    /**
+     * A list of features to mark as protected.
+     */
+    protectedFeatures: pulumi.Input<pulumi.Input<string>[]>;
 }
 
-export interface DeploymentSettingsPredictionsSettings {
+export interface DeploymentChallengerModelsSettings {
+    /**
+     * Is 'True' if challenger models is enabled for this deployment.
+     */
+    enabled: pulumi.Input<boolean>;
+}
+
+export interface DeploymentChallengerReplaySettings {
+    /**
+     * If challenger replay is enabled.
+     */
+    enabled: pulumi.Input<boolean>;
+}
+
+export interface DeploymentDriftTrackingSettings {
+    /**
+     * If feature drift tracking is to be turned on.
+     */
+    featureDriftEnabled?: pulumi.Input<boolean>;
+    /**
+     * If target drift tracking is to be turned on.
+     */
+    targetDriftEnabled?: pulumi.Input<boolean>;
+}
+
+export interface DeploymentHealthSettings {
+    /**
+     * The accuracy health settings for this Deployment.
+     */
+    accuracy?: pulumi.Input<inputs.DeploymentHealthSettingsAccuracy>;
+    /**
+     * The actuals timeliness health settings for this Deployment.
+     */
+    actualsTimeliness?: pulumi.Input<inputs.DeploymentHealthSettingsActualsTimeliness>;
+    /**
+     * The custom metrics health settings for this Deployment.
+     */
+    customMetrics?: pulumi.Input<inputs.DeploymentHealthSettingsCustomMetrics>;
+    /**
+     * The data drift health settings for this Deployment.
+     */
+    dataDrift?: pulumi.Input<inputs.DeploymentHealthSettingsDataDrift>;
+    /**
+     * The fairness health settings for this Deployment.
+     */
+    fairness?: pulumi.Input<inputs.DeploymentHealthSettingsFairness>;
+    /**
+     * The predictions timeliness health settings for this Deployment.
+     */
+    predictionsTimeliness?: pulumi.Input<inputs.DeploymentHealthSettingsPredictionsTimeliness>;
+    /**
+     * The service health settings for this Deployment.
+     */
+    service?: pulumi.Input<inputs.DeploymentHealthSettingsService>;
+}
+
+export interface DeploymentHealthSettingsAccuracy {
+    /**
+     * The batch count for the accuracy health settings.
+     */
+    batchCount?: pulumi.Input<number>;
+    /**
+     * The failing threshold for the accuracy health settings.
+     */
+    failingThreshold?: pulumi.Input<number>;
+    /**
+     * The measurement for the accuracy health settings.
+     */
+    measurement?: pulumi.Input<string>;
+    /**
+     * The metric for the accuracy health settings.
+     */
+    metric?: pulumi.Input<string>;
+    /**
+     * The warning threshold for the accuracy health settings.
+     */
+    warningThreshold?: pulumi.Input<number>;
+}
+
+export interface DeploymentHealthSettingsActualsTimeliness {
+    /**
+     * If acutals timeliness is enabled for this Deployment.
+     */
+    enabled: pulumi.Input<boolean>;
+    /**
+     * The expected frequency for the actuals timeliness health settings.
+     */
+    expectedFrequency?: pulumi.Input<string>;
+}
+
+export interface DeploymentHealthSettingsCustomMetrics {
+    /**
+     * The failing conditions for the custom metrics health settings.
+     */
+    failingConditions?: pulumi.Input<pulumi.Input<inputs.DeploymentHealthSettingsCustomMetricsFailingCondition>[]>;
+    /**
+     * The warning conditions for the custom metrics health settings.
+     */
+    warningConditions?: pulumi.Input<pulumi.Input<inputs.DeploymentHealthSettingsCustomMetricsWarningCondition>[]>;
+}
+
+export interface DeploymentHealthSettingsCustomMetricsFailingCondition {
+    /**
+     * The compare operator for the failing condition of the custom metrics health settings.
+     */
+    compareOperator: pulumi.Input<string>;
+    /**
+     * The metric ID for the failing condition of the custom metrics health settings.
+     */
+    metricId: pulumi.Input<string>;
+    /**
+     * The threshold for the failing condition of the custom metrics health settings.
+     */
+    threshold: pulumi.Input<number>;
+}
+
+export interface DeploymentHealthSettingsCustomMetricsWarningCondition {
+    /**
+     * The compare operator for the warning condition of the custom metrics health settings.
+     */
+    compareOperator: pulumi.Input<string>;
+    /**
+     * The metric ID for the warning condition of the custom metrics health settings.
+     */
+    metricId: pulumi.Input<string>;
+    /**
+     * The threshold for the warning condition of the custom metrics health settings.
+     */
+    threshold: pulumi.Input<number>;
+}
+
+export interface DeploymentHealthSettingsDataDrift {
+    /**
+     * The batch count for the data drift health settings.
+     */
+    batchCount?: pulumi.Input<number>;
+    /**
+     * The drift threshold for the data drift health settings.
+     */
+    driftThreshold?: pulumi.Input<number>;
+    /**
+     * The exclude features for the data drift health settings.
+     */
+    excludeFeatures?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The high importance failing count for the data drift health settings.
+     */
+    highImportanceFailingCount?: pulumi.Input<number>;
+    /**
+     * The high importance warning count for the data drift health settings.
+     */
+    highImportanceWarningCount?: pulumi.Input<number>;
+    /**
+     * The importance threshold for the data drift health settings.
+     */
+    importanceThreshold?: pulumi.Input<number>;
+    /**
+     * The low importance failing count for the data drift health settings.
+     */
+    lowImportanceFailingCount?: pulumi.Input<number>;
+    /**
+     * The low importance warning count for the data drift health settings.
+     */
+    lowImportanceWarningCount?: pulumi.Input<number>;
+    /**
+     * The starred features for the data drift health settings.
+     */
+    starredFeatures?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The time interval for the data drift health settings.
+     */
+    timeInterval?: pulumi.Input<string>;
+}
+
+export interface DeploymentHealthSettingsFairness {
+    /**
+     * The protected class failing count for the fairness health settings.
+     */
+    protectedClassFailingCount?: pulumi.Input<number>;
+    /**
+     * The protected class warning count for the fairness health settings.
+     */
+    protectedClassWarningCount?: pulumi.Input<number>;
+}
+
+export interface DeploymentHealthSettingsPredictionsTimeliness {
+    /**
+     * If predictions timeliness is enabled for this Deployment.
+     */
+    enabled: pulumi.Input<boolean>;
+    /**
+     * The expected frequency for the predictions timeliness health settings.
+     */
+    expectedFrequency?: pulumi.Input<string>;
+}
+
+export interface DeploymentHealthSettingsService {
+    /**
+     * The batch count for the service health settings.
+     */
+    batchCount: pulumi.Input<number>;
+}
+
+export interface DeploymentPredictionIntervalsSettings {
+    /**
+     * Whether prediction intervals are enabled for this deployment.
+     */
+    enabled: pulumi.Input<boolean>;
+    /**
+     * List of enabled prediction intervals’ sizes for this deployment.
+     */
+    percentiles?: pulumi.Input<pulumi.Input<number>[]>;
+}
+
+export interface DeploymentPredictionWarningSettings {
+    /**
+     * The custom boundaries for prediction warnings.
+     */
+    customBoundaries?: pulumi.Input<inputs.DeploymentPredictionWarningSettingsCustomBoundaries>;
+    /**
+     * If target prediction warning is enabled for this Deployment.
+     */
+    enabled: pulumi.Input<boolean>;
+}
+
+export interface DeploymentPredictionWarningSettingsCustomBoundaries {
+    /**
+     * All predictions less than provided value will be considered anomalous.
+     */
+    lowerBoundary?: pulumi.Input<number>;
+    /**
+     * All predictions greater than provided value will be considered anomalous.
+     */
+    upperBoundary?: pulumi.Input<number>;
+}
+
+export interface DeploymentPredictionsByForecastDateSettings {
+    /**
+     * The column name in prediction datasets to be used as forecast date.
+     */
+    columnName?: pulumi.Input<string>;
+    /**
+     * The datetime format of the forecast date column in prediction datasets.
+     */
+    datetimeFormat?: pulumi.Input<string>;
+    /**
+     * Is ’True’ if predictions by forecast date is enabled for this deployment.
+     */
+    enabled: pulumi.Input<boolean>;
+}
+
+export interface DeploymentPredictionsDataCollectionSettings {
+    /**
+     * If predictions data collections is enabled for this Deployment.
+     */
+    enabled: pulumi.Input<boolean>;
+}
+
+export interface DeploymentPredictionsSettings {
     /**
      * The maximum number of computes to use for predictions.
      */
@@ -203,6 +461,17 @@ export interface DeploymentSettingsPredictionsSettings {
      * Whether to use real-time predictions.
      */
     realTime: pulumi.Input<boolean>;
+}
+
+export interface DeploymentSegmentAnalysisSettings {
+    /**
+     * A list of strings that gives the segment attributes selected for tracking.
+     */
+    attributes?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Set to 'True' if segment analysis is enabled for this deployment.
+     */
+    enabled: pulumi.Input<boolean>;
 }
 
 export interface LlmBlueprintLlmSettings {
