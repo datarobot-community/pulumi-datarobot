@@ -7,32 +7,36 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.Datarobot.Inputs
+namespace Pulumi.Datarobot.Outputs
 {
 
-    public sealed class DeploymentSettingsPredictionsSettingsGetArgs : global::Pulumi.ResourceArgs
+    [OutputType]
+    public sealed class DeploymentPredictionsSettings
     {
         /// <summary>
         /// The maximum number of computes to use for predictions.
         /// </summary>
-        [Input("maxComputes", required: true)]
-        public Input<int> MaxComputes { get; set; } = null!;
-
+        public readonly int MaxComputes;
         /// <summary>
         /// The minimum number of computes to use for predictions.
         /// </summary>
-        [Input("minComputes", required: true)]
-        public Input<int> MinComputes { get; set; } = null!;
-
+        public readonly int MinComputes;
         /// <summary>
         /// Whether to use real-time predictions.
         /// </summary>
-        [Input("realTime", required: true)]
-        public Input<bool> RealTime { get; set; } = null!;
+        public readonly bool RealTime;
 
-        public DeploymentSettingsPredictionsSettingsGetArgs()
+        [OutputConstructor]
+        private DeploymentPredictionsSettings(
+            int maxComputes,
+
+            int minComputes,
+
+            bool realTime)
         {
+            MaxComputes = maxComputes;
+            MinComputes = minComputes;
+            RealTime = realTime;
         }
-        public static new DeploymentSettingsPredictionsSettingsGetArgs Empty => new DeploymentSettingsPredictionsSettingsGetArgs();
     }
 }

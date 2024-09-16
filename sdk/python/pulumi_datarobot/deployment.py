@@ -19,19 +19,67 @@ class DeploymentArgs:
                  label: pulumi.Input[str],
                  prediction_environment_id: pulumi.Input[str],
                  registered_model_version_id: pulumi.Input[str],
-                 settings: Optional[pulumi.Input['DeploymentSettingsArgs']] = None):
+                 association_id_settings: Optional[pulumi.Input['DeploymentAssociationIdSettingsArgs']] = None,
+                 bias_and_fairness_settings: Optional[pulumi.Input['DeploymentBiasAndFairnessSettingsArgs']] = None,
+                 challenger_models_settings: Optional[pulumi.Input['DeploymentChallengerModelsSettingsArgs']] = None,
+                 challenger_replay_settings: Optional[pulumi.Input['DeploymentChallengerReplaySettingsArgs']] = None,
+                 drift_tracking_settings: Optional[pulumi.Input['DeploymentDriftTrackingSettingsArgs']] = None,
+                 health_settings: Optional[pulumi.Input['DeploymentHealthSettingsArgs']] = None,
+                 importance: Optional[pulumi.Input[str]] = None,
+                 prediction_intervals_settings: Optional[pulumi.Input['DeploymentPredictionIntervalsSettingsArgs']] = None,
+                 prediction_warning_settings: Optional[pulumi.Input['DeploymentPredictionWarningSettingsArgs']] = None,
+                 predictions_by_forecast_date_settings: Optional[pulumi.Input['DeploymentPredictionsByForecastDateSettingsArgs']] = None,
+                 predictions_data_collection_settings: Optional[pulumi.Input['DeploymentPredictionsDataCollectionSettingsArgs']] = None,
+                 predictions_settings: Optional[pulumi.Input['DeploymentPredictionsSettingsArgs']] = None,
+                 segment_analysis_settings: Optional[pulumi.Input['DeploymentSegmentAnalysisSettingsArgs']] = None):
         """
         The set of arguments for constructing a Deployment resource.
         :param pulumi.Input[str] label: The label of the Deployment.
         :param pulumi.Input[str] prediction_environment_id: The ID of the predication environment for this Deployment.
         :param pulumi.Input[str] registered_model_version_id: The ID of the registered model version for this Deployment.
-        :param pulumi.Input['DeploymentSettingsArgs'] settings: The settings for the Deployment.
+        :param pulumi.Input['DeploymentAssociationIdSettingsArgs'] association_id_settings: Association ID settings for this Deployment.
+        :param pulumi.Input['DeploymentBiasAndFairnessSettingsArgs'] bias_and_fairness_settings: Bias and fairness settings for the Deployment.
+        :param pulumi.Input['DeploymentChallengerModelsSettingsArgs'] challenger_models_settings: The challenger models settings for the Deployment.
+        :param pulumi.Input['DeploymentChallengerReplaySettingsArgs'] challenger_replay_settings: The challenger replay settings for the Deployment.
+        :param pulumi.Input['DeploymentDriftTrackingSettingsArgs'] drift_tracking_settings: The drift tracking settings for the Deployment.
+        :param pulumi.Input['DeploymentHealthSettingsArgs'] health_settings: The health settings for this Deployment.
+        :param pulumi.Input[str] importance: The importance of the Deployment.
+        :param pulumi.Input['DeploymentPredictionIntervalsSettingsArgs'] prediction_intervals_settings: The prediction intervals settings for this Deployment.
+        :param pulumi.Input['DeploymentPredictionWarningSettingsArgs'] prediction_warning_settings: The prediction warning settings for the Deployment.
+        :param pulumi.Input['DeploymentPredictionsByForecastDateSettingsArgs'] predictions_by_forecast_date_settings: The predictions by forecase date settings for the Deployment.
+        :param pulumi.Input['DeploymentPredictionsDataCollectionSettingsArgs'] predictions_data_collection_settings: The predictions data collection settings for the Deployment.
+        :param pulumi.Input['DeploymentPredictionsSettingsArgs'] predictions_settings: Settings for the predictions.
+        :param pulumi.Input['DeploymentSegmentAnalysisSettingsArgs'] segment_analysis_settings: The segment analysis settings for the Deployment.
         """
         pulumi.set(__self__, "label", label)
         pulumi.set(__self__, "prediction_environment_id", prediction_environment_id)
         pulumi.set(__self__, "registered_model_version_id", registered_model_version_id)
-        if settings is not None:
-            pulumi.set(__self__, "settings", settings)
+        if association_id_settings is not None:
+            pulumi.set(__self__, "association_id_settings", association_id_settings)
+        if bias_and_fairness_settings is not None:
+            pulumi.set(__self__, "bias_and_fairness_settings", bias_and_fairness_settings)
+        if challenger_models_settings is not None:
+            pulumi.set(__self__, "challenger_models_settings", challenger_models_settings)
+        if challenger_replay_settings is not None:
+            pulumi.set(__self__, "challenger_replay_settings", challenger_replay_settings)
+        if drift_tracking_settings is not None:
+            pulumi.set(__self__, "drift_tracking_settings", drift_tracking_settings)
+        if health_settings is not None:
+            pulumi.set(__self__, "health_settings", health_settings)
+        if importance is not None:
+            pulumi.set(__self__, "importance", importance)
+        if prediction_intervals_settings is not None:
+            pulumi.set(__self__, "prediction_intervals_settings", prediction_intervals_settings)
+        if prediction_warning_settings is not None:
+            pulumi.set(__self__, "prediction_warning_settings", prediction_warning_settings)
+        if predictions_by_forecast_date_settings is not None:
+            pulumi.set(__self__, "predictions_by_forecast_date_settings", predictions_by_forecast_date_settings)
+        if predictions_data_collection_settings is not None:
+            pulumi.set(__self__, "predictions_data_collection_settings", predictions_data_collection_settings)
+        if predictions_settings is not None:
+            pulumi.set(__self__, "predictions_settings", predictions_settings)
+        if segment_analysis_settings is not None:
+            pulumi.set(__self__, "segment_analysis_settings", segment_analysis_settings)
 
     @property
     @pulumi.getter
@@ -70,40 +118,316 @@ class DeploymentArgs:
         pulumi.set(self, "registered_model_version_id", value)
 
     @property
-    @pulumi.getter
-    def settings(self) -> Optional[pulumi.Input['DeploymentSettingsArgs']]:
+    @pulumi.getter(name="associationIdSettings")
+    def association_id_settings(self) -> Optional[pulumi.Input['DeploymentAssociationIdSettingsArgs']]:
         """
-        The settings for the Deployment.
+        Association ID settings for this Deployment.
         """
-        return pulumi.get(self, "settings")
+        return pulumi.get(self, "association_id_settings")
 
-    @settings.setter
-    def settings(self, value: Optional[pulumi.Input['DeploymentSettingsArgs']]):
-        pulumi.set(self, "settings", value)
+    @association_id_settings.setter
+    def association_id_settings(self, value: Optional[pulumi.Input['DeploymentAssociationIdSettingsArgs']]):
+        pulumi.set(self, "association_id_settings", value)
+
+    @property
+    @pulumi.getter(name="biasAndFairnessSettings")
+    def bias_and_fairness_settings(self) -> Optional[pulumi.Input['DeploymentBiasAndFairnessSettingsArgs']]:
+        """
+        Bias and fairness settings for the Deployment.
+        """
+        return pulumi.get(self, "bias_and_fairness_settings")
+
+    @bias_and_fairness_settings.setter
+    def bias_and_fairness_settings(self, value: Optional[pulumi.Input['DeploymentBiasAndFairnessSettingsArgs']]):
+        pulumi.set(self, "bias_and_fairness_settings", value)
+
+    @property
+    @pulumi.getter(name="challengerModelsSettings")
+    def challenger_models_settings(self) -> Optional[pulumi.Input['DeploymentChallengerModelsSettingsArgs']]:
+        """
+        The challenger models settings for the Deployment.
+        """
+        return pulumi.get(self, "challenger_models_settings")
+
+    @challenger_models_settings.setter
+    def challenger_models_settings(self, value: Optional[pulumi.Input['DeploymentChallengerModelsSettingsArgs']]):
+        pulumi.set(self, "challenger_models_settings", value)
+
+    @property
+    @pulumi.getter(name="challengerReplaySettings")
+    def challenger_replay_settings(self) -> Optional[pulumi.Input['DeploymentChallengerReplaySettingsArgs']]:
+        """
+        The challenger replay settings for the Deployment.
+        """
+        return pulumi.get(self, "challenger_replay_settings")
+
+    @challenger_replay_settings.setter
+    def challenger_replay_settings(self, value: Optional[pulumi.Input['DeploymentChallengerReplaySettingsArgs']]):
+        pulumi.set(self, "challenger_replay_settings", value)
+
+    @property
+    @pulumi.getter(name="driftTrackingSettings")
+    def drift_tracking_settings(self) -> Optional[pulumi.Input['DeploymentDriftTrackingSettingsArgs']]:
+        """
+        The drift tracking settings for the Deployment.
+        """
+        return pulumi.get(self, "drift_tracking_settings")
+
+    @drift_tracking_settings.setter
+    def drift_tracking_settings(self, value: Optional[pulumi.Input['DeploymentDriftTrackingSettingsArgs']]):
+        pulumi.set(self, "drift_tracking_settings", value)
+
+    @property
+    @pulumi.getter(name="healthSettings")
+    def health_settings(self) -> Optional[pulumi.Input['DeploymentHealthSettingsArgs']]:
+        """
+        The health settings for this Deployment.
+        """
+        return pulumi.get(self, "health_settings")
+
+    @health_settings.setter
+    def health_settings(self, value: Optional[pulumi.Input['DeploymentHealthSettingsArgs']]):
+        pulumi.set(self, "health_settings", value)
+
+    @property
+    @pulumi.getter
+    def importance(self) -> Optional[pulumi.Input[str]]:
+        """
+        The importance of the Deployment.
+        """
+        return pulumi.get(self, "importance")
+
+    @importance.setter
+    def importance(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "importance", value)
+
+    @property
+    @pulumi.getter(name="predictionIntervalsSettings")
+    def prediction_intervals_settings(self) -> Optional[pulumi.Input['DeploymentPredictionIntervalsSettingsArgs']]:
+        """
+        The prediction intervals settings for this Deployment.
+        """
+        return pulumi.get(self, "prediction_intervals_settings")
+
+    @prediction_intervals_settings.setter
+    def prediction_intervals_settings(self, value: Optional[pulumi.Input['DeploymentPredictionIntervalsSettingsArgs']]):
+        pulumi.set(self, "prediction_intervals_settings", value)
+
+    @property
+    @pulumi.getter(name="predictionWarningSettings")
+    def prediction_warning_settings(self) -> Optional[pulumi.Input['DeploymentPredictionWarningSettingsArgs']]:
+        """
+        The prediction warning settings for the Deployment.
+        """
+        return pulumi.get(self, "prediction_warning_settings")
+
+    @prediction_warning_settings.setter
+    def prediction_warning_settings(self, value: Optional[pulumi.Input['DeploymentPredictionWarningSettingsArgs']]):
+        pulumi.set(self, "prediction_warning_settings", value)
+
+    @property
+    @pulumi.getter(name="predictionsByForecastDateSettings")
+    def predictions_by_forecast_date_settings(self) -> Optional[pulumi.Input['DeploymentPredictionsByForecastDateSettingsArgs']]:
+        """
+        The predictions by forecase date settings for the Deployment.
+        """
+        return pulumi.get(self, "predictions_by_forecast_date_settings")
+
+    @predictions_by_forecast_date_settings.setter
+    def predictions_by_forecast_date_settings(self, value: Optional[pulumi.Input['DeploymentPredictionsByForecastDateSettingsArgs']]):
+        pulumi.set(self, "predictions_by_forecast_date_settings", value)
+
+    @property
+    @pulumi.getter(name="predictionsDataCollectionSettings")
+    def predictions_data_collection_settings(self) -> Optional[pulumi.Input['DeploymentPredictionsDataCollectionSettingsArgs']]:
+        """
+        The predictions data collection settings for the Deployment.
+        """
+        return pulumi.get(self, "predictions_data_collection_settings")
+
+    @predictions_data_collection_settings.setter
+    def predictions_data_collection_settings(self, value: Optional[pulumi.Input['DeploymentPredictionsDataCollectionSettingsArgs']]):
+        pulumi.set(self, "predictions_data_collection_settings", value)
+
+    @property
+    @pulumi.getter(name="predictionsSettings")
+    def predictions_settings(self) -> Optional[pulumi.Input['DeploymentPredictionsSettingsArgs']]:
+        """
+        Settings for the predictions.
+        """
+        return pulumi.get(self, "predictions_settings")
+
+    @predictions_settings.setter
+    def predictions_settings(self, value: Optional[pulumi.Input['DeploymentPredictionsSettingsArgs']]):
+        pulumi.set(self, "predictions_settings", value)
+
+    @property
+    @pulumi.getter(name="segmentAnalysisSettings")
+    def segment_analysis_settings(self) -> Optional[pulumi.Input['DeploymentSegmentAnalysisSettingsArgs']]:
+        """
+        The segment analysis settings for the Deployment.
+        """
+        return pulumi.get(self, "segment_analysis_settings")
+
+    @segment_analysis_settings.setter
+    def segment_analysis_settings(self, value: Optional[pulumi.Input['DeploymentSegmentAnalysisSettingsArgs']]):
+        pulumi.set(self, "segment_analysis_settings", value)
 
 
 @pulumi.input_type
 class _DeploymentState:
     def __init__(__self__, *,
+                 association_id_settings: Optional[pulumi.Input['DeploymentAssociationIdSettingsArgs']] = None,
+                 bias_and_fairness_settings: Optional[pulumi.Input['DeploymentBiasAndFairnessSettingsArgs']] = None,
+                 challenger_models_settings: Optional[pulumi.Input['DeploymentChallengerModelsSettingsArgs']] = None,
+                 challenger_replay_settings: Optional[pulumi.Input['DeploymentChallengerReplaySettingsArgs']] = None,
+                 drift_tracking_settings: Optional[pulumi.Input['DeploymentDriftTrackingSettingsArgs']] = None,
+                 health_settings: Optional[pulumi.Input['DeploymentHealthSettingsArgs']] = None,
+                 importance: Optional[pulumi.Input[str]] = None,
                  label: Optional[pulumi.Input[str]] = None,
                  prediction_environment_id: Optional[pulumi.Input[str]] = None,
+                 prediction_intervals_settings: Optional[pulumi.Input['DeploymentPredictionIntervalsSettingsArgs']] = None,
+                 prediction_warning_settings: Optional[pulumi.Input['DeploymentPredictionWarningSettingsArgs']] = None,
+                 predictions_by_forecast_date_settings: Optional[pulumi.Input['DeploymentPredictionsByForecastDateSettingsArgs']] = None,
+                 predictions_data_collection_settings: Optional[pulumi.Input['DeploymentPredictionsDataCollectionSettingsArgs']] = None,
+                 predictions_settings: Optional[pulumi.Input['DeploymentPredictionsSettingsArgs']] = None,
                  registered_model_version_id: Optional[pulumi.Input[str]] = None,
-                 settings: Optional[pulumi.Input['DeploymentSettingsArgs']] = None):
+                 segment_analysis_settings: Optional[pulumi.Input['DeploymentSegmentAnalysisSettingsArgs']] = None):
         """
         Input properties used for looking up and filtering Deployment resources.
+        :param pulumi.Input['DeploymentAssociationIdSettingsArgs'] association_id_settings: Association ID settings for this Deployment.
+        :param pulumi.Input['DeploymentBiasAndFairnessSettingsArgs'] bias_and_fairness_settings: Bias and fairness settings for the Deployment.
+        :param pulumi.Input['DeploymentChallengerModelsSettingsArgs'] challenger_models_settings: The challenger models settings for the Deployment.
+        :param pulumi.Input['DeploymentChallengerReplaySettingsArgs'] challenger_replay_settings: The challenger replay settings for the Deployment.
+        :param pulumi.Input['DeploymentDriftTrackingSettingsArgs'] drift_tracking_settings: The drift tracking settings for the Deployment.
+        :param pulumi.Input['DeploymentHealthSettingsArgs'] health_settings: The health settings for this Deployment.
+        :param pulumi.Input[str] importance: The importance of the Deployment.
         :param pulumi.Input[str] label: The label of the Deployment.
         :param pulumi.Input[str] prediction_environment_id: The ID of the predication environment for this Deployment.
+        :param pulumi.Input['DeploymentPredictionIntervalsSettingsArgs'] prediction_intervals_settings: The prediction intervals settings for this Deployment.
+        :param pulumi.Input['DeploymentPredictionWarningSettingsArgs'] prediction_warning_settings: The prediction warning settings for the Deployment.
+        :param pulumi.Input['DeploymentPredictionsByForecastDateSettingsArgs'] predictions_by_forecast_date_settings: The predictions by forecase date settings for the Deployment.
+        :param pulumi.Input['DeploymentPredictionsDataCollectionSettingsArgs'] predictions_data_collection_settings: The predictions data collection settings for the Deployment.
+        :param pulumi.Input['DeploymentPredictionsSettingsArgs'] predictions_settings: Settings for the predictions.
         :param pulumi.Input[str] registered_model_version_id: The ID of the registered model version for this Deployment.
-        :param pulumi.Input['DeploymentSettingsArgs'] settings: The settings for the Deployment.
+        :param pulumi.Input['DeploymentSegmentAnalysisSettingsArgs'] segment_analysis_settings: The segment analysis settings for the Deployment.
         """
+        if association_id_settings is not None:
+            pulumi.set(__self__, "association_id_settings", association_id_settings)
+        if bias_and_fairness_settings is not None:
+            pulumi.set(__self__, "bias_and_fairness_settings", bias_and_fairness_settings)
+        if challenger_models_settings is not None:
+            pulumi.set(__self__, "challenger_models_settings", challenger_models_settings)
+        if challenger_replay_settings is not None:
+            pulumi.set(__self__, "challenger_replay_settings", challenger_replay_settings)
+        if drift_tracking_settings is not None:
+            pulumi.set(__self__, "drift_tracking_settings", drift_tracking_settings)
+        if health_settings is not None:
+            pulumi.set(__self__, "health_settings", health_settings)
+        if importance is not None:
+            pulumi.set(__self__, "importance", importance)
         if label is not None:
             pulumi.set(__self__, "label", label)
         if prediction_environment_id is not None:
             pulumi.set(__self__, "prediction_environment_id", prediction_environment_id)
+        if prediction_intervals_settings is not None:
+            pulumi.set(__self__, "prediction_intervals_settings", prediction_intervals_settings)
+        if prediction_warning_settings is not None:
+            pulumi.set(__self__, "prediction_warning_settings", prediction_warning_settings)
+        if predictions_by_forecast_date_settings is not None:
+            pulumi.set(__self__, "predictions_by_forecast_date_settings", predictions_by_forecast_date_settings)
+        if predictions_data_collection_settings is not None:
+            pulumi.set(__self__, "predictions_data_collection_settings", predictions_data_collection_settings)
+        if predictions_settings is not None:
+            pulumi.set(__self__, "predictions_settings", predictions_settings)
         if registered_model_version_id is not None:
             pulumi.set(__self__, "registered_model_version_id", registered_model_version_id)
-        if settings is not None:
-            pulumi.set(__self__, "settings", settings)
+        if segment_analysis_settings is not None:
+            pulumi.set(__self__, "segment_analysis_settings", segment_analysis_settings)
+
+    @property
+    @pulumi.getter(name="associationIdSettings")
+    def association_id_settings(self) -> Optional[pulumi.Input['DeploymentAssociationIdSettingsArgs']]:
+        """
+        Association ID settings for this Deployment.
+        """
+        return pulumi.get(self, "association_id_settings")
+
+    @association_id_settings.setter
+    def association_id_settings(self, value: Optional[pulumi.Input['DeploymentAssociationIdSettingsArgs']]):
+        pulumi.set(self, "association_id_settings", value)
+
+    @property
+    @pulumi.getter(name="biasAndFairnessSettings")
+    def bias_and_fairness_settings(self) -> Optional[pulumi.Input['DeploymentBiasAndFairnessSettingsArgs']]:
+        """
+        Bias and fairness settings for the Deployment.
+        """
+        return pulumi.get(self, "bias_and_fairness_settings")
+
+    @bias_and_fairness_settings.setter
+    def bias_and_fairness_settings(self, value: Optional[pulumi.Input['DeploymentBiasAndFairnessSettingsArgs']]):
+        pulumi.set(self, "bias_and_fairness_settings", value)
+
+    @property
+    @pulumi.getter(name="challengerModelsSettings")
+    def challenger_models_settings(self) -> Optional[pulumi.Input['DeploymentChallengerModelsSettingsArgs']]:
+        """
+        The challenger models settings for the Deployment.
+        """
+        return pulumi.get(self, "challenger_models_settings")
+
+    @challenger_models_settings.setter
+    def challenger_models_settings(self, value: Optional[pulumi.Input['DeploymentChallengerModelsSettingsArgs']]):
+        pulumi.set(self, "challenger_models_settings", value)
+
+    @property
+    @pulumi.getter(name="challengerReplaySettings")
+    def challenger_replay_settings(self) -> Optional[pulumi.Input['DeploymentChallengerReplaySettingsArgs']]:
+        """
+        The challenger replay settings for the Deployment.
+        """
+        return pulumi.get(self, "challenger_replay_settings")
+
+    @challenger_replay_settings.setter
+    def challenger_replay_settings(self, value: Optional[pulumi.Input['DeploymentChallengerReplaySettingsArgs']]):
+        pulumi.set(self, "challenger_replay_settings", value)
+
+    @property
+    @pulumi.getter(name="driftTrackingSettings")
+    def drift_tracking_settings(self) -> Optional[pulumi.Input['DeploymentDriftTrackingSettingsArgs']]:
+        """
+        The drift tracking settings for the Deployment.
+        """
+        return pulumi.get(self, "drift_tracking_settings")
+
+    @drift_tracking_settings.setter
+    def drift_tracking_settings(self, value: Optional[pulumi.Input['DeploymentDriftTrackingSettingsArgs']]):
+        pulumi.set(self, "drift_tracking_settings", value)
+
+    @property
+    @pulumi.getter(name="healthSettings")
+    def health_settings(self) -> Optional[pulumi.Input['DeploymentHealthSettingsArgs']]:
+        """
+        The health settings for this Deployment.
+        """
+        return pulumi.get(self, "health_settings")
+
+    @health_settings.setter
+    def health_settings(self, value: Optional[pulumi.Input['DeploymentHealthSettingsArgs']]):
+        pulumi.set(self, "health_settings", value)
+
+    @property
+    @pulumi.getter
+    def importance(self) -> Optional[pulumi.Input[str]]:
+        """
+        The importance of the Deployment.
+        """
+        return pulumi.get(self, "importance")
+
+    @importance.setter
+    def importance(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "importance", value)
 
     @property
     @pulumi.getter
@@ -130,6 +454,66 @@ class _DeploymentState:
         pulumi.set(self, "prediction_environment_id", value)
 
     @property
+    @pulumi.getter(name="predictionIntervalsSettings")
+    def prediction_intervals_settings(self) -> Optional[pulumi.Input['DeploymentPredictionIntervalsSettingsArgs']]:
+        """
+        The prediction intervals settings for this Deployment.
+        """
+        return pulumi.get(self, "prediction_intervals_settings")
+
+    @prediction_intervals_settings.setter
+    def prediction_intervals_settings(self, value: Optional[pulumi.Input['DeploymentPredictionIntervalsSettingsArgs']]):
+        pulumi.set(self, "prediction_intervals_settings", value)
+
+    @property
+    @pulumi.getter(name="predictionWarningSettings")
+    def prediction_warning_settings(self) -> Optional[pulumi.Input['DeploymentPredictionWarningSettingsArgs']]:
+        """
+        The prediction warning settings for the Deployment.
+        """
+        return pulumi.get(self, "prediction_warning_settings")
+
+    @prediction_warning_settings.setter
+    def prediction_warning_settings(self, value: Optional[pulumi.Input['DeploymentPredictionWarningSettingsArgs']]):
+        pulumi.set(self, "prediction_warning_settings", value)
+
+    @property
+    @pulumi.getter(name="predictionsByForecastDateSettings")
+    def predictions_by_forecast_date_settings(self) -> Optional[pulumi.Input['DeploymentPredictionsByForecastDateSettingsArgs']]:
+        """
+        The predictions by forecase date settings for the Deployment.
+        """
+        return pulumi.get(self, "predictions_by_forecast_date_settings")
+
+    @predictions_by_forecast_date_settings.setter
+    def predictions_by_forecast_date_settings(self, value: Optional[pulumi.Input['DeploymentPredictionsByForecastDateSettingsArgs']]):
+        pulumi.set(self, "predictions_by_forecast_date_settings", value)
+
+    @property
+    @pulumi.getter(name="predictionsDataCollectionSettings")
+    def predictions_data_collection_settings(self) -> Optional[pulumi.Input['DeploymentPredictionsDataCollectionSettingsArgs']]:
+        """
+        The predictions data collection settings for the Deployment.
+        """
+        return pulumi.get(self, "predictions_data_collection_settings")
+
+    @predictions_data_collection_settings.setter
+    def predictions_data_collection_settings(self, value: Optional[pulumi.Input['DeploymentPredictionsDataCollectionSettingsArgs']]):
+        pulumi.set(self, "predictions_data_collection_settings", value)
+
+    @property
+    @pulumi.getter(name="predictionsSettings")
+    def predictions_settings(self) -> Optional[pulumi.Input['DeploymentPredictionsSettingsArgs']]:
+        """
+        Settings for the predictions.
+        """
+        return pulumi.get(self, "predictions_settings")
+
+    @predictions_settings.setter
+    def predictions_settings(self, value: Optional[pulumi.Input['DeploymentPredictionsSettingsArgs']]):
+        pulumi.set(self, "predictions_settings", value)
+
+    @property
     @pulumi.getter(name="registeredModelVersionId")
     def registered_model_version_id(self) -> Optional[pulumi.Input[str]]:
         """
@@ -142,16 +526,16 @@ class _DeploymentState:
         pulumi.set(self, "registered_model_version_id", value)
 
     @property
-    @pulumi.getter
-    def settings(self) -> Optional[pulumi.Input['DeploymentSettingsArgs']]:
+    @pulumi.getter(name="segmentAnalysisSettings")
+    def segment_analysis_settings(self) -> Optional[pulumi.Input['DeploymentSegmentAnalysisSettingsArgs']]:
         """
-        The settings for the Deployment.
+        The segment analysis settings for the Deployment.
         """
-        return pulumi.get(self, "settings")
+        return pulumi.get(self, "segment_analysis_settings")
 
-    @settings.setter
-    def settings(self, value: Optional[pulumi.Input['DeploymentSettingsArgs']]):
-        pulumi.set(self, "settings", value)
+    @segment_analysis_settings.setter
+    def segment_analysis_settings(self, value: Optional[pulumi.Input['DeploymentSegmentAnalysisSettingsArgs']]):
+        pulumi.set(self, "segment_analysis_settings", value)
 
 
 class Deployment(pulumi.CustomResource):
@@ -159,10 +543,22 @@ class Deployment(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 association_id_settings: Optional[pulumi.Input[Union['DeploymentAssociationIdSettingsArgs', 'DeploymentAssociationIdSettingsArgsDict']]] = None,
+                 bias_and_fairness_settings: Optional[pulumi.Input[Union['DeploymentBiasAndFairnessSettingsArgs', 'DeploymentBiasAndFairnessSettingsArgsDict']]] = None,
+                 challenger_models_settings: Optional[pulumi.Input[Union['DeploymentChallengerModelsSettingsArgs', 'DeploymentChallengerModelsSettingsArgsDict']]] = None,
+                 challenger_replay_settings: Optional[pulumi.Input[Union['DeploymentChallengerReplaySettingsArgs', 'DeploymentChallengerReplaySettingsArgsDict']]] = None,
+                 drift_tracking_settings: Optional[pulumi.Input[Union['DeploymentDriftTrackingSettingsArgs', 'DeploymentDriftTrackingSettingsArgsDict']]] = None,
+                 health_settings: Optional[pulumi.Input[Union['DeploymentHealthSettingsArgs', 'DeploymentHealthSettingsArgsDict']]] = None,
+                 importance: Optional[pulumi.Input[str]] = None,
                  label: Optional[pulumi.Input[str]] = None,
                  prediction_environment_id: Optional[pulumi.Input[str]] = None,
+                 prediction_intervals_settings: Optional[pulumi.Input[Union['DeploymentPredictionIntervalsSettingsArgs', 'DeploymentPredictionIntervalsSettingsArgsDict']]] = None,
+                 prediction_warning_settings: Optional[pulumi.Input[Union['DeploymentPredictionWarningSettingsArgs', 'DeploymentPredictionWarningSettingsArgsDict']]] = None,
+                 predictions_by_forecast_date_settings: Optional[pulumi.Input[Union['DeploymentPredictionsByForecastDateSettingsArgs', 'DeploymentPredictionsByForecastDateSettingsArgsDict']]] = None,
+                 predictions_data_collection_settings: Optional[pulumi.Input[Union['DeploymentPredictionsDataCollectionSettingsArgs', 'DeploymentPredictionsDataCollectionSettingsArgsDict']]] = None,
+                 predictions_settings: Optional[pulumi.Input[Union['DeploymentPredictionsSettingsArgs', 'DeploymentPredictionsSettingsArgsDict']]] = None,
                  registered_model_version_id: Optional[pulumi.Input[str]] = None,
-                 settings: Optional[pulumi.Input[Union['DeploymentSettingsArgs', 'DeploymentSettingsArgsDict']]] = None,
+                 segment_analysis_settings: Optional[pulumi.Input[Union['DeploymentSegmentAnalysisSettingsArgs', 'DeploymentSegmentAnalysisSettingsArgsDict']]] = None,
                  __props__=None):
         """
         Deployment
@@ -190,18 +586,39 @@ class Deployment(pulumi.CustomResource):
             prediction_environment_id=example_prediction_environment.id,
             registered_model_version_id=example_registered_model.version_id)
         # Optional settings
-        # settings = {
-        #   prediction_row_storage = true
-        # }
+        # challenger_models_settings = {}
+        # challenger_replay_settings = {}
+        # segment_analysis_settings  = {}
+        # bias_and_fairness_settings = {}
+        # predictions_by_forecast_date_settings = {}
+        # drift_tracking_settings = {}
+        # association_id_settings = {}
+        # predictions_data_collection_settings = {}
+        # prediction_warning_settings = {}
+        # prediction_interval_settings = {}
+        # predictions_settings = {}
+        # health_settings = {}
         pulumi.export("datarobotDeploymentId", example_deployment.id)
         ```
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[Union['DeploymentAssociationIdSettingsArgs', 'DeploymentAssociationIdSettingsArgsDict']] association_id_settings: Association ID settings for this Deployment.
+        :param pulumi.Input[Union['DeploymentBiasAndFairnessSettingsArgs', 'DeploymentBiasAndFairnessSettingsArgsDict']] bias_and_fairness_settings: Bias and fairness settings for the Deployment.
+        :param pulumi.Input[Union['DeploymentChallengerModelsSettingsArgs', 'DeploymentChallengerModelsSettingsArgsDict']] challenger_models_settings: The challenger models settings for the Deployment.
+        :param pulumi.Input[Union['DeploymentChallengerReplaySettingsArgs', 'DeploymentChallengerReplaySettingsArgsDict']] challenger_replay_settings: The challenger replay settings for the Deployment.
+        :param pulumi.Input[Union['DeploymentDriftTrackingSettingsArgs', 'DeploymentDriftTrackingSettingsArgsDict']] drift_tracking_settings: The drift tracking settings for the Deployment.
+        :param pulumi.Input[Union['DeploymentHealthSettingsArgs', 'DeploymentHealthSettingsArgsDict']] health_settings: The health settings for this Deployment.
+        :param pulumi.Input[str] importance: The importance of the Deployment.
         :param pulumi.Input[str] label: The label of the Deployment.
         :param pulumi.Input[str] prediction_environment_id: The ID of the predication environment for this Deployment.
+        :param pulumi.Input[Union['DeploymentPredictionIntervalsSettingsArgs', 'DeploymentPredictionIntervalsSettingsArgsDict']] prediction_intervals_settings: The prediction intervals settings for this Deployment.
+        :param pulumi.Input[Union['DeploymentPredictionWarningSettingsArgs', 'DeploymentPredictionWarningSettingsArgsDict']] prediction_warning_settings: The prediction warning settings for the Deployment.
+        :param pulumi.Input[Union['DeploymentPredictionsByForecastDateSettingsArgs', 'DeploymentPredictionsByForecastDateSettingsArgsDict']] predictions_by_forecast_date_settings: The predictions by forecase date settings for the Deployment.
+        :param pulumi.Input[Union['DeploymentPredictionsDataCollectionSettingsArgs', 'DeploymentPredictionsDataCollectionSettingsArgsDict']] predictions_data_collection_settings: The predictions data collection settings for the Deployment.
+        :param pulumi.Input[Union['DeploymentPredictionsSettingsArgs', 'DeploymentPredictionsSettingsArgsDict']] predictions_settings: Settings for the predictions.
         :param pulumi.Input[str] registered_model_version_id: The ID of the registered model version for this Deployment.
-        :param pulumi.Input[Union['DeploymentSettingsArgs', 'DeploymentSettingsArgsDict']] settings: The settings for the Deployment.
+        :param pulumi.Input[Union['DeploymentSegmentAnalysisSettingsArgs', 'DeploymentSegmentAnalysisSettingsArgsDict']] segment_analysis_settings: The segment analysis settings for the Deployment.
         """
         ...
     @overload
@@ -235,9 +652,18 @@ class Deployment(pulumi.CustomResource):
             prediction_environment_id=example_prediction_environment.id,
             registered_model_version_id=example_registered_model.version_id)
         # Optional settings
-        # settings = {
-        #   prediction_row_storage = true
-        # }
+        # challenger_models_settings = {}
+        # challenger_replay_settings = {}
+        # segment_analysis_settings  = {}
+        # bias_and_fairness_settings = {}
+        # predictions_by_forecast_date_settings = {}
+        # drift_tracking_settings = {}
+        # association_id_settings = {}
+        # predictions_data_collection_settings = {}
+        # prediction_warning_settings = {}
+        # prediction_interval_settings = {}
+        # predictions_settings = {}
+        # health_settings = {}
         pulumi.export("datarobotDeploymentId", example_deployment.id)
         ```
 
@@ -256,10 +682,22 @@ class Deployment(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 association_id_settings: Optional[pulumi.Input[Union['DeploymentAssociationIdSettingsArgs', 'DeploymentAssociationIdSettingsArgsDict']]] = None,
+                 bias_and_fairness_settings: Optional[pulumi.Input[Union['DeploymentBiasAndFairnessSettingsArgs', 'DeploymentBiasAndFairnessSettingsArgsDict']]] = None,
+                 challenger_models_settings: Optional[pulumi.Input[Union['DeploymentChallengerModelsSettingsArgs', 'DeploymentChallengerModelsSettingsArgsDict']]] = None,
+                 challenger_replay_settings: Optional[pulumi.Input[Union['DeploymentChallengerReplaySettingsArgs', 'DeploymentChallengerReplaySettingsArgsDict']]] = None,
+                 drift_tracking_settings: Optional[pulumi.Input[Union['DeploymentDriftTrackingSettingsArgs', 'DeploymentDriftTrackingSettingsArgsDict']]] = None,
+                 health_settings: Optional[pulumi.Input[Union['DeploymentHealthSettingsArgs', 'DeploymentHealthSettingsArgsDict']]] = None,
+                 importance: Optional[pulumi.Input[str]] = None,
                  label: Optional[pulumi.Input[str]] = None,
                  prediction_environment_id: Optional[pulumi.Input[str]] = None,
+                 prediction_intervals_settings: Optional[pulumi.Input[Union['DeploymentPredictionIntervalsSettingsArgs', 'DeploymentPredictionIntervalsSettingsArgsDict']]] = None,
+                 prediction_warning_settings: Optional[pulumi.Input[Union['DeploymentPredictionWarningSettingsArgs', 'DeploymentPredictionWarningSettingsArgsDict']]] = None,
+                 predictions_by_forecast_date_settings: Optional[pulumi.Input[Union['DeploymentPredictionsByForecastDateSettingsArgs', 'DeploymentPredictionsByForecastDateSettingsArgsDict']]] = None,
+                 predictions_data_collection_settings: Optional[pulumi.Input[Union['DeploymentPredictionsDataCollectionSettingsArgs', 'DeploymentPredictionsDataCollectionSettingsArgsDict']]] = None,
+                 predictions_settings: Optional[pulumi.Input[Union['DeploymentPredictionsSettingsArgs', 'DeploymentPredictionsSettingsArgsDict']]] = None,
                  registered_model_version_id: Optional[pulumi.Input[str]] = None,
-                 settings: Optional[pulumi.Input[Union['DeploymentSettingsArgs', 'DeploymentSettingsArgsDict']]] = None,
+                 segment_analysis_settings: Optional[pulumi.Input[Union['DeploymentSegmentAnalysisSettingsArgs', 'DeploymentSegmentAnalysisSettingsArgsDict']]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -269,16 +707,28 @@ class Deployment(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = DeploymentArgs.__new__(DeploymentArgs)
 
+            __props__.__dict__["association_id_settings"] = association_id_settings
+            __props__.__dict__["bias_and_fairness_settings"] = bias_and_fairness_settings
+            __props__.__dict__["challenger_models_settings"] = challenger_models_settings
+            __props__.__dict__["challenger_replay_settings"] = challenger_replay_settings
+            __props__.__dict__["drift_tracking_settings"] = drift_tracking_settings
+            __props__.__dict__["health_settings"] = health_settings
+            __props__.__dict__["importance"] = importance
             if label is None and not opts.urn:
                 raise TypeError("Missing required property 'label'")
             __props__.__dict__["label"] = label
             if prediction_environment_id is None and not opts.urn:
                 raise TypeError("Missing required property 'prediction_environment_id'")
             __props__.__dict__["prediction_environment_id"] = prediction_environment_id
+            __props__.__dict__["prediction_intervals_settings"] = prediction_intervals_settings
+            __props__.__dict__["prediction_warning_settings"] = prediction_warning_settings
+            __props__.__dict__["predictions_by_forecast_date_settings"] = predictions_by_forecast_date_settings
+            __props__.__dict__["predictions_data_collection_settings"] = predictions_data_collection_settings
+            __props__.__dict__["predictions_settings"] = predictions_settings
             if registered_model_version_id is None and not opts.urn:
                 raise TypeError("Missing required property 'registered_model_version_id'")
             __props__.__dict__["registered_model_version_id"] = registered_model_version_id
-            __props__.__dict__["settings"] = settings
+            __props__.__dict__["segment_analysis_settings"] = segment_analysis_settings
         super(Deployment, __self__).__init__(
             'datarobot:index/deployment:Deployment',
             resource_name,
@@ -289,10 +739,22 @@ class Deployment(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
+            association_id_settings: Optional[pulumi.Input[Union['DeploymentAssociationIdSettingsArgs', 'DeploymentAssociationIdSettingsArgsDict']]] = None,
+            bias_and_fairness_settings: Optional[pulumi.Input[Union['DeploymentBiasAndFairnessSettingsArgs', 'DeploymentBiasAndFairnessSettingsArgsDict']]] = None,
+            challenger_models_settings: Optional[pulumi.Input[Union['DeploymentChallengerModelsSettingsArgs', 'DeploymentChallengerModelsSettingsArgsDict']]] = None,
+            challenger_replay_settings: Optional[pulumi.Input[Union['DeploymentChallengerReplaySettingsArgs', 'DeploymentChallengerReplaySettingsArgsDict']]] = None,
+            drift_tracking_settings: Optional[pulumi.Input[Union['DeploymentDriftTrackingSettingsArgs', 'DeploymentDriftTrackingSettingsArgsDict']]] = None,
+            health_settings: Optional[pulumi.Input[Union['DeploymentHealthSettingsArgs', 'DeploymentHealthSettingsArgsDict']]] = None,
+            importance: Optional[pulumi.Input[str]] = None,
             label: Optional[pulumi.Input[str]] = None,
             prediction_environment_id: Optional[pulumi.Input[str]] = None,
+            prediction_intervals_settings: Optional[pulumi.Input[Union['DeploymentPredictionIntervalsSettingsArgs', 'DeploymentPredictionIntervalsSettingsArgsDict']]] = None,
+            prediction_warning_settings: Optional[pulumi.Input[Union['DeploymentPredictionWarningSettingsArgs', 'DeploymentPredictionWarningSettingsArgsDict']]] = None,
+            predictions_by_forecast_date_settings: Optional[pulumi.Input[Union['DeploymentPredictionsByForecastDateSettingsArgs', 'DeploymentPredictionsByForecastDateSettingsArgsDict']]] = None,
+            predictions_data_collection_settings: Optional[pulumi.Input[Union['DeploymentPredictionsDataCollectionSettingsArgs', 'DeploymentPredictionsDataCollectionSettingsArgsDict']]] = None,
+            predictions_settings: Optional[pulumi.Input[Union['DeploymentPredictionsSettingsArgs', 'DeploymentPredictionsSettingsArgsDict']]] = None,
             registered_model_version_id: Optional[pulumi.Input[str]] = None,
-            settings: Optional[pulumi.Input[Union['DeploymentSettingsArgs', 'DeploymentSettingsArgsDict']]] = None) -> 'Deployment':
+            segment_analysis_settings: Optional[pulumi.Input[Union['DeploymentSegmentAnalysisSettingsArgs', 'DeploymentSegmentAnalysisSettingsArgsDict']]] = None) -> 'Deployment':
         """
         Get an existing Deployment resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -300,20 +762,100 @@ class Deployment(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[Union['DeploymentAssociationIdSettingsArgs', 'DeploymentAssociationIdSettingsArgsDict']] association_id_settings: Association ID settings for this Deployment.
+        :param pulumi.Input[Union['DeploymentBiasAndFairnessSettingsArgs', 'DeploymentBiasAndFairnessSettingsArgsDict']] bias_and_fairness_settings: Bias and fairness settings for the Deployment.
+        :param pulumi.Input[Union['DeploymentChallengerModelsSettingsArgs', 'DeploymentChallengerModelsSettingsArgsDict']] challenger_models_settings: The challenger models settings for the Deployment.
+        :param pulumi.Input[Union['DeploymentChallengerReplaySettingsArgs', 'DeploymentChallengerReplaySettingsArgsDict']] challenger_replay_settings: The challenger replay settings for the Deployment.
+        :param pulumi.Input[Union['DeploymentDriftTrackingSettingsArgs', 'DeploymentDriftTrackingSettingsArgsDict']] drift_tracking_settings: The drift tracking settings for the Deployment.
+        :param pulumi.Input[Union['DeploymentHealthSettingsArgs', 'DeploymentHealthSettingsArgsDict']] health_settings: The health settings for this Deployment.
+        :param pulumi.Input[str] importance: The importance of the Deployment.
         :param pulumi.Input[str] label: The label of the Deployment.
         :param pulumi.Input[str] prediction_environment_id: The ID of the predication environment for this Deployment.
+        :param pulumi.Input[Union['DeploymentPredictionIntervalsSettingsArgs', 'DeploymentPredictionIntervalsSettingsArgsDict']] prediction_intervals_settings: The prediction intervals settings for this Deployment.
+        :param pulumi.Input[Union['DeploymentPredictionWarningSettingsArgs', 'DeploymentPredictionWarningSettingsArgsDict']] prediction_warning_settings: The prediction warning settings for the Deployment.
+        :param pulumi.Input[Union['DeploymentPredictionsByForecastDateSettingsArgs', 'DeploymentPredictionsByForecastDateSettingsArgsDict']] predictions_by_forecast_date_settings: The predictions by forecase date settings for the Deployment.
+        :param pulumi.Input[Union['DeploymentPredictionsDataCollectionSettingsArgs', 'DeploymentPredictionsDataCollectionSettingsArgsDict']] predictions_data_collection_settings: The predictions data collection settings for the Deployment.
+        :param pulumi.Input[Union['DeploymentPredictionsSettingsArgs', 'DeploymentPredictionsSettingsArgsDict']] predictions_settings: Settings for the predictions.
         :param pulumi.Input[str] registered_model_version_id: The ID of the registered model version for this Deployment.
-        :param pulumi.Input[Union['DeploymentSettingsArgs', 'DeploymentSettingsArgsDict']] settings: The settings for the Deployment.
+        :param pulumi.Input[Union['DeploymentSegmentAnalysisSettingsArgs', 'DeploymentSegmentAnalysisSettingsArgsDict']] segment_analysis_settings: The segment analysis settings for the Deployment.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = _DeploymentState.__new__(_DeploymentState)
 
+        __props__.__dict__["association_id_settings"] = association_id_settings
+        __props__.__dict__["bias_and_fairness_settings"] = bias_and_fairness_settings
+        __props__.__dict__["challenger_models_settings"] = challenger_models_settings
+        __props__.__dict__["challenger_replay_settings"] = challenger_replay_settings
+        __props__.__dict__["drift_tracking_settings"] = drift_tracking_settings
+        __props__.__dict__["health_settings"] = health_settings
+        __props__.__dict__["importance"] = importance
         __props__.__dict__["label"] = label
         __props__.__dict__["prediction_environment_id"] = prediction_environment_id
+        __props__.__dict__["prediction_intervals_settings"] = prediction_intervals_settings
+        __props__.__dict__["prediction_warning_settings"] = prediction_warning_settings
+        __props__.__dict__["predictions_by_forecast_date_settings"] = predictions_by_forecast_date_settings
+        __props__.__dict__["predictions_data_collection_settings"] = predictions_data_collection_settings
+        __props__.__dict__["predictions_settings"] = predictions_settings
         __props__.__dict__["registered_model_version_id"] = registered_model_version_id
-        __props__.__dict__["settings"] = settings
+        __props__.__dict__["segment_analysis_settings"] = segment_analysis_settings
         return Deployment(resource_name, opts=opts, __props__=__props__)
+
+    @property
+    @pulumi.getter(name="associationIdSettings")
+    def association_id_settings(self) -> pulumi.Output[Optional['outputs.DeploymentAssociationIdSettings']]:
+        """
+        Association ID settings for this Deployment.
+        """
+        return pulumi.get(self, "association_id_settings")
+
+    @property
+    @pulumi.getter(name="biasAndFairnessSettings")
+    def bias_and_fairness_settings(self) -> pulumi.Output[Optional['outputs.DeploymentBiasAndFairnessSettings']]:
+        """
+        Bias and fairness settings for the Deployment.
+        """
+        return pulumi.get(self, "bias_and_fairness_settings")
+
+    @property
+    @pulumi.getter(name="challengerModelsSettings")
+    def challenger_models_settings(self) -> pulumi.Output[Optional['outputs.DeploymentChallengerModelsSettings']]:
+        """
+        The challenger models settings for the Deployment.
+        """
+        return pulumi.get(self, "challenger_models_settings")
+
+    @property
+    @pulumi.getter(name="challengerReplaySettings")
+    def challenger_replay_settings(self) -> pulumi.Output[Optional['outputs.DeploymentChallengerReplaySettings']]:
+        """
+        The challenger replay settings for the Deployment.
+        """
+        return pulumi.get(self, "challenger_replay_settings")
+
+    @property
+    @pulumi.getter(name="driftTrackingSettings")
+    def drift_tracking_settings(self) -> pulumi.Output[Optional['outputs.DeploymentDriftTrackingSettings']]:
+        """
+        The drift tracking settings for the Deployment.
+        """
+        return pulumi.get(self, "drift_tracking_settings")
+
+    @property
+    @pulumi.getter(name="healthSettings")
+    def health_settings(self) -> pulumi.Output[Optional['outputs.DeploymentHealthSettings']]:
+        """
+        The health settings for this Deployment.
+        """
+        return pulumi.get(self, "health_settings")
+
+    @property
+    @pulumi.getter
+    def importance(self) -> pulumi.Output[str]:
+        """
+        The importance of the Deployment.
+        """
+        return pulumi.get(self, "importance")
 
     @property
     @pulumi.getter
@@ -332,6 +874,46 @@ class Deployment(pulumi.CustomResource):
         return pulumi.get(self, "prediction_environment_id")
 
     @property
+    @pulumi.getter(name="predictionIntervalsSettings")
+    def prediction_intervals_settings(self) -> pulumi.Output[Optional['outputs.DeploymentPredictionIntervalsSettings']]:
+        """
+        The prediction intervals settings for this Deployment.
+        """
+        return pulumi.get(self, "prediction_intervals_settings")
+
+    @property
+    @pulumi.getter(name="predictionWarningSettings")
+    def prediction_warning_settings(self) -> pulumi.Output[Optional['outputs.DeploymentPredictionWarningSettings']]:
+        """
+        The prediction warning settings for the Deployment.
+        """
+        return pulumi.get(self, "prediction_warning_settings")
+
+    @property
+    @pulumi.getter(name="predictionsByForecastDateSettings")
+    def predictions_by_forecast_date_settings(self) -> pulumi.Output[Optional['outputs.DeploymentPredictionsByForecastDateSettings']]:
+        """
+        The predictions by forecase date settings for the Deployment.
+        """
+        return pulumi.get(self, "predictions_by_forecast_date_settings")
+
+    @property
+    @pulumi.getter(name="predictionsDataCollectionSettings")
+    def predictions_data_collection_settings(self) -> pulumi.Output[Optional['outputs.DeploymentPredictionsDataCollectionSettings']]:
+        """
+        The predictions data collection settings for the Deployment.
+        """
+        return pulumi.get(self, "predictions_data_collection_settings")
+
+    @property
+    @pulumi.getter(name="predictionsSettings")
+    def predictions_settings(self) -> pulumi.Output[Optional['outputs.DeploymentPredictionsSettings']]:
+        """
+        Settings for the predictions.
+        """
+        return pulumi.get(self, "predictions_settings")
+
+    @property
     @pulumi.getter(name="registeredModelVersionId")
     def registered_model_version_id(self) -> pulumi.Output[str]:
         """
@@ -340,10 +922,10 @@ class Deployment(pulumi.CustomResource):
         return pulumi.get(self, "registered_model_version_id")
 
     @property
-    @pulumi.getter
-    def settings(self) -> pulumi.Output[Optional['outputs.DeploymentSettings']]:
+    @pulumi.getter(name="segmentAnalysisSettings")
+    def segment_analysis_settings(self) -> pulumi.Output[Optional['outputs.DeploymentSegmentAnalysisSettings']]:
         """
-        The settings for the Deployment.
+        The segment analysis settings for the Deployment.
         """
-        return pulumi.get(self, "settings")
+        return pulumi.get(self, "segment_analysis_settings")
 

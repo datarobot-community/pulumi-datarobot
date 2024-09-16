@@ -20,9 +20,28 @@ __all__ = [
     'CustomModelResourceSettings',
     'CustomModelRuntimeParameterValue',
     'CustomModelSourceRemoteRepository',
-    'DeploymentSettings',
-    'DeploymentSettingsAssociationId',
-    'DeploymentSettingsPredictionsSettings',
+    'DeploymentAssociationIdSettings',
+    'DeploymentBiasAndFairnessSettings',
+    'DeploymentChallengerModelsSettings',
+    'DeploymentChallengerReplaySettings',
+    'DeploymentDriftTrackingSettings',
+    'DeploymentHealthSettings',
+    'DeploymentHealthSettingsAccuracy',
+    'DeploymentHealthSettingsActualsTimeliness',
+    'DeploymentHealthSettingsCustomMetrics',
+    'DeploymentHealthSettingsCustomMetricsFailingCondition',
+    'DeploymentHealthSettingsCustomMetricsWarningCondition',
+    'DeploymentHealthSettingsDataDrift',
+    'DeploymentHealthSettingsFairness',
+    'DeploymentHealthSettingsPredictionsTimeliness',
+    'DeploymentHealthSettingsService',
+    'DeploymentPredictionIntervalsSettings',
+    'DeploymentPredictionWarningSettings',
+    'DeploymentPredictionWarningSettingsCustomBoundaries',
+    'DeploymentPredictionsByForecastDateSettings',
+    'DeploymentPredictionsDataCollectionSettings',
+    'DeploymentPredictionsSettings',
+    'DeploymentSegmentAnalysisSettings',
     'LlmBlueprintLlmSettings',
     'LlmBlueprintVectorDatabaseSettings',
     'VectorDatabaseChunkingParameters',
@@ -533,146 +552,1148 @@ class CustomModelSourceRemoteRepository(dict):
 
 
 @pulumi.output_type
-class DeploymentSettings(dict):
-    @staticmethod
-    def __key_warning(key: str):
-        suggest = None
-        if key == "associationId":
-            suggest = "association_id"
-        elif key == "challengerAnalysis":
-            suggest = "challenger_analysis"
-        elif key == "predictionRowStorage":
-            suggest = "prediction_row_storage"
-        elif key == "predictionsSettings":
-            suggest = "predictions_settings"
-
-        if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in DeploymentSettings. Access the value via the '{suggest}' property getter instead.")
-
-    def __getitem__(self, key: str) -> Any:
-        DeploymentSettings.__key_warning(key)
-        return super().__getitem__(key)
-
-    def get(self, key: str, default = None) -> Any:
-        DeploymentSettings.__key_warning(key)
-        return super().get(key, default)
-
-    def __init__(__self__, *,
-                 association_id: Optional['outputs.DeploymentSettingsAssociationId'] = None,
-                 challenger_analysis: Optional[bool] = None,
-                 prediction_row_storage: Optional[bool] = None,
-                 predictions_settings: Optional['outputs.DeploymentSettingsPredictionsSettings'] = None):
-        """
-        :param 'DeploymentSettingsAssociationIdArgs' association_id: Used to associate predictions back to your actual data.
-        :param bool challenger_analysis: Used to compare the performance of the deployed model with the challenger models.
-        :param bool prediction_row_storage: Used to score predictions made by the challenger models and compare performance with the deployed model.
-        :param 'DeploymentSettingsPredictionsSettingsArgs' predictions_settings: Settings for the predictions.
-        """
-        if association_id is not None:
-            pulumi.set(__self__, "association_id", association_id)
-        if challenger_analysis is not None:
-            pulumi.set(__self__, "challenger_analysis", challenger_analysis)
-        if prediction_row_storage is not None:
-            pulumi.set(__self__, "prediction_row_storage", prediction_row_storage)
-        if predictions_settings is not None:
-            pulumi.set(__self__, "predictions_settings", predictions_settings)
-
-    @property
-    @pulumi.getter(name="associationId")
-    def association_id(self) -> Optional['outputs.DeploymentSettingsAssociationId']:
-        """
-        Used to associate predictions back to your actual data.
-        """
-        return pulumi.get(self, "association_id")
-
-    @property
-    @pulumi.getter(name="challengerAnalysis")
-    def challenger_analysis(self) -> Optional[bool]:
-        """
-        Used to compare the performance of the deployed model with the challenger models.
-        """
-        return pulumi.get(self, "challenger_analysis")
-
-    @property
-    @pulumi.getter(name="predictionRowStorage")
-    def prediction_row_storage(self) -> Optional[bool]:
-        """
-        Used to score predictions made by the challenger models and compare performance with the deployed model.
-        """
-        return pulumi.get(self, "prediction_row_storage")
-
-    @property
-    @pulumi.getter(name="predictionsSettings")
-    def predictions_settings(self) -> Optional['outputs.DeploymentSettingsPredictionsSettings']:
-        """
-        Settings for the predictions.
-        """
-        return pulumi.get(self, "predictions_settings")
-
-
-@pulumi.output_type
-class DeploymentSettingsAssociationId(dict):
+class DeploymentAssociationIdSettings(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
         if key == "autoGenerateId":
             suggest = "auto_generate_id"
-        elif key == "featureName":
-            suggest = "feature_name"
+        elif key == "columnNames":
+            suggest = "column_names"
         elif key == "requiredInPredictionRequests":
             suggest = "required_in_prediction_requests"
 
         if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in DeploymentSettingsAssociationId. Access the value via the '{suggest}' property getter instead.")
+            pulumi.log.warn(f"Key '{key}' not found in DeploymentAssociationIdSettings. Access the value via the '{suggest}' property getter instead.")
 
     def __getitem__(self, key: str) -> Any:
-        DeploymentSettingsAssociationId.__key_warning(key)
+        DeploymentAssociationIdSettings.__key_warning(key)
         return super().__getitem__(key)
 
     def get(self, key: str, default = None) -> Any:
-        DeploymentSettingsAssociationId.__key_warning(key)
+        DeploymentAssociationIdSettings.__key_warning(key)
         return super().get(key, default)
 
     def __init__(__self__, *,
-                 auto_generate_id: bool,
-                 feature_name: str,
-                 required_in_prediction_requests: bool):
+                 auto_generate_id: Optional[bool] = None,
+                 column_names: Optional[Sequence[str]] = None,
+                 required_in_prediction_requests: Optional[bool] = None):
         """
-        :param bool auto_generate_id: Whether to automatically generate an association ID.
-        :param str feature_name: The name of the feature to use as the association ID.
-        :param bool required_in_prediction_requests: Whether the association ID is required in prediction requests.
+        :param bool auto_generate_id: Whether to auto generate ID.
+        :param Sequence[str] column_names: Name of the columns to be used as association ID, currently only support a list of one string.
+        :param bool required_in_prediction_requests: Whether the association ID column is required in prediction requests.
         """
-        pulumi.set(__self__, "auto_generate_id", auto_generate_id)
-        pulumi.set(__self__, "feature_name", feature_name)
-        pulumi.set(__self__, "required_in_prediction_requests", required_in_prediction_requests)
+        if auto_generate_id is not None:
+            pulumi.set(__self__, "auto_generate_id", auto_generate_id)
+        if column_names is not None:
+            pulumi.set(__self__, "column_names", column_names)
+        if required_in_prediction_requests is not None:
+            pulumi.set(__self__, "required_in_prediction_requests", required_in_prediction_requests)
 
     @property
     @pulumi.getter(name="autoGenerateId")
-    def auto_generate_id(self) -> bool:
+    def auto_generate_id(self) -> Optional[bool]:
         """
-        Whether to automatically generate an association ID.
+        Whether to auto generate ID.
         """
         return pulumi.get(self, "auto_generate_id")
 
     @property
-    @pulumi.getter(name="featureName")
-    def feature_name(self) -> str:
+    @pulumi.getter(name="columnNames")
+    def column_names(self) -> Optional[Sequence[str]]:
         """
-        The name of the feature to use as the association ID.
+        Name of the columns to be used as association ID, currently only support a list of one string.
         """
-        return pulumi.get(self, "feature_name")
+        return pulumi.get(self, "column_names")
 
     @property
     @pulumi.getter(name="requiredInPredictionRequests")
-    def required_in_prediction_requests(self) -> bool:
+    def required_in_prediction_requests(self) -> Optional[bool]:
         """
-        Whether the association ID is required in prediction requests.
+        Whether the association ID column is required in prediction requests.
         """
         return pulumi.get(self, "required_in_prediction_requests")
 
 
 @pulumi.output_type
-class DeploymentSettingsPredictionsSettings(dict):
+class DeploymentBiasAndFairnessSettings(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "fairnessMetricSet":
+            suggest = "fairness_metric_set"
+        elif key == "fairnessThreshold":
+            suggest = "fairness_threshold"
+        elif key == "preferableTargetValue":
+            suggest = "preferable_target_value"
+        elif key == "protectedFeatures":
+            suggest = "protected_features"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in DeploymentBiasAndFairnessSettings. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        DeploymentBiasAndFairnessSettings.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        DeploymentBiasAndFairnessSettings.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 fairness_metric_set: str,
+                 fairness_threshold: float,
+                 preferable_target_value: bool,
+                 protected_features: Sequence[str]):
+        """
+        :param str fairness_metric_set: A set of fairness metrics to use for calculating fairness.
+        :param float fairness_threshold: Threshold value of the fairness metric. Cannot be less than 0 or greater than 1.
+        :param bool preferable_target_value: A target value that should be treated as a positive outcome for the prediction.
+        :param Sequence[str] protected_features: A list of features to mark as protected.
+        """
+        pulumi.set(__self__, "fairness_metric_set", fairness_metric_set)
+        pulumi.set(__self__, "fairness_threshold", fairness_threshold)
+        pulumi.set(__self__, "preferable_target_value", preferable_target_value)
+        pulumi.set(__self__, "protected_features", protected_features)
+
+    @property
+    @pulumi.getter(name="fairnessMetricSet")
+    def fairness_metric_set(self) -> str:
+        """
+        A set of fairness metrics to use for calculating fairness.
+        """
+        return pulumi.get(self, "fairness_metric_set")
+
+    @property
+    @pulumi.getter(name="fairnessThreshold")
+    def fairness_threshold(self) -> float:
+        """
+        Threshold value of the fairness metric. Cannot be less than 0 or greater than 1.
+        """
+        return pulumi.get(self, "fairness_threshold")
+
+    @property
+    @pulumi.getter(name="preferableTargetValue")
+    def preferable_target_value(self) -> bool:
+        """
+        A target value that should be treated as a positive outcome for the prediction.
+        """
+        return pulumi.get(self, "preferable_target_value")
+
+    @property
+    @pulumi.getter(name="protectedFeatures")
+    def protected_features(self) -> Sequence[str]:
+        """
+        A list of features to mark as protected.
+        """
+        return pulumi.get(self, "protected_features")
+
+
+@pulumi.output_type
+class DeploymentChallengerModelsSettings(dict):
+    def __init__(__self__, *,
+                 enabled: bool):
+        """
+        :param bool enabled: Is 'True' if challenger models is enabled for this deployment.
+        """
+        pulumi.set(__self__, "enabled", enabled)
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> bool:
+        """
+        Is 'True' if challenger models is enabled for this deployment.
+        """
+        return pulumi.get(self, "enabled")
+
+
+@pulumi.output_type
+class DeploymentChallengerReplaySettings(dict):
+    def __init__(__self__, *,
+                 enabled: bool):
+        """
+        :param bool enabled: If challenger replay is enabled.
+        """
+        pulumi.set(__self__, "enabled", enabled)
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> bool:
+        """
+        If challenger replay is enabled.
+        """
+        return pulumi.get(self, "enabled")
+
+
+@pulumi.output_type
+class DeploymentDriftTrackingSettings(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "featureDriftEnabled":
+            suggest = "feature_drift_enabled"
+        elif key == "targetDriftEnabled":
+            suggest = "target_drift_enabled"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in DeploymentDriftTrackingSettings. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        DeploymentDriftTrackingSettings.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        DeploymentDriftTrackingSettings.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 feature_drift_enabled: Optional[bool] = None,
+                 target_drift_enabled: Optional[bool] = None):
+        """
+        :param bool feature_drift_enabled: If feature drift tracking is to be turned on.
+        :param bool target_drift_enabled: If target drift tracking is to be turned on.
+        """
+        if feature_drift_enabled is not None:
+            pulumi.set(__self__, "feature_drift_enabled", feature_drift_enabled)
+        if target_drift_enabled is not None:
+            pulumi.set(__self__, "target_drift_enabled", target_drift_enabled)
+
+    @property
+    @pulumi.getter(name="featureDriftEnabled")
+    def feature_drift_enabled(self) -> Optional[bool]:
+        """
+        If feature drift tracking is to be turned on.
+        """
+        return pulumi.get(self, "feature_drift_enabled")
+
+    @property
+    @pulumi.getter(name="targetDriftEnabled")
+    def target_drift_enabled(self) -> Optional[bool]:
+        """
+        If target drift tracking is to be turned on.
+        """
+        return pulumi.get(self, "target_drift_enabled")
+
+
+@pulumi.output_type
+class DeploymentHealthSettings(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "actualsTimeliness":
+            suggest = "actuals_timeliness"
+        elif key == "customMetrics":
+            suggest = "custom_metrics"
+        elif key == "dataDrift":
+            suggest = "data_drift"
+        elif key == "predictionsTimeliness":
+            suggest = "predictions_timeliness"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in DeploymentHealthSettings. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        DeploymentHealthSettings.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        DeploymentHealthSettings.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 accuracy: Optional['outputs.DeploymentHealthSettingsAccuracy'] = None,
+                 actuals_timeliness: Optional['outputs.DeploymentHealthSettingsActualsTimeliness'] = None,
+                 custom_metrics: Optional['outputs.DeploymentHealthSettingsCustomMetrics'] = None,
+                 data_drift: Optional['outputs.DeploymentHealthSettingsDataDrift'] = None,
+                 fairness: Optional['outputs.DeploymentHealthSettingsFairness'] = None,
+                 predictions_timeliness: Optional['outputs.DeploymentHealthSettingsPredictionsTimeliness'] = None,
+                 service: Optional['outputs.DeploymentHealthSettingsService'] = None):
+        """
+        :param 'DeploymentHealthSettingsAccuracyArgs' accuracy: The accuracy health settings for this Deployment.
+        :param 'DeploymentHealthSettingsActualsTimelinessArgs' actuals_timeliness: The actuals timeliness health settings for this Deployment.
+        :param 'DeploymentHealthSettingsCustomMetricsArgs' custom_metrics: The custom metrics health settings for this Deployment.
+        :param 'DeploymentHealthSettingsDataDriftArgs' data_drift: The data drift health settings for this Deployment.
+        :param 'DeploymentHealthSettingsFairnessArgs' fairness: The fairness health settings for this Deployment.
+        :param 'DeploymentHealthSettingsPredictionsTimelinessArgs' predictions_timeliness: The predictions timeliness health settings for this Deployment.
+        :param 'DeploymentHealthSettingsServiceArgs' service: The service health settings for this Deployment.
+        """
+        if accuracy is not None:
+            pulumi.set(__self__, "accuracy", accuracy)
+        if actuals_timeliness is not None:
+            pulumi.set(__self__, "actuals_timeliness", actuals_timeliness)
+        if custom_metrics is not None:
+            pulumi.set(__self__, "custom_metrics", custom_metrics)
+        if data_drift is not None:
+            pulumi.set(__self__, "data_drift", data_drift)
+        if fairness is not None:
+            pulumi.set(__self__, "fairness", fairness)
+        if predictions_timeliness is not None:
+            pulumi.set(__self__, "predictions_timeliness", predictions_timeliness)
+        if service is not None:
+            pulumi.set(__self__, "service", service)
+
+    @property
+    @pulumi.getter
+    def accuracy(self) -> Optional['outputs.DeploymentHealthSettingsAccuracy']:
+        """
+        The accuracy health settings for this Deployment.
+        """
+        return pulumi.get(self, "accuracy")
+
+    @property
+    @pulumi.getter(name="actualsTimeliness")
+    def actuals_timeliness(self) -> Optional['outputs.DeploymentHealthSettingsActualsTimeliness']:
+        """
+        The actuals timeliness health settings for this Deployment.
+        """
+        return pulumi.get(self, "actuals_timeliness")
+
+    @property
+    @pulumi.getter(name="customMetrics")
+    def custom_metrics(self) -> Optional['outputs.DeploymentHealthSettingsCustomMetrics']:
+        """
+        The custom metrics health settings for this Deployment.
+        """
+        return pulumi.get(self, "custom_metrics")
+
+    @property
+    @pulumi.getter(name="dataDrift")
+    def data_drift(self) -> Optional['outputs.DeploymentHealthSettingsDataDrift']:
+        """
+        The data drift health settings for this Deployment.
+        """
+        return pulumi.get(self, "data_drift")
+
+    @property
+    @pulumi.getter
+    def fairness(self) -> Optional['outputs.DeploymentHealthSettingsFairness']:
+        """
+        The fairness health settings for this Deployment.
+        """
+        return pulumi.get(self, "fairness")
+
+    @property
+    @pulumi.getter(name="predictionsTimeliness")
+    def predictions_timeliness(self) -> Optional['outputs.DeploymentHealthSettingsPredictionsTimeliness']:
+        """
+        The predictions timeliness health settings for this Deployment.
+        """
+        return pulumi.get(self, "predictions_timeliness")
+
+    @property
+    @pulumi.getter
+    def service(self) -> Optional['outputs.DeploymentHealthSettingsService']:
+        """
+        The service health settings for this Deployment.
+        """
+        return pulumi.get(self, "service")
+
+
+@pulumi.output_type
+class DeploymentHealthSettingsAccuracy(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "batchCount":
+            suggest = "batch_count"
+        elif key == "failingThreshold":
+            suggest = "failing_threshold"
+        elif key == "warningThreshold":
+            suggest = "warning_threshold"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in DeploymentHealthSettingsAccuracy. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        DeploymentHealthSettingsAccuracy.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        DeploymentHealthSettingsAccuracy.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 batch_count: Optional[int] = None,
+                 failing_threshold: Optional[float] = None,
+                 measurement: Optional[str] = None,
+                 metric: Optional[str] = None,
+                 warning_threshold: Optional[float] = None):
+        """
+        :param int batch_count: The batch count for the accuracy health settings.
+        :param float failing_threshold: The failing threshold for the accuracy health settings.
+        :param str measurement: The measurement for the accuracy health settings.
+        :param str metric: The metric for the accuracy health settings.
+        :param float warning_threshold: The warning threshold for the accuracy health settings.
+        """
+        if batch_count is not None:
+            pulumi.set(__self__, "batch_count", batch_count)
+        if failing_threshold is not None:
+            pulumi.set(__self__, "failing_threshold", failing_threshold)
+        if measurement is not None:
+            pulumi.set(__self__, "measurement", measurement)
+        if metric is not None:
+            pulumi.set(__self__, "metric", metric)
+        if warning_threshold is not None:
+            pulumi.set(__self__, "warning_threshold", warning_threshold)
+
+    @property
+    @pulumi.getter(name="batchCount")
+    def batch_count(self) -> Optional[int]:
+        """
+        The batch count for the accuracy health settings.
+        """
+        return pulumi.get(self, "batch_count")
+
+    @property
+    @pulumi.getter(name="failingThreshold")
+    def failing_threshold(self) -> Optional[float]:
+        """
+        The failing threshold for the accuracy health settings.
+        """
+        return pulumi.get(self, "failing_threshold")
+
+    @property
+    @pulumi.getter
+    def measurement(self) -> Optional[str]:
+        """
+        The measurement for the accuracy health settings.
+        """
+        return pulumi.get(self, "measurement")
+
+    @property
+    @pulumi.getter
+    def metric(self) -> Optional[str]:
+        """
+        The metric for the accuracy health settings.
+        """
+        return pulumi.get(self, "metric")
+
+    @property
+    @pulumi.getter(name="warningThreshold")
+    def warning_threshold(self) -> Optional[float]:
+        """
+        The warning threshold for the accuracy health settings.
+        """
+        return pulumi.get(self, "warning_threshold")
+
+
+@pulumi.output_type
+class DeploymentHealthSettingsActualsTimeliness(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "expectedFrequency":
+            suggest = "expected_frequency"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in DeploymentHealthSettingsActualsTimeliness. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        DeploymentHealthSettingsActualsTimeliness.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        DeploymentHealthSettingsActualsTimeliness.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 enabled: bool,
+                 expected_frequency: Optional[str] = None):
+        """
+        :param bool enabled: If acutals timeliness is enabled for this Deployment.
+        :param str expected_frequency: The expected frequency for the actuals timeliness health settings.
+        """
+        pulumi.set(__self__, "enabled", enabled)
+        if expected_frequency is not None:
+            pulumi.set(__self__, "expected_frequency", expected_frequency)
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> bool:
+        """
+        If acutals timeliness is enabled for this Deployment.
+        """
+        return pulumi.get(self, "enabled")
+
+    @property
+    @pulumi.getter(name="expectedFrequency")
+    def expected_frequency(self) -> Optional[str]:
+        """
+        The expected frequency for the actuals timeliness health settings.
+        """
+        return pulumi.get(self, "expected_frequency")
+
+
+@pulumi.output_type
+class DeploymentHealthSettingsCustomMetrics(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "failingConditions":
+            suggest = "failing_conditions"
+        elif key == "warningConditions":
+            suggest = "warning_conditions"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in DeploymentHealthSettingsCustomMetrics. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        DeploymentHealthSettingsCustomMetrics.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        DeploymentHealthSettingsCustomMetrics.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 failing_conditions: Optional[Sequence['outputs.DeploymentHealthSettingsCustomMetricsFailingCondition']] = None,
+                 warning_conditions: Optional[Sequence['outputs.DeploymentHealthSettingsCustomMetricsWarningCondition']] = None):
+        """
+        :param Sequence['DeploymentHealthSettingsCustomMetricsFailingConditionArgs'] failing_conditions: The failing conditions for the custom metrics health settings.
+        :param Sequence['DeploymentHealthSettingsCustomMetricsWarningConditionArgs'] warning_conditions: The warning conditions for the custom metrics health settings.
+        """
+        if failing_conditions is not None:
+            pulumi.set(__self__, "failing_conditions", failing_conditions)
+        if warning_conditions is not None:
+            pulumi.set(__self__, "warning_conditions", warning_conditions)
+
+    @property
+    @pulumi.getter(name="failingConditions")
+    def failing_conditions(self) -> Optional[Sequence['outputs.DeploymentHealthSettingsCustomMetricsFailingCondition']]:
+        """
+        The failing conditions for the custom metrics health settings.
+        """
+        return pulumi.get(self, "failing_conditions")
+
+    @property
+    @pulumi.getter(name="warningConditions")
+    def warning_conditions(self) -> Optional[Sequence['outputs.DeploymentHealthSettingsCustomMetricsWarningCondition']]:
+        """
+        The warning conditions for the custom metrics health settings.
+        """
+        return pulumi.get(self, "warning_conditions")
+
+
+@pulumi.output_type
+class DeploymentHealthSettingsCustomMetricsFailingCondition(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "compareOperator":
+            suggest = "compare_operator"
+        elif key == "metricId":
+            suggest = "metric_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in DeploymentHealthSettingsCustomMetricsFailingCondition. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        DeploymentHealthSettingsCustomMetricsFailingCondition.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        DeploymentHealthSettingsCustomMetricsFailingCondition.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 compare_operator: str,
+                 metric_id: str,
+                 threshold: float):
+        """
+        :param str compare_operator: The compare operator for the failing condition of the custom metrics health settings.
+        :param str metric_id: The metric ID for the failing condition of the custom metrics health settings.
+        :param float threshold: The threshold for the failing condition of the custom metrics health settings.
+        """
+        pulumi.set(__self__, "compare_operator", compare_operator)
+        pulumi.set(__self__, "metric_id", metric_id)
+        pulumi.set(__self__, "threshold", threshold)
+
+    @property
+    @pulumi.getter(name="compareOperator")
+    def compare_operator(self) -> str:
+        """
+        The compare operator for the failing condition of the custom metrics health settings.
+        """
+        return pulumi.get(self, "compare_operator")
+
+    @property
+    @pulumi.getter(name="metricId")
+    def metric_id(self) -> str:
+        """
+        The metric ID for the failing condition of the custom metrics health settings.
+        """
+        return pulumi.get(self, "metric_id")
+
+    @property
+    @pulumi.getter
+    def threshold(self) -> float:
+        """
+        The threshold for the failing condition of the custom metrics health settings.
+        """
+        return pulumi.get(self, "threshold")
+
+
+@pulumi.output_type
+class DeploymentHealthSettingsCustomMetricsWarningCondition(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "compareOperator":
+            suggest = "compare_operator"
+        elif key == "metricId":
+            suggest = "metric_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in DeploymentHealthSettingsCustomMetricsWarningCondition. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        DeploymentHealthSettingsCustomMetricsWarningCondition.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        DeploymentHealthSettingsCustomMetricsWarningCondition.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 compare_operator: str,
+                 metric_id: str,
+                 threshold: float):
+        """
+        :param str compare_operator: The compare operator for the warning condition of the custom metrics health settings.
+        :param str metric_id: The metric ID for the warning condition of the custom metrics health settings.
+        :param float threshold: The threshold for the warning condition of the custom metrics health settings.
+        """
+        pulumi.set(__self__, "compare_operator", compare_operator)
+        pulumi.set(__self__, "metric_id", metric_id)
+        pulumi.set(__self__, "threshold", threshold)
+
+    @property
+    @pulumi.getter(name="compareOperator")
+    def compare_operator(self) -> str:
+        """
+        The compare operator for the warning condition of the custom metrics health settings.
+        """
+        return pulumi.get(self, "compare_operator")
+
+    @property
+    @pulumi.getter(name="metricId")
+    def metric_id(self) -> str:
+        """
+        The metric ID for the warning condition of the custom metrics health settings.
+        """
+        return pulumi.get(self, "metric_id")
+
+    @property
+    @pulumi.getter
+    def threshold(self) -> float:
+        """
+        The threshold for the warning condition of the custom metrics health settings.
+        """
+        return pulumi.get(self, "threshold")
+
+
+@pulumi.output_type
+class DeploymentHealthSettingsDataDrift(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "batchCount":
+            suggest = "batch_count"
+        elif key == "driftThreshold":
+            suggest = "drift_threshold"
+        elif key == "excludeFeatures":
+            suggest = "exclude_features"
+        elif key == "highImportanceFailingCount":
+            suggest = "high_importance_failing_count"
+        elif key == "highImportanceWarningCount":
+            suggest = "high_importance_warning_count"
+        elif key == "importanceThreshold":
+            suggest = "importance_threshold"
+        elif key == "lowImportanceFailingCount":
+            suggest = "low_importance_failing_count"
+        elif key == "lowImportanceWarningCount":
+            suggest = "low_importance_warning_count"
+        elif key == "starredFeatures":
+            suggest = "starred_features"
+        elif key == "timeInterval":
+            suggest = "time_interval"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in DeploymentHealthSettingsDataDrift. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        DeploymentHealthSettingsDataDrift.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        DeploymentHealthSettingsDataDrift.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 batch_count: Optional[int] = None,
+                 drift_threshold: Optional[float] = None,
+                 exclude_features: Optional[Sequence[str]] = None,
+                 high_importance_failing_count: Optional[int] = None,
+                 high_importance_warning_count: Optional[int] = None,
+                 importance_threshold: Optional[float] = None,
+                 low_importance_failing_count: Optional[int] = None,
+                 low_importance_warning_count: Optional[int] = None,
+                 starred_features: Optional[Sequence[str]] = None,
+                 time_interval: Optional[str] = None):
+        """
+        :param int batch_count: The batch count for the data drift health settings.
+        :param float drift_threshold: The drift threshold for the data drift health settings.
+        :param Sequence[str] exclude_features: The exclude features for the data drift health settings.
+        :param int high_importance_failing_count: The high importance failing count for the data drift health settings.
+        :param int high_importance_warning_count: The high importance warning count for the data drift health settings.
+        :param float importance_threshold: The importance threshold for the data drift health settings.
+        :param int low_importance_failing_count: The low importance failing count for the data drift health settings.
+        :param int low_importance_warning_count: The low importance warning count for the data drift health settings.
+        :param Sequence[str] starred_features: The starred features for the data drift health settings.
+        :param str time_interval: The time interval for the data drift health settings.
+        """
+        if batch_count is not None:
+            pulumi.set(__self__, "batch_count", batch_count)
+        if drift_threshold is not None:
+            pulumi.set(__self__, "drift_threshold", drift_threshold)
+        if exclude_features is not None:
+            pulumi.set(__self__, "exclude_features", exclude_features)
+        if high_importance_failing_count is not None:
+            pulumi.set(__self__, "high_importance_failing_count", high_importance_failing_count)
+        if high_importance_warning_count is not None:
+            pulumi.set(__self__, "high_importance_warning_count", high_importance_warning_count)
+        if importance_threshold is not None:
+            pulumi.set(__self__, "importance_threshold", importance_threshold)
+        if low_importance_failing_count is not None:
+            pulumi.set(__self__, "low_importance_failing_count", low_importance_failing_count)
+        if low_importance_warning_count is not None:
+            pulumi.set(__self__, "low_importance_warning_count", low_importance_warning_count)
+        if starred_features is not None:
+            pulumi.set(__self__, "starred_features", starred_features)
+        if time_interval is not None:
+            pulumi.set(__self__, "time_interval", time_interval)
+
+    @property
+    @pulumi.getter(name="batchCount")
+    def batch_count(self) -> Optional[int]:
+        """
+        The batch count for the data drift health settings.
+        """
+        return pulumi.get(self, "batch_count")
+
+    @property
+    @pulumi.getter(name="driftThreshold")
+    def drift_threshold(self) -> Optional[float]:
+        """
+        The drift threshold for the data drift health settings.
+        """
+        return pulumi.get(self, "drift_threshold")
+
+    @property
+    @pulumi.getter(name="excludeFeatures")
+    def exclude_features(self) -> Optional[Sequence[str]]:
+        """
+        The exclude features for the data drift health settings.
+        """
+        return pulumi.get(self, "exclude_features")
+
+    @property
+    @pulumi.getter(name="highImportanceFailingCount")
+    def high_importance_failing_count(self) -> Optional[int]:
+        """
+        The high importance failing count for the data drift health settings.
+        """
+        return pulumi.get(self, "high_importance_failing_count")
+
+    @property
+    @pulumi.getter(name="highImportanceWarningCount")
+    def high_importance_warning_count(self) -> Optional[int]:
+        """
+        The high importance warning count for the data drift health settings.
+        """
+        return pulumi.get(self, "high_importance_warning_count")
+
+    @property
+    @pulumi.getter(name="importanceThreshold")
+    def importance_threshold(self) -> Optional[float]:
+        """
+        The importance threshold for the data drift health settings.
+        """
+        return pulumi.get(self, "importance_threshold")
+
+    @property
+    @pulumi.getter(name="lowImportanceFailingCount")
+    def low_importance_failing_count(self) -> Optional[int]:
+        """
+        The low importance failing count for the data drift health settings.
+        """
+        return pulumi.get(self, "low_importance_failing_count")
+
+    @property
+    @pulumi.getter(name="lowImportanceWarningCount")
+    def low_importance_warning_count(self) -> Optional[int]:
+        """
+        The low importance warning count for the data drift health settings.
+        """
+        return pulumi.get(self, "low_importance_warning_count")
+
+    @property
+    @pulumi.getter(name="starredFeatures")
+    def starred_features(self) -> Optional[Sequence[str]]:
+        """
+        The starred features for the data drift health settings.
+        """
+        return pulumi.get(self, "starred_features")
+
+    @property
+    @pulumi.getter(name="timeInterval")
+    def time_interval(self) -> Optional[str]:
+        """
+        The time interval for the data drift health settings.
+        """
+        return pulumi.get(self, "time_interval")
+
+
+@pulumi.output_type
+class DeploymentHealthSettingsFairness(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "protectedClassFailingCount":
+            suggest = "protected_class_failing_count"
+        elif key == "protectedClassWarningCount":
+            suggest = "protected_class_warning_count"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in DeploymentHealthSettingsFairness. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        DeploymentHealthSettingsFairness.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        DeploymentHealthSettingsFairness.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 protected_class_failing_count: Optional[int] = None,
+                 protected_class_warning_count: Optional[int] = None):
+        """
+        :param int protected_class_failing_count: The protected class failing count for the fairness health settings.
+        :param int protected_class_warning_count: The protected class warning count for the fairness health settings.
+        """
+        if protected_class_failing_count is not None:
+            pulumi.set(__self__, "protected_class_failing_count", protected_class_failing_count)
+        if protected_class_warning_count is not None:
+            pulumi.set(__self__, "protected_class_warning_count", protected_class_warning_count)
+
+    @property
+    @pulumi.getter(name="protectedClassFailingCount")
+    def protected_class_failing_count(self) -> Optional[int]:
+        """
+        The protected class failing count for the fairness health settings.
+        """
+        return pulumi.get(self, "protected_class_failing_count")
+
+    @property
+    @pulumi.getter(name="protectedClassWarningCount")
+    def protected_class_warning_count(self) -> Optional[int]:
+        """
+        The protected class warning count for the fairness health settings.
+        """
+        return pulumi.get(self, "protected_class_warning_count")
+
+
+@pulumi.output_type
+class DeploymentHealthSettingsPredictionsTimeliness(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "expectedFrequency":
+            suggest = "expected_frequency"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in DeploymentHealthSettingsPredictionsTimeliness. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        DeploymentHealthSettingsPredictionsTimeliness.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        DeploymentHealthSettingsPredictionsTimeliness.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 enabled: bool,
+                 expected_frequency: Optional[str] = None):
+        """
+        :param bool enabled: If predictions timeliness is enabled for this Deployment.
+        :param str expected_frequency: The expected frequency for the predictions timeliness health settings.
+        """
+        pulumi.set(__self__, "enabled", enabled)
+        if expected_frequency is not None:
+            pulumi.set(__self__, "expected_frequency", expected_frequency)
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> bool:
+        """
+        If predictions timeliness is enabled for this Deployment.
+        """
+        return pulumi.get(self, "enabled")
+
+    @property
+    @pulumi.getter(name="expectedFrequency")
+    def expected_frequency(self) -> Optional[str]:
+        """
+        The expected frequency for the predictions timeliness health settings.
+        """
+        return pulumi.get(self, "expected_frequency")
+
+
+@pulumi.output_type
+class DeploymentHealthSettingsService(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "batchCount":
+            suggest = "batch_count"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in DeploymentHealthSettingsService. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        DeploymentHealthSettingsService.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        DeploymentHealthSettingsService.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 batch_count: int):
+        """
+        :param int batch_count: The batch count for the service health settings.
+        """
+        pulumi.set(__self__, "batch_count", batch_count)
+
+    @property
+    @pulumi.getter(name="batchCount")
+    def batch_count(self) -> int:
+        """
+        The batch count for the service health settings.
+        """
+        return pulumi.get(self, "batch_count")
+
+
+@pulumi.output_type
+class DeploymentPredictionIntervalsSettings(dict):
+    def __init__(__self__, *,
+                 enabled: bool,
+                 percentiles: Optional[Sequence[int]] = None):
+        """
+        :param bool enabled: Whether prediction intervals are enabled for this deployment.
+        :param Sequence[int] percentiles: List of enabled prediction intervals’ sizes for this deployment.
+        """
+        pulumi.set(__self__, "enabled", enabled)
+        if percentiles is not None:
+            pulumi.set(__self__, "percentiles", percentiles)
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> bool:
+        """
+        Whether prediction intervals are enabled for this deployment.
+        """
+        return pulumi.get(self, "enabled")
+
+    @property
+    @pulumi.getter
+    def percentiles(self) -> Optional[Sequence[int]]:
+        """
+        List of enabled prediction intervals’ sizes for this deployment.
+        """
+        return pulumi.get(self, "percentiles")
+
+
+@pulumi.output_type
+class DeploymentPredictionWarningSettings(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "customBoundaries":
+            suggest = "custom_boundaries"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in DeploymentPredictionWarningSettings. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        DeploymentPredictionWarningSettings.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        DeploymentPredictionWarningSettings.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 enabled: bool,
+                 custom_boundaries: Optional['outputs.DeploymentPredictionWarningSettingsCustomBoundaries'] = None):
+        """
+        :param bool enabled: If target prediction warning is enabled for this Deployment.
+        :param 'DeploymentPredictionWarningSettingsCustomBoundariesArgs' custom_boundaries: The custom boundaries for prediction warnings.
+        """
+        pulumi.set(__self__, "enabled", enabled)
+        if custom_boundaries is not None:
+            pulumi.set(__self__, "custom_boundaries", custom_boundaries)
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> bool:
+        """
+        If target prediction warning is enabled for this Deployment.
+        """
+        return pulumi.get(self, "enabled")
+
+    @property
+    @pulumi.getter(name="customBoundaries")
+    def custom_boundaries(self) -> Optional['outputs.DeploymentPredictionWarningSettingsCustomBoundaries']:
+        """
+        The custom boundaries for prediction warnings.
+        """
+        return pulumi.get(self, "custom_boundaries")
+
+
+@pulumi.output_type
+class DeploymentPredictionWarningSettingsCustomBoundaries(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "lowerBoundary":
+            suggest = "lower_boundary"
+        elif key == "upperBoundary":
+            suggest = "upper_boundary"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in DeploymentPredictionWarningSettingsCustomBoundaries. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        DeploymentPredictionWarningSettingsCustomBoundaries.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        DeploymentPredictionWarningSettingsCustomBoundaries.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 lower_boundary: Optional[float] = None,
+                 upper_boundary: Optional[float] = None):
+        """
+        :param float lower_boundary: All predictions less than provided value will be considered anomalous.
+        :param float upper_boundary: All predictions greater than provided value will be considered anomalous.
+        """
+        if lower_boundary is not None:
+            pulumi.set(__self__, "lower_boundary", lower_boundary)
+        if upper_boundary is not None:
+            pulumi.set(__self__, "upper_boundary", upper_boundary)
+
+    @property
+    @pulumi.getter(name="lowerBoundary")
+    def lower_boundary(self) -> Optional[float]:
+        """
+        All predictions less than provided value will be considered anomalous.
+        """
+        return pulumi.get(self, "lower_boundary")
+
+    @property
+    @pulumi.getter(name="upperBoundary")
+    def upper_boundary(self) -> Optional[float]:
+        """
+        All predictions greater than provided value will be considered anomalous.
+        """
+        return pulumi.get(self, "upper_boundary")
+
+
+@pulumi.output_type
+class DeploymentPredictionsByForecastDateSettings(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "columnName":
+            suggest = "column_name"
+        elif key == "datetimeFormat":
+            suggest = "datetime_format"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in DeploymentPredictionsByForecastDateSettings. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        DeploymentPredictionsByForecastDateSettings.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        DeploymentPredictionsByForecastDateSettings.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 enabled: bool,
+                 column_name: Optional[str] = None,
+                 datetime_format: Optional[str] = None):
+        """
+        :param bool enabled: Is ’True’ if predictions by forecast date is enabled for this deployment.
+        :param str column_name: The column name in prediction datasets to be used as forecast date.
+        :param str datetime_format: The datetime format of the forecast date column in prediction datasets.
+        """
+        pulumi.set(__self__, "enabled", enabled)
+        if column_name is not None:
+            pulumi.set(__self__, "column_name", column_name)
+        if datetime_format is not None:
+            pulumi.set(__self__, "datetime_format", datetime_format)
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> bool:
+        """
+        Is ’True’ if predictions by forecast date is enabled for this deployment.
+        """
+        return pulumi.get(self, "enabled")
+
+    @property
+    @pulumi.getter(name="columnName")
+    def column_name(self) -> Optional[str]:
+        """
+        The column name in prediction datasets to be used as forecast date.
+        """
+        return pulumi.get(self, "column_name")
+
+    @property
+    @pulumi.getter(name="datetimeFormat")
+    def datetime_format(self) -> Optional[str]:
+        """
+        The datetime format of the forecast date column in prediction datasets.
+        """
+        return pulumi.get(self, "datetime_format")
+
+
+@pulumi.output_type
+class DeploymentPredictionsDataCollectionSettings(dict):
+    def __init__(__self__, *,
+                 enabled: bool):
+        """
+        :param bool enabled: If predictions data collections is enabled for this Deployment.
+        """
+        pulumi.set(__self__, "enabled", enabled)
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> bool:
+        """
+        If predictions data collections is enabled for this Deployment.
+        """
+        return pulumi.get(self, "enabled")
+
+
+@pulumi.output_type
+class DeploymentPredictionsSettings(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
@@ -684,14 +1705,14 @@ class DeploymentSettingsPredictionsSettings(dict):
             suggest = "real_time"
 
         if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in DeploymentSettingsPredictionsSettings. Access the value via the '{suggest}' property getter instead.")
+            pulumi.log.warn(f"Key '{key}' not found in DeploymentPredictionsSettings. Access the value via the '{suggest}' property getter instead.")
 
     def __getitem__(self, key: str) -> Any:
-        DeploymentSettingsPredictionsSettings.__key_warning(key)
+        DeploymentPredictionsSettings.__key_warning(key)
         return super().__getitem__(key)
 
     def get(self, key: str, default = None) -> Any:
-        DeploymentSettingsPredictionsSettings.__key_warning(key)
+        DeploymentPredictionsSettings.__key_warning(key)
         return super().get(key, default)
 
     def __init__(__self__, *,
@@ -730,6 +1751,36 @@ class DeploymentSettingsPredictionsSettings(dict):
         Whether to use real-time predictions.
         """
         return pulumi.get(self, "real_time")
+
+
+@pulumi.output_type
+class DeploymentSegmentAnalysisSettings(dict):
+    def __init__(__self__, *,
+                 enabled: bool,
+                 attributes: Optional[Sequence[str]] = None):
+        """
+        :param bool enabled: Set to 'True' if segment analysis is enabled for this deployment.
+        :param Sequence[str] attributes: A list of strings that gives the segment attributes selected for tracking.
+        """
+        pulumi.set(__self__, "enabled", enabled)
+        if attributes is not None:
+            pulumi.set(__self__, "attributes", attributes)
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> bool:
+        """
+        Set to 'True' if segment analysis is enabled for this deployment.
+        """
+        return pulumi.get(self, "enabled")
+
+    @property
+    @pulumi.getter
+    def attributes(self) -> Optional[Sequence[str]]:
+        """
+        A list of strings that gives the segment attributes selected for tracking.
+        """
+        return pulumi.get(self, "attributes")
 
 
 @pulumi.output_type

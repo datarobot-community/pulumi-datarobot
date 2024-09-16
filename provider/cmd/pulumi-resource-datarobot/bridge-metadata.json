@@ -63,7 +63,61 @@
                 }
             },
             "datarobot_deployment": {
-                "current": "datarobot:index/deployment:Deployment"
+                "current": "datarobot:index/deployment:Deployment",
+                "fields": {
+                    "association_id_settings": {
+                        "fields": {
+                            "column_names": {
+                                "maxItemsOne": false
+                            }
+                        }
+                    },
+                    "bias_and_fairness_settings": {
+                        "fields": {
+                            "protected_features": {
+                                "maxItemsOne": false
+                            }
+                        }
+                    },
+                    "health_settings": {
+                        "fields": {
+                            "custom_metrics": {
+                                "fields": {
+                                    "failing_conditions": {
+                                        "maxItemsOne": false
+                                    },
+                                    "warning_conditions": {
+                                        "maxItemsOne": false
+                                    }
+                                }
+                            },
+                            "data_drift": {
+                                "fields": {
+                                    "exclude_features": {
+                                        "maxItemsOne": false
+                                    },
+                                    "starred_features": {
+                                        "maxItemsOne": false
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "prediction_intervals_settings": {
+                        "fields": {
+                            "percentiles": {
+                                "maxItemsOne": false
+                            }
+                        }
+                    },
+                    "segment_analysis_settings": {
+                        "fields": {
+                            "attributes": {
+                                "maxItemsOne": false
+                            }
+                        }
+                    }
+                }
             },
             "datarobot_google_cloud_credential": {
                 "current": "datarobot:index/googleCloudCredential:GoogleCloudCredential"
