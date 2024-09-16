@@ -1146,376 +1146,3359 @@ func (o CustomModelSourceRemoteRepositoryArrayOutput) Index(i pulumi.IntInput) C
 	}).(CustomModelSourceRemoteRepositoryOutput)
 }
 
-type DeploymentSettings struct {
-	// Used to associate predictions back to your actual data.
-	AssociationId *DeploymentSettingsAssociationId `pulumi:"associationId"`
-	// Used to compare the performance of the deployed model with the challenger models.
-	ChallengerAnalysis *bool `pulumi:"challengerAnalysis"`
-	// Used to score predictions made by the challenger models and compare performance with the deployed model.
-	PredictionRowStorage *bool `pulumi:"predictionRowStorage"`
-	// Settings for the predictions.
-	PredictionsSettings *DeploymentSettingsPredictionsSettings `pulumi:"predictionsSettings"`
+type DeploymentAssociationIdSettings struct {
+	// Whether to auto generate ID.
+	AutoGenerateId *bool `pulumi:"autoGenerateId"`
+	// Name of the columns to be used as association ID, currently only support a list of one string.
+	ColumnNames []string `pulumi:"columnNames"`
+	// Whether the association ID column is required in prediction requests.
+	RequiredInPredictionRequests *bool `pulumi:"requiredInPredictionRequests"`
 }
 
-// DeploymentSettingsInput is an input type that accepts DeploymentSettingsArgs and DeploymentSettingsOutput values.
-// You can construct a concrete instance of `DeploymentSettingsInput` via:
+// DeploymentAssociationIdSettingsInput is an input type that accepts DeploymentAssociationIdSettingsArgs and DeploymentAssociationIdSettingsOutput values.
+// You can construct a concrete instance of `DeploymentAssociationIdSettingsInput` via:
 //
-//	DeploymentSettingsArgs{...}
-type DeploymentSettingsInput interface {
+//	DeploymentAssociationIdSettingsArgs{...}
+type DeploymentAssociationIdSettingsInput interface {
 	pulumi.Input
 
-	ToDeploymentSettingsOutput() DeploymentSettingsOutput
-	ToDeploymentSettingsOutputWithContext(context.Context) DeploymentSettingsOutput
+	ToDeploymentAssociationIdSettingsOutput() DeploymentAssociationIdSettingsOutput
+	ToDeploymentAssociationIdSettingsOutputWithContext(context.Context) DeploymentAssociationIdSettingsOutput
 }
 
-type DeploymentSettingsArgs struct {
-	// Used to associate predictions back to your actual data.
-	AssociationId DeploymentSettingsAssociationIdPtrInput `pulumi:"associationId"`
-	// Used to compare the performance of the deployed model with the challenger models.
-	ChallengerAnalysis pulumi.BoolPtrInput `pulumi:"challengerAnalysis"`
-	// Used to score predictions made by the challenger models and compare performance with the deployed model.
-	PredictionRowStorage pulumi.BoolPtrInput `pulumi:"predictionRowStorage"`
-	// Settings for the predictions.
-	PredictionsSettings DeploymentSettingsPredictionsSettingsPtrInput `pulumi:"predictionsSettings"`
+type DeploymentAssociationIdSettingsArgs struct {
+	// Whether to auto generate ID.
+	AutoGenerateId pulumi.BoolPtrInput `pulumi:"autoGenerateId"`
+	// Name of the columns to be used as association ID, currently only support a list of one string.
+	ColumnNames pulumi.StringArrayInput `pulumi:"columnNames"`
+	// Whether the association ID column is required in prediction requests.
+	RequiredInPredictionRequests pulumi.BoolPtrInput `pulumi:"requiredInPredictionRequests"`
 }
 
-func (DeploymentSettingsArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*DeploymentSettings)(nil)).Elem()
+func (DeploymentAssociationIdSettingsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentAssociationIdSettings)(nil)).Elem()
 }
 
-func (i DeploymentSettingsArgs) ToDeploymentSettingsOutput() DeploymentSettingsOutput {
-	return i.ToDeploymentSettingsOutputWithContext(context.Background())
+func (i DeploymentAssociationIdSettingsArgs) ToDeploymentAssociationIdSettingsOutput() DeploymentAssociationIdSettingsOutput {
+	return i.ToDeploymentAssociationIdSettingsOutputWithContext(context.Background())
 }
 
-func (i DeploymentSettingsArgs) ToDeploymentSettingsOutputWithContext(ctx context.Context) DeploymentSettingsOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DeploymentSettingsOutput)
+func (i DeploymentAssociationIdSettingsArgs) ToDeploymentAssociationIdSettingsOutputWithContext(ctx context.Context) DeploymentAssociationIdSettingsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentAssociationIdSettingsOutput)
 }
 
-func (i DeploymentSettingsArgs) ToDeploymentSettingsPtrOutput() DeploymentSettingsPtrOutput {
-	return i.ToDeploymentSettingsPtrOutputWithContext(context.Background())
+func (i DeploymentAssociationIdSettingsArgs) ToDeploymentAssociationIdSettingsPtrOutput() DeploymentAssociationIdSettingsPtrOutput {
+	return i.ToDeploymentAssociationIdSettingsPtrOutputWithContext(context.Background())
 }
 
-func (i DeploymentSettingsArgs) ToDeploymentSettingsPtrOutputWithContext(ctx context.Context) DeploymentSettingsPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DeploymentSettingsOutput).ToDeploymentSettingsPtrOutputWithContext(ctx)
+func (i DeploymentAssociationIdSettingsArgs) ToDeploymentAssociationIdSettingsPtrOutputWithContext(ctx context.Context) DeploymentAssociationIdSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentAssociationIdSettingsOutput).ToDeploymentAssociationIdSettingsPtrOutputWithContext(ctx)
 }
 
-// DeploymentSettingsPtrInput is an input type that accepts DeploymentSettingsArgs, DeploymentSettingsPtr and DeploymentSettingsPtrOutput values.
-// You can construct a concrete instance of `DeploymentSettingsPtrInput` via:
+// DeploymentAssociationIdSettingsPtrInput is an input type that accepts DeploymentAssociationIdSettingsArgs, DeploymentAssociationIdSettingsPtr and DeploymentAssociationIdSettingsPtrOutput values.
+// You can construct a concrete instance of `DeploymentAssociationIdSettingsPtrInput` via:
 //
-//	        DeploymentSettingsArgs{...}
+//	        DeploymentAssociationIdSettingsArgs{...}
 //
 //	or:
 //
 //	        nil
-type DeploymentSettingsPtrInput interface {
+type DeploymentAssociationIdSettingsPtrInput interface {
 	pulumi.Input
 
-	ToDeploymentSettingsPtrOutput() DeploymentSettingsPtrOutput
-	ToDeploymentSettingsPtrOutputWithContext(context.Context) DeploymentSettingsPtrOutput
+	ToDeploymentAssociationIdSettingsPtrOutput() DeploymentAssociationIdSettingsPtrOutput
+	ToDeploymentAssociationIdSettingsPtrOutputWithContext(context.Context) DeploymentAssociationIdSettingsPtrOutput
 }
 
-type deploymentSettingsPtrType DeploymentSettingsArgs
+type deploymentAssociationIdSettingsPtrType DeploymentAssociationIdSettingsArgs
 
-func DeploymentSettingsPtr(v *DeploymentSettingsArgs) DeploymentSettingsPtrInput {
-	return (*deploymentSettingsPtrType)(v)
+func DeploymentAssociationIdSettingsPtr(v *DeploymentAssociationIdSettingsArgs) DeploymentAssociationIdSettingsPtrInput {
+	return (*deploymentAssociationIdSettingsPtrType)(v)
 }
 
-func (*deploymentSettingsPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**DeploymentSettings)(nil)).Elem()
+func (*deploymentAssociationIdSettingsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentAssociationIdSettings)(nil)).Elem()
 }
 
-func (i *deploymentSettingsPtrType) ToDeploymentSettingsPtrOutput() DeploymentSettingsPtrOutput {
-	return i.ToDeploymentSettingsPtrOutputWithContext(context.Background())
+func (i *deploymentAssociationIdSettingsPtrType) ToDeploymentAssociationIdSettingsPtrOutput() DeploymentAssociationIdSettingsPtrOutput {
+	return i.ToDeploymentAssociationIdSettingsPtrOutputWithContext(context.Background())
 }
 
-func (i *deploymentSettingsPtrType) ToDeploymentSettingsPtrOutputWithContext(ctx context.Context) DeploymentSettingsPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DeploymentSettingsPtrOutput)
+func (i *deploymentAssociationIdSettingsPtrType) ToDeploymentAssociationIdSettingsPtrOutputWithContext(ctx context.Context) DeploymentAssociationIdSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentAssociationIdSettingsPtrOutput)
 }
 
-type DeploymentSettingsOutput struct{ *pulumi.OutputState }
+type DeploymentAssociationIdSettingsOutput struct{ *pulumi.OutputState }
 
-func (DeploymentSettingsOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*DeploymentSettings)(nil)).Elem()
+func (DeploymentAssociationIdSettingsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentAssociationIdSettings)(nil)).Elem()
 }
 
-func (o DeploymentSettingsOutput) ToDeploymentSettingsOutput() DeploymentSettingsOutput {
+func (o DeploymentAssociationIdSettingsOutput) ToDeploymentAssociationIdSettingsOutput() DeploymentAssociationIdSettingsOutput {
 	return o
 }
 
-func (o DeploymentSettingsOutput) ToDeploymentSettingsOutputWithContext(ctx context.Context) DeploymentSettingsOutput {
+func (o DeploymentAssociationIdSettingsOutput) ToDeploymentAssociationIdSettingsOutputWithContext(ctx context.Context) DeploymentAssociationIdSettingsOutput {
 	return o
 }
 
-func (o DeploymentSettingsOutput) ToDeploymentSettingsPtrOutput() DeploymentSettingsPtrOutput {
-	return o.ToDeploymentSettingsPtrOutputWithContext(context.Background())
+func (o DeploymentAssociationIdSettingsOutput) ToDeploymentAssociationIdSettingsPtrOutput() DeploymentAssociationIdSettingsPtrOutput {
+	return o.ToDeploymentAssociationIdSettingsPtrOutputWithContext(context.Background())
 }
 
-func (o DeploymentSettingsOutput) ToDeploymentSettingsPtrOutputWithContext(ctx context.Context) DeploymentSettingsPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v DeploymentSettings) *DeploymentSettings {
+func (o DeploymentAssociationIdSettingsOutput) ToDeploymentAssociationIdSettingsPtrOutputWithContext(ctx context.Context) DeploymentAssociationIdSettingsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DeploymentAssociationIdSettings) *DeploymentAssociationIdSettings {
 		return &v
-	}).(DeploymentSettingsPtrOutput)
+	}).(DeploymentAssociationIdSettingsPtrOutput)
 }
 
-// Used to associate predictions back to your actual data.
-func (o DeploymentSettingsOutput) AssociationId() DeploymentSettingsAssociationIdPtrOutput {
-	return o.ApplyT(func(v DeploymentSettings) *DeploymentSettingsAssociationId { return v.AssociationId }).(DeploymentSettingsAssociationIdPtrOutput)
+// Whether to auto generate ID.
+func (o DeploymentAssociationIdSettingsOutput) AutoGenerateId() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v DeploymentAssociationIdSettings) *bool { return v.AutoGenerateId }).(pulumi.BoolPtrOutput)
 }
 
-// Used to compare the performance of the deployed model with the challenger models.
-func (o DeploymentSettingsOutput) ChallengerAnalysis() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v DeploymentSettings) *bool { return v.ChallengerAnalysis }).(pulumi.BoolPtrOutput)
+// Name of the columns to be used as association ID, currently only support a list of one string.
+func (o DeploymentAssociationIdSettingsOutput) ColumnNames() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v DeploymentAssociationIdSettings) []string { return v.ColumnNames }).(pulumi.StringArrayOutput)
 }
 
-// Used to score predictions made by the challenger models and compare performance with the deployed model.
-func (o DeploymentSettingsOutput) PredictionRowStorage() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v DeploymentSettings) *bool { return v.PredictionRowStorage }).(pulumi.BoolPtrOutput)
+// Whether the association ID column is required in prediction requests.
+func (o DeploymentAssociationIdSettingsOutput) RequiredInPredictionRequests() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v DeploymentAssociationIdSettings) *bool { return v.RequiredInPredictionRequests }).(pulumi.BoolPtrOutput)
 }
 
-// Settings for the predictions.
-func (o DeploymentSettingsOutput) PredictionsSettings() DeploymentSettingsPredictionsSettingsPtrOutput {
-	return o.ApplyT(func(v DeploymentSettings) *DeploymentSettingsPredictionsSettings { return v.PredictionsSettings }).(DeploymentSettingsPredictionsSettingsPtrOutput)
+type DeploymentAssociationIdSettingsPtrOutput struct{ *pulumi.OutputState }
+
+func (DeploymentAssociationIdSettingsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentAssociationIdSettings)(nil)).Elem()
 }
 
-type DeploymentSettingsPtrOutput struct{ *pulumi.OutputState }
-
-func (DeploymentSettingsPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**DeploymentSettings)(nil)).Elem()
-}
-
-func (o DeploymentSettingsPtrOutput) ToDeploymentSettingsPtrOutput() DeploymentSettingsPtrOutput {
+func (o DeploymentAssociationIdSettingsPtrOutput) ToDeploymentAssociationIdSettingsPtrOutput() DeploymentAssociationIdSettingsPtrOutput {
 	return o
 }
 
-func (o DeploymentSettingsPtrOutput) ToDeploymentSettingsPtrOutputWithContext(ctx context.Context) DeploymentSettingsPtrOutput {
+func (o DeploymentAssociationIdSettingsPtrOutput) ToDeploymentAssociationIdSettingsPtrOutputWithContext(ctx context.Context) DeploymentAssociationIdSettingsPtrOutput {
 	return o
 }
 
-func (o DeploymentSettingsPtrOutput) Elem() DeploymentSettingsOutput {
-	return o.ApplyT(func(v *DeploymentSettings) DeploymentSettings {
+func (o DeploymentAssociationIdSettingsPtrOutput) Elem() DeploymentAssociationIdSettingsOutput {
+	return o.ApplyT(func(v *DeploymentAssociationIdSettings) DeploymentAssociationIdSettings {
 		if v != nil {
 			return *v
 		}
-		var ret DeploymentSettings
+		var ret DeploymentAssociationIdSettings
 		return ret
-	}).(DeploymentSettingsOutput)
+	}).(DeploymentAssociationIdSettingsOutput)
 }
 
-// Used to associate predictions back to your actual data.
-func (o DeploymentSettingsPtrOutput) AssociationId() DeploymentSettingsAssociationIdPtrOutput {
-	return o.ApplyT(func(v *DeploymentSettings) *DeploymentSettingsAssociationId {
+// Whether to auto generate ID.
+func (o DeploymentAssociationIdSettingsPtrOutput) AutoGenerateId() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *DeploymentAssociationIdSettings) *bool {
 		if v == nil {
 			return nil
 		}
-		return v.AssociationId
-	}).(DeploymentSettingsAssociationIdPtrOutput)
-}
-
-// Used to compare the performance of the deployed model with the challenger models.
-func (o DeploymentSettingsPtrOutput) ChallengerAnalysis() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v *DeploymentSettings) *bool {
-		if v == nil {
-			return nil
-		}
-		return v.ChallengerAnalysis
+		return v.AutoGenerateId
 	}).(pulumi.BoolPtrOutput)
 }
 
-// Used to score predictions made by the challenger models and compare performance with the deployed model.
-func (o DeploymentSettingsPtrOutput) PredictionRowStorage() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v *DeploymentSettings) *bool {
+// Name of the columns to be used as association ID, currently only support a list of one string.
+func (o DeploymentAssociationIdSettingsPtrOutput) ColumnNames() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *DeploymentAssociationIdSettings) []string {
 		if v == nil {
 			return nil
 		}
-		return v.PredictionRowStorage
+		return v.ColumnNames
+	}).(pulumi.StringArrayOutput)
+}
+
+// Whether the association ID column is required in prediction requests.
+func (o DeploymentAssociationIdSettingsPtrOutput) RequiredInPredictionRequests() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *DeploymentAssociationIdSettings) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.RequiredInPredictionRequests
 	}).(pulumi.BoolPtrOutput)
 }
 
-// Settings for the predictions.
-func (o DeploymentSettingsPtrOutput) PredictionsSettings() DeploymentSettingsPredictionsSettingsPtrOutput {
-	return o.ApplyT(func(v *DeploymentSettings) *DeploymentSettingsPredictionsSettings {
-		if v == nil {
-			return nil
-		}
-		return v.PredictionsSettings
-	}).(DeploymentSettingsPredictionsSettingsPtrOutput)
+type DeploymentBiasAndFairnessSettings struct {
+	// A set of fairness metrics to use for calculating fairness.
+	FairnessMetricSet string `pulumi:"fairnessMetricSet"`
+	// Threshold value of the fairness metric. Cannot be less than 0 or greater than 1.
+	FairnessThreshold float64 `pulumi:"fairnessThreshold"`
+	// A target value that should be treated as a positive outcome for the prediction.
+	PreferableTargetValue bool `pulumi:"preferableTargetValue"`
+	// A list of features to mark as protected.
+	ProtectedFeatures []string `pulumi:"protectedFeatures"`
 }
 
-type DeploymentSettingsAssociationId struct {
-	// Whether to automatically generate an association ID.
-	AutoGenerateId bool `pulumi:"autoGenerateId"`
-	// The name of the feature to use as the association ID.
-	FeatureName string `pulumi:"featureName"`
-	// Whether the association ID is required in prediction requests.
-	RequiredInPredictionRequests bool `pulumi:"requiredInPredictionRequests"`
-}
-
-// DeploymentSettingsAssociationIdInput is an input type that accepts DeploymentSettingsAssociationIdArgs and DeploymentSettingsAssociationIdOutput values.
-// You can construct a concrete instance of `DeploymentSettingsAssociationIdInput` via:
+// DeploymentBiasAndFairnessSettingsInput is an input type that accepts DeploymentBiasAndFairnessSettingsArgs and DeploymentBiasAndFairnessSettingsOutput values.
+// You can construct a concrete instance of `DeploymentBiasAndFairnessSettingsInput` via:
 //
-//	DeploymentSettingsAssociationIdArgs{...}
-type DeploymentSettingsAssociationIdInput interface {
+//	DeploymentBiasAndFairnessSettingsArgs{...}
+type DeploymentBiasAndFairnessSettingsInput interface {
 	pulumi.Input
 
-	ToDeploymentSettingsAssociationIdOutput() DeploymentSettingsAssociationIdOutput
-	ToDeploymentSettingsAssociationIdOutputWithContext(context.Context) DeploymentSettingsAssociationIdOutput
+	ToDeploymentBiasAndFairnessSettingsOutput() DeploymentBiasAndFairnessSettingsOutput
+	ToDeploymentBiasAndFairnessSettingsOutputWithContext(context.Context) DeploymentBiasAndFairnessSettingsOutput
 }
 
-type DeploymentSettingsAssociationIdArgs struct {
-	// Whether to automatically generate an association ID.
-	AutoGenerateId pulumi.BoolInput `pulumi:"autoGenerateId"`
-	// The name of the feature to use as the association ID.
-	FeatureName pulumi.StringInput `pulumi:"featureName"`
-	// Whether the association ID is required in prediction requests.
-	RequiredInPredictionRequests pulumi.BoolInput `pulumi:"requiredInPredictionRequests"`
+type DeploymentBiasAndFairnessSettingsArgs struct {
+	// A set of fairness metrics to use for calculating fairness.
+	FairnessMetricSet pulumi.StringInput `pulumi:"fairnessMetricSet"`
+	// Threshold value of the fairness metric. Cannot be less than 0 or greater than 1.
+	FairnessThreshold pulumi.Float64Input `pulumi:"fairnessThreshold"`
+	// A target value that should be treated as a positive outcome for the prediction.
+	PreferableTargetValue pulumi.BoolInput `pulumi:"preferableTargetValue"`
+	// A list of features to mark as protected.
+	ProtectedFeatures pulumi.StringArrayInput `pulumi:"protectedFeatures"`
 }
 
-func (DeploymentSettingsAssociationIdArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*DeploymentSettingsAssociationId)(nil)).Elem()
+func (DeploymentBiasAndFairnessSettingsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentBiasAndFairnessSettings)(nil)).Elem()
 }
 
-func (i DeploymentSettingsAssociationIdArgs) ToDeploymentSettingsAssociationIdOutput() DeploymentSettingsAssociationIdOutput {
-	return i.ToDeploymentSettingsAssociationIdOutputWithContext(context.Background())
+func (i DeploymentBiasAndFairnessSettingsArgs) ToDeploymentBiasAndFairnessSettingsOutput() DeploymentBiasAndFairnessSettingsOutput {
+	return i.ToDeploymentBiasAndFairnessSettingsOutputWithContext(context.Background())
 }
 
-func (i DeploymentSettingsAssociationIdArgs) ToDeploymentSettingsAssociationIdOutputWithContext(ctx context.Context) DeploymentSettingsAssociationIdOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DeploymentSettingsAssociationIdOutput)
+func (i DeploymentBiasAndFairnessSettingsArgs) ToDeploymentBiasAndFairnessSettingsOutputWithContext(ctx context.Context) DeploymentBiasAndFairnessSettingsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentBiasAndFairnessSettingsOutput)
 }
 
-func (i DeploymentSettingsAssociationIdArgs) ToDeploymentSettingsAssociationIdPtrOutput() DeploymentSettingsAssociationIdPtrOutput {
-	return i.ToDeploymentSettingsAssociationIdPtrOutputWithContext(context.Background())
+func (i DeploymentBiasAndFairnessSettingsArgs) ToDeploymentBiasAndFairnessSettingsPtrOutput() DeploymentBiasAndFairnessSettingsPtrOutput {
+	return i.ToDeploymentBiasAndFairnessSettingsPtrOutputWithContext(context.Background())
 }
 
-func (i DeploymentSettingsAssociationIdArgs) ToDeploymentSettingsAssociationIdPtrOutputWithContext(ctx context.Context) DeploymentSettingsAssociationIdPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DeploymentSettingsAssociationIdOutput).ToDeploymentSettingsAssociationIdPtrOutputWithContext(ctx)
+func (i DeploymentBiasAndFairnessSettingsArgs) ToDeploymentBiasAndFairnessSettingsPtrOutputWithContext(ctx context.Context) DeploymentBiasAndFairnessSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentBiasAndFairnessSettingsOutput).ToDeploymentBiasAndFairnessSettingsPtrOutputWithContext(ctx)
 }
 
-// DeploymentSettingsAssociationIdPtrInput is an input type that accepts DeploymentSettingsAssociationIdArgs, DeploymentSettingsAssociationIdPtr and DeploymentSettingsAssociationIdPtrOutput values.
-// You can construct a concrete instance of `DeploymentSettingsAssociationIdPtrInput` via:
+// DeploymentBiasAndFairnessSettingsPtrInput is an input type that accepts DeploymentBiasAndFairnessSettingsArgs, DeploymentBiasAndFairnessSettingsPtr and DeploymentBiasAndFairnessSettingsPtrOutput values.
+// You can construct a concrete instance of `DeploymentBiasAndFairnessSettingsPtrInput` via:
 //
-//	        DeploymentSettingsAssociationIdArgs{...}
+//	        DeploymentBiasAndFairnessSettingsArgs{...}
 //
 //	or:
 //
 //	        nil
-type DeploymentSettingsAssociationIdPtrInput interface {
+type DeploymentBiasAndFairnessSettingsPtrInput interface {
 	pulumi.Input
 
-	ToDeploymentSettingsAssociationIdPtrOutput() DeploymentSettingsAssociationIdPtrOutput
-	ToDeploymentSettingsAssociationIdPtrOutputWithContext(context.Context) DeploymentSettingsAssociationIdPtrOutput
+	ToDeploymentBiasAndFairnessSettingsPtrOutput() DeploymentBiasAndFairnessSettingsPtrOutput
+	ToDeploymentBiasAndFairnessSettingsPtrOutputWithContext(context.Context) DeploymentBiasAndFairnessSettingsPtrOutput
 }
 
-type deploymentSettingsAssociationIdPtrType DeploymentSettingsAssociationIdArgs
+type deploymentBiasAndFairnessSettingsPtrType DeploymentBiasAndFairnessSettingsArgs
 
-func DeploymentSettingsAssociationIdPtr(v *DeploymentSettingsAssociationIdArgs) DeploymentSettingsAssociationIdPtrInput {
-	return (*deploymentSettingsAssociationIdPtrType)(v)
+func DeploymentBiasAndFairnessSettingsPtr(v *DeploymentBiasAndFairnessSettingsArgs) DeploymentBiasAndFairnessSettingsPtrInput {
+	return (*deploymentBiasAndFairnessSettingsPtrType)(v)
 }
 
-func (*deploymentSettingsAssociationIdPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**DeploymentSettingsAssociationId)(nil)).Elem()
+func (*deploymentBiasAndFairnessSettingsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentBiasAndFairnessSettings)(nil)).Elem()
 }
 
-func (i *deploymentSettingsAssociationIdPtrType) ToDeploymentSettingsAssociationIdPtrOutput() DeploymentSettingsAssociationIdPtrOutput {
-	return i.ToDeploymentSettingsAssociationIdPtrOutputWithContext(context.Background())
+func (i *deploymentBiasAndFairnessSettingsPtrType) ToDeploymentBiasAndFairnessSettingsPtrOutput() DeploymentBiasAndFairnessSettingsPtrOutput {
+	return i.ToDeploymentBiasAndFairnessSettingsPtrOutputWithContext(context.Background())
 }
 
-func (i *deploymentSettingsAssociationIdPtrType) ToDeploymentSettingsAssociationIdPtrOutputWithContext(ctx context.Context) DeploymentSettingsAssociationIdPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DeploymentSettingsAssociationIdPtrOutput)
+func (i *deploymentBiasAndFairnessSettingsPtrType) ToDeploymentBiasAndFairnessSettingsPtrOutputWithContext(ctx context.Context) DeploymentBiasAndFairnessSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentBiasAndFairnessSettingsPtrOutput)
 }
 
-type DeploymentSettingsAssociationIdOutput struct{ *pulumi.OutputState }
+type DeploymentBiasAndFairnessSettingsOutput struct{ *pulumi.OutputState }
 
-func (DeploymentSettingsAssociationIdOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*DeploymentSettingsAssociationId)(nil)).Elem()
+func (DeploymentBiasAndFairnessSettingsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentBiasAndFairnessSettings)(nil)).Elem()
 }
 
-func (o DeploymentSettingsAssociationIdOutput) ToDeploymentSettingsAssociationIdOutput() DeploymentSettingsAssociationIdOutput {
+func (o DeploymentBiasAndFairnessSettingsOutput) ToDeploymentBiasAndFairnessSettingsOutput() DeploymentBiasAndFairnessSettingsOutput {
 	return o
 }
 
-func (o DeploymentSettingsAssociationIdOutput) ToDeploymentSettingsAssociationIdOutputWithContext(ctx context.Context) DeploymentSettingsAssociationIdOutput {
+func (o DeploymentBiasAndFairnessSettingsOutput) ToDeploymentBiasAndFairnessSettingsOutputWithContext(ctx context.Context) DeploymentBiasAndFairnessSettingsOutput {
 	return o
 }
 
-func (o DeploymentSettingsAssociationIdOutput) ToDeploymentSettingsAssociationIdPtrOutput() DeploymentSettingsAssociationIdPtrOutput {
-	return o.ToDeploymentSettingsAssociationIdPtrOutputWithContext(context.Background())
+func (o DeploymentBiasAndFairnessSettingsOutput) ToDeploymentBiasAndFairnessSettingsPtrOutput() DeploymentBiasAndFairnessSettingsPtrOutput {
+	return o.ToDeploymentBiasAndFairnessSettingsPtrOutputWithContext(context.Background())
 }
 
-func (o DeploymentSettingsAssociationIdOutput) ToDeploymentSettingsAssociationIdPtrOutputWithContext(ctx context.Context) DeploymentSettingsAssociationIdPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v DeploymentSettingsAssociationId) *DeploymentSettingsAssociationId {
+func (o DeploymentBiasAndFairnessSettingsOutput) ToDeploymentBiasAndFairnessSettingsPtrOutputWithContext(ctx context.Context) DeploymentBiasAndFairnessSettingsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DeploymentBiasAndFairnessSettings) *DeploymentBiasAndFairnessSettings {
 		return &v
-	}).(DeploymentSettingsAssociationIdPtrOutput)
+	}).(DeploymentBiasAndFairnessSettingsPtrOutput)
 }
 
-// Whether to automatically generate an association ID.
-func (o DeploymentSettingsAssociationIdOutput) AutoGenerateId() pulumi.BoolOutput {
-	return o.ApplyT(func(v DeploymentSettingsAssociationId) bool { return v.AutoGenerateId }).(pulumi.BoolOutput)
+// A set of fairness metrics to use for calculating fairness.
+func (o DeploymentBiasAndFairnessSettingsOutput) FairnessMetricSet() pulumi.StringOutput {
+	return o.ApplyT(func(v DeploymentBiasAndFairnessSettings) string { return v.FairnessMetricSet }).(pulumi.StringOutput)
 }
 
-// The name of the feature to use as the association ID.
-func (o DeploymentSettingsAssociationIdOutput) FeatureName() pulumi.StringOutput {
-	return o.ApplyT(func(v DeploymentSettingsAssociationId) string { return v.FeatureName }).(pulumi.StringOutput)
+// Threshold value of the fairness metric. Cannot be less than 0 or greater than 1.
+func (o DeploymentBiasAndFairnessSettingsOutput) FairnessThreshold() pulumi.Float64Output {
+	return o.ApplyT(func(v DeploymentBiasAndFairnessSettings) float64 { return v.FairnessThreshold }).(pulumi.Float64Output)
 }
 
-// Whether the association ID is required in prediction requests.
-func (o DeploymentSettingsAssociationIdOutput) RequiredInPredictionRequests() pulumi.BoolOutput {
-	return o.ApplyT(func(v DeploymentSettingsAssociationId) bool { return v.RequiredInPredictionRequests }).(pulumi.BoolOutput)
+// A target value that should be treated as a positive outcome for the prediction.
+func (o DeploymentBiasAndFairnessSettingsOutput) PreferableTargetValue() pulumi.BoolOutput {
+	return o.ApplyT(func(v DeploymentBiasAndFairnessSettings) bool { return v.PreferableTargetValue }).(pulumi.BoolOutput)
 }
 
-type DeploymentSettingsAssociationIdPtrOutput struct{ *pulumi.OutputState }
-
-func (DeploymentSettingsAssociationIdPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**DeploymentSettingsAssociationId)(nil)).Elem()
+// A list of features to mark as protected.
+func (o DeploymentBiasAndFairnessSettingsOutput) ProtectedFeatures() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v DeploymentBiasAndFairnessSettings) []string { return v.ProtectedFeatures }).(pulumi.StringArrayOutput)
 }
 
-func (o DeploymentSettingsAssociationIdPtrOutput) ToDeploymentSettingsAssociationIdPtrOutput() DeploymentSettingsAssociationIdPtrOutput {
+type DeploymentBiasAndFairnessSettingsPtrOutput struct{ *pulumi.OutputState }
+
+func (DeploymentBiasAndFairnessSettingsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentBiasAndFairnessSettings)(nil)).Elem()
+}
+
+func (o DeploymentBiasAndFairnessSettingsPtrOutput) ToDeploymentBiasAndFairnessSettingsPtrOutput() DeploymentBiasAndFairnessSettingsPtrOutput {
 	return o
 }
 
-func (o DeploymentSettingsAssociationIdPtrOutput) ToDeploymentSettingsAssociationIdPtrOutputWithContext(ctx context.Context) DeploymentSettingsAssociationIdPtrOutput {
+func (o DeploymentBiasAndFairnessSettingsPtrOutput) ToDeploymentBiasAndFairnessSettingsPtrOutputWithContext(ctx context.Context) DeploymentBiasAndFairnessSettingsPtrOutput {
 	return o
 }
 
-func (o DeploymentSettingsAssociationIdPtrOutput) Elem() DeploymentSettingsAssociationIdOutput {
-	return o.ApplyT(func(v *DeploymentSettingsAssociationId) DeploymentSettingsAssociationId {
+func (o DeploymentBiasAndFairnessSettingsPtrOutput) Elem() DeploymentBiasAndFairnessSettingsOutput {
+	return o.ApplyT(func(v *DeploymentBiasAndFairnessSettings) DeploymentBiasAndFairnessSettings {
 		if v != nil {
 			return *v
 		}
-		var ret DeploymentSettingsAssociationId
+		var ret DeploymentBiasAndFairnessSettings
 		return ret
-	}).(DeploymentSettingsAssociationIdOutput)
+	}).(DeploymentBiasAndFairnessSettingsOutput)
 }
 
-// Whether to automatically generate an association ID.
-func (o DeploymentSettingsAssociationIdPtrOutput) AutoGenerateId() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v *DeploymentSettingsAssociationId) *bool {
+// A set of fairness metrics to use for calculating fairness.
+func (o DeploymentBiasAndFairnessSettingsPtrOutput) FairnessMetricSet() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DeploymentBiasAndFairnessSettings) *string {
 		if v == nil {
 			return nil
 		}
-		return &v.AutoGenerateId
-	}).(pulumi.BoolPtrOutput)
-}
-
-// The name of the feature to use as the association ID.
-func (o DeploymentSettingsAssociationIdPtrOutput) FeatureName() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *DeploymentSettingsAssociationId) *string {
-		if v == nil {
-			return nil
-		}
-		return &v.FeatureName
+		return &v.FairnessMetricSet
 	}).(pulumi.StringPtrOutput)
 }
 
-// Whether the association ID is required in prediction requests.
-func (o DeploymentSettingsAssociationIdPtrOutput) RequiredInPredictionRequests() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v *DeploymentSettingsAssociationId) *bool {
+// Threshold value of the fairness metric. Cannot be less than 0 or greater than 1.
+func (o DeploymentBiasAndFairnessSettingsPtrOutput) FairnessThreshold() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v *DeploymentBiasAndFairnessSettings) *float64 {
 		if v == nil {
 			return nil
 		}
-		return &v.RequiredInPredictionRequests
+		return &v.FairnessThreshold
+	}).(pulumi.Float64PtrOutput)
+}
+
+// A target value that should be treated as a positive outcome for the prediction.
+func (o DeploymentBiasAndFairnessSettingsPtrOutput) PreferableTargetValue() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *DeploymentBiasAndFairnessSettings) *bool {
+		if v == nil {
+			return nil
+		}
+		return &v.PreferableTargetValue
 	}).(pulumi.BoolPtrOutput)
 }
 
-type DeploymentSettingsPredictionsSettings struct {
+// A list of features to mark as protected.
+func (o DeploymentBiasAndFairnessSettingsPtrOutput) ProtectedFeatures() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *DeploymentBiasAndFairnessSettings) []string {
+		if v == nil {
+			return nil
+		}
+		return v.ProtectedFeatures
+	}).(pulumi.StringArrayOutput)
+}
+
+type DeploymentChallengerModelsSettings struct {
+	// Is 'True' if challenger models is enabled for this deployment.
+	Enabled bool `pulumi:"enabled"`
+}
+
+// DeploymentChallengerModelsSettingsInput is an input type that accepts DeploymentChallengerModelsSettingsArgs and DeploymentChallengerModelsSettingsOutput values.
+// You can construct a concrete instance of `DeploymentChallengerModelsSettingsInput` via:
+//
+//	DeploymentChallengerModelsSettingsArgs{...}
+type DeploymentChallengerModelsSettingsInput interface {
+	pulumi.Input
+
+	ToDeploymentChallengerModelsSettingsOutput() DeploymentChallengerModelsSettingsOutput
+	ToDeploymentChallengerModelsSettingsOutputWithContext(context.Context) DeploymentChallengerModelsSettingsOutput
+}
+
+type DeploymentChallengerModelsSettingsArgs struct {
+	// Is 'True' if challenger models is enabled for this deployment.
+	Enabled pulumi.BoolInput `pulumi:"enabled"`
+}
+
+func (DeploymentChallengerModelsSettingsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentChallengerModelsSettings)(nil)).Elem()
+}
+
+func (i DeploymentChallengerModelsSettingsArgs) ToDeploymentChallengerModelsSettingsOutput() DeploymentChallengerModelsSettingsOutput {
+	return i.ToDeploymentChallengerModelsSettingsOutputWithContext(context.Background())
+}
+
+func (i DeploymentChallengerModelsSettingsArgs) ToDeploymentChallengerModelsSettingsOutputWithContext(ctx context.Context) DeploymentChallengerModelsSettingsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentChallengerModelsSettingsOutput)
+}
+
+func (i DeploymentChallengerModelsSettingsArgs) ToDeploymentChallengerModelsSettingsPtrOutput() DeploymentChallengerModelsSettingsPtrOutput {
+	return i.ToDeploymentChallengerModelsSettingsPtrOutputWithContext(context.Background())
+}
+
+func (i DeploymentChallengerModelsSettingsArgs) ToDeploymentChallengerModelsSettingsPtrOutputWithContext(ctx context.Context) DeploymentChallengerModelsSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentChallengerModelsSettingsOutput).ToDeploymentChallengerModelsSettingsPtrOutputWithContext(ctx)
+}
+
+// DeploymentChallengerModelsSettingsPtrInput is an input type that accepts DeploymentChallengerModelsSettingsArgs, DeploymentChallengerModelsSettingsPtr and DeploymentChallengerModelsSettingsPtrOutput values.
+// You can construct a concrete instance of `DeploymentChallengerModelsSettingsPtrInput` via:
+//
+//	        DeploymentChallengerModelsSettingsArgs{...}
+//
+//	or:
+//
+//	        nil
+type DeploymentChallengerModelsSettingsPtrInput interface {
+	pulumi.Input
+
+	ToDeploymentChallengerModelsSettingsPtrOutput() DeploymentChallengerModelsSettingsPtrOutput
+	ToDeploymentChallengerModelsSettingsPtrOutputWithContext(context.Context) DeploymentChallengerModelsSettingsPtrOutput
+}
+
+type deploymentChallengerModelsSettingsPtrType DeploymentChallengerModelsSettingsArgs
+
+func DeploymentChallengerModelsSettingsPtr(v *DeploymentChallengerModelsSettingsArgs) DeploymentChallengerModelsSettingsPtrInput {
+	return (*deploymentChallengerModelsSettingsPtrType)(v)
+}
+
+func (*deploymentChallengerModelsSettingsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentChallengerModelsSettings)(nil)).Elem()
+}
+
+func (i *deploymentChallengerModelsSettingsPtrType) ToDeploymentChallengerModelsSettingsPtrOutput() DeploymentChallengerModelsSettingsPtrOutput {
+	return i.ToDeploymentChallengerModelsSettingsPtrOutputWithContext(context.Background())
+}
+
+func (i *deploymentChallengerModelsSettingsPtrType) ToDeploymentChallengerModelsSettingsPtrOutputWithContext(ctx context.Context) DeploymentChallengerModelsSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentChallengerModelsSettingsPtrOutput)
+}
+
+type DeploymentChallengerModelsSettingsOutput struct{ *pulumi.OutputState }
+
+func (DeploymentChallengerModelsSettingsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentChallengerModelsSettings)(nil)).Elem()
+}
+
+func (o DeploymentChallengerModelsSettingsOutput) ToDeploymentChallengerModelsSettingsOutput() DeploymentChallengerModelsSettingsOutput {
+	return o
+}
+
+func (o DeploymentChallengerModelsSettingsOutput) ToDeploymentChallengerModelsSettingsOutputWithContext(ctx context.Context) DeploymentChallengerModelsSettingsOutput {
+	return o
+}
+
+func (o DeploymentChallengerModelsSettingsOutput) ToDeploymentChallengerModelsSettingsPtrOutput() DeploymentChallengerModelsSettingsPtrOutput {
+	return o.ToDeploymentChallengerModelsSettingsPtrOutputWithContext(context.Background())
+}
+
+func (o DeploymentChallengerModelsSettingsOutput) ToDeploymentChallengerModelsSettingsPtrOutputWithContext(ctx context.Context) DeploymentChallengerModelsSettingsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DeploymentChallengerModelsSettings) *DeploymentChallengerModelsSettings {
+		return &v
+	}).(DeploymentChallengerModelsSettingsPtrOutput)
+}
+
+// Is 'True' if challenger models is enabled for this deployment.
+func (o DeploymentChallengerModelsSettingsOutput) Enabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v DeploymentChallengerModelsSettings) bool { return v.Enabled }).(pulumi.BoolOutput)
+}
+
+type DeploymentChallengerModelsSettingsPtrOutput struct{ *pulumi.OutputState }
+
+func (DeploymentChallengerModelsSettingsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentChallengerModelsSettings)(nil)).Elem()
+}
+
+func (o DeploymentChallengerModelsSettingsPtrOutput) ToDeploymentChallengerModelsSettingsPtrOutput() DeploymentChallengerModelsSettingsPtrOutput {
+	return o
+}
+
+func (o DeploymentChallengerModelsSettingsPtrOutput) ToDeploymentChallengerModelsSettingsPtrOutputWithContext(ctx context.Context) DeploymentChallengerModelsSettingsPtrOutput {
+	return o
+}
+
+func (o DeploymentChallengerModelsSettingsPtrOutput) Elem() DeploymentChallengerModelsSettingsOutput {
+	return o.ApplyT(func(v *DeploymentChallengerModelsSettings) DeploymentChallengerModelsSettings {
+		if v != nil {
+			return *v
+		}
+		var ret DeploymentChallengerModelsSettings
+		return ret
+	}).(DeploymentChallengerModelsSettingsOutput)
+}
+
+// Is 'True' if challenger models is enabled for this deployment.
+func (o DeploymentChallengerModelsSettingsPtrOutput) Enabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *DeploymentChallengerModelsSettings) *bool {
+		if v == nil {
+			return nil
+		}
+		return &v.Enabled
+	}).(pulumi.BoolPtrOutput)
+}
+
+type DeploymentChallengerReplaySettings struct {
+	// If challenger replay is enabled.
+	Enabled bool `pulumi:"enabled"`
+}
+
+// DeploymentChallengerReplaySettingsInput is an input type that accepts DeploymentChallengerReplaySettingsArgs and DeploymentChallengerReplaySettingsOutput values.
+// You can construct a concrete instance of `DeploymentChallengerReplaySettingsInput` via:
+//
+//	DeploymentChallengerReplaySettingsArgs{...}
+type DeploymentChallengerReplaySettingsInput interface {
+	pulumi.Input
+
+	ToDeploymentChallengerReplaySettingsOutput() DeploymentChallengerReplaySettingsOutput
+	ToDeploymentChallengerReplaySettingsOutputWithContext(context.Context) DeploymentChallengerReplaySettingsOutput
+}
+
+type DeploymentChallengerReplaySettingsArgs struct {
+	// If challenger replay is enabled.
+	Enabled pulumi.BoolInput `pulumi:"enabled"`
+}
+
+func (DeploymentChallengerReplaySettingsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentChallengerReplaySettings)(nil)).Elem()
+}
+
+func (i DeploymentChallengerReplaySettingsArgs) ToDeploymentChallengerReplaySettingsOutput() DeploymentChallengerReplaySettingsOutput {
+	return i.ToDeploymentChallengerReplaySettingsOutputWithContext(context.Background())
+}
+
+func (i DeploymentChallengerReplaySettingsArgs) ToDeploymentChallengerReplaySettingsOutputWithContext(ctx context.Context) DeploymentChallengerReplaySettingsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentChallengerReplaySettingsOutput)
+}
+
+func (i DeploymentChallengerReplaySettingsArgs) ToDeploymentChallengerReplaySettingsPtrOutput() DeploymentChallengerReplaySettingsPtrOutput {
+	return i.ToDeploymentChallengerReplaySettingsPtrOutputWithContext(context.Background())
+}
+
+func (i DeploymentChallengerReplaySettingsArgs) ToDeploymentChallengerReplaySettingsPtrOutputWithContext(ctx context.Context) DeploymentChallengerReplaySettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentChallengerReplaySettingsOutput).ToDeploymentChallengerReplaySettingsPtrOutputWithContext(ctx)
+}
+
+// DeploymentChallengerReplaySettingsPtrInput is an input type that accepts DeploymentChallengerReplaySettingsArgs, DeploymentChallengerReplaySettingsPtr and DeploymentChallengerReplaySettingsPtrOutput values.
+// You can construct a concrete instance of `DeploymentChallengerReplaySettingsPtrInput` via:
+//
+//	        DeploymentChallengerReplaySettingsArgs{...}
+//
+//	or:
+//
+//	        nil
+type DeploymentChallengerReplaySettingsPtrInput interface {
+	pulumi.Input
+
+	ToDeploymentChallengerReplaySettingsPtrOutput() DeploymentChallengerReplaySettingsPtrOutput
+	ToDeploymentChallengerReplaySettingsPtrOutputWithContext(context.Context) DeploymentChallengerReplaySettingsPtrOutput
+}
+
+type deploymentChallengerReplaySettingsPtrType DeploymentChallengerReplaySettingsArgs
+
+func DeploymentChallengerReplaySettingsPtr(v *DeploymentChallengerReplaySettingsArgs) DeploymentChallengerReplaySettingsPtrInput {
+	return (*deploymentChallengerReplaySettingsPtrType)(v)
+}
+
+func (*deploymentChallengerReplaySettingsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentChallengerReplaySettings)(nil)).Elem()
+}
+
+func (i *deploymentChallengerReplaySettingsPtrType) ToDeploymentChallengerReplaySettingsPtrOutput() DeploymentChallengerReplaySettingsPtrOutput {
+	return i.ToDeploymentChallengerReplaySettingsPtrOutputWithContext(context.Background())
+}
+
+func (i *deploymentChallengerReplaySettingsPtrType) ToDeploymentChallengerReplaySettingsPtrOutputWithContext(ctx context.Context) DeploymentChallengerReplaySettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentChallengerReplaySettingsPtrOutput)
+}
+
+type DeploymentChallengerReplaySettingsOutput struct{ *pulumi.OutputState }
+
+func (DeploymentChallengerReplaySettingsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentChallengerReplaySettings)(nil)).Elem()
+}
+
+func (o DeploymentChallengerReplaySettingsOutput) ToDeploymentChallengerReplaySettingsOutput() DeploymentChallengerReplaySettingsOutput {
+	return o
+}
+
+func (o DeploymentChallengerReplaySettingsOutput) ToDeploymentChallengerReplaySettingsOutputWithContext(ctx context.Context) DeploymentChallengerReplaySettingsOutput {
+	return o
+}
+
+func (o DeploymentChallengerReplaySettingsOutput) ToDeploymentChallengerReplaySettingsPtrOutput() DeploymentChallengerReplaySettingsPtrOutput {
+	return o.ToDeploymentChallengerReplaySettingsPtrOutputWithContext(context.Background())
+}
+
+func (o DeploymentChallengerReplaySettingsOutput) ToDeploymentChallengerReplaySettingsPtrOutputWithContext(ctx context.Context) DeploymentChallengerReplaySettingsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DeploymentChallengerReplaySettings) *DeploymentChallengerReplaySettings {
+		return &v
+	}).(DeploymentChallengerReplaySettingsPtrOutput)
+}
+
+// If challenger replay is enabled.
+func (o DeploymentChallengerReplaySettingsOutput) Enabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v DeploymentChallengerReplaySettings) bool { return v.Enabled }).(pulumi.BoolOutput)
+}
+
+type DeploymentChallengerReplaySettingsPtrOutput struct{ *pulumi.OutputState }
+
+func (DeploymentChallengerReplaySettingsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentChallengerReplaySettings)(nil)).Elem()
+}
+
+func (o DeploymentChallengerReplaySettingsPtrOutput) ToDeploymentChallengerReplaySettingsPtrOutput() DeploymentChallengerReplaySettingsPtrOutput {
+	return o
+}
+
+func (o DeploymentChallengerReplaySettingsPtrOutput) ToDeploymentChallengerReplaySettingsPtrOutputWithContext(ctx context.Context) DeploymentChallengerReplaySettingsPtrOutput {
+	return o
+}
+
+func (o DeploymentChallengerReplaySettingsPtrOutput) Elem() DeploymentChallengerReplaySettingsOutput {
+	return o.ApplyT(func(v *DeploymentChallengerReplaySettings) DeploymentChallengerReplaySettings {
+		if v != nil {
+			return *v
+		}
+		var ret DeploymentChallengerReplaySettings
+		return ret
+	}).(DeploymentChallengerReplaySettingsOutput)
+}
+
+// If challenger replay is enabled.
+func (o DeploymentChallengerReplaySettingsPtrOutput) Enabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *DeploymentChallengerReplaySettings) *bool {
+		if v == nil {
+			return nil
+		}
+		return &v.Enabled
+	}).(pulumi.BoolPtrOutput)
+}
+
+type DeploymentDriftTrackingSettings struct {
+	// If feature drift tracking is to be turned on.
+	FeatureDriftEnabled *bool `pulumi:"featureDriftEnabled"`
+	// If target drift tracking is to be turned on.
+	TargetDriftEnabled *bool `pulumi:"targetDriftEnabled"`
+}
+
+// DeploymentDriftTrackingSettingsInput is an input type that accepts DeploymentDriftTrackingSettingsArgs and DeploymentDriftTrackingSettingsOutput values.
+// You can construct a concrete instance of `DeploymentDriftTrackingSettingsInput` via:
+//
+//	DeploymentDriftTrackingSettingsArgs{...}
+type DeploymentDriftTrackingSettingsInput interface {
+	pulumi.Input
+
+	ToDeploymentDriftTrackingSettingsOutput() DeploymentDriftTrackingSettingsOutput
+	ToDeploymentDriftTrackingSettingsOutputWithContext(context.Context) DeploymentDriftTrackingSettingsOutput
+}
+
+type DeploymentDriftTrackingSettingsArgs struct {
+	// If feature drift tracking is to be turned on.
+	FeatureDriftEnabled pulumi.BoolPtrInput `pulumi:"featureDriftEnabled"`
+	// If target drift tracking is to be turned on.
+	TargetDriftEnabled pulumi.BoolPtrInput `pulumi:"targetDriftEnabled"`
+}
+
+func (DeploymentDriftTrackingSettingsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentDriftTrackingSettings)(nil)).Elem()
+}
+
+func (i DeploymentDriftTrackingSettingsArgs) ToDeploymentDriftTrackingSettingsOutput() DeploymentDriftTrackingSettingsOutput {
+	return i.ToDeploymentDriftTrackingSettingsOutputWithContext(context.Background())
+}
+
+func (i DeploymentDriftTrackingSettingsArgs) ToDeploymentDriftTrackingSettingsOutputWithContext(ctx context.Context) DeploymentDriftTrackingSettingsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentDriftTrackingSettingsOutput)
+}
+
+func (i DeploymentDriftTrackingSettingsArgs) ToDeploymentDriftTrackingSettingsPtrOutput() DeploymentDriftTrackingSettingsPtrOutput {
+	return i.ToDeploymentDriftTrackingSettingsPtrOutputWithContext(context.Background())
+}
+
+func (i DeploymentDriftTrackingSettingsArgs) ToDeploymentDriftTrackingSettingsPtrOutputWithContext(ctx context.Context) DeploymentDriftTrackingSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentDriftTrackingSettingsOutput).ToDeploymentDriftTrackingSettingsPtrOutputWithContext(ctx)
+}
+
+// DeploymentDriftTrackingSettingsPtrInput is an input type that accepts DeploymentDriftTrackingSettingsArgs, DeploymentDriftTrackingSettingsPtr and DeploymentDriftTrackingSettingsPtrOutput values.
+// You can construct a concrete instance of `DeploymentDriftTrackingSettingsPtrInput` via:
+//
+//	        DeploymentDriftTrackingSettingsArgs{...}
+//
+//	or:
+//
+//	        nil
+type DeploymentDriftTrackingSettingsPtrInput interface {
+	pulumi.Input
+
+	ToDeploymentDriftTrackingSettingsPtrOutput() DeploymentDriftTrackingSettingsPtrOutput
+	ToDeploymentDriftTrackingSettingsPtrOutputWithContext(context.Context) DeploymentDriftTrackingSettingsPtrOutput
+}
+
+type deploymentDriftTrackingSettingsPtrType DeploymentDriftTrackingSettingsArgs
+
+func DeploymentDriftTrackingSettingsPtr(v *DeploymentDriftTrackingSettingsArgs) DeploymentDriftTrackingSettingsPtrInput {
+	return (*deploymentDriftTrackingSettingsPtrType)(v)
+}
+
+func (*deploymentDriftTrackingSettingsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentDriftTrackingSettings)(nil)).Elem()
+}
+
+func (i *deploymentDriftTrackingSettingsPtrType) ToDeploymentDriftTrackingSettingsPtrOutput() DeploymentDriftTrackingSettingsPtrOutput {
+	return i.ToDeploymentDriftTrackingSettingsPtrOutputWithContext(context.Background())
+}
+
+func (i *deploymentDriftTrackingSettingsPtrType) ToDeploymentDriftTrackingSettingsPtrOutputWithContext(ctx context.Context) DeploymentDriftTrackingSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentDriftTrackingSettingsPtrOutput)
+}
+
+type DeploymentDriftTrackingSettingsOutput struct{ *pulumi.OutputState }
+
+func (DeploymentDriftTrackingSettingsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentDriftTrackingSettings)(nil)).Elem()
+}
+
+func (o DeploymentDriftTrackingSettingsOutput) ToDeploymentDriftTrackingSettingsOutput() DeploymentDriftTrackingSettingsOutput {
+	return o
+}
+
+func (o DeploymentDriftTrackingSettingsOutput) ToDeploymentDriftTrackingSettingsOutputWithContext(ctx context.Context) DeploymentDriftTrackingSettingsOutput {
+	return o
+}
+
+func (o DeploymentDriftTrackingSettingsOutput) ToDeploymentDriftTrackingSettingsPtrOutput() DeploymentDriftTrackingSettingsPtrOutput {
+	return o.ToDeploymentDriftTrackingSettingsPtrOutputWithContext(context.Background())
+}
+
+func (o DeploymentDriftTrackingSettingsOutput) ToDeploymentDriftTrackingSettingsPtrOutputWithContext(ctx context.Context) DeploymentDriftTrackingSettingsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DeploymentDriftTrackingSettings) *DeploymentDriftTrackingSettings {
+		return &v
+	}).(DeploymentDriftTrackingSettingsPtrOutput)
+}
+
+// If feature drift tracking is to be turned on.
+func (o DeploymentDriftTrackingSettingsOutput) FeatureDriftEnabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v DeploymentDriftTrackingSettings) *bool { return v.FeatureDriftEnabled }).(pulumi.BoolPtrOutput)
+}
+
+// If target drift tracking is to be turned on.
+func (o DeploymentDriftTrackingSettingsOutput) TargetDriftEnabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v DeploymentDriftTrackingSettings) *bool { return v.TargetDriftEnabled }).(pulumi.BoolPtrOutput)
+}
+
+type DeploymentDriftTrackingSettingsPtrOutput struct{ *pulumi.OutputState }
+
+func (DeploymentDriftTrackingSettingsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentDriftTrackingSettings)(nil)).Elem()
+}
+
+func (o DeploymentDriftTrackingSettingsPtrOutput) ToDeploymentDriftTrackingSettingsPtrOutput() DeploymentDriftTrackingSettingsPtrOutput {
+	return o
+}
+
+func (o DeploymentDriftTrackingSettingsPtrOutput) ToDeploymentDriftTrackingSettingsPtrOutputWithContext(ctx context.Context) DeploymentDriftTrackingSettingsPtrOutput {
+	return o
+}
+
+func (o DeploymentDriftTrackingSettingsPtrOutput) Elem() DeploymentDriftTrackingSettingsOutput {
+	return o.ApplyT(func(v *DeploymentDriftTrackingSettings) DeploymentDriftTrackingSettings {
+		if v != nil {
+			return *v
+		}
+		var ret DeploymentDriftTrackingSettings
+		return ret
+	}).(DeploymentDriftTrackingSettingsOutput)
+}
+
+// If feature drift tracking is to be turned on.
+func (o DeploymentDriftTrackingSettingsPtrOutput) FeatureDriftEnabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *DeploymentDriftTrackingSettings) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.FeatureDriftEnabled
+	}).(pulumi.BoolPtrOutput)
+}
+
+// If target drift tracking is to be turned on.
+func (o DeploymentDriftTrackingSettingsPtrOutput) TargetDriftEnabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *DeploymentDriftTrackingSettings) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.TargetDriftEnabled
+	}).(pulumi.BoolPtrOutput)
+}
+
+type DeploymentHealthSettings struct {
+	// The accuracy health settings for this Deployment.
+	Accuracy *DeploymentHealthSettingsAccuracy `pulumi:"accuracy"`
+	// The actuals timeliness health settings for this Deployment.
+	ActualsTimeliness *DeploymentHealthSettingsActualsTimeliness `pulumi:"actualsTimeliness"`
+	// The custom metrics health settings for this Deployment.
+	CustomMetrics *DeploymentHealthSettingsCustomMetrics `pulumi:"customMetrics"`
+	// The data drift health settings for this Deployment.
+	DataDrift *DeploymentHealthSettingsDataDrift `pulumi:"dataDrift"`
+	// The fairness health settings for this Deployment.
+	Fairness *DeploymentHealthSettingsFairness `pulumi:"fairness"`
+	// The predictions timeliness health settings for this Deployment.
+	PredictionsTimeliness *DeploymentHealthSettingsPredictionsTimeliness `pulumi:"predictionsTimeliness"`
+	// The service health settings for this Deployment.
+	Service *DeploymentHealthSettingsService `pulumi:"service"`
+}
+
+// DeploymentHealthSettingsInput is an input type that accepts DeploymentHealthSettingsArgs and DeploymentHealthSettingsOutput values.
+// You can construct a concrete instance of `DeploymentHealthSettingsInput` via:
+//
+//	DeploymentHealthSettingsArgs{...}
+type DeploymentHealthSettingsInput interface {
+	pulumi.Input
+
+	ToDeploymentHealthSettingsOutput() DeploymentHealthSettingsOutput
+	ToDeploymentHealthSettingsOutputWithContext(context.Context) DeploymentHealthSettingsOutput
+}
+
+type DeploymentHealthSettingsArgs struct {
+	// The accuracy health settings for this Deployment.
+	Accuracy DeploymentHealthSettingsAccuracyPtrInput `pulumi:"accuracy"`
+	// The actuals timeliness health settings for this Deployment.
+	ActualsTimeliness DeploymentHealthSettingsActualsTimelinessPtrInput `pulumi:"actualsTimeliness"`
+	// The custom metrics health settings for this Deployment.
+	CustomMetrics DeploymentHealthSettingsCustomMetricsPtrInput `pulumi:"customMetrics"`
+	// The data drift health settings for this Deployment.
+	DataDrift DeploymentHealthSettingsDataDriftPtrInput `pulumi:"dataDrift"`
+	// The fairness health settings for this Deployment.
+	Fairness DeploymentHealthSettingsFairnessPtrInput `pulumi:"fairness"`
+	// The predictions timeliness health settings for this Deployment.
+	PredictionsTimeliness DeploymentHealthSettingsPredictionsTimelinessPtrInput `pulumi:"predictionsTimeliness"`
+	// The service health settings for this Deployment.
+	Service DeploymentHealthSettingsServicePtrInput `pulumi:"service"`
+}
+
+func (DeploymentHealthSettingsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentHealthSettings)(nil)).Elem()
+}
+
+func (i DeploymentHealthSettingsArgs) ToDeploymentHealthSettingsOutput() DeploymentHealthSettingsOutput {
+	return i.ToDeploymentHealthSettingsOutputWithContext(context.Background())
+}
+
+func (i DeploymentHealthSettingsArgs) ToDeploymentHealthSettingsOutputWithContext(ctx context.Context) DeploymentHealthSettingsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentHealthSettingsOutput)
+}
+
+func (i DeploymentHealthSettingsArgs) ToDeploymentHealthSettingsPtrOutput() DeploymentHealthSettingsPtrOutput {
+	return i.ToDeploymentHealthSettingsPtrOutputWithContext(context.Background())
+}
+
+func (i DeploymentHealthSettingsArgs) ToDeploymentHealthSettingsPtrOutputWithContext(ctx context.Context) DeploymentHealthSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentHealthSettingsOutput).ToDeploymentHealthSettingsPtrOutputWithContext(ctx)
+}
+
+// DeploymentHealthSettingsPtrInput is an input type that accepts DeploymentHealthSettingsArgs, DeploymentHealthSettingsPtr and DeploymentHealthSettingsPtrOutput values.
+// You can construct a concrete instance of `DeploymentHealthSettingsPtrInput` via:
+//
+//	        DeploymentHealthSettingsArgs{...}
+//
+//	or:
+//
+//	        nil
+type DeploymentHealthSettingsPtrInput interface {
+	pulumi.Input
+
+	ToDeploymentHealthSettingsPtrOutput() DeploymentHealthSettingsPtrOutput
+	ToDeploymentHealthSettingsPtrOutputWithContext(context.Context) DeploymentHealthSettingsPtrOutput
+}
+
+type deploymentHealthSettingsPtrType DeploymentHealthSettingsArgs
+
+func DeploymentHealthSettingsPtr(v *DeploymentHealthSettingsArgs) DeploymentHealthSettingsPtrInput {
+	return (*deploymentHealthSettingsPtrType)(v)
+}
+
+func (*deploymentHealthSettingsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentHealthSettings)(nil)).Elem()
+}
+
+func (i *deploymentHealthSettingsPtrType) ToDeploymentHealthSettingsPtrOutput() DeploymentHealthSettingsPtrOutput {
+	return i.ToDeploymentHealthSettingsPtrOutputWithContext(context.Background())
+}
+
+func (i *deploymentHealthSettingsPtrType) ToDeploymentHealthSettingsPtrOutputWithContext(ctx context.Context) DeploymentHealthSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentHealthSettingsPtrOutput)
+}
+
+type DeploymentHealthSettingsOutput struct{ *pulumi.OutputState }
+
+func (DeploymentHealthSettingsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentHealthSettings)(nil)).Elem()
+}
+
+func (o DeploymentHealthSettingsOutput) ToDeploymentHealthSettingsOutput() DeploymentHealthSettingsOutput {
+	return o
+}
+
+func (o DeploymentHealthSettingsOutput) ToDeploymentHealthSettingsOutputWithContext(ctx context.Context) DeploymentHealthSettingsOutput {
+	return o
+}
+
+func (o DeploymentHealthSettingsOutput) ToDeploymentHealthSettingsPtrOutput() DeploymentHealthSettingsPtrOutput {
+	return o.ToDeploymentHealthSettingsPtrOutputWithContext(context.Background())
+}
+
+func (o DeploymentHealthSettingsOutput) ToDeploymentHealthSettingsPtrOutputWithContext(ctx context.Context) DeploymentHealthSettingsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DeploymentHealthSettings) *DeploymentHealthSettings {
+		return &v
+	}).(DeploymentHealthSettingsPtrOutput)
+}
+
+// The accuracy health settings for this Deployment.
+func (o DeploymentHealthSettingsOutput) Accuracy() DeploymentHealthSettingsAccuracyPtrOutput {
+	return o.ApplyT(func(v DeploymentHealthSettings) *DeploymentHealthSettingsAccuracy { return v.Accuracy }).(DeploymentHealthSettingsAccuracyPtrOutput)
+}
+
+// The actuals timeliness health settings for this Deployment.
+func (o DeploymentHealthSettingsOutput) ActualsTimeliness() DeploymentHealthSettingsActualsTimelinessPtrOutput {
+	return o.ApplyT(func(v DeploymentHealthSettings) *DeploymentHealthSettingsActualsTimeliness {
+		return v.ActualsTimeliness
+	}).(DeploymentHealthSettingsActualsTimelinessPtrOutput)
+}
+
+// The custom metrics health settings for this Deployment.
+func (o DeploymentHealthSettingsOutput) CustomMetrics() DeploymentHealthSettingsCustomMetricsPtrOutput {
+	return o.ApplyT(func(v DeploymentHealthSettings) *DeploymentHealthSettingsCustomMetrics { return v.CustomMetrics }).(DeploymentHealthSettingsCustomMetricsPtrOutput)
+}
+
+// The data drift health settings for this Deployment.
+func (o DeploymentHealthSettingsOutput) DataDrift() DeploymentHealthSettingsDataDriftPtrOutput {
+	return o.ApplyT(func(v DeploymentHealthSettings) *DeploymentHealthSettingsDataDrift { return v.DataDrift }).(DeploymentHealthSettingsDataDriftPtrOutput)
+}
+
+// The fairness health settings for this Deployment.
+func (o DeploymentHealthSettingsOutput) Fairness() DeploymentHealthSettingsFairnessPtrOutput {
+	return o.ApplyT(func(v DeploymentHealthSettings) *DeploymentHealthSettingsFairness { return v.Fairness }).(DeploymentHealthSettingsFairnessPtrOutput)
+}
+
+// The predictions timeliness health settings for this Deployment.
+func (o DeploymentHealthSettingsOutput) PredictionsTimeliness() DeploymentHealthSettingsPredictionsTimelinessPtrOutput {
+	return o.ApplyT(func(v DeploymentHealthSettings) *DeploymentHealthSettingsPredictionsTimeliness {
+		return v.PredictionsTimeliness
+	}).(DeploymentHealthSettingsPredictionsTimelinessPtrOutput)
+}
+
+// The service health settings for this Deployment.
+func (o DeploymentHealthSettingsOutput) Service() DeploymentHealthSettingsServicePtrOutput {
+	return o.ApplyT(func(v DeploymentHealthSettings) *DeploymentHealthSettingsService { return v.Service }).(DeploymentHealthSettingsServicePtrOutput)
+}
+
+type DeploymentHealthSettingsPtrOutput struct{ *pulumi.OutputState }
+
+func (DeploymentHealthSettingsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentHealthSettings)(nil)).Elem()
+}
+
+func (o DeploymentHealthSettingsPtrOutput) ToDeploymentHealthSettingsPtrOutput() DeploymentHealthSettingsPtrOutput {
+	return o
+}
+
+func (o DeploymentHealthSettingsPtrOutput) ToDeploymentHealthSettingsPtrOutputWithContext(ctx context.Context) DeploymentHealthSettingsPtrOutput {
+	return o
+}
+
+func (o DeploymentHealthSettingsPtrOutput) Elem() DeploymentHealthSettingsOutput {
+	return o.ApplyT(func(v *DeploymentHealthSettings) DeploymentHealthSettings {
+		if v != nil {
+			return *v
+		}
+		var ret DeploymentHealthSettings
+		return ret
+	}).(DeploymentHealthSettingsOutput)
+}
+
+// The accuracy health settings for this Deployment.
+func (o DeploymentHealthSettingsPtrOutput) Accuracy() DeploymentHealthSettingsAccuracyPtrOutput {
+	return o.ApplyT(func(v *DeploymentHealthSettings) *DeploymentHealthSettingsAccuracy {
+		if v == nil {
+			return nil
+		}
+		return v.Accuracy
+	}).(DeploymentHealthSettingsAccuracyPtrOutput)
+}
+
+// The actuals timeliness health settings for this Deployment.
+func (o DeploymentHealthSettingsPtrOutput) ActualsTimeliness() DeploymentHealthSettingsActualsTimelinessPtrOutput {
+	return o.ApplyT(func(v *DeploymentHealthSettings) *DeploymentHealthSettingsActualsTimeliness {
+		if v == nil {
+			return nil
+		}
+		return v.ActualsTimeliness
+	}).(DeploymentHealthSettingsActualsTimelinessPtrOutput)
+}
+
+// The custom metrics health settings for this Deployment.
+func (o DeploymentHealthSettingsPtrOutput) CustomMetrics() DeploymentHealthSettingsCustomMetricsPtrOutput {
+	return o.ApplyT(func(v *DeploymentHealthSettings) *DeploymentHealthSettingsCustomMetrics {
+		if v == nil {
+			return nil
+		}
+		return v.CustomMetrics
+	}).(DeploymentHealthSettingsCustomMetricsPtrOutput)
+}
+
+// The data drift health settings for this Deployment.
+func (o DeploymentHealthSettingsPtrOutput) DataDrift() DeploymentHealthSettingsDataDriftPtrOutput {
+	return o.ApplyT(func(v *DeploymentHealthSettings) *DeploymentHealthSettingsDataDrift {
+		if v == nil {
+			return nil
+		}
+		return v.DataDrift
+	}).(DeploymentHealthSettingsDataDriftPtrOutput)
+}
+
+// The fairness health settings for this Deployment.
+func (o DeploymentHealthSettingsPtrOutput) Fairness() DeploymentHealthSettingsFairnessPtrOutput {
+	return o.ApplyT(func(v *DeploymentHealthSettings) *DeploymentHealthSettingsFairness {
+		if v == nil {
+			return nil
+		}
+		return v.Fairness
+	}).(DeploymentHealthSettingsFairnessPtrOutput)
+}
+
+// The predictions timeliness health settings for this Deployment.
+func (o DeploymentHealthSettingsPtrOutput) PredictionsTimeliness() DeploymentHealthSettingsPredictionsTimelinessPtrOutput {
+	return o.ApplyT(func(v *DeploymentHealthSettings) *DeploymentHealthSettingsPredictionsTimeliness {
+		if v == nil {
+			return nil
+		}
+		return v.PredictionsTimeliness
+	}).(DeploymentHealthSettingsPredictionsTimelinessPtrOutput)
+}
+
+// The service health settings for this Deployment.
+func (o DeploymentHealthSettingsPtrOutput) Service() DeploymentHealthSettingsServicePtrOutput {
+	return o.ApplyT(func(v *DeploymentHealthSettings) *DeploymentHealthSettingsService {
+		if v == nil {
+			return nil
+		}
+		return v.Service
+	}).(DeploymentHealthSettingsServicePtrOutput)
+}
+
+type DeploymentHealthSettingsAccuracy struct {
+	// The batch count for the accuracy health settings.
+	BatchCount *int `pulumi:"batchCount"`
+	// The failing threshold for the accuracy health settings.
+	FailingThreshold *float64 `pulumi:"failingThreshold"`
+	// The measurement for the accuracy health settings.
+	Measurement *string `pulumi:"measurement"`
+	// The metric for the accuracy health settings.
+	Metric *string `pulumi:"metric"`
+	// The warning threshold for the accuracy health settings.
+	WarningThreshold *float64 `pulumi:"warningThreshold"`
+}
+
+// DeploymentHealthSettingsAccuracyInput is an input type that accepts DeploymentHealthSettingsAccuracyArgs and DeploymentHealthSettingsAccuracyOutput values.
+// You can construct a concrete instance of `DeploymentHealthSettingsAccuracyInput` via:
+//
+//	DeploymentHealthSettingsAccuracyArgs{...}
+type DeploymentHealthSettingsAccuracyInput interface {
+	pulumi.Input
+
+	ToDeploymentHealthSettingsAccuracyOutput() DeploymentHealthSettingsAccuracyOutput
+	ToDeploymentHealthSettingsAccuracyOutputWithContext(context.Context) DeploymentHealthSettingsAccuracyOutput
+}
+
+type DeploymentHealthSettingsAccuracyArgs struct {
+	// The batch count for the accuracy health settings.
+	BatchCount pulumi.IntPtrInput `pulumi:"batchCount"`
+	// The failing threshold for the accuracy health settings.
+	FailingThreshold pulumi.Float64PtrInput `pulumi:"failingThreshold"`
+	// The measurement for the accuracy health settings.
+	Measurement pulumi.StringPtrInput `pulumi:"measurement"`
+	// The metric for the accuracy health settings.
+	Metric pulumi.StringPtrInput `pulumi:"metric"`
+	// The warning threshold for the accuracy health settings.
+	WarningThreshold pulumi.Float64PtrInput `pulumi:"warningThreshold"`
+}
+
+func (DeploymentHealthSettingsAccuracyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentHealthSettingsAccuracy)(nil)).Elem()
+}
+
+func (i DeploymentHealthSettingsAccuracyArgs) ToDeploymentHealthSettingsAccuracyOutput() DeploymentHealthSettingsAccuracyOutput {
+	return i.ToDeploymentHealthSettingsAccuracyOutputWithContext(context.Background())
+}
+
+func (i DeploymentHealthSettingsAccuracyArgs) ToDeploymentHealthSettingsAccuracyOutputWithContext(ctx context.Context) DeploymentHealthSettingsAccuracyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentHealthSettingsAccuracyOutput)
+}
+
+func (i DeploymentHealthSettingsAccuracyArgs) ToDeploymentHealthSettingsAccuracyPtrOutput() DeploymentHealthSettingsAccuracyPtrOutput {
+	return i.ToDeploymentHealthSettingsAccuracyPtrOutputWithContext(context.Background())
+}
+
+func (i DeploymentHealthSettingsAccuracyArgs) ToDeploymentHealthSettingsAccuracyPtrOutputWithContext(ctx context.Context) DeploymentHealthSettingsAccuracyPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentHealthSettingsAccuracyOutput).ToDeploymentHealthSettingsAccuracyPtrOutputWithContext(ctx)
+}
+
+// DeploymentHealthSettingsAccuracyPtrInput is an input type that accepts DeploymentHealthSettingsAccuracyArgs, DeploymentHealthSettingsAccuracyPtr and DeploymentHealthSettingsAccuracyPtrOutput values.
+// You can construct a concrete instance of `DeploymentHealthSettingsAccuracyPtrInput` via:
+//
+//	        DeploymentHealthSettingsAccuracyArgs{...}
+//
+//	or:
+//
+//	        nil
+type DeploymentHealthSettingsAccuracyPtrInput interface {
+	pulumi.Input
+
+	ToDeploymentHealthSettingsAccuracyPtrOutput() DeploymentHealthSettingsAccuracyPtrOutput
+	ToDeploymentHealthSettingsAccuracyPtrOutputWithContext(context.Context) DeploymentHealthSettingsAccuracyPtrOutput
+}
+
+type deploymentHealthSettingsAccuracyPtrType DeploymentHealthSettingsAccuracyArgs
+
+func DeploymentHealthSettingsAccuracyPtr(v *DeploymentHealthSettingsAccuracyArgs) DeploymentHealthSettingsAccuracyPtrInput {
+	return (*deploymentHealthSettingsAccuracyPtrType)(v)
+}
+
+func (*deploymentHealthSettingsAccuracyPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentHealthSettingsAccuracy)(nil)).Elem()
+}
+
+func (i *deploymentHealthSettingsAccuracyPtrType) ToDeploymentHealthSettingsAccuracyPtrOutput() DeploymentHealthSettingsAccuracyPtrOutput {
+	return i.ToDeploymentHealthSettingsAccuracyPtrOutputWithContext(context.Background())
+}
+
+func (i *deploymentHealthSettingsAccuracyPtrType) ToDeploymentHealthSettingsAccuracyPtrOutputWithContext(ctx context.Context) DeploymentHealthSettingsAccuracyPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentHealthSettingsAccuracyPtrOutput)
+}
+
+type DeploymentHealthSettingsAccuracyOutput struct{ *pulumi.OutputState }
+
+func (DeploymentHealthSettingsAccuracyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentHealthSettingsAccuracy)(nil)).Elem()
+}
+
+func (o DeploymentHealthSettingsAccuracyOutput) ToDeploymentHealthSettingsAccuracyOutput() DeploymentHealthSettingsAccuracyOutput {
+	return o
+}
+
+func (o DeploymentHealthSettingsAccuracyOutput) ToDeploymentHealthSettingsAccuracyOutputWithContext(ctx context.Context) DeploymentHealthSettingsAccuracyOutput {
+	return o
+}
+
+func (o DeploymentHealthSettingsAccuracyOutput) ToDeploymentHealthSettingsAccuracyPtrOutput() DeploymentHealthSettingsAccuracyPtrOutput {
+	return o.ToDeploymentHealthSettingsAccuracyPtrOutputWithContext(context.Background())
+}
+
+func (o DeploymentHealthSettingsAccuracyOutput) ToDeploymentHealthSettingsAccuracyPtrOutputWithContext(ctx context.Context) DeploymentHealthSettingsAccuracyPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DeploymentHealthSettingsAccuracy) *DeploymentHealthSettingsAccuracy {
+		return &v
+	}).(DeploymentHealthSettingsAccuracyPtrOutput)
+}
+
+// The batch count for the accuracy health settings.
+func (o DeploymentHealthSettingsAccuracyOutput) BatchCount() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v DeploymentHealthSettingsAccuracy) *int { return v.BatchCount }).(pulumi.IntPtrOutput)
+}
+
+// The failing threshold for the accuracy health settings.
+func (o DeploymentHealthSettingsAccuracyOutput) FailingThreshold() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v DeploymentHealthSettingsAccuracy) *float64 { return v.FailingThreshold }).(pulumi.Float64PtrOutput)
+}
+
+// The measurement for the accuracy health settings.
+func (o DeploymentHealthSettingsAccuracyOutput) Measurement() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DeploymentHealthSettingsAccuracy) *string { return v.Measurement }).(pulumi.StringPtrOutput)
+}
+
+// The metric for the accuracy health settings.
+func (o DeploymentHealthSettingsAccuracyOutput) Metric() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DeploymentHealthSettingsAccuracy) *string { return v.Metric }).(pulumi.StringPtrOutput)
+}
+
+// The warning threshold for the accuracy health settings.
+func (o DeploymentHealthSettingsAccuracyOutput) WarningThreshold() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v DeploymentHealthSettingsAccuracy) *float64 { return v.WarningThreshold }).(pulumi.Float64PtrOutput)
+}
+
+type DeploymentHealthSettingsAccuracyPtrOutput struct{ *pulumi.OutputState }
+
+func (DeploymentHealthSettingsAccuracyPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentHealthSettingsAccuracy)(nil)).Elem()
+}
+
+func (o DeploymentHealthSettingsAccuracyPtrOutput) ToDeploymentHealthSettingsAccuracyPtrOutput() DeploymentHealthSettingsAccuracyPtrOutput {
+	return o
+}
+
+func (o DeploymentHealthSettingsAccuracyPtrOutput) ToDeploymentHealthSettingsAccuracyPtrOutputWithContext(ctx context.Context) DeploymentHealthSettingsAccuracyPtrOutput {
+	return o
+}
+
+func (o DeploymentHealthSettingsAccuracyPtrOutput) Elem() DeploymentHealthSettingsAccuracyOutput {
+	return o.ApplyT(func(v *DeploymentHealthSettingsAccuracy) DeploymentHealthSettingsAccuracy {
+		if v != nil {
+			return *v
+		}
+		var ret DeploymentHealthSettingsAccuracy
+		return ret
+	}).(DeploymentHealthSettingsAccuracyOutput)
+}
+
+// The batch count for the accuracy health settings.
+func (o DeploymentHealthSettingsAccuracyPtrOutput) BatchCount() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DeploymentHealthSettingsAccuracy) *int {
+		if v == nil {
+			return nil
+		}
+		return v.BatchCount
+	}).(pulumi.IntPtrOutput)
+}
+
+// The failing threshold for the accuracy health settings.
+func (o DeploymentHealthSettingsAccuracyPtrOutput) FailingThreshold() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v *DeploymentHealthSettingsAccuracy) *float64 {
+		if v == nil {
+			return nil
+		}
+		return v.FailingThreshold
+	}).(pulumi.Float64PtrOutput)
+}
+
+// The measurement for the accuracy health settings.
+func (o DeploymentHealthSettingsAccuracyPtrOutput) Measurement() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DeploymentHealthSettingsAccuracy) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Measurement
+	}).(pulumi.StringPtrOutput)
+}
+
+// The metric for the accuracy health settings.
+func (o DeploymentHealthSettingsAccuracyPtrOutput) Metric() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DeploymentHealthSettingsAccuracy) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Metric
+	}).(pulumi.StringPtrOutput)
+}
+
+// The warning threshold for the accuracy health settings.
+func (o DeploymentHealthSettingsAccuracyPtrOutput) WarningThreshold() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v *DeploymentHealthSettingsAccuracy) *float64 {
+		if v == nil {
+			return nil
+		}
+		return v.WarningThreshold
+	}).(pulumi.Float64PtrOutput)
+}
+
+type DeploymentHealthSettingsActualsTimeliness struct {
+	// If acutals timeliness is enabled for this Deployment.
+	Enabled bool `pulumi:"enabled"`
+	// The expected frequency for the actuals timeliness health settings.
+	ExpectedFrequency *string `pulumi:"expectedFrequency"`
+}
+
+// DeploymentHealthSettingsActualsTimelinessInput is an input type that accepts DeploymentHealthSettingsActualsTimelinessArgs and DeploymentHealthSettingsActualsTimelinessOutput values.
+// You can construct a concrete instance of `DeploymentHealthSettingsActualsTimelinessInput` via:
+//
+//	DeploymentHealthSettingsActualsTimelinessArgs{...}
+type DeploymentHealthSettingsActualsTimelinessInput interface {
+	pulumi.Input
+
+	ToDeploymentHealthSettingsActualsTimelinessOutput() DeploymentHealthSettingsActualsTimelinessOutput
+	ToDeploymentHealthSettingsActualsTimelinessOutputWithContext(context.Context) DeploymentHealthSettingsActualsTimelinessOutput
+}
+
+type DeploymentHealthSettingsActualsTimelinessArgs struct {
+	// If acutals timeliness is enabled for this Deployment.
+	Enabled pulumi.BoolInput `pulumi:"enabled"`
+	// The expected frequency for the actuals timeliness health settings.
+	ExpectedFrequency pulumi.StringPtrInput `pulumi:"expectedFrequency"`
+}
+
+func (DeploymentHealthSettingsActualsTimelinessArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentHealthSettingsActualsTimeliness)(nil)).Elem()
+}
+
+func (i DeploymentHealthSettingsActualsTimelinessArgs) ToDeploymentHealthSettingsActualsTimelinessOutput() DeploymentHealthSettingsActualsTimelinessOutput {
+	return i.ToDeploymentHealthSettingsActualsTimelinessOutputWithContext(context.Background())
+}
+
+func (i DeploymentHealthSettingsActualsTimelinessArgs) ToDeploymentHealthSettingsActualsTimelinessOutputWithContext(ctx context.Context) DeploymentHealthSettingsActualsTimelinessOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentHealthSettingsActualsTimelinessOutput)
+}
+
+func (i DeploymentHealthSettingsActualsTimelinessArgs) ToDeploymentHealthSettingsActualsTimelinessPtrOutput() DeploymentHealthSettingsActualsTimelinessPtrOutput {
+	return i.ToDeploymentHealthSettingsActualsTimelinessPtrOutputWithContext(context.Background())
+}
+
+func (i DeploymentHealthSettingsActualsTimelinessArgs) ToDeploymentHealthSettingsActualsTimelinessPtrOutputWithContext(ctx context.Context) DeploymentHealthSettingsActualsTimelinessPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentHealthSettingsActualsTimelinessOutput).ToDeploymentHealthSettingsActualsTimelinessPtrOutputWithContext(ctx)
+}
+
+// DeploymentHealthSettingsActualsTimelinessPtrInput is an input type that accepts DeploymentHealthSettingsActualsTimelinessArgs, DeploymentHealthSettingsActualsTimelinessPtr and DeploymentHealthSettingsActualsTimelinessPtrOutput values.
+// You can construct a concrete instance of `DeploymentHealthSettingsActualsTimelinessPtrInput` via:
+//
+//	        DeploymentHealthSettingsActualsTimelinessArgs{...}
+//
+//	or:
+//
+//	        nil
+type DeploymentHealthSettingsActualsTimelinessPtrInput interface {
+	pulumi.Input
+
+	ToDeploymentHealthSettingsActualsTimelinessPtrOutput() DeploymentHealthSettingsActualsTimelinessPtrOutput
+	ToDeploymentHealthSettingsActualsTimelinessPtrOutputWithContext(context.Context) DeploymentHealthSettingsActualsTimelinessPtrOutput
+}
+
+type deploymentHealthSettingsActualsTimelinessPtrType DeploymentHealthSettingsActualsTimelinessArgs
+
+func DeploymentHealthSettingsActualsTimelinessPtr(v *DeploymentHealthSettingsActualsTimelinessArgs) DeploymentHealthSettingsActualsTimelinessPtrInput {
+	return (*deploymentHealthSettingsActualsTimelinessPtrType)(v)
+}
+
+func (*deploymentHealthSettingsActualsTimelinessPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentHealthSettingsActualsTimeliness)(nil)).Elem()
+}
+
+func (i *deploymentHealthSettingsActualsTimelinessPtrType) ToDeploymentHealthSettingsActualsTimelinessPtrOutput() DeploymentHealthSettingsActualsTimelinessPtrOutput {
+	return i.ToDeploymentHealthSettingsActualsTimelinessPtrOutputWithContext(context.Background())
+}
+
+func (i *deploymentHealthSettingsActualsTimelinessPtrType) ToDeploymentHealthSettingsActualsTimelinessPtrOutputWithContext(ctx context.Context) DeploymentHealthSettingsActualsTimelinessPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentHealthSettingsActualsTimelinessPtrOutput)
+}
+
+type DeploymentHealthSettingsActualsTimelinessOutput struct{ *pulumi.OutputState }
+
+func (DeploymentHealthSettingsActualsTimelinessOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentHealthSettingsActualsTimeliness)(nil)).Elem()
+}
+
+func (o DeploymentHealthSettingsActualsTimelinessOutput) ToDeploymentHealthSettingsActualsTimelinessOutput() DeploymentHealthSettingsActualsTimelinessOutput {
+	return o
+}
+
+func (o DeploymentHealthSettingsActualsTimelinessOutput) ToDeploymentHealthSettingsActualsTimelinessOutputWithContext(ctx context.Context) DeploymentHealthSettingsActualsTimelinessOutput {
+	return o
+}
+
+func (o DeploymentHealthSettingsActualsTimelinessOutput) ToDeploymentHealthSettingsActualsTimelinessPtrOutput() DeploymentHealthSettingsActualsTimelinessPtrOutput {
+	return o.ToDeploymentHealthSettingsActualsTimelinessPtrOutputWithContext(context.Background())
+}
+
+func (o DeploymentHealthSettingsActualsTimelinessOutput) ToDeploymentHealthSettingsActualsTimelinessPtrOutputWithContext(ctx context.Context) DeploymentHealthSettingsActualsTimelinessPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DeploymentHealthSettingsActualsTimeliness) *DeploymentHealthSettingsActualsTimeliness {
+		return &v
+	}).(DeploymentHealthSettingsActualsTimelinessPtrOutput)
+}
+
+// If acutals timeliness is enabled for this Deployment.
+func (o DeploymentHealthSettingsActualsTimelinessOutput) Enabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v DeploymentHealthSettingsActualsTimeliness) bool { return v.Enabled }).(pulumi.BoolOutput)
+}
+
+// The expected frequency for the actuals timeliness health settings.
+func (o DeploymentHealthSettingsActualsTimelinessOutput) ExpectedFrequency() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DeploymentHealthSettingsActualsTimeliness) *string { return v.ExpectedFrequency }).(pulumi.StringPtrOutput)
+}
+
+type DeploymentHealthSettingsActualsTimelinessPtrOutput struct{ *pulumi.OutputState }
+
+func (DeploymentHealthSettingsActualsTimelinessPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentHealthSettingsActualsTimeliness)(nil)).Elem()
+}
+
+func (o DeploymentHealthSettingsActualsTimelinessPtrOutput) ToDeploymentHealthSettingsActualsTimelinessPtrOutput() DeploymentHealthSettingsActualsTimelinessPtrOutput {
+	return o
+}
+
+func (o DeploymentHealthSettingsActualsTimelinessPtrOutput) ToDeploymentHealthSettingsActualsTimelinessPtrOutputWithContext(ctx context.Context) DeploymentHealthSettingsActualsTimelinessPtrOutput {
+	return o
+}
+
+func (o DeploymentHealthSettingsActualsTimelinessPtrOutput) Elem() DeploymentHealthSettingsActualsTimelinessOutput {
+	return o.ApplyT(func(v *DeploymentHealthSettingsActualsTimeliness) DeploymentHealthSettingsActualsTimeliness {
+		if v != nil {
+			return *v
+		}
+		var ret DeploymentHealthSettingsActualsTimeliness
+		return ret
+	}).(DeploymentHealthSettingsActualsTimelinessOutput)
+}
+
+// If acutals timeliness is enabled for this Deployment.
+func (o DeploymentHealthSettingsActualsTimelinessPtrOutput) Enabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *DeploymentHealthSettingsActualsTimeliness) *bool {
+		if v == nil {
+			return nil
+		}
+		return &v.Enabled
+	}).(pulumi.BoolPtrOutput)
+}
+
+// The expected frequency for the actuals timeliness health settings.
+func (o DeploymentHealthSettingsActualsTimelinessPtrOutput) ExpectedFrequency() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DeploymentHealthSettingsActualsTimeliness) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ExpectedFrequency
+	}).(pulumi.StringPtrOutput)
+}
+
+type DeploymentHealthSettingsCustomMetrics struct {
+	// The failing conditions for the custom metrics health settings.
+	FailingConditions []DeploymentHealthSettingsCustomMetricsFailingCondition `pulumi:"failingConditions"`
+	// The warning conditions for the custom metrics health settings.
+	WarningConditions []DeploymentHealthSettingsCustomMetricsWarningCondition `pulumi:"warningConditions"`
+}
+
+// DeploymentHealthSettingsCustomMetricsInput is an input type that accepts DeploymentHealthSettingsCustomMetricsArgs and DeploymentHealthSettingsCustomMetricsOutput values.
+// You can construct a concrete instance of `DeploymentHealthSettingsCustomMetricsInput` via:
+//
+//	DeploymentHealthSettingsCustomMetricsArgs{...}
+type DeploymentHealthSettingsCustomMetricsInput interface {
+	pulumi.Input
+
+	ToDeploymentHealthSettingsCustomMetricsOutput() DeploymentHealthSettingsCustomMetricsOutput
+	ToDeploymentHealthSettingsCustomMetricsOutputWithContext(context.Context) DeploymentHealthSettingsCustomMetricsOutput
+}
+
+type DeploymentHealthSettingsCustomMetricsArgs struct {
+	// The failing conditions for the custom metrics health settings.
+	FailingConditions DeploymentHealthSettingsCustomMetricsFailingConditionArrayInput `pulumi:"failingConditions"`
+	// The warning conditions for the custom metrics health settings.
+	WarningConditions DeploymentHealthSettingsCustomMetricsWarningConditionArrayInput `pulumi:"warningConditions"`
+}
+
+func (DeploymentHealthSettingsCustomMetricsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentHealthSettingsCustomMetrics)(nil)).Elem()
+}
+
+func (i DeploymentHealthSettingsCustomMetricsArgs) ToDeploymentHealthSettingsCustomMetricsOutput() DeploymentHealthSettingsCustomMetricsOutput {
+	return i.ToDeploymentHealthSettingsCustomMetricsOutputWithContext(context.Background())
+}
+
+func (i DeploymentHealthSettingsCustomMetricsArgs) ToDeploymentHealthSettingsCustomMetricsOutputWithContext(ctx context.Context) DeploymentHealthSettingsCustomMetricsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentHealthSettingsCustomMetricsOutput)
+}
+
+func (i DeploymentHealthSettingsCustomMetricsArgs) ToDeploymentHealthSettingsCustomMetricsPtrOutput() DeploymentHealthSettingsCustomMetricsPtrOutput {
+	return i.ToDeploymentHealthSettingsCustomMetricsPtrOutputWithContext(context.Background())
+}
+
+func (i DeploymentHealthSettingsCustomMetricsArgs) ToDeploymentHealthSettingsCustomMetricsPtrOutputWithContext(ctx context.Context) DeploymentHealthSettingsCustomMetricsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentHealthSettingsCustomMetricsOutput).ToDeploymentHealthSettingsCustomMetricsPtrOutputWithContext(ctx)
+}
+
+// DeploymentHealthSettingsCustomMetricsPtrInput is an input type that accepts DeploymentHealthSettingsCustomMetricsArgs, DeploymentHealthSettingsCustomMetricsPtr and DeploymentHealthSettingsCustomMetricsPtrOutput values.
+// You can construct a concrete instance of `DeploymentHealthSettingsCustomMetricsPtrInput` via:
+//
+//	        DeploymentHealthSettingsCustomMetricsArgs{...}
+//
+//	or:
+//
+//	        nil
+type DeploymentHealthSettingsCustomMetricsPtrInput interface {
+	pulumi.Input
+
+	ToDeploymentHealthSettingsCustomMetricsPtrOutput() DeploymentHealthSettingsCustomMetricsPtrOutput
+	ToDeploymentHealthSettingsCustomMetricsPtrOutputWithContext(context.Context) DeploymentHealthSettingsCustomMetricsPtrOutput
+}
+
+type deploymentHealthSettingsCustomMetricsPtrType DeploymentHealthSettingsCustomMetricsArgs
+
+func DeploymentHealthSettingsCustomMetricsPtr(v *DeploymentHealthSettingsCustomMetricsArgs) DeploymentHealthSettingsCustomMetricsPtrInput {
+	return (*deploymentHealthSettingsCustomMetricsPtrType)(v)
+}
+
+func (*deploymentHealthSettingsCustomMetricsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentHealthSettingsCustomMetrics)(nil)).Elem()
+}
+
+func (i *deploymentHealthSettingsCustomMetricsPtrType) ToDeploymentHealthSettingsCustomMetricsPtrOutput() DeploymentHealthSettingsCustomMetricsPtrOutput {
+	return i.ToDeploymentHealthSettingsCustomMetricsPtrOutputWithContext(context.Background())
+}
+
+func (i *deploymentHealthSettingsCustomMetricsPtrType) ToDeploymentHealthSettingsCustomMetricsPtrOutputWithContext(ctx context.Context) DeploymentHealthSettingsCustomMetricsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentHealthSettingsCustomMetricsPtrOutput)
+}
+
+type DeploymentHealthSettingsCustomMetricsOutput struct{ *pulumi.OutputState }
+
+func (DeploymentHealthSettingsCustomMetricsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentHealthSettingsCustomMetrics)(nil)).Elem()
+}
+
+func (o DeploymentHealthSettingsCustomMetricsOutput) ToDeploymentHealthSettingsCustomMetricsOutput() DeploymentHealthSettingsCustomMetricsOutput {
+	return o
+}
+
+func (o DeploymentHealthSettingsCustomMetricsOutput) ToDeploymentHealthSettingsCustomMetricsOutputWithContext(ctx context.Context) DeploymentHealthSettingsCustomMetricsOutput {
+	return o
+}
+
+func (o DeploymentHealthSettingsCustomMetricsOutput) ToDeploymentHealthSettingsCustomMetricsPtrOutput() DeploymentHealthSettingsCustomMetricsPtrOutput {
+	return o.ToDeploymentHealthSettingsCustomMetricsPtrOutputWithContext(context.Background())
+}
+
+func (o DeploymentHealthSettingsCustomMetricsOutput) ToDeploymentHealthSettingsCustomMetricsPtrOutputWithContext(ctx context.Context) DeploymentHealthSettingsCustomMetricsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DeploymentHealthSettingsCustomMetrics) *DeploymentHealthSettingsCustomMetrics {
+		return &v
+	}).(DeploymentHealthSettingsCustomMetricsPtrOutput)
+}
+
+// The failing conditions for the custom metrics health settings.
+func (o DeploymentHealthSettingsCustomMetricsOutput) FailingConditions() DeploymentHealthSettingsCustomMetricsFailingConditionArrayOutput {
+	return o.ApplyT(func(v DeploymentHealthSettingsCustomMetrics) []DeploymentHealthSettingsCustomMetricsFailingCondition {
+		return v.FailingConditions
+	}).(DeploymentHealthSettingsCustomMetricsFailingConditionArrayOutput)
+}
+
+// The warning conditions for the custom metrics health settings.
+func (o DeploymentHealthSettingsCustomMetricsOutput) WarningConditions() DeploymentHealthSettingsCustomMetricsWarningConditionArrayOutput {
+	return o.ApplyT(func(v DeploymentHealthSettingsCustomMetrics) []DeploymentHealthSettingsCustomMetricsWarningCondition {
+		return v.WarningConditions
+	}).(DeploymentHealthSettingsCustomMetricsWarningConditionArrayOutput)
+}
+
+type DeploymentHealthSettingsCustomMetricsPtrOutput struct{ *pulumi.OutputState }
+
+func (DeploymentHealthSettingsCustomMetricsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentHealthSettingsCustomMetrics)(nil)).Elem()
+}
+
+func (o DeploymentHealthSettingsCustomMetricsPtrOutput) ToDeploymentHealthSettingsCustomMetricsPtrOutput() DeploymentHealthSettingsCustomMetricsPtrOutput {
+	return o
+}
+
+func (o DeploymentHealthSettingsCustomMetricsPtrOutput) ToDeploymentHealthSettingsCustomMetricsPtrOutputWithContext(ctx context.Context) DeploymentHealthSettingsCustomMetricsPtrOutput {
+	return o
+}
+
+func (o DeploymentHealthSettingsCustomMetricsPtrOutput) Elem() DeploymentHealthSettingsCustomMetricsOutput {
+	return o.ApplyT(func(v *DeploymentHealthSettingsCustomMetrics) DeploymentHealthSettingsCustomMetrics {
+		if v != nil {
+			return *v
+		}
+		var ret DeploymentHealthSettingsCustomMetrics
+		return ret
+	}).(DeploymentHealthSettingsCustomMetricsOutput)
+}
+
+// The failing conditions for the custom metrics health settings.
+func (o DeploymentHealthSettingsCustomMetricsPtrOutput) FailingConditions() DeploymentHealthSettingsCustomMetricsFailingConditionArrayOutput {
+	return o.ApplyT(func(v *DeploymentHealthSettingsCustomMetrics) []DeploymentHealthSettingsCustomMetricsFailingCondition {
+		if v == nil {
+			return nil
+		}
+		return v.FailingConditions
+	}).(DeploymentHealthSettingsCustomMetricsFailingConditionArrayOutput)
+}
+
+// The warning conditions for the custom metrics health settings.
+func (o DeploymentHealthSettingsCustomMetricsPtrOutput) WarningConditions() DeploymentHealthSettingsCustomMetricsWarningConditionArrayOutput {
+	return o.ApplyT(func(v *DeploymentHealthSettingsCustomMetrics) []DeploymentHealthSettingsCustomMetricsWarningCondition {
+		if v == nil {
+			return nil
+		}
+		return v.WarningConditions
+	}).(DeploymentHealthSettingsCustomMetricsWarningConditionArrayOutput)
+}
+
+type DeploymentHealthSettingsCustomMetricsFailingCondition struct {
+	// The compare operator for the failing condition of the custom metrics health settings.
+	CompareOperator string `pulumi:"compareOperator"`
+	// The metric ID for the failing condition of the custom metrics health settings.
+	MetricId string `pulumi:"metricId"`
+	// The threshold for the failing condition of the custom metrics health settings.
+	Threshold float64 `pulumi:"threshold"`
+}
+
+// DeploymentHealthSettingsCustomMetricsFailingConditionInput is an input type that accepts DeploymentHealthSettingsCustomMetricsFailingConditionArgs and DeploymentHealthSettingsCustomMetricsFailingConditionOutput values.
+// You can construct a concrete instance of `DeploymentHealthSettingsCustomMetricsFailingConditionInput` via:
+//
+//	DeploymentHealthSettingsCustomMetricsFailingConditionArgs{...}
+type DeploymentHealthSettingsCustomMetricsFailingConditionInput interface {
+	pulumi.Input
+
+	ToDeploymentHealthSettingsCustomMetricsFailingConditionOutput() DeploymentHealthSettingsCustomMetricsFailingConditionOutput
+	ToDeploymentHealthSettingsCustomMetricsFailingConditionOutputWithContext(context.Context) DeploymentHealthSettingsCustomMetricsFailingConditionOutput
+}
+
+type DeploymentHealthSettingsCustomMetricsFailingConditionArgs struct {
+	// The compare operator for the failing condition of the custom metrics health settings.
+	CompareOperator pulumi.StringInput `pulumi:"compareOperator"`
+	// The metric ID for the failing condition of the custom metrics health settings.
+	MetricId pulumi.StringInput `pulumi:"metricId"`
+	// The threshold for the failing condition of the custom metrics health settings.
+	Threshold pulumi.Float64Input `pulumi:"threshold"`
+}
+
+func (DeploymentHealthSettingsCustomMetricsFailingConditionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentHealthSettingsCustomMetricsFailingCondition)(nil)).Elem()
+}
+
+func (i DeploymentHealthSettingsCustomMetricsFailingConditionArgs) ToDeploymentHealthSettingsCustomMetricsFailingConditionOutput() DeploymentHealthSettingsCustomMetricsFailingConditionOutput {
+	return i.ToDeploymentHealthSettingsCustomMetricsFailingConditionOutputWithContext(context.Background())
+}
+
+func (i DeploymentHealthSettingsCustomMetricsFailingConditionArgs) ToDeploymentHealthSettingsCustomMetricsFailingConditionOutputWithContext(ctx context.Context) DeploymentHealthSettingsCustomMetricsFailingConditionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentHealthSettingsCustomMetricsFailingConditionOutput)
+}
+
+// DeploymentHealthSettingsCustomMetricsFailingConditionArrayInput is an input type that accepts DeploymentHealthSettingsCustomMetricsFailingConditionArray and DeploymentHealthSettingsCustomMetricsFailingConditionArrayOutput values.
+// You can construct a concrete instance of `DeploymentHealthSettingsCustomMetricsFailingConditionArrayInput` via:
+//
+//	DeploymentHealthSettingsCustomMetricsFailingConditionArray{ DeploymentHealthSettingsCustomMetricsFailingConditionArgs{...} }
+type DeploymentHealthSettingsCustomMetricsFailingConditionArrayInput interface {
+	pulumi.Input
+
+	ToDeploymentHealthSettingsCustomMetricsFailingConditionArrayOutput() DeploymentHealthSettingsCustomMetricsFailingConditionArrayOutput
+	ToDeploymentHealthSettingsCustomMetricsFailingConditionArrayOutputWithContext(context.Context) DeploymentHealthSettingsCustomMetricsFailingConditionArrayOutput
+}
+
+type DeploymentHealthSettingsCustomMetricsFailingConditionArray []DeploymentHealthSettingsCustomMetricsFailingConditionInput
+
+func (DeploymentHealthSettingsCustomMetricsFailingConditionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DeploymentHealthSettingsCustomMetricsFailingCondition)(nil)).Elem()
+}
+
+func (i DeploymentHealthSettingsCustomMetricsFailingConditionArray) ToDeploymentHealthSettingsCustomMetricsFailingConditionArrayOutput() DeploymentHealthSettingsCustomMetricsFailingConditionArrayOutput {
+	return i.ToDeploymentHealthSettingsCustomMetricsFailingConditionArrayOutputWithContext(context.Background())
+}
+
+func (i DeploymentHealthSettingsCustomMetricsFailingConditionArray) ToDeploymentHealthSettingsCustomMetricsFailingConditionArrayOutputWithContext(ctx context.Context) DeploymentHealthSettingsCustomMetricsFailingConditionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentHealthSettingsCustomMetricsFailingConditionArrayOutput)
+}
+
+type DeploymentHealthSettingsCustomMetricsFailingConditionOutput struct{ *pulumi.OutputState }
+
+func (DeploymentHealthSettingsCustomMetricsFailingConditionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentHealthSettingsCustomMetricsFailingCondition)(nil)).Elem()
+}
+
+func (o DeploymentHealthSettingsCustomMetricsFailingConditionOutput) ToDeploymentHealthSettingsCustomMetricsFailingConditionOutput() DeploymentHealthSettingsCustomMetricsFailingConditionOutput {
+	return o
+}
+
+func (o DeploymentHealthSettingsCustomMetricsFailingConditionOutput) ToDeploymentHealthSettingsCustomMetricsFailingConditionOutputWithContext(ctx context.Context) DeploymentHealthSettingsCustomMetricsFailingConditionOutput {
+	return o
+}
+
+// The compare operator for the failing condition of the custom metrics health settings.
+func (o DeploymentHealthSettingsCustomMetricsFailingConditionOutput) CompareOperator() pulumi.StringOutput {
+	return o.ApplyT(func(v DeploymentHealthSettingsCustomMetricsFailingCondition) string { return v.CompareOperator }).(pulumi.StringOutput)
+}
+
+// The metric ID for the failing condition of the custom metrics health settings.
+func (o DeploymentHealthSettingsCustomMetricsFailingConditionOutput) MetricId() pulumi.StringOutput {
+	return o.ApplyT(func(v DeploymentHealthSettingsCustomMetricsFailingCondition) string { return v.MetricId }).(pulumi.StringOutput)
+}
+
+// The threshold for the failing condition of the custom metrics health settings.
+func (o DeploymentHealthSettingsCustomMetricsFailingConditionOutput) Threshold() pulumi.Float64Output {
+	return o.ApplyT(func(v DeploymentHealthSettingsCustomMetricsFailingCondition) float64 { return v.Threshold }).(pulumi.Float64Output)
+}
+
+type DeploymentHealthSettingsCustomMetricsFailingConditionArrayOutput struct{ *pulumi.OutputState }
+
+func (DeploymentHealthSettingsCustomMetricsFailingConditionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DeploymentHealthSettingsCustomMetricsFailingCondition)(nil)).Elem()
+}
+
+func (o DeploymentHealthSettingsCustomMetricsFailingConditionArrayOutput) ToDeploymentHealthSettingsCustomMetricsFailingConditionArrayOutput() DeploymentHealthSettingsCustomMetricsFailingConditionArrayOutput {
+	return o
+}
+
+func (o DeploymentHealthSettingsCustomMetricsFailingConditionArrayOutput) ToDeploymentHealthSettingsCustomMetricsFailingConditionArrayOutputWithContext(ctx context.Context) DeploymentHealthSettingsCustomMetricsFailingConditionArrayOutput {
+	return o
+}
+
+func (o DeploymentHealthSettingsCustomMetricsFailingConditionArrayOutput) Index(i pulumi.IntInput) DeploymentHealthSettingsCustomMetricsFailingConditionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DeploymentHealthSettingsCustomMetricsFailingCondition {
+		return vs[0].([]DeploymentHealthSettingsCustomMetricsFailingCondition)[vs[1].(int)]
+	}).(DeploymentHealthSettingsCustomMetricsFailingConditionOutput)
+}
+
+type DeploymentHealthSettingsCustomMetricsWarningCondition struct {
+	// The compare operator for the warning condition of the custom metrics health settings.
+	CompareOperator string `pulumi:"compareOperator"`
+	// The metric ID for the warning condition of the custom metrics health settings.
+	MetricId string `pulumi:"metricId"`
+	// The threshold for the warning condition of the custom metrics health settings.
+	Threshold float64 `pulumi:"threshold"`
+}
+
+// DeploymentHealthSettingsCustomMetricsWarningConditionInput is an input type that accepts DeploymentHealthSettingsCustomMetricsWarningConditionArgs and DeploymentHealthSettingsCustomMetricsWarningConditionOutput values.
+// You can construct a concrete instance of `DeploymentHealthSettingsCustomMetricsWarningConditionInput` via:
+//
+//	DeploymentHealthSettingsCustomMetricsWarningConditionArgs{...}
+type DeploymentHealthSettingsCustomMetricsWarningConditionInput interface {
+	pulumi.Input
+
+	ToDeploymentHealthSettingsCustomMetricsWarningConditionOutput() DeploymentHealthSettingsCustomMetricsWarningConditionOutput
+	ToDeploymentHealthSettingsCustomMetricsWarningConditionOutputWithContext(context.Context) DeploymentHealthSettingsCustomMetricsWarningConditionOutput
+}
+
+type DeploymentHealthSettingsCustomMetricsWarningConditionArgs struct {
+	// The compare operator for the warning condition of the custom metrics health settings.
+	CompareOperator pulumi.StringInput `pulumi:"compareOperator"`
+	// The metric ID for the warning condition of the custom metrics health settings.
+	MetricId pulumi.StringInput `pulumi:"metricId"`
+	// The threshold for the warning condition of the custom metrics health settings.
+	Threshold pulumi.Float64Input `pulumi:"threshold"`
+}
+
+func (DeploymentHealthSettingsCustomMetricsWarningConditionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentHealthSettingsCustomMetricsWarningCondition)(nil)).Elem()
+}
+
+func (i DeploymentHealthSettingsCustomMetricsWarningConditionArgs) ToDeploymentHealthSettingsCustomMetricsWarningConditionOutput() DeploymentHealthSettingsCustomMetricsWarningConditionOutput {
+	return i.ToDeploymentHealthSettingsCustomMetricsWarningConditionOutputWithContext(context.Background())
+}
+
+func (i DeploymentHealthSettingsCustomMetricsWarningConditionArgs) ToDeploymentHealthSettingsCustomMetricsWarningConditionOutputWithContext(ctx context.Context) DeploymentHealthSettingsCustomMetricsWarningConditionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentHealthSettingsCustomMetricsWarningConditionOutput)
+}
+
+// DeploymentHealthSettingsCustomMetricsWarningConditionArrayInput is an input type that accepts DeploymentHealthSettingsCustomMetricsWarningConditionArray and DeploymentHealthSettingsCustomMetricsWarningConditionArrayOutput values.
+// You can construct a concrete instance of `DeploymentHealthSettingsCustomMetricsWarningConditionArrayInput` via:
+//
+//	DeploymentHealthSettingsCustomMetricsWarningConditionArray{ DeploymentHealthSettingsCustomMetricsWarningConditionArgs{...} }
+type DeploymentHealthSettingsCustomMetricsWarningConditionArrayInput interface {
+	pulumi.Input
+
+	ToDeploymentHealthSettingsCustomMetricsWarningConditionArrayOutput() DeploymentHealthSettingsCustomMetricsWarningConditionArrayOutput
+	ToDeploymentHealthSettingsCustomMetricsWarningConditionArrayOutputWithContext(context.Context) DeploymentHealthSettingsCustomMetricsWarningConditionArrayOutput
+}
+
+type DeploymentHealthSettingsCustomMetricsWarningConditionArray []DeploymentHealthSettingsCustomMetricsWarningConditionInput
+
+func (DeploymentHealthSettingsCustomMetricsWarningConditionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DeploymentHealthSettingsCustomMetricsWarningCondition)(nil)).Elem()
+}
+
+func (i DeploymentHealthSettingsCustomMetricsWarningConditionArray) ToDeploymentHealthSettingsCustomMetricsWarningConditionArrayOutput() DeploymentHealthSettingsCustomMetricsWarningConditionArrayOutput {
+	return i.ToDeploymentHealthSettingsCustomMetricsWarningConditionArrayOutputWithContext(context.Background())
+}
+
+func (i DeploymentHealthSettingsCustomMetricsWarningConditionArray) ToDeploymentHealthSettingsCustomMetricsWarningConditionArrayOutputWithContext(ctx context.Context) DeploymentHealthSettingsCustomMetricsWarningConditionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentHealthSettingsCustomMetricsWarningConditionArrayOutput)
+}
+
+type DeploymentHealthSettingsCustomMetricsWarningConditionOutput struct{ *pulumi.OutputState }
+
+func (DeploymentHealthSettingsCustomMetricsWarningConditionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentHealthSettingsCustomMetricsWarningCondition)(nil)).Elem()
+}
+
+func (o DeploymentHealthSettingsCustomMetricsWarningConditionOutput) ToDeploymentHealthSettingsCustomMetricsWarningConditionOutput() DeploymentHealthSettingsCustomMetricsWarningConditionOutput {
+	return o
+}
+
+func (o DeploymentHealthSettingsCustomMetricsWarningConditionOutput) ToDeploymentHealthSettingsCustomMetricsWarningConditionOutputWithContext(ctx context.Context) DeploymentHealthSettingsCustomMetricsWarningConditionOutput {
+	return o
+}
+
+// The compare operator for the warning condition of the custom metrics health settings.
+func (o DeploymentHealthSettingsCustomMetricsWarningConditionOutput) CompareOperator() pulumi.StringOutput {
+	return o.ApplyT(func(v DeploymentHealthSettingsCustomMetricsWarningCondition) string { return v.CompareOperator }).(pulumi.StringOutput)
+}
+
+// The metric ID for the warning condition of the custom metrics health settings.
+func (o DeploymentHealthSettingsCustomMetricsWarningConditionOutput) MetricId() pulumi.StringOutput {
+	return o.ApplyT(func(v DeploymentHealthSettingsCustomMetricsWarningCondition) string { return v.MetricId }).(pulumi.StringOutput)
+}
+
+// The threshold for the warning condition of the custom metrics health settings.
+func (o DeploymentHealthSettingsCustomMetricsWarningConditionOutput) Threshold() pulumi.Float64Output {
+	return o.ApplyT(func(v DeploymentHealthSettingsCustomMetricsWarningCondition) float64 { return v.Threshold }).(pulumi.Float64Output)
+}
+
+type DeploymentHealthSettingsCustomMetricsWarningConditionArrayOutput struct{ *pulumi.OutputState }
+
+func (DeploymentHealthSettingsCustomMetricsWarningConditionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DeploymentHealthSettingsCustomMetricsWarningCondition)(nil)).Elem()
+}
+
+func (o DeploymentHealthSettingsCustomMetricsWarningConditionArrayOutput) ToDeploymentHealthSettingsCustomMetricsWarningConditionArrayOutput() DeploymentHealthSettingsCustomMetricsWarningConditionArrayOutput {
+	return o
+}
+
+func (o DeploymentHealthSettingsCustomMetricsWarningConditionArrayOutput) ToDeploymentHealthSettingsCustomMetricsWarningConditionArrayOutputWithContext(ctx context.Context) DeploymentHealthSettingsCustomMetricsWarningConditionArrayOutput {
+	return o
+}
+
+func (o DeploymentHealthSettingsCustomMetricsWarningConditionArrayOutput) Index(i pulumi.IntInput) DeploymentHealthSettingsCustomMetricsWarningConditionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DeploymentHealthSettingsCustomMetricsWarningCondition {
+		return vs[0].([]DeploymentHealthSettingsCustomMetricsWarningCondition)[vs[1].(int)]
+	}).(DeploymentHealthSettingsCustomMetricsWarningConditionOutput)
+}
+
+type DeploymentHealthSettingsDataDrift struct {
+	// The batch count for the data drift health settings.
+	BatchCount *int `pulumi:"batchCount"`
+	// The drift threshold for the data drift health settings.
+	DriftThreshold *float64 `pulumi:"driftThreshold"`
+	// The exclude features for the data drift health settings.
+	ExcludeFeatures []string `pulumi:"excludeFeatures"`
+	// The high importance failing count for the data drift health settings.
+	HighImportanceFailingCount *int `pulumi:"highImportanceFailingCount"`
+	// The high importance warning count for the data drift health settings.
+	HighImportanceWarningCount *int `pulumi:"highImportanceWarningCount"`
+	// The importance threshold for the data drift health settings.
+	ImportanceThreshold *float64 `pulumi:"importanceThreshold"`
+	// The low importance failing count for the data drift health settings.
+	LowImportanceFailingCount *int `pulumi:"lowImportanceFailingCount"`
+	// The low importance warning count for the data drift health settings.
+	LowImportanceWarningCount *int `pulumi:"lowImportanceWarningCount"`
+	// The starred features for the data drift health settings.
+	StarredFeatures []string `pulumi:"starredFeatures"`
+	// The time interval for the data drift health settings.
+	TimeInterval *string `pulumi:"timeInterval"`
+}
+
+// DeploymentHealthSettingsDataDriftInput is an input type that accepts DeploymentHealthSettingsDataDriftArgs and DeploymentHealthSettingsDataDriftOutput values.
+// You can construct a concrete instance of `DeploymentHealthSettingsDataDriftInput` via:
+//
+//	DeploymentHealthSettingsDataDriftArgs{...}
+type DeploymentHealthSettingsDataDriftInput interface {
+	pulumi.Input
+
+	ToDeploymentHealthSettingsDataDriftOutput() DeploymentHealthSettingsDataDriftOutput
+	ToDeploymentHealthSettingsDataDriftOutputWithContext(context.Context) DeploymentHealthSettingsDataDriftOutput
+}
+
+type DeploymentHealthSettingsDataDriftArgs struct {
+	// The batch count for the data drift health settings.
+	BatchCount pulumi.IntPtrInput `pulumi:"batchCount"`
+	// The drift threshold for the data drift health settings.
+	DriftThreshold pulumi.Float64PtrInput `pulumi:"driftThreshold"`
+	// The exclude features for the data drift health settings.
+	ExcludeFeatures pulumi.StringArrayInput `pulumi:"excludeFeatures"`
+	// The high importance failing count for the data drift health settings.
+	HighImportanceFailingCount pulumi.IntPtrInput `pulumi:"highImportanceFailingCount"`
+	// The high importance warning count for the data drift health settings.
+	HighImportanceWarningCount pulumi.IntPtrInput `pulumi:"highImportanceWarningCount"`
+	// The importance threshold for the data drift health settings.
+	ImportanceThreshold pulumi.Float64PtrInput `pulumi:"importanceThreshold"`
+	// The low importance failing count for the data drift health settings.
+	LowImportanceFailingCount pulumi.IntPtrInput `pulumi:"lowImportanceFailingCount"`
+	// The low importance warning count for the data drift health settings.
+	LowImportanceWarningCount pulumi.IntPtrInput `pulumi:"lowImportanceWarningCount"`
+	// The starred features for the data drift health settings.
+	StarredFeatures pulumi.StringArrayInput `pulumi:"starredFeatures"`
+	// The time interval for the data drift health settings.
+	TimeInterval pulumi.StringPtrInput `pulumi:"timeInterval"`
+}
+
+func (DeploymentHealthSettingsDataDriftArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentHealthSettingsDataDrift)(nil)).Elem()
+}
+
+func (i DeploymentHealthSettingsDataDriftArgs) ToDeploymentHealthSettingsDataDriftOutput() DeploymentHealthSettingsDataDriftOutput {
+	return i.ToDeploymentHealthSettingsDataDriftOutputWithContext(context.Background())
+}
+
+func (i DeploymentHealthSettingsDataDriftArgs) ToDeploymentHealthSettingsDataDriftOutputWithContext(ctx context.Context) DeploymentHealthSettingsDataDriftOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentHealthSettingsDataDriftOutput)
+}
+
+func (i DeploymentHealthSettingsDataDriftArgs) ToDeploymentHealthSettingsDataDriftPtrOutput() DeploymentHealthSettingsDataDriftPtrOutput {
+	return i.ToDeploymentHealthSettingsDataDriftPtrOutputWithContext(context.Background())
+}
+
+func (i DeploymentHealthSettingsDataDriftArgs) ToDeploymentHealthSettingsDataDriftPtrOutputWithContext(ctx context.Context) DeploymentHealthSettingsDataDriftPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentHealthSettingsDataDriftOutput).ToDeploymentHealthSettingsDataDriftPtrOutputWithContext(ctx)
+}
+
+// DeploymentHealthSettingsDataDriftPtrInput is an input type that accepts DeploymentHealthSettingsDataDriftArgs, DeploymentHealthSettingsDataDriftPtr and DeploymentHealthSettingsDataDriftPtrOutput values.
+// You can construct a concrete instance of `DeploymentHealthSettingsDataDriftPtrInput` via:
+//
+//	        DeploymentHealthSettingsDataDriftArgs{...}
+//
+//	or:
+//
+//	        nil
+type DeploymentHealthSettingsDataDriftPtrInput interface {
+	pulumi.Input
+
+	ToDeploymentHealthSettingsDataDriftPtrOutput() DeploymentHealthSettingsDataDriftPtrOutput
+	ToDeploymentHealthSettingsDataDriftPtrOutputWithContext(context.Context) DeploymentHealthSettingsDataDriftPtrOutput
+}
+
+type deploymentHealthSettingsDataDriftPtrType DeploymentHealthSettingsDataDriftArgs
+
+func DeploymentHealthSettingsDataDriftPtr(v *DeploymentHealthSettingsDataDriftArgs) DeploymentHealthSettingsDataDriftPtrInput {
+	return (*deploymentHealthSettingsDataDriftPtrType)(v)
+}
+
+func (*deploymentHealthSettingsDataDriftPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentHealthSettingsDataDrift)(nil)).Elem()
+}
+
+func (i *deploymentHealthSettingsDataDriftPtrType) ToDeploymentHealthSettingsDataDriftPtrOutput() DeploymentHealthSettingsDataDriftPtrOutput {
+	return i.ToDeploymentHealthSettingsDataDriftPtrOutputWithContext(context.Background())
+}
+
+func (i *deploymentHealthSettingsDataDriftPtrType) ToDeploymentHealthSettingsDataDriftPtrOutputWithContext(ctx context.Context) DeploymentHealthSettingsDataDriftPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentHealthSettingsDataDriftPtrOutput)
+}
+
+type DeploymentHealthSettingsDataDriftOutput struct{ *pulumi.OutputState }
+
+func (DeploymentHealthSettingsDataDriftOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentHealthSettingsDataDrift)(nil)).Elem()
+}
+
+func (o DeploymentHealthSettingsDataDriftOutput) ToDeploymentHealthSettingsDataDriftOutput() DeploymentHealthSettingsDataDriftOutput {
+	return o
+}
+
+func (o DeploymentHealthSettingsDataDriftOutput) ToDeploymentHealthSettingsDataDriftOutputWithContext(ctx context.Context) DeploymentHealthSettingsDataDriftOutput {
+	return o
+}
+
+func (o DeploymentHealthSettingsDataDriftOutput) ToDeploymentHealthSettingsDataDriftPtrOutput() DeploymentHealthSettingsDataDriftPtrOutput {
+	return o.ToDeploymentHealthSettingsDataDriftPtrOutputWithContext(context.Background())
+}
+
+func (o DeploymentHealthSettingsDataDriftOutput) ToDeploymentHealthSettingsDataDriftPtrOutputWithContext(ctx context.Context) DeploymentHealthSettingsDataDriftPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DeploymentHealthSettingsDataDrift) *DeploymentHealthSettingsDataDrift {
+		return &v
+	}).(DeploymentHealthSettingsDataDriftPtrOutput)
+}
+
+// The batch count for the data drift health settings.
+func (o DeploymentHealthSettingsDataDriftOutput) BatchCount() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v DeploymentHealthSettingsDataDrift) *int { return v.BatchCount }).(pulumi.IntPtrOutput)
+}
+
+// The drift threshold for the data drift health settings.
+func (o DeploymentHealthSettingsDataDriftOutput) DriftThreshold() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v DeploymentHealthSettingsDataDrift) *float64 { return v.DriftThreshold }).(pulumi.Float64PtrOutput)
+}
+
+// The exclude features for the data drift health settings.
+func (o DeploymentHealthSettingsDataDriftOutput) ExcludeFeatures() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v DeploymentHealthSettingsDataDrift) []string { return v.ExcludeFeatures }).(pulumi.StringArrayOutput)
+}
+
+// The high importance failing count for the data drift health settings.
+func (o DeploymentHealthSettingsDataDriftOutput) HighImportanceFailingCount() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v DeploymentHealthSettingsDataDrift) *int { return v.HighImportanceFailingCount }).(pulumi.IntPtrOutput)
+}
+
+// The high importance warning count for the data drift health settings.
+func (o DeploymentHealthSettingsDataDriftOutput) HighImportanceWarningCount() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v DeploymentHealthSettingsDataDrift) *int { return v.HighImportanceWarningCount }).(pulumi.IntPtrOutput)
+}
+
+// The importance threshold for the data drift health settings.
+func (o DeploymentHealthSettingsDataDriftOutput) ImportanceThreshold() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v DeploymentHealthSettingsDataDrift) *float64 { return v.ImportanceThreshold }).(pulumi.Float64PtrOutput)
+}
+
+// The low importance failing count for the data drift health settings.
+func (o DeploymentHealthSettingsDataDriftOutput) LowImportanceFailingCount() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v DeploymentHealthSettingsDataDrift) *int { return v.LowImportanceFailingCount }).(pulumi.IntPtrOutput)
+}
+
+// The low importance warning count for the data drift health settings.
+func (o DeploymentHealthSettingsDataDriftOutput) LowImportanceWarningCount() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v DeploymentHealthSettingsDataDrift) *int { return v.LowImportanceWarningCount }).(pulumi.IntPtrOutput)
+}
+
+// The starred features for the data drift health settings.
+func (o DeploymentHealthSettingsDataDriftOutput) StarredFeatures() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v DeploymentHealthSettingsDataDrift) []string { return v.StarredFeatures }).(pulumi.StringArrayOutput)
+}
+
+// The time interval for the data drift health settings.
+func (o DeploymentHealthSettingsDataDriftOutput) TimeInterval() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DeploymentHealthSettingsDataDrift) *string { return v.TimeInterval }).(pulumi.StringPtrOutput)
+}
+
+type DeploymentHealthSettingsDataDriftPtrOutput struct{ *pulumi.OutputState }
+
+func (DeploymentHealthSettingsDataDriftPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentHealthSettingsDataDrift)(nil)).Elem()
+}
+
+func (o DeploymentHealthSettingsDataDriftPtrOutput) ToDeploymentHealthSettingsDataDriftPtrOutput() DeploymentHealthSettingsDataDriftPtrOutput {
+	return o
+}
+
+func (o DeploymentHealthSettingsDataDriftPtrOutput) ToDeploymentHealthSettingsDataDriftPtrOutputWithContext(ctx context.Context) DeploymentHealthSettingsDataDriftPtrOutput {
+	return o
+}
+
+func (o DeploymentHealthSettingsDataDriftPtrOutput) Elem() DeploymentHealthSettingsDataDriftOutput {
+	return o.ApplyT(func(v *DeploymentHealthSettingsDataDrift) DeploymentHealthSettingsDataDrift {
+		if v != nil {
+			return *v
+		}
+		var ret DeploymentHealthSettingsDataDrift
+		return ret
+	}).(DeploymentHealthSettingsDataDriftOutput)
+}
+
+// The batch count for the data drift health settings.
+func (o DeploymentHealthSettingsDataDriftPtrOutput) BatchCount() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DeploymentHealthSettingsDataDrift) *int {
+		if v == nil {
+			return nil
+		}
+		return v.BatchCount
+	}).(pulumi.IntPtrOutput)
+}
+
+// The drift threshold for the data drift health settings.
+func (o DeploymentHealthSettingsDataDriftPtrOutput) DriftThreshold() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v *DeploymentHealthSettingsDataDrift) *float64 {
+		if v == nil {
+			return nil
+		}
+		return v.DriftThreshold
+	}).(pulumi.Float64PtrOutput)
+}
+
+// The exclude features for the data drift health settings.
+func (o DeploymentHealthSettingsDataDriftPtrOutput) ExcludeFeatures() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *DeploymentHealthSettingsDataDrift) []string {
+		if v == nil {
+			return nil
+		}
+		return v.ExcludeFeatures
+	}).(pulumi.StringArrayOutput)
+}
+
+// The high importance failing count for the data drift health settings.
+func (o DeploymentHealthSettingsDataDriftPtrOutput) HighImportanceFailingCount() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DeploymentHealthSettingsDataDrift) *int {
+		if v == nil {
+			return nil
+		}
+		return v.HighImportanceFailingCount
+	}).(pulumi.IntPtrOutput)
+}
+
+// The high importance warning count for the data drift health settings.
+func (o DeploymentHealthSettingsDataDriftPtrOutput) HighImportanceWarningCount() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DeploymentHealthSettingsDataDrift) *int {
+		if v == nil {
+			return nil
+		}
+		return v.HighImportanceWarningCount
+	}).(pulumi.IntPtrOutput)
+}
+
+// The importance threshold for the data drift health settings.
+func (o DeploymentHealthSettingsDataDriftPtrOutput) ImportanceThreshold() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v *DeploymentHealthSettingsDataDrift) *float64 {
+		if v == nil {
+			return nil
+		}
+		return v.ImportanceThreshold
+	}).(pulumi.Float64PtrOutput)
+}
+
+// The low importance failing count for the data drift health settings.
+func (o DeploymentHealthSettingsDataDriftPtrOutput) LowImportanceFailingCount() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DeploymentHealthSettingsDataDrift) *int {
+		if v == nil {
+			return nil
+		}
+		return v.LowImportanceFailingCount
+	}).(pulumi.IntPtrOutput)
+}
+
+// The low importance warning count for the data drift health settings.
+func (o DeploymentHealthSettingsDataDriftPtrOutput) LowImportanceWarningCount() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DeploymentHealthSettingsDataDrift) *int {
+		if v == nil {
+			return nil
+		}
+		return v.LowImportanceWarningCount
+	}).(pulumi.IntPtrOutput)
+}
+
+// The starred features for the data drift health settings.
+func (o DeploymentHealthSettingsDataDriftPtrOutput) StarredFeatures() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *DeploymentHealthSettingsDataDrift) []string {
+		if v == nil {
+			return nil
+		}
+		return v.StarredFeatures
+	}).(pulumi.StringArrayOutput)
+}
+
+// The time interval for the data drift health settings.
+func (o DeploymentHealthSettingsDataDriftPtrOutput) TimeInterval() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DeploymentHealthSettingsDataDrift) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TimeInterval
+	}).(pulumi.StringPtrOutput)
+}
+
+type DeploymentHealthSettingsFairness struct {
+	// The protected class failing count for the fairness health settings.
+	ProtectedClassFailingCount *int `pulumi:"protectedClassFailingCount"`
+	// The protected class warning count for the fairness health settings.
+	ProtectedClassWarningCount *int `pulumi:"protectedClassWarningCount"`
+}
+
+// DeploymentHealthSettingsFairnessInput is an input type that accepts DeploymentHealthSettingsFairnessArgs and DeploymentHealthSettingsFairnessOutput values.
+// You can construct a concrete instance of `DeploymentHealthSettingsFairnessInput` via:
+//
+//	DeploymentHealthSettingsFairnessArgs{...}
+type DeploymentHealthSettingsFairnessInput interface {
+	pulumi.Input
+
+	ToDeploymentHealthSettingsFairnessOutput() DeploymentHealthSettingsFairnessOutput
+	ToDeploymentHealthSettingsFairnessOutputWithContext(context.Context) DeploymentHealthSettingsFairnessOutput
+}
+
+type DeploymentHealthSettingsFairnessArgs struct {
+	// The protected class failing count for the fairness health settings.
+	ProtectedClassFailingCount pulumi.IntPtrInput `pulumi:"protectedClassFailingCount"`
+	// The protected class warning count for the fairness health settings.
+	ProtectedClassWarningCount pulumi.IntPtrInput `pulumi:"protectedClassWarningCount"`
+}
+
+func (DeploymentHealthSettingsFairnessArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentHealthSettingsFairness)(nil)).Elem()
+}
+
+func (i DeploymentHealthSettingsFairnessArgs) ToDeploymentHealthSettingsFairnessOutput() DeploymentHealthSettingsFairnessOutput {
+	return i.ToDeploymentHealthSettingsFairnessOutputWithContext(context.Background())
+}
+
+func (i DeploymentHealthSettingsFairnessArgs) ToDeploymentHealthSettingsFairnessOutputWithContext(ctx context.Context) DeploymentHealthSettingsFairnessOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentHealthSettingsFairnessOutput)
+}
+
+func (i DeploymentHealthSettingsFairnessArgs) ToDeploymentHealthSettingsFairnessPtrOutput() DeploymentHealthSettingsFairnessPtrOutput {
+	return i.ToDeploymentHealthSettingsFairnessPtrOutputWithContext(context.Background())
+}
+
+func (i DeploymentHealthSettingsFairnessArgs) ToDeploymentHealthSettingsFairnessPtrOutputWithContext(ctx context.Context) DeploymentHealthSettingsFairnessPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentHealthSettingsFairnessOutput).ToDeploymentHealthSettingsFairnessPtrOutputWithContext(ctx)
+}
+
+// DeploymentHealthSettingsFairnessPtrInput is an input type that accepts DeploymentHealthSettingsFairnessArgs, DeploymentHealthSettingsFairnessPtr and DeploymentHealthSettingsFairnessPtrOutput values.
+// You can construct a concrete instance of `DeploymentHealthSettingsFairnessPtrInput` via:
+//
+//	        DeploymentHealthSettingsFairnessArgs{...}
+//
+//	or:
+//
+//	        nil
+type DeploymentHealthSettingsFairnessPtrInput interface {
+	pulumi.Input
+
+	ToDeploymentHealthSettingsFairnessPtrOutput() DeploymentHealthSettingsFairnessPtrOutput
+	ToDeploymentHealthSettingsFairnessPtrOutputWithContext(context.Context) DeploymentHealthSettingsFairnessPtrOutput
+}
+
+type deploymentHealthSettingsFairnessPtrType DeploymentHealthSettingsFairnessArgs
+
+func DeploymentHealthSettingsFairnessPtr(v *DeploymentHealthSettingsFairnessArgs) DeploymentHealthSettingsFairnessPtrInput {
+	return (*deploymentHealthSettingsFairnessPtrType)(v)
+}
+
+func (*deploymentHealthSettingsFairnessPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentHealthSettingsFairness)(nil)).Elem()
+}
+
+func (i *deploymentHealthSettingsFairnessPtrType) ToDeploymentHealthSettingsFairnessPtrOutput() DeploymentHealthSettingsFairnessPtrOutput {
+	return i.ToDeploymentHealthSettingsFairnessPtrOutputWithContext(context.Background())
+}
+
+func (i *deploymentHealthSettingsFairnessPtrType) ToDeploymentHealthSettingsFairnessPtrOutputWithContext(ctx context.Context) DeploymentHealthSettingsFairnessPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentHealthSettingsFairnessPtrOutput)
+}
+
+type DeploymentHealthSettingsFairnessOutput struct{ *pulumi.OutputState }
+
+func (DeploymentHealthSettingsFairnessOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentHealthSettingsFairness)(nil)).Elem()
+}
+
+func (o DeploymentHealthSettingsFairnessOutput) ToDeploymentHealthSettingsFairnessOutput() DeploymentHealthSettingsFairnessOutput {
+	return o
+}
+
+func (o DeploymentHealthSettingsFairnessOutput) ToDeploymentHealthSettingsFairnessOutputWithContext(ctx context.Context) DeploymentHealthSettingsFairnessOutput {
+	return o
+}
+
+func (o DeploymentHealthSettingsFairnessOutput) ToDeploymentHealthSettingsFairnessPtrOutput() DeploymentHealthSettingsFairnessPtrOutput {
+	return o.ToDeploymentHealthSettingsFairnessPtrOutputWithContext(context.Background())
+}
+
+func (o DeploymentHealthSettingsFairnessOutput) ToDeploymentHealthSettingsFairnessPtrOutputWithContext(ctx context.Context) DeploymentHealthSettingsFairnessPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DeploymentHealthSettingsFairness) *DeploymentHealthSettingsFairness {
+		return &v
+	}).(DeploymentHealthSettingsFairnessPtrOutput)
+}
+
+// The protected class failing count for the fairness health settings.
+func (o DeploymentHealthSettingsFairnessOutput) ProtectedClassFailingCount() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v DeploymentHealthSettingsFairness) *int { return v.ProtectedClassFailingCount }).(pulumi.IntPtrOutput)
+}
+
+// The protected class warning count for the fairness health settings.
+func (o DeploymentHealthSettingsFairnessOutput) ProtectedClassWarningCount() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v DeploymentHealthSettingsFairness) *int { return v.ProtectedClassWarningCount }).(pulumi.IntPtrOutput)
+}
+
+type DeploymentHealthSettingsFairnessPtrOutput struct{ *pulumi.OutputState }
+
+func (DeploymentHealthSettingsFairnessPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentHealthSettingsFairness)(nil)).Elem()
+}
+
+func (o DeploymentHealthSettingsFairnessPtrOutput) ToDeploymentHealthSettingsFairnessPtrOutput() DeploymentHealthSettingsFairnessPtrOutput {
+	return o
+}
+
+func (o DeploymentHealthSettingsFairnessPtrOutput) ToDeploymentHealthSettingsFairnessPtrOutputWithContext(ctx context.Context) DeploymentHealthSettingsFairnessPtrOutput {
+	return o
+}
+
+func (o DeploymentHealthSettingsFairnessPtrOutput) Elem() DeploymentHealthSettingsFairnessOutput {
+	return o.ApplyT(func(v *DeploymentHealthSettingsFairness) DeploymentHealthSettingsFairness {
+		if v != nil {
+			return *v
+		}
+		var ret DeploymentHealthSettingsFairness
+		return ret
+	}).(DeploymentHealthSettingsFairnessOutput)
+}
+
+// The protected class failing count for the fairness health settings.
+func (o DeploymentHealthSettingsFairnessPtrOutput) ProtectedClassFailingCount() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DeploymentHealthSettingsFairness) *int {
+		if v == nil {
+			return nil
+		}
+		return v.ProtectedClassFailingCount
+	}).(pulumi.IntPtrOutput)
+}
+
+// The protected class warning count for the fairness health settings.
+func (o DeploymentHealthSettingsFairnessPtrOutput) ProtectedClassWarningCount() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DeploymentHealthSettingsFairness) *int {
+		if v == nil {
+			return nil
+		}
+		return v.ProtectedClassWarningCount
+	}).(pulumi.IntPtrOutput)
+}
+
+type DeploymentHealthSettingsPredictionsTimeliness struct {
+	// If predictions timeliness is enabled for this Deployment.
+	Enabled bool `pulumi:"enabled"`
+	// The expected frequency for the predictions timeliness health settings.
+	ExpectedFrequency *string `pulumi:"expectedFrequency"`
+}
+
+// DeploymentHealthSettingsPredictionsTimelinessInput is an input type that accepts DeploymentHealthSettingsPredictionsTimelinessArgs and DeploymentHealthSettingsPredictionsTimelinessOutput values.
+// You can construct a concrete instance of `DeploymentHealthSettingsPredictionsTimelinessInput` via:
+//
+//	DeploymentHealthSettingsPredictionsTimelinessArgs{...}
+type DeploymentHealthSettingsPredictionsTimelinessInput interface {
+	pulumi.Input
+
+	ToDeploymentHealthSettingsPredictionsTimelinessOutput() DeploymentHealthSettingsPredictionsTimelinessOutput
+	ToDeploymentHealthSettingsPredictionsTimelinessOutputWithContext(context.Context) DeploymentHealthSettingsPredictionsTimelinessOutput
+}
+
+type DeploymentHealthSettingsPredictionsTimelinessArgs struct {
+	// If predictions timeliness is enabled for this Deployment.
+	Enabled pulumi.BoolInput `pulumi:"enabled"`
+	// The expected frequency for the predictions timeliness health settings.
+	ExpectedFrequency pulumi.StringPtrInput `pulumi:"expectedFrequency"`
+}
+
+func (DeploymentHealthSettingsPredictionsTimelinessArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentHealthSettingsPredictionsTimeliness)(nil)).Elem()
+}
+
+func (i DeploymentHealthSettingsPredictionsTimelinessArgs) ToDeploymentHealthSettingsPredictionsTimelinessOutput() DeploymentHealthSettingsPredictionsTimelinessOutput {
+	return i.ToDeploymentHealthSettingsPredictionsTimelinessOutputWithContext(context.Background())
+}
+
+func (i DeploymentHealthSettingsPredictionsTimelinessArgs) ToDeploymentHealthSettingsPredictionsTimelinessOutputWithContext(ctx context.Context) DeploymentHealthSettingsPredictionsTimelinessOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentHealthSettingsPredictionsTimelinessOutput)
+}
+
+func (i DeploymentHealthSettingsPredictionsTimelinessArgs) ToDeploymentHealthSettingsPredictionsTimelinessPtrOutput() DeploymentHealthSettingsPredictionsTimelinessPtrOutput {
+	return i.ToDeploymentHealthSettingsPredictionsTimelinessPtrOutputWithContext(context.Background())
+}
+
+func (i DeploymentHealthSettingsPredictionsTimelinessArgs) ToDeploymentHealthSettingsPredictionsTimelinessPtrOutputWithContext(ctx context.Context) DeploymentHealthSettingsPredictionsTimelinessPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentHealthSettingsPredictionsTimelinessOutput).ToDeploymentHealthSettingsPredictionsTimelinessPtrOutputWithContext(ctx)
+}
+
+// DeploymentHealthSettingsPredictionsTimelinessPtrInput is an input type that accepts DeploymentHealthSettingsPredictionsTimelinessArgs, DeploymentHealthSettingsPredictionsTimelinessPtr and DeploymentHealthSettingsPredictionsTimelinessPtrOutput values.
+// You can construct a concrete instance of `DeploymentHealthSettingsPredictionsTimelinessPtrInput` via:
+//
+//	        DeploymentHealthSettingsPredictionsTimelinessArgs{...}
+//
+//	or:
+//
+//	        nil
+type DeploymentHealthSettingsPredictionsTimelinessPtrInput interface {
+	pulumi.Input
+
+	ToDeploymentHealthSettingsPredictionsTimelinessPtrOutput() DeploymentHealthSettingsPredictionsTimelinessPtrOutput
+	ToDeploymentHealthSettingsPredictionsTimelinessPtrOutputWithContext(context.Context) DeploymentHealthSettingsPredictionsTimelinessPtrOutput
+}
+
+type deploymentHealthSettingsPredictionsTimelinessPtrType DeploymentHealthSettingsPredictionsTimelinessArgs
+
+func DeploymentHealthSettingsPredictionsTimelinessPtr(v *DeploymentHealthSettingsPredictionsTimelinessArgs) DeploymentHealthSettingsPredictionsTimelinessPtrInput {
+	return (*deploymentHealthSettingsPredictionsTimelinessPtrType)(v)
+}
+
+func (*deploymentHealthSettingsPredictionsTimelinessPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentHealthSettingsPredictionsTimeliness)(nil)).Elem()
+}
+
+func (i *deploymentHealthSettingsPredictionsTimelinessPtrType) ToDeploymentHealthSettingsPredictionsTimelinessPtrOutput() DeploymentHealthSettingsPredictionsTimelinessPtrOutput {
+	return i.ToDeploymentHealthSettingsPredictionsTimelinessPtrOutputWithContext(context.Background())
+}
+
+func (i *deploymentHealthSettingsPredictionsTimelinessPtrType) ToDeploymentHealthSettingsPredictionsTimelinessPtrOutputWithContext(ctx context.Context) DeploymentHealthSettingsPredictionsTimelinessPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentHealthSettingsPredictionsTimelinessPtrOutput)
+}
+
+type DeploymentHealthSettingsPredictionsTimelinessOutput struct{ *pulumi.OutputState }
+
+func (DeploymentHealthSettingsPredictionsTimelinessOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentHealthSettingsPredictionsTimeliness)(nil)).Elem()
+}
+
+func (o DeploymentHealthSettingsPredictionsTimelinessOutput) ToDeploymentHealthSettingsPredictionsTimelinessOutput() DeploymentHealthSettingsPredictionsTimelinessOutput {
+	return o
+}
+
+func (o DeploymentHealthSettingsPredictionsTimelinessOutput) ToDeploymentHealthSettingsPredictionsTimelinessOutputWithContext(ctx context.Context) DeploymentHealthSettingsPredictionsTimelinessOutput {
+	return o
+}
+
+func (o DeploymentHealthSettingsPredictionsTimelinessOutput) ToDeploymentHealthSettingsPredictionsTimelinessPtrOutput() DeploymentHealthSettingsPredictionsTimelinessPtrOutput {
+	return o.ToDeploymentHealthSettingsPredictionsTimelinessPtrOutputWithContext(context.Background())
+}
+
+func (o DeploymentHealthSettingsPredictionsTimelinessOutput) ToDeploymentHealthSettingsPredictionsTimelinessPtrOutputWithContext(ctx context.Context) DeploymentHealthSettingsPredictionsTimelinessPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DeploymentHealthSettingsPredictionsTimeliness) *DeploymentHealthSettingsPredictionsTimeliness {
+		return &v
+	}).(DeploymentHealthSettingsPredictionsTimelinessPtrOutput)
+}
+
+// If predictions timeliness is enabled for this Deployment.
+func (o DeploymentHealthSettingsPredictionsTimelinessOutput) Enabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v DeploymentHealthSettingsPredictionsTimeliness) bool { return v.Enabled }).(pulumi.BoolOutput)
+}
+
+// The expected frequency for the predictions timeliness health settings.
+func (o DeploymentHealthSettingsPredictionsTimelinessOutput) ExpectedFrequency() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DeploymentHealthSettingsPredictionsTimeliness) *string { return v.ExpectedFrequency }).(pulumi.StringPtrOutput)
+}
+
+type DeploymentHealthSettingsPredictionsTimelinessPtrOutput struct{ *pulumi.OutputState }
+
+func (DeploymentHealthSettingsPredictionsTimelinessPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentHealthSettingsPredictionsTimeliness)(nil)).Elem()
+}
+
+func (o DeploymentHealthSettingsPredictionsTimelinessPtrOutput) ToDeploymentHealthSettingsPredictionsTimelinessPtrOutput() DeploymentHealthSettingsPredictionsTimelinessPtrOutput {
+	return o
+}
+
+func (o DeploymentHealthSettingsPredictionsTimelinessPtrOutput) ToDeploymentHealthSettingsPredictionsTimelinessPtrOutputWithContext(ctx context.Context) DeploymentHealthSettingsPredictionsTimelinessPtrOutput {
+	return o
+}
+
+func (o DeploymentHealthSettingsPredictionsTimelinessPtrOutput) Elem() DeploymentHealthSettingsPredictionsTimelinessOutput {
+	return o.ApplyT(func(v *DeploymentHealthSettingsPredictionsTimeliness) DeploymentHealthSettingsPredictionsTimeliness {
+		if v != nil {
+			return *v
+		}
+		var ret DeploymentHealthSettingsPredictionsTimeliness
+		return ret
+	}).(DeploymentHealthSettingsPredictionsTimelinessOutput)
+}
+
+// If predictions timeliness is enabled for this Deployment.
+func (o DeploymentHealthSettingsPredictionsTimelinessPtrOutput) Enabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *DeploymentHealthSettingsPredictionsTimeliness) *bool {
+		if v == nil {
+			return nil
+		}
+		return &v.Enabled
+	}).(pulumi.BoolPtrOutput)
+}
+
+// The expected frequency for the predictions timeliness health settings.
+func (o DeploymentHealthSettingsPredictionsTimelinessPtrOutput) ExpectedFrequency() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DeploymentHealthSettingsPredictionsTimeliness) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ExpectedFrequency
+	}).(pulumi.StringPtrOutput)
+}
+
+type DeploymentHealthSettingsService struct {
+	// The batch count for the service health settings.
+	BatchCount int `pulumi:"batchCount"`
+}
+
+// DeploymentHealthSettingsServiceInput is an input type that accepts DeploymentHealthSettingsServiceArgs and DeploymentHealthSettingsServiceOutput values.
+// You can construct a concrete instance of `DeploymentHealthSettingsServiceInput` via:
+//
+//	DeploymentHealthSettingsServiceArgs{...}
+type DeploymentHealthSettingsServiceInput interface {
+	pulumi.Input
+
+	ToDeploymentHealthSettingsServiceOutput() DeploymentHealthSettingsServiceOutput
+	ToDeploymentHealthSettingsServiceOutputWithContext(context.Context) DeploymentHealthSettingsServiceOutput
+}
+
+type DeploymentHealthSettingsServiceArgs struct {
+	// The batch count for the service health settings.
+	BatchCount pulumi.IntInput `pulumi:"batchCount"`
+}
+
+func (DeploymentHealthSettingsServiceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentHealthSettingsService)(nil)).Elem()
+}
+
+func (i DeploymentHealthSettingsServiceArgs) ToDeploymentHealthSettingsServiceOutput() DeploymentHealthSettingsServiceOutput {
+	return i.ToDeploymentHealthSettingsServiceOutputWithContext(context.Background())
+}
+
+func (i DeploymentHealthSettingsServiceArgs) ToDeploymentHealthSettingsServiceOutputWithContext(ctx context.Context) DeploymentHealthSettingsServiceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentHealthSettingsServiceOutput)
+}
+
+func (i DeploymentHealthSettingsServiceArgs) ToDeploymentHealthSettingsServicePtrOutput() DeploymentHealthSettingsServicePtrOutput {
+	return i.ToDeploymentHealthSettingsServicePtrOutputWithContext(context.Background())
+}
+
+func (i DeploymentHealthSettingsServiceArgs) ToDeploymentHealthSettingsServicePtrOutputWithContext(ctx context.Context) DeploymentHealthSettingsServicePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentHealthSettingsServiceOutput).ToDeploymentHealthSettingsServicePtrOutputWithContext(ctx)
+}
+
+// DeploymentHealthSettingsServicePtrInput is an input type that accepts DeploymentHealthSettingsServiceArgs, DeploymentHealthSettingsServicePtr and DeploymentHealthSettingsServicePtrOutput values.
+// You can construct a concrete instance of `DeploymentHealthSettingsServicePtrInput` via:
+//
+//	        DeploymentHealthSettingsServiceArgs{...}
+//
+//	or:
+//
+//	        nil
+type DeploymentHealthSettingsServicePtrInput interface {
+	pulumi.Input
+
+	ToDeploymentHealthSettingsServicePtrOutput() DeploymentHealthSettingsServicePtrOutput
+	ToDeploymentHealthSettingsServicePtrOutputWithContext(context.Context) DeploymentHealthSettingsServicePtrOutput
+}
+
+type deploymentHealthSettingsServicePtrType DeploymentHealthSettingsServiceArgs
+
+func DeploymentHealthSettingsServicePtr(v *DeploymentHealthSettingsServiceArgs) DeploymentHealthSettingsServicePtrInput {
+	return (*deploymentHealthSettingsServicePtrType)(v)
+}
+
+func (*deploymentHealthSettingsServicePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentHealthSettingsService)(nil)).Elem()
+}
+
+func (i *deploymentHealthSettingsServicePtrType) ToDeploymentHealthSettingsServicePtrOutput() DeploymentHealthSettingsServicePtrOutput {
+	return i.ToDeploymentHealthSettingsServicePtrOutputWithContext(context.Background())
+}
+
+func (i *deploymentHealthSettingsServicePtrType) ToDeploymentHealthSettingsServicePtrOutputWithContext(ctx context.Context) DeploymentHealthSettingsServicePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentHealthSettingsServicePtrOutput)
+}
+
+type DeploymentHealthSettingsServiceOutput struct{ *pulumi.OutputState }
+
+func (DeploymentHealthSettingsServiceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentHealthSettingsService)(nil)).Elem()
+}
+
+func (o DeploymentHealthSettingsServiceOutput) ToDeploymentHealthSettingsServiceOutput() DeploymentHealthSettingsServiceOutput {
+	return o
+}
+
+func (o DeploymentHealthSettingsServiceOutput) ToDeploymentHealthSettingsServiceOutputWithContext(ctx context.Context) DeploymentHealthSettingsServiceOutput {
+	return o
+}
+
+func (o DeploymentHealthSettingsServiceOutput) ToDeploymentHealthSettingsServicePtrOutput() DeploymentHealthSettingsServicePtrOutput {
+	return o.ToDeploymentHealthSettingsServicePtrOutputWithContext(context.Background())
+}
+
+func (o DeploymentHealthSettingsServiceOutput) ToDeploymentHealthSettingsServicePtrOutputWithContext(ctx context.Context) DeploymentHealthSettingsServicePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DeploymentHealthSettingsService) *DeploymentHealthSettingsService {
+		return &v
+	}).(DeploymentHealthSettingsServicePtrOutput)
+}
+
+// The batch count for the service health settings.
+func (o DeploymentHealthSettingsServiceOutput) BatchCount() pulumi.IntOutput {
+	return o.ApplyT(func(v DeploymentHealthSettingsService) int { return v.BatchCount }).(pulumi.IntOutput)
+}
+
+type DeploymentHealthSettingsServicePtrOutput struct{ *pulumi.OutputState }
+
+func (DeploymentHealthSettingsServicePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentHealthSettingsService)(nil)).Elem()
+}
+
+func (o DeploymentHealthSettingsServicePtrOutput) ToDeploymentHealthSettingsServicePtrOutput() DeploymentHealthSettingsServicePtrOutput {
+	return o
+}
+
+func (o DeploymentHealthSettingsServicePtrOutput) ToDeploymentHealthSettingsServicePtrOutputWithContext(ctx context.Context) DeploymentHealthSettingsServicePtrOutput {
+	return o
+}
+
+func (o DeploymentHealthSettingsServicePtrOutput) Elem() DeploymentHealthSettingsServiceOutput {
+	return o.ApplyT(func(v *DeploymentHealthSettingsService) DeploymentHealthSettingsService {
+		if v != nil {
+			return *v
+		}
+		var ret DeploymentHealthSettingsService
+		return ret
+	}).(DeploymentHealthSettingsServiceOutput)
+}
+
+// The batch count for the service health settings.
+func (o DeploymentHealthSettingsServicePtrOutput) BatchCount() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DeploymentHealthSettingsService) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.BatchCount
+	}).(pulumi.IntPtrOutput)
+}
+
+type DeploymentPredictionIntervalsSettings struct {
+	// Whether prediction intervals are enabled for this deployment.
+	Enabled bool `pulumi:"enabled"`
+	// List of enabled prediction intervals’ sizes for this deployment.
+	Percentiles []int `pulumi:"percentiles"`
+}
+
+// DeploymentPredictionIntervalsSettingsInput is an input type that accepts DeploymentPredictionIntervalsSettingsArgs and DeploymentPredictionIntervalsSettingsOutput values.
+// You can construct a concrete instance of `DeploymentPredictionIntervalsSettingsInput` via:
+//
+//	DeploymentPredictionIntervalsSettingsArgs{...}
+type DeploymentPredictionIntervalsSettingsInput interface {
+	pulumi.Input
+
+	ToDeploymentPredictionIntervalsSettingsOutput() DeploymentPredictionIntervalsSettingsOutput
+	ToDeploymentPredictionIntervalsSettingsOutputWithContext(context.Context) DeploymentPredictionIntervalsSettingsOutput
+}
+
+type DeploymentPredictionIntervalsSettingsArgs struct {
+	// Whether prediction intervals are enabled for this deployment.
+	Enabled pulumi.BoolInput `pulumi:"enabled"`
+	// List of enabled prediction intervals’ sizes for this deployment.
+	Percentiles pulumi.IntArrayInput `pulumi:"percentiles"`
+}
+
+func (DeploymentPredictionIntervalsSettingsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentPredictionIntervalsSettings)(nil)).Elem()
+}
+
+func (i DeploymentPredictionIntervalsSettingsArgs) ToDeploymentPredictionIntervalsSettingsOutput() DeploymentPredictionIntervalsSettingsOutput {
+	return i.ToDeploymentPredictionIntervalsSettingsOutputWithContext(context.Background())
+}
+
+func (i DeploymentPredictionIntervalsSettingsArgs) ToDeploymentPredictionIntervalsSettingsOutputWithContext(ctx context.Context) DeploymentPredictionIntervalsSettingsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentPredictionIntervalsSettingsOutput)
+}
+
+func (i DeploymentPredictionIntervalsSettingsArgs) ToDeploymentPredictionIntervalsSettingsPtrOutput() DeploymentPredictionIntervalsSettingsPtrOutput {
+	return i.ToDeploymentPredictionIntervalsSettingsPtrOutputWithContext(context.Background())
+}
+
+func (i DeploymentPredictionIntervalsSettingsArgs) ToDeploymentPredictionIntervalsSettingsPtrOutputWithContext(ctx context.Context) DeploymentPredictionIntervalsSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentPredictionIntervalsSettingsOutput).ToDeploymentPredictionIntervalsSettingsPtrOutputWithContext(ctx)
+}
+
+// DeploymentPredictionIntervalsSettingsPtrInput is an input type that accepts DeploymentPredictionIntervalsSettingsArgs, DeploymentPredictionIntervalsSettingsPtr and DeploymentPredictionIntervalsSettingsPtrOutput values.
+// You can construct a concrete instance of `DeploymentPredictionIntervalsSettingsPtrInput` via:
+//
+//	        DeploymentPredictionIntervalsSettingsArgs{...}
+//
+//	or:
+//
+//	        nil
+type DeploymentPredictionIntervalsSettingsPtrInput interface {
+	pulumi.Input
+
+	ToDeploymentPredictionIntervalsSettingsPtrOutput() DeploymentPredictionIntervalsSettingsPtrOutput
+	ToDeploymentPredictionIntervalsSettingsPtrOutputWithContext(context.Context) DeploymentPredictionIntervalsSettingsPtrOutput
+}
+
+type deploymentPredictionIntervalsSettingsPtrType DeploymentPredictionIntervalsSettingsArgs
+
+func DeploymentPredictionIntervalsSettingsPtr(v *DeploymentPredictionIntervalsSettingsArgs) DeploymentPredictionIntervalsSettingsPtrInput {
+	return (*deploymentPredictionIntervalsSettingsPtrType)(v)
+}
+
+func (*deploymentPredictionIntervalsSettingsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentPredictionIntervalsSettings)(nil)).Elem()
+}
+
+func (i *deploymentPredictionIntervalsSettingsPtrType) ToDeploymentPredictionIntervalsSettingsPtrOutput() DeploymentPredictionIntervalsSettingsPtrOutput {
+	return i.ToDeploymentPredictionIntervalsSettingsPtrOutputWithContext(context.Background())
+}
+
+func (i *deploymentPredictionIntervalsSettingsPtrType) ToDeploymentPredictionIntervalsSettingsPtrOutputWithContext(ctx context.Context) DeploymentPredictionIntervalsSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentPredictionIntervalsSettingsPtrOutput)
+}
+
+type DeploymentPredictionIntervalsSettingsOutput struct{ *pulumi.OutputState }
+
+func (DeploymentPredictionIntervalsSettingsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentPredictionIntervalsSettings)(nil)).Elem()
+}
+
+func (o DeploymentPredictionIntervalsSettingsOutput) ToDeploymentPredictionIntervalsSettingsOutput() DeploymentPredictionIntervalsSettingsOutput {
+	return o
+}
+
+func (o DeploymentPredictionIntervalsSettingsOutput) ToDeploymentPredictionIntervalsSettingsOutputWithContext(ctx context.Context) DeploymentPredictionIntervalsSettingsOutput {
+	return o
+}
+
+func (o DeploymentPredictionIntervalsSettingsOutput) ToDeploymentPredictionIntervalsSettingsPtrOutput() DeploymentPredictionIntervalsSettingsPtrOutput {
+	return o.ToDeploymentPredictionIntervalsSettingsPtrOutputWithContext(context.Background())
+}
+
+func (o DeploymentPredictionIntervalsSettingsOutput) ToDeploymentPredictionIntervalsSettingsPtrOutputWithContext(ctx context.Context) DeploymentPredictionIntervalsSettingsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DeploymentPredictionIntervalsSettings) *DeploymentPredictionIntervalsSettings {
+		return &v
+	}).(DeploymentPredictionIntervalsSettingsPtrOutput)
+}
+
+// Whether prediction intervals are enabled for this deployment.
+func (o DeploymentPredictionIntervalsSettingsOutput) Enabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v DeploymentPredictionIntervalsSettings) bool { return v.Enabled }).(pulumi.BoolOutput)
+}
+
+// List of enabled prediction intervals’ sizes for this deployment.
+func (o DeploymentPredictionIntervalsSettingsOutput) Percentiles() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v DeploymentPredictionIntervalsSettings) []int { return v.Percentiles }).(pulumi.IntArrayOutput)
+}
+
+type DeploymentPredictionIntervalsSettingsPtrOutput struct{ *pulumi.OutputState }
+
+func (DeploymentPredictionIntervalsSettingsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentPredictionIntervalsSettings)(nil)).Elem()
+}
+
+func (o DeploymentPredictionIntervalsSettingsPtrOutput) ToDeploymentPredictionIntervalsSettingsPtrOutput() DeploymentPredictionIntervalsSettingsPtrOutput {
+	return o
+}
+
+func (o DeploymentPredictionIntervalsSettingsPtrOutput) ToDeploymentPredictionIntervalsSettingsPtrOutputWithContext(ctx context.Context) DeploymentPredictionIntervalsSettingsPtrOutput {
+	return o
+}
+
+func (o DeploymentPredictionIntervalsSettingsPtrOutput) Elem() DeploymentPredictionIntervalsSettingsOutput {
+	return o.ApplyT(func(v *DeploymentPredictionIntervalsSettings) DeploymentPredictionIntervalsSettings {
+		if v != nil {
+			return *v
+		}
+		var ret DeploymentPredictionIntervalsSettings
+		return ret
+	}).(DeploymentPredictionIntervalsSettingsOutput)
+}
+
+// Whether prediction intervals are enabled for this deployment.
+func (o DeploymentPredictionIntervalsSettingsPtrOutput) Enabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *DeploymentPredictionIntervalsSettings) *bool {
+		if v == nil {
+			return nil
+		}
+		return &v.Enabled
+	}).(pulumi.BoolPtrOutput)
+}
+
+// List of enabled prediction intervals’ sizes for this deployment.
+func (o DeploymentPredictionIntervalsSettingsPtrOutput) Percentiles() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v *DeploymentPredictionIntervalsSettings) []int {
+		if v == nil {
+			return nil
+		}
+		return v.Percentiles
+	}).(pulumi.IntArrayOutput)
+}
+
+type DeploymentPredictionWarningSettings struct {
+	// The custom boundaries for prediction warnings.
+	CustomBoundaries *DeploymentPredictionWarningSettingsCustomBoundaries `pulumi:"customBoundaries"`
+	// If target prediction warning is enabled for this Deployment.
+	Enabled bool `pulumi:"enabled"`
+}
+
+// DeploymentPredictionWarningSettingsInput is an input type that accepts DeploymentPredictionWarningSettingsArgs and DeploymentPredictionWarningSettingsOutput values.
+// You can construct a concrete instance of `DeploymentPredictionWarningSettingsInput` via:
+//
+//	DeploymentPredictionWarningSettingsArgs{...}
+type DeploymentPredictionWarningSettingsInput interface {
+	pulumi.Input
+
+	ToDeploymentPredictionWarningSettingsOutput() DeploymentPredictionWarningSettingsOutput
+	ToDeploymentPredictionWarningSettingsOutputWithContext(context.Context) DeploymentPredictionWarningSettingsOutput
+}
+
+type DeploymentPredictionWarningSettingsArgs struct {
+	// The custom boundaries for prediction warnings.
+	CustomBoundaries DeploymentPredictionWarningSettingsCustomBoundariesPtrInput `pulumi:"customBoundaries"`
+	// If target prediction warning is enabled for this Deployment.
+	Enabled pulumi.BoolInput `pulumi:"enabled"`
+}
+
+func (DeploymentPredictionWarningSettingsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentPredictionWarningSettings)(nil)).Elem()
+}
+
+func (i DeploymentPredictionWarningSettingsArgs) ToDeploymentPredictionWarningSettingsOutput() DeploymentPredictionWarningSettingsOutput {
+	return i.ToDeploymentPredictionWarningSettingsOutputWithContext(context.Background())
+}
+
+func (i DeploymentPredictionWarningSettingsArgs) ToDeploymentPredictionWarningSettingsOutputWithContext(ctx context.Context) DeploymentPredictionWarningSettingsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentPredictionWarningSettingsOutput)
+}
+
+func (i DeploymentPredictionWarningSettingsArgs) ToDeploymentPredictionWarningSettingsPtrOutput() DeploymentPredictionWarningSettingsPtrOutput {
+	return i.ToDeploymentPredictionWarningSettingsPtrOutputWithContext(context.Background())
+}
+
+func (i DeploymentPredictionWarningSettingsArgs) ToDeploymentPredictionWarningSettingsPtrOutputWithContext(ctx context.Context) DeploymentPredictionWarningSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentPredictionWarningSettingsOutput).ToDeploymentPredictionWarningSettingsPtrOutputWithContext(ctx)
+}
+
+// DeploymentPredictionWarningSettingsPtrInput is an input type that accepts DeploymentPredictionWarningSettingsArgs, DeploymentPredictionWarningSettingsPtr and DeploymentPredictionWarningSettingsPtrOutput values.
+// You can construct a concrete instance of `DeploymentPredictionWarningSettingsPtrInput` via:
+//
+//	        DeploymentPredictionWarningSettingsArgs{...}
+//
+//	or:
+//
+//	        nil
+type DeploymentPredictionWarningSettingsPtrInput interface {
+	pulumi.Input
+
+	ToDeploymentPredictionWarningSettingsPtrOutput() DeploymentPredictionWarningSettingsPtrOutput
+	ToDeploymentPredictionWarningSettingsPtrOutputWithContext(context.Context) DeploymentPredictionWarningSettingsPtrOutput
+}
+
+type deploymentPredictionWarningSettingsPtrType DeploymentPredictionWarningSettingsArgs
+
+func DeploymentPredictionWarningSettingsPtr(v *DeploymentPredictionWarningSettingsArgs) DeploymentPredictionWarningSettingsPtrInput {
+	return (*deploymentPredictionWarningSettingsPtrType)(v)
+}
+
+func (*deploymentPredictionWarningSettingsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentPredictionWarningSettings)(nil)).Elem()
+}
+
+func (i *deploymentPredictionWarningSettingsPtrType) ToDeploymentPredictionWarningSettingsPtrOutput() DeploymentPredictionWarningSettingsPtrOutput {
+	return i.ToDeploymentPredictionWarningSettingsPtrOutputWithContext(context.Background())
+}
+
+func (i *deploymentPredictionWarningSettingsPtrType) ToDeploymentPredictionWarningSettingsPtrOutputWithContext(ctx context.Context) DeploymentPredictionWarningSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentPredictionWarningSettingsPtrOutput)
+}
+
+type DeploymentPredictionWarningSettingsOutput struct{ *pulumi.OutputState }
+
+func (DeploymentPredictionWarningSettingsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentPredictionWarningSettings)(nil)).Elem()
+}
+
+func (o DeploymentPredictionWarningSettingsOutput) ToDeploymentPredictionWarningSettingsOutput() DeploymentPredictionWarningSettingsOutput {
+	return o
+}
+
+func (o DeploymentPredictionWarningSettingsOutput) ToDeploymentPredictionWarningSettingsOutputWithContext(ctx context.Context) DeploymentPredictionWarningSettingsOutput {
+	return o
+}
+
+func (o DeploymentPredictionWarningSettingsOutput) ToDeploymentPredictionWarningSettingsPtrOutput() DeploymentPredictionWarningSettingsPtrOutput {
+	return o.ToDeploymentPredictionWarningSettingsPtrOutputWithContext(context.Background())
+}
+
+func (o DeploymentPredictionWarningSettingsOutput) ToDeploymentPredictionWarningSettingsPtrOutputWithContext(ctx context.Context) DeploymentPredictionWarningSettingsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DeploymentPredictionWarningSettings) *DeploymentPredictionWarningSettings {
+		return &v
+	}).(DeploymentPredictionWarningSettingsPtrOutput)
+}
+
+// The custom boundaries for prediction warnings.
+func (o DeploymentPredictionWarningSettingsOutput) CustomBoundaries() DeploymentPredictionWarningSettingsCustomBoundariesPtrOutput {
+	return o.ApplyT(func(v DeploymentPredictionWarningSettings) *DeploymentPredictionWarningSettingsCustomBoundaries {
+		return v.CustomBoundaries
+	}).(DeploymentPredictionWarningSettingsCustomBoundariesPtrOutput)
+}
+
+// If target prediction warning is enabled for this Deployment.
+func (o DeploymentPredictionWarningSettingsOutput) Enabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v DeploymentPredictionWarningSettings) bool { return v.Enabled }).(pulumi.BoolOutput)
+}
+
+type DeploymentPredictionWarningSettingsPtrOutput struct{ *pulumi.OutputState }
+
+func (DeploymentPredictionWarningSettingsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentPredictionWarningSettings)(nil)).Elem()
+}
+
+func (o DeploymentPredictionWarningSettingsPtrOutput) ToDeploymentPredictionWarningSettingsPtrOutput() DeploymentPredictionWarningSettingsPtrOutput {
+	return o
+}
+
+func (o DeploymentPredictionWarningSettingsPtrOutput) ToDeploymentPredictionWarningSettingsPtrOutputWithContext(ctx context.Context) DeploymentPredictionWarningSettingsPtrOutput {
+	return o
+}
+
+func (o DeploymentPredictionWarningSettingsPtrOutput) Elem() DeploymentPredictionWarningSettingsOutput {
+	return o.ApplyT(func(v *DeploymentPredictionWarningSettings) DeploymentPredictionWarningSettings {
+		if v != nil {
+			return *v
+		}
+		var ret DeploymentPredictionWarningSettings
+		return ret
+	}).(DeploymentPredictionWarningSettingsOutput)
+}
+
+// The custom boundaries for prediction warnings.
+func (o DeploymentPredictionWarningSettingsPtrOutput) CustomBoundaries() DeploymentPredictionWarningSettingsCustomBoundariesPtrOutput {
+	return o.ApplyT(func(v *DeploymentPredictionWarningSettings) *DeploymentPredictionWarningSettingsCustomBoundaries {
+		if v == nil {
+			return nil
+		}
+		return v.CustomBoundaries
+	}).(DeploymentPredictionWarningSettingsCustomBoundariesPtrOutput)
+}
+
+// If target prediction warning is enabled for this Deployment.
+func (o DeploymentPredictionWarningSettingsPtrOutput) Enabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *DeploymentPredictionWarningSettings) *bool {
+		if v == nil {
+			return nil
+		}
+		return &v.Enabled
+	}).(pulumi.BoolPtrOutput)
+}
+
+type DeploymentPredictionWarningSettingsCustomBoundaries struct {
+	// All predictions less than provided value will be considered anomalous.
+	LowerBoundary *float64 `pulumi:"lowerBoundary"`
+	// All predictions greater than provided value will be considered anomalous.
+	UpperBoundary *float64 `pulumi:"upperBoundary"`
+}
+
+// DeploymentPredictionWarningSettingsCustomBoundariesInput is an input type that accepts DeploymentPredictionWarningSettingsCustomBoundariesArgs and DeploymentPredictionWarningSettingsCustomBoundariesOutput values.
+// You can construct a concrete instance of `DeploymentPredictionWarningSettingsCustomBoundariesInput` via:
+//
+//	DeploymentPredictionWarningSettingsCustomBoundariesArgs{...}
+type DeploymentPredictionWarningSettingsCustomBoundariesInput interface {
+	pulumi.Input
+
+	ToDeploymentPredictionWarningSettingsCustomBoundariesOutput() DeploymentPredictionWarningSettingsCustomBoundariesOutput
+	ToDeploymentPredictionWarningSettingsCustomBoundariesOutputWithContext(context.Context) DeploymentPredictionWarningSettingsCustomBoundariesOutput
+}
+
+type DeploymentPredictionWarningSettingsCustomBoundariesArgs struct {
+	// All predictions less than provided value will be considered anomalous.
+	LowerBoundary pulumi.Float64PtrInput `pulumi:"lowerBoundary"`
+	// All predictions greater than provided value will be considered anomalous.
+	UpperBoundary pulumi.Float64PtrInput `pulumi:"upperBoundary"`
+}
+
+func (DeploymentPredictionWarningSettingsCustomBoundariesArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentPredictionWarningSettingsCustomBoundaries)(nil)).Elem()
+}
+
+func (i DeploymentPredictionWarningSettingsCustomBoundariesArgs) ToDeploymentPredictionWarningSettingsCustomBoundariesOutput() DeploymentPredictionWarningSettingsCustomBoundariesOutput {
+	return i.ToDeploymentPredictionWarningSettingsCustomBoundariesOutputWithContext(context.Background())
+}
+
+func (i DeploymentPredictionWarningSettingsCustomBoundariesArgs) ToDeploymentPredictionWarningSettingsCustomBoundariesOutputWithContext(ctx context.Context) DeploymentPredictionWarningSettingsCustomBoundariesOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentPredictionWarningSettingsCustomBoundariesOutput)
+}
+
+func (i DeploymentPredictionWarningSettingsCustomBoundariesArgs) ToDeploymentPredictionWarningSettingsCustomBoundariesPtrOutput() DeploymentPredictionWarningSettingsCustomBoundariesPtrOutput {
+	return i.ToDeploymentPredictionWarningSettingsCustomBoundariesPtrOutputWithContext(context.Background())
+}
+
+func (i DeploymentPredictionWarningSettingsCustomBoundariesArgs) ToDeploymentPredictionWarningSettingsCustomBoundariesPtrOutputWithContext(ctx context.Context) DeploymentPredictionWarningSettingsCustomBoundariesPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentPredictionWarningSettingsCustomBoundariesOutput).ToDeploymentPredictionWarningSettingsCustomBoundariesPtrOutputWithContext(ctx)
+}
+
+// DeploymentPredictionWarningSettingsCustomBoundariesPtrInput is an input type that accepts DeploymentPredictionWarningSettingsCustomBoundariesArgs, DeploymentPredictionWarningSettingsCustomBoundariesPtr and DeploymentPredictionWarningSettingsCustomBoundariesPtrOutput values.
+// You can construct a concrete instance of `DeploymentPredictionWarningSettingsCustomBoundariesPtrInput` via:
+//
+//	        DeploymentPredictionWarningSettingsCustomBoundariesArgs{...}
+//
+//	or:
+//
+//	        nil
+type DeploymentPredictionWarningSettingsCustomBoundariesPtrInput interface {
+	pulumi.Input
+
+	ToDeploymentPredictionWarningSettingsCustomBoundariesPtrOutput() DeploymentPredictionWarningSettingsCustomBoundariesPtrOutput
+	ToDeploymentPredictionWarningSettingsCustomBoundariesPtrOutputWithContext(context.Context) DeploymentPredictionWarningSettingsCustomBoundariesPtrOutput
+}
+
+type deploymentPredictionWarningSettingsCustomBoundariesPtrType DeploymentPredictionWarningSettingsCustomBoundariesArgs
+
+func DeploymentPredictionWarningSettingsCustomBoundariesPtr(v *DeploymentPredictionWarningSettingsCustomBoundariesArgs) DeploymentPredictionWarningSettingsCustomBoundariesPtrInput {
+	return (*deploymentPredictionWarningSettingsCustomBoundariesPtrType)(v)
+}
+
+func (*deploymentPredictionWarningSettingsCustomBoundariesPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentPredictionWarningSettingsCustomBoundaries)(nil)).Elem()
+}
+
+func (i *deploymentPredictionWarningSettingsCustomBoundariesPtrType) ToDeploymentPredictionWarningSettingsCustomBoundariesPtrOutput() DeploymentPredictionWarningSettingsCustomBoundariesPtrOutput {
+	return i.ToDeploymentPredictionWarningSettingsCustomBoundariesPtrOutputWithContext(context.Background())
+}
+
+func (i *deploymentPredictionWarningSettingsCustomBoundariesPtrType) ToDeploymentPredictionWarningSettingsCustomBoundariesPtrOutputWithContext(ctx context.Context) DeploymentPredictionWarningSettingsCustomBoundariesPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentPredictionWarningSettingsCustomBoundariesPtrOutput)
+}
+
+type DeploymentPredictionWarningSettingsCustomBoundariesOutput struct{ *pulumi.OutputState }
+
+func (DeploymentPredictionWarningSettingsCustomBoundariesOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentPredictionWarningSettingsCustomBoundaries)(nil)).Elem()
+}
+
+func (o DeploymentPredictionWarningSettingsCustomBoundariesOutput) ToDeploymentPredictionWarningSettingsCustomBoundariesOutput() DeploymentPredictionWarningSettingsCustomBoundariesOutput {
+	return o
+}
+
+func (o DeploymentPredictionWarningSettingsCustomBoundariesOutput) ToDeploymentPredictionWarningSettingsCustomBoundariesOutputWithContext(ctx context.Context) DeploymentPredictionWarningSettingsCustomBoundariesOutput {
+	return o
+}
+
+func (o DeploymentPredictionWarningSettingsCustomBoundariesOutput) ToDeploymentPredictionWarningSettingsCustomBoundariesPtrOutput() DeploymentPredictionWarningSettingsCustomBoundariesPtrOutput {
+	return o.ToDeploymentPredictionWarningSettingsCustomBoundariesPtrOutputWithContext(context.Background())
+}
+
+func (o DeploymentPredictionWarningSettingsCustomBoundariesOutput) ToDeploymentPredictionWarningSettingsCustomBoundariesPtrOutputWithContext(ctx context.Context) DeploymentPredictionWarningSettingsCustomBoundariesPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DeploymentPredictionWarningSettingsCustomBoundaries) *DeploymentPredictionWarningSettingsCustomBoundaries {
+		return &v
+	}).(DeploymentPredictionWarningSettingsCustomBoundariesPtrOutput)
+}
+
+// All predictions less than provided value will be considered anomalous.
+func (o DeploymentPredictionWarningSettingsCustomBoundariesOutput) LowerBoundary() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v DeploymentPredictionWarningSettingsCustomBoundaries) *float64 { return v.LowerBoundary }).(pulumi.Float64PtrOutput)
+}
+
+// All predictions greater than provided value will be considered anomalous.
+func (o DeploymentPredictionWarningSettingsCustomBoundariesOutput) UpperBoundary() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v DeploymentPredictionWarningSettingsCustomBoundaries) *float64 { return v.UpperBoundary }).(pulumi.Float64PtrOutput)
+}
+
+type DeploymentPredictionWarningSettingsCustomBoundariesPtrOutput struct{ *pulumi.OutputState }
+
+func (DeploymentPredictionWarningSettingsCustomBoundariesPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentPredictionWarningSettingsCustomBoundaries)(nil)).Elem()
+}
+
+func (o DeploymentPredictionWarningSettingsCustomBoundariesPtrOutput) ToDeploymentPredictionWarningSettingsCustomBoundariesPtrOutput() DeploymentPredictionWarningSettingsCustomBoundariesPtrOutput {
+	return o
+}
+
+func (o DeploymentPredictionWarningSettingsCustomBoundariesPtrOutput) ToDeploymentPredictionWarningSettingsCustomBoundariesPtrOutputWithContext(ctx context.Context) DeploymentPredictionWarningSettingsCustomBoundariesPtrOutput {
+	return o
+}
+
+func (o DeploymentPredictionWarningSettingsCustomBoundariesPtrOutput) Elem() DeploymentPredictionWarningSettingsCustomBoundariesOutput {
+	return o.ApplyT(func(v *DeploymentPredictionWarningSettingsCustomBoundaries) DeploymentPredictionWarningSettingsCustomBoundaries {
+		if v != nil {
+			return *v
+		}
+		var ret DeploymentPredictionWarningSettingsCustomBoundaries
+		return ret
+	}).(DeploymentPredictionWarningSettingsCustomBoundariesOutput)
+}
+
+// All predictions less than provided value will be considered anomalous.
+func (o DeploymentPredictionWarningSettingsCustomBoundariesPtrOutput) LowerBoundary() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v *DeploymentPredictionWarningSettingsCustomBoundaries) *float64 {
+		if v == nil {
+			return nil
+		}
+		return v.LowerBoundary
+	}).(pulumi.Float64PtrOutput)
+}
+
+// All predictions greater than provided value will be considered anomalous.
+func (o DeploymentPredictionWarningSettingsCustomBoundariesPtrOutput) UpperBoundary() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v *DeploymentPredictionWarningSettingsCustomBoundaries) *float64 {
+		if v == nil {
+			return nil
+		}
+		return v.UpperBoundary
+	}).(pulumi.Float64PtrOutput)
+}
+
+type DeploymentPredictionsByForecastDateSettings struct {
+	// The column name in prediction datasets to be used as forecast date.
+	ColumnName *string `pulumi:"columnName"`
+	// The datetime format of the forecast date column in prediction datasets.
+	DatetimeFormat *string `pulumi:"datetimeFormat"`
+	// Is ’True’ if predictions by forecast date is enabled for this deployment.
+	Enabled bool `pulumi:"enabled"`
+}
+
+// DeploymentPredictionsByForecastDateSettingsInput is an input type that accepts DeploymentPredictionsByForecastDateSettingsArgs and DeploymentPredictionsByForecastDateSettingsOutput values.
+// You can construct a concrete instance of `DeploymentPredictionsByForecastDateSettingsInput` via:
+//
+//	DeploymentPredictionsByForecastDateSettingsArgs{...}
+type DeploymentPredictionsByForecastDateSettingsInput interface {
+	pulumi.Input
+
+	ToDeploymentPredictionsByForecastDateSettingsOutput() DeploymentPredictionsByForecastDateSettingsOutput
+	ToDeploymentPredictionsByForecastDateSettingsOutputWithContext(context.Context) DeploymentPredictionsByForecastDateSettingsOutput
+}
+
+type DeploymentPredictionsByForecastDateSettingsArgs struct {
+	// The column name in prediction datasets to be used as forecast date.
+	ColumnName pulumi.StringPtrInput `pulumi:"columnName"`
+	// The datetime format of the forecast date column in prediction datasets.
+	DatetimeFormat pulumi.StringPtrInput `pulumi:"datetimeFormat"`
+	// Is ’True’ if predictions by forecast date is enabled for this deployment.
+	Enabled pulumi.BoolInput `pulumi:"enabled"`
+}
+
+func (DeploymentPredictionsByForecastDateSettingsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentPredictionsByForecastDateSettings)(nil)).Elem()
+}
+
+func (i DeploymentPredictionsByForecastDateSettingsArgs) ToDeploymentPredictionsByForecastDateSettingsOutput() DeploymentPredictionsByForecastDateSettingsOutput {
+	return i.ToDeploymentPredictionsByForecastDateSettingsOutputWithContext(context.Background())
+}
+
+func (i DeploymentPredictionsByForecastDateSettingsArgs) ToDeploymentPredictionsByForecastDateSettingsOutputWithContext(ctx context.Context) DeploymentPredictionsByForecastDateSettingsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentPredictionsByForecastDateSettingsOutput)
+}
+
+func (i DeploymentPredictionsByForecastDateSettingsArgs) ToDeploymentPredictionsByForecastDateSettingsPtrOutput() DeploymentPredictionsByForecastDateSettingsPtrOutput {
+	return i.ToDeploymentPredictionsByForecastDateSettingsPtrOutputWithContext(context.Background())
+}
+
+func (i DeploymentPredictionsByForecastDateSettingsArgs) ToDeploymentPredictionsByForecastDateSettingsPtrOutputWithContext(ctx context.Context) DeploymentPredictionsByForecastDateSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentPredictionsByForecastDateSettingsOutput).ToDeploymentPredictionsByForecastDateSettingsPtrOutputWithContext(ctx)
+}
+
+// DeploymentPredictionsByForecastDateSettingsPtrInput is an input type that accepts DeploymentPredictionsByForecastDateSettingsArgs, DeploymentPredictionsByForecastDateSettingsPtr and DeploymentPredictionsByForecastDateSettingsPtrOutput values.
+// You can construct a concrete instance of `DeploymentPredictionsByForecastDateSettingsPtrInput` via:
+//
+//	        DeploymentPredictionsByForecastDateSettingsArgs{...}
+//
+//	or:
+//
+//	        nil
+type DeploymentPredictionsByForecastDateSettingsPtrInput interface {
+	pulumi.Input
+
+	ToDeploymentPredictionsByForecastDateSettingsPtrOutput() DeploymentPredictionsByForecastDateSettingsPtrOutput
+	ToDeploymentPredictionsByForecastDateSettingsPtrOutputWithContext(context.Context) DeploymentPredictionsByForecastDateSettingsPtrOutput
+}
+
+type deploymentPredictionsByForecastDateSettingsPtrType DeploymentPredictionsByForecastDateSettingsArgs
+
+func DeploymentPredictionsByForecastDateSettingsPtr(v *DeploymentPredictionsByForecastDateSettingsArgs) DeploymentPredictionsByForecastDateSettingsPtrInput {
+	return (*deploymentPredictionsByForecastDateSettingsPtrType)(v)
+}
+
+func (*deploymentPredictionsByForecastDateSettingsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentPredictionsByForecastDateSettings)(nil)).Elem()
+}
+
+func (i *deploymentPredictionsByForecastDateSettingsPtrType) ToDeploymentPredictionsByForecastDateSettingsPtrOutput() DeploymentPredictionsByForecastDateSettingsPtrOutput {
+	return i.ToDeploymentPredictionsByForecastDateSettingsPtrOutputWithContext(context.Background())
+}
+
+func (i *deploymentPredictionsByForecastDateSettingsPtrType) ToDeploymentPredictionsByForecastDateSettingsPtrOutputWithContext(ctx context.Context) DeploymentPredictionsByForecastDateSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentPredictionsByForecastDateSettingsPtrOutput)
+}
+
+type DeploymentPredictionsByForecastDateSettingsOutput struct{ *pulumi.OutputState }
+
+func (DeploymentPredictionsByForecastDateSettingsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentPredictionsByForecastDateSettings)(nil)).Elem()
+}
+
+func (o DeploymentPredictionsByForecastDateSettingsOutput) ToDeploymentPredictionsByForecastDateSettingsOutput() DeploymentPredictionsByForecastDateSettingsOutput {
+	return o
+}
+
+func (o DeploymentPredictionsByForecastDateSettingsOutput) ToDeploymentPredictionsByForecastDateSettingsOutputWithContext(ctx context.Context) DeploymentPredictionsByForecastDateSettingsOutput {
+	return o
+}
+
+func (o DeploymentPredictionsByForecastDateSettingsOutput) ToDeploymentPredictionsByForecastDateSettingsPtrOutput() DeploymentPredictionsByForecastDateSettingsPtrOutput {
+	return o.ToDeploymentPredictionsByForecastDateSettingsPtrOutputWithContext(context.Background())
+}
+
+func (o DeploymentPredictionsByForecastDateSettingsOutput) ToDeploymentPredictionsByForecastDateSettingsPtrOutputWithContext(ctx context.Context) DeploymentPredictionsByForecastDateSettingsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DeploymentPredictionsByForecastDateSettings) *DeploymentPredictionsByForecastDateSettings {
+		return &v
+	}).(DeploymentPredictionsByForecastDateSettingsPtrOutput)
+}
+
+// The column name in prediction datasets to be used as forecast date.
+func (o DeploymentPredictionsByForecastDateSettingsOutput) ColumnName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DeploymentPredictionsByForecastDateSettings) *string { return v.ColumnName }).(pulumi.StringPtrOutput)
+}
+
+// The datetime format of the forecast date column in prediction datasets.
+func (o DeploymentPredictionsByForecastDateSettingsOutput) DatetimeFormat() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DeploymentPredictionsByForecastDateSettings) *string { return v.DatetimeFormat }).(pulumi.StringPtrOutput)
+}
+
+// Is ’True’ if predictions by forecast date is enabled for this deployment.
+func (o DeploymentPredictionsByForecastDateSettingsOutput) Enabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v DeploymentPredictionsByForecastDateSettings) bool { return v.Enabled }).(pulumi.BoolOutput)
+}
+
+type DeploymentPredictionsByForecastDateSettingsPtrOutput struct{ *pulumi.OutputState }
+
+func (DeploymentPredictionsByForecastDateSettingsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentPredictionsByForecastDateSettings)(nil)).Elem()
+}
+
+func (o DeploymentPredictionsByForecastDateSettingsPtrOutput) ToDeploymentPredictionsByForecastDateSettingsPtrOutput() DeploymentPredictionsByForecastDateSettingsPtrOutput {
+	return o
+}
+
+func (o DeploymentPredictionsByForecastDateSettingsPtrOutput) ToDeploymentPredictionsByForecastDateSettingsPtrOutputWithContext(ctx context.Context) DeploymentPredictionsByForecastDateSettingsPtrOutput {
+	return o
+}
+
+func (o DeploymentPredictionsByForecastDateSettingsPtrOutput) Elem() DeploymentPredictionsByForecastDateSettingsOutput {
+	return o.ApplyT(func(v *DeploymentPredictionsByForecastDateSettings) DeploymentPredictionsByForecastDateSettings {
+		if v != nil {
+			return *v
+		}
+		var ret DeploymentPredictionsByForecastDateSettings
+		return ret
+	}).(DeploymentPredictionsByForecastDateSettingsOutput)
+}
+
+// The column name in prediction datasets to be used as forecast date.
+func (o DeploymentPredictionsByForecastDateSettingsPtrOutput) ColumnName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DeploymentPredictionsByForecastDateSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ColumnName
+	}).(pulumi.StringPtrOutput)
+}
+
+// The datetime format of the forecast date column in prediction datasets.
+func (o DeploymentPredictionsByForecastDateSettingsPtrOutput) DatetimeFormat() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DeploymentPredictionsByForecastDateSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.DatetimeFormat
+	}).(pulumi.StringPtrOutput)
+}
+
+// Is ’True’ if predictions by forecast date is enabled for this deployment.
+func (o DeploymentPredictionsByForecastDateSettingsPtrOutput) Enabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *DeploymentPredictionsByForecastDateSettings) *bool {
+		if v == nil {
+			return nil
+		}
+		return &v.Enabled
+	}).(pulumi.BoolPtrOutput)
+}
+
+type DeploymentPredictionsDataCollectionSettings struct {
+	// If predictions data collections is enabled for this Deployment.
+	Enabled bool `pulumi:"enabled"`
+}
+
+// DeploymentPredictionsDataCollectionSettingsInput is an input type that accepts DeploymentPredictionsDataCollectionSettingsArgs and DeploymentPredictionsDataCollectionSettingsOutput values.
+// You can construct a concrete instance of `DeploymentPredictionsDataCollectionSettingsInput` via:
+//
+//	DeploymentPredictionsDataCollectionSettingsArgs{...}
+type DeploymentPredictionsDataCollectionSettingsInput interface {
+	pulumi.Input
+
+	ToDeploymentPredictionsDataCollectionSettingsOutput() DeploymentPredictionsDataCollectionSettingsOutput
+	ToDeploymentPredictionsDataCollectionSettingsOutputWithContext(context.Context) DeploymentPredictionsDataCollectionSettingsOutput
+}
+
+type DeploymentPredictionsDataCollectionSettingsArgs struct {
+	// If predictions data collections is enabled for this Deployment.
+	Enabled pulumi.BoolInput `pulumi:"enabled"`
+}
+
+func (DeploymentPredictionsDataCollectionSettingsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentPredictionsDataCollectionSettings)(nil)).Elem()
+}
+
+func (i DeploymentPredictionsDataCollectionSettingsArgs) ToDeploymentPredictionsDataCollectionSettingsOutput() DeploymentPredictionsDataCollectionSettingsOutput {
+	return i.ToDeploymentPredictionsDataCollectionSettingsOutputWithContext(context.Background())
+}
+
+func (i DeploymentPredictionsDataCollectionSettingsArgs) ToDeploymentPredictionsDataCollectionSettingsOutputWithContext(ctx context.Context) DeploymentPredictionsDataCollectionSettingsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentPredictionsDataCollectionSettingsOutput)
+}
+
+func (i DeploymentPredictionsDataCollectionSettingsArgs) ToDeploymentPredictionsDataCollectionSettingsPtrOutput() DeploymentPredictionsDataCollectionSettingsPtrOutput {
+	return i.ToDeploymentPredictionsDataCollectionSettingsPtrOutputWithContext(context.Background())
+}
+
+func (i DeploymentPredictionsDataCollectionSettingsArgs) ToDeploymentPredictionsDataCollectionSettingsPtrOutputWithContext(ctx context.Context) DeploymentPredictionsDataCollectionSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentPredictionsDataCollectionSettingsOutput).ToDeploymentPredictionsDataCollectionSettingsPtrOutputWithContext(ctx)
+}
+
+// DeploymentPredictionsDataCollectionSettingsPtrInput is an input type that accepts DeploymentPredictionsDataCollectionSettingsArgs, DeploymentPredictionsDataCollectionSettingsPtr and DeploymentPredictionsDataCollectionSettingsPtrOutput values.
+// You can construct a concrete instance of `DeploymentPredictionsDataCollectionSettingsPtrInput` via:
+//
+//	        DeploymentPredictionsDataCollectionSettingsArgs{...}
+//
+//	or:
+//
+//	        nil
+type DeploymentPredictionsDataCollectionSettingsPtrInput interface {
+	pulumi.Input
+
+	ToDeploymentPredictionsDataCollectionSettingsPtrOutput() DeploymentPredictionsDataCollectionSettingsPtrOutput
+	ToDeploymentPredictionsDataCollectionSettingsPtrOutputWithContext(context.Context) DeploymentPredictionsDataCollectionSettingsPtrOutput
+}
+
+type deploymentPredictionsDataCollectionSettingsPtrType DeploymentPredictionsDataCollectionSettingsArgs
+
+func DeploymentPredictionsDataCollectionSettingsPtr(v *DeploymentPredictionsDataCollectionSettingsArgs) DeploymentPredictionsDataCollectionSettingsPtrInput {
+	return (*deploymentPredictionsDataCollectionSettingsPtrType)(v)
+}
+
+func (*deploymentPredictionsDataCollectionSettingsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentPredictionsDataCollectionSettings)(nil)).Elem()
+}
+
+func (i *deploymentPredictionsDataCollectionSettingsPtrType) ToDeploymentPredictionsDataCollectionSettingsPtrOutput() DeploymentPredictionsDataCollectionSettingsPtrOutput {
+	return i.ToDeploymentPredictionsDataCollectionSettingsPtrOutputWithContext(context.Background())
+}
+
+func (i *deploymentPredictionsDataCollectionSettingsPtrType) ToDeploymentPredictionsDataCollectionSettingsPtrOutputWithContext(ctx context.Context) DeploymentPredictionsDataCollectionSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentPredictionsDataCollectionSettingsPtrOutput)
+}
+
+type DeploymentPredictionsDataCollectionSettingsOutput struct{ *pulumi.OutputState }
+
+func (DeploymentPredictionsDataCollectionSettingsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentPredictionsDataCollectionSettings)(nil)).Elem()
+}
+
+func (o DeploymentPredictionsDataCollectionSettingsOutput) ToDeploymentPredictionsDataCollectionSettingsOutput() DeploymentPredictionsDataCollectionSettingsOutput {
+	return o
+}
+
+func (o DeploymentPredictionsDataCollectionSettingsOutput) ToDeploymentPredictionsDataCollectionSettingsOutputWithContext(ctx context.Context) DeploymentPredictionsDataCollectionSettingsOutput {
+	return o
+}
+
+func (o DeploymentPredictionsDataCollectionSettingsOutput) ToDeploymentPredictionsDataCollectionSettingsPtrOutput() DeploymentPredictionsDataCollectionSettingsPtrOutput {
+	return o.ToDeploymentPredictionsDataCollectionSettingsPtrOutputWithContext(context.Background())
+}
+
+func (o DeploymentPredictionsDataCollectionSettingsOutput) ToDeploymentPredictionsDataCollectionSettingsPtrOutputWithContext(ctx context.Context) DeploymentPredictionsDataCollectionSettingsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DeploymentPredictionsDataCollectionSettings) *DeploymentPredictionsDataCollectionSettings {
+		return &v
+	}).(DeploymentPredictionsDataCollectionSettingsPtrOutput)
+}
+
+// If predictions data collections is enabled for this Deployment.
+func (o DeploymentPredictionsDataCollectionSettingsOutput) Enabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v DeploymentPredictionsDataCollectionSettings) bool { return v.Enabled }).(pulumi.BoolOutput)
+}
+
+type DeploymentPredictionsDataCollectionSettingsPtrOutput struct{ *pulumi.OutputState }
+
+func (DeploymentPredictionsDataCollectionSettingsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentPredictionsDataCollectionSettings)(nil)).Elem()
+}
+
+func (o DeploymentPredictionsDataCollectionSettingsPtrOutput) ToDeploymentPredictionsDataCollectionSettingsPtrOutput() DeploymentPredictionsDataCollectionSettingsPtrOutput {
+	return o
+}
+
+func (o DeploymentPredictionsDataCollectionSettingsPtrOutput) ToDeploymentPredictionsDataCollectionSettingsPtrOutputWithContext(ctx context.Context) DeploymentPredictionsDataCollectionSettingsPtrOutput {
+	return o
+}
+
+func (o DeploymentPredictionsDataCollectionSettingsPtrOutput) Elem() DeploymentPredictionsDataCollectionSettingsOutput {
+	return o.ApplyT(func(v *DeploymentPredictionsDataCollectionSettings) DeploymentPredictionsDataCollectionSettings {
+		if v != nil {
+			return *v
+		}
+		var ret DeploymentPredictionsDataCollectionSettings
+		return ret
+	}).(DeploymentPredictionsDataCollectionSettingsOutput)
+}
+
+// If predictions data collections is enabled for this Deployment.
+func (o DeploymentPredictionsDataCollectionSettingsPtrOutput) Enabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *DeploymentPredictionsDataCollectionSettings) *bool {
+		if v == nil {
+			return nil
+		}
+		return &v.Enabled
+	}).(pulumi.BoolPtrOutput)
+}
+
+type DeploymentPredictionsSettings struct {
 	// The maximum number of computes to use for predictions.
 	MaxComputes int `pulumi:"maxComputes"`
 	// The minimum number of computes to use for predictions.
@@ -1524,18 +4507,18 @@ type DeploymentSettingsPredictionsSettings struct {
 	RealTime bool `pulumi:"realTime"`
 }
 
-// DeploymentSettingsPredictionsSettingsInput is an input type that accepts DeploymentSettingsPredictionsSettingsArgs and DeploymentSettingsPredictionsSettingsOutput values.
-// You can construct a concrete instance of `DeploymentSettingsPredictionsSettingsInput` via:
+// DeploymentPredictionsSettingsInput is an input type that accepts DeploymentPredictionsSettingsArgs and DeploymentPredictionsSettingsOutput values.
+// You can construct a concrete instance of `DeploymentPredictionsSettingsInput` via:
 //
-//	DeploymentSettingsPredictionsSettingsArgs{...}
-type DeploymentSettingsPredictionsSettingsInput interface {
+//	DeploymentPredictionsSettingsArgs{...}
+type DeploymentPredictionsSettingsInput interface {
 	pulumi.Input
 
-	ToDeploymentSettingsPredictionsSettingsOutput() DeploymentSettingsPredictionsSettingsOutput
-	ToDeploymentSettingsPredictionsSettingsOutputWithContext(context.Context) DeploymentSettingsPredictionsSettingsOutput
+	ToDeploymentPredictionsSettingsOutput() DeploymentPredictionsSettingsOutput
+	ToDeploymentPredictionsSettingsOutputWithContext(context.Context) DeploymentPredictionsSettingsOutput
 }
 
-type DeploymentSettingsPredictionsSettingsArgs struct {
+type DeploymentPredictionsSettingsArgs struct {
 	// The maximum number of computes to use for predictions.
 	MaxComputes pulumi.IntInput `pulumi:"maxComputes"`
 	// The minimum number of computes to use for predictions.
@@ -1544,125 +4527,125 @@ type DeploymentSettingsPredictionsSettingsArgs struct {
 	RealTime pulumi.BoolInput `pulumi:"realTime"`
 }
 
-func (DeploymentSettingsPredictionsSettingsArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*DeploymentSettingsPredictionsSettings)(nil)).Elem()
+func (DeploymentPredictionsSettingsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentPredictionsSettings)(nil)).Elem()
 }
 
-func (i DeploymentSettingsPredictionsSettingsArgs) ToDeploymentSettingsPredictionsSettingsOutput() DeploymentSettingsPredictionsSettingsOutput {
-	return i.ToDeploymentSettingsPredictionsSettingsOutputWithContext(context.Background())
+func (i DeploymentPredictionsSettingsArgs) ToDeploymentPredictionsSettingsOutput() DeploymentPredictionsSettingsOutput {
+	return i.ToDeploymentPredictionsSettingsOutputWithContext(context.Background())
 }
 
-func (i DeploymentSettingsPredictionsSettingsArgs) ToDeploymentSettingsPredictionsSettingsOutputWithContext(ctx context.Context) DeploymentSettingsPredictionsSettingsOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DeploymentSettingsPredictionsSettingsOutput)
+func (i DeploymentPredictionsSettingsArgs) ToDeploymentPredictionsSettingsOutputWithContext(ctx context.Context) DeploymentPredictionsSettingsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentPredictionsSettingsOutput)
 }
 
-func (i DeploymentSettingsPredictionsSettingsArgs) ToDeploymentSettingsPredictionsSettingsPtrOutput() DeploymentSettingsPredictionsSettingsPtrOutput {
-	return i.ToDeploymentSettingsPredictionsSettingsPtrOutputWithContext(context.Background())
+func (i DeploymentPredictionsSettingsArgs) ToDeploymentPredictionsSettingsPtrOutput() DeploymentPredictionsSettingsPtrOutput {
+	return i.ToDeploymentPredictionsSettingsPtrOutputWithContext(context.Background())
 }
 
-func (i DeploymentSettingsPredictionsSettingsArgs) ToDeploymentSettingsPredictionsSettingsPtrOutputWithContext(ctx context.Context) DeploymentSettingsPredictionsSettingsPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DeploymentSettingsPredictionsSettingsOutput).ToDeploymentSettingsPredictionsSettingsPtrOutputWithContext(ctx)
+func (i DeploymentPredictionsSettingsArgs) ToDeploymentPredictionsSettingsPtrOutputWithContext(ctx context.Context) DeploymentPredictionsSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentPredictionsSettingsOutput).ToDeploymentPredictionsSettingsPtrOutputWithContext(ctx)
 }
 
-// DeploymentSettingsPredictionsSettingsPtrInput is an input type that accepts DeploymentSettingsPredictionsSettingsArgs, DeploymentSettingsPredictionsSettingsPtr and DeploymentSettingsPredictionsSettingsPtrOutput values.
-// You can construct a concrete instance of `DeploymentSettingsPredictionsSettingsPtrInput` via:
+// DeploymentPredictionsSettingsPtrInput is an input type that accepts DeploymentPredictionsSettingsArgs, DeploymentPredictionsSettingsPtr and DeploymentPredictionsSettingsPtrOutput values.
+// You can construct a concrete instance of `DeploymentPredictionsSettingsPtrInput` via:
 //
-//	        DeploymentSettingsPredictionsSettingsArgs{...}
+//	        DeploymentPredictionsSettingsArgs{...}
 //
 //	or:
 //
 //	        nil
-type DeploymentSettingsPredictionsSettingsPtrInput interface {
+type DeploymentPredictionsSettingsPtrInput interface {
 	pulumi.Input
 
-	ToDeploymentSettingsPredictionsSettingsPtrOutput() DeploymentSettingsPredictionsSettingsPtrOutput
-	ToDeploymentSettingsPredictionsSettingsPtrOutputWithContext(context.Context) DeploymentSettingsPredictionsSettingsPtrOutput
+	ToDeploymentPredictionsSettingsPtrOutput() DeploymentPredictionsSettingsPtrOutput
+	ToDeploymentPredictionsSettingsPtrOutputWithContext(context.Context) DeploymentPredictionsSettingsPtrOutput
 }
 
-type deploymentSettingsPredictionsSettingsPtrType DeploymentSettingsPredictionsSettingsArgs
+type deploymentPredictionsSettingsPtrType DeploymentPredictionsSettingsArgs
 
-func DeploymentSettingsPredictionsSettingsPtr(v *DeploymentSettingsPredictionsSettingsArgs) DeploymentSettingsPredictionsSettingsPtrInput {
-	return (*deploymentSettingsPredictionsSettingsPtrType)(v)
+func DeploymentPredictionsSettingsPtr(v *DeploymentPredictionsSettingsArgs) DeploymentPredictionsSettingsPtrInput {
+	return (*deploymentPredictionsSettingsPtrType)(v)
 }
 
-func (*deploymentSettingsPredictionsSettingsPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**DeploymentSettingsPredictionsSettings)(nil)).Elem()
+func (*deploymentPredictionsSettingsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentPredictionsSettings)(nil)).Elem()
 }
 
-func (i *deploymentSettingsPredictionsSettingsPtrType) ToDeploymentSettingsPredictionsSettingsPtrOutput() DeploymentSettingsPredictionsSettingsPtrOutput {
-	return i.ToDeploymentSettingsPredictionsSettingsPtrOutputWithContext(context.Background())
+func (i *deploymentPredictionsSettingsPtrType) ToDeploymentPredictionsSettingsPtrOutput() DeploymentPredictionsSettingsPtrOutput {
+	return i.ToDeploymentPredictionsSettingsPtrOutputWithContext(context.Background())
 }
 
-func (i *deploymentSettingsPredictionsSettingsPtrType) ToDeploymentSettingsPredictionsSettingsPtrOutputWithContext(ctx context.Context) DeploymentSettingsPredictionsSettingsPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(DeploymentSettingsPredictionsSettingsPtrOutput)
+func (i *deploymentPredictionsSettingsPtrType) ToDeploymentPredictionsSettingsPtrOutputWithContext(ctx context.Context) DeploymentPredictionsSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentPredictionsSettingsPtrOutput)
 }
 
-type DeploymentSettingsPredictionsSettingsOutput struct{ *pulumi.OutputState }
+type DeploymentPredictionsSettingsOutput struct{ *pulumi.OutputState }
 
-func (DeploymentSettingsPredictionsSettingsOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*DeploymentSettingsPredictionsSettings)(nil)).Elem()
+func (DeploymentPredictionsSettingsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentPredictionsSettings)(nil)).Elem()
 }
 
-func (o DeploymentSettingsPredictionsSettingsOutput) ToDeploymentSettingsPredictionsSettingsOutput() DeploymentSettingsPredictionsSettingsOutput {
+func (o DeploymentPredictionsSettingsOutput) ToDeploymentPredictionsSettingsOutput() DeploymentPredictionsSettingsOutput {
 	return o
 }
 
-func (o DeploymentSettingsPredictionsSettingsOutput) ToDeploymentSettingsPredictionsSettingsOutputWithContext(ctx context.Context) DeploymentSettingsPredictionsSettingsOutput {
+func (o DeploymentPredictionsSettingsOutput) ToDeploymentPredictionsSettingsOutputWithContext(ctx context.Context) DeploymentPredictionsSettingsOutput {
 	return o
 }
 
-func (o DeploymentSettingsPredictionsSettingsOutput) ToDeploymentSettingsPredictionsSettingsPtrOutput() DeploymentSettingsPredictionsSettingsPtrOutput {
-	return o.ToDeploymentSettingsPredictionsSettingsPtrOutputWithContext(context.Background())
+func (o DeploymentPredictionsSettingsOutput) ToDeploymentPredictionsSettingsPtrOutput() DeploymentPredictionsSettingsPtrOutput {
+	return o.ToDeploymentPredictionsSettingsPtrOutputWithContext(context.Background())
 }
 
-func (o DeploymentSettingsPredictionsSettingsOutput) ToDeploymentSettingsPredictionsSettingsPtrOutputWithContext(ctx context.Context) DeploymentSettingsPredictionsSettingsPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v DeploymentSettingsPredictionsSettings) *DeploymentSettingsPredictionsSettings {
+func (o DeploymentPredictionsSettingsOutput) ToDeploymentPredictionsSettingsPtrOutputWithContext(ctx context.Context) DeploymentPredictionsSettingsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DeploymentPredictionsSettings) *DeploymentPredictionsSettings {
 		return &v
-	}).(DeploymentSettingsPredictionsSettingsPtrOutput)
+	}).(DeploymentPredictionsSettingsPtrOutput)
 }
 
 // The maximum number of computes to use for predictions.
-func (o DeploymentSettingsPredictionsSettingsOutput) MaxComputes() pulumi.IntOutput {
-	return o.ApplyT(func(v DeploymentSettingsPredictionsSettings) int { return v.MaxComputes }).(pulumi.IntOutput)
+func (o DeploymentPredictionsSettingsOutput) MaxComputes() pulumi.IntOutput {
+	return o.ApplyT(func(v DeploymentPredictionsSettings) int { return v.MaxComputes }).(pulumi.IntOutput)
 }
 
 // The minimum number of computes to use for predictions.
-func (o DeploymentSettingsPredictionsSettingsOutput) MinComputes() pulumi.IntOutput {
-	return o.ApplyT(func(v DeploymentSettingsPredictionsSettings) int { return v.MinComputes }).(pulumi.IntOutput)
+func (o DeploymentPredictionsSettingsOutput) MinComputes() pulumi.IntOutput {
+	return o.ApplyT(func(v DeploymentPredictionsSettings) int { return v.MinComputes }).(pulumi.IntOutput)
 }
 
 // Whether to use real-time predictions.
-func (o DeploymentSettingsPredictionsSettingsOutput) RealTime() pulumi.BoolOutput {
-	return o.ApplyT(func(v DeploymentSettingsPredictionsSettings) bool { return v.RealTime }).(pulumi.BoolOutput)
+func (o DeploymentPredictionsSettingsOutput) RealTime() pulumi.BoolOutput {
+	return o.ApplyT(func(v DeploymentPredictionsSettings) bool { return v.RealTime }).(pulumi.BoolOutput)
 }
 
-type DeploymentSettingsPredictionsSettingsPtrOutput struct{ *pulumi.OutputState }
+type DeploymentPredictionsSettingsPtrOutput struct{ *pulumi.OutputState }
 
-func (DeploymentSettingsPredictionsSettingsPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**DeploymentSettingsPredictionsSettings)(nil)).Elem()
+func (DeploymentPredictionsSettingsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentPredictionsSettings)(nil)).Elem()
 }
 
-func (o DeploymentSettingsPredictionsSettingsPtrOutput) ToDeploymentSettingsPredictionsSettingsPtrOutput() DeploymentSettingsPredictionsSettingsPtrOutput {
+func (o DeploymentPredictionsSettingsPtrOutput) ToDeploymentPredictionsSettingsPtrOutput() DeploymentPredictionsSettingsPtrOutput {
 	return o
 }
 
-func (o DeploymentSettingsPredictionsSettingsPtrOutput) ToDeploymentSettingsPredictionsSettingsPtrOutputWithContext(ctx context.Context) DeploymentSettingsPredictionsSettingsPtrOutput {
+func (o DeploymentPredictionsSettingsPtrOutput) ToDeploymentPredictionsSettingsPtrOutputWithContext(ctx context.Context) DeploymentPredictionsSettingsPtrOutput {
 	return o
 }
 
-func (o DeploymentSettingsPredictionsSettingsPtrOutput) Elem() DeploymentSettingsPredictionsSettingsOutput {
-	return o.ApplyT(func(v *DeploymentSettingsPredictionsSettings) DeploymentSettingsPredictionsSettings {
+func (o DeploymentPredictionsSettingsPtrOutput) Elem() DeploymentPredictionsSettingsOutput {
+	return o.ApplyT(func(v *DeploymentPredictionsSettings) DeploymentPredictionsSettings {
 		if v != nil {
 			return *v
 		}
-		var ret DeploymentSettingsPredictionsSettings
+		var ret DeploymentPredictionsSettings
 		return ret
-	}).(DeploymentSettingsPredictionsSettingsOutput)
+	}).(DeploymentPredictionsSettingsOutput)
 }
 
 // The maximum number of computes to use for predictions.
-func (o DeploymentSettingsPredictionsSettingsPtrOutput) MaxComputes() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *DeploymentSettingsPredictionsSettings) *int {
+func (o DeploymentPredictionsSettingsPtrOutput) MaxComputes() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DeploymentPredictionsSettings) *int {
 		if v == nil {
 			return nil
 		}
@@ -1671,8 +4654,8 @@ func (o DeploymentSettingsPredictionsSettingsPtrOutput) MaxComputes() pulumi.Int
 }
 
 // The minimum number of computes to use for predictions.
-func (o DeploymentSettingsPredictionsSettingsPtrOutput) MinComputes() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *DeploymentSettingsPredictionsSettings) *int {
+func (o DeploymentPredictionsSettingsPtrOutput) MinComputes() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DeploymentPredictionsSettings) *int {
 		if v == nil {
 			return nil
 		}
@@ -1681,12 +4664,168 @@ func (o DeploymentSettingsPredictionsSettingsPtrOutput) MinComputes() pulumi.Int
 }
 
 // Whether to use real-time predictions.
-func (o DeploymentSettingsPredictionsSettingsPtrOutput) RealTime() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v *DeploymentSettingsPredictionsSettings) *bool {
+func (o DeploymentPredictionsSettingsPtrOutput) RealTime() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *DeploymentPredictionsSettings) *bool {
 		if v == nil {
 			return nil
 		}
 		return &v.RealTime
+	}).(pulumi.BoolPtrOutput)
+}
+
+type DeploymentSegmentAnalysisSettings struct {
+	// A list of strings that gives the segment attributes selected for tracking.
+	Attributes []string `pulumi:"attributes"`
+	// Set to 'True' if segment analysis is enabled for this deployment.
+	Enabled bool `pulumi:"enabled"`
+}
+
+// DeploymentSegmentAnalysisSettingsInput is an input type that accepts DeploymentSegmentAnalysisSettingsArgs and DeploymentSegmentAnalysisSettingsOutput values.
+// You can construct a concrete instance of `DeploymentSegmentAnalysisSettingsInput` via:
+//
+//	DeploymentSegmentAnalysisSettingsArgs{...}
+type DeploymentSegmentAnalysisSettingsInput interface {
+	pulumi.Input
+
+	ToDeploymentSegmentAnalysisSettingsOutput() DeploymentSegmentAnalysisSettingsOutput
+	ToDeploymentSegmentAnalysisSettingsOutputWithContext(context.Context) DeploymentSegmentAnalysisSettingsOutput
+}
+
+type DeploymentSegmentAnalysisSettingsArgs struct {
+	// A list of strings that gives the segment attributes selected for tracking.
+	Attributes pulumi.StringArrayInput `pulumi:"attributes"`
+	// Set to 'True' if segment analysis is enabled for this deployment.
+	Enabled pulumi.BoolInput `pulumi:"enabled"`
+}
+
+func (DeploymentSegmentAnalysisSettingsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentSegmentAnalysisSettings)(nil)).Elem()
+}
+
+func (i DeploymentSegmentAnalysisSettingsArgs) ToDeploymentSegmentAnalysisSettingsOutput() DeploymentSegmentAnalysisSettingsOutput {
+	return i.ToDeploymentSegmentAnalysisSettingsOutputWithContext(context.Background())
+}
+
+func (i DeploymentSegmentAnalysisSettingsArgs) ToDeploymentSegmentAnalysisSettingsOutputWithContext(ctx context.Context) DeploymentSegmentAnalysisSettingsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentSegmentAnalysisSettingsOutput)
+}
+
+func (i DeploymentSegmentAnalysisSettingsArgs) ToDeploymentSegmentAnalysisSettingsPtrOutput() DeploymentSegmentAnalysisSettingsPtrOutput {
+	return i.ToDeploymentSegmentAnalysisSettingsPtrOutputWithContext(context.Background())
+}
+
+func (i DeploymentSegmentAnalysisSettingsArgs) ToDeploymentSegmentAnalysisSettingsPtrOutputWithContext(ctx context.Context) DeploymentSegmentAnalysisSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentSegmentAnalysisSettingsOutput).ToDeploymentSegmentAnalysisSettingsPtrOutputWithContext(ctx)
+}
+
+// DeploymentSegmentAnalysisSettingsPtrInput is an input type that accepts DeploymentSegmentAnalysisSettingsArgs, DeploymentSegmentAnalysisSettingsPtr and DeploymentSegmentAnalysisSettingsPtrOutput values.
+// You can construct a concrete instance of `DeploymentSegmentAnalysisSettingsPtrInput` via:
+//
+//	        DeploymentSegmentAnalysisSettingsArgs{...}
+//
+//	or:
+//
+//	        nil
+type DeploymentSegmentAnalysisSettingsPtrInput interface {
+	pulumi.Input
+
+	ToDeploymentSegmentAnalysisSettingsPtrOutput() DeploymentSegmentAnalysisSettingsPtrOutput
+	ToDeploymentSegmentAnalysisSettingsPtrOutputWithContext(context.Context) DeploymentSegmentAnalysisSettingsPtrOutput
+}
+
+type deploymentSegmentAnalysisSettingsPtrType DeploymentSegmentAnalysisSettingsArgs
+
+func DeploymentSegmentAnalysisSettingsPtr(v *DeploymentSegmentAnalysisSettingsArgs) DeploymentSegmentAnalysisSettingsPtrInput {
+	return (*deploymentSegmentAnalysisSettingsPtrType)(v)
+}
+
+func (*deploymentSegmentAnalysisSettingsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentSegmentAnalysisSettings)(nil)).Elem()
+}
+
+func (i *deploymentSegmentAnalysisSettingsPtrType) ToDeploymentSegmentAnalysisSettingsPtrOutput() DeploymentSegmentAnalysisSettingsPtrOutput {
+	return i.ToDeploymentSegmentAnalysisSettingsPtrOutputWithContext(context.Background())
+}
+
+func (i *deploymentSegmentAnalysisSettingsPtrType) ToDeploymentSegmentAnalysisSettingsPtrOutputWithContext(ctx context.Context) DeploymentSegmentAnalysisSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentSegmentAnalysisSettingsPtrOutput)
+}
+
+type DeploymentSegmentAnalysisSettingsOutput struct{ *pulumi.OutputState }
+
+func (DeploymentSegmentAnalysisSettingsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentSegmentAnalysisSettings)(nil)).Elem()
+}
+
+func (o DeploymentSegmentAnalysisSettingsOutput) ToDeploymentSegmentAnalysisSettingsOutput() DeploymentSegmentAnalysisSettingsOutput {
+	return o
+}
+
+func (o DeploymentSegmentAnalysisSettingsOutput) ToDeploymentSegmentAnalysisSettingsOutputWithContext(ctx context.Context) DeploymentSegmentAnalysisSettingsOutput {
+	return o
+}
+
+func (o DeploymentSegmentAnalysisSettingsOutput) ToDeploymentSegmentAnalysisSettingsPtrOutput() DeploymentSegmentAnalysisSettingsPtrOutput {
+	return o.ToDeploymentSegmentAnalysisSettingsPtrOutputWithContext(context.Background())
+}
+
+func (o DeploymentSegmentAnalysisSettingsOutput) ToDeploymentSegmentAnalysisSettingsPtrOutputWithContext(ctx context.Context) DeploymentSegmentAnalysisSettingsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DeploymentSegmentAnalysisSettings) *DeploymentSegmentAnalysisSettings {
+		return &v
+	}).(DeploymentSegmentAnalysisSettingsPtrOutput)
+}
+
+// A list of strings that gives the segment attributes selected for tracking.
+func (o DeploymentSegmentAnalysisSettingsOutput) Attributes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v DeploymentSegmentAnalysisSettings) []string { return v.Attributes }).(pulumi.StringArrayOutput)
+}
+
+// Set to 'True' if segment analysis is enabled for this deployment.
+func (o DeploymentSegmentAnalysisSettingsOutput) Enabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v DeploymentSegmentAnalysisSettings) bool { return v.Enabled }).(pulumi.BoolOutput)
+}
+
+type DeploymentSegmentAnalysisSettingsPtrOutput struct{ *pulumi.OutputState }
+
+func (DeploymentSegmentAnalysisSettingsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentSegmentAnalysisSettings)(nil)).Elem()
+}
+
+func (o DeploymentSegmentAnalysisSettingsPtrOutput) ToDeploymentSegmentAnalysisSettingsPtrOutput() DeploymentSegmentAnalysisSettingsPtrOutput {
+	return o
+}
+
+func (o DeploymentSegmentAnalysisSettingsPtrOutput) ToDeploymentSegmentAnalysisSettingsPtrOutputWithContext(ctx context.Context) DeploymentSegmentAnalysisSettingsPtrOutput {
+	return o
+}
+
+func (o DeploymentSegmentAnalysisSettingsPtrOutput) Elem() DeploymentSegmentAnalysisSettingsOutput {
+	return o.ApplyT(func(v *DeploymentSegmentAnalysisSettings) DeploymentSegmentAnalysisSettings {
+		if v != nil {
+			return *v
+		}
+		var ret DeploymentSegmentAnalysisSettings
+		return ret
+	}).(DeploymentSegmentAnalysisSettingsOutput)
+}
+
+// A list of strings that gives the segment attributes selected for tracking.
+func (o DeploymentSegmentAnalysisSettingsPtrOutput) Attributes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *DeploymentSegmentAnalysisSettings) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Attributes
+	}).(pulumi.StringArrayOutput)
+}
+
+// Set to 'True' if segment analysis is enabled for this deployment.
+func (o DeploymentSegmentAnalysisSettingsPtrOutput) Enabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *DeploymentSegmentAnalysisSettings) *bool {
+		if v == nil {
+			return nil
+		}
+		return &v.Enabled
 	}).(pulumi.BoolPtrOutput)
 }
 
@@ -2289,12 +5428,50 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelRuntimeParameterValueArrayInput)(nil)).Elem(), CustomModelRuntimeParameterValueArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelSourceRemoteRepositoryInput)(nil)).Elem(), CustomModelSourceRemoteRepositoryArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelSourceRemoteRepositoryArrayInput)(nil)).Elem(), CustomModelSourceRemoteRepositoryArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentSettingsInput)(nil)).Elem(), DeploymentSettingsArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentSettingsPtrInput)(nil)).Elem(), DeploymentSettingsArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentSettingsAssociationIdInput)(nil)).Elem(), DeploymentSettingsAssociationIdArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentSettingsAssociationIdPtrInput)(nil)).Elem(), DeploymentSettingsAssociationIdArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentSettingsPredictionsSettingsInput)(nil)).Elem(), DeploymentSettingsPredictionsSettingsArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentSettingsPredictionsSettingsPtrInput)(nil)).Elem(), DeploymentSettingsPredictionsSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentAssociationIdSettingsInput)(nil)).Elem(), DeploymentAssociationIdSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentAssociationIdSettingsPtrInput)(nil)).Elem(), DeploymentAssociationIdSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentBiasAndFairnessSettingsInput)(nil)).Elem(), DeploymentBiasAndFairnessSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentBiasAndFairnessSettingsPtrInput)(nil)).Elem(), DeploymentBiasAndFairnessSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentChallengerModelsSettingsInput)(nil)).Elem(), DeploymentChallengerModelsSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentChallengerModelsSettingsPtrInput)(nil)).Elem(), DeploymentChallengerModelsSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentChallengerReplaySettingsInput)(nil)).Elem(), DeploymentChallengerReplaySettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentChallengerReplaySettingsPtrInput)(nil)).Elem(), DeploymentChallengerReplaySettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentDriftTrackingSettingsInput)(nil)).Elem(), DeploymentDriftTrackingSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentDriftTrackingSettingsPtrInput)(nil)).Elem(), DeploymentDriftTrackingSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentHealthSettingsInput)(nil)).Elem(), DeploymentHealthSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentHealthSettingsPtrInput)(nil)).Elem(), DeploymentHealthSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentHealthSettingsAccuracyInput)(nil)).Elem(), DeploymentHealthSettingsAccuracyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentHealthSettingsAccuracyPtrInput)(nil)).Elem(), DeploymentHealthSettingsAccuracyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentHealthSettingsActualsTimelinessInput)(nil)).Elem(), DeploymentHealthSettingsActualsTimelinessArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentHealthSettingsActualsTimelinessPtrInput)(nil)).Elem(), DeploymentHealthSettingsActualsTimelinessArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentHealthSettingsCustomMetricsInput)(nil)).Elem(), DeploymentHealthSettingsCustomMetricsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentHealthSettingsCustomMetricsPtrInput)(nil)).Elem(), DeploymentHealthSettingsCustomMetricsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentHealthSettingsCustomMetricsFailingConditionInput)(nil)).Elem(), DeploymentHealthSettingsCustomMetricsFailingConditionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentHealthSettingsCustomMetricsFailingConditionArrayInput)(nil)).Elem(), DeploymentHealthSettingsCustomMetricsFailingConditionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentHealthSettingsCustomMetricsWarningConditionInput)(nil)).Elem(), DeploymentHealthSettingsCustomMetricsWarningConditionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentHealthSettingsCustomMetricsWarningConditionArrayInput)(nil)).Elem(), DeploymentHealthSettingsCustomMetricsWarningConditionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentHealthSettingsDataDriftInput)(nil)).Elem(), DeploymentHealthSettingsDataDriftArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentHealthSettingsDataDriftPtrInput)(nil)).Elem(), DeploymentHealthSettingsDataDriftArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentHealthSettingsFairnessInput)(nil)).Elem(), DeploymentHealthSettingsFairnessArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentHealthSettingsFairnessPtrInput)(nil)).Elem(), DeploymentHealthSettingsFairnessArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentHealthSettingsPredictionsTimelinessInput)(nil)).Elem(), DeploymentHealthSettingsPredictionsTimelinessArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentHealthSettingsPredictionsTimelinessPtrInput)(nil)).Elem(), DeploymentHealthSettingsPredictionsTimelinessArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentHealthSettingsServiceInput)(nil)).Elem(), DeploymentHealthSettingsServiceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentHealthSettingsServicePtrInput)(nil)).Elem(), DeploymentHealthSettingsServiceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentPredictionIntervalsSettingsInput)(nil)).Elem(), DeploymentPredictionIntervalsSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentPredictionIntervalsSettingsPtrInput)(nil)).Elem(), DeploymentPredictionIntervalsSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentPredictionWarningSettingsInput)(nil)).Elem(), DeploymentPredictionWarningSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentPredictionWarningSettingsPtrInput)(nil)).Elem(), DeploymentPredictionWarningSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentPredictionWarningSettingsCustomBoundariesInput)(nil)).Elem(), DeploymentPredictionWarningSettingsCustomBoundariesArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentPredictionWarningSettingsCustomBoundariesPtrInput)(nil)).Elem(), DeploymentPredictionWarningSettingsCustomBoundariesArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentPredictionsByForecastDateSettingsInput)(nil)).Elem(), DeploymentPredictionsByForecastDateSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentPredictionsByForecastDateSettingsPtrInput)(nil)).Elem(), DeploymentPredictionsByForecastDateSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentPredictionsDataCollectionSettingsInput)(nil)).Elem(), DeploymentPredictionsDataCollectionSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentPredictionsDataCollectionSettingsPtrInput)(nil)).Elem(), DeploymentPredictionsDataCollectionSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentPredictionsSettingsInput)(nil)).Elem(), DeploymentPredictionsSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentPredictionsSettingsPtrInput)(nil)).Elem(), DeploymentPredictionsSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentSegmentAnalysisSettingsInput)(nil)).Elem(), DeploymentSegmentAnalysisSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentSegmentAnalysisSettingsPtrInput)(nil)).Elem(), DeploymentSegmentAnalysisSettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*LlmBlueprintLlmSettingsInput)(nil)).Elem(), LlmBlueprintLlmSettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*LlmBlueprintLlmSettingsPtrInput)(nil)).Elem(), LlmBlueprintLlmSettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*LlmBlueprintVectorDatabaseSettingsInput)(nil)).Elem(), LlmBlueprintVectorDatabaseSettingsArgs{})
@@ -2317,12 +5494,50 @@ func init() {
 	pulumi.RegisterOutputType(CustomModelRuntimeParameterValueArrayOutput{})
 	pulumi.RegisterOutputType(CustomModelSourceRemoteRepositoryOutput{})
 	pulumi.RegisterOutputType(CustomModelSourceRemoteRepositoryArrayOutput{})
-	pulumi.RegisterOutputType(DeploymentSettingsOutput{})
-	pulumi.RegisterOutputType(DeploymentSettingsPtrOutput{})
-	pulumi.RegisterOutputType(DeploymentSettingsAssociationIdOutput{})
-	pulumi.RegisterOutputType(DeploymentSettingsAssociationIdPtrOutput{})
-	pulumi.RegisterOutputType(DeploymentSettingsPredictionsSettingsOutput{})
-	pulumi.RegisterOutputType(DeploymentSettingsPredictionsSettingsPtrOutput{})
+	pulumi.RegisterOutputType(DeploymentAssociationIdSettingsOutput{})
+	pulumi.RegisterOutputType(DeploymentAssociationIdSettingsPtrOutput{})
+	pulumi.RegisterOutputType(DeploymentBiasAndFairnessSettingsOutput{})
+	pulumi.RegisterOutputType(DeploymentBiasAndFairnessSettingsPtrOutput{})
+	pulumi.RegisterOutputType(DeploymentChallengerModelsSettingsOutput{})
+	pulumi.RegisterOutputType(DeploymentChallengerModelsSettingsPtrOutput{})
+	pulumi.RegisterOutputType(DeploymentChallengerReplaySettingsOutput{})
+	pulumi.RegisterOutputType(DeploymentChallengerReplaySettingsPtrOutput{})
+	pulumi.RegisterOutputType(DeploymentDriftTrackingSettingsOutput{})
+	pulumi.RegisterOutputType(DeploymentDriftTrackingSettingsPtrOutput{})
+	pulumi.RegisterOutputType(DeploymentHealthSettingsOutput{})
+	pulumi.RegisterOutputType(DeploymentHealthSettingsPtrOutput{})
+	pulumi.RegisterOutputType(DeploymentHealthSettingsAccuracyOutput{})
+	pulumi.RegisterOutputType(DeploymentHealthSettingsAccuracyPtrOutput{})
+	pulumi.RegisterOutputType(DeploymentHealthSettingsActualsTimelinessOutput{})
+	pulumi.RegisterOutputType(DeploymentHealthSettingsActualsTimelinessPtrOutput{})
+	pulumi.RegisterOutputType(DeploymentHealthSettingsCustomMetricsOutput{})
+	pulumi.RegisterOutputType(DeploymentHealthSettingsCustomMetricsPtrOutput{})
+	pulumi.RegisterOutputType(DeploymentHealthSettingsCustomMetricsFailingConditionOutput{})
+	pulumi.RegisterOutputType(DeploymentHealthSettingsCustomMetricsFailingConditionArrayOutput{})
+	pulumi.RegisterOutputType(DeploymentHealthSettingsCustomMetricsWarningConditionOutput{})
+	pulumi.RegisterOutputType(DeploymentHealthSettingsCustomMetricsWarningConditionArrayOutput{})
+	pulumi.RegisterOutputType(DeploymentHealthSettingsDataDriftOutput{})
+	pulumi.RegisterOutputType(DeploymentHealthSettingsDataDriftPtrOutput{})
+	pulumi.RegisterOutputType(DeploymentHealthSettingsFairnessOutput{})
+	pulumi.RegisterOutputType(DeploymentHealthSettingsFairnessPtrOutput{})
+	pulumi.RegisterOutputType(DeploymentHealthSettingsPredictionsTimelinessOutput{})
+	pulumi.RegisterOutputType(DeploymentHealthSettingsPredictionsTimelinessPtrOutput{})
+	pulumi.RegisterOutputType(DeploymentHealthSettingsServiceOutput{})
+	pulumi.RegisterOutputType(DeploymentHealthSettingsServicePtrOutput{})
+	pulumi.RegisterOutputType(DeploymentPredictionIntervalsSettingsOutput{})
+	pulumi.RegisterOutputType(DeploymentPredictionIntervalsSettingsPtrOutput{})
+	pulumi.RegisterOutputType(DeploymentPredictionWarningSettingsOutput{})
+	pulumi.RegisterOutputType(DeploymentPredictionWarningSettingsPtrOutput{})
+	pulumi.RegisterOutputType(DeploymentPredictionWarningSettingsCustomBoundariesOutput{})
+	pulumi.RegisterOutputType(DeploymentPredictionWarningSettingsCustomBoundariesPtrOutput{})
+	pulumi.RegisterOutputType(DeploymentPredictionsByForecastDateSettingsOutput{})
+	pulumi.RegisterOutputType(DeploymentPredictionsByForecastDateSettingsPtrOutput{})
+	pulumi.RegisterOutputType(DeploymentPredictionsDataCollectionSettingsOutput{})
+	pulumi.RegisterOutputType(DeploymentPredictionsDataCollectionSettingsPtrOutput{})
+	pulumi.RegisterOutputType(DeploymentPredictionsSettingsOutput{})
+	pulumi.RegisterOutputType(DeploymentPredictionsSettingsPtrOutput{})
+	pulumi.RegisterOutputType(DeploymentSegmentAnalysisSettingsOutput{})
+	pulumi.RegisterOutputType(DeploymentSegmentAnalysisSettingsPtrOutput{})
 	pulumi.RegisterOutputType(LlmBlueprintLlmSettingsOutput{})
 	pulumi.RegisterOutputType(LlmBlueprintLlmSettingsPtrOutput{})
 	pulumi.RegisterOutputType(LlmBlueprintVectorDatabaseSettingsOutput{})

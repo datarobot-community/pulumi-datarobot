@@ -36,9 +36,18 @@ import * as utilities from "./utilities";
  *     registeredModelVersionId: exampleRegisteredModel.versionId,
  * });
  * // Optional settings
- * // settings = {
- * //   prediction_row_storage = true
- * // }
+ * // challenger_models_settings = {}
+ * // challenger_replay_settings = {}
+ * // segment_analysis_settings  = {}
+ * // bias_and_fairness_settings = {}
+ * // predictions_by_forecast_date_settings = {}
+ * // drift_tracking_settings = {}
+ * // association_id_settings = {}
+ * // predictions_data_collection_settings = {}
+ * // prediction_warning_settings = {}
+ * // prediction_interval_settings = {}
+ * // predictions_settings = {}
+ * // health_settings = {}
  * export const datarobotDeploymentId = exampleDeployment.id;
  * ```
  */
@@ -71,6 +80,34 @@ export class Deployment extends pulumi.CustomResource {
     }
 
     /**
+     * Association ID settings for this Deployment.
+     */
+    public readonly associationIdSettings!: pulumi.Output<outputs.DeploymentAssociationIdSettings | undefined>;
+    /**
+     * Bias and fairness settings for the Deployment.
+     */
+    public readonly biasAndFairnessSettings!: pulumi.Output<outputs.DeploymentBiasAndFairnessSettings | undefined>;
+    /**
+     * The challenger models settings for the Deployment.
+     */
+    public readonly challengerModelsSettings!: pulumi.Output<outputs.DeploymentChallengerModelsSettings | undefined>;
+    /**
+     * The challenger replay settings for the Deployment.
+     */
+    public readonly challengerReplaySettings!: pulumi.Output<outputs.DeploymentChallengerReplaySettings | undefined>;
+    /**
+     * The drift tracking settings for the Deployment.
+     */
+    public readonly driftTrackingSettings!: pulumi.Output<outputs.DeploymentDriftTrackingSettings | undefined>;
+    /**
+     * The health settings for this Deployment.
+     */
+    public readonly healthSettings!: pulumi.Output<outputs.DeploymentHealthSettings | undefined>;
+    /**
+     * The importance of the Deployment.
+     */
+    public readonly importance!: pulumi.Output<string>;
+    /**
      * The label of the Deployment.
      */
     public readonly label!: pulumi.Output<string>;
@@ -79,13 +116,33 @@ export class Deployment extends pulumi.CustomResource {
      */
     public readonly predictionEnvironmentId!: pulumi.Output<string>;
     /**
+     * The prediction intervals settings for this Deployment.
+     */
+    public readonly predictionIntervalsSettings!: pulumi.Output<outputs.DeploymentPredictionIntervalsSettings | undefined>;
+    /**
+     * The prediction warning settings for the Deployment.
+     */
+    public readonly predictionWarningSettings!: pulumi.Output<outputs.DeploymentPredictionWarningSettings | undefined>;
+    /**
+     * The predictions by forecase date settings for the Deployment.
+     */
+    public readonly predictionsByForecastDateSettings!: pulumi.Output<outputs.DeploymentPredictionsByForecastDateSettings | undefined>;
+    /**
+     * The predictions data collection settings for the Deployment.
+     */
+    public readonly predictionsDataCollectionSettings!: pulumi.Output<outputs.DeploymentPredictionsDataCollectionSettings | undefined>;
+    /**
+     * Settings for the predictions.
+     */
+    public readonly predictionsSettings!: pulumi.Output<outputs.DeploymentPredictionsSettings | undefined>;
+    /**
      * The ID of the registered model version for this Deployment.
      */
     public readonly registeredModelVersionId!: pulumi.Output<string>;
     /**
-     * The settings for the Deployment.
+     * The segment analysis settings for the Deployment.
      */
-    public readonly settings!: pulumi.Output<outputs.DeploymentSettings | undefined>;
+    public readonly segmentAnalysisSettings!: pulumi.Output<outputs.DeploymentSegmentAnalysisSettings | undefined>;
 
     /**
      * Create a Deployment resource with the given unique name, arguments, and options.
@@ -100,10 +157,22 @@ export class Deployment extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as DeploymentState | undefined;
+            resourceInputs["associationIdSettings"] = state ? state.associationIdSettings : undefined;
+            resourceInputs["biasAndFairnessSettings"] = state ? state.biasAndFairnessSettings : undefined;
+            resourceInputs["challengerModelsSettings"] = state ? state.challengerModelsSettings : undefined;
+            resourceInputs["challengerReplaySettings"] = state ? state.challengerReplaySettings : undefined;
+            resourceInputs["driftTrackingSettings"] = state ? state.driftTrackingSettings : undefined;
+            resourceInputs["healthSettings"] = state ? state.healthSettings : undefined;
+            resourceInputs["importance"] = state ? state.importance : undefined;
             resourceInputs["label"] = state ? state.label : undefined;
             resourceInputs["predictionEnvironmentId"] = state ? state.predictionEnvironmentId : undefined;
+            resourceInputs["predictionIntervalsSettings"] = state ? state.predictionIntervalsSettings : undefined;
+            resourceInputs["predictionWarningSettings"] = state ? state.predictionWarningSettings : undefined;
+            resourceInputs["predictionsByForecastDateSettings"] = state ? state.predictionsByForecastDateSettings : undefined;
+            resourceInputs["predictionsDataCollectionSettings"] = state ? state.predictionsDataCollectionSettings : undefined;
+            resourceInputs["predictionsSettings"] = state ? state.predictionsSettings : undefined;
             resourceInputs["registeredModelVersionId"] = state ? state.registeredModelVersionId : undefined;
-            resourceInputs["settings"] = state ? state.settings : undefined;
+            resourceInputs["segmentAnalysisSettings"] = state ? state.segmentAnalysisSettings : undefined;
         } else {
             const args = argsOrState as DeploymentArgs | undefined;
             if ((!args || args.label === undefined) && !opts.urn) {
@@ -115,10 +184,22 @@ export class Deployment extends pulumi.CustomResource {
             if ((!args || args.registeredModelVersionId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'registeredModelVersionId'");
             }
+            resourceInputs["associationIdSettings"] = args ? args.associationIdSettings : undefined;
+            resourceInputs["biasAndFairnessSettings"] = args ? args.biasAndFairnessSettings : undefined;
+            resourceInputs["challengerModelsSettings"] = args ? args.challengerModelsSettings : undefined;
+            resourceInputs["challengerReplaySettings"] = args ? args.challengerReplaySettings : undefined;
+            resourceInputs["driftTrackingSettings"] = args ? args.driftTrackingSettings : undefined;
+            resourceInputs["healthSettings"] = args ? args.healthSettings : undefined;
+            resourceInputs["importance"] = args ? args.importance : undefined;
             resourceInputs["label"] = args ? args.label : undefined;
             resourceInputs["predictionEnvironmentId"] = args ? args.predictionEnvironmentId : undefined;
+            resourceInputs["predictionIntervalsSettings"] = args ? args.predictionIntervalsSettings : undefined;
+            resourceInputs["predictionWarningSettings"] = args ? args.predictionWarningSettings : undefined;
+            resourceInputs["predictionsByForecastDateSettings"] = args ? args.predictionsByForecastDateSettings : undefined;
+            resourceInputs["predictionsDataCollectionSettings"] = args ? args.predictionsDataCollectionSettings : undefined;
+            resourceInputs["predictionsSettings"] = args ? args.predictionsSettings : undefined;
             resourceInputs["registeredModelVersionId"] = args ? args.registeredModelVersionId : undefined;
-            resourceInputs["settings"] = args ? args.settings : undefined;
+            resourceInputs["segmentAnalysisSettings"] = args ? args.segmentAnalysisSettings : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(Deployment.__pulumiType, name, resourceInputs, opts);
@@ -130,6 +211,34 @@ export class Deployment extends pulumi.CustomResource {
  */
 export interface DeploymentState {
     /**
+     * Association ID settings for this Deployment.
+     */
+    associationIdSettings?: pulumi.Input<inputs.DeploymentAssociationIdSettings>;
+    /**
+     * Bias and fairness settings for the Deployment.
+     */
+    biasAndFairnessSettings?: pulumi.Input<inputs.DeploymentBiasAndFairnessSettings>;
+    /**
+     * The challenger models settings for the Deployment.
+     */
+    challengerModelsSettings?: pulumi.Input<inputs.DeploymentChallengerModelsSettings>;
+    /**
+     * The challenger replay settings for the Deployment.
+     */
+    challengerReplaySettings?: pulumi.Input<inputs.DeploymentChallengerReplaySettings>;
+    /**
+     * The drift tracking settings for the Deployment.
+     */
+    driftTrackingSettings?: pulumi.Input<inputs.DeploymentDriftTrackingSettings>;
+    /**
+     * The health settings for this Deployment.
+     */
+    healthSettings?: pulumi.Input<inputs.DeploymentHealthSettings>;
+    /**
+     * The importance of the Deployment.
+     */
+    importance?: pulumi.Input<string>;
+    /**
      * The label of the Deployment.
      */
     label?: pulumi.Input<string>;
@@ -138,19 +247,67 @@ export interface DeploymentState {
      */
     predictionEnvironmentId?: pulumi.Input<string>;
     /**
+     * The prediction intervals settings for this Deployment.
+     */
+    predictionIntervalsSettings?: pulumi.Input<inputs.DeploymentPredictionIntervalsSettings>;
+    /**
+     * The prediction warning settings for the Deployment.
+     */
+    predictionWarningSettings?: pulumi.Input<inputs.DeploymentPredictionWarningSettings>;
+    /**
+     * The predictions by forecase date settings for the Deployment.
+     */
+    predictionsByForecastDateSettings?: pulumi.Input<inputs.DeploymentPredictionsByForecastDateSettings>;
+    /**
+     * The predictions data collection settings for the Deployment.
+     */
+    predictionsDataCollectionSettings?: pulumi.Input<inputs.DeploymentPredictionsDataCollectionSettings>;
+    /**
+     * Settings for the predictions.
+     */
+    predictionsSettings?: pulumi.Input<inputs.DeploymentPredictionsSettings>;
+    /**
      * The ID of the registered model version for this Deployment.
      */
     registeredModelVersionId?: pulumi.Input<string>;
     /**
-     * The settings for the Deployment.
+     * The segment analysis settings for the Deployment.
      */
-    settings?: pulumi.Input<inputs.DeploymentSettings>;
+    segmentAnalysisSettings?: pulumi.Input<inputs.DeploymentSegmentAnalysisSettings>;
 }
 
 /**
  * The set of arguments for constructing a Deployment resource.
  */
 export interface DeploymentArgs {
+    /**
+     * Association ID settings for this Deployment.
+     */
+    associationIdSettings?: pulumi.Input<inputs.DeploymentAssociationIdSettings>;
+    /**
+     * Bias and fairness settings for the Deployment.
+     */
+    biasAndFairnessSettings?: pulumi.Input<inputs.DeploymentBiasAndFairnessSettings>;
+    /**
+     * The challenger models settings for the Deployment.
+     */
+    challengerModelsSettings?: pulumi.Input<inputs.DeploymentChallengerModelsSettings>;
+    /**
+     * The challenger replay settings for the Deployment.
+     */
+    challengerReplaySettings?: pulumi.Input<inputs.DeploymentChallengerReplaySettings>;
+    /**
+     * The drift tracking settings for the Deployment.
+     */
+    driftTrackingSettings?: pulumi.Input<inputs.DeploymentDriftTrackingSettings>;
+    /**
+     * The health settings for this Deployment.
+     */
+    healthSettings?: pulumi.Input<inputs.DeploymentHealthSettings>;
+    /**
+     * The importance of the Deployment.
+     */
+    importance?: pulumi.Input<string>;
     /**
      * The label of the Deployment.
      */
@@ -160,11 +317,31 @@ export interface DeploymentArgs {
      */
     predictionEnvironmentId: pulumi.Input<string>;
     /**
+     * The prediction intervals settings for this Deployment.
+     */
+    predictionIntervalsSettings?: pulumi.Input<inputs.DeploymentPredictionIntervalsSettings>;
+    /**
+     * The prediction warning settings for the Deployment.
+     */
+    predictionWarningSettings?: pulumi.Input<inputs.DeploymentPredictionWarningSettings>;
+    /**
+     * The predictions by forecase date settings for the Deployment.
+     */
+    predictionsByForecastDateSettings?: pulumi.Input<inputs.DeploymentPredictionsByForecastDateSettings>;
+    /**
+     * The predictions data collection settings for the Deployment.
+     */
+    predictionsDataCollectionSettings?: pulumi.Input<inputs.DeploymentPredictionsDataCollectionSettings>;
+    /**
+     * Settings for the predictions.
+     */
+    predictionsSettings?: pulumi.Input<inputs.DeploymentPredictionsSettings>;
+    /**
      * The ID of the registered model version for this Deployment.
      */
     registeredModelVersionId: pulumi.Input<string>;
     /**
-     * The settings for the Deployment.
+     * The segment analysis settings for the Deployment.
      */
-    settings?: pulumi.Input<inputs.DeploymentSettings>;
+    segmentAnalysisSettings?: pulumi.Input<inputs.DeploymentSegmentAnalysisSettings>;
 }
