@@ -168,6 +168,30 @@ class VectorDatabase(pulumi.CustomResource):
         """
         Vector database
 
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_datarobot as datarobot
+
+        example_use_case = datarobot.UseCase("exampleUseCase", description="Description for the example use case")
+        example_dataset_from_file = datarobot.DatasetFromFile("exampleDatasetFromFile",
+            file_path="[Path to file to upload]",
+            use_case_ids=[example_use_case.id])
+        example_vector_database = datarobot.VectorDatabase("exampleVectorDatabase",
+            use_case_id=example_use_case.id,
+            dataset_id=example_dataset_from_file.id)
+        # Optional
+        # chunking_parameters = {
+        #   chunk_overlap_percentage = 0
+        #   chunk_size               = 512
+        #   chunking_method          = "recursive"
+        #   embedding_model          = "jinaai/jina-embedding-t-en-v1"
+        #   separators               = ["\\n", " "]
+        # }
+        pulumi.export("exampleId", example_vector_database.id)
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Union['VectorDatabaseChunkingParametersArgs', 'VectorDatabaseChunkingParametersArgsDict']] chunking_parameters: The chunking parameters for the Model.
@@ -183,6 +207,30 @@ class VectorDatabase(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Vector database
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_datarobot as datarobot
+
+        example_use_case = datarobot.UseCase("exampleUseCase", description="Description for the example use case")
+        example_dataset_from_file = datarobot.DatasetFromFile("exampleDatasetFromFile",
+            file_path="[Path to file to upload]",
+            use_case_ids=[example_use_case.id])
+        example_vector_database = datarobot.VectorDatabase("exampleVectorDatabase",
+            use_case_id=example_use_case.id,
+            dataset_id=example_dataset_from_file.id)
+        # Optional
+        # chunking_parameters = {
+        #   chunk_overlap_percentage = 0
+        #   chunk_size               = 512
+        #   chunking_method          = "recursive"
+        #   embedding_model          = "jinaai/jina-embedding-t-en-v1"
+        #   separators               = ["\\n", " "]
+        # }
+        pulumi.export("exampleId", example_vector_database.id)
+        ```
 
         :param str resource_name: The name of the resource.
         :param VectorDatabaseArgs args: The arguments to use to populate this resource's properties.

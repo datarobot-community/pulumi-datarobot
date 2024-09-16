@@ -156,41 +156,299 @@ export interface CustomModelSourceRemoteRepository {
     sourcePaths: string[];
 }
 
-export interface DeploymentSettings {
+export interface DeploymentAssociationIdSettings {
     /**
-     * Used to associate predictions back to your actual data.
+     * Whether to auto generate ID.
      */
-    associationId?: outputs.DeploymentSettingsAssociationId;
+    autoGenerateId?: boolean;
     /**
-     * Used to compare the performance of the deployed model with the challenger models.
+     * Name of the columns to be used as association ID, currently only support a list of one string.
      */
-    challengerAnalysis?: boolean;
+    columnNames?: string[];
     /**
-     * Used to score predictions made by the challenger models and compare performance with the deployed model.
+     * Whether the association ID column is required in prediction requests.
      */
-    predictionRowStorage?: boolean;
-    /**
-     * Settings for the predictions.
-     */
-    predictionsSettings?: outputs.DeploymentSettingsPredictionsSettings;
+    requiredInPredictionRequests?: boolean;
 }
 
-export interface DeploymentSettingsAssociationId {
+export interface DeploymentBiasAndFairnessSettings {
     /**
-     * Whether to automatically generate an association ID.
+     * A set of fairness metrics to use for calculating fairness.
      */
-    autoGenerateId: boolean;
+    fairnessMetricSet: string;
     /**
-     * The name of the feature to use as the association ID.
+     * Threshold value of the fairness metric. Cannot be less than 0 or greater than 1.
      */
-    featureName: string;
+    fairnessThreshold: number;
     /**
-     * Whether the association ID is required in prediction requests.
+     * A target value that should be treated as a positive outcome for the prediction.
      */
-    requiredInPredictionRequests: boolean;
+    preferableTargetValue: boolean;
+    /**
+     * A list of features to mark as protected.
+     */
+    protectedFeatures: string[];
 }
 
-export interface DeploymentSettingsPredictionsSettings {
+export interface DeploymentChallengerModelsSettings {
+    /**
+     * Is 'True' if challenger models is enabled for this deployment.
+     */
+    enabled: boolean;
+}
+
+export interface DeploymentChallengerReplaySettings {
+    /**
+     * If challenger replay is enabled.
+     */
+    enabled: boolean;
+}
+
+export interface DeploymentDriftTrackingSettings {
+    /**
+     * If feature drift tracking is to be turned on.
+     */
+    featureDriftEnabled?: boolean;
+    /**
+     * If target drift tracking is to be turned on.
+     */
+    targetDriftEnabled?: boolean;
+}
+
+export interface DeploymentHealthSettings {
+    /**
+     * The accuracy health settings for this Deployment.
+     */
+    accuracy?: outputs.DeploymentHealthSettingsAccuracy;
+    /**
+     * The actuals timeliness health settings for this Deployment.
+     */
+    actualsTimeliness?: outputs.DeploymentHealthSettingsActualsTimeliness;
+    /**
+     * The custom metrics health settings for this Deployment.
+     */
+    customMetrics?: outputs.DeploymentHealthSettingsCustomMetrics;
+    /**
+     * The data drift health settings for this Deployment.
+     */
+    dataDrift?: outputs.DeploymentHealthSettingsDataDrift;
+    /**
+     * The fairness health settings for this Deployment.
+     */
+    fairness?: outputs.DeploymentHealthSettingsFairness;
+    /**
+     * The predictions timeliness health settings for this Deployment.
+     */
+    predictionsTimeliness?: outputs.DeploymentHealthSettingsPredictionsTimeliness;
+    /**
+     * The service health settings for this Deployment.
+     */
+    service?: outputs.DeploymentHealthSettingsService;
+}
+
+export interface DeploymentHealthSettingsAccuracy {
+    /**
+     * The batch count for the accuracy health settings.
+     */
+    batchCount?: number;
+    /**
+     * The failing threshold for the accuracy health settings.
+     */
+    failingThreshold?: number;
+    /**
+     * The measurement for the accuracy health settings.
+     */
+    measurement?: string;
+    /**
+     * The metric for the accuracy health settings.
+     */
+    metric?: string;
+    /**
+     * The warning threshold for the accuracy health settings.
+     */
+    warningThreshold?: number;
+}
+
+export interface DeploymentHealthSettingsActualsTimeliness {
+    /**
+     * If acutals timeliness is enabled for this Deployment.
+     */
+    enabled: boolean;
+    /**
+     * The expected frequency for the actuals timeliness health settings.
+     */
+    expectedFrequency?: string;
+}
+
+export interface DeploymentHealthSettingsCustomMetrics {
+    /**
+     * The failing conditions for the custom metrics health settings.
+     */
+    failingConditions?: outputs.DeploymentHealthSettingsCustomMetricsFailingCondition[];
+    /**
+     * The warning conditions for the custom metrics health settings.
+     */
+    warningConditions?: outputs.DeploymentHealthSettingsCustomMetricsWarningCondition[];
+}
+
+export interface DeploymentHealthSettingsCustomMetricsFailingCondition {
+    /**
+     * The compare operator for the failing condition of the custom metrics health settings.
+     */
+    compareOperator: string;
+    /**
+     * The metric ID for the failing condition of the custom metrics health settings.
+     */
+    metricId: string;
+    /**
+     * The threshold for the failing condition of the custom metrics health settings.
+     */
+    threshold: number;
+}
+
+export interface DeploymentHealthSettingsCustomMetricsWarningCondition {
+    /**
+     * The compare operator for the warning condition of the custom metrics health settings.
+     */
+    compareOperator: string;
+    /**
+     * The metric ID for the warning condition of the custom metrics health settings.
+     */
+    metricId: string;
+    /**
+     * The threshold for the warning condition of the custom metrics health settings.
+     */
+    threshold: number;
+}
+
+export interface DeploymentHealthSettingsDataDrift {
+    /**
+     * The batch count for the data drift health settings.
+     */
+    batchCount?: number;
+    /**
+     * The drift threshold for the data drift health settings.
+     */
+    driftThreshold?: number;
+    /**
+     * The exclude features for the data drift health settings.
+     */
+    excludeFeatures?: string[];
+    /**
+     * The high importance failing count for the data drift health settings.
+     */
+    highImportanceFailingCount?: number;
+    /**
+     * The high importance warning count for the data drift health settings.
+     */
+    highImportanceWarningCount?: number;
+    /**
+     * The importance threshold for the data drift health settings.
+     */
+    importanceThreshold?: number;
+    /**
+     * The low importance failing count for the data drift health settings.
+     */
+    lowImportanceFailingCount?: number;
+    /**
+     * The low importance warning count for the data drift health settings.
+     */
+    lowImportanceWarningCount?: number;
+    /**
+     * The starred features for the data drift health settings.
+     */
+    starredFeatures?: string[];
+    /**
+     * The time interval for the data drift health settings.
+     */
+    timeInterval?: string;
+}
+
+export interface DeploymentHealthSettingsFairness {
+    /**
+     * The protected class failing count for the fairness health settings.
+     */
+    protectedClassFailingCount?: number;
+    /**
+     * The protected class warning count for the fairness health settings.
+     */
+    protectedClassWarningCount?: number;
+}
+
+export interface DeploymentHealthSettingsPredictionsTimeliness {
+    /**
+     * If predictions timeliness is enabled for this Deployment.
+     */
+    enabled: boolean;
+    /**
+     * The expected frequency for the predictions timeliness health settings.
+     */
+    expectedFrequency?: string;
+}
+
+export interface DeploymentHealthSettingsService {
+    /**
+     * The batch count for the service health settings.
+     */
+    batchCount: number;
+}
+
+export interface DeploymentPredictionIntervalsSettings {
+    /**
+     * Whether prediction intervals are enabled for this deployment.
+     */
+    enabled: boolean;
+    /**
+     * List of enabled prediction intervals’ sizes for this deployment.
+     */
+    percentiles?: number[];
+}
+
+export interface DeploymentPredictionWarningSettings {
+    /**
+     * The custom boundaries for prediction warnings.
+     */
+    customBoundaries?: outputs.DeploymentPredictionWarningSettingsCustomBoundaries;
+    /**
+     * If target prediction warning is enabled for this Deployment.
+     */
+    enabled: boolean;
+}
+
+export interface DeploymentPredictionWarningSettingsCustomBoundaries {
+    /**
+     * All predictions less than provided value will be considered anomalous.
+     */
+    lowerBoundary?: number;
+    /**
+     * All predictions greater than provided value will be considered anomalous.
+     */
+    upperBoundary?: number;
+}
+
+export interface DeploymentPredictionsByForecastDateSettings {
+    /**
+     * The column name in prediction datasets to be used as forecast date.
+     */
+    columnName?: string;
+    /**
+     * The datetime format of the forecast date column in prediction datasets.
+     */
+    datetimeFormat?: string;
+    /**
+     * Is ’True’ if predictions by forecast date is enabled for this deployment.
+     */
+    enabled: boolean;
+}
+
+export interface DeploymentPredictionsDataCollectionSettings {
+    /**
+     * If predictions data collections is enabled for this Deployment.
+     */
+    enabled: boolean;
+}
+
+export interface DeploymentPredictionsSettings {
     /**
      * The maximum number of computes to use for predictions.
      */
@@ -203,6 +461,17 @@ export interface DeploymentSettingsPredictionsSettings {
      * Whether to use real-time predictions.
      */
     realTime: boolean;
+}
+
+export interface DeploymentSegmentAnalysisSettings {
+    /**
+     * A list of strings that gives the segment attributes selected for tracking.
+     */
+    attributes?: string[];
+    /**
+     * Set to 'True' if segment analysis is enabled for this deployment.
+     */
+    enabled: boolean;
 }
 
 export interface LlmBlueprintLlmSettings {
