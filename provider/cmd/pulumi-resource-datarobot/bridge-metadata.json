@@ -62,6 +62,14 @@
                     }
                 }
             },
+            "datarobot_dataset_from_url": {
+                "current": "datarobot:index/datasetFromUrl:DatasetFromUrl",
+                "fields": {
+                    "use_case_ids": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
             "datarobot_deployment": {
                 "current": "datarobot:index/deployment:Deployment",
                 "fields": {
