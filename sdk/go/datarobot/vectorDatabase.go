@@ -35,8 +35,10 @@ import (
 //				return err
 //			}
 //			exampleDatasetFromFile, err := datarobot.NewDatasetFromFile(ctx, "exampleDatasetFromFile", &datarobot.DatasetFromFileArgs{
-//				SourceFile: pulumi.String("[Path to file to upload]"),
-//				UseCaseId:  exampleUseCase.ID(),
+//				FilePath: pulumi.String("[Path to file to upload]"),
+//				UseCaseIds: pulumi.StringArray{
+//					exampleUseCase.ID(),
+//				},
 //			})
 //			if err != nil {
 //				return err

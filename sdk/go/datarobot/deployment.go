@@ -71,14 +71,38 @@ import (
 type Deployment struct {
 	pulumi.CustomResourceState
 
+	// Association ID settings for this Deployment.
+	AssociationIdSettings DeploymentAssociationIdSettingsPtrOutput `pulumi:"associationIdSettings"`
+	// Bias and fairness settings for the Deployment.
+	BiasAndFairnessSettings DeploymentBiasAndFairnessSettingsPtrOutput `pulumi:"biasAndFairnessSettings"`
+	// The challenger models settings for the Deployment.
+	ChallengerModelsSettings DeploymentChallengerModelsSettingsPtrOutput `pulumi:"challengerModelsSettings"`
+	// The challenger replay settings for the Deployment.
+	ChallengerReplaySettings DeploymentChallengerReplaySettingsPtrOutput `pulumi:"challengerReplaySettings"`
+	// The drift tracking settings for the Deployment.
+	DriftTrackingSettings DeploymentDriftTrackingSettingsPtrOutput `pulumi:"driftTrackingSettings"`
+	// The health settings for this Deployment.
+	HealthSettings DeploymentHealthSettingsPtrOutput `pulumi:"healthSettings"`
+	// The importance of the Deployment.
+	Importance pulumi.StringOutput `pulumi:"importance"`
 	// The label of the Deployment.
 	Label pulumi.StringOutput `pulumi:"label"`
 	// The ID of the predication environment for this Deployment.
 	PredictionEnvironmentId pulumi.StringOutput `pulumi:"predictionEnvironmentId"`
+	// The prediction intervals settings for this Deployment.
+	PredictionIntervalsSettings DeploymentPredictionIntervalsSettingsPtrOutput `pulumi:"predictionIntervalsSettings"`
+	// The prediction warning settings for the Deployment.
+	PredictionWarningSettings DeploymentPredictionWarningSettingsPtrOutput `pulumi:"predictionWarningSettings"`
+	// The predictions by forecase date settings for the Deployment.
+	PredictionsByForecastDateSettings DeploymentPredictionsByForecastDateSettingsPtrOutput `pulumi:"predictionsByForecastDateSettings"`
+	// The predictions data collection settings for the Deployment.
+	PredictionsDataCollectionSettings DeploymentPredictionsDataCollectionSettingsPtrOutput `pulumi:"predictionsDataCollectionSettings"`
+	// Settings for the predictions.
+	PredictionsSettings DeploymentPredictionsSettingsPtrOutput `pulumi:"predictionsSettings"`
 	// The ID of the registered model version for this Deployment.
 	RegisteredModelVersionId pulumi.StringOutput `pulumi:"registeredModelVersionId"`
-	// The settings for the Deployment.
-	Settings DeploymentSettingsPtrOutput `pulumi:"settings"`
+	// The segment analysis settings for the Deployment.
+	SegmentAnalysisSettings DeploymentSegmentAnalysisSettingsPtrOutput `pulumi:"segmentAnalysisSettings"`
 }
 
 // NewDeployment registers a new resource with the given unique name, arguments, and options.
@@ -120,25 +144,73 @@ func GetDeployment(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Deployment resources.
 type deploymentState struct {
+	// Association ID settings for this Deployment.
+	AssociationIdSettings *DeploymentAssociationIdSettings `pulumi:"associationIdSettings"`
+	// Bias and fairness settings for the Deployment.
+	BiasAndFairnessSettings *DeploymentBiasAndFairnessSettings `pulumi:"biasAndFairnessSettings"`
+	// The challenger models settings for the Deployment.
+	ChallengerModelsSettings *DeploymentChallengerModelsSettings `pulumi:"challengerModelsSettings"`
+	// The challenger replay settings for the Deployment.
+	ChallengerReplaySettings *DeploymentChallengerReplaySettings `pulumi:"challengerReplaySettings"`
+	// The drift tracking settings for the Deployment.
+	DriftTrackingSettings *DeploymentDriftTrackingSettings `pulumi:"driftTrackingSettings"`
+	// The health settings for this Deployment.
+	HealthSettings *DeploymentHealthSettings `pulumi:"healthSettings"`
+	// The importance of the Deployment.
+	Importance *string `pulumi:"importance"`
 	// The label of the Deployment.
 	Label *string `pulumi:"label"`
 	// The ID of the predication environment for this Deployment.
 	PredictionEnvironmentId *string `pulumi:"predictionEnvironmentId"`
+	// The prediction intervals settings for this Deployment.
+	PredictionIntervalsSettings *DeploymentPredictionIntervalsSettings `pulumi:"predictionIntervalsSettings"`
+	// The prediction warning settings for the Deployment.
+	PredictionWarningSettings *DeploymentPredictionWarningSettings `pulumi:"predictionWarningSettings"`
+	// The predictions by forecase date settings for the Deployment.
+	PredictionsByForecastDateSettings *DeploymentPredictionsByForecastDateSettings `pulumi:"predictionsByForecastDateSettings"`
+	// The predictions data collection settings for the Deployment.
+	PredictionsDataCollectionSettings *DeploymentPredictionsDataCollectionSettings `pulumi:"predictionsDataCollectionSettings"`
+	// Settings for the predictions.
+	PredictionsSettings *DeploymentPredictionsSettings `pulumi:"predictionsSettings"`
 	// The ID of the registered model version for this Deployment.
 	RegisteredModelVersionId *string `pulumi:"registeredModelVersionId"`
-	// The settings for the Deployment.
-	Settings *DeploymentSettings `pulumi:"settings"`
+	// The segment analysis settings for the Deployment.
+	SegmentAnalysisSettings *DeploymentSegmentAnalysisSettings `pulumi:"segmentAnalysisSettings"`
 }
 
 type DeploymentState struct {
+	// Association ID settings for this Deployment.
+	AssociationIdSettings DeploymentAssociationIdSettingsPtrInput
+	// Bias and fairness settings for the Deployment.
+	BiasAndFairnessSettings DeploymentBiasAndFairnessSettingsPtrInput
+	// The challenger models settings for the Deployment.
+	ChallengerModelsSettings DeploymentChallengerModelsSettingsPtrInput
+	// The challenger replay settings for the Deployment.
+	ChallengerReplaySettings DeploymentChallengerReplaySettingsPtrInput
+	// The drift tracking settings for the Deployment.
+	DriftTrackingSettings DeploymentDriftTrackingSettingsPtrInput
+	// The health settings for this Deployment.
+	HealthSettings DeploymentHealthSettingsPtrInput
+	// The importance of the Deployment.
+	Importance pulumi.StringPtrInput
 	// The label of the Deployment.
 	Label pulumi.StringPtrInput
 	// The ID of the predication environment for this Deployment.
 	PredictionEnvironmentId pulumi.StringPtrInput
+	// The prediction intervals settings for this Deployment.
+	PredictionIntervalsSettings DeploymentPredictionIntervalsSettingsPtrInput
+	// The prediction warning settings for the Deployment.
+	PredictionWarningSettings DeploymentPredictionWarningSettingsPtrInput
+	// The predictions by forecase date settings for the Deployment.
+	PredictionsByForecastDateSettings DeploymentPredictionsByForecastDateSettingsPtrInput
+	// The predictions data collection settings for the Deployment.
+	PredictionsDataCollectionSettings DeploymentPredictionsDataCollectionSettingsPtrInput
+	// Settings for the predictions.
+	PredictionsSettings DeploymentPredictionsSettingsPtrInput
 	// The ID of the registered model version for this Deployment.
 	RegisteredModelVersionId pulumi.StringPtrInput
-	// The settings for the Deployment.
-	Settings DeploymentSettingsPtrInput
+	// The segment analysis settings for the Deployment.
+	SegmentAnalysisSettings DeploymentSegmentAnalysisSettingsPtrInput
 }
 
 func (DeploymentState) ElementType() reflect.Type {
@@ -146,26 +218,74 @@ func (DeploymentState) ElementType() reflect.Type {
 }
 
 type deploymentArgs struct {
+	// Association ID settings for this Deployment.
+	AssociationIdSettings *DeploymentAssociationIdSettings `pulumi:"associationIdSettings"`
+	// Bias and fairness settings for the Deployment.
+	BiasAndFairnessSettings *DeploymentBiasAndFairnessSettings `pulumi:"biasAndFairnessSettings"`
+	// The challenger models settings for the Deployment.
+	ChallengerModelsSettings *DeploymentChallengerModelsSettings `pulumi:"challengerModelsSettings"`
+	// The challenger replay settings for the Deployment.
+	ChallengerReplaySettings *DeploymentChallengerReplaySettings `pulumi:"challengerReplaySettings"`
+	// The drift tracking settings for the Deployment.
+	DriftTrackingSettings *DeploymentDriftTrackingSettings `pulumi:"driftTrackingSettings"`
+	// The health settings for this Deployment.
+	HealthSettings *DeploymentHealthSettings `pulumi:"healthSettings"`
+	// The importance of the Deployment.
+	Importance *string `pulumi:"importance"`
 	// The label of the Deployment.
 	Label string `pulumi:"label"`
 	// The ID of the predication environment for this Deployment.
 	PredictionEnvironmentId string `pulumi:"predictionEnvironmentId"`
+	// The prediction intervals settings for this Deployment.
+	PredictionIntervalsSettings *DeploymentPredictionIntervalsSettings `pulumi:"predictionIntervalsSettings"`
+	// The prediction warning settings for the Deployment.
+	PredictionWarningSettings *DeploymentPredictionWarningSettings `pulumi:"predictionWarningSettings"`
+	// The predictions by forecase date settings for the Deployment.
+	PredictionsByForecastDateSettings *DeploymentPredictionsByForecastDateSettings `pulumi:"predictionsByForecastDateSettings"`
+	// The predictions data collection settings for the Deployment.
+	PredictionsDataCollectionSettings *DeploymentPredictionsDataCollectionSettings `pulumi:"predictionsDataCollectionSettings"`
+	// Settings for the predictions.
+	PredictionsSettings *DeploymentPredictionsSettings `pulumi:"predictionsSettings"`
 	// The ID of the registered model version for this Deployment.
 	RegisteredModelVersionId string `pulumi:"registeredModelVersionId"`
-	// The settings for the Deployment.
-	Settings *DeploymentSettings `pulumi:"settings"`
+	// The segment analysis settings for the Deployment.
+	SegmentAnalysisSettings *DeploymentSegmentAnalysisSettings `pulumi:"segmentAnalysisSettings"`
 }
 
 // The set of arguments for constructing a Deployment resource.
 type DeploymentArgs struct {
+	// Association ID settings for this Deployment.
+	AssociationIdSettings DeploymentAssociationIdSettingsPtrInput
+	// Bias and fairness settings for the Deployment.
+	BiasAndFairnessSettings DeploymentBiasAndFairnessSettingsPtrInput
+	// The challenger models settings for the Deployment.
+	ChallengerModelsSettings DeploymentChallengerModelsSettingsPtrInput
+	// The challenger replay settings for the Deployment.
+	ChallengerReplaySettings DeploymentChallengerReplaySettingsPtrInput
+	// The drift tracking settings for the Deployment.
+	DriftTrackingSettings DeploymentDriftTrackingSettingsPtrInput
+	// The health settings for this Deployment.
+	HealthSettings DeploymentHealthSettingsPtrInput
+	// The importance of the Deployment.
+	Importance pulumi.StringPtrInput
 	// The label of the Deployment.
 	Label pulumi.StringInput
 	// The ID of the predication environment for this Deployment.
 	PredictionEnvironmentId pulumi.StringInput
+	// The prediction intervals settings for this Deployment.
+	PredictionIntervalsSettings DeploymentPredictionIntervalsSettingsPtrInput
+	// The prediction warning settings for the Deployment.
+	PredictionWarningSettings DeploymentPredictionWarningSettingsPtrInput
+	// The predictions by forecase date settings for the Deployment.
+	PredictionsByForecastDateSettings DeploymentPredictionsByForecastDateSettingsPtrInput
+	// The predictions data collection settings for the Deployment.
+	PredictionsDataCollectionSettings DeploymentPredictionsDataCollectionSettingsPtrInput
+	// Settings for the predictions.
+	PredictionsSettings DeploymentPredictionsSettingsPtrInput
 	// The ID of the registered model version for this Deployment.
 	RegisteredModelVersionId pulumi.StringInput
-	// The settings for the Deployment.
-	Settings DeploymentSettingsPtrInput
+	// The segment analysis settings for the Deployment.
+	SegmentAnalysisSettings DeploymentSegmentAnalysisSettingsPtrInput
 }
 
 func (DeploymentArgs) ElementType() reflect.Type {
@@ -255,6 +375,41 @@ func (o DeploymentOutput) ToDeploymentOutputWithContext(ctx context.Context) Dep
 	return o
 }
 
+// Association ID settings for this Deployment.
+func (o DeploymentOutput) AssociationIdSettings() DeploymentAssociationIdSettingsPtrOutput {
+	return o.ApplyT(func(v *Deployment) DeploymentAssociationIdSettingsPtrOutput { return v.AssociationIdSettings }).(DeploymentAssociationIdSettingsPtrOutput)
+}
+
+// Bias and fairness settings for the Deployment.
+func (o DeploymentOutput) BiasAndFairnessSettings() DeploymentBiasAndFairnessSettingsPtrOutput {
+	return o.ApplyT(func(v *Deployment) DeploymentBiasAndFairnessSettingsPtrOutput { return v.BiasAndFairnessSettings }).(DeploymentBiasAndFairnessSettingsPtrOutput)
+}
+
+// The challenger models settings for the Deployment.
+func (o DeploymentOutput) ChallengerModelsSettings() DeploymentChallengerModelsSettingsPtrOutput {
+	return o.ApplyT(func(v *Deployment) DeploymentChallengerModelsSettingsPtrOutput { return v.ChallengerModelsSettings }).(DeploymentChallengerModelsSettingsPtrOutput)
+}
+
+// The challenger replay settings for the Deployment.
+func (o DeploymentOutput) ChallengerReplaySettings() DeploymentChallengerReplaySettingsPtrOutput {
+	return o.ApplyT(func(v *Deployment) DeploymentChallengerReplaySettingsPtrOutput { return v.ChallengerReplaySettings }).(DeploymentChallengerReplaySettingsPtrOutput)
+}
+
+// The drift tracking settings for the Deployment.
+func (o DeploymentOutput) DriftTrackingSettings() DeploymentDriftTrackingSettingsPtrOutput {
+	return o.ApplyT(func(v *Deployment) DeploymentDriftTrackingSettingsPtrOutput { return v.DriftTrackingSettings }).(DeploymentDriftTrackingSettingsPtrOutput)
+}
+
+// The health settings for this Deployment.
+func (o DeploymentOutput) HealthSettings() DeploymentHealthSettingsPtrOutput {
+	return o.ApplyT(func(v *Deployment) DeploymentHealthSettingsPtrOutput { return v.HealthSettings }).(DeploymentHealthSettingsPtrOutput)
+}
+
+// The importance of the Deployment.
+func (o DeploymentOutput) Importance() pulumi.StringOutput {
+	return o.ApplyT(func(v *Deployment) pulumi.StringOutput { return v.Importance }).(pulumi.StringOutput)
+}
+
 // The label of the Deployment.
 func (o DeploymentOutput) Label() pulumi.StringOutput {
 	return o.ApplyT(func(v *Deployment) pulumi.StringOutput { return v.Label }).(pulumi.StringOutput)
@@ -265,14 +420,45 @@ func (o DeploymentOutput) PredictionEnvironmentId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Deployment) pulumi.StringOutput { return v.PredictionEnvironmentId }).(pulumi.StringOutput)
 }
 
+// The prediction intervals settings for this Deployment.
+func (o DeploymentOutput) PredictionIntervalsSettings() DeploymentPredictionIntervalsSettingsPtrOutput {
+	return o.ApplyT(func(v *Deployment) DeploymentPredictionIntervalsSettingsPtrOutput {
+		return v.PredictionIntervalsSettings
+	}).(DeploymentPredictionIntervalsSettingsPtrOutput)
+}
+
+// The prediction warning settings for the Deployment.
+func (o DeploymentOutput) PredictionWarningSettings() DeploymentPredictionWarningSettingsPtrOutput {
+	return o.ApplyT(func(v *Deployment) DeploymentPredictionWarningSettingsPtrOutput { return v.PredictionWarningSettings }).(DeploymentPredictionWarningSettingsPtrOutput)
+}
+
+// The predictions by forecase date settings for the Deployment.
+func (o DeploymentOutput) PredictionsByForecastDateSettings() DeploymentPredictionsByForecastDateSettingsPtrOutput {
+	return o.ApplyT(func(v *Deployment) DeploymentPredictionsByForecastDateSettingsPtrOutput {
+		return v.PredictionsByForecastDateSettings
+	}).(DeploymentPredictionsByForecastDateSettingsPtrOutput)
+}
+
+// The predictions data collection settings for the Deployment.
+func (o DeploymentOutput) PredictionsDataCollectionSettings() DeploymentPredictionsDataCollectionSettingsPtrOutput {
+	return o.ApplyT(func(v *Deployment) DeploymentPredictionsDataCollectionSettingsPtrOutput {
+		return v.PredictionsDataCollectionSettings
+	}).(DeploymentPredictionsDataCollectionSettingsPtrOutput)
+}
+
+// Settings for the predictions.
+func (o DeploymentOutput) PredictionsSettings() DeploymentPredictionsSettingsPtrOutput {
+	return o.ApplyT(func(v *Deployment) DeploymentPredictionsSettingsPtrOutput { return v.PredictionsSettings }).(DeploymentPredictionsSettingsPtrOutput)
+}
+
 // The ID of the registered model version for this Deployment.
 func (o DeploymentOutput) RegisteredModelVersionId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Deployment) pulumi.StringOutput { return v.RegisteredModelVersionId }).(pulumi.StringOutput)
 }
 
-// The settings for the Deployment.
-func (o DeploymentOutput) Settings() DeploymentSettingsPtrOutput {
-	return o.ApplyT(func(v *Deployment) DeploymentSettingsPtrOutput { return v.Settings }).(DeploymentSettingsPtrOutput)
+// The segment analysis settings for the Deployment.
+func (o DeploymentOutput) SegmentAnalysisSettings() DeploymentSegmentAnalysisSettingsPtrOutput {
+	return o.ApplyT(func(v *Deployment) DeploymentSegmentAnalysisSettingsPtrOutput { return v.SegmentAnalysisSettings }).(DeploymentSegmentAnalysisSettingsPtrOutput)
 }
 
 type DeploymentArrayOutput struct{ *pulumi.OutputState }

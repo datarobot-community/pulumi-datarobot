@@ -10,7 +10,7 @@ using Pulumi.Serialization;
 namespace Pulumi.Datarobot.Inputs
 {
 
-    public sealed class DeploymentSettingsPredictionsSettingsArgs : global::Pulumi.ResourceArgs
+    public sealed class DeploymentPredictionsSettingsArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The maximum number of computes to use for predictions.
@@ -30,9 +30,9 @@ namespace Pulumi.Datarobot.Inputs
         [Input("realTime", required: true)]
         public Input<bool> RealTime { get; set; } = null!;
 
-        public DeploymentSettingsPredictionsSettingsArgs()
+        public DeploymentPredictionsSettingsArgs()
         {
         }
-        public static new DeploymentSettingsPredictionsSettingsArgs Empty => new DeploymentSettingsPredictionsSettingsArgs();
+        public static new DeploymentPredictionsSettingsArgs Empty => new DeploymentPredictionsSettingsArgs();
     }
 }

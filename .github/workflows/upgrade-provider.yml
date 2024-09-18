@@ -1,12 +1,13 @@
 name: Upgrade provider
 on:
+  workflow_dispatch: 
   issues:
     types:
     - opened
   schedule:
     - cron: '0 5 * * *'
 env:
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 jobs:
   upgrade_provider:
     name: upgrade-provider

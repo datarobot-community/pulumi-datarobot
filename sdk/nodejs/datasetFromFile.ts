@@ -14,8 +14,8 @@ import * as utilities from "./utilities";
  * import * as datarobot from "@datarobot/pulumi-datarobot";
  *
  * const example = new datarobot.DatasetFromFile("example", {
- *     sourceFile: "[Path to file to upload]",
- *     useCaseId: datarobot_use_case.example.id,
+ *     filePath: "[Path to file to upload]",
+ *     useCaseIds: [datarobot_use_case.example.id],
  * });
  * export const exampleId = example.id;
  * ```
@@ -51,11 +51,15 @@ export class DatasetFromFile extends pulumi.CustomResource {
     /**
      * The path to the file to upload.
      */
-    public readonly sourceFile!: pulumi.Output<string>;
+    public readonly filePath!: pulumi.Output<string>;
     /**
-     * The id of the Use Case.
+     * The name of the Dataset. Defaults to the file name.
      */
-    public readonly useCaseId!: pulumi.Output<string>;
+    public readonly name!: pulumi.Output<string>;
+    /**
+     * The list of Use Case IDs to add the Dataset to.
+     */
+    public readonly useCaseIds!: pulumi.Output<string[] | undefined>;
 
     /**
      * Create a DatasetFromFile resource with the given unique name, arguments, and options.
@@ -70,18 +74,17 @@ export class DatasetFromFile extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as DatasetFromFileState | undefined;
-            resourceInputs["sourceFile"] = state ? state.sourceFile : undefined;
-            resourceInputs["useCaseId"] = state ? state.useCaseId : undefined;
+            resourceInputs["filePath"] = state ? state.filePath : undefined;
+            resourceInputs["name"] = state ? state.name : undefined;
+            resourceInputs["useCaseIds"] = state ? state.useCaseIds : undefined;
         } else {
             const args = argsOrState as DatasetFromFileArgs | undefined;
-            if ((!args || args.sourceFile === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'sourceFile'");
+            if ((!args || args.filePath === undefined) && !opts.urn) {
+                throw new Error("Missing required property 'filePath'");
             }
-            if ((!args || args.useCaseId === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'useCaseId'");
-            }
-            resourceInputs["sourceFile"] = args ? args.sourceFile : undefined;
-            resourceInputs["useCaseId"] = args ? args.useCaseId : undefined;
+            resourceInputs["filePath"] = args ? args.filePath : undefined;
+            resourceInputs["name"] = args ? args.name : undefined;
+            resourceInputs["useCaseIds"] = args ? args.useCaseIds : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(DatasetFromFile.__pulumiType, name, resourceInputs, opts);
@@ -95,11 +98,15 @@ export interface DatasetFromFileState {
     /**
      * The path to the file to upload.
      */
-    sourceFile?: pulumi.Input<string>;
+    filePath?: pulumi.Input<string>;
     /**
-     * The id of the Use Case.
+     * The name of the Dataset. Defaults to the file name.
      */
-    useCaseId?: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
+    /**
+     * The list of Use Case IDs to add the Dataset to.
+     */
+    useCaseIds?: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 /**
@@ -109,9 +116,13 @@ export interface DatasetFromFileArgs {
     /**
      * The path to the file to upload.
      */
-    sourceFile: pulumi.Input<string>;
+    filePath: pulumi.Input<string>;
     /**
-     * The id of the Use Case.
+     * The name of the Dataset. Defaults to the file name.
      */
-    useCaseId: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
+    /**
+     * The list of Use Case IDs to add the Dataset to.
+     */
+    useCaseIds?: pulumi.Input<pulumi.Input<string>[]>;
 }

@@ -17,8 +17,8 @@ import * as utilities from "./utilities";
  *
  * const exampleUseCase = new datarobot.UseCase("exampleUseCase", {description: "Description for the example use case"});
  * const exampleDatasetFromFile = new datarobot.DatasetFromFile("exampleDatasetFromFile", {
- *     sourceFile: "[Path to file to upload]",
- *     useCaseId: exampleUseCase.id,
+ *     filePath: "[Path to file to upload]",
+ *     useCaseIds: [exampleUseCase.id],
  * });
  * const exampleVectorDatabase = new datarobot.VectorDatabase("exampleVectorDatabase", {
  *     useCaseId: exampleUseCase.id,

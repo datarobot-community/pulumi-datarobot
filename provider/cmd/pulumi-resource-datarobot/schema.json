@@ -304,50 +304,403 @@
                 "sourcePaths"
             ]
         },
-        "datarobot:index/DeploymentSettings:DeploymentSettings": {
+        "datarobot:index/DeploymentAssociationIdSettings:DeploymentAssociationIdSettings": {
             "properties": {
-                "associationId": {
-                    "$ref": "#/types/datarobot:index/DeploymentSettingsAssociationId:DeploymentSettingsAssociationId",
-                    "description": "Used to associate predictions back to your actual data.\n"
-                },
-                "challengerAnalysis": {
+                "autoGenerateId": {
                     "type": "boolean",
-                    "description": "Used to compare the performance of the deployed model with the challenger models.\n"
+                    "description": "Whether to auto generate ID.\n"
                 },
-                "predictionRowStorage": {
+                "columnNames": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Name of the columns to be used as association ID, currently only support a list of one string.\n"
+                },
+                "requiredInPredictionRequests": {
                     "type": "boolean",
-                    "description": "Used to score predictions made by the challenger models and compare performance with the deployed model.\n"
-                },
-                "predictionsSettings": {
-                    "$ref": "#/types/datarobot:index/DeploymentSettingsPredictionsSettings:DeploymentSettingsPredictionsSettings",
-                    "description": "Settings for the predictions.\n"
+                    "description": "Whether the association ID column is required in prediction requests.\n"
                 }
             },
             "type": "object"
         },
-        "datarobot:index/DeploymentSettingsAssociationId:DeploymentSettingsAssociationId": {
+        "datarobot:index/DeploymentBiasAndFairnessSettings:DeploymentBiasAndFairnessSettings": {
             "properties": {
-                "autoGenerateId": {
-                    "type": "boolean",
-                    "description": "Whether to automatically generate an association ID.\n"
-                },
-                "featureName": {
+                "fairnessMetricSet": {
                     "type": "string",
-                    "description": "The name of the feature to use as the association ID.\n"
+                    "description": "A set of fairness metrics to use for calculating fairness.\n"
                 },
-                "requiredInPredictionRequests": {
+                "fairnessThreshold": {
+                    "type": "number",
+                    "description": "Threshold value of the fairness metric. Cannot be less than 0 or greater than 1.\n"
+                },
+                "preferableTargetValue": {
                     "type": "boolean",
-                    "description": "Whether the association ID is required in prediction requests.\n"
+                    "description": "A target value that should be treated as a positive outcome for the prediction.\n"
+                },
+                "protectedFeatures": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "A list of features to mark as protected.\n"
                 }
             },
             "type": "object",
             "required": [
-                "autoGenerateId",
-                "featureName",
-                "requiredInPredictionRequests"
+                "fairnessMetricSet",
+                "fairnessThreshold",
+                "preferableTargetValue",
+                "protectedFeatures"
             ]
         },
-        "datarobot:index/DeploymentSettingsPredictionsSettings:DeploymentSettingsPredictionsSettings": {
+        "datarobot:index/DeploymentChallengerModelsSettings:DeploymentChallengerModelsSettings": {
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "description": "Is 'True' if challenger models is enabled for this deployment.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "enabled"
+            ]
+        },
+        "datarobot:index/DeploymentChallengerReplaySettings:DeploymentChallengerReplaySettings": {
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "description": "If challenger replay is enabled.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "enabled"
+            ]
+        },
+        "datarobot:index/DeploymentDriftTrackingSettings:DeploymentDriftTrackingSettings": {
+            "properties": {
+                "featureDriftEnabled": {
+                    "type": "boolean",
+                    "description": "If feature drift tracking is to be turned on.\n"
+                },
+                "targetDriftEnabled": {
+                    "type": "boolean",
+                    "description": "If target drift tracking is to be turned on.\n"
+                }
+            },
+            "type": "object"
+        },
+        "datarobot:index/DeploymentHealthSettings:DeploymentHealthSettings": {
+            "properties": {
+                "accuracy": {
+                    "$ref": "#/types/datarobot:index/DeploymentHealthSettingsAccuracy:DeploymentHealthSettingsAccuracy",
+                    "description": "The accuracy health settings for this Deployment.\n"
+                },
+                "actualsTimeliness": {
+                    "$ref": "#/types/datarobot:index/DeploymentHealthSettingsActualsTimeliness:DeploymentHealthSettingsActualsTimeliness",
+                    "description": "The actuals timeliness health settings for this Deployment.\n"
+                },
+                "customMetrics": {
+                    "$ref": "#/types/datarobot:index/DeploymentHealthSettingsCustomMetrics:DeploymentHealthSettingsCustomMetrics",
+                    "description": "The custom metrics health settings for this Deployment.\n"
+                },
+                "dataDrift": {
+                    "$ref": "#/types/datarobot:index/DeploymentHealthSettingsDataDrift:DeploymentHealthSettingsDataDrift",
+                    "description": "The data drift health settings for this Deployment.\n"
+                },
+                "fairness": {
+                    "$ref": "#/types/datarobot:index/DeploymentHealthSettingsFairness:DeploymentHealthSettingsFairness",
+                    "description": "The fairness health settings for this Deployment.\n"
+                },
+                "predictionsTimeliness": {
+                    "$ref": "#/types/datarobot:index/DeploymentHealthSettingsPredictionsTimeliness:DeploymentHealthSettingsPredictionsTimeliness",
+                    "description": "The predictions timeliness health settings for this Deployment.\n"
+                },
+                "service": {
+                    "$ref": "#/types/datarobot:index/DeploymentHealthSettingsService:DeploymentHealthSettingsService",
+                    "description": "The service health settings for this Deployment.\n"
+                }
+            },
+            "type": "object"
+        },
+        "datarobot:index/DeploymentHealthSettingsAccuracy:DeploymentHealthSettingsAccuracy": {
+            "properties": {
+                "batchCount": {
+                    "type": "integer",
+                    "description": "The batch count for the accuracy health settings.\n"
+                },
+                "failingThreshold": {
+                    "type": "number",
+                    "description": "The failing threshold for the accuracy health settings.\n"
+                },
+                "measurement": {
+                    "type": "string",
+                    "description": "The measurement for the accuracy health settings.\n"
+                },
+                "metric": {
+                    "type": "string",
+                    "description": "The metric for the accuracy health settings.\n"
+                },
+                "warningThreshold": {
+                    "type": "number",
+                    "description": "The warning threshold for the accuracy health settings.\n"
+                }
+            },
+            "type": "object"
+        },
+        "datarobot:index/DeploymentHealthSettingsActualsTimeliness:DeploymentHealthSettingsActualsTimeliness": {
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "description": "If acutals timeliness is enabled for this Deployment.\n"
+                },
+                "expectedFrequency": {
+                    "type": "string",
+                    "description": "The expected frequency for the actuals timeliness health settings.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "enabled"
+            ]
+        },
+        "datarobot:index/DeploymentHealthSettingsCustomMetrics:DeploymentHealthSettingsCustomMetrics": {
+            "properties": {
+                "failingConditions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/datarobot:index/DeploymentHealthSettingsCustomMetricsFailingCondition:DeploymentHealthSettingsCustomMetricsFailingCondition"
+                    },
+                    "description": "The failing conditions for the custom metrics health settings.\n"
+                },
+                "warningConditions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/datarobot:index/DeploymentHealthSettingsCustomMetricsWarningCondition:DeploymentHealthSettingsCustomMetricsWarningCondition"
+                    },
+                    "description": "The warning conditions for the custom metrics health settings.\n"
+                }
+            },
+            "type": "object"
+        },
+        "datarobot:index/DeploymentHealthSettingsCustomMetricsFailingCondition:DeploymentHealthSettingsCustomMetricsFailingCondition": {
+            "properties": {
+                "compareOperator": {
+                    "type": "string",
+                    "description": "The compare operator for the failing condition of the custom metrics health settings.\n"
+                },
+                "metricId": {
+                    "type": "string",
+                    "description": "The metric ID for the failing condition of the custom metrics health settings.\n"
+                },
+                "threshold": {
+                    "type": "number",
+                    "description": "The threshold for the failing condition of the custom metrics health settings.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "compareOperator",
+                "metricId",
+                "threshold"
+            ]
+        },
+        "datarobot:index/DeploymentHealthSettingsCustomMetricsWarningCondition:DeploymentHealthSettingsCustomMetricsWarningCondition": {
+            "properties": {
+                "compareOperator": {
+                    "type": "string",
+                    "description": "The compare operator for the warning condition of the custom metrics health settings.\n"
+                },
+                "metricId": {
+                    "type": "string",
+                    "description": "The metric ID for the warning condition of the custom metrics health settings.\n"
+                },
+                "threshold": {
+                    "type": "number",
+                    "description": "The threshold for the warning condition of the custom metrics health settings.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "compareOperator",
+                "metricId",
+                "threshold"
+            ]
+        },
+        "datarobot:index/DeploymentHealthSettingsDataDrift:DeploymentHealthSettingsDataDrift": {
+            "properties": {
+                "batchCount": {
+                    "type": "integer",
+                    "description": "The batch count for the data drift health settings.\n"
+                },
+                "driftThreshold": {
+                    "type": "number",
+                    "description": "The drift threshold for the data drift health settings.\n"
+                },
+                "excludeFeatures": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The exclude features for the data drift health settings.\n"
+                },
+                "highImportanceFailingCount": {
+                    "type": "integer",
+                    "description": "The high importance failing count for the data drift health settings.\n"
+                },
+                "highImportanceWarningCount": {
+                    "type": "integer",
+                    "description": "The high importance warning count for the data drift health settings.\n"
+                },
+                "importanceThreshold": {
+                    "type": "number",
+                    "description": "The importance threshold for the data drift health settings.\n"
+                },
+                "lowImportanceFailingCount": {
+                    "type": "integer",
+                    "description": "The low importance failing count for the data drift health settings.\n"
+                },
+                "lowImportanceWarningCount": {
+                    "type": "integer",
+                    "description": "The low importance warning count for the data drift health settings.\n"
+                },
+                "starredFeatures": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The starred features for the data drift health settings.\n"
+                },
+                "timeInterval": {
+                    "type": "string",
+                    "description": "The time interval for the data drift health settings.\n"
+                }
+            },
+            "type": "object"
+        },
+        "datarobot:index/DeploymentHealthSettingsFairness:DeploymentHealthSettingsFairness": {
+            "properties": {
+                "protectedClassFailingCount": {
+                    "type": "integer",
+                    "description": "The protected class failing count for the fairness health settings.\n"
+                },
+                "protectedClassWarningCount": {
+                    "type": "integer",
+                    "description": "The protected class warning count for the fairness health settings.\n"
+                }
+            },
+            "type": "object"
+        },
+        "datarobot:index/DeploymentHealthSettingsPredictionsTimeliness:DeploymentHealthSettingsPredictionsTimeliness": {
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "description": "If predictions timeliness is enabled for this Deployment.\n"
+                },
+                "expectedFrequency": {
+                    "type": "string",
+                    "description": "The expected frequency for the predictions timeliness health settings.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "enabled"
+            ]
+        },
+        "datarobot:index/DeploymentHealthSettingsService:DeploymentHealthSettingsService": {
+            "properties": {
+                "batchCount": {
+                    "type": "integer",
+                    "description": "The batch count for the service health settings.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "batchCount"
+            ]
+        },
+        "datarobot:index/DeploymentPredictionIntervalsSettings:DeploymentPredictionIntervalsSettings": {
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "description": "Whether prediction intervals are enabled for this deployment.\n"
+                },
+                "percentiles": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    },
+                    "description": "List of enabled prediction intervals’ sizes for this deployment.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "enabled"
+            ]
+        },
+        "datarobot:index/DeploymentPredictionWarningSettings:DeploymentPredictionWarningSettings": {
+            "properties": {
+                "customBoundaries": {
+                    "$ref": "#/types/datarobot:index/DeploymentPredictionWarningSettingsCustomBoundaries:DeploymentPredictionWarningSettingsCustomBoundaries",
+                    "description": "The custom boundaries for prediction warnings.\n"
+                },
+                "enabled": {
+                    "type": "boolean",
+                    "description": "If target prediction warning is enabled for this Deployment.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "enabled"
+            ]
+        },
+        "datarobot:index/DeploymentPredictionWarningSettingsCustomBoundaries:DeploymentPredictionWarningSettingsCustomBoundaries": {
+            "properties": {
+                "lowerBoundary": {
+                    "type": "number",
+                    "description": "All predictions less than provided value will be considered anomalous.\n"
+                },
+                "upperBoundary": {
+                    "type": "number",
+                    "description": "All predictions greater than provided value will be considered anomalous.\n"
+                }
+            },
+            "type": "object"
+        },
+        "datarobot:index/DeploymentPredictionsByForecastDateSettings:DeploymentPredictionsByForecastDateSettings": {
+            "properties": {
+                "columnName": {
+                    "type": "string",
+                    "description": "The column name in prediction datasets to be used as forecast date.\n"
+                },
+                "datetimeFormat": {
+                    "type": "string",
+                    "description": "The datetime format of the forecast date column in prediction datasets.\n"
+                },
+                "enabled": {
+                    "type": "boolean",
+                    "description": "Is ’True’ if predictions by forecast date is enabled for this deployment.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "enabled"
+            ]
+        },
+        "datarobot:index/DeploymentPredictionsDataCollectionSettings:DeploymentPredictionsDataCollectionSettings": {
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "description": "If predictions data collections is enabled for this Deployment.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "enabled"
+            ]
+        },
+        "datarobot:index/DeploymentPredictionsSettings:DeploymentPredictionsSettings": {
             "properties": {
                 "maxComputes": {
                     "type": "integer",
@@ -367,6 +720,25 @@
                 "maxComputes",
                 "minComputes",
                 "realTime"
+            ]
+        },
+        "datarobot:index/DeploymentSegmentAnalysisSettings:DeploymentSegmentAnalysisSettings": {
+            "properties": {
+                "attributes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "A list of strings that gives the segment attributes selected for tracking.\n"
+                },
+                "enabled": {
+                    "type": "boolean",
+                    "description": "Set to 'True' if segment analysis is enabled for this deployment.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "enabled"
             ]
         },
         "datarobot:index/LlmBlueprintLlmSettings:LlmBlueprintLlmSettings": {
@@ -1189,53 +1561,101 @@
             }
         },
         "datarobot:index/datasetFromFile:DatasetFromFile": {
-            "description": "Data set from file\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@datarobot/pulumi-datarobot\";\n\nconst example = new datarobot.DatasetFromFile(\"example\", {\n    sourceFile: \"[Path to file to upload]\",\n    useCaseId: datarobot_use_case.example.id,\n});\nexport const exampleId = example.id;\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample = datarobot.DatasetFromFile(\"example\",\n    source_file=\"[Path to file to upload]\",\n    use_case_id=datarobot_use_case[\"example\"][\"id\"])\npulumi.export(\"exampleId\", example.id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = Pulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Datarobot.DatasetFromFile(\"example\", new()\n    {\n        SourceFile = \"[Path to file to upload]\",\n        UseCaseId = datarobot_use_case.Example.Id,\n    });\n\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"exampleId\"] = example.Id,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texample, err := datarobot.NewDatasetFromFile(ctx, \"example\", \u0026datarobot.DatasetFromFileArgs{\n\t\t\tSourceFile: pulumi.String(\"[Path to file to upload]\"),\n\t\t\tUseCaseId:  pulumi.Any(datarobot_use_case.Example.Id),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"exampleId\", example.ID())\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.DatasetFromFile;\nimport com.pulumi.datarobot.DatasetFromFileArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new DatasetFromFile(\"example\", DatasetFromFileArgs.builder()\n            .sourceFile(\"[Path to file to upload]\")\n            .useCaseId(datarobot_use_case.example().id())\n            .build());\n\n        ctx.export(\"exampleId\", example.id());\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: datarobot:DatasetFromFile\n    properties:\n      sourceFile: '[Path to file to upload]'\n      useCaseId: ${datarobot_use_case.example.id}\noutputs:\n  exampleId: ${example.id}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "description": "Data set from file\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@datarobot/pulumi-datarobot\";\n\nconst example = new datarobot.DatasetFromFile(\"example\", {\n    filePath: \"[Path to file to upload]\",\n    useCaseIds: [datarobot_use_case.example.id],\n});\nexport const exampleId = example.id;\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample = datarobot.DatasetFromFile(\"example\",\n    file_path=\"[Path to file to upload]\",\n    use_case_ids=[datarobot_use_case[\"example\"][\"id\"]])\npulumi.export(\"exampleId\", example.id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = Pulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Datarobot.DatasetFromFile(\"example\", new()\n    {\n        FilePath = \"[Path to file to upload]\",\n        UseCaseIds = new[]\n        {\n            datarobot_use_case.Example.Id,\n        },\n    });\n\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"exampleId\"] = example.Id,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texample, err := datarobot.NewDatasetFromFile(ctx, \"example\", \u0026datarobot.DatasetFromFileArgs{\n\t\t\tFilePath: pulumi.String(\"[Path to file to upload]\"),\n\t\t\tUseCaseIds: pulumi.StringArray{\n\t\t\t\tdatarobot_use_case.Example.Id,\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"exampleId\", example.ID())\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.DatasetFromFile;\nimport com.pulumi.datarobot.DatasetFromFileArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new DatasetFromFile(\"example\", DatasetFromFileArgs.builder()\n            .filePath(\"[Path to file to upload]\")\n            .useCaseIds(datarobot_use_case.example().id())\n            .build());\n\n        ctx.export(\"exampleId\", example.id());\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: datarobot:DatasetFromFile\n    properties:\n      filePath: '[Path to file to upload]'\n      useCaseIds:\n        - ${datarobot_use_case.example.id}\noutputs:\n  exampleId: ${example.id}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
             "properties": {
-                "sourceFile": {
+                "filePath": {
                     "type": "string",
                     "description": "The path to the file to upload.\n"
                 },
-                "useCaseId": {
+                "name": {
                     "type": "string",
-                    "description": "The id of the Use Case.\n"
+                    "description": "The name of the Dataset. Defaults to the file name.\n"
+                },
+                "useCaseIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The list of Use Case IDs to add the Dataset to.\n"
                 }
             },
             "required": [
-                "sourceFile",
-                "useCaseId"
+                "filePath",
+                "name"
             ],
             "inputProperties": {
-                "sourceFile": {
+                "filePath": {
                     "type": "string",
                     "description": "The path to the file to upload.\n"
                 },
-                "useCaseId": {
+                "name": {
                     "type": "string",
-                    "description": "The id of the Use Case.\n"
+                    "description": "The name of the Dataset. Defaults to the file name.\n"
+                },
+                "useCaseIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The list of Use Case IDs to add the Dataset to.\n"
                 }
             },
             "requiredInputs": [
-                "sourceFile",
-                "useCaseId"
+                "filePath"
             ],
             "stateInputs": {
                 "description": "Input properties used for looking up and filtering DatasetFromFile resources.\n",
                 "properties": {
-                    "sourceFile": {
+                    "filePath": {
                         "type": "string",
                         "description": "The path to the file to upload.\n"
                     },
-                    "useCaseId": {
+                    "name": {
                         "type": "string",
-                        "description": "The id of the Use Case.\n"
+                        "description": "The name of the Dataset. Defaults to the file name.\n"
+                    },
+                    "useCaseIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "The list of Use Case IDs to add the Dataset to.\n"
                     }
                 },
                 "type": "object"
             }
         },
         "datarobot:index/deployment:Deployment": {
-            "description": "Deployment\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@datarobot/pulumi-datarobot\";\n\nconst exampleCustomModel = new datarobot.CustomModel(\"exampleCustomModel\", {\n    description: \"Description for the example custom model\",\n    targetType: \"Binary\",\n    targetName: \"my_label\",\n    baseEnvironmentName: \"[GenAI] Python 3.11 with Moderations\",\n    files: [\"example.py\"],\n});\nconst exampleRegisteredModel = new datarobot.RegisteredModel(\"exampleRegisteredModel\", {\n    customModelVersionId: exampleCustomModel.versionId,\n    description: \"Description for the example registered model\",\n});\nconst examplePredictionEnvironment = new datarobot.PredictionEnvironment(\"examplePredictionEnvironment\", {\n    description: \"Description for the example prediction environment\",\n    platform: \"datarobotServerless\",\n});\nconst exampleDeployment = new datarobot.Deployment(\"exampleDeployment\", {\n    label: \"An example deployment\",\n    predictionEnvironmentId: examplePredictionEnvironment.id,\n    registeredModelVersionId: exampleRegisteredModel.versionId,\n});\n// Optional settings\n// settings = {\n//   prediction_row_storage = true\n// }\nexport const datarobotDeploymentId = exampleDeployment.id;\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample_custom_model = datarobot.CustomModel(\"exampleCustomModel\",\n    description=\"Description for the example custom model\",\n    target_type=\"Binary\",\n    target_name=\"my_label\",\n    base_environment_name=\"[GenAI] Python 3.11 with Moderations\",\n    files=[\"example.py\"])\nexample_registered_model = datarobot.RegisteredModel(\"exampleRegisteredModel\",\n    custom_model_version_id=example_custom_model.version_id,\n    description=\"Description for the example registered model\")\nexample_prediction_environment = datarobot.PredictionEnvironment(\"examplePredictionEnvironment\",\n    description=\"Description for the example prediction environment\",\n    platform=\"datarobotServerless\")\nexample_deployment = datarobot.Deployment(\"exampleDeployment\",\n    label=\"An example deployment\",\n    prediction_environment_id=example_prediction_environment.id,\n    registered_model_version_id=example_registered_model.version_id)\n# Optional settings\n# settings = {\n#   prediction_row_storage = true\n# }\npulumi.export(\"datarobotDeploymentId\", example_deployment.id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = Pulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var exampleCustomModel = new Datarobot.CustomModel(\"exampleCustomModel\", new()\n    {\n        Description = \"Description for the example custom model\",\n        TargetType = \"Binary\",\n        TargetName = \"my_label\",\n        BaseEnvironmentName = \"[GenAI] Python 3.11 with Moderations\",\n        Files = new[]\n        {\n            \"example.py\",\n        },\n    });\n\n    var exampleRegisteredModel = new Datarobot.RegisteredModel(\"exampleRegisteredModel\", new()\n    {\n        CustomModelVersionId = exampleCustomModel.VersionId,\n        Description = \"Description for the example registered model\",\n    });\n\n    var examplePredictionEnvironment = new Datarobot.PredictionEnvironment(\"examplePredictionEnvironment\", new()\n    {\n        Description = \"Description for the example prediction environment\",\n        Platform = \"datarobotServerless\",\n    });\n\n    var exampleDeployment = new Datarobot.Deployment(\"exampleDeployment\", new()\n    {\n        Label = \"An example deployment\",\n        PredictionEnvironmentId = examplePredictionEnvironment.Id,\n        RegisteredModelVersionId = exampleRegisteredModel.VersionId,\n    });\n\n    // Optional settings\n    // settings = {\n    //   prediction_row_storage = true\n    // }\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"datarobotDeploymentId\"] = exampleDeployment.Id,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texampleCustomModel, err := datarobot.NewCustomModel(ctx, \"exampleCustomModel\", \u0026datarobot.CustomModelArgs{\n\t\t\tDescription:         pulumi.String(\"Description for the example custom model\"),\n\t\t\tTargetType:          pulumi.String(\"Binary\"),\n\t\t\tTargetName:          pulumi.String(\"my_label\"),\n\t\t\tBaseEnvironmentName: pulumi.String(\"[GenAI] Python 3.11 with Moderations\"),\n\t\t\tFiles: pulumi.Any{\n\t\t\t\t\"example.py\",\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\texampleRegisteredModel, err := datarobot.NewRegisteredModel(ctx, \"exampleRegisteredModel\", \u0026datarobot.RegisteredModelArgs{\n\t\t\tCustomModelVersionId: exampleCustomModel.VersionId,\n\t\t\tDescription:          pulumi.String(\"Description for the example registered model\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\texamplePredictionEnvironment, err := datarobot.NewPredictionEnvironment(ctx, \"examplePredictionEnvironment\", \u0026datarobot.PredictionEnvironmentArgs{\n\t\t\tDescription: pulumi.String(\"Description for the example prediction environment\"),\n\t\t\tPlatform:    pulumi.String(\"datarobotServerless\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\texampleDeployment, err := datarobot.NewDeployment(ctx, \"exampleDeployment\", \u0026datarobot.DeploymentArgs{\n\t\t\tLabel:                    pulumi.String(\"An example deployment\"),\n\t\t\tPredictionEnvironmentId:  examplePredictionEnvironment.ID(),\n\t\t\tRegisteredModelVersionId: exampleRegisteredModel.VersionId,\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"datarobotDeploymentId\", exampleDeployment.ID())\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.CustomModel;\nimport com.pulumi.datarobot.CustomModelArgs;\nimport com.pulumi.datarobot.RegisteredModel;\nimport com.pulumi.datarobot.RegisteredModelArgs;\nimport com.pulumi.datarobot.PredictionEnvironment;\nimport com.pulumi.datarobot.PredictionEnvironmentArgs;\nimport com.pulumi.datarobot.Deployment;\nimport com.pulumi.datarobot.DeploymentArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var exampleCustomModel = new CustomModel(\"exampleCustomModel\", CustomModelArgs.builder()\n            .description(\"Description for the example custom model\")\n            .targetType(\"Binary\")\n            .targetName(\"my_label\")\n            .baseEnvironmentName(\"[GenAI] Python 3.11 with Moderations\")\n            .files(\"example.py\")\n            .build());\n\n        var exampleRegisteredModel = new RegisteredModel(\"exampleRegisteredModel\", RegisteredModelArgs.builder()\n            .customModelVersionId(exampleCustomModel.versionId())\n            .description(\"Description for the example registered model\")\n            .build());\n\n        var examplePredictionEnvironment = new PredictionEnvironment(\"examplePredictionEnvironment\", PredictionEnvironmentArgs.builder()\n            .description(\"Description for the example prediction environment\")\n            .platform(\"datarobotServerless\")\n            .build());\n\n        var exampleDeployment = new Deployment(\"exampleDeployment\", DeploymentArgs.builder()\n            .label(\"An example deployment\")\n            .predictionEnvironmentId(examplePredictionEnvironment.id())\n            .registeredModelVersionId(exampleRegisteredModel.versionId())\n            .build());\n\n        // Optional settings\n        // settings = {\n        //   prediction_row_storage = true\n        // }\n        ctx.export(\"datarobotDeploymentId\", exampleDeployment.id());\n    }\n}\n```\n```yaml\nresources:\n  exampleCustomModel:\n    type: datarobot:CustomModel\n    properties:\n      description: Description for the example custom model\n      targetType: Binary\n      targetName: my_label\n      baseEnvironmentName: '[GenAI] Python 3.11 with Moderations'\n      files:\n        - example.py\n  exampleRegisteredModel:\n    type: datarobot:RegisteredModel\n    properties:\n      customModelVersionId: ${exampleCustomModel.versionId}\n      description: Description for the example registered model\n  examplePredictionEnvironment:\n    type: datarobot:PredictionEnvironment\n    properties:\n      description: Description for the example prediction environment\n      platform: datarobotServerless\n  exampleDeployment:\n    type: datarobot:Deployment\n    properties:\n      label: An example deployment\n      predictionEnvironmentId: ${examplePredictionEnvironment.id}\n      registeredModelVersionId: ${exampleRegisteredModel.versionId}\noutputs:\n  datarobotDeploymentId: ${exampleDeployment.id}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "description": "Deployment\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@datarobot/pulumi-datarobot\";\n\nconst exampleCustomModel = new datarobot.CustomModel(\"exampleCustomModel\", {\n    description: \"Description for the example custom model\",\n    targetType: \"Binary\",\n    targetName: \"my_label\",\n    baseEnvironmentName: \"[GenAI] Python 3.11 with Moderations\",\n    files: [\"example.py\"],\n});\nconst exampleRegisteredModel = new datarobot.RegisteredModel(\"exampleRegisteredModel\", {\n    customModelVersionId: exampleCustomModel.versionId,\n    description: \"Description for the example registered model\",\n});\nconst examplePredictionEnvironment = new datarobot.PredictionEnvironment(\"examplePredictionEnvironment\", {\n    description: \"Description for the example prediction environment\",\n    platform: \"datarobotServerless\",\n});\nconst exampleDeployment = new datarobot.Deployment(\"exampleDeployment\", {\n    label: \"An example deployment\",\n    predictionEnvironmentId: examplePredictionEnvironment.id,\n    registeredModelVersionId: exampleRegisteredModel.versionId,\n});\n// Optional settings\n// challenger_models_settings = {}\n// challenger_replay_settings = {}\n// segment_analysis_settings  = {}\n// bias_and_fairness_settings = {}\n// predictions_by_forecast_date_settings = {}\n// drift_tracking_settings = {}\n// association_id_settings = {}\n// predictions_data_collection_settings = {}\n// prediction_warning_settings = {}\n// prediction_interval_settings = {}\n// predictions_settings = {}\n// health_settings = {}\nexport const datarobotDeploymentId = exampleDeployment.id;\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample_custom_model = datarobot.CustomModel(\"exampleCustomModel\",\n    description=\"Description for the example custom model\",\n    target_type=\"Binary\",\n    target_name=\"my_label\",\n    base_environment_name=\"[GenAI] Python 3.11 with Moderations\",\n    files=[\"example.py\"])\nexample_registered_model = datarobot.RegisteredModel(\"exampleRegisteredModel\",\n    custom_model_version_id=example_custom_model.version_id,\n    description=\"Description for the example registered model\")\nexample_prediction_environment = datarobot.PredictionEnvironment(\"examplePredictionEnvironment\",\n    description=\"Description for the example prediction environment\",\n    platform=\"datarobotServerless\")\nexample_deployment = datarobot.Deployment(\"exampleDeployment\",\n    label=\"An example deployment\",\n    prediction_environment_id=example_prediction_environment.id,\n    registered_model_version_id=example_registered_model.version_id)\n# Optional settings\n# challenger_models_settings = {}\n# challenger_replay_settings = {}\n# segment_analysis_settings  = {}\n# bias_and_fairness_settings = {}\n# predictions_by_forecast_date_settings = {}\n# drift_tracking_settings = {}\n# association_id_settings = {}\n# predictions_data_collection_settings = {}\n# prediction_warning_settings = {}\n# prediction_interval_settings = {}\n# predictions_settings = {}\n# health_settings = {}\npulumi.export(\"datarobotDeploymentId\", example_deployment.id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = Pulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var exampleCustomModel = new Datarobot.CustomModel(\"exampleCustomModel\", new()\n    {\n        Description = \"Description for the example custom model\",\n        TargetType = \"Binary\",\n        TargetName = \"my_label\",\n        BaseEnvironmentName = \"[GenAI] Python 3.11 with Moderations\",\n        Files = new[]\n        {\n            \"example.py\",\n        },\n    });\n\n    var exampleRegisteredModel = new Datarobot.RegisteredModel(\"exampleRegisteredModel\", new()\n    {\n        CustomModelVersionId = exampleCustomModel.VersionId,\n        Description = \"Description for the example registered model\",\n    });\n\n    var examplePredictionEnvironment = new Datarobot.PredictionEnvironment(\"examplePredictionEnvironment\", new()\n    {\n        Description = \"Description for the example prediction environment\",\n        Platform = \"datarobotServerless\",\n    });\n\n    var exampleDeployment = new Datarobot.Deployment(\"exampleDeployment\", new()\n    {\n        Label = \"An example deployment\",\n        PredictionEnvironmentId = examplePredictionEnvironment.Id,\n        RegisteredModelVersionId = exampleRegisteredModel.VersionId,\n    });\n\n    // Optional settings\n    // challenger_models_settings = {}\n    // challenger_replay_settings = {}\n    // segment_analysis_settings  = {}\n    // bias_and_fairness_settings = {}\n    // predictions_by_forecast_date_settings = {}\n    // drift_tracking_settings = {}\n    // association_id_settings = {}\n    // predictions_data_collection_settings = {}\n    // prediction_warning_settings = {}\n    // prediction_interval_settings = {}\n    // predictions_settings = {}\n    // health_settings = {}\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"datarobotDeploymentId\"] = exampleDeployment.Id,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texampleCustomModel, err := datarobot.NewCustomModel(ctx, \"exampleCustomModel\", \u0026datarobot.CustomModelArgs{\n\t\t\tDescription:         pulumi.String(\"Description for the example custom model\"),\n\t\t\tTargetType:          pulumi.String(\"Binary\"),\n\t\t\tTargetName:          pulumi.String(\"my_label\"),\n\t\t\tBaseEnvironmentName: pulumi.String(\"[GenAI] Python 3.11 with Moderations\"),\n\t\t\tFiles: pulumi.Any{\n\t\t\t\t\"example.py\",\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\texampleRegisteredModel, err := datarobot.NewRegisteredModel(ctx, \"exampleRegisteredModel\", \u0026datarobot.RegisteredModelArgs{\n\t\t\tCustomModelVersionId: exampleCustomModel.VersionId,\n\t\t\tDescription:          pulumi.String(\"Description for the example registered model\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\texamplePredictionEnvironment, err := datarobot.NewPredictionEnvironment(ctx, \"examplePredictionEnvironment\", \u0026datarobot.PredictionEnvironmentArgs{\n\t\t\tDescription: pulumi.String(\"Description for the example prediction environment\"),\n\t\t\tPlatform:    pulumi.String(\"datarobotServerless\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\texampleDeployment, err := datarobot.NewDeployment(ctx, \"exampleDeployment\", \u0026datarobot.DeploymentArgs{\n\t\t\tLabel:                    pulumi.String(\"An example deployment\"),\n\t\t\tPredictionEnvironmentId:  examplePredictionEnvironment.ID(),\n\t\t\tRegisteredModelVersionId: exampleRegisteredModel.VersionId,\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"datarobotDeploymentId\", exampleDeployment.ID())\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.CustomModel;\nimport com.pulumi.datarobot.CustomModelArgs;\nimport com.pulumi.datarobot.RegisteredModel;\nimport com.pulumi.datarobot.RegisteredModelArgs;\nimport com.pulumi.datarobot.PredictionEnvironment;\nimport com.pulumi.datarobot.PredictionEnvironmentArgs;\nimport com.pulumi.datarobot.Deployment;\nimport com.pulumi.datarobot.DeploymentArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var exampleCustomModel = new CustomModel(\"exampleCustomModel\", CustomModelArgs.builder()\n            .description(\"Description for the example custom model\")\n            .targetType(\"Binary\")\n            .targetName(\"my_label\")\n            .baseEnvironmentName(\"[GenAI] Python 3.11 with Moderations\")\n            .files(\"example.py\")\n            .build());\n\n        var exampleRegisteredModel = new RegisteredModel(\"exampleRegisteredModel\", RegisteredModelArgs.builder()\n            .customModelVersionId(exampleCustomModel.versionId())\n            .description(\"Description for the example registered model\")\n            .build());\n\n        var examplePredictionEnvironment = new PredictionEnvironment(\"examplePredictionEnvironment\", PredictionEnvironmentArgs.builder()\n            .description(\"Description for the example prediction environment\")\n            .platform(\"datarobotServerless\")\n            .build());\n\n        var exampleDeployment = new Deployment(\"exampleDeployment\", DeploymentArgs.builder()\n            .label(\"An example deployment\")\n            .predictionEnvironmentId(examplePredictionEnvironment.id())\n            .registeredModelVersionId(exampleRegisteredModel.versionId())\n            .build());\n\n        // Optional settings\n        // challenger_models_settings = {}\n        // challenger_replay_settings = {}\n        // segment_analysis_settings  = {}\n        // bias_and_fairness_settings = {}\n        // predictions_by_forecast_date_settings = {}\n        // drift_tracking_settings = {}\n        // association_id_settings = {}\n        // predictions_data_collection_settings = {}\n        // prediction_warning_settings = {}\n        // prediction_interval_settings = {}\n        // predictions_settings = {}\n        // health_settings = {}\n        ctx.export(\"datarobotDeploymentId\", exampleDeployment.id());\n    }\n}\n```\n```yaml\nresources:\n  exampleCustomModel:\n    type: datarobot:CustomModel\n    properties:\n      description: Description for the example custom model\n      targetType: Binary\n      targetName: my_label\n      baseEnvironmentName: '[GenAI] Python 3.11 with Moderations'\n      files:\n        - example.py\n  exampleRegisteredModel:\n    type: datarobot:RegisteredModel\n    properties:\n      customModelVersionId: ${exampleCustomModel.versionId}\n      description: Description for the example registered model\n  examplePredictionEnvironment:\n    type: datarobot:PredictionEnvironment\n    properties:\n      description: Description for the example prediction environment\n      platform: datarobotServerless\n  exampleDeployment:\n    type: datarobot:Deployment\n    properties:\n      label: An example deployment\n      predictionEnvironmentId: ${examplePredictionEnvironment.id}\n      registeredModelVersionId: ${exampleRegisteredModel.versionId}\noutputs:\n  datarobotDeploymentId: ${exampleDeployment.id}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
             "properties": {
+                "associationIdSettings": {
+                    "$ref": "#/types/datarobot:index/DeploymentAssociationIdSettings:DeploymentAssociationIdSettings",
+                    "description": "Association ID settings for this Deployment.\n"
+                },
+                "biasAndFairnessSettings": {
+                    "$ref": "#/types/datarobot:index/DeploymentBiasAndFairnessSettings:DeploymentBiasAndFairnessSettings",
+                    "description": "Bias and fairness settings for the Deployment.\n"
+                },
+                "challengerModelsSettings": {
+                    "$ref": "#/types/datarobot:index/DeploymentChallengerModelsSettings:DeploymentChallengerModelsSettings",
+                    "description": "The challenger models settings for the Deployment.\n"
+                },
+                "challengerReplaySettings": {
+                    "$ref": "#/types/datarobot:index/DeploymentChallengerReplaySettings:DeploymentChallengerReplaySettings",
+                    "description": "The challenger replay settings for the Deployment.\n"
+                },
+                "driftTrackingSettings": {
+                    "$ref": "#/types/datarobot:index/DeploymentDriftTrackingSettings:DeploymentDriftTrackingSettings",
+                    "description": "The drift tracking settings for the Deployment.\n"
+                },
+                "healthSettings": {
+                    "$ref": "#/types/datarobot:index/DeploymentHealthSettings:DeploymentHealthSettings",
+                    "description": "The health settings for this Deployment.\n"
+                },
+                "importance": {
+                    "type": "string",
+                    "description": "The importance of the Deployment.\n"
+                },
                 "label": {
                     "type": "string",
                     "description": "The label of the Deployment.\n"
@@ -1244,21 +1664,70 @@
                     "type": "string",
                     "description": "The ID of the predication environment for this Deployment.\n"
                 },
+                "predictionIntervalsSettings": {
+                    "$ref": "#/types/datarobot:index/DeploymentPredictionIntervalsSettings:DeploymentPredictionIntervalsSettings",
+                    "description": "The prediction intervals settings for this Deployment.\n"
+                },
+                "predictionWarningSettings": {
+                    "$ref": "#/types/datarobot:index/DeploymentPredictionWarningSettings:DeploymentPredictionWarningSettings",
+                    "description": "The prediction warning settings for the Deployment.\n"
+                },
+                "predictionsByForecastDateSettings": {
+                    "$ref": "#/types/datarobot:index/DeploymentPredictionsByForecastDateSettings:DeploymentPredictionsByForecastDateSettings",
+                    "description": "The predictions by forecase date settings for the Deployment.\n"
+                },
+                "predictionsDataCollectionSettings": {
+                    "$ref": "#/types/datarobot:index/DeploymentPredictionsDataCollectionSettings:DeploymentPredictionsDataCollectionSettings",
+                    "description": "The predictions data collection settings for the Deployment.\n"
+                },
+                "predictionsSettings": {
+                    "$ref": "#/types/datarobot:index/DeploymentPredictionsSettings:DeploymentPredictionsSettings",
+                    "description": "Settings for the predictions.\n"
+                },
                 "registeredModelVersionId": {
                     "type": "string",
                     "description": "The ID of the registered model version for this Deployment.\n"
                 },
-                "settings": {
-                    "$ref": "#/types/datarobot:index/DeploymentSettings:DeploymentSettings",
-                    "description": "The settings for the Deployment.\n"
+                "segmentAnalysisSettings": {
+                    "$ref": "#/types/datarobot:index/DeploymentSegmentAnalysisSettings:DeploymentSegmentAnalysisSettings",
+                    "description": "The segment analysis settings for the Deployment.\n"
                 }
             },
             "required": [
+                "importance",
                 "label",
                 "predictionEnvironmentId",
                 "registeredModelVersionId"
             ],
             "inputProperties": {
+                "associationIdSettings": {
+                    "$ref": "#/types/datarobot:index/DeploymentAssociationIdSettings:DeploymentAssociationIdSettings",
+                    "description": "Association ID settings for this Deployment.\n"
+                },
+                "biasAndFairnessSettings": {
+                    "$ref": "#/types/datarobot:index/DeploymentBiasAndFairnessSettings:DeploymentBiasAndFairnessSettings",
+                    "description": "Bias and fairness settings for the Deployment.\n"
+                },
+                "challengerModelsSettings": {
+                    "$ref": "#/types/datarobot:index/DeploymentChallengerModelsSettings:DeploymentChallengerModelsSettings",
+                    "description": "The challenger models settings for the Deployment.\n"
+                },
+                "challengerReplaySettings": {
+                    "$ref": "#/types/datarobot:index/DeploymentChallengerReplaySettings:DeploymentChallengerReplaySettings",
+                    "description": "The challenger replay settings for the Deployment.\n"
+                },
+                "driftTrackingSettings": {
+                    "$ref": "#/types/datarobot:index/DeploymentDriftTrackingSettings:DeploymentDriftTrackingSettings",
+                    "description": "The drift tracking settings for the Deployment.\n"
+                },
+                "healthSettings": {
+                    "$ref": "#/types/datarobot:index/DeploymentHealthSettings:DeploymentHealthSettings",
+                    "description": "The health settings for this Deployment.\n"
+                },
+                "importance": {
+                    "type": "string",
+                    "description": "The importance of the Deployment.\n"
+                },
                 "label": {
                     "type": "string",
                     "description": "The label of the Deployment.\n"
@@ -1267,13 +1736,33 @@
                     "type": "string",
                     "description": "The ID of the predication environment for this Deployment.\n"
                 },
+                "predictionIntervalsSettings": {
+                    "$ref": "#/types/datarobot:index/DeploymentPredictionIntervalsSettings:DeploymentPredictionIntervalsSettings",
+                    "description": "The prediction intervals settings for this Deployment.\n"
+                },
+                "predictionWarningSettings": {
+                    "$ref": "#/types/datarobot:index/DeploymentPredictionWarningSettings:DeploymentPredictionWarningSettings",
+                    "description": "The prediction warning settings for the Deployment.\n"
+                },
+                "predictionsByForecastDateSettings": {
+                    "$ref": "#/types/datarobot:index/DeploymentPredictionsByForecastDateSettings:DeploymentPredictionsByForecastDateSettings",
+                    "description": "The predictions by forecase date settings for the Deployment.\n"
+                },
+                "predictionsDataCollectionSettings": {
+                    "$ref": "#/types/datarobot:index/DeploymentPredictionsDataCollectionSettings:DeploymentPredictionsDataCollectionSettings",
+                    "description": "The predictions data collection settings for the Deployment.\n"
+                },
+                "predictionsSettings": {
+                    "$ref": "#/types/datarobot:index/DeploymentPredictionsSettings:DeploymentPredictionsSettings",
+                    "description": "Settings for the predictions.\n"
+                },
                 "registeredModelVersionId": {
                     "type": "string",
                     "description": "The ID of the registered model version for this Deployment.\n"
                 },
-                "settings": {
-                    "$ref": "#/types/datarobot:index/DeploymentSettings:DeploymentSettings",
-                    "description": "The settings for the Deployment.\n"
+                "segmentAnalysisSettings": {
+                    "$ref": "#/types/datarobot:index/DeploymentSegmentAnalysisSettings:DeploymentSegmentAnalysisSettings",
+                    "description": "The segment analysis settings for the Deployment.\n"
                 }
             },
             "requiredInputs": [
@@ -1284,6 +1773,34 @@
             "stateInputs": {
                 "description": "Input properties used for looking up and filtering Deployment resources.\n",
                 "properties": {
+                    "associationIdSettings": {
+                        "$ref": "#/types/datarobot:index/DeploymentAssociationIdSettings:DeploymentAssociationIdSettings",
+                        "description": "Association ID settings for this Deployment.\n"
+                    },
+                    "biasAndFairnessSettings": {
+                        "$ref": "#/types/datarobot:index/DeploymentBiasAndFairnessSettings:DeploymentBiasAndFairnessSettings",
+                        "description": "Bias and fairness settings for the Deployment.\n"
+                    },
+                    "challengerModelsSettings": {
+                        "$ref": "#/types/datarobot:index/DeploymentChallengerModelsSettings:DeploymentChallengerModelsSettings",
+                        "description": "The challenger models settings for the Deployment.\n"
+                    },
+                    "challengerReplaySettings": {
+                        "$ref": "#/types/datarobot:index/DeploymentChallengerReplaySettings:DeploymentChallengerReplaySettings",
+                        "description": "The challenger replay settings for the Deployment.\n"
+                    },
+                    "driftTrackingSettings": {
+                        "$ref": "#/types/datarobot:index/DeploymentDriftTrackingSettings:DeploymentDriftTrackingSettings",
+                        "description": "The drift tracking settings for the Deployment.\n"
+                    },
+                    "healthSettings": {
+                        "$ref": "#/types/datarobot:index/DeploymentHealthSettings:DeploymentHealthSettings",
+                        "description": "The health settings for this Deployment.\n"
+                    },
+                    "importance": {
+                        "type": "string",
+                        "description": "The importance of the Deployment.\n"
+                    },
                     "label": {
                         "type": "string",
                         "description": "The label of the Deployment.\n"
@@ -1292,13 +1809,33 @@
                         "type": "string",
                         "description": "The ID of the predication environment for this Deployment.\n"
                     },
+                    "predictionIntervalsSettings": {
+                        "$ref": "#/types/datarobot:index/DeploymentPredictionIntervalsSettings:DeploymentPredictionIntervalsSettings",
+                        "description": "The prediction intervals settings for this Deployment.\n"
+                    },
+                    "predictionWarningSettings": {
+                        "$ref": "#/types/datarobot:index/DeploymentPredictionWarningSettings:DeploymentPredictionWarningSettings",
+                        "description": "The prediction warning settings for the Deployment.\n"
+                    },
+                    "predictionsByForecastDateSettings": {
+                        "$ref": "#/types/datarobot:index/DeploymentPredictionsByForecastDateSettings:DeploymentPredictionsByForecastDateSettings",
+                        "description": "The predictions by forecase date settings for the Deployment.\n"
+                    },
+                    "predictionsDataCollectionSettings": {
+                        "$ref": "#/types/datarobot:index/DeploymentPredictionsDataCollectionSettings:DeploymentPredictionsDataCollectionSettings",
+                        "description": "The predictions data collection settings for the Deployment.\n"
+                    },
+                    "predictionsSettings": {
+                        "$ref": "#/types/datarobot:index/DeploymentPredictionsSettings:DeploymentPredictionsSettings",
+                        "description": "Settings for the predictions.\n"
+                    },
                     "registeredModelVersionId": {
                         "type": "string",
                         "description": "The ID of the registered model version for this Deployment.\n"
                     },
-                    "settings": {
-                        "$ref": "#/types/datarobot:index/DeploymentSettings:DeploymentSettings",
-                        "description": "The settings for the Deployment.\n"
+                    "segmentAnalysisSettings": {
+                        "$ref": "#/types/datarobot:index/DeploymentSegmentAnalysisSettings:DeploymentSegmentAnalysisSettings",
+                        "description": "The segment analysis settings for the Deployment.\n"
                     }
                 },
                 "type": "object"
@@ -1524,11 +2061,31 @@
             }
         },
         "datarobot:index/predictionEnvironment:PredictionEnvironment": {
-            "description": "prediction environment\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@datarobot/pulumi-datarobot\";\n\nconst example = new datarobot.PredictionEnvironment(\"example\", {\n    description: \"Description for the example prediction environment\",\n    platform: \"datarobotServerless\",\n});\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample = datarobot.PredictionEnvironment(\"example\",\n    description=\"Description for the example prediction environment\",\n    platform=\"datarobotServerless\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = Pulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Datarobot.PredictionEnvironment(\"example\", new()\n    {\n        Description = \"Description for the example prediction environment\",\n        Platform = \"datarobotServerless\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := datarobot.NewPredictionEnvironment(ctx, \"example\", \u0026datarobot.PredictionEnvironmentArgs{\n\t\t\tDescription: pulumi.String(\"Description for the example prediction environment\"),\n\t\t\tPlatform:    pulumi.String(\"datarobotServerless\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.PredictionEnvironment;\nimport com.pulumi.datarobot.PredictionEnvironmentArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new PredictionEnvironment(\"example\", PredictionEnvironmentArgs.builder()\n            .description(\"Description for the example prediction environment\")\n            .platform(\"datarobotServerless\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: datarobot:PredictionEnvironment\n    properties:\n      description: Description for the example prediction environment\n      platform: datarobotServerless\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "description": "prediction environment\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@datarobot/pulumi-datarobot\";\n\nconst example = new datarobot.PredictionEnvironment(\"example\", {\n    batchJobsMaxConcurrent: 20,\n    batchJobsPriority: \"high\",\n    credentialId: \"\u003ccredential_id\u003e\",\n    datastoreId: \"\u003cdatastore_id\u003e\",\n    description: \"Description for the example prediction environment\",\n    managedBy: \"selfManaged\",\n    platform: \"datarobotServerless\",\n    supportedModelFormats: [\n        \"datarobot\",\n        \"customModel\",\n    ],\n});\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample = datarobot.PredictionEnvironment(\"example\",\n    batch_jobs_max_concurrent=20,\n    batch_jobs_priority=\"high\",\n    credential_id=\"\u003ccredential_id\u003e\",\n    datastore_id=\"\u003cdatastore_id\u003e\",\n    description=\"Description for the example prediction environment\",\n    managed_by=\"selfManaged\",\n    platform=\"datarobotServerless\",\n    supported_model_formats=[\n        \"datarobot\",\n        \"customModel\",\n    ])\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = Pulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Datarobot.PredictionEnvironment(\"example\", new()\n    {\n        BatchJobsMaxConcurrent = 20,\n        BatchJobsPriority = \"high\",\n        CredentialId = \"\u003ccredential_id\u003e\",\n        DatastoreId = \"\u003cdatastore_id\u003e\",\n        Description = \"Description for the example prediction environment\",\n        ManagedBy = \"selfManaged\",\n        Platform = \"datarobotServerless\",\n        SupportedModelFormats = new[]\n        {\n            \"datarobot\",\n            \"customModel\",\n        },\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := datarobot.NewPredictionEnvironment(ctx, \"example\", \u0026datarobot.PredictionEnvironmentArgs{\n\t\t\tBatchJobsMaxConcurrent: pulumi.Int(20),\n\t\t\tBatchJobsPriority:      pulumi.String(\"high\"),\n\t\t\tCredentialId:           pulumi.String(\"\u003ccredential_id\u003e\"),\n\t\t\tDatastoreId:            pulumi.String(\"\u003cdatastore_id\u003e\"),\n\t\t\tDescription:            pulumi.String(\"Description for the example prediction environment\"),\n\t\t\tManagedBy:              pulumi.String(\"selfManaged\"),\n\t\t\tPlatform:               pulumi.String(\"datarobotServerless\"),\n\t\t\tSupportedModelFormats: pulumi.StringArray{\n\t\t\t\tpulumi.String(\"datarobot\"),\n\t\t\t\tpulumi.String(\"customModel\"),\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.PredictionEnvironment;\nimport com.pulumi.datarobot.PredictionEnvironmentArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new PredictionEnvironment(\"example\", PredictionEnvironmentArgs.builder()\n            .batchJobsMaxConcurrent(20)\n            .batchJobsPriority(\"high\")\n            .credentialId(\"\u003ccredential_id\u003e\")\n            .datastoreId(\"\u003cdatastore_id\u003e\")\n            .description(\"Description for the example prediction environment\")\n            .managedBy(\"selfManaged\")\n            .platform(\"datarobotServerless\")\n            .supportedModelFormats(            \n                \"datarobot\",\n                \"customModel\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: datarobot:PredictionEnvironment\n    properties:\n      # Optional\n      batchJobsMaxConcurrent: 20\n      batchJobsPriority: high\n      credentialId: \u003ccredential_id\u003e\n      datastoreId: \u003cdatastore_id\u003e\n      description: Description for the example prediction environment\n      managedBy: selfManaged\n      platform: datarobotServerless\n      supportedModelFormats:\n        - datarobot\n        - customModel\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
             "properties": {
+                "batchJobsMaxConcurrent": {
+                    "type": "integer",
+                    "description": "The maximum number of concurrent batch prediction jobs.\n"
+                },
+                "batchJobsPriority": {
+                    "type": "string",
+                    "description": "The importance of batch jobs.\n"
+                },
+                "credentialId": {
+                    "type": "string",
+                    "description": "The ID of the credential associated with the data connection. Only applicable for external prediction environments managed by DataRobot.\n"
+                },
+                "datastoreId": {
+                    "type": "string",
+                    "description": "The ID of the data store connection configuration. Only applicable for external prediction environments managed by DataRobot.\n"
+                },
                 "description": {
                     "type": "string",
                     "description": "The description of the Prediction Environment.\n"
+                },
+                "managedBy": {
+                    "type": "string",
+                    "description": "Determines if the prediction environment should be managed by the management agent, datarobot, or self-managed. Self-managed by default.\n"
                 },
                 "name": {
                     "type": "string",
@@ -1537,16 +2094,44 @@
                 "platform": {
                     "type": "string",
                     "description": "The platform for the Prediction Environment.\n"
+                },
+                "supportedModelFormats": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The list of supported model formats.\n"
                 }
             },
             "required": [
+                "managedBy",
                 "name",
                 "platform"
             ],
             "inputProperties": {
+                "batchJobsMaxConcurrent": {
+                    "type": "integer",
+                    "description": "The maximum number of concurrent batch prediction jobs.\n"
+                },
+                "batchJobsPriority": {
+                    "type": "string",
+                    "description": "The importance of batch jobs.\n"
+                },
+                "credentialId": {
+                    "type": "string",
+                    "description": "The ID of the credential associated with the data connection. Only applicable for external prediction environments managed by DataRobot.\n"
+                },
+                "datastoreId": {
+                    "type": "string",
+                    "description": "The ID of the data store connection configuration. Only applicable for external prediction environments managed by DataRobot.\n"
+                },
                 "description": {
                     "type": "string",
                     "description": "The description of the Prediction Environment.\n"
+                },
+                "managedBy": {
+                    "type": "string",
+                    "description": "Determines if the prediction environment should be managed by the management agent, datarobot, or self-managed. Self-managed by default.\n"
                 },
                 "name": {
                     "type": "string",
@@ -1555,6 +2140,13 @@
                 "platform": {
                     "type": "string",
                     "description": "The platform for the Prediction Environment.\n"
+                },
+                "supportedModelFormats": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The list of supported model formats.\n"
                 }
             },
             "requiredInputs": [
@@ -1563,9 +2155,29 @@
             "stateInputs": {
                 "description": "Input properties used for looking up and filtering PredictionEnvironment resources.\n",
                 "properties": {
+                    "batchJobsMaxConcurrent": {
+                        "type": "integer",
+                        "description": "The maximum number of concurrent batch prediction jobs.\n"
+                    },
+                    "batchJobsPriority": {
+                        "type": "string",
+                        "description": "The importance of batch jobs.\n"
+                    },
+                    "credentialId": {
+                        "type": "string",
+                        "description": "The ID of the credential associated with the data connection. Only applicable for external prediction environments managed by DataRobot.\n"
+                    },
+                    "datastoreId": {
+                        "type": "string",
+                        "description": "The ID of the data store connection configuration. Only applicable for external prediction environments managed by DataRobot.\n"
+                    },
                     "description": {
                         "type": "string",
                         "description": "The description of the Prediction Environment.\n"
+                    },
+                    "managedBy": {
+                        "type": "string",
+                        "description": "Determines if the prediction environment should be managed by the management agent, datarobot, or self-managed. Self-managed by default.\n"
                     },
                     "name": {
                         "type": "string",
@@ -1574,6 +2186,13 @@
                     "platform": {
                         "type": "string",
                         "description": "The platform for the Prediction Environment.\n"
+                    },
+                    "supportedModelFormats": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "The list of supported model formats.\n"
                     }
                 },
                 "type": "object"
@@ -1921,7 +2540,7 @@
             }
         },
         "datarobot:index/vectorDatabase:VectorDatabase": {
-            "description": "Vector database\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@datarobot/pulumi-datarobot\";\n\nconst exampleUseCase = new datarobot.UseCase(\"exampleUseCase\", {description: \"Description for the example use case\"});\nconst exampleDatasetFromFile = new datarobot.DatasetFromFile(\"exampleDatasetFromFile\", {\n    sourceFile: \"[Path to file to upload]\",\n    useCaseId: exampleUseCase.id,\n});\nconst exampleVectorDatabase = new datarobot.VectorDatabase(\"exampleVectorDatabase\", {\n    useCaseId: exampleUseCase.id,\n    datasetId: exampleDatasetFromFile.id,\n});\n// Optional\n// chunking_parameters = {\n//   chunk_overlap_percentage = 0\n//   chunk_size               = 512\n//   chunking_method          = \"recursive\"\n//   embedding_model          = \"jinaai/jina-embedding-t-en-v1\"\n//   separators               = [\"\\n\", \" \"]\n// }\nexport const exampleId = exampleVectorDatabase.id;\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample_use_case = datarobot.UseCase(\"exampleUseCase\", description=\"Description for the example use case\")\nexample_dataset_from_file = datarobot.DatasetFromFile(\"exampleDatasetFromFile\",\n    source_file=\"[Path to file to upload]\",\n    use_case_id=example_use_case.id)\nexample_vector_database = datarobot.VectorDatabase(\"exampleVectorDatabase\",\n    use_case_id=example_use_case.id,\n    dataset_id=example_dataset_from_file.id)\n# Optional\n# chunking_parameters = {\n#   chunk_overlap_percentage = 0\n#   chunk_size               = 512\n#   chunking_method          = \"recursive\"\n#   embedding_model          = \"jinaai/jina-embedding-t-en-v1\"\n#   separators               = [\"\\n\", \" \"]\n# }\npulumi.export(\"exampleId\", example_vector_database.id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = Pulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var exampleUseCase = new Datarobot.UseCase(\"exampleUseCase\", new()\n    {\n        Description = \"Description for the example use case\",\n    });\n\n    var exampleDatasetFromFile = new Datarobot.DatasetFromFile(\"exampleDatasetFromFile\", new()\n    {\n        SourceFile = \"[Path to file to upload]\",\n        UseCaseId = exampleUseCase.Id,\n    });\n\n    var exampleVectorDatabase = new Datarobot.VectorDatabase(\"exampleVectorDatabase\", new()\n    {\n        UseCaseId = exampleUseCase.Id,\n        DatasetId = exampleDatasetFromFile.Id,\n    });\n\n    // Optional\n    // chunking_parameters = {\n    //   chunk_overlap_percentage = 0\n    //   chunk_size               = 512\n    //   chunking_method          = \"recursive\"\n    //   embedding_model          = \"jinaai/jina-embedding-t-en-v1\"\n    //   separators               = [\"\\n\", \" \"]\n    // }\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"exampleId\"] = exampleVectorDatabase.Id,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texampleUseCase, err := datarobot.NewUseCase(ctx, \"exampleUseCase\", \u0026datarobot.UseCaseArgs{\n\t\t\tDescription: pulumi.String(\"Description for the example use case\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\texampleDatasetFromFile, err := datarobot.NewDatasetFromFile(ctx, \"exampleDatasetFromFile\", \u0026datarobot.DatasetFromFileArgs{\n\t\t\tSourceFile: pulumi.String(\"[Path to file to upload]\"),\n\t\t\tUseCaseId:  exampleUseCase.ID(),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\texampleVectorDatabase, err := datarobot.NewVectorDatabase(ctx, \"exampleVectorDatabase\", \u0026datarobot.VectorDatabaseArgs{\n\t\t\tUseCaseId: exampleUseCase.ID(),\n\t\t\tDatasetId: exampleDatasetFromFile.ID(),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"exampleId\", exampleVectorDatabase.ID())\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.UseCase;\nimport com.pulumi.datarobot.UseCaseArgs;\nimport com.pulumi.datarobot.DatasetFromFile;\nimport com.pulumi.datarobot.DatasetFromFileArgs;\nimport com.pulumi.datarobot.VectorDatabase;\nimport com.pulumi.datarobot.VectorDatabaseArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var exampleUseCase = new UseCase(\"exampleUseCase\", UseCaseArgs.builder()\n            .description(\"Description for the example use case\")\n            .build());\n\n        var exampleDatasetFromFile = new DatasetFromFile(\"exampleDatasetFromFile\", DatasetFromFileArgs.builder()\n            .sourceFile(\"[Path to file to upload]\")\n            .useCaseId(exampleUseCase.id())\n            .build());\n\n        var exampleVectorDatabase = new VectorDatabase(\"exampleVectorDatabase\", VectorDatabaseArgs.builder()\n            .useCaseId(exampleUseCase.id())\n            .datasetId(exampleDatasetFromFile.id())\n            .build());\n\n        // Optional\n        // chunking_parameters = {\n        //   chunk_overlap_percentage = 0\n        //   chunk_size               = 512\n        //   chunking_method          = \"recursive\"\n        //   embedding_model          = \"jinaai/jina-embedding-t-en-v1\"\n        //   separators               = [\"\\n\", \" \"]\n        // }\n        ctx.export(\"exampleId\", exampleVectorDatabase.id());\n    }\n}\n```\n```yaml\nresources:\n  exampleUseCase:\n    type: datarobot:UseCase\n    properties:\n      description: Description for the example use case\n  exampleDatasetFromFile:\n    type: datarobot:DatasetFromFile\n    properties:\n      sourceFile: '[Path to file to upload]'\n      useCaseId: ${exampleUseCase.id}\n  exampleVectorDatabase:\n    type: datarobot:VectorDatabase\n    properties:\n      useCaseId: ${exampleUseCase.id}\n      datasetId: ${exampleDatasetFromFile.id}\noutputs:\n  exampleId: ${exampleVectorDatabase.id}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "description": "Vector database\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@datarobot/pulumi-datarobot\";\n\nconst exampleUseCase = new datarobot.UseCase(\"exampleUseCase\", {description: \"Description for the example use case\"});\nconst exampleDatasetFromFile = new datarobot.DatasetFromFile(\"exampleDatasetFromFile\", {\n    filePath: \"[Path to file to upload]\",\n    useCaseIds: [exampleUseCase.id],\n});\nconst exampleVectorDatabase = new datarobot.VectorDatabase(\"exampleVectorDatabase\", {\n    useCaseId: exampleUseCase.id,\n    datasetId: exampleDatasetFromFile.id,\n});\n// Optional\n// chunking_parameters = {\n//   chunk_overlap_percentage = 0\n//   chunk_size               = 512\n//   chunking_method          = \"recursive\"\n//   embedding_model          = \"jinaai/jina-embedding-t-en-v1\"\n//   separators               = [\"\\n\", \" \"]\n// }\nexport const exampleId = exampleVectorDatabase.id;\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample_use_case = datarobot.UseCase(\"exampleUseCase\", description=\"Description for the example use case\")\nexample_dataset_from_file = datarobot.DatasetFromFile(\"exampleDatasetFromFile\",\n    file_path=\"[Path to file to upload]\",\n    use_case_ids=[example_use_case.id])\nexample_vector_database = datarobot.VectorDatabase(\"exampleVectorDatabase\",\n    use_case_id=example_use_case.id,\n    dataset_id=example_dataset_from_file.id)\n# Optional\n# chunking_parameters = {\n#   chunk_overlap_percentage = 0\n#   chunk_size               = 512\n#   chunking_method          = \"recursive\"\n#   embedding_model          = \"jinaai/jina-embedding-t-en-v1\"\n#   separators               = [\"\\n\", \" \"]\n# }\npulumi.export(\"exampleId\", example_vector_database.id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = Pulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var exampleUseCase = new Datarobot.UseCase(\"exampleUseCase\", new()\n    {\n        Description = \"Description for the example use case\",\n    });\n\n    var exampleDatasetFromFile = new Datarobot.DatasetFromFile(\"exampleDatasetFromFile\", new()\n    {\n        FilePath = \"[Path to file to upload]\",\n        UseCaseIds = new[]\n        {\n            exampleUseCase.Id,\n        },\n    });\n\n    var exampleVectorDatabase = new Datarobot.VectorDatabase(\"exampleVectorDatabase\", new()\n    {\n        UseCaseId = exampleUseCase.Id,\n        DatasetId = exampleDatasetFromFile.Id,\n    });\n\n    // Optional\n    // chunking_parameters = {\n    //   chunk_overlap_percentage = 0\n    //   chunk_size               = 512\n    //   chunking_method          = \"recursive\"\n    //   embedding_model          = \"jinaai/jina-embedding-t-en-v1\"\n    //   separators               = [\"\\n\", \" \"]\n    // }\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"exampleId\"] = exampleVectorDatabase.Id,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texampleUseCase, err := datarobot.NewUseCase(ctx, \"exampleUseCase\", \u0026datarobot.UseCaseArgs{\n\t\t\tDescription: pulumi.String(\"Description for the example use case\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\texampleDatasetFromFile, err := datarobot.NewDatasetFromFile(ctx, \"exampleDatasetFromFile\", \u0026datarobot.DatasetFromFileArgs{\n\t\t\tFilePath: pulumi.String(\"[Path to file to upload]\"),\n\t\t\tUseCaseIds: pulumi.StringArray{\n\t\t\t\texampleUseCase.ID(),\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\texampleVectorDatabase, err := datarobot.NewVectorDatabase(ctx, \"exampleVectorDatabase\", \u0026datarobot.VectorDatabaseArgs{\n\t\t\tUseCaseId: exampleUseCase.ID(),\n\t\t\tDatasetId: exampleDatasetFromFile.ID(),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"exampleId\", exampleVectorDatabase.ID())\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.UseCase;\nimport com.pulumi.datarobot.UseCaseArgs;\nimport com.pulumi.datarobot.DatasetFromFile;\nimport com.pulumi.datarobot.DatasetFromFileArgs;\nimport com.pulumi.datarobot.VectorDatabase;\nimport com.pulumi.datarobot.VectorDatabaseArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var exampleUseCase = new UseCase(\"exampleUseCase\", UseCaseArgs.builder()\n            .description(\"Description for the example use case\")\n            .build());\n\n        var exampleDatasetFromFile = new DatasetFromFile(\"exampleDatasetFromFile\", DatasetFromFileArgs.builder()\n            .filePath(\"[Path to file to upload]\")\n            .useCaseIds(exampleUseCase.id())\n            .build());\n\n        var exampleVectorDatabase = new VectorDatabase(\"exampleVectorDatabase\", VectorDatabaseArgs.builder()\n            .useCaseId(exampleUseCase.id())\n            .datasetId(exampleDatasetFromFile.id())\n            .build());\n\n        // Optional\n        // chunking_parameters = {\n        //   chunk_overlap_percentage = 0\n        //   chunk_size               = 512\n        //   chunking_method          = \"recursive\"\n        //   embedding_model          = \"jinaai/jina-embedding-t-en-v1\"\n        //   separators               = [\"\\n\", \" \"]\n        // }\n        ctx.export(\"exampleId\", exampleVectorDatabase.id());\n    }\n}\n```\n```yaml\nresources:\n  exampleUseCase:\n    type: datarobot:UseCase\n    properties:\n      description: Description for the example use case\n  exampleDatasetFromFile:\n    type: datarobot:DatasetFromFile\n    properties:\n      filePath: '[Path to file to upload]'\n      useCaseIds:\n        - ${exampleUseCase.id}\n  exampleVectorDatabase:\n    type: datarobot:VectorDatabase\n    properties:\n      useCaseId: ${exampleUseCase.id}\n      datasetId: ${exampleDatasetFromFile.id}\noutputs:\n  exampleId: ${exampleVectorDatabase.id}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
             "properties": {
                 "chunkingParameters": {
                     "$ref": "#/types/datarobot:index/VectorDatabaseChunkingParameters:VectorDatabaseChunkingParameters",

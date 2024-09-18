@@ -14,79 +14,112 @@ __all__ = ['DatasetFromFileArgs', 'DatasetFromFile']
 @pulumi.input_type
 class DatasetFromFileArgs:
     def __init__(__self__, *,
-                 source_file: pulumi.Input[str],
-                 use_case_id: pulumi.Input[str]):
+                 file_path: pulumi.Input[str],
+                 name: Optional[pulumi.Input[str]] = None,
+                 use_case_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         The set of arguments for constructing a DatasetFromFile resource.
-        :param pulumi.Input[str] source_file: The path to the file to upload.
-        :param pulumi.Input[str] use_case_id: The id of the Use Case.
+        :param pulumi.Input[str] file_path: The path to the file to upload.
+        :param pulumi.Input[str] name: The name of the Dataset. Defaults to the file name.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] use_case_ids: The list of Use Case IDs to add the Dataset to.
         """
-        pulumi.set(__self__, "source_file", source_file)
-        pulumi.set(__self__, "use_case_id", use_case_id)
+        pulumi.set(__self__, "file_path", file_path)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if use_case_ids is not None:
+            pulumi.set(__self__, "use_case_ids", use_case_ids)
 
     @property
-    @pulumi.getter(name="sourceFile")
-    def source_file(self) -> pulumi.Input[str]:
+    @pulumi.getter(name="filePath")
+    def file_path(self) -> pulumi.Input[str]:
         """
         The path to the file to upload.
         """
-        return pulumi.get(self, "source_file")
+        return pulumi.get(self, "file_path")
 
-    @source_file.setter
-    def source_file(self, value: pulumi.Input[str]):
-        pulumi.set(self, "source_file", value)
+    @file_path.setter
+    def file_path(self, value: pulumi.Input[str]):
+        pulumi.set(self, "file_path", value)
 
     @property
-    @pulumi.getter(name="useCaseId")
-    def use_case_id(self) -> pulumi.Input[str]:
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
         """
-        The id of the Use Case.
+        The name of the Dataset. Defaults to the file name.
         """
-        return pulumi.get(self, "use_case_id")
+        return pulumi.get(self, "name")
 
-    @use_case_id.setter
-    def use_case_id(self, value: pulumi.Input[str]):
-        pulumi.set(self, "use_case_id", value)
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter(name="useCaseIds")
+    def use_case_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        The list of Use Case IDs to add the Dataset to.
+        """
+        return pulumi.get(self, "use_case_ids")
+
+    @use_case_ids.setter
+    def use_case_ids(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "use_case_ids", value)
 
 
 @pulumi.input_type
 class _DatasetFromFileState:
     def __init__(__self__, *,
-                 source_file: Optional[pulumi.Input[str]] = None,
-                 use_case_id: Optional[pulumi.Input[str]] = None):
+                 file_path: Optional[pulumi.Input[str]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 use_case_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         Input properties used for looking up and filtering DatasetFromFile resources.
-        :param pulumi.Input[str] source_file: The path to the file to upload.
-        :param pulumi.Input[str] use_case_id: The id of the Use Case.
+        :param pulumi.Input[str] file_path: The path to the file to upload.
+        :param pulumi.Input[str] name: The name of the Dataset. Defaults to the file name.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] use_case_ids: The list of Use Case IDs to add the Dataset to.
         """
-        if source_file is not None:
-            pulumi.set(__self__, "source_file", source_file)
-        if use_case_id is not None:
-            pulumi.set(__self__, "use_case_id", use_case_id)
+        if file_path is not None:
+            pulumi.set(__self__, "file_path", file_path)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if use_case_ids is not None:
+            pulumi.set(__self__, "use_case_ids", use_case_ids)
 
     @property
-    @pulumi.getter(name="sourceFile")
-    def source_file(self) -> Optional[pulumi.Input[str]]:
+    @pulumi.getter(name="filePath")
+    def file_path(self) -> Optional[pulumi.Input[str]]:
         """
         The path to the file to upload.
         """
-        return pulumi.get(self, "source_file")
+        return pulumi.get(self, "file_path")
 
-    @source_file.setter
-    def source_file(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "source_file", value)
+    @file_path.setter
+    def file_path(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "file_path", value)
 
     @property
-    @pulumi.getter(name="useCaseId")
-    def use_case_id(self) -> Optional[pulumi.Input[str]]:
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
         """
-        The id of the Use Case.
+        The name of the Dataset. Defaults to the file name.
         """
-        return pulumi.get(self, "use_case_id")
+        return pulumi.get(self, "name")
 
-    @use_case_id.setter
-    def use_case_id(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "use_case_id", value)
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter(name="useCaseIds")
+    def use_case_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        The list of Use Case IDs to add the Dataset to.
+        """
+        return pulumi.get(self, "use_case_ids")
+
+    @use_case_ids.setter
+    def use_case_ids(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "use_case_ids", value)
 
 
 class DatasetFromFile(pulumi.CustomResource):
@@ -94,8 +127,9 @@ class DatasetFromFile(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 source_file: Optional[pulumi.Input[str]] = None,
-                 use_case_id: Optional[pulumi.Input[str]] = None,
+                 file_path: Optional[pulumi.Input[str]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 use_case_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         """
         Data set from file
@@ -107,15 +141,16 @@ class DatasetFromFile(pulumi.CustomResource):
         import pulumi_datarobot as datarobot
 
         example = datarobot.DatasetFromFile("example",
-            source_file="[Path to file to upload]",
-            use_case_id=datarobot_use_case["example"]["id"])
+            file_path="[Path to file to upload]",
+            use_case_ids=[datarobot_use_case["example"]["id"]])
         pulumi.export("exampleId", example.id)
         ```
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] source_file: The path to the file to upload.
-        :param pulumi.Input[str] use_case_id: The id of the Use Case.
+        :param pulumi.Input[str] file_path: The path to the file to upload.
+        :param pulumi.Input[str] name: The name of the Dataset. Defaults to the file name.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] use_case_ids: The list of Use Case IDs to add the Dataset to.
         """
         ...
     @overload
@@ -133,8 +168,8 @@ class DatasetFromFile(pulumi.CustomResource):
         import pulumi_datarobot as datarobot
 
         example = datarobot.DatasetFromFile("example",
-            source_file="[Path to file to upload]",
-            use_case_id=datarobot_use_case["example"]["id"])
+            file_path="[Path to file to upload]",
+            use_case_ids=[datarobot_use_case["example"]["id"]])
         pulumi.export("exampleId", example.id)
         ```
 
@@ -153,8 +188,9 @@ class DatasetFromFile(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 source_file: Optional[pulumi.Input[str]] = None,
-                 use_case_id: Optional[pulumi.Input[str]] = None,
+                 file_path: Optional[pulumi.Input[str]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 use_case_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -164,12 +200,11 @@ class DatasetFromFile(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = DatasetFromFileArgs.__new__(DatasetFromFileArgs)
 
-            if source_file is None and not opts.urn:
-                raise TypeError("Missing required property 'source_file'")
-            __props__.__dict__["source_file"] = source_file
-            if use_case_id is None and not opts.urn:
-                raise TypeError("Missing required property 'use_case_id'")
-            __props__.__dict__["use_case_id"] = use_case_id
+            if file_path is None and not opts.urn:
+                raise TypeError("Missing required property 'file_path'")
+            __props__.__dict__["file_path"] = file_path
+            __props__.__dict__["name"] = name
+            __props__.__dict__["use_case_ids"] = use_case_ids
         super(DatasetFromFile, __self__).__init__(
             'datarobot:index/datasetFromFile:DatasetFromFile',
             resource_name,
@@ -180,8 +215,9 @@ class DatasetFromFile(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            source_file: Optional[pulumi.Input[str]] = None,
-            use_case_id: Optional[pulumi.Input[str]] = None) -> 'DatasetFromFile':
+            file_path: Optional[pulumi.Input[str]] = None,
+            name: Optional[pulumi.Input[str]] = None,
+            use_case_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None) -> 'DatasetFromFile':
         """
         Get an existing DatasetFromFile resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -189,30 +225,40 @@ class DatasetFromFile(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] source_file: The path to the file to upload.
-        :param pulumi.Input[str] use_case_id: The id of the Use Case.
+        :param pulumi.Input[str] file_path: The path to the file to upload.
+        :param pulumi.Input[str] name: The name of the Dataset. Defaults to the file name.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] use_case_ids: The list of Use Case IDs to add the Dataset to.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = _DatasetFromFileState.__new__(_DatasetFromFileState)
 
-        __props__.__dict__["source_file"] = source_file
-        __props__.__dict__["use_case_id"] = use_case_id
+        __props__.__dict__["file_path"] = file_path
+        __props__.__dict__["name"] = name
+        __props__.__dict__["use_case_ids"] = use_case_ids
         return DatasetFromFile(resource_name, opts=opts, __props__=__props__)
 
     @property
-    @pulumi.getter(name="sourceFile")
-    def source_file(self) -> pulumi.Output[str]:
+    @pulumi.getter(name="filePath")
+    def file_path(self) -> pulumi.Output[str]:
         """
         The path to the file to upload.
         """
-        return pulumi.get(self, "source_file")
+        return pulumi.get(self, "file_path")
 
     @property
-    @pulumi.getter(name="useCaseId")
-    def use_case_id(self) -> pulumi.Output[str]:
+    @pulumi.getter
+    def name(self) -> pulumi.Output[str]:
         """
-        The id of the Use Case.
+        The name of the Dataset. Defaults to the file name.
         """
-        return pulumi.get(self, "use_case_id")
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="useCaseIds")
+    def use_case_ids(self) -> pulumi.Output[Optional[Sequence[str]]]:
+        """
+        The list of Use Case IDs to add the Dataset to.
+        """
+        return pulumi.get(self, "use_case_ids")
 

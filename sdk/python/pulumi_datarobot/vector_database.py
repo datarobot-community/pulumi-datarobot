@@ -176,8 +176,8 @@ class VectorDatabase(pulumi.CustomResource):
 
         example_use_case = datarobot.UseCase("exampleUseCase", description="Description for the example use case")
         example_dataset_from_file = datarobot.DatasetFromFile("exampleDatasetFromFile",
-            source_file="[Path to file to upload]",
-            use_case_id=example_use_case.id)
+            file_path="[Path to file to upload]",
+            use_case_ids=[example_use_case.id])
         example_vector_database = datarobot.VectorDatabase("exampleVectorDatabase",
             use_case_id=example_use_case.id,
             dataset_id=example_dataset_from_file.id)
@@ -216,8 +216,8 @@ class VectorDatabase(pulumi.CustomResource):
 
         example_use_case = datarobot.UseCase("exampleUseCase", description="Description for the example use case")
         example_dataset_from_file = datarobot.DatasetFromFile("exampleDatasetFromFile",
-            source_file="[Path to file to upload]",
-            use_case_id=example_use_case.id)
+            file_path="[Path to file to upload]",
+            use_case_ids=[example_use_case.id])
         example_vector_database = datarobot.VectorDatabase("exampleVectorDatabase",
             use_case_id=example_use_case.id,
             dataset_id=example_dataset_from_file.id)

@@ -29,8 +29,11 @@ namespace Pulumi.Datarobot
     /// 
     ///     var exampleDatasetFromFile = new Datarobot.DatasetFromFile("exampleDatasetFromFile", new()
     ///     {
-    ///         SourceFile = "[Path to file to upload]",
-    ///         UseCaseId = exampleUseCase.Id,
+    ///         FilePath = "[Path to file to upload]",
+    ///         UseCaseIds = new[]
+    ///         {
+    ///             exampleUseCase.Id,
+    ///         },
     ///     });
     /// 
     ///     var exampleVectorDatabase = new Datarobot.VectorDatabase("exampleVectorDatabase", new()
