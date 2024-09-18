@@ -35,6 +35,11 @@ export type DatasetFromFile = import("./datasetFromFile").DatasetFromFile;
 export const DatasetFromFile: typeof import("./datasetFromFile").DatasetFromFile = null as any;
 utilities.lazyLoad(exports, ["DatasetFromFile"], () => require("./datasetFromFile"));
 
+export { DatasetFromUrlArgs, DatasetFromUrlState } from "./datasetFromUrl";
+export type DatasetFromUrl = import("./datasetFromUrl").DatasetFromUrl;
+export const DatasetFromUrl: typeof import("./datasetFromUrl").DatasetFromUrl = null as any;
+utilities.lazyLoad(exports, ["DatasetFromUrl"], () => require("./datasetFromUrl"));
+
 export { DeploymentArgs, DeploymentState } from "./deployment";
 export type Deployment = import("./deployment").Deployment;
 export const Deployment: typeof import("./deployment").Deployment = null as any;
@@ -121,6 +126,8 @@ const _module = {
                 return new CustomModel(name, <any>undefined, { urn })
             case "datarobot:index/datasetFromFile:DatasetFromFile":
                 return new DatasetFromFile(name, <any>undefined, { urn })
+            case "datarobot:index/datasetFromUrl:DatasetFromUrl":
+                return new DatasetFromUrl(name, <any>undefined, { urn })
             case "datarobot:index/deployment:Deployment":
                 return new Deployment(name, <any>undefined, { urn })
             case "datarobot:index/googleCloudCredential:GoogleCloudCredential":
@@ -152,6 +159,7 @@ pulumi.runtime.registerResourceModule("datarobot", "index/basicCredential", _mod
 pulumi.runtime.registerResourceModule("datarobot", "index/customApplication", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/customModel", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/datasetFromFile", _module)
+pulumi.runtime.registerResourceModule("datarobot", "index/datasetFromUrl", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/deployment", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/googleCloudCredential", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/llmBlueprint", _module)
