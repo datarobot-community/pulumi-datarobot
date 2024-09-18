@@ -21,6 +21,7 @@
         "customApplication.ts",
         "customModel.ts",
         "datasetFromFile.ts",
+        "datasetFromUrl.ts",
         "deployment.ts",
         "getGlobalModel.ts",
         "googleCloudCredential.ts",

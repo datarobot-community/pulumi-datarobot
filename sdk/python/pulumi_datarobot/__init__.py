@@ -11,6 +11,7 @@ from .basic_credential import *
 from .custom_application import *
 from .custom_model import *
 from .dataset_from_file import *
+from .dataset_from_url import *
 from .deployment import *
 from .get_global_model import *
 from .google_cloud_credential import *
@@ -82,6 +83,14 @@ _utilities.register(
   "fqn": "pulumi_datarobot",
   "classes": {
    "datarobot:index/datasetFromFile:DatasetFromFile": "DatasetFromFile"
+  }
+ },
+ {
+  "pkg": "datarobot",
+  "mod": "index/datasetFromUrl",
+  "fqn": "pulumi_datarobot",
+  "classes": {
+   "datarobot:index/datasetFromUrl:DatasetFromUrl": "DatasetFromUrl"
   }
  },
  {
