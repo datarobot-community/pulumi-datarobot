@@ -51,7 +51,7 @@ resources:
 {{% /choosable %}}
 
 {{% /choosable %}}
-{{% choosable language yaml %}}
+{{% choosable language typescript %}}
 
 ```typescript
 import * as datarobot from "@datarobot/pulumi-datarobot";
