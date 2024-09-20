@@ -6,8 +6,9 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
+using Pulumi;
 
-namespace Pulumi.Datarobot
+namespace DataRobotPulumi.Datarobot
 {
     /// <summary>
     /// Basic Credential
@@ -18,7 +19,7 @@ namespace Pulumi.Datarobot
     /// using System.Collections.Generic;
     /// using System.Linq;
     /// using Pulumi;
-    /// using Datarobot = Pulumi.Datarobot;
+    /// using Datarobot = DataRobotPulumi.Datarobot;
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {

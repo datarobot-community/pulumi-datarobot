@@ -4,7 +4,7 @@
 using System;
 using System.Collections.Immutable;
 
-namespace Pulumi.Datarobot
+namespace DataRobotPulumi.Datarobot
 {
     public static class Config
     {

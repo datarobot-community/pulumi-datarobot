@@ -4,14 +4,54 @@ meta_desc: Information on how to install the DataRobot provider.
 layout: package
 ---
 
-## Installation
+## Installing
 
-The Pulumi `DataRobot` provider is available as a package in all Pulumi languages:
+This package is available for several languages/platforms:
 
 - Python: [`pulumi-datarobot`](https://pypi.org/project/pulumi-datarobot/)
 - JavaScript/TypeScript: [`@datarobot/pulumi-datarobot`](https://www.npmjs.com/package/@datarobot/pulumi-datarobot)
 - Go: [`github.com/datarobot-community/pulumi-datarobot/sdk`](https://pkg.go.dev/github.com/datarobot-community/pulumi-datarobot/sdk)
-- .NET: _coming soon_
+- .NET: [`DataRobotPulumi.Datarobot`](https://www.nuget.org/packages/DataRobotPulumi.Datarobot)
+
+### Python
+
+To use from Python, install using `pip`:
+
+```bash
+pip install pulumi_datarobot
+```
+
+### Javscript/Typescript
+
+To use from JavaScript or TypeScript in Node.js, install using either `npm`:
+
+```bash
+npm install @datarobot/pulumi-datarobot
+```
+
+or `yarn`:
+
+```bash
+yarn add @datarobot/pulumi-datarobot
+```
+
+### Go
+
+```
+go get github.com/datarobot-community/pulumi-datarobot/sdk/go/...
+```
+
+### .NET
+
+To use from .NET, install using `dotnet add package`:
+
+```
+dotnet add package DataRobotPulumi.Datarobot
+```
+
+### YAML
+
+No install necessary, just run `pulumi up`.
 
 ### Provider Binary
 

@@ -8,6 +8,11 @@ To use this package, please install the [Pulumi CLI](https://pulumi.io/) first.
 
 This package is available for several languages/platforms:
 
+- Python: [`pulumi-datarobot`](https://pypi.org/project/pulumi-datarobot/)
+- JavaScript/TypeScript: [`@datarobot/pulumi-datarobot`](https://www.npmjs.com/package/@datarobot/pulumi-datarobot)
+- Go: [`github.com/datarobot-community/pulumi-datarobot/sdk`](https://pkg.go.dev/github.com/datarobot-community/pulumi-datarobot/sdk)
+- .NET: [`DataRobotPulumi.Datarobot`](https://www.nuget.org/packages/DataRobotPulumi.Datarobot)
+
 ### Python
 
 To use from Python, install using `pip`:
@@ -32,11 +37,17 @@ yarn add @datarobot/pulumi-datarobot
 
 ### Go
 
-Coming soon...
+```
+go get github.com/datarobot-community/pulumi-datarobot/sdk/go/...
+```
 
 ### .NET
 
-Coming soon...
+To use from .NET, install using `dotnet add package`:
+
+```
+dotnet add package DataRobotPulumi.Datarobot
+```
 
 ### YAML
 
