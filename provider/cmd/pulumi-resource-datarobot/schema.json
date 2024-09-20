@@ -11,7 +11,7 @@
     "license": "Apache-2.0",
     "attribution": "This Pulumi package is based on the [`datarobot` Terraform Provider](https://github.com/datarobot-community/terraform-provider-datarobot).",
     "repository": "https://github.com/datarobot-community/pulumi-datarobot",
-    "logoUrl": "https://www.datarobot.com/wp-content/uploads/2021/08/DataRobot-logo-color.svg",
+    "logoUrl": "https://www.datarobot.com/wp-content/uploads/2024/03/mascot-blue.png",
     "pluginDownloadURL": "github://api.github.com/datarobot-community/pulumi-datarobot",
     "publisher": "DataRobot, Inc.",
     "meta": {
