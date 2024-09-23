@@ -10,9 +10,6 @@ The `DataRobot` provider for Pulumi can be used to provision any of the resource
 
 {{< chooser language "python,yaml,typescript" >}}
 
-{{% /choosable %}}
-
-{{% /choosable %}}
 {{% choosable language python %}}
 
 ```python
@@ -32,7 +29,6 @@ playground = datarobot.Playground("playground",
 
 {{% /choosable %}}
 
-{{% /choosable %}}
 {{% choosable language yaml %}}
 
 ```yaml
@@ -50,7 +46,6 @@ resources:
 
 {{% /choosable %}}
 
-{{% /choosable %}}
 {{% choosable language typescript %}}
 
 ```typescript
