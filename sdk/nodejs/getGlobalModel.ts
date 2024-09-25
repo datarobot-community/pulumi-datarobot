@@ -19,7 +19,6 @@ import * as utilities from "./utilities";
  * ```
  */
 export function getGlobalModel(args: GetGlobalModelArgs, opts?: pulumi.InvokeOptions): Promise<GetGlobalModelResult> {
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("datarobot:index/getGlobalModel:getGlobalModel", {
         "name": args.name,
@@ -68,7 +67,10 @@ export interface GetGlobalModelResult {
  * ```
  */
 export function getGlobalModelOutput(args: GetGlobalModelOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetGlobalModelResult> {
-    return pulumi.output(args).apply((a: any) => getGlobalModel(a, opts))
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("datarobot:index/getGlobalModel:getGlobalModel", {
+        "name": args.name,
+    }, opts);
 }
 
 /**
