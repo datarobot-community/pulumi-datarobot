@@ -36,13 +36,17 @@ export class GoogleCloudCredential extends pulumi.CustomResource {
     }
 
     /**
+     * The GCP key in JSON format.
+     */
+    public readonly gcpKey!: pulumi.Output<string | undefined>;
+    /**
+     * The file that has the GCP key. Cannot be used with `gcpKey`.
+     */
+    public readonly gcpKeyFile!: pulumi.Output<string | undefined>;
+    /**
      * The name of the Google Cloud Credential.
      */
     public readonly name!: pulumi.Output<string>;
-    /**
-     * The source file of the Google Cloud Credential.
-     */
-    public readonly sourceFile!: pulumi.Output<string>;
 
     /**
      * Create a GoogleCloudCredential resource with the given unique name, arguments, and options.
@@ -51,23 +55,24 @@ export class GoogleCloudCredential extends pulumi.CustomResource {
      * @param args The arguments to use to populate this resource's properties.
      * @param opts A bag of options that control this resource's behavior.
      */
-    constructor(name: string, args: GoogleCloudCredentialArgs, opts?: pulumi.CustomResourceOptions)
+    constructor(name: string, args?: GoogleCloudCredentialArgs, opts?: pulumi.CustomResourceOptions)
     constructor(name: string, argsOrState?: GoogleCloudCredentialArgs | GoogleCloudCredentialState, opts?: pulumi.CustomResourceOptions) {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as GoogleCloudCredentialState | undefined;
+            resourceInputs["gcpKey"] = state ? state.gcpKey : undefined;
+            resourceInputs["gcpKeyFile"] = state ? state.gcpKeyFile : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
-            resourceInputs["sourceFile"] = state ? state.sourceFile : undefined;
         } else {
             const args = argsOrState as GoogleCloudCredentialArgs | undefined;
-            if ((!args || args.sourceFile === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'sourceFile'");
-            }
+            resourceInputs["gcpKey"] = args?.gcpKey ? pulumi.secret(args.gcpKey) : undefined;
+            resourceInputs["gcpKeyFile"] = args ? args.gcpKeyFile : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
-            resourceInputs["sourceFile"] = args ? args.sourceFile : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["gcpKey"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(GoogleCloudCredential.__pulumiType, name, resourceInputs, opts);
     }
 }
@@ -77,13 +82,17 @@ export class GoogleCloudCredential extends pulumi.CustomResource {
  */
 export interface GoogleCloudCredentialState {
     /**
+     * The GCP key in JSON format.
+     */
+    gcpKey?: pulumi.Input<string>;
+    /**
+     * The file that has the GCP key. Cannot be used with `gcpKey`.
+     */
+    gcpKeyFile?: pulumi.Input<string>;
+    /**
      * The name of the Google Cloud Credential.
      */
     name?: pulumi.Input<string>;
-    /**
-     * The source file of the Google Cloud Credential.
-     */
-    sourceFile?: pulumi.Input<string>;
 }
 
 /**
@@ -91,11 +100,15 @@ export interface GoogleCloudCredentialState {
  */
 export interface GoogleCloudCredentialArgs {
     /**
+     * The GCP key in JSON format.
+     */
+    gcpKey?: pulumi.Input<string>;
+    /**
+     * The file that has the GCP key. Cannot be used with `gcpKey`.
+     */
+    gcpKeyFile?: pulumi.Input<string>;
+    /**
      * The name of the Google Cloud Credential.
      */
     name?: pulumi.Input<string>;
-    /**
-     * The source file of the Google Cloud Credential.
-     */
-    sourceFile: pulumi.Input<string>;
 }

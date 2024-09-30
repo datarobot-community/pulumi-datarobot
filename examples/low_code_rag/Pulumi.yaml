@@ -42,7 +42,7 @@ resources:
     type: datarobot:GoogleCloudCredential
     properties:
       name: Google Cloud Service Account
-      sourceFile: google_credentials.json
+      gcpKeyFile: google_credentials.json
 
   datarobotCustomModel:
     type: datarobot:CustomModel

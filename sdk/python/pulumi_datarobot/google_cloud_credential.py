@@ -14,28 +14,45 @@ __all__ = ['GoogleCloudCredentialArgs', 'GoogleCloudCredential']
 @pulumi.input_type
 class GoogleCloudCredentialArgs:
     def __init__(__self__, *,
-                 source_file: pulumi.Input[str],
+                 gcp_key: Optional[pulumi.Input[str]] = None,
+                 gcp_key_file: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a GoogleCloudCredential resource.
-        :param pulumi.Input[str] source_file: The source file of the Google Cloud Credential.
+        :param pulumi.Input[str] gcp_key: The GCP key in JSON format.
+        :param pulumi.Input[str] gcp_key_file: The file that has the GCP key. Cannot be used with `gcp_key`.
         :param pulumi.Input[str] name: The name of the Google Cloud Credential.
         """
-        pulumi.set(__self__, "source_file", source_file)
+        if gcp_key is not None:
+            pulumi.set(__self__, "gcp_key", gcp_key)
+        if gcp_key_file is not None:
+            pulumi.set(__self__, "gcp_key_file", gcp_key_file)
         if name is not None:
             pulumi.set(__self__, "name", name)
 
     @property
-    @pulumi.getter(name="sourceFile")
-    def source_file(self) -> pulumi.Input[str]:
+    @pulumi.getter(name="gcpKey")
+    def gcp_key(self) -> Optional[pulumi.Input[str]]:
         """
-        The source file of the Google Cloud Credential.
+        The GCP key in JSON format.
         """
-        return pulumi.get(self, "source_file")
+        return pulumi.get(self, "gcp_key")
 
-    @source_file.setter
-    def source_file(self, value: pulumi.Input[str]):
-        pulumi.set(self, "source_file", value)
+    @gcp_key.setter
+    def gcp_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "gcp_key", value)
+
+    @property
+    @pulumi.getter(name="gcpKeyFile")
+    def gcp_key_file(self) -> Optional[pulumi.Input[str]]:
+        """
+        The file that has the GCP key. Cannot be used with `gcp_key`.
+        """
+        return pulumi.get(self, "gcp_key_file")
+
+    @gcp_key_file.setter
+    def gcp_key_file(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "gcp_key_file", value)
 
     @property
     @pulumi.getter
@@ -53,17 +70,45 @@ class GoogleCloudCredentialArgs:
 @pulumi.input_type
 class _GoogleCloudCredentialState:
     def __init__(__self__, *,
-                 name: Optional[pulumi.Input[str]] = None,
-                 source_file: Optional[pulumi.Input[str]] = None):
+                 gcp_key: Optional[pulumi.Input[str]] = None,
+                 gcp_key_file: Optional[pulumi.Input[str]] = None,
+                 name: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering GoogleCloudCredential resources.
+        :param pulumi.Input[str] gcp_key: The GCP key in JSON format.
+        :param pulumi.Input[str] gcp_key_file: The file that has the GCP key. Cannot be used with `gcp_key`.
         :param pulumi.Input[str] name: The name of the Google Cloud Credential.
-        :param pulumi.Input[str] source_file: The source file of the Google Cloud Credential.
         """
+        if gcp_key is not None:
+            pulumi.set(__self__, "gcp_key", gcp_key)
+        if gcp_key_file is not None:
+            pulumi.set(__self__, "gcp_key_file", gcp_key_file)
         if name is not None:
             pulumi.set(__self__, "name", name)
-        if source_file is not None:
-            pulumi.set(__self__, "source_file", source_file)
+
+    @property
+    @pulumi.getter(name="gcpKey")
+    def gcp_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        The GCP key in JSON format.
+        """
+        return pulumi.get(self, "gcp_key")
+
+    @gcp_key.setter
+    def gcp_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "gcp_key", value)
+
+    @property
+    @pulumi.getter(name="gcpKeyFile")
+    def gcp_key_file(self) -> Optional[pulumi.Input[str]]:
+        """
+        The file that has the GCP key. Cannot be used with `gcp_key`.
+        """
+        return pulumi.get(self, "gcp_key_file")
+
+    @gcp_key_file.setter
+    def gcp_key_file(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "gcp_key_file", value)
 
     @property
     @pulumi.getter
@@ -77,40 +122,30 @@ class _GoogleCloudCredentialState:
     def name(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "name", value)
 
-    @property
-    @pulumi.getter(name="sourceFile")
-    def source_file(self) -> Optional[pulumi.Input[str]]:
-        """
-        The source file of the Google Cloud Credential.
-        """
-        return pulumi.get(self, "source_file")
-
-    @source_file.setter
-    def source_file(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "source_file", value)
-
 
 class GoogleCloudCredential(pulumi.CustomResource):
     @overload
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 gcp_key: Optional[pulumi.Input[str]] = None,
+                 gcp_key_file: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
-                 source_file: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
         Api Token Credential
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[str] gcp_key: The GCP key in JSON format.
+        :param pulumi.Input[str] gcp_key_file: The file that has the GCP key. Cannot be used with `gcp_key`.
         :param pulumi.Input[str] name: The name of the Google Cloud Credential.
-        :param pulumi.Input[str] source_file: The source file of the Google Cloud Credential.
         """
         ...
     @overload
     def __init__(__self__,
                  resource_name: str,
-                 args: GoogleCloudCredentialArgs,
+                 args: Optional[GoogleCloudCredentialArgs] = None,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Api Token Credential
@@ -130,8 +165,9 @@ class GoogleCloudCredential(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 gcp_key: Optional[pulumi.Input[str]] = None,
+                 gcp_key_file: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
-                 source_file: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -141,10 +177,11 @@ class GoogleCloudCredential(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = GoogleCloudCredentialArgs.__new__(GoogleCloudCredentialArgs)
 
+            __props__.__dict__["gcp_key"] = None if gcp_key is None else pulumi.Output.secret(gcp_key)
+            __props__.__dict__["gcp_key_file"] = gcp_key_file
             __props__.__dict__["name"] = name
-            if source_file is None and not opts.urn:
-                raise TypeError("Missing required property 'source_file'")
-            __props__.__dict__["source_file"] = source_file
+        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["gcpKey"])
+        opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(GoogleCloudCredential, __self__).__init__(
             'datarobot:index/googleCloudCredential:GoogleCloudCredential',
             resource_name,
@@ -155,8 +192,9 @@ class GoogleCloudCredential(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            name: Optional[pulumi.Input[str]] = None,
-            source_file: Optional[pulumi.Input[str]] = None) -> 'GoogleCloudCredential':
+            gcp_key: Optional[pulumi.Input[str]] = None,
+            gcp_key_file: Optional[pulumi.Input[str]] = None,
+            name: Optional[pulumi.Input[str]] = None) -> 'GoogleCloudCredential':
         """
         Get an existing GoogleCloudCredential resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -164,16 +202,34 @@ class GoogleCloudCredential(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[str] gcp_key: The GCP key in JSON format.
+        :param pulumi.Input[str] gcp_key_file: The file that has the GCP key. Cannot be used with `gcp_key`.
         :param pulumi.Input[str] name: The name of the Google Cloud Credential.
-        :param pulumi.Input[str] source_file: The source file of the Google Cloud Credential.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = _GoogleCloudCredentialState.__new__(_GoogleCloudCredentialState)
 
+        __props__.__dict__["gcp_key"] = gcp_key
+        __props__.__dict__["gcp_key_file"] = gcp_key_file
         __props__.__dict__["name"] = name
-        __props__.__dict__["source_file"] = source_file
         return GoogleCloudCredential(resource_name, opts=opts, __props__=__props__)
+
+    @property
+    @pulumi.getter(name="gcpKey")
+    def gcp_key(self) -> pulumi.Output[Optional[str]]:
+        """
+        The GCP key in JSON format.
+        """
+        return pulumi.get(self, "gcp_key")
+
+    @property
+    @pulumi.getter(name="gcpKeyFile")
+    def gcp_key_file(self) -> pulumi.Output[Optional[str]]:
+        """
+        The file that has the GCP key. Cannot be used with `gcp_key`.
+        """
+        return pulumi.get(self, "gcp_key_file")
 
     @property
     @pulumi.getter
@@ -182,12 +238,4 @@ class GoogleCloudCredential(pulumi.CustomResource):
         The name of the Google Cloud Credential.
         """
         return pulumi.get(self, "name")
-
-    @property
-    @pulumi.getter(name="sourceFile")
-    def source_file(self) -> pulumi.Output[str]:
-        """
-        The source file of the Google Cloud Credential.
-        """
-        return pulumi.get(self, "source_file")
 

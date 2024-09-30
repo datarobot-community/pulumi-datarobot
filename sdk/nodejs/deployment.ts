@@ -19,7 +19,7 @@ import * as utilities from "./utilities";
  *     description: "Description for the example custom model",
  *     targetType: "Binary",
  *     targetName: "my_label",
- *     baseEnvironmentName: "[GenAI] Python 3.11 with Moderations",
+ *     baseEnvironmentId: "65f9b27eab986d30d4c64268",
  *     files: ["example.py"],
  * });
  * const exampleRegisteredModel = new datarobot.RegisteredModel("exampleRegisteredModel", {

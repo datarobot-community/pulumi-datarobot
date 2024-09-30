@@ -42,7 +42,7 @@ namespace DataRobotPulumi.Datarobot
     ///         },
     ///         TargetType = "Binary",
     ///         TargetName = "my_label",
-    ///         BaseEnvironmentName = "[GenAI] Python 3.11 with Moderations",
+    ///         BaseEnvironmentId = "65f9b27eab986d30d4c64268",
     ///     });
     /// 
     ///     // Optional
@@ -94,12 +94,6 @@ namespace DataRobotPulumi.Datarobot
         /// </summary>
         [Output("baseEnvironmentId")]
         public Output<string> BaseEnvironmentId { get; private set; } = null!;
-
-        /// <summary>
-        /// The name of the base environment for the Custom Model.
-        /// </summary>
-        [Output("baseEnvironmentName")]
-        public Output<string?> BaseEnvironmentName { get; private set; } = null!;
 
         /// <summary>
         /// The ID of the base environment version for the Custom Model.
@@ -225,7 +219,7 @@ namespace DataRobotPulumi.Datarobot
         /// The target type of the Custom Model.
         /// </summary>
         [Output("targetType")]
-        public Output<string?> TargetType { get; private set; } = null!;
+        public Output<string> TargetType { get; private set; } = null!;
 
         /// <summary>
         /// The name of the partition column in the training dataset assigned to the Custom Model.
@@ -309,12 +303,6 @@ namespace DataRobotPulumi.Datarobot
         /// </summary>
         [Input("baseEnvironmentId")]
         public Input<string>? BaseEnvironmentId { get; set; }
-
-        /// <summary>
-        /// The name of the base environment for the Custom Model.
-        /// </summary>
-        [Input("baseEnvironmentName")]
-        public Input<string>? BaseEnvironmentName { get; set; }
 
         /// <summary>
         /// The ID of the base environment version for the Custom Model.
@@ -485,12 +473,6 @@ namespace DataRobotPulumi.Datarobot
         /// </summary>
         [Input("baseEnvironmentId")]
         public Input<string>? BaseEnvironmentId { get; set; }
-
-        /// <summary>
-        /// The name of the base environment for the Custom Model.
-        /// </summary>
-        [Input("baseEnvironmentName")]
-        public Input<string>? BaseEnvironmentName { get; set; }
 
         /// <summary>
         /// The ID of the base environment version for the Custom Model.
