@@ -28,7 +28,7 @@ namespace DataRobotPulumi.Datarobot
     ///         Description = "Description for the example custom model",
     ///         TargetType = "Binary",
     ///         TargetName = "my_label",
-    ///         BaseEnvironmentName = "[GenAI] Python 3.11 with Moderations",
+    ///         BaseEnvironmentId = "65f9b27eab986d30d4c64268",
     ///         Files = new[]
     ///         {
     ///             "example.py",

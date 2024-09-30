@@ -121,7 +121,7 @@ func Provider() tfbridge.ProviderInfo {
 		//
 		// You may host a logo on a domain you control or add an SVG logo for your package
 		// in your repository and use the raw content URL for that file as your logo URL.
-		LogoURL: "https://www.datarobot.com/wp-content/uploads/2024/03/mascot-blue.png",
+		LogoURL: "https://raw.githubusercontent.com/datarobot-community/pulumi-datarobot/main/assets/datarobot-logo.png",
 		// PluginDownloadURL is an optional URL used to download the Provider
 		// for use in Pulumi programs
 		// e.g https://github.com/org/pulumi-provider-name/releases/

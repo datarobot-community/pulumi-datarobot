@@ -17,7 +17,6 @@ __all__ = ['CustomModelArgs', 'CustomModel']
 class CustomModelArgs:
     def __init__(__self__, *,
                  base_environment_id: Optional[pulumi.Input[str]] = None,
-                 base_environment_name: Optional[pulumi.Input[str]] = None,
                  base_environment_version_id: Optional[pulumi.Input[str]] = None,
                  class_labels: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  class_labels_file: Optional[pulumi.Input[str]] = None,
@@ -43,7 +42,6 @@ class CustomModelArgs:
         """
         The set of arguments for constructing a CustomModel resource.
         :param pulumi.Input[str] base_environment_id: The ID of the base environment for the Custom Model.
-        :param pulumi.Input[str] base_environment_name: The name of the base environment for the Custom Model.
         :param pulumi.Input[str] base_environment_version_id: The ID of the base environment version for the Custom Model.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] class_labels: Class labels for multiclass classification. Cannot be used with class*labels*file.
         :param pulumi.Input[str] class_labels_file: Path to file containing newline separated class labels for multiclass classification. Cannot be used with class_labels.
@@ -69,8 +67,6 @@ class CustomModelArgs:
         """
         if base_environment_id is not None:
             pulumi.set(__self__, "base_environment_id", base_environment_id)
-        if base_environment_name is not None:
-            pulumi.set(__self__, "base_environment_name", base_environment_name)
         if base_environment_version_id is not None:
             pulumi.set(__self__, "base_environment_version_id", base_environment_version_id)
         if class_labels is not None:
@@ -127,18 +123,6 @@ class CustomModelArgs:
     @base_environment_id.setter
     def base_environment_id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "base_environment_id", value)
-
-    @property
-    @pulumi.getter(name="baseEnvironmentName")
-    def base_environment_name(self) -> Optional[pulumi.Input[str]]:
-        """
-        The name of the base environment for the Custom Model.
-        """
-        return pulumi.get(self, "base_environment_name")
-
-    @base_environment_name.setter
-    def base_environment_name(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "base_environment_name", value)
 
     @property
     @pulumi.getter(name="baseEnvironmentVersionId")
@@ -409,7 +393,6 @@ class CustomModelArgs:
 class _CustomModelState:
     def __init__(__self__, *,
                  base_environment_id: Optional[pulumi.Input[str]] = None,
-                 base_environment_name: Optional[pulumi.Input[str]] = None,
                  base_environment_version_id: Optional[pulumi.Input[str]] = None,
                  class_labels: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  class_labels_file: Optional[pulumi.Input[str]] = None,
@@ -439,7 +422,6 @@ class _CustomModelState:
         """
         Input properties used for looking up and filtering CustomModel resources.
         :param pulumi.Input[str] base_environment_id: The ID of the base environment for the Custom Model.
-        :param pulumi.Input[str] base_environment_name: The name of the base environment for the Custom Model.
         :param pulumi.Input[str] base_environment_version_id: The ID of the base environment version for the Custom Model.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] class_labels: Class labels for multiclass classification. Cannot be used with class*labels*file.
         :param pulumi.Input[str] class_labels_file: Path to file containing newline separated class labels for multiclass classification. Cannot be used with class_labels.
@@ -469,8 +451,6 @@ class _CustomModelState:
         """
         if base_environment_id is not None:
             pulumi.set(__self__, "base_environment_id", base_environment_id)
-        if base_environment_name is not None:
-            pulumi.set(__self__, "base_environment_name", base_environment_name)
         if base_environment_version_id is not None:
             pulumi.set(__self__, "base_environment_version_id", base_environment_version_id)
         if class_labels is not None:
@@ -535,18 +515,6 @@ class _CustomModelState:
     @base_environment_id.setter
     def base_environment_id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "base_environment_id", value)
-
-    @property
-    @pulumi.getter(name="baseEnvironmentName")
-    def base_environment_name(self) -> Optional[pulumi.Input[str]]:
-        """
-        The name of the base environment for the Custom Model.
-        """
-        return pulumi.get(self, "base_environment_name")
-
-    @base_environment_name.setter
-    def base_environment_name(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "base_environment_name", value)
 
     @property
     @pulumi.getter(name="baseEnvironmentVersionId")
@@ -867,7 +835,6 @@ class CustomModel(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  base_environment_id: Optional[pulumi.Input[str]] = None,
-                 base_environment_name: Optional[pulumi.Input[str]] = None,
                  base_environment_version_id: Optional[pulumi.Input[str]] = None,
                  class_labels: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  class_labels_file: Optional[pulumi.Input[str]] = None,
@@ -914,7 +881,7 @@ class CustomModel(pulumi.CustomResource):
             ],
             target_type="Binary",
             target_name="my_label",
-            base_environment_name="[GenAI] Python 3.11 with Moderations")
+            base_environment_id="65f9b27eab986d30d4c64268")
         # Optional
         # source_remote_repositories = [
         #   {
@@ -955,7 +922,6 @@ class CustomModel(pulumi.CustomResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] base_environment_id: The ID of the base environment for the Custom Model.
-        :param pulumi.Input[str] base_environment_name: The name of the base environment for the Custom Model.
         :param pulumi.Input[str] base_environment_version_id: The ID of the base environment version for the Custom Model.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] class_labels: Class labels for multiclass classification. Cannot be used with class*labels*file.
         :param pulumi.Input[str] class_labels_file: Path to file containing newline separated class labels for multiclass classification. Cannot be used with class_labels.
@@ -1008,7 +974,7 @@ class CustomModel(pulumi.CustomResource):
             ],
             target_type="Binary",
             target_name="my_label",
-            base_environment_name="[GenAI] Python 3.11 with Moderations")
+            base_environment_id="65f9b27eab986d30d4c64268")
         # Optional
         # source_remote_repositories = [
         #   {
@@ -1062,7 +1028,6 @@ class CustomModel(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  base_environment_id: Optional[pulumi.Input[str]] = None,
-                 base_environment_name: Optional[pulumi.Input[str]] = None,
                  base_environment_version_id: Optional[pulumi.Input[str]] = None,
                  class_labels: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  class_labels_file: Optional[pulumi.Input[str]] = None,
@@ -1095,7 +1060,6 @@ class CustomModel(pulumi.CustomResource):
             __props__ = CustomModelArgs.__new__(CustomModelArgs)
 
             __props__.__dict__["base_environment_id"] = base_environment_id
-            __props__.__dict__["base_environment_name"] = base_environment_name
             __props__.__dict__["base_environment_version_id"] = base_environment_version_id
             __props__.__dict__["class_labels"] = class_labels
             __props__.__dict__["class_labels_file"] = class_labels_file
@@ -1133,7 +1097,6 @@ class CustomModel(pulumi.CustomResource):
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
             base_environment_id: Optional[pulumi.Input[str]] = None,
-            base_environment_name: Optional[pulumi.Input[str]] = None,
             base_environment_version_id: Optional[pulumi.Input[str]] = None,
             class_labels: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             class_labels_file: Optional[pulumi.Input[str]] = None,
@@ -1168,7 +1131,6 @@ class CustomModel(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] base_environment_id: The ID of the base environment for the Custom Model.
-        :param pulumi.Input[str] base_environment_name: The name of the base environment for the Custom Model.
         :param pulumi.Input[str] base_environment_version_id: The ID of the base environment version for the Custom Model.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] class_labels: Class labels for multiclass classification. Cannot be used with class*labels*file.
         :param pulumi.Input[str] class_labels_file: Path to file containing newline separated class labels for multiclass classification. Cannot be used with class_labels.
@@ -1201,7 +1163,6 @@ class CustomModel(pulumi.CustomResource):
         __props__ = _CustomModelState.__new__(_CustomModelState)
 
         __props__.__dict__["base_environment_id"] = base_environment_id
-        __props__.__dict__["base_environment_name"] = base_environment_name
         __props__.__dict__["base_environment_version_id"] = base_environment_version_id
         __props__.__dict__["class_labels"] = class_labels
         __props__.__dict__["class_labels_file"] = class_labels_file
@@ -1237,14 +1198,6 @@ class CustomModel(pulumi.CustomResource):
         The ID of the base environment for the Custom Model.
         """
         return pulumi.get(self, "base_environment_id")
-
-    @property
-    @pulumi.getter(name="baseEnvironmentName")
-    def base_environment_name(self) -> pulumi.Output[Optional[str]]:
-        """
-        The name of the base environment for the Custom Model.
-        """
-        return pulumi.get(self, "base_environment_name")
 
     @property
     @pulumi.getter(name="baseEnvironmentVersionId")
@@ -1408,7 +1361,7 @@ class CustomModel(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="targetType")
-    def target_type(self) -> pulumi.Output[Optional[str]]:
+    def target_type(self) -> pulumi.Output[str]:
         """
         The target type of the Custom Model.
         """
