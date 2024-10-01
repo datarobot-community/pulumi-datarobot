@@ -7,6 +7,9 @@
             "datarobot_application_source": {
                 "current": "datarobot:index/applicationSource:ApplicationSource",
                 "fields": {
+                    "files_hashes": {
+                        "maxItemsOne": false
+                    },
                     "runtime_parameter_values": {
                         "maxItemsOne": false
                     }
@@ -27,6 +30,9 @@
                 "current": "datarobot:index/customModel:CustomModel",
                 "fields": {
                     "class_labels": {
+                        "maxItemsOne": false
+                    },
+                    "files_hashes": {
                         "maxItemsOne": false
                     },
                     "guard_configurations": {

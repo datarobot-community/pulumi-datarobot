@@ -72,17 +72,21 @@ class _GoogleCloudCredentialState:
     def __init__(__self__, *,
                  gcp_key: Optional[pulumi.Input[str]] = None,
                  gcp_key_file: Optional[pulumi.Input[str]] = None,
+                 gcp_key_file_hash: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering GoogleCloudCredential resources.
         :param pulumi.Input[str] gcp_key: The GCP key in JSON format.
         :param pulumi.Input[str] gcp_key_file: The file that has the GCP key. Cannot be used with `gcp_key`.
+        :param pulumi.Input[str] gcp_key_file_hash: The hash of the GCP key file contents.
         :param pulumi.Input[str] name: The name of the Google Cloud Credential.
         """
         if gcp_key is not None:
             pulumi.set(__self__, "gcp_key", gcp_key)
         if gcp_key_file is not None:
             pulumi.set(__self__, "gcp_key_file", gcp_key_file)
+        if gcp_key_file_hash is not None:
+            pulumi.set(__self__, "gcp_key_file_hash", gcp_key_file_hash)
         if name is not None:
             pulumi.set(__self__, "name", name)
 
@@ -109,6 +113,18 @@ class _GoogleCloudCredentialState:
     @gcp_key_file.setter
     def gcp_key_file(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "gcp_key_file", value)
+
+    @property
+    @pulumi.getter(name="gcpKeyFileHash")
+    def gcp_key_file_hash(self) -> Optional[pulumi.Input[str]]:
+        """
+        The hash of the GCP key file contents.
+        """
+        return pulumi.get(self, "gcp_key_file_hash")
+
+    @gcp_key_file_hash.setter
+    def gcp_key_file_hash(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "gcp_key_file_hash", value)
 
     @property
     @pulumi.getter
@@ -180,6 +196,7 @@ class GoogleCloudCredential(pulumi.CustomResource):
             __props__.__dict__["gcp_key"] = None if gcp_key is None else pulumi.Output.secret(gcp_key)
             __props__.__dict__["gcp_key_file"] = gcp_key_file
             __props__.__dict__["name"] = name
+            __props__.__dict__["gcp_key_file_hash"] = None
         secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["gcpKey"])
         opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(GoogleCloudCredential, __self__).__init__(
@@ -194,6 +211,7 @@ class GoogleCloudCredential(pulumi.CustomResource):
             opts: Optional[pulumi.ResourceOptions] = None,
             gcp_key: Optional[pulumi.Input[str]] = None,
             gcp_key_file: Optional[pulumi.Input[str]] = None,
+            gcp_key_file_hash: Optional[pulumi.Input[str]] = None,
             name: Optional[pulumi.Input[str]] = None) -> 'GoogleCloudCredential':
         """
         Get an existing GoogleCloudCredential resource's state with the given name, id, and optional extra
@@ -204,6 +222,7 @@ class GoogleCloudCredential(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] gcp_key: The GCP key in JSON format.
         :param pulumi.Input[str] gcp_key_file: The file that has the GCP key. Cannot be used with `gcp_key`.
+        :param pulumi.Input[str] gcp_key_file_hash: The hash of the GCP key file contents.
         :param pulumi.Input[str] name: The name of the Google Cloud Credential.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -212,6 +231,7 @@ class GoogleCloudCredential(pulumi.CustomResource):
 
         __props__.__dict__["gcp_key"] = gcp_key
         __props__.__dict__["gcp_key_file"] = gcp_key_file
+        __props__.__dict__["gcp_key_file_hash"] = gcp_key_file_hash
         __props__.__dict__["name"] = name
         return GoogleCloudCredential(resource_name, opts=opts, __props__=__props__)
 
@@ -230,6 +250,14 @@ class GoogleCloudCredential(pulumi.CustomResource):
         The file that has the GCP key. Cannot be used with `gcp_key`.
         """
         return pulumi.get(self, "gcp_key_file")
+
+    @property
+    @pulumi.getter(name="gcpKeyFileHash")
+    def gcp_key_file_hash(self) -> pulumi.Output[str]:
+        """
+        The hash of the GCP key file contents.
+        """
+        return pulumi.get(self, "gcp_key_file_hash")
 
     @property
     @pulumi.getter

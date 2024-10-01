@@ -56,10 +56,22 @@ namespace DataRobotPulumi.Datarobot
         public Output<object?> Files { get; private set; } = null!;
 
         /// <summary>
+        /// The hash of file contents for each file in files.
+        /// </summary>
+        [Output("filesHashes")]
+        public Output<ImmutableArray<string>> FilesHashes { get; private set; } = null!;
+
+        /// <summary>
         /// The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
         /// </summary>
         [Output("folderPath")]
         public Output<string?> FolderPath { get; private set; } = null!;
+
+        /// <summary>
+        /// The hash of the folder path contents.
+        /// </summary>
+        [Output("folderPathHash")]
+        public Output<string> FolderPathHash { get; private set; } = null!;
 
         /// <summary>
         /// The name of the Application Source.
@@ -182,11 +194,29 @@ namespace DataRobotPulumi.Datarobot
         [Input("files")]
         public Input<object>? Files { get; set; }
 
+        [Input("filesHashes")]
+        private InputList<string>? _filesHashes;
+
+        /// <summary>
+        /// The hash of file contents for each file in files.
+        /// </summary>
+        public InputList<string> FilesHashes
+        {
+            get => _filesHashes ?? (_filesHashes = new InputList<string>());
+            set => _filesHashes = value;
+        }
+
         /// <summary>
         /// The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
         /// </summary>
         [Input("folderPath")]
         public Input<string>? FolderPath { get; set; }
+
+        /// <summary>
+        /// The hash of the folder path contents.
+        /// </summary>
+        [Input("folderPathHash")]
+        public Input<string>? FolderPathHash { get; set; }
 
         /// <summary>
         /// The name of the Application Source.

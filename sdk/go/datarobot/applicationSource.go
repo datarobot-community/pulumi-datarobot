@@ -52,8 +52,12 @@ type ApplicationSource struct {
 
 	// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
 	Files pulumi.AnyOutput `pulumi:"files"`
+	// The hash of file contents for each file in files.
+	FilesHashes pulumi.StringArrayOutput `pulumi:"filesHashes"`
 	// The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
 	FolderPath pulumi.StringPtrOutput `pulumi:"folderPath"`
+	// The hash of the folder path contents.
+	FolderPathHash pulumi.StringOutput `pulumi:"folderPathHash"`
 	// The name of the Application Source.
 	Name pulumi.StringOutput `pulumi:"name"`
 	// The resource settings for the Application Source.
@@ -96,8 +100,12 @@ func GetApplicationSource(ctx *pulumi.Context,
 type applicationSourceState struct {
 	// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
 	Files interface{} `pulumi:"files"`
+	// The hash of file contents for each file in files.
+	FilesHashes []string `pulumi:"filesHashes"`
 	// The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
 	FolderPath *string `pulumi:"folderPath"`
+	// The hash of the folder path contents.
+	FolderPathHash *string `pulumi:"folderPathHash"`
 	// The name of the Application Source.
 	Name *string `pulumi:"name"`
 	// The resource settings for the Application Source.
@@ -111,8 +119,12 @@ type applicationSourceState struct {
 type ApplicationSourceState struct {
 	// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
 	Files pulumi.Input
+	// The hash of file contents for each file in files.
+	FilesHashes pulumi.StringArrayInput
 	// The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
 	FolderPath pulumi.StringPtrInput
+	// The hash of the folder path contents.
+	FolderPathHash pulumi.StringPtrInput
 	// The name of the Application Source.
 	Name pulumi.StringPtrInput
 	// The resource settings for the Application Source.
@@ -246,9 +258,19 @@ func (o ApplicationSourceOutput) Files() pulumi.AnyOutput {
 	return o.ApplyT(func(v *ApplicationSource) pulumi.AnyOutput { return v.Files }).(pulumi.AnyOutput)
 }
 
+// The hash of file contents for each file in files.
+func (o ApplicationSourceOutput) FilesHashes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *ApplicationSource) pulumi.StringArrayOutput { return v.FilesHashes }).(pulumi.StringArrayOutput)
+}
+
 // The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
 func (o ApplicationSourceOutput) FolderPath() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ApplicationSource) pulumi.StringPtrOutput { return v.FolderPath }).(pulumi.StringPtrOutput)
+}
+
+// The hash of the folder path contents.
+func (o ApplicationSourceOutput) FolderPathHash() pulumi.StringOutput {
+	return o.ApplyT(func(v *ApplicationSource) pulumi.StringOutput { return v.FolderPathHash }).(pulumi.StringOutput)
 }
 
 // The name of the Application Source.

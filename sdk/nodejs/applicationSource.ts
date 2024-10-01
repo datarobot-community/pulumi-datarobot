@@ -56,9 +56,17 @@ export class ApplicationSource extends pulumi.CustomResource {
      */
     public readonly files!: pulumi.Output<any | undefined>;
     /**
+     * The hash of file contents for each file in files.
+     */
+    public /*out*/ readonly filesHashes!: pulumi.Output<string[]>;
+    /**
      * The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
      */
     public readonly folderPath!: pulumi.Output<string | undefined>;
+    /**
+     * The hash of the folder path contents.
+     */
+    public /*out*/ readonly folderPathHash!: pulumi.Output<string>;
     /**
      * The name of the Application Source.
      */
@@ -90,7 +98,9 @@ export class ApplicationSource extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as ApplicationSourceState | undefined;
             resourceInputs["files"] = state ? state.files : undefined;
+            resourceInputs["filesHashes"] = state ? state.filesHashes : undefined;
             resourceInputs["folderPath"] = state ? state.folderPath : undefined;
+            resourceInputs["folderPathHash"] = state ? state.folderPathHash : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["resourceSettings"] = state ? state.resourceSettings : undefined;
             resourceInputs["runtimeParameterValues"] = state ? state.runtimeParameterValues : undefined;
@@ -102,6 +112,8 @@ export class ApplicationSource extends pulumi.CustomResource {
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["resourceSettings"] = args ? args.resourceSettings : undefined;
             resourceInputs["runtimeParameterValues"] = args ? args.runtimeParameterValues : undefined;
+            resourceInputs["filesHashes"] = undefined /*out*/;
+            resourceInputs["folderPathHash"] = undefined /*out*/;
             resourceInputs["versionId"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -118,9 +130,17 @@ export interface ApplicationSourceState {
      */
     files?: any;
     /**
+     * The hash of file contents for each file in files.
+     */
+    filesHashes?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
      * The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
      */
     folderPath?: pulumi.Input<string>;
+    /**
+     * The hash of the folder path contents.
+     */
+    folderPathHash?: pulumi.Input<string>;
     /**
      * The name of the Application Source.
      */

@@ -43,6 +43,12 @@ namespace DataRobotPulumi.Datarobot
     public partial class DatasetFromFile : global::Pulumi.CustomResource
     {
         /// <summary>
+        /// The hash of the file contents.
+        /// </summary>
+        [Output("fileHash")]
+        public Output<string> FileHash { get; private set; } = null!;
+
+        /// <summary>
         /// The path to the file to upload.
         /// </summary>
         [Output("filePath")]
@@ -139,6 +145,12 @@ namespace DataRobotPulumi.Datarobot
 
     public sealed class DatasetFromFileState : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// The hash of the file contents.
+        /// </summary>
+        [Input("fileHash")]
+        public Input<string>? FileHash { get; set; }
+
         /// <summary>
         /// The path to the file to upload.
         /// </summary>

@@ -29,6 +29,12 @@ namespace DataRobotPulumi.Datarobot
         public Output<string?> GcpKeyFile { get; private set; } = null!;
 
         /// <summary>
+        /// The hash of the GCP key file contents.
+        /// </summary>
+        [Output("gcpKeyFileHash")]
+        public Output<string> GcpKeyFileHash { get; private set; } = null!;
+
+        /// <summary>
         /// The name of the Google Cloud Credential.
         /// </summary>
         [Output("name")]
@@ -142,6 +148,12 @@ namespace DataRobotPulumi.Datarobot
         /// </summary>
         [Input("gcpKeyFile")]
         public Input<string>? GcpKeyFile { get; set; }
+
+        /// <summary>
+        /// The hash of the GCP key file contents.
+        /// </summary>
+        [Input("gcpKeyFileHash")]
+        public Input<string>? GcpKeyFileHash { get; set; }
 
         /// <summary>
         /// The name of the Google Cloud Credential.
