@@ -46,6 +46,8 @@ import (
 type DatasetFromFile struct {
 	pulumi.CustomResourceState
 
+	// The hash of the file contents.
+	FileHash pulumi.StringOutput `pulumi:"fileHash"`
 	// The path to the file to upload.
 	FilePath pulumi.StringOutput `pulumi:"filePath"`
 	// The name of the Dataset. Defaults to the file name.
@@ -87,6 +89,8 @@ func GetDatasetFromFile(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering DatasetFromFile resources.
 type datasetFromFileState struct {
+	// The hash of the file contents.
+	FileHash *string `pulumi:"fileHash"`
 	// The path to the file to upload.
 	FilePath *string `pulumi:"filePath"`
 	// The name of the Dataset. Defaults to the file name.
@@ -96,6 +100,8 @@ type datasetFromFileState struct {
 }
 
 type DatasetFromFileState struct {
+	// The hash of the file contents.
+	FileHash pulumi.StringPtrInput
 	// The path to the file to upload.
 	FilePath pulumi.StringPtrInput
 	// The name of the Dataset. Defaults to the file name.
@@ -212,6 +218,11 @@ func (o DatasetFromFileOutput) ToDatasetFromFileOutput() DatasetFromFileOutput {
 
 func (o DatasetFromFileOutput) ToDatasetFromFileOutputWithContext(ctx context.Context) DatasetFromFileOutput {
 	return o
+}
+
+// The hash of the file contents.
+func (o DatasetFromFileOutput) FileHash() pulumi.StringOutput {
+	return o.ApplyT(func(v *DatasetFromFile) pulumi.StringOutput { return v.FileHash }).(pulumi.StringOutput)
 }
 
 // The path to the file to upload.

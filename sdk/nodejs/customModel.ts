@@ -126,9 +126,17 @@ export class CustomModel extends pulumi.CustomResource {
      */
     public readonly files!: pulumi.Output<any | undefined>;
     /**
+     * The hash of file contents for each file in files.
+     */
+    public /*out*/ readonly filesHashes!: pulumi.Output<string[]>;
+    /**
      * The path to a folder containing files to build the Custom Model. Each file in the folder is uploaded under path relative to a folder path.
      */
     public readonly folderPath!: pulumi.Output<string | undefined>;
+    /**
+     * The hash of the folder path contents.
+     */
+    public /*out*/ readonly folderPathHash!: pulumi.Output<string>;
     /**
      * The guard configurations for the Custom Model.
      */
@@ -226,7 +234,9 @@ export class CustomModel extends pulumi.CustomResource {
             resourceInputs["deploymentsCount"] = state ? state.deploymentsCount : undefined;
             resourceInputs["description"] = state ? state.description : undefined;
             resourceInputs["files"] = state ? state.files : undefined;
+            resourceInputs["filesHashes"] = state ? state.filesHashes : undefined;
             resourceInputs["folderPath"] = state ? state.folderPath : undefined;
+            resourceInputs["folderPathHash"] = state ? state.folderPathHash : undefined;
             resourceInputs["guardConfigurations"] = state ? state.guardConfigurations : undefined;
             resourceInputs["isProxy"] = state ? state.isProxy : undefined;
             resourceInputs["language"] = state ? state.language : undefined;
@@ -272,6 +282,8 @@ export class CustomModel extends pulumi.CustomResource {
             resourceInputs["trainingDataPartitionColumn"] = args ? args.trainingDataPartitionColumn : undefined;
             resourceInputs["trainingDatasetId"] = args ? args.trainingDatasetId : undefined;
             resourceInputs["deploymentsCount"] = undefined /*out*/;
+            resourceInputs["filesHashes"] = undefined /*out*/;
+            resourceInputs["folderPathHash"] = undefined /*out*/;
             resourceInputs["trainingDatasetName"] = undefined /*out*/;
             resourceInputs["trainingDatasetVersionId"] = undefined /*out*/;
             resourceInputs["versionId"] = undefined /*out*/;
@@ -314,9 +326,17 @@ export interface CustomModelState {
      */
     files?: any;
     /**
+     * The hash of file contents for each file in files.
+     */
+    filesHashes?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
      * The path to a folder containing files to build the Custom Model. Each file in the folder is uploaded under path relative to a folder path.
      */
     folderPath?: pulumi.Input<string>;
+    /**
+     * The hash of the folder path contents.
+     */
+    folderPathHash?: pulumi.Input<string>;
     /**
      * The guard configurations for the Custom Model.
      */

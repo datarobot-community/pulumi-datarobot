@@ -71,8 +71,12 @@ type CustomModel struct {
 	Description pulumi.StringPtrOutput `pulumi:"description"`
 	// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Custom Model. If list is of strings, then basenames will be used for tuples.
 	Files pulumi.AnyOutput `pulumi:"files"`
+	// The hash of file contents for each file in files.
+	FilesHashes pulumi.StringArrayOutput `pulumi:"filesHashes"`
 	// The path to a folder containing files to build the Custom Model. Each file in the folder is uploaded under path relative to a folder path.
 	FolderPath pulumi.StringPtrOutput `pulumi:"folderPath"`
+	// The hash of the folder path contents.
+	FolderPathHash pulumi.StringOutput `pulumi:"folderPathHash"`
 	// The guard configurations for the Custom Model.
 	GuardConfigurations CustomModelGuardConfigurationArrayOutput `pulumi:"guardConfigurations"`
 	// Flag indicating if the Custom Model is a proxy model.
@@ -157,8 +161,12 @@ type customModelState struct {
 	Description *string `pulumi:"description"`
 	// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Custom Model. If list is of strings, then basenames will be used for tuples.
 	Files interface{} `pulumi:"files"`
+	// The hash of file contents for each file in files.
+	FilesHashes []string `pulumi:"filesHashes"`
 	// The path to a folder containing files to build the Custom Model. Each file in the folder is uploaded under path relative to a folder path.
 	FolderPath *string `pulumi:"folderPath"`
+	// The hash of the folder path contents.
+	FolderPathHash *string `pulumi:"folderPathHash"`
 	// The guard configurations for the Custom Model.
 	GuardConfigurations []CustomModelGuardConfiguration `pulumi:"guardConfigurations"`
 	// Flag indicating if the Custom Model is a proxy model.
@@ -214,8 +222,12 @@ type CustomModelState struct {
 	Description pulumi.StringPtrInput
 	// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Custom Model. If list is of strings, then basenames will be used for tuples.
 	Files pulumi.Input
+	// The hash of file contents for each file in files.
+	FilesHashes pulumi.StringArrayInput
 	// The path to a folder containing files to build the Custom Model. Each file in the folder is uploaded under path relative to a folder path.
 	FolderPath pulumi.StringPtrInput
+	// The hash of the folder path contents.
+	FolderPathHash pulumi.StringPtrInput
 	// The guard configurations for the Custom Model.
 	GuardConfigurations CustomModelGuardConfigurationArrayInput
 	// Flag indicating if the Custom Model is a proxy model.
@@ -481,9 +493,19 @@ func (o CustomModelOutput) Files() pulumi.AnyOutput {
 	return o.ApplyT(func(v *CustomModel) pulumi.AnyOutput { return v.Files }).(pulumi.AnyOutput)
 }
 
+// The hash of file contents for each file in files.
+func (o CustomModelOutput) FilesHashes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *CustomModel) pulumi.StringArrayOutput { return v.FilesHashes }).(pulumi.StringArrayOutput)
+}
+
 // The path to a folder containing files to build the Custom Model. Each file in the folder is uploaded under path relative to a folder path.
 func (o CustomModelOutput) FolderPath() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *CustomModel) pulumi.StringPtrOutput { return v.FolderPath }).(pulumi.StringPtrOutput)
+}
+
+// The hash of the folder path contents.
+func (o CustomModelOutput) FolderPathHash() pulumi.StringOutput {
+	return o.ApplyT(func(v *CustomModel) pulumi.StringOutput { return v.FolderPathHash }).(pulumi.StringOutput)
 }
 
 // The guard configurations for the Custom Model.
