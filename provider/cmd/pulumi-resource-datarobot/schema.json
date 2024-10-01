@@ -915,9 +915,20 @@
                     "$ref": "pulumi.json#/Any",
                     "description": "The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.\n"
                 },
+                "filesHashes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The hash of file contents for each file in files.\n"
+                },
                 "folderPath": {
                     "type": "string",
                     "description": "The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.\n"
+                },
+                "folderPathHash": {
+                    "type": "string",
+                    "description": "The hash of the folder path contents.\n"
                 },
                 "name": {
                     "type": "string",
@@ -940,6 +951,8 @@
                 }
             },
             "required": [
+                "filesHashes",
+                "folderPathHash",
                 "name",
                 "resourceSettings",
                 "runtimeParameterValues",
@@ -977,9 +990,20 @@
                         "$ref": "pulumi.json#/Any",
                         "description": "The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.\n"
                     },
+                    "filesHashes": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "The hash of file contents for each file in files.\n"
+                    },
                     "folderPath": {
                         "type": "string",
                         "description": "The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.\n"
+                    },
+                    "folderPathHash": {
+                        "type": "string",
+                        "description": "The hash of the folder path contents.\n"
                     },
                     "name": {
                         "type": "string",
@@ -1210,9 +1234,20 @@
                     "$ref": "pulumi.json#/Any",
                     "description": "The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Custom Model. If list is of strings, then basenames will be used for tuples.\n"
                 },
+                "filesHashes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The hash of file contents for each file in files.\n"
+                },
                 "folderPath": {
                     "type": "string",
                     "description": "The path to a folder containing files to build the Custom Model. Each file in the folder is uploaded under path relative to a folder path.\n"
+                },
+                "folderPathHash": {
+                    "type": "string",
+                    "description": "The hash of the folder path contents.\n"
                 },
                 "guardConfigurations": {
                     "type": "array",
@@ -1304,6 +1339,8 @@
                 "baseEnvironmentId",
                 "baseEnvironmentVersionId",
                 "deploymentsCount",
+                "filesHashes",
+                "folderPathHash",
                 "isProxy",
                 "name",
                 "negativeClassLabel",
@@ -1457,9 +1494,20 @@
                         "$ref": "pulumi.json#/Any",
                         "description": "The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Custom Model. If list is of strings, then basenames will be used for tuples.\n"
                     },
+                    "filesHashes": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "The hash of file contents for each file in files.\n"
+                    },
                     "folderPath": {
                         "type": "string",
                         "description": "The path to a folder containing files to build the Custom Model. Each file in the folder is uploaded under path relative to a folder path.\n"
+                    },
+                    "folderPathHash": {
+                        "type": "string",
+                        "description": "The hash of the folder path contents.\n"
                     },
                     "guardConfigurations": {
                         "type": "array",
@@ -1553,6 +1601,10 @@
         "datarobot:index/datasetFromFile:DatasetFromFile": {
             "description": "Data set from file\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@datarobot/pulumi-datarobot\";\n\nconst example = new datarobot.DatasetFromFile(\"example\", {\n    filePath: \"[Path to file to upload]\",\n    useCaseIds: [datarobot_use_case.example.id],\n});\nexport const exampleId = example.id;\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample = datarobot.DatasetFromFile(\"example\",\n    file_path=\"[Path to file to upload]\",\n    use_case_ids=[datarobot_use_case[\"example\"][\"id\"]])\npulumi.export(\"exampleId\", example.id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = DataRobotPulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Datarobot.DatasetFromFile(\"example\", new()\n    {\n        FilePath = \"[Path to file to upload]\",\n        UseCaseIds = new[]\n        {\n            datarobot_use_case.Example.Id,\n        },\n    });\n\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"exampleId\"] = example.Id,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texample, err := datarobot.NewDatasetFromFile(ctx, \"example\", \u0026datarobot.DatasetFromFileArgs{\n\t\t\tFilePath: pulumi.String(\"[Path to file to upload]\"),\n\t\t\tUseCaseIds: pulumi.StringArray{\n\t\t\t\tdatarobot_use_case.Example.Id,\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"exampleId\", example.ID())\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.DatasetFromFile;\nimport com.pulumi.datarobot.DatasetFromFileArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new DatasetFromFile(\"example\", DatasetFromFileArgs.builder()\n            .filePath(\"[Path to file to upload]\")\n            .useCaseIds(datarobot_use_case.example().id())\n            .build());\n\n        ctx.export(\"exampleId\", example.id());\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: datarobot:DatasetFromFile\n    properties:\n      filePath: '[Path to file to upload]'\n      useCaseIds:\n        - ${datarobot_use_case.example.id}\noutputs:\n  exampleId: ${example.id}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
             "properties": {
+                "fileHash": {
+                    "type": "string",
+                    "description": "The hash of the file contents.\n"
+                },
                 "filePath": {
                     "type": "string",
                     "description": "The path to the file to upload.\n"
@@ -1570,6 +1622,7 @@
                 }
             },
             "required": [
+                "fileHash",
                 "filePath",
                 "name"
             ],
@@ -1596,6 +1649,10 @@
             "stateInputs": {
                 "description": "Input properties used for looking up and filtering DatasetFromFile resources.\n",
                 "properties": {
+                    "fileHash": {
+                        "type": "string",
+                        "description": "The hash of the file contents.\n"
+                    },
                     "filePath": {
                         "type": "string",
                         "description": "The path to the file to upload.\n"
@@ -1908,12 +1965,17 @@
                     "type": "string",
                     "description": "The file that has the GCP key. Cannot be used with `gcp_key`.\n"
                 },
+                "gcpKeyFileHash": {
+                    "type": "string",
+                    "description": "The hash of the GCP key file contents.\n"
+                },
                 "name": {
                     "type": "string",
                     "description": "The name of the Google Cloud Credential.\n"
                 }
             },
             "required": [
+                "gcpKeyFileHash",
                 "name"
             ],
             "inputProperties": {
@@ -1942,6 +2004,10 @@
                     "gcpKeyFile": {
                         "type": "string",
                         "description": "The file that has the GCP key. Cannot be used with `gcp_key`.\n"
+                    },
+                    "gcpKeyFileHash": {
+                        "type": "string",
+                        "description": "The hash of the GCP key file contents.\n"
                     },
                     "name": {
                         "type": "string",
