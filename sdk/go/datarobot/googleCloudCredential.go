@@ -7,7 +7,6 @@ import (
 	"context"
 	"reflect"
 
-	"errors"
 	"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot/internal"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
@@ -16,22 +15,28 @@ import (
 type GoogleCloudCredential struct {
 	pulumi.CustomResourceState
 
+	// The GCP key in JSON format.
+	GcpKey pulumi.StringPtrOutput `pulumi:"gcpKey"`
+	// The file that has the GCP key. Cannot be used with `gcpKey`.
+	GcpKeyFile pulumi.StringPtrOutput `pulumi:"gcpKeyFile"`
 	// The name of the Google Cloud Credential.
 	Name pulumi.StringOutput `pulumi:"name"`
-	// The source file of the Google Cloud Credential.
-	SourceFile pulumi.StringOutput `pulumi:"sourceFile"`
 }
 
 // NewGoogleCloudCredential registers a new resource with the given unique name, arguments, and options.
 func NewGoogleCloudCredential(ctx *pulumi.Context,
 	name string, args *GoogleCloudCredentialArgs, opts ...pulumi.ResourceOption) (*GoogleCloudCredential, error) {
 	if args == nil {
-		return nil, errors.New("missing one or more required arguments")
+		args = &GoogleCloudCredentialArgs{}
 	}
 
-	if args.SourceFile == nil {
-		return nil, errors.New("invalid value for required argument 'SourceFile'")
+	if args.GcpKey != nil {
+		args.GcpKey = pulumi.ToSecret(args.GcpKey).(pulumi.StringPtrInput)
 	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"gcpKey",
+	})
+	opts = append(opts, secrets)
 	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource GoogleCloudCredential
 	err := ctx.RegisterResource("datarobot:index/googleCloudCredential:GoogleCloudCredential", name, args, &resource, opts...)
@@ -55,17 +60,21 @@ func GetGoogleCloudCredential(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering GoogleCloudCredential resources.
 type googleCloudCredentialState struct {
+	// The GCP key in JSON format.
+	GcpKey *string `pulumi:"gcpKey"`
+	// The file that has the GCP key. Cannot be used with `gcpKey`.
+	GcpKeyFile *string `pulumi:"gcpKeyFile"`
 	// The name of the Google Cloud Credential.
 	Name *string `pulumi:"name"`
-	// The source file of the Google Cloud Credential.
-	SourceFile *string `pulumi:"sourceFile"`
 }
 
 type GoogleCloudCredentialState struct {
+	// The GCP key in JSON format.
+	GcpKey pulumi.StringPtrInput
+	// The file that has the GCP key. Cannot be used with `gcpKey`.
+	GcpKeyFile pulumi.StringPtrInput
 	// The name of the Google Cloud Credential.
 	Name pulumi.StringPtrInput
-	// The source file of the Google Cloud Credential.
-	SourceFile pulumi.StringPtrInput
 }
 
 func (GoogleCloudCredentialState) ElementType() reflect.Type {
@@ -73,18 +82,22 @@ func (GoogleCloudCredentialState) ElementType() reflect.Type {
 }
 
 type googleCloudCredentialArgs struct {
+	// The GCP key in JSON format.
+	GcpKey *string `pulumi:"gcpKey"`
+	// The file that has the GCP key. Cannot be used with `gcpKey`.
+	GcpKeyFile *string `pulumi:"gcpKeyFile"`
 	// The name of the Google Cloud Credential.
 	Name *string `pulumi:"name"`
-	// The source file of the Google Cloud Credential.
-	SourceFile string `pulumi:"sourceFile"`
 }
 
 // The set of arguments for constructing a GoogleCloudCredential resource.
 type GoogleCloudCredentialArgs struct {
+	// The GCP key in JSON format.
+	GcpKey pulumi.StringPtrInput
+	// The file that has the GCP key. Cannot be used with `gcpKey`.
+	GcpKeyFile pulumi.StringPtrInput
 	// The name of the Google Cloud Credential.
 	Name pulumi.StringPtrInput
-	// The source file of the Google Cloud Credential.
-	SourceFile pulumi.StringInput
 }
 
 func (GoogleCloudCredentialArgs) ElementType() reflect.Type {
@@ -174,14 +187,19 @@ func (o GoogleCloudCredentialOutput) ToGoogleCloudCredentialOutputWithContext(ct
 	return o
 }
 
+// The GCP key in JSON format.
+func (o GoogleCloudCredentialOutput) GcpKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *GoogleCloudCredential) pulumi.StringPtrOutput { return v.GcpKey }).(pulumi.StringPtrOutput)
+}
+
+// The file that has the GCP key. Cannot be used with `gcpKey`.
+func (o GoogleCloudCredentialOutput) GcpKeyFile() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *GoogleCloudCredential) pulumi.StringPtrOutput { return v.GcpKeyFile }).(pulumi.StringPtrOutput)
+}
+
 // The name of the Google Cloud Credential.
 func (o GoogleCloudCredentialOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *GoogleCloudCredential) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
-}
-
-// The source file of the Google Cloud Credential.
-func (o GoogleCloudCredentialOutput) SourceFile() pulumi.StringOutput {
-	return o.ApplyT(func(v *GoogleCloudCredential) pulumi.StringOutput { return v.SourceFile }).(pulumi.StringOutput)
 }
 
 type GoogleCloudCredentialArrayOutput struct{ *pulumi.OutputState }

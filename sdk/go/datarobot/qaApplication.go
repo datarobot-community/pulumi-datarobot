@@ -29,10 +29,10 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			exampleCustomModel, err := datarobot.NewCustomModel(ctx, "exampleCustomModel", &datarobot.CustomModelArgs{
-//				Description:         pulumi.String("Description for the example custom model"),
-//				TargetType:          pulumi.String("Binary"),
-//				TargetName:          pulumi.String("my_label"),
-//				BaseEnvironmentName: pulumi.String("[GenAI] Python 3.11 with Moderations"),
+//				Description:       pulumi.String("Description for the example custom model"),
+//				TargetType:        pulumi.String("Binary"),
+//				TargetName:        pulumi.String("my_label"),
+//				BaseEnvironmentId: pulumi.String("65f9b27eab986d30d4c64268"),
 //				Files: pulumi.Any{
 //					"example.py",
 //				},

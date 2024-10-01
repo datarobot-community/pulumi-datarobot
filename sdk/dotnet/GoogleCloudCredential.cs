@@ -17,16 +17,22 @@ namespace DataRobotPulumi.Datarobot
     public partial class GoogleCloudCredential : global::Pulumi.CustomResource
     {
         /// <summary>
+        /// The GCP key in JSON format.
+        /// </summary>
+        [Output("gcpKey")]
+        public Output<string?> GcpKey { get; private set; } = null!;
+
+        /// <summary>
+        /// The file that has the GCP key. Cannot be used with `gcp_key`.
+        /// </summary>
+        [Output("gcpKeyFile")]
+        public Output<string?> GcpKeyFile { get; private set; } = null!;
+
+        /// <summary>
         /// The name of the Google Cloud Credential.
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
-
-        /// <summary>
-        /// The source file of the Google Cloud Credential.
-        /// </summary>
-        [Output("sourceFile")]
-        public Output<string> SourceFile { get; private set; } = null!;
 
 
         /// <summary>
@@ -36,7 +42,7 @@ namespace DataRobotPulumi.Datarobot
         /// <param name="name">The unique name of the resource</param>
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public GoogleCloudCredential(string name, GoogleCloudCredentialArgs args, CustomResourceOptions? options = null)
+        public GoogleCloudCredential(string name, GoogleCloudCredentialArgs? args = null, CustomResourceOptions? options = null)
             : base("datarobot:index/googleCloudCredential:GoogleCloudCredential", name, args ?? new GoogleCloudCredentialArgs(), MakeResourceOptions(options, ""))
         {
         }
@@ -52,6 +58,10 @@ namespace DataRobotPulumi.Datarobot
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/datarobot-community/pulumi-datarobot",
+                AdditionalSecretOutputs =
+                {
+                    "gcpKey",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -75,17 +85,33 @@ namespace DataRobotPulumi.Datarobot
 
     public sealed class GoogleCloudCredentialArgs : global::Pulumi.ResourceArgs
     {
+        [Input("gcpKey")]
+        private Input<string>? _gcpKey;
+
+        /// <summary>
+        /// The GCP key in JSON format.
+        /// </summary>
+        public Input<string>? GcpKey
+        {
+            get => _gcpKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _gcpKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// The file that has the GCP key. Cannot be used with `gcp_key`.
+        /// </summary>
+        [Input("gcpKeyFile")]
+        public Input<string>? GcpKeyFile { get; set; }
+
         /// <summary>
         /// The name of the Google Cloud Credential.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
-
-        /// <summary>
-        /// The source file of the Google Cloud Credential.
-        /// </summary>
-        [Input("sourceFile", required: true)]
-        public Input<string> SourceFile { get; set; } = null!;
 
         public GoogleCloudCredentialArgs()
         {
@@ -95,17 +121,33 @@ namespace DataRobotPulumi.Datarobot
 
     public sealed class GoogleCloudCredentialState : global::Pulumi.ResourceArgs
     {
+        [Input("gcpKey")]
+        private Input<string>? _gcpKey;
+
+        /// <summary>
+        /// The GCP key in JSON format.
+        /// </summary>
+        public Input<string>? GcpKey
+        {
+            get => _gcpKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _gcpKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        /// <summary>
+        /// The file that has the GCP key. Cannot be used with `gcp_key`.
+        /// </summary>
+        [Input("gcpKeyFile")]
+        public Input<string>? GcpKeyFile { get; set; }
+
         /// <summary>
         /// The name of the Google Cloud Credential.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
-
-        /// <summary>
-        /// The source file of the Google Cloud Credential.
-        /// </summary>
-        [Input("sourceFile")]
-        public Input<string>? SourceFile { get; set; }
 
         public GoogleCloudCredentialState()
         {

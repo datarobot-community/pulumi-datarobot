@@ -30,7 +30,7 @@ import * as utilities from "./utilities";
  *     ],
  *     targetType: "Binary",
  *     targetName: "my_label",
- *     baseEnvironmentName: "[GenAI] Python 3.11 with Moderations",
+ *     baseEnvironmentId: "65f9b27eab986d30d4c64268",
  * });
  * // Optional
  * // source_remote_repositories = [
@@ -101,10 +101,6 @@ export class CustomModel extends pulumi.CustomResource {
      * The ID of the base environment for the Custom Model.
      */
     public readonly baseEnvironmentId!: pulumi.Output<string>;
-    /**
-     * The name of the base environment for the Custom Model.
-     */
-    public readonly baseEnvironmentName!: pulumi.Output<string | undefined>;
     /**
      * The ID of the base environment version for the Custom Model.
      */
@@ -188,7 +184,7 @@ export class CustomModel extends pulumi.CustomResource {
     /**
      * The target type of the Custom Model.
      */
-    public readonly targetType!: pulumi.Output<string | undefined>;
+    public readonly targetType!: pulumi.Output<string>;
     /**
      * The name of the partition column in the training dataset assigned to the Custom Model.
      */
@@ -224,7 +220,6 @@ export class CustomModel extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as CustomModelState | undefined;
             resourceInputs["baseEnvironmentId"] = state ? state.baseEnvironmentId : undefined;
-            resourceInputs["baseEnvironmentName"] = state ? state.baseEnvironmentName : undefined;
             resourceInputs["baseEnvironmentVersionId"] = state ? state.baseEnvironmentVersionId : undefined;
             resourceInputs["classLabels"] = state ? state.classLabels : undefined;
             resourceInputs["classLabelsFile"] = state ? state.classLabelsFile : undefined;
@@ -254,7 +249,6 @@ export class CustomModel extends pulumi.CustomResource {
         } else {
             const args = argsOrState as CustomModelArgs | undefined;
             resourceInputs["baseEnvironmentId"] = args ? args.baseEnvironmentId : undefined;
-            resourceInputs["baseEnvironmentName"] = args ? args.baseEnvironmentName : undefined;
             resourceInputs["baseEnvironmentVersionId"] = args ? args.baseEnvironmentVersionId : undefined;
             resourceInputs["classLabels"] = args ? args.classLabels : undefined;
             resourceInputs["classLabelsFile"] = args ? args.classLabelsFile : undefined;
@@ -295,10 +289,6 @@ export interface CustomModelState {
      * The ID of the base environment for the Custom Model.
      */
     baseEnvironmentId?: pulumi.Input<string>;
-    /**
-     * The name of the base environment for the Custom Model.
-     */
-    baseEnvironmentName?: pulumi.Input<string>;
     /**
      * The ID of the base environment version for the Custom Model.
      */
@@ -413,10 +403,6 @@ export interface CustomModelArgs {
      * The ID of the base environment for the Custom Model.
      */
     baseEnvironmentId?: pulumi.Input<string>;
-    /**
-     * The name of the base environment for the Custom Model.
-     */
-    baseEnvironmentName?: pulumi.Input<string>;
     /**
      * The ID of the base environment version for the Custom Model.
      */

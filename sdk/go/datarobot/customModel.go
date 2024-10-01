@@ -41,9 +41,9 @@ import (
 //					"file1.py",
 //					"file2.py",
 //				},
-//				TargetType:          pulumi.String("Binary"),
-//				TargetName:          pulumi.String("my_label"),
-//				BaseEnvironmentName: pulumi.String("[GenAI] Python 3.11 with Moderations"),
+//				TargetType:        pulumi.String("Binary"),
+//				TargetName:        pulumi.String("my_label"),
+//				BaseEnvironmentId: pulumi.String("65f9b27eab986d30d4c64268"),
 //			})
 //			if err != nil {
 //				return err
@@ -59,8 +59,6 @@ type CustomModel struct {
 
 	// The ID of the base environment for the Custom Model.
 	BaseEnvironmentId pulumi.StringOutput `pulumi:"baseEnvironmentId"`
-	// The name of the base environment for the Custom Model.
-	BaseEnvironmentName pulumi.StringPtrOutput `pulumi:"baseEnvironmentName"`
 	// The ID of the base environment version for the Custom Model.
 	BaseEnvironmentVersionId pulumi.StringOutput `pulumi:"baseEnvironmentVersionId"`
 	// Class labels for multiclass classification. Cannot be used with class*labels*file.
@@ -102,7 +100,7 @@ type CustomModel struct {
 	// The target name of the Custom Model.
 	TargetName pulumi.StringOutput `pulumi:"targetName"`
 	// The target type of the Custom Model.
-	TargetType pulumi.StringPtrOutput `pulumi:"targetType"`
+	TargetType pulumi.StringOutput `pulumi:"targetType"`
 	// The name of the partition column in the training dataset assigned to the Custom Model.
 	TrainingDataPartitionColumn pulumi.StringPtrOutput `pulumi:"trainingDataPartitionColumn"`
 	// The ID of the training dataset assigned to the Custom Model.
@@ -147,8 +145,6 @@ func GetCustomModel(ctx *pulumi.Context,
 type customModelState struct {
 	// The ID of the base environment for the Custom Model.
 	BaseEnvironmentId *string `pulumi:"baseEnvironmentId"`
-	// The name of the base environment for the Custom Model.
-	BaseEnvironmentName *string `pulumi:"baseEnvironmentName"`
 	// The ID of the base environment version for the Custom Model.
 	BaseEnvironmentVersionId *string `pulumi:"baseEnvironmentVersionId"`
 	// Class labels for multiclass classification. Cannot be used with class*labels*file.
@@ -206,8 +202,6 @@ type customModelState struct {
 type CustomModelState struct {
 	// The ID of the base environment for the Custom Model.
 	BaseEnvironmentId pulumi.StringPtrInput
-	// The name of the base environment for the Custom Model.
-	BaseEnvironmentName pulumi.StringPtrInput
 	// The ID of the base environment version for the Custom Model.
 	BaseEnvironmentVersionId pulumi.StringPtrInput
 	// Class labels for multiclass classification. Cannot be used with class*labels*file.
@@ -269,8 +263,6 @@ func (CustomModelState) ElementType() reflect.Type {
 type customModelArgs struct {
 	// The ID of the base environment for the Custom Model.
 	BaseEnvironmentId *string `pulumi:"baseEnvironmentId"`
-	// The name of the base environment for the Custom Model.
-	BaseEnvironmentName *string `pulumi:"baseEnvironmentName"`
 	// The ID of the base environment version for the Custom Model.
 	BaseEnvironmentVersionId *string `pulumi:"baseEnvironmentVersionId"`
 	// Class labels for multiclass classification. Cannot be used with class*labels*file.
@@ -321,8 +313,6 @@ type customModelArgs struct {
 type CustomModelArgs struct {
 	// The ID of the base environment for the Custom Model.
 	BaseEnvironmentId pulumi.StringPtrInput
-	// The name of the base environment for the Custom Model.
-	BaseEnvironmentName pulumi.StringPtrInput
 	// The ID of the base environment version for the Custom Model.
 	BaseEnvironmentVersionId pulumi.StringPtrInput
 	// Class labels for multiclass classification. Cannot be used with class*labels*file.
@@ -461,11 +451,6 @@ func (o CustomModelOutput) BaseEnvironmentId() pulumi.StringOutput {
 	return o.ApplyT(func(v *CustomModel) pulumi.StringOutput { return v.BaseEnvironmentId }).(pulumi.StringOutput)
 }
 
-// The name of the base environment for the Custom Model.
-func (o CustomModelOutput) BaseEnvironmentName() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CustomModel) pulumi.StringPtrOutput { return v.BaseEnvironmentName }).(pulumi.StringPtrOutput)
-}
-
 // The ID of the base environment version for the Custom Model.
 func (o CustomModelOutput) BaseEnvironmentVersionId() pulumi.StringOutput {
 	return o.ApplyT(func(v *CustomModel) pulumi.StringOutput { return v.BaseEnvironmentVersionId }).(pulumi.StringOutput)
@@ -569,8 +554,8 @@ func (o CustomModelOutput) TargetName() pulumi.StringOutput {
 }
 
 // The target type of the Custom Model.
-func (o CustomModelOutput) TargetType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CustomModel) pulumi.StringPtrOutput { return v.TargetType }).(pulumi.StringPtrOutput)
+func (o CustomModelOutput) TargetType() pulumi.StringOutput {
+	return o.ApplyT(func(v *CustomModel) pulumi.StringOutput { return v.TargetType }).(pulumi.StringOutput)
 }
 
 // The name of the partition column in the training dataset assigned to the Custom Model.
