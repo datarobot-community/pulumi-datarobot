@@ -105,7 +105,9 @@ class ApplicationSourceArgs:
 class _ApplicationSourceState:
     def __init__(__self__, *,
                  files: Optional[Any] = None,
+                 files_hashes: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  folder_path: Optional[pulumi.Input[str]] = None,
+                 folder_path_hash: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  resource_settings: Optional[pulumi.Input['ApplicationSourceResourceSettingsArgs']] = None,
                  runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input['ApplicationSourceRuntimeParameterValueArgs']]]] = None,
@@ -113,7 +115,9 @@ class _ApplicationSourceState:
         """
         Input properties used for looking up and filtering ApplicationSource resources.
         :param Any files: The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] files_hashes: The hash of file contents for each file in files.
         :param pulumi.Input[str] folder_path: The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
+        :param pulumi.Input[str] folder_path_hash: The hash of the folder path contents.
         :param pulumi.Input[str] name: The name of the Application Source.
         :param pulumi.Input['ApplicationSourceResourceSettingsArgs'] resource_settings: The resource settings for the Application Source.
         :param pulumi.Input[Sequence[pulumi.Input['ApplicationSourceRuntimeParameterValueArgs']]] runtime_parameter_values: The runtime parameter values for the Application Source.
@@ -121,8 +125,12 @@ class _ApplicationSourceState:
         """
         if files is not None:
             pulumi.set(__self__, "files", files)
+        if files_hashes is not None:
+            pulumi.set(__self__, "files_hashes", files_hashes)
         if folder_path is not None:
             pulumi.set(__self__, "folder_path", folder_path)
+        if folder_path_hash is not None:
+            pulumi.set(__self__, "folder_path_hash", folder_path_hash)
         if name is not None:
             pulumi.set(__self__, "name", name)
         if resource_settings is not None:
@@ -145,6 +153,18 @@ class _ApplicationSourceState:
         pulumi.set(self, "files", value)
 
     @property
+    @pulumi.getter(name="filesHashes")
+    def files_hashes(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        The hash of file contents for each file in files.
+        """
+        return pulumi.get(self, "files_hashes")
+
+    @files_hashes.setter
+    def files_hashes(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "files_hashes", value)
+
+    @property
     @pulumi.getter(name="folderPath")
     def folder_path(self) -> Optional[pulumi.Input[str]]:
         """
@@ -155,6 +175,18 @@ class _ApplicationSourceState:
     @folder_path.setter
     def folder_path(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "folder_path", value)
+
+    @property
+    @pulumi.getter(name="folderPathHash")
+    def folder_path_hash(self) -> Optional[pulumi.Input[str]]:
+        """
+        The hash of the folder path contents.
+        """
+        return pulumi.get(self, "folder_path_hash")
+
+    @folder_path_hash.setter
+    def folder_path_hash(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "folder_path_hash", value)
 
     @property
     @pulumi.getter
@@ -298,6 +330,8 @@ class ApplicationSource(pulumi.CustomResource):
             __props__.__dict__["name"] = name
             __props__.__dict__["resource_settings"] = resource_settings
             __props__.__dict__["runtime_parameter_values"] = runtime_parameter_values
+            __props__.__dict__["files_hashes"] = None
+            __props__.__dict__["folder_path_hash"] = None
             __props__.__dict__["version_id"] = None
         super(ApplicationSource, __self__).__init__(
             'datarobot:index/applicationSource:ApplicationSource',
@@ -310,7 +344,9 @@ class ApplicationSource(pulumi.CustomResource):
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
             files: Optional[Any] = None,
+            files_hashes: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             folder_path: Optional[pulumi.Input[str]] = None,
+            folder_path_hash: Optional[pulumi.Input[str]] = None,
             name: Optional[pulumi.Input[str]] = None,
             resource_settings: Optional[pulumi.Input[Union['ApplicationSourceResourceSettingsArgs', 'ApplicationSourceResourceSettingsArgsDict']]] = None,
             runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input[Union['ApplicationSourceRuntimeParameterValueArgs', 'ApplicationSourceRuntimeParameterValueArgsDict']]]]] = None,
@@ -323,7 +359,9 @@ class ApplicationSource(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param Any files: The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] files_hashes: The hash of file contents for each file in files.
         :param pulumi.Input[str] folder_path: The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
+        :param pulumi.Input[str] folder_path_hash: The hash of the folder path contents.
         :param pulumi.Input[str] name: The name of the Application Source.
         :param pulumi.Input[Union['ApplicationSourceResourceSettingsArgs', 'ApplicationSourceResourceSettingsArgsDict']] resource_settings: The resource settings for the Application Source.
         :param pulumi.Input[Sequence[pulumi.Input[Union['ApplicationSourceRuntimeParameterValueArgs', 'ApplicationSourceRuntimeParameterValueArgsDict']]]] runtime_parameter_values: The runtime parameter values for the Application Source.
@@ -334,7 +372,9 @@ class ApplicationSource(pulumi.CustomResource):
         __props__ = _ApplicationSourceState.__new__(_ApplicationSourceState)
 
         __props__.__dict__["files"] = files
+        __props__.__dict__["files_hashes"] = files_hashes
         __props__.__dict__["folder_path"] = folder_path
+        __props__.__dict__["folder_path_hash"] = folder_path_hash
         __props__.__dict__["name"] = name
         __props__.__dict__["resource_settings"] = resource_settings
         __props__.__dict__["runtime_parameter_values"] = runtime_parameter_values
@@ -350,12 +390,28 @@ class ApplicationSource(pulumi.CustomResource):
         return pulumi.get(self, "files")
 
     @property
+    @pulumi.getter(name="filesHashes")
+    def files_hashes(self) -> pulumi.Output[Sequence[str]]:
+        """
+        The hash of file contents for each file in files.
+        """
+        return pulumi.get(self, "files_hashes")
+
+    @property
     @pulumi.getter(name="folderPath")
     def folder_path(self) -> pulumi.Output[Optional[str]]:
         """
         The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
         """
         return pulumi.get(self, "folder_path")
+
+    @property
+    @pulumi.getter(name="folderPathHash")
+    def folder_path_hash(self) -> pulumi.Output[str]:
+        """
+        The hash of the folder path contents.
+        """
+        return pulumi.get(self, "folder_path_hash")
 
     @property
     @pulumi.getter

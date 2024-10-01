@@ -19,6 +19,8 @@ type GoogleCloudCredential struct {
 	GcpKey pulumi.StringPtrOutput `pulumi:"gcpKey"`
 	// The file that has the GCP key. Cannot be used with `gcpKey`.
 	GcpKeyFile pulumi.StringPtrOutput `pulumi:"gcpKeyFile"`
+	// The hash of the GCP key file contents.
+	GcpKeyFileHash pulumi.StringOutput `pulumi:"gcpKeyFileHash"`
 	// The name of the Google Cloud Credential.
 	Name pulumi.StringOutput `pulumi:"name"`
 }
@@ -64,6 +66,8 @@ type googleCloudCredentialState struct {
 	GcpKey *string `pulumi:"gcpKey"`
 	// The file that has the GCP key. Cannot be used with `gcpKey`.
 	GcpKeyFile *string `pulumi:"gcpKeyFile"`
+	// The hash of the GCP key file contents.
+	GcpKeyFileHash *string `pulumi:"gcpKeyFileHash"`
 	// The name of the Google Cloud Credential.
 	Name *string `pulumi:"name"`
 }
@@ -73,6 +77,8 @@ type GoogleCloudCredentialState struct {
 	GcpKey pulumi.StringPtrInput
 	// The file that has the GCP key. Cannot be used with `gcpKey`.
 	GcpKeyFile pulumi.StringPtrInput
+	// The hash of the GCP key file contents.
+	GcpKeyFileHash pulumi.StringPtrInput
 	// The name of the Google Cloud Credential.
 	Name pulumi.StringPtrInput
 }
@@ -195,6 +201,11 @@ func (o GoogleCloudCredentialOutput) GcpKey() pulumi.StringPtrOutput {
 // The file that has the GCP key. Cannot be used with `gcpKey`.
 func (o GoogleCloudCredentialOutput) GcpKeyFile() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *GoogleCloudCredential) pulumi.StringPtrOutput { return v.GcpKeyFile }).(pulumi.StringPtrOutput)
+}
+
+// The hash of the GCP key file contents.
+func (o GoogleCloudCredentialOutput) GcpKeyFileHash() pulumi.StringOutput {
+	return o.ApplyT(func(v *GoogleCloudCredential) pulumi.StringOutput { return v.GcpKeyFileHash }).(pulumi.StringOutput)
 }
 
 // The name of the Google Cloud Credential.

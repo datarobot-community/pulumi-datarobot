@@ -399,7 +399,9 @@ class _CustomModelState:
                  deployments_count: Optional[pulumi.Input[int]] = None,
                  description: Optional[pulumi.Input[str]] = None,
                  files: Optional[Any] = None,
+                 files_hashes: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  folder_path: Optional[pulumi.Input[str]] = None,
+                 folder_path_hash: Optional[pulumi.Input[str]] = None,
                  guard_configurations: Optional[pulumi.Input[Sequence[pulumi.Input['CustomModelGuardConfigurationArgs']]]] = None,
                  is_proxy: Optional[pulumi.Input[bool]] = None,
                  language: Optional[pulumi.Input[str]] = None,
@@ -428,7 +430,9 @@ class _CustomModelState:
         :param pulumi.Input[int] deployments_count: The number of deployments for the Custom Model.
         :param pulumi.Input[str] description: The description of the Custom Model.
         :param Any files: The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Custom Model. If list is of strings, then basenames will be used for tuples.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] files_hashes: The hash of file contents for each file in files.
         :param pulumi.Input[str] folder_path: The path to a folder containing files to build the Custom Model. Each file in the folder is uploaded under path relative to a folder path.
+        :param pulumi.Input[str] folder_path_hash: The hash of the folder path contents.
         :param pulumi.Input[Sequence[pulumi.Input['CustomModelGuardConfigurationArgs']]] guard_configurations: The guard configurations for the Custom Model.
         :param pulumi.Input[bool] is_proxy: Flag indicating if the Custom Model is a proxy model.
         :param pulumi.Input[str] language: The language used to build the Custom Model.
@@ -463,8 +467,12 @@ class _CustomModelState:
             pulumi.set(__self__, "description", description)
         if files is not None:
             pulumi.set(__self__, "files", files)
+        if files_hashes is not None:
+            pulumi.set(__self__, "files_hashes", files_hashes)
         if folder_path is not None:
             pulumi.set(__self__, "folder_path", folder_path)
+        if folder_path_hash is not None:
+            pulumi.set(__self__, "folder_path_hash", folder_path_hash)
         if guard_configurations is not None:
             pulumi.set(__self__, "guard_configurations", guard_configurations)
         if is_proxy is not None:
@@ -589,6 +597,18 @@ class _CustomModelState:
         pulumi.set(self, "files", value)
 
     @property
+    @pulumi.getter(name="filesHashes")
+    def files_hashes(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        The hash of file contents for each file in files.
+        """
+        return pulumi.get(self, "files_hashes")
+
+    @files_hashes.setter
+    def files_hashes(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "files_hashes", value)
+
+    @property
     @pulumi.getter(name="folderPath")
     def folder_path(self) -> Optional[pulumi.Input[str]]:
         """
@@ -599,6 +619,18 @@ class _CustomModelState:
     @folder_path.setter
     def folder_path(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "folder_path", value)
+
+    @property
+    @pulumi.getter(name="folderPathHash")
+    def folder_path_hash(self) -> Optional[pulumi.Input[str]]:
+        """
+        The hash of the folder path contents.
+        """
+        return pulumi.get(self, "folder_path_hash")
+
+    @folder_path_hash.setter
+    def folder_path_hash(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "folder_path_hash", value)
 
     @property
     @pulumi.getter(name="guardConfigurations")
@@ -1083,6 +1115,8 @@ class CustomModel(pulumi.CustomResource):
             __props__.__dict__["training_data_partition_column"] = training_data_partition_column
             __props__.__dict__["training_dataset_id"] = training_dataset_id
             __props__.__dict__["deployments_count"] = None
+            __props__.__dict__["files_hashes"] = None
+            __props__.__dict__["folder_path_hash"] = None
             __props__.__dict__["training_dataset_name"] = None
             __props__.__dict__["training_dataset_version_id"] = None
             __props__.__dict__["version_id"] = None
@@ -1103,7 +1137,9 @@ class CustomModel(pulumi.CustomResource):
             deployments_count: Optional[pulumi.Input[int]] = None,
             description: Optional[pulumi.Input[str]] = None,
             files: Optional[Any] = None,
+            files_hashes: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             folder_path: Optional[pulumi.Input[str]] = None,
+            folder_path_hash: Optional[pulumi.Input[str]] = None,
             guard_configurations: Optional[pulumi.Input[Sequence[pulumi.Input[Union['CustomModelGuardConfigurationArgs', 'CustomModelGuardConfigurationArgsDict']]]]] = None,
             is_proxy: Optional[pulumi.Input[bool]] = None,
             language: Optional[pulumi.Input[str]] = None,
@@ -1137,7 +1173,9 @@ class CustomModel(pulumi.CustomResource):
         :param pulumi.Input[int] deployments_count: The number of deployments for the Custom Model.
         :param pulumi.Input[str] description: The description of the Custom Model.
         :param Any files: The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Custom Model. If list is of strings, then basenames will be used for tuples.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] files_hashes: The hash of file contents for each file in files.
         :param pulumi.Input[str] folder_path: The path to a folder containing files to build the Custom Model. Each file in the folder is uploaded under path relative to a folder path.
+        :param pulumi.Input[str] folder_path_hash: The hash of the folder path contents.
         :param pulumi.Input[Sequence[pulumi.Input[Union['CustomModelGuardConfigurationArgs', 'CustomModelGuardConfigurationArgsDict']]]] guard_configurations: The guard configurations for the Custom Model.
         :param pulumi.Input[bool] is_proxy: Flag indicating if the Custom Model is a proxy model.
         :param pulumi.Input[str] language: The language used to build the Custom Model.
@@ -1169,7 +1207,9 @@ class CustomModel(pulumi.CustomResource):
         __props__.__dict__["deployments_count"] = deployments_count
         __props__.__dict__["description"] = description
         __props__.__dict__["files"] = files
+        __props__.__dict__["files_hashes"] = files_hashes
         __props__.__dict__["folder_path"] = folder_path
+        __props__.__dict__["folder_path_hash"] = folder_path_hash
         __props__.__dict__["guard_configurations"] = guard_configurations
         __props__.__dict__["is_proxy"] = is_proxy
         __props__.__dict__["language"] = language
@@ -1248,12 +1288,28 @@ class CustomModel(pulumi.CustomResource):
         return pulumi.get(self, "files")
 
     @property
+    @pulumi.getter(name="filesHashes")
+    def files_hashes(self) -> pulumi.Output[Sequence[str]]:
+        """
+        The hash of file contents for each file in files.
+        """
+        return pulumi.get(self, "files_hashes")
+
+    @property
     @pulumi.getter(name="folderPath")
     def folder_path(self) -> pulumi.Output[Optional[str]]:
         """
         The path to a folder containing files to build the Custom Model. Each file in the folder is uploaded under path relative to a folder path.
         """
         return pulumi.get(self, "folder_path")
+
+    @property
+    @pulumi.getter(name="folderPathHash")
+    def folder_path_hash(self) -> pulumi.Output[str]:
+        """
+        The hash of the folder path contents.
+        """
+        return pulumi.get(self, "folder_path_hash")
 
     @property
     @pulumi.getter(name="guardConfigurations")

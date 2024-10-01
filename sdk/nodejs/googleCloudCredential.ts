@@ -44,6 +44,10 @@ export class GoogleCloudCredential extends pulumi.CustomResource {
      */
     public readonly gcpKeyFile!: pulumi.Output<string | undefined>;
     /**
+     * The hash of the GCP key file contents.
+     */
+    public /*out*/ readonly gcpKeyFileHash!: pulumi.Output<string>;
+    /**
      * The name of the Google Cloud Credential.
      */
     public readonly name!: pulumi.Output<string>;
@@ -63,12 +67,14 @@ export class GoogleCloudCredential extends pulumi.CustomResource {
             const state = argsOrState as GoogleCloudCredentialState | undefined;
             resourceInputs["gcpKey"] = state ? state.gcpKey : undefined;
             resourceInputs["gcpKeyFile"] = state ? state.gcpKeyFile : undefined;
+            resourceInputs["gcpKeyFileHash"] = state ? state.gcpKeyFileHash : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
         } else {
             const args = argsOrState as GoogleCloudCredentialArgs | undefined;
             resourceInputs["gcpKey"] = args?.gcpKey ? pulumi.secret(args.gcpKey) : undefined;
             resourceInputs["gcpKeyFile"] = args ? args.gcpKeyFile : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
+            resourceInputs["gcpKeyFileHash"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         const secretOpts = { additionalSecretOutputs: ["gcpKey"] };
@@ -89,6 +95,10 @@ export interface GoogleCloudCredentialState {
      * The file that has the GCP key. Cannot be used with `gcpKey`.
      */
     gcpKeyFile?: pulumi.Input<string>;
+    /**
+     * The hash of the GCP key file contents.
+     */
+    gcpKeyFileHash?: pulumi.Input<string>;
     /**
      * The name of the Google Cloud Credential.
      */

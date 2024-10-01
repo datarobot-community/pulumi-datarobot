@@ -49,6 +49,10 @@ export class DatasetFromFile extends pulumi.CustomResource {
     }
 
     /**
+     * The hash of the file contents.
+     */
+    public /*out*/ readonly fileHash!: pulumi.Output<string>;
+    /**
      * The path to the file to upload.
      */
     public readonly filePath!: pulumi.Output<string>;
@@ -74,6 +78,7 @@ export class DatasetFromFile extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as DatasetFromFileState | undefined;
+            resourceInputs["fileHash"] = state ? state.fileHash : undefined;
             resourceInputs["filePath"] = state ? state.filePath : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["useCaseIds"] = state ? state.useCaseIds : undefined;
@@ -85,6 +90,7 @@ export class DatasetFromFile extends pulumi.CustomResource {
             resourceInputs["filePath"] = args ? args.filePath : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["useCaseIds"] = args ? args.useCaseIds : undefined;
+            resourceInputs["fileHash"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(DatasetFromFile.__pulumiType, name, resourceInputs, opts);
@@ -95,6 +101,10 @@ export class DatasetFromFile extends pulumi.CustomResource {
  * Input properties used for looking up and filtering DatasetFromFile resources.
  */
 export interface DatasetFromFileState {
+    /**
+     * The hash of the file contents.
+     */
+    fileHash?: pulumi.Input<string>;
     /**
      * The path to the file to upload.
      */
