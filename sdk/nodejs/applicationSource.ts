@@ -15,10 +15,13 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as datarobot from "@datarobot/pulumi-datarobot";
  *
- * const example = new datarobot.ApplicationSource("example", {files: [
- *     ["start-app.sh"],
- *     ["streamlit-app.py"],
- * ]});
+ * const example = new datarobot.ApplicationSource("example", {
+ *     baseEnvironmentId: "6542cd582a9d3d51bf4ac71e",
+ *     files: [
+ *         ["start-app.sh"],
+ *         ["streamlit-app.py"],
+ *     ],
+ * });
  * export const datarobotApplicationSourceId = example.id;
  * export const datarobotApplicationSourceVersionId = example.versionId;
  * ```
@@ -51,6 +54,14 @@ export class ApplicationSource extends pulumi.CustomResource {
         return obj['__pulumiType'] === ApplicationSource.__pulumiType;
     }
 
+    /**
+     * The ID of the base environment for the Application Source.
+     */
+    public readonly baseEnvironmentId!: pulumi.Output<string>;
+    /**
+     * The ID of the base environment version for the Application Source.
+     */
+    public readonly baseEnvironmentVersionId!: pulumi.Output<string>;
     /**
      * The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
      */
@@ -97,6 +108,8 @@ export class ApplicationSource extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as ApplicationSourceState | undefined;
+            resourceInputs["baseEnvironmentId"] = state ? state.baseEnvironmentId : undefined;
+            resourceInputs["baseEnvironmentVersionId"] = state ? state.baseEnvironmentVersionId : undefined;
             resourceInputs["files"] = state ? state.files : undefined;
             resourceInputs["filesHashes"] = state ? state.filesHashes : undefined;
             resourceInputs["folderPath"] = state ? state.folderPath : undefined;
@@ -107,6 +120,8 @@ export class ApplicationSource extends pulumi.CustomResource {
             resourceInputs["versionId"] = state ? state.versionId : undefined;
         } else {
             const args = argsOrState as ApplicationSourceArgs | undefined;
+            resourceInputs["baseEnvironmentId"] = args ? args.baseEnvironmentId : undefined;
+            resourceInputs["baseEnvironmentVersionId"] = args ? args.baseEnvironmentVersionId : undefined;
             resourceInputs["files"] = args ? args.files : undefined;
             resourceInputs["folderPath"] = args ? args.folderPath : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
@@ -125,6 +140,14 @@ export class ApplicationSource extends pulumi.CustomResource {
  * Input properties used for looking up and filtering ApplicationSource resources.
  */
 export interface ApplicationSourceState {
+    /**
+     * The ID of the base environment for the Application Source.
+     */
+    baseEnvironmentId?: pulumi.Input<string>;
+    /**
+     * The ID of the base environment version for the Application Source.
+     */
+    baseEnvironmentVersionId?: pulumi.Input<string>;
     /**
      * The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
      */
@@ -163,6 +186,14 @@ export interface ApplicationSourceState {
  * The set of arguments for constructing a ApplicationSource resource.
  */
 export interface ApplicationSourceArgs {
+    /**
+     * The ID of the base environment for the Application Source.
+     */
+    baseEnvironmentId?: pulumi.Input<string>;
+    /**
+     * The ID of the base environment version for the Application Source.
+     */
+    baseEnvironmentVersionId?: pulumi.Input<string>;
     /**
      * The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
      */
