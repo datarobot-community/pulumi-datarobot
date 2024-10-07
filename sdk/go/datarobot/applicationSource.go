@@ -28,6 +28,7 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			example, err := datarobot.NewApplicationSource(ctx, "example", &datarobot.ApplicationSourceArgs{
+//				BaseEnvironmentId: pulumi.String("6542cd582a9d3d51bf4ac71e"),
 //				Files: pulumi.Any{
 //					[]string{
 //						"start-app.sh",
@@ -50,6 +51,10 @@ import (
 type ApplicationSource struct {
 	pulumi.CustomResourceState
 
+	// The ID of the base environment for the Application Source.
+	BaseEnvironmentId pulumi.StringOutput `pulumi:"baseEnvironmentId"`
+	// The ID of the base environment version for the Application Source.
+	BaseEnvironmentVersionId pulumi.StringOutput `pulumi:"baseEnvironmentVersionId"`
 	// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
 	Files pulumi.AnyOutput `pulumi:"files"`
 	// The hash of file contents for each file in files.
@@ -98,6 +103,10 @@ func GetApplicationSource(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering ApplicationSource resources.
 type applicationSourceState struct {
+	// The ID of the base environment for the Application Source.
+	BaseEnvironmentId *string `pulumi:"baseEnvironmentId"`
+	// The ID of the base environment version for the Application Source.
+	BaseEnvironmentVersionId *string `pulumi:"baseEnvironmentVersionId"`
 	// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
 	Files interface{} `pulumi:"files"`
 	// The hash of file contents for each file in files.
@@ -117,6 +126,10 @@ type applicationSourceState struct {
 }
 
 type ApplicationSourceState struct {
+	// The ID of the base environment for the Application Source.
+	BaseEnvironmentId pulumi.StringPtrInput
+	// The ID of the base environment version for the Application Source.
+	BaseEnvironmentVersionId pulumi.StringPtrInput
 	// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
 	Files pulumi.Input
 	// The hash of file contents for each file in files.
@@ -140,6 +153,10 @@ func (ApplicationSourceState) ElementType() reflect.Type {
 }
 
 type applicationSourceArgs struct {
+	// The ID of the base environment for the Application Source.
+	BaseEnvironmentId *string `pulumi:"baseEnvironmentId"`
+	// The ID of the base environment version for the Application Source.
+	BaseEnvironmentVersionId *string `pulumi:"baseEnvironmentVersionId"`
 	// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
 	Files interface{} `pulumi:"files"`
 	// The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
@@ -154,6 +171,10 @@ type applicationSourceArgs struct {
 
 // The set of arguments for constructing a ApplicationSource resource.
 type ApplicationSourceArgs struct {
+	// The ID of the base environment for the Application Source.
+	BaseEnvironmentId pulumi.StringPtrInput
+	// The ID of the base environment version for the Application Source.
+	BaseEnvironmentVersionId pulumi.StringPtrInput
 	// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
 	Files pulumi.Input
 	// The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
@@ -251,6 +272,16 @@ func (o ApplicationSourceOutput) ToApplicationSourceOutput() ApplicationSourceOu
 
 func (o ApplicationSourceOutput) ToApplicationSourceOutputWithContext(ctx context.Context) ApplicationSourceOutput {
 	return o
+}
+
+// The ID of the base environment for the Application Source.
+func (o ApplicationSourceOutput) BaseEnvironmentId() pulumi.StringOutput {
+	return o.ApplyT(func(v *ApplicationSource) pulumi.StringOutput { return v.BaseEnvironmentId }).(pulumi.StringOutput)
+}
+
+// The ID of the base environment version for the Application Source.
+func (o ApplicationSourceOutput) BaseEnvironmentVersionId() pulumi.StringOutput {
+	return o.ApplyT(func(v *ApplicationSource) pulumi.StringOutput { return v.BaseEnvironmentVersionId }).(pulumi.StringOutput)
 }
 
 // The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.

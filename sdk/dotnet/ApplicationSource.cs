@@ -25,6 +25,7 @@ namespace DataRobotPulumi.Datarobot
     /// {
     ///     var example = new Datarobot.ApplicationSource("example", new()
     ///     {
+    ///         BaseEnvironmentId = "6542cd582a9d3d51bf4ac71e",
     ///         Files = new[]
     ///         {
     ///             new[]
@@ -49,6 +50,18 @@ namespace DataRobotPulumi.Datarobot
     [DatarobotResourceType("datarobot:index/applicationSource:ApplicationSource")]
     public partial class ApplicationSource : global::Pulumi.CustomResource
     {
+        /// <summary>
+        /// The ID of the base environment for the Application Source.
+        /// </summary>
+        [Output("baseEnvironmentId")]
+        public Output<string> BaseEnvironmentId { get; private set; } = null!;
+
+        /// <summary>
+        /// The ID of the base environment version for the Application Source.
+        /// </summary>
+        [Output("baseEnvironmentVersionId")]
+        public Output<string> BaseEnvironmentVersionId { get; private set; } = null!;
+
         /// <summary>
         /// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
         /// </summary>
@@ -145,6 +158,18 @@ namespace DataRobotPulumi.Datarobot
     public sealed class ApplicationSourceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// The ID of the base environment for the Application Source.
+        /// </summary>
+        [Input("baseEnvironmentId")]
+        public Input<string>? BaseEnvironmentId { get; set; }
+
+        /// <summary>
+        /// The ID of the base environment version for the Application Source.
+        /// </summary>
+        [Input("baseEnvironmentVersionId")]
+        public Input<string>? BaseEnvironmentVersionId { get; set; }
+
+        /// <summary>
         /// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
         /// </summary>
         [Input("files")]
@@ -188,6 +213,18 @@ namespace DataRobotPulumi.Datarobot
 
     public sealed class ApplicationSourceState : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// The ID of the base environment for the Application Source.
+        /// </summary>
+        [Input("baseEnvironmentId")]
+        public Input<string>? BaseEnvironmentId { get; set; }
+
+        /// <summary>
+        /// The ID of the base environment version for the Application Source.
+        /// </summary>
+        [Input("baseEnvironmentVersionId")]
+        public Input<string>? BaseEnvironmentVersionId { get; set; }
+
         /// <summary>
         /// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
         /// </summary>

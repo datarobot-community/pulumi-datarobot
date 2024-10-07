@@ -16,6 +16,8 @@ __all__ = ['ApplicationSourceArgs', 'ApplicationSource']
 @pulumi.input_type
 class ApplicationSourceArgs:
     def __init__(__self__, *,
+                 base_environment_id: Optional[pulumi.Input[str]] = None,
+                 base_environment_version_id: Optional[pulumi.Input[str]] = None,
                  files: Optional[Any] = None,
                  folder_path: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
@@ -23,12 +25,18 @@ class ApplicationSourceArgs:
                  runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input['ApplicationSourceRuntimeParameterValueArgs']]]] = None):
         """
         The set of arguments for constructing a ApplicationSource resource.
+        :param pulumi.Input[str] base_environment_id: The ID of the base environment for the Application Source.
+        :param pulumi.Input[str] base_environment_version_id: The ID of the base environment version for the Application Source.
         :param Any files: The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
         :param pulumi.Input[str] folder_path: The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
         :param pulumi.Input[str] name: The name of the Application Source.
         :param pulumi.Input['ApplicationSourceResourceSettingsArgs'] resource_settings: The resource settings for the Application Source.
         :param pulumi.Input[Sequence[pulumi.Input['ApplicationSourceRuntimeParameterValueArgs']]] runtime_parameter_values: The runtime parameter values for the Application Source.
         """
+        if base_environment_id is not None:
+            pulumi.set(__self__, "base_environment_id", base_environment_id)
+        if base_environment_version_id is not None:
+            pulumi.set(__self__, "base_environment_version_id", base_environment_version_id)
         if files is not None:
             pulumi.set(__self__, "files", files)
         if folder_path is not None:
@@ -39,6 +47,30 @@ class ApplicationSourceArgs:
             pulumi.set(__self__, "resource_settings", resource_settings)
         if runtime_parameter_values is not None:
             pulumi.set(__self__, "runtime_parameter_values", runtime_parameter_values)
+
+    @property
+    @pulumi.getter(name="baseEnvironmentId")
+    def base_environment_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The ID of the base environment for the Application Source.
+        """
+        return pulumi.get(self, "base_environment_id")
+
+    @base_environment_id.setter
+    def base_environment_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "base_environment_id", value)
+
+    @property
+    @pulumi.getter(name="baseEnvironmentVersionId")
+    def base_environment_version_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The ID of the base environment version for the Application Source.
+        """
+        return pulumi.get(self, "base_environment_version_id")
+
+    @base_environment_version_id.setter
+    def base_environment_version_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "base_environment_version_id", value)
 
     @property
     @pulumi.getter
@@ -104,6 +136,8 @@ class ApplicationSourceArgs:
 @pulumi.input_type
 class _ApplicationSourceState:
     def __init__(__self__, *,
+                 base_environment_id: Optional[pulumi.Input[str]] = None,
+                 base_environment_version_id: Optional[pulumi.Input[str]] = None,
                  files: Optional[Any] = None,
                  files_hashes: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  folder_path: Optional[pulumi.Input[str]] = None,
@@ -114,6 +148,8 @@ class _ApplicationSourceState:
                  version_id: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering ApplicationSource resources.
+        :param pulumi.Input[str] base_environment_id: The ID of the base environment for the Application Source.
+        :param pulumi.Input[str] base_environment_version_id: The ID of the base environment version for the Application Source.
         :param Any files: The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] files_hashes: The hash of file contents for each file in files.
         :param pulumi.Input[str] folder_path: The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
@@ -123,6 +159,10 @@ class _ApplicationSourceState:
         :param pulumi.Input[Sequence[pulumi.Input['ApplicationSourceRuntimeParameterValueArgs']]] runtime_parameter_values: The runtime parameter values for the Application Source.
         :param pulumi.Input[str] version_id: The version ID of the Application Source.
         """
+        if base_environment_id is not None:
+            pulumi.set(__self__, "base_environment_id", base_environment_id)
+        if base_environment_version_id is not None:
+            pulumi.set(__self__, "base_environment_version_id", base_environment_version_id)
         if files is not None:
             pulumi.set(__self__, "files", files)
         if files_hashes is not None:
@@ -139,6 +179,30 @@ class _ApplicationSourceState:
             pulumi.set(__self__, "runtime_parameter_values", runtime_parameter_values)
         if version_id is not None:
             pulumi.set(__self__, "version_id", version_id)
+
+    @property
+    @pulumi.getter(name="baseEnvironmentId")
+    def base_environment_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The ID of the base environment for the Application Source.
+        """
+        return pulumi.get(self, "base_environment_id")
+
+    @base_environment_id.setter
+    def base_environment_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "base_environment_id", value)
+
+    @property
+    @pulumi.getter(name="baseEnvironmentVersionId")
+    def base_environment_version_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The ID of the base environment version for the Application Source.
+        """
+        return pulumi.get(self, "base_environment_version_id")
+
+    @base_environment_version_id.setter
+    def base_environment_version_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "base_environment_version_id", value)
 
     @property
     @pulumi.getter
@@ -242,6 +306,8 @@ class ApplicationSource(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 base_environment_id: Optional[pulumi.Input[str]] = None,
+                 base_environment_version_id: Optional[pulumi.Input[str]] = None,
                  files: Optional[Any] = None,
                  folder_path: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
@@ -257,16 +323,20 @@ class ApplicationSource(pulumi.CustomResource):
         import pulumi
         import pulumi_datarobot as datarobot
 
-        example = datarobot.ApplicationSource("example", files=[
-            ["start-app.sh"],
-            ["streamlit-app.py"],
-        ])
+        example = datarobot.ApplicationSource("example",
+            base_environment_id="6542cd582a9d3d51bf4ac71e",
+            files=[
+                ["start-app.sh"],
+                ["streamlit-app.py"],
+            ])
         pulumi.export("datarobotApplicationSourceId", example.id)
         pulumi.export("datarobotApplicationSourceVersionId", example.version_id)
         ```
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[str] base_environment_id: The ID of the base environment for the Application Source.
+        :param pulumi.Input[str] base_environment_version_id: The ID of the base environment version for the Application Source.
         :param Any files: The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
         :param pulumi.Input[str] folder_path: The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
         :param pulumi.Input[str] name: The name of the Application Source.
@@ -288,10 +358,12 @@ class ApplicationSource(pulumi.CustomResource):
         import pulumi
         import pulumi_datarobot as datarobot
 
-        example = datarobot.ApplicationSource("example", files=[
-            ["start-app.sh"],
-            ["streamlit-app.py"],
-        ])
+        example = datarobot.ApplicationSource("example",
+            base_environment_id="6542cd582a9d3d51bf4ac71e",
+            files=[
+                ["start-app.sh"],
+                ["streamlit-app.py"],
+            ])
         pulumi.export("datarobotApplicationSourceId", example.id)
         pulumi.export("datarobotApplicationSourceVersionId", example.version_id)
         ```
@@ -311,6 +383,8 @@ class ApplicationSource(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 base_environment_id: Optional[pulumi.Input[str]] = None,
+                 base_environment_version_id: Optional[pulumi.Input[str]] = None,
                  files: Optional[Any] = None,
                  folder_path: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
@@ -325,6 +399,8 @@ class ApplicationSource(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = ApplicationSourceArgs.__new__(ApplicationSourceArgs)
 
+            __props__.__dict__["base_environment_id"] = base_environment_id
+            __props__.__dict__["base_environment_version_id"] = base_environment_version_id
             __props__.__dict__["files"] = files
             __props__.__dict__["folder_path"] = folder_path
             __props__.__dict__["name"] = name
@@ -343,6 +419,8 @@ class ApplicationSource(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
+            base_environment_id: Optional[pulumi.Input[str]] = None,
+            base_environment_version_id: Optional[pulumi.Input[str]] = None,
             files: Optional[Any] = None,
             files_hashes: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             folder_path: Optional[pulumi.Input[str]] = None,
@@ -358,6 +436,8 @@ class ApplicationSource(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[str] base_environment_id: The ID of the base environment for the Application Source.
+        :param pulumi.Input[str] base_environment_version_id: The ID of the base environment version for the Application Source.
         :param Any files: The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] files_hashes: The hash of file contents for each file in files.
         :param pulumi.Input[str] folder_path: The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
@@ -371,6 +451,8 @@ class ApplicationSource(pulumi.CustomResource):
 
         __props__ = _ApplicationSourceState.__new__(_ApplicationSourceState)
 
+        __props__.__dict__["base_environment_id"] = base_environment_id
+        __props__.__dict__["base_environment_version_id"] = base_environment_version_id
         __props__.__dict__["files"] = files
         __props__.__dict__["files_hashes"] = files_hashes
         __props__.__dict__["folder_path"] = folder_path
@@ -380,6 +462,22 @@ class ApplicationSource(pulumi.CustomResource):
         __props__.__dict__["runtime_parameter_values"] = runtime_parameter_values
         __props__.__dict__["version_id"] = version_id
         return ApplicationSource(resource_name, opts=opts, __props__=__props__)
+
+    @property
+    @pulumi.getter(name="baseEnvironmentId")
+    def base_environment_id(self) -> pulumi.Output[str]:
+        """
+        The ID of the base environment for the Application Source.
+        """
+        return pulumi.get(self, "base_environment_id")
+
+    @property
+    @pulumi.getter(name="baseEnvironmentVersionId")
+    def base_environment_version_id(self) -> pulumi.Output[str]:
+        """
+        The ID of the base environment version for the Application Source.
+        """
+        return pulumi.get(self, "base_environment_version_id")
 
     @property
     @pulumi.getter
