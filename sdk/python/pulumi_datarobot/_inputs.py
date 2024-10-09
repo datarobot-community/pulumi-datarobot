@@ -14,7 +14,6 @@ __all__ = [
     'ApplicationSourceRuntimeParameterValueArgs',
     'CustomModelGuardConfigurationArgs',
     'CustomModelGuardConfigurationInterventionArgs',
-    'CustomModelGuardConfigurationInterventionConditionArgs',
     'CustomModelOverallModerationConfigurationArgs',
     'CustomModelResourceSettingsArgs',
     'CustomModelRuntimeParameterValueArgs',
@@ -304,11 +303,11 @@ class CustomModelGuardConfigurationArgs:
 class CustomModelGuardConfigurationInterventionArgs:
     def __init__(__self__, *,
                  action: pulumi.Input[str],
-                 condition: pulumi.Input['CustomModelGuardConfigurationInterventionConditionArgs'],
+                 condition: pulumi.Input[str],
                  message: Optional[pulumi.Input[str]] = None):
         """
         :param pulumi.Input[str] action: The action of the guard intervention.
-        :param pulumi.Input['CustomModelGuardConfigurationInterventionConditionArgs'] condition: The list of conditions for the guard intervention.
+        :param pulumi.Input[str] condition: The JSON-encoded condition of the guard intervention. e.g. `{"comparand": 0.5, "comparator": "lessThan"}`
         :param pulumi.Input[str] message: The message of the guard intervention.
         """
         pulumi.set(__self__, "action", action)
@@ -330,14 +329,14 @@ class CustomModelGuardConfigurationInterventionArgs:
 
     @property
     @pulumi.getter
-    def condition(self) -> pulumi.Input['CustomModelGuardConfigurationInterventionConditionArgs']:
+    def condition(self) -> pulumi.Input[str]:
         """
-        The list of conditions for the guard intervention.
+        The JSON-encoded condition of the guard intervention. e.g. `{"comparand": 0.5, "comparator": "lessThan"}`
         """
         return pulumi.get(self, "condition")
 
     @condition.setter
-    def condition(self, value: pulumi.Input['CustomModelGuardConfigurationInterventionConditionArgs']):
+    def condition(self, value: pulumi.Input[str]):
         pulumi.set(self, "condition", value)
 
     @property
@@ -351,43 +350,6 @@ class CustomModelGuardConfigurationInterventionArgs:
     @message.setter
     def message(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "message", value)
-
-
-@pulumi.input_type
-class CustomModelGuardConfigurationInterventionConditionArgs:
-    def __init__(__self__, *,
-                 comparand: pulumi.Input[float],
-                 comparator: pulumi.Input[str]):
-        """
-        :param pulumi.Input[float] comparand: The comparand of the guard condition.
-        :param pulumi.Input[str] comparator: The comparator of the guard condition.
-        """
-        pulumi.set(__self__, "comparand", comparand)
-        pulumi.set(__self__, "comparator", comparator)
-
-    @property
-    @pulumi.getter
-    def comparand(self) -> pulumi.Input[float]:
-        """
-        The comparand of the guard condition.
-        """
-        return pulumi.get(self, "comparand")
-
-    @comparand.setter
-    def comparand(self, value: pulumi.Input[float]):
-        pulumi.set(self, "comparand", value)
-
-    @property
-    @pulumi.getter
-    def comparator(self) -> pulumi.Input[str]:
-        """
-        The comparator of the guard condition.
-        """
-        return pulumi.get(self, "comparator")
-
-    @comparator.setter
-    def comparator(self, value: pulumi.Input[str]):
-        pulumi.set(self, "comparator", value)
 
 
 @pulumi.input_type

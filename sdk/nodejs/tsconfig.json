@@ -32,6 +32,7 @@
         "provider.ts",
         "qaApplication.ts",
         "registeredModel.ts",
+        "registeredModelFromLeaderboard.ts",
         "remoteRepository.ts",
         "types/index.ts",
         "types/input.ts",

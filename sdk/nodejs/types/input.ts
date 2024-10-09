@@ -80,24 +80,13 @@ export interface CustomModelGuardConfigurationIntervention {
      */
     action: pulumi.Input<string>;
     /**
-     * The list of conditions for the guard intervention.
+     * The JSON-encoded condition of the guard intervention. e.g. `{"comparand": 0.5, "comparator": "lessThan"}`
      */
-    condition: pulumi.Input<inputs.CustomModelGuardConfigurationInterventionCondition>;
+    condition: pulumi.Input<string>;
     /**
      * The message of the guard intervention.
      */
     message?: pulumi.Input<string>;
-}
-
-export interface CustomModelGuardConfigurationInterventionCondition {
-    /**
-     * The comparand of the guard condition.
-     */
-    comparand: pulumi.Input<number>;
-    /**
-     * The comparator of the guard condition.
-     */
-    comparator: pulumi.Input<string>;
 }
 
 export interface CustomModelOverallModerationConfiguration {
