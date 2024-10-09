@@ -21,6 +21,7 @@ from .prediction_environment import *
 from .provider import *
 from .qa_application import *
 from .registered_model import *
+from .registered_model_from_leaderboard import *
 from .remote_repository import *
 from .use_case import *
 from .vector_database import *
@@ -147,6 +148,14 @@ _utilities.register(
   "fqn": "pulumi_datarobot",
   "classes": {
    "datarobot:index/registeredModel:RegisteredModel": "RegisteredModel"
+  }
+ },
+ {
+  "pkg": "datarobot",
+  "mod": "index/registeredModelFromLeaderboard",
+  "fqn": "pulumi_datarobot",
+  "classes": {
+   "datarobot:index/registeredModelFromLeaderboard:RegisteredModelFromLeaderboard": "RegisteredModelFromLeaderboard"
   }
  },
  {

@@ -19,9 +19,9 @@ namespace DataRobotPulumi.Datarobot.Outputs
         /// </summary>
         public readonly string Action;
         /// <summary>
-        /// The list of conditions for the guard intervention.
+        /// The JSON-encoded condition of the guard intervention. e.g. `{"comparand": 0.5, "comparator": "lessThan"}`
         /// </summary>
-        public readonly Outputs.CustomModelGuardConfigurationInterventionCondition Condition;
+        public readonly string Condition;
         /// <summary>
         /// The message of the guard intervention.
         /// </summary>
@@ -31,7 +31,7 @@ namespace DataRobotPulumi.Datarobot.Outputs
         private CustomModelGuardConfigurationIntervention(
             string action,
 
-            Outputs.CustomModelGuardConfigurationInterventionCondition condition,
+            string condition,
 
             string? message)
         {

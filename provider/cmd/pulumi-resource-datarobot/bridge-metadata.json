@@ -161,6 +161,9 @@
             "datarobot_registered_model": {
                 "current": "datarobot:index/registeredModel:RegisteredModel"
             },
+            "datarobot_registered_model_from_leaderboard": {
+                "current": "datarobot:index/registeredModelFromLeaderboard:RegisteredModelFromLeaderboard"
+            },
             "datarobot_remote_repository": {
                 "current": "datarobot:index/remoteRepository:RemoteRepository"
             },

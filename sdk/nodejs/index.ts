@@ -85,6 +85,11 @@ export type RegisteredModel = import("./registeredModel").RegisteredModel;
 export const RegisteredModel: typeof import("./registeredModel").RegisteredModel = null as any;
 utilities.lazyLoad(exports, ["RegisteredModel"], () => require("./registeredModel"));
 
+export { RegisteredModelFromLeaderboardArgs, RegisteredModelFromLeaderboardState } from "./registeredModelFromLeaderboard";
+export type RegisteredModelFromLeaderboard = import("./registeredModelFromLeaderboard").RegisteredModelFromLeaderboard;
+export const RegisteredModelFromLeaderboard: typeof import("./registeredModelFromLeaderboard").RegisteredModelFromLeaderboard = null as any;
+utilities.lazyLoad(exports, ["RegisteredModelFromLeaderboard"], () => require("./registeredModelFromLeaderboard"));
+
 export { RemoteRepositoryArgs, RemoteRepositoryState } from "./remoteRepository";
 export type RemoteRepository = import("./remoteRepository").RemoteRepository;
 export const RemoteRepository: typeof import("./remoteRepository").RemoteRepository = null as any;
@@ -142,6 +147,8 @@ const _module = {
                 return new QaApplication(name, <any>undefined, { urn })
             case "datarobot:index/registeredModel:RegisteredModel":
                 return new RegisteredModel(name, <any>undefined, { urn })
+            case "datarobot:index/registeredModelFromLeaderboard:RegisteredModelFromLeaderboard":
+                return new RegisteredModelFromLeaderboard(name, <any>undefined, { urn })
             case "datarobot:index/remoteRepository:RemoteRepository":
                 return new RemoteRepository(name, <any>undefined, { urn })
             case "datarobot:index/useCase:UseCase":
@@ -167,6 +174,7 @@ pulumi.runtime.registerResourceModule("datarobot", "index/playground", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/predictionEnvironment", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/qaApplication", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/registeredModel", _module)
+pulumi.runtime.registerResourceModule("datarobot", "index/registeredModelFromLeaderboard", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/remoteRepository", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/useCase", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/vectorDatabase", _module)

@@ -15,7 +15,6 @@ __all__ = [
     'ApplicationSourceRuntimeParameterValue',
     'CustomModelGuardConfiguration',
     'CustomModelGuardConfigurationIntervention',
-    'CustomModelGuardConfigurationInterventionCondition',
     'CustomModelOverallModerationConfiguration',
     'CustomModelResourceSettings',
     'CustomModelRuntimeParameterValue',
@@ -276,11 +275,11 @@ class CustomModelGuardConfiguration(dict):
 class CustomModelGuardConfigurationIntervention(dict):
     def __init__(__self__, *,
                  action: str,
-                 condition: 'outputs.CustomModelGuardConfigurationInterventionCondition',
+                 condition: str,
                  message: Optional[str] = None):
         """
         :param str action: The action of the guard intervention.
-        :param 'CustomModelGuardConfigurationInterventionConditionArgs' condition: The list of conditions for the guard intervention.
+        :param str condition: The JSON-encoded condition of the guard intervention. e.g. `{"comparand": 0.5, "comparator": "lessThan"}`
         :param str message: The message of the guard intervention.
         """
         pulumi.set(__self__, "action", action)
@@ -298,9 +297,9 @@ class CustomModelGuardConfigurationIntervention(dict):
 
     @property
     @pulumi.getter
-    def condition(self) -> 'outputs.CustomModelGuardConfigurationInterventionCondition':
+    def condition(self) -> str:
         """
-        The list of conditions for the guard intervention.
+        The JSON-encoded condition of the guard intervention. e.g. `{"comparand": 0.5, "comparator": "lessThan"}`
         """
         return pulumi.get(self, "condition")
 
@@ -311,35 +310,6 @@ class CustomModelGuardConfigurationIntervention(dict):
         The message of the guard intervention.
         """
         return pulumi.get(self, "message")
-
-
-@pulumi.output_type
-class CustomModelGuardConfigurationInterventionCondition(dict):
-    def __init__(__self__, *,
-                 comparand: float,
-                 comparator: str):
-        """
-        :param float comparand: The comparand of the guard condition.
-        :param str comparator: The comparator of the guard condition.
-        """
-        pulumi.set(__self__, "comparand", comparand)
-        pulumi.set(__self__, "comparator", comparator)
-
-    @property
-    @pulumi.getter
-    def comparand(self) -> float:
-        """
-        The comparand of the guard condition.
-        """
-        return pulumi.get(self, "comparand")
-
-    @property
-    @pulumi.getter
-    def comparator(self) -> str:
-        """
-        The comparator of the guard condition.
-        """
-        return pulumi.get(self, "comparator")
 
 
 @pulumi.output_type

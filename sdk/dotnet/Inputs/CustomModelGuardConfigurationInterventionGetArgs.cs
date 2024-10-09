@@ -20,10 +20,10 @@ namespace DataRobotPulumi.Datarobot.Inputs
         public Input<string> Action { get; set; } = null!;
 
         /// <summary>
-        /// The list of conditions for the guard intervention.
+        /// The JSON-encoded condition of the guard intervention. e.g. `{"comparand": 0.5, "comparator": "lessThan"}`
         /// </summary>
         [Input("condition", required: true)]
-        public Input<Inputs.CustomModelGuardConfigurationInterventionConditionGetArgs> Condition { get; set; } = null!;
+        public Input<string> Condition { get; set; } = null!;
 
         /// <summary>
         /// The message of the guard intervention.

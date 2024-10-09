@@ -455,8 +455,8 @@ func (o CustomModelGuardConfigurationArrayOutput) Index(i pulumi.IntInput) Custo
 type CustomModelGuardConfigurationIntervention struct {
 	// The action of the guard intervention.
 	Action string `pulumi:"action"`
-	// The list of conditions for the guard intervention.
-	Condition CustomModelGuardConfigurationInterventionCondition `pulumi:"condition"`
+	// The JSON-encoded condition of the guard intervention. e.g. `{"comparand": 0.5, "comparator": "lessThan"}`
+	Condition string `pulumi:"condition"`
 	// The message of the guard intervention.
 	Message *string `pulumi:"message"`
 }
@@ -475,8 +475,8 @@ type CustomModelGuardConfigurationInterventionInput interface {
 type CustomModelGuardConfigurationInterventionArgs struct {
 	// The action of the guard intervention.
 	Action pulumi.StringInput `pulumi:"action"`
-	// The list of conditions for the guard intervention.
-	Condition CustomModelGuardConfigurationInterventionConditionInput `pulumi:"condition"`
+	// The JSON-encoded condition of the guard intervention. e.g. `{"comparand": 0.5, "comparator": "lessThan"}`
+	Condition pulumi.StringInput `pulumi:"condition"`
 	// The message of the guard intervention.
 	Message pulumi.StringPtrInput `pulumi:"message"`
 }
@@ -512,77 +512,14 @@ func (o CustomModelGuardConfigurationInterventionOutput) Action() pulumi.StringO
 	return o.ApplyT(func(v CustomModelGuardConfigurationIntervention) string { return v.Action }).(pulumi.StringOutput)
 }
 
-// The list of conditions for the guard intervention.
-func (o CustomModelGuardConfigurationInterventionOutput) Condition() CustomModelGuardConfigurationInterventionConditionOutput {
-	return o.ApplyT(func(v CustomModelGuardConfigurationIntervention) CustomModelGuardConfigurationInterventionCondition {
-		return v.Condition
-	}).(CustomModelGuardConfigurationInterventionConditionOutput)
+// The JSON-encoded condition of the guard intervention. e.g. `{"comparand": 0.5, "comparator": "lessThan"}`
+func (o CustomModelGuardConfigurationInterventionOutput) Condition() pulumi.StringOutput {
+	return o.ApplyT(func(v CustomModelGuardConfigurationIntervention) string { return v.Condition }).(pulumi.StringOutput)
 }
 
 // The message of the guard intervention.
 func (o CustomModelGuardConfigurationInterventionOutput) Message() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v CustomModelGuardConfigurationIntervention) *string { return v.Message }).(pulumi.StringPtrOutput)
-}
-
-type CustomModelGuardConfigurationInterventionCondition struct {
-	// The comparand of the guard condition.
-	Comparand float64 `pulumi:"comparand"`
-	// The comparator of the guard condition.
-	Comparator string `pulumi:"comparator"`
-}
-
-// CustomModelGuardConfigurationInterventionConditionInput is an input type that accepts CustomModelGuardConfigurationInterventionConditionArgs and CustomModelGuardConfigurationInterventionConditionOutput values.
-// You can construct a concrete instance of `CustomModelGuardConfigurationInterventionConditionInput` via:
-//
-//	CustomModelGuardConfigurationInterventionConditionArgs{...}
-type CustomModelGuardConfigurationInterventionConditionInput interface {
-	pulumi.Input
-
-	ToCustomModelGuardConfigurationInterventionConditionOutput() CustomModelGuardConfigurationInterventionConditionOutput
-	ToCustomModelGuardConfigurationInterventionConditionOutputWithContext(context.Context) CustomModelGuardConfigurationInterventionConditionOutput
-}
-
-type CustomModelGuardConfigurationInterventionConditionArgs struct {
-	// The comparand of the guard condition.
-	Comparand pulumi.Float64Input `pulumi:"comparand"`
-	// The comparator of the guard condition.
-	Comparator pulumi.StringInput `pulumi:"comparator"`
-}
-
-func (CustomModelGuardConfigurationInterventionConditionArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CustomModelGuardConfigurationInterventionCondition)(nil)).Elem()
-}
-
-func (i CustomModelGuardConfigurationInterventionConditionArgs) ToCustomModelGuardConfigurationInterventionConditionOutput() CustomModelGuardConfigurationInterventionConditionOutput {
-	return i.ToCustomModelGuardConfigurationInterventionConditionOutputWithContext(context.Background())
-}
-
-func (i CustomModelGuardConfigurationInterventionConditionArgs) ToCustomModelGuardConfigurationInterventionConditionOutputWithContext(ctx context.Context) CustomModelGuardConfigurationInterventionConditionOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CustomModelGuardConfigurationInterventionConditionOutput)
-}
-
-type CustomModelGuardConfigurationInterventionConditionOutput struct{ *pulumi.OutputState }
-
-func (CustomModelGuardConfigurationInterventionConditionOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CustomModelGuardConfigurationInterventionCondition)(nil)).Elem()
-}
-
-func (o CustomModelGuardConfigurationInterventionConditionOutput) ToCustomModelGuardConfigurationInterventionConditionOutput() CustomModelGuardConfigurationInterventionConditionOutput {
-	return o
-}
-
-func (o CustomModelGuardConfigurationInterventionConditionOutput) ToCustomModelGuardConfigurationInterventionConditionOutputWithContext(ctx context.Context) CustomModelGuardConfigurationInterventionConditionOutput {
-	return o
-}
-
-// The comparand of the guard condition.
-func (o CustomModelGuardConfigurationInterventionConditionOutput) Comparand() pulumi.Float64Output {
-	return o.ApplyT(func(v CustomModelGuardConfigurationInterventionCondition) float64 { return v.Comparand }).(pulumi.Float64Output)
-}
-
-// The comparator of the guard condition.
-func (o CustomModelGuardConfigurationInterventionConditionOutput) Comparator() pulumi.StringOutput {
-	return o.ApplyT(func(v CustomModelGuardConfigurationInterventionCondition) string { return v.Comparator }).(pulumi.StringOutput)
 }
 
 type CustomModelOverallModerationConfiguration struct {
@@ -5419,7 +5356,6 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelGuardConfigurationInput)(nil)).Elem(), CustomModelGuardConfigurationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelGuardConfigurationArrayInput)(nil)).Elem(), CustomModelGuardConfigurationArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelGuardConfigurationInterventionInput)(nil)).Elem(), CustomModelGuardConfigurationInterventionArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelGuardConfigurationInterventionConditionInput)(nil)).Elem(), CustomModelGuardConfigurationInterventionConditionArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelOverallModerationConfigurationInput)(nil)).Elem(), CustomModelOverallModerationConfigurationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelOverallModerationConfigurationPtrInput)(nil)).Elem(), CustomModelOverallModerationConfigurationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelResourceSettingsInput)(nil)).Elem(), CustomModelResourceSettingsArgs{})
@@ -5485,7 +5421,6 @@ func init() {
 	pulumi.RegisterOutputType(CustomModelGuardConfigurationOutput{})
 	pulumi.RegisterOutputType(CustomModelGuardConfigurationArrayOutput{})
 	pulumi.RegisterOutputType(CustomModelGuardConfigurationInterventionOutput{})
-	pulumi.RegisterOutputType(CustomModelGuardConfigurationInterventionConditionOutput{})
 	pulumi.RegisterOutputType(CustomModelOverallModerationConfigurationOutput{})
 	pulumi.RegisterOutputType(CustomModelOverallModerationConfigurationPtrOutput{})
 	pulumi.RegisterOutputType(CustomModelResourceSettingsOutput{})

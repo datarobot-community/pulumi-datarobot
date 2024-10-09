@@ -49,6 +49,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &QaApplication{}
 	case "datarobot:index/registeredModel:RegisteredModel":
 		r = &RegisteredModel{}
+	case "datarobot:index/registeredModelFromLeaderboard:RegisteredModelFromLeaderboard":
+		r = &RegisteredModelFromLeaderboard{}
 	case "datarobot:index/remoteRepository:RemoteRepository":
 		r = &RemoteRepository{}
 	case "datarobot:index/useCase:UseCase":
@@ -154,6 +156,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"datarobot",
 		"index/registeredModel",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"datarobot",
+		"index/registeredModelFromLeaderboard",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

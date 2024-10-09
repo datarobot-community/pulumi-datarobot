@@ -80,24 +80,13 @@ export interface CustomModelGuardConfigurationIntervention {
      */
     action: string;
     /**
-     * The list of conditions for the guard intervention.
+     * The JSON-encoded condition of the guard intervention. e.g. `{"comparand": 0.5, "comparator": "lessThan"}`
      */
-    condition: outputs.CustomModelGuardConfigurationInterventionCondition;
+    condition: string;
     /**
      * The message of the guard intervention.
      */
     message: string;
-}
-
-export interface CustomModelGuardConfigurationInterventionCondition {
-    /**
-     * The comparand of the guard condition.
-     */
-    comparand: number;
-    /**
-     * The comparator of the guard condition.
-     */
-    comparator: string;
 }
 
 export interface CustomModelOverallModerationConfiguration {

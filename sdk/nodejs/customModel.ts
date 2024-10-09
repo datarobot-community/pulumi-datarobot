@@ -50,10 +50,10 @@ import * as utilities from "./utilities";
  * //     intervention = {
  * //       action  = "block"
  * //       message = "response has been blocked by Rogue 1 guard"
- * //       condition = {
- * //         comparand  = 0.8
- * //         comparator = "lessThan"
- * //       }
+ * //       condition = jsonencode({
+ * //         "comparand": 0.5, 
+ * //         "comparator": "greaterThan"
+ * //       })
  * //     }
  * //   },
  * // ]
