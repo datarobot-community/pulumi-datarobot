@@ -4,46 +4,95 @@
 
 import copy
 import warnings
+import sys
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+if sys.version_info >= (3, 11):
+    from typing import NotRequired, TypedDict, TypeAlias
+else:
+    from typing_extensions import NotRequired, TypedDict, TypeAlias
 from . import _utilities
 
 __all__ = [
     'ApplicationSourceResourceSettingsArgs',
+    'ApplicationSourceResourceSettingsArgsDict',
     'ApplicationSourceRuntimeParameterValueArgs',
+    'ApplicationSourceRuntimeParameterValueArgsDict',
     'CustomModelGuardConfigurationArgs',
+    'CustomModelGuardConfigurationArgsDict',
     'CustomModelGuardConfigurationInterventionArgs',
+    'CustomModelGuardConfigurationInterventionArgsDict',
     'CustomModelOverallModerationConfigurationArgs',
+    'CustomModelOverallModerationConfigurationArgsDict',
     'CustomModelResourceSettingsArgs',
+    'CustomModelResourceSettingsArgsDict',
     'CustomModelRuntimeParameterValueArgs',
+    'CustomModelRuntimeParameterValueArgsDict',
     'CustomModelSourceRemoteRepositoryArgs',
+    'CustomModelSourceRemoteRepositoryArgsDict',
     'DeploymentAssociationIdSettingsArgs',
+    'DeploymentAssociationIdSettingsArgsDict',
     'DeploymentBiasAndFairnessSettingsArgs',
+    'DeploymentBiasAndFairnessSettingsArgsDict',
     'DeploymentChallengerModelsSettingsArgs',
+    'DeploymentChallengerModelsSettingsArgsDict',
     'DeploymentChallengerReplaySettingsArgs',
+    'DeploymentChallengerReplaySettingsArgsDict',
     'DeploymentDriftTrackingSettingsArgs',
+    'DeploymentDriftTrackingSettingsArgsDict',
     'DeploymentHealthSettingsArgs',
+    'DeploymentHealthSettingsArgsDict',
     'DeploymentHealthSettingsAccuracyArgs',
+    'DeploymentHealthSettingsAccuracyArgsDict',
     'DeploymentHealthSettingsActualsTimelinessArgs',
+    'DeploymentHealthSettingsActualsTimelinessArgsDict',
     'DeploymentHealthSettingsCustomMetricsArgs',
+    'DeploymentHealthSettingsCustomMetricsArgsDict',
     'DeploymentHealthSettingsCustomMetricsFailingConditionArgs',
+    'DeploymentHealthSettingsCustomMetricsFailingConditionArgsDict',
     'DeploymentHealthSettingsCustomMetricsWarningConditionArgs',
+    'DeploymentHealthSettingsCustomMetricsWarningConditionArgsDict',
     'DeploymentHealthSettingsDataDriftArgs',
+    'DeploymentHealthSettingsDataDriftArgsDict',
     'DeploymentHealthSettingsFairnessArgs',
+    'DeploymentHealthSettingsFairnessArgsDict',
     'DeploymentHealthSettingsPredictionsTimelinessArgs',
+    'DeploymentHealthSettingsPredictionsTimelinessArgsDict',
     'DeploymentHealthSettingsServiceArgs',
+    'DeploymentHealthSettingsServiceArgsDict',
     'DeploymentPredictionIntervalsSettingsArgs',
+    'DeploymentPredictionIntervalsSettingsArgsDict',
     'DeploymentPredictionWarningSettingsArgs',
+    'DeploymentPredictionWarningSettingsArgsDict',
     'DeploymentPredictionWarningSettingsCustomBoundariesArgs',
+    'DeploymentPredictionWarningSettingsCustomBoundariesArgsDict',
     'DeploymentPredictionsByForecastDateSettingsArgs',
+    'DeploymentPredictionsByForecastDateSettingsArgsDict',
     'DeploymentPredictionsDataCollectionSettingsArgs',
+    'DeploymentPredictionsDataCollectionSettingsArgsDict',
     'DeploymentPredictionsSettingsArgs',
+    'DeploymentPredictionsSettingsArgsDict',
     'DeploymentSegmentAnalysisSettingsArgs',
+    'DeploymentSegmentAnalysisSettingsArgsDict',
     'LlmBlueprintLlmSettingsArgs',
+    'LlmBlueprintLlmSettingsArgsDict',
     'LlmBlueprintVectorDatabaseSettingsArgs',
+    'LlmBlueprintVectorDatabaseSettingsArgsDict',
     'VectorDatabaseChunkingParametersArgs',
+    'VectorDatabaseChunkingParametersArgsDict',
 ]
+
+MYPY = False
+
+if not MYPY:
+    class ApplicationSourceResourceSettingsArgsDict(TypedDict):
+        replicas: NotRequired[pulumi.Input[int]]
+        """
+        The replicas for the Application Source.
+        """
+elif False:
+    ApplicationSourceResourceSettingsArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ApplicationSourceResourceSettingsArgs:
@@ -67,6 +116,23 @@ class ApplicationSourceResourceSettingsArgs:
     def replicas(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "replicas", value)
 
+
+if not MYPY:
+    class ApplicationSourceRuntimeParameterValueArgsDict(TypedDict):
+        key: pulumi.Input[str]
+        """
+        The name of the runtime parameter.
+        """
+        type: pulumi.Input[str]
+        """
+        The type of the runtime parameter.
+        """
+        value: pulumi.Input[str]
+        """
+        The value of the runtime parameter (type conversion is handled internally).
+        """
+elif False:
+    ApplicationSourceRuntimeParameterValueArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class ApplicationSourceRuntimeParameterValueArgs:
@@ -119,6 +185,55 @@ class ApplicationSourceRuntimeParameterValueArgs:
     def value(self, value: pulumi.Input[str]):
         pulumi.set(self, "value", value)
 
+
+if not MYPY:
+    class CustomModelGuardConfigurationArgsDict(TypedDict):
+        intervention: pulumi.Input['CustomModelGuardConfigurationInterventionArgsDict']
+        """
+        The intervention for the guard configuration.
+        """
+        name: pulumi.Input[str]
+        """
+        The name of the guard configuration.
+        """
+        stages: pulumi.Input[Sequence[pulumi.Input[str]]]
+        """
+        The list of stages for the guard configuration.
+        """
+        template_name: pulumi.Input[str]
+        """
+        The template name of the guard configuration.
+        """
+        deployment_id: NotRequired[pulumi.Input[str]]
+        """
+        The deployment ID of this guard.
+        """
+        input_column_name: NotRequired[pulumi.Input[str]]
+        """
+        The input column name of this guard.
+        """
+        llm_type: NotRequired[pulumi.Input[str]]
+        """
+        The LLM type for this guard.
+        """
+        openai_api_base: NotRequired[pulumi.Input[str]]
+        """
+        The OpenAI API base URL for this guard.
+        """
+        openai_credential: NotRequired[pulumi.Input[str]]
+        """
+        The ID of an OpenAI credential for this guard.
+        """
+        openai_deployment_id: NotRequired[pulumi.Input[str]]
+        """
+        The ID of an OpenAI deployment for this guard.
+        """
+        output_column_name: NotRequired[pulumi.Input[str]]
+        """
+        The output column name of this guard.
+        """
+elif False:
+    CustomModelGuardConfigurationArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class CustomModelGuardConfigurationArgs:
@@ -299,6 +414,23 @@ class CustomModelGuardConfigurationArgs:
         pulumi.set(self, "output_column_name", value)
 
 
+if not MYPY:
+    class CustomModelGuardConfigurationInterventionArgsDict(TypedDict):
+        action: pulumi.Input[str]
+        """
+        The action of the guard intervention.
+        """
+        condition: pulumi.Input[str]
+        """
+        The JSON-encoded condition of the guard intervention. e.g. `{"comparand": 0.5, "comparator": "lessThan"}`
+        """
+        message: NotRequired[pulumi.Input[str]]
+        """
+        The message of the guard intervention.
+        """
+elif False:
+    CustomModelGuardConfigurationInterventionArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class CustomModelGuardConfigurationInterventionArgs:
     def __init__(__self__, *,
@@ -352,6 +484,19 @@ class CustomModelGuardConfigurationInterventionArgs:
         pulumi.set(self, "message", value)
 
 
+if not MYPY:
+    class CustomModelOverallModerationConfigurationArgsDict(TypedDict):
+        timeout_action: NotRequired[pulumi.Input[str]]
+        """
+        The timeout action of the overall moderation configuration.
+        """
+        timeout_sec: NotRequired[pulumi.Input[int]]
+        """
+        The timeout in seconds of the overall moderation configuration.
+        """
+elif False:
+    CustomModelOverallModerationConfigurationArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class CustomModelOverallModerationConfigurationArgs:
     def __init__(__self__, *,
@@ -390,6 +535,23 @@ class CustomModelOverallModerationConfigurationArgs:
     def timeout_sec(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "timeout_sec", value)
 
+
+if not MYPY:
+    class CustomModelResourceSettingsArgsDict(TypedDict):
+        memory_mb: NotRequired[pulumi.Input[int]]
+        """
+        The memory in MB for the Custom Model.
+        """
+        network_access: NotRequired[pulumi.Input[str]]
+        """
+        The network access for the Custom Model.
+        """
+        replicas: NotRequired[pulumi.Input[int]]
+        """
+        The replicas for the Custom Model.
+        """
+elif False:
+    CustomModelResourceSettingsArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class CustomModelResourceSettingsArgs:
@@ -446,6 +608,23 @@ class CustomModelResourceSettingsArgs:
         pulumi.set(self, "replicas", value)
 
 
+if not MYPY:
+    class CustomModelRuntimeParameterValueArgsDict(TypedDict):
+        key: pulumi.Input[str]
+        """
+        The name of the runtime parameter.
+        """
+        type: pulumi.Input[str]
+        """
+        The type of the runtime parameter.
+        """
+        value: pulumi.Input[str]
+        """
+        The value of the runtime parameter (type conversion is handled internally).
+        """
+elif False:
+    CustomModelRuntimeParameterValueArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class CustomModelRuntimeParameterValueArgs:
     def __init__(__self__, *,
@@ -498,6 +677,23 @@ class CustomModelRuntimeParameterValueArgs:
         pulumi.set(self, "value", value)
 
 
+if not MYPY:
+    class CustomModelSourceRemoteRepositoryArgsDict(TypedDict):
+        id: pulumi.Input[str]
+        """
+        The ID of the source remote repository.
+        """
+        ref: pulumi.Input[str]
+        """
+        The reference of the source remote repository.
+        """
+        source_paths: pulumi.Input[Sequence[pulumi.Input[str]]]
+        """
+        The list of source paths in the source remote repository.
+        """
+elif False:
+    CustomModelSourceRemoteRepositoryArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class CustomModelSourceRemoteRepositoryArgs:
     def __init__(__self__, *,
@@ -549,6 +745,23 @@ class CustomModelSourceRemoteRepositoryArgs:
     def source_paths(self, value: pulumi.Input[Sequence[pulumi.Input[str]]]):
         pulumi.set(self, "source_paths", value)
 
+
+if not MYPY:
+    class DeploymentAssociationIdSettingsArgsDict(TypedDict):
+        auto_generate_id: NotRequired[pulumi.Input[bool]]
+        """
+        Whether to auto generate ID.
+        """
+        column_names: NotRequired[pulumi.Input[Sequence[pulumi.Input[str]]]]
+        """
+        Name of the columns to be used as association ID, currently only support a list of one string.
+        """
+        required_in_prediction_requests: NotRequired[pulumi.Input[bool]]
+        """
+        Whether the association ID column is required in prediction requests.
+        """
+elif False:
+    DeploymentAssociationIdSettingsArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class DeploymentAssociationIdSettingsArgs:
@@ -604,6 +817,27 @@ class DeploymentAssociationIdSettingsArgs:
     def required_in_prediction_requests(self, value: Optional[pulumi.Input[bool]]):
         pulumi.set(self, "required_in_prediction_requests", value)
 
+
+if not MYPY:
+    class DeploymentBiasAndFairnessSettingsArgsDict(TypedDict):
+        fairness_metric_set: pulumi.Input[str]
+        """
+        A set of fairness metrics to use for calculating fairness.
+        """
+        fairness_threshold: pulumi.Input[float]
+        """
+        Threshold value of the fairness metric. Cannot be less than 0 or greater than 1.
+        """
+        preferable_target_value: pulumi.Input[bool]
+        """
+        A target value that should be treated as a positive outcome for the prediction.
+        """
+        protected_features: pulumi.Input[Sequence[pulumi.Input[str]]]
+        """
+        A list of features to mark as protected.
+        """
+elif False:
+    DeploymentBiasAndFairnessSettingsArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class DeploymentBiasAndFairnessSettingsArgs:
@@ -672,6 +906,15 @@ class DeploymentBiasAndFairnessSettingsArgs:
         pulumi.set(self, "protected_features", value)
 
 
+if not MYPY:
+    class DeploymentChallengerModelsSettingsArgsDict(TypedDict):
+        enabled: pulumi.Input[bool]
+        """
+        Is 'True' if challenger models is enabled for this deployment.
+        """
+elif False:
+    DeploymentChallengerModelsSettingsArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class DeploymentChallengerModelsSettingsArgs:
     def __init__(__self__, *,
@@ -694,6 +937,15 @@ class DeploymentChallengerModelsSettingsArgs:
         pulumi.set(self, "enabled", value)
 
 
+if not MYPY:
+    class DeploymentChallengerReplaySettingsArgsDict(TypedDict):
+        enabled: pulumi.Input[bool]
+        """
+        If challenger replay is enabled.
+        """
+elif False:
+    DeploymentChallengerReplaySettingsArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class DeploymentChallengerReplaySettingsArgs:
     def __init__(__self__, *,
@@ -715,6 +967,19 @@ class DeploymentChallengerReplaySettingsArgs:
     def enabled(self, value: pulumi.Input[bool]):
         pulumi.set(self, "enabled", value)
 
+
+if not MYPY:
+    class DeploymentDriftTrackingSettingsArgsDict(TypedDict):
+        feature_drift_enabled: NotRequired[pulumi.Input[bool]]
+        """
+        If feature drift tracking is to be turned on.
+        """
+        target_drift_enabled: NotRequired[pulumi.Input[bool]]
+        """
+        If target drift tracking is to be turned on.
+        """
+elif False:
+    DeploymentDriftTrackingSettingsArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class DeploymentDriftTrackingSettingsArgs:
@@ -754,6 +1019,39 @@ class DeploymentDriftTrackingSettingsArgs:
     def target_drift_enabled(self, value: Optional[pulumi.Input[bool]]):
         pulumi.set(self, "target_drift_enabled", value)
 
+
+if not MYPY:
+    class DeploymentHealthSettingsArgsDict(TypedDict):
+        accuracy: NotRequired[pulumi.Input['DeploymentHealthSettingsAccuracyArgsDict']]
+        """
+        The accuracy health settings for this Deployment.
+        """
+        actuals_timeliness: NotRequired[pulumi.Input['DeploymentHealthSettingsActualsTimelinessArgsDict']]
+        """
+        The actuals timeliness health settings for this Deployment.
+        """
+        custom_metrics: NotRequired[pulumi.Input['DeploymentHealthSettingsCustomMetricsArgsDict']]
+        """
+        The custom metrics health settings for this Deployment.
+        """
+        data_drift: NotRequired[pulumi.Input['DeploymentHealthSettingsDataDriftArgsDict']]
+        """
+        The data drift health settings for this Deployment.
+        """
+        fairness: NotRequired[pulumi.Input['DeploymentHealthSettingsFairnessArgsDict']]
+        """
+        The fairness health settings for this Deployment.
+        """
+        predictions_timeliness: NotRequired[pulumi.Input['DeploymentHealthSettingsPredictionsTimelinessArgsDict']]
+        """
+        The predictions timeliness health settings for this Deployment.
+        """
+        service: NotRequired[pulumi.Input['DeploymentHealthSettingsServiceArgsDict']]
+        """
+        The service health settings for this Deployment.
+        """
+elif False:
+    DeploymentHealthSettingsArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class DeploymentHealthSettingsArgs:
@@ -874,6 +1172,31 @@ class DeploymentHealthSettingsArgs:
         pulumi.set(self, "service", value)
 
 
+if not MYPY:
+    class DeploymentHealthSettingsAccuracyArgsDict(TypedDict):
+        batch_count: NotRequired[pulumi.Input[int]]
+        """
+        The batch count for the accuracy health settings.
+        """
+        failing_threshold: NotRequired[pulumi.Input[float]]
+        """
+        The failing threshold for the accuracy health settings.
+        """
+        measurement: NotRequired[pulumi.Input[str]]
+        """
+        The measurement for the accuracy health settings.
+        """
+        metric: NotRequired[pulumi.Input[str]]
+        """
+        The metric for the accuracy health settings.
+        """
+        warning_threshold: NotRequired[pulumi.Input[float]]
+        """
+        The warning threshold for the accuracy health settings.
+        """
+elif False:
+    DeploymentHealthSettingsAccuracyArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class DeploymentHealthSettingsAccuracyArgs:
     def __init__(__self__, *,
@@ -961,6 +1284,19 @@ class DeploymentHealthSettingsAccuracyArgs:
         pulumi.set(self, "warning_threshold", value)
 
 
+if not MYPY:
+    class DeploymentHealthSettingsActualsTimelinessArgsDict(TypedDict):
+        enabled: pulumi.Input[bool]
+        """
+        If acutals timeliness is enabled for this Deployment.
+        """
+        expected_frequency: NotRequired[pulumi.Input[str]]
+        """
+        The expected frequency for the actuals timeliness health settings.
+        """
+elif False:
+    DeploymentHealthSettingsActualsTimelinessArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class DeploymentHealthSettingsActualsTimelinessArgs:
     def __init__(__self__, *,
@@ -998,6 +1334,19 @@ class DeploymentHealthSettingsActualsTimelinessArgs:
     def expected_frequency(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "expected_frequency", value)
 
+
+if not MYPY:
+    class DeploymentHealthSettingsCustomMetricsArgsDict(TypedDict):
+        failing_conditions: NotRequired[pulumi.Input[Sequence[pulumi.Input['DeploymentHealthSettingsCustomMetricsFailingConditionArgsDict']]]]
+        """
+        The failing conditions for the custom metrics health settings.
+        """
+        warning_conditions: NotRequired[pulumi.Input[Sequence[pulumi.Input['DeploymentHealthSettingsCustomMetricsWarningConditionArgsDict']]]]
+        """
+        The warning conditions for the custom metrics health settings.
+        """
+elif False:
+    DeploymentHealthSettingsCustomMetricsArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class DeploymentHealthSettingsCustomMetricsArgs:
@@ -1037,6 +1386,23 @@ class DeploymentHealthSettingsCustomMetricsArgs:
     def warning_conditions(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['DeploymentHealthSettingsCustomMetricsWarningConditionArgs']]]]):
         pulumi.set(self, "warning_conditions", value)
 
+
+if not MYPY:
+    class DeploymentHealthSettingsCustomMetricsFailingConditionArgsDict(TypedDict):
+        compare_operator: pulumi.Input[str]
+        """
+        The compare operator for the failing condition of the custom metrics health settings.
+        """
+        metric_id: pulumi.Input[str]
+        """
+        The metric ID for the failing condition of the custom metrics health settings.
+        """
+        threshold: pulumi.Input[float]
+        """
+        The threshold for the failing condition of the custom metrics health settings.
+        """
+elif False:
+    DeploymentHealthSettingsCustomMetricsFailingConditionArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class DeploymentHealthSettingsCustomMetricsFailingConditionArgs:
@@ -1090,6 +1456,23 @@ class DeploymentHealthSettingsCustomMetricsFailingConditionArgs:
         pulumi.set(self, "threshold", value)
 
 
+if not MYPY:
+    class DeploymentHealthSettingsCustomMetricsWarningConditionArgsDict(TypedDict):
+        compare_operator: pulumi.Input[str]
+        """
+        The compare operator for the warning condition of the custom metrics health settings.
+        """
+        metric_id: pulumi.Input[str]
+        """
+        The metric ID for the warning condition of the custom metrics health settings.
+        """
+        threshold: pulumi.Input[float]
+        """
+        The threshold for the warning condition of the custom metrics health settings.
+        """
+elif False:
+    DeploymentHealthSettingsCustomMetricsWarningConditionArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class DeploymentHealthSettingsCustomMetricsWarningConditionArgs:
     def __init__(__self__, *,
@@ -1141,6 +1524,51 @@ class DeploymentHealthSettingsCustomMetricsWarningConditionArgs:
     def threshold(self, value: pulumi.Input[float]):
         pulumi.set(self, "threshold", value)
 
+
+if not MYPY:
+    class DeploymentHealthSettingsDataDriftArgsDict(TypedDict):
+        batch_count: NotRequired[pulumi.Input[int]]
+        """
+        The batch count for the data drift health settings.
+        """
+        drift_threshold: NotRequired[pulumi.Input[float]]
+        """
+        The drift threshold for the data drift health settings.
+        """
+        exclude_features: NotRequired[pulumi.Input[Sequence[pulumi.Input[str]]]]
+        """
+        The exclude features for the data drift health settings.
+        """
+        high_importance_failing_count: NotRequired[pulumi.Input[int]]
+        """
+        The high importance failing count for the data drift health settings.
+        """
+        high_importance_warning_count: NotRequired[pulumi.Input[int]]
+        """
+        The high importance warning count for the data drift health settings.
+        """
+        importance_threshold: NotRequired[pulumi.Input[float]]
+        """
+        The importance threshold for the data drift health settings.
+        """
+        low_importance_failing_count: NotRequired[pulumi.Input[int]]
+        """
+        The low importance failing count for the data drift health settings.
+        """
+        low_importance_warning_count: NotRequired[pulumi.Input[int]]
+        """
+        The low importance warning count for the data drift health settings.
+        """
+        starred_features: NotRequired[pulumi.Input[Sequence[pulumi.Input[str]]]]
+        """
+        The starred features for the data drift health settings.
+        """
+        time_interval: NotRequired[pulumi.Input[str]]
+        """
+        The time interval for the data drift health settings.
+        """
+elif False:
+    DeploymentHealthSettingsDataDriftArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class DeploymentHealthSettingsDataDriftArgs:
@@ -1309,6 +1737,19 @@ class DeploymentHealthSettingsDataDriftArgs:
         pulumi.set(self, "time_interval", value)
 
 
+if not MYPY:
+    class DeploymentHealthSettingsFairnessArgsDict(TypedDict):
+        protected_class_failing_count: NotRequired[pulumi.Input[int]]
+        """
+        The protected class failing count for the fairness health settings.
+        """
+        protected_class_warning_count: NotRequired[pulumi.Input[int]]
+        """
+        The protected class warning count for the fairness health settings.
+        """
+elif False:
+    DeploymentHealthSettingsFairnessArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class DeploymentHealthSettingsFairnessArgs:
     def __init__(__self__, *,
@@ -1348,6 +1789,19 @@ class DeploymentHealthSettingsFairnessArgs:
         pulumi.set(self, "protected_class_warning_count", value)
 
 
+if not MYPY:
+    class DeploymentHealthSettingsPredictionsTimelinessArgsDict(TypedDict):
+        enabled: pulumi.Input[bool]
+        """
+        If predictions timeliness is enabled for this Deployment.
+        """
+        expected_frequency: NotRequired[pulumi.Input[str]]
+        """
+        The expected frequency for the predictions timeliness health settings.
+        """
+elif False:
+    DeploymentHealthSettingsPredictionsTimelinessArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class DeploymentHealthSettingsPredictionsTimelinessArgs:
     def __init__(__self__, *,
@@ -1386,6 +1840,15 @@ class DeploymentHealthSettingsPredictionsTimelinessArgs:
         pulumi.set(self, "expected_frequency", value)
 
 
+if not MYPY:
+    class DeploymentHealthSettingsServiceArgsDict(TypedDict):
+        batch_count: pulumi.Input[int]
+        """
+        The batch count for the service health settings.
+        """
+elif False:
+    DeploymentHealthSettingsServiceArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class DeploymentHealthSettingsServiceArgs:
     def __init__(__self__, *,
@@ -1407,6 +1870,19 @@ class DeploymentHealthSettingsServiceArgs:
     def batch_count(self, value: pulumi.Input[int]):
         pulumi.set(self, "batch_count", value)
 
+
+if not MYPY:
+    class DeploymentPredictionIntervalsSettingsArgsDict(TypedDict):
+        enabled: pulumi.Input[bool]
+        """
+        Whether prediction intervals are enabled for this deployment.
+        """
+        percentiles: NotRequired[pulumi.Input[Sequence[pulumi.Input[int]]]]
+        """
+        List of enabled prediction intervals’ sizes for this deployment.
+        """
+elif False:
+    DeploymentPredictionIntervalsSettingsArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class DeploymentPredictionIntervalsSettingsArgs:
@@ -1446,6 +1922,19 @@ class DeploymentPredictionIntervalsSettingsArgs:
         pulumi.set(self, "percentiles", value)
 
 
+if not MYPY:
+    class DeploymentPredictionWarningSettingsArgsDict(TypedDict):
+        enabled: pulumi.Input[bool]
+        """
+        If target prediction warning is enabled for this Deployment.
+        """
+        custom_boundaries: NotRequired[pulumi.Input['DeploymentPredictionWarningSettingsCustomBoundariesArgsDict']]
+        """
+        The custom boundaries for prediction warnings.
+        """
+elif False:
+    DeploymentPredictionWarningSettingsArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class DeploymentPredictionWarningSettingsArgs:
     def __init__(__self__, *,
@@ -1483,6 +1972,19 @@ class DeploymentPredictionWarningSettingsArgs:
     def custom_boundaries(self, value: Optional[pulumi.Input['DeploymentPredictionWarningSettingsCustomBoundariesArgs']]):
         pulumi.set(self, "custom_boundaries", value)
 
+
+if not MYPY:
+    class DeploymentPredictionWarningSettingsCustomBoundariesArgsDict(TypedDict):
+        lower_boundary: NotRequired[pulumi.Input[float]]
+        """
+        All predictions less than provided value will be considered anomalous.
+        """
+        upper_boundary: NotRequired[pulumi.Input[float]]
+        """
+        All predictions greater than provided value will be considered anomalous.
+        """
+elif False:
+    DeploymentPredictionWarningSettingsCustomBoundariesArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class DeploymentPredictionWarningSettingsCustomBoundariesArgs:
@@ -1522,6 +2024,23 @@ class DeploymentPredictionWarningSettingsCustomBoundariesArgs:
     def upper_boundary(self, value: Optional[pulumi.Input[float]]):
         pulumi.set(self, "upper_boundary", value)
 
+
+if not MYPY:
+    class DeploymentPredictionsByForecastDateSettingsArgsDict(TypedDict):
+        enabled: pulumi.Input[bool]
+        """
+        Is ’True’ if predictions by forecast date is enabled for this deployment.
+        """
+        column_name: NotRequired[pulumi.Input[str]]
+        """
+        The column name in prediction datasets to be used as forecast date.
+        """
+        datetime_format: NotRequired[pulumi.Input[str]]
+        """
+        The datetime format of the forecast date column in prediction datasets.
+        """
+elif False:
+    DeploymentPredictionsByForecastDateSettingsArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class DeploymentPredictionsByForecastDateSettingsArgs:
@@ -1577,6 +2096,15 @@ class DeploymentPredictionsByForecastDateSettingsArgs:
         pulumi.set(self, "datetime_format", value)
 
 
+if not MYPY:
+    class DeploymentPredictionsDataCollectionSettingsArgsDict(TypedDict):
+        enabled: pulumi.Input[bool]
+        """
+        If predictions data collections is enabled for this Deployment.
+        """
+elif False:
+    DeploymentPredictionsDataCollectionSettingsArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class DeploymentPredictionsDataCollectionSettingsArgs:
     def __init__(__self__, *,
@@ -1598,6 +2126,23 @@ class DeploymentPredictionsDataCollectionSettingsArgs:
     def enabled(self, value: pulumi.Input[bool]):
         pulumi.set(self, "enabled", value)
 
+
+if not MYPY:
+    class DeploymentPredictionsSettingsArgsDict(TypedDict):
+        max_computes: pulumi.Input[int]
+        """
+        The maximum number of computes to use for predictions.
+        """
+        min_computes: pulumi.Input[int]
+        """
+        The minimum number of computes to use for predictions.
+        """
+        real_time: pulumi.Input[bool]
+        """
+        Whether to use real-time predictions.
+        """
+elif False:
+    DeploymentPredictionsSettingsArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class DeploymentPredictionsSettingsArgs:
@@ -1651,6 +2196,19 @@ class DeploymentPredictionsSettingsArgs:
         pulumi.set(self, "real_time", value)
 
 
+if not MYPY:
+    class DeploymentSegmentAnalysisSettingsArgsDict(TypedDict):
+        enabled: pulumi.Input[bool]
+        """
+        Set to 'True' if segment analysis is enabled for this deployment.
+        """
+        attributes: NotRequired[pulumi.Input[Sequence[pulumi.Input[str]]]]
+        """
+        A list of strings that gives the segment attributes selected for tracking.
+        """
+elif False:
+    DeploymentSegmentAnalysisSettingsArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class DeploymentSegmentAnalysisSettingsArgs:
     def __init__(__self__, *,
@@ -1688,6 +2246,27 @@ class DeploymentSegmentAnalysisSettingsArgs:
     def attributes(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
         pulumi.set(self, "attributes", value)
 
+
+if not MYPY:
+    class LlmBlueprintLlmSettingsArgsDict(TypedDict):
+        max_completion_length: NotRequired[pulumi.Input[int]]
+        """
+        The maximum number of tokens allowed in the completion. The combined count of this value and prompt tokens must be below the model's maximum context size, where prompt token count is comprised of system prompt, user prompt, recent chat history, and vector database citations.
+        """
+        system_prompt: NotRequired[pulumi.Input[str]]
+        """
+        Guides the style of the LLM response. It is a 'universal' prompt, prepended to all individual prompts.
+        """
+        temperature: NotRequired[pulumi.Input[float]]
+        """
+        Controls the randomness of model output, where higher values return more diverse output and lower values return more deterministic results.
+        """
+        top_p: NotRequired[pulumi.Input[float]]
+        """
+        Threshold that controls the selection of words included in the response, based on a cumulative probability cutoff for token selection. Higher numbers return more diverse options for outputs.
+        """
+elif False:
+    LlmBlueprintLlmSettingsArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class LlmBlueprintLlmSettingsArgs:
@@ -1760,6 +2339,19 @@ class LlmBlueprintLlmSettingsArgs:
         pulumi.set(self, "top_p", value)
 
 
+if not MYPY:
+    class LlmBlueprintVectorDatabaseSettingsArgsDict(TypedDict):
+        max_documents_retrieved_per_prompt: NotRequired[pulumi.Input[int]]
+        """
+        The maximum number of documents to retrieve from the Vector Database.
+        """
+        max_tokens: NotRequired[pulumi.Input[int]]
+        """
+        The maximum number of tokens to retrieve from the Vector Database.
+        """
+elif False:
+    LlmBlueprintVectorDatabaseSettingsArgsDict: TypeAlias = Mapping[str, Any]
+
 @pulumi.input_type
 class LlmBlueprintVectorDatabaseSettingsArgs:
     def __init__(__self__, *,
@@ -1798,6 +2390,35 @@ class LlmBlueprintVectorDatabaseSettingsArgs:
     def max_tokens(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "max_tokens", value)
 
+
+if not MYPY:
+    class VectorDatabaseChunkingParametersArgsDict(TypedDict):
+        chunk_overlap_percentage: NotRequired[pulumi.Input[int]]
+        """
+        The percentage of overlap between chunks.
+        """
+        chunk_size: NotRequired[pulumi.Input[int]]
+        """
+        The size of the chunks.
+        """
+        chunking_method: NotRequired[pulumi.Input[str]]
+        """
+        The method used to chunk the data.
+        """
+        embedding_model: NotRequired[pulumi.Input[str]]
+        """
+        The id of the Embedding Model.
+        """
+        is_separator_regex: NotRequired[pulumi.Input[bool]]
+        """
+        Whether the separator is a regex.
+        """
+        separators: NotRequired[pulumi.Input[Sequence[pulumi.Input[str]]]]
+        """
+        The separators used to split the data.
+        """
+elif False:
+    VectorDatabaseChunkingParametersArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class VectorDatabaseChunkingParametersArgs:
