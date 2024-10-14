@@ -120,7 +120,7 @@ export class CustomModel extends pulumi.CustomResource {
     /**
      * The description of the Custom Model.
      */
-    public readonly description!: pulumi.Output<string | undefined>;
+    public readonly description!: pulumi.Output<string>;
     /**
      * The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Custom Model. If list is of strings, then basenames will be used for tuples.
      */

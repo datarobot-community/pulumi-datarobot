@@ -68,7 +68,7 @@ type CustomModel struct {
 	// The number of deployments for the Custom Model.
 	DeploymentsCount pulumi.IntOutput `pulumi:"deploymentsCount"`
 	// The description of the Custom Model.
-	Description pulumi.StringPtrOutput `pulumi:"description"`
+	Description pulumi.StringOutput `pulumi:"description"`
 	// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Custom Model. If list is of strings, then basenames will be used for tuples.
 	Files pulumi.AnyOutput `pulumi:"files"`
 	// The hash of file contents for each file in files.
@@ -494,8 +494,8 @@ func (o CustomModelOutput) DeploymentsCount() pulumi.IntOutput {
 }
 
 // The description of the Custom Model.
-func (o CustomModelOutput) Description() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CustomModel) pulumi.StringPtrOutput { return v.Description }).(pulumi.StringPtrOutput)
+func (o CustomModelOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v *CustomModel) pulumi.StringOutput { return v.Description }).(pulumi.StringOutput)
 }
 
 // The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Custom Model. If list is of strings, then basenames will be used for tuples.
