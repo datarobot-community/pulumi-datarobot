@@ -80,6 +80,10 @@ export class CustomApplication extends pulumi.CustomResource {
      * The version ID of the Custom Application Source.
      */
     public readonly sourceVersionId!: pulumi.Output<string>;
+    /**
+     * The list of Use Case IDs to add the Custom Application to.
+     */
+    public readonly useCaseIds!: pulumi.Output<string[] | undefined>;
 
     /**
      * Create a CustomApplication resource with the given unique name, arguments, and options.
@@ -100,6 +104,7 @@ export class CustomApplication extends pulumi.CustomResource {
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["sourceId"] = state ? state.sourceId : undefined;
             resourceInputs["sourceVersionId"] = state ? state.sourceVersionId : undefined;
+            resourceInputs["useCaseIds"] = state ? state.useCaseIds : undefined;
         } else {
             const args = argsOrState as CustomApplicationArgs | undefined;
             if ((!args || args.sourceVersionId === undefined) && !opts.urn) {
@@ -109,6 +114,7 @@ export class CustomApplication extends pulumi.CustomResource {
             resourceInputs["externalAccessRecipients"] = args ? args.externalAccessRecipients : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["sourceVersionId"] = args ? args.sourceVersionId : undefined;
+            resourceInputs["useCaseIds"] = args ? args.useCaseIds : undefined;
             resourceInputs["applicationUrl"] = undefined /*out*/;
             resourceInputs["sourceId"] = undefined /*out*/;
         }
@@ -145,6 +151,10 @@ export interface CustomApplicationState {
      * The version ID of the Custom Application Source.
      */
     sourceVersionId?: pulumi.Input<string>;
+    /**
+     * The list of Use Case IDs to add the Custom Application to.
+     */
+    useCaseIds?: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 /**
@@ -167,4 +177,8 @@ export interface CustomApplicationArgs {
      * The version ID of the Custom Application Source.
      */
     sourceVersionId: pulumi.Input<string>;
+    /**
+     * The list of Use Case IDs to add the Custom Application to.
+     */
+    useCaseIds?: pulumi.Input<pulumi.Input<string>[]>;
 }

@@ -4,9 +4,14 @@
 
 import copy
 import warnings
+import sys
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+if sys.version_info >= (3, 11):
+    from typing import NotRequired, TypedDict, TypeAlias
+else:
+    from typing_extensions import NotRequired, TypedDict, TypeAlias
 from . import _utilities
 
 __all__ = ['RegisteredModelFromLeaderboardArgs', 'RegisteredModelFromLeaderboard']
@@ -20,6 +25,7 @@ class RegisteredModelFromLeaderboardArgs:
                  distribution_prediction_model_id: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  prediction_threshold: Optional[pulumi.Input[float]] = None,
+                 use_case_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  version_name: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a RegisteredModelFromLeaderboard resource.
@@ -29,6 +35,7 @@ class RegisteredModelFromLeaderboardArgs:
         :param pulumi.Input[str] distribution_prediction_model_id: The ID of the DataRobot distribution prediction model trained on predictions from the DataRobot model.
         :param pulumi.Input[str] name: The name of the Registered Model.
         :param pulumi.Input[float] prediction_threshold: The prediction threshold for the model.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] use_case_ids: The list of Use Case IDs to add the Registered Model version to.
         :param pulumi.Input[str] version_name: The name of the Registered Model Version.
         """
         pulumi.set(__self__, "model_id", model_id)
@@ -42,6 +49,8 @@ class RegisteredModelFromLeaderboardArgs:
             pulumi.set(__self__, "name", name)
         if prediction_threshold is not None:
             pulumi.set(__self__, "prediction_threshold", prediction_threshold)
+        if use_case_ids is not None:
+            pulumi.set(__self__, "use_case_ids", use_case_ids)
         if version_name is not None:
             pulumi.set(__self__, "version_name", version_name)
 
@@ -118,6 +127,18 @@ class RegisteredModelFromLeaderboardArgs:
         pulumi.set(self, "prediction_threshold", value)
 
     @property
+    @pulumi.getter(name="useCaseIds")
+    def use_case_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        The list of Use Case IDs to add the Registered Model version to.
+        """
+        return pulumi.get(self, "use_case_ids")
+
+    @use_case_ids.setter
+    def use_case_ids(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "use_case_ids", value)
+
+    @property
     @pulumi.getter(name="versionName")
     def version_name(self) -> Optional[pulumi.Input[str]]:
         """
@@ -139,6 +160,7 @@ class _RegisteredModelFromLeaderboardState:
                  model_id: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  prediction_threshold: Optional[pulumi.Input[float]] = None,
+                 use_case_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  version_id: Optional[pulumi.Input[str]] = None,
                  version_name: Optional[pulumi.Input[str]] = None):
         """
@@ -149,6 +171,7 @@ class _RegisteredModelFromLeaderboardState:
         :param pulumi.Input[str] model_id: The ID of the DataRobot model for this Registered Model.
         :param pulumi.Input[str] name: The name of the Registered Model.
         :param pulumi.Input[float] prediction_threshold: The prediction threshold for the model.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] use_case_ids: The list of Use Case IDs to add the Registered Model version to.
         :param pulumi.Input[str] version_id: The ID of the Registered Model Version.
         :param pulumi.Input[str] version_name: The name of the Registered Model Version.
         """
@@ -164,6 +187,8 @@ class _RegisteredModelFromLeaderboardState:
             pulumi.set(__self__, "name", name)
         if prediction_threshold is not None:
             pulumi.set(__self__, "prediction_threshold", prediction_threshold)
+        if use_case_ids is not None:
+            pulumi.set(__self__, "use_case_ids", use_case_ids)
         if version_id is not None:
             pulumi.set(__self__, "version_id", version_id)
         if version_name is not None:
@@ -242,6 +267,18 @@ class _RegisteredModelFromLeaderboardState:
         pulumi.set(self, "prediction_threshold", value)
 
     @property
+    @pulumi.getter(name="useCaseIds")
+    def use_case_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        The list of Use Case IDs to add the Registered Model version to.
+        """
+        return pulumi.get(self, "use_case_ids")
+
+    @use_case_ids.setter
+    def use_case_ids(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "use_case_ids", value)
+
+    @property
     @pulumi.getter(name="versionId")
     def version_id(self) -> Optional[pulumi.Input[str]]:
         """
@@ -277,6 +314,7 @@ class RegisteredModelFromLeaderboard(pulumi.CustomResource):
                  model_id: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  prediction_threshold: Optional[pulumi.Input[float]] = None,
+                 use_case_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  version_name: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
@@ -290,6 +328,7 @@ class RegisteredModelFromLeaderboard(pulumi.CustomResource):
         :param pulumi.Input[str] model_id: The ID of the DataRobot model for this Registered Model.
         :param pulumi.Input[str] name: The name of the Registered Model.
         :param pulumi.Input[float] prediction_threshold: The prediction threshold for the model.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] use_case_ids: The list of Use Case IDs to add the Registered Model version to.
         :param pulumi.Input[str] version_name: The name of the Registered Model Version.
         """
         ...
@@ -322,6 +361,7 @@ class RegisteredModelFromLeaderboard(pulumi.CustomResource):
                  model_id: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  prediction_threshold: Optional[pulumi.Input[float]] = None,
+                 use_case_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  version_name: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
@@ -340,6 +380,7 @@ class RegisteredModelFromLeaderboard(pulumi.CustomResource):
             __props__.__dict__["model_id"] = model_id
             __props__.__dict__["name"] = name
             __props__.__dict__["prediction_threshold"] = prediction_threshold
+            __props__.__dict__["use_case_ids"] = use_case_ids
             __props__.__dict__["version_name"] = version_name
             __props__.__dict__["version_id"] = None
         super(RegisteredModelFromLeaderboard, __self__).__init__(
@@ -358,6 +399,7 @@ class RegisteredModelFromLeaderboard(pulumi.CustomResource):
             model_id: Optional[pulumi.Input[str]] = None,
             name: Optional[pulumi.Input[str]] = None,
             prediction_threshold: Optional[pulumi.Input[float]] = None,
+            use_case_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             version_id: Optional[pulumi.Input[str]] = None,
             version_name: Optional[pulumi.Input[str]] = None) -> 'RegisteredModelFromLeaderboard':
         """
@@ -373,6 +415,7 @@ class RegisteredModelFromLeaderboard(pulumi.CustomResource):
         :param pulumi.Input[str] model_id: The ID of the DataRobot model for this Registered Model.
         :param pulumi.Input[str] name: The name of the Registered Model.
         :param pulumi.Input[float] prediction_threshold: The prediction threshold for the model.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] use_case_ids: The list of Use Case IDs to add the Registered Model version to.
         :param pulumi.Input[str] version_id: The ID of the Registered Model Version.
         :param pulumi.Input[str] version_name: The name of the Registered Model Version.
         """
@@ -386,6 +429,7 @@ class RegisteredModelFromLeaderboard(pulumi.CustomResource):
         __props__.__dict__["model_id"] = model_id
         __props__.__dict__["name"] = name
         __props__.__dict__["prediction_threshold"] = prediction_threshold
+        __props__.__dict__["use_case_ids"] = use_case_ids
         __props__.__dict__["version_id"] = version_id
         __props__.__dict__["version_name"] = version_name
         return RegisteredModelFromLeaderboard(resource_name, opts=opts, __props__=__props__)
@@ -437,6 +481,14 @@ class RegisteredModelFromLeaderboard(pulumi.CustomResource):
         The prediction threshold for the model.
         """
         return pulumi.get(self, "prediction_threshold")
+
+    @property
+    @pulumi.getter(name="useCaseIds")
+    def use_case_ids(self) -> pulumi.Output[Optional[Sequence[str]]]:
+        """
+        The list of Use Case IDs to add the Registered Model version to.
+        """
+        return pulumi.get(self, "use_case_ids")
 
     @property
     @pulumi.getter(name="versionId")

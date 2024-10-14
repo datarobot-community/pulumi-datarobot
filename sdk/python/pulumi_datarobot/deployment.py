@@ -4,9 +4,14 @@
 
 import copy
 import warnings
+import sys
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+if sys.version_info >= (3, 11):
+    from typing import NotRequired, TypedDict, TypeAlias
+else:
+    from typing_extensions import NotRequired, TypedDict, TypeAlias
 from . import _utilities
 from . import outputs
 from ._inputs import *
@@ -31,7 +36,8 @@ class DeploymentArgs:
                  predictions_by_forecast_date_settings: Optional[pulumi.Input['DeploymentPredictionsByForecastDateSettingsArgs']] = None,
                  predictions_data_collection_settings: Optional[pulumi.Input['DeploymentPredictionsDataCollectionSettingsArgs']] = None,
                  predictions_settings: Optional[pulumi.Input['DeploymentPredictionsSettingsArgs']] = None,
-                 segment_analysis_settings: Optional[pulumi.Input['DeploymentSegmentAnalysisSettingsArgs']] = None):
+                 segment_analysis_settings: Optional[pulumi.Input['DeploymentSegmentAnalysisSettingsArgs']] = None,
+                 use_case_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         The set of arguments for constructing a Deployment resource.
         :param pulumi.Input[str] label: The label of the Deployment.
@@ -50,6 +56,7 @@ class DeploymentArgs:
         :param pulumi.Input['DeploymentPredictionsDataCollectionSettingsArgs'] predictions_data_collection_settings: The predictions data collection settings for the Deployment.
         :param pulumi.Input['DeploymentPredictionsSettingsArgs'] predictions_settings: Settings for the predictions.
         :param pulumi.Input['DeploymentSegmentAnalysisSettingsArgs'] segment_analysis_settings: The segment analysis settings for the Deployment.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] use_case_ids: The list of Use Case IDs to add the Deployment to.
         """
         pulumi.set(__self__, "label", label)
         pulumi.set(__self__, "prediction_environment_id", prediction_environment_id)
@@ -80,6 +87,8 @@ class DeploymentArgs:
             pulumi.set(__self__, "predictions_settings", predictions_settings)
         if segment_analysis_settings is not None:
             pulumi.set(__self__, "segment_analysis_settings", segment_analysis_settings)
+        if use_case_ids is not None:
+            pulumi.set(__self__, "use_case_ids", use_case_ids)
 
     @property
     @pulumi.getter
@@ -273,6 +282,18 @@ class DeploymentArgs:
     def segment_analysis_settings(self, value: Optional[pulumi.Input['DeploymentSegmentAnalysisSettingsArgs']]):
         pulumi.set(self, "segment_analysis_settings", value)
 
+    @property
+    @pulumi.getter(name="useCaseIds")
+    def use_case_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        The list of Use Case IDs to add the Deployment to.
+        """
+        return pulumi.get(self, "use_case_ids")
+
+    @use_case_ids.setter
+    def use_case_ids(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "use_case_ids", value)
+
 
 @pulumi.input_type
 class _DeploymentState:
@@ -292,7 +313,8 @@ class _DeploymentState:
                  predictions_data_collection_settings: Optional[pulumi.Input['DeploymentPredictionsDataCollectionSettingsArgs']] = None,
                  predictions_settings: Optional[pulumi.Input['DeploymentPredictionsSettingsArgs']] = None,
                  registered_model_version_id: Optional[pulumi.Input[str]] = None,
-                 segment_analysis_settings: Optional[pulumi.Input['DeploymentSegmentAnalysisSettingsArgs']] = None):
+                 segment_analysis_settings: Optional[pulumi.Input['DeploymentSegmentAnalysisSettingsArgs']] = None,
+                 use_case_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         Input properties used for looking up and filtering Deployment resources.
         :param pulumi.Input['DeploymentAssociationIdSettingsArgs'] association_id_settings: Association ID settings for this Deployment.
@@ -311,6 +333,7 @@ class _DeploymentState:
         :param pulumi.Input['DeploymentPredictionsSettingsArgs'] predictions_settings: Settings for the predictions.
         :param pulumi.Input[str] registered_model_version_id: The ID of the registered model version for this Deployment.
         :param pulumi.Input['DeploymentSegmentAnalysisSettingsArgs'] segment_analysis_settings: The segment analysis settings for the Deployment.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] use_case_ids: The list of Use Case IDs to add the Deployment to.
         """
         if association_id_settings is not None:
             pulumi.set(__self__, "association_id_settings", association_id_settings)
@@ -344,6 +367,8 @@ class _DeploymentState:
             pulumi.set(__self__, "registered_model_version_id", registered_model_version_id)
         if segment_analysis_settings is not None:
             pulumi.set(__self__, "segment_analysis_settings", segment_analysis_settings)
+        if use_case_ids is not None:
+            pulumi.set(__self__, "use_case_ids", use_case_ids)
 
     @property
     @pulumi.getter(name="associationIdSettings")
@@ -537,6 +562,18 @@ class _DeploymentState:
     def segment_analysis_settings(self, value: Optional[pulumi.Input['DeploymentSegmentAnalysisSettingsArgs']]):
         pulumi.set(self, "segment_analysis_settings", value)
 
+    @property
+    @pulumi.getter(name="useCaseIds")
+    def use_case_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        The list of Use Case IDs to add the Deployment to.
+        """
+        return pulumi.get(self, "use_case_ids")
+
+    @use_case_ids.setter
+    def use_case_ids(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "use_case_ids", value)
+
 
 class Deployment(pulumi.CustomResource):
     @overload
@@ -559,6 +596,7 @@ class Deployment(pulumi.CustomResource):
                  predictions_settings: Optional[pulumi.Input[Union['DeploymentPredictionsSettingsArgs', 'DeploymentPredictionsSettingsArgsDict']]] = None,
                  registered_model_version_id: Optional[pulumi.Input[str]] = None,
                  segment_analysis_settings: Optional[pulumi.Input[Union['DeploymentSegmentAnalysisSettingsArgs', 'DeploymentSegmentAnalysisSettingsArgsDict']]] = None,
+                 use_case_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         """
         Deployment
@@ -619,6 +657,7 @@ class Deployment(pulumi.CustomResource):
         :param pulumi.Input[Union['DeploymentPredictionsSettingsArgs', 'DeploymentPredictionsSettingsArgsDict']] predictions_settings: Settings for the predictions.
         :param pulumi.Input[str] registered_model_version_id: The ID of the registered model version for this Deployment.
         :param pulumi.Input[Union['DeploymentSegmentAnalysisSettingsArgs', 'DeploymentSegmentAnalysisSettingsArgsDict']] segment_analysis_settings: The segment analysis settings for the Deployment.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] use_case_ids: The list of Use Case IDs to add the Deployment to.
         """
         ...
     @overload
@@ -698,6 +737,7 @@ class Deployment(pulumi.CustomResource):
                  predictions_settings: Optional[pulumi.Input[Union['DeploymentPredictionsSettingsArgs', 'DeploymentPredictionsSettingsArgsDict']]] = None,
                  registered_model_version_id: Optional[pulumi.Input[str]] = None,
                  segment_analysis_settings: Optional[pulumi.Input[Union['DeploymentSegmentAnalysisSettingsArgs', 'DeploymentSegmentAnalysisSettingsArgsDict']]] = None,
+                 use_case_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -729,6 +769,7 @@ class Deployment(pulumi.CustomResource):
                 raise TypeError("Missing required property 'registered_model_version_id'")
             __props__.__dict__["registered_model_version_id"] = registered_model_version_id
             __props__.__dict__["segment_analysis_settings"] = segment_analysis_settings
+            __props__.__dict__["use_case_ids"] = use_case_ids
         super(Deployment, __self__).__init__(
             'datarobot:index/deployment:Deployment',
             resource_name,
@@ -754,7 +795,8 @@ class Deployment(pulumi.CustomResource):
             predictions_data_collection_settings: Optional[pulumi.Input[Union['DeploymentPredictionsDataCollectionSettingsArgs', 'DeploymentPredictionsDataCollectionSettingsArgsDict']]] = None,
             predictions_settings: Optional[pulumi.Input[Union['DeploymentPredictionsSettingsArgs', 'DeploymentPredictionsSettingsArgsDict']]] = None,
             registered_model_version_id: Optional[pulumi.Input[str]] = None,
-            segment_analysis_settings: Optional[pulumi.Input[Union['DeploymentSegmentAnalysisSettingsArgs', 'DeploymentSegmentAnalysisSettingsArgsDict']]] = None) -> 'Deployment':
+            segment_analysis_settings: Optional[pulumi.Input[Union['DeploymentSegmentAnalysisSettingsArgs', 'DeploymentSegmentAnalysisSettingsArgsDict']]] = None,
+            use_case_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None) -> 'Deployment':
         """
         Get an existing Deployment resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -778,6 +820,7 @@ class Deployment(pulumi.CustomResource):
         :param pulumi.Input[Union['DeploymentPredictionsSettingsArgs', 'DeploymentPredictionsSettingsArgsDict']] predictions_settings: Settings for the predictions.
         :param pulumi.Input[str] registered_model_version_id: The ID of the registered model version for this Deployment.
         :param pulumi.Input[Union['DeploymentSegmentAnalysisSettingsArgs', 'DeploymentSegmentAnalysisSettingsArgsDict']] segment_analysis_settings: The segment analysis settings for the Deployment.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] use_case_ids: The list of Use Case IDs to add the Deployment to.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -799,6 +842,7 @@ class Deployment(pulumi.CustomResource):
         __props__.__dict__["predictions_settings"] = predictions_settings
         __props__.__dict__["registered_model_version_id"] = registered_model_version_id
         __props__.__dict__["segment_analysis_settings"] = segment_analysis_settings
+        __props__.__dict__["use_case_ids"] = use_case_ids
         return Deployment(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -928,4 +972,12 @@ class Deployment(pulumi.CustomResource):
         The segment analysis settings for the Deployment.
         """
         return pulumi.get(self, "segment_analysis_settings")
+
+    @property
+    @pulumi.getter(name="useCaseIds")
+    def use_case_ids(self) -> pulumi.Output[Optional[Sequence[str]]]:
+        """
+        The list of Use Case IDs to add the Deployment to.
+        """
+        return pulumi.get(self, "use_case_ids")
 

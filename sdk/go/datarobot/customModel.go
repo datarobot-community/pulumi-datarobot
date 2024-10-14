@@ -113,6 +113,8 @@ type CustomModel struct {
 	TrainingDatasetName pulumi.StringOutput `pulumi:"trainingDatasetName"`
 	// The version ID of the training dataset assigned to the Custom Model.
 	TrainingDatasetVersionId pulumi.StringOutput `pulumi:"trainingDatasetVersionId"`
+	// The list of Use Case IDs to add the Custom Model version to.
+	UseCaseIds pulumi.StringArrayOutput `pulumi:"useCaseIds"`
 	// The ID of the latest Custom Model version.
 	VersionId pulumi.StringOutput `pulumi:"versionId"`
 }
@@ -203,6 +205,8 @@ type customModelState struct {
 	TrainingDatasetName *string `pulumi:"trainingDatasetName"`
 	// The version ID of the training dataset assigned to the Custom Model.
 	TrainingDatasetVersionId *string `pulumi:"trainingDatasetVersionId"`
+	// The list of Use Case IDs to add the Custom Model version to.
+	UseCaseIds []string `pulumi:"useCaseIds"`
 	// The ID of the latest Custom Model version.
 	VersionId *string `pulumi:"versionId"`
 }
@@ -264,6 +268,8 @@ type CustomModelState struct {
 	TrainingDatasetName pulumi.StringPtrInput
 	// The version ID of the training dataset assigned to the Custom Model.
 	TrainingDatasetVersionId pulumi.StringPtrInput
+	// The list of Use Case IDs to add the Custom Model version to.
+	UseCaseIds pulumi.StringArrayInput
 	// The ID of the latest Custom Model version.
 	VersionId pulumi.StringPtrInput
 }
@@ -319,6 +325,8 @@ type customModelArgs struct {
 	TrainingDataPartitionColumn *string `pulumi:"trainingDataPartitionColumn"`
 	// The ID of the training dataset assigned to the Custom Model.
 	TrainingDatasetId *string `pulumi:"trainingDatasetId"`
+	// The list of Use Case IDs to add the Custom Model version to.
+	UseCaseIds []string `pulumi:"useCaseIds"`
 }
 
 // The set of arguments for constructing a CustomModel resource.
@@ -369,6 +377,8 @@ type CustomModelArgs struct {
 	TrainingDataPartitionColumn pulumi.StringPtrInput
 	// The ID of the training dataset assigned to the Custom Model.
 	TrainingDatasetId pulumi.StringPtrInput
+	// The list of Use Case IDs to add the Custom Model version to.
+	UseCaseIds pulumi.StringArrayInput
 }
 
 func (CustomModelArgs) ElementType() reflect.Type {
@@ -598,6 +608,11 @@ func (o CustomModelOutput) TrainingDatasetName() pulumi.StringOutput {
 // The version ID of the training dataset assigned to the Custom Model.
 func (o CustomModelOutput) TrainingDatasetVersionId() pulumi.StringOutput {
 	return o.ApplyT(func(v *CustomModel) pulumi.StringOutput { return v.TrainingDatasetVersionId }).(pulumi.StringOutput)
+}
+
+// The list of Use Case IDs to add the Custom Model version to.
+func (o CustomModelOutput) UseCaseIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *CustomModel) pulumi.StringArrayOutput { return v.UseCaseIds }).(pulumi.StringArrayOutput)
 }
 
 // The ID of the latest Custom Model version.

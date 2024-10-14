@@ -73,6 +73,10 @@ export class RegisteredModel extends pulumi.CustomResource {
      */
     public readonly name!: pulumi.Output<string>;
     /**
+     * The list of Use Case IDs to add the Registered Model version to.
+     */
+    public readonly useCaseIds!: pulumi.Output<string[] | undefined>;
+    /**
      * The ID of the Registered Model Version.
      */
     public /*out*/ readonly versionId!: pulumi.Output<string>;
@@ -97,6 +101,7 @@ export class RegisteredModel extends pulumi.CustomResource {
             resourceInputs["customModelVersionId"] = state ? state.customModelVersionId : undefined;
             resourceInputs["description"] = state ? state.description : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
+            resourceInputs["useCaseIds"] = state ? state.useCaseIds : undefined;
             resourceInputs["versionId"] = state ? state.versionId : undefined;
             resourceInputs["versionName"] = state ? state.versionName : undefined;
         } else {
@@ -107,6 +112,7 @@ export class RegisteredModel extends pulumi.CustomResource {
             resourceInputs["customModelVersionId"] = args ? args.customModelVersionId : undefined;
             resourceInputs["description"] = args ? args.description : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
+            resourceInputs["useCaseIds"] = args ? args.useCaseIds : undefined;
             resourceInputs["versionName"] = args ? args.versionName : undefined;
             resourceInputs["versionId"] = undefined /*out*/;
         }
@@ -131,6 +137,10 @@ export interface RegisteredModelState {
      * The name of the Registered Model.
      */
     name?: pulumi.Input<string>;
+    /**
+     * The list of Use Case IDs to add the Registered Model version to.
+     */
+    useCaseIds?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The ID of the Registered Model Version.
      */
@@ -157,6 +167,10 @@ export interface RegisteredModelArgs {
      * The name of the Registered Model.
      */
     name?: pulumi.Input<string>;
+    /**
+     * The list of Use Case IDs to add the Registered Model version to.
+     */
+    useCaseIds?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The name of the Registered Model Version.
      */

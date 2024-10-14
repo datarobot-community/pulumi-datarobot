@@ -4,9 +4,14 @@
 
 import copy
 import warnings
+import sys
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+if sys.version_info >= (3, 11):
+    from typing import NotRequired, TypedDict, TypeAlias
+else:
+    from typing_extensions import NotRequired, TypedDict, TypeAlias
 from . import _utilities
 from . import outputs
 from ._inputs import *
@@ -38,7 +43,8 @@ class CustomModelArgs:
                  target_name: Optional[pulumi.Input[str]] = None,
                  target_type: Optional[pulumi.Input[str]] = None,
                  training_data_partition_column: Optional[pulumi.Input[str]] = None,
-                 training_dataset_id: Optional[pulumi.Input[str]] = None):
+                 training_dataset_id: Optional[pulumi.Input[str]] = None,
+                 use_case_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         The set of arguments for constructing a CustomModel resource.
         :param pulumi.Input[str] base_environment_id: The ID of the base environment for the Custom Model.
@@ -64,6 +70,7 @@ class CustomModelArgs:
         :param pulumi.Input[str] target_type: The target type of the Custom Model.
         :param pulumi.Input[str] training_data_partition_column: The name of the partition column in the training dataset assigned to the Custom Model.
         :param pulumi.Input[str] training_dataset_id: The ID of the training dataset assigned to the Custom Model.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] use_case_ids: The list of Use Case IDs to add the Custom Model version to.
         """
         if base_environment_id is not None:
             pulumi.set(__self__, "base_environment_id", base_environment_id)
@@ -111,6 +118,8 @@ class CustomModelArgs:
             pulumi.set(__self__, "training_data_partition_column", training_data_partition_column)
         if training_dataset_id is not None:
             pulumi.set(__self__, "training_dataset_id", training_dataset_id)
+        if use_case_ids is not None:
+            pulumi.set(__self__, "use_case_ids", use_case_ids)
 
     @property
     @pulumi.getter(name="baseEnvironmentId")
@@ -388,6 +397,18 @@ class CustomModelArgs:
     def training_dataset_id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "training_dataset_id", value)
 
+    @property
+    @pulumi.getter(name="useCaseIds")
+    def use_case_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        The list of Use Case IDs to add the Custom Model version to.
+        """
+        return pulumi.get(self, "use_case_ids")
+
+    @use_case_ids.setter
+    def use_case_ids(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "use_case_ids", value)
+
 
 @pulumi.input_type
 class _CustomModelState:
@@ -420,6 +441,7 @@ class _CustomModelState:
                  training_dataset_id: Optional[pulumi.Input[str]] = None,
                  training_dataset_name: Optional[pulumi.Input[str]] = None,
                  training_dataset_version_id: Optional[pulumi.Input[str]] = None,
+                 use_case_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  version_id: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering CustomModel resources.
@@ -451,6 +473,7 @@ class _CustomModelState:
         :param pulumi.Input[str] training_dataset_id: The ID of the training dataset assigned to the Custom Model.
         :param pulumi.Input[str] training_dataset_name: The name of the training dataset assigned to the Custom Model.
         :param pulumi.Input[str] training_dataset_version_id: The version ID of the training dataset assigned to the Custom Model.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] use_case_ids: The list of Use Case IDs to add the Custom Model version to.
         :param pulumi.Input[str] version_id: The ID of the latest Custom Model version.
         """
         if base_environment_id is not None:
@@ -509,6 +532,8 @@ class _CustomModelState:
             pulumi.set(__self__, "training_dataset_name", training_dataset_name)
         if training_dataset_version_id is not None:
             pulumi.set(__self__, "training_dataset_version_id", training_dataset_version_id)
+        if use_case_ids is not None:
+            pulumi.set(__self__, "use_case_ids", use_case_ids)
         if version_id is not None:
             pulumi.set(__self__, "version_id", version_id)
 
@@ -849,6 +874,18 @@ class _CustomModelState:
         pulumi.set(self, "training_dataset_version_id", value)
 
     @property
+    @pulumi.getter(name="useCaseIds")
+    def use_case_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        The list of Use Case IDs to add the Custom Model version to.
+        """
+        return pulumi.get(self, "use_case_ids")
+
+    @use_case_ids.setter
+    def use_case_ids(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "use_case_ids", value)
+
+    @property
     @pulumi.getter(name="versionId")
     def version_id(self) -> Optional[pulumi.Input[str]]:
         """
@@ -889,6 +926,7 @@ class CustomModel(pulumi.CustomResource):
                  target_type: Optional[pulumi.Input[str]] = None,
                  training_data_partition_column: Optional[pulumi.Input[str]] = None,
                  training_dataset_id: Optional[pulumi.Input[str]] = None,
+                 use_case_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         """
         Data set from file
@@ -976,6 +1014,7 @@ class CustomModel(pulumi.CustomResource):
         :param pulumi.Input[str] target_type: The target type of the Custom Model.
         :param pulumi.Input[str] training_data_partition_column: The name of the partition column in the training dataset assigned to the Custom Model.
         :param pulumi.Input[str] training_dataset_id: The ID of the training dataset assigned to the Custom Model.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] use_case_ids: The list of Use Case IDs to add the Custom Model version to.
         """
         ...
     @overload
@@ -1082,6 +1121,7 @@ class CustomModel(pulumi.CustomResource):
                  target_type: Optional[pulumi.Input[str]] = None,
                  training_data_partition_column: Optional[pulumi.Input[str]] = None,
                  training_dataset_id: Optional[pulumi.Input[str]] = None,
+                 use_case_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -1114,6 +1154,7 @@ class CustomModel(pulumi.CustomResource):
             __props__.__dict__["target_type"] = target_type
             __props__.__dict__["training_data_partition_column"] = training_data_partition_column
             __props__.__dict__["training_dataset_id"] = training_dataset_id
+            __props__.__dict__["use_case_ids"] = use_case_ids
             __props__.__dict__["deployments_count"] = None
             __props__.__dict__["files_hashes"] = None
             __props__.__dict__["folder_path_hash"] = None
@@ -1158,6 +1199,7 @@ class CustomModel(pulumi.CustomResource):
             training_dataset_id: Optional[pulumi.Input[str]] = None,
             training_dataset_name: Optional[pulumi.Input[str]] = None,
             training_dataset_version_id: Optional[pulumi.Input[str]] = None,
+            use_case_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             version_id: Optional[pulumi.Input[str]] = None) -> 'CustomModel':
         """
         Get an existing CustomModel resource's state with the given name, id, and optional extra
@@ -1194,6 +1236,7 @@ class CustomModel(pulumi.CustomResource):
         :param pulumi.Input[str] training_dataset_id: The ID of the training dataset assigned to the Custom Model.
         :param pulumi.Input[str] training_dataset_name: The name of the training dataset assigned to the Custom Model.
         :param pulumi.Input[str] training_dataset_version_id: The version ID of the training dataset assigned to the Custom Model.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] use_case_ids: The list of Use Case IDs to add the Custom Model version to.
         :param pulumi.Input[str] version_id: The ID of the latest Custom Model version.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -1228,6 +1271,7 @@ class CustomModel(pulumi.CustomResource):
         __props__.__dict__["training_dataset_id"] = training_dataset_id
         __props__.__dict__["training_dataset_name"] = training_dataset_name
         __props__.__dict__["training_dataset_version_id"] = training_dataset_version_id
+        __props__.__dict__["use_case_ids"] = use_case_ids
         __props__.__dict__["version_id"] = version_id
         return CustomModel(resource_name, opts=opts, __props__=__props__)
 
@@ -1454,6 +1498,14 @@ class CustomModel(pulumi.CustomResource):
         The version ID of the training dataset assigned to the Custom Model.
         """
         return pulumi.get(self, "training_dataset_version_id")
+
+    @property
+    @pulumi.getter(name="useCaseIds")
+    def use_case_ids(self) -> pulumi.Output[Optional[Sequence[str]]]:
+        """
+        The list of Use Case IDs to add the Custom Model version to.
+        """
+        return pulumi.get(self, "use_case_ids")
 
     @property
     @pulumi.getter(name="versionId")

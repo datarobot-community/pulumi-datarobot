@@ -75,6 +75,8 @@ type CustomApplication struct {
 	SourceId pulumi.StringOutput `pulumi:"sourceId"`
 	// The version ID of the Custom Application Source.
 	SourceVersionId pulumi.StringOutput `pulumi:"sourceVersionId"`
+	// The list of Use Case IDs to add the Custom Application to.
+	UseCaseIds pulumi.StringArrayOutput `pulumi:"useCaseIds"`
 }
 
 // NewCustomApplication registers a new resource with the given unique name, arguments, and options.
@@ -122,6 +124,8 @@ type customApplicationState struct {
 	SourceId *string `pulumi:"sourceId"`
 	// The version ID of the Custom Application Source.
 	SourceVersionId *string `pulumi:"sourceVersionId"`
+	// The list of Use Case IDs to add the Custom Application to.
+	UseCaseIds []string `pulumi:"useCaseIds"`
 }
 
 type CustomApplicationState struct {
@@ -137,6 +141,8 @@ type CustomApplicationState struct {
 	SourceId pulumi.StringPtrInput
 	// The version ID of the Custom Application Source.
 	SourceVersionId pulumi.StringPtrInput
+	// The list of Use Case IDs to add the Custom Application to.
+	UseCaseIds pulumi.StringArrayInput
 }
 
 func (CustomApplicationState) ElementType() reflect.Type {
@@ -152,6 +158,8 @@ type customApplicationArgs struct {
 	Name *string `pulumi:"name"`
 	// The version ID of the Custom Application Source.
 	SourceVersionId string `pulumi:"sourceVersionId"`
+	// The list of Use Case IDs to add the Custom Application to.
+	UseCaseIds []string `pulumi:"useCaseIds"`
 }
 
 // The set of arguments for constructing a CustomApplication resource.
@@ -164,6 +172,8 @@ type CustomApplicationArgs struct {
 	Name pulumi.StringPtrInput
 	// The version ID of the Custom Application Source.
 	SourceVersionId pulumi.StringInput
+	// The list of Use Case IDs to add the Custom Application to.
+	UseCaseIds pulumi.StringArrayInput
 }
 
 func (CustomApplicationArgs) ElementType() reflect.Type {
@@ -281,6 +291,11 @@ func (o CustomApplicationOutput) SourceId() pulumi.StringOutput {
 // The version ID of the Custom Application Source.
 func (o CustomApplicationOutput) SourceVersionId() pulumi.StringOutput {
 	return o.ApplyT(func(v *CustomApplication) pulumi.StringOutput { return v.SourceVersionId }).(pulumi.StringOutput)
+}
+
+// The list of Use Case IDs to add the Custom Application to.
+func (o CustomApplicationOutput) UseCaseIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *CustomApplication) pulumi.StringArrayOutput { return v.UseCaseIds }).(pulumi.StringArrayOutput)
 }
 
 type CustomApplicationArrayOutput struct{ *pulumi.OutputState }
