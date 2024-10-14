@@ -97,6 +97,12 @@ namespace DataRobotPulumi.Datarobot
         [Output("sourceVersionId")]
         public Output<string> SourceVersionId { get; private set; } = null!;
 
+        /// <summary>
+        /// The list of Use Case IDs to add the Custom Application to.
+        /// </summary>
+        [Output("useCaseIds")]
+        public Output<ImmutableArray<string>> UseCaseIds { get; private set; } = null!;
+
 
         /// <summary>
         /// Create a CustomApplication resource with the given unique name, arguments, and options.
@@ -174,6 +180,18 @@ namespace DataRobotPulumi.Datarobot
         [Input("sourceVersionId", required: true)]
         public Input<string> SourceVersionId { get; set; } = null!;
 
+        [Input("useCaseIds")]
+        private InputList<string>? _useCaseIds;
+
+        /// <summary>
+        /// The list of Use Case IDs to add the Custom Application to.
+        /// </summary>
+        public InputList<string> UseCaseIds
+        {
+            get => _useCaseIds ?? (_useCaseIds = new InputList<string>());
+            set => _useCaseIds = value;
+        }
+
         public CustomApplicationArgs()
         {
         }
@@ -223,6 +241,18 @@ namespace DataRobotPulumi.Datarobot
         /// </summary>
         [Input("sourceVersionId")]
         public Input<string>? SourceVersionId { get; set; }
+
+        [Input("useCaseIds")]
+        private InputList<string>? _useCaseIds;
+
+        /// <summary>
+        /// The list of Use Case IDs to add the Custom Application to.
+        /// </summary>
+        public InputList<string> UseCaseIds
+        {
+            get => _useCaseIds ?? (_useCaseIds = new InputList<string>());
+            set => _useCaseIds = value;
+        }
 
         public CustomApplicationState()
         {

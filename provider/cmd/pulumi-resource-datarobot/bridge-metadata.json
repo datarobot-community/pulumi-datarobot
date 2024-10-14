@@ -23,6 +23,9 @@
                 "fields": {
                     "external_access_recipients": {
                         "maxItemsOne": false
+                    },
+                    "use_case_ids": {
+                        "maxItemsOne": false
                     }
                 }
             },
@@ -57,6 +60,9 @@
                                 }
                             }
                         }
+                    },
+                    "use_case_ids": {
+                        "maxItemsOne": false
                     }
                 }
             },
@@ -130,6 +136,9 @@
                                 "maxItemsOne": false
                             }
                         }
+                    },
+                    "use_case_ids": {
+                        "maxItemsOne": false
                     }
                 }
             },
@@ -159,10 +168,20 @@
                 }
             },
             "datarobot_registered_model": {
-                "current": "datarobot:index/registeredModel:RegisteredModel"
+                "current": "datarobot:index/registeredModel:RegisteredModel",
+                "fields": {
+                    "use_case_ids": {
+                        "maxItemsOne": false
+                    }
+                }
             },
             "datarobot_registered_model_from_leaderboard": {
-                "current": "datarobot:index/registeredModelFromLeaderboard:RegisteredModelFromLeaderboard"
+                "current": "datarobot:index/registeredModelFromLeaderboard:RegisteredModelFromLeaderboard",
+                "fields": {
+                    "use_case_ids": {
+                        "maxItemsOne": false
+                    }
+                }
             },
             "datarobot_remote_repository": {
                 "current": "datarobot:index/remoteRepository:RemoteRepository"

@@ -53,6 +53,12 @@ namespace DataRobotPulumi.Datarobot
         public Output<double?> PredictionThreshold { get; private set; } = null!;
 
         /// <summary>
+        /// The list of Use Case IDs to add the Registered Model version to.
+        /// </summary>
+        [Output("useCaseIds")]
+        public Output<ImmutableArray<string>> UseCaseIds { get; private set; } = null!;
+
+        /// <summary>
         /// The ID of the Registered Model Version.
         /// </summary>
         [Output("versionId")]
@@ -147,6 +153,18 @@ namespace DataRobotPulumi.Datarobot
         [Input("predictionThreshold")]
         public Input<double>? PredictionThreshold { get; set; }
 
+        [Input("useCaseIds")]
+        private InputList<string>? _useCaseIds;
+
+        /// <summary>
+        /// The list of Use Case IDs to add the Registered Model version to.
+        /// </summary>
+        public InputList<string> UseCaseIds
+        {
+            get => _useCaseIds ?? (_useCaseIds = new InputList<string>());
+            set => _useCaseIds = value;
+        }
+
         /// <summary>
         /// The name of the Registered Model Version.
         /// </summary>
@@ -196,6 +214,18 @@ namespace DataRobotPulumi.Datarobot
         /// </summary>
         [Input("predictionThreshold")]
         public Input<double>? PredictionThreshold { get; set; }
+
+        [Input("useCaseIds")]
+        private InputList<string>? _useCaseIds;
+
+        /// <summary>
+        /// The list of Use Case IDs to add the Registered Model version to.
+        /// </summary>
+        public InputList<string> UseCaseIds
+        {
+            get => _useCaseIds ?? (_useCaseIds = new InputList<string>());
+            set => _useCaseIds = value;
+        }
 
         /// <summary>
         /// The ID of the Registered Model Version.

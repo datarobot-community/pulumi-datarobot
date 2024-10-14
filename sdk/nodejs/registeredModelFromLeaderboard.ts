@@ -60,6 +60,10 @@ export class RegisteredModelFromLeaderboard extends pulumi.CustomResource {
      */
     public readonly predictionThreshold!: pulumi.Output<number | undefined>;
     /**
+     * The list of Use Case IDs to add the Registered Model version to.
+     */
+    public readonly useCaseIds!: pulumi.Output<string[] | undefined>;
+    /**
      * The ID of the Registered Model Version.
      */
     public /*out*/ readonly versionId!: pulumi.Output<string>;
@@ -87,6 +91,7 @@ export class RegisteredModelFromLeaderboard extends pulumi.CustomResource {
             resourceInputs["modelId"] = state ? state.modelId : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["predictionThreshold"] = state ? state.predictionThreshold : undefined;
+            resourceInputs["useCaseIds"] = state ? state.useCaseIds : undefined;
             resourceInputs["versionId"] = state ? state.versionId : undefined;
             resourceInputs["versionName"] = state ? state.versionName : undefined;
         } else {
@@ -100,6 +105,7 @@ export class RegisteredModelFromLeaderboard extends pulumi.CustomResource {
             resourceInputs["modelId"] = args ? args.modelId : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["predictionThreshold"] = args ? args.predictionThreshold : undefined;
+            resourceInputs["useCaseIds"] = args ? args.useCaseIds : undefined;
             resourceInputs["versionName"] = args ? args.versionName : undefined;
             resourceInputs["versionId"] = undefined /*out*/;
         }
@@ -136,6 +142,10 @@ export interface RegisteredModelFromLeaderboardState {
      * The prediction threshold for the model.
      */
     predictionThreshold?: pulumi.Input<number>;
+    /**
+     * The list of Use Case IDs to add the Registered Model version to.
+     */
+    useCaseIds?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The ID of the Registered Model Version.
      */
@@ -174,6 +184,10 @@ export interface RegisteredModelFromLeaderboardArgs {
      * The prediction threshold for the model.
      */
     predictionThreshold?: pulumi.Input<number>;
+    /**
+     * The list of Use Case IDs to add the Registered Model version to.
+     */
+    useCaseIds?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * The name of the Registered Model Version.
      */

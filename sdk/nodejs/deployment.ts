@@ -143,6 +143,10 @@ export class Deployment extends pulumi.CustomResource {
      * The segment analysis settings for the Deployment.
      */
     public readonly segmentAnalysisSettings!: pulumi.Output<outputs.DeploymentSegmentAnalysisSettings | undefined>;
+    /**
+     * The list of Use Case IDs to add the Deployment to.
+     */
+    public readonly useCaseIds!: pulumi.Output<string[] | undefined>;
 
     /**
      * Create a Deployment resource with the given unique name, arguments, and options.
@@ -173,6 +177,7 @@ export class Deployment extends pulumi.CustomResource {
             resourceInputs["predictionsSettings"] = state ? state.predictionsSettings : undefined;
             resourceInputs["registeredModelVersionId"] = state ? state.registeredModelVersionId : undefined;
             resourceInputs["segmentAnalysisSettings"] = state ? state.segmentAnalysisSettings : undefined;
+            resourceInputs["useCaseIds"] = state ? state.useCaseIds : undefined;
         } else {
             const args = argsOrState as DeploymentArgs | undefined;
             if ((!args || args.label === undefined) && !opts.urn) {
@@ -200,6 +205,7 @@ export class Deployment extends pulumi.CustomResource {
             resourceInputs["predictionsSettings"] = args ? args.predictionsSettings : undefined;
             resourceInputs["registeredModelVersionId"] = args ? args.registeredModelVersionId : undefined;
             resourceInputs["segmentAnalysisSettings"] = args ? args.segmentAnalysisSettings : undefined;
+            resourceInputs["useCaseIds"] = args ? args.useCaseIds : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(Deployment.__pulumiType, name, resourceInputs, opts);
@@ -274,6 +280,10 @@ export interface DeploymentState {
      * The segment analysis settings for the Deployment.
      */
     segmentAnalysisSettings?: pulumi.Input<inputs.DeploymentSegmentAnalysisSettings>;
+    /**
+     * The list of Use Case IDs to add the Deployment to.
+     */
+    useCaseIds?: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 /**
@@ -344,4 +354,8 @@ export interface DeploymentArgs {
      * The segment analysis settings for the Deployment.
      */
     segmentAnalysisSettings?: pulumi.Input<inputs.DeploymentSegmentAnalysisSettings>;
+    /**
+     * The list of Use Case IDs to add the Deployment to.
+     */
+    useCaseIds?: pulumi.Input<pulumi.Input<string>[]>;
 }

@@ -4,9 +4,14 @@
 
 import copy
 import warnings
+import sys
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+if sys.version_info >= (3, 11):
+    from typing import NotRequired, TypedDict, TypeAlias
+else:
+    from typing_extensions import NotRequired, TypedDict, TypeAlias
 from . import _utilities
 
 __all__ = ['CustomApplicationArgs', 'CustomApplication']
@@ -17,13 +22,15 @@ class CustomApplicationArgs:
                  source_version_id: pulumi.Input[str],
                  external_access_enabled: Optional[pulumi.Input[bool]] = None,
                  external_access_recipients: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
-                 name: Optional[pulumi.Input[str]] = None):
+                 name: Optional[pulumi.Input[str]] = None,
+                 use_case_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         The set of arguments for constructing a CustomApplication resource.
         :param pulumi.Input[str] source_version_id: The version ID of the Custom Application Source.
         :param pulumi.Input[bool] external_access_enabled: Whether external access is enabled for the Custom Application.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] external_access_recipients: The list of external email addresses that have access to the Custom Application.
         :param pulumi.Input[str] name: The name of the Custom Application.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] use_case_ids: The list of Use Case IDs to add the Custom Application to.
         """
         pulumi.set(__self__, "source_version_id", source_version_id)
         if external_access_enabled is not None:
@@ -32,6 +39,8 @@ class CustomApplicationArgs:
             pulumi.set(__self__, "external_access_recipients", external_access_recipients)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if use_case_ids is not None:
+            pulumi.set(__self__, "use_case_ids", use_case_ids)
 
     @property
     @pulumi.getter(name="sourceVersionId")
@@ -81,6 +90,18 @@ class CustomApplicationArgs:
     def name(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "name", value)
 
+    @property
+    @pulumi.getter(name="useCaseIds")
+    def use_case_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        The list of Use Case IDs to add the Custom Application to.
+        """
+        return pulumi.get(self, "use_case_ids")
+
+    @use_case_ids.setter
+    def use_case_ids(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "use_case_ids", value)
+
 
 @pulumi.input_type
 class _CustomApplicationState:
@@ -90,7 +111,8 @@ class _CustomApplicationState:
                  external_access_recipients: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  source_id: Optional[pulumi.Input[str]] = None,
-                 source_version_id: Optional[pulumi.Input[str]] = None):
+                 source_version_id: Optional[pulumi.Input[str]] = None,
+                 use_case_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         Input properties used for looking up and filtering CustomApplication resources.
         :param pulumi.Input[str] application_url: The URL of the Custom Application.
@@ -99,6 +121,7 @@ class _CustomApplicationState:
         :param pulumi.Input[str] name: The name of the Custom Application.
         :param pulumi.Input[str] source_id: The ID of the Custom Application Source.
         :param pulumi.Input[str] source_version_id: The version ID of the Custom Application Source.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] use_case_ids: The list of Use Case IDs to add the Custom Application to.
         """
         if application_url is not None:
             pulumi.set(__self__, "application_url", application_url)
@@ -112,6 +135,8 @@ class _CustomApplicationState:
             pulumi.set(__self__, "source_id", source_id)
         if source_version_id is not None:
             pulumi.set(__self__, "source_version_id", source_version_id)
+        if use_case_ids is not None:
+            pulumi.set(__self__, "use_case_ids", use_case_ids)
 
     @property
     @pulumi.getter(name="applicationUrl")
@@ -185,6 +210,18 @@ class _CustomApplicationState:
     def source_version_id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "source_version_id", value)
 
+    @property
+    @pulumi.getter(name="useCaseIds")
+    def use_case_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        The list of Use Case IDs to add the Custom Application to.
+        """
+        return pulumi.get(self, "use_case_ids")
+
+    @use_case_ids.setter
+    def use_case_ids(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "use_case_ids", value)
+
 
 class CustomApplication(pulumi.CustomResource):
     @overload
@@ -195,6 +232,7 @@ class CustomApplication(pulumi.CustomResource):
                  external_access_recipients: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  source_version_id: Optional[pulumi.Input[str]] = None,
+                 use_case_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         """
         Custom Application
@@ -225,6 +263,7 @@ class CustomApplication(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[str]]] external_access_recipients: The list of external email addresses that have access to the Custom Application.
         :param pulumi.Input[str] name: The name of the Custom Application.
         :param pulumi.Input[str] source_version_id: The version ID of the Custom Application Source.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] use_case_ids: The list of Use Case IDs to add the Custom Application to.
         """
         ...
     @overload
@@ -274,6 +313,7 @@ class CustomApplication(pulumi.CustomResource):
                  external_access_recipients: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  source_version_id: Optional[pulumi.Input[str]] = None,
+                 use_case_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -289,6 +329,7 @@ class CustomApplication(pulumi.CustomResource):
             if source_version_id is None and not opts.urn:
                 raise TypeError("Missing required property 'source_version_id'")
             __props__.__dict__["source_version_id"] = source_version_id
+            __props__.__dict__["use_case_ids"] = use_case_ids
             __props__.__dict__["application_url"] = None
             __props__.__dict__["source_id"] = None
         super(CustomApplication, __self__).__init__(
@@ -306,7 +347,8 @@ class CustomApplication(pulumi.CustomResource):
             external_access_recipients: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             name: Optional[pulumi.Input[str]] = None,
             source_id: Optional[pulumi.Input[str]] = None,
-            source_version_id: Optional[pulumi.Input[str]] = None) -> 'CustomApplication':
+            source_version_id: Optional[pulumi.Input[str]] = None,
+            use_case_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None) -> 'CustomApplication':
         """
         Get an existing CustomApplication resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -320,6 +362,7 @@ class CustomApplication(pulumi.CustomResource):
         :param pulumi.Input[str] name: The name of the Custom Application.
         :param pulumi.Input[str] source_id: The ID of the Custom Application Source.
         :param pulumi.Input[str] source_version_id: The version ID of the Custom Application Source.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] use_case_ids: The list of Use Case IDs to add the Custom Application to.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -331,6 +374,7 @@ class CustomApplication(pulumi.CustomResource):
         __props__.__dict__["name"] = name
         __props__.__dict__["source_id"] = source_id
         __props__.__dict__["source_version_id"] = source_version_id
+        __props__.__dict__["use_case_ids"] = use_case_ids
         return CustomApplication(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -380,4 +424,12 @@ class CustomApplication(pulumi.CustomResource):
         The version ID of the Custom Application Source.
         """
         return pulumi.get(self, "source_version_id")
+
+    @property
+    @pulumi.getter(name="useCaseIds")
+    def use_case_ids(self) -> pulumi.Output[Optional[Sequence[str]]]:
+        """
+        The list of Use Case IDs to add the Custom Application to.
+        """
+        return pulumi.get(self, "use_case_ids")
 

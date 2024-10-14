@@ -173,6 +173,12 @@ namespace DataRobotPulumi.Datarobot
         [Output("segmentAnalysisSettings")]
         public Output<Outputs.DeploymentSegmentAnalysisSettings?> SegmentAnalysisSettings { get; private set; } = null!;
 
+        /// <summary>
+        /// The list of Use Case IDs to add the Deployment to.
+        /// </summary>
+        [Output("useCaseIds")]
+        public Output<ImmutableArray<string>> UseCaseIds { get; private set; } = null!;
+
 
         /// <summary>
         /// Create a Deployment resource with the given unique name, arguments, and options.
@@ -316,6 +322,18 @@ namespace DataRobotPulumi.Datarobot
         [Input("segmentAnalysisSettings")]
         public Input<Inputs.DeploymentSegmentAnalysisSettingsArgs>? SegmentAnalysisSettings { get; set; }
 
+        [Input("useCaseIds")]
+        private InputList<string>? _useCaseIds;
+
+        /// <summary>
+        /// The list of Use Case IDs to add the Deployment to.
+        /// </summary>
+        public InputList<string> UseCaseIds
+        {
+            get => _useCaseIds ?? (_useCaseIds = new InputList<string>());
+            set => _useCaseIds = value;
+        }
+
         public DeploymentArgs()
         {
         }
@@ -419,6 +437,18 @@ namespace DataRobotPulumi.Datarobot
         /// </summary>
         [Input("segmentAnalysisSettings")]
         public Input<Inputs.DeploymentSegmentAnalysisSettingsGetArgs>? SegmentAnalysisSettings { get; set; }
+
+        [Input("useCaseIds")]
+        private InputList<string>? _useCaseIds;
+
+        /// <summary>
+        /// The list of Use Case IDs to add the Deployment to.
+        /// </summary>
+        public InputList<string> UseCaseIds
+        {
+            get => _useCaseIds ?? (_useCaseIds = new InputList<string>());
+            set => _useCaseIds = value;
+        }
 
         public DeploymentState()
         {

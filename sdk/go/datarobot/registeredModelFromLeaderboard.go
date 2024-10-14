@@ -28,6 +28,8 @@ type RegisteredModelFromLeaderboard struct {
 	Name pulumi.StringOutput `pulumi:"name"`
 	// The prediction threshold for the model.
 	PredictionThreshold pulumi.Float64PtrOutput `pulumi:"predictionThreshold"`
+	// The list of Use Case IDs to add the Registered Model version to.
+	UseCaseIds pulumi.StringArrayOutput `pulumi:"useCaseIds"`
 	// The ID of the Registered Model Version.
 	VersionId pulumi.StringOutput `pulumi:"versionId"`
 	// The name of the Registered Model Version.
@@ -79,6 +81,8 @@ type registeredModelFromLeaderboardState struct {
 	Name *string `pulumi:"name"`
 	// The prediction threshold for the model.
 	PredictionThreshold *float64 `pulumi:"predictionThreshold"`
+	// The list of Use Case IDs to add the Registered Model version to.
+	UseCaseIds []string `pulumi:"useCaseIds"`
 	// The ID of the Registered Model Version.
 	VersionId *string `pulumi:"versionId"`
 	// The name of the Registered Model Version.
@@ -98,6 +102,8 @@ type RegisteredModelFromLeaderboardState struct {
 	Name pulumi.StringPtrInput
 	// The prediction threshold for the model.
 	PredictionThreshold pulumi.Float64PtrInput
+	// The list of Use Case IDs to add the Registered Model version to.
+	UseCaseIds pulumi.StringArrayInput
 	// The ID of the Registered Model Version.
 	VersionId pulumi.StringPtrInput
 	// The name of the Registered Model Version.
@@ -121,6 +127,8 @@ type registeredModelFromLeaderboardArgs struct {
 	Name *string `pulumi:"name"`
 	// The prediction threshold for the model.
 	PredictionThreshold *float64 `pulumi:"predictionThreshold"`
+	// The list of Use Case IDs to add the Registered Model version to.
+	UseCaseIds []string `pulumi:"useCaseIds"`
 	// The name of the Registered Model Version.
 	VersionName *string `pulumi:"versionName"`
 }
@@ -139,6 +147,8 @@ type RegisteredModelFromLeaderboardArgs struct {
 	Name pulumi.StringPtrInput
 	// The prediction threshold for the model.
 	PredictionThreshold pulumi.Float64PtrInput
+	// The list of Use Case IDs to add the Registered Model version to.
+	UseCaseIds pulumi.StringArrayInput
 	// The name of the Registered Model Version.
 	VersionName pulumi.StringPtrInput
 }
@@ -258,6 +268,11 @@ func (o RegisteredModelFromLeaderboardOutput) Name() pulumi.StringOutput {
 // The prediction threshold for the model.
 func (o RegisteredModelFromLeaderboardOutput) PredictionThreshold() pulumi.Float64PtrOutput {
 	return o.ApplyT(func(v *RegisteredModelFromLeaderboard) pulumi.Float64PtrOutput { return v.PredictionThreshold }).(pulumi.Float64PtrOutput)
+}
+
+// The list of Use Case IDs to add the Registered Model version to.
+func (o RegisteredModelFromLeaderboardOutput) UseCaseIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *RegisteredModelFromLeaderboard) pulumi.StringArrayOutput { return v.UseCaseIds }).(pulumi.StringArrayOutput)
 }
 
 // The ID of the Registered Model Version.

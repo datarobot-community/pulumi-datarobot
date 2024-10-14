@@ -103,6 +103,8 @@ type Deployment struct {
 	RegisteredModelVersionId pulumi.StringOutput `pulumi:"registeredModelVersionId"`
 	// The segment analysis settings for the Deployment.
 	SegmentAnalysisSettings DeploymentSegmentAnalysisSettingsPtrOutput `pulumi:"segmentAnalysisSettings"`
+	// The list of Use Case IDs to add the Deployment to.
+	UseCaseIds pulumi.StringArrayOutput `pulumi:"useCaseIds"`
 }
 
 // NewDeployment registers a new resource with the given unique name, arguments, and options.
@@ -176,6 +178,8 @@ type deploymentState struct {
 	RegisteredModelVersionId *string `pulumi:"registeredModelVersionId"`
 	// The segment analysis settings for the Deployment.
 	SegmentAnalysisSettings *DeploymentSegmentAnalysisSettings `pulumi:"segmentAnalysisSettings"`
+	// The list of Use Case IDs to add the Deployment to.
+	UseCaseIds []string `pulumi:"useCaseIds"`
 }
 
 type DeploymentState struct {
@@ -211,6 +215,8 @@ type DeploymentState struct {
 	RegisteredModelVersionId pulumi.StringPtrInput
 	// The segment analysis settings for the Deployment.
 	SegmentAnalysisSettings DeploymentSegmentAnalysisSettingsPtrInput
+	// The list of Use Case IDs to add the Deployment to.
+	UseCaseIds pulumi.StringArrayInput
 }
 
 func (DeploymentState) ElementType() reflect.Type {
@@ -250,6 +256,8 @@ type deploymentArgs struct {
 	RegisteredModelVersionId string `pulumi:"registeredModelVersionId"`
 	// The segment analysis settings for the Deployment.
 	SegmentAnalysisSettings *DeploymentSegmentAnalysisSettings `pulumi:"segmentAnalysisSettings"`
+	// The list of Use Case IDs to add the Deployment to.
+	UseCaseIds []string `pulumi:"useCaseIds"`
 }
 
 // The set of arguments for constructing a Deployment resource.
@@ -286,6 +294,8 @@ type DeploymentArgs struct {
 	RegisteredModelVersionId pulumi.StringInput
 	// The segment analysis settings for the Deployment.
 	SegmentAnalysisSettings DeploymentSegmentAnalysisSettingsPtrInput
+	// The list of Use Case IDs to add the Deployment to.
+	UseCaseIds pulumi.StringArrayInput
 }
 
 func (DeploymentArgs) ElementType() reflect.Type {
@@ -459,6 +469,11 @@ func (o DeploymentOutput) RegisteredModelVersionId() pulumi.StringOutput {
 // The segment analysis settings for the Deployment.
 func (o DeploymentOutput) SegmentAnalysisSettings() DeploymentSegmentAnalysisSettingsPtrOutput {
 	return o.ApplyT(func(v *Deployment) DeploymentSegmentAnalysisSettingsPtrOutput { return v.SegmentAnalysisSettings }).(DeploymentSegmentAnalysisSettingsPtrOutput)
+}
+
+// The list of Use Case IDs to add the Deployment to.
+func (o DeploymentOutput) UseCaseIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *Deployment) pulumi.StringArrayOutput { return v.UseCaseIds }).(pulumi.StringArrayOutput)
 }
 
 type DeploymentArrayOutput struct{ *pulumi.OutputState }

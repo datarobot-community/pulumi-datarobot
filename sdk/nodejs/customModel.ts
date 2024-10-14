@@ -210,6 +210,10 @@ export class CustomModel extends pulumi.CustomResource {
      */
     public /*out*/ readonly trainingDatasetVersionId!: pulumi.Output<string>;
     /**
+     * The list of Use Case IDs to add the Custom Model version to.
+     */
+    public readonly useCaseIds!: pulumi.Output<string[] | undefined>;
+    /**
      * The ID of the latest Custom Model version.
      */
     public /*out*/ readonly versionId!: pulumi.Output<string>;
@@ -255,6 +259,7 @@ export class CustomModel extends pulumi.CustomResource {
             resourceInputs["trainingDatasetId"] = state ? state.trainingDatasetId : undefined;
             resourceInputs["trainingDatasetName"] = state ? state.trainingDatasetName : undefined;
             resourceInputs["trainingDatasetVersionId"] = state ? state.trainingDatasetVersionId : undefined;
+            resourceInputs["useCaseIds"] = state ? state.useCaseIds : undefined;
             resourceInputs["versionId"] = state ? state.versionId : undefined;
         } else {
             const args = argsOrState as CustomModelArgs | undefined;
@@ -281,6 +286,7 @@ export class CustomModel extends pulumi.CustomResource {
             resourceInputs["targetType"] = args ? args.targetType : undefined;
             resourceInputs["trainingDataPartitionColumn"] = args ? args.trainingDataPartitionColumn : undefined;
             resourceInputs["trainingDatasetId"] = args ? args.trainingDatasetId : undefined;
+            resourceInputs["useCaseIds"] = args ? args.useCaseIds : undefined;
             resourceInputs["deploymentsCount"] = undefined /*out*/;
             resourceInputs["filesHashes"] = undefined /*out*/;
             resourceInputs["folderPathHash"] = undefined /*out*/;
@@ -410,6 +416,10 @@ export interface CustomModelState {
      */
     trainingDatasetVersionId?: pulumi.Input<string>;
     /**
+     * The list of Use Case IDs to add the Custom Model version to.
+     */
+    useCaseIds?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
      * The ID of the latest Custom Model version.
      */
     versionId?: pulumi.Input<string>;
@@ -511,4 +521,8 @@ export interface CustomModelArgs {
      * The ID of the training dataset assigned to the Custom Model.
      */
     trainingDatasetId?: pulumi.Input<string>;
+    /**
+     * The list of Use Case IDs to add the Custom Model version to.
+     */
+    useCaseIds?: pulumi.Input<pulumi.Input<string>[]>;
 }

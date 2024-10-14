@@ -258,6 +258,12 @@ namespace DataRobotPulumi.Datarobot
         public Output<string> TrainingDatasetVersionId { get; private set; } = null!;
 
         /// <summary>
+        /// The list of Use Case IDs to add the Custom Model version to.
+        /// </summary>
+        [Output("useCaseIds")]
+        public Output<ImmutableArray<string>> UseCaseIds { get; private set; } = null!;
+
+        /// <summary>
         /// The ID of the latest Custom Model version.
         /// </summary>
         [Output("versionId")]
@@ -472,6 +478,18 @@ namespace DataRobotPulumi.Datarobot
         [Input("trainingDatasetId")]
         public Input<string>? TrainingDatasetId { get; set; }
 
+        [Input("useCaseIds")]
+        private InputList<string>? _useCaseIds;
+
+        /// <summary>
+        /// The list of Use Case IDs to add the Custom Model version to.
+        /// </summary>
+        public InputList<string> UseCaseIds
+        {
+            get => _useCaseIds ?? (_useCaseIds = new InputList<string>());
+            set => _useCaseIds = value;
+        }
+
         public CustomModelArgs()
         {
         }
@@ -677,6 +695,18 @@ namespace DataRobotPulumi.Datarobot
         /// </summary>
         [Input("trainingDatasetVersionId")]
         public Input<string>? TrainingDatasetVersionId { get; set; }
+
+        [Input("useCaseIds")]
+        private InputList<string>? _useCaseIds;
+
+        /// <summary>
+        /// The list of Use Case IDs to add the Custom Model version to.
+        /// </summary>
+        public InputList<string> UseCaseIds
+        {
+            get => _useCaseIds ?? (_useCaseIds = new InputList<string>());
+            set => _useCaseIds = value;
+        }
 
         /// <summary>
         /// The ID of the latest Custom Model version.
