@@ -1376,6 +1376,7 @@
                 "baseEnvironmentId",
                 "baseEnvironmentVersionId",
                 "deploymentsCount",
+                "description",
                 "filesHashes",
                 "folderPathHash",
                 "isProxy",
