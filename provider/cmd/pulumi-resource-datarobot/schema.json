@@ -1142,6 +1142,13 @@
                 "sourceVersionId": {
                     "type": "string",
                     "description": "The version ID of the Custom Application Source.\n"
+                },
+                "useCaseIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The list of Use Case IDs to add the Custom Application to.\n"
                 }
             },
             "required": [
@@ -1170,6 +1177,13 @@
                 "sourceVersionId": {
                     "type": "string",
                     "description": "The version ID of the Custom Application Source.\n"
+                },
+                "useCaseIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The list of Use Case IDs to add the Custom Application to.\n"
                 }
             },
             "requiredInputs": [
@@ -1204,6 +1218,13 @@
                     "sourceVersionId": {
                         "type": "string",
                         "description": "The version ID of the Custom Application Source.\n"
+                    },
+                    "useCaseIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "The list of Use Case IDs to add the Custom Application to.\n"
                     }
                 },
                 "type": "object"
@@ -1339,6 +1360,13 @@
                     "type": "string",
                     "description": "The version ID of the training dataset assigned to the Custom Model.\n"
                 },
+                "useCaseIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The list of Use Case IDs to add the Custom Model version to.\n"
+                },
                 "versionId": {
                     "type": "string",
                     "description": "The ID of the latest Custom Model version.\n"
@@ -1467,6 +1495,13 @@
                 "trainingDatasetId": {
                     "type": "string",
                     "description": "The ID of the training dataset assigned to the Custom Model.\n"
+                },
+                "useCaseIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The list of Use Case IDs to add the Custom Model version to.\n"
                 }
             },
             "stateInputs": {
@@ -1598,6 +1633,13 @@
                     "trainingDatasetVersionId": {
                         "type": "string",
                         "description": "The version ID of the training dataset assigned to the Custom Model.\n"
+                    },
+                    "useCaseIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "The list of Use Case IDs to add the Custom Model version to.\n"
                     },
                     "versionId": {
                         "type": "string",
@@ -1812,6 +1854,13 @@
                 "segmentAnalysisSettings": {
                     "$ref": "#/types/datarobot:index/DeploymentSegmentAnalysisSettings:DeploymentSegmentAnalysisSettings",
                     "description": "The segment analysis settings for the Deployment.\n"
+                },
+                "useCaseIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The list of Use Case IDs to add the Deployment to.\n"
                 }
             },
             "required": [
@@ -1884,6 +1933,13 @@
                 "segmentAnalysisSettings": {
                     "$ref": "#/types/datarobot:index/DeploymentSegmentAnalysisSettings:DeploymentSegmentAnalysisSettings",
                     "description": "The segment analysis settings for the Deployment.\n"
+                },
+                "useCaseIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The list of Use Case IDs to add the Deployment to.\n"
                 }
             },
             "requiredInputs": [
@@ -1957,6 +2013,13 @@
                     "segmentAnalysisSettings": {
                         "$ref": "#/types/datarobot:index/DeploymentSegmentAnalysisSettings:DeploymentSegmentAnalysisSettings",
                         "description": "The segment analysis settings for the Deployment.\n"
+                    },
+                    "useCaseIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "The list of Use Case IDs to add the Deployment to.\n"
                     }
                 },
                 "type": "object"
@@ -2459,6 +2522,13 @@
                     "type": "string",
                     "description": "The name of the Registered Model.\n"
                 },
+                "useCaseIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The list of Use Case IDs to add the Registered Model version to.\n"
+                },
                 "versionId": {
                     "type": "string",
                     "description": "The ID of the Registered Model Version.\n"
@@ -2487,6 +2557,13 @@
                     "type": "string",
                     "description": "The name of the Registered Model.\n"
                 },
+                "useCaseIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The list of Use Case IDs to add the Registered Model version to.\n"
+                },
                 "versionName": {
                     "type": "string",
                     "description": "The name of the Registered Model Version.\n"
@@ -2509,6 +2586,13 @@
                     "name": {
                         "type": "string",
                         "description": "The name of the Registered Model.\n"
+                    },
+                    "useCaseIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "The list of Use Case IDs to add the Registered Model version to.\n"
                     },
                     "versionId": {
                         "type": "string",
@@ -2548,6 +2632,13 @@
                 "predictionThreshold": {
                     "type": "number",
                     "description": "The prediction threshold for the model.\n"
+                },
+                "useCaseIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The list of Use Case IDs to add the Registered Model version to.\n"
                 },
                 "versionId": {
                     "type": "string",
@@ -2589,6 +2680,13 @@
                     "type": "number",
                     "description": "The prediction threshold for the model.\n"
                 },
+                "useCaseIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The list of Use Case IDs to add the Registered Model version to.\n"
+                },
                 "versionName": {
                     "type": "string",
                     "description": "The name of the Registered Model Version.\n"
@@ -2623,6 +2721,13 @@
                     "predictionThreshold": {
                         "type": "number",
                         "description": "The prediction threshold for the model.\n"
+                    },
+                    "useCaseIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "The list of Use Case IDs to add the Registered Model version to.\n"
                     },
                     "versionId": {
                         "type": "string",
