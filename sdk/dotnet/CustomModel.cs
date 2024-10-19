@@ -74,11 +74,9 @@ namespace DataRobotPulumi.Datarobot
     ///     //   timeout_sec    = 120
     ///     //   timeout_action = "score"
     ///     // }
-    ///     // resource_settings = {
-    ///     //   memory_mb      = 512
-    ///     //   replicas       = 2
-    ///     //   network_access = "NONE"
-    ///     // }
+    ///     // memory_mb      = 512
+    ///     // replicas       = 2
+    ///     // network_access = "NONE"
     ///     return new Dictionary&lt;string, object?&gt;
     ///     {
     ///         ["exampleId"] = exampleCustomModel.Id,
@@ -168,6 +166,12 @@ namespace DataRobotPulumi.Datarobot
         public Output<string?> Language { get; private set; } = null!;
 
         /// <summary>
+        /// The memory in MB for the Custom Model.
+        /// </summary>
+        [Output("memoryMb")]
+        public Output<int> MemoryMb { get; private set; } = null!;
+
+        /// <summary>
         /// The name of the Custom Model.
         /// </summary>
         [Output("name")]
@@ -178,6 +182,12 @@ namespace DataRobotPulumi.Datarobot
         /// </summary>
         [Output("negativeClassLabel")]
         public Output<string> NegativeClassLabel { get; private set; } = null!;
+
+        /// <summary>
+        /// The network access for the Custom Model.
+        /// </summary>
+        [Output("networkAccess")]
+        public Output<string> NetworkAccess { get; private set; } = null!;
 
         /// <summary>
         /// The overall moderation configuration for the Custom Model.
@@ -198,10 +208,16 @@ namespace DataRobotPulumi.Datarobot
         public Output<double> PredictionThreshold { get; private set; } = null!;
 
         /// <summary>
-        /// The resource settings for the Custom Model.
+        /// The replicas for the Custom Model.
         /// </summary>
-        [Output("resourceSettings")]
-        public Output<Outputs.CustomModelResourceSettings> ResourceSettings { get; private set; } = null!;
+        [Output("replicas")]
+        public Output<int> Replicas { get; private set; } = null!;
+
+        /// <summary>
+        /// A single identifier that represents a bundle of resources: Memory, CPU, GPU, etc.
+        /// </summary>
+        [Output("resourceBundleId")]
+        public Output<string?> ResourceBundleId { get; private set; } = null!;
 
         /// <summary>
         /// The runtime parameter values for the Custom Model.
@@ -389,6 +405,12 @@ namespace DataRobotPulumi.Datarobot
         public Input<string>? Language { get; set; }
 
         /// <summary>
+        /// The memory in MB for the Custom Model.
+        /// </summary>
+        [Input("memoryMb")]
+        public Input<int>? MemoryMb { get; set; }
+
+        /// <summary>
         /// The name of the Custom Model.
         /// </summary>
         [Input("name")]
@@ -399,6 +421,12 @@ namespace DataRobotPulumi.Datarobot
         /// </summary>
         [Input("negativeClassLabel")]
         public Input<string>? NegativeClassLabel { get; set; }
+
+        /// <summary>
+        /// The network access for the Custom Model.
+        /// </summary>
+        [Input("networkAccess")]
+        public Input<string>? NetworkAccess { get; set; }
 
         /// <summary>
         /// The overall moderation configuration for the Custom Model.
@@ -419,10 +447,16 @@ namespace DataRobotPulumi.Datarobot
         public Input<double>? PredictionThreshold { get; set; }
 
         /// <summary>
-        /// The resource settings for the Custom Model.
+        /// The replicas for the Custom Model.
         /// </summary>
-        [Input("resourceSettings")]
-        public Input<Inputs.CustomModelResourceSettingsArgs>? ResourceSettings { get; set; }
+        [Input("replicas")]
+        public Input<int>? Replicas { get; set; }
+
+        /// <summary>
+        /// A single identifier that represents a bundle of resources: Memory, CPU, GPU, etc.
+        /// </summary>
+        [Input("resourceBundleId")]
+        public Input<string>? ResourceBundleId { get; set; }
 
         [Input("runtimeParameterValues")]
         private InputList<Inputs.CustomModelRuntimeParameterValueArgs>? _runtimeParameterValues;
@@ -595,6 +629,12 @@ namespace DataRobotPulumi.Datarobot
         public Input<string>? Language { get; set; }
 
         /// <summary>
+        /// The memory in MB for the Custom Model.
+        /// </summary>
+        [Input("memoryMb")]
+        public Input<int>? MemoryMb { get; set; }
+
+        /// <summary>
         /// The name of the Custom Model.
         /// </summary>
         [Input("name")]
@@ -605,6 +645,12 @@ namespace DataRobotPulumi.Datarobot
         /// </summary>
         [Input("negativeClassLabel")]
         public Input<string>? NegativeClassLabel { get; set; }
+
+        /// <summary>
+        /// The network access for the Custom Model.
+        /// </summary>
+        [Input("networkAccess")]
+        public Input<string>? NetworkAccess { get; set; }
 
         /// <summary>
         /// The overall moderation configuration for the Custom Model.
@@ -625,10 +671,16 @@ namespace DataRobotPulumi.Datarobot
         public Input<double>? PredictionThreshold { get; set; }
 
         /// <summary>
-        /// The resource settings for the Custom Model.
+        /// The replicas for the Custom Model.
         /// </summary>
-        [Input("resourceSettings")]
-        public Input<Inputs.CustomModelResourceSettingsGetArgs>? ResourceSettings { get; set; }
+        [Input("replicas")]
+        public Input<int>? Replicas { get; set; }
+
+        /// <summary>
+        /// A single identifier that represents a bundle of resources: Memory, CPU, GPU, etc.
+        /// </summary>
+        [Input("resourceBundleId")]
+        public Input<string>? ResourceBundleId { get; set; }
 
         [Input("runtimeParameterValues")]
         private InputList<Inputs.CustomModelRuntimeParameterValueGetArgs>? _runtimeParameterValues;

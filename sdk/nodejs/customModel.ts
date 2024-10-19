@@ -61,11 +61,9 @@ import * as utilities from "./utilities";
  * //   timeout_sec    = 120
  * //   timeout_action = "score"
  * // }
- * // resource_settings = {
- * //   memory_mb      = 512
- * //   replicas       = 2
- * //   network_access = "NONE"
- * // }
+ * // memory_mb      = 512
+ * // replicas       = 2
+ * // network_access = "NONE"
  * export const exampleId = exampleCustomModel.id;
  * ```
  */
@@ -150,6 +148,10 @@ export class CustomModel extends pulumi.CustomResource {
      */
     public readonly language!: pulumi.Output<string | undefined>;
     /**
+     * The memory in MB for the Custom Model.
+     */
+    public readonly memoryMb!: pulumi.Output<number>;
+    /**
      * The name of the Custom Model.
      */
     public readonly name!: pulumi.Output<string>;
@@ -157,6 +159,10 @@ export class CustomModel extends pulumi.CustomResource {
      * The negative class label of the Custom Model.
      */
     public readonly negativeClassLabel!: pulumi.Output<string>;
+    /**
+     * The network access for the Custom Model.
+     */
+    public readonly networkAccess!: pulumi.Output<string>;
     /**
      * The overall moderation configuration for the Custom Model.
      */
@@ -170,9 +176,13 @@ export class CustomModel extends pulumi.CustomResource {
      */
     public readonly predictionThreshold!: pulumi.Output<number>;
     /**
-     * The resource settings for the Custom Model.
+     * The replicas for the Custom Model.
      */
-    public readonly resourceSettings!: pulumi.Output<outputs.CustomModelResourceSettings>;
+    public readonly replicas!: pulumi.Output<number>;
+    /**
+     * A single identifier that represents a bundle of resources: Memory, CPU, GPU, etc.
+     */
+    public readonly resourceBundleId!: pulumi.Output<string | undefined>;
     /**
      * The runtime parameter values for the Custom Model.
      */
@@ -244,12 +254,15 @@ export class CustomModel extends pulumi.CustomResource {
             resourceInputs["guardConfigurations"] = state ? state.guardConfigurations : undefined;
             resourceInputs["isProxy"] = state ? state.isProxy : undefined;
             resourceInputs["language"] = state ? state.language : undefined;
+            resourceInputs["memoryMb"] = state ? state.memoryMb : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["negativeClassLabel"] = state ? state.negativeClassLabel : undefined;
+            resourceInputs["networkAccess"] = state ? state.networkAccess : undefined;
             resourceInputs["overallModerationConfiguration"] = state ? state.overallModerationConfiguration : undefined;
             resourceInputs["positiveClassLabel"] = state ? state.positiveClassLabel : undefined;
             resourceInputs["predictionThreshold"] = state ? state.predictionThreshold : undefined;
-            resourceInputs["resourceSettings"] = state ? state.resourceSettings : undefined;
+            resourceInputs["replicas"] = state ? state.replicas : undefined;
+            resourceInputs["resourceBundleId"] = state ? state.resourceBundleId : undefined;
             resourceInputs["runtimeParameterValues"] = state ? state.runtimeParameterValues : undefined;
             resourceInputs["sourceLlmBlueprintId"] = state ? state.sourceLlmBlueprintId : undefined;
             resourceInputs["sourceRemoteRepositories"] = state ? state.sourceRemoteRepositories : undefined;
@@ -273,12 +286,15 @@ export class CustomModel extends pulumi.CustomResource {
             resourceInputs["guardConfigurations"] = args ? args.guardConfigurations : undefined;
             resourceInputs["isProxy"] = args ? args.isProxy : undefined;
             resourceInputs["language"] = args ? args.language : undefined;
+            resourceInputs["memoryMb"] = args ? args.memoryMb : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["negativeClassLabel"] = args ? args.negativeClassLabel : undefined;
+            resourceInputs["networkAccess"] = args ? args.networkAccess : undefined;
             resourceInputs["overallModerationConfiguration"] = args ? args.overallModerationConfiguration : undefined;
             resourceInputs["positiveClassLabel"] = args ? args.positiveClassLabel : undefined;
             resourceInputs["predictionThreshold"] = args ? args.predictionThreshold : undefined;
-            resourceInputs["resourceSettings"] = args ? args.resourceSettings : undefined;
+            resourceInputs["replicas"] = args ? args.replicas : undefined;
+            resourceInputs["resourceBundleId"] = args ? args.resourceBundleId : undefined;
             resourceInputs["runtimeParameterValues"] = args ? args.runtimeParameterValues : undefined;
             resourceInputs["sourceLlmBlueprintId"] = args ? args.sourceLlmBlueprintId : undefined;
             resourceInputs["sourceRemoteRepositories"] = args ? args.sourceRemoteRepositories : undefined;
@@ -356,6 +372,10 @@ export interface CustomModelState {
      */
     language?: pulumi.Input<string>;
     /**
+     * The memory in MB for the Custom Model.
+     */
+    memoryMb?: pulumi.Input<number>;
+    /**
      * The name of the Custom Model.
      */
     name?: pulumi.Input<string>;
@@ -363,6 +383,10 @@ export interface CustomModelState {
      * The negative class label of the Custom Model.
      */
     negativeClassLabel?: pulumi.Input<string>;
+    /**
+     * The network access for the Custom Model.
+     */
+    networkAccess?: pulumi.Input<string>;
     /**
      * The overall moderation configuration for the Custom Model.
      */
@@ -376,9 +400,13 @@ export interface CustomModelState {
      */
     predictionThreshold?: pulumi.Input<number>;
     /**
-     * The resource settings for the Custom Model.
+     * The replicas for the Custom Model.
      */
-    resourceSettings?: pulumi.Input<inputs.CustomModelResourceSettings>;
+    replicas?: pulumi.Input<number>;
+    /**
+     * A single identifier that represents a bundle of resources: Memory, CPU, GPU, etc.
+     */
+    resourceBundleId?: pulumi.Input<string>;
     /**
      * The runtime parameter values for the Custom Model.
      */
@@ -470,6 +498,10 @@ export interface CustomModelArgs {
      */
     language?: pulumi.Input<string>;
     /**
+     * The memory in MB for the Custom Model.
+     */
+    memoryMb?: pulumi.Input<number>;
+    /**
      * The name of the Custom Model.
      */
     name?: pulumi.Input<string>;
@@ -477,6 +509,10 @@ export interface CustomModelArgs {
      * The negative class label of the Custom Model.
      */
     negativeClassLabel?: pulumi.Input<string>;
+    /**
+     * The network access for the Custom Model.
+     */
+    networkAccess?: pulumi.Input<string>;
     /**
      * The overall moderation configuration for the Custom Model.
      */
@@ -490,9 +526,13 @@ export interface CustomModelArgs {
      */
     predictionThreshold?: pulumi.Input<number>;
     /**
-     * The resource settings for the Custom Model.
+     * The replicas for the Custom Model.
      */
-    resourceSettings?: pulumi.Input<inputs.CustomModelResourceSettings>;
+    replicas?: pulumi.Input<number>;
+    /**
+     * A single identifier that represents a bundle of resources: Memory, CPU, GPU, etc.
+     */
+    resourceBundleId?: pulumi.Input<string>;
     /**
      * The runtime parameter values for the Custom Model.
      */

@@ -100,21 +100,6 @@ export interface CustomModelOverallModerationConfiguration {
     timeoutSec: number;
 }
 
-export interface CustomModelResourceSettings {
-    /**
-     * The memory in MB for the Custom Model.
-     */
-    memoryMb: number;
-    /**
-     * The network access for the Custom Model.
-     */
-    networkAccess: string;
-    /**
-     * The replicas for the Custom Model.
-     */
-    replicas: number;
-}
-
 export interface CustomModelRuntimeParameterValue {
     /**
      * The name of the runtime parameter.
@@ -446,10 +431,6 @@ export interface DeploymentPredictionsSettings {
      * The minimum number of computes to use for predictions.
      */
     minComputes: number;
-    /**
-     * Whether to use real-time predictions.
-     */
-    realTime: boolean;
 }
 
 export interface DeploymentSegmentAnalysisSettings {

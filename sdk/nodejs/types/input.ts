@@ -100,21 +100,6 @@ export interface CustomModelOverallModerationConfiguration {
     timeoutSec?: pulumi.Input<number>;
 }
 
-export interface CustomModelResourceSettings {
-    /**
-     * The memory in MB for the Custom Model.
-     */
-    memoryMb?: pulumi.Input<number>;
-    /**
-     * The network access for the Custom Model.
-     */
-    networkAccess?: pulumi.Input<string>;
-    /**
-     * The replicas for the Custom Model.
-     */
-    replicas?: pulumi.Input<number>;
-}
-
 export interface CustomModelRuntimeParameterValue {
     /**
      * The name of the runtime parameter.
@@ -446,10 +431,6 @@ export interface DeploymentPredictionsSettings {
      * The minimum number of computes to use for predictions.
      */
     minComputes: pulumi.Input<number>;
-    /**
-     * Whether to use real-time predictions.
-     */
-    realTime: pulumi.Input<boolean>;
 }
 
 export interface DeploymentSegmentAnalysisSettings {

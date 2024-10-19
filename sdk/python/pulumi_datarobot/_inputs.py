@@ -25,8 +25,6 @@ __all__ = [
     'CustomModelGuardConfigurationInterventionArgsDict',
     'CustomModelOverallModerationConfigurationArgs',
     'CustomModelOverallModerationConfigurationArgsDict',
-    'CustomModelResourceSettingsArgs',
-    'CustomModelResourceSettingsArgsDict',
     'CustomModelRuntimeParameterValueArgs',
     'CustomModelRuntimeParameterValueArgsDict',
     'CustomModelSourceRemoteRepositoryArgs',
@@ -534,78 +532,6 @@ class CustomModelOverallModerationConfigurationArgs:
     @timeout_sec.setter
     def timeout_sec(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "timeout_sec", value)
-
-
-if not MYPY:
-    class CustomModelResourceSettingsArgsDict(TypedDict):
-        memory_mb: NotRequired[pulumi.Input[int]]
-        """
-        The memory in MB for the Custom Model.
-        """
-        network_access: NotRequired[pulumi.Input[str]]
-        """
-        The network access for the Custom Model.
-        """
-        replicas: NotRequired[pulumi.Input[int]]
-        """
-        The replicas for the Custom Model.
-        """
-elif False:
-    CustomModelResourceSettingsArgsDict: TypeAlias = Mapping[str, Any]
-
-@pulumi.input_type
-class CustomModelResourceSettingsArgs:
-    def __init__(__self__, *,
-                 memory_mb: Optional[pulumi.Input[int]] = None,
-                 network_access: Optional[pulumi.Input[str]] = None,
-                 replicas: Optional[pulumi.Input[int]] = None):
-        """
-        :param pulumi.Input[int] memory_mb: The memory in MB for the Custom Model.
-        :param pulumi.Input[str] network_access: The network access for the Custom Model.
-        :param pulumi.Input[int] replicas: The replicas for the Custom Model.
-        """
-        if memory_mb is not None:
-            pulumi.set(__self__, "memory_mb", memory_mb)
-        if network_access is not None:
-            pulumi.set(__self__, "network_access", network_access)
-        if replicas is not None:
-            pulumi.set(__self__, "replicas", replicas)
-
-    @property
-    @pulumi.getter(name="memoryMb")
-    def memory_mb(self) -> Optional[pulumi.Input[int]]:
-        """
-        The memory in MB for the Custom Model.
-        """
-        return pulumi.get(self, "memory_mb")
-
-    @memory_mb.setter
-    def memory_mb(self, value: Optional[pulumi.Input[int]]):
-        pulumi.set(self, "memory_mb", value)
-
-    @property
-    @pulumi.getter(name="networkAccess")
-    def network_access(self) -> Optional[pulumi.Input[str]]:
-        """
-        The network access for the Custom Model.
-        """
-        return pulumi.get(self, "network_access")
-
-    @network_access.setter
-    def network_access(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "network_access", value)
-
-    @property
-    @pulumi.getter
-    def replicas(self) -> Optional[pulumi.Input[int]]:
-        """
-        The replicas for the Custom Model.
-        """
-        return pulumi.get(self, "replicas")
-
-    @replicas.setter
-    def replicas(self, value: Optional[pulumi.Input[int]]):
-        pulumi.set(self, "replicas", value)
 
 
 if not MYPY:
@@ -2137,10 +2063,6 @@ if not MYPY:
         """
         The minimum number of computes to use for predictions.
         """
-        real_time: pulumi.Input[bool]
-        """
-        Whether to use real-time predictions.
-        """
 elif False:
     DeploymentPredictionsSettingsArgsDict: TypeAlias = Mapping[str, Any]
 
@@ -2148,16 +2070,13 @@ elif False:
 class DeploymentPredictionsSettingsArgs:
     def __init__(__self__, *,
                  max_computes: pulumi.Input[int],
-                 min_computes: pulumi.Input[int],
-                 real_time: pulumi.Input[bool]):
+                 min_computes: pulumi.Input[int]):
         """
         :param pulumi.Input[int] max_computes: The maximum number of computes to use for predictions.
         :param pulumi.Input[int] min_computes: The minimum number of computes to use for predictions.
-        :param pulumi.Input[bool] real_time: Whether to use real-time predictions.
         """
         pulumi.set(__self__, "max_computes", max_computes)
         pulumi.set(__self__, "min_computes", min_computes)
-        pulumi.set(__self__, "real_time", real_time)
 
     @property
     @pulumi.getter(name="maxComputes")
@@ -2182,18 +2101,6 @@ class DeploymentPredictionsSettingsArgs:
     @min_computes.setter
     def min_computes(self, value: pulumi.Input[int]):
         pulumi.set(self, "min_computes", value)
-
-    @property
-    @pulumi.getter(name="realTime")
-    def real_time(self) -> pulumi.Input[bool]:
-        """
-        Whether to use real-time predictions.
-        """
-        return pulumi.get(self, "real_time")
-
-    @real_time.setter
-    def real_time(self, value: pulumi.Input[bool]):
-        pulumi.set(self, "real_time", value)
 
 
 if not MYPY:
