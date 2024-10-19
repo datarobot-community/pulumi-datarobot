@@ -22,22 +22,15 @@ namespace DataRobotPulumi.Datarobot.Outputs
         /// The minimum number of computes to use for predictions.
         /// </summary>
         public readonly int MinComputes;
-        /// <summary>
-        /// Whether to use real-time predictions.
-        /// </summary>
-        public readonly bool RealTime;
 
         [OutputConstructor]
         private DeploymentPredictionsSettings(
             int maxComputes,
 
-            int minComputes,
-
-            bool realTime)
+            int minComputes)
         {
             MaxComputes = maxComputes;
             MinComputes = minComputes;
-            RealTime = realTime;
         }
     }
 }

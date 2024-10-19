@@ -678,181 +678,6 @@ func (o CustomModelOverallModerationConfigurationPtrOutput) TimeoutSec() pulumi.
 	}).(pulumi.IntPtrOutput)
 }
 
-type CustomModelResourceSettings struct {
-	// The memory in MB for the Custom Model.
-	MemoryMb *int `pulumi:"memoryMb"`
-	// The network access for the Custom Model.
-	NetworkAccess *string `pulumi:"networkAccess"`
-	// The replicas for the Custom Model.
-	Replicas *int `pulumi:"replicas"`
-}
-
-// CustomModelResourceSettingsInput is an input type that accepts CustomModelResourceSettingsArgs and CustomModelResourceSettingsOutput values.
-// You can construct a concrete instance of `CustomModelResourceSettingsInput` via:
-//
-//	CustomModelResourceSettingsArgs{...}
-type CustomModelResourceSettingsInput interface {
-	pulumi.Input
-
-	ToCustomModelResourceSettingsOutput() CustomModelResourceSettingsOutput
-	ToCustomModelResourceSettingsOutputWithContext(context.Context) CustomModelResourceSettingsOutput
-}
-
-type CustomModelResourceSettingsArgs struct {
-	// The memory in MB for the Custom Model.
-	MemoryMb pulumi.IntPtrInput `pulumi:"memoryMb"`
-	// The network access for the Custom Model.
-	NetworkAccess pulumi.StringPtrInput `pulumi:"networkAccess"`
-	// The replicas for the Custom Model.
-	Replicas pulumi.IntPtrInput `pulumi:"replicas"`
-}
-
-func (CustomModelResourceSettingsArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CustomModelResourceSettings)(nil)).Elem()
-}
-
-func (i CustomModelResourceSettingsArgs) ToCustomModelResourceSettingsOutput() CustomModelResourceSettingsOutput {
-	return i.ToCustomModelResourceSettingsOutputWithContext(context.Background())
-}
-
-func (i CustomModelResourceSettingsArgs) ToCustomModelResourceSettingsOutputWithContext(ctx context.Context) CustomModelResourceSettingsOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CustomModelResourceSettingsOutput)
-}
-
-func (i CustomModelResourceSettingsArgs) ToCustomModelResourceSettingsPtrOutput() CustomModelResourceSettingsPtrOutput {
-	return i.ToCustomModelResourceSettingsPtrOutputWithContext(context.Background())
-}
-
-func (i CustomModelResourceSettingsArgs) ToCustomModelResourceSettingsPtrOutputWithContext(ctx context.Context) CustomModelResourceSettingsPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CustomModelResourceSettingsOutput).ToCustomModelResourceSettingsPtrOutputWithContext(ctx)
-}
-
-// CustomModelResourceSettingsPtrInput is an input type that accepts CustomModelResourceSettingsArgs, CustomModelResourceSettingsPtr and CustomModelResourceSettingsPtrOutput values.
-// You can construct a concrete instance of `CustomModelResourceSettingsPtrInput` via:
-//
-//	        CustomModelResourceSettingsArgs{...}
-//
-//	or:
-//
-//	        nil
-type CustomModelResourceSettingsPtrInput interface {
-	pulumi.Input
-
-	ToCustomModelResourceSettingsPtrOutput() CustomModelResourceSettingsPtrOutput
-	ToCustomModelResourceSettingsPtrOutputWithContext(context.Context) CustomModelResourceSettingsPtrOutput
-}
-
-type customModelResourceSettingsPtrType CustomModelResourceSettingsArgs
-
-func CustomModelResourceSettingsPtr(v *CustomModelResourceSettingsArgs) CustomModelResourceSettingsPtrInput {
-	return (*customModelResourceSettingsPtrType)(v)
-}
-
-func (*customModelResourceSettingsPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**CustomModelResourceSettings)(nil)).Elem()
-}
-
-func (i *customModelResourceSettingsPtrType) ToCustomModelResourceSettingsPtrOutput() CustomModelResourceSettingsPtrOutput {
-	return i.ToCustomModelResourceSettingsPtrOutputWithContext(context.Background())
-}
-
-func (i *customModelResourceSettingsPtrType) ToCustomModelResourceSettingsPtrOutputWithContext(ctx context.Context) CustomModelResourceSettingsPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CustomModelResourceSettingsPtrOutput)
-}
-
-type CustomModelResourceSettingsOutput struct{ *pulumi.OutputState }
-
-func (CustomModelResourceSettingsOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CustomModelResourceSettings)(nil)).Elem()
-}
-
-func (o CustomModelResourceSettingsOutput) ToCustomModelResourceSettingsOutput() CustomModelResourceSettingsOutput {
-	return o
-}
-
-func (o CustomModelResourceSettingsOutput) ToCustomModelResourceSettingsOutputWithContext(ctx context.Context) CustomModelResourceSettingsOutput {
-	return o
-}
-
-func (o CustomModelResourceSettingsOutput) ToCustomModelResourceSettingsPtrOutput() CustomModelResourceSettingsPtrOutput {
-	return o.ToCustomModelResourceSettingsPtrOutputWithContext(context.Background())
-}
-
-func (o CustomModelResourceSettingsOutput) ToCustomModelResourceSettingsPtrOutputWithContext(ctx context.Context) CustomModelResourceSettingsPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v CustomModelResourceSettings) *CustomModelResourceSettings {
-		return &v
-	}).(CustomModelResourceSettingsPtrOutput)
-}
-
-// The memory in MB for the Custom Model.
-func (o CustomModelResourceSettingsOutput) MemoryMb() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v CustomModelResourceSettings) *int { return v.MemoryMb }).(pulumi.IntPtrOutput)
-}
-
-// The network access for the Custom Model.
-func (o CustomModelResourceSettingsOutput) NetworkAccess() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v CustomModelResourceSettings) *string { return v.NetworkAccess }).(pulumi.StringPtrOutput)
-}
-
-// The replicas for the Custom Model.
-func (o CustomModelResourceSettingsOutput) Replicas() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v CustomModelResourceSettings) *int { return v.Replicas }).(pulumi.IntPtrOutput)
-}
-
-type CustomModelResourceSettingsPtrOutput struct{ *pulumi.OutputState }
-
-func (CustomModelResourceSettingsPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**CustomModelResourceSettings)(nil)).Elem()
-}
-
-func (o CustomModelResourceSettingsPtrOutput) ToCustomModelResourceSettingsPtrOutput() CustomModelResourceSettingsPtrOutput {
-	return o
-}
-
-func (o CustomModelResourceSettingsPtrOutput) ToCustomModelResourceSettingsPtrOutputWithContext(ctx context.Context) CustomModelResourceSettingsPtrOutput {
-	return o
-}
-
-func (o CustomModelResourceSettingsPtrOutput) Elem() CustomModelResourceSettingsOutput {
-	return o.ApplyT(func(v *CustomModelResourceSettings) CustomModelResourceSettings {
-		if v != nil {
-			return *v
-		}
-		var ret CustomModelResourceSettings
-		return ret
-	}).(CustomModelResourceSettingsOutput)
-}
-
-// The memory in MB for the Custom Model.
-func (o CustomModelResourceSettingsPtrOutput) MemoryMb() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *CustomModelResourceSettings) *int {
-		if v == nil {
-			return nil
-		}
-		return v.MemoryMb
-	}).(pulumi.IntPtrOutput)
-}
-
-// The network access for the Custom Model.
-func (o CustomModelResourceSettingsPtrOutput) NetworkAccess() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *CustomModelResourceSettings) *string {
-		if v == nil {
-			return nil
-		}
-		return v.NetworkAccess
-	}).(pulumi.StringPtrOutput)
-}
-
-// The replicas for the Custom Model.
-func (o CustomModelResourceSettingsPtrOutput) Replicas() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *CustomModelResourceSettings) *int {
-		if v == nil {
-			return nil
-		}
-		return v.Replicas
-	}).(pulumi.IntPtrOutput)
-}
-
 type CustomModelRuntimeParameterValue struct {
 	// The name of the runtime parameter.
 	Key string `pulumi:"key"`
@@ -4440,8 +4265,6 @@ type DeploymentPredictionsSettings struct {
 	MaxComputes int `pulumi:"maxComputes"`
 	// The minimum number of computes to use for predictions.
 	MinComputes int `pulumi:"minComputes"`
-	// Whether to use real-time predictions.
-	RealTime bool `pulumi:"realTime"`
 }
 
 // DeploymentPredictionsSettingsInput is an input type that accepts DeploymentPredictionsSettingsArgs and DeploymentPredictionsSettingsOutput values.
@@ -4460,8 +4283,6 @@ type DeploymentPredictionsSettingsArgs struct {
 	MaxComputes pulumi.IntInput `pulumi:"maxComputes"`
 	// The minimum number of computes to use for predictions.
 	MinComputes pulumi.IntInput `pulumi:"minComputes"`
-	// Whether to use real-time predictions.
-	RealTime pulumi.BoolInput `pulumi:"realTime"`
 }
 
 func (DeploymentPredictionsSettingsArgs) ElementType() reflect.Type {
@@ -4551,11 +4372,6 @@ func (o DeploymentPredictionsSettingsOutput) MinComputes() pulumi.IntOutput {
 	return o.ApplyT(func(v DeploymentPredictionsSettings) int { return v.MinComputes }).(pulumi.IntOutput)
 }
 
-// Whether to use real-time predictions.
-func (o DeploymentPredictionsSettingsOutput) RealTime() pulumi.BoolOutput {
-	return o.ApplyT(func(v DeploymentPredictionsSettings) bool { return v.RealTime }).(pulumi.BoolOutput)
-}
-
 type DeploymentPredictionsSettingsPtrOutput struct{ *pulumi.OutputState }
 
 func (DeploymentPredictionsSettingsPtrOutput) ElementType() reflect.Type {
@@ -4598,16 +4414,6 @@ func (o DeploymentPredictionsSettingsPtrOutput) MinComputes() pulumi.IntPtrOutpu
 		}
 		return &v.MinComputes
 	}).(pulumi.IntPtrOutput)
-}
-
-// Whether to use real-time predictions.
-func (o DeploymentPredictionsSettingsPtrOutput) RealTime() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v *DeploymentPredictionsSettings) *bool {
-		if v == nil {
-			return nil
-		}
-		return &v.RealTime
-	}).(pulumi.BoolPtrOutput)
 }
 
 type DeploymentSegmentAnalysisSettings struct {
@@ -5358,8 +5164,6 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelGuardConfigurationInterventionInput)(nil)).Elem(), CustomModelGuardConfigurationInterventionArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelOverallModerationConfigurationInput)(nil)).Elem(), CustomModelOverallModerationConfigurationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelOverallModerationConfigurationPtrInput)(nil)).Elem(), CustomModelOverallModerationConfigurationArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelResourceSettingsInput)(nil)).Elem(), CustomModelResourceSettingsArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelResourceSettingsPtrInput)(nil)).Elem(), CustomModelResourceSettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelRuntimeParameterValueInput)(nil)).Elem(), CustomModelRuntimeParameterValueArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelRuntimeParameterValueArrayInput)(nil)).Elem(), CustomModelRuntimeParameterValueArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelSourceRemoteRepositoryInput)(nil)).Elem(), CustomModelSourceRemoteRepositoryArgs{})
@@ -5423,8 +5227,6 @@ func init() {
 	pulumi.RegisterOutputType(CustomModelGuardConfigurationInterventionOutput{})
 	pulumi.RegisterOutputType(CustomModelOverallModerationConfigurationOutput{})
 	pulumi.RegisterOutputType(CustomModelOverallModerationConfigurationPtrOutput{})
-	pulumi.RegisterOutputType(CustomModelResourceSettingsOutput{})
-	pulumi.RegisterOutputType(CustomModelResourceSettingsPtrOutput{})
 	pulumi.RegisterOutputType(CustomModelRuntimeParameterValueOutput{})
 	pulumi.RegisterOutputType(CustomModelRuntimeParameterValueArrayOutput{})
 	pulumi.RegisterOutputType(CustomModelSourceRemoteRepositoryOutput{})

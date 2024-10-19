@@ -21,7 +21,6 @@ __all__ = [
     'CustomModelGuardConfiguration',
     'CustomModelGuardConfigurationIntervention',
     'CustomModelOverallModerationConfiguration',
-    'CustomModelResourceSettings',
     'CustomModelRuntimeParameterValue',
     'CustomModelSourceRemoteRepository',
     'DeploymentAssociationIdSettings',
@@ -365,68 +364,6 @@ class CustomModelOverallModerationConfiguration(dict):
         The timeout in seconds of the overall moderation configuration.
         """
         return pulumi.get(self, "timeout_sec")
-
-
-@pulumi.output_type
-class CustomModelResourceSettings(dict):
-    @staticmethod
-    def __key_warning(key: str):
-        suggest = None
-        if key == "memoryMb":
-            suggest = "memory_mb"
-        elif key == "networkAccess":
-            suggest = "network_access"
-
-        if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in CustomModelResourceSettings. Access the value via the '{suggest}' property getter instead.")
-
-    def __getitem__(self, key: str) -> Any:
-        CustomModelResourceSettings.__key_warning(key)
-        return super().__getitem__(key)
-
-    def get(self, key: str, default = None) -> Any:
-        CustomModelResourceSettings.__key_warning(key)
-        return super().get(key, default)
-
-    def __init__(__self__, *,
-                 memory_mb: Optional[int] = None,
-                 network_access: Optional[str] = None,
-                 replicas: Optional[int] = None):
-        """
-        :param int memory_mb: The memory in MB for the Custom Model.
-        :param str network_access: The network access for the Custom Model.
-        :param int replicas: The replicas for the Custom Model.
-        """
-        if memory_mb is not None:
-            pulumi.set(__self__, "memory_mb", memory_mb)
-        if network_access is not None:
-            pulumi.set(__self__, "network_access", network_access)
-        if replicas is not None:
-            pulumi.set(__self__, "replicas", replicas)
-
-    @property
-    @pulumi.getter(name="memoryMb")
-    def memory_mb(self) -> Optional[int]:
-        """
-        The memory in MB for the Custom Model.
-        """
-        return pulumi.get(self, "memory_mb")
-
-    @property
-    @pulumi.getter(name="networkAccess")
-    def network_access(self) -> Optional[str]:
-        """
-        The network access for the Custom Model.
-        """
-        return pulumi.get(self, "network_access")
-
-    @property
-    @pulumi.getter
-    def replicas(self) -> Optional[int]:
-        """
-        The replicas for the Custom Model.
-        """
-        return pulumi.get(self, "replicas")
 
 
 @pulumi.output_type
@@ -1676,8 +1613,6 @@ class DeploymentPredictionsSettings(dict):
             suggest = "max_computes"
         elif key == "minComputes":
             suggest = "min_computes"
-        elif key == "realTime":
-            suggest = "real_time"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in DeploymentPredictionsSettings. Access the value via the '{suggest}' property getter instead.")
@@ -1692,16 +1627,13 @@ class DeploymentPredictionsSettings(dict):
 
     def __init__(__self__, *,
                  max_computes: int,
-                 min_computes: int,
-                 real_time: bool):
+                 min_computes: int):
         """
         :param int max_computes: The maximum number of computes to use for predictions.
         :param int min_computes: The minimum number of computes to use for predictions.
-        :param bool real_time: Whether to use real-time predictions.
         """
         pulumi.set(__self__, "max_computes", max_computes)
         pulumi.set(__self__, "min_computes", min_computes)
-        pulumi.set(__self__, "real_time", real_time)
 
     @property
     @pulumi.getter(name="maxComputes")
@@ -1718,14 +1650,6 @@ class DeploymentPredictionsSettings(dict):
         The minimum number of computes to use for predictions.
         """
         return pulumi.get(self, "min_computes")
-
-    @property
-    @pulumi.getter(name="realTime")
-    def real_time(self) -> bool:
-        """
-        Whether to use real-time predictions.
-        """
-        return pulumi.get(self, "real_time")
 
 
 @pulumi.output_type

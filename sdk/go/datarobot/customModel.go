@@ -83,18 +83,24 @@ type CustomModel struct {
 	IsProxy pulumi.BoolOutput `pulumi:"isProxy"`
 	// The language used to build the Custom Model.
 	Language pulumi.StringPtrOutput `pulumi:"language"`
+	// The memory in MB for the Custom Model.
+	MemoryMb pulumi.IntOutput `pulumi:"memoryMb"`
 	// The name of the Custom Model.
 	Name pulumi.StringOutput `pulumi:"name"`
 	// The negative class label of the Custom Model.
 	NegativeClassLabel pulumi.StringOutput `pulumi:"negativeClassLabel"`
+	// The network access for the Custom Model.
+	NetworkAccess pulumi.StringOutput `pulumi:"networkAccess"`
 	// The overall moderation configuration for the Custom Model.
 	OverallModerationConfiguration CustomModelOverallModerationConfigurationPtrOutput `pulumi:"overallModerationConfiguration"`
 	// The positive class label of the Custom Model.
 	PositiveClassLabel pulumi.StringOutput `pulumi:"positiveClassLabel"`
 	// The prediction threshold of the Custom Model.
 	PredictionThreshold pulumi.Float64Output `pulumi:"predictionThreshold"`
-	// The resource settings for the Custom Model.
-	ResourceSettings CustomModelResourceSettingsOutput `pulumi:"resourceSettings"`
+	// The replicas for the Custom Model.
+	Replicas pulumi.IntOutput `pulumi:"replicas"`
+	// A single identifier that represents a bundle of resources: Memory, CPU, GPU, etc.
+	ResourceBundleId pulumi.StringPtrOutput `pulumi:"resourceBundleId"`
 	// The runtime parameter values for the Custom Model.
 	RuntimeParameterValues CustomModelRuntimeParameterValueArrayOutput `pulumi:"runtimeParameterValues"`
 	// The ID of the source LLM Blueprint for the Custom Model.
@@ -175,18 +181,24 @@ type customModelState struct {
 	IsProxy *bool `pulumi:"isProxy"`
 	// The language used to build the Custom Model.
 	Language *string `pulumi:"language"`
+	// The memory in MB for the Custom Model.
+	MemoryMb *int `pulumi:"memoryMb"`
 	// The name of the Custom Model.
 	Name *string `pulumi:"name"`
 	// The negative class label of the Custom Model.
 	NegativeClassLabel *string `pulumi:"negativeClassLabel"`
+	// The network access for the Custom Model.
+	NetworkAccess *string `pulumi:"networkAccess"`
 	// The overall moderation configuration for the Custom Model.
 	OverallModerationConfiguration *CustomModelOverallModerationConfiguration `pulumi:"overallModerationConfiguration"`
 	// The positive class label of the Custom Model.
 	PositiveClassLabel *string `pulumi:"positiveClassLabel"`
 	// The prediction threshold of the Custom Model.
 	PredictionThreshold *float64 `pulumi:"predictionThreshold"`
-	// The resource settings for the Custom Model.
-	ResourceSettings *CustomModelResourceSettings `pulumi:"resourceSettings"`
+	// The replicas for the Custom Model.
+	Replicas *int `pulumi:"replicas"`
+	// A single identifier that represents a bundle of resources: Memory, CPU, GPU, etc.
+	ResourceBundleId *string `pulumi:"resourceBundleId"`
 	// The runtime parameter values for the Custom Model.
 	RuntimeParameterValues []CustomModelRuntimeParameterValue `pulumi:"runtimeParameterValues"`
 	// The ID of the source LLM Blueprint for the Custom Model.
@@ -238,18 +250,24 @@ type CustomModelState struct {
 	IsProxy pulumi.BoolPtrInput
 	// The language used to build the Custom Model.
 	Language pulumi.StringPtrInput
+	// The memory in MB for the Custom Model.
+	MemoryMb pulumi.IntPtrInput
 	// The name of the Custom Model.
 	Name pulumi.StringPtrInput
 	// The negative class label of the Custom Model.
 	NegativeClassLabel pulumi.StringPtrInput
+	// The network access for the Custom Model.
+	NetworkAccess pulumi.StringPtrInput
 	// The overall moderation configuration for the Custom Model.
 	OverallModerationConfiguration CustomModelOverallModerationConfigurationPtrInput
 	// The positive class label of the Custom Model.
 	PositiveClassLabel pulumi.StringPtrInput
 	// The prediction threshold of the Custom Model.
 	PredictionThreshold pulumi.Float64PtrInput
-	// The resource settings for the Custom Model.
-	ResourceSettings CustomModelResourceSettingsPtrInput
+	// The replicas for the Custom Model.
+	Replicas pulumi.IntPtrInput
+	// A single identifier that represents a bundle of resources: Memory, CPU, GPU, etc.
+	ResourceBundleId pulumi.StringPtrInput
 	// The runtime parameter values for the Custom Model.
 	RuntimeParameterValues CustomModelRuntimeParameterValueArrayInput
 	// The ID of the source LLM Blueprint for the Custom Model.
@@ -299,18 +317,24 @@ type customModelArgs struct {
 	IsProxy *bool `pulumi:"isProxy"`
 	// The language used to build the Custom Model.
 	Language *string `pulumi:"language"`
+	// The memory in MB for the Custom Model.
+	MemoryMb *int `pulumi:"memoryMb"`
 	// The name of the Custom Model.
 	Name *string `pulumi:"name"`
 	// The negative class label of the Custom Model.
 	NegativeClassLabel *string `pulumi:"negativeClassLabel"`
+	// The network access for the Custom Model.
+	NetworkAccess *string `pulumi:"networkAccess"`
 	// The overall moderation configuration for the Custom Model.
 	OverallModerationConfiguration *CustomModelOverallModerationConfiguration `pulumi:"overallModerationConfiguration"`
 	// The positive class label of the Custom Model.
 	PositiveClassLabel *string `pulumi:"positiveClassLabel"`
 	// The prediction threshold of the Custom Model.
 	PredictionThreshold *float64 `pulumi:"predictionThreshold"`
-	// The resource settings for the Custom Model.
-	ResourceSettings *CustomModelResourceSettings `pulumi:"resourceSettings"`
+	// The replicas for the Custom Model.
+	Replicas *int `pulumi:"replicas"`
+	// A single identifier that represents a bundle of resources: Memory, CPU, GPU, etc.
+	ResourceBundleId *string `pulumi:"resourceBundleId"`
 	// The runtime parameter values for the Custom Model.
 	RuntimeParameterValues []CustomModelRuntimeParameterValue `pulumi:"runtimeParameterValues"`
 	// The ID of the source LLM Blueprint for the Custom Model.
@@ -351,18 +375,24 @@ type CustomModelArgs struct {
 	IsProxy pulumi.BoolPtrInput
 	// The language used to build the Custom Model.
 	Language pulumi.StringPtrInput
+	// The memory in MB for the Custom Model.
+	MemoryMb pulumi.IntPtrInput
 	// The name of the Custom Model.
 	Name pulumi.StringPtrInput
 	// The negative class label of the Custom Model.
 	NegativeClassLabel pulumi.StringPtrInput
+	// The network access for the Custom Model.
+	NetworkAccess pulumi.StringPtrInput
 	// The overall moderation configuration for the Custom Model.
 	OverallModerationConfiguration CustomModelOverallModerationConfigurationPtrInput
 	// The positive class label of the Custom Model.
 	PositiveClassLabel pulumi.StringPtrInput
 	// The prediction threshold of the Custom Model.
 	PredictionThreshold pulumi.Float64PtrInput
-	// The resource settings for the Custom Model.
-	ResourceSettings CustomModelResourceSettingsPtrInput
+	// The replicas for the Custom Model.
+	Replicas pulumi.IntPtrInput
+	// A single identifier that represents a bundle of resources: Memory, CPU, GPU, etc.
+	ResourceBundleId pulumi.StringPtrInput
 	// The runtime parameter values for the Custom Model.
 	RuntimeParameterValues CustomModelRuntimeParameterValueArrayInput
 	// The ID of the source LLM Blueprint for the Custom Model.
@@ -533,6 +563,11 @@ func (o CustomModelOutput) Language() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *CustomModel) pulumi.StringPtrOutput { return v.Language }).(pulumi.StringPtrOutput)
 }
 
+// The memory in MB for the Custom Model.
+func (o CustomModelOutput) MemoryMb() pulumi.IntOutput {
+	return o.ApplyT(func(v *CustomModel) pulumi.IntOutput { return v.MemoryMb }).(pulumi.IntOutput)
+}
+
 // The name of the Custom Model.
 func (o CustomModelOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *CustomModel) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
@@ -541,6 +576,11 @@ func (o CustomModelOutput) Name() pulumi.StringOutput {
 // The negative class label of the Custom Model.
 func (o CustomModelOutput) NegativeClassLabel() pulumi.StringOutput {
 	return o.ApplyT(func(v *CustomModel) pulumi.StringOutput { return v.NegativeClassLabel }).(pulumi.StringOutput)
+}
+
+// The network access for the Custom Model.
+func (o CustomModelOutput) NetworkAccess() pulumi.StringOutput {
+	return o.ApplyT(func(v *CustomModel) pulumi.StringOutput { return v.NetworkAccess }).(pulumi.StringOutput)
 }
 
 // The overall moderation configuration for the Custom Model.
@@ -560,9 +600,14 @@ func (o CustomModelOutput) PredictionThreshold() pulumi.Float64Output {
 	return o.ApplyT(func(v *CustomModel) pulumi.Float64Output { return v.PredictionThreshold }).(pulumi.Float64Output)
 }
 
-// The resource settings for the Custom Model.
-func (o CustomModelOutput) ResourceSettings() CustomModelResourceSettingsOutput {
-	return o.ApplyT(func(v *CustomModel) CustomModelResourceSettingsOutput { return v.ResourceSettings }).(CustomModelResourceSettingsOutput)
+// The replicas for the Custom Model.
+func (o CustomModelOutput) Replicas() pulumi.IntOutput {
+	return o.ApplyT(func(v *CustomModel) pulumi.IntOutput { return v.Replicas }).(pulumi.IntOutput)
+}
+
+// A single identifier that represents a bundle of resources: Memory, CPU, GPU, etc.
+func (o CustomModelOutput) ResourceBundleId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CustomModel) pulumi.StringPtrOutput { return v.ResourceBundleId }).(pulumi.StringPtrOutput)
 }
 
 // The runtime parameter values for the Custom Model.

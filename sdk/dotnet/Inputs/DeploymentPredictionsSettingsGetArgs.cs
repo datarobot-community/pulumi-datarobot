@@ -25,12 +25,6 @@ namespace DataRobotPulumi.Datarobot.Inputs
         [Input("minComputes", required: true)]
         public Input<int> MinComputes { get; set; } = null!;
 
-        /// <summary>
-        /// Whether to use real-time predictions.
-        /// </summary>
-        [Input("realTime", required: true)]
-        public Input<bool> RealTime { get; set; } = null!;
-
         public DeploymentPredictionsSettingsGetArgs()
         {
         }
