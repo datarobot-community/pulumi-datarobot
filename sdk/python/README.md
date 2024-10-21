@@ -57,7 +57,7 @@ No install necessary, just run `pulumi up`.
 
 The following configuration points are available for the DataRobot provider:
 
-- `datarobot:apikey` (environment: `DATAROBOT_API_KEY`) - the API key for DataRobot
+- `datarobot:apikey` (environment: `DATAROBOT_API_TOKEN`) - the API key for DataRobot
 - `datarobot:endpoint` (environment: `DATAROBOT_ENDPOINT`) - the endpoint for DataRobot
 
 ## Examples
