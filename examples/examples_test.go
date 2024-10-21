@@ -8,9 +8,9 @@ import (
 )
 
 func getApiKey(t *testing.T) string {
-	name := os.Getenv("DATAROBOT_API_KEY")
+	name := os.Getenv("DATAROBOT_API_TOKEN")
 	if name == "" {
-		t.Skipf("Skipping test due to missing DATAROBOT_API_KEY environment variable")
+		t.Skipf("Skipping test due to missing DATAROBOT_API_TOKEN environment variable")
 	}
 
 	return name
