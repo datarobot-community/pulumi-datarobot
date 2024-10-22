@@ -63,3 +63,12 @@ The following configuration points are available for the DataRobot provider:
 ## Examples
 
 See [datarobot-pulumi examples](https://github.com/datarobot-community/pulumi-datarobot/tree/main/examples)
+
+## Air-Gapped Environments
+
+Keep the following items in mind if running in an air-gapped environment:
+
+- Run `pulumi login --local` to store state files on your local filesystem, instead of the default Pulumi Cloud.
+- Set `DATAROBOT_ENDPOINT`: https://{datarobot.example.com}/api/v2
+    (replacing {datarobot.example.com} with your specific deployment endpoint)
+- For Python, the `pulumi` and `pulumi-datarobot` packages must be installed in the air-gapped system. ([Example](https://medium.com/@kriyanshii/installing-python-packages-in-air-gapped-environment-7c9bfddff2b0) using `pip wheel`)
