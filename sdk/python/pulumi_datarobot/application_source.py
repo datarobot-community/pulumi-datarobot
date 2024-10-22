@@ -26,7 +26,7 @@ class ApplicationSourceArgs:
                  files: Optional[Any] = None,
                  folder_path: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
-                 resource_settings: Optional[pulumi.Input['ApplicationSourceResourceSettingsArgs']] = None,
+                 replicas: Optional[pulumi.Input[int]] = None,
                  runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input['ApplicationSourceRuntimeParameterValueArgs']]]] = None):
         """
         The set of arguments for constructing a ApplicationSource resource.
@@ -35,7 +35,7 @@ class ApplicationSourceArgs:
         :param Any files: The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
         :param pulumi.Input[str] folder_path: The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
         :param pulumi.Input[str] name: The name of the Application Source.
-        :param pulumi.Input['ApplicationSourceResourceSettingsArgs'] resource_settings: The resource settings for the Application Source.
+        :param pulumi.Input[int] replicas: The replicas for the Application Source.
         :param pulumi.Input[Sequence[pulumi.Input['ApplicationSourceRuntimeParameterValueArgs']]] runtime_parameter_values: The runtime parameter values for the Application Source.
         """
         if base_environment_id is not None:
@@ -48,8 +48,8 @@ class ApplicationSourceArgs:
             pulumi.set(__self__, "folder_path", folder_path)
         if name is not None:
             pulumi.set(__self__, "name", name)
-        if resource_settings is not None:
-            pulumi.set(__self__, "resource_settings", resource_settings)
+        if replicas is not None:
+            pulumi.set(__self__, "replicas", replicas)
         if runtime_parameter_values is not None:
             pulumi.set(__self__, "runtime_parameter_values", runtime_parameter_values)
 
@@ -114,16 +114,16 @@ class ApplicationSourceArgs:
         pulumi.set(self, "name", value)
 
     @property
-    @pulumi.getter(name="resourceSettings")
-    def resource_settings(self) -> Optional[pulumi.Input['ApplicationSourceResourceSettingsArgs']]:
+    @pulumi.getter
+    def replicas(self) -> Optional[pulumi.Input[int]]:
         """
-        The resource settings for the Application Source.
+        The replicas for the Application Source.
         """
-        return pulumi.get(self, "resource_settings")
+        return pulumi.get(self, "replicas")
 
-    @resource_settings.setter
-    def resource_settings(self, value: Optional[pulumi.Input['ApplicationSourceResourceSettingsArgs']]):
-        pulumi.set(self, "resource_settings", value)
+    @replicas.setter
+    def replicas(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "replicas", value)
 
     @property
     @pulumi.getter(name="runtimeParameterValues")
@@ -148,7 +148,7 @@ class _ApplicationSourceState:
                  folder_path: Optional[pulumi.Input[str]] = None,
                  folder_path_hash: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
-                 resource_settings: Optional[pulumi.Input['ApplicationSourceResourceSettingsArgs']] = None,
+                 replicas: Optional[pulumi.Input[int]] = None,
                  runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input['ApplicationSourceRuntimeParameterValueArgs']]]] = None,
                  version_id: Optional[pulumi.Input[str]] = None):
         """
@@ -160,7 +160,7 @@ class _ApplicationSourceState:
         :param pulumi.Input[str] folder_path: The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
         :param pulumi.Input[str] folder_path_hash: The hash of the folder path contents.
         :param pulumi.Input[str] name: The name of the Application Source.
-        :param pulumi.Input['ApplicationSourceResourceSettingsArgs'] resource_settings: The resource settings for the Application Source.
+        :param pulumi.Input[int] replicas: The replicas for the Application Source.
         :param pulumi.Input[Sequence[pulumi.Input['ApplicationSourceRuntimeParameterValueArgs']]] runtime_parameter_values: The runtime parameter values for the Application Source.
         :param pulumi.Input[str] version_id: The version ID of the Application Source.
         """
@@ -178,8 +178,8 @@ class _ApplicationSourceState:
             pulumi.set(__self__, "folder_path_hash", folder_path_hash)
         if name is not None:
             pulumi.set(__self__, "name", name)
-        if resource_settings is not None:
-            pulumi.set(__self__, "resource_settings", resource_settings)
+        if replicas is not None:
+            pulumi.set(__self__, "replicas", replicas)
         if runtime_parameter_values is not None:
             pulumi.set(__self__, "runtime_parameter_values", runtime_parameter_values)
         if version_id is not None:
@@ -270,16 +270,16 @@ class _ApplicationSourceState:
         pulumi.set(self, "name", value)
 
     @property
-    @pulumi.getter(name="resourceSettings")
-    def resource_settings(self) -> Optional[pulumi.Input['ApplicationSourceResourceSettingsArgs']]:
+    @pulumi.getter
+    def replicas(self) -> Optional[pulumi.Input[int]]:
         """
-        The resource settings for the Application Source.
+        The replicas for the Application Source.
         """
-        return pulumi.get(self, "resource_settings")
+        return pulumi.get(self, "replicas")
 
-    @resource_settings.setter
-    def resource_settings(self, value: Optional[pulumi.Input['ApplicationSourceResourceSettingsArgs']]):
-        pulumi.set(self, "resource_settings", value)
+    @replicas.setter
+    def replicas(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "replicas", value)
 
     @property
     @pulumi.getter(name="runtimeParameterValues")
@@ -316,7 +316,7 @@ class ApplicationSource(pulumi.CustomResource):
                  files: Optional[Any] = None,
                  folder_path: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
-                 resource_settings: Optional[pulumi.Input[Union['ApplicationSourceResourceSettingsArgs', 'ApplicationSourceResourceSettingsArgsDict']]] = None,
+                 replicas: Optional[pulumi.Input[int]] = None,
                  runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input[Union['ApplicationSourceRuntimeParameterValueArgs', 'ApplicationSourceRuntimeParameterValueArgsDict']]]]] = None,
                  __props__=None):
         """
@@ -345,7 +345,7 @@ class ApplicationSource(pulumi.CustomResource):
         :param Any files: The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
         :param pulumi.Input[str] folder_path: The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
         :param pulumi.Input[str] name: The name of the Application Source.
-        :param pulumi.Input[Union['ApplicationSourceResourceSettingsArgs', 'ApplicationSourceResourceSettingsArgsDict']] resource_settings: The resource settings for the Application Source.
+        :param pulumi.Input[int] replicas: The replicas for the Application Source.
         :param pulumi.Input[Sequence[pulumi.Input[Union['ApplicationSourceRuntimeParameterValueArgs', 'ApplicationSourceRuntimeParameterValueArgsDict']]]] runtime_parameter_values: The runtime parameter values for the Application Source.
         """
         ...
@@ -393,7 +393,7 @@ class ApplicationSource(pulumi.CustomResource):
                  files: Optional[Any] = None,
                  folder_path: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
-                 resource_settings: Optional[pulumi.Input[Union['ApplicationSourceResourceSettingsArgs', 'ApplicationSourceResourceSettingsArgsDict']]] = None,
+                 replicas: Optional[pulumi.Input[int]] = None,
                  runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input[Union['ApplicationSourceRuntimeParameterValueArgs', 'ApplicationSourceRuntimeParameterValueArgsDict']]]]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
@@ -409,7 +409,7 @@ class ApplicationSource(pulumi.CustomResource):
             __props__.__dict__["files"] = files
             __props__.__dict__["folder_path"] = folder_path
             __props__.__dict__["name"] = name
-            __props__.__dict__["resource_settings"] = resource_settings
+            __props__.__dict__["replicas"] = replicas
             __props__.__dict__["runtime_parameter_values"] = runtime_parameter_values
             __props__.__dict__["files_hashes"] = None
             __props__.__dict__["folder_path_hash"] = None
@@ -431,7 +431,7 @@ class ApplicationSource(pulumi.CustomResource):
             folder_path: Optional[pulumi.Input[str]] = None,
             folder_path_hash: Optional[pulumi.Input[str]] = None,
             name: Optional[pulumi.Input[str]] = None,
-            resource_settings: Optional[pulumi.Input[Union['ApplicationSourceResourceSettingsArgs', 'ApplicationSourceResourceSettingsArgsDict']]] = None,
+            replicas: Optional[pulumi.Input[int]] = None,
             runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input[Union['ApplicationSourceRuntimeParameterValueArgs', 'ApplicationSourceRuntimeParameterValueArgsDict']]]]] = None,
             version_id: Optional[pulumi.Input[str]] = None) -> 'ApplicationSource':
         """
@@ -448,7 +448,7 @@ class ApplicationSource(pulumi.CustomResource):
         :param pulumi.Input[str] folder_path: The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
         :param pulumi.Input[str] folder_path_hash: The hash of the folder path contents.
         :param pulumi.Input[str] name: The name of the Application Source.
-        :param pulumi.Input[Union['ApplicationSourceResourceSettingsArgs', 'ApplicationSourceResourceSettingsArgsDict']] resource_settings: The resource settings for the Application Source.
+        :param pulumi.Input[int] replicas: The replicas for the Application Source.
         :param pulumi.Input[Sequence[pulumi.Input[Union['ApplicationSourceRuntimeParameterValueArgs', 'ApplicationSourceRuntimeParameterValueArgsDict']]]] runtime_parameter_values: The runtime parameter values for the Application Source.
         :param pulumi.Input[str] version_id: The version ID of the Application Source.
         """
@@ -463,7 +463,7 @@ class ApplicationSource(pulumi.CustomResource):
         __props__.__dict__["folder_path"] = folder_path
         __props__.__dict__["folder_path_hash"] = folder_path_hash
         __props__.__dict__["name"] = name
-        __props__.__dict__["resource_settings"] = resource_settings
+        __props__.__dict__["replicas"] = replicas
         __props__.__dict__["runtime_parameter_values"] = runtime_parameter_values
         __props__.__dict__["version_id"] = version_id
         return ApplicationSource(resource_name, opts=opts, __props__=__props__)
@@ -525,12 +525,12 @@ class ApplicationSource(pulumi.CustomResource):
         return pulumi.get(self, "name")
 
     @property
-    @pulumi.getter(name="resourceSettings")
-    def resource_settings(self) -> pulumi.Output['outputs.ApplicationSourceResourceSettings']:
+    @pulumi.getter
+    def replicas(self) -> pulumi.Output[int]:
         """
-        The resource settings for the Application Source.
+        The replicas for the Application Source.
         """
-        return pulumi.get(self, "resource_settings")
+        return pulumi.get(self, "replicas")
 
     @property
     @pulumi.getter(name="runtimeParameterValues")

@@ -16,7 +16,6 @@ from . import _utilities
 from . import outputs
 
 __all__ = [
-    'ApplicationSourceResourceSettings',
     'ApplicationSourceRuntimeParameterValue',
     'CustomModelGuardConfiguration',
     'CustomModelGuardConfigurationIntervention',
@@ -49,25 +48,6 @@ __all__ = [
     'LlmBlueprintVectorDatabaseSettings',
     'VectorDatabaseChunkingParameters',
 ]
-
-@pulumi.output_type
-class ApplicationSourceResourceSettings(dict):
-    def __init__(__self__, *,
-                 replicas: Optional[int] = None):
-        """
-        :param int replicas: The replicas for the Application Source.
-        """
-        if replicas is not None:
-            pulumi.set(__self__, "replicas", replicas)
-
-    @property
-    @pulumi.getter
-    def replicas(self) -> Optional[int]:
-        """
-        The replicas for the Application Source.
-        """
-        return pulumi.get(self, "replicas")
-
 
 @pulumi.output_type
 class ApplicationSourceRuntimeParameterValue(dict):

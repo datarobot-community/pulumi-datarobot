@@ -93,10 +93,10 @@ namespace DataRobotPulumi.Datarobot
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// The resource settings for the Application Source.
+        /// The replicas for the Application Source.
         /// </summary>
-        [Output("resourceSettings")]
-        public Output<Outputs.ApplicationSourceResourceSettings> ResourceSettings { get; private set; } = null!;
+        [Output("replicas")]
+        public Output<int> Replicas { get; private set; } = null!;
 
         /// <summary>
         /// The runtime parameter values for the Application Source.
@@ -188,10 +188,10 @@ namespace DataRobotPulumi.Datarobot
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// The resource settings for the Application Source.
+        /// The replicas for the Application Source.
         /// </summary>
-        [Input("resourceSettings")]
-        public Input<Inputs.ApplicationSourceResourceSettingsArgs>? ResourceSettings { get; set; }
+        [Input("replicas")]
+        public Input<int>? Replicas { get; set; }
 
         [Input("runtimeParameterValues")]
         private InputList<Inputs.ApplicationSourceRuntimeParameterValueArgs>? _runtimeParameterValues;
@@ -262,10 +262,10 @@ namespace DataRobotPulumi.Datarobot
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// The resource settings for the Application Source.
+        /// The replicas for the Application Source.
         /// </summary>
-        [Input("resourceSettings")]
-        public Input<Inputs.ApplicationSourceResourceSettingsGetArgs>? ResourceSettings { get; set; }
+        [Input("replicas")]
+        public Input<int>? Replicas { get; set; }
 
         [Input("runtimeParameterValues")]
         private InputList<Inputs.ApplicationSourceRuntimeParameterValueGetArgs>? _runtimeParameterValues;

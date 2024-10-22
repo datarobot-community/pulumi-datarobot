@@ -15,8 +15,6 @@ else:
 from . import _utilities
 
 __all__ = [
-    'ApplicationSourceResourceSettingsArgs',
-    'ApplicationSourceResourceSettingsArgsDict',
     'ApplicationSourceRuntimeParameterValueArgs',
     'ApplicationSourceRuntimeParameterValueArgsDict',
     'CustomModelGuardConfigurationArgs',
@@ -82,38 +80,6 @@ __all__ = [
 ]
 
 MYPY = False
-
-if not MYPY:
-    class ApplicationSourceResourceSettingsArgsDict(TypedDict):
-        replicas: NotRequired[pulumi.Input[int]]
-        """
-        The replicas for the Application Source.
-        """
-elif False:
-    ApplicationSourceResourceSettingsArgsDict: TypeAlias = Mapping[str, Any]
-
-@pulumi.input_type
-class ApplicationSourceResourceSettingsArgs:
-    def __init__(__self__, *,
-                 replicas: Optional[pulumi.Input[int]] = None):
-        """
-        :param pulumi.Input[int] replicas: The replicas for the Application Source.
-        """
-        if replicas is not None:
-            pulumi.set(__self__, "replicas", replicas)
-
-    @property
-    @pulumi.getter
-    def replicas(self) -> Optional[pulumi.Input[int]]:
-        """
-        The replicas for the Application Source.
-        """
-        return pulumi.get(self, "replicas")
-
-    @replicas.setter
-    def replicas(self, value: Optional[pulumi.Input[int]]):
-        pulumi.set(self, "replicas", value)
-
 
 if not MYPY:
     class ApplicationSourceRuntimeParameterValueArgsDict(TypedDict):
