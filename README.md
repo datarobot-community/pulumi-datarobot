@@ -68,7 +68,44 @@ See [datarobot-pulumi examples](https://github.com/datarobot-community/pulumi-da
 
 Keep the following items in mind if running in an air-gapped environment:
 
-- Run `pulumi login --local` to store state files on your local filesystem, instead of the default Pulumi Cloud.
+- Run `pulumi login --local` to store state files on your local filesystem, instead of the default Pulumi Cloud. Pulumi binaries are available [here](https://www.pulumi.com/docs/iac/download-install/).
 - Set `DATAROBOT_ENDPOINT`: https://{datarobot.example.com}/api/v2
     (replacing {datarobot.example.com} with your specific deployment endpoint)
-- For Python, the `pulumi` and `pulumi-datarobot` packages must be installed in the air-gapped system. ([Example](https://medium.com/@kriyanshii/installing-python-packages-in-air-gapped-environment-7c9bfddff2b0) using `pip wheel`)
+- For Python, the [pulumi](https://pypi.org/project/pulumi/) and [pulumi-datarobot](https://pypi.org/project/pulumi-datarobot/) packages must be installed in the air-gapped system. 
+
+    Example using `pip wheel`:
+
+    1. create a directory where you want to store package wheels.
+
+    ```bash
+    mkdir folder_containing_wheel
+    ```
+
+    2. Now install wheels of the python library you want to install
+
+    ```bash
+    pip wheel pulumi-datarobot -w folder_containing_wheel
+    ```
+
+    This will store all your required dependent wheels of the `pulumi-datarobot` package in the folder. you can check it with doing ls -ltr`.
+
+    3. Now, you can make a tar file of this folder.
+
+    ```bash
+    tar cf folder_containing_wheel.tar folder_containing_wheel/
+    ```
+
+    and you can transfer it to your air-gapped system.
+
+    Now untar the folder.
+
+    ```bash
+    tar xf folder_containing_wheel.tar
+    cd folder_containing_wheel/
+    ```
+
+    now install wheels from the folder.
+
+    ```bash
+    pip install * -f ./ --no-index 
+    ```
