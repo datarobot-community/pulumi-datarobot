@@ -5,13 +5,6 @@ import * as pulumi from "@pulumi/pulumi";
 import * as inputs from "../types/input";
 import * as outputs from "../types/output";
 
-export interface ApplicationSourceResourceSettings {
-    /**
-     * The replicas for the Application Source.
-     */
-    replicas: number;
-}
-
 export interface ApplicationSourceRuntimeParameterValue {
     /**
      * The name of the runtime parameter.

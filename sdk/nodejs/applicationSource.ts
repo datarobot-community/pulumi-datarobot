@@ -83,9 +83,9 @@ export class ApplicationSource extends pulumi.CustomResource {
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * The resource settings for the Application Source.
+     * The replicas for the Application Source.
      */
-    public readonly resourceSettings!: pulumi.Output<outputs.ApplicationSourceResourceSettings>;
+    public readonly replicas!: pulumi.Output<number>;
     /**
      * The runtime parameter values for the Application Source.
      */
@@ -115,7 +115,7 @@ export class ApplicationSource extends pulumi.CustomResource {
             resourceInputs["folderPath"] = state ? state.folderPath : undefined;
             resourceInputs["folderPathHash"] = state ? state.folderPathHash : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
-            resourceInputs["resourceSettings"] = state ? state.resourceSettings : undefined;
+            resourceInputs["replicas"] = state ? state.replicas : undefined;
             resourceInputs["runtimeParameterValues"] = state ? state.runtimeParameterValues : undefined;
             resourceInputs["versionId"] = state ? state.versionId : undefined;
         } else {
@@ -125,7 +125,7 @@ export class ApplicationSource extends pulumi.CustomResource {
             resourceInputs["files"] = args ? args.files : undefined;
             resourceInputs["folderPath"] = args ? args.folderPath : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
-            resourceInputs["resourceSettings"] = args ? args.resourceSettings : undefined;
+            resourceInputs["replicas"] = args ? args.replicas : undefined;
             resourceInputs["runtimeParameterValues"] = args ? args.runtimeParameterValues : undefined;
             resourceInputs["filesHashes"] = undefined /*out*/;
             resourceInputs["folderPathHash"] = undefined /*out*/;
@@ -169,9 +169,9 @@ export interface ApplicationSourceState {
      */
     name?: pulumi.Input<string>;
     /**
-     * The resource settings for the Application Source.
+     * The replicas for the Application Source.
      */
-    resourceSettings?: pulumi.Input<inputs.ApplicationSourceResourceSettings>;
+    replicas?: pulumi.Input<number>;
     /**
      * The runtime parameter values for the Application Source.
      */
@@ -207,9 +207,9 @@ export interface ApplicationSourceArgs {
      */
     name?: pulumi.Input<string>;
     /**
-     * The resource settings for the Application Source.
+     * The replicas for the Application Source.
      */
-    resourceSettings?: pulumi.Input<inputs.ApplicationSourceResourceSettings>;
+    replicas?: pulumi.Input<number>;
     /**
      * The runtime parameter values for the Application Source.
      */

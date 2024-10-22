@@ -13,143 +13,6 @@ import (
 
 var _ = internal.GetEnvOrDefault
 
-type ApplicationSourceResourceSettings struct {
-	// The replicas for the Application Source.
-	Replicas *int `pulumi:"replicas"`
-}
-
-// ApplicationSourceResourceSettingsInput is an input type that accepts ApplicationSourceResourceSettingsArgs and ApplicationSourceResourceSettingsOutput values.
-// You can construct a concrete instance of `ApplicationSourceResourceSettingsInput` via:
-//
-//	ApplicationSourceResourceSettingsArgs{...}
-type ApplicationSourceResourceSettingsInput interface {
-	pulumi.Input
-
-	ToApplicationSourceResourceSettingsOutput() ApplicationSourceResourceSettingsOutput
-	ToApplicationSourceResourceSettingsOutputWithContext(context.Context) ApplicationSourceResourceSettingsOutput
-}
-
-type ApplicationSourceResourceSettingsArgs struct {
-	// The replicas for the Application Source.
-	Replicas pulumi.IntPtrInput `pulumi:"replicas"`
-}
-
-func (ApplicationSourceResourceSettingsArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ApplicationSourceResourceSettings)(nil)).Elem()
-}
-
-func (i ApplicationSourceResourceSettingsArgs) ToApplicationSourceResourceSettingsOutput() ApplicationSourceResourceSettingsOutput {
-	return i.ToApplicationSourceResourceSettingsOutputWithContext(context.Background())
-}
-
-func (i ApplicationSourceResourceSettingsArgs) ToApplicationSourceResourceSettingsOutputWithContext(ctx context.Context) ApplicationSourceResourceSettingsOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ApplicationSourceResourceSettingsOutput)
-}
-
-func (i ApplicationSourceResourceSettingsArgs) ToApplicationSourceResourceSettingsPtrOutput() ApplicationSourceResourceSettingsPtrOutput {
-	return i.ToApplicationSourceResourceSettingsPtrOutputWithContext(context.Background())
-}
-
-func (i ApplicationSourceResourceSettingsArgs) ToApplicationSourceResourceSettingsPtrOutputWithContext(ctx context.Context) ApplicationSourceResourceSettingsPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ApplicationSourceResourceSettingsOutput).ToApplicationSourceResourceSettingsPtrOutputWithContext(ctx)
-}
-
-// ApplicationSourceResourceSettingsPtrInput is an input type that accepts ApplicationSourceResourceSettingsArgs, ApplicationSourceResourceSettingsPtr and ApplicationSourceResourceSettingsPtrOutput values.
-// You can construct a concrete instance of `ApplicationSourceResourceSettingsPtrInput` via:
-//
-//	        ApplicationSourceResourceSettingsArgs{...}
-//
-//	or:
-//
-//	        nil
-type ApplicationSourceResourceSettingsPtrInput interface {
-	pulumi.Input
-
-	ToApplicationSourceResourceSettingsPtrOutput() ApplicationSourceResourceSettingsPtrOutput
-	ToApplicationSourceResourceSettingsPtrOutputWithContext(context.Context) ApplicationSourceResourceSettingsPtrOutput
-}
-
-type applicationSourceResourceSettingsPtrType ApplicationSourceResourceSettingsArgs
-
-func ApplicationSourceResourceSettingsPtr(v *ApplicationSourceResourceSettingsArgs) ApplicationSourceResourceSettingsPtrInput {
-	return (*applicationSourceResourceSettingsPtrType)(v)
-}
-
-func (*applicationSourceResourceSettingsPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**ApplicationSourceResourceSettings)(nil)).Elem()
-}
-
-func (i *applicationSourceResourceSettingsPtrType) ToApplicationSourceResourceSettingsPtrOutput() ApplicationSourceResourceSettingsPtrOutput {
-	return i.ToApplicationSourceResourceSettingsPtrOutputWithContext(context.Background())
-}
-
-func (i *applicationSourceResourceSettingsPtrType) ToApplicationSourceResourceSettingsPtrOutputWithContext(ctx context.Context) ApplicationSourceResourceSettingsPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ApplicationSourceResourceSettingsPtrOutput)
-}
-
-type ApplicationSourceResourceSettingsOutput struct{ *pulumi.OutputState }
-
-func (ApplicationSourceResourceSettingsOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ApplicationSourceResourceSettings)(nil)).Elem()
-}
-
-func (o ApplicationSourceResourceSettingsOutput) ToApplicationSourceResourceSettingsOutput() ApplicationSourceResourceSettingsOutput {
-	return o
-}
-
-func (o ApplicationSourceResourceSettingsOutput) ToApplicationSourceResourceSettingsOutputWithContext(ctx context.Context) ApplicationSourceResourceSettingsOutput {
-	return o
-}
-
-func (o ApplicationSourceResourceSettingsOutput) ToApplicationSourceResourceSettingsPtrOutput() ApplicationSourceResourceSettingsPtrOutput {
-	return o.ToApplicationSourceResourceSettingsPtrOutputWithContext(context.Background())
-}
-
-func (o ApplicationSourceResourceSettingsOutput) ToApplicationSourceResourceSettingsPtrOutputWithContext(ctx context.Context) ApplicationSourceResourceSettingsPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v ApplicationSourceResourceSettings) *ApplicationSourceResourceSettings {
-		return &v
-	}).(ApplicationSourceResourceSettingsPtrOutput)
-}
-
-// The replicas for the Application Source.
-func (o ApplicationSourceResourceSettingsOutput) Replicas() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v ApplicationSourceResourceSettings) *int { return v.Replicas }).(pulumi.IntPtrOutput)
-}
-
-type ApplicationSourceResourceSettingsPtrOutput struct{ *pulumi.OutputState }
-
-func (ApplicationSourceResourceSettingsPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**ApplicationSourceResourceSettings)(nil)).Elem()
-}
-
-func (o ApplicationSourceResourceSettingsPtrOutput) ToApplicationSourceResourceSettingsPtrOutput() ApplicationSourceResourceSettingsPtrOutput {
-	return o
-}
-
-func (o ApplicationSourceResourceSettingsPtrOutput) ToApplicationSourceResourceSettingsPtrOutputWithContext(ctx context.Context) ApplicationSourceResourceSettingsPtrOutput {
-	return o
-}
-
-func (o ApplicationSourceResourceSettingsPtrOutput) Elem() ApplicationSourceResourceSettingsOutput {
-	return o.ApplyT(func(v *ApplicationSourceResourceSettings) ApplicationSourceResourceSettings {
-		if v != nil {
-			return *v
-		}
-		var ret ApplicationSourceResourceSettings
-		return ret
-	}).(ApplicationSourceResourceSettingsOutput)
-}
-
-// The replicas for the Application Source.
-func (o ApplicationSourceResourceSettingsPtrOutput) Replicas() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *ApplicationSourceResourceSettings) *int {
-		if v == nil {
-			return nil
-		}
-		return v.Replicas
-	}).(pulumi.IntPtrOutput)
-}
-
 type ApplicationSourceRuntimeParameterValue struct {
 	// The name of the runtime parameter.
 	Key string `pulumi:"key"`
@@ -5155,8 +5018,6 @@ func (o VectorDatabaseChunkingParametersPtrOutput) Separators() pulumi.StringArr
 }
 
 func init() {
-	pulumi.RegisterInputType(reflect.TypeOf((*ApplicationSourceResourceSettingsInput)(nil)).Elem(), ApplicationSourceResourceSettingsArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ApplicationSourceResourceSettingsPtrInput)(nil)).Elem(), ApplicationSourceResourceSettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ApplicationSourceRuntimeParameterValueInput)(nil)).Elem(), ApplicationSourceRuntimeParameterValueArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ApplicationSourceRuntimeParameterValueArrayInput)(nil)).Elem(), ApplicationSourceRuntimeParameterValueArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelGuardConfigurationInput)(nil)).Elem(), CustomModelGuardConfigurationArgs{})
@@ -5218,8 +5079,6 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*LlmBlueprintVectorDatabaseSettingsPtrInput)(nil)).Elem(), LlmBlueprintVectorDatabaseSettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*VectorDatabaseChunkingParametersInput)(nil)).Elem(), VectorDatabaseChunkingParametersArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*VectorDatabaseChunkingParametersPtrInput)(nil)).Elem(), VectorDatabaseChunkingParametersArgs{})
-	pulumi.RegisterOutputType(ApplicationSourceResourceSettingsOutput{})
-	pulumi.RegisterOutputType(ApplicationSourceResourceSettingsPtrOutput{})
 	pulumi.RegisterOutputType(ApplicationSourceRuntimeParameterValueOutput{})
 	pulumi.RegisterOutputType(ApplicationSourceRuntimeParameterValueArrayOutput{})
 	pulumi.RegisterOutputType(CustomModelGuardConfigurationOutput{})

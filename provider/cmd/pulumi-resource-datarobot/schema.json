@@ -68,22 +68,6 @@
         }
     },
     "types": {
-        "datarobot:index/ApplicationSourceResourceSettings:ApplicationSourceResourceSettings": {
-            "properties": {
-                "replicas": {
-                    "type": "integer",
-                    "description": "The replicas for the Application Source.\n"
-                }
-            },
-            "type": "object",
-            "language": {
-                "nodejs": {
-                    "requiredOutputs": [
-                        "replicas"
-                    ]
-                }
-            }
-        },
         "datarobot:index/ApplicationSourceRuntimeParameterValue:ApplicationSourceRuntimeParameterValue": {
             "properties": {
                 "key": {
@@ -894,9 +878,9 @@
                     "type": "string",
                     "description": "The name of the Application Source.\n"
                 },
-                "resourceSettings": {
-                    "$ref": "#/types/datarobot:index/ApplicationSourceResourceSettings:ApplicationSourceResourceSettings",
-                    "description": "The resource settings for the Application Source.\n"
+                "replicas": {
+                    "type": "integer",
+                    "description": "The replicas for the Application Source.\n"
                 },
                 "runtimeParameterValues": {
                     "type": "array",
@@ -916,7 +900,7 @@
                 "filesHashes",
                 "folderPathHash",
                 "name",
-                "resourceSettings",
+                "replicas",
                 "runtimeParameterValues",
                 "versionId"
             ],
@@ -941,9 +925,9 @@
                     "type": "string",
                     "description": "The name of the Application Source.\n"
                 },
-                "resourceSettings": {
-                    "$ref": "#/types/datarobot:index/ApplicationSourceResourceSettings:ApplicationSourceResourceSettings",
-                    "description": "The resource settings for the Application Source.\n"
+                "replicas": {
+                    "type": "integer",
+                    "description": "The replicas for the Application Source.\n"
                 },
                 "runtimeParameterValues": {
                     "type": "array",
@@ -987,9 +971,9 @@
                         "type": "string",
                         "description": "The name of the Application Source.\n"
                     },
-                    "resourceSettings": {
-                        "$ref": "#/types/datarobot:index/ApplicationSourceResourceSettings:ApplicationSourceResourceSettings",
-                        "description": "The resource settings for the Application Source.\n"
+                    "replicas": {
+                        "type": "integer",
+                        "description": "The replicas for the Application Source.\n"
                     },
                     "runtimeParameterValues": {
                         "type": "array",

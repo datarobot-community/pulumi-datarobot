@@ -2,12 +2,10 @@
     "auto-aliasing": {
         "resources": {
             "datarobot_api_token_credential": {
-                "current": "datarobot:index/apiTokenCredential:ApiTokenCredential",
-                "majorVersion": 1
+                "current": "datarobot:index/apiTokenCredential:ApiTokenCredential"
             },
             "datarobot_application_source": {
                 "current": "datarobot:index/applicationSource:ApplicationSource",
-                "majorVersion": 1,
                 "fields": {
                     "files_hashes": {
                         "maxItemsOne": false
@@ -18,12 +16,10 @@
                 }
             },
             "datarobot_basic_credential": {
-                "current": "datarobot:index/basicCredential:BasicCredential",
-                "majorVersion": 1
+                "current": "datarobot:index/basicCredential:BasicCredential"
             },
             "datarobot_custom_application": {
                 "current": "datarobot:index/customApplication:CustomApplication",
-                "majorVersion": 1,
                 "fields": {
                     "external_access_recipients": {
                         "maxItemsOne": false
@@ -35,7 +31,6 @@
             },
             "datarobot_custom_model": {
                 "current": "datarobot:index/customModel:CustomModel",
-                "majorVersion": 1,
                 "fields": {
                     "class_labels": {
                         "maxItemsOne": false
@@ -73,7 +68,6 @@
             },
             "datarobot_dataset_from_file": {
                 "current": "datarobot:index/datasetFromFile:DatasetFromFile",
-                "majorVersion": 1,
                 "fields": {
                     "use_case_ids": {
                         "maxItemsOne": false
@@ -82,7 +76,6 @@
             },
             "datarobot_dataset_from_url": {
                 "current": "datarobot:index/datasetFromUrl:DatasetFromUrl",
-                "majorVersion": 1,
                 "fields": {
                     "use_case_ids": {
                         "maxItemsOne": false
@@ -91,7 +84,6 @@
             },
             "datarobot_deployment": {
                 "current": "datarobot:index/deployment:Deployment",
-                "majorVersion": 1,
                 "fields": {
                     "association_id_settings": {
                         "fields": {
@@ -151,20 +143,16 @@
                 }
             },
             "datarobot_google_cloud_credential": {
-                "current": "datarobot:index/googleCloudCredential:GoogleCloudCredential",
-                "majorVersion": 1
+                "current": "datarobot:index/googleCloudCredential:GoogleCloudCredential"
             },
             "datarobot_llm_blueprint": {
-                "current": "datarobot:index/llmBlueprint:LlmBlueprint",
-                "majorVersion": 1
+                "current": "datarobot:index/llmBlueprint:LlmBlueprint"
             },
             "datarobot_playground": {
-                "current": "datarobot:index/playground:Playground",
-                "majorVersion": 1
+                "current": "datarobot:index/playground:Playground"
             },
             "datarobot_prediction_environment": {
                 "current": "datarobot:index/predictionEnvironment:PredictionEnvironment",
-                "majorVersion": 1,
                 "fields": {
                     "supported_model_formats": {
                         "maxItemsOne": false
@@ -173,7 +161,6 @@
             },
             "datarobot_qa_application": {
                 "current": "datarobot:index/qaApplication:QaApplication",
-                "majorVersion": 1,
                 "fields": {
                     "external_access_recipients": {
                         "maxItemsOne": false
@@ -182,7 +169,6 @@
             },
             "datarobot_registered_model": {
                 "current": "datarobot:index/registeredModel:RegisteredModel",
-                "majorVersion": 1,
                 "fields": {
                     "use_case_ids": {
                         "maxItemsOne": false
@@ -191,7 +177,6 @@
             },
             "datarobot_registered_model_from_leaderboard": {
                 "current": "datarobot:index/registeredModelFromLeaderboard:RegisteredModelFromLeaderboard",
-                "majorVersion": 1,
                 "fields": {
                     "use_case_ids": {
                         "maxItemsOne": false
@@ -199,16 +184,13 @@
                 }
             },
             "datarobot_remote_repository": {
-                "current": "datarobot:index/remoteRepository:RemoteRepository",
-                "majorVersion": 1
+                "current": "datarobot:index/remoteRepository:RemoteRepository"
             },
             "datarobot_use_case": {
-                "current": "datarobot:index/useCase:UseCase",
-                "majorVersion": 1
+                "current": "datarobot:index/useCase:UseCase"
             },
             "datarobot_vector_database": {
                 "current": "datarobot:index/vectorDatabase:VectorDatabase",
-                "majorVersion": 1,
                 "fields": {
                     "chunking_parameters": {
                         "fields": {
@@ -222,8 +204,7 @@
         },
         "datasources": {
             "datarobot_global_model": {
-                "current": "datarobot:index/getGlobalModel:getGlobalModel",
-                "majorVersion": 1
+                "current": "datarobot:index/getGlobalModel:getGlobalModel"
             }
         }
     },

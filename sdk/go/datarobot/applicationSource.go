@@ -65,8 +65,8 @@ type ApplicationSource struct {
 	FolderPathHash pulumi.StringOutput `pulumi:"folderPathHash"`
 	// The name of the Application Source.
 	Name pulumi.StringOutput `pulumi:"name"`
-	// The resource settings for the Application Source.
-	ResourceSettings ApplicationSourceResourceSettingsOutput `pulumi:"resourceSettings"`
+	// The replicas for the Application Source.
+	Replicas pulumi.IntOutput `pulumi:"replicas"`
 	// The runtime parameter values for the Application Source.
 	RuntimeParameterValues ApplicationSourceRuntimeParameterValueArrayOutput `pulumi:"runtimeParameterValues"`
 	// The version ID of the Application Source.
@@ -117,8 +117,8 @@ type applicationSourceState struct {
 	FolderPathHash *string `pulumi:"folderPathHash"`
 	// The name of the Application Source.
 	Name *string `pulumi:"name"`
-	// The resource settings for the Application Source.
-	ResourceSettings *ApplicationSourceResourceSettings `pulumi:"resourceSettings"`
+	// The replicas for the Application Source.
+	Replicas *int `pulumi:"replicas"`
 	// The runtime parameter values for the Application Source.
 	RuntimeParameterValues []ApplicationSourceRuntimeParameterValue `pulumi:"runtimeParameterValues"`
 	// The version ID of the Application Source.
@@ -140,8 +140,8 @@ type ApplicationSourceState struct {
 	FolderPathHash pulumi.StringPtrInput
 	// The name of the Application Source.
 	Name pulumi.StringPtrInput
-	// The resource settings for the Application Source.
-	ResourceSettings ApplicationSourceResourceSettingsPtrInput
+	// The replicas for the Application Source.
+	Replicas pulumi.IntPtrInput
 	// The runtime parameter values for the Application Source.
 	RuntimeParameterValues ApplicationSourceRuntimeParameterValueArrayInput
 	// The version ID of the Application Source.
@@ -163,8 +163,8 @@ type applicationSourceArgs struct {
 	FolderPath *string `pulumi:"folderPath"`
 	// The name of the Application Source.
 	Name *string `pulumi:"name"`
-	// The resource settings for the Application Source.
-	ResourceSettings *ApplicationSourceResourceSettings `pulumi:"resourceSettings"`
+	// The replicas for the Application Source.
+	Replicas *int `pulumi:"replicas"`
 	// The runtime parameter values for the Application Source.
 	RuntimeParameterValues []ApplicationSourceRuntimeParameterValue `pulumi:"runtimeParameterValues"`
 }
@@ -181,8 +181,8 @@ type ApplicationSourceArgs struct {
 	FolderPath pulumi.StringPtrInput
 	// The name of the Application Source.
 	Name pulumi.StringPtrInput
-	// The resource settings for the Application Source.
-	ResourceSettings ApplicationSourceResourceSettingsPtrInput
+	// The replicas for the Application Source.
+	Replicas pulumi.IntPtrInput
 	// The runtime parameter values for the Application Source.
 	RuntimeParameterValues ApplicationSourceRuntimeParameterValueArrayInput
 }
@@ -309,9 +309,9 @@ func (o ApplicationSourceOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *ApplicationSource) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// The resource settings for the Application Source.
-func (o ApplicationSourceOutput) ResourceSettings() ApplicationSourceResourceSettingsOutput {
-	return o.ApplyT(func(v *ApplicationSource) ApplicationSourceResourceSettingsOutput { return v.ResourceSettings }).(ApplicationSourceResourceSettingsOutput)
+// The replicas for the Application Source.
+func (o ApplicationSourceOutput) Replicas() pulumi.IntOutput {
+	return o.ApplyT(func(v *ApplicationSource) pulumi.IntOutput { return v.Replicas }).(pulumi.IntOutput)
 }
 
 // The runtime parameter values for the Application Source.
