@@ -1,0 +1,11 @@
+name: declarative_api_example
+runtime:
+  name: python
+  options:
+    toolchain: pip
+    virtualenv: venv
+description: A minimal Python Pulumi program
+config:
+  pulumi:tags:
+    value:
+      pulumi:template: python
