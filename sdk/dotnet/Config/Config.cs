@@ -52,5 +52,15 @@ namespace DataRobotPulumi.Datarobot
             set => _endpoint.Set(value);
         }
 
+        private static readonly __Value<string?> _tracecontext = new __Value<string?>(() => __config.Get("tracecontext"));
+        /// <summary>
+        /// DataRobot trace context
+        /// </summary>
+        public static string? Tracecontext
+        {
+            get => _tracecontext.Get();
+            set => _tracecontext.Set(value);
+        }
+
     }
 }

@@ -31,6 +31,12 @@ namespace DataRobotPulumi.Datarobot
         [Output("endpoint")]
         public Output<string?> Endpoint { get; private set; } = null!;
 
+        /// <summary>
+        /// DataRobot trace context
+        /// </summary>
+        [Output("tracecontext")]
+        public Output<string?> Tracecontext { get; private set; } = null!;
+
 
         /// <summary>
         /// Create a Provider resource with the given unique name, arguments, and options.
@@ -54,6 +60,7 @@ namespace DataRobotPulumi.Datarobot
                 {
                     "apikey",
                     "endpoint",
+                    "tracecontext",
                 },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
@@ -94,6 +101,22 @@ namespace DataRobotPulumi.Datarobot
             {
                 var emptySecret = Output.CreateSecret(0);
                 _endpoint = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        [Input("tracecontext")]
+        private Input<string>? _tracecontext;
+
+        /// <summary>
+        /// DataRobot trace context
+        /// </summary>
+        public Input<string>? Tracecontext
+        {
+            get => _tracecontext;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _tracecontext = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
             }
         }
 

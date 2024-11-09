@@ -20,16 +20,20 @@ __all__ = ['ProviderArgs', 'Provider']
 class ProviderArgs:
     def __init__(__self__, *,
                  apikey: Optional[pulumi.Input[str]] = None,
-                 endpoint: Optional[pulumi.Input[str]] = None):
+                 endpoint: Optional[pulumi.Input[str]] = None,
+                 tracecontext: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a Provider resource.
         :param pulumi.Input[str] apikey: Key to access DataRobot API
         :param pulumi.Input[str] endpoint: Endpoint for the DataRobot API
+        :param pulumi.Input[str] tracecontext: DataRobot trace context
         """
         if apikey is not None:
             pulumi.set(__self__, "apikey", apikey)
         if endpoint is not None:
             pulumi.set(__self__, "endpoint", endpoint)
+        if tracecontext is not None:
+            pulumi.set(__self__, "tracecontext", tracecontext)
 
     @property
     @pulumi.getter
@@ -55,6 +59,18 @@ class ProviderArgs:
     def endpoint(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "endpoint", value)
 
+    @property
+    @pulumi.getter
+    def tracecontext(self) -> Optional[pulumi.Input[str]]:
+        """
+        DataRobot trace context
+        """
+        return pulumi.get(self, "tracecontext")
+
+    @tracecontext.setter
+    def tracecontext(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "tracecontext", value)
+
 
 class Provider(pulumi.ProviderResource):
     @overload
@@ -63,6 +79,7 @@ class Provider(pulumi.ProviderResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  apikey: Optional[pulumi.Input[str]] = None,
                  endpoint: Optional[pulumi.Input[str]] = None,
+                 tracecontext: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
         The provider type for the datarobot package. By default, resources use package-wide configuration
@@ -74,6 +91,7 @@ class Provider(pulumi.ProviderResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] apikey: Key to access DataRobot API
         :param pulumi.Input[str] endpoint: Endpoint for the DataRobot API
+        :param pulumi.Input[str] tracecontext: DataRobot trace context
         """
         ...
     @overload
@@ -104,6 +122,7 @@ class Provider(pulumi.ProviderResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  apikey: Optional[pulumi.Input[str]] = None,
                  endpoint: Optional[pulumi.Input[str]] = None,
+                 tracecontext: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -115,7 +134,8 @@ class Provider(pulumi.ProviderResource):
 
             __props__.__dict__["apikey"] = None if apikey is None else pulumi.Output.secret(apikey)
             __props__.__dict__["endpoint"] = None if endpoint is None else pulumi.Output.secret(endpoint)
-        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["apikey", "endpoint"])
+            __props__.__dict__["tracecontext"] = None if tracecontext is None else pulumi.Output.secret(tracecontext)
+        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["apikey", "endpoint", "tracecontext"])
         opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(Provider, __self__).__init__(
             'datarobot',
@@ -138,4 +158,12 @@ class Provider(pulumi.ProviderResource):
         Endpoint for the DataRobot API
         """
         return pulumi.get(self, "endpoint")
+
+    @property
+    @pulumi.getter
+    def tracecontext(self) -> pulumi.Output[Optional[str]]:
+        """
+        DataRobot trace context
+        """
+        return pulumi.get(self, "tracecontext")
 

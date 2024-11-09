@@ -33,6 +33,10 @@ export class Provider extends pulumi.ProviderResource {
      * Endpoint for the DataRobot API
      */
     public readonly endpoint!: pulumi.Output<string | undefined>;
+    /**
+     * DataRobot trace context
+     */
+    public readonly tracecontext!: pulumi.Output<string | undefined>;
 
     /**
      * Create a Provider resource with the given unique name, arguments, and options.
@@ -47,9 +51,10 @@ export class Provider extends pulumi.ProviderResource {
         {
             resourceInputs["apikey"] = args?.apikey ? pulumi.secret(args.apikey) : undefined;
             resourceInputs["endpoint"] = args?.endpoint ? pulumi.secret(args.endpoint) : undefined;
+            resourceInputs["tracecontext"] = args?.tracecontext ? pulumi.secret(args.tracecontext) : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
-        const secretOpts = { additionalSecretOutputs: ["apikey", "endpoint"] };
+        const secretOpts = { additionalSecretOutputs: ["apikey", "endpoint", "tracecontext"] };
         opts = pulumi.mergeOptions(opts, secretOpts);
         super(Provider.__pulumiType, name, resourceInputs, opts);
     }
@@ -67,4 +72,8 @@ export interface ProviderArgs {
      * Endpoint for the DataRobot API
      */
     endpoint?: pulumi.Input<string>;
+    /**
+     * DataRobot trace context
+     */
+    tracecontext?: pulumi.Input<string>;
 }

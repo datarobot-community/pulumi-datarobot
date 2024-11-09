@@ -24,3 +24,8 @@ endpoint: Optional[str]
 Endpoint for the DataRobot API
 """
 
+tracecontext: Optional[str]
+"""
+DataRobot trace context
+"""
+
