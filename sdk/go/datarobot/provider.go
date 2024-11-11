@@ -22,6 +22,8 @@ type Provider struct {
 	Apikey pulumi.StringPtrOutput `pulumi:"apikey"`
 	// Endpoint for the DataRobot API
 	Endpoint pulumi.StringPtrOutput `pulumi:"endpoint"`
+	// DataRobot trace context
+	Tracecontext pulumi.StringPtrOutput `pulumi:"tracecontext"`
 }
 
 // NewProvider registers a new resource with the given unique name, arguments, and options.
@@ -37,9 +39,13 @@ func NewProvider(ctx *pulumi.Context,
 	if args.Endpoint != nil {
 		args.Endpoint = pulumi.ToSecret(args.Endpoint).(pulumi.StringPtrInput)
 	}
+	if args.Tracecontext != nil {
+		args.Tracecontext = pulumi.ToSecret(args.Tracecontext).(pulumi.StringPtrInput)
+	}
 	secrets := pulumi.AdditionalSecretOutputs([]string{
 		"apikey",
 		"endpoint",
+		"tracecontext",
 	})
 	opts = append(opts, secrets)
 	opts = internal.PkgResourceDefaultOpts(opts)
@@ -56,6 +62,8 @@ type providerArgs struct {
 	Apikey *string `pulumi:"apikey"`
 	// Endpoint for the DataRobot API
 	Endpoint *string `pulumi:"endpoint"`
+	// DataRobot trace context
+	Tracecontext *string `pulumi:"tracecontext"`
 }
 
 // The set of arguments for constructing a Provider resource.
@@ -64,6 +72,8 @@ type ProviderArgs struct {
 	Apikey pulumi.StringPtrInput
 	// Endpoint for the DataRobot API
 	Endpoint pulumi.StringPtrInput
+	// DataRobot trace context
+	Tracecontext pulumi.StringPtrInput
 }
 
 func (ProviderArgs) ElementType() reflect.Type {
@@ -111,6 +121,11 @@ func (o ProviderOutput) Apikey() pulumi.StringPtrOutput {
 // Endpoint for the DataRobot API
 func (o ProviderOutput) Endpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Provider) pulumi.StringPtrOutput { return v.Endpoint }).(pulumi.StringPtrOutput)
+}
+
+// DataRobot trace context
+func (o ProviderOutput) Tracecontext() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Provider) pulumi.StringPtrOutput { return v.Tracecontext }).(pulumi.StringPtrOutput)
 }
 
 func init() {

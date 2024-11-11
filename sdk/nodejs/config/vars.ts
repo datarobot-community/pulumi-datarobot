@@ -29,3 +29,14 @@ Object.defineProperty(exports, "endpoint", {
     enumerable: true,
 });
 
+/**
+ * DataRobot trace context
+ */
+export declare const tracecontext: string | undefined;
+Object.defineProperty(exports, "tracecontext", {
+    get() {
+        return __config.get("tracecontext");
+    },
+    enumerable: true,
+});
+
