@@ -20,3 +20,8 @@ func GetApikey(ctx *pulumi.Context) string {
 func GetEndpoint(ctx *pulumi.Context) string {
 	return config.Get(ctx, "datarobot:endpoint")
 }
+
+// DataRobot trace context
+func GetTracecontext(ctx *pulumi.Context) string {
+	return config.Get(ctx, "datarobot:tracecontext")
+}

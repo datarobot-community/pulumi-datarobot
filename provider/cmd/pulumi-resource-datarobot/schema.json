@@ -64,6 +64,11 @@
                 "type": "string",
                 "description": "Endpoint for the DataRobot API\n",
                 "secret": true
+            },
+            "tracecontext": {
+                "type": "string",
+                "description": "DataRobot trace context\n",
+                "secret": true
             }
         }
     },
@@ -769,6 +774,11 @@
                 "type": "string",
                 "description": "Endpoint for the DataRobot API\n",
                 "secret": true
+            },
+            "tracecontext": {
+                "type": "string",
+                "description": "DataRobot trace context\n",
+                "secret": true
             }
         },
         "inputProperties": {
@@ -780,6 +790,11 @@
             "endpoint": {
                 "type": "string",
                 "description": "Endpoint for the DataRobot API\n",
+                "secret": true
+            },
+            "tracecontext": {
+                "type": "string",
+                "description": "DataRobot trace context\n",
                 "secret": true
             }
         }

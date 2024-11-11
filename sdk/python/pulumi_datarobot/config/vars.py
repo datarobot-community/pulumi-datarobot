@@ -34,3 +34,10 @@ class _ExportableConfig(types.ModuleType):
         """
         return __config__.get('endpoint')
 
+    @property
+    def tracecontext(self) -> Optional[str]:
+        """
+        DataRobot trace context
+        """
+        return __config__.get('tracecontext')
+
