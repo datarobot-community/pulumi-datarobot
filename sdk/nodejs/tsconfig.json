@@ -23,6 +23,8 @@
         "datasetFromFile.ts",
         "datasetFromUrl.ts",
         "deployment.ts",
+        "executionEnvironment.ts",
+        "getExecutionEnvironment.ts",
         "getGlobalModel.ts",
         "googleCloudCredential.ts",
         "index.ts",
