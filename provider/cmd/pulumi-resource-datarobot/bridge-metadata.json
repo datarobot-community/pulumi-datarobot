@@ -142,6 +142,14 @@
                     }
                 }
             },
+            "datarobot_execution_environment": {
+                "current": "datarobot:index/executionEnvironment:ExecutionEnvironment",
+                "fields": {
+                    "use_cases": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
             "datarobot_google_cloud_credential": {
                 "current": "datarobot:index/googleCloudCredential:GoogleCloudCredential"
             },
@@ -203,6 +211,9 @@
             }
         },
         "datasources": {
+            "datarobot_execution_environment": {
+                "current": "datarobot:index/getExecutionEnvironment:getExecutionEnvironment"
+            },
             "datarobot_global_model": {
                 "current": "datarobot:index/getGlobalModel:getGlobalModel"
             }
