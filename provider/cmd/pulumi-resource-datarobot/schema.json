@@ -2032,6 +2032,129 @@
                 "type": "object"
             }
         },
+        "datarobot:index/executionEnvironment:ExecutionEnvironment": {
+            "description": "Execution Environment\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@datarobot/pulumi-datarobot\";\n\nconst example = new datarobot.ExecutionEnvironment(\"example\", {\n    description: \"Example Execution Environment Description\",\n    dockerContextPath: \"docker_context.zip\",\n    programmingLanguage: \"python\",\n    useCases: [\"customModel\"],\n});\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample = datarobot.ExecutionEnvironment(\"example\",\n    description=\"Example Execution Environment Description\",\n    docker_context_path=\"docker_context.zip\",\n    programming_language=\"python\",\n    use_cases=[\"customModel\"])\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = DataRobotPulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Datarobot.ExecutionEnvironment(\"example\", new()\n    {\n        Description = \"Example Execution Environment Description\",\n        DockerContextPath = \"docker_context.zip\",\n        ProgrammingLanguage = \"python\",\n        UseCases = new[]\n        {\n            \"customModel\",\n        },\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := datarobot.NewExecutionEnvironment(ctx, \"example\", \u0026datarobot.ExecutionEnvironmentArgs{\n\t\t\tDescription:         pulumi.String(\"Example Execution Environment Description\"),\n\t\t\tDockerContextPath:   pulumi.String(\"docker_context.zip\"),\n\t\t\tProgrammingLanguage: pulumi.String(\"python\"),\n\t\t\tUseCases: pulumi.StringArray{\n\t\t\t\tpulumi.String(\"customModel\"),\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.ExecutionEnvironment;\nimport com.pulumi.datarobot.ExecutionEnvironmentArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new ExecutionEnvironment(\"example\", ExecutionEnvironmentArgs.builder()\n            .description(\"Example Execution Environment Description\")\n            .dockerContextPath(\"docker_context.zip\")\n            .programmingLanguage(\"python\")\n            .useCases(\"customModel\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: datarobot:ExecutionEnvironment\n    properties:\n      description: Example Execution Environment Description\n      dockerContextPath: docker_context.zip\n      programmingLanguage: python\n      useCases:\n        - customModel\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "properties": {
+                "buildStatus": {
+                    "type": "string",
+                    "description": "The status of the Execution Environment version build.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The description of the Execution Environment.\n"
+                },
+                "dockerContextPath": {
+                    "type": "string",
+                    "description": "The path to a docker context archive or folder\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the Execution Environment.\n"
+                },
+                "programmingLanguage": {
+                    "type": "string",
+                    "description": "The programming language of the Execution Environment.\n"
+                },
+                "useCases": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The list of Use Cases that the Execution Environment supports.\n"
+                },
+                "versionDescription": {
+                    "type": "string",
+                    "description": "The description of the Execution Environment version.\n"
+                },
+                "versionId": {
+                    "type": "string",
+                    "description": "The ID of the Execution Environment Version.\n"
+                }
+            },
+            "required": [
+                "buildStatus",
+                "dockerContextPath",
+                "name",
+                "programmingLanguage",
+                "useCases",
+                "versionId"
+            ],
+            "inputProperties": {
+                "description": {
+                    "type": "string",
+                    "description": "The description of the Execution Environment.\n"
+                },
+                "dockerContextPath": {
+                    "type": "string",
+                    "description": "The path to a docker context archive or folder\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the Execution Environment.\n"
+                },
+                "programmingLanguage": {
+                    "type": "string",
+                    "description": "The programming language of the Execution Environment.\n"
+                },
+                "useCases": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The list of Use Cases that the Execution Environment supports.\n"
+                },
+                "versionDescription": {
+                    "type": "string",
+                    "description": "The description of the Execution Environment version.\n"
+                }
+            },
+            "requiredInputs": [
+                "dockerContextPath",
+                "programmingLanguage",
+                "useCases"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering ExecutionEnvironment resources.\n",
+                "properties": {
+                    "buildStatus": {
+                        "type": "string",
+                        "description": "The status of the Execution Environment version build.\n"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "The description of the Execution Environment.\n"
+                    },
+                    "dockerContextPath": {
+                        "type": "string",
+                        "description": "The path to a docker context archive or folder\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the Execution Environment.\n"
+                    },
+                    "programmingLanguage": {
+                        "type": "string",
+                        "description": "The programming language of the Execution Environment.\n"
+                    },
+                    "useCases": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "The list of Use Cases that the Execution Environment supports.\n"
+                    },
+                    "versionDescription": {
+                        "type": "string",
+                        "description": "The description of the Execution Environment version.\n"
+                    },
+                    "versionId": {
+                        "type": "string",
+                        "description": "The ID of the Execution Environment Version.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
         "datarobot:index/googleCloudCredential:GoogleCloudCredential": {
             "description": "Api Token Credential\n",
             "properties": {
@@ -2979,6 +3102,55 @@
         }
     },
     "functions": {
+        "datarobot:index/getExecutionEnvironment:getExecutionEnvironment": {
+            "description": "Execution Environment\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@pulumi/datarobot\";\n\nconst example = datarobot.getExecutionEnvironment({\n    name: \"DataRobot] Python 3.12\",\n});\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample = datarobot.get_execution_environment(name=\"DataRobot] Python 3.12\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = Pulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = Datarobot.GetExecutionEnvironment.Invoke(new()\n    {\n        Name = \"DataRobot] Python 3.12\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := datarobot.LookupExecutionEnvironment(ctx, \u0026datarobot.LookupExecutionEnvironmentArgs{\n\t\t\tName: \"DataRobot] Python 3.12\",\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.DatarobotFunctions;\nimport com.pulumi.datarobot.inputs.GetExecutionEnvironmentArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var example = DatarobotFunctions.getExecutionEnvironment(GetExecutionEnvironmentArgs.builder()\n            .name(\"DataRobot] Python 3.12\")\n            .build());\n\n    }\n}\n```\n```yaml\nvariables:\n  example:\n    fn::invoke:\n      Function: datarobot:getExecutionEnvironment\n      Arguments:\n        name: DataRobot] Python 3.12\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "inputs": {
+                "description": "A collection of arguments for invoking getExecutionEnvironment.\n",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the Execution Environment.\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "name"
+                ]
+            },
+            "outputs": {
+                "description": "A collection of values returned by getExecutionEnvironment.\n",
+                "properties": {
+                    "description": {
+                        "type": "string",
+                        "description": "The description of the Execution Environment.\n"
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "The ID of the Execution Environment.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the Execution Environment.\n"
+                    },
+                    "programmingLanguage": {
+                        "type": "string",
+                        "description": "The programming language of the Execution Environment.\n"
+                    },
+                    "versionId": {
+                        "type": "string",
+                        "description": "The ID of the Execution Environment Version.\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "description",
+                    "id",
+                    "name",
+                    "programmingLanguage",
+                    "versionId"
+                ]
+            }
+        },
         "datarobot:index/getGlobalModel:getGlobalModel": {
             "description": "Global Model\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@pulumi/datarobot\";\n\nconst dummyBinaryClassification = datarobot.getGlobalModel({\n    name: \"[DataRobot] Dummy Binary Classification\",\n});\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\ndummy_binary_classification = datarobot.get_global_model(name=\"[DataRobot] Dummy Binary Classification\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = Pulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var dummyBinaryClassification = Datarobot.GetGlobalModel.Invoke(new()\n    {\n        Name = \"[DataRobot] Dummy Binary Classification\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := datarobot.GetGlobalModel(ctx, \u0026datarobot.GetGlobalModelArgs{\n\t\t\tName: \"[DataRobot] Dummy Binary Classification\",\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.DatarobotFunctions;\nimport com.pulumi.datarobot.inputs.GetGlobalModelArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var dummyBinaryClassification = DatarobotFunctions.getGlobalModel(GetGlobalModelArgs.builder()\n            .name(\"[DataRobot] Dummy Binary Classification\")\n            .build());\n\n    }\n}\n```\n```yaml\nvariables:\n  dummyBinaryClassification:\n    fn::invoke:\n      Function: datarobot:getGlobalModel\n      Arguments:\n        name: '[DataRobot] Dummy Binary Classification'\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
             "inputs": {

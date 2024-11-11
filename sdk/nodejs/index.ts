@@ -45,6 +45,16 @@ export type Deployment = import("./deployment").Deployment;
 export const Deployment: typeof import("./deployment").Deployment = null as any;
 utilities.lazyLoad(exports, ["Deployment"], () => require("./deployment"));
 
+export { ExecutionEnvironmentArgs, ExecutionEnvironmentState } from "./executionEnvironment";
+export type ExecutionEnvironment = import("./executionEnvironment").ExecutionEnvironment;
+export const ExecutionEnvironment: typeof import("./executionEnvironment").ExecutionEnvironment = null as any;
+utilities.lazyLoad(exports, ["ExecutionEnvironment"], () => require("./executionEnvironment"));
+
+export { GetExecutionEnvironmentArgs, GetExecutionEnvironmentResult, GetExecutionEnvironmentOutputArgs } from "./getExecutionEnvironment";
+export const getExecutionEnvironment: typeof import("./getExecutionEnvironment").getExecutionEnvironment = null as any;
+export const getExecutionEnvironmentOutput: typeof import("./getExecutionEnvironment").getExecutionEnvironmentOutput = null as any;
+utilities.lazyLoad(exports, ["getExecutionEnvironment","getExecutionEnvironmentOutput"], () => require("./getExecutionEnvironment"));
+
 export { GetGlobalModelArgs, GetGlobalModelResult, GetGlobalModelOutputArgs } from "./getGlobalModel";
 export const getGlobalModel: typeof import("./getGlobalModel").getGlobalModel = null as any;
 export const getGlobalModelOutput: typeof import("./getGlobalModel").getGlobalModelOutput = null as any;
@@ -135,6 +145,8 @@ const _module = {
                 return new DatasetFromUrl(name, <any>undefined, { urn })
             case "datarobot:index/deployment:Deployment":
                 return new Deployment(name, <any>undefined, { urn })
+            case "datarobot:index/executionEnvironment:ExecutionEnvironment":
+                return new ExecutionEnvironment(name, <any>undefined, { urn })
             case "datarobot:index/googleCloudCredential:GoogleCloudCredential":
                 return new GoogleCloudCredential(name, <any>undefined, { urn })
             case "datarobot:index/llmBlueprint:LlmBlueprint":
@@ -168,6 +180,7 @@ pulumi.runtime.registerResourceModule("datarobot", "index/customModel", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/datasetFromFile", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/datasetFromUrl", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/deployment", _module)
+pulumi.runtime.registerResourceModule("datarobot", "index/executionEnvironment", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/googleCloudCredential", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/llmBlueprint", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/playground", _module)

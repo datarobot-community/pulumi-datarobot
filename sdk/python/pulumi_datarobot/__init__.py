@@ -13,6 +13,8 @@ from .custom_model import *
 from .dataset_from_file import *
 from .dataset_from_url import *
 from .deployment import *
+from .execution_environment import *
+from .get_execution_environment import *
 from .get_global_model import *
 from .google_cloud_credential import *
 from .llm_blueprint import *
@@ -100,6 +102,14 @@ _utilities.register(
   "fqn": "pulumi_datarobot",
   "classes": {
    "datarobot:index/deployment:Deployment": "Deployment"
+  }
+ },
+ {
+  "pkg": "datarobot",
+  "mod": "index/executionEnvironment",
+  "fqn": "pulumi_datarobot",
+  "classes": {
+   "datarobot:index/executionEnvironment:ExecutionEnvironment": "ExecutionEnvironment"
   }
  },
  {

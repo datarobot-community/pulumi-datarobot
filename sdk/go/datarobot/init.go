@@ -37,6 +37,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &DatasetFromUrl{}
 	case "datarobot:index/deployment:Deployment":
 		r = &Deployment{}
+	case "datarobot:index/executionEnvironment:ExecutionEnvironment":
+		r = &ExecutionEnvironment{}
 	case "datarobot:index/googleCloudCredential:GoogleCloudCredential":
 		r = &GoogleCloudCredential{}
 	case "datarobot:index/llmBlueprint:LlmBlueprint":
@@ -126,6 +128,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"datarobot",
 		"index/deployment",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"datarobot",
+		"index/executionEnvironment",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
