@@ -21,6 +21,8 @@ __all__ = [
     'CustomModelGuardConfigurationArgsDict',
     'CustomModelGuardConfigurationInterventionArgs',
     'CustomModelGuardConfigurationInterventionArgsDict',
+    'CustomModelGuardConfigurationNemoInfoArgs',
+    'CustomModelGuardConfigurationNemoInfoArgsDict',
     'CustomModelOverallModerationConfigurationArgs',
     'CustomModelOverallModerationConfigurationArgsDict',
     'CustomModelRuntimeParameterValueArgs',
@@ -180,6 +182,10 @@ if not MYPY:
         """
         The LLM type for this guard.
         """
+        nemo_info: NotRequired[pulumi.Input['CustomModelGuardConfigurationNemoInfoArgsDict']]
+        """
+        Configuration info for NeMo guards.
+        """
         openai_api_base: NotRequired[pulumi.Input[str]]
         """
         The OpenAI API base URL for this guard.
@@ -209,6 +215,7 @@ class CustomModelGuardConfigurationArgs:
                  deployment_id: Optional[pulumi.Input[str]] = None,
                  input_column_name: Optional[pulumi.Input[str]] = None,
                  llm_type: Optional[pulumi.Input[str]] = None,
+                 nemo_info: Optional[pulumi.Input['CustomModelGuardConfigurationNemoInfoArgs']] = None,
                  openai_api_base: Optional[pulumi.Input[str]] = None,
                  openai_credential: Optional[pulumi.Input[str]] = None,
                  openai_deployment_id: Optional[pulumi.Input[str]] = None,
@@ -221,6 +228,7 @@ class CustomModelGuardConfigurationArgs:
         :param pulumi.Input[str] deployment_id: The deployment ID of this guard.
         :param pulumi.Input[str] input_column_name: The input column name of this guard.
         :param pulumi.Input[str] llm_type: The LLM type for this guard.
+        :param pulumi.Input['CustomModelGuardConfigurationNemoInfoArgs'] nemo_info: Configuration info for NeMo guards.
         :param pulumi.Input[str] openai_api_base: The OpenAI API base URL for this guard.
         :param pulumi.Input[str] openai_credential: The ID of an OpenAI credential for this guard.
         :param pulumi.Input[str] openai_deployment_id: The ID of an OpenAI deployment for this guard.
@@ -236,6 +244,8 @@ class CustomModelGuardConfigurationArgs:
             pulumi.set(__self__, "input_column_name", input_column_name)
         if llm_type is not None:
             pulumi.set(__self__, "llm_type", llm_type)
+        if nemo_info is not None:
+            pulumi.set(__self__, "nemo_info", nemo_info)
         if openai_api_base is not None:
             pulumi.set(__self__, "openai_api_base", openai_api_base)
         if openai_credential is not None:
@@ -328,6 +338,18 @@ class CustomModelGuardConfigurationArgs:
     @llm_type.setter
     def llm_type(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "llm_type", value)
+
+    @property
+    @pulumi.getter(name="nemoInfo")
+    def nemo_info(self) -> Optional[pulumi.Input['CustomModelGuardConfigurationNemoInfoArgs']]:
+        """
+        Configuration info for NeMo guards.
+        """
+        return pulumi.get(self, "nemo_info")
+
+    @nemo_info.setter
+    def nemo_info(self, value: Optional[pulumi.Input['CustomModelGuardConfigurationNemoInfoArgs']]):
+        pulumi.set(self, "nemo_info", value)
 
     @property
     @pulumi.getter(name="openaiApiBase")
@@ -446,6 +468,118 @@ class CustomModelGuardConfigurationInterventionArgs:
     @message.setter
     def message(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "message", value)
+
+
+if not MYPY:
+    class CustomModelGuardConfigurationNemoInfoArgsDict(TypedDict):
+        actions: NotRequired[pulumi.Input[str]]
+        """
+        The actions for the NeMo information.
+        """
+        blocked_terms: NotRequired[pulumi.Input[str]]
+        """
+        NeMo guardrails blocked terms list.
+        """
+        llm_prompts: NotRequired[pulumi.Input[str]]
+        """
+        NeMo guardrails prompts.
+        """
+        main_config: NotRequired[pulumi.Input[str]]
+        """
+        Overall NeMo configuration YAML.
+        """
+        rails_config: NotRequired[pulumi.Input[str]]
+        """
+        NeMo guardrails configuration Colang.
+        """
+elif False:
+    CustomModelGuardConfigurationNemoInfoArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class CustomModelGuardConfigurationNemoInfoArgs:
+    def __init__(__self__, *,
+                 actions: Optional[pulumi.Input[str]] = None,
+                 blocked_terms: Optional[pulumi.Input[str]] = None,
+                 llm_prompts: Optional[pulumi.Input[str]] = None,
+                 main_config: Optional[pulumi.Input[str]] = None,
+                 rails_config: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] actions: The actions for the NeMo information.
+        :param pulumi.Input[str] blocked_terms: NeMo guardrails blocked terms list.
+        :param pulumi.Input[str] llm_prompts: NeMo guardrails prompts.
+        :param pulumi.Input[str] main_config: Overall NeMo configuration YAML.
+        :param pulumi.Input[str] rails_config: NeMo guardrails configuration Colang.
+        """
+        if actions is not None:
+            pulumi.set(__self__, "actions", actions)
+        if blocked_terms is not None:
+            pulumi.set(__self__, "blocked_terms", blocked_terms)
+        if llm_prompts is not None:
+            pulumi.set(__self__, "llm_prompts", llm_prompts)
+        if main_config is not None:
+            pulumi.set(__self__, "main_config", main_config)
+        if rails_config is not None:
+            pulumi.set(__self__, "rails_config", rails_config)
+
+    @property
+    @pulumi.getter
+    def actions(self) -> Optional[pulumi.Input[str]]:
+        """
+        The actions for the NeMo information.
+        """
+        return pulumi.get(self, "actions")
+
+    @actions.setter
+    def actions(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "actions", value)
+
+    @property
+    @pulumi.getter(name="blockedTerms")
+    def blocked_terms(self) -> Optional[pulumi.Input[str]]:
+        """
+        NeMo guardrails blocked terms list.
+        """
+        return pulumi.get(self, "blocked_terms")
+
+    @blocked_terms.setter
+    def blocked_terms(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "blocked_terms", value)
+
+    @property
+    @pulumi.getter(name="llmPrompts")
+    def llm_prompts(self) -> Optional[pulumi.Input[str]]:
+        """
+        NeMo guardrails prompts.
+        """
+        return pulumi.get(self, "llm_prompts")
+
+    @llm_prompts.setter
+    def llm_prompts(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "llm_prompts", value)
+
+    @property
+    @pulumi.getter(name="mainConfig")
+    def main_config(self) -> Optional[pulumi.Input[str]]:
+        """
+        Overall NeMo configuration YAML.
+        """
+        return pulumi.get(self, "main_config")
+
+    @main_config.setter
+    def main_config(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "main_config", value)
+
+    @property
+    @pulumi.getter(name="railsConfig")
+    def rails_config(self) -> Optional[pulumi.Input[str]]:
+        """
+        NeMo guardrails configuration Colang.
+        """
+        return pulumi.get(self, "rails_config")
+
+    @rails_config.setter
+    def rails_config(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "rails_config", value)
 
 
 if not MYPY:

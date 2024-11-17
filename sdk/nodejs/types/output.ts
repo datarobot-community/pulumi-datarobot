@@ -42,6 +42,10 @@ export interface CustomModelGuardConfiguration {
      */
     name: string;
     /**
+     * Configuration info for NeMo guards.
+     */
+    nemoInfo?: outputs.CustomModelGuardConfigurationNemoInfo;
+    /**
      * The OpenAI API base URL for this guard.
      */
     openaiApiBase?: string;
@@ -80,6 +84,29 @@ export interface CustomModelGuardConfigurationIntervention {
      * The message of the guard intervention.
      */
     message: string;
+}
+
+export interface CustomModelGuardConfigurationNemoInfo {
+    /**
+     * The actions for the NeMo information.
+     */
+    actions?: string;
+    /**
+     * NeMo guardrails blocked terms list.
+     */
+    blockedTerms?: string;
+    /**
+     * NeMo guardrails prompts.
+     */
+    llmPrompts?: string;
+    /**
+     * Overall NeMo configuration YAML.
+     */
+    mainConfig?: string;
+    /**
+     * NeMo guardrails configuration Colang.
+     */
+    railsConfig?: string;
 }
 
 export interface CustomModelOverallModerationConfiguration {
