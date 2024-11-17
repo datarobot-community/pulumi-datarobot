@@ -117,6 +117,10 @@
                     "type": "string",
                     "description": "The name of the guard configuration.\n"
                 },
+                "nemoInfo": {
+                    "$ref": "#/types/datarobot:index/CustomModelGuardConfigurationNemoInfo:CustomModelGuardConfigurationNemoInfo",
+                    "description": "Configuration info for NeMo guards.\n"
+                },
                 "openaiApiBase": {
                     "type": "string",
                     "description": "The OpenAI API base URL for this guard.\n"
@@ -182,6 +186,31 @@
                     ]
                 }
             }
+        },
+        "datarobot:index/CustomModelGuardConfigurationNemoInfo:CustomModelGuardConfigurationNemoInfo": {
+            "properties": {
+                "actions": {
+                    "type": "string",
+                    "description": "The actions for the NeMo information.\n"
+                },
+                "blockedTerms": {
+                    "type": "string",
+                    "description": "NeMo guardrails blocked terms list.\n"
+                },
+                "llmPrompts": {
+                    "type": "string",
+                    "description": "NeMo guardrails prompts.\n"
+                },
+                "mainConfig": {
+                    "type": "string",
+                    "description": "Overall NeMo configuration YAML.\n"
+                },
+                "railsConfig": {
+                    "type": "string",
+                    "description": "NeMo guardrails configuration Colang.\n"
+                }
+            },
+            "type": "object"
         },
         "datarobot:index/CustomModelOverallModerationConfiguration:CustomModelOverallModerationConfiguration": {
             "properties": {
