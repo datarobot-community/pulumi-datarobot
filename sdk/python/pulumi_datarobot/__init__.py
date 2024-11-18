@@ -12,6 +12,7 @@ from .custom_application import *
 from .custom_model import *
 from .dataset_from_file import *
 from .dataset_from_url import *
+from .datastore import *
 from .deployment import *
 from .execution_environment import *
 from .get_execution_environment import *
@@ -94,6 +95,14 @@ _utilities.register(
   "fqn": "pulumi_datarobot",
   "classes": {
    "datarobot:index/datasetFromUrl:DatasetFromUrl": "DatasetFromUrl"
+  }
+ },
+ {
+  "pkg": "datarobot",
+  "mod": "index/datastore",
+  "fqn": "pulumi_datarobot",
+  "classes": {
+   "datarobot:index/datastore:Datastore": "Datastore"
   }
  },
  {
