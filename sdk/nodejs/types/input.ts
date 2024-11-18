@@ -42,6 +42,10 @@ export interface CustomModelGuardConfiguration {
      */
     name: pulumi.Input<string>;
     /**
+     * Configuration info for NeMo guards.
+     */
+    nemoInfo?: pulumi.Input<inputs.CustomModelGuardConfigurationNemoInfo>;
+    /**
      * The OpenAI API base URL for this guard.
      */
     openaiApiBase?: pulumi.Input<string>;
@@ -80,6 +84,29 @@ export interface CustomModelGuardConfigurationIntervention {
      * The message of the guard intervention.
      */
     message?: pulumi.Input<string>;
+}
+
+export interface CustomModelGuardConfigurationNemoInfo {
+    /**
+     * The actions for the NeMo information.
+     */
+    actions?: pulumi.Input<string>;
+    /**
+     * NeMo guardrails blocked terms list.
+     */
+    blockedTerms?: pulumi.Input<string>;
+    /**
+     * NeMo guardrails prompts.
+     */
+    llmPrompts?: pulumi.Input<string>;
+    /**
+     * Overall NeMo configuration YAML.
+     */
+    mainConfig?: pulumi.Input<string>;
+    /**
+     * NeMo guardrails configuration Colang.
+     */
+    railsConfig?: pulumi.Input<string>;
 }
 
 export interface CustomModelOverallModerationConfiguration {

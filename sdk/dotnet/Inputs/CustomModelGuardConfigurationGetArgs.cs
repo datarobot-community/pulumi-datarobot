@@ -44,6 +44,12 @@ namespace DataRobotPulumi.Datarobot.Inputs
         public Input<string> Name { get; set; } = null!;
 
         /// <summary>
+        /// Configuration info for NeMo guards.
+        /// </summary>
+        [Input("nemoInfo")]
+        public Input<Inputs.CustomModelGuardConfigurationNemoInfoGetArgs>? NemoInfo { get; set; }
+
+        /// <summary>
         /// The OpenAI API base URL for this guard.
         /// </summary>
         [Input("openaiApiBase")]

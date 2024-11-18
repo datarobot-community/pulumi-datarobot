@@ -139,6 +139,8 @@ type CustomModelGuardConfiguration struct {
 	LlmType *string `pulumi:"llmType"`
 	// The name of the guard configuration.
 	Name string `pulumi:"name"`
+	// Configuration info for NeMo guards.
+	NemoInfo *CustomModelGuardConfigurationNemoInfo `pulumi:"nemoInfo"`
 	// The OpenAI API base URL for this guard.
 	OpenaiApiBase *string `pulumi:"openaiApiBase"`
 	// The ID of an OpenAI credential for this guard.
@@ -175,6 +177,8 @@ type CustomModelGuardConfigurationArgs struct {
 	LlmType pulumi.StringPtrInput `pulumi:"llmType"`
 	// The name of the guard configuration.
 	Name pulumi.StringInput `pulumi:"name"`
+	// Configuration info for NeMo guards.
+	NemoInfo CustomModelGuardConfigurationNemoInfoPtrInput `pulumi:"nemoInfo"`
 	// The OpenAI API base URL for this guard.
 	OpenaiApiBase pulumi.StringPtrInput `pulumi:"openaiApiBase"`
 	// The ID of an OpenAI credential for this guard.
@@ -263,6 +267,11 @@ func (o CustomModelGuardConfigurationOutput) LlmType() pulumi.StringPtrOutput {
 // The name of the guard configuration.
 func (o CustomModelGuardConfigurationOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v CustomModelGuardConfiguration) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Configuration info for NeMo guards.
+func (o CustomModelGuardConfigurationOutput) NemoInfo() CustomModelGuardConfigurationNemoInfoPtrOutput {
+	return o.ApplyT(func(v CustomModelGuardConfiguration) *CustomModelGuardConfigurationNemoInfo { return v.NemoInfo }).(CustomModelGuardConfigurationNemoInfoPtrOutput)
 }
 
 // The OpenAI API base URL for this guard.
@@ -383,6 +392,219 @@ func (o CustomModelGuardConfigurationInterventionOutput) Condition() pulumi.Stri
 // The message of the guard intervention.
 func (o CustomModelGuardConfigurationInterventionOutput) Message() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v CustomModelGuardConfigurationIntervention) *string { return v.Message }).(pulumi.StringPtrOutput)
+}
+
+type CustomModelGuardConfigurationNemoInfo struct {
+	// The actions for the NeMo information.
+	Actions *string `pulumi:"actions"`
+	// NeMo guardrails blocked terms list.
+	BlockedTerms *string `pulumi:"blockedTerms"`
+	// NeMo guardrails prompts.
+	LlmPrompts *string `pulumi:"llmPrompts"`
+	// Overall NeMo configuration YAML.
+	MainConfig *string `pulumi:"mainConfig"`
+	// NeMo guardrails configuration Colang.
+	RailsConfig *string `pulumi:"railsConfig"`
+}
+
+// CustomModelGuardConfigurationNemoInfoInput is an input type that accepts CustomModelGuardConfigurationNemoInfoArgs and CustomModelGuardConfigurationNemoInfoOutput values.
+// You can construct a concrete instance of `CustomModelGuardConfigurationNemoInfoInput` via:
+//
+//	CustomModelGuardConfigurationNemoInfoArgs{...}
+type CustomModelGuardConfigurationNemoInfoInput interface {
+	pulumi.Input
+
+	ToCustomModelGuardConfigurationNemoInfoOutput() CustomModelGuardConfigurationNemoInfoOutput
+	ToCustomModelGuardConfigurationNemoInfoOutputWithContext(context.Context) CustomModelGuardConfigurationNemoInfoOutput
+}
+
+type CustomModelGuardConfigurationNemoInfoArgs struct {
+	// The actions for the NeMo information.
+	Actions pulumi.StringPtrInput `pulumi:"actions"`
+	// NeMo guardrails blocked terms list.
+	BlockedTerms pulumi.StringPtrInput `pulumi:"blockedTerms"`
+	// NeMo guardrails prompts.
+	LlmPrompts pulumi.StringPtrInput `pulumi:"llmPrompts"`
+	// Overall NeMo configuration YAML.
+	MainConfig pulumi.StringPtrInput `pulumi:"mainConfig"`
+	// NeMo guardrails configuration Colang.
+	RailsConfig pulumi.StringPtrInput `pulumi:"railsConfig"`
+}
+
+func (CustomModelGuardConfigurationNemoInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomModelGuardConfigurationNemoInfo)(nil)).Elem()
+}
+
+func (i CustomModelGuardConfigurationNemoInfoArgs) ToCustomModelGuardConfigurationNemoInfoOutput() CustomModelGuardConfigurationNemoInfoOutput {
+	return i.ToCustomModelGuardConfigurationNemoInfoOutputWithContext(context.Background())
+}
+
+func (i CustomModelGuardConfigurationNemoInfoArgs) ToCustomModelGuardConfigurationNemoInfoOutputWithContext(ctx context.Context) CustomModelGuardConfigurationNemoInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomModelGuardConfigurationNemoInfoOutput)
+}
+
+func (i CustomModelGuardConfigurationNemoInfoArgs) ToCustomModelGuardConfigurationNemoInfoPtrOutput() CustomModelGuardConfigurationNemoInfoPtrOutput {
+	return i.ToCustomModelGuardConfigurationNemoInfoPtrOutputWithContext(context.Background())
+}
+
+func (i CustomModelGuardConfigurationNemoInfoArgs) ToCustomModelGuardConfigurationNemoInfoPtrOutputWithContext(ctx context.Context) CustomModelGuardConfigurationNemoInfoPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomModelGuardConfigurationNemoInfoOutput).ToCustomModelGuardConfigurationNemoInfoPtrOutputWithContext(ctx)
+}
+
+// CustomModelGuardConfigurationNemoInfoPtrInput is an input type that accepts CustomModelGuardConfigurationNemoInfoArgs, CustomModelGuardConfigurationNemoInfoPtr and CustomModelGuardConfigurationNemoInfoPtrOutput values.
+// You can construct a concrete instance of `CustomModelGuardConfigurationNemoInfoPtrInput` via:
+//
+//	        CustomModelGuardConfigurationNemoInfoArgs{...}
+//
+//	or:
+//
+//	        nil
+type CustomModelGuardConfigurationNemoInfoPtrInput interface {
+	pulumi.Input
+
+	ToCustomModelGuardConfigurationNemoInfoPtrOutput() CustomModelGuardConfigurationNemoInfoPtrOutput
+	ToCustomModelGuardConfigurationNemoInfoPtrOutputWithContext(context.Context) CustomModelGuardConfigurationNemoInfoPtrOutput
+}
+
+type customModelGuardConfigurationNemoInfoPtrType CustomModelGuardConfigurationNemoInfoArgs
+
+func CustomModelGuardConfigurationNemoInfoPtr(v *CustomModelGuardConfigurationNemoInfoArgs) CustomModelGuardConfigurationNemoInfoPtrInput {
+	return (*customModelGuardConfigurationNemoInfoPtrType)(v)
+}
+
+func (*customModelGuardConfigurationNemoInfoPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**CustomModelGuardConfigurationNemoInfo)(nil)).Elem()
+}
+
+func (i *customModelGuardConfigurationNemoInfoPtrType) ToCustomModelGuardConfigurationNemoInfoPtrOutput() CustomModelGuardConfigurationNemoInfoPtrOutput {
+	return i.ToCustomModelGuardConfigurationNemoInfoPtrOutputWithContext(context.Background())
+}
+
+func (i *customModelGuardConfigurationNemoInfoPtrType) ToCustomModelGuardConfigurationNemoInfoPtrOutputWithContext(ctx context.Context) CustomModelGuardConfigurationNemoInfoPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomModelGuardConfigurationNemoInfoPtrOutput)
+}
+
+type CustomModelGuardConfigurationNemoInfoOutput struct{ *pulumi.OutputState }
+
+func (CustomModelGuardConfigurationNemoInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomModelGuardConfigurationNemoInfo)(nil)).Elem()
+}
+
+func (o CustomModelGuardConfigurationNemoInfoOutput) ToCustomModelGuardConfigurationNemoInfoOutput() CustomModelGuardConfigurationNemoInfoOutput {
+	return o
+}
+
+func (o CustomModelGuardConfigurationNemoInfoOutput) ToCustomModelGuardConfigurationNemoInfoOutputWithContext(ctx context.Context) CustomModelGuardConfigurationNemoInfoOutput {
+	return o
+}
+
+func (o CustomModelGuardConfigurationNemoInfoOutput) ToCustomModelGuardConfigurationNemoInfoPtrOutput() CustomModelGuardConfigurationNemoInfoPtrOutput {
+	return o.ToCustomModelGuardConfigurationNemoInfoPtrOutputWithContext(context.Background())
+}
+
+func (o CustomModelGuardConfigurationNemoInfoOutput) ToCustomModelGuardConfigurationNemoInfoPtrOutputWithContext(ctx context.Context) CustomModelGuardConfigurationNemoInfoPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v CustomModelGuardConfigurationNemoInfo) *CustomModelGuardConfigurationNemoInfo {
+		return &v
+	}).(CustomModelGuardConfigurationNemoInfoPtrOutput)
+}
+
+// The actions for the NeMo information.
+func (o CustomModelGuardConfigurationNemoInfoOutput) Actions() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CustomModelGuardConfigurationNemoInfo) *string { return v.Actions }).(pulumi.StringPtrOutput)
+}
+
+// NeMo guardrails blocked terms list.
+func (o CustomModelGuardConfigurationNemoInfoOutput) BlockedTerms() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CustomModelGuardConfigurationNemoInfo) *string { return v.BlockedTerms }).(pulumi.StringPtrOutput)
+}
+
+// NeMo guardrails prompts.
+func (o CustomModelGuardConfigurationNemoInfoOutput) LlmPrompts() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CustomModelGuardConfigurationNemoInfo) *string { return v.LlmPrompts }).(pulumi.StringPtrOutput)
+}
+
+// Overall NeMo configuration YAML.
+func (o CustomModelGuardConfigurationNemoInfoOutput) MainConfig() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CustomModelGuardConfigurationNemoInfo) *string { return v.MainConfig }).(pulumi.StringPtrOutput)
+}
+
+// NeMo guardrails configuration Colang.
+func (o CustomModelGuardConfigurationNemoInfoOutput) RailsConfig() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CustomModelGuardConfigurationNemoInfo) *string { return v.RailsConfig }).(pulumi.StringPtrOutput)
+}
+
+type CustomModelGuardConfigurationNemoInfoPtrOutput struct{ *pulumi.OutputState }
+
+func (CustomModelGuardConfigurationNemoInfoPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**CustomModelGuardConfigurationNemoInfo)(nil)).Elem()
+}
+
+func (o CustomModelGuardConfigurationNemoInfoPtrOutput) ToCustomModelGuardConfigurationNemoInfoPtrOutput() CustomModelGuardConfigurationNemoInfoPtrOutput {
+	return o
+}
+
+func (o CustomModelGuardConfigurationNemoInfoPtrOutput) ToCustomModelGuardConfigurationNemoInfoPtrOutputWithContext(ctx context.Context) CustomModelGuardConfigurationNemoInfoPtrOutput {
+	return o
+}
+
+func (o CustomModelGuardConfigurationNemoInfoPtrOutput) Elem() CustomModelGuardConfigurationNemoInfoOutput {
+	return o.ApplyT(func(v *CustomModelGuardConfigurationNemoInfo) CustomModelGuardConfigurationNemoInfo {
+		if v != nil {
+			return *v
+		}
+		var ret CustomModelGuardConfigurationNemoInfo
+		return ret
+	}).(CustomModelGuardConfigurationNemoInfoOutput)
+}
+
+// The actions for the NeMo information.
+func (o CustomModelGuardConfigurationNemoInfoPtrOutput) Actions() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CustomModelGuardConfigurationNemoInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Actions
+	}).(pulumi.StringPtrOutput)
+}
+
+// NeMo guardrails blocked terms list.
+func (o CustomModelGuardConfigurationNemoInfoPtrOutput) BlockedTerms() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CustomModelGuardConfigurationNemoInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.BlockedTerms
+	}).(pulumi.StringPtrOutput)
+}
+
+// NeMo guardrails prompts.
+func (o CustomModelGuardConfigurationNemoInfoPtrOutput) LlmPrompts() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CustomModelGuardConfigurationNemoInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.LlmPrompts
+	}).(pulumi.StringPtrOutput)
+}
+
+// Overall NeMo configuration YAML.
+func (o CustomModelGuardConfigurationNemoInfoPtrOutput) MainConfig() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CustomModelGuardConfigurationNemoInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.MainConfig
+	}).(pulumi.StringPtrOutput)
+}
+
+// NeMo guardrails configuration Colang.
+func (o CustomModelGuardConfigurationNemoInfoPtrOutput) RailsConfig() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CustomModelGuardConfigurationNemoInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.RailsConfig
+	}).(pulumi.StringPtrOutput)
 }
 
 type CustomModelOverallModerationConfiguration struct {
@@ -5023,6 +5245,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelGuardConfigurationInput)(nil)).Elem(), CustomModelGuardConfigurationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelGuardConfigurationArrayInput)(nil)).Elem(), CustomModelGuardConfigurationArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelGuardConfigurationInterventionInput)(nil)).Elem(), CustomModelGuardConfigurationInterventionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelGuardConfigurationNemoInfoInput)(nil)).Elem(), CustomModelGuardConfigurationNemoInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelGuardConfigurationNemoInfoPtrInput)(nil)).Elem(), CustomModelGuardConfigurationNemoInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelOverallModerationConfigurationInput)(nil)).Elem(), CustomModelOverallModerationConfigurationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelOverallModerationConfigurationPtrInput)(nil)).Elem(), CustomModelOverallModerationConfigurationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelRuntimeParameterValueInput)(nil)).Elem(), CustomModelRuntimeParameterValueArgs{})
@@ -5084,6 +5308,8 @@ func init() {
 	pulumi.RegisterOutputType(CustomModelGuardConfigurationOutput{})
 	pulumi.RegisterOutputType(CustomModelGuardConfigurationArrayOutput{})
 	pulumi.RegisterOutputType(CustomModelGuardConfigurationInterventionOutput{})
+	pulumi.RegisterOutputType(CustomModelGuardConfigurationNemoInfoOutput{})
+	pulumi.RegisterOutputType(CustomModelGuardConfigurationNemoInfoPtrOutput{})
 	pulumi.RegisterOutputType(CustomModelOverallModerationConfigurationOutput{})
 	pulumi.RegisterOutputType(CustomModelOverallModerationConfigurationPtrOutput{})
 	pulumi.RegisterOutputType(CustomModelRuntimeParameterValueOutput{})

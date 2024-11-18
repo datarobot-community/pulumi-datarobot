@@ -22,6 +22,7 @@
         "customModel.ts",
         "datasetFromFile.ts",
         "datasetFromUrl.ts",
+        "datastore.ts",
         "deployment.ts",
         "executionEnvironment.ts",
         "getExecutionEnvironment.ts",
