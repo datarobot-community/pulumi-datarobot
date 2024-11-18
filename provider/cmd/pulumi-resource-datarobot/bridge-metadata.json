@@ -82,6 +82,14 @@
                     }
                 }
             },
+            "datarobot_datastore": {
+                "current": "datarobot:index/datastore:Datastore",
+                "fields": {
+                    "fields": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
             "datarobot_deployment": {
                 "current": "datarobot:index/deployment:Deployment",
                 "fields": {

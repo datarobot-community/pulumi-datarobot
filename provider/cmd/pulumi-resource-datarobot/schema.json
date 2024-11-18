@@ -117,6 +117,10 @@
                     "type": "string",
                     "description": "The name of the guard configuration.\n"
                 },
+                "nemoInfo": {
+                    "$ref": "#/types/datarobot:index/CustomModelGuardConfigurationNemoInfo:CustomModelGuardConfigurationNemoInfo",
+                    "description": "Configuration info for NeMo guards.\n"
+                },
                 "openaiApiBase": {
                     "type": "string",
                     "description": "The OpenAI API base URL for this guard.\n"
@@ -182,6 +186,31 @@
                     ]
                 }
             }
+        },
+        "datarobot:index/CustomModelGuardConfigurationNemoInfo:CustomModelGuardConfigurationNemoInfo": {
+            "properties": {
+                "actions": {
+                    "type": "string",
+                    "description": "The actions for the NeMo information.\n"
+                },
+                "blockedTerms": {
+                    "type": "string",
+                    "description": "NeMo guardrails blocked terms list.\n"
+                },
+                "llmPrompts": {
+                    "type": "string",
+                    "description": "NeMo guardrails prompts.\n"
+                },
+                "mainConfig": {
+                    "type": "string",
+                    "description": "Overall NeMo configuration YAML.\n"
+                },
+                "railsConfig": {
+                    "type": "string",
+                    "description": "NeMo guardrails configuration Colang.\n"
+                }
+            },
+            "type": "object"
         },
         "datarobot:index/CustomModelOverallModerationConfiguration:CustomModelOverallModerationConfiguration": {
             "properties": {
@@ -1790,6 +1819,117 @@
                             "type": "string"
                         },
                         "description": "The list of Use Case IDs to add the Dataset to.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "datarobot:index/datastore:Datastore": {
+            "description": "Data store\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@datarobot/pulumi-datarobot\";\n\nconst exampleConnector = new datarobot.Datastore(\"exampleConnector\", {\n    canonicalName: \"Example Connector Datastore\",\n    dataStoreType: \"dr-connector-v1\",\n    connectorId: \"65538041dde6a1d664d0b2ec\",\n    fields: [{\n        id: \"fs.defaultFS\",\n        name: \"Bucket Name\",\n        value: \"my-bucket\",\n    }],\n});\nconst exampleJdbc = new datarobot.Datastore(\"exampleJdbc\", {\n    canonicalName: \"Example JDBC Datastore\",\n    dataStoreType: \"jdbc\",\n    driverId: \"5b4752844bf542000175dbea\",\n    fields: [\n        {\n            name: \"address\",\n            value: \"my-address\",\n        },\n        {\n            name: \"database\",\n            value: \"my-database\",\n        },\n    ],\n});\nconst exampleDatabase = new datarobot.Datastore(\"exampleDatabase\", {\n    canonicalName: \"Example Database Datastore\",\n    dataStoreType: \"dr-database-v1\",\n    driverId: \"64a288a50636598d75df7f82\",\n    fields: [{\n        id: \"bq.project_id\",\n        name: \"Project Id\",\n        value: \"project-id\",\n    }],\n});\nexport const exampleConnectorId = exampleConnector.id;\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample_connector = datarobot.Datastore(\"exampleConnector\",\n    canonical_name=\"Example Connector Datastore\",\n    data_store_type=\"dr-connector-v1\",\n    connector_id=\"65538041dde6a1d664d0b2ec\",\n    fields=[{\n        \"id\": \"fs.defaultFS\",\n        \"name\": \"Bucket Name\",\n        \"value\": \"my-bucket\",\n    }])\nexample_jdbc = datarobot.Datastore(\"exampleJdbc\",\n    canonical_name=\"Example JDBC Datastore\",\n    data_store_type=\"jdbc\",\n    driver_id=\"5b4752844bf542000175dbea\",\n    fields=[\n        {\n            \"name\": \"address\",\n            \"value\": \"my-address\",\n        },\n        {\n            \"name\": \"database\",\n            \"value\": \"my-database\",\n        },\n    ])\nexample_database = datarobot.Datastore(\"exampleDatabase\",\n    canonical_name=\"Example Database Datastore\",\n    data_store_type=\"dr-database-v1\",\n    driver_id=\"64a288a50636598d75df7f82\",\n    fields=[{\n        \"id\": \"bq.project_id\",\n        \"name\": \"Project Id\",\n        \"value\": \"project-id\",\n    }])\npulumi.export(\"exampleConnectorId\", example_connector.id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = DataRobotPulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var exampleConnector = new Datarobot.Datastore(\"exampleConnector\", new()\n    {\n        CanonicalName = \"Example Connector Datastore\",\n        DataStoreType = \"dr-connector-v1\",\n        ConnectorId = \"65538041dde6a1d664d0b2ec\",\n        Fields = new[]\n        {\n            \n            {\n                { \"id\", \"fs.defaultFS\" },\n                { \"name\", \"Bucket Name\" },\n                { \"value\", \"my-bucket\" },\n            },\n        },\n    });\n\n    var exampleJdbc = new Datarobot.Datastore(\"exampleJdbc\", new()\n    {\n        CanonicalName = \"Example JDBC Datastore\",\n        DataStoreType = \"jdbc\",\n        DriverId = \"5b4752844bf542000175dbea\",\n        Fields = new[]\n        {\n            \n            {\n                { \"name\", \"address\" },\n                { \"value\", \"my-address\" },\n            },\n            \n            {\n                { \"name\", \"database\" },\n                { \"value\", \"my-database\" },\n            },\n        },\n    });\n\n    var exampleDatabase = new Datarobot.Datastore(\"exampleDatabase\", new()\n    {\n        CanonicalName = \"Example Database Datastore\",\n        DataStoreType = \"dr-database-v1\",\n        DriverId = \"64a288a50636598d75df7f82\",\n        Fields = new[]\n        {\n            \n            {\n                { \"id\", \"bq.project_id\" },\n                { \"name\", \"Project Id\" },\n                { \"value\", \"project-id\" },\n            },\n        },\n    });\n\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"exampleConnectorId\"] = exampleConnector.Id,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texampleConnector, err := datarobot.NewDatastore(ctx, \"exampleConnector\", \u0026datarobot.DatastoreArgs{\n\t\t\tCanonicalName: pulumi.String(\"Example Connector Datastore\"),\n\t\t\tDataStoreType: pulumi.String(\"dr-connector-v1\"),\n\t\t\tConnectorId:   pulumi.String(\"65538041dde6a1d664d0b2ec\"),\n\t\t\tFields: pulumi.StringMapArray{\n\t\t\t\tpulumi.StringMap{\n\t\t\t\t\t\"id\":    pulumi.String(\"fs.defaultFS\"),\n\t\t\t\t\t\"name\":  pulumi.String(\"Bucket Name\"),\n\t\t\t\t\t\"value\": pulumi.String(\"my-bucket\"),\n\t\t\t\t},\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = datarobot.NewDatastore(ctx, \"exampleJdbc\", \u0026datarobot.DatastoreArgs{\n\t\t\tCanonicalName: pulumi.String(\"Example JDBC Datastore\"),\n\t\t\tDataStoreType: pulumi.String(\"jdbc\"),\n\t\t\tDriverId:      pulumi.String(\"5b4752844bf542000175dbea\"),\n\t\t\tFields: pulumi.StringMapArray{\n\t\t\t\tpulumi.StringMap{\n\t\t\t\t\t\"name\":  pulumi.String(\"address\"),\n\t\t\t\t\t\"value\": pulumi.String(\"my-address\"),\n\t\t\t\t},\n\t\t\t\tpulumi.StringMap{\n\t\t\t\t\t\"name\":  pulumi.String(\"database\"),\n\t\t\t\t\t\"value\": pulumi.String(\"my-database\"),\n\t\t\t\t},\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = datarobot.NewDatastore(ctx, \"exampleDatabase\", \u0026datarobot.DatastoreArgs{\n\t\t\tCanonicalName: pulumi.String(\"Example Database Datastore\"),\n\t\t\tDataStoreType: pulumi.String(\"dr-database-v1\"),\n\t\t\tDriverId:      pulumi.String(\"64a288a50636598d75df7f82\"),\n\t\t\tFields: pulumi.StringMapArray{\n\t\t\t\tpulumi.StringMap{\n\t\t\t\t\t\"id\":    pulumi.String(\"bq.project_id\"),\n\t\t\t\t\t\"name\":  pulumi.String(\"Project Id\"),\n\t\t\t\t\t\"value\": pulumi.String(\"project-id\"),\n\t\t\t\t},\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"exampleConnectorId\", exampleConnector.ID())\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.Datastore;\nimport com.pulumi.datarobot.DatastoreArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var exampleConnector = new Datastore(\"exampleConnector\", DatastoreArgs.builder()\n            .canonicalName(\"Example Connector Datastore\")\n            .dataStoreType(\"dr-connector-v1\")\n            .connectorId(\"65538041dde6a1d664d0b2ec\")\n            .fields(Map.ofEntries(\n                Map.entry(\"id\", \"fs.defaultFS\"),\n                Map.entry(\"name\", \"Bucket Name\"),\n                Map.entry(\"value\", \"my-bucket\")\n            ))\n            .build());\n\n        var exampleJdbc = new Datastore(\"exampleJdbc\", DatastoreArgs.builder()\n            .canonicalName(\"Example JDBC Datastore\")\n            .dataStoreType(\"jdbc\")\n            .driverId(\"5b4752844bf542000175dbea\")\n            .fields(            \n                Map.ofEntries(\n                    Map.entry(\"name\", \"address\"),\n                    Map.entry(\"value\", \"my-address\")\n                ),\n                Map.ofEntries(\n                    Map.entry(\"name\", \"database\"),\n                    Map.entry(\"value\", \"my-database\")\n                ))\n            .build());\n\n        var exampleDatabase = new Datastore(\"exampleDatabase\", DatastoreArgs.builder()\n            .canonicalName(\"Example Database Datastore\")\n            .dataStoreType(\"dr-database-v1\")\n            .driverId(\"64a288a50636598d75df7f82\")\n            .fields(Map.ofEntries(\n                Map.entry(\"id\", \"bq.project_id\"),\n                Map.entry(\"name\", \"Project Id\"),\n                Map.entry(\"value\", \"project-id\")\n            ))\n            .build());\n\n        ctx.export(\"exampleConnectorId\", exampleConnector.id());\n    }\n}\n```\n```yaml\nresources:\n  exampleConnector:\n    type: datarobot:Datastore\n    properties:\n      canonicalName: Example Connector Datastore\n      dataStoreType: dr-connector-v1\n      connectorId: 65538041dde6a1d664d0b2ec\n      fields:\n        - id: fs.defaultFS\n          name: Bucket Name\n          value: my-bucket\n  exampleJdbc:\n    type: datarobot:Datastore\n    properties:\n      canonicalName: Example JDBC Datastore\n      dataStoreType: jdbc\n      driverId: 5b4752844bf542000175dbea\n      fields:\n        - name: address\n          value: my-address\n        - name: database\n          value: my-database\n  exampleDatabase:\n    type: datarobot:Datastore\n    properties:\n      canonicalName: Example Database Datastore\n      dataStoreType: dr-database-v1\n      driverId: 64a288a50636598d75df7f82\n      fields:\n        - id: bq.project_id\n          name: Project Id\n          value: project-id\noutputs:\n  exampleConnectorId: ${exampleConnector.id}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "properties": {
+                "canonicalName": {
+                    "type": "string",
+                    "description": "The user-friendly name of the data store.\n"
+                },
+                "connectorId": {
+                    "type": "string",
+                    "description": "The identifier of the Connector if data*store*type is DR*CONNECTOR*V1\n"
+                },
+                "dataStoreType": {
+                    "type": "string",
+                    "description": "The type of data store.\n"
+                },
+                "driverId": {
+                    "type": "string",
+                    "description": "The identifier of the DataDriver if data*store*type is JDBC or DR*DATABASE*V1\n"
+                },
+                "fields": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        }
+                    },
+                    "description": "If the type is dr-database-v1, then the fields specify the configuration.\n"
+                },
+                "jdbcUrl": {
+                    "type": "string",
+                    "description": "The full JDBC URL (for example: jdbc:postgresql://my.dbaddress.org:5432/my_db).\n"
+                }
+            },
+            "required": [
+                "canonicalName",
+                "dataStoreType"
+            ],
+            "inputProperties": {
+                "canonicalName": {
+                    "type": "string",
+                    "description": "The user-friendly name of the data store.\n"
+                },
+                "connectorId": {
+                    "type": "string",
+                    "description": "The identifier of the Connector if data*store*type is DR*CONNECTOR*V1\n"
+                },
+                "dataStoreType": {
+                    "type": "string",
+                    "description": "The type of data store.\n"
+                },
+                "driverId": {
+                    "type": "string",
+                    "description": "The identifier of the DataDriver if data*store*type is JDBC or DR*DATABASE*V1\n"
+                },
+                "fields": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        }
+                    },
+                    "description": "If the type is dr-database-v1, then the fields specify the configuration.\n"
+                },
+                "jdbcUrl": {
+                    "type": "string",
+                    "description": "The full JDBC URL (for example: jdbc:postgresql://my.dbaddress.org:5432/my_db).\n"
+                }
+            },
+            "requiredInputs": [
+                "canonicalName",
+                "dataStoreType"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Datastore resources.\n",
+                "properties": {
+                    "canonicalName": {
+                        "type": "string",
+                        "description": "The user-friendly name of the data store.\n"
+                    },
+                    "connectorId": {
+                        "type": "string",
+                        "description": "The identifier of the Connector if data*store*type is DR*CONNECTOR*V1\n"
+                    },
+                    "dataStoreType": {
+                        "type": "string",
+                        "description": "The type of data store.\n"
+                    },
+                    "driverId": {
+                        "type": "string",
+                        "description": "The identifier of the DataDriver if data*store*type is JDBC or DR*DATABASE*V1\n"
+                    },
+                    "fields": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        },
+                        "description": "If the type is dr-database-v1, then the fields specify the configuration.\n"
+                    },
+                    "jdbcUrl": {
+                        "type": "string",
+                        "description": "The full JDBC URL (for example: jdbc:postgresql://my.dbaddress.org:5432/my_db).\n"
                     }
                 },
                 "type": "object"
