@@ -280,6 +280,46 @@
                 "sourcePaths"
             ]
         },
+        "datarobot:index/DatasourceParams:DatasourceParams": {
+            "properties": {
+                "catalog": {
+                    "type": "string",
+                    "description": "The Catalog name in the database if supported.\n"
+                },
+                "dataStoreId": {
+                    "type": "string",
+                    "description": "The id of the DataStore.\n"
+                },
+                "fetchSize": {
+                    "type": "integer",
+                    "description": "A user specified fetch size in the range [1, 20000]. By default a fetchSize will be assigned to balance throughput and memory usage.\n"
+                },
+                "partitionColumn": {
+                    "type": "string",
+                    "description": "The name of the partition column.\n"
+                },
+                "path": {
+                    "type": "string",
+                    "description": "The user-specified path for BLOB storage.\n"
+                },
+                "query": {
+                    "type": "string",
+                    "description": "The user specified SQL query.\n"
+                },
+                "schema": {
+                    "type": "string",
+                    "description": "The name of the schema associated with the table.\n"
+                },
+                "table": {
+                    "type": "string",
+                    "description": "The name of specified database table.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "dataStoreId"
+            ]
+        },
         "datarobot:index/DeploymentAssociationIdSettings:DeploymentAssociationIdSettings": {
             "properties": {
                 "autoGenerateId": {
@@ -1685,6 +1725,144 @@
                 "type": "object"
             }
         },
+        "datarobot:index/datasetFromDatasource:DatasetFromDatasource": {
+            "description": "Data Set from Data Source.\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@datarobot/pulumi-datarobot\";\n\nconst example = new datarobot.DatasetFromDatasource(\"example\", {\n    datasourceId: datarobot_datasource.example.id,\n    credentialId: datarobot_credential.example.id,\n    doSnapshot: false,\n    persistDataAfterIngestion: false,\n    useKerberos: true,\n    categories: [\"TRAINING\"],\n    useCaseIds: [datarobot_use_case.example.id],\n});\nexport const exampleId = example.id;\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample = datarobot.DatasetFromDatasource(\"example\",\n    datasource_id=datarobot_datasource[\"example\"][\"id\"],\n    credential_id=datarobot_credential[\"example\"][\"id\"],\n    do_snapshot=False,\n    persist_data_after_ingestion=False,\n    use_kerberos=True,\n    categories=[\"TRAINING\"],\n    use_case_ids=[datarobot_use_case[\"example\"][\"id\"]])\npulumi.export(\"exampleId\", example.id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = DataRobotPulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Datarobot.DatasetFromDatasource(\"example\", new()\n    {\n        DatasourceId = datarobot_datasource.Example.Id,\n        CredentialId = datarobot_credential.Example.Id,\n        DoSnapshot = false,\n        PersistDataAfterIngestion = false,\n        UseKerberos = true,\n        Categories = new[]\n        {\n            \"TRAINING\",\n        },\n        UseCaseIds = new[]\n        {\n            datarobot_use_case.Example.Id,\n        },\n    });\n\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"exampleId\"] = example.Id,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texample, err := datarobot.NewDatasetFromDatasource(ctx, \"example\", \u0026datarobot.DatasetFromDatasourceArgs{\n\t\t\tDatasourceId:              pulumi.Any(datarobot_datasource.Example.Id),\n\t\t\tCredentialId:              pulumi.Any(datarobot_credential.Example.Id),\n\t\t\tDoSnapshot:                pulumi.Bool(false),\n\t\t\tPersistDataAfterIngestion: pulumi.Bool(false),\n\t\t\tUseKerberos:               pulumi.Bool(true),\n\t\t\tCategories: pulumi.StringArray{\n\t\t\t\tpulumi.String(\"TRAINING\"),\n\t\t\t},\n\t\t\tUseCaseIds: pulumi.StringArray{\n\t\t\t\tdatarobot_use_case.Example.Id,\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"exampleId\", example.ID())\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.DatasetFromDatasource;\nimport com.pulumi.datarobot.DatasetFromDatasourceArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new DatasetFromDatasource(\"example\", DatasetFromDatasourceArgs.builder()\n            .datasourceId(datarobot_datasource.example().id())\n            .credentialId(datarobot_credential.example().id())\n            .doSnapshot(false)\n            .persistDataAfterIngestion(false)\n            .useKerberos(true)\n            .categories(\"TRAINING\")\n            .useCaseIds(datarobot_use_case.example().id())\n            .build());\n\n        ctx.export(\"exampleId\", example.id());\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: datarobot:DatasetFromDatasource\n    properties:\n      datasourceId: ${datarobot_datasource.example.id}\n      credentialId: ${datarobot_credential.example.id}\n      # Optional\n      doSnapshot: false\n      persistDataAfterIngestion: false\n      useKerberos: true\n      categories:\n        - TRAINING\n      useCaseIds:\n        - ${datarobot_use_case.example.id}\noutputs:\n  exampleId: ${example.id}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "properties": {
+                "categories": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "An array of strings describing the intended use of the dataset.\n"
+                },
+                "credentialId": {
+                    "type": "string",
+                    "description": "The ID of the set of credentials to use.\n"
+                },
+                "dataSourceId": {
+                    "type": "string",
+                    "description": "The ID for the DataSource to use as the source of data.\n"
+                },
+                "doSnapshot": {
+                    "type": "boolean",
+                    "description": "If unset, uses the server default: True. If true, creates a snapshot dataset; if false, creates a remote dataset.\n"
+                },
+                "persistDataAfterIngestion": {
+                    "type": "boolean",
+                    "description": "If unset, uses the server default: True. If true, will enforce saving all data (for download and sampling) and will allow a user to view extended data profile (which includes data statistics like min/max/median/mean, histogram, etc.). If false, will not enforce saving data. The data schema (feature names and types) still will be available.\n"
+                },
+                "sampleSizeRows": {
+                    "type": "integer",
+                    "description": "The number of rows fetched during dataset registration.\n"
+                },
+                "useCaseIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The list of Use Case IDs to add the Dataset to.\n"
+                },
+                "useKerberos": {
+                    "type": "boolean",
+                    "description": "If unset, uses the server default: False. If true, use kerberos authentication for database authentication.\n"
+                }
+            },
+            "required": [
+                "credentialId",
+                "dataSourceId",
+                "doSnapshot",
+                "persistDataAfterIngestion",
+                "useKerberos"
+            ],
+            "inputProperties": {
+                "categories": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "An array of strings describing the intended use of the dataset.\n"
+                },
+                "credentialId": {
+                    "type": "string",
+                    "description": "The ID of the set of credentials to use.\n"
+                },
+                "dataSourceId": {
+                    "type": "string",
+                    "description": "The ID for the DataSource to use as the source of data.\n"
+                },
+                "doSnapshot": {
+                    "type": "boolean",
+                    "description": "If unset, uses the server default: True. If true, creates a snapshot dataset; if false, creates a remote dataset.\n"
+                },
+                "persistDataAfterIngestion": {
+                    "type": "boolean",
+                    "description": "If unset, uses the server default: True. If true, will enforce saving all data (for download and sampling) and will allow a user to view extended data profile (which includes data statistics like min/max/median/mean, histogram, etc.). If false, will not enforce saving data. The data schema (feature names and types) still will be available.\n"
+                },
+                "sampleSizeRows": {
+                    "type": "integer",
+                    "description": "The number of rows fetched during dataset registration.\n"
+                },
+                "useCaseIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The list of Use Case IDs to add the Dataset to.\n"
+                },
+                "useKerberos": {
+                    "type": "boolean",
+                    "description": "If unset, uses the server default: False. If true, use kerberos authentication for database authentication.\n"
+                }
+            },
+            "requiredInputs": [
+                "credentialId",
+                "dataSourceId"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering DatasetFromDatasource resources.\n",
+                "properties": {
+                    "categories": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "An array of strings describing the intended use of the dataset.\n"
+                    },
+                    "credentialId": {
+                        "type": "string",
+                        "description": "The ID of the set of credentials to use.\n"
+                    },
+                    "dataSourceId": {
+                        "type": "string",
+                        "description": "The ID for the DataSource to use as the source of data.\n"
+                    },
+                    "doSnapshot": {
+                        "type": "boolean",
+                        "description": "If unset, uses the server default: True. If true, creates a snapshot dataset; if false, creates a remote dataset.\n"
+                    },
+                    "persistDataAfterIngestion": {
+                        "type": "boolean",
+                        "description": "If unset, uses the server default: True. If true, will enforce saving all data (for download and sampling) and will allow a user to view extended data profile (which includes data statistics like min/max/median/mean, histogram, etc.). If false, will not enforce saving data. The data schema (feature names and types) still will be available.\n"
+                    },
+                    "sampleSizeRows": {
+                        "type": "integer",
+                        "description": "The number of rows fetched during dataset registration.\n"
+                    },
+                    "useCaseIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "The list of Use Case IDs to add the Dataset to.\n"
+                    },
+                    "useKerberos": {
+                        "type": "boolean",
+                        "description": "If unset, uses the server default: False. If true, use kerberos authentication for database authentication.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
         "datarobot:index/datasetFromFile:DatasetFromFile": {
             "description": "Data set from file\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@datarobot/pulumi-datarobot\";\n\nconst example = new datarobot.DatasetFromFile(\"example\", {\n    filePath: \"[Path to file to upload]\",\n    useCaseIds: [datarobot_use_case.example.id],\n});\nexport const exampleId = example.id;\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample = datarobot.DatasetFromFile(\"example\",\n    file_path=\"[Path to file to upload]\",\n    use_case_ids=[datarobot_use_case[\"example\"][\"id\"]])\npulumi.export(\"exampleId\", example.id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = DataRobotPulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Datarobot.DatasetFromFile(\"example\", new()\n    {\n        FilePath = \"[Path to file to upload]\",\n        UseCaseIds = new[]\n        {\n            datarobot_use_case.Example.Id,\n        },\n    });\n\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"exampleId\"] = example.Id,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texample, err := datarobot.NewDatasetFromFile(ctx, \"example\", \u0026datarobot.DatasetFromFileArgs{\n\t\t\tFilePath: pulumi.String(\"[Path to file to upload]\"),\n\t\t\tUseCaseIds: pulumi.StringArray{\n\t\t\t\tdatarobot_use_case.Example.Id,\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"exampleId\", example.ID())\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.DatasetFromFile;\nimport com.pulumi.datarobot.DatasetFromFileArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new DatasetFromFile(\"example\", DatasetFromFileArgs.builder()\n            .filePath(\"[Path to file to upload]\")\n            .useCaseIds(datarobot_use_case.example().id())\n            .build());\n\n        ctx.export(\"exampleId\", example.id());\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: datarobot:DatasetFromFile\n    properties:\n      filePath: '[Path to file to upload]'\n      useCaseIds:\n        - ${datarobot_use_case.example.id}\noutputs:\n  exampleId: ${example.id}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
             "properties": {
@@ -1819,6 +1997,65 @@
                             "type": "string"
                         },
                         "description": "The list of Use Case IDs to add the Dataset to.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "datarobot:index/datasource:Datasource": {
+            "description": "Data source\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.Datasource;\nimport com.pulumi.datarobot.DatasourceArgs;\nimport com.pulumi.datarobot.inputs.DatasourceParamsArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var exampleDatabaseTable = new Datasource(\"exampleDatabaseTable\", DatasourceArgs.builder()\n            .canonicalName(\"Example Database Table Data Source\")\n            .dataSourceType(\"dr-database-v1\")\n            .params(DatasourceParamsArgs.builder()\n                .data_store_id(datarobot_datastore.example_database().id())\n                .catalog(\"my-catalog\")\n                .schema(\"my-schema\")\n                .table(\"my-table\")\n                .build())\n            .build());\n\n        var exampleDatabaseQuery = new Datasource(\"exampleDatabaseQuery\", DatasourceArgs.builder()\n            .canonicalName(\"Example Database Query Data Source\")\n            .dataSourceType(\"dr-database-v1\")\n            .params(DatasourceParamsArgs.builder()\n                .data_store_id(datarobot_datastore.example_database().id())\n                .query(\"SELECT * FROM my-table\")\n                .build())\n            .build());\n\n        var exampleConnector = new Datasource(\"exampleConnector\", DatasourceArgs.builder()\n            .canonicalName(\"Example Connector Data Source\")\n            .dataSourceType(\"dr-connector-v1\")\n            .params(DatasourceParamsArgs.builder()\n                .data_store_id(datarobot_datastore.example_connector().id())\n                .path(\"/my-folder/my-file.csv\")\n                .build())\n            .build());\n\n        ctx.export(\"exampleId\", exampleDatabaseTable.id());\n    }\n}\n```\n```yaml\nresources:\n  exampleDatabaseTable:\n    type: datarobot:Datasource\n    properties:\n      canonicalName: Example Database Table Data Source\n      dataSourceType: dr-database-v1\n      params:\n        data_store_id: ${datarobot_datastore.example_database.id}\n        catalog: my-catalog\n        schema: my-schema\n        table: my-table\n  exampleDatabaseQuery:\n    type: datarobot:Datasource\n    properties:\n      canonicalName: Example Database Query Data Source\n      dataSourceType: dr-database-v1\n      params:\n        data_store_id: ${datarobot_datastore.example_database.id}\n        query: SELECT * FROM my-table\n  exampleConnector:\n    type: datarobot:Datasource\n    properties:\n      canonicalName: Example Connector Data Source\n      dataSourceType: dr-connector-v1\n      params:\n        data_store_id: ${datarobot_datastore.example_connector.id}\n        path: /my-folder/my-file.csv\noutputs:\n  exampleId: ${exampleDatabaseTable.id}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "properties": {
+                "canonicalName": {
+                    "type": "string",
+                    "description": "The user-friendly name of the data source.\n"
+                },
+                "dataSourceType": {
+                    "type": "string",
+                    "description": "The type of data source.\n"
+                },
+                "params": {
+                    "$ref": "#/types/datarobot:index/DatasourceParams:DatasourceParams",
+                    "description": "The data source parameters.\n"
+                }
+            },
+            "required": [
+                "canonicalName",
+                "dataSourceType",
+                "params"
+            ],
+            "inputProperties": {
+                "canonicalName": {
+                    "type": "string",
+                    "description": "The user-friendly name of the data source.\n"
+                },
+                "dataSourceType": {
+                    "type": "string",
+                    "description": "The type of data source.\n"
+                },
+                "params": {
+                    "$ref": "#/types/datarobot:index/DatasourceParams:DatasourceParams",
+                    "description": "The data source parameters.\n"
+                }
+            },
+            "requiredInputs": [
+                "canonicalName",
+                "dataSourceType",
+                "params"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Datasource resources.\n",
+                "properties": {
+                    "canonicalName": {
+                        "type": "string",
+                        "description": "The user-friendly name of the data source.\n"
+                    },
+                    "dataSourceType": {
+                        "type": "string",
+                        "description": "The type of data source.\n"
+                    },
+                    "params": {
+                        "$ref": "#/types/datarobot:index/DatasourceParams:DatasourceParams",
+                        "description": "The data source parameters.\n"
                     }
                 },
                 "type": "object"
