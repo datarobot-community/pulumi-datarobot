@@ -150,6 +150,41 @@ export interface CustomModelSourceRemoteRepository {
     sourcePaths: pulumi.Input<pulumi.Input<string>[]>;
 }
 
+export interface DatasourceParams {
+    /**
+     * The Catalog name in the database if supported.
+     */
+    catalog?: pulumi.Input<string>;
+    /**
+     * The id of the DataStore.
+     */
+    dataStoreId: pulumi.Input<string>;
+    /**
+     * A user specified fetch size in the range [1, 20000]. By default a fetchSize will be assigned to balance throughput and memory usage.
+     */
+    fetchSize?: pulumi.Input<number>;
+    /**
+     * The name of the partition column.
+     */
+    partitionColumn?: pulumi.Input<string>;
+    /**
+     * The user-specified path for BLOB storage.
+     */
+    path?: pulumi.Input<string>;
+    /**
+     * The user specified SQL query.
+     */
+    query?: pulumi.Input<string>;
+    /**
+     * The name of the schema associated with the table.
+     */
+    schema?: pulumi.Input<string>;
+    /**
+     * The name of specified database table.
+     */
+    table?: pulumi.Input<string>;
+}
+
 export interface DeploymentAssociationIdSettings {
     /**
      * Whether to auto generate ID.

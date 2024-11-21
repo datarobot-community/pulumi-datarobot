@@ -993,6 +993,276 @@ func (o CustomModelSourceRemoteRepositoryArrayOutput) Index(i pulumi.IntInput) C
 	}).(CustomModelSourceRemoteRepositoryOutput)
 }
 
+type DatasourceParams struct {
+	// The Catalog name in the database if supported.
+	Catalog *string `pulumi:"catalog"`
+	// The id of the DataStore.
+	DataStoreId string `pulumi:"dataStoreId"`
+	// A user specified fetch size in the range [1, 20000]. By default a fetchSize will be assigned to balance throughput and memory usage.
+	FetchSize *int `pulumi:"fetchSize"`
+	// The name of the partition column.
+	PartitionColumn *string `pulumi:"partitionColumn"`
+	// The user-specified path for BLOB storage.
+	Path *string `pulumi:"path"`
+	// The user specified SQL query.
+	Query *string `pulumi:"query"`
+	// The name of the schema associated with the table.
+	Schema *string `pulumi:"schema"`
+	// The name of specified database table.
+	Table *string `pulumi:"table"`
+}
+
+// DatasourceParamsInput is an input type that accepts DatasourceParamsArgs and DatasourceParamsOutput values.
+// You can construct a concrete instance of `DatasourceParamsInput` via:
+//
+//	DatasourceParamsArgs{...}
+type DatasourceParamsInput interface {
+	pulumi.Input
+
+	ToDatasourceParamsOutput() DatasourceParamsOutput
+	ToDatasourceParamsOutputWithContext(context.Context) DatasourceParamsOutput
+}
+
+type DatasourceParamsArgs struct {
+	// The Catalog name in the database if supported.
+	Catalog pulumi.StringPtrInput `pulumi:"catalog"`
+	// The id of the DataStore.
+	DataStoreId pulumi.StringInput `pulumi:"dataStoreId"`
+	// A user specified fetch size in the range [1, 20000]. By default a fetchSize will be assigned to balance throughput and memory usage.
+	FetchSize pulumi.IntPtrInput `pulumi:"fetchSize"`
+	// The name of the partition column.
+	PartitionColumn pulumi.StringPtrInput `pulumi:"partitionColumn"`
+	// The user-specified path for BLOB storage.
+	Path pulumi.StringPtrInput `pulumi:"path"`
+	// The user specified SQL query.
+	Query pulumi.StringPtrInput `pulumi:"query"`
+	// The name of the schema associated with the table.
+	Schema pulumi.StringPtrInput `pulumi:"schema"`
+	// The name of specified database table.
+	Table pulumi.StringPtrInput `pulumi:"table"`
+}
+
+func (DatasourceParamsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DatasourceParams)(nil)).Elem()
+}
+
+func (i DatasourceParamsArgs) ToDatasourceParamsOutput() DatasourceParamsOutput {
+	return i.ToDatasourceParamsOutputWithContext(context.Background())
+}
+
+func (i DatasourceParamsArgs) ToDatasourceParamsOutputWithContext(ctx context.Context) DatasourceParamsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DatasourceParamsOutput)
+}
+
+func (i DatasourceParamsArgs) ToDatasourceParamsPtrOutput() DatasourceParamsPtrOutput {
+	return i.ToDatasourceParamsPtrOutputWithContext(context.Background())
+}
+
+func (i DatasourceParamsArgs) ToDatasourceParamsPtrOutputWithContext(ctx context.Context) DatasourceParamsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DatasourceParamsOutput).ToDatasourceParamsPtrOutputWithContext(ctx)
+}
+
+// DatasourceParamsPtrInput is an input type that accepts DatasourceParamsArgs, DatasourceParamsPtr and DatasourceParamsPtrOutput values.
+// You can construct a concrete instance of `DatasourceParamsPtrInput` via:
+//
+//	        DatasourceParamsArgs{...}
+//
+//	or:
+//
+//	        nil
+type DatasourceParamsPtrInput interface {
+	pulumi.Input
+
+	ToDatasourceParamsPtrOutput() DatasourceParamsPtrOutput
+	ToDatasourceParamsPtrOutputWithContext(context.Context) DatasourceParamsPtrOutput
+}
+
+type datasourceParamsPtrType DatasourceParamsArgs
+
+func DatasourceParamsPtr(v *DatasourceParamsArgs) DatasourceParamsPtrInput {
+	return (*datasourceParamsPtrType)(v)
+}
+
+func (*datasourceParamsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DatasourceParams)(nil)).Elem()
+}
+
+func (i *datasourceParamsPtrType) ToDatasourceParamsPtrOutput() DatasourceParamsPtrOutput {
+	return i.ToDatasourceParamsPtrOutputWithContext(context.Background())
+}
+
+func (i *datasourceParamsPtrType) ToDatasourceParamsPtrOutputWithContext(ctx context.Context) DatasourceParamsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DatasourceParamsPtrOutput)
+}
+
+type DatasourceParamsOutput struct{ *pulumi.OutputState }
+
+func (DatasourceParamsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DatasourceParams)(nil)).Elem()
+}
+
+func (o DatasourceParamsOutput) ToDatasourceParamsOutput() DatasourceParamsOutput {
+	return o
+}
+
+func (o DatasourceParamsOutput) ToDatasourceParamsOutputWithContext(ctx context.Context) DatasourceParamsOutput {
+	return o
+}
+
+func (o DatasourceParamsOutput) ToDatasourceParamsPtrOutput() DatasourceParamsPtrOutput {
+	return o.ToDatasourceParamsPtrOutputWithContext(context.Background())
+}
+
+func (o DatasourceParamsOutput) ToDatasourceParamsPtrOutputWithContext(ctx context.Context) DatasourceParamsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DatasourceParams) *DatasourceParams {
+		return &v
+	}).(DatasourceParamsPtrOutput)
+}
+
+// The Catalog name in the database if supported.
+func (o DatasourceParamsOutput) Catalog() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DatasourceParams) *string { return v.Catalog }).(pulumi.StringPtrOutput)
+}
+
+// The id of the DataStore.
+func (o DatasourceParamsOutput) DataStoreId() pulumi.StringOutput {
+	return o.ApplyT(func(v DatasourceParams) string { return v.DataStoreId }).(pulumi.StringOutput)
+}
+
+// A user specified fetch size in the range [1, 20000]. By default a fetchSize will be assigned to balance throughput and memory usage.
+func (o DatasourceParamsOutput) FetchSize() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v DatasourceParams) *int { return v.FetchSize }).(pulumi.IntPtrOutput)
+}
+
+// The name of the partition column.
+func (o DatasourceParamsOutput) PartitionColumn() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DatasourceParams) *string { return v.PartitionColumn }).(pulumi.StringPtrOutput)
+}
+
+// The user-specified path for BLOB storage.
+func (o DatasourceParamsOutput) Path() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DatasourceParams) *string { return v.Path }).(pulumi.StringPtrOutput)
+}
+
+// The user specified SQL query.
+func (o DatasourceParamsOutput) Query() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DatasourceParams) *string { return v.Query }).(pulumi.StringPtrOutput)
+}
+
+// The name of the schema associated with the table.
+func (o DatasourceParamsOutput) Schema() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DatasourceParams) *string { return v.Schema }).(pulumi.StringPtrOutput)
+}
+
+// The name of specified database table.
+func (o DatasourceParamsOutput) Table() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DatasourceParams) *string { return v.Table }).(pulumi.StringPtrOutput)
+}
+
+type DatasourceParamsPtrOutput struct{ *pulumi.OutputState }
+
+func (DatasourceParamsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DatasourceParams)(nil)).Elem()
+}
+
+func (o DatasourceParamsPtrOutput) ToDatasourceParamsPtrOutput() DatasourceParamsPtrOutput {
+	return o
+}
+
+func (o DatasourceParamsPtrOutput) ToDatasourceParamsPtrOutputWithContext(ctx context.Context) DatasourceParamsPtrOutput {
+	return o
+}
+
+func (o DatasourceParamsPtrOutput) Elem() DatasourceParamsOutput {
+	return o.ApplyT(func(v *DatasourceParams) DatasourceParams {
+		if v != nil {
+			return *v
+		}
+		var ret DatasourceParams
+		return ret
+	}).(DatasourceParamsOutput)
+}
+
+// The Catalog name in the database if supported.
+func (o DatasourceParamsPtrOutput) Catalog() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DatasourceParams) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Catalog
+	}).(pulumi.StringPtrOutput)
+}
+
+// The id of the DataStore.
+func (o DatasourceParamsPtrOutput) DataStoreId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DatasourceParams) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.DataStoreId
+	}).(pulumi.StringPtrOutput)
+}
+
+// A user specified fetch size in the range [1, 20000]. By default a fetchSize will be assigned to balance throughput and memory usage.
+func (o DatasourceParamsPtrOutput) FetchSize() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DatasourceParams) *int {
+		if v == nil {
+			return nil
+		}
+		return v.FetchSize
+	}).(pulumi.IntPtrOutput)
+}
+
+// The name of the partition column.
+func (o DatasourceParamsPtrOutput) PartitionColumn() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DatasourceParams) *string {
+		if v == nil {
+			return nil
+		}
+		return v.PartitionColumn
+	}).(pulumi.StringPtrOutput)
+}
+
+// The user-specified path for BLOB storage.
+func (o DatasourceParamsPtrOutput) Path() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DatasourceParams) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Path
+	}).(pulumi.StringPtrOutput)
+}
+
+// The user specified SQL query.
+func (o DatasourceParamsPtrOutput) Query() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DatasourceParams) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Query
+	}).(pulumi.StringPtrOutput)
+}
+
+// The name of the schema associated with the table.
+func (o DatasourceParamsPtrOutput) Schema() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DatasourceParams) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Schema
+	}).(pulumi.StringPtrOutput)
+}
+
+// The name of specified database table.
+func (o DatasourceParamsPtrOutput) Table() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DatasourceParams) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Table
+	}).(pulumi.StringPtrOutput)
+}
+
 type DeploymentAssociationIdSettings struct {
 	// Whether to auto generate ID.
 	AutoGenerateId *bool `pulumi:"autoGenerateId"`
@@ -5253,6 +5523,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelRuntimeParameterValueArrayInput)(nil)).Elem(), CustomModelRuntimeParameterValueArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelSourceRemoteRepositoryInput)(nil)).Elem(), CustomModelSourceRemoteRepositoryArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelSourceRemoteRepositoryArrayInput)(nil)).Elem(), CustomModelSourceRemoteRepositoryArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DatasourceParamsInput)(nil)).Elem(), DatasourceParamsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DatasourceParamsPtrInput)(nil)).Elem(), DatasourceParamsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentAssociationIdSettingsInput)(nil)).Elem(), DeploymentAssociationIdSettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentAssociationIdSettingsPtrInput)(nil)).Elem(), DeploymentAssociationIdSettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentBiasAndFairnessSettingsInput)(nil)).Elem(), DeploymentBiasAndFairnessSettingsArgs{})
@@ -5316,6 +5588,8 @@ func init() {
 	pulumi.RegisterOutputType(CustomModelRuntimeParameterValueArrayOutput{})
 	pulumi.RegisterOutputType(CustomModelSourceRemoteRepositoryOutput{})
 	pulumi.RegisterOutputType(CustomModelSourceRemoteRepositoryArrayOutput{})
+	pulumi.RegisterOutputType(DatasourceParamsOutput{})
+	pulumi.RegisterOutputType(DatasourceParamsPtrOutput{})
 	pulumi.RegisterOutputType(DeploymentAssociationIdSettingsOutput{})
 	pulumi.RegisterOutputType(DeploymentAssociationIdSettingsPtrOutput{})
 	pulumi.RegisterOutputType(DeploymentBiasAndFairnessSettingsOutput{})

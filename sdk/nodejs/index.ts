@@ -40,6 +40,11 @@ export type DatasetFromUrl = import("./datasetFromUrl").DatasetFromUrl;
 export const DatasetFromUrl: typeof import("./datasetFromUrl").DatasetFromUrl = null as any;
 utilities.lazyLoad(exports, ["DatasetFromUrl"], () => require("./datasetFromUrl"));
 
+export { DatasourceArgs, DatasourceState } from "./datasource";
+export type Datasource = import("./datasource").Datasource;
+export const Datasource: typeof import("./datasource").Datasource = null as any;
+utilities.lazyLoad(exports, ["Datasource"], () => require("./datasource"));
+
 export { DatastoreArgs, DatastoreState } from "./datastore";
 export type Datastore = import("./datastore").Datastore;
 export const Datastore: typeof import("./datastore").Datastore = null as any;
@@ -148,6 +153,8 @@ const _module = {
                 return new DatasetFromFile(name, <any>undefined, { urn })
             case "datarobot:index/datasetFromUrl:DatasetFromUrl":
                 return new DatasetFromUrl(name, <any>undefined, { urn })
+            case "datarobot:index/datasource:Datasource":
+                return new Datasource(name, <any>undefined, { urn })
             case "datarobot:index/datastore:Datastore":
                 return new Datastore(name, <any>undefined, { urn })
             case "datarobot:index/deployment:Deployment":
@@ -186,6 +193,7 @@ pulumi.runtime.registerResourceModule("datarobot", "index/customApplication", _m
 pulumi.runtime.registerResourceModule("datarobot", "index/customModel", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/datasetFromFile", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/datasetFromUrl", _module)
+pulumi.runtime.registerResourceModule("datarobot", "index/datasource", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/datastore", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/deployment", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/executionEnvironment", _module)
