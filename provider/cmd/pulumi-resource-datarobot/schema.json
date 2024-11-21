@@ -280,6 +280,46 @@
                 "sourcePaths"
             ]
         },
+        "datarobot:index/DatasourceParams:DatasourceParams": {
+            "properties": {
+                "catalog": {
+                    "type": "string",
+                    "description": "The Catalog name in the database if supported.\n"
+                },
+                "dataStoreId": {
+                    "type": "string",
+                    "description": "The id of the DataStore.\n"
+                },
+                "fetchSize": {
+                    "type": "integer",
+                    "description": "A user specified fetch size in the range [1, 20000]. By default a fetchSize will be assigned to balance throughput and memory usage.\n"
+                },
+                "partitionColumn": {
+                    "type": "string",
+                    "description": "The name of the partition column.\n"
+                },
+                "path": {
+                    "type": "string",
+                    "description": "The user-specified path for BLOB storage.\n"
+                },
+                "query": {
+                    "type": "string",
+                    "description": "The user specified SQL query.\n"
+                },
+                "schema": {
+                    "type": "string",
+                    "description": "The name of the schema associated with the table.\n"
+                },
+                "table": {
+                    "type": "string",
+                    "description": "The name of specified database table.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "dataStoreId"
+            ]
+        },
         "datarobot:index/DeploymentAssociationIdSettings:DeploymentAssociationIdSettings": {
             "properties": {
                 "autoGenerateId": {
@@ -1819,6 +1859,65 @@
                             "type": "string"
                         },
                         "description": "The list of Use Case IDs to add the Dataset to.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "datarobot:index/datasource:Datasource": {
+            "description": "Data source\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.Datasource;\nimport com.pulumi.datarobot.DatasourceArgs;\nimport com.pulumi.datarobot.inputs.DatasourceParamsArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var exampleDatabaseTable = new Datasource(\"exampleDatabaseTable\", DatasourceArgs.builder()\n            .canonicalName(\"Example Database Table Data Source\")\n            .dataSourceType(\"dr-database-v1\")\n            .params(DatasourceParamsArgs.builder()\n                .data_store_id(datarobot_datastore.example_database().id())\n                .catalog(\"my-catalog\")\n                .schema(\"my-schema\")\n                .table(\"my-table\")\n                .build())\n            .build());\n\n        var exampleDatabaseQuery = new Datasource(\"exampleDatabaseQuery\", DatasourceArgs.builder()\n            .canonicalName(\"Example Database Query Data Source\")\n            .dataSourceType(\"dr-database-v1\")\n            .params(DatasourceParamsArgs.builder()\n                .data_store_id(datarobot_datastore.example_database().id())\n                .query(\"SELECT * FROM my-table\")\n                .build())\n            .build());\n\n        var exampleConnector = new Datasource(\"exampleConnector\", DatasourceArgs.builder()\n            .canonicalName(\"Example Connector Data Source\")\n            .dataSourceType(\"dr-connector-v1\")\n            .params(DatasourceParamsArgs.builder()\n                .data_store_id(datarobot_datastore.example_connector().id())\n                .path(\"/my-folder/my-file.csv\")\n                .build())\n            .build());\n\n        ctx.export(\"exampleId\", exampleDatabaseTable.id());\n    }\n}\n```\n```yaml\nresources:\n  exampleDatabaseTable:\n    type: datarobot:Datasource\n    properties:\n      canonicalName: Example Database Table Data Source\n      dataSourceType: dr-database-v1\n      params:\n        data_store_id: ${datarobot_datastore.example_database.id}\n        catalog: my-catalog\n        schema: my-schema\n        table: my-table\n  exampleDatabaseQuery:\n    type: datarobot:Datasource\n    properties:\n      canonicalName: Example Database Query Data Source\n      dataSourceType: dr-database-v1\n      params:\n        data_store_id: ${datarobot_datastore.example_database.id}\n        query: SELECT * FROM my-table\n  exampleConnector:\n    type: datarobot:Datasource\n    properties:\n      canonicalName: Example Connector Data Source\n      dataSourceType: dr-connector-v1\n      params:\n        data_store_id: ${datarobot_datastore.example_connector.id}\n        path: /my-folder/my-file.csv\noutputs:\n  exampleId: ${exampleDatabaseTable.id}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "properties": {
+                "canonicalName": {
+                    "type": "string",
+                    "description": "The user-friendly name of the data source.\n"
+                },
+                "dataSourceType": {
+                    "type": "string",
+                    "description": "The type of data source.\n"
+                },
+                "params": {
+                    "$ref": "#/types/datarobot:index/DatasourceParams:DatasourceParams",
+                    "description": "The data source parameters.\n"
+                }
+            },
+            "required": [
+                "canonicalName",
+                "dataSourceType",
+                "params"
+            ],
+            "inputProperties": {
+                "canonicalName": {
+                    "type": "string",
+                    "description": "The user-friendly name of the data source.\n"
+                },
+                "dataSourceType": {
+                    "type": "string",
+                    "description": "The type of data source.\n"
+                },
+                "params": {
+                    "$ref": "#/types/datarobot:index/DatasourceParams:DatasourceParams",
+                    "description": "The data source parameters.\n"
+                }
+            },
+            "requiredInputs": [
+                "canonicalName",
+                "dataSourceType",
+                "params"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Datasource resources.\n",
+                "properties": {
+                    "canonicalName": {
+                        "type": "string",
+                        "description": "The user-friendly name of the data source.\n"
+                    },
+                    "dataSourceType": {
+                        "type": "string",
+                        "description": "The type of data source.\n"
+                    },
+                    "params": {
+                        "$ref": "#/types/datarobot:index/DatasourceParams:DatasourceParams",
+                        "description": "The data source parameters.\n"
                     }
                 },
                 "type": "object"

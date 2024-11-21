@@ -82,6 +82,9 @@
                     }
                 }
             },
+            "datarobot_datasource": {
+                "current": "datarobot:index/datasource:Datasource"
+            },
             "datarobot_datastore": {
                 "current": "datarobot:index/datastore:Datastore",
                 "fields": {
