@@ -29,6 +29,8 @@ __all__ = [
     'CustomModelRuntimeParameterValueArgsDict',
     'CustomModelSourceRemoteRepositoryArgs',
     'CustomModelSourceRemoteRepositoryArgsDict',
+    'DatasourceParamsArgs',
+    'DatasourceParamsArgsDict',
     'DeploymentAssociationIdSettingsArgs',
     'DeploymentAssociationIdSettingsArgsDict',
     'DeploymentBiasAndFairnessSettingsArgs',
@@ -770,6 +772,177 @@ class CustomModelSourceRemoteRepositoryArgs:
     @source_paths.setter
     def source_paths(self, value: pulumi.Input[Sequence[pulumi.Input[str]]]):
         pulumi.set(self, "source_paths", value)
+
+
+if not MYPY:
+    class DatasourceParamsArgsDict(TypedDict):
+        data_store_id: pulumi.Input[str]
+        """
+        The id of the DataStore.
+        """
+        catalog: NotRequired[pulumi.Input[str]]
+        """
+        The Catalog name in the database if supported.
+        """
+        fetch_size: NotRequired[pulumi.Input[int]]
+        """
+        A user specified fetch size in the range [1, 20000]. By default a fetchSize will be assigned to balance throughput and memory usage.
+        """
+        partition_column: NotRequired[pulumi.Input[str]]
+        """
+        The name of the partition column.
+        """
+        path: NotRequired[pulumi.Input[str]]
+        """
+        The user-specified path for BLOB storage.
+        """
+        query: NotRequired[pulumi.Input[str]]
+        """
+        The user specified SQL query.
+        """
+        schema: NotRequired[pulumi.Input[str]]
+        """
+        The name of the schema associated with the table.
+        """
+        table: NotRequired[pulumi.Input[str]]
+        """
+        The name of specified database table.
+        """
+elif False:
+    DatasourceParamsArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class DatasourceParamsArgs:
+    def __init__(__self__, *,
+                 data_store_id: pulumi.Input[str],
+                 catalog: Optional[pulumi.Input[str]] = None,
+                 fetch_size: Optional[pulumi.Input[int]] = None,
+                 partition_column: Optional[pulumi.Input[str]] = None,
+                 path: Optional[pulumi.Input[str]] = None,
+                 query: Optional[pulumi.Input[str]] = None,
+                 schema: Optional[pulumi.Input[str]] = None,
+                 table: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] data_store_id: The id of the DataStore.
+        :param pulumi.Input[str] catalog: The Catalog name in the database if supported.
+        :param pulumi.Input[int] fetch_size: A user specified fetch size in the range [1, 20000]. By default a fetchSize will be assigned to balance throughput and memory usage.
+        :param pulumi.Input[str] partition_column: The name of the partition column.
+        :param pulumi.Input[str] path: The user-specified path for BLOB storage.
+        :param pulumi.Input[str] query: The user specified SQL query.
+        :param pulumi.Input[str] schema: The name of the schema associated with the table.
+        :param pulumi.Input[str] table: The name of specified database table.
+        """
+        pulumi.set(__self__, "data_store_id", data_store_id)
+        if catalog is not None:
+            pulumi.set(__self__, "catalog", catalog)
+        if fetch_size is not None:
+            pulumi.set(__self__, "fetch_size", fetch_size)
+        if partition_column is not None:
+            pulumi.set(__self__, "partition_column", partition_column)
+        if path is not None:
+            pulumi.set(__self__, "path", path)
+        if query is not None:
+            pulumi.set(__self__, "query", query)
+        if schema is not None:
+            pulumi.set(__self__, "schema", schema)
+        if table is not None:
+            pulumi.set(__self__, "table", table)
+
+    @property
+    @pulumi.getter(name="dataStoreId")
+    def data_store_id(self) -> pulumi.Input[str]:
+        """
+        The id of the DataStore.
+        """
+        return pulumi.get(self, "data_store_id")
+
+    @data_store_id.setter
+    def data_store_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "data_store_id", value)
+
+    @property
+    @pulumi.getter
+    def catalog(self) -> Optional[pulumi.Input[str]]:
+        """
+        The Catalog name in the database if supported.
+        """
+        return pulumi.get(self, "catalog")
+
+    @catalog.setter
+    def catalog(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "catalog", value)
+
+    @property
+    @pulumi.getter(name="fetchSize")
+    def fetch_size(self) -> Optional[pulumi.Input[int]]:
+        """
+        A user specified fetch size in the range [1, 20000]. By default a fetchSize will be assigned to balance throughput and memory usage.
+        """
+        return pulumi.get(self, "fetch_size")
+
+    @fetch_size.setter
+    def fetch_size(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "fetch_size", value)
+
+    @property
+    @pulumi.getter(name="partitionColumn")
+    def partition_column(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of the partition column.
+        """
+        return pulumi.get(self, "partition_column")
+
+    @partition_column.setter
+    def partition_column(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "partition_column", value)
+
+    @property
+    @pulumi.getter
+    def path(self) -> Optional[pulumi.Input[str]]:
+        """
+        The user-specified path for BLOB storage.
+        """
+        return pulumi.get(self, "path")
+
+    @path.setter
+    def path(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "path", value)
+
+    @property
+    @pulumi.getter
+    def query(self) -> Optional[pulumi.Input[str]]:
+        """
+        The user specified SQL query.
+        """
+        return pulumi.get(self, "query")
+
+    @query.setter
+    def query(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "query", value)
+
+    @property
+    @pulumi.getter
+    def schema(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of the schema associated with the table.
+        """
+        return pulumi.get(self, "schema")
+
+    @schema.setter
+    def schema(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "schema", value)
+
+    @property
+    @pulumi.getter
+    def table(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of specified database table.
+        """
+        return pulumi.get(self, "table")
+
+    @table.setter
+    def table(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "table", value)
 
 
 if not MYPY:

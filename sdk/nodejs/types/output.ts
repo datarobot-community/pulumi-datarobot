@@ -150,6 +150,41 @@ export interface CustomModelSourceRemoteRepository {
     sourcePaths: string[];
 }
 
+export interface DatasourceParams {
+    /**
+     * The Catalog name in the database if supported.
+     */
+    catalog?: string;
+    /**
+     * The id of the DataStore.
+     */
+    dataStoreId: string;
+    /**
+     * A user specified fetch size in the range [1, 20000]. By default a fetchSize will be assigned to balance throughput and memory usage.
+     */
+    fetchSize?: number;
+    /**
+     * The name of the partition column.
+     */
+    partitionColumn?: string;
+    /**
+     * The user-specified path for BLOB storage.
+     */
+    path?: string;
+    /**
+     * The user specified SQL query.
+     */
+    query?: string;
+    /**
+     * The name of the schema associated with the table.
+     */
+    schema?: string;
+    /**
+     * The name of specified database table.
+     */
+    table?: string;
+}
+
 export interface DeploymentAssociationIdSettings {
     /**
      * Whether to auto generate ID.

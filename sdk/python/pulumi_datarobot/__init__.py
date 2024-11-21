@@ -10,8 +10,10 @@ from .application_source import *
 from .basic_credential import *
 from .custom_application import *
 from .custom_model import *
+from .dataset_from_datasource import *
 from .dataset_from_file import *
 from .dataset_from_url import *
+from .datasource import *
 from .datastore import *
 from .deployment import *
 from .execution_environment import *
@@ -83,6 +85,14 @@ _utilities.register(
  },
  {
   "pkg": "datarobot",
+  "mod": "index/datasetFromDatasource",
+  "fqn": "pulumi_datarobot",
+  "classes": {
+   "datarobot:index/datasetFromDatasource:DatasetFromDatasource": "DatasetFromDatasource"
+  }
+ },
+ {
+  "pkg": "datarobot",
   "mod": "index/datasetFromFile",
   "fqn": "pulumi_datarobot",
   "classes": {
@@ -95,6 +105,14 @@ _utilities.register(
   "fqn": "pulumi_datarobot",
   "classes": {
    "datarobot:index/datasetFromUrl:DatasetFromUrl": "DatasetFromUrl"
+  }
+ },
+ {
+  "pkg": "datarobot",
+  "mod": "index/datasource",
+  "fqn": "pulumi_datarobot",
+  "classes": {
+   "datarobot:index/datasource:Datasource": "Datasource"
   }
  },
  {
