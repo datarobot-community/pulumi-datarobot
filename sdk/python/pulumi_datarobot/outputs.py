@@ -17,6 +17,7 @@ from . import outputs
 
 __all__ = [
     'ApplicationSourceRuntimeParameterValue',
+    'CustomJobRuntimeParameterValue',
     'CustomModelGuardConfiguration',
     'CustomModelGuardConfigurationIntervention',
     'CustomModelGuardConfigurationNemoInfo',
@@ -53,6 +54,46 @@ __all__ = [
 
 @pulumi.output_type
 class ApplicationSourceRuntimeParameterValue(dict):
+    def __init__(__self__, *,
+                 key: str,
+                 type: str,
+                 value: str):
+        """
+        :param str key: The name of the runtime parameter.
+        :param str type: The type of the runtime parameter.
+        :param str value: The value of the runtime parameter (type conversion is handled internally).
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "type", type)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        """
+        The name of the runtime parameter.
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        The type of the runtime parameter.
+        """
+        return pulumi.get(self, "type")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        The value of the runtime parameter (type conversion is handled internally).
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class CustomJobRuntimeParameterValue(dict):
     def __init__(__self__, *,
                  key: str,
                  type: str,

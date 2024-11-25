@@ -25,6 +25,11 @@ export type CustomApplication = import("./customApplication").CustomApplication;
 export const CustomApplication: typeof import("./customApplication").CustomApplication = null as any;
 utilities.lazyLoad(exports, ["CustomApplication"], () => require("./customApplication"));
 
+export { CustomJobArgs, CustomJobState } from "./customJob";
+export type CustomJob = import("./customJob").CustomJob;
+export const CustomJob: typeof import("./customJob").CustomJob = null as any;
+utilities.lazyLoad(exports, ["CustomJob"], () => require("./customJob"));
+
 export { CustomModelArgs, CustomModelState } from "./customModel";
 export type CustomModel = import("./customModel").CustomModel;
 export const CustomModel: typeof import("./customModel").CustomModel = null as any;
@@ -152,6 +157,8 @@ const _module = {
                 return new BasicCredential(name, <any>undefined, { urn })
             case "datarobot:index/customApplication:CustomApplication":
                 return new CustomApplication(name, <any>undefined, { urn })
+            case "datarobot:index/customJob:CustomJob":
+                return new CustomJob(name, <any>undefined, { urn })
             case "datarobot:index/customModel:CustomModel":
                 return new CustomModel(name, <any>undefined, { urn })
             case "datarobot:index/datasetFromDatasource:DatasetFromDatasource":
@@ -197,6 +204,7 @@ pulumi.runtime.registerResourceModule("datarobot", "index/apiTokenCredential", _
 pulumi.runtime.registerResourceModule("datarobot", "index/applicationSource", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/basicCredential", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/customApplication", _module)
+pulumi.runtime.registerResourceModule("datarobot", "index/customJob", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/customModel", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/datasetFromDatasource", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/datasetFromFile", _module)

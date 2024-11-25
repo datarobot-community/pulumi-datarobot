@@ -128,6 +128,121 @@ func (o ApplicationSourceRuntimeParameterValueArrayOutput) Index(i pulumi.IntInp
 	}).(ApplicationSourceRuntimeParameterValueOutput)
 }
 
+type CustomJobRuntimeParameterValue struct {
+	// The name of the runtime parameter.
+	Key string `pulumi:"key"`
+	// The type of the runtime parameter.
+	Type string `pulumi:"type"`
+	// The value of the runtime parameter (type conversion is handled internally).
+	Value string `pulumi:"value"`
+}
+
+// CustomJobRuntimeParameterValueInput is an input type that accepts CustomJobRuntimeParameterValueArgs and CustomJobRuntimeParameterValueOutput values.
+// You can construct a concrete instance of `CustomJobRuntimeParameterValueInput` via:
+//
+//	CustomJobRuntimeParameterValueArgs{...}
+type CustomJobRuntimeParameterValueInput interface {
+	pulumi.Input
+
+	ToCustomJobRuntimeParameterValueOutput() CustomJobRuntimeParameterValueOutput
+	ToCustomJobRuntimeParameterValueOutputWithContext(context.Context) CustomJobRuntimeParameterValueOutput
+}
+
+type CustomJobRuntimeParameterValueArgs struct {
+	// The name of the runtime parameter.
+	Key pulumi.StringInput `pulumi:"key"`
+	// The type of the runtime parameter.
+	Type pulumi.StringInput `pulumi:"type"`
+	// The value of the runtime parameter (type conversion is handled internally).
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (CustomJobRuntimeParameterValueArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomJobRuntimeParameterValue)(nil)).Elem()
+}
+
+func (i CustomJobRuntimeParameterValueArgs) ToCustomJobRuntimeParameterValueOutput() CustomJobRuntimeParameterValueOutput {
+	return i.ToCustomJobRuntimeParameterValueOutputWithContext(context.Background())
+}
+
+func (i CustomJobRuntimeParameterValueArgs) ToCustomJobRuntimeParameterValueOutputWithContext(ctx context.Context) CustomJobRuntimeParameterValueOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomJobRuntimeParameterValueOutput)
+}
+
+// CustomJobRuntimeParameterValueArrayInput is an input type that accepts CustomJobRuntimeParameterValueArray and CustomJobRuntimeParameterValueArrayOutput values.
+// You can construct a concrete instance of `CustomJobRuntimeParameterValueArrayInput` via:
+//
+//	CustomJobRuntimeParameterValueArray{ CustomJobRuntimeParameterValueArgs{...} }
+type CustomJobRuntimeParameterValueArrayInput interface {
+	pulumi.Input
+
+	ToCustomJobRuntimeParameterValueArrayOutput() CustomJobRuntimeParameterValueArrayOutput
+	ToCustomJobRuntimeParameterValueArrayOutputWithContext(context.Context) CustomJobRuntimeParameterValueArrayOutput
+}
+
+type CustomJobRuntimeParameterValueArray []CustomJobRuntimeParameterValueInput
+
+func (CustomJobRuntimeParameterValueArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CustomJobRuntimeParameterValue)(nil)).Elem()
+}
+
+func (i CustomJobRuntimeParameterValueArray) ToCustomJobRuntimeParameterValueArrayOutput() CustomJobRuntimeParameterValueArrayOutput {
+	return i.ToCustomJobRuntimeParameterValueArrayOutputWithContext(context.Background())
+}
+
+func (i CustomJobRuntimeParameterValueArray) ToCustomJobRuntimeParameterValueArrayOutputWithContext(ctx context.Context) CustomJobRuntimeParameterValueArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomJobRuntimeParameterValueArrayOutput)
+}
+
+type CustomJobRuntimeParameterValueOutput struct{ *pulumi.OutputState }
+
+func (CustomJobRuntimeParameterValueOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomJobRuntimeParameterValue)(nil)).Elem()
+}
+
+func (o CustomJobRuntimeParameterValueOutput) ToCustomJobRuntimeParameterValueOutput() CustomJobRuntimeParameterValueOutput {
+	return o
+}
+
+func (o CustomJobRuntimeParameterValueOutput) ToCustomJobRuntimeParameterValueOutputWithContext(ctx context.Context) CustomJobRuntimeParameterValueOutput {
+	return o
+}
+
+// The name of the runtime parameter.
+func (o CustomJobRuntimeParameterValueOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v CustomJobRuntimeParameterValue) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// The type of the runtime parameter.
+func (o CustomJobRuntimeParameterValueOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v CustomJobRuntimeParameterValue) string { return v.Type }).(pulumi.StringOutput)
+}
+
+// The value of the runtime parameter (type conversion is handled internally).
+func (o CustomJobRuntimeParameterValueOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v CustomJobRuntimeParameterValue) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type CustomJobRuntimeParameterValueArrayOutput struct{ *pulumi.OutputState }
+
+func (CustomJobRuntimeParameterValueArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CustomJobRuntimeParameterValue)(nil)).Elem()
+}
+
+func (o CustomJobRuntimeParameterValueArrayOutput) ToCustomJobRuntimeParameterValueArrayOutput() CustomJobRuntimeParameterValueArrayOutput {
+	return o
+}
+
+func (o CustomJobRuntimeParameterValueArrayOutput) ToCustomJobRuntimeParameterValueArrayOutputWithContext(ctx context.Context) CustomJobRuntimeParameterValueArrayOutput {
+	return o
+}
+
+func (o CustomJobRuntimeParameterValueArrayOutput) Index(i pulumi.IntInput) CustomJobRuntimeParameterValueOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CustomJobRuntimeParameterValue {
+		return vs[0].([]CustomJobRuntimeParameterValue)[vs[1].(int)]
+	}).(CustomJobRuntimeParameterValueOutput)
+}
+
 type CustomModelGuardConfiguration struct {
 	// The deployment ID of this guard.
 	DeploymentId *string `pulumi:"deploymentId"`
@@ -5512,6 +5627,8 @@ func (o VectorDatabaseChunkingParametersPtrOutput) Separators() pulumi.StringArr
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ApplicationSourceRuntimeParameterValueInput)(nil)).Elem(), ApplicationSourceRuntimeParameterValueArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ApplicationSourceRuntimeParameterValueArrayInput)(nil)).Elem(), ApplicationSourceRuntimeParameterValueArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomJobRuntimeParameterValueInput)(nil)).Elem(), CustomJobRuntimeParameterValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomJobRuntimeParameterValueArrayInput)(nil)).Elem(), CustomJobRuntimeParameterValueArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelGuardConfigurationInput)(nil)).Elem(), CustomModelGuardConfigurationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelGuardConfigurationArrayInput)(nil)).Elem(), CustomModelGuardConfigurationArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelGuardConfigurationInterventionInput)(nil)).Elem(), CustomModelGuardConfigurationInterventionArgs{})
@@ -5577,6 +5694,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*VectorDatabaseChunkingParametersPtrInput)(nil)).Elem(), VectorDatabaseChunkingParametersArgs{})
 	pulumi.RegisterOutputType(ApplicationSourceRuntimeParameterValueOutput{})
 	pulumi.RegisterOutputType(ApplicationSourceRuntimeParameterValueArrayOutput{})
+	pulumi.RegisterOutputType(CustomJobRuntimeParameterValueOutput{})
+	pulumi.RegisterOutputType(CustomJobRuntimeParameterValueArrayOutput{})
 	pulumi.RegisterOutputType(CustomModelGuardConfigurationOutput{})
 	pulumi.RegisterOutputType(CustomModelGuardConfigurationArrayOutput{})
 	pulumi.RegisterOutputType(CustomModelGuardConfigurationInterventionOutput{})

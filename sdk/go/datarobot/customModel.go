@@ -11,7 +11,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Data set from file
+// Custom Model
 //
 // ## Example Usage
 //

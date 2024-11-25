@@ -17,6 +17,8 @@ from . import _utilities
 __all__ = [
     'ApplicationSourceRuntimeParameterValueArgs',
     'ApplicationSourceRuntimeParameterValueArgsDict',
+    'CustomJobRuntimeParameterValueArgs',
+    'CustomJobRuntimeParameterValueArgsDict',
     'CustomModelGuardConfigurationArgs',
     'CustomModelGuardConfigurationArgsDict',
     'CustomModelGuardConfigurationInterventionArgs',
@@ -104,6 +106,75 @@ elif False:
 
 @pulumi.input_type
 class ApplicationSourceRuntimeParameterValueArgs:
+    def __init__(__self__, *,
+                 key: pulumi.Input[str],
+                 type: pulumi.Input[str],
+                 value: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] key: The name of the runtime parameter.
+        :param pulumi.Input[str] type: The type of the runtime parameter.
+        :param pulumi.Input[str] value: The value of the runtime parameter (type conversion is handled internally).
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "type", type)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> pulumi.Input[str]:
+        """
+        The name of the runtime parameter.
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: pulumi.Input[str]):
+        pulumi.set(self, "key", value)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        The type of the runtime parameter.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> pulumi.Input[str]:
+        """
+        The value of the runtime parameter (type conversion is handled internally).
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: pulumi.Input[str]):
+        pulumi.set(self, "value", value)
+
+
+if not MYPY:
+    class CustomJobRuntimeParameterValueArgsDict(TypedDict):
+        key: pulumi.Input[str]
+        """
+        The name of the runtime parameter.
+        """
+        type: pulumi.Input[str]
+        """
+        The type of the runtime parameter.
+        """
+        value: pulumi.Input[str]
+        """
+        The value of the runtime parameter (type conversion is handled internally).
+        """
+elif False:
+    CustomJobRuntimeParameterValueArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class CustomJobRuntimeParameterValueArgs:
     def __init__(__self__, *,
                  key: pulumi.Input[str],
                  type: pulumi.Input[str],

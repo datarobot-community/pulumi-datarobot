@@ -20,6 +20,21 @@ export interface ApplicationSourceRuntimeParameterValue {
     value: string;
 }
 
+export interface CustomJobRuntimeParameterValue {
+    /**
+     * The name of the runtime parameter.
+     */
+    key: string;
+    /**
+     * The type of the runtime parameter.
+     */
+    type: string;
+    /**
+     * The value of the runtime parameter (type conversion is handled internally).
+     */
+    value: string;
+}
+
 export interface CustomModelGuardConfiguration {
     /**
      * The deployment ID of this guard.
