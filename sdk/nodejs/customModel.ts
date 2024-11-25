@@ -7,7 +7,7 @@ import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
 /**
- * Data set from file
+ * Custom Model
  *
  * ## Example Usage
  *

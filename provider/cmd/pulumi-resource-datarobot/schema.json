@@ -95,6 +95,28 @@
                 "value"
             ]
         },
+        "datarobot:index/CustomJobRuntimeParameterValue:CustomJobRuntimeParameterValue": {
+            "properties": {
+                "key": {
+                    "type": "string",
+                    "description": "The name of the runtime parameter.\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The type of the runtime parameter.\n"
+                },
+                "value": {
+                    "type": "string",
+                    "description": "The value of the runtime parameter (type conversion is handled internally).\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "key",
+                "type",
+                "value"
+            ]
+        },
         "datarobot:index/CustomModelGuardConfiguration:CustomModelGuardConfiguration": {
             "properties": {
                 "deploymentId": {
@@ -1267,8 +1289,182 @@
                 "type": "object"
             }
         },
+        "datarobot:index/customJob:CustomJob": {
+            "description": "Custom Job\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@datarobot/pulumi-datarobot\";\n\nconst example = new datarobot.CustomJob(\"example\", {\n    jobType: \"retraining\",\n    files: [\n        \"file1.py\",\n        \"file2.py\",\n    ],\n    environmentId: \"65f9b27eab986d30d4c64268\",\n    description: \"Example Custom Job Description\",\n    runtimeParameterValues: [{\n        key: \"EXAMPLE_PARAM\",\n        type: \"string\",\n        value: \"val\",\n    }],\n    egressNetworkPolicy: \"none\",\n    resourceBundleId: \"cpu.micro\",\n});\nexport const exampleId = example.id;\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample = datarobot.CustomJob(\"example\",\n    job_type=\"retraining\",\n    files=[\n        \"file1.py\",\n        \"file2.py\",\n    ],\n    environment_id=\"65f9b27eab986d30d4c64268\",\n    description=\"Example Custom Job Description\",\n    runtime_parameter_values=[{\n        \"key\": \"EXAMPLE_PARAM\",\n        \"type\": \"string\",\n        \"value\": \"val\",\n    }],\n    egress_network_policy=\"none\",\n    resource_bundle_id=\"cpu.micro\")\npulumi.export(\"exampleId\", example.id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = DataRobotPulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Datarobot.CustomJob(\"example\", new()\n    {\n        JobType = \"retraining\",\n        Files = new[]\n        {\n            \"file1.py\",\n            \"file2.py\",\n        },\n        EnvironmentId = \"65f9b27eab986d30d4c64268\",\n        Description = \"Example Custom Job Description\",\n        RuntimeParameterValues = new[]\n        {\n            new Datarobot.Inputs.CustomJobRuntimeParameterValueArgs\n            {\n                Key = \"EXAMPLE_PARAM\",\n                Type = \"string\",\n                Value = \"val\",\n            },\n        },\n        EgressNetworkPolicy = \"none\",\n        ResourceBundleId = \"cpu.micro\",\n    });\n\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"exampleId\"] = example.Id,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texample, err := datarobot.NewCustomJob(ctx, \"example\", \u0026datarobot.CustomJobArgs{\n\t\t\tJobType: pulumi.String(\"retraining\"),\n\t\t\tFiles: pulumi.Any{\n\t\t\t\t\"file1.py\",\n\t\t\t\t\"file2.py\",\n\t\t\t},\n\t\t\tEnvironmentId: pulumi.String(\"65f9b27eab986d30d4c64268\"),\n\t\t\tDescription:   pulumi.String(\"Example Custom Job Description\"),\n\t\t\tRuntimeParameterValues: datarobot.CustomJobRuntimeParameterValueArray{\n\t\t\t\t\u0026datarobot.CustomJobRuntimeParameterValueArgs{\n\t\t\t\t\tKey:   pulumi.String(\"EXAMPLE_PARAM\"),\n\t\t\t\t\tType:  pulumi.String(\"string\"),\n\t\t\t\t\tValue: pulumi.String(\"val\"),\n\t\t\t\t},\n\t\t\t},\n\t\t\tEgressNetworkPolicy: pulumi.String(\"none\"),\n\t\t\tResourceBundleId:    pulumi.String(\"cpu.micro\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"exampleId\", example.ID())\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.CustomJob;\nimport com.pulumi.datarobot.CustomJobArgs;\nimport com.pulumi.datarobot.inputs.CustomJobRuntimeParameterValueArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new CustomJob(\"example\", CustomJobArgs.builder()\n            .jobType(\"retraining\")\n            .files(            \n                \"file1.py\",\n                \"file2.py\")\n            .environmentId(\"65f9b27eab986d30d4c64268\")\n            .description(\"Example Custom Job Description\")\n            .runtimeParameterValues(CustomJobRuntimeParameterValueArgs.builder()\n                .key(\"EXAMPLE_PARAM\")\n                .type(\"string\")\n                .value(\"val\")\n                .build())\n            .egressNetworkPolicy(\"none\")\n            .resourceBundleId(\"cpu.micro\")\n            .build());\n\n        ctx.export(\"exampleId\", example.id());\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: datarobot:CustomJob\n    properties:\n      jobType: retraining\n      files:\n        - file1.py\n        - file2.py\n      environmentId: 65f9b27eab986d30d4c64268\n      # Optional\n      description: Example Custom Job Description\n      runtimeParameterValues:\n        - key: EXAMPLE_PARAM\n          type: string\n          value: val\n      egressNetworkPolicy: none\n      resourceBundleId: cpu.micro\noutputs:\n  exampleId: ${example.id}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "properties": {
+                "description": {
+                    "type": "string",
+                    "description": "The description of the Custom Job.\n"
+                },
+                "egressNetworkPolicy": {
+                    "type": "string",
+                    "description": "The egress network policy for the Job.\n"
+                },
+                "environmentId": {
+                    "type": "string",
+                    "description": "The ID of the environment to use with the Job.\n"
+                },
+                "environmentVersionId": {
+                    "type": "string",
+                    "description": "The ID of the environment version to use with the Job.\n"
+                },
+                "files": {
+                    "$ref": "pulumi.json#/Any",
+                    "description": "The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Job. If list is of strings, then basenames will be used for tuples.\n"
+                },
+                "filesHashes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The hash of file contents for each file in files.\n"
+                },
+                "folderPath": {
+                    "type": "string",
+                    "description": "The path to a folder containing files to be uploaded. Each file in the folder is uploaded under path relative to a folder path.\n"
+                },
+                "folderPathHash": {
+                    "type": "string",
+                    "description": "The hash of the folder path contents.\n"
+                },
+                "jobType": {
+                    "type": "string",
+                    "description": "The type of the Custom Job.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the Custom Job.\n"
+                },
+                "resourceBundleId": {
+                    "type": "string",
+                    "description": "A single identifier that represents a bundle of resources: Memory, CPU, GPU, etc.\n"
+                },
+                "runtimeParameterValues": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/datarobot:index/CustomJobRuntimeParameterValue:CustomJobRuntimeParameterValue"
+                    },
+                    "description": "Additional parameters to be injected into a Job at runtime.\n"
+                }
+            },
+            "required": [
+                "egressNetworkPolicy",
+                "environmentId",
+                "environmentVersionId",
+                "filesHashes",
+                "folderPathHash",
+                "jobType",
+                "name",
+                "runtimeParameterValues"
+            ],
+            "inputProperties": {
+                "description": {
+                    "type": "string",
+                    "description": "The description of the Custom Job.\n"
+                },
+                "egressNetworkPolicy": {
+                    "type": "string",
+                    "description": "The egress network policy for the Job.\n"
+                },
+                "environmentId": {
+                    "type": "string",
+                    "description": "The ID of the environment to use with the Job.\n"
+                },
+                "environmentVersionId": {
+                    "type": "string",
+                    "description": "The ID of the environment version to use with the Job.\n"
+                },
+                "files": {
+                    "$ref": "pulumi.json#/Any",
+                    "description": "The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Job. If list is of strings, then basenames will be used for tuples.\n"
+                },
+                "folderPath": {
+                    "type": "string",
+                    "description": "The path to a folder containing files to be uploaded. Each file in the folder is uploaded under path relative to a folder path.\n"
+                },
+                "jobType": {
+                    "type": "string",
+                    "description": "The type of the Custom Job.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the Custom Job.\n"
+                },
+                "resourceBundleId": {
+                    "type": "string",
+                    "description": "A single identifier that represents a bundle of resources: Memory, CPU, GPU, etc.\n"
+                },
+                "runtimeParameterValues": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/datarobot:index/CustomJobRuntimeParameterValue:CustomJobRuntimeParameterValue"
+                    },
+                    "description": "Additional parameters to be injected into a Job at runtime.\n"
+                }
+            },
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering CustomJob resources.\n",
+                "properties": {
+                    "description": {
+                        "type": "string",
+                        "description": "The description of the Custom Job.\n"
+                    },
+                    "egressNetworkPolicy": {
+                        "type": "string",
+                        "description": "The egress network policy for the Job.\n"
+                    },
+                    "environmentId": {
+                        "type": "string",
+                        "description": "The ID of the environment to use with the Job.\n"
+                    },
+                    "environmentVersionId": {
+                        "type": "string",
+                        "description": "The ID of the environment version to use with the Job.\n"
+                    },
+                    "files": {
+                        "$ref": "pulumi.json#/Any",
+                        "description": "The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Job. If list is of strings, then basenames will be used for tuples.\n"
+                    },
+                    "filesHashes": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "The hash of file contents for each file in files.\n"
+                    },
+                    "folderPath": {
+                        "type": "string",
+                        "description": "The path to a folder containing files to be uploaded. Each file in the folder is uploaded under path relative to a folder path.\n"
+                    },
+                    "folderPathHash": {
+                        "type": "string",
+                        "description": "The hash of the folder path contents.\n"
+                    },
+                    "jobType": {
+                        "type": "string",
+                        "description": "The type of the Custom Job.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the Custom Job.\n"
+                    },
+                    "resourceBundleId": {
+                        "type": "string",
+                        "description": "A single identifier that represents a bundle of resources: Memory, CPU, GPU, etc.\n"
+                    },
+                    "runtimeParameterValues": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/datarobot:index/CustomJobRuntimeParameterValue:CustomJobRuntimeParameterValue"
+                        },
+                        "description": "Additional parameters to be injected into a Job at runtime.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
         "datarobot:index/customModel:CustomModel": {
-            "description": "Data set from file\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@datarobot/pulumi-datarobot\";\n\nconst exampleRemoteRepository = new datarobot.RemoteRepository(\"exampleRemoteRepository\", {\n    description: \"GitHub repository with Datarobot user models\",\n    location: \"https://github.com/datarobot/datarobot-user-models\",\n    sourceType: \"github\",\n});\n// set the credential id for private repositories\n// credential_id = datarobot_api_token_credential.example.id\nconst exampleCustomModel = new datarobot.CustomModel(\"exampleCustomModel\", {\n    description: \"An example custom model from GitHub repository\",\n    files: [\n        \"file1.py\",\n        \"file2.py\",\n    ],\n    targetType: \"Binary\",\n    targetName: \"my_label\",\n    baseEnvironmentId: \"65f9b27eab986d30d4c64268\",\n});\n// Optional\n// source_remote_repositories = [\n//   {\n//     id  = datarobot_remote_repository.example.id\n//     ref = \"master\"\n//     source_paths = [\n//       \"model_templates/python3_dummy_binary\",\n//     ]\n//   }\n// ]\n// guard_configurations = [\n//   {\n//     template_name = \"Rouge 1\"\n//     name          = \"Rouge 1 response\"\n//     stages        = [\"response\"]\n//     intervention = {\n//       action  = \"block\"\n//       message = \"response has been blocked by Rogue 1 guard\"\n//       condition = jsonencode({\n//         \"comparand\": 0.5, \n//         \"comparator\": \"greaterThan\"\n//       })\n//     }\n//   },\n// ]\n// overall_moderation_configuration = {\n//   timeout_sec    = 120\n//   timeout_action = \"score\"\n// }\n// memory_mb      = 512\n// replicas       = 2\n// network_access = \"NONE\"\nexport const exampleId = exampleCustomModel.id;\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample_remote_repository = datarobot.RemoteRepository(\"exampleRemoteRepository\",\n    description=\"GitHub repository with Datarobot user models\",\n    location=\"https://github.com/datarobot/datarobot-user-models\",\n    source_type=\"github\")\n# set the credential id for private repositories\n# credential_id = datarobot_api_token_credential.example.id\nexample_custom_model = datarobot.CustomModel(\"exampleCustomModel\",\n    description=\"An example custom model from GitHub repository\",\n    files=[\n        \"file1.py\",\n        \"file2.py\",\n    ],\n    target_type=\"Binary\",\n    target_name=\"my_label\",\n    base_environment_id=\"65f9b27eab986d30d4c64268\")\n# Optional\n# source_remote_repositories = [\n#   {\n#     id  = datarobot_remote_repository.example.id\n#     ref = \"master\"\n#     source_paths = [\n#       \"model_templates/python3_dummy_binary\",\n#     ]\n#   }\n# ]\n# guard_configurations = [\n#   {\n#     template_name = \"Rouge 1\"\n#     name          = \"Rouge 1 response\"\n#     stages        = [\"response\"]\n#     intervention = {\n#       action  = \"block\"\n#       message = \"response has been blocked by Rogue 1 guard\"\n#       condition = jsonencode({\n#         \"comparand\": 0.5, \n#         \"comparator\": \"greaterThan\"\n#       })\n#     }\n#   },\n# ]\n# overall_moderation_configuration = {\n#   timeout_sec    = 120\n#   timeout_action = \"score\"\n# }\n# memory_mb      = 512\n# replicas       = 2\n# network_access = \"NONE\"\npulumi.export(\"exampleId\", example_custom_model.id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = DataRobotPulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var exampleRemoteRepository = new Datarobot.RemoteRepository(\"exampleRemoteRepository\", new()\n    {\n        Description = \"GitHub repository with Datarobot user models\",\n        Location = \"https://github.com/datarobot/datarobot-user-models\",\n        SourceType = \"github\",\n    });\n\n    // set the credential id for private repositories\n    // credential_id = datarobot_api_token_credential.example.id\n    var exampleCustomModel = new Datarobot.CustomModel(\"exampleCustomModel\", new()\n    {\n        Description = \"An example custom model from GitHub repository\",\n        Files = new[]\n        {\n            \"file1.py\",\n            \"file2.py\",\n        },\n        TargetType = \"Binary\",\n        TargetName = \"my_label\",\n        BaseEnvironmentId = \"65f9b27eab986d30d4c64268\",\n    });\n\n    // Optional\n    // source_remote_repositories = [\n    //   {\n    //     id  = datarobot_remote_repository.example.id\n    //     ref = \"master\"\n    //     source_paths = [\n    //       \"model_templates/python3_dummy_binary\",\n    //     ]\n    //   }\n    // ]\n    // guard_configurations = [\n    //   {\n    //     template_name = \"Rouge 1\"\n    //     name          = \"Rouge 1 response\"\n    //     stages        = [\"response\"]\n    //     intervention = {\n    //       action  = \"block\"\n    //       message = \"response has been blocked by Rogue 1 guard\"\n    //       condition = jsonencode({\n    //         \"comparand\": 0.5, \n    //         \"comparator\": \"greaterThan\"\n    //       })\n    //     }\n    //   },\n    // ]\n    // overall_moderation_configuration = {\n    //   timeout_sec    = 120\n    //   timeout_action = \"score\"\n    // }\n    // memory_mb      = 512\n    // replicas       = 2\n    // network_access = \"NONE\"\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"exampleId\"] = exampleCustomModel.Id,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := datarobot.NewRemoteRepository(ctx, \"exampleRemoteRepository\", \u0026datarobot.RemoteRepositoryArgs{\n\t\t\tDescription: pulumi.String(\"GitHub repository with Datarobot user models\"),\n\t\t\tLocation:    pulumi.String(\"https://github.com/datarobot/datarobot-user-models\"),\n\t\t\tSourceType:  pulumi.String(\"github\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\texampleCustomModel, err := datarobot.NewCustomModel(ctx, \"exampleCustomModel\", \u0026datarobot.CustomModelArgs{\n\t\t\tDescription: pulumi.String(\"An example custom model from GitHub repository\"),\n\t\t\tFiles: pulumi.Any{\n\t\t\t\t\"file1.py\",\n\t\t\t\t\"file2.py\",\n\t\t\t},\n\t\t\tTargetType:        pulumi.String(\"Binary\"),\n\t\t\tTargetName:        pulumi.String(\"my_label\"),\n\t\t\tBaseEnvironmentId: pulumi.String(\"65f9b27eab986d30d4c64268\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"exampleId\", exampleCustomModel.ID())\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.RemoteRepository;\nimport com.pulumi.datarobot.RemoteRepositoryArgs;\nimport com.pulumi.datarobot.CustomModel;\nimport com.pulumi.datarobot.CustomModelArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var exampleRemoteRepository = new RemoteRepository(\"exampleRemoteRepository\", RemoteRepositoryArgs.builder()\n            .description(\"GitHub repository with Datarobot user models\")\n            .location(\"https://github.com/datarobot/datarobot-user-models\")\n            .sourceType(\"github\")\n            .build());\n\n        // set the credential id for private repositories\n        // credential_id = datarobot_api_token_credential.example.id\n        var exampleCustomModel = new CustomModel(\"exampleCustomModel\", CustomModelArgs.builder()\n            .description(\"An example custom model from GitHub repository\")\n            .files(            \n                \"file1.py\",\n                \"file2.py\")\n            .targetType(\"Binary\")\n            .targetName(\"my_label\")\n            .baseEnvironmentId(\"65f9b27eab986d30d4c64268\")\n            .build());\n\n        // Optional\n        // source_remote_repositories = [\n        //   {\n        //     id  = datarobot_remote_repository.example.id\n        //     ref = \"master\"\n        //     source_paths = [\n        //       \"model_templates/python3_dummy_binary\",\n        //     ]\n        //   }\n        // ]\n        // guard_configurations = [\n        //   {\n        //     template_name = \"Rouge 1\"\n        //     name          = \"Rouge 1 response\"\n        //     stages        = [\"response\"]\n        //     intervention = {\n        //       action  = \"block\"\n        //       message = \"response has been blocked by Rogue 1 guard\"\n        //       condition = jsonencode({\n        //         \"comparand\": 0.5, \n        //         \"comparator\": \"greaterThan\"\n        //       })\n        //     }\n        //   },\n        // ]\n        // overall_moderation_configuration = {\n        //   timeout_sec    = 120\n        //   timeout_action = \"score\"\n        // }\n        // memory_mb      = 512\n        // replicas       = 2\n        // network_access = \"NONE\"\n        ctx.export(\"exampleId\", exampleCustomModel.id());\n    }\n}\n```\n```yaml\nresources:\n  exampleRemoteRepository:\n    type: datarobot:RemoteRepository\n    properties:\n      description: GitHub repository with Datarobot user models\n      location: https://github.com/datarobot/datarobot-user-models\n      sourceType: github\n  exampleCustomModel:\n    type: datarobot:CustomModel\n    properties:\n      description: An example custom model from GitHub repository\n      files:\n        - file1.py\n        - file2.py\n      targetType: Binary\n      targetName: my_label\n      baseEnvironmentId: 65f9b27eab986d30d4c64268\noutputs:\n  exampleId: ${exampleCustomModel.id}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "description": "Custom Model\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@datarobot/pulumi-datarobot\";\n\nconst exampleRemoteRepository = new datarobot.RemoteRepository(\"exampleRemoteRepository\", {\n    description: \"GitHub repository with Datarobot user models\",\n    location: \"https://github.com/datarobot/datarobot-user-models\",\n    sourceType: \"github\",\n});\n// set the credential id for private repositories\n// credential_id = datarobot_api_token_credential.example.id\nconst exampleCustomModel = new datarobot.CustomModel(\"exampleCustomModel\", {\n    description: \"An example custom model from GitHub repository\",\n    files: [\n        \"file1.py\",\n        \"file2.py\",\n    ],\n    targetType: \"Binary\",\n    targetName: \"my_label\",\n    baseEnvironmentId: \"65f9b27eab986d30d4c64268\",\n});\n// Optional\n// source_remote_repositories = [\n//   {\n//     id  = datarobot_remote_repository.example.id\n//     ref = \"master\"\n//     source_paths = [\n//       \"model_templates/python3_dummy_binary\",\n//     ]\n//   }\n// ]\n// guard_configurations = [\n//   {\n//     template_name = \"Rouge 1\"\n//     name          = \"Rouge 1 response\"\n//     stages        = [\"response\"]\n//     intervention = {\n//       action  = \"block\"\n//       message = \"response has been blocked by Rogue 1 guard\"\n//       condition = jsonencode({\n//         \"comparand\": 0.5, \n//         \"comparator\": \"greaterThan\"\n//       })\n//     }\n//   },\n// ]\n// overall_moderation_configuration = {\n//   timeout_sec    = 120\n//   timeout_action = \"score\"\n// }\n// memory_mb      = 512\n// replicas       = 2\n// network_access = \"NONE\"\nexport const exampleId = exampleCustomModel.id;\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample_remote_repository = datarobot.RemoteRepository(\"exampleRemoteRepository\",\n    description=\"GitHub repository with Datarobot user models\",\n    location=\"https://github.com/datarobot/datarobot-user-models\",\n    source_type=\"github\")\n# set the credential id for private repositories\n# credential_id = datarobot_api_token_credential.example.id\nexample_custom_model = datarobot.CustomModel(\"exampleCustomModel\",\n    description=\"An example custom model from GitHub repository\",\n    files=[\n        \"file1.py\",\n        \"file2.py\",\n    ],\n    target_type=\"Binary\",\n    target_name=\"my_label\",\n    base_environment_id=\"65f9b27eab986d30d4c64268\")\n# Optional\n# source_remote_repositories = [\n#   {\n#     id  = datarobot_remote_repository.example.id\n#     ref = \"master\"\n#     source_paths = [\n#       \"model_templates/python3_dummy_binary\",\n#     ]\n#   }\n# ]\n# guard_configurations = [\n#   {\n#     template_name = \"Rouge 1\"\n#     name          = \"Rouge 1 response\"\n#     stages        = [\"response\"]\n#     intervention = {\n#       action  = \"block\"\n#       message = \"response has been blocked by Rogue 1 guard\"\n#       condition = jsonencode({\n#         \"comparand\": 0.5, \n#         \"comparator\": \"greaterThan\"\n#       })\n#     }\n#   },\n# ]\n# overall_moderation_configuration = {\n#   timeout_sec    = 120\n#   timeout_action = \"score\"\n# }\n# memory_mb      = 512\n# replicas       = 2\n# network_access = \"NONE\"\npulumi.export(\"exampleId\", example_custom_model.id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = DataRobotPulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var exampleRemoteRepository = new Datarobot.RemoteRepository(\"exampleRemoteRepository\", new()\n    {\n        Description = \"GitHub repository with Datarobot user models\",\n        Location = \"https://github.com/datarobot/datarobot-user-models\",\n        SourceType = \"github\",\n    });\n\n    // set the credential id for private repositories\n    // credential_id = datarobot_api_token_credential.example.id\n    var exampleCustomModel = new Datarobot.CustomModel(\"exampleCustomModel\", new()\n    {\n        Description = \"An example custom model from GitHub repository\",\n        Files = new[]\n        {\n            \"file1.py\",\n            \"file2.py\",\n        },\n        TargetType = \"Binary\",\n        TargetName = \"my_label\",\n        BaseEnvironmentId = \"65f9b27eab986d30d4c64268\",\n    });\n\n    // Optional\n    // source_remote_repositories = [\n    //   {\n    //     id  = datarobot_remote_repository.example.id\n    //     ref = \"master\"\n    //     source_paths = [\n    //       \"model_templates/python3_dummy_binary\",\n    //     ]\n    //   }\n    // ]\n    // guard_configurations = [\n    //   {\n    //     template_name = \"Rouge 1\"\n    //     name          = \"Rouge 1 response\"\n    //     stages        = [\"response\"]\n    //     intervention = {\n    //       action  = \"block\"\n    //       message = \"response has been blocked by Rogue 1 guard\"\n    //       condition = jsonencode({\n    //         \"comparand\": 0.5, \n    //         \"comparator\": \"greaterThan\"\n    //       })\n    //     }\n    //   },\n    // ]\n    // overall_moderation_configuration = {\n    //   timeout_sec    = 120\n    //   timeout_action = \"score\"\n    // }\n    // memory_mb      = 512\n    // replicas       = 2\n    // network_access = \"NONE\"\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"exampleId\"] = exampleCustomModel.Id,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := datarobot.NewRemoteRepository(ctx, \"exampleRemoteRepository\", \u0026datarobot.RemoteRepositoryArgs{\n\t\t\tDescription: pulumi.String(\"GitHub repository with Datarobot user models\"),\n\t\t\tLocation:    pulumi.String(\"https://github.com/datarobot/datarobot-user-models\"),\n\t\t\tSourceType:  pulumi.String(\"github\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\texampleCustomModel, err := datarobot.NewCustomModel(ctx, \"exampleCustomModel\", \u0026datarobot.CustomModelArgs{\n\t\t\tDescription: pulumi.String(\"An example custom model from GitHub repository\"),\n\t\t\tFiles: pulumi.Any{\n\t\t\t\t\"file1.py\",\n\t\t\t\t\"file2.py\",\n\t\t\t},\n\t\t\tTargetType:        pulumi.String(\"Binary\"),\n\t\t\tTargetName:        pulumi.String(\"my_label\"),\n\t\t\tBaseEnvironmentId: pulumi.String(\"65f9b27eab986d30d4c64268\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"exampleId\", exampleCustomModel.ID())\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.RemoteRepository;\nimport com.pulumi.datarobot.RemoteRepositoryArgs;\nimport com.pulumi.datarobot.CustomModel;\nimport com.pulumi.datarobot.CustomModelArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var exampleRemoteRepository = new RemoteRepository(\"exampleRemoteRepository\", RemoteRepositoryArgs.builder()\n            .description(\"GitHub repository with Datarobot user models\")\n            .location(\"https://github.com/datarobot/datarobot-user-models\")\n            .sourceType(\"github\")\n            .build());\n\n        // set the credential id for private repositories\n        // credential_id = datarobot_api_token_credential.example.id\n        var exampleCustomModel = new CustomModel(\"exampleCustomModel\", CustomModelArgs.builder()\n            .description(\"An example custom model from GitHub repository\")\n            .files(            \n                \"file1.py\",\n                \"file2.py\")\n            .targetType(\"Binary\")\n            .targetName(\"my_label\")\n            .baseEnvironmentId(\"65f9b27eab986d30d4c64268\")\n            .build());\n\n        // Optional\n        // source_remote_repositories = [\n        //   {\n        //     id  = datarobot_remote_repository.example.id\n        //     ref = \"master\"\n        //     source_paths = [\n        //       \"model_templates/python3_dummy_binary\",\n        //     ]\n        //   }\n        // ]\n        // guard_configurations = [\n        //   {\n        //     template_name = \"Rouge 1\"\n        //     name          = \"Rouge 1 response\"\n        //     stages        = [\"response\"]\n        //     intervention = {\n        //       action  = \"block\"\n        //       message = \"response has been blocked by Rogue 1 guard\"\n        //       condition = jsonencode({\n        //         \"comparand\": 0.5, \n        //         \"comparator\": \"greaterThan\"\n        //       })\n        //     }\n        //   },\n        // ]\n        // overall_moderation_configuration = {\n        //   timeout_sec    = 120\n        //   timeout_action = \"score\"\n        // }\n        // memory_mb      = 512\n        // replicas       = 2\n        // network_access = \"NONE\"\n        ctx.export(\"exampleId\", exampleCustomModel.id());\n    }\n}\n```\n```yaml\nresources:\n  exampleRemoteRepository:\n    type: datarobot:RemoteRepository\n    properties:\n      description: GitHub repository with Datarobot user models\n      location: https://github.com/datarobot/datarobot-user-models\n      sourceType: github\n  exampleCustomModel:\n    type: datarobot:CustomModel\n    properties:\n      description: An example custom model from GitHub repository\n      files:\n        - file1.py\n        - file2.py\n      targetType: Binary\n      targetName: my_label\n      baseEnvironmentId: 65f9b27eab986d30d4c64268\noutputs:\n  exampleId: ${exampleCustomModel.id}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
             "properties": {
                 "baseEnvironmentId": {
                     "type": "string",

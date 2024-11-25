@@ -1028,7 +1028,7 @@ class CustomModel(pulumi.CustomResource):
                  use_case_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         """
-        Data set from file
+        Custom Model
 
         ## Example Usage
 
@@ -1123,7 +1123,7 @@ class CustomModel(pulumi.CustomResource):
                  args: Optional[CustomModelArgs] = None,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Data set from file
+        Custom Model
 
         ## Example Usage
 

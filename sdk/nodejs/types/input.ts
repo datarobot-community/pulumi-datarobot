@@ -20,6 +20,21 @@ export interface ApplicationSourceRuntimeParameterValue {
     value: pulumi.Input<string>;
 }
 
+export interface CustomJobRuntimeParameterValue {
+    /**
+     * The name of the runtime parameter.
+     */
+    key: pulumi.Input<string>;
+    /**
+     * The type of the runtime parameter.
+     */
+    type: pulumi.Input<string>;
+    /**
+     * The value of the runtime parameter (type conversion is handled internally).
+     */
+    value: pulumi.Input<string>;
+}
+
 export interface CustomModelGuardConfiguration {
     /**
      * The deployment ID of this guard.

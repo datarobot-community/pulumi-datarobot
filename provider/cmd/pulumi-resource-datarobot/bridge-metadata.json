@@ -29,6 +29,17 @@
                     }
                 }
             },
+            "datarobot_custom_job": {
+                "current": "datarobot:index/customJob:CustomJob",
+                "fields": {
+                    "files_hashes": {
+                        "maxItemsOne": false
+                    },
+                    "runtime_parameter_values": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
             "datarobot_custom_model": {
                 "current": "datarobot:index/customModel:CustomModel",
                 "fields": {

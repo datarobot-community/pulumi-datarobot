@@ -9,6 +9,7 @@ from .api_token_credential import *
 from .application_source import *
 from .basic_credential import *
 from .custom_application import *
+from .custom_job import *
 from .custom_model import *
 from .dataset_from_datasource import *
 from .dataset_from_file import *
@@ -73,6 +74,14 @@ _utilities.register(
   "fqn": "pulumi_datarobot",
   "classes": {
    "datarobot:index/customApplication:CustomApplication": "CustomApplication"
+  }
+ },
+ {
+  "pkg": "datarobot",
+  "mod": "index/customJob",
+  "fqn": "pulumi_datarobot",
+  "classes": {
+   "datarobot:index/customJob:CustomJob": "CustomJob"
   }
  },
  {

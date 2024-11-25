@@ -11,7 +11,7 @@ using Pulumi;
 namespace DataRobotPulumi.Datarobot
 {
     /// <summary>
-    /// Data set from file
+    /// Custom Model
     /// 
     /// ## Example Usage
     /// 

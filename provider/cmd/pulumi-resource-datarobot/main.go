@@ -19,7 +19,7 @@ import (
 	_ "embed"
 
 	datarobot "github.com/datarobot-community/pulumi-datarobot/provider"
-	"github.com/pulumi/pulumi-terraform-bridge/pf/tfbridge"
+	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/pf/tfbridge"
 )
 
 //go:embed schema.json
