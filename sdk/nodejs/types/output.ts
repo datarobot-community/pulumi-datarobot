@@ -42,6 +42,10 @@ export interface CustomModelGuardConfiguration {
      */
     name: string;
     /**
+     * Configuration info for NeMo guards.
+     */
+    nemoInfo?: outputs.CustomModelGuardConfigurationNemoInfo;
+    /**
      * The OpenAI API base URL for this guard.
      */
     openaiApiBase?: string;
@@ -80,6 +84,29 @@ export interface CustomModelGuardConfigurationIntervention {
      * The message of the guard intervention.
      */
     message: string;
+}
+
+export interface CustomModelGuardConfigurationNemoInfo {
+    /**
+     * The actions for the NeMo information.
+     */
+    actions?: string;
+    /**
+     * NeMo guardrails blocked terms list.
+     */
+    blockedTerms?: string;
+    /**
+     * NeMo guardrails prompts.
+     */
+    llmPrompts?: string;
+    /**
+     * Overall NeMo configuration YAML.
+     */
+    mainConfig?: string;
+    /**
+     * NeMo guardrails configuration Colang.
+     */
+    railsConfig?: string;
 }
 
 export interface CustomModelOverallModerationConfiguration {
@@ -121,6 +148,41 @@ export interface CustomModelSourceRemoteRepository {
      * The list of source paths in the source remote repository.
      */
     sourcePaths: string[];
+}
+
+export interface DatasourceParams {
+    /**
+     * The Catalog name in the database if supported.
+     */
+    catalog?: string;
+    /**
+     * The id of the DataStore.
+     */
+    dataStoreId: string;
+    /**
+     * A user specified fetch size in the range [1, 20000]. By default a fetchSize will be assigned to balance throughput and memory usage.
+     */
+    fetchSize?: number;
+    /**
+     * The name of the partition column.
+     */
+    partitionColumn?: string;
+    /**
+     * The user-specified path for BLOB storage.
+     */
+    path?: string;
+    /**
+     * The user specified SQL query.
+     */
+    query?: string;
+    /**
+     * The name of the schema associated with the table.
+     */
+    schema?: string;
+    /**
+     * The name of specified database table.
+     */
+    table?: string;
 }
 
 export interface DeploymentAssociationIdSettings {

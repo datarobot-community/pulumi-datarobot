@@ -30,6 +30,11 @@ export type CustomModel = import("./customModel").CustomModel;
 export const CustomModel: typeof import("./customModel").CustomModel = null as any;
 utilities.lazyLoad(exports, ["CustomModel"], () => require("./customModel"));
 
+export { DatasetFromDatasourceArgs, DatasetFromDatasourceState } from "./datasetFromDatasource";
+export type DatasetFromDatasource = import("./datasetFromDatasource").DatasetFromDatasource;
+export const DatasetFromDatasource: typeof import("./datasetFromDatasource").DatasetFromDatasource = null as any;
+utilities.lazyLoad(exports, ["DatasetFromDatasource"], () => require("./datasetFromDatasource"));
+
 export { DatasetFromFileArgs, DatasetFromFileState } from "./datasetFromFile";
 export type DatasetFromFile = import("./datasetFromFile").DatasetFromFile;
 export const DatasetFromFile: typeof import("./datasetFromFile").DatasetFromFile = null as any;
@@ -39,6 +44,16 @@ export { DatasetFromUrlArgs, DatasetFromUrlState } from "./datasetFromUrl";
 export type DatasetFromUrl = import("./datasetFromUrl").DatasetFromUrl;
 export const DatasetFromUrl: typeof import("./datasetFromUrl").DatasetFromUrl = null as any;
 utilities.lazyLoad(exports, ["DatasetFromUrl"], () => require("./datasetFromUrl"));
+
+export { DatasourceArgs, DatasourceState } from "./datasource";
+export type Datasource = import("./datasource").Datasource;
+export const Datasource: typeof import("./datasource").Datasource = null as any;
+utilities.lazyLoad(exports, ["Datasource"], () => require("./datasource"));
+
+export { DatastoreArgs, DatastoreState } from "./datastore";
+export type Datastore = import("./datastore").Datastore;
+export const Datastore: typeof import("./datastore").Datastore = null as any;
+utilities.lazyLoad(exports, ["Datastore"], () => require("./datastore"));
 
 export { DeploymentArgs, DeploymentState } from "./deployment";
 export type Deployment = import("./deployment").Deployment;
@@ -139,10 +154,16 @@ const _module = {
                 return new CustomApplication(name, <any>undefined, { urn })
             case "datarobot:index/customModel:CustomModel":
                 return new CustomModel(name, <any>undefined, { urn })
+            case "datarobot:index/datasetFromDatasource:DatasetFromDatasource":
+                return new DatasetFromDatasource(name, <any>undefined, { urn })
             case "datarobot:index/datasetFromFile:DatasetFromFile":
                 return new DatasetFromFile(name, <any>undefined, { urn })
             case "datarobot:index/datasetFromUrl:DatasetFromUrl":
                 return new DatasetFromUrl(name, <any>undefined, { urn })
+            case "datarobot:index/datasource:Datasource":
+                return new Datasource(name, <any>undefined, { urn })
+            case "datarobot:index/datastore:Datastore":
+                return new Datastore(name, <any>undefined, { urn })
             case "datarobot:index/deployment:Deployment":
                 return new Deployment(name, <any>undefined, { urn })
             case "datarobot:index/executionEnvironment:ExecutionEnvironment":
@@ -177,8 +198,11 @@ pulumi.runtime.registerResourceModule("datarobot", "index/applicationSource", _m
 pulumi.runtime.registerResourceModule("datarobot", "index/basicCredential", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/customApplication", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/customModel", _module)
+pulumi.runtime.registerResourceModule("datarobot", "index/datasetFromDatasource", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/datasetFromFile", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/datasetFromUrl", _module)
+pulumi.runtime.registerResourceModule("datarobot", "index/datasource", _module)
+pulumi.runtime.registerResourceModule("datarobot", "index/datastore", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/deployment", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/executionEnvironment", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/googleCloudCredential", _module)

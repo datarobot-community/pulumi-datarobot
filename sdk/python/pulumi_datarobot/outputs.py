@@ -19,9 +19,11 @@ __all__ = [
     'ApplicationSourceRuntimeParameterValue',
     'CustomModelGuardConfiguration',
     'CustomModelGuardConfigurationIntervention',
+    'CustomModelGuardConfigurationNemoInfo',
     'CustomModelOverallModerationConfiguration',
     'CustomModelRuntimeParameterValue',
     'CustomModelSourceRemoteRepository',
+    'DatasourceParams',
     'DeploymentAssociationIdSettings',
     'DeploymentBiasAndFairnessSettings',
     'DeploymentChallengerModelsSettings',
@@ -102,6 +104,8 @@ class CustomModelGuardConfiguration(dict):
             suggest = "input_column_name"
         elif key == "llmType":
             suggest = "llm_type"
+        elif key == "nemoInfo":
+            suggest = "nemo_info"
         elif key == "openaiApiBase":
             suggest = "openai_api_base"
         elif key == "openaiCredential":
@@ -130,6 +134,7 @@ class CustomModelGuardConfiguration(dict):
                  deployment_id: Optional[str] = None,
                  input_column_name: Optional[str] = None,
                  llm_type: Optional[str] = None,
+                 nemo_info: Optional['outputs.CustomModelGuardConfigurationNemoInfo'] = None,
                  openai_api_base: Optional[str] = None,
                  openai_credential: Optional[str] = None,
                  openai_deployment_id: Optional[str] = None,
@@ -142,6 +147,7 @@ class CustomModelGuardConfiguration(dict):
         :param str deployment_id: The deployment ID of this guard.
         :param str input_column_name: The input column name of this guard.
         :param str llm_type: The LLM type for this guard.
+        :param 'CustomModelGuardConfigurationNemoInfoArgs' nemo_info: Configuration info for NeMo guards.
         :param str openai_api_base: The OpenAI API base URL for this guard.
         :param str openai_credential: The ID of an OpenAI credential for this guard.
         :param str openai_deployment_id: The ID of an OpenAI deployment for this guard.
@@ -157,6 +163,8 @@ class CustomModelGuardConfiguration(dict):
             pulumi.set(__self__, "input_column_name", input_column_name)
         if llm_type is not None:
             pulumi.set(__self__, "llm_type", llm_type)
+        if nemo_info is not None:
+            pulumi.set(__self__, "nemo_info", nemo_info)
         if openai_api_base is not None:
             pulumi.set(__self__, "openai_api_base", openai_api_base)
         if openai_credential is not None:
@@ -221,6 +229,14 @@ class CustomModelGuardConfiguration(dict):
         The LLM type for this guard.
         """
         return pulumi.get(self, "llm_type")
+
+    @property
+    @pulumi.getter(name="nemoInfo")
+    def nemo_info(self) -> Optional['outputs.CustomModelGuardConfigurationNemoInfo']:
+        """
+        Configuration info for NeMo guards.
+        """
+        return pulumi.get(self, "nemo_info")
 
     @property
     @pulumi.getter(name="openaiApiBase")
@@ -294,6 +310,96 @@ class CustomModelGuardConfigurationIntervention(dict):
         The message of the guard intervention.
         """
         return pulumi.get(self, "message")
+
+
+@pulumi.output_type
+class CustomModelGuardConfigurationNemoInfo(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "blockedTerms":
+            suggest = "blocked_terms"
+        elif key == "llmPrompts":
+            suggest = "llm_prompts"
+        elif key == "mainConfig":
+            suggest = "main_config"
+        elif key == "railsConfig":
+            suggest = "rails_config"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in CustomModelGuardConfigurationNemoInfo. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        CustomModelGuardConfigurationNemoInfo.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        CustomModelGuardConfigurationNemoInfo.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 actions: Optional[str] = None,
+                 blocked_terms: Optional[str] = None,
+                 llm_prompts: Optional[str] = None,
+                 main_config: Optional[str] = None,
+                 rails_config: Optional[str] = None):
+        """
+        :param str actions: The actions for the NeMo information.
+        :param str blocked_terms: NeMo guardrails blocked terms list.
+        :param str llm_prompts: NeMo guardrails prompts.
+        :param str main_config: Overall NeMo configuration YAML.
+        :param str rails_config: NeMo guardrails configuration Colang.
+        """
+        if actions is not None:
+            pulumi.set(__self__, "actions", actions)
+        if blocked_terms is not None:
+            pulumi.set(__self__, "blocked_terms", blocked_terms)
+        if llm_prompts is not None:
+            pulumi.set(__self__, "llm_prompts", llm_prompts)
+        if main_config is not None:
+            pulumi.set(__self__, "main_config", main_config)
+        if rails_config is not None:
+            pulumi.set(__self__, "rails_config", rails_config)
+
+    @property
+    @pulumi.getter
+    def actions(self) -> Optional[str]:
+        """
+        The actions for the NeMo information.
+        """
+        return pulumi.get(self, "actions")
+
+    @property
+    @pulumi.getter(name="blockedTerms")
+    def blocked_terms(self) -> Optional[str]:
+        """
+        NeMo guardrails blocked terms list.
+        """
+        return pulumi.get(self, "blocked_terms")
+
+    @property
+    @pulumi.getter(name="llmPrompts")
+    def llm_prompts(self) -> Optional[str]:
+        """
+        NeMo guardrails prompts.
+        """
+        return pulumi.get(self, "llm_prompts")
+
+    @property
+    @pulumi.getter(name="mainConfig")
+    def main_config(self) -> Optional[str]:
+        """
+        Overall NeMo configuration YAML.
+        """
+        return pulumi.get(self, "main_config")
+
+    @property
+    @pulumi.getter(name="railsConfig")
+    def rails_config(self) -> Optional[str]:
+        """
+        NeMo guardrails configuration Colang.
+        """
+        return pulumi.get(self, "rails_config")
 
 
 @pulumi.output_type
@@ -441,6 +547,129 @@ class CustomModelSourceRemoteRepository(dict):
         The list of source paths in the source remote repository.
         """
         return pulumi.get(self, "source_paths")
+
+
+@pulumi.output_type
+class DatasourceParams(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "dataStoreId":
+            suggest = "data_store_id"
+        elif key == "fetchSize":
+            suggest = "fetch_size"
+        elif key == "partitionColumn":
+            suggest = "partition_column"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in DatasourceParams. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        DatasourceParams.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        DatasourceParams.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 data_store_id: str,
+                 catalog: Optional[str] = None,
+                 fetch_size: Optional[int] = None,
+                 partition_column: Optional[str] = None,
+                 path: Optional[str] = None,
+                 query: Optional[str] = None,
+                 schema: Optional[str] = None,
+                 table: Optional[str] = None):
+        """
+        :param str data_store_id: The id of the DataStore.
+        :param str catalog: The Catalog name in the database if supported.
+        :param int fetch_size: A user specified fetch size in the range [1, 20000]. By default a fetchSize will be assigned to balance throughput and memory usage.
+        :param str partition_column: The name of the partition column.
+        :param str path: The user-specified path for BLOB storage.
+        :param str query: The user specified SQL query.
+        :param str schema: The name of the schema associated with the table.
+        :param str table: The name of specified database table.
+        """
+        pulumi.set(__self__, "data_store_id", data_store_id)
+        if catalog is not None:
+            pulumi.set(__self__, "catalog", catalog)
+        if fetch_size is not None:
+            pulumi.set(__self__, "fetch_size", fetch_size)
+        if partition_column is not None:
+            pulumi.set(__self__, "partition_column", partition_column)
+        if path is not None:
+            pulumi.set(__self__, "path", path)
+        if query is not None:
+            pulumi.set(__self__, "query", query)
+        if schema is not None:
+            pulumi.set(__self__, "schema", schema)
+        if table is not None:
+            pulumi.set(__self__, "table", table)
+
+    @property
+    @pulumi.getter(name="dataStoreId")
+    def data_store_id(self) -> str:
+        """
+        The id of the DataStore.
+        """
+        return pulumi.get(self, "data_store_id")
+
+    @property
+    @pulumi.getter
+    def catalog(self) -> Optional[str]:
+        """
+        The Catalog name in the database if supported.
+        """
+        return pulumi.get(self, "catalog")
+
+    @property
+    @pulumi.getter(name="fetchSize")
+    def fetch_size(self) -> Optional[int]:
+        """
+        A user specified fetch size in the range [1, 20000]. By default a fetchSize will be assigned to balance throughput and memory usage.
+        """
+        return pulumi.get(self, "fetch_size")
+
+    @property
+    @pulumi.getter(name="partitionColumn")
+    def partition_column(self) -> Optional[str]:
+        """
+        The name of the partition column.
+        """
+        return pulumi.get(self, "partition_column")
+
+    @property
+    @pulumi.getter
+    def path(self) -> Optional[str]:
+        """
+        The user-specified path for BLOB storage.
+        """
+        return pulumi.get(self, "path")
+
+    @property
+    @pulumi.getter
+    def query(self) -> Optional[str]:
+        """
+        The user specified SQL query.
+        """
+        return pulumi.get(self, "query")
+
+    @property
+    @pulumi.getter
+    def schema(self) -> Optional[str]:
+        """
+        The name of the schema associated with the table.
+        """
+        return pulumi.get(self, "schema")
+
+    @property
+    @pulumi.getter
+    def table(self) -> Optional[str]:
+        """
+        The name of specified database table.
+        """
+        return pulumi.get(self, "table")
 
 
 @pulumi.output_type

@@ -139,6 +139,8 @@ type CustomModelGuardConfiguration struct {
 	LlmType *string `pulumi:"llmType"`
 	// The name of the guard configuration.
 	Name string `pulumi:"name"`
+	// Configuration info for NeMo guards.
+	NemoInfo *CustomModelGuardConfigurationNemoInfo `pulumi:"nemoInfo"`
 	// The OpenAI API base URL for this guard.
 	OpenaiApiBase *string `pulumi:"openaiApiBase"`
 	// The ID of an OpenAI credential for this guard.
@@ -175,6 +177,8 @@ type CustomModelGuardConfigurationArgs struct {
 	LlmType pulumi.StringPtrInput `pulumi:"llmType"`
 	// The name of the guard configuration.
 	Name pulumi.StringInput `pulumi:"name"`
+	// Configuration info for NeMo guards.
+	NemoInfo CustomModelGuardConfigurationNemoInfoPtrInput `pulumi:"nemoInfo"`
 	// The OpenAI API base URL for this guard.
 	OpenaiApiBase pulumi.StringPtrInput `pulumi:"openaiApiBase"`
 	// The ID of an OpenAI credential for this guard.
@@ -263,6 +267,11 @@ func (o CustomModelGuardConfigurationOutput) LlmType() pulumi.StringPtrOutput {
 // The name of the guard configuration.
 func (o CustomModelGuardConfigurationOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v CustomModelGuardConfiguration) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Configuration info for NeMo guards.
+func (o CustomModelGuardConfigurationOutput) NemoInfo() CustomModelGuardConfigurationNemoInfoPtrOutput {
+	return o.ApplyT(func(v CustomModelGuardConfiguration) *CustomModelGuardConfigurationNemoInfo { return v.NemoInfo }).(CustomModelGuardConfigurationNemoInfoPtrOutput)
 }
 
 // The OpenAI API base URL for this guard.
@@ -383,6 +392,219 @@ func (o CustomModelGuardConfigurationInterventionOutput) Condition() pulumi.Stri
 // The message of the guard intervention.
 func (o CustomModelGuardConfigurationInterventionOutput) Message() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v CustomModelGuardConfigurationIntervention) *string { return v.Message }).(pulumi.StringPtrOutput)
+}
+
+type CustomModelGuardConfigurationNemoInfo struct {
+	// The actions for the NeMo information.
+	Actions *string `pulumi:"actions"`
+	// NeMo guardrails blocked terms list.
+	BlockedTerms *string `pulumi:"blockedTerms"`
+	// NeMo guardrails prompts.
+	LlmPrompts *string `pulumi:"llmPrompts"`
+	// Overall NeMo configuration YAML.
+	MainConfig *string `pulumi:"mainConfig"`
+	// NeMo guardrails configuration Colang.
+	RailsConfig *string `pulumi:"railsConfig"`
+}
+
+// CustomModelGuardConfigurationNemoInfoInput is an input type that accepts CustomModelGuardConfigurationNemoInfoArgs and CustomModelGuardConfigurationNemoInfoOutput values.
+// You can construct a concrete instance of `CustomModelGuardConfigurationNemoInfoInput` via:
+//
+//	CustomModelGuardConfigurationNemoInfoArgs{...}
+type CustomModelGuardConfigurationNemoInfoInput interface {
+	pulumi.Input
+
+	ToCustomModelGuardConfigurationNemoInfoOutput() CustomModelGuardConfigurationNemoInfoOutput
+	ToCustomModelGuardConfigurationNemoInfoOutputWithContext(context.Context) CustomModelGuardConfigurationNemoInfoOutput
+}
+
+type CustomModelGuardConfigurationNemoInfoArgs struct {
+	// The actions for the NeMo information.
+	Actions pulumi.StringPtrInput `pulumi:"actions"`
+	// NeMo guardrails blocked terms list.
+	BlockedTerms pulumi.StringPtrInput `pulumi:"blockedTerms"`
+	// NeMo guardrails prompts.
+	LlmPrompts pulumi.StringPtrInput `pulumi:"llmPrompts"`
+	// Overall NeMo configuration YAML.
+	MainConfig pulumi.StringPtrInput `pulumi:"mainConfig"`
+	// NeMo guardrails configuration Colang.
+	RailsConfig pulumi.StringPtrInput `pulumi:"railsConfig"`
+}
+
+func (CustomModelGuardConfigurationNemoInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomModelGuardConfigurationNemoInfo)(nil)).Elem()
+}
+
+func (i CustomModelGuardConfigurationNemoInfoArgs) ToCustomModelGuardConfigurationNemoInfoOutput() CustomModelGuardConfigurationNemoInfoOutput {
+	return i.ToCustomModelGuardConfigurationNemoInfoOutputWithContext(context.Background())
+}
+
+func (i CustomModelGuardConfigurationNemoInfoArgs) ToCustomModelGuardConfigurationNemoInfoOutputWithContext(ctx context.Context) CustomModelGuardConfigurationNemoInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomModelGuardConfigurationNemoInfoOutput)
+}
+
+func (i CustomModelGuardConfigurationNemoInfoArgs) ToCustomModelGuardConfigurationNemoInfoPtrOutput() CustomModelGuardConfigurationNemoInfoPtrOutput {
+	return i.ToCustomModelGuardConfigurationNemoInfoPtrOutputWithContext(context.Background())
+}
+
+func (i CustomModelGuardConfigurationNemoInfoArgs) ToCustomModelGuardConfigurationNemoInfoPtrOutputWithContext(ctx context.Context) CustomModelGuardConfigurationNemoInfoPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomModelGuardConfigurationNemoInfoOutput).ToCustomModelGuardConfigurationNemoInfoPtrOutputWithContext(ctx)
+}
+
+// CustomModelGuardConfigurationNemoInfoPtrInput is an input type that accepts CustomModelGuardConfigurationNemoInfoArgs, CustomModelGuardConfigurationNemoInfoPtr and CustomModelGuardConfigurationNemoInfoPtrOutput values.
+// You can construct a concrete instance of `CustomModelGuardConfigurationNemoInfoPtrInput` via:
+//
+//	        CustomModelGuardConfigurationNemoInfoArgs{...}
+//
+//	or:
+//
+//	        nil
+type CustomModelGuardConfigurationNemoInfoPtrInput interface {
+	pulumi.Input
+
+	ToCustomModelGuardConfigurationNemoInfoPtrOutput() CustomModelGuardConfigurationNemoInfoPtrOutput
+	ToCustomModelGuardConfigurationNemoInfoPtrOutputWithContext(context.Context) CustomModelGuardConfigurationNemoInfoPtrOutput
+}
+
+type customModelGuardConfigurationNemoInfoPtrType CustomModelGuardConfigurationNemoInfoArgs
+
+func CustomModelGuardConfigurationNemoInfoPtr(v *CustomModelGuardConfigurationNemoInfoArgs) CustomModelGuardConfigurationNemoInfoPtrInput {
+	return (*customModelGuardConfigurationNemoInfoPtrType)(v)
+}
+
+func (*customModelGuardConfigurationNemoInfoPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**CustomModelGuardConfigurationNemoInfo)(nil)).Elem()
+}
+
+func (i *customModelGuardConfigurationNemoInfoPtrType) ToCustomModelGuardConfigurationNemoInfoPtrOutput() CustomModelGuardConfigurationNemoInfoPtrOutput {
+	return i.ToCustomModelGuardConfigurationNemoInfoPtrOutputWithContext(context.Background())
+}
+
+func (i *customModelGuardConfigurationNemoInfoPtrType) ToCustomModelGuardConfigurationNemoInfoPtrOutputWithContext(ctx context.Context) CustomModelGuardConfigurationNemoInfoPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomModelGuardConfigurationNemoInfoPtrOutput)
+}
+
+type CustomModelGuardConfigurationNemoInfoOutput struct{ *pulumi.OutputState }
+
+func (CustomModelGuardConfigurationNemoInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomModelGuardConfigurationNemoInfo)(nil)).Elem()
+}
+
+func (o CustomModelGuardConfigurationNemoInfoOutput) ToCustomModelGuardConfigurationNemoInfoOutput() CustomModelGuardConfigurationNemoInfoOutput {
+	return o
+}
+
+func (o CustomModelGuardConfigurationNemoInfoOutput) ToCustomModelGuardConfigurationNemoInfoOutputWithContext(ctx context.Context) CustomModelGuardConfigurationNemoInfoOutput {
+	return o
+}
+
+func (o CustomModelGuardConfigurationNemoInfoOutput) ToCustomModelGuardConfigurationNemoInfoPtrOutput() CustomModelGuardConfigurationNemoInfoPtrOutput {
+	return o.ToCustomModelGuardConfigurationNemoInfoPtrOutputWithContext(context.Background())
+}
+
+func (o CustomModelGuardConfigurationNemoInfoOutput) ToCustomModelGuardConfigurationNemoInfoPtrOutputWithContext(ctx context.Context) CustomModelGuardConfigurationNemoInfoPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v CustomModelGuardConfigurationNemoInfo) *CustomModelGuardConfigurationNemoInfo {
+		return &v
+	}).(CustomModelGuardConfigurationNemoInfoPtrOutput)
+}
+
+// The actions for the NeMo information.
+func (o CustomModelGuardConfigurationNemoInfoOutput) Actions() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CustomModelGuardConfigurationNemoInfo) *string { return v.Actions }).(pulumi.StringPtrOutput)
+}
+
+// NeMo guardrails blocked terms list.
+func (o CustomModelGuardConfigurationNemoInfoOutput) BlockedTerms() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CustomModelGuardConfigurationNemoInfo) *string { return v.BlockedTerms }).(pulumi.StringPtrOutput)
+}
+
+// NeMo guardrails prompts.
+func (o CustomModelGuardConfigurationNemoInfoOutput) LlmPrompts() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CustomModelGuardConfigurationNemoInfo) *string { return v.LlmPrompts }).(pulumi.StringPtrOutput)
+}
+
+// Overall NeMo configuration YAML.
+func (o CustomModelGuardConfigurationNemoInfoOutput) MainConfig() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CustomModelGuardConfigurationNemoInfo) *string { return v.MainConfig }).(pulumi.StringPtrOutput)
+}
+
+// NeMo guardrails configuration Colang.
+func (o CustomModelGuardConfigurationNemoInfoOutput) RailsConfig() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CustomModelGuardConfigurationNemoInfo) *string { return v.RailsConfig }).(pulumi.StringPtrOutput)
+}
+
+type CustomModelGuardConfigurationNemoInfoPtrOutput struct{ *pulumi.OutputState }
+
+func (CustomModelGuardConfigurationNemoInfoPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**CustomModelGuardConfigurationNemoInfo)(nil)).Elem()
+}
+
+func (o CustomModelGuardConfigurationNemoInfoPtrOutput) ToCustomModelGuardConfigurationNemoInfoPtrOutput() CustomModelGuardConfigurationNemoInfoPtrOutput {
+	return o
+}
+
+func (o CustomModelGuardConfigurationNemoInfoPtrOutput) ToCustomModelGuardConfigurationNemoInfoPtrOutputWithContext(ctx context.Context) CustomModelGuardConfigurationNemoInfoPtrOutput {
+	return o
+}
+
+func (o CustomModelGuardConfigurationNemoInfoPtrOutput) Elem() CustomModelGuardConfigurationNemoInfoOutput {
+	return o.ApplyT(func(v *CustomModelGuardConfigurationNemoInfo) CustomModelGuardConfigurationNemoInfo {
+		if v != nil {
+			return *v
+		}
+		var ret CustomModelGuardConfigurationNemoInfo
+		return ret
+	}).(CustomModelGuardConfigurationNemoInfoOutput)
+}
+
+// The actions for the NeMo information.
+func (o CustomModelGuardConfigurationNemoInfoPtrOutput) Actions() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CustomModelGuardConfigurationNemoInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Actions
+	}).(pulumi.StringPtrOutput)
+}
+
+// NeMo guardrails blocked terms list.
+func (o CustomModelGuardConfigurationNemoInfoPtrOutput) BlockedTerms() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CustomModelGuardConfigurationNemoInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.BlockedTerms
+	}).(pulumi.StringPtrOutput)
+}
+
+// NeMo guardrails prompts.
+func (o CustomModelGuardConfigurationNemoInfoPtrOutput) LlmPrompts() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CustomModelGuardConfigurationNemoInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.LlmPrompts
+	}).(pulumi.StringPtrOutput)
+}
+
+// Overall NeMo configuration YAML.
+func (o CustomModelGuardConfigurationNemoInfoPtrOutput) MainConfig() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CustomModelGuardConfigurationNemoInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.MainConfig
+	}).(pulumi.StringPtrOutput)
+}
+
+// NeMo guardrails configuration Colang.
+func (o CustomModelGuardConfigurationNemoInfoPtrOutput) RailsConfig() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CustomModelGuardConfigurationNemoInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.RailsConfig
+	}).(pulumi.StringPtrOutput)
 }
 
 type CustomModelOverallModerationConfiguration struct {
@@ -769,6 +991,276 @@ func (o CustomModelSourceRemoteRepositoryArrayOutput) Index(i pulumi.IntInput) C
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CustomModelSourceRemoteRepository {
 		return vs[0].([]CustomModelSourceRemoteRepository)[vs[1].(int)]
 	}).(CustomModelSourceRemoteRepositoryOutput)
+}
+
+type DatasourceParams struct {
+	// The Catalog name in the database if supported.
+	Catalog *string `pulumi:"catalog"`
+	// The id of the DataStore.
+	DataStoreId string `pulumi:"dataStoreId"`
+	// A user specified fetch size in the range [1, 20000]. By default a fetchSize will be assigned to balance throughput and memory usage.
+	FetchSize *int `pulumi:"fetchSize"`
+	// The name of the partition column.
+	PartitionColumn *string `pulumi:"partitionColumn"`
+	// The user-specified path for BLOB storage.
+	Path *string `pulumi:"path"`
+	// The user specified SQL query.
+	Query *string `pulumi:"query"`
+	// The name of the schema associated with the table.
+	Schema *string `pulumi:"schema"`
+	// The name of specified database table.
+	Table *string `pulumi:"table"`
+}
+
+// DatasourceParamsInput is an input type that accepts DatasourceParamsArgs and DatasourceParamsOutput values.
+// You can construct a concrete instance of `DatasourceParamsInput` via:
+//
+//	DatasourceParamsArgs{...}
+type DatasourceParamsInput interface {
+	pulumi.Input
+
+	ToDatasourceParamsOutput() DatasourceParamsOutput
+	ToDatasourceParamsOutputWithContext(context.Context) DatasourceParamsOutput
+}
+
+type DatasourceParamsArgs struct {
+	// The Catalog name in the database if supported.
+	Catalog pulumi.StringPtrInput `pulumi:"catalog"`
+	// The id of the DataStore.
+	DataStoreId pulumi.StringInput `pulumi:"dataStoreId"`
+	// A user specified fetch size in the range [1, 20000]. By default a fetchSize will be assigned to balance throughput and memory usage.
+	FetchSize pulumi.IntPtrInput `pulumi:"fetchSize"`
+	// The name of the partition column.
+	PartitionColumn pulumi.StringPtrInput `pulumi:"partitionColumn"`
+	// The user-specified path for BLOB storage.
+	Path pulumi.StringPtrInput `pulumi:"path"`
+	// The user specified SQL query.
+	Query pulumi.StringPtrInput `pulumi:"query"`
+	// The name of the schema associated with the table.
+	Schema pulumi.StringPtrInput `pulumi:"schema"`
+	// The name of specified database table.
+	Table pulumi.StringPtrInput `pulumi:"table"`
+}
+
+func (DatasourceParamsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DatasourceParams)(nil)).Elem()
+}
+
+func (i DatasourceParamsArgs) ToDatasourceParamsOutput() DatasourceParamsOutput {
+	return i.ToDatasourceParamsOutputWithContext(context.Background())
+}
+
+func (i DatasourceParamsArgs) ToDatasourceParamsOutputWithContext(ctx context.Context) DatasourceParamsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DatasourceParamsOutput)
+}
+
+func (i DatasourceParamsArgs) ToDatasourceParamsPtrOutput() DatasourceParamsPtrOutput {
+	return i.ToDatasourceParamsPtrOutputWithContext(context.Background())
+}
+
+func (i DatasourceParamsArgs) ToDatasourceParamsPtrOutputWithContext(ctx context.Context) DatasourceParamsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DatasourceParamsOutput).ToDatasourceParamsPtrOutputWithContext(ctx)
+}
+
+// DatasourceParamsPtrInput is an input type that accepts DatasourceParamsArgs, DatasourceParamsPtr and DatasourceParamsPtrOutput values.
+// You can construct a concrete instance of `DatasourceParamsPtrInput` via:
+//
+//	        DatasourceParamsArgs{...}
+//
+//	or:
+//
+//	        nil
+type DatasourceParamsPtrInput interface {
+	pulumi.Input
+
+	ToDatasourceParamsPtrOutput() DatasourceParamsPtrOutput
+	ToDatasourceParamsPtrOutputWithContext(context.Context) DatasourceParamsPtrOutput
+}
+
+type datasourceParamsPtrType DatasourceParamsArgs
+
+func DatasourceParamsPtr(v *DatasourceParamsArgs) DatasourceParamsPtrInput {
+	return (*datasourceParamsPtrType)(v)
+}
+
+func (*datasourceParamsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DatasourceParams)(nil)).Elem()
+}
+
+func (i *datasourceParamsPtrType) ToDatasourceParamsPtrOutput() DatasourceParamsPtrOutput {
+	return i.ToDatasourceParamsPtrOutputWithContext(context.Background())
+}
+
+func (i *datasourceParamsPtrType) ToDatasourceParamsPtrOutputWithContext(ctx context.Context) DatasourceParamsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DatasourceParamsPtrOutput)
+}
+
+type DatasourceParamsOutput struct{ *pulumi.OutputState }
+
+func (DatasourceParamsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DatasourceParams)(nil)).Elem()
+}
+
+func (o DatasourceParamsOutput) ToDatasourceParamsOutput() DatasourceParamsOutput {
+	return o
+}
+
+func (o DatasourceParamsOutput) ToDatasourceParamsOutputWithContext(ctx context.Context) DatasourceParamsOutput {
+	return o
+}
+
+func (o DatasourceParamsOutput) ToDatasourceParamsPtrOutput() DatasourceParamsPtrOutput {
+	return o.ToDatasourceParamsPtrOutputWithContext(context.Background())
+}
+
+func (o DatasourceParamsOutput) ToDatasourceParamsPtrOutputWithContext(ctx context.Context) DatasourceParamsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DatasourceParams) *DatasourceParams {
+		return &v
+	}).(DatasourceParamsPtrOutput)
+}
+
+// The Catalog name in the database if supported.
+func (o DatasourceParamsOutput) Catalog() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DatasourceParams) *string { return v.Catalog }).(pulumi.StringPtrOutput)
+}
+
+// The id of the DataStore.
+func (o DatasourceParamsOutput) DataStoreId() pulumi.StringOutput {
+	return o.ApplyT(func(v DatasourceParams) string { return v.DataStoreId }).(pulumi.StringOutput)
+}
+
+// A user specified fetch size in the range [1, 20000]. By default a fetchSize will be assigned to balance throughput and memory usage.
+func (o DatasourceParamsOutput) FetchSize() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v DatasourceParams) *int { return v.FetchSize }).(pulumi.IntPtrOutput)
+}
+
+// The name of the partition column.
+func (o DatasourceParamsOutput) PartitionColumn() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DatasourceParams) *string { return v.PartitionColumn }).(pulumi.StringPtrOutput)
+}
+
+// The user-specified path for BLOB storage.
+func (o DatasourceParamsOutput) Path() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DatasourceParams) *string { return v.Path }).(pulumi.StringPtrOutput)
+}
+
+// The user specified SQL query.
+func (o DatasourceParamsOutput) Query() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DatasourceParams) *string { return v.Query }).(pulumi.StringPtrOutput)
+}
+
+// The name of the schema associated with the table.
+func (o DatasourceParamsOutput) Schema() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DatasourceParams) *string { return v.Schema }).(pulumi.StringPtrOutput)
+}
+
+// The name of specified database table.
+func (o DatasourceParamsOutput) Table() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DatasourceParams) *string { return v.Table }).(pulumi.StringPtrOutput)
+}
+
+type DatasourceParamsPtrOutput struct{ *pulumi.OutputState }
+
+func (DatasourceParamsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DatasourceParams)(nil)).Elem()
+}
+
+func (o DatasourceParamsPtrOutput) ToDatasourceParamsPtrOutput() DatasourceParamsPtrOutput {
+	return o
+}
+
+func (o DatasourceParamsPtrOutput) ToDatasourceParamsPtrOutputWithContext(ctx context.Context) DatasourceParamsPtrOutput {
+	return o
+}
+
+func (o DatasourceParamsPtrOutput) Elem() DatasourceParamsOutput {
+	return o.ApplyT(func(v *DatasourceParams) DatasourceParams {
+		if v != nil {
+			return *v
+		}
+		var ret DatasourceParams
+		return ret
+	}).(DatasourceParamsOutput)
+}
+
+// The Catalog name in the database if supported.
+func (o DatasourceParamsPtrOutput) Catalog() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DatasourceParams) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Catalog
+	}).(pulumi.StringPtrOutput)
+}
+
+// The id of the DataStore.
+func (o DatasourceParamsPtrOutput) DataStoreId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DatasourceParams) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.DataStoreId
+	}).(pulumi.StringPtrOutput)
+}
+
+// A user specified fetch size in the range [1, 20000]. By default a fetchSize will be assigned to balance throughput and memory usage.
+func (o DatasourceParamsPtrOutput) FetchSize() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DatasourceParams) *int {
+		if v == nil {
+			return nil
+		}
+		return v.FetchSize
+	}).(pulumi.IntPtrOutput)
+}
+
+// The name of the partition column.
+func (o DatasourceParamsPtrOutput) PartitionColumn() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DatasourceParams) *string {
+		if v == nil {
+			return nil
+		}
+		return v.PartitionColumn
+	}).(pulumi.StringPtrOutput)
+}
+
+// The user-specified path for BLOB storage.
+func (o DatasourceParamsPtrOutput) Path() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DatasourceParams) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Path
+	}).(pulumi.StringPtrOutput)
+}
+
+// The user specified SQL query.
+func (o DatasourceParamsPtrOutput) Query() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DatasourceParams) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Query
+	}).(pulumi.StringPtrOutput)
+}
+
+// The name of the schema associated with the table.
+func (o DatasourceParamsPtrOutput) Schema() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DatasourceParams) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Schema
+	}).(pulumi.StringPtrOutput)
+}
+
+// The name of specified database table.
+func (o DatasourceParamsPtrOutput) Table() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DatasourceParams) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Table
+	}).(pulumi.StringPtrOutput)
 }
 
 type DeploymentAssociationIdSettings struct {
@@ -5023,12 +5515,16 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelGuardConfigurationInput)(nil)).Elem(), CustomModelGuardConfigurationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelGuardConfigurationArrayInput)(nil)).Elem(), CustomModelGuardConfigurationArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelGuardConfigurationInterventionInput)(nil)).Elem(), CustomModelGuardConfigurationInterventionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelGuardConfigurationNemoInfoInput)(nil)).Elem(), CustomModelGuardConfigurationNemoInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelGuardConfigurationNemoInfoPtrInput)(nil)).Elem(), CustomModelGuardConfigurationNemoInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelOverallModerationConfigurationInput)(nil)).Elem(), CustomModelOverallModerationConfigurationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelOverallModerationConfigurationPtrInput)(nil)).Elem(), CustomModelOverallModerationConfigurationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelRuntimeParameterValueInput)(nil)).Elem(), CustomModelRuntimeParameterValueArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelRuntimeParameterValueArrayInput)(nil)).Elem(), CustomModelRuntimeParameterValueArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelSourceRemoteRepositoryInput)(nil)).Elem(), CustomModelSourceRemoteRepositoryArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelSourceRemoteRepositoryArrayInput)(nil)).Elem(), CustomModelSourceRemoteRepositoryArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DatasourceParamsInput)(nil)).Elem(), DatasourceParamsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DatasourceParamsPtrInput)(nil)).Elem(), DatasourceParamsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentAssociationIdSettingsInput)(nil)).Elem(), DeploymentAssociationIdSettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentAssociationIdSettingsPtrInput)(nil)).Elem(), DeploymentAssociationIdSettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentBiasAndFairnessSettingsInput)(nil)).Elem(), DeploymentBiasAndFairnessSettingsArgs{})
@@ -5084,12 +5580,16 @@ func init() {
 	pulumi.RegisterOutputType(CustomModelGuardConfigurationOutput{})
 	pulumi.RegisterOutputType(CustomModelGuardConfigurationArrayOutput{})
 	pulumi.RegisterOutputType(CustomModelGuardConfigurationInterventionOutput{})
+	pulumi.RegisterOutputType(CustomModelGuardConfigurationNemoInfoOutput{})
+	pulumi.RegisterOutputType(CustomModelGuardConfigurationNemoInfoPtrOutput{})
 	pulumi.RegisterOutputType(CustomModelOverallModerationConfigurationOutput{})
 	pulumi.RegisterOutputType(CustomModelOverallModerationConfigurationPtrOutput{})
 	pulumi.RegisterOutputType(CustomModelRuntimeParameterValueOutput{})
 	pulumi.RegisterOutputType(CustomModelRuntimeParameterValueArrayOutput{})
 	pulumi.RegisterOutputType(CustomModelSourceRemoteRepositoryOutput{})
 	pulumi.RegisterOutputType(CustomModelSourceRemoteRepositoryArrayOutput{})
+	pulumi.RegisterOutputType(DatasourceParamsOutput{})
+	pulumi.RegisterOutputType(DatasourceParamsPtrOutput{})
 	pulumi.RegisterOutputType(DeploymentAssociationIdSettingsOutput{})
 	pulumi.RegisterOutputType(DeploymentAssociationIdSettingsPtrOutput{})
 	pulumi.RegisterOutputType(DeploymentBiasAndFairnessSettingsOutput{})

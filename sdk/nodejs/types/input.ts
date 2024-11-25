@@ -42,6 +42,10 @@ export interface CustomModelGuardConfiguration {
      */
     name: pulumi.Input<string>;
     /**
+     * Configuration info for NeMo guards.
+     */
+    nemoInfo?: pulumi.Input<inputs.CustomModelGuardConfigurationNemoInfo>;
+    /**
      * The OpenAI API base URL for this guard.
      */
     openaiApiBase?: pulumi.Input<string>;
@@ -80,6 +84,29 @@ export interface CustomModelGuardConfigurationIntervention {
      * The message of the guard intervention.
      */
     message?: pulumi.Input<string>;
+}
+
+export interface CustomModelGuardConfigurationNemoInfo {
+    /**
+     * The actions for the NeMo information.
+     */
+    actions?: pulumi.Input<string>;
+    /**
+     * NeMo guardrails blocked terms list.
+     */
+    blockedTerms?: pulumi.Input<string>;
+    /**
+     * NeMo guardrails prompts.
+     */
+    llmPrompts?: pulumi.Input<string>;
+    /**
+     * Overall NeMo configuration YAML.
+     */
+    mainConfig?: pulumi.Input<string>;
+    /**
+     * NeMo guardrails configuration Colang.
+     */
+    railsConfig?: pulumi.Input<string>;
 }
 
 export interface CustomModelOverallModerationConfiguration {
@@ -121,6 +148,41 @@ export interface CustomModelSourceRemoteRepository {
      * The list of source paths in the source remote repository.
      */
     sourcePaths: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface DatasourceParams {
+    /**
+     * The Catalog name in the database if supported.
+     */
+    catalog?: pulumi.Input<string>;
+    /**
+     * The id of the DataStore.
+     */
+    dataStoreId: pulumi.Input<string>;
+    /**
+     * A user specified fetch size in the range [1, 20000]. By default a fetchSize will be assigned to balance throughput and memory usage.
+     */
+    fetchSize?: pulumi.Input<number>;
+    /**
+     * The name of the partition column.
+     */
+    partitionColumn?: pulumi.Input<string>;
+    /**
+     * The user-specified path for BLOB storage.
+     */
+    path?: pulumi.Input<string>;
+    /**
+     * The user specified SQL query.
+     */
+    query?: pulumi.Input<string>;
+    /**
+     * The name of the schema associated with the table.
+     */
+    schema?: pulumi.Input<string>;
+    /**
+     * The name of specified database table.
+     */
+    table?: pulumi.Input<string>;
 }
 
 export interface DeploymentAssociationIdSettings {

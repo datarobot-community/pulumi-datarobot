@@ -66,6 +66,17 @@
                     }
                 }
             },
+            "datarobot_dataset_from_datasource": {
+                "current": "datarobot:index/datasetFromDatasource:DatasetFromDatasource",
+                "fields": {
+                    "categories": {
+                        "maxItemsOne": false
+                    },
+                    "use_case_ids": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
             "datarobot_dataset_from_file": {
                 "current": "datarobot:index/datasetFromFile:DatasetFromFile",
                 "fields": {
@@ -78,6 +89,17 @@
                 "current": "datarobot:index/datasetFromUrl:DatasetFromUrl",
                 "fields": {
                     "use_case_ids": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "datarobot_datasource": {
+                "current": "datarobot:index/datasource:Datasource"
+            },
+            "datarobot_datastore": {
+                "current": "datarobot:index/datastore:Datastore",
+                "fields": {
+                    "fields": {
                         "maxItemsOne": false
                     }
                 }

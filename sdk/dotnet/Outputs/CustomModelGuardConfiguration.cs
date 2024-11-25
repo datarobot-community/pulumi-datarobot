@@ -35,6 +35,10 @@ namespace DataRobotPulumi.Datarobot.Outputs
         /// </summary>
         public readonly string Name;
         /// <summary>
+        /// Configuration info for NeMo guards.
+        /// </summary>
+        public readonly Outputs.CustomModelGuardConfigurationNemoInfo? NemoInfo;
+        /// <summary>
         /// The OpenAI API base URL for this guard.
         /// </summary>
         public readonly string? OpenaiApiBase;
@@ -71,6 +75,8 @@ namespace DataRobotPulumi.Datarobot.Outputs
 
             string name,
 
+            Outputs.CustomModelGuardConfigurationNemoInfo? nemoInfo,
+
             string? openaiApiBase,
 
             string? openaiCredential,
@@ -88,6 +94,7 @@ namespace DataRobotPulumi.Datarobot.Outputs
             Intervention = intervention;
             LlmType = llmType;
             Name = name;
+            NemoInfo = nemoInfo;
             OpenaiApiBase = openaiApiBase;
             OpenaiCredential = openaiCredential;
             OpenaiDeploymentId = openaiDeploymentId;
