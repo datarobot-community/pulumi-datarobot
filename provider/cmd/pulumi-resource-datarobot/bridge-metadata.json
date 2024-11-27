@@ -18,6 +18,46 @@
             "datarobot_basic_credential": {
                 "current": "datarobot:index/basicCredential:BasicCredential"
             },
+            "datarobot_batch_prediction_job_definition": {
+                "current": "datarobot:index/batchPredictionJobDefinition:BatchPredictionJobDefinition",
+                "fields": {
+                    "include_probabilities_classes": {
+                        "maxItemsOne": false
+                    },
+                    "output_settings": {
+                        "fields": {
+                            "update_columns": {
+                                "maxItemsOne": false
+                            },
+                            "where_columns": {
+                                "maxItemsOne": false
+                            }
+                        }
+                    },
+                    "passthrough_columns": {
+                        "maxItemsOne": false
+                    },
+                    "schedule": {
+                        "fields": {
+                            "day_of_month": {
+                                "maxItemsOne": false
+                            },
+                            "day_of_week": {
+                                "maxItemsOne": false
+                            },
+                            "hour": {
+                                "maxItemsOne": false
+                            },
+                            "minute": {
+                                "maxItemsOne": false
+                            },
+                            "month": {
+                                "maxItemsOne": false
+                            }
+                        }
+                    }
+                }
+            },
             "datarobot_custom_application": {
                 "current": "datarobot:index/customApplication:CustomApplication",
                 "fields": {
