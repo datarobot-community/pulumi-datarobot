@@ -8,6 +8,7 @@ import typing
 from .api_token_credential import *
 from .application_source import *
 from .basic_credential import *
+from .batch_prediction_job_definition import *
 from .custom_application import *
 from .custom_job import *
 from .custom_model import *
@@ -66,6 +67,14 @@ _utilities.register(
   "fqn": "pulumi_datarobot",
   "classes": {
    "datarobot:index/basicCredential:BasicCredential": "BasicCredential"
+  }
+ },
+ {
+  "pkg": "datarobot",
+  "mod": "index/batchPredictionJobDefinition",
+  "fqn": "pulumi_datarobot",
+  "classes": {
+   "datarobot:index/batchPredictionJobDefinition:BatchPredictionJobDefinition": "BatchPredictionJobDefinition"
   }
  },
  {

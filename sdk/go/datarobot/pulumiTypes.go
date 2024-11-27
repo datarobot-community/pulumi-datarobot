@@ -128,6 +128,1514 @@ func (o ApplicationSourceRuntimeParameterValueArrayOutput) Index(i pulumi.IntInp
 	}).(ApplicationSourceRuntimeParameterValueOutput)
 }
 
+type BatchPredictionJobDefinitionCsvSettings struct {
+	// Fields are delimited by this character. Use the string tab to denote TSV (TAB separated values). Must be either a one-character string or the string tab.
+	Delimiter *string `pulumi:"delimiter"`
+	// Encoding for the CSV files.
+	Encoding *string `pulumi:"encoding"`
+	// Fields containing the delimiter must be quoted using this character.
+	Quotechar *string `pulumi:"quotechar"`
+}
+
+// BatchPredictionJobDefinitionCsvSettingsInput is an input type that accepts BatchPredictionJobDefinitionCsvSettingsArgs and BatchPredictionJobDefinitionCsvSettingsOutput values.
+// You can construct a concrete instance of `BatchPredictionJobDefinitionCsvSettingsInput` via:
+//
+//	BatchPredictionJobDefinitionCsvSettingsArgs{...}
+type BatchPredictionJobDefinitionCsvSettingsInput interface {
+	pulumi.Input
+
+	ToBatchPredictionJobDefinitionCsvSettingsOutput() BatchPredictionJobDefinitionCsvSettingsOutput
+	ToBatchPredictionJobDefinitionCsvSettingsOutputWithContext(context.Context) BatchPredictionJobDefinitionCsvSettingsOutput
+}
+
+type BatchPredictionJobDefinitionCsvSettingsArgs struct {
+	// Fields are delimited by this character. Use the string tab to denote TSV (TAB separated values). Must be either a one-character string or the string tab.
+	Delimiter pulumi.StringPtrInput `pulumi:"delimiter"`
+	// Encoding for the CSV files.
+	Encoding pulumi.StringPtrInput `pulumi:"encoding"`
+	// Fields containing the delimiter must be quoted using this character.
+	Quotechar pulumi.StringPtrInput `pulumi:"quotechar"`
+}
+
+func (BatchPredictionJobDefinitionCsvSettingsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BatchPredictionJobDefinitionCsvSettings)(nil)).Elem()
+}
+
+func (i BatchPredictionJobDefinitionCsvSettingsArgs) ToBatchPredictionJobDefinitionCsvSettingsOutput() BatchPredictionJobDefinitionCsvSettingsOutput {
+	return i.ToBatchPredictionJobDefinitionCsvSettingsOutputWithContext(context.Background())
+}
+
+func (i BatchPredictionJobDefinitionCsvSettingsArgs) ToBatchPredictionJobDefinitionCsvSettingsOutputWithContext(ctx context.Context) BatchPredictionJobDefinitionCsvSettingsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchPredictionJobDefinitionCsvSettingsOutput)
+}
+
+func (i BatchPredictionJobDefinitionCsvSettingsArgs) ToBatchPredictionJobDefinitionCsvSettingsPtrOutput() BatchPredictionJobDefinitionCsvSettingsPtrOutput {
+	return i.ToBatchPredictionJobDefinitionCsvSettingsPtrOutputWithContext(context.Background())
+}
+
+func (i BatchPredictionJobDefinitionCsvSettingsArgs) ToBatchPredictionJobDefinitionCsvSettingsPtrOutputWithContext(ctx context.Context) BatchPredictionJobDefinitionCsvSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchPredictionJobDefinitionCsvSettingsOutput).ToBatchPredictionJobDefinitionCsvSettingsPtrOutputWithContext(ctx)
+}
+
+// BatchPredictionJobDefinitionCsvSettingsPtrInput is an input type that accepts BatchPredictionJobDefinitionCsvSettingsArgs, BatchPredictionJobDefinitionCsvSettingsPtr and BatchPredictionJobDefinitionCsvSettingsPtrOutput values.
+// You can construct a concrete instance of `BatchPredictionJobDefinitionCsvSettingsPtrInput` via:
+//
+//	        BatchPredictionJobDefinitionCsvSettingsArgs{...}
+//
+//	or:
+//
+//	        nil
+type BatchPredictionJobDefinitionCsvSettingsPtrInput interface {
+	pulumi.Input
+
+	ToBatchPredictionJobDefinitionCsvSettingsPtrOutput() BatchPredictionJobDefinitionCsvSettingsPtrOutput
+	ToBatchPredictionJobDefinitionCsvSettingsPtrOutputWithContext(context.Context) BatchPredictionJobDefinitionCsvSettingsPtrOutput
+}
+
+type batchPredictionJobDefinitionCsvSettingsPtrType BatchPredictionJobDefinitionCsvSettingsArgs
+
+func BatchPredictionJobDefinitionCsvSettingsPtr(v *BatchPredictionJobDefinitionCsvSettingsArgs) BatchPredictionJobDefinitionCsvSettingsPtrInput {
+	return (*batchPredictionJobDefinitionCsvSettingsPtrType)(v)
+}
+
+func (*batchPredictionJobDefinitionCsvSettingsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**BatchPredictionJobDefinitionCsvSettings)(nil)).Elem()
+}
+
+func (i *batchPredictionJobDefinitionCsvSettingsPtrType) ToBatchPredictionJobDefinitionCsvSettingsPtrOutput() BatchPredictionJobDefinitionCsvSettingsPtrOutput {
+	return i.ToBatchPredictionJobDefinitionCsvSettingsPtrOutputWithContext(context.Background())
+}
+
+func (i *batchPredictionJobDefinitionCsvSettingsPtrType) ToBatchPredictionJobDefinitionCsvSettingsPtrOutputWithContext(ctx context.Context) BatchPredictionJobDefinitionCsvSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchPredictionJobDefinitionCsvSettingsPtrOutput)
+}
+
+type BatchPredictionJobDefinitionCsvSettingsOutput struct{ *pulumi.OutputState }
+
+func (BatchPredictionJobDefinitionCsvSettingsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BatchPredictionJobDefinitionCsvSettings)(nil)).Elem()
+}
+
+func (o BatchPredictionJobDefinitionCsvSettingsOutput) ToBatchPredictionJobDefinitionCsvSettingsOutput() BatchPredictionJobDefinitionCsvSettingsOutput {
+	return o
+}
+
+func (o BatchPredictionJobDefinitionCsvSettingsOutput) ToBatchPredictionJobDefinitionCsvSettingsOutputWithContext(ctx context.Context) BatchPredictionJobDefinitionCsvSettingsOutput {
+	return o
+}
+
+func (o BatchPredictionJobDefinitionCsvSettingsOutput) ToBatchPredictionJobDefinitionCsvSettingsPtrOutput() BatchPredictionJobDefinitionCsvSettingsPtrOutput {
+	return o.ToBatchPredictionJobDefinitionCsvSettingsPtrOutputWithContext(context.Background())
+}
+
+func (o BatchPredictionJobDefinitionCsvSettingsOutput) ToBatchPredictionJobDefinitionCsvSettingsPtrOutputWithContext(ctx context.Context) BatchPredictionJobDefinitionCsvSettingsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v BatchPredictionJobDefinitionCsvSettings) *BatchPredictionJobDefinitionCsvSettings {
+		return &v
+	}).(BatchPredictionJobDefinitionCsvSettingsPtrOutput)
+}
+
+// Fields are delimited by this character. Use the string tab to denote TSV (TAB separated values). Must be either a one-character string or the string tab.
+func (o BatchPredictionJobDefinitionCsvSettingsOutput) Delimiter() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BatchPredictionJobDefinitionCsvSettings) *string { return v.Delimiter }).(pulumi.StringPtrOutput)
+}
+
+// Encoding for the CSV files.
+func (o BatchPredictionJobDefinitionCsvSettingsOutput) Encoding() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BatchPredictionJobDefinitionCsvSettings) *string { return v.Encoding }).(pulumi.StringPtrOutput)
+}
+
+// Fields containing the delimiter must be quoted using this character.
+func (o BatchPredictionJobDefinitionCsvSettingsOutput) Quotechar() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BatchPredictionJobDefinitionCsvSettings) *string { return v.Quotechar }).(pulumi.StringPtrOutput)
+}
+
+type BatchPredictionJobDefinitionCsvSettingsPtrOutput struct{ *pulumi.OutputState }
+
+func (BatchPredictionJobDefinitionCsvSettingsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**BatchPredictionJobDefinitionCsvSettings)(nil)).Elem()
+}
+
+func (o BatchPredictionJobDefinitionCsvSettingsPtrOutput) ToBatchPredictionJobDefinitionCsvSettingsPtrOutput() BatchPredictionJobDefinitionCsvSettingsPtrOutput {
+	return o
+}
+
+func (o BatchPredictionJobDefinitionCsvSettingsPtrOutput) ToBatchPredictionJobDefinitionCsvSettingsPtrOutputWithContext(ctx context.Context) BatchPredictionJobDefinitionCsvSettingsPtrOutput {
+	return o
+}
+
+func (o BatchPredictionJobDefinitionCsvSettingsPtrOutput) Elem() BatchPredictionJobDefinitionCsvSettingsOutput {
+	return o.ApplyT(func(v *BatchPredictionJobDefinitionCsvSettings) BatchPredictionJobDefinitionCsvSettings {
+		if v != nil {
+			return *v
+		}
+		var ret BatchPredictionJobDefinitionCsvSettings
+		return ret
+	}).(BatchPredictionJobDefinitionCsvSettingsOutput)
+}
+
+// Fields are delimited by this character. Use the string tab to denote TSV (TAB separated values). Must be either a one-character string or the string tab.
+func (o BatchPredictionJobDefinitionCsvSettingsPtrOutput) Delimiter() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchPredictionJobDefinitionCsvSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Delimiter
+	}).(pulumi.StringPtrOutput)
+}
+
+// Encoding for the CSV files.
+func (o BatchPredictionJobDefinitionCsvSettingsPtrOutput) Encoding() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchPredictionJobDefinitionCsvSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Encoding
+	}).(pulumi.StringPtrOutput)
+}
+
+// Fields containing the delimiter must be quoted using this character.
+func (o BatchPredictionJobDefinitionCsvSettingsPtrOutput) Quotechar() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchPredictionJobDefinitionCsvSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Quotechar
+	}).(pulumi.StringPtrOutput)
+}
+
+type BatchPredictionJobDefinitionIntakeSettings struct {
+	// The name of specified database catalog for JDBC type.
+	Catalog *string `pulumi:"catalog"`
+	// The ID of the credentials for S3 or JDBC data source.
+	CredentialId *string `pulumi:"credentialId"`
+	// The ID of the external data store connected to the JDBC data source.
+	DataStoreId *string `pulumi:"dataStoreId"`
+	// The ID of the dataset to score for dataset type.
+	DatasetId *string `pulumi:"datasetId"`
+	// Any non-default endpoint URL for S3 access.
+	EndpointUrl *string `pulumi:"endpointUrl"`
+	// Changing the fetchSize can be used to balance throughput and memory usage for JDBC type.
+	FetchSize *int `pulumi:"fetchSize"`
+	// String path to file of scoring data for localFile type.
+	File *string `pulumi:"file"`
+	// A self-supplied SELECT statement of the data set you wish to predict for JDBC type.
+	Query *string `pulumi:"query"`
+	// The name of specified database schema for JDBC type.
+	Schema *string `pulumi:"schema"`
+	// The name of specified database table for JDBC type.
+	Table *string `pulumi:"table"`
+	// Type of data source.
+	Type string `pulumi:"type"`
+	// The URL to score (e.g.: s3://bucket/key) for S3 type.
+	Url *string `pulumi:"url"`
+}
+
+// BatchPredictionJobDefinitionIntakeSettingsInput is an input type that accepts BatchPredictionJobDefinitionIntakeSettingsArgs and BatchPredictionJobDefinitionIntakeSettingsOutput values.
+// You can construct a concrete instance of `BatchPredictionJobDefinitionIntakeSettingsInput` via:
+//
+//	BatchPredictionJobDefinitionIntakeSettingsArgs{...}
+type BatchPredictionJobDefinitionIntakeSettingsInput interface {
+	pulumi.Input
+
+	ToBatchPredictionJobDefinitionIntakeSettingsOutput() BatchPredictionJobDefinitionIntakeSettingsOutput
+	ToBatchPredictionJobDefinitionIntakeSettingsOutputWithContext(context.Context) BatchPredictionJobDefinitionIntakeSettingsOutput
+}
+
+type BatchPredictionJobDefinitionIntakeSettingsArgs struct {
+	// The name of specified database catalog for JDBC type.
+	Catalog pulumi.StringPtrInput `pulumi:"catalog"`
+	// The ID of the credentials for S3 or JDBC data source.
+	CredentialId pulumi.StringPtrInput `pulumi:"credentialId"`
+	// The ID of the external data store connected to the JDBC data source.
+	DataStoreId pulumi.StringPtrInput `pulumi:"dataStoreId"`
+	// The ID of the dataset to score for dataset type.
+	DatasetId pulumi.StringPtrInput `pulumi:"datasetId"`
+	// Any non-default endpoint URL for S3 access.
+	EndpointUrl pulumi.StringPtrInput `pulumi:"endpointUrl"`
+	// Changing the fetchSize can be used to balance throughput and memory usage for JDBC type.
+	FetchSize pulumi.IntPtrInput `pulumi:"fetchSize"`
+	// String path to file of scoring data for localFile type.
+	File pulumi.StringPtrInput `pulumi:"file"`
+	// A self-supplied SELECT statement of the data set you wish to predict for JDBC type.
+	Query pulumi.StringPtrInput `pulumi:"query"`
+	// The name of specified database schema for JDBC type.
+	Schema pulumi.StringPtrInput `pulumi:"schema"`
+	// The name of specified database table for JDBC type.
+	Table pulumi.StringPtrInput `pulumi:"table"`
+	// Type of data source.
+	Type pulumi.StringInput `pulumi:"type"`
+	// The URL to score (e.g.: s3://bucket/key) for S3 type.
+	Url pulumi.StringPtrInput `pulumi:"url"`
+}
+
+func (BatchPredictionJobDefinitionIntakeSettingsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BatchPredictionJobDefinitionIntakeSettings)(nil)).Elem()
+}
+
+func (i BatchPredictionJobDefinitionIntakeSettingsArgs) ToBatchPredictionJobDefinitionIntakeSettingsOutput() BatchPredictionJobDefinitionIntakeSettingsOutput {
+	return i.ToBatchPredictionJobDefinitionIntakeSettingsOutputWithContext(context.Background())
+}
+
+func (i BatchPredictionJobDefinitionIntakeSettingsArgs) ToBatchPredictionJobDefinitionIntakeSettingsOutputWithContext(ctx context.Context) BatchPredictionJobDefinitionIntakeSettingsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchPredictionJobDefinitionIntakeSettingsOutput)
+}
+
+func (i BatchPredictionJobDefinitionIntakeSettingsArgs) ToBatchPredictionJobDefinitionIntakeSettingsPtrOutput() BatchPredictionJobDefinitionIntakeSettingsPtrOutput {
+	return i.ToBatchPredictionJobDefinitionIntakeSettingsPtrOutputWithContext(context.Background())
+}
+
+func (i BatchPredictionJobDefinitionIntakeSettingsArgs) ToBatchPredictionJobDefinitionIntakeSettingsPtrOutputWithContext(ctx context.Context) BatchPredictionJobDefinitionIntakeSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchPredictionJobDefinitionIntakeSettingsOutput).ToBatchPredictionJobDefinitionIntakeSettingsPtrOutputWithContext(ctx)
+}
+
+// BatchPredictionJobDefinitionIntakeSettingsPtrInput is an input type that accepts BatchPredictionJobDefinitionIntakeSettingsArgs, BatchPredictionJobDefinitionIntakeSettingsPtr and BatchPredictionJobDefinitionIntakeSettingsPtrOutput values.
+// You can construct a concrete instance of `BatchPredictionJobDefinitionIntakeSettingsPtrInput` via:
+//
+//	        BatchPredictionJobDefinitionIntakeSettingsArgs{...}
+//
+//	or:
+//
+//	        nil
+type BatchPredictionJobDefinitionIntakeSettingsPtrInput interface {
+	pulumi.Input
+
+	ToBatchPredictionJobDefinitionIntakeSettingsPtrOutput() BatchPredictionJobDefinitionIntakeSettingsPtrOutput
+	ToBatchPredictionJobDefinitionIntakeSettingsPtrOutputWithContext(context.Context) BatchPredictionJobDefinitionIntakeSettingsPtrOutput
+}
+
+type batchPredictionJobDefinitionIntakeSettingsPtrType BatchPredictionJobDefinitionIntakeSettingsArgs
+
+func BatchPredictionJobDefinitionIntakeSettingsPtr(v *BatchPredictionJobDefinitionIntakeSettingsArgs) BatchPredictionJobDefinitionIntakeSettingsPtrInput {
+	return (*batchPredictionJobDefinitionIntakeSettingsPtrType)(v)
+}
+
+func (*batchPredictionJobDefinitionIntakeSettingsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**BatchPredictionJobDefinitionIntakeSettings)(nil)).Elem()
+}
+
+func (i *batchPredictionJobDefinitionIntakeSettingsPtrType) ToBatchPredictionJobDefinitionIntakeSettingsPtrOutput() BatchPredictionJobDefinitionIntakeSettingsPtrOutput {
+	return i.ToBatchPredictionJobDefinitionIntakeSettingsPtrOutputWithContext(context.Background())
+}
+
+func (i *batchPredictionJobDefinitionIntakeSettingsPtrType) ToBatchPredictionJobDefinitionIntakeSettingsPtrOutputWithContext(ctx context.Context) BatchPredictionJobDefinitionIntakeSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchPredictionJobDefinitionIntakeSettingsPtrOutput)
+}
+
+type BatchPredictionJobDefinitionIntakeSettingsOutput struct{ *pulumi.OutputState }
+
+func (BatchPredictionJobDefinitionIntakeSettingsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BatchPredictionJobDefinitionIntakeSettings)(nil)).Elem()
+}
+
+func (o BatchPredictionJobDefinitionIntakeSettingsOutput) ToBatchPredictionJobDefinitionIntakeSettingsOutput() BatchPredictionJobDefinitionIntakeSettingsOutput {
+	return o
+}
+
+func (o BatchPredictionJobDefinitionIntakeSettingsOutput) ToBatchPredictionJobDefinitionIntakeSettingsOutputWithContext(ctx context.Context) BatchPredictionJobDefinitionIntakeSettingsOutput {
+	return o
+}
+
+func (o BatchPredictionJobDefinitionIntakeSettingsOutput) ToBatchPredictionJobDefinitionIntakeSettingsPtrOutput() BatchPredictionJobDefinitionIntakeSettingsPtrOutput {
+	return o.ToBatchPredictionJobDefinitionIntakeSettingsPtrOutputWithContext(context.Background())
+}
+
+func (o BatchPredictionJobDefinitionIntakeSettingsOutput) ToBatchPredictionJobDefinitionIntakeSettingsPtrOutputWithContext(ctx context.Context) BatchPredictionJobDefinitionIntakeSettingsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v BatchPredictionJobDefinitionIntakeSettings) *BatchPredictionJobDefinitionIntakeSettings {
+		return &v
+	}).(BatchPredictionJobDefinitionIntakeSettingsPtrOutput)
+}
+
+// The name of specified database catalog for JDBC type.
+func (o BatchPredictionJobDefinitionIntakeSettingsOutput) Catalog() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BatchPredictionJobDefinitionIntakeSettings) *string { return v.Catalog }).(pulumi.StringPtrOutput)
+}
+
+// The ID of the credentials for S3 or JDBC data source.
+func (o BatchPredictionJobDefinitionIntakeSettingsOutput) CredentialId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BatchPredictionJobDefinitionIntakeSettings) *string { return v.CredentialId }).(pulumi.StringPtrOutput)
+}
+
+// The ID of the external data store connected to the JDBC data source.
+func (o BatchPredictionJobDefinitionIntakeSettingsOutput) DataStoreId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BatchPredictionJobDefinitionIntakeSettings) *string { return v.DataStoreId }).(pulumi.StringPtrOutput)
+}
+
+// The ID of the dataset to score for dataset type.
+func (o BatchPredictionJobDefinitionIntakeSettingsOutput) DatasetId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BatchPredictionJobDefinitionIntakeSettings) *string { return v.DatasetId }).(pulumi.StringPtrOutput)
+}
+
+// Any non-default endpoint URL for S3 access.
+func (o BatchPredictionJobDefinitionIntakeSettingsOutput) EndpointUrl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BatchPredictionJobDefinitionIntakeSettings) *string { return v.EndpointUrl }).(pulumi.StringPtrOutput)
+}
+
+// Changing the fetchSize can be used to balance throughput and memory usage for JDBC type.
+func (o BatchPredictionJobDefinitionIntakeSettingsOutput) FetchSize() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v BatchPredictionJobDefinitionIntakeSettings) *int { return v.FetchSize }).(pulumi.IntPtrOutput)
+}
+
+// String path to file of scoring data for localFile type.
+func (o BatchPredictionJobDefinitionIntakeSettingsOutput) File() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BatchPredictionJobDefinitionIntakeSettings) *string { return v.File }).(pulumi.StringPtrOutput)
+}
+
+// A self-supplied SELECT statement of the data set you wish to predict for JDBC type.
+func (o BatchPredictionJobDefinitionIntakeSettingsOutput) Query() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BatchPredictionJobDefinitionIntakeSettings) *string { return v.Query }).(pulumi.StringPtrOutput)
+}
+
+// The name of specified database schema for JDBC type.
+func (o BatchPredictionJobDefinitionIntakeSettingsOutput) Schema() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BatchPredictionJobDefinitionIntakeSettings) *string { return v.Schema }).(pulumi.StringPtrOutput)
+}
+
+// The name of specified database table for JDBC type.
+func (o BatchPredictionJobDefinitionIntakeSettingsOutput) Table() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BatchPredictionJobDefinitionIntakeSettings) *string { return v.Table }).(pulumi.StringPtrOutput)
+}
+
+// Type of data source.
+func (o BatchPredictionJobDefinitionIntakeSettingsOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v BatchPredictionJobDefinitionIntakeSettings) string { return v.Type }).(pulumi.StringOutput)
+}
+
+// The URL to score (e.g.: s3://bucket/key) for S3 type.
+func (o BatchPredictionJobDefinitionIntakeSettingsOutput) Url() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BatchPredictionJobDefinitionIntakeSettings) *string { return v.Url }).(pulumi.StringPtrOutput)
+}
+
+type BatchPredictionJobDefinitionIntakeSettingsPtrOutput struct{ *pulumi.OutputState }
+
+func (BatchPredictionJobDefinitionIntakeSettingsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**BatchPredictionJobDefinitionIntakeSettings)(nil)).Elem()
+}
+
+func (o BatchPredictionJobDefinitionIntakeSettingsPtrOutput) ToBatchPredictionJobDefinitionIntakeSettingsPtrOutput() BatchPredictionJobDefinitionIntakeSettingsPtrOutput {
+	return o
+}
+
+func (o BatchPredictionJobDefinitionIntakeSettingsPtrOutput) ToBatchPredictionJobDefinitionIntakeSettingsPtrOutputWithContext(ctx context.Context) BatchPredictionJobDefinitionIntakeSettingsPtrOutput {
+	return o
+}
+
+func (o BatchPredictionJobDefinitionIntakeSettingsPtrOutput) Elem() BatchPredictionJobDefinitionIntakeSettingsOutput {
+	return o.ApplyT(func(v *BatchPredictionJobDefinitionIntakeSettings) BatchPredictionJobDefinitionIntakeSettings {
+		if v != nil {
+			return *v
+		}
+		var ret BatchPredictionJobDefinitionIntakeSettings
+		return ret
+	}).(BatchPredictionJobDefinitionIntakeSettingsOutput)
+}
+
+// The name of specified database catalog for JDBC type.
+func (o BatchPredictionJobDefinitionIntakeSettingsPtrOutput) Catalog() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchPredictionJobDefinitionIntakeSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Catalog
+	}).(pulumi.StringPtrOutput)
+}
+
+// The ID of the credentials for S3 or JDBC data source.
+func (o BatchPredictionJobDefinitionIntakeSettingsPtrOutput) CredentialId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchPredictionJobDefinitionIntakeSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.CredentialId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The ID of the external data store connected to the JDBC data source.
+func (o BatchPredictionJobDefinitionIntakeSettingsPtrOutput) DataStoreId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchPredictionJobDefinitionIntakeSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.DataStoreId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The ID of the dataset to score for dataset type.
+func (o BatchPredictionJobDefinitionIntakeSettingsPtrOutput) DatasetId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchPredictionJobDefinitionIntakeSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.DatasetId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Any non-default endpoint URL for S3 access.
+func (o BatchPredictionJobDefinitionIntakeSettingsPtrOutput) EndpointUrl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchPredictionJobDefinitionIntakeSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.EndpointUrl
+	}).(pulumi.StringPtrOutput)
+}
+
+// Changing the fetchSize can be used to balance throughput and memory usage for JDBC type.
+func (o BatchPredictionJobDefinitionIntakeSettingsPtrOutput) FetchSize() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *BatchPredictionJobDefinitionIntakeSettings) *int {
+		if v == nil {
+			return nil
+		}
+		return v.FetchSize
+	}).(pulumi.IntPtrOutput)
+}
+
+// String path to file of scoring data for localFile type.
+func (o BatchPredictionJobDefinitionIntakeSettingsPtrOutput) File() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchPredictionJobDefinitionIntakeSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.File
+	}).(pulumi.StringPtrOutput)
+}
+
+// A self-supplied SELECT statement of the data set you wish to predict for JDBC type.
+func (o BatchPredictionJobDefinitionIntakeSettingsPtrOutput) Query() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchPredictionJobDefinitionIntakeSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Query
+	}).(pulumi.StringPtrOutput)
+}
+
+// The name of specified database schema for JDBC type.
+func (o BatchPredictionJobDefinitionIntakeSettingsPtrOutput) Schema() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchPredictionJobDefinitionIntakeSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Schema
+	}).(pulumi.StringPtrOutput)
+}
+
+// The name of specified database table for JDBC type.
+func (o BatchPredictionJobDefinitionIntakeSettingsPtrOutput) Table() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchPredictionJobDefinitionIntakeSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Table
+	}).(pulumi.StringPtrOutput)
+}
+
+// Type of data source.
+func (o BatchPredictionJobDefinitionIntakeSettingsPtrOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchPredictionJobDefinitionIntakeSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Type
+	}).(pulumi.StringPtrOutput)
+}
+
+// The URL to score (e.g.: s3://bucket/key) for S3 type.
+func (o BatchPredictionJobDefinitionIntakeSettingsPtrOutput) Url() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchPredictionJobDefinitionIntakeSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Url
+	}).(pulumi.StringPtrOutput)
+}
+
+type BatchPredictionJobDefinitionOutputSettings struct {
+	// The name of specified database catalog for JDBC type.
+	Catalog *string `pulumi:"catalog"`
+	// If no existing table is detected, attempt to create it before writing data for JDBC type.
+	CreateTableIfNotExists *bool `pulumi:"createTableIfNotExists"`
+	// The ID of the credentials for S3 or JDBC data source.
+	CredentialId *string `pulumi:"credentialId"`
+	// The ID of the external data store connected to the JDBC data source.
+	DataStoreId *string `pulumi:"dataStoreId"`
+	// Any non-default endpoint URL for S3 access.
+	EndpointUrl *string `pulumi:"endpointUrl"`
+	// Path to save the scored data as CSV for localFile type.
+	Path *string `pulumi:"path"`
+	// The name of specified database schema for JDBC type.
+	Schema *string `pulumi:"schema"`
+	// The type of insertion statement to create for JDBC type.
+	StatementType *string `pulumi:"statementType"`
+	// The name of specified database table for JDBC type.
+	Table *string `pulumi:"table"`
+	// Type of output.
+	Type *string `pulumi:"type"`
+	// A list of strings containing those column names to be updated for JDBC type.
+	UpdateColumns []string `pulumi:"updateColumns"`
+	// The URL for storing the results (e.g.: s3://bucket/key) for S3 type.
+	Url *string `pulumi:"url"`
+	// A list of strings containing those column names to be selected for JDBC type.
+	WhereColumns []string `pulumi:"whereColumns"`
+}
+
+// BatchPredictionJobDefinitionOutputSettingsInput is an input type that accepts BatchPredictionJobDefinitionOutputSettingsArgs and BatchPredictionJobDefinitionOutputSettingsOutput values.
+// You can construct a concrete instance of `BatchPredictionJobDefinitionOutputSettingsInput` via:
+//
+//	BatchPredictionJobDefinitionOutputSettingsArgs{...}
+type BatchPredictionJobDefinitionOutputSettingsInput interface {
+	pulumi.Input
+
+	ToBatchPredictionJobDefinitionOutputSettingsOutput() BatchPredictionJobDefinitionOutputSettingsOutput
+	ToBatchPredictionJobDefinitionOutputSettingsOutputWithContext(context.Context) BatchPredictionJobDefinitionOutputSettingsOutput
+}
+
+type BatchPredictionJobDefinitionOutputSettingsArgs struct {
+	// The name of specified database catalog for JDBC type.
+	Catalog pulumi.StringPtrInput `pulumi:"catalog"`
+	// If no existing table is detected, attempt to create it before writing data for JDBC type.
+	CreateTableIfNotExists pulumi.BoolPtrInput `pulumi:"createTableIfNotExists"`
+	// The ID of the credentials for S3 or JDBC data source.
+	CredentialId pulumi.StringPtrInput `pulumi:"credentialId"`
+	// The ID of the external data store connected to the JDBC data source.
+	DataStoreId pulumi.StringPtrInput `pulumi:"dataStoreId"`
+	// Any non-default endpoint URL for S3 access.
+	EndpointUrl pulumi.StringPtrInput `pulumi:"endpointUrl"`
+	// Path to save the scored data as CSV for localFile type.
+	Path pulumi.StringPtrInput `pulumi:"path"`
+	// The name of specified database schema for JDBC type.
+	Schema pulumi.StringPtrInput `pulumi:"schema"`
+	// The type of insertion statement to create for JDBC type.
+	StatementType pulumi.StringPtrInput `pulumi:"statementType"`
+	// The name of specified database table for JDBC type.
+	Table pulumi.StringPtrInput `pulumi:"table"`
+	// Type of output.
+	Type pulumi.StringPtrInput `pulumi:"type"`
+	// A list of strings containing those column names to be updated for JDBC type.
+	UpdateColumns pulumi.StringArrayInput `pulumi:"updateColumns"`
+	// The URL for storing the results (e.g.: s3://bucket/key) for S3 type.
+	Url pulumi.StringPtrInput `pulumi:"url"`
+	// A list of strings containing those column names to be selected for JDBC type.
+	WhereColumns pulumi.StringArrayInput `pulumi:"whereColumns"`
+}
+
+func (BatchPredictionJobDefinitionOutputSettingsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BatchPredictionJobDefinitionOutputSettings)(nil)).Elem()
+}
+
+func (i BatchPredictionJobDefinitionOutputSettingsArgs) ToBatchPredictionJobDefinitionOutputSettingsOutput() BatchPredictionJobDefinitionOutputSettingsOutput {
+	return i.ToBatchPredictionJobDefinitionOutputSettingsOutputWithContext(context.Background())
+}
+
+func (i BatchPredictionJobDefinitionOutputSettingsArgs) ToBatchPredictionJobDefinitionOutputSettingsOutputWithContext(ctx context.Context) BatchPredictionJobDefinitionOutputSettingsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchPredictionJobDefinitionOutputSettingsOutput)
+}
+
+func (i BatchPredictionJobDefinitionOutputSettingsArgs) ToBatchPredictionJobDefinitionOutputSettingsPtrOutput() BatchPredictionJobDefinitionOutputSettingsPtrOutput {
+	return i.ToBatchPredictionJobDefinitionOutputSettingsPtrOutputWithContext(context.Background())
+}
+
+func (i BatchPredictionJobDefinitionOutputSettingsArgs) ToBatchPredictionJobDefinitionOutputSettingsPtrOutputWithContext(ctx context.Context) BatchPredictionJobDefinitionOutputSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchPredictionJobDefinitionOutputSettingsOutput).ToBatchPredictionJobDefinitionOutputSettingsPtrOutputWithContext(ctx)
+}
+
+// BatchPredictionJobDefinitionOutputSettingsPtrInput is an input type that accepts BatchPredictionJobDefinitionOutputSettingsArgs, BatchPredictionJobDefinitionOutputSettingsPtr and BatchPredictionJobDefinitionOutputSettingsPtrOutput values.
+// You can construct a concrete instance of `BatchPredictionJobDefinitionOutputSettingsPtrInput` via:
+//
+//	        BatchPredictionJobDefinitionOutputSettingsArgs{...}
+//
+//	or:
+//
+//	        nil
+type BatchPredictionJobDefinitionOutputSettingsPtrInput interface {
+	pulumi.Input
+
+	ToBatchPredictionJobDefinitionOutputSettingsPtrOutput() BatchPredictionJobDefinitionOutputSettingsPtrOutput
+	ToBatchPredictionJobDefinitionOutputSettingsPtrOutputWithContext(context.Context) BatchPredictionJobDefinitionOutputSettingsPtrOutput
+}
+
+type batchPredictionJobDefinitionOutputSettingsPtrType BatchPredictionJobDefinitionOutputSettingsArgs
+
+func BatchPredictionJobDefinitionOutputSettingsPtr(v *BatchPredictionJobDefinitionOutputSettingsArgs) BatchPredictionJobDefinitionOutputSettingsPtrInput {
+	return (*batchPredictionJobDefinitionOutputSettingsPtrType)(v)
+}
+
+func (*batchPredictionJobDefinitionOutputSettingsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**BatchPredictionJobDefinitionOutputSettings)(nil)).Elem()
+}
+
+func (i *batchPredictionJobDefinitionOutputSettingsPtrType) ToBatchPredictionJobDefinitionOutputSettingsPtrOutput() BatchPredictionJobDefinitionOutputSettingsPtrOutput {
+	return i.ToBatchPredictionJobDefinitionOutputSettingsPtrOutputWithContext(context.Background())
+}
+
+func (i *batchPredictionJobDefinitionOutputSettingsPtrType) ToBatchPredictionJobDefinitionOutputSettingsPtrOutputWithContext(ctx context.Context) BatchPredictionJobDefinitionOutputSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchPredictionJobDefinitionOutputSettingsPtrOutput)
+}
+
+type BatchPredictionJobDefinitionOutputSettingsOutput struct{ *pulumi.OutputState }
+
+func (BatchPredictionJobDefinitionOutputSettingsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BatchPredictionJobDefinitionOutputSettings)(nil)).Elem()
+}
+
+func (o BatchPredictionJobDefinitionOutputSettingsOutput) ToBatchPredictionJobDefinitionOutputSettingsOutput() BatchPredictionJobDefinitionOutputSettingsOutput {
+	return o
+}
+
+func (o BatchPredictionJobDefinitionOutputSettingsOutput) ToBatchPredictionJobDefinitionOutputSettingsOutputWithContext(ctx context.Context) BatchPredictionJobDefinitionOutputSettingsOutput {
+	return o
+}
+
+func (o BatchPredictionJobDefinitionOutputSettingsOutput) ToBatchPredictionJobDefinitionOutputSettingsPtrOutput() BatchPredictionJobDefinitionOutputSettingsPtrOutput {
+	return o.ToBatchPredictionJobDefinitionOutputSettingsPtrOutputWithContext(context.Background())
+}
+
+func (o BatchPredictionJobDefinitionOutputSettingsOutput) ToBatchPredictionJobDefinitionOutputSettingsPtrOutputWithContext(ctx context.Context) BatchPredictionJobDefinitionOutputSettingsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v BatchPredictionJobDefinitionOutputSettings) *BatchPredictionJobDefinitionOutputSettings {
+		return &v
+	}).(BatchPredictionJobDefinitionOutputSettingsPtrOutput)
+}
+
+// The name of specified database catalog for JDBC type.
+func (o BatchPredictionJobDefinitionOutputSettingsOutput) Catalog() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BatchPredictionJobDefinitionOutputSettings) *string { return v.Catalog }).(pulumi.StringPtrOutput)
+}
+
+// If no existing table is detected, attempt to create it before writing data for JDBC type.
+func (o BatchPredictionJobDefinitionOutputSettingsOutput) CreateTableIfNotExists() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v BatchPredictionJobDefinitionOutputSettings) *bool { return v.CreateTableIfNotExists }).(pulumi.BoolPtrOutput)
+}
+
+// The ID of the credentials for S3 or JDBC data source.
+func (o BatchPredictionJobDefinitionOutputSettingsOutput) CredentialId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BatchPredictionJobDefinitionOutputSettings) *string { return v.CredentialId }).(pulumi.StringPtrOutput)
+}
+
+// The ID of the external data store connected to the JDBC data source.
+func (o BatchPredictionJobDefinitionOutputSettingsOutput) DataStoreId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BatchPredictionJobDefinitionOutputSettings) *string { return v.DataStoreId }).(pulumi.StringPtrOutput)
+}
+
+// Any non-default endpoint URL for S3 access.
+func (o BatchPredictionJobDefinitionOutputSettingsOutput) EndpointUrl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BatchPredictionJobDefinitionOutputSettings) *string { return v.EndpointUrl }).(pulumi.StringPtrOutput)
+}
+
+// Path to save the scored data as CSV for localFile type.
+func (o BatchPredictionJobDefinitionOutputSettingsOutput) Path() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BatchPredictionJobDefinitionOutputSettings) *string { return v.Path }).(pulumi.StringPtrOutput)
+}
+
+// The name of specified database schema for JDBC type.
+func (o BatchPredictionJobDefinitionOutputSettingsOutput) Schema() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BatchPredictionJobDefinitionOutputSettings) *string { return v.Schema }).(pulumi.StringPtrOutput)
+}
+
+// The type of insertion statement to create for JDBC type.
+func (o BatchPredictionJobDefinitionOutputSettingsOutput) StatementType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BatchPredictionJobDefinitionOutputSettings) *string { return v.StatementType }).(pulumi.StringPtrOutput)
+}
+
+// The name of specified database table for JDBC type.
+func (o BatchPredictionJobDefinitionOutputSettingsOutput) Table() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BatchPredictionJobDefinitionOutputSettings) *string { return v.Table }).(pulumi.StringPtrOutput)
+}
+
+// Type of output.
+func (o BatchPredictionJobDefinitionOutputSettingsOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BatchPredictionJobDefinitionOutputSettings) *string { return v.Type }).(pulumi.StringPtrOutput)
+}
+
+// A list of strings containing those column names to be updated for JDBC type.
+func (o BatchPredictionJobDefinitionOutputSettingsOutput) UpdateColumns() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v BatchPredictionJobDefinitionOutputSettings) []string { return v.UpdateColumns }).(pulumi.StringArrayOutput)
+}
+
+// The URL for storing the results (e.g.: s3://bucket/key) for S3 type.
+func (o BatchPredictionJobDefinitionOutputSettingsOutput) Url() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BatchPredictionJobDefinitionOutputSettings) *string { return v.Url }).(pulumi.StringPtrOutput)
+}
+
+// A list of strings containing those column names to be selected for JDBC type.
+func (o BatchPredictionJobDefinitionOutputSettingsOutput) WhereColumns() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v BatchPredictionJobDefinitionOutputSettings) []string { return v.WhereColumns }).(pulumi.StringArrayOutput)
+}
+
+type BatchPredictionJobDefinitionOutputSettingsPtrOutput struct{ *pulumi.OutputState }
+
+func (BatchPredictionJobDefinitionOutputSettingsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**BatchPredictionJobDefinitionOutputSettings)(nil)).Elem()
+}
+
+func (o BatchPredictionJobDefinitionOutputSettingsPtrOutput) ToBatchPredictionJobDefinitionOutputSettingsPtrOutput() BatchPredictionJobDefinitionOutputSettingsPtrOutput {
+	return o
+}
+
+func (o BatchPredictionJobDefinitionOutputSettingsPtrOutput) ToBatchPredictionJobDefinitionOutputSettingsPtrOutputWithContext(ctx context.Context) BatchPredictionJobDefinitionOutputSettingsPtrOutput {
+	return o
+}
+
+func (o BatchPredictionJobDefinitionOutputSettingsPtrOutput) Elem() BatchPredictionJobDefinitionOutputSettingsOutput {
+	return o.ApplyT(func(v *BatchPredictionJobDefinitionOutputSettings) BatchPredictionJobDefinitionOutputSettings {
+		if v != nil {
+			return *v
+		}
+		var ret BatchPredictionJobDefinitionOutputSettings
+		return ret
+	}).(BatchPredictionJobDefinitionOutputSettingsOutput)
+}
+
+// The name of specified database catalog for JDBC type.
+func (o BatchPredictionJobDefinitionOutputSettingsPtrOutput) Catalog() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchPredictionJobDefinitionOutputSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Catalog
+	}).(pulumi.StringPtrOutput)
+}
+
+// If no existing table is detected, attempt to create it before writing data for JDBC type.
+func (o BatchPredictionJobDefinitionOutputSettingsPtrOutput) CreateTableIfNotExists() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *BatchPredictionJobDefinitionOutputSettings) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.CreateTableIfNotExists
+	}).(pulumi.BoolPtrOutput)
+}
+
+// The ID of the credentials for S3 or JDBC data source.
+func (o BatchPredictionJobDefinitionOutputSettingsPtrOutput) CredentialId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchPredictionJobDefinitionOutputSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.CredentialId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The ID of the external data store connected to the JDBC data source.
+func (o BatchPredictionJobDefinitionOutputSettingsPtrOutput) DataStoreId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchPredictionJobDefinitionOutputSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.DataStoreId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Any non-default endpoint URL for S3 access.
+func (o BatchPredictionJobDefinitionOutputSettingsPtrOutput) EndpointUrl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchPredictionJobDefinitionOutputSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.EndpointUrl
+	}).(pulumi.StringPtrOutput)
+}
+
+// Path to save the scored data as CSV for localFile type.
+func (o BatchPredictionJobDefinitionOutputSettingsPtrOutput) Path() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchPredictionJobDefinitionOutputSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Path
+	}).(pulumi.StringPtrOutput)
+}
+
+// The name of specified database schema for JDBC type.
+func (o BatchPredictionJobDefinitionOutputSettingsPtrOutput) Schema() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchPredictionJobDefinitionOutputSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Schema
+	}).(pulumi.StringPtrOutput)
+}
+
+// The type of insertion statement to create for JDBC type.
+func (o BatchPredictionJobDefinitionOutputSettingsPtrOutput) StatementType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchPredictionJobDefinitionOutputSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.StatementType
+	}).(pulumi.StringPtrOutput)
+}
+
+// The name of specified database table for JDBC type.
+func (o BatchPredictionJobDefinitionOutputSettingsPtrOutput) Table() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchPredictionJobDefinitionOutputSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Table
+	}).(pulumi.StringPtrOutput)
+}
+
+// Type of output.
+func (o BatchPredictionJobDefinitionOutputSettingsPtrOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchPredictionJobDefinitionOutputSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Type
+	}).(pulumi.StringPtrOutput)
+}
+
+// A list of strings containing those column names to be updated for JDBC type.
+func (o BatchPredictionJobDefinitionOutputSettingsPtrOutput) UpdateColumns() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *BatchPredictionJobDefinitionOutputSettings) []string {
+		if v == nil {
+			return nil
+		}
+		return v.UpdateColumns
+	}).(pulumi.StringArrayOutput)
+}
+
+// The URL for storing the results (e.g.: s3://bucket/key) for S3 type.
+func (o BatchPredictionJobDefinitionOutputSettingsPtrOutput) Url() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchPredictionJobDefinitionOutputSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Url
+	}).(pulumi.StringPtrOutput)
+}
+
+// A list of strings containing those column names to be selected for JDBC type.
+func (o BatchPredictionJobDefinitionOutputSettingsPtrOutput) WhereColumns() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *BatchPredictionJobDefinitionOutputSettings) []string {
+		if v == nil {
+			return nil
+		}
+		return v.WhereColumns
+	}).(pulumi.StringArrayOutput)
+}
+
+type BatchPredictionJobDefinitionPredictionInstance struct {
+	// By default, prediction requests will use the API key of the user that created the job. This allows you to make requests on behalf of other users.
+	ApiKey *string `pulumi:"apiKey"`
+	// If running a job against a prediction instance in the Managed AI Cloud, you must provide the organization level DataRobot-Key.
+	DatarobotKey *string `pulumi:"datarobotKey"`
+	// Hostname of the prediction instance.
+	HostName string `pulumi:"hostName"`
+	// Set to false to run prediction requests from the batch prediction job without SSL. Defaults to true.
+	SslEnabled *bool `pulumi:"sslEnabled"`
+}
+
+// BatchPredictionJobDefinitionPredictionInstanceInput is an input type that accepts BatchPredictionJobDefinitionPredictionInstanceArgs and BatchPredictionJobDefinitionPredictionInstanceOutput values.
+// You can construct a concrete instance of `BatchPredictionJobDefinitionPredictionInstanceInput` via:
+//
+//	BatchPredictionJobDefinitionPredictionInstanceArgs{...}
+type BatchPredictionJobDefinitionPredictionInstanceInput interface {
+	pulumi.Input
+
+	ToBatchPredictionJobDefinitionPredictionInstanceOutput() BatchPredictionJobDefinitionPredictionInstanceOutput
+	ToBatchPredictionJobDefinitionPredictionInstanceOutputWithContext(context.Context) BatchPredictionJobDefinitionPredictionInstanceOutput
+}
+
+type BatchPredictionJobDefinitionPredictionInstanceArgs struct {
+	// By default, prediction requests will use the API key of the user that created the job. This allows you to make requests on behalf of other users.
+	ApiKey pulumi.StringPtrInput `pulumi:"apiKey"`
+	// If running a job against a prediction instance in the Managed AI Cloud, you must provide the organization level DataRobot-Key.
+	DatarobotKey pulumi.StringPtrInput `pulumi:"datarobotKey"`
+	// Hostname of the prediction instance.
+	HostName pulumi.StringInput `pulumi:"hostName"`
+	// Set to false to run prediction requests from the batch prediction job without SSL. Defaults to true.
+	SslEnabled pulumi.BoolPtrInput `pulumi:"sslEnabled"`
+}
+
+func (BatchPredictionJobDefinitionPredictionInstanceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BatchPredictionJobDefinitionPredictionInstance)(nil)).Elem()
+}
+
+func (i BatchPredictionJobDefinitionPredictionInstanceArgs) ToBatchPredictionJobDefinitionPredictionInstanceOutput() BatchPredictionJobDefinitionPredictionInstanceOutput {
+	return i.ToBatchPredictionJobDefinitionPredictionInstanceOutputWithContext(context.Background())
+}
+
+func (i BatchPredictionJobDefinitionPredictionInstanceArgs) ToBatchPredictionJobDefinitionPredictionInstanceOutputWithContext(ctx context.Context) BatchPredictionJobDefinitionPredictionInstanceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchPredictionJobDefinitionPredictionInstanceOutput)
+}
+
+func (i BatchPredictionJobDefinitionPredictionInstanceArgs) ToBatchPredictionJobDefinitionPredictionInstancePtrOutput() BatchPredictionJobDefinitionPredictionInstancePtrOutput {
+	return i.ToBatchPredictionJobDefinitionPredictionInstancePtrOutputWithContext(context.Background())
+}
+
+func (i BatchPredictionJobDefinitionPredictionInstanceArgs) ToBatchPredictionJobDefinitionPredictionInstancePtrOutputWithContext(ctx context.Context) BatchPredictionJobDefinitionPredictionInstancePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchPredictionJobDefinitionPredictionInstanceOutput).ToBatchPredictionJobDefinitionPredictionInstancePtrOutputWithContext(ctx)
+}
+
+// BatchPredictionJobDefinitionPredictionInstancePtrInput is an input type that accepts BatchPredictionJobDefinitionPredictionInstanceArgs, BatchPredictionJobDefinitionPredictionInstancePtr and BatchPredictionJobDefinitionPredictionInstancePtrOutput values.
+// You can construct a concrete instance of `BatchPredictionJobDefinitionPredictionInstancePtrInput` via:
+//
+//	        BatchPredictionJobDefinitionPredictionInstanceArgs{...}
+//
+//	or:
+//
+//	        nil
+type BatchPredictionJobDefinitionPredictionInstancePtrInput interface {
+	pulumi.Input
+
+	ToBatchPredictionJobDefinitionPredictionInstancePtrOutput() BatchPredictionJobDefinitionPredictionInstancePtrOutput
+	ToBatchPredictionJobDefinitionPredictionInstancePtrOutputWithContext(context.Context) BatchPredictionJobDefinitionPredictionInstancePtrOutput
+}
+
+type batchPredictionJobDefinitionPredictionInstancePtrType BatchPredictionJobDefinitionPredictionInstanceArgs
+
+func BatchPredictionJobDefinitionPredictionInstancePtr(v *BatchPredictionJobDefinitionPredictionInstanceArgs) BatchPredictionJobDefinitionPredictionInstancePtrInput {
+	return (*batchPredictionJobDefinitionPredictionInstancePtrType)(v)
+}
+
+func (*batchPredictionJobDefinitionPredictionInstancePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**BatchPredictionJobDefinitionPredictionInstance)(nil)).Elem()
+}
+
+func (i *batchPredictionJobDefinitionPredictionInstancePtrType) ToBatchPredictionJobDefinitionPredictionInstancePtrOutput() BatchPredictionJobDefinitionPredictionInstancePtrOutput {
+	return i.ToBatchPredictionJobDefinitionPredictionInstancePtrOutputWithContext(context.Background())
+}
+
+func (i *batchPredictionJobDefinitionPredictionInstancePtrType) ToBatchPredictionJobDefinitionPredictionInstancePtrOutputWithContext(ctx context.Context) BatchPredictionJobDefinitionPredictionInstancePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchPredictionJobDefinitionPredictionInstancePtrOutput)
+}
+
+type BatchPredictionJobDefinitionPredictionInstanceOutput struct{ *pulumi.OutputState }
+
+func (BatchPredictionJobDefinitionPredictionInstanceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BatchPredictionJobDefinitionPredictionInstance)(nil)).Elem()
+}
+
+func (o BatchPredictionJobDefinitionPredictionInstanceOutput) ToBatchPredictionJobDefinitionPredictionInstanceOutput() BatchPredictionJobDefinitionPredictionInstanceOutput {
+	return o
+}
+
+func (o BatchPredictionJobDefinitionPredictionInstanceOutput) ToBatchPredictionJobDefinitionPredictionInstanceOutputWithContext(ctx context.Context) BatchPredictionJobDefinitionPredictionInstanceOutput {
+	return o
+}
+
+func (o BatchPredictionJobDefinitionPredictionInstanceOutput) ToBatchPredictionJobDefinitionPredictionInstancePtrOutput() BatchPredictionJobDefinitionPredictionInstancePtrOutput {
+	return o.ToBatchPredictionJobDefinitionPredictionInstancePtrOutputWithContext(context.Background())
+}
+
+func (o BatchPredictionJobDefinitionPredictionInstanceOutput) ToBatchPredictionJobDefinitionPredictionInstancePtrOutputWithContext(ctx context.Context) BatchPredictionJobDefinitionPredictionInstancePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v BatchPredictionJobDefinitionPredictionInstance) *BatchPredictionJobDefinitionPredictionInstance {
+		return &v
+	}).(BatchPredictionJobDefinitionPredictionInstancePtrOutput)
+}
+
+// By default, prediction requests will use the API key of the user that created the job. This allows you to make requests on behalf of other users.
+func (o BatchPredictionJobDefinitionPredictionInstanceOutput) ApiKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BatchPredictionJobDefinitionPredictionInstance) *string { return v.ApiKey }).(pulumi.StringPtrOutput)
+}
+
+// If running a job against a prediction instance in the Managed AI Cloud, you must provide the organization level DataRobot-Key.
+func (o BatchPredictionJobDefinitionPredictionInstanceOutput) DatarobotKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BatchPredictionJobDefinitionPredictionInstance) *string { return v.DatarobotKey }).(pulumi.StringPtrOutput)
+}
+
+// Hostname of the prediction instance.
+func (o BatchPredictionJobDefinitionPredictionInstanceOutput) HostName() pulumi.StringOutput {
+	return o.ApplyT(func(v BatchPredictionJobDefinitionPredictionInstance) string { return v.HostName }).(pulumi.StringOutput)
+}
+
+// Set to false to run prediction requests from the batch prediction job without SSL. Defaults to true.
+func (o BatchPredictionJobDefinitionPredictionInstanceOutput) SslEnabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v BatchPredictionJobDefinitionPredictionInstance) *bool { return v.SslEnabled }).(pulumi.BoolPtrOutput)
+}
+
+type BatchPredictionJobDefinitionPredictionInstancePtrOutput struct{ *pulumi.OutputState }
+
+func (BatchPredictionJobDefinitionPredictionInstancePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**BatchPredictionJobDefinitionPredictionInstance)(nil)).Elem()
+}
+
+func (o BatchPredictionJobDefinitionPredictionInstancePtrOutput) ToBatchPredictionJobDefinitionPredictionInstancePtrOutput() BatchPredictionJobDefinitionPredictionInstancePtrOutput {
+	return o
+}
+
+func (o BatchPredictionJobDefinitionPredictionInstancePtrOutput) ToBatchPredictionJobDefinitionPredictionInstancePtrOutputWithContext(ctx context.Context) BatchPredictionJobDefinitionPredictionInstancePtrOutput {
+	return o
+}
+
+func (o BatchPredictionJobDefinitionPredictionInstancePtrOutput) Elem() BatchPredictionJobDefinitionPredictionInstanceOutput {
+	return o.ApplyT(func(v *BatchPredictionJobDefinitionPredictionInstance) BatchPredictionJobDefinitionPredictionInstance {
+		if v != nil {
+			return *v
+		}
+		var ret BatchPredictionJobDefinitionPredictionInstance
+		return ret
+	}).(BatchPredictionJobDefinitionPredictionInstanceOutput)
+}
+
+// By default, prediction requests will use the API key of the user that created the job. This allows you to make requests on behalf of other users.
+func (o BatchPredictionJobDefinitionPredictionInstancePtrOutput) ApiKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchPredictionJobDefinitionPredictionInstance) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ApiKey
+	}).(pulumi.StringPtrOutput)
+}
+
+// If running a job against a prediction instance in the Managed AI Cloud, you must provide the organization level DataRobot-Key.
+func (o BatchPredictionJobDefinitionPredictionInstancePtrOutput) DatarobotKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchPredictionJobDefinitionPredictionInstance) *string {
+		if v == nil {
+			return nil
+		}
+		return v.DatarobotKey
+	}).(pulumi.StringPtrOutput)
+}
+
+// Hostname of the prediction instance.
+func (o BatchPredictionJobDefinitionPredictionInstancePtrOutput) HostName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchPredictionJobDefinitionPredictionInstance) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.HostName
+	}).(pulumi.StringPtrOutput)
+}
+
+// Set to false to run prediction requests from the batch prediction job without SSL. Defaults to true.
+func (o BatchPredictionJobDefinitionPredictionInstancePtrOutput) SslEnabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *BatchPredictionJobDefinitionPredictionInstance) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.SslEnabled
+	}).(pulumi.BoolPtrOutput)
+}
+
+type BatchPredictionJobDefinitionSchedule struct {
+	// Days of the month when the job will run.
+	DayOfMonths []string `pulumi:"dayOfMonths"`
+	// Days of the week when the job will run.
+	DayOfWeeks []string `pulumi:"dayOfWeeks"`
+	// Hours of the day when the job will run.
+	Hours []string `pulumi:"hours"`
+	// Minutes of the day when the job will run.
+	Minutes []string `pulumi:"minutes"`
+	// Months of the year when the job will run.
+	Months []string `pulumi:"months"`
+}
+
+// BatchPredictionJobDefinitionScheduleInput is an input type that accepts BatchPredictionJobDefinitionScheduleArgs and BatchPredictionJobDefinitionScheduleOutput values.
+// You can construct a concrete instance of `BatchPredictionJobDefinitionScheduleInput` via:
+//
+//	BatchPredictionJobDefinitionScheduleArgs{...}
+type BatchPredictionJobDefinitionScheduleInput interface {
+	pulumi.Input
+
+	ToBatchPredictionJobDefinitionScheduleOutput() BatchPredictionJobDefinitionScheduleOutput
+	ToBatchPredictionJobDefinitionScheduleOutputWithContext(context.Context) BatchPredictionJobDefinitionScheduleOutput
+}
+
+type BatchPredictionJobDefinitionScheduleArgs struct {
+	// Days of the month when the job will run.
+	DayOfMonths pulumi.StringArrayInput `pulumi:"dayOfMonths"`
+	// Days of the week when the job will run.
+	DayOfWeeks pulumi.StringArrayInput `pulumi:"dayOfWeeks"`
+	// Hours of the day when the job will run.
+	Hours pulumi.StringArrayInput `pulumi:"hours"`
+	// Minutes of the day when the job will run.
+	Minutes pulumi.StringArrayInput `pulumi:"minutes"`
+	// Months of the year when the job will run.
+	Months pulumi.StringArrayInput `pulumi:"months"`
+}
+
+func (BatchPredictionJobDefinitionScheduleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BatchPredictionJobDefinitionSchedule)(nil)).Elem()
+}
+
+func (i BatchPredictionJobDefinitionScheduleArgs) ToBatchPredictionJobDefinitionScheduleOutput() BatchPredictionJobDefinitionScheduleOutput {
+	return i.ToBatchPredictionJobDefinitionScheduleOutputWithContext(context.Background())
+}
+
+func (i BatchPredictionJobDefinitionScheduleArgs) ToBatchPredictionJobDefinitionScheduleOutputWithContext(ctx context.Context) BatchPredictionJobDefinitionScheduleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchPredictionJobDefinitionScheduleOutput)
+}
+
+func (i BatchPredictionJobDefinitionScheduleArgs) ToBatchPredictionJobDefinitionSchedulePtrOutput() BatchPredictionJobDefinitionSchedulePtrOutput {
+	return i.ToBatchPredictionJobDefinitionSchedulePtrOutputWithContext(context.Background())
+}
+
+func (i BatchPredictionJobDefinitionScheduleArgs) ToBatchPredictionJobDefinitionSchedulePtrOutputWithContext(ctx context.Context) BatchPredictionJobDefinitionSchedulePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchPredictionJobDefinitionScheduleOutput).ToBatchPredictionJobDefinitionSchedulePtrOutputWithContext(ctx)
+}
+
+// BatchPredictionJobDefinitionSchedulePtrInput is an input type that accepts BatchPredictionJobDefinitionScheduleArgs, BatchPredictionJobDefinitionSchedulePtr and BatchPredictionJobDefinitionSchedulePtrOutput values.
+// You can construct a concrete instance of `BatchPredictionJobDefinitionSchedulePtrInput` via:
+//
+//	        BatchPredictionJobDefinitionScheduleArgs{...}
+//
+//	or:
+//
+//	        nil
+type BatchPredictionJobDefinitionSchedulePtrInput interface {
+	pulumi.Input
+
+	ToBatchPredictionJobDefinitionSchedulePtrOutput() BatchPredictionJobDefinitionSchedulePtrOutput
+	ToBatchPredictionJobDefinitionSchedulePtrOutputWithContext(context.Context) BatchPredictionJobDefinitionSchedulePtrOutput
+}
+
+type batchPredictionJobDefinitionSchedulePtrType BatchPredictionJobDefinitionScheduleArgs
+
+func BatchPredictionJobDefinitionSchedulePtr(v *BatchPredictionJobDefinitionScheduleArgs) BatchPredictionJobDefinitionSchedulePtrInput {
+	return (*batchPredictionJobDefinitionSchedulePtrType)(v)
+}
+
+func (*batchPredictionJobDefinitionSchedulePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**BatchPredictionJobDefinitionSchedule)(nil)).Elem()
+}
+
+func (i *batchPredictionJobDefinitionSchedulePtrType) ToBatchPredictionJobDefinitionSchedulePtrOutput() BatchPredictionJobDefinitionSchedulePtrOutput {
+	return i.ToBatchPredictionJobDefinitionSchedulePtrOutputWithContext(context.Background())
+}
+
+func (i *batchPredictionJobDefinitionSchedulePtrType) ToBatchPredictionJobDefinitionSchedulePtrOutputWithContext(ctx context.Context) BatchPredictionJobDefinitionSchedulePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchPredictionJobDefinitionSchedulePtrOutput)
+}
+
+type BatchPredictionJobDefinitionScheduleOutput struct{ *pulumi.OutputState }
+
+func (BatchPredictionJobDefinitionScheduleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BatchPredictionJobDefinitionSchedule)(nil)).Elem()
+}
+
+func (o BatchPredictionJobDefinitionScheduleOutput) ToBatchPredictionJobDefinitionScheduleOutput() BatchPredictionJobDefinitionScheduleOutput {
+	return o
+}
+
+func (o BatchPredictionJobDefinitionScheduleOutput) ToBatchPredictionJobDefinitionScheduleOutputWithContext(ctx context.Context) BatchPredictionJobDefinitionScheduleOutput {
+	return o
+}
+
+func (o BatchPredictionJobDefinitionScheduleOutput) ToBatchPredictionJobDefinitionSchedulePtrOutput() BatchPredictionJobDefinitionSchedulePtrOutput {
+	return o.ToBatchPredictionJobDefinitionSchedulePtrOutputWithContext(context.Background())
+}
+
+func (o BatchPredictionJobDefinitionScheduleOutput) ToBatchPredictionJobDefinitionSchedulePtrOutputWithContext(ctx context.Context) BatchPredictionJobDefinitionSchedulePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v BatchPredictionJobDefinitionSchedule) *BatchPredictionJobDefinitionSchedule {
+		return &v
+	}).(BatchPredictionJobDefinitionSchedulePtrOutput)
+}
+
+// Days of the month when the job will run.
+func (o BatchPredictionJobDefinitionScheduleOutput) DayOfMonths() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v BatchPredictionJobDefinitionSchedule) []string { return v.DayOfMonths }).(pulumi.StringArrayOutput)
+}
+
+// Days of the week when the job will run.
+func (o BatchPredictionJobDefinitionScheduleOutput) DayOfWeeks() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v BatchPredictionJobDefinitionSchedule) []string { return v.DayOfWeeks }).(pulumi.StringArrayOutput)
+}
+
+// Hours of the day when the job will run.
+func (o BatchPredictionJobDefinitionScheduleOutput) Hours() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v BatchPredictionJobDefinitionSchedule) []string { return v.Hours }).(pulumi.StringArrayOutput)
+}
+
+// Minutes of the day when the job will run.
+func (o BatchPredictionJobDefinitionScheduleOutput) Minutes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v BatchPredictionJobDefinitionSchedule) []string { return v.Minutes }).(pulumi.StringArrayOutput)
+}
+
+// Months of the year when the job will run.
+func (o BatchPredictionJobDefinitionScheduleOutput) Months() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v BatchPredictionJobDefinitionSchedule) []string { return v.Months }).(pulumi.StringArrayOutput)
+}
+
+type BatchPredictionJobDefinitionSchedulePtrOutput struct{ *pulumi.OutputState }
+
+func (BatchPredictionJobDefinitionSchedulePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**BatchPredictionJobDefinitionSchedule)(nil)).Elem()
+}
+
+func (o BatchPredictionJobDefinitionSchedulePtrOutput) ToBatchPredictionJobDefinitionSchedulePtrOutput() BatchPredictionJobDefinitionSchedulePtrOutput {
+	return o
+}
+
+func (o BatchPredictionJobDefinitionSchedulePtrOutput) ToBatchPredictionJobDefinitionSchedulePtrOutputWithContext(ctx context.Context) BatchPredictionJobDefinitionSchedulePtrOutput {
+	return o
+}
+
+func (o BatchPredictionJobDefinitionSchedulePtrOutput) Elem() BatchPredictionJobDefinitionScheduleOutput {
+	return o.ApplyT(func(v *BatchPredictionJobDefinitionSchedule) BatchPredictionJobDefinitionSchedule {
+		if v != nil {
+			return *v
+		}
+		var ret BatchPredictionJobDefinitionSchedule
+		return ret
+	}).(BatchPredictionJobDefinitionScheduleOutput)
+}
+
+// Days of the month when the job will run.
+func (o BatchPredictionJobDefinitionSchedulePtrOutput) DayOfMonths() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *BatchPredictionJobDefinitionSchedule) []string {
+		if v == nil {
+			return nil
+		}
+		return v.DayOfMonths
+	}).(pulumi.StringArrayOutput)
+}
+
+// Days of the week when the job will run.
+func (o BatchPredictionJobDefinitionSchedulePtrOutput) DayOfWeeks() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *BatchPredictionJobDefinitionSchedule) []string {
+		if v == nil {
+			return nil
+		}
+		return v.DayOfWeeks
+	}).(pulumi.StringArrayOutput)
+}
+
+// Hours of the day when the job will run.
+func (o BatchPredictionJobDefinitionSchedulePtrOutput) Hours() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *BatchPredictionJobDefinitionSchedule) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Hours
+	}).(pulumi.StringArrayOutput)
+}
+
+// Minutes of the day when the job will run.
+func (o BatchPredictionJobDefinitionSchedulePtrOutput) Minutes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *BatchPredictionJobDefinitionSchedule) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Minutes
+	}).(pulumi.StringArrayOutput)
+}
+
+// Months of the year when the job will run.
+func (o BatchPredictionJobDefinitionSchedulePtrOutput) Months() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *BatchPredictionJobDefinitionSchedule) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Months
+	}).(pulumi.StringArrayOutput)
+}
+
+type BatchPredictionJobDefinitionTimeseriesSettings struct {
+	// Forecast point for the dataset, used for the forecast predictions. May be passed if timeseries_settings.type=forecast.
+	ForecastPoint *string `pulumi:"forecastPoint"`
+	// End date for historical predictions. May be passed if timeseries_settings.type=historical.
+	PredictionsEndDate *string `pulumi:"predictionsEndDate"`
+	// Start date for historical predictions. May be passed if timeseries_settings.type=historical.
+	PredictionsStartDate *string `pulumi:"predictionsStartDate"`
+	// If True, missing values in the known in advance features are allowed in the forecast window at the prediction time. Default is False.
+	RelaxKnownInAdvanceFeaturesCheck *bool `pulumi:"relaxKnownInAdvanceFeaturesCheck"`
+	// Type of time-series prediction. Must be 'forecast' or 'historical'. Default is 'forecast'.
+	Type *string `pulumi:"type"`
+}
+
+// BatchPredictionJobDefinitionTimeseriesSettingsInput is an input type that accepts BatchPredictionJobDefinitionTimeseriesSettingsArgs and BatchPredictionJobDefinitionTimeseriesSettingsOutput values.
+// You can construct a concrete instance of `BatchPredictionJobDefinitionTimeseriesSettingsInput` via:
+//
+//	BatchPredictionJobDefinitionTimeseriesSettingsArgs{...}
+type BatchPredictionJobDefinitionTimeseriesSettingsInput interface {
+	pulumi.Input
+
+	ToBatchPredictionJobDefinitionTimeseriesSettingsOutput() BatchPredictionJobDefinitionTimeseriesSettingsOutput
+	ToBatchPredictionJobDefinitionTimeseriesSettingsOutputWithContext(context.Context) BatchPredictionJobDefinitionTimeseriesSettingsOutput
+}
+
+type BatchPredictionJobDefinitionTimeseriesSettingsArgs struct {
+	// Forecast point for the dataset, used for the forecast predictions. May be passed if timeseries_settings.type=forecast.
+	ForecastPoint pulumi.StringPtrInput `pulumi:"forecastPoint"`
+	// End date for historical predictions. May be passed if timeseries_settings.type=historical.
+	PredictionsEndDate pulumi.StringPtrInput `pulumi:"predictionsEndDate"`
+	// Start date for historical predictions. May be passed if timeseries_settings.type=historical.
+	PredictionsStartDate pulumi.StringPtrInput `pulumi:"predictionsStartDate"`
+	// If True, missing values in the known in advance features are allowed in the forecast window at the prediction time. Default is False.
+	RelaxKnownInAdvanceFeaturesCheck pulumi.BoolPtrInput `pulumi:"relaxKnownInAdvanceFeaturesCheck"`
+	// Type of time-series prediction. Must be 'forecast' or 'historical'. Default is 'forecast'.
+	Type pulumi.StringPtrInput `pulumi:"type"`
+}
+
+func (BatchPredictionJobDefinitionTimeseriesSettingsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*BatchPredictionJobDefinitionTimeseriesSettings)(nil)).Elem()
+}
+
+func (i BatchPredictionJobDefinitionTimeseriesSettingsArgs) ToBatchPredictionJobDefinitionTimeseriesSettingsOutput() BatchPredictionJobDefinitionTimeseriesSettingsOutput {
+	return i.ToBatchPredictionJobDefinitionTimeseriesSettingsOutputWithContext(context.Background())
+}
+
+func (i BatchPredictionJobDefinitionTimeseriesSettingsArgs) ToBatchPredictionJobDefinitionTimeseriesSettingsOutputWithContext(ctx context.Context) BatchPredictionJobDefinitionTimeseriesSettingsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchPredictionJobDefinitionTimeseriesSettingsOutput)
+}
+
+func (i BatchPredictionJobDefinitionTimeseriesSettingsArgs) ToBatchPredictionJobDefinitionTimeseriesSettingsPtrOutput() BatchPredictionJobDefinitionTimeseriesSettingsPtrOutput {
+	return i.ToBatchPredictionJobDefinitionTimeseriesSettingsPtrOutputWithContext(context.Background())
+}
+
+func (i BatchPredictionJobDefinitionTimeseriesSettingsArgs) ToBatchPredictionJobDefinitionTimeseriesSettingsPtrOutputWithContext(ctx context.Context) BatchPredictionJobDefinitionTimeseriesSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchPredictionJobDefinitionTimeseriesSettingsOutput).ToBatchPredictionJobDefinitionTimeseriesSettingsPtrOutputWithContext(ctx)
+}
+
+// BatchPredictionJobDefinitionTimeseriesSettingsPtrInput is an input type that accepts BatchPredictionJobDefinitionTimeseriesSettingsArgs, BatchPredictionJobDefinitionTimeseriesSettingsPtr and BatchPredictionJobDefinitionTimeseriesSettingsPtrOutput values.
+// You can construct a concrete instance of `BatchPredictionJobDefinitionTimeseriesSettingsPtrInput` via:
+//
+//	        BatchPredictionJobDefinitionTimeseriesSettingsArgs{...}
+//
+//	or:
+//
+//	        nil
+type BatchPredictionJobDefinitionTimeseriesSettingsPtrInput interface {
+	pulumi.Input
+
+	ToBatchPredictionJobDefinitionTimeseriesSettingsPtrOutput() BatchPredictionJobDefinitionTimeseriesSettingsPtrOutput
+	ToBatchPredictionJobDefinitionTimeseriesSettingsPtrOutputWithContext(context.Context) BatchPredictionJobDefinitionTimeseriesSettingsPtrOutput
+}
+
+type batchPredictionJobDefinitionTimeseriesSettingsPtrType BatchPredictionJobDefinitionTimeseriesSettingsArgs
+
+func BatchPredictionJobDefinitionTimeseriesSettingsPtr(v *BatchPredictionJobDefinitionTimeseriesSettingsArgs) BatchPredictionJobDefinitionTimeseriesSettingsPtrInput {
+	return (*batchPredictionJobDefinitionTimeseriesSettingsPtrType)(v)
+}
+
+func (*batchPredictionJobDefinitionTimeseriesSettingsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**BatchPredictionJobDefinitionTimeseriesSettings)(nil)).Elem()
+}
+
+func (i *batchPredictionJobDefinitionTimeseriesSettingsPtrType) ToBatchPredictionJobDefinitionTimeseriesSettingsPtrOutput() BatchPredictionJobDefinitionTimeseriesSettingsPtrOutput {
+	return i.ToBatchPredictionJobDefinitionTimeseriesSettingsPtrOutputWithContext(context.Background())
+}
+
+func (i *batchPredictionJobDefinitionTimeseriesSettingsPtrType) ToBatchPredictionJobDefinitionTimeseriesSettingsPtrOutputWithContext(ctx context.Context) BatchPredictionJobDefinitionTimeseriesSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(BatchPredictionJobDefinitionTimeseriesSettingsPtrOutput)
+}
+
+type BatchPredictionJobDefinitionTimeseriesSettingsOutput struct{ *pulumi.OutputState }
+
+func (BatchPredictionJobDefinitionTimeseriesSettingsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*BatchPredictionJobDefinitionTimeseriesSettings)(nil)).Elem()
+}
+
+func (o BatchPredictionJobDefinitionTimeseriesSettingsOutput) ToBatchPredictionJobDefinitionTimeseriesSettingsOutput() BatchPredictionJobDefinitionTimeseriesSettingsOutput {
+	return o
+}
+
+func (o BatchPredictionJobDefinitionTimeseriesSettingsOutput) ToBatchPredictionJobDefinitionTimeseriesSettingsOutputWithContext(ctx context.Context) BatchPredictionJobDefinitionTimeseriesSettingsOutput {
+	return o
+}
+
+func (o BatchPredictionJobDefinitionTimeseriesSettingsOutput) ToBatchPredictionJobDefinitionTimeseriesSettingsPtrOutput() BatchPredictionJobDefinitionTimeseriesSettingsPtrOutput {
+	return o.ToBatchPredictionJobDefinitionTimeseriesSettingsPtrOutputWithContext(context.Background())
+}
+
+func (o BatchPredictionJobDefinitionTimeseriesSettingsOutput) ToBatchPredictionJobDefinitionTimeseriesSettingsPtrOutputWithContext(ctx context.Context) BatchPredictionJobDefinitionTimeseriesSettingsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v BatchPredictionJobDefinitionTimeseriesSettings) *BatchPredictionJobDefinitionTimeseriesSettings {
+		return &v
+	}).(BatchPredictionJobDefinitionTimeseriesSettingsPtrOutput)
+}
+
+// Forecast point for the dataset, used for the forecast predictions. May be passed if timeseries_settings.type=forecast.
+func (o BatchPredictionJobDefinitionTimeseriesSettingsOutput) ForecastPoint() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BatchPredictionJobDefinitionTimeseriesSettings) *string { return v.ForecastPoint }).(pulumi.StringPtrOutput)
+}
+
+// End date for historical predictions. May be passed if timeseries_settings.type=historical.
+func (o BatchPredictionJobDefinitionTimeseriesSettingsOutput) PredictionsEndDate() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BatchPredictionJobDefinitionTimeseriesSettings) *string { return v.PredictionsEndDate }).(pulumi.StringPtrOutput)
+}
+
+// Start date for historical predictions. May be passed if timeseries_settings.type=historical.
+func (o BatchPredictionJobDefinitionTimeseriesSettingsOutput) PredictionsStartDate() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BatchPredictionJobDefinitionTimeseriesSettings) *string { return v.PredictionsStartDate }).(pulumi.StringPtrOutput)
+}
+
+// If True, missing values in the known in advance features are allowed in the forecast window at the prediction time. Default is False.
+func (o BatchPredictionJobDefinitionTimeseriesSettingsOutput) RelaxKnownInAdvanceFeaturesCheck() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v BatchPredictionJobDefinitionTimeseriesSettings) *bool {
+		return v.RelaxKnownInAdvanceFeaturesCheck
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Type of time-series prediction. Must be 'forecast' or 'historical'. Default is 'forecast'.
+func (o BatchPredictionJobDefinitionTimeseriesSettingsOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BatchPredictionJobDefinitionTimeseriesSettings) *string { return v.Type }).(pulumi.StringPtrOutput)
+}
+
+type BatchPredictionJobDefinitionTimeseriesSettingsPtrOutput struct{ *pulumi.OutputState }
+
+func (BatchPredictionJobDefinitionTimeseriesSettingsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**BatchPredictionJobDefinitionTimeseriesSettings)(nil)).Elem()
+}
+
+func (o BatchPredictionJobDefinitionTimeseriesSettingsPtrOutput) ToBatchPredictionJobDefinitionTimeseriesSettingsPtrOutput() BatchPredictionJobDefinitionTimeseriesSettingsPtrOutput {
+	return o
+}
+
+func (o BatchPredictionJobDefinitionTimeseriesSettingsPtrOutput) ToBatchPredictionJobDefinitionTimeseriesSettingsPtrOutputWithContext(ctx context.Context) BatchPredictionJobDefinitionTimeseriesSettingsPtrOutput {
+	return o
+}
+
+func (o BatchPredictionJobDefinitionTimeseriesSettingsPtrOutput) Elem() BatchPredictionJobDefinitionTimeseriesSettingsOutput {
+	return o.ApplyT(func(v *BatchPredictionJobDefinitionTimeseriesSettings) BatchPredictionJobDefinitionTimeseriesSettings {
+		if v != nil {
+			return *v
+		}
+		var ret BatchPredictionJobDefinitionTimeseriesSettings
+		return ret
+	}).(BatchPredictionJobDefinitionTimeseriesSettingsOutput)
+}
+
+// Forecast point for the dataset, used for the forecast predictions. May be passed if timeseries_settings.type=forecast.
+func (o BatchPredictionJobDefinitionTimeseriesSettingsPtrOutput) ForecastPoint() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchPredictionJobDefinitionTimeseriesSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ForecastPoint
+	}).(pulumi.StringPtrOutput)
+}
+
+// End date for historical predictions. May be passed if timeseries_settings.type=historical.
+func (o BatchPredictionJobDefinitionTimeseriesSettingsPtrOutput) PredictionsEndDate() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchPredictionJobDefinitionTimeseriesSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.PredictionsEndDate
+	}).(pulumi.StringPtrOutput)
+}
+
+// Start date for historical predictions. May be passed if timeseries_settings.type=historical.
+func (o BatchPredictionJobDefinitionTimeseriesSettingsPtrOutput) PredictionsStartDate() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchPredictionJobDefinitionTimeseriesSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.PredictionsStartDate
+	}).(pulumi.StringPtrOutput)
+}
+
+// If True, missing values in the known in advance features are allowed in the forecast window at the prediction time. Default is False.
+func (o BatchPredictionJobDefinitionTimeseriesSettingsPtrOutput) RelaxKnownInAdvanceFeaturesCheck() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *BatchPredictionJobDefinitionTimeseriesSettings) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.RelaxKnownInAdvanceFeaturesCheck
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Type of time-series prediction. Must be 'forecast' or 'historical'. Default is 'forecast'.
+func (o BatchPredictionJobDefinitionTimeseriesSettingsPtrOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BatchPredictionJobDefinitionTimeseriesSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Type
+	}).(pulumi.StringPtrOutput)
+}
+
 type CustomJobRuntimeParameterValue struct {
 	// The name of the runtime parameter.
 	Key string `pulumi:"key"`
@@ -5627,6 +7135,18 @@ func (o VectorDatabaseChunkingParametersPtrOutput) Separators() pulumi.StringArr
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ApplicationSourceRuntimeParameterValueInput)(nil)).Elem(), ApplicationSourceRuntimeParameterValueArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ApplicationSourceRuntimeParameterValueArrayInput)(nil)).Elem(), ApplicationSourceRuntimeParameterValueArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BatchPredictionJobDefinitionCsvSettingsInput)(nil)).Elem(), BatchPredictionJobDefinitionCsvSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BatchPredictionJobDefinitionCsvSettingsPtrInput)(nil)).Elem(), BatchPredictionJobDefinitionCsvSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BatchPredictionJobDefinitionIntakeSettingsInput)(nil)).Elem(), BatchPredictionJobDefinitionIntakeSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BatchPredictionJobDefinitionIntakeSettingsPtrInput)(nil)).Elem(), BatchPredictionJobDefinitionIntakeSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BatchPredictionJobDefinitionOutputSettingsInput)(nil)).Elem(), BatchPredictionJobDefinitionOutputSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BatchPredictionJobDefinitionOutputSettingsPtrInput)(nil)).Elem(), BatchPredictionJobDefinitionOutputSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BatchPredictionJobDefinitionPredictionInstanceInput)(nil)).Elem(), BatchPredictionJobDefinitionPredictionInstanceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BatchPredictionJobDefinitionPredictionInstancePtrInput)(nil)).Elem(), BatchPredictionJobDefinitionPredictionInstanceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BatchPredictionJobDefinitionScheduleInput)(nil)).Elem(), BatchPredictionJobDefinitionScheduleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BatchPredictionJobDefinitionSchedulePtrInput)(nil)).Elem(), BatchPredictionJobDefinitionScheduleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BatchPredictionJobDefinitionTimeseriesSettingsInput)(nil)).Elem(), BatchPredictionJobDefinitionTimeseriesSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*BatchPredictionJobDefinitionTimeseriesSettingsPtrInput)(nil)).Elem(), BatchPredictionJobDefinitionTimeseriesSettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomJobRuntimeParameterValueInput)(nil)).Elem(), CustomJobRuntimeParameterValueArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomJobRuntimeParameterValueArrayInput)(nil)).Elem(), CustomJobRuntimeParameterValueArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelGuardConfigurationInput)(nil)).Elem(), CustomModelGuardConfigurationArgs{})
@@ -5694,6 +7214,18 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*VectorDatabaseChunkingParametersPtrInput)(nil)).Elem(), VectorDatabaseChunkingParametersArgs{})
 	pulumi.RegisterOutputType(ApplicationSourceRuntimeParameterValueOutput{})
 	pulumi.RegisterOutputType(ApplicationSourceRuntimeParameterValueArrayOutput{})
+	pulumi.RegisterOutputType(BatchPredictionJobDefinitionCsvSettingsOutput{})
+	pulumi.RegisterOutputType(BatchPredictionJobDefinitionCsvSettingsPtrOutput{})
+	pulumi.RegisterOutputType(BatchPredictionJobDefinitionIntakeSettingsOutput{})
+	pulumi.RegisterOutputType(BatchPredictionJobDefinitionIntakeSettingsPtrOutput{})
+	pulumi.RegisterOutputType(BatchPredictionJobDefinitionOutputSettingsOutput{})
+	pulumi.RegisterOutputType(BatchPredictionJobDefinitionOutputSettingsPtrOutput{})
+	pulumi.RegisterOutputType(BatchPredictionJobDefinitionPredictionInstanceOutput{})
+	pulumi.RegisterOutputType(BatchPredictionJobDefinitionPredictionInstancePtrOutput{})
+	pulumi.RegisterOutputType(BatchPredictionJobDefinitionScheduleOutput{})
+	pulumi.RegisterOutputType(BatchPredictionJobDefinitionSchedulePtrOutput{})
+	pulumi.RegisterOutputType(BatchPredictionJobDefinitionTimeseriesSettingsOutput{})
+	pulumi.RegisterOutputType(BatchPredictionJobDefinitionTimeseriesSettingsPtrOutput{})
 	pulumi.RegisterOutputType(CustomJobRuntimeParameterValueOutput{})
 	pulumi.RegisterOutputType(CustomJobRuntimeParameterValueArrayOutput{})
 	pulumi.RegisterOutputType(CustomModelGuardConfigurationOutput{})

@@ -95,6 +95,269 @@
                 "value"
             ]
         },
+        "datarobot:index/BatchPredictionJobDefinitionCsvSettings:BatchPredictionJobDefinitionCsvSettings": {
+            "properties": {
+                "delimiter": {
+                    "type": "string",
+                    "description": "Fields are delimited by this character. Use the string tab to denote TSV (TAB separated values). Must be either a one-character string or the string tab.\n"
+                },
+                "encoding": {
+                    "type": "string",
+                    "description": "Encoding for the CSV files.\n"
+                },
+                "quotechar": {
+                    "type": "string",
+                    "description": "Fields containing the delimiter must be quoted using this character.\n"
+                }
+            },
+            "type": "object",
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "delimiter",
+                        "encoding",
+                        "quotechar"
+                    ]
+                }
+            }
+        },
+        "datarobot:index/BatchPredictionJobDefinitionIntakeSettings:BatchPredictionJobDefinitionIntakeSettings": {
+            "properties": {
+                "catalog": {
+                    "type": "string",
+                    "description": "The name of specified database catalog for JDBC type.\n"
+                },
+                "credentialId": {
+                    "type": "string",
+                    "description": "The ID of the credentials for S3 or JDBC data source.\n"
+                },
+                "dataStoreId": {
+                    "type": "string",
+                    "description": "The ID of the external data store connected to the JDBC data source.\n"
+                },
+                "datasetId": {
+                    "type": "string",
+                    "description": "The ID of the dataset to score for dataset type.\n"
+                },
+                "endpointUrl": {
+                    "type": "string",
+                    "description": "Any non-default endpoint URL for S3 access.\n"
+                },
+                "fetchSize": {
+                    "type": "integer",
+                    "description": "Changing the fetchSize can be used to balance throughput and memory usage for JDBC type.\n"
+                },
+                "file": {
+                    "type": "string",
+                    "description": "String path to file of scoring data for localFile type.\n"
+                },
+                "query": {
+                    "type": "string",
+                    "description": "A self-supplied SELECT statement of the data set you wish to predict for JDBC type.\n"
+                },
+                "schema": {
+                    "type": "string",
+                    "description": "The name of specified database schema for JDBC type.\n"
+                },
+                "table": {
+                    "type": "string",
+                    "description": "The name of specified database table for JDBC type.\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "Type of data source.\n"
+                },
+                "url": {
+                    "type": "string",
+                    "description": "The URL to score (e.g.: s3://bucket/key) for S3 type.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "type"
+            ]
+        },
+        "datarobot:index/BatchPredictionJobDefinitionOutputSettings:BatchPredictionJobDefinitionOutputSettings": {
+            "properties": {
+                "catalog": {
+                    "type": "string",
+                    "description": "The name of specified database catalog for JDBC type.\n"
+                },
+                "createTableIfNotExists": {
+                    "type": "boolean",
+                    "description": "If no existing table is detected, attempt to create it before writing data for JDBC type.\n"
+                },
+                "credentialId": {
+                    "type": "string",
+                    "description": "The ID of the credentials for S3 or JDBC data source.\n"
+                },
+                "dataStoreId": {
+                    "type": "string",
+                    "description": "The ID of the external data store connected to the JDBC data source.\n"
+                },
+                "endpointUrl": {
+                    "type": "string",
+                    "description": "Any non-default endpoint URL for S3 access.\n"
+                },
+                "path": {
+                    "type": "string",
+                    "description": "Path to save the scored data as CSV for localFile type.\n"
+                },
+                "schema": {
+                    "type": "string",
+                    "description": "The name of specified database schema for JDBC type.\n"
+                },
+                "statementType": {
+                    "type": "string",
+                    "description": "The type of insertion statement to create for JDBC type.\n"
+                },
+                "table": {
+                    "type": "string",
+                    "description": "The name of specified database table for JDBC type.\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "Type of output.\n"
+                },
+                "updateColumns": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "A list of strings containing those column names to be updated for JDBC type.\n"
+                },
+                "url": {
+                    "type": "string",
+                    "description": "The URL for storing the results (e.g.: s3://bucket/key) for S3 type.\n"
+                },
+                "whereColumns": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "A list of strings containing those column names to be selected for JDBC type.\n"
+                }
+            },
+            "type": "object",
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "type"
+                    ]
+                }
+            }
+        },
+        "datarobot:index/BatchPredictionJobDefinitionPredictionInstance:BatchPredictionJobDefinitionPredictionInstance": {
+            "properties": {
+                "apiKey": {
+                    "type": "string",
+                    "description": "By default, prediction requests will use the API key of the user that created the job. This allows you to make requests on behalf of other users.\n"
+                },
+                "datarobotKey": {
+                    "type": "string",
+                    "description": "If running a job against a prediction instance in the Managed AI Cloud, you must provide the organization level DataRobot-Key.\n"
+                },
+                "hostName": {
+                    "type": "string",
+                    "description": "Hostname of the prediction instance.\n"
+                },
+                "sslEnabled": {
+                    "type": "boolean",
+                    "description": "Set to false to run prediction requests from the batch prediction job without SSL. Defaults to true.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "hostName"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "hostName",
+                        "sslEnabled"
+                    ]
+                }
+            }
+        },
+        "datarobot:index/BatchPredictionJobDefinitionSchedule:BatchPredictionJobDefinitionSchedule": {
+            "properties": {
+                "dayOfMonths": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Days of the month when the job will run.\n"
+                },
+                "dayOfWeeks": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Days of the week when the job will run.\n"
+                },
+                "hours": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Hours of the day when the job will run.\n"
+                },
+                "minutes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Minutes of the day when the job will run.\n"
+                },
+                "months": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Months of the year when the job will run.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "dayOfMonths",
+                "dayOfWeeks",
+                "hours",
+                "minutes",
+                "months"
+            ]
+        },
+        "datarobot:index/BatchPredictionJobDefinitionTimeseriesSettings:BatchPredictionJobDefinitionTimeseriesSettings": {
+            "properties": {
+                "forecastPoint": {
+                    "type": "string",
+                    "description": "Forecast point for the dataset, used for the forecast predictions. May be passed if timeseries_settings.type=forecast.\n"
+                },
+                "predictionsEndDate": {
+                    "type": "string",
+                    "description": "End date for historical predictions. May be passed if timeseries_settings.type=historical.\n"
+                },
+                "predictionsStartDate": {
+                    "type": "string",
+                    "description": "Start date for historical predictions. May be passed if timeseries_settings.type=historical.\n"
+                },
+                "relaxKnownInAdvanceFeaturesCheck": {
+                    "type": "boolean",
+                    "description": "If True, missing values in the known in advance features are allowed in the forecast window at the prediction time. Default is False.\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "Type of time-series prediction. Must be 'forecast' or 'historical'. Default is 'forecast'.\n"
+                }
+            },
+            "type": "object",
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "relaxKnownInAdvanceFeaturesCheck"
+                    ]
+                }
+            }
+        },
         "datarobot:index/CustomJobRuntimeParameterValue:CustomJobRuntimeParameterValue": {
             "properties": {
                 "key": {
@@ -1167,6 +1430,365 @@
                         "type": "string",
                         "description": "The user of the Basic Credential.\n",
                         "secret": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "datarobot:index/batchPredictionJobDefinition:BatchPredictionJobDefinition": {
+            "description": "Batch Prediction Job Definition\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.BatchPredictionJobDefinition;\nimport com.pulumi.datarobot.BatchPredictionJobDefinitionArgs;\nimport com.pulumi.datarobot.inputs.BatchPredictionJobDefinitionIntakeSettingsArgs;\nimport com.pulumi.datarobot.inputs.BatchPredictionJobDefinitionOutputSettingsArgs;\nimport com.pulumi.datarobot.inputs.BatchPredictionJobDefinitionCsvSettingsArgs;\nimport com.pulumi.datarobot.inputs.BatchPredictionJobDefinitionScheduleArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new BatchPredictionJobDefinition(\"example\", BatchPredictionJobDefinitionArgs.builder()\n            .deploymentId(datarobot_deployment.batch_prediction_job_definition().id())\n            .intakeSettings(BatchPredictionJobDefinitionIntakeSettingsArgs.builder()\n                .type(\"s3\")\n                .url(\"s3://datarobot-public-datasets-redistributable/1k_diabetes_simplified_features.csv\")\n                .credential_id(datarobot_basic_credential.batch_prediction_job_definition().id())\n                .build())\n            .outputSettings(BatchPredictionJobDefinitionOutputSettingsArgs.builder()\n                .type(\"s3\")\n                .url(\"s3://my-test-bucket/predictions.csv\")\n                .credential_id(datarobot_basic_credential.batch_prediction_job_definition().id())\n                .build())\n            .csvSettings(BatchPredictionJobDefinitionCsvSettingsArgs.builder()\n                .delimiter(\".\")\n                .quotechar(\"'\")\n                .encoding(\"utf-8\")\n                .build())\n            .numConcurrent(1)\n            .chunkSize(10)\n            .maxExplanations(5)\n            .thresholdHigh(0.8)\n            .thresholdLow(0.2)\n            .predictionThreshold(0.5)\n            .includePredictionStatus(true)\n            .skipDriftTracking(true)\n            .passthroughColumnsSet(\"all\")\n            .abortOnError(false)\n            .includeProbabilities(true)\n            .columnNamesRemapping(Map.of(\"col1\", \"newCol1\"))\n            .schedule(BatchPredictionJobDefinitionScheduleArgs.builder()\n                .minute(                \n                    \"15\",\n                    \"45\")\n                .hour(\"*\")\n                .month(\"*\")\n                .day_of_month(\"*\")\n                .day_of_week(\"*\")\n                .build())\n            .build());\n\n        ctx.export(\"exampleId\", example.id());\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: datarobot:BatchPredictionJobDefinition\n    properties:\n      deploymentId: ${datarobot_deployment.batch_prediction_job_definition.id}\n      intakeSettings:\n        type: s3\n        url: s3://datarobot-public-datasets-redistributable/1k_diabetes_simplified_features.csv\n        credential_id: ${datarobot_basic_credential.batch_prediction_job_definition.id}\n      # Optional parameters\n      outputSettings:\n        type: s3\n        url: s3://my-test-bucket/predictions.csv\n        credential_id: ${datarobot_basic_credential.batch_prediction_job_definition.id}\n      csvSettings:\n        delimiter: .\n        quotechar: ''''\n        encoding: utf-8\n      numConcurrent: 1\n      chunkSize: 10\n      maxExplanations: 5\n      thresholdHigh: 0.8\n      thresholdLow: 0.2\n      predictionThreshold: 0.5\n      includePredictionStatus: true\n      skipDriftTracking: true\n      passthroughColumnsSet: all\n      abortOnError: false\n      includeProbabilities: true\n      columnNamesRemapping:\n        col1: newCol1\n      schedule:\n        minute:\n          - '15'\n          - '45'\n        hour:\n          - '*'\n        month:\n          - '*'\n        day_of_month:\n          - '*'\n        day_of_week:\n          - '*'\noutputs:\n  exampleId: ${example.id}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "properties": {
+                "abortOnError": {
+                    "type": "boolean",
+                    "description": "Default behavior is to abort the job if too many rows fail scoring. This will free up resources for other jobs that may score successfully. Set to false to unconditionally score every row no matter how many errors are encountered. Defaults to True.\n"
+                },
+                "chunkSize": {
+                    "$ref": "pulumi.json#/Any",
+                    "description": "Which strategy should be used to determine the chunk size. Can be either a named strategy or a fixed size in bytes.\n"
+                },
+                "columnNamesRemapping": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Mapping with column renaming for output table.\n"
+                },
+                "csvSettings": {
+                    "$ref": "#/types/datarobot:index/BatchPredictionJobDefinitionCsvSettings:BatchPredictionJobDefinitionCsvSettings",
+                    "description": "CSV intake and output settings.\n"
+                },
+                "deploymentId": {
+                    "type": "string",
+                    "description": "The ID of the deployment to use for the batch prediction job.\n"
+                },
+                "enabled": {
+                    "type": "boolean",
+                    "description": "Whether or not the job definition should be active on a scheduled basis. If True, schedule is required.\n"
+                },
+                "explanationAlgorithm": {
+                    "type": "string",
+                    "description": "Which algorithm will be used to calculate prediction explanations.\n"
+                },
+                "includePredictionStatus": {
+                    "type": "boolean",
+                    "description": "Include the prediction_status column in the output. Defaults to False.\n"
+                },
+                "includeProbabilities": {
+                    "type": "boolean",
+                    "description": "Flag that enables returning of all probability columns. Defaults to True.\n"
+                },
+                "includeProbabilitiesClasses": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List the subset of classes if a user doesn’t want all the classes. Defaults to [].\n"
+                },
+                "intakeSettings": {
+                    "$ref": "#/types/datarobot:index/BatchPredictionJobDefinitionIntakeSettings:BatchPredictionJobDefinitionIntakeSettings",
+                    "description": "A dict configuring how data is coming from.\n"
+                },
+                "maxExplanations": {
+                    "type": "integer",
+                    "description": "Compute prediction explanations for this amount of features.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name you want your job to be identified with. Must be unique across the organization’s existing jobs.\n"
+                },
+                "numConcurrent": {
+                    "type": "integer",
+                    "description": "Number of concurrent chunks to score simultaneously. Defaults to the available number of cores of the deployment. Lower it to leave resources for real-time scoring.\n"
+                },
+                "outputSettings": {
+                    "$ref": "#/types/datarobot:index/BatchPredictionJobDefinitionOutputSettings:BatchPredictionJobDefinitionOutputSettings",
+                    "description": "A dict configuring how scored data is to be saved.\n"
+                },
+                "passthroughColumns": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Keep these columns from the scoring dataset in the scored dataset. This is useful for correlating predictions with source data.\n"
+                },
+                "passthroughColumnsSet": {
+                    "type": "string",
+                    "description": "To pass through every column from the scoring dataset, set this to all.\n"
+                },
+                "predictionInstance": {
+                    "$ref": "#/types/datarobot:index/BatchPredictionJobDefinitionPredictionInstance:BatchPredictionJobDefinitionPredictionInstance",
+                    "description": "Defaults to instance specified by deployment or system configuration.\n"
+                },
+                "predictionThreshold": {
+                    "type": "number",
+                    "description": "Threshold is the point that sets the class boundary for a predicted value. This value can be set between 0.0 and 1.0.\n"
+                },
+                "predictionWarningEnabled": {
+                    "type": "boolean",
+                    "description": "Add prediction warnings to the scored data. Currently only supported for regression models. Defaults to False.\n"
+                },
+                "schedule": {
+                    "$ref": "#/types/datarobot:index/BatchPredictionJobDefinitionSchedule:BatchPredictionJobDefinitionSchedule",
+                    "description": "Defines at what intervals the job should run.\n"
+                },
+                "skipDriftTracking": {
+                    "type": "boolean",
+                    "description": "Skips drift tracking on any predictions made from this job. This is useful when running non-production workloads to not affect drift tracking and cause unnecessary alerts. Defaults to false.\n"
+                },
+                "thresholdHigh": {
+                    "type": "number",
+                    "description": "Only compute prediction explanations for predictions above this threshold. Can be combined with threshold_low.\n"
+                },
+                "thresholdLow": {
+                    "type": "number",
+                    "description": "Only compute prediction explanations for predictions below this threshold. Can be combined with threshold_high.\n"
+                },
+                "timeseriesSettings": {
+                    "$ref": "#/types/datarobot:index/BatchPredictionJobDefinitionTimeseriesSettings:BatchPredictionJobDefinitionTimeseriesSettings",
+                    "description": "Configuration for time-series scoring.\n"
+                }
+            },
+            "required": [
+                "abortOnError",
+                "csvSettings",
+                "deploymentId",
+                "enabled",
+                "explanationAlgorithm",
+                "includePredictionStatus",
+                "includeProbabilities",
+                "intakeSettings",
+                "maxExplanations",
+                "name",
+                "outputSettings",
+                "predictionWarningEnabled",
+                "skipDriftTracking"
+            ],
+            "inputProperties": {
+                "abortOnError": {
+                    "type": "boolean",
+                    "description": "Default behavior is to abort the job if too many rows fail scoring. This will free up resources for other jobs that may score successfully. Set to false to unconditionally score every row no matter how many errors are encountered. Defaults to True.\n"
+                },
+                "chunkSize": {
+                    "$ref": "pulumi.json#/Any",
+                    "description": "Which strategy should be used to determine the chunk size. Can be either a named strategy or a fixed size in bytes.\n"
+                },
+                "columnNamesRemapping": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Mapping with column renaming for output table.\n"
+                },
+                "csvSettings": {
+                    "$ref": "#/types/datarobot:index/BatchPredictionJobDefinitionCsvSettings:BatchPredictionJobDefinitionCsvSettings",
+                    "description": "CSV intake and output settings.\n"
+                },
+                "deploymentId": {
+                    "type": "string",
+                    "description": "The ID of the deployment to use for the batch prediction job.\n"
+                },
+                "enabled": {
+                    "type": "boolean",
+                    "description": "Whether or not the job definition should be active on a scheduled basis. If True, schedule is required.\n"
+                },
+                "explanationAlgorithm": {
+                    "type": "string",
+                    "description": "Which algorithm will be used to calculate prediction explanations.\n"
+                },
+                "includePredictionStatus": {
+                    "type": "boolean",
+                    "description": "Include the prediction_status column in the output. Defaults to False.\n"
+                },
+                "includeProbabilities": {
+                    "type": "boolean",
+                    "description": "Flag that enables returning of all probability columns. Defaults to True.\n"
+                },
+                "includeProbabilitiesClasses": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List the subset of classes if a user doesn’t want all the classes. Defaults to [].\n"
+                },
+                "intakeSettings": {
+                    "$ref": "#/types/datarobot:index/BatchPredictionJobDefinitionIntakeSettings:BatchPredictionJobDefinitionIntakeSettings",
+                    "description": "A dict configuring how data is coming from.\n"
+                },
+                "maxExplanations": {
+                    "type": "integer",
+                    "description": "Compute prediction explanations for this amount of features.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name you want your job to be identified with. Must be unique across the organization’s existing jobs.\n"
+                },
+                "numConcurrent": {
+                    "type": "integer",
+                    "description": "Number of concurrent chunks to score simultaneously. Defaults to the available number of cores of the deployment. Lower it to leave resources for real-time scoring.\n"
+                },
+                "outputSettings": {
+                    "$ref": "#/types/datarobot:index/BatchPredictionJobDefinitionOutputSettings:BatchPredictionJobDefinitionOutputSettings",
+                    "description": "A dict configuring how scored data is to be saved.\n"
+                },
+                "passthroughColumns": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Keep these columns from the scoring dataset in the scored dataset. This is useful for correlating predictions with source data.\n"
+                },
+                "passthroughColumnsSet": {
+                    "type": "string",
+                    "description": "To pass through every column from the scoring dataset, set this to all.\n"
+                },
+                "predictionInstance": {
+                    "$ref": "#/types/datarobot:index/BatchPredictionJobDefinitionPredictionInstance:BatchPredictionJobDefinitionPredictionInstance",
+                    "description": "Defaults to instance specified by deployment or system configuration.\n"
+                },
+                "predictionThreshold": {
+                    "type": "number",
+                    "description": "Threshold is the point that sets the class boundary for a predicted value. This value can be set between 0.0 and 1.0.\n"
+                },
+                "predictionWarningEnabled": {
+                    "type": "boolean",
+                    "description": "Add prediction warnings to the scored data. Currently only supported for regression models. Defaults to False.\n"
+                },
+                "schedule": {
+                    "$ref": "#/types/datarobot:index/BatchPredictionJobDefinitionSchedule:BatchPredictionJobDefinitionSchedule",
+                    "description": "Defines at what intervals the job should run.\n"
+                },
+                "skipDriftTracking": {
+                    "type": "boolean",
+                    "description": "Skips drift tracking on any predictions made from this job. This is useful when running non-production workloads to not affect drift tracking and cause unnecessary alerts. Defaults to false.\n"
+                },
+                "thresholdHigh": {
+                    "type": "number",
+                    "description": "Only compute prediction explanations for predictions above this threshold. Can be combined with threshold_low.\n"
+                },
+                "thresholdLow": {
+                    "type": "number",
+                    "description": "Only compute prediction explanations for predictions below this threshold. Can be combined with threshold_high.\n"
+                },
+                "timeseriesSettings": {
+                    "$ref": "#/types/datarobot:index/BatchPredictionJobDefinitionTimeseriesSettings:BatchPredictionJobDefinitionTimeseriesSettings",
+                    "description": "Configuration for time-series scoring.\n"
+                }
+            },
+            "requiredInputs": [
+                "deploymentId",
+                "intakeSettings"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering BatchPredictionJobDefinition resources.\n",
+                "properties": {
+                    "abortOnError": {
+                        "type": "boolean",
+                        "description": "Default behavior is to abort the job if too many rows fail scoring. This will free up resources for other jobs that may score successfully. Set to false to unconditionally score every row no matter how many errors are encountered. Defaults to True.\n"
+                    },
+                    "chunkSize": {
+                        "$ref": "pulumi.json#/Any",
+                        "description": "Which strategy should be used to determine the chunk size. Can be either a named strategy or a fixed size in bytes.\n"
+                    },
+                    "columnNamesRemapping": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "description": "Mapping with column renaming for output table.\n"
+                    },
+                    "csvSettings": {
+                        "$ref": "#/types/datarobot:index/BatchPredictionJobDefinitionCsvSettings:BatchPredictionJobDefinitionCsvSettings",
+                        "description": "CSV intake and output settings.\n"
+                    },
+                    "deploymentId": {
+                        "type": "string",
+                        "description": "The ID of the deployment to use for the batch prediction job.\n"
+                    },
+                    "enabled": {
+                        "type": "boolean",
+                        "description": "Whether or not the job definition should be active on a scheduled basis. If True, schedule is required.\n"
+                    },
+                    "explanationAlgorithm": {
+                        "type": "string",
+                        "description": "Which algorithm will be used to calculate prediction explanations.\n"
+                    },
+                    "includePredictionStatus": {
+                        "type": "boolean",
+                        "description": "Include the prediction_status column in the output. Defaults to False.\n"
+                    },
+                    "includeProbabilities": {
+                        "type": "boolean",
+                        "description": "Flag that enables returning of all probability columns. Defaults to True.\n"
+                    },
+                    "includeProbabilitiesClasses": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List the subset of classes if a user doesn’t want all the classes. Defaults to [].\n"
+                    },
+                    "intakeSettings": {
+                        "$ref": "#/types/datarobot:index/BatchPredictionJobDefinitionIntakeSettings:BatchPredictionJobDefinitionIntakeSettings",
+                        "description": "A dict configuring how data is coming from.\n"
+                    },
+                    "maxExplanations": {
+                        "type": "integer",
+                        "description": "Compute prediction explanations for this amount of features.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name you want your job to be identified with. Must be unique across the organization’s existing jobs.\n"
+                    },
+                    "numConcurrent": {
+                        "type": "integer",
+                        "description": "Number of concurrent chunks to score simultaneously. Defaults to the available number of cores of the deployment. Lower it to leave resources for real-time scoring.\n"
+                    },
+                    "outputSettings": {
+                        "$ref": "#/types/datarobot:index/BatchPredictionJobDefinitionOutputSettings:BatchPredictionJobDefinitionOutputSettings",
+                        "description": "A dict configuring how scored data is to be saved.\n"
+                    },
+                    "passthroughColumns": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Keep these columns from the scoring dataset in the scored dataset. This is useful for correlating predictions with source data.\n"
+                    },
+                    "passthroughColumnsSet": {
+                        "type": "string",
+                        "description": "To pass through every column from the scoring dataset, set this to all.\n"
+                    },
+                    "predictionInstance": {
+                        "$ref": "#/types/datarobot:index/BatchPredictionJobDefinitionPredictionInstance:BatchPredictionJobDefinitionPredictionInstance",
+                        "description": "Defaults to instance specified by deployment or system configuration.\n"
+                    },
+                    "predictionThreshold": {
+                        "type": "number",
+                        "description": "Threshold is the point that sets the class boundary for a predicted value. This value can be set between 0.0 and 1.0.\n"
+                    },
+                    "predictionWarningEnabled": {
+                        "type": "boolean",
+                        "description": "Add prediction warnings to the scored data. Currently only supported for regression models. Defaults to False.\n"
+                    },
+                    "schedule": {
+                        "$ref": "#/types/datarobot:index/BatchPredictionJobDefinitionSchedule:BatchPredictionJobDefinitionSchedule",
+                        "description": "Defines at what intervals the job should run.\n"
+                    },
+                    "skipDriftTracking": {
+                        "type": "boolean",
+                        "description": "Skips drift tracking on any predictions made from this job. This is useful when running non-production workloads to not affect drift tracking and cause unnecessary alerts. Defaults to false.\n"
+                    },
+                    "thresholdHigh": {
+                        "type": "number",
+                        "description": "Only compute prediction explanations for predictions above this threshold. Can be combined with threshold_low.\n"
+                    },
+                    "thresholdLow": {
+                        "type": "number",
+                        "description": "Only compute prediction explanations for predictions below this threshold. Can be combined with threshold_high.\n"
+                    },
+                    "timeseriesSettings": {
+                        "$ref": "#/types/datarobot:index/BatchPredictionJobDefinitionTimeseriesSettings:BatchPredictionJobDefinitionTimeseriesSettings",
+                        "description": "Configuration for time-series scoring.\n"
                     }
                 },
                 "type": "object"

@@ -17,6 +17,18 @@ from . import _utilities
 __all__ = [
     'ApplicationSourceRuntimeParameterValueArgs',
     'ApplicationSourceRuntimeParameterValueArgsDict',
+    'BatchPredictionJobDefinitionCsvSettingsArgs',
+    'BatchPredictionJobDefinitionCsvSettingsArgsDict',
+    'BatchPredictionJobDefinitionIntakeSettingsArgs',
+    'BatchPredictionJobDefinitionIntakeSettingsArgsDict',
+    'BatchPredictionJobDefinitionOutputSettingsArgs',
+    'BatchPredictionJobDefinitionOutputSettingsArgsDict',
+    'BatchPredictionJobDefinitionPredictionInstanceArgs',
+    'BatchPredictionJobDefinitionPredictionInstanceArgsDict',
+    'BatchPredictionJobDefinitionScheduleArgs',
+    'BatchPredictionJobDefinitionScheduleArgsDict',
+    'BatchPredictionJobDefinitionTimeseriesSettingsArgs',
+    'BatchPredictionJobDefinitionTimeseriesSettingsArgsDict',
     'CustomJobRuntimeParameterValueArgs',
     'CustomJobRuntimeParameterValueArgsDict',
     'CustomModelGuardConfigurationArgs',
@@ -154,6 +166,911 @@ class ApplicationSourceRuntimeParameterValueArgs:
     @value.setter
     def value(self, value: pulumi.Input[str]):
         pulumi.set(self, "value", value)
+
+
+if not MYPY:
+    class BatchPredictionJobDefinitionCsvSettingsArgsDict(TypedDict):
+        delimiter: NotRequired[pulumi.Input[str]]
+        """
+        Fields are delimited by this character. Use the string tab to denote TSV (TAB separated values). Must be either a one-character string or the string tab.
+        """
+        encoding: NotRequired[pulumi.Input[str]]
+        """
+        Encoding for the CSV files.
+        """
+        quotechar: NotRequired[pulumi.Input[str]]
+        """
+        Fields containing the delimiter must be quoted using this character.
+        """
+elif False:
+    BatchPredictionJobDefinitionCsvSettingsArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class BatchPredictionJobDefinitionCsvSettingsArgs:
+    def __init__(__self__, *,
+                 delimiter: Optional[pulumi.Input[str]] = None,
+                 encoding: Optional[pulumi.Input[str]] = None,
+                 quotechar: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] delimiter: Fields are delimited by this character. Use the string tab to denote TSV (TAB separated values). Must be either a one-character string or the string tab.
+        :param pulumi.Input[str] encoding: Encoding for the CSV files.
+        :param pulumi.Input[str] quotechar: Fields containing the delimiter must be quoted using this character.
+        """
+        if delimiter is not None:
+            pulumi.set(__self__, "delimiter", delimiter)
+        if encoding is not None:
+            pulumi.set(__self__, "encoding", encoding)
+        if quotechar is not None:
+            pulumi.set(__self__, "quotechar", quotechar)
+
+    @property
+    @pulumi.getter
+    def delimiter(self) -> Optional[pulumi.Input[str]]:
+        """
+        Fields are delimited by this character. Use the string tab to denote TSV (TAB separated values). Must be either a one-character string or the string tab.
+        """
+        return pulumi.get(self, "delimiter")
+
+    @delimiter.setter
+    def delimiter(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "delimiter", value)
+
+    @property
+    @pulumi.getter
+    def encoding(self) -> Optional[pulumi.Input[str]]:
+        """
+        Encoding for the CSV files.
+        """
+        return pulumi.get(self, "encoding")
+
+    @encoding.setter
+    def encoding(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "encoding", value)
+
+    @property
+    @pulumi.getter
+    def quotechar(self) -> Optional[pulumi.Input[str]]:
+        """
+        Fields containing the delimiter must be quoted using this character.
+        """
+        return pulumi.get(self, "quotechar")
+
+    @quotechar.setter
+    def quotechar(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "quotechar", value)
+
+
+if not MYPY:
+    class BatchPredictionJobDefinitionIntakeSettingsArgsDict(TypedDict):
+        type: pulumi.Input[str]
+        """
+        Type of data source.
+        """
+        catalog: NotRequired[pulumi.Input[str]]
+        """
+        The name of specified database catalog for JDBC type.
+        """
+        credential_id: NotRequired[pulumi.Input[str]]
+        """
+        The ID of the credentials for S3 or JDBC data source.
+        """
+        data_store_id: NotRequired[pulumi.Input[str]]
+        """
+        The ID of the external data store connected to the JDBC data source.
+        """
+        dataset_id: NotRequired[pulumi.Input[str]]
+        """
+        The ID of the dataset to score for dataset type.
+        """
+        endpoint_url: NotRequired[pulumi.Input[str]]
+        """
+        Any non-default endpoint URL for S3 access.
+        """
+        fetch_size: NotRequired[pulumi.Input[int]]
+        """
+        Changing the fetchSize can be used to balance throughput and memory usage for JDBC type.
+        """
+        file: NotRequired[pulumi.Input[str]]
+        """
+        String path to file of scoring data for localFile type.
+        """
+        query: NotRequired[pulumi.Input[str]]
+        """
+        A self-supplied SELECT statement of the data set you wish to predict for JDBC type.
+        """
+        schema: NotRequired[pulumi.Input[str]]
+        """
+        The name of specified database schema for JDBC type.
+        """
+        table: NotRequired[pulumi.Input[str]]
+        """
+        The name of specified database table for JDBC type.
+        """
+        url: NotRequired[pulumi.Input[str]]
+        """
+        The URL to score (e.g.: s3://bucket/key) for S3 type.
+        """
+elif False:
+    BatchPredictionJobDefinitionIntakeSettingsArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class BatchPredictionJobDefinitionIntakeSettingsArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 catalog: Optional[pulumi.Input[str]] = None,
+                 credential_id: Optional[pulumi.Input[str]] = None,
+                 data_store_id: Optional[pulumi.Input[str]] = None,
+                 dataset_id: Optional[pulumi.Input[str]] = None,
+                 endpoint_url: Optional[pulumi.Input[str]] = None,
+                 fetch_size: Optional[pulumi.Input[int]] = None,
+                 file: Optional[pulumi.Input[str]] = None,
+                 query: Optional[pulumi.Input[str]] = None,
+                 schema: Optional[pulumi.Input[str]] = None,
+                 table: Optional[pulumi.Input[str]] = None,
+                 url: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] type: Type of data source.
+        :param pulumi.Input[str] catalog: The name of specified database catalog for JDBC type.
+        :param pulumi.Input[str] credential_id: The ID of the credentials for S3 or JDBC data source.
+        :param pulumi.Input[str] data_store_id: The ID of the external data store connected to the JDBC data source.
+        :param pulumi.Input[str] dataset_id: The ID of the dataset to score for dataset type.
+        :param pulumi.Input[str] endpoint_url: Any non-default endpoint URL for S3 access.
+        :param pulumi.Input[int] fetch_size: Changing the fetchSize can be used to balance throughput and memory usage for JDBC type.
+        :param pulumi.Input[str] file: String path to file of scoring data for localFile type.
+        :param pulumi.Input[str] query: A self-supplied SELECT statement of the data set you wish to predict for JDBC type.
+        :param pulumi.Input[str] schema: The name of specified database schema for JDBC type.
+        :param pulumi.Input[str] table: The name of specified database table for JDBC type.
+        :param pulumi.Input[str] url: The URL to score (e.g.: s3://bucket/key) for S3 type.
+        """
+        pulumi.set(__self__, "type", type)
+        if catalog is not None:
+            pulumi.set(__self__, "catalog", catalog)
+        if credential_id is not None:
+            pulumi.set(__self__, "credential_id", credential_id)
+        if data_store_id is not None:
+            pulumi.set(__self__, "data_store_id", data_store_id)
+        if dataset_id is not None:
+            pulumi.set(__self__, "dataset_id", dataset_id)
+        if endpoint_url is not None:
+            pulumi.set(__self__, "endpoint_url", endpoint_url)
+        if fetch_size is not None:
+            pulumi.set(__self__, "fetch_size", fetch_size)
+        if file is not None:
+            pulumi.set(__self__, "file", file)
+        if query is not None:
+            pulumi.set(__self__, "query", query)
+        if schema is not None:
+            pulumi.set(__self__, "schema", schema)
+        if table is not None:
+            pulumi.set(__self__, "table", table)
+        if url is not None:
+            pulumi.set(__self__, "url", url)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        Type of data source.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter
+    def catalog(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of specified database catalog for JDBC type.
+        """
+        return pulumi.get(self, "catalog")
+
+    @catalog.setter
+    def catalog(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "catalog", value)
+
+    @property
+    @pulumi.getter(name="credentialId")
+    def credential_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The ID of the credentials for S3 or JDBC data source.
+        """
+        return pulumi.get(self, "credential_id")
+
+    @credential_id.setter
+    def credential_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "credential_id", value)
+
+    @property
+    @pulumi.getter(name="dataStoreId")
+    def data_store_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The ID of the external data store connected to the JDBC data source.
+        """
+        return pulumi.get(self, "data_store_id")
+
+    @data_store_id.setter
+    def data_store_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "data_store_id", value)
+
+    @property
+    @pulumi.getter(name="datasetId")
+    def dataset_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The ID of the dataset to score for dataset type.
+        """
+        return pulumi.get(self, "dataset_id")
+
+    @dataset_id.setter
+    def dataset_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "dataset_id", value)
+
+    @property
+    @pulumi.getter(name="endpointUrl")
+    def endpoint_url(self) -> Optional[pulumi.Input[str]]:
+        """
+        Any non-default endpoint URL for S3 access.
+        """
+        return pulumi.get(self, "endpoint_url")
+
+    @endpoint_url.setter
+    def endpoint_url(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "endpoint_url", value)
+
+    @property
+    @pulumi.getter(name="fetchSize")
+    def fetch_size(self) -> Optional[pulumi.Input[int]]:
+        """
+        Changing the fetchSize can be used to balance throughput and memory usage for JDBC type.
+        """
+        return pulumi.get(self, "fetch_size")
+
+    @fetch_size.setter
+    def fetch_size(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "fetch_size", value)
+
+    @property
+    @pulumi.getter
+    def file(self) -> Optional[pulumi.Input[str]]:
+        """
+        String path to file of scoring data for localFile type.
+        """
+        return pulumi.get(self, "file")
+
+    @file.setter
+    def file(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "file", value)
+
+    @property
+    @pulumi.getter
+    def query(self) -> Optional[pulumi.Input[str]]:
+        """
+        A self-supplied SELECT statement of the data set you wish to predict for JDBC type.
+        """
+        return pulumi.get(self, "query")
+
+    @query.setter
+    def query(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "query", value)
+
+    @property
+    @pulumi.getter
+    def schema(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of specified database schema for JDBC type.
+        """
+        return pulumi.get(self, "schema")
+
+    @schema.setter
+    def schema(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "schema", value)
+
+    @property
+    @pulumi.getter
+    def table(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of specified database table for JDBC type.
+        """
+        return pulumi.get(self, "table")
+
+    @table.setter
+    def table(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "table", value)
+
+    @property
+    @pulumi.getter
+    def url(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL to score (e.g.: s3://bucket/key) for S3 type.
+        """
+        return pulumi.get(self, "url")
+
+    @url.setter
+    def url(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "url", value)
+
+
+if not MYPY:
+    class BatchPredictionJobDefinitionOutputSettingsArgsDict(TypedDict):
+        catalog: NotRequired[pulumi.Input[str]]
+        """
+        The name of specified database catalog for JDBC type.
+        """
+        create_table_if_not_exists: NotRequired[pulumi.Input[bool]]
+        """
+        If no existing table is detected, attempt to create it before writing data for JDBC type.
+        """
+        credential_id: NotRequired[pulumi.Input[str]]
+        """
+        The ID of the credentials for S3 or JDBC data source.
+        """
+        data_store_id: NotRequired[pulumi.Input[str]]
+        """
+        The ID of the external data store connected to the JDBC data source.
+        """
+        endpoint_url: NotRequired[pulumi.Input[str]]
+        """
+        Any non-default endpoint URL for S3 access.
+        """
+        path: NotRequired[pulumi.Input[str]]
+        """
+        Path to save the scored data as CSV for localFile type.
+        """
+        schema: NotRequired[pulumi.Input[str]]
+        """
+        The name of specified database schema for JDBC type.
+        """
+        statement_type: NotRequired[pulumi.Input[str]]
+        """
+        The type of insertion statement to create for JDBC type.
+        """
+        table: NotRequired[pulumi.Input[str]]
+        """
+        The name of specified database table for JDBC type.
+        """
+        type: NotRequired[pulumi.Input[str]]
+        """
+        Type of output.
+        """
+        update_columns: NotRequired[pulumi.Input[Sequence[pulumi.Input[str]]]]
+        """
+        A list of strings containing those column names to be updated for JDBC type.
+        """
+        url: NotRequired[pulumi.Input[str]]
+        """
+        The URL for storing the results (e.g.: s3://bucket/key) for S3 type.
+        """
+        where_columns: NotRequired[pulumi.Input[Sequence[pulumi.Input[str]]]]
+        """
+        A list of strings containing those column names to be selected for JDBC type.
+        """
+elif False:
+    BatchPredictionJobDefinitionOutputSettingsArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class BatchPredictionJobDefinitionOutputSettingsArgs:
+    def __init__(__self__, *,
+                 catalog: Optional[pulumi.Input[str]] = None,
+                 create_table_if_not_exists: Optional[pulumi.Input[bool]] = None,
+                 credential_id: Optional[pulumi.Input[str]] = None,
+                 data_store_id: Optional[pulumi.Input[str]] = None,
+                 endpoint_url: Optional[pulumi.Input[str]] = None,
+                 path: Optional[pulumi.Input[str]] = None,
+                 schema: Optional[pulumi.Input[str]] = None,
+                 statement_type: Optional[pulumi.Input[str]] = None,
+                 table: Optional[pulumi.Input[str]] = None,
+                 type: Optional[pulumi.Input[str]] = None,
+                 update_columns: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 url: Optional[pulumi.Input[str]] = None,
+                 where_columns: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
+        """
+        :param pulumi.Input[str] catalog: The name of specified database catalog for JDBC type.
+        :param pulumi.Input[bool] create_table_if_not_exists: If no existing table is detected, attempt to create it before writing data for JDBC type.
+        :param pulumi.Input[str] credential_id: The ID of the credentials for S3 or JDBC data source.
+        :param pulumi.Input[str] data_store_id: The ID of the external data store connected to the JDBC data source.
+        :param pulumi.Input[str] endpoint_url: Any non-default endpoint URL for S3 access.
+        :param pulumi.Input[str] path: Path to save the scored data as CSV for localFile type.
+        :param pulumi.Input[str] schema: The name of specified database schema for JDBC type.
+        :param pulumi.Input[str] statement_type: The type of insertion statement to create for JDBC type.
+        :param pulumi.Input[str] table: The name of specified database table for JDBC type.
+        :param pulumi.Input[str] type: Type of output.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] update_columns: A list of strings containing those column names to be updated for JDBC type.
+        :param pulumi.Input[str] url: The URL for storing the results (e.g.: s3://bucket/key) for S3 type.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] where_columns: A list of strings containing those column names to be selected for JDBC type.
+        """
+        if catalog is not None:
+            pulumi.set(__self__, "catalog", catalog)
+        if create_table_if_not_exists is not None:
+            pulumi.set(__self__, "create_table_if_not_exists", create_table_if_not_exists)
+        if credential_id is not None:
+            pulumi.set(__self__, "credential_id", credential_id)
+        if data_store_id is not None:
+            pulumi.set(__self__, "data_store_id", data_store_id)
+        if endpoint_url is not None:
+            pulumi.set(__self__, "endpoint_url", endpoint_url)
+        if path is not None:
+            pulumi.set(__self__, "path", path)
+        if schema is not None:
+            pulumi.set(__self__, "schema", schema)
+        if statement_type is not None:
+            pulumi.set(__self__, "statement_type", statement_type)
+        if table is not None:
+            pulumi.set(__self__, "table", table)
+        if type is not None:
+            pulumi.set(__self__, "type", type)
+        if update_columns is not None:
+            pulumi.set(__self__, "update_columns", update_columns)
+        if url is not None:
+            pulumi.set(__self__, "url", url)
+        if where_columns is not None:
+            pulumi.set(__self__, "where_columns", where_columns)
+
+    @property
+    @pulumi.getter
+    def catalog(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of specified database catalog for JDBC type.
+        """
+        return pulumi.get(self, "catalog")
+
+    @catalog.setter
+    def catalog(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "catalog", value)
+
+    @property
+    @pulumi.getter(name="createTableIfNotExists")
+    def create_table_if_not_exists(self) -> Optional[pulumi.Input[bool]]:
+        """
+        If no existing table is detected, attempt to create it before writing data for JDBC type.
+        """
+        return pulumi.get(self, "create_table_if_not_exists")
+
+    @create_table_if_not_exists.setter
+    def create_table_if_not_exists(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "create_table_if_not_exists", value)
+
+    @property
+    @pulumi.getter(name="credentialId")
+    def credential_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The ID of the credentials for S3 or JDBC data source.
+        """
+        return pulumi.get(self, "credential_id")
+
+    @credential_id.setter
+    def credential_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "credential_id", value)
+
+    @property
+    @pulumi.getter(name="dataStoreId")
+    def data_store_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The ID of the external data store connected to the JDBC data source.
+        """
+        return pulumi.get(self, "data_store_id")
+
+    @data_store_id.setter
+    def data_store_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "data_store_id", value)
+
+    @property
+    @pulumi.getter(name="endpointUrl")
+    def endpoint_url(self) -> Optional[pulumi.Input[str]]:
+        """
+        Any non-default endpoint URL for S3 access.
+        """
+        return pulumi.get(self, "endpoint_url")
+
+    @endpoint_url.setter
+    def endpoint_url(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "endpoint_url", value)
+
+    @property
+    @pulumi.getter
+    def path(self) -> Optional[pulumi.Input[str]]:
+        """
+        Path to save the scored data as CSV for localFile type.
+        """
+        return pulumi.get(self, "path")
+
+    @path.setter
+    def path(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "path", value)
+
+    @property
+    @pulumi.getter
+    def schema(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of specified database schema for JDBC type.
+        """
+        return pulumi.get(self, "schema")
+
+    @schema.setter
+    def schema(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "schema", value)
+
+    @property
+    @pulumi.getter(name="statementType")
+    def statement_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        The type of insertion statement to create for JDBC type.
+        """
+        return pulumi.get(self, "statement_type")
+
+    @statement_type.setter
+    def statement_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "statement_type", value)
+
+    @property
+    @pulumi.getter
+    def table(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of specified database table for JDBC type.
+        """
+        return pulumi.get(self, "table")
+
+    @table.setter
+    def table(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "table", value)
+
+    @property
+    @pulumi.getter
+    def type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Type of output.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter(name="updateColumns")
+    def update_columns(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        A list of strings containing those column names to be updated for JDBC type.
+        """
+        return pulumi.get(self, "update_columns")
+
+    @update_columns.setter
+    def update_columns(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "update_columns", value)
+
+    @property
+    @pulumi.getter
+    def url(self) -> Optional[pulumi.Input[str]]:
+        """
+        The URL for storing the results (e.g.: s3://bucket/key) for S3 type.
+        """
+        return pulumi.get(self, "url")
+
+    @url.setter
+    def url(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "url", value)
+
+    @property
+    @pulumi.getter(name="whereColumns")
+    def where_columns(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        A list of strings containing those column names to be selected for JDBC type.
+        """
+        return pulumi.get(self, "where_columns")
+
+    @where_columns.setter
+    def where_columns(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "where_columns", value)
+
+
+if not MYPY:
+    class BatchPredictionJobDefinitionPredictionInstanceArgsDict(TypedDict):
+        host_name: pulumi.Input[str]
+        """
+        Hostname of the prediction instance.
+        """
+        api_key: NotRequired[pulumi.Input[str]]
+        """
+        By default, prediction requests will use the API key of the user that created the job. This allows you to make requests on behalf of other users.
+        """
+        datarobot_key: NotRequired[pulumi.Input[str]]
+        """
+        If running a job against a prediction instance in the Managed AI Cloud, you must provide the organization level DataRobot-Key.
+        """
+        ssl_enabled: NotRequired[pulumi.Input[bool]]
+        """
+        Set to false to run prediction requests from the batch prediction job without SSL. Defaults to true.
+        """
+elif False:
+    BatchPredictionJobDefinitionPredictionInstanceArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class BatchPredictionJobDefinitionPredictionInstanceArgs:
+    def __init__(__self__, *,
+                 host_name: pulumi.Input[str],
+                 api_key: Optional[pulumi.Input[str]] = None,
+                 datarobot_key: Optional[pulumi.Input[str]] = None,
+                 ssl_enabled: Optional[pulumi.Input[bool]] = None):
+        """
+        :param pulumi.Input[str] host_name: Hostname of the prediction instance.
+        :param pulumi.Input[str] api_key: By default, prediction requests will use the API key of the user that created the job. This allows you to make requests on behalf of other users.
+        :param pulumi.Input[str] datarobot_key: If running a job against a prediction instance in the Managed AI Cloud, you must provide the organization level DataRobot-Key.
+        :param pulumi.Input[bool] ssl_enabled: Set to false to run prediction requests from the batch prediction job without SSL. Defaults to true.
+        """
+        pulumi.set(__self__, "host_name", host_name)
+        if api_key is not None:
+            pulumi.set(__self__, "api_key", api_key)
+        if datarobot_key is not None:
+            pulumi.set(__self__, "datarobot_key", datarobot_key)
+        if ssl_enabled is not None:
+            pulumi.set(__self__, "ssl_enabled", ssl_enabled)
+
+    @property
+    @pulumi.getter(name="hostName")
+    def host_name(self) -> pulumi.Input[str]:
+        """
+        Hostname of the prediction instance.
+        """
+        return pulumi.get(self, "host_name")
+
+    @host_name.setter
+    def host_name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "host_name", value)
+
+    @property
+    @pulumi.getter(name="apiKey")
+    def api_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        By default, prediction requests will use the API key of the user that created the job. This allows you to make requests on behalf of other users.
+        """
+        return pulumi.get(self, "api_key")
+
+    @api_key.setter
+    def api_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "api_key", value)
+
+    @property
+    @pulumi.getter(name="datarobotKey")
+    def datarobot_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        If running a job against a prediction instance in the Managed AI Cloud, you must provide the organization level DataRobot-Key.
+        """
+        return pulumi.get(self, "datarobot_key")
+
+    @datarobot_key.setter
+    def datarobot_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "datarobot_key", value)
+
+    @property
+    @pulumi.getter(name="sslEnabled")
+    def ssl_enabled(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Set to false to run prediction requests from the batch prediction job without SSL. Defaults to true.
+        """
+        return pulumi.get(self, "ssl_enabled")
+
+    @ssl_enabled.setter
+    def ssl_enabled(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "ssl_enabled", value)
+
+
+if not MYPY:
+    class BatchPredictionJobDefinitionScheduleArgsDict(TypedDict):
+        day_of_months: pulumi.Input[Sequence[pulumi.Input[str]]]
+        """
+        Days of the month when the job will run.
+        """
+        day_of_weeks: pulumi.Input[Sequence[pulumi.Input[str]]]
+        """
+        Days of the week when the job will run.
+        """
+        hours: pulumi.Input[Sequence[pulumi.Input[str]]]
+        """
+        Hours of the day when the job will run.
+        """
+        minutes: pulumi.Input[Sequence[pulumi.Input[str]]]
+        """
+        Minutes of the day when the job will run.
+        """
+        months: pulumi.Input[Sequence[pulumi.Input[str]]]
+        """
+        Months of the year when the job will run.
+        """
+elif False:
+    BatchPredictionJobDefinitionScheduleArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class BatchPredictionJobDefinitionScheduleArgs:
+    def __init__(__self__, *,
+                 day_of_months: pulumi.Input[Sequence[pulumi.Input[str]]],
+                 day_of_weeks: pulumi.Input[Sequence[pulumi.Input[str]]],
+                 hours: pulumi.Input[Sequence[pulumi.Input[str]]],
+                 minutes: pulumi.Input[Sequence[pulumi.Input[str]]],
+                 months: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] day_of_months: Days of the month when the job will run.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] day_of_weeks: Days of the week when the job will run.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] hours: Hours of the day when the job will run.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] minutes: Minutes of the day when the job will run.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] months: Months of the year when the job will run.
+        """
+        pulumi.set(__self__, "day_of_months", day_of_months)
+        pulumi.set(__self__, "day_of_weeks", day_of_weeks)
+        pulumi.set(__self__, "hours", hours)
+        pulumi.set(__self__, "minutes", minutes)
+        pulumi.set(__self__, "months", months)
+
+    @property
+    @pulumi.getter(name="dayOfMonths")
+    def day_of_months(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        Days of the month when the job will run.
+        """
+        return pulumi.get(self, "day_of_months")
+
+    @day_of_months.setter
+    def day_of_months(self, value: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        pulumi.set(self, "day_of_months", value)
+
+    @property
+    @pulumi.getter(name="dayOfWeeks")
+    def day_of_weeks(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        Days of the week when the job will run.
+        """
+        return pulumi.get(self, "day_of_weeks")
+
+    @day_of_weeks.setter
+    def day_of_weeks(self, value: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        pulumi.set(self, "day_of_weeks", value)
+
+    @property
+    @pulumi.getter
+    def hours(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        Hours of the day when the job will run.
+        """
+        return pulumi.get(self, "hours")
+
+    @hours.setter
+    def hours(self, value: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        pulumi.set(self, "hours", value)
+
+    @property
+    @pulumi.getter
+    def minutes(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        Minutes of the day when the job will run.
+        """
+        return pulumi.get(self, "minutes")
+
+    @minutes.setter
+    def minutes(self, value: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        pulumi.set(self, "minutes", value)
+
+    @property
+    @pulumi.getter
+    def months(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        Months of the year when the job will run.
+        """
+        return pulumi.get(self, "months")
+
+    @months.setter
+    def months(self, value: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        pulumi.set(self, "months", value)
+
+
+if not MYPY:
+    class BatchPredictionJobDefinitionTimeseriesSettingsArgsDict(TypedDict):
+        forecast_point: NotRequired[pulumi.Input[str]]
+        """
+        Forecast point for the dataset, used for the forecast predictions. May be passed if timeseries_settings.type=forecast.
+        """
+        predictions_end_date: NotRequired[pulumi.Input[str]]
+        """
+        End date for historical predictions. May be passed if timeseries_settings.type=historical.
+        """
+        predictions_start_date: NotRequired[pulumi.Input[str]]
+        """
+        Start date for historical predictions. May be passed if timeseries_settings.type=historical.
+        """
+        relax_known_in_advance_features_check: NotRequired[pulumi.Input[bool]]
+        """
+        If True, missing values in the known in advance features are allowed in the forecast window at the prediction time. Default is False.
+        """
+        type: NotRequired[pulumi.Input[str]]
+        """
+        Type of time-series prediction. Must be 'forecast' or 'historical'. Default is 'forecast'.
+        """
+elif False:
+    BatchPredictionJobDefinitionTimeseriesSettingsArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class BatchPredictionJobDefinitionTimeseriesSettingsArgs:
+    def __init__(__self__, *,
+                 forecast_point: Optional[pulumi.Input[str]] = None,
+                 predictions_end_date: Optional[pulumi.Input[str]] = None,
+                 predictions_start_date: Optional[pulumi.Input[str]] = None,
+                 relax_known_in_advance_features_check: Optional[pulumi.Input[bool]] = None,
+                 type: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] forecast_point: Forecast point for the dataset, used for the forecast predictions. May be passed if timeseries_settings.type=forecast.
+        :param pulumi.Input[str] predictions_end_date: End date for historical predictions. May be passed if timeseries_settings.type=historical.
+        :param pulumi.Input[str] predictions_start_date: Start date for historical predictions. May be passed if timeseries_settings.type=historical.
+        :param pulumi.Input[bool] relax_known_in_advance_features_check: If True, missing values in the known in advance features are allowed in the forecast window at the prediction time. Default is False.
+        :param pulumi.Input[str] type: Type of time-series prediction. Must be 'forecast' or 'historical'. Default is 'forecast'.
+        """
+        if forecast_point is not None:
+            pulumi.set(__self__, "forecast_point", forecast_point)
+        if predictions_end_date is not None:
+            pulumi.set(__self__, "predictions_end_date", predictions_end_date)
+        if predictions_start_date is not None:
+            pulumi.set(__self__, "predictions_start_date", predictions_start_date)
+        if relax_known_in_advance_features_check is not None:
+            pulumi.set(__self__, "relax_known_in_advance_features_check", relax_known_in_advance_features_check)
+        if type is not None:
+            pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter(name="forecastPoint")
+    def forecast_point(self) -> Optional[pulumi.Input[str]]:
+        """
+        Forecast point for the dataset, used for the forecast predictions. May be passed if timeseries_settings.type=forecast.
+        """
+        return pulumi.get(self, "forecast_point")
+
+    @forecast_point.setter
+    def forecast_point(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "forecast_point", value)
+
+    @property
+    @pulumi.getter(name="predictionsEndDate")
+    def predictions_end_date(self) -> Optional[pulumi.Input[str]]:
+        """
+        End date for historical predictions. May be passed if timeseries_settings.type=historical.
+        """
+        return pulumi.get(self, "predictions_end_date")
+
+    @predictions_end_date.setter
+    def predictions_end_date(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "predictions_end_date", value)
+
+    @property
+    @pulumi.getter(name="predictionsStartDate")
+    def predictions_start_date(self) -> Optional[pulumi.Input[str]]:
+        """
+        Start date for historical predictions. May be passed if timeseries_settings.type=historical.
+        """
+        return pulumi.get(self, "predictions_start_date")
+
+    @predictions_start_date.setter
+    def predictions_start_date(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "predictions_start_date", value)
+
+    @property
+    @pulumi.getter(name="relaxKnownInAdvanceFeaturesCheck")
+    def relax_known_in_advance_features_check(self) -> Optional[pulumi.Input[bool]]:
+        """
+        If True, missing values in the known in advance features are allowed in the forecast window at the prediction time. Default is False.
+        """
+        return pulumi.get(self, "relax_known_in_advance_features_check")
+
+    @relax_known_in_advance_features_check.setter
+    def relax_known_in_advance_features_check(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "relax_known_in_advance_features_check", value)
+
+    @property
+    @pulumi.getter
+    def type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Type of time-series prediction. Must be 'forecast' or 'historical'. Default is 'forecast'.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "type", value)
 
 
 if not MYPY:
