@@ -20,6 +20,192 @@ export interface ApplicationSourceRuntimeParameterValue {
     value: pulumi.Input<string>;
 }
 
+export interface BatchPredictionJobDefinitionCsvSettings {
+    /**
+     * Fields are delimited by this character. Use the string tab to denote TSV (TAB separated values). Must be either a one-character string or the string tab.
+     */
+    delimiter?: pulumi.Input<string>;
+    /**
+     * Encoding for the CSV files.
+     */
+    encoding?: pulumi.Input<string>;
+    /**
+     * Fields containing the delimiter must be quoted using this character.
+     */
+    quotechar?: pulumi.Input<string>;
+}
+
+export interface BatchPredictionJobDefinitionIntakeSettings {
+    /**
+     * The name of specified database catalog for JDBC type.
+     */
+    catalog?: pulumi.Input<string>;
+    /**
+     * The ID of the credentials for S3 or JDBC data source.
+     */
+    credentialId?: pulumi.Input<string>;
+    /**
+     * The ID of the external data store connected to the JDBC data source.
+     */
+    dataStoreId?: pulumi.Input<string>;
+    /**
+     * The ID of the dataset to score for dataset type.
+     */
+    datasetId?: pulumi.Input<string>;
+    /**
+     * Any non-default endpoint URL for S3 access.
+     */
+    endpointUrl?: pulumi.Input<string>;
+    /**
+     * Changing the fetchSize can be used to balance throughput and memory usage for JDBC type.
+     */
+    fetchSize?: pulumi.Input<number>;
+    /**
+     * String path to file of scoring data for localFile type.
+     */
+    file?: pulumi.Input<string>;
+    /**
+     * A self-supplied SELECT statement of the data set you wish to predict for JDBC type.
+     */
+    query?: pulumi.Input<string>;
+    /**
+     * The name of specified database schema for JDBC type.
+     */
+    schema?: pulumi.Input<string>;
+    /**
+     * The name of specified database table for JDBC type.
+     */
+    table?: pulumi.Input<string>;
+    /**
+     * Type of data source.
+     */
+    type: pulumi.Input<string>;
+    /**
+     * The URL to score (e.g.: s3://bucket/key) for S3 type.
+     */
+    url?: pulumi.Input<string>;
+}
+
+export interface BatchPredictionJobDefinitionOutputSettings {
+    /**
+     * The name of specified database catalog for JDBC type.
+     */
+    catalog?: pulumi.Input<string>;
+    /**
+     * If no existing table is detected, attempt to create it before writing data for JDBC type.
+     */
+    createTableIfNotExists?: pulumi.Input<boolean>;
+    /**
+     * The ID of the credentials for S3 or JDBC data source.
+     */
+    credentialId?: pulumi.Input<string>;
+    /**
+     * The ID of the external data store connected to the JDBC data source.
+     */
+    dataStoreId?: pulumi.Input<string>;
+    /**
+     * Any non-default endpoint URL for S3 access.
+     */
+    endpointUrl?: pulumi.Input<string>;
+    /**
+     * Path to save the scored data as CSV for localFile type.
+     */
+    path?: pulumi.Input<string>;
+    /**
+     * The name of specified database schema for JDBC type.
+     */
+    schema?: pulumi.Input<string>;
+    /**
+     * The type of insertion statement to create for JDBC type.
+     */
+    statementType?: pulumi.Input<string>;
+    /**
+     * The name of specified database table for JDBC type.
+     */
+    table?: pulumi.Input<string>;
+    /**
+     * Type of output.
+     */
+    type?: pulumi.Input<string>;
+    /**
+     * A list of strings containing those column names to be updated for JDBC type.
+     */
+    updateColumns?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The URL for storing the results (e.g.: s3://bucket/key) for S3 type.
+     */
+    url?: pulumi.Input<string>;
+    /**
+     * A list of strings containing those column names to be selected for JDBC type.
+     */
+    whereColumns?: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface BatchPredictionJobDefinitionPredictionInstance {
+    /**
+     * By default, prediction requests will use the API key of the user that created the job. This allows you to make requests on behalf of other users.
+     */
+    apiKey?: pulumi.Input<string>;
+    /**
+     * If running a job against a prediction instance in the Managed AI Cloud, you must provide the organization level DataRobot-Key.
+     */
+    datarobotKey?: pulumi.Input<string>;
+    /**
+     * Hostname of the prediction instance.
+     */
+    hostName: pulumi.Input<string>;
+    /**
+     * Set to false to run prediction requests from the batch prediction job without SSL. Defaults to true.
+     */
+    sslEnabled?: pulumi.Input<boolean>;
+}
+
+export interface BatchPredictionJobDefinitionSchedule {
+    /**
+     * Days of the month when the job will run.
+     */
+    dayOfMonths: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Days of the week when the job will run.
+     */
+    dayOfWeeks: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Hours of the day when the job will run.
+     */
+    hours: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Minutes of the day when the job will run.
+     */
+    minutes: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Months of the year when the job will run.
+     */
+    months: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface BatchPredictionJobDefinitionTimeseriesSettings {
+    /**
+     * Forecast point for the dataset, used for the forecast predictions. May be passed if timeseries_settings.type=forecast.
+     */
+    forecastPoint?: pulumi.Input<string>;
+    /**
+     * End date for historical predictions. May be passed if timeseries_settings.type=historical.
+     */
+    predictionsEndDate?: pulumi.Input<string>;
+    /**
+     * Start date for historical predictions. May be passed if timeseries_settings.type=historical.
+     */
+    predictionsStartDate?: pulumi.Input<string>;
+    /**
+     * If True, missing values in the known in advance features are allowed in the forecast window at the prediction time. Default is False.
+     */
+    relaxKnownInAdvanceFeaturesCheck?: pulumi.Input<boolean>;
+    /**
+     * Type of time-series prediction. Must be 'forecast' or 'historical'. Default is 'forecast'.
+     */
+    type?: pulumi.Input<string>;
+}
+
 export interface CustomJobRuntimeParameterValue {
     /**
      * The name of the runtime parameter.

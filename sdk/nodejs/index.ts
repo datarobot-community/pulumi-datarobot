@@ -20,6 +20,11 @@ export type BasicCredential = import("./basicCredential").BasicCredential;
 export const BasicCredential: typeof import("./basicCredential").BasicCredential = null as any;
 utilities.lazyLoad(exports, ["BasicCredential"], () => require("./basicCredential"));
 
+export { BatchPredictionJobDefinitionArgs, BatchPredictionJobDefinitionState } from "./batchPredictionJobDefinition";
+export type BatchPredictionJobDefinition = import("./batchPredictionJobDefinition").BatchPredictionJobDefinition;
+export const BatchPredictionJobDefinition: typeof import("./batchPredictionJobDefinition").BatchPredictionJobDefinition = null as any;
+utilities.lazyLoad(exports, ["BatchPredictionJobDefinition"], () => require("./batchPredictionJobDefinition"));
+
 export { CustomApplicationArgs, CustomApplicationState } from "./customApplication";
 export type CustomApplication = import("./customApplication").CustomApplication;
 export const CustomApplication: typeof import("./customApplication").CustomApplication = null as any;
@@ -155,6 +160,8 @@ const _module = {
                 return new ApplicationSource(name, <any>undefined, { urn })
             case "datarobot:index/basicCredential:BasicCredential":
                 return new BasicCredential(name, <any>undefined, { urn })
+            case "datarobot:index/batchPredictionJobDefinition:BatchPredictionJobDefinition":
+                return new BatchPredictionJobDefinition(name, <any>undefined, { urn })
             case "datarobot:index/customApplication:CustomApplication":
                 return new CustomApplication(name, <any>undefined, { urn })
             case "datarobot:index/customJob:CustomJob":
@@ -203,6 +210,7 @@ const _module = {
 pulumi.runtime.registerResourceModule("datarobot", "index/apiTokenCredential", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/applicationSource", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/basicCredential", _module)
+pulumi.runtime.registerResourceModule("datarobot", "index/batchPredictionJobDefinition", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/customApplication", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/customJob", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/customModel", _module)
