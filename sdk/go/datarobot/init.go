@@ -33,6 +33,10 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &CustomApplication{}
 	case "datarobot:index/customJob:CustomJob":
 		r = &CustomJob{}
+	case "datarobot:index/customMetricFromJob:CustomMetricFromJob":
+		r = &CustomMetricFromJob{}
+	case "datarobot:index/customMetricJob:CustomMetricJob":
+		r = &CustomMetricJob{}
 	case "datarobot:index/customModel:CustomModel":
 		r = &CustomModel{}
 	case "datarobot:index/datasetFromDatasource:DatasetFromDatasource":
@@ -128,6 +132,16 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"datarobot",
 		"index/customJob",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"datarobot",
+		"index/customMetricFromJob",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"datarobot",
+		"index/customMetricJob",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

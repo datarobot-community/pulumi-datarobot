@@ -11,6 +11,8 @@ from .basic_credential import *
 from .batch_prediction_job_definition import *
 from .custom_application import *
 from .custom_job import *
+from .custom_metric_from_job import *
+from .custom_metric_job import *
 from .custom_model import *
 from .dataset_from_datasource import *
 from .dataset_from_file import *
@@ -91,6 +93,22 @@ _utilities.register(
   "fqn": "pulumi_datarobot",
   "classes": {
    "datarobot:index/customJob:CustomJob": "CustomJob"
+  }
+ },
+ {
+  "pkg": "datarobot",
+  "mod": "index/customMetricFromJob",
+  "fqn": "pulumi_datarobot",
+  "classes": {
+   "datarobot:index/customMetricFromJob:CustomMetricFromJob": "CustomMetricFromJob"
+  }
+ },
+ {
+  "pkg": "datarobot",
+  "mod": "index/customMetricJob",
+  "fqn": "pulumi_datarobot",
+  "classes": {
+   "datarobot:index/customMetricJob:CustomMetricJob": "CustomMetricJob"
   }
  },
  {

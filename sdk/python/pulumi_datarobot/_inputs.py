@@ -31,6 +31,20 @@ __all__ = [
     'BatchPredictionJobDefinitionTimeseriesSettingsArgsDict',
     'CustomJobRuntimeParameterValueArgs',
     'CustomJobRuntimeParameterValueArgsDict',
+    'CustomMetricFromJobBatchArgs',
+    'CustomMetricFromJobBatchArgsDict',
+    'CustomMetricFromJobParameterOverrideArgs',
+    'CustomMetricFromJobParameterOverrideArgsDict',
+    'CustomMetricFromJobSampleCountArgs',
+    'CustomMetricFromJobSampleCountArgsDict',
+    'CustomMetricFromJobScheduleArgs',
+    'CustomMetricFromJobScheduleArgsDict',
+    'CustomMetricFromJobTimestampArgs',
+    'CustomMetricFromJobTimestampArgsDict',
+    'CustomMetricFromJobValueArgs',
+    'CustomMetricFromJobValueArgsDict',
+    'CustomMetricJobRuntimeParameterValueArgs',
+    'CustomMetricJobRuntimeParameterValueArgsDict',
     'CustomModelGuardConfigurationArgs',
     'CustomModelGuardConfigurationArgsDict',
     'CustomModelGuardConfigurationInterventionArgs',
@@ -1092,6 +1106,398 @@ elif False:
 
 @pulumi.input_type
 class CustomJobRuntimeParameterValueArgs:
+    def __init__(__self__, *,
+                 key: pulumi.Input[str],
+                 type: pulumi.Input[str],
+                 value: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] key: The name of the runtime parameter.
+        :param pulumi.Input[str] type: The type of the runtime parameter.
+        :param pulumi.Input[str] value: The value of the runtime parameter (type conversion is handled internally).
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "type", type)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> pulumi.Input[str]:
+        """
+        The name of the runtime parameter.
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: pulumi.Input[str]):
+        pulumi.set(self, "key", value)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        The type of the runtime parameter.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> pulumi.Input[str]:
+        """
+        The value of the runtime parameter (type conversion is handled internally).
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: pulumi.Input[str]):
+        pulumi.set(self, "value", value)
+
+
+if not MYPY:
+    class CustomMetricFromJobBatchArgsDict(TypedDict):
+        column_name: NotRequired[pulumi.Input[str]]
+        """
+        Column name.
+        """
+elif False:
+    CustomMetricFromJobBatchArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class CustomMetricFromJobBatchArgs:
+    def __init__(__self__, *,
+                 column_name: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] column_name: Column name.
+        """
+        if column_name is not None:
+            pulumi.set(__self__, "column_name", column_name)
+
+    @property
+    @pulumi.getter(name="columnName")
+    def column_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Column name.
+        """
+        return pulumi.get(self, "column_name")
+
+    @column_name.setter
+    def column_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "column_name", value)
+
+
+if not MYPY:
+    class CustomMetricFromJobParameterOverrideArgsDict(TypedDict):
+        key: pulumi.Input[str]
+        """
+        The name of the runtime parameter.
+        """
+        type: pulumi.Input[str]
+        """
+        The type of the runtime parameter.
+        """
+        value: pulumi.Input[str]
+        """
+        The value of the runtime parameter (type conversion is handled internally).
+        """
+elif False:
+    CustomMetricFromJobParameterOverrideArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class CustomMetricFromJobParameterOverrideArgs:
+    def __init__(__self__, *,
+                 key: pulumi.Input[str],
+                 type: pulumi.Input[str],
+                 value: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] key: The name of the runtime parameter.
+        :param pulumi.Input[str] type: The type of the runtime parameter.
+        :param pulumi.Input[str] value: The value of the runtime parameter (type conversion is handled internally).
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "type", type)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> pulumi.Input[str]:
+        """
+        The name of the runtime parameter.
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: pulumi.Input[str]):
+        pulumi.set(self, "key", value)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        The type of the runtime parameter.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> pulumi.Input[str]:
+        """
+        The value of the runtime parameter (type conversion is handled internally).
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: pulumi.Input[str]):
+        pulumi.set(self, "value", value)
+
+
+if not MYPY:
+    class CustomMetricFromJobSampleCountArgsDict(TypedDict):
+        column_name: pulumi.Input[str]
+        """
+        Column name.
+        """
+elif False:
+    CustomMetricFromJobSampleCountArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class CustomMetricFromJobSampleCountArgs:
+    def __init__(__self__, *,
+                 column_name: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] column_name: Column name.
+        """
+        pulumi.set(__self__, "column_name", column_name)
+
+    @property
+    @pulumi.getter(name="columnName")
+    def column_name(self) -> pulumi.Input[str]:
+        """
+        Column name.
+        """
+        return pulumi.get(self, "column_name")
+
+    @column_name.setter
+    def column_name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "column_name", value)
+
+
+if not MYPY:
+    class CustomMetricFromJobScheduleArgsDict(TypedDict):
+        day_of_months: pulumi.Input[Sequence[pulumi.Input[str]]]
+        """
+        Days of the month when the metric job will run.
+        """
+        day_of_weeks: pulumi.Input[Sequence[pulumi.Input[str]]]
+        """
+        Days of the week when the metric job will run.
+        """
+        hours: pulumi.Input[Sequence[pulumi.Input[str]]]
+        """
+        Hours of the day when the metric job will run.
+        """
+        minutes: pulumi.Input[Sequence[pulumi.Input[str]]]
+        """
+        Minutes of the day when the metric job will run.
+        """
+        months: pulumi.Input[Sequence[pulumi.Input[str]]]
+        """
+        Months of the year when the metric job will run.
+        """
+elif False:
+    CustomMetricFromJobScheduleArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class CustomMetricFromJobScheduleArgs:
+    def __init__(__self__, *,
+                 day_of_months: pulumi.Input[Sequence[pulumi.Input[str]]],
+                 day_of_weeks: pulumi.Input[Sequence[pulumi.Input[str]]],
+                 hours: pulumi.Input[Sequence[pulumi.Input[str]]],
+                 minutes: pulumi.Input[Sequence[pulumi.Input[str]]],
+                 months: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] day_of_months: Days of the month when the metric job will run.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] day_of_weeks: Days of the week when the metric job will run.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] hours: Hours of the day when the metric job will run.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] minutes: Minutes of the day when the metric job will run.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] months: Months of the year when the metric job will run.
+        """
+        pulumi.set(__self__, "day_of_months", day_of_months)
+        pulumi.set(__self__, "day_of_weeks", day_of_weeks)
+        pulumi.set(__self__, "hours", hours)
+        pulumi.set(__self__, "minutes", minutes)
+        pulumi.set(__self__, "months", months)
+
+    @property
+    @pulumi.getter(name="dayOfMonths")
+    def day_of_months(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        Days of the month when the metric job will run.
+        """
+        return pulumi.get(self, "day_of_months")
+
+    @day_of_months.setter
+    def day_of_months(self, value: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        pulumi.set(self, "day_of_months", value)
+
+    @property
+    @pulumi.getter(name="dayOfWeeks")
+    def day_of_weeks(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        Days of the week when the metric job will run.
+        """
+        return pulumi.get(self, "day_of_weeks")
+
+    @day_of_weeks.setter
+    def day_of_weeks(self, value: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        pulumi.set(self, "day_of_weeks", value)
+
+    @property
+    @pulumi.getter
+    def hours(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        Hours of the day when the metric job will run.
+        """
+        return pulumi.get(self, "hours")
+
+    @hours.setter
+    def hours(self, value: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        pulumi.set(self, "hours", value)
+
+    @property
+    @pulumi.getter
+    def minutes(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        Minutes of the day when the metric job will run.
+        """
+        return pulumi.get(self, "minutes")
+
+    @minutes.setter
+    def minutes(self, value: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        pulumi.set(self, "minutes", value)
+
+    @property
+    @pulumi.getter
+    def months(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        Months of the year when the metric job will run.
+        """
+        return pulumi.get(self, "months")
+
+    @months.setter
+    def months(self, value: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        pulumi.set(self, "months", value)
+
+
+if not MYPY:
+    class CustomMetricFromJobTimestampArgsDict(TypedDict):
+        column_name: NotRequired[pulumi.Input[str]]
+        """
+        Column name.
+        """
+        time_format: NotRequired[pulumi.Input[str]]
+        """
+        Format.
+        """
+elif False:
+    CustomMetricFromJobTimestampArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class CustomMetricFromJobTimestampArgs:
+    def __init__(__self__, *,
+                 column_name: Optional[pulumi.Input[str]] = None,
+                 time_format: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] column_name: Column name.
+        :param pulumi.Input[str] time_format: Format.
+        """
+        if column_name is not None:
+            pulumi.set(__self__, "column_name", column_name)
+        if time_format is not None:
+            pulumi.set(__self__, "time_format", time_format)
+
+    @property
+    @pulumi.getter(name="columnName")
+    def column_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Column name.
+        """
+        return pulumi.get(self, "column_name")
+
+    @column_name.setter
+    def column_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "column_name", value)
+
+    @property
+    @pulumi.getter(name="timeFormat")
+    def time_format(self) -> Optional[pulumi.Input[str]]:
+        """
+        Format.
+        """
+        return pulumi.get(self, "time_format")
+
+    @time_format.setter
+    def time_format(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "time_format", value)
+
+
+if not MYPY:
+    class CustomMetricFromJobValueArgsDict(TypedDict):
+        column_name: NotRequired[pulumi.Input[str]]
+        """
+        Column name.
+        """
+elif False:
+    CustomMetricFromJobValueArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class CustomMetricFromJobValueArgs:
+    def __init__(__self__, *,
+                 column_name: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] column_name: Column name.
+        """
+        if column_name is not None:
+            pulumi.set(__self__, "column_name", column_name)
+
+    @property
+    @pulumi.getter(name="columnName")
+    def column_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Column name.
+        """
+        return pulumi.get(self, "column_name")
+
+    @column_name.setter
+    def column_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "column_name", value)
+
+
+if not MYPY:
+    class CustomMetricJobRuntimeParameterValueArgsDict(TypedDict):
+        key: pulumi.Input[str]
+        """
+        The name of the runtime parameter.
+        """
+        type: pulumi.Input[str]
+        """
+        The type of the runtime parameter.
+        """
+        value: pulumi.Input[str]
+        """
+        The value of the runtime parameter (type conversion is handled internally).
+        """
+elif False:
+    CustomMetricJobRuntimeParameterValueArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class CustomMetricJobRuntimeParameterValueArgs:
     def __init__(__self__, *,
                  key: pulumi.Input[str],
                  type: pulumi.Input[str],

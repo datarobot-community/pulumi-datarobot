@@ -221,6 +221,91 @@ export interface CustomJobRuntimeParameterValue {
     value: pulumi.Input<string>;
 }
 
+export interface CustomMetricFromJobBatch {
+    /**
+     * Column name.
+     */
+    columnName?: pulumi.Input<string>;
+}
+
+export interface CustomMetricFromJobParameterOverride {
+    /**
+     * The name of the runtime parameter.
+     */
+    key: pulumi.Input<string>;
+    /**
+     * The type of the runtime parameter.
+     */
+    type: pulumi.Input<string>;
+    /**
+     * The value of the runtime parameter (type conversion is handled internally).
+     */
+    value: pulumi.Input<string>;
+}
+
+export interface CustomMetricFromJobSampleCount {
+    /**
+     * Column name.
+     */
+    columnName: pulumi.Input<string>;
+}
+
+export interface CustomMetricFromJobSchedule {
+    /**
+     * Days of the month when the metric job will run.
+     */
+    dayOfMonths: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Days of the week when the metric job will run.
+     */
+    dayOfWeeks: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Hours of the day when the metric job will run.
+     */
+    hours: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Minutes of the day when the metric job will run.
+     */
+    minutes: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Months of the year when the metric job will run.
+     */
+    months: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface CustomMetricFromJobTimestamp {
+    /**
+     * Column name.
+     */
+    columnName?: pulumi.Input<string>;
+    /**
+     * Format.
+     */
+    timeFormat?: pulumi.Input<string>;
+}
+
+export interface CustomMetricFromJobValue {
+    /**
+     * Column name.
+     */
+    columnName?: pulumi.Input<string>;
+}
+
+export interface CustomMetricJobRuntimeParameterValue {
+    /**
+     * The name of the runtime parameter.
+     */
+    key: pulumi.Input<string>;
+    /**
+     * The type of the runtime parameter.
+     */
+    type: pulumi.Input<string>;
+    /**
+     * The value of the runtime parameter (type conversion is handled internally).
+     */
+    value: pulumi.Input<string>;
+}
+
 export interface CustomModelGuardConfiguration {
     /**
      * The deployment ID of this guard.

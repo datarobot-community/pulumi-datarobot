@@ -221,6 +221,91 @@ export interface CustomJobRuntimeParameterValue {
     value: string;
 }
 
+export interface CustomMetricFromJobBatch {
+    /**
+     * Column name.
+     */
+    columnName?: string;
+}
+
+export interface CustomMetricFromJobParameterOverride {
+    /**
+     * The name of the runtime parameter.
+     */
+    key: string;
+    /**
+     * The type of the runtime parameter.
+     */
+    type: string;
+    /**
+     * The value of the runtime parameter (type conversion is handled internally).
+     */
+    value: string;
+}
+
+export interface CustomMetricFromJobSampleCount {
+    /**
+     * Column name.
+     */
+    columnName: string;
+}
+
+export interface CustomMetricFromJobSchedule {
+    /**
+     * Days of the month when the metric job will run.
+     */
+    dayOfMonths: string[];
+    /**
+     * Days of the week when the metric job will run.
+     */
+    dayOfWeeks: string[];
+    /**
+     * Hours of the day when the metric job will run.
+     */
+    hours: string[];
+    /**
+     * Minutes of the day when the metric job will run.
+     */
+    minutes: string[];
+    /**
+     * Months of the year when the metric job will run.
+     */
+    months: string[];
+}
+
+export interface CustomMetricFromJobTimestamp {
+    /**
+     * Column name.
+     */
+    columnName?: string;
+    /**
+     * Format.
+     */
+    timeFormat?: string;
+}
+
+export interface CustomMetricFromJobValue {
+    /**
+     * Column name.
+     */
+    columnName?: string;
+}
+
+export interface CustomMetricJobRuntimeParameterValue {
+    /**
+     * The name of the runtime parameter.
+     */
+    key: string;
+    /**
+     * The type of the runtime parameter.
+     */
+    type: string;
+    /**
+     * The value of the runtime parameter (type conversion is handled internally).
+     */
+    value: string;
+}
+
 export interface CustomModelGuardConfiguration {
     /**
      * The deployment ID of this guard.

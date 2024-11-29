@@ -21,6 +21,8 @@
         "config/vars.ts",
         "customApplication.ts",
         "customJob.ts",
+        "customMetricFromJob.ts",
+        "customMetricJob.ts",
         "customModel.ts",
         "datasetFromDatasource.ts",
         "datasetFromFile.ts",
