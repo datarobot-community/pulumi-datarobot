@@ -380,6 +380,140 @@
                 "value"
             ]
         },
+        "datarobot:index/CustomMetricFromJobBatch:CustomMetricFromJobBatch": {
+            "properties": {
+                "columnName": {
+                    "type": "string",
+                    "description": "Column name.\n"
+                }
+            },
+            "type": "object"
+        },
+        "datarobot:index/CustomMetricFromJobParameterOverride:CustomMetricFromJobParameterOverride": {
+            "properties": {
+                "key": {
+                    "type": "string",
+                    "description": "The name of the runtime parameter.\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The type of the runtime parameter.\n"
+                },
+                "value": {
+                    "type": "string",
+                    "description": "The value of the runtime parameter (type conversion is handled internally).\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "key",
+                "type",
+                "value"
+            ]
+        },
+        "datarobot:index/CustomMetricFromJobSampleCount:CustomMetricFromJobSampleCount": {
+            "properties": {
+                "columnName": {
+                    "type": "string",
+                    "description": "Column name.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "columnName"
+            ]
+        },
+        "datarobot:index/CustomMetricFromJobSchedule:CustomMetricFromJobSchedule": {
+            "properties": {
+                "dayOfMonths": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Days of the month when the metric job will run.\n"
+                },
+                "dayOfWeeks": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Days of the week when the metric job will run.\n"
+                },
+                "hours": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Hours of the day when the metric job will run.\n"
+                },
+                "minutes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Minutes of the day when the metric job will run.\n"
+                },
+                "months": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Months of the year when the metric job will run.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "dayOfMonths",
+                "dayOfWeeks",
+                "hours",
+                "minutes",
+                "months"
+            ]
+        },
+        "datarobot:index/CustomMetricFromJobTimestamp:CustomMetricFromJobTimestamp": {
+            "properties": {
+                "columnName": {
+                    "type": "string",
+                    "description": "Column name.\n"
+                },
+                "timeFormat": {
+                    "type": "string",
+                    "description": "Format.\n"
+                }
+            },
+            "type": "object"
+        },
+        "datarobot:index/CustomMetricFromJobValue:CustomMetricFromJobValue": {
+            "properties": {
+                "columnName": {
+                    "type": "string",
+                    "description": "Column name.\n"
+                }
+            },
+            "type": "object"
+        },
+        "datarobot:index/CustomMetricJobRuntimeParameterValue:CustomMetricJobRuntimeParameterValue": {
+            "properties": {
+                "key": {
+                    "type": "string",
+                    "description": "The name of the runtime parameter.\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The type of the runtime parameter.\n"
+                },
+                "value": {
+                    "type": "string",
+                    "description": "The value of the runtime parameter (type conversion is handled internally).\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "key",
+                "type",
+                "value"
+            ]
+        },
         "datarobot:index/CustomModelGuardConfiguration:CustomModelGuardConfiguration": {
             "properties": {
                 "deploymentId": {
@@ -2080,6 +2214,395 @@
                             "$ref": "#/types/datarobot:index/CustomJobRuntimeParameterValue:CustomJobRuntimeParameterValue"
                         },
                         "description": "Additional parameters to be injected into a Job at runtime.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "datarobot:index/customMetricFromJob:CustomMetricFromJob": {
+            "description": "Custom Metric From Job\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@datarobot/pulumi-datarobot\";\n\nconst example = new datarobot.CustomMetricFromJob(\"example\", {\n    deploymentId: datarobot_deployment.example.id,\n    customJobId: datarobot_custom_metric_job.example.id,\n});\nexport const exampleId = example.id;\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample = datarobot.CustomMetricFromJob(\"example\",\n    deployment_id=datarobot_deployment[\"example\"][\"id\"],\n    custom_job_id=datarobot_custom_metric_job[\"example\"][\"id\"])\npulumi.export(\"exampleId\", example.id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = DataRobotPulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Datarobot.CustomMetricFromJob(\"example\", new()\n    {\n        DeploymentId = datarobot_deployment.Example.Id,\n        CustomJobId = datarobot_custom_metric_job.Example.Id,\n    });\n\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"exampleId\"] = example.Id,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texample, err := datarobot.NewCustomMetricFromJob(ctx, \"example\", \u0026datarobot.CustomMetricFromJobArgs{\n\t\t\tDeploymentId: pulumi.Any(datarobot_deployment.Example.Id),\n\t\t\tCustomJobId:  pulumi.Any(datarobot_custom_metric_job.Example.Id),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"exampleId\", example.ID())\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.CustomMetricFromJob;\nimport com.pulumi.datarobot.CustomMetricFromJobArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new CustomMetricFromJob(\"example\", CustomMetricFromJobArgs.builder()\n            .deploymentId(datarobot_deployment.example().id())\n            .customJobId(datarobot_custom_metric_job.example().id())\n            .build());\n\n        ctx.export(\"exampleId\", example.id());\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: datarobot:CustomMetricFromJob\n    properties:\n      deploymentId: ${datarobot_deployment.example.id}\n      customJobId: ${datarobot_custom_metric_job.example.id}\noutputs:\n  exampleId: ${example.id}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "properties": {
+                "baselineValue": {
+                    "type": "number",
+                    "description": "Baseline value for the metric.\n"
+                },
+                "batch": {
+                    "$ref": "#/types/datarobot:index/CustomMetricFromJobBatch:CustomMetricFromJobBatch",
+                    "description": "Batch ID source when reading values from columnar dataset like a file.\n"
+                },
+                "customJobId": {
+                    "type": "string",
+                    "description": "ID of the Custom Job.\n"
+                },
+                "deploymentId": {
+                    "type": "string",
+                    "description": "ID of the Deployment.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Description of the metric.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Name of the metric.\n"
+                },
+                "parameterOverrides": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/datarobot:index/CustomMetricFromJobParameterOverride:CustomMetricFromJobParameterOverride"
+                    },
+                    "description": "Additional parameters to be injected into the Metric Job at runtime.\n"
+                },
+                "sampleCount": {
+                    "$ref": "#/types/datarobot:index/CustomMetricFromJobSampleCount:CustomMetricFromJobSampleCount",
+                    "description": "Points to a weight column if users provide pre-aggregated metric values. Used with columnar datasets.\n"
+                },
+                "schedule": {
+                    "$ref": "#/types/datarobot:index/CustomMetricFromJobSchedule:CustomMetricFromJobSchedule",
+                    "description": "Defines at what intervals the metric job should run.\n"
+                },
+                "timestamp": {
+                    "$ref": "#/types/datarobot:index/CustomMetricFromJobTimestamp:CustomMetricFromJobTimestamp",
+                    "description": "Timestamp spoofing when reading values from file, like dataset. By default, we replicate pd.to_datetime formatting behaviour.\n"
+                },
+                "value": {
+                    "$ref": "#/types/datarobot:index/CustomMetricFromJobValue:CustomMetricFromJobValue",
+                    "description": "Value source when reading values from columnar dataset like a file.\n"
+                }
+            },
+            "required": [
+                "customJobId",
+                "deploymentId",
+                "name"
+            ],
+            "inputProperties": {
+                "baselineValue": {
+                    "type": "number",
+                    "description": "Baseline value for the metric.\n"
+                },
+                "batch": {
+                    "$ref": "#/types/datarobot:index/CustomMetricFromJobBatch:CustomMetricFromJobBatch",
+                    "description": "Batch ID source when reading values from columnar dataset like a file.\n"
+                },
+                "customJobId": {
+                    "type": "string",
+                    "description": "ID of the Custom Job.\n"
+                },
+                "deploymentId": {
+                    "type": "string",
+                    "description": "ID of the Deployment.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Description of the metric.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Name of the metric.\n"
+                },
+                "parameterOverrides": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/datarobot:index/CustomMetricFromJobParameterOverride:CustomMetricFromJobParameterOverride"
+                    },
+                    "description": "Additional parameters to be injected into the Metric Job at runtime.\n"
+                },
+                "sampleCount": {
+                    "$ref": "#/types/datarobot:index/CustomMetricFromJobSampleCount:CustomMetricFromJobSampleCount",
+                    "description": "Points to a weight column if users provide pre-aggregated metric values. Used with columnar datasets.\n"
+                },
+                "schedule": {
+                    "$ref": "#/types/datarobot:index/CustomMetricFromJobSchedule:CustomMetricFromJobSchedule",
+                    "description": "Defines at what intervals the metric job should run.\n"
+                },
+                "timestamp": {
+                    "$ref": "#/types/datarobot:index/CustomMetricFromJobTimestamp:CustomMetricFromJobTimestamp",
+                    "description": "Timestamp spoofing when reading values from file, like dataset. By default, we replicate pd.to_datetime formatting behaviour.\n"
+                },
+                "value": {
+                    "$ref": "#/types/datarobot:index/CustomMetricFromJobValue:CustomMetricFromJobValue",
+                    "description": "Value source when reading values from columnar dataset like a file.\n"
+                }
+            },
+            "requiredInputs": [
+                "customJobId",
+                "deploymentId"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering CustomMetricFromJob resources.\n",
+                "properties": {
+                    "baselineValue": {
+                        "type": "number",
+                        "description": "Baseline value for the metric.\n"
+                    },
+                    "batch": {
+                        "$ref": "#/types/datarobot:index/CustomMetricFromJobBatch:CustomMetricFromJobBatch",
+                        "description": "Batch ID source when reading values from columnar dataset like a file.\n"
+                    },
+                    "customJobId": {
+                        "type": "string",
+                        "description": "ID of the Custom Job.\n"
+                    },
+                    "deploymentId": {
+                        "type": "string",
+                        "description": "ID of the Deployment.\n"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Description of the metric.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Name of the metric.\n"
+                    },
+                    "parameterOverrides": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/datarobot:index/CustomMetricFromJobParameterOverride:CustomMetricFromJobParameterOverride"
+                        },
+                        "description": "Additional parameters to be injected into the Metric Job at runtime.\n"
+                    },
+                    "sampleCount": {
+                        "$ref": "#/types/datarobot:index/CustomMetricFromJobSampleCount:CustomMetricFromJobSampleCount",
+                        "description": "Points to a weight column if users provide pre-aggregated metric values. Used with columnar datasets.\n"
+                    },
+                    "schedule": {
+                        "$ref": "#/types/datarobot:index/CustomMetricFromJobSchedule:CustomMetricFromJobSchedule",
+                        "description": "Defines at what intervals the metric job should run.\n"
+                    },
+                    "timestamp": {
+                        "$ref": "#/types/datarobot:index/CustomMetricFromJobTimestamp:CustomMetricFromJobTimestamp",
+                        "description": "Timestamp spoofing when reading values from file, like dataset. By default, we replicate pd.to_datetime formatting behaviour.\n"
+                    },
+                    "value": {
+                        "$ref": "#/types/datarobot:index/CustomMetricFromJobValue:CustomMetricFromJobValue",
+                        "description": "Value source when reading values from columnar dataset like a file.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "datarobot:index/customMetricJob:CustomMetricJob": {
+            "description": "Custom Job\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@datarobot/pulumi-datarobot\";\n\nconst example = new datarobot.CustomMetricJob(\"example\", {\n    files: [\n        \"file1.py\",\n        \"file2.py\",\n    ],\n    environmentId: \"65f9b27eab986d30d4c64268\",\n    description: \"Example Custom Metric Job Description\",\n    runtimeParameterValues: [{\n        key: \"EXAMPLE_PARAM\",\n        type: \"string\",\n        value: \"val\",\n    }],\n    egressNetworkPolicy: \"none\",\n    resourceBundleId: \"cpu.micro\",\n    units: \"count\",\n    directionality: \"lowerIsBetter\",\n    type: \"sum\",\n    isModelSpecific: false,\n});\nexport const exampleId = example.id;\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample = datarobot.CustomMetricJob(\"example\",\n    files=[\n        \"file1.py\",\n        \"file2.py\",\n    ],\n    environment_id=\"65f9b27eab986d30d4c64268\",\n    description=\"Example Custom Metric Job Description\",\n    runtime_parameter_values=[{\n        \"key\": \"EXAMPLE_PARAM\",\n        \"type\": \"string\",\n        \"value\": \"val\",\n    }],\n    egress_network_policy=\"none\",\n    resource_bundle_id=\"cpu.micro\",\n    units=\"count\",\n    directionality=\"lowerIsBetter\",\n    type=\"sum\",\n    is_model_specific=False)\npulumi.export(\"exampleId\", example.id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = DataRobotPulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Datarobot.CustomMetricJob(\"example\", new()\n    {\n        Files = new[]\n        {\n            \"file1.py\",\n            \"file2.py\",\n        },\n        EnvironmentId = \"65f9b27eab986d30d4c64268\",\n        Description = \"Example Custom Metric Job Description\",\n        RuntimeParameterValues = new[]\n        {\n            new Datarobot.Inputs.CustomMetricJobRuntimeParameterValueArgs\n            {\n                Key = \"EXAMPLE_PARAM\",\n                Type = \"string\",\n                Value = \"val\",\n            },\n        },\n        EgressNetworkPolicy = \"none\",\n        ResourceBundleId = \"cpu.micro\",\n        Units = \"count\",\n        Directionality = \"lowerIsBetter\",\n        Type = \"sum\",\n        IsModelSpecific = false,\n    });\n\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"exampleId\"] = example.Id,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texample, err := datarobot.NewCustomMetricJob(ctx, \"example\", \u0026datarobot.CustomMetricJobArgs{\n\t\t\tFiles: pulumi.Any{\n\t\t\t\t\"file1.py\",\n\t\t\t\t\"file2.py\",\n\t\t\t},\n\t\t\tEnvironmentId: pulumi.String(\"65f9b27eab986d30d4c64268\"),\n\t\t\tDescription:   pulumi.String(\"Example Custom Metric Job Description\"),\n\t\t\tRuntimeParameterValues: datarobot.CustomMetricJobRuntimeParameterValueArray{\n\t\t\t\t\u0026datarobot.CustomMetricJobRuntimeParameterValueArgs{\n\t\t\t\t\tKey:   pulumi.String(\"EXAMPLE_PARAM\"),\n\t\t\t\t\tType:  pulumi.String(\"string\"),\n\t\t\t\t\tValue: pulumi.String(\"val\"),\n\t\t\t\t},\n\t\t\t},\n\t\t\tEgressNetworkPolicy: pulumi.String(\"none\"),\n\t\t\tResourceBundleId:    pulumi.String(\"cpu.micro\"),\n\t\t\tUnits:               pulumi.String(\"count\"),\n\t\t\tDirectionality:      pulumi.String(\"lowerIsBetter\"),\n\t\t\tType:                pulumi.String(\"sum\"),\n\t\t\tIsModelSpecific:     pulumi.Bool(false),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"exampleId\", example.ID())\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.CustomMetricJob;\nimport com.pulumi.datarobot.CustomMetricJobArgs;\nimport com.pulumi.datarobot.inputs.CustomMetricJobRuntimeParameterValueArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new CustomMetricJob(\"example\", CustomMetricJobArgs.builder()\n            .files(            \n                \"file1.py\",\n                \"file2.py\")\n            .environmentId(\"65f9b27eab986d30d4c64268\")\n            .description(\"Example Custom Metric Job Description\")\n            .runtimeParameterValues(CustomMetricJobRuntimeParameterValueArgs.builder()\n                .key(\"EXAMPLE_PARAM\")\n                .type(\"string\")\n                .value(\"val\")\n                .build())\n            .egressNetworkPolicy(\"none\")\n            .resourceBundleId(\"cpu.micro\")\n            .units(\"count\")\n            .directionality(\"lowerIsBetter\")\n            .type(\"sum\")\n            .isModelSpecific(false)\n            .build());\n\n        ctx.export(\"exampleId\", example.id());\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: datarobot:CustomMetricJob\n    properties:\n      files:\n        - file1.py\n        - file2.py\n      environmentId: 65f9b27eab986d30d4c64268\n      # Optional\n      description: Example Custom Metric Job Description\n      runtimeParameterValues:\n        - key: EXAMPLE_PARAM\n          type: string\n          value: val\n      egressNetworkPolicy: none\n      resourceBundleId: cpu.micro\n      units: count\n      directionality: lowerIsBetter\n      type: sum\n      isModelSpecific: false\noutputs:\n  exampleId: ${example.id}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "properties": {
+                "description": {
+                    "type": "string",
+                    "description": "The description of the Custom Metric Job.\n"
+                },
+                "directionality": {
+                    "type": "string",
+                    "description": "The directionality of the Custom Metric.\n"
+                },
+                "egressNetworkPolicy": {
+                    "type": "string",
+                    "description": "The egress network policy for the Job.\n"
+                },
+                "environmentId": {
+                    "type": "string",
+                    "description": "The ID of the environment to use with the Job.\n"
+                },
+                "environmentVersionId": {
+                    "type": "string",
+                    "description": "The ID of the environment version to use with the Job.\n"
+                },
+                "files": {
+                    "$ref": "pulumi.json#/Any",
+                    "description": "The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Job. If list is of strings, then basenames will be used for tuples.\n"
+                },
+                "filesHashes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The hash of file contents for each file in files.\n"
+                },
+                "folderPath": {
+                    "type": "string",
+                    "description": "The path to a folder containing files to be uploaded. Each file in the folder is uploaded under path relative to a folder path.\n"
+                },
+                "folderPathHash": {
+                    "type": "string",
+                    "description": "The hash of the folder path contents.\n"
+                },
+                "isModelSpecific": {
+                    "type": "boolean",
+                    "description": "Determines whether the metric is related to the model or deployment.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the Custom Metric Job.\n"
+                },
+                "resourceBundleId": {
+                    "type": "string",
+                    "description": "A single identifier that represents a bundle of resources: Memory, CPU, GPU, etc.\n"
+                },
+                "runtimeParameterValues": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/datarobot:index/CustomMetricJobRuntimeParameterValue:CustomMetricJobRuntimeParameterValue"
+                    },
+                    "description": "Additional parameters to be injected into a Job at runtime.\n"
+                },
+                "timeStep": {
+                    "type": "string",
+                    "description": "Custom metric time bucket size.\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The aggregation type of the custom metric.\n"
+                },
+                "units": {
+                    "type": "string",
+                    "description": "The units, or the y-axis label, of the given custom metric.\n"
+                }
+            },
+            "required": [
+                "directionality",
+                "egressNetworkPolicy",
+                "environmentId",
+                "environmentVersionId",
+                "filesHashes",
+                "folderPathHash",
+                "isModelSpecific",
+                "name",
+                "runtimeParameterValues",
+                "timeStep",
+                "type",
+                "units"
+            ],
+            "inputProperties": {
+                "description": {
+                    "type": "string",
+                    "description": "The description of the Custom Metric Job.\n"
+                },
+                "directionality": {
+                    "type": "string",
+                    "description": "The directionality of the Custom Metric.\n"
+                },
+                "egressNetworkPolicy": {
+                    "type": "string",
+                    "description": "The egress network policy for the Job.\n"
+                },
+                "environmentId": {
+                    "type": "string",
+                    "description": "The ID of the environment to use with the Job.\n"
+                },
+                "environmentVersionId": {
+                    "type": "string",
+                    "description": "The ID of the environment version to use with the Job.\n"
+                },
+                "files": {
+                    "$ref": "pulumi.json#/Any",
+                    "description": "The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Job. If list is of strings, then basenames will be used for tuples.\n"
+                },
+                "folderPath": {
+                    "type": "string",
+                    "description": "The path to a folder containing files to be uploaded. Each file in the folder is uploaded under path relative to a folder path.\n"
+                },
+                "isModelSpecific": {
+                    "type": "boolean",
+                    "description": "Determines whether the metric is related to the model or deployment.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the Custom Metric Job.\n"
+                },
+                "resourceBundleId": {
+                    "type": "string",
+                    "description": "A single identifier that represents a bundle of resources: Memory, CPU, GPU, etc.\n"
+                },
+                "runtimeParameterValues": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/datarobot:index/CustomMetricJobRuntimeParameterValue:CustomMetricJobRuntimeParameterValue"
+                    },
+                    "description": "Additional parameters to be injected into a Job at runtime.\n"
+                },
+                "timeStep": {
+                    "type": "string",
+                    "description": "Custom metric time bucket size.\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The aggregation type of the custom metric.\n"
+                },
+                "units": {
+                    "type": "string",
+                    "description": "The units, or the y-axis label, of the given custom metric.\n"
+                }
+            },
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering CustomMetricJob resources.\n",
+                "properties": {
+                    "description": {
+                        "type": "string",
+                        "description": "The description of the Custom Metric Job.\n"
+                    },
+                    "directionality": {
+                        "type": "string",
+                        "description": "The directionality of the Custom Metric.\n"
+                    },
+                    "egressNetworkPolicy": {
+                        "type": "string",
+                        "description": "The egress network policy for the Job.\n"
+                    },
+                    "environmentId": {
+                        "type": "string",
+                        "description": "The ID of the environment to use with the Job.\n"
+                    },
+                    "environmentVersionId": {
+                        "type": "string",
+                        "description": "The ID of the environment version to use with the Job.\n"
+                    },
+                    "files": {
+                        "$ref": "pulumi.json#/Any",
+                        "description": "The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Job. If list is of strings, then basenames will be used for tuples.\n"
+                    },
+                    "filesHashes": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "The hash of file contents for each file in files.\n"
+                    },
+                    "folderPath": {
+                        "type": "string",
+                        "description": "The path to a folder containing files to be uploaded. Each file in the folder is uploaded under path relative to a folder path.\n"
+                    },
+                    "folderPathHash": {
+                        "type": "string",
+                        "description": "The hash of the folder path contents.\n"
+                    },
+                    "isModelSpecific": {
+                        "type": "boolean",
+                        "description": "Determines whether the metric is related to the model or deployment.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the Custom Metric Job.\n"
+                    },
+                    "resourceBundleId": {
+                        "type": "string",
+                        "description": "A single identifier that represents a bundle of resources: Memory, CPU, GPU, etc.\n"
+                    },
+                    "runtimeParameterValues": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/datarobot:index/CustomMetricJobRuntimeParameterValue:CustomMetricJobRuntimeParameterValue"
+                        },
+                        "description": "Additional parameters to be injected into a Job at runtime.\n"
+                    },
+                    "timeStep": {
+                        "type": "string",
+                        "description": "Custom metric time bucket size.\n"
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "The aggregation type of the custom metric.\n"
+                    },
+                    "units": {
+                        "type": "string",
+                        "description": "The units, or the y-axis label, of the given custom metric.\n"
                     }
                 },
                 "type": "object"
