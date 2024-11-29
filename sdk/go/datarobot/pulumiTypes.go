@@ -1751,6 +1751,1016 @@ func (o CustomJobRuntimeParameterValueArrayOutput) Index(i pulumi.IntInput) Cust
 	}).(CustomJobRuntimeParameterValueOutput)
 }
 
+type CustomMetricFromJobBatch struct {
+	// Column name.
+	ColumnName *string `pulumi:"columnName"`
+}
+
+// CustomMetricFromJobBatchInput is an input type that accepts CustomMetricFromJobBatchArgs and CustomMetricFromJobBatchOutput values.
+// You can construct a concrete instance of `CustomMetricFromJobBatchInput` via:
+//
+//	CustomMetricFromJobBatchArgs{...}
+type CustomMetricFromJobBatchInput interface {
+	pulumi.Input
+
+	ToCustomMetricFromJobBatchOutput() CustomMetricFromJobBatchOutput
+	ToCustomMetricFromJobBatchOutputWithContext(context.Context) CustomMetricFromJobBatchOutput
+}
+
+type CustomMetricFromJobBatchArgs struct {
+	// Column name.
+	ColumnName pulumi.StringPtrInput `pulumi:"columnName"`
+}
+
+func (CustomMetricFromJobBatchArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomMetricFromJobBatch)(nil)).Elem()
+}
+
+func (i CustomMetricFromJobBatchArgs) ToCustomMetricFromJobBatchOutput() CustomMetricFromJobBatchOutput {
+	return i.ToCustomMetricFromJobBatchOutputWithContext(context.Background())
+}
+
+func (i CustomMetricFromJobBatchArgs) ToCustomMetricFromJobBatchOutputWithContext(ctx context.Context) CustomMetricFromJobBatchOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomMetricFromJobBatchOutput)
+}
+
+func (i CustomMetricFromJobBatchArgs) ToCustomMetricFromJobBatchPtrOutput() CustomMetricFromJobBatchPtrOutput {
+	return i.ToCustomMetricFromJobBatchPtrOutputWithContext(context.Background())
+}
+
+func (i CustomMetricFromJobBatchArgs) ToCustomMetricFromJobBatchPtrOutputWithContext(ctx context.Context) CustomMetricFromJobBatchPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomMetricFromJobBatchOutput).ToCustomMetricFromJobBatchPtrOutputWithContext(ctx)
+}
+
+// CustomMetricFromJobBatchPtrInput is an input type that accepts CustomMetricFromJobBatchArgs, CustomMetricFromJobBatchPtr and CustomMetricFromJobBatchPtrOutput values.
+// You can construct a concrete instance of `CustomMetricFromJobBatchPtrInput` via:
+//
+//	        CustomMetricFromJobBatchArgs{...}
+//
+//	or:
+//
+//	        nil
+type CustomMetricFromJobBatchPtrInput interface {
+	pulumi.Input
+
+	ToCustomMetricFromJobBatchPtrOutput() CustomMetricFromJobBatchPtrOutput
+	ToCustomMetricFromJobBatchPtrOutputWithContext(context.Context) CustomMetricFromJobBatchPtrOutput
+}
+
+type customMetricFromJobBatchPtrType CustomMetricFromJobBatchArgs
+
+func CustomMetricFromJobBatchPtr(v *CustomMetricFromJobBatchArgs) CustomMetricFromJobBatchPtrInput {
+	return (*customMetricFromJobBatchPtrType)(v)
+}
+
+func (*customMetricFromJobBatchPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**CustomMetricFromJobBatch)(nil)).Elem()
+}
+
+func (i *customMetricFromJobBatchPtrType) ToCustomMetricFromJobBatchPtrOutput() CustomMetricFromJobBatchPtrOutput {
+	return i.ToCustomMetricFromJobBatchPtrOutputWithContext(context.Background())
+}
+
+func (i *customMetricFromJobBatchPtrType) ToCustomMetricFromJobBatchPtrOutputWithContext(ctx context.Context) CustomMetricFromJobBatchPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomMetricFromJobBatchPtrOutput)
+}
+
+type CustomMetricFromJobBatchOutput struct{ *pulumi.OutputState }
+
+func (CustomMetricFromJobBatchOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomMetricFromJobBatch)(nil)).Elem()
+}
+
+func (o CustomMetricFromJobBatchOutput) ToCustomMetricFromJobBatchOutput() CustomMetricFromJobBatchOutput {
+	return o
+}
+
+func (o CustomMetricFromJobBatchOutput) ToCustomMetricFromJobBatchOutputWithContext(ctx context.Context) CustomMetricFromJobBatchOutput {
+	return o
+}
+
+func (o CustomMetricFromJobBatchOutput) ToCustomMetricFromJobBatchPtrOutput() CustomMetricFromJobBatchPtrOutput {
+	return o.ToCustomMetricFromJobBatchPtrOutputWithContext(context.Background())
+}
+
+func (o CustomMetricFromJobBatchOutput) ToCustomMetricFromJobBatchPtrOutputWithContext(ctx context.Context) CustomMetricFromJobBatchPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v CustomMetricFromJobBatch) *CustomMetricFromJobBatch {
+		return &v
+	}).(CustomMetricFromJobBatchPtrOutput)
+}
+
+// Column name.
+func (o CustomMetricFromJobBatchOutput) ColumnName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CustomMetricFromJobBatch) *string { return v.ColumnName }).(pulumi.StringPtrOutput)
+}
+
+type CustomMetricFromJobBatchPtrOutput struct{ *pulumi.OutputState }
+
+func (CustomMetricFromJobBatchPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**CustomMetricFromJobBatch)(nil)).Elem()
+}
+
+func (o CustomMetricFromJobBatchPtrOutput) ToCustomMetricFromJobBatchPtrOutput() CustomMetricFromJobBatchPtrOutput {
+	return o
+}
+
+func (o CustomMetricFromJobBatchPtrOutput) ToCustomMetricFromJobBatchPtrOutputWithContext(ctx context.Context) CustomMetricFromJobBatchPtrOutput {
+	return o
+}
+
+func (o CustomMetricFromJobBatchPtrOutput) Elem() CustomMetricFromJobBatchOutput {
+	return o.ApplyT(func(v *CustomMetricFromJobBatch) CustomMetricFromJobBatch {
+		if v != nil {
+			return *v
+		}
+		var ret CustomMetricFromJobBatch
+		return ret
+	}).(CustomMetricFromJobBatchOutput)
+}
+
+// Column name.
+func (o CustomMetricFromJobBatchPtrOutput) ColumnName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CustomMetricFromJobBatch) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ColumnName
+	}).(pulumi.StringPtrOutput)
+}
+
+type CustomMetricFromJobParameterOverride struct {
+	// The name of the runtime parameter.
+	Key string `pulumi:"key"`
+	// The type of the runtime parameter.
+	Type string `pulumi:"type"`
+	// The value of the runtime parameter (type conversion is handled internally).
+	Value string `pulumi:"value"`
+}
+
+// CustomMetricFromJobParameterOverrideInput is an input type that accepts CustomMetricFromJobParameterOverrideArgs and CustomMetricFromJobParameterOverrideOutput values.
+// You can construct a concrete instance of `CustomMetricFromJobParameterOverrideInput` via:
+//
+//	CustomMetricFromJobParameterOverrideArgs{...}
+type CustomMetricFromJobParameterOverrideInput interface {
+	pulumi.Input
+
+	ToCustomMetricFromJobParameterOverrideOutput() CustomMetricFromJobParameterOverrideOutput
+	ToCustomMetricFromJobParameterOverrideOutputWithContext(context.Context) CustomMetricFromJobParameterOverrideOutput
+}
+
+type CustomMetricFromJobParameterOverrideArgs struct {
+	// The name of the runtime parameter.
+	Key pulumi.StringInput `pulumi:"key"`
+	// The type of the runtime parameter.
+	Type pulumi.StringInput `pulumi:"type"`
+	// The value of the runtime parameter (type conversion is handled internally).
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (CustomMetricFromJobParameterOverrideArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomMetricFromJobParameterOverride)(nil)).Elem()
+}
+
+func (i CustomMetricFromJobParameterOverrideArgs) ToCustomMetricFromJobParameterOverrideOutput() CustomMetricFromJobParameterOverrideOutput {
+	return i.ToCustomMetricFromJobParameterOverrideOutputWithContext(context.Background())
+}
+
+func (i CustomMetricFromJobParameterOverrideArgs) ToCustomMetricFromJobParameterOverrideOutputWithContext(ctx context.Context) CustomMetricFromJobParameterOverrideOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomMetricFromJobParameterOverrideOutput)
+}
+
+// CustomMetricFromJobParameterOverrideArrayInput is an input type that accepts CustomMetricFromJobParameterOverrideArray and CustomMetricFromJobParameterOverrideArrayOutput values.
+// You can construct a concrete instance of `CustomMetricFromJobParameterOverrideArrayInput` via:
+//
+//	CustomMetricFromJobParameterOverrideArray{ CustomMetricFromJobParameterOverrideArgs{...} }
+type CustomMetricFromJobParameterOverrideArrayInput interface {
+	pulumi.Input
+
+	ToCustomMetricFromJobParameterOverrideArrayOutput() CustomMetricFromJobParameterOverrideArrayOutput
+	ToCustomMetricFromJobParameterOverrideArrayOutputWithContext(context.Context) CustomMetricFromJobParameterOverrideArrayOutput
+}
+
+type CustomMetricFromJobParameterOverrideArray []CustomMetricFromJobParameterOverrideInput
+
+func (CustomMetricFromJobParameterOverrideArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CustomMetricFromJobParameterOverride)(nil)).Elem()
+}
+
+func (i CustomMetricFromJobParameterOverrideArray) ToCustomMetricFromJobParameterOverrideArrayOutput() CustomMetricFromJobParameterOverrideArrayOutput {
+	return i.ToCustomMetricFromJobParameterOverrideArrayOutputWithContext(context.Background())
+}
+
+func (i CustomMetricFromJobParameterOverrideArray) ToCustomMetricFromJobParameterOverrideArrayOutputWithContext(ctx context.Context) CustomMetricFromJobParameterOverrideArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomMetricFromJobParameterOverrideArrayOutput)
+}
+
+type CustomMetricFromJobParameterOverrideOutput struct{ *pulumi.OutputState }
+
+func (CustomMetricFromJobParameterOverrideOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomMetricFromJobParameterOverride)(nil)).Elem()
+}
+
+func (o CustomMetricFromJobParameterOverrideOutput) ToCustomMetricFromJobParameterOverrideOutput() CustomMetricFromJobParameterOverrideOutput {
+	return o
+}
+
+func (o CustomMetricFromJobParameterOverrideOutput) ToCustomMetricFromJobParameterOverrideOutputWithContext(ctx context.Context) CustomMetricFromJobParameterOverrideOutput {
+	return o
+}
+
+// The name of the runtime parameter.
+func (o CustomMetricFromJobParameterOverrideOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v CustomMetricFromJobParameterOverride) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// The type of the runtime parameter.
+func (o CustomMetricFromJobParameterOverrideOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v CustomMetricFromJobParameterOverride) string { return v.Type }).(pulumi.StringOutput)
+}
+
+// The value of the runtime parameter (type conversion is handled internally).
+func (o CustomMetricFromJobParameterOverrideOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v CustomMetricFromJobParameterOverride) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type CustomMetricFromJobParameterOverrideArrayOutput struct{ *pulumi.OutputState }
+
+func (CustomMetricFromJobParameterOverrideArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CustomMetricFromJobParameterOverride)(nil)).Elem()
+}
+
+func (o CustomMetricFromJobParameterOverrideArrayOutput) ToCustomMetricFromJobParameterOverrideArrayOutput() CustomMetricFromJobParameterOverrideArrayOutput {
+	return o
+}
+
+func (o CustomMetricFromJobParameterOverrideArrayOutput) ToCustomMetricFromJobParameterOverrideArrayOutputWithContext(ctx context.Context) CustomMetricFromJobParameterOverrideArrayOutput {
+	return o
+}
+
+func (o CustomMetricFromJobParameterOverrideArrayOutput) Index(i pulumi.IntInput) CustomMetricFromJobParameterOverrideOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CustomMetricFromJobParameterOverride {
+		return vs[0].([]CustomMetricFromJobParameterOverride)[vs[1].(int)]
+	}).(CustomMetricFromJobParameterOverrideOutput)
+}
+
+type CustomMetricFromJobSampleCount struct {
+	// Column name.
+	ColumnName string `pulumi:"columnName"`
+}
+
+// CustomMetricFromJobSampleCountInput is an input type that accepts CustomMetricFromJobSampleCountArgs and CustomMetricFromJobSampleCountOutput values.
+// You can construct a concrete instance of `CustomMetricFromJobSampleCountInput` via:
+//
+//	CustomMetricFromJobSampleCountArgs{...}
+type CustomMetricFromJobSampleCountInput interface {
+	pulumi.Input
+
+	ToCustomMetricFromJobSampleCountOutput() CustomMetricFromJobSampleCountOutput
+	ToCustomMetricFromJobSampleCountOutputWithContext(context.Context) CustomMetricFromJobSampleCountOutput
+}
+
+type CustomMetricFromJobSampleCountArgs struct {
+	// Column name.
+	ColumnName pulumi.StringInput `pulumi:"columnName"`
+}
+
+func (CustomMetricFromJobSampleCountArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomMetricFromJobSampleCount)(nil)).Elem()
+}
+
+func (i CustomMetricFromJobSampleCountArgs) ToCustomMetricFromJobSampleCountOutput() CustomMetricFromJobSampleCountOutput {
+	return i.ToCustomMetricFromJobSampleCountOutputWithContext(context.Background())
+}
+
+func (i CustomMetricFromJobSampleCountArgs) ToCustomMetricFromJobSampleCountOutputWithContext(ctx context.Context) CustomMetricFromJobSampleCountOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomMetricFromJobSampleCountOutput)
+}
+
+func (i CustomMetricFromJobSampleCountArgs) ToCustomMetricFromJobSampleCountPtrOutput() CustomMetricFromJobSampleCountPtrOutput {
+	return i.ToCustomMetricFromJobSampleCountPtrOutputWithContext(context.Background())
+}
+
+func (i CustomMetricFromJobSampleCountArgs) ToCustomMetricFromJobSampleCountPtrOutputWithContext(ctx context.Context) CustomMetricFromJobSampleCountPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomMetricFromJobSampleCountOutput).ToCustomMetricFromJobSampleCountPtrOutputWithContext(ctx)
+}
+
+// CustomMetricFromJobSampleCountPtrInput is an input type that accepts CustomMetricFromJobSampleCountArgs, CustomMetricFromJobSampleCountPtr and CustomMetricFromJobSampleCountPtrOutput values.
+// You can construct a concrete instance of `CustomMetricFromJobSampleCountPtrInput` via:
+//
+//	        CustomMetricFromJobSampleCountArgs{...}
+//
+//	or:
+//
+//	        nil
+type CustomMetricFromJobSampleCountPtrInput interface {
+	pulumi.Input
+
+	ToCustomMetricFromJobSampleCountPtrOutput() CustomMetricFromJobSampleCountPtrOutput
+	ToCustomMetricFromJobSampleCountPtrOutputWithContext(context.Context) CustomMetricFromJobSampleCountPtrOutput
+}
+
+type customMetricFromJobSampleCountPtrType CustomMetricFromJobSampleCountArgs
+
+func CustomMetricFromJobSampleCountPtr(v *CustomMetricFromJobSampleCountArgs) CustomMetricFromJobSampleCountPtrInput {
+	return (*customMetricFromJobSampleCountPtrType)(v)
+}
+
+func (*customMetricFromJobSampleCountPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**CustomMetricFromJobSampleCount)(nil)).Elem()
+}
+
+func (i *customMetricFromJobSampleCountPtrType) ToCustomMetricFromJobSampleCountPtrOutput() CustomMetricFromJobSampleCountPtrOutput {
+	return i.ToCustomMetricFromJobSampleCountPtrOutputWithContext(context.Background())
+}
+
+func (i *customMetricFromJobSampleCountPtrType) ToCustomMetricFromJobSampleCountPtrOutputWithContext(ctx context.Context) CustomMetricFromJobSampleCountPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomMetricFromJobSampleCountPtrOutput)
+}
+
+type CustomMetricFromJobSampleCountOutput struct{ *pulumi.OutputState }
+
+func (CustomMetricFromJobSampleCountOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomMetricFromJobSampleCount)(nil)).Elem()
+}
+
+func (o CustomMetricFromJobSampleCountOutput) ToCustomMetricFromJobSampleCountOutput() CustomMetricFromJobSampleCountOutput {
+	return o
+}
+
+func (o CustomMetricFromJobSampleCountOutput) ToCustomMetricFromJobSampleCountOutputWithContext(ctx context.Context) CustomMetricFromJobSampleCountOutput {
+	return o
+}
+
+func (o CustomMetricFromJobSampleCountOutput) ToCustomMetricFromJobSampleCountPtrOutput() CustomMetricFromJobSampleCountPtrOutput {
+	return o.ToCustomMetricFromJobSampleCountPtrOutputWithContext(context.Background())
+}
+
+func (o CustomMetricFromJobSampleCountOutput) ToCustomMetricFromJobSampleCountPtrOutputWithContext(ctx context.Context) CustomMetricFromJobSampleCountPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v CustomMetricFromJobSampleCount) *CustomMetricFromJobSampleCount {
+		return &v
+	}).(CustomMetricFromJobSampleCountPtrOutput)
+}
+
+// Column name.
+func (o CustomMetricFromJobSampleCountOutput) ColumnName() pulumi.StringOutput {
+	return o.ApplyT(func(v CustomMetricFromJobSampleCount) string { return v.ColumnName }).(pulumi.StringOutput)
+}
+
+type CustomMetricFromJobSampleCountPtrOutput struct{ *pulumi.OutputState }
+
+func (CustomMetricFromJobSampleCountPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**CustomMetricFromJobSampleCount)(nil)).Elem()
+}
+
+func (o CustomMetricFromJobSampleCountPtrOutput) ToCustomMetricFromJobSampleCountPtrOutput() CustomMetricFromJobSampleCountPtrOutput {
+	return o
+}
+
+func (o CustomMetricFromJobSampleCountPtrOutput) ToCustomMetricFromJobSampleCountPtrOutputWithContext(ctx context.Context) CustomMetricFromJobSampleCountPtrOutput {
+	return o
+}
+
+func (o CustomMetricFromJobSampleCountPtrOutput) Elem() CustomMetricFromJobSampleCountOutput {
+	return o.ApplyT(func(v *CustomMetricFromJobSampleCount) CustomMetricFromJobSampleCount {
+		if v != nil {
+			return *v
+		}
+		var ret CustomMetricFromJobSampleCount
+		return ret
+	}).(CustomMetricFromJobSampleCountOutput)
+}
+
+// Column name.
+func (o CustomMetricFromJobSampleCountPtrOutput) ColumnName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CustomMetricFromJobSampleCount) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ColumnName
+	}).(pulumi.StringPtrOutput)
+}
+
+type CustomMetricFromJobSchedule struct {
+	// Days of the month when the metric job will run.
+	DayOfMonths []string `pulumi:"dayOfMonths"`
+	// Days of the week when the metric job will run.
+	DayOfWeeks []string `pulumi:"dayOfWeeks"`
+	// Hours of the day when the metric job will run.
+	Hours []string `pulumi:"hours"`
+	// Minutes of the day when the metric job will run.
+	Minutes []string `pulumi:"minutes"`
+	// Months of the year when the metric job will run.
+	Months []string `pulumi:"months"`
+}
+
+// CustomMetricFromJobScheduleInput is an input type that accepts CustomMetricFromJobScheduleArgs and CustomMetricFromJobScheduleOutput values.
+// You can construct a concrete instance of `CustomMetricFromJobScheduleInput` via:
+//
+//	CustomMetricFromJobScheduleArgs{...}
+type CustomMetricFromJobScheduleInput interface {
+	pulumi.Input
+
+	ToCustomMetricFromJobScheduleOutput() CustomMetricFromJobScheduleOutput
+	ToCustomMetricFromJobScheduleOutputWithContext(context.Context) CustomMetricFromJobScheduleOutput
+}
+
+type CustomMetricFromJobScheduleArgs struct {
+	// Days of the month when the metric job will run.
+	DayOfMonths pulumi.StringArrayInput `pulumi:"dayOfMonths"`
+	// Days of the week when the metric job will run.
+	DayOfWeeks pulumi.StringArrayInput `pulumi:"dayOfWeeks"`
+	// Hours of the day when the metric job will run.
+	Hours pulumi.StringArrayInput `pulumi:"hours"`
+	// Minutes of the day when the metric job will run.
+	Minutes pulumi.StringArrayInput `pulumi:"minutes"`
+	// Months of the year when the metric job will run.
+	Months pulumi.StringArrayInput `pulumi:"months"`
+}
+
+func (CustomMetricFromJobScheduleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomMetricFromJobSchedule)(nil)).Elem()
+}
+
+func (i CustomMetricFromJobScheduleArgs) ToCustomMetricFromJobScheduleOutput() CustomMetricFromJobScheduleOutput {
+	return i.ToCustomMetricFromJobScheduleOutputWithContext(context.Background())
+}
+
+func (i CustomMetricFromJobScheduleArgs) ToCustomMetricFromJobScheduleOutputWithContext(ctx context.Context) CustomMetricFromJobScheduleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomMetricFromJobScheduleOutput)
+}
+
+func (i CustomMetricFromJobScheduleArgs) ToCustomMetricFromJobSchedulePtrOutput() CustomMetricFromJobSchedulePtrOutput {
+	return i.ToCustomMetricFromJobSchedulePtrOutputWithContext(context.Background())
+}
+
+func (i CustomMetricFromJobScheduleArgs) ToCustomMetricFromJobSchedulePtrOutputWithContext(ctx context.Context) CustomMetricFromJobSchedulePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomMetricFromJobScheduleOutput).ToCustomMetricFromJobSchedulePtrOutputWithContext(ctx)
+}
+
+// CustomMetricFromJobSchedulePtrInput is an input type that accepts CustomMetricFromJobScheduleArgs, CustomMetricFromJobSchedulePtr and CustomMetricFromJobSchedulePtrOutput values.
+// You can construct a concrete instance of `CustomMetricFromJobSchedulePtrInput` via:
+//
+//	        CustomMetricFromJobScheduleArgs{...}
+//
+//	or:
+//
+//	        nil
+type CustomMetricFromJobSchedulePtrInput interface {
+	pulumi.Input
+
+	ToCustomMetricFromJobSchedulePtrOutput() CustomMetricFromJobSchedulePtrOutput
+	ToCustomMetricFromJobSchedulePtrOutputWithContext(context.Context) CustomMetricFromJobSchedulePtrOutput
+}
+
+type customMetricFromJobSchedulePtrType CustomMetricFromJobScheduleArgs
+
+func CustomMetricFromJobSchedulePtr(v *CustomMetricFromJobScheduleArgs) CustomMetricFromJobSchedulePtrInput {
+	return (*customMetricFromJobSchedulePtrType)(v)
+}
+
+func (*customMetricFromJobSchedulePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**CustomMetricFromJobSchedule)(nil)).Elem()
+}
+
+func (i *customMetricFromJobSchedulePtrType) ToCustomMetricFromJobSchedulePtrOutput() CustomMetricFromJobSchedulePtrOutput {
+	return i.ToCustomMetricFromJobSchedulePtrOutputWithContext(context.Background())
+}
+
+func (i *customMetricFromJobSchedulePtrType) ToCustomMetricFromJobSchedulePtrOutputWithContext(ctx context.Context) CustomMetricFromJobSchedulePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomMetricFromJobSchedulePtrOutput)
+}
+
+type CustomMetricFromJobScheduleOutput struct{ *pulumi.OutputState }
+
+func (CustomMetricFromJobScheduleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomMetricFromJobSchedule)(nil)).Elem()
+}
+
+func (o CustomMetricFromJobScheduleOutput) ToCustomMetricFromJobScheduleOutput() CustomMetricFromJobScheduleOutput {
+	return o
+}
+
+func (o CustomMetricFromJobScheduleOutput) ToCustomMetricFromJobScheduleOutputWithContext(ctx context.Context) CustomMetricFromJobScheduleOutput {
+	return o
+}
+
+func (o CustomMetricFromJobScheduleOutput) ToCustomMetricFromJobSchedulePtrOutput() CustomMetricFromJobSchedulePtrOutput {
+	return o.ToCustomMetricFromJobSchedulePtrOutputWithContext(context.Background())
+}
+
+func (o CustomMetricFromJobScheduleOutput) ToCustomMetricFromJobSchedulePtrOutputWithContext(ctx context.Context) CustomMetricFromJobSchedulePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v CustomMetricFromJobSchedule) *CustomMetricFromJobSchedule {
+		return &v
+	}).(CustomMetricFromJobSchedulePtrOutput)
+}
+
+// Days of the month when the metric job will run.
+func (o CustomMetricFromJobScheduleOutput) DayOfMonths() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v CustomMetricFromJobSchedule) []string { return v.DayOfMonths }).(pulumi.StringArrayOutput)
+}
+
+// Days of the week when the metric job will run.
+func (o CustomMetricFromJobScheduleOutput) DayOfWeeks() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v CustomMetricFromJobSchedule) []string { return v.DayOfWeeks }).(pulumi.StringArrayOutput)
+}
+
+// Hours of the day when the metric job will run.
+func (o CustomMetricFromJobScheduleOutput) Hours() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v CustomMetricFromJobSchedule) []string { return v.Hours }).(pulumi.StringArrayOutput)
+}
+
+// Minutes of the day when the metric job will run.
+func (o CustomMetricFromJobScheduleOutput) Minutes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v CustomMetricFromJobSchedule) []string { return v.Minutes }).(pulumi.StringArrayOutput)
+}
+
+// Months of the year when the metric job will run.
+func (o CustomMetricFromJobScheduleOutput) Months() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v CustomMetricFromJobSchedule) []string { return v.Months }).(pulumi.StringArrayOutput)
+}
+
+type CustomMetricFromJobSchedulePtrOutput struct{ *pulumi.OutputState }
+
+func (CustomMetricFromJobSchedulePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**CustomMetricFromJobSchedule)(nil)).Elem()
+}
+
+func (o CustomMetricFromJobSchedulePtrOutput) ToCustomMetricFromJobSchedulePtrOutput() CustomMetricFromJobSchedulePtrOutput {
+	return o
+}
+
+func (o CustomMetricFromJobSchedulePtrOutput) ToCustomMetricFromJobSchedulePtrOutputWithContext(ctx context.Context) CustomMetricFromJobSchedulePtrOutput {
+	return o
+}
+
+func (o CustomMetricFromJobSchedulePtrOutput) Elem() CustomMetricFromJobScheduleOutput {
+	return o.ApplyT(func(v *CustomMetricFromJobSchedule) CustomMetricFromJobSchedule {
+		if v != nil {
+			return *v
+		}
+		var ret CustomMetricFromJobSchedule
+		return ret
+	}).(CustomMetricFromJobScheduleOutput)
+}
+
+// Days of the month when the metric job will run.
+func (o CustomMetricFromJobSchedulePtrOutput) DayOfMonths() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *CustomMetricFromJobSchedule) []string {
+		if v == nil {
+			return nil
+		}
+		return v.DayOfMonths
+	}).(pulumi.StringArrayOutput)
+}
+
+// Days of the week when the metric job will run.
+func (o CustomMetricFromJobSchedulePtrOutput) DayOfWeeks() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *CustomMetricFromJobSchedule) []string {
+		if v == nil {
+			return nil
+		}
+		return v.DayOfWeeks
+	}).(pulumi.StringArrayOutput)
+}
+
+// Hours of the day when the metric job will run.
+func (o CustomMetricFromJobSchedulePtrOutput) Hours() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *CustomMetricFromJobSchedule) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Hours
+	}).(pulumi.StringArrayOutput)
+}
+
+// Minutes of the day when the metric job will run.
+func (o CustomMetricFromJobSchedulePtrOutput) Minutes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *CustomMetricFromJobSchedule) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Minutes
+	}).(pulumi.StringArrayOutput)
+}
+
+// Months of the year when the metric job will run.
+func (o CustomMetricFromJobSchedulePtrOutput) Months() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *CustomMetricFromJobSchedule) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Months
+	}).(pulumi.StringArrayOutput)
+}
+
+type CustomMetricFromJobTimestamp struct {
+	// Column name.
+	ColumnName *string `pulumi:"columnName"`
+	// Format.
+	TimeFormat *string `pulumi:"timeFormat"`
+}
+
+// CustomMetricFromJobTimestampInput is an input type that accepts CustomMetricFromJobTimestampArgs and CustomMetricFromJobTimestampOutput values.
+// You can construct a concrete instance of `CustomMetricFromJobTimestampInput` via:
+//
+//	CustomMetricFromJobTimestampArgs{...}
+type CustomMetricFromJobTimestampInput interface {
+	pulumi.Input
+
+	ToCustomMetricFromJobTimestampOutput() CustomMetricFromJobTimestampOutput
+	ToCustomMetricFromJobTimestampOutputWithContext(context.Context) CustomMetricFromJobTimestampOutput
+}
+
+type CustomMetricFromJobTimestampArgs struct {
+	// Column name.
+	ColumnName pulumi.StringPtrInput `pulumi:"columnName"`
+	// Format.
+	TimeFormat pulumi.StringPtrInput `pulumi:"timeFormat"`
+}
+
+func (CustomMetricFromJobTimestampArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomMetricFromJobTimestamp)(nil)).Elem()
+}
+
+func (i CustomMetricFromJobTimestampArgs) ToCustomMetricFromJobTimestampOutput() CustomMetricFromJobTimestampOutput {
+	return i.ToCustomMetricFromJobTimestampOutputWithContext(context.Background())
+}
+
+func (i CustomMetricFromJobTimestampArgs) ToCustomMetricFromJobTimestampOutputWithContext(ctx context.Context) CustomMetricFromJobTimestampOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomMetricFromJobTimestampOutput)
+}
+
+func (i CustomMetricFromJobTimestampArgs) ToCustomMetricFromJobTimestampPtrOutput() CustomMetricFromJobTimestampPtrOutput {
+	return i.ToCustomMetricFromJobTimestampPtrOutputWithContext(context.Background())
+}
+
+func (i CustomMetricFromJobTimestampArgs) ToCustomMetricFromJobTimestampPtrOutputWithContext(ctx context.Context) CustomMetricFromJobTimestampPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomMetricFromJobTimestampOutput).ToCustomMetricFromJobTimestampPtrOutputWithContext(ctx)
+}
+
+// CustomMetricFromJobTimestampPtrInput is an input type that accepts CustomMetricFromJobTimestampArgs, CustomMetricFromJobTimestampPtr and CustomMetricFromJobTimestampPtrOutput values.
+// You can construct a concrete instance of `CustomMetricFromJobTimestampPtrInput` via:
+//
+//	        CustomMetricFromJobTimestampArgs{...}
+//
+//	or:
+//
+//	        nil
+type CustomMetricFromJobTimestampPtrInput interface {
+	pulumi.Input
+
+	ToCustomMetricFromJobTimestampPtrOutput() CustomMetricFromJobTimestampPtrOutput
+	ToCustomMetricFromJobTimestampPtrOutputWithContext(context.Context) CustomMetricFromJobTimestampPtrOutput
+}
+
+type customMetricFromJobTimestampPtrType CustomMetricFromJobTimestampArgs
+
+func CustomMetricFromJobTimestampPtr(v *CustomMetricFromJobTimestampArgs) CustomMetricFromJobTimestampPtrInput {
+	return (*customMetricFromJobTimestampPtrType)(v)
+}
+
+func (*customMetricFromJobTimestampPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**CustomMetricFromJobTimestamp)(nil)).Elem()
+}
+
+func (i *customMetricFromJobTimestampPtrType) ToCustomMetricFromJobTimestampPtrOutput() CustomMetricFromJobTimestampPtrOutput {
+	return i.ToCustomMetricFromJobTimestampPtrOutputWithContext(context.Background())
+}
+
+func (i *customMetricFromJobTimestampPtrType) ToCustomMetricFromJobTimestampPtrOutputWithContext(ctx context.Context) CustomMetricFromJobTimestampPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomMetricFromJobTimestampPtrOutput)
+}
+
+type CustomMetricFromJobTimestampOutput struct{ *pulumi.OutputState }
+
+func (CustomMetricFromJobTimestampOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomMetricFromJobTimestamp)(nil)).Elem()
+}
+
+func (o CustomMetricFromJobTimestampOutput) ToCustomMetricFromJobTimestampOutput() CustomMetricFromJobTimestampOutput {
+	return o
+}
+
+func (o CustomMetricFromJobTimestampOutput) ToCustomMetricFromJobTimestampOutputWithContext(ctx context.Context) CustomMetricFromJobTimestampOutput {
+	return o
+}
+
+func (o CustomMetricFromJobTimestampOutput) ToCustomMetricFromJobTimestampPtrOutput() CustomMetricFromJobTimestampPtrOutput {
+	return o.ToCustomMetricFromJobTimestampPtrOutputWithContext(context.Background())
+}
+
+func (o CustomMetricFromJobTimestampOutput) ToCustomMetricFromJobTimestampPtrOutputWithContext(ctx context.Context) CustomMetricFromJobTimestampPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v CustomMetricFromJobTimestamp) *CustomMetricFromJobTimestamp {
+		return &v
+	}).(CustomMetricFromJobTimestampPtrOutput)
+}
+
+// Column name.
+func (o CustomMetricFromJobTimestampOutput) ColumnName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CustomMetricFromJobTimestamp) *string { return v.ColumnName }).(pulumi.StringPtrOutput)
+}
+
+// Format.
+func (o CustomMetricFromJobTimestampOutput) TimeFormat() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CustomMetricFromJobTimestamp) *string { return v.TimeFormat }).(pulumi.StringPtrOutput)
+}
+
+type CustomMetricFromJobTimestampPtrOutput struct{ *pulumi.OutputState }
+
+func (CustomMetricFromJobTimestampPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**CustomMetricFromJobTimestamp)(nil)).Elem()
+}
+
+func (o CustomMetricFromJobTimestampPtrOutput) ToCustomMetricFromJobTimestampPtrOutput() CustomMetricFromJobTimestampPtrOutput {
+	return o
+}
+
+func (o CustomMetricFromJobTimestampPtrOutput) ToCustomMetricFromJobTimestampPtrOutputWithContext(ctx context.Context) CustomMetricFromJobTimestampPtrOutput {
+	return o
+}
+
+func (o CustomMetricFromJobTimestampPtrOutput) Elem() CustomMetricFromJobTimestampOutput {
+	return o.ApplyT(func(v *CustomMetricFromJobTimestamp) CustomMetricFromJobTimestamp {
+		if v != nil {
+			return *v
+		}
+		var ret CustomMetricFromJobTimestamp
+		return ret
+	}).(CustomMetricFromJobTimestampOutput)
+}
+
+// Column name.
+func (o CustomMetricFromJobTimestampPtrOutput) ColumnName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CustomMetricFromJobTimestamp) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ColumnName
+	}).(pulumi.StringPtrOutput)
+}
+
+// Format.
+func (o CustomMetricFromJobTimestampPtrOutput) TimeFormat() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CustomMetricFromJobTimestamp) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TimeFormat
+	}).(pulumi.StringPtrOutput)
+}
+
+type CustomMetricFromJobValue struct {
+	// Column name.
+	ColumnName *string `pulumi:"columnName"`
+}
+
+// CustomMetricFromJobValueInput is an input type that accepts CustomMetricFromJobValueArgs and CustomMetricFromJobValueOutput values.
+// You can construct a concrete instance of `CustomMetricFromJobValueInput` via:
+//
+//	CustomMetricFromJobValueArgs{...}
+type CustomMetricFromJobValueInput interface {
+	pulumi.Input
+
+	ToCustomMetricFromJobValueOutput() CustomMetricFromJobValueOutput
+	ToCustomMetricFromJobValueOutputWithContext(context.Context) CustomMetricFromJobValueOutput
+}
+
+type CustomMetricFromJobValueArgs struct {
+	// Column name.
+	ColumnName pulumi.StringPtrInput `pulumi:"columnName"`
+}
+
+func (CustomMetricFromJobValueArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomMetricFromJobValue)(nil)).Elem()
+}
+
+func (i CustomMetricFromJobValueArgs) ToCustomMetricFromJobValueOutput() CustomMetricFromJobValueOutput {
+	return i.ToCustomMetricFromJobValueOutputWithContext(context.Background())
+}
+
+func (i CustomMetricFromJobValueArgs) ToCustomMetricFromJobValueOutputWithContext(ctx context.Context) CustomMetricFromJobValueOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomMetricFromJobValueOutput)
+}
+
+func (i CustomMetricFromJobValueArgs) ToCustomMetricFromJobValuePtrOutput() CustomMetricFromJobValuePtrOutput {
+	return i.ToCustomMetricFromJobValuePtrOutputWithContext(context.Background())
+}
+
+func (i CustomMetricFromJobValueArgs) ToCustomMetricFromJobValuePtrOutputWithContext(ctx context.Context) CustomMetricFromJobValuePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomMetricFromJobValueOutput).ToCustomMetricFromJobValuePtrOutputWithContext(ctx)
+}
+
+// CustomMetricFromJobValuePtrInput is an input type that accepts CustomMetricFromJobValueArgs, CustomMetricFromJobValuePtr and CustomMetricFromJobValuePtrOutput values.
+// You can construct a concrete instance of `CustomMetricFromJobValuePtrInput` via:
+//
+//	        CustomMetricFromJobValueArgs{...}
+//
+//	or:
+//
+//	        nil
+type CustomMetricFromJobValuePtrInput interface {
+	pulumi.Input
+
+	ToCustomMetricFromJobValuePtrOutput() CustomMetricFromJobValuePtrOutput
+	ToCustomMetricFromJobValuePtrOutputWithContext(context.Context) CustomMetricFromJobValuePtrOutput
+}
+
+type customMetricFromJobValuePtrType CustomMetricFromJobValueArgs
+
+func CustomMetricFromJobValuePtr(v *CustomMetricFromJobValueArgs) CustomMetricFromJobValuePtrInput {
+	return (*customMetricFromJobValuePtrType)(v)
+}
+
+func (*customMetricFromJobValuePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**CustomMetricFromJobValue)(nil)).Elem()
+}
+
+func (i *customMetricFromJobValuePtrType) ToCustomMetricFromJobValuePtrOutput() CustomMetricFromJobValuePtrOutput {
+	return i.ToCustomMetricFromJobValuePtrOutputWithContext(context.Background())
+}
+
+func (i *customMetricFromJobValuePtrType) ToCustomMetricFromJobValuePtrOutputWithContext(ctx context.Context) CustomMetricFromJobValuePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomMetricFromJobValuePtrOutput)
+}
+
+type CustomMetricFromJobValueOutput struct{ *pulumi.OutputState }
+
+func (CustomMetricFromJobValueOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomMetricFromJobValue)(nil)).Elem()
+}
+
+func (o CustomMetricFromJobValueOutput) ToCustomMetricFromJobValueOutput() CustomMetricFromJobValueOutput {
+	return o
+}
+
+func (o CustomMetricFromJobValueOutput) ToCustomMetricFromJobValueOutputWithContext(ctx context.Context) CustomMetricFromJobValueOutput {
+	return o
+}
+
+func (o CustomMetricFromJobValueOutput) ToCustomMetricFromJobValuePtrOutput() CustomMetricFromJobValuePtrOutput {
+	return o.ToCustomMetricFromJobValuePtrOutputWithContext(context.Background())
+}
+
+func (o CustomMetricFromJobValueOutput) ToCustomMetricFromJobValuePtrOutputWithContext(ctx context.Context) CustomMetricFromJobValuePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v CustomMetricFromJobValue) *CustomMetricFromJobValue {
+		return &v
+	}).(CustomMetricFromJobValuePtrOutput)
+}
+
+// Column name.
+func (o CustomMetricFromJobValueOutput) ColumnName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CustomMetricFromJobValue) *string { return v.ColumnName }).(pulumi.StringPtrOutput)
+}
+
+type CustomMetricFromJobValuePtrOutput struct{ *pulumi.OutputState }
+
+func (CustomMetricFromJobValuePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**CustomMetricFromJobValue)(nil)).Elem()
+}
+
+func (o CustomMetricFromJobValuePtrOutput) ToCustomMetricFromJobValuePtrOutput() CustomMetricFromJobValuePtrOutput {
+	return o
+}
+
+func (o CustomMetricFromJobValuePtrOutput) ToCustomMetricFromJobValuePtrOutputWithContext(ctx context.Context) CustomMetricFromJobValuePtrOutput {
+	return o
+}
+
+func (o CustomMetricFromJobValuePtrOutput) Elem() CustomMetricFromJobValueOutput {
+	return o.ApplyT(func(v *CustomMetricFromJobValue) CustomMetricFromJobValue {
+		if v != nil {
+			return *v
+		}
+		var ret CustomMetricFromJobValue
+		return ret
+	}).(CustomMetricFromJobValueOutput)
+}
+
+// Column name.
+func (o CustomMetricFromJobValuePtrOutput) ColumnName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CustomMetricFromJobValue) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ColumnName
+	}).(pulumi.StringPtrOutput)
+}
+
+type CustomMetricJobRuntimeParameterValue struct {
+	// The name of the runtime parameter.
+	Key string `pulumi:"key"`
+	// The type of the runtime parameter.
+	Type string `pulumi:"type"`
+	// The value of the runtime parameter (type conversion is handled internally).
+	Value string `pulumi:"value"`
+}
+
+// CustomMetricJobRuntimeParameterValueInput is an input type that accepts CustomMetricJobRuntimeParameterValueArgs and CustomMetricJobRuntimeParameterValueOutput values.
+// You can construct a concrete instance of `CustomMetricJobRuntimeParameterValueInput` via:
+//
+//	CustomMetricJobRuntimeParameterValueArgs{...}
+type CustomMetricJobRuntimeParameterValueInput interface {
+	pulumi.Input
+
+	ToCustomMetricJobRuntimeParameterValueOutput() CustomMetricJobRuntimeParameterValueOutput
+	ToCustomMetricJobRuntimeParameterValueOutputWithContext(context.Context) CustomMetricJobRuntimeParameterValueOutput
+}
+
+type CustomMetricJobRuntimeParameterValueArgs struct {
+	// The name of the runtime parameter.
+	Key pulumi.StringInput `pulumi:"key"`
+	// The type of the runtime parameter.
+	Type pulumi.StringInput `pulumi:"type"`
+	// The value of the runtime parameter (type conversion is handled internally).
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (CustomMetricJobRuntimeParameterValueArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomMetricJobRuntimeParameterValue)(nil)).Elem()
+}
+
+func (i CustomMetricJobRuntimeParameterValueArgs) ToCustomMetricJobRuntimeParameterValueOutput() CustomMetricJobRuntimeParameterValueOutput {
+	return i.ToCustomMetricJobRuntimeParameterValueOutputWithContext(context.Background())
+}
+
+func (i CustomMetricJobRuntimeParameterValueArgs) ToCustomMetricJobRuntimeParameterValueOutputWithContext(ctx context.Context) CustomMetricJobRuntimeParameterValueOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomMetricJobRuntimeParameterValueOutput)
+}
+
+// CustomMetricJobRuntimeParameterValueArrayInput is an input type that accepts CustomMetricJobRuntimeParameterValueArray and CustomMetricJobRuntimeParameterValueArrayOutput values.
+// You can construct a concrete instance of `CustomMetricJobRuntimeParameterValueArrayInput` via:
+//
+//	CustomMetricJobRuntimeParameterValueArray{ CustomMetricJobRuntimeParameterValueArgs{...} }
+type CustomMetricJobRuntimeParameterValueArrayInput interface {
+	pulumi.Input
+
+	ToCustomMetricJobRuntimeParameterValueArrayOutput() CustomMetricJobRuntimeParameterValueArrayOutput
+	ToCustomMetricJobRuntimeParameterValueArrayOutputWithContext(context.Context) CustomMetricJobRuntimeParameterValueArrayOutput
+}
+
+type CustomMetricJobRuntimeParameterValueArray []CustomMetricJobRuntimeParameterValueInput
+
+func (CustomMetricJobRuntimeParameterValueArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CustomMetricJobRuntimeParameterValue)(nil)).Elem()
+}
+
+func (i CustomMetricJobRuntimeParameterValueArray) ToCustomMetricJobRuntimeParameterValueArrayOutput() CustomMetricJobRuntimeParameterValueArrayOutput {
+	return i.ToCustomMetricJobRuntimeParameterValueArrayOutputWithContext(context.Background())
+}
+
+func (i CustomMetricJobRuntimeParameterValueArray) ToCustomMetricJobRuntimeParameterValueArrayOutputWithContext(ctx context.Context) CustomMetricJobRuntimeParameterValueArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomMetricJobRuntimeParameterValueArrayOutput)
+}
+
+type CustomMetricJobRuntimeParameterValueOutput struct{ *pulumi.OutputState }
+
+func (CustomMetricJobRuntimeParameterValueOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomMetricJobRuntimeParameterValue)(nil)).Elem()
+}
+
+func (o CustomMetricJobRuntimeParameterValueOutput) ToCustomMetricJobRuntimeParameterValueOutput() CustomMetricJobRuntimeParameterValueOutput {
+	return o
+}
+
+func (o CustomMetricJobRuntimeParameterValueOutput) ToCustomMetricJobRuntimeParameterValueOutputWithContext(ctx context.Context) CustomMetricJobRuntimeParameterValueOutput {
+	return o
+}
+
+// The name of the runtime parameter.
+func (o CustomMetricJobRuntimeParameterValueOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v CustomMetricJobRuntimeParameterValue) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// The type of the runtime parameter.
+func (o CustomMetricJobRuntimeParameterValueOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v CustomMetricJobRuntimeParameterValue) string { return v.Type }).(pulumi.StringOutput)
+}
+
+// The value of the runtime parameter (type conversion is handled internally).
+func (o CustomMetricJobRuntimeParameterValueOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v CustomMetricJobRuntimeParameterValue) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type CustomMetricJobRuntimeParameterValueArrayOutput struct{ *pulumi.OutputState }
+
+func (CustomMetricJobRuntimeParameterValueArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CustomMetricJobRuntimeParameterValue)(nil)).Elem()
+}
+
+func (o CustomMetricJobRuntimeParameterValueArrayOutput) ToCustomMetricJobRuntimeParameterValueArrayOutput() CustomMetricJobRuntimeParameterValueArrayOutput {
+	return o
+}
+
+func (o CustomMetricJobRuntimeParameterValueArrayOutput) ToCustomMetricJobRuntimeParameterValueArrayOutputWithContext(ctx context.Context) CustomMetricJobRuntimeParameterValueArrayOutput {
+	return o
+}
+
+func (o CustomMetricJobRuntimeParameterValueArrayOutput) Index(i pulumi.IntInput) CustomMetricJobRuntimeParameterValueOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CustomMetricJobRuntimeParameterValue {
+		return vs[0].([]CustomMetricJobRuntimeParameterValue)[vs[1].(int)]
+	}).(CustomMetricJobRuntimeParameterValueOutput)
+}
+
 type CustomModelGuardConfiguration struct {
 	// The deployment ID of this guard.
 	DeploymentId *string `pulumi:"deploymentId"`
@@ -7149,6 +8159,20 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*BatchPredictionJobDefinitionTimeseriesSettingsPtrInput)(nil)).Elem(), BatchPredictionJobDefinitionTimeseriesSettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomJobRuntimeParameterValueInput)(nil)).Elem(), CustomJobRuntimeParameterValueArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomJobRuntimeParameterValueArrayInput)(nil)).Elem(), CustomJobRuntimeParameterValueArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomMetricFromJobBatchInput)(nil)).Elem(), CustomMetricFromJobBatchArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomMetricFromJobBatchPtrInput)(nil)).Elem(), CustomMetricFromJobBatchArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomMetricFromJobParameterOverrideInput)(nil)).Elem(), CustomMetricFromJobParameterOverrideArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomMetricFromJobParameterOverrideArrayInput)(nil)).Elem(), CustomMetricFromJobParameterOverrideArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomMetricFromJobSampleCountInput)(nil)).Elem(), CustomMetricFromJobSampleCountArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomMetricFromJobSampleCountPtrInput)(nil)).Elem(), CustomMetricFromJobSampleCountArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomMetricFromJobScheduleInput)(nil)).Elem(), CustomMetricFromJobScheduleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomMetricFromJobSchedulePtrInput)(nil)).Elem(), CustomMetricFromJobScheduleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomMetricFromJobTimestampInput)(nil)).Elem(), CustomMetricFromJobTimestampArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomMetricFromJobTimestampPtrInput)(nil)).Elem(), CustomMetricFromJobTimestampArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomMetricFromJobValueInput)(nil)).Elem(), CustomMetricFromJobValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomMetricFromJobValuePtrInput)(nil)).Elem(), CustomMetricFromJobValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomMetricJobRuntimeParameterValueInput)(nil)).Elem(), CustomMetricJobRuntimeParameterValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomMetricJobRuntimeParameterValueArrayInput)(nil)).Elem(), CustomMetricJobRuntimeParameterValueArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelGuardConfigurationInput)(nil)).Elem(), CustomModelGuardConfigurationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelGuardConfigurationArrayInput)(nil)).Elem(), CustomModelGuardConfigurationArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelGuardConfigurationInterventionInput)(nil)).Elem(), CustomModelGuardConfigurationInterventionArgs{})
@@ -7228,6 +8252,20 @@ func init() {
 	pulumi.RegisterOutputType(BatchPredictionJobDefinitionTimeseriesSettingsPtrOutput{})
 	pulumi.RegisterOutputType(CustomJobRuntimeParameterValueOutput{})
 	pulumi.RegisterOutputType(CustomJobRuntimeParameterValueArrayOutput{})
+	pulumi.RegisterOutputType(CustomMetricFromJobBatchOutput{})
+	pulumi.RegisterOutputType(CustomMetricFromJobBatchPtrOutput{})
+	pulumi.RegisterOutputType(CustomMetricFromJobParameterOverrideOutput{})
+	pulumi.RegisterOutputType(CustomMetricFromJobParameterOverrideArrayOutput{})
+	pulumi.RegisterOutputType(CustomMetricFromJobSampleCountOutput{})
+	pulumi.RegisterOutputType(CustomMetricFromJobSampleCountPtrOutput{})
+	pulumi.RegisterOutputType(CustomMetricFromJobScheduleOutput{})
+	pulumi.RegisterOutputType(CustomMetricFromJobSchedulePtrOutput{})
+	pulumi.RegisterOutputType(CustomMetricFromJobTimestampOutput{})
+	pulumi.RegisterOutputType(CustomMetricFromJobTimestampPtrOutput{})
+	pulumi.RegisterOutputType(CustomMetricFromJobValueOutput{})
+	pulumi.RegisterOutputType(CustomMetricFromJobValuePtrOutput{})
+	pulumi.RegisterOutputType(CustomMetricJobRuntimeParameterValueOutput{})
+	pulumi.RegisterOutputType(CustomMetricJobRuntimeParameterValueArrayOutput{})
 	pulumi.RegisterOutputType(CustomModelGuardConfigurationOutput{})
 	pulumi.RegisterOutputType(CustomModelGuardConfigurationArrayOutput{})
 	pulumi.RegisterOutputType(CustomModelGuardConfigurationInterventionOutput{})
