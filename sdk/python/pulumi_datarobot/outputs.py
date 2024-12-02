@@ -59,6 +59,12 @@ __all__ = [
     'DeploymentPredictionsByForecastDateSettings',
     'DeploymentPredictionsDataCollectionSettings',
     'DeploymentPredictionsSettings',
+    'DeploymentRetrainingPolicyAutopilotOptions',
+    'DeploymentRetrainingPolicyProjectOptions',
+    'DeploymentRetrainingPolicyTimeSeriesOptions',
+    'DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicity',
+    'DeploymentRetrainingPolicyTrigger',
+    'DeploymentRetrainingPolicyTriggerSchedule',
     'DeploymentSegmentAnalysisSettings',
     'LlmBlueprintLlmSettings',
     'LlmBlueprintVectorDatabaseSettings',
@@ -2889,6 +2895,533 @@ class DeploymentPredictionsSettings(dict):
         The minimum number of computes to use for predictions.
         """
         return pulumi.get(self, "min_computes")
+
+
+@pulumi.output_type
+class DeploymentRetrainingPolicyAutopilotOptions(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "blendBestModels":
+            suggest = "blend_best_models"
+        elif key == "runLeakageRemovedFeatureList":
+            suggest = "run_leakage_removed_feature_list"
+        elif key == "scoringCodeOnly":
+            suggest = "scoring_code_only"
+        elif key == "shapOnlyMode":
+            suggest = "shap_only_mode"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in DeploymentRetrainingPolicyAutopilotOptions. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        DeploymentRetrainingPolicyAutopilotOptions.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        DeploymentRetrainingPolicyAutopilotOptions.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 blend_best_models: Optional[bool] = None,
+                 mode: Optional[str] = None,
+                 run_leakage_removed_feature_list: Optional[bool] = None,
+                 scoring_code_only: Optional[bool] = None,
+                 shap_only_mode: Optional[bool] = None):
+        """
+        :param bool blend_best_models: Blend best models during Autopilot run. This option is not supported in SHAP-only mode.
+        :param str mode: The autopiltot mode.
+        :param bool run_leakage_removed_feature_list: Run Autopilot on Leakage Removed feature list (if exists).
+        :param bool scoring_code_only: Keep only models that can be converted to scorable java code during Autopilot run.
+        :param bool shap_only_mode: Include only models with SHAP value support.
+        """
+        if blend_best_models is not None:
+            pulumi.set(__self__, "blend_best_models", blend_best_models)
+        if mode is not None:
+            pulumi.set(__self__, "mode", mode)
+        if run_leakage_removed_feature_list is not None:
+            pulumi.set(__self__, "run_leakage_removed_feature_list", run_leakage_removed_feature_list)
+        if scoring_code_only is not None:
+            pulumi.set(__self__, "scoring_code_only", scoring_code_only)
+        if shap_only_mode is not None:
+            pulumi.set(__self__, "shap_only_mode", shap_only_mode)
+
+    @property
+    @pulumi.getter(name="blendBestModels")
+    def blend_best_models(self) -> Optional[bool]:
+        """
+        Blend best models during Autopilot run. This option is not supported in SHAP-only mode.
+        """
+        return pulumi.get(self, "blend_best_models")
+
+    @property
+    @pulumi.getter
+    def mode(self) -> Optional[str]:
+        """
+        The autopiltot mode.
+        """
+        return pulumi.get(self, "mode")
+
+    @property
+    @pulumi.getter(name="runLeakageRemovedFeatureList")
+    def run_leakage_removed_feature_list(self) -> Optional[bool]:
+        """
+        Run Autopilot on Leakage Removed feature list (if exists).
+        """
+        return pulumi.get(self, "run_leakage_removed_feature_list")
+
+    @property
+    @pulumi.getter(name="scoringCodeOnly")
+    def scoring_code_only(self) -> Optional[bool]:
+        """
+        Keep only models that can be converted to scorable java code during Autopilot run.
+        """
+        return pulumi.get(self, "scoring_code_only")
+
+    @property
+    @pulumi.getter(name="shapOnlyMode")
+    def shap_only_mode(self) -> Optional[bool]:
+        """
+        Include only models with SHAP value support.
+        """
+        return pulumi.get(self, "shap_only_mode")
+
+
+@pulumi.output_type
+class DeploymentRetrainingPolicyProjectOptions(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "cvMethod":
+            suggest = "cv_method"
+        elif key == "holdoutPct":
+            suggest = "holdout_pct"
+        elif key == "validationPct":
+            suggest = "validation_pct"
+        elif key == "validationType":
+            suggest = "validation_type"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in DeploymentRetrainingPolicyProjectOptions. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        DeploymentRetrainingPolicyProjectOptions.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        DeploymentRetrainingPolicyProjectOptions.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 cv_method: Optional[str] = None,
+                 holdout_pct: Optional[float] = None,
+                 metric: Optional[str] = None,
+                 reps: Optional[float] = None,
+                 validation_pct: Optional[float] = None,
+                 validation_type: Optional[str] = None):
+        """
+        :param str cv_method: The partitioning method for projects used to build new models.
+        :param float holdout_pct: The percentage of dataset to assign to holdout set in projects used to build new models.
+        :param str metric: The model selection metric in projects used to build new models.
+        :param float reps: The number of cross validation folds to use for projects used to build new models.
+        :param float validation_pct: The percentage of dataset to assign to validation set in projects used to build new models.
+        :param str validation_type: The validation type for projects used to build new models.
+        """
+        if cv_method is not None:
+            pulumi.set(__self__, "cv_method", cv_method)
+        if holdout_pct is not None:
+            pulumi.set(__self__, "holdout_pct", holdout_pct)
+        if metric is not None:
+            pulumi.set(__self__, "metric", metric)
+        if reps is not None:
+            pulumi.set(__self__, "reps", reps)
+        if validation_pct is not None:
+            pulumi.set(__self__, "validation_pct", validation_pct)
+        if validation_type is not None:
+            pulumi.set(__self__, "validation_type", validation_type)
+
+    @property
+    @pulumi.getter(name="cvMethod")
+    def cv_method(self) -> Optional[str]:
+        """
+        The partitioning method for projects used to build new models.
+        """
+        return pulumi.get(self, "cv_method")
+
+    @property
+    @pulumi.getter(name="holdoutPct")
+    def holdout_pct(self) -> Optional[float]:
+        """
+        The percentage of dataset to assign to holdout set in projects used to build new models.
+        """
+        return pulumi.get(self, "holdout_pct")
+
+    @property
+    @pulumi.getter
+    def metric(self) -> Optional[str]:
+        """
+        The model selection metric in projects used to build new models.
+        """
+        return pulumi.get(self, "metric")
+
+    @property
+    @pulumi.getter
+    def reps(self) -> Optional[float]:
+        """
+        The number of cross validation folds to use for projects used to build new models.
+        """
+        return pulumi.get(self, "reps")
+
+    @property
+    @pulumi.getter(name="validationPct")
+    def validation_pct(self) -> Optional[float]:
+        """
+        The percentage of dataset to assign to validation set in projects used to build new models.
+        """
+        return pulumi.get(self, "validation_pct")
+
+    @property
+    @pulumi.getter(name="validationType")
+    def validation_type(self) -> Optional[str]:
+        """
+        The validation type for projects used to build new models.
+        """
+        return pulumi.get(self, "validation_type")
+
+
+@pulumi.output_type
+class DeploymentRetrainingPolicyTimeSeriesOptions(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "calendarId":
+            suggest = "calendar_id"
+        elif key == "differencingMethod":
+            suggest = "differencing_method"
+        elif key == "exponentiallyWeightedMovingAlpha":
+            suggest = "exponentially_weighted_moving_alpha"
+        elif key == "treatAsExponential":
+            suggest = "treat_as_exponential"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in DeploymentRetrainingPolicyTimeSeriesOptions. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        DeploymentRetrainingPolicyTimeSeriesOptions.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        DeploymentRetrainingPolicyTimeSeriesOptions.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 calendar_id: Optional[str] = None,
+                 differencing_method: Optional[str] = None,
+                 exponentially_weighted_moving_alpha: Optional[float] = None,
+                 periodicities: Optional[Sequence['outputs.DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicity']] = None,
+                 treat_as_exponential: Optional[str] = None):
+        """
+        :param str calendar_id: The ID of the calendar to be used in this project.
+        :param str differencing_method: For time series projects only. Used to specify which differencing method to apply if the data is stationary. For classification problems simple and seasonal are not allowed. Parameter periodicities must be specified if seasonal is chosen. Defaults to auto.
+        :param float exponentially_weighted_moving_alpha: Discount factor (alpha) used for exponentially weighted moving features.
+        :param Sequence['DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityArgs'] periodicities: A list of periodicities for time series projects only. For classification problems periodicities are not allowed. If this is provided, parameter 'differencing*method' will default to 'seasonal' if not provided or 'auto'.
+        :param str treat_as_exponential: For time series projects only. Used to specify whether to treat data as exponential trend and apply transformations like log-transform. For classification problems always is not allowed. Defaults to auto.
+        """
+        if calendar_id is not None:
+            pulumi.set(__self__, "calendar_id", calendar_id)
+        if differencing_method is not None:
+            pulumi.set(__self__, "differencing_method", differencing_method)
+        if exponentially_weighted_moving_alpha is not None:
+            pulumi.set(__self__, "exponentially_weighted_moving_alpha", exponentially_weighted_moving_alpha)
+        if periodicities is not None:
+            pulumi.set(__self__, "periodicities", periodicities)
+        if treat_as_exponential is not None:
+            pulumi.set(__self__, "treat_as_exponential", treat_as_exponential)
+
+    @property
+    @pulumi.getter(name="calendarId")
+    def calendar_id(self) -> Optional[str]:
+        """
+        The ID of the calendar to be used in this project.
+        """
+        return pulumi.get(self, "calendar_id")
+
+    @property
+    @pulumi.getter(name="differencingMethod")
+    def differencing_method(self) -> Optional[str]:
+        """
+        For time series projects only. Used to specify which differencing method to apply if the data is stationary. For classification problems simple and seasonal are not allowed. Parameter periodicities must be specified if seasonal is chosen. Defaults to auto.
+        """
+        return pulumi.get(self, "differencing_method")
+
+    @property
+    @pulumi.getter(name="exponentiallyWeightedMovingAlpha")
+    def exponentially_weighted_moving_alpha(self) -> Optional[float]:
+        """
+        Discount factor (alpha) used for exponentially weighted moving features.
+        """
+        return pulumi.get(self, "exponentially_weighted_moving_alpha")
+
+    @property
+    @pulumi.getter
+    def periodicities(self) -> Optional[Sequence['outputs.DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicity']]:
+        """
+        A list of periodicities for time series projects only. For classification problems periodicities are not allowed. If this is provided, parameter 'differencing*method' will default to 'seasonal' if not provided or 'auto'.
+        """
+        return pulumi.get(self, "periodicities")
+
+    @property
+    @pulumi.getter(name="treatAsExponential")
+    def treat_as_exponential(self) -> Optional[str]:
+        """
+        For time series projects only. Used to specify whether to treat data as exponential trend and apply transformations like log-transform. For classification problems always is not allowed. Defaults to auto.
+        """
+        return pulumi.get(self, "treat_as_exponential")
+
+
+@pulumi.output_type
+class DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicity(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "timeSteps":
+            suggest = "time_steps"
+        elif key == "timeUnit":
+            suggest = "time_unit"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicity. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicity.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicity.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 time_steps: int,
+                 time_unit: str):
+        """
+        :param int time_steps: The number of time steps.
+        :param str time_unit: The time unit or ROW if windowsBasisUnit is ROW
+        """
+        pulumi.set(__self__, "time_steps", time_steps)
+        pulumi.set(__self__, "time_unit", time_unit)
+
+    @property
+    @pulumi.getter(name="timeSteps")
+    def time_steps(self) -> int:
+        """
+        The number of time steps.
+        """
+        return pulumi.get(self, "time_steps")
+
+    @property
+    @pulumi.getter(name="timeUnit")
+    def time_unit(self) -> str:
+        """
+        The time unit or ROW if windowsBasisUnit is ROW
+        """
+        return pulumi.get(self, "time_unit")
+
+
+@pulumi.output_type
+class DeploymentRetrainingPolicyTrigger(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "customJobId":
+            suggest = "custom_job_id"
+        elif key == "minIntervalBetweenRuns":
+            suggest = "min_interval_between_runs"
+        elif key == "statusDeclinesToFailing":
+            suggest = "status_declines_to_failing"
+        elif key == "statusDeclinesToWarning":
+            suggest = "status_declines_to_warning"
+        elif key == "statusStillInDecline":
+            suggest = "status_still_in_decline"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in DeploymentRetrainingPolicyTrigger. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        DeploymentRetrainingPolicyTrigger.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        DeploymentRetrainingPolicyTrigger.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 custom_job_id: Optional[str] = None,
+                 min_interval_between_runs: Optional[str] = None,
+                 schedule: Optional['outputs.DeploymentRetrainingPolicyTriggerSchedule'] = None,
+                 status_declines_to_failing: Optional[bool] = None,
+                 status_declines_to_warning: Optional[bool] = None,
+                 status_still_in_decline: Optional[bool] = None,
+                 type: Optional[str] = None):
+        """
+        :param str custom_job_id: Custom job ID for the retraining policy.
+        :param str min_interval_between_runs: Minimal interval between policy runs in ISO 8601 duration string.
+        :param 'DeploymentRetrainingPolicyTriggerScheduleArgs' schedule: Schedule for the retraining policy.
+        :param bool status_declines_to_failing: Identifies when trigger type is based on deployment a health status, whether the policy will run when health status declines to failing.
+        :param bool status_declines_to_warning: Identifies when trigger type is based on deployment a health status, whether the policy will run when health status declines to warning.
+        :param bool status_still_in_decline: Identifies when trigger type is based on deployment a health status, whether the policy will run when health status still in decline.
+        :param str type: Type of retraining policy trigger.
+        """
+        if custom_job_id is not None:
+            pulumi.set(__self__, "custom_job_id", custom_job_id)
+        if min_interval_between_runs is not None:
+            pulumi.set(__self__, "min_interval_between_runs", min_interval_between_runs)
+        if schedule is not None:
+            pulumi.set(__self__, "schedule", schedule)
+        if status_declines_to_failing is not None:
+            pulumi.set(__self__, "status_declines_to_failing", status_declines_to_failing)
+        if status_declines_to_warning is not None:
+            pulumi.set(__self__, "status_declines_to_warning", status_declines_to_warning)
+        if status_still_in_decline is not None:
+            pulumi.set(__self__, "status_still_in_decline", status_still_in_decline)
+        if type is not None:
+            pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter(name="customJobId")
+    def custom_job_id(self) -> Optional[str]:
+        """
+        Custom job ID for the retraining policy.
+        """
+        return pulumi.get(self, "custom_job_id")
+
+    @property
+    @pulumi.getter(name="minIntervalBetweenRuns")
+    def min_interval_between_runs(self) -> Optional[str]:
+        """
+        Minimal interval between policy runs in ISO 8601 duration string.
+        """
+        return pulumi.get(self, "min_interval_between_runs")
+
+    @property
+    @pulumi.getter
+    def schedule(self) -> Optional['outputs.DeploymentRetrainingPolicyTriggerSchedule']:
+        """
+        Schedule for the retraining policy.
+        """
+        return pulumi.get(self, "schedule")
+
+    @property
+    @pulumi.getter(name="statusDeclinesToFailing")
+    def status_declines_to_failing(self) -> Optional[bool]:
+        """
+        Identifies when trigger type is based on deployment a health status, whether the policy will run when health status declines to failing.
+        """
+        return pulumi.get(self, "status_declines_to_failing")
+
+    @property
+    @pulumi.getter(name="statusDeclinesToWarning")
+    def status_declines_to_warning(self) -> Optional[bool]:
+        """
+        Identifies when trigger type is based on deployment a health status, whether the policy will run when health status declines to warning.
+        """
+        return pulumi.get(self, "status_declines_to_warning")
+
+    @property
+    @pulumi.getter(name="statusStillInDecline")
+    def status_still_in_decline(self) -> Optional[bool]:
+        """
+        Identifies when trigger type is based on deployment a health status, whether the policy will run when health status still in decline.
+        """
+        return pulumi.get(self, "status_still_in_decline")
+
+    @property
+    @pulumi.getter
+    def type(self) -> Optional[str]:
+        """
+        Type of retraining policy trigger.
+        """
+        return pulumi.get(self, "type")
+
+
+@pulumi.output_type
+class DeploymentRetrainingPolicyTriggerSchedule(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "dayOfMonths":
+            suggest = "day_of_months"
+        elif key == "dayOfWeeks":
+            suggest = "day_of_weeks"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in DeploymentRetrainingPolicyTriggerSchedule. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        DeploymentRetrainingPolicyTriggerSchedule.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        DeploymentRetrainingPolicyTriggerSchedule.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 day_of_months: Sequence[str],
+                 day_of_weeks: Sequence[str],
+                 hours: Sequence[str],
+                 minutes: Sequence[str],
+                 months: Sequence[str]):
+        """
+        :param Sequence[str] day_of_months: Days of the month when the job will run.
+        :param Sequence[str] day_of_weeks: Days of the week when the job will run.
+        :param Sequence[str] hours: Hours of the day when the job will run.
+        :param Sequence[str] minutes: Minutes of the day when the job will run.
+        :param Sequence[str] months: Months of the year when the job will run.
+        """
+        pulumi.set(__self__, "day_of_months", day_of_months)
+        pulumi.set(__self__, "day_of_weeks", day_of_weeks)
+        pulumi.set(__self__, "hours", hours)
+        pulumi.set(__self__, "minutes", minutes)
+        pulumi.set(__self__, "months", months)
+
+    @property
+    @pulumi.getter(name="dayOfMonths")
+    def day_of_months(self) -> Sequence[str]:
+        """
+        Days of the month when the job will run.
+        """
+        return pulumi.get(self, "day_of_months")
+
+    @property
+    @pulumi.getter(name="dayOfWeeks")
+    def day_of_weeks(self) -> Sequence[str]:
+        """
+        Days of the week when the job will run.
+        """
+        return pulumi.get(self, "day_of_weeks")
+
+    @property
+    @pulumi.getter
+    def hours(self) -> Sequence[str]:
+        """
+        Hours of the day when the job will run.
+        """
+        return pulumi.get(self, "hours")
+
+    @property
+    @pulumi.getter
+    def minutes(self) -> Sequence[str]:
+        """
+        Minutes of the day when the job will run.
+        """
+        return pulumi.get(self, "minutes")
+
+    @property
+    @pulumi.getter
+    def months(self) -> Sequence[str]:
+        """
+        Months of the year when the job will run.
+        """
+        return pulumi.get(self, "months")
 
 
 @pulumi.output_type

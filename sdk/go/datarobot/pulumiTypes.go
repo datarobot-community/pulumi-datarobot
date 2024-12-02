@@ -7404,6 +7404,1240 @@ func (o DeploymentPredictionsSettingsPtrOutput) MinComputes() pulumi.IntPtrOutpu
 	}).(pulumi.IntPtrOutput)
 }
 
+type DeploymentRetrainingPolicyAutopilotOptions struct {
+	// Blend best models during Autopilot run. This option is not supported in SHAP-only mode.
+	BlendBestModels *bool `pulumi:"blendBestModels"`
+	// The autopiltot mode.
+	Mode *string `pulumi:"mode"`
+	// Run Autopilot on Leakage Removed feature list (if exists).
+	RunLeakageRemovedFeatureList *bool `pulumi:"runLeakageRemovedFeatureList"`
+	// Keep only models that can be converted to scorable java code during Autopilot run.
+	ScoringCodeOnly *bool `pulumi:"scoringCodeOnly"`
+	// Include only models with SHAP value support.
+	ShapOnlyMode *bool `pulumi:"shapOnlyMode"`
+}
+
+// DeploymentRetrainingPolicyAutopilotOptionsInput is an input type that accepts DeploymentRetrainingPolicyAutopilotOptionsArgs and DeploymentRetrainingPolicyAutopilotOptionsOutput values.
+// You can construct a concrete instance of `DeploymentRetrainingPolicyAutopilotOptionsInput` via:
+//
+//	DeploymentRetrainingPolicyAutopilotOptionsArgs{...}
+type DeploymentRetrainingPolicyAutopilotOptionsInput interface {
+	pulumi.Input
+
+	ToDeploymentRetrainingPolicyAutopilotOptionsOutput() DeploymentRetrainingPolicyAutopilotOptionsOutput
+	ToDeploymentRetrainingPolicyAutopilotOptionsOutputWithContext(context.Context) DeploymentRetrainingPolicyAutopilotOptionsOutput
+}
+
+type DeploymentRetrainingPolicyAutopilotOptionsArgs struct {
+	// Blend best models during Autopilot run. This option is not supported in SHAP-only mode.
+	BlendBestModels pulumi.BoolPtrInput `pulumi:"blendBestModels"`
+	// The autopiltot mode.
+	Mode pulumi.StringPtrInput `pulumi:"mode"`
+	// Run Autopilot on Leakage Removed feature list (if exists).
+	RunLeakageRemovedFeatureList pulumi.BoolPtrInput `pulumi:"runLeakageRemovedFeatureList"`
+	// Keep only models that can be converted to scorable java code during Autopilot run.
+	ScoringCodeOnly pulumi.BoolPtrInput `pulumi:"scoringCodeOnly"`
+	// Include only models with SHAP value support.
+	ShapOnlyMode pulumi.BoolPtrInput `pulumi:"shapOnlyMode"`
+}
+
+func (DeploymentRetrainingPolicyAutopilotOptionsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentRetrainingPolicyAutopilotOptions)(nil)).Elem()
+}
+
+func (i DeploymentRetrainingPolicyAutopilotOptionsArgs) ToDeploymentRetrainingPolicyAutopilotOptionsOutput() DeploymentRetrainingPolicyAutopilotOptionsOutput {
+	return i.ToDeploymentRetrainingPolicyAutopilotOptionsOutputWithContext(context.Background())
+}
+
+func (i DeploymentRetrainingPolicyAutopilotOptionsArgs) ToDeploymentRetrainingPolicyAutopilotOptionsOutputWithContext(ctx context.Context) DeploymentRetrainingPolicyAutopilotOptionsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentRetrainingPolicyAutopilotOptionsOutput)
+}
+
+func (i DeploymentRetrainingPolicyAutopilotOptionsArgs) ToDeploymentRetrainingPolicyAutopilotOptionsPtrOutput() DeploymentRetrainingPolicyAutopilotOptionsPtrOutput {
+	return i.ToDeploymentRetrainingPolicyAutopilotOptionsPtrOutputWithContext(context.Background())
+}
+
+func (i DeploymentRetrainingPolicyAutopilotOptionsArgs) ToDeploymentRetrainingPolicyAutopilotOptionsPtrOutputWithContext(ctx context.Context) DeploymentRetrainingPolicyAutopilotOptionsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentRetrainingPolicyAutopilotOptionsOutput).ToDeploymentRetrainingPolicyAutopilotOptionsPtrOutputWithContext(ctx)
+}
+
+// DeploymentRetrainingPolicyAutopilotOptionsPtrInput is an input type that accepts DeploymentRetrainingPolicyAutopilotOptionsArgs, DeploymentRetrainingPolicyAutopilotOptionsPtr and DeploymentRetrainingPolicyAutopilotOptionsPtrOutput values.
+// You can construct a concrete instance of `DeploymentRetrainingPolicyAutopilotOptionsPtrInput` via:
+//
+//	        DeploymentRetrainingPolicyAutopilotOptionsArgs{...}
+//
+//	or:
+//
+//	        nil
+type DeploymentRetrainingPolicyAutopilotOptionsPtrInput interface {
+	pulumi.Input
+
+	ToDeploymentRetrainingPolicyAutopilotOptionsPtrOutput() DeploymentRetrainingPolicyAutopilotOptionsPtrOutput
+	ToDeploymentRetrainingPolicyAutopilotOptionsPtrOutputWithContext(context.Context) DeploymentRetrainingPolicyAutopilotOptionsPtrOutput
+}
+
+type deploymentRetrainingPolicyAutopilotOptionsPtrType DeploymentRetrainingPolicyAutopilotOptionsArgs
+
+func DeploymentRetrainingPolicyAutopilotOptionsPtr(v *DeploymentRetrainingPolicyAutopilotOptionsArgs) DeploymentRetrainingPolicyAutopilotOptionsPtrInput {
+	return (*deploymentRetrainingPolicyAutopilotOptionsPtrType)(v)
+}
+
+func (*deploymentRetrainingPolicyAutopilotOptionsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentRetrainingPolicyAutopilotOptions)(nil)).Elem()
+}
+
+func (i *deploymentRetrainingPolicyAutopilotOptionsPtrType) ToDeploymentRetrainingPolicyAutopilotOptionsPtrOutput() DeploymentRetrainingPolicyAutopilotOptionsPtrOutput {
+	return i.ToDeploymentRetrainingPolicyAutopilotOptionsPtrOutputWithContext(context.Background())
+}
+
+func (i *deploymentRetrainingPolicyAutopilotOptionsPtrType) ToDeploymentRetrainingPolicyAutopilotOptionsPtrOutputWithContext(ctx context.Context) DeploymentRetrainingPolicyAutopilotOptionsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentRetrainingPolicyAutopilotOptionsPtrOutput)
+}
+
+type DeploymentRetrainingPolicyAutopilotOptionsOutput struct{ *pulumi.OutputState }
+
+func (DeploymentRetrainingPolicyAutopilotOptionsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentRetrainingPolicyAutopilotOptions)(nil)).Elem()
+}
+
+func (o DeploymentRetrainingPolicyAutopilotOptionsOutput) ToDeploymentRetrainingPolicyAutopilotOptionsOutput() DeploymentRetrainingPolicyAutopilotOptionsOutput {
+	return o
+}
+
+func (o DeploymentRetrainingPolicyAutopilotOptionsOutput) ToDeploymentRetrainingPolicyAutopilotOptionsOutputWithContext(ctx context.Context) DeploymentRetrainingPolicyAutopilotOptionsOutput {
+	return o
+}
+
+func (o DeploymentRetrainingPolicyAutopilotOptionsOutput) ToDeploymentRetrainingPolicyAutopilotOptionsPtrOutput() DeploymentRetrainingPolicyAutopilotOptionsPtrOutput {
+	return o.ToDeploymentRetrainingPolicyAutopilotOptionsPtrOutputWithContext(context.Background())
+}
+
+func (o DeploymentRetrainingPolicyAutopilotOptionsOutput) ToDeploymentRetrainingPolicyAutopilotOptionsPtrOutputWithContext(ctx context.Context) DeploymentRetrainingPolicyAutopilotOptionsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DeploymentRetrainingPolicyAutopilotOptions) *DeploymentRetrainingPolicyAutopilotOptions {
+		return &v
+	}).(DeploymentRetrainingPolicyAutopilotOptionsPtrOutput)
+}
+
+// Blend best models during Autopilot run. This option is not supported in SHAP-only mode.
+func (o DeploymentRetrainingPolicyAutopilotOptionsOutput) BlendBestModels() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v DeploymentRetrainingPolicyAutopilotOptions) *bool { return v.BlendBestModels }).(pulumi.BoolPtrOutput)
+}
+
+// The autopiltot mode.
+func (o DeploymentRetrainingPolicyAutopilotOptionsOutput) Mode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DeploymentRetrainingPolicyAutopilotOptions) *string { return v.Mode }).(pulumi.StringPtrOutput)
+}
+
+// Run Autopilot on Leakage Removed feature list (if exists).
+func (o DeploymentRetrainingPolicyAutopilotOptionsOutput) RunLeakageRemovedFeatureList() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v DeploymentRetrainingPolicyAutopilotOptions) *bool { return v.RunLeakageRemovedFeatureList }).(pulumi.BoolPtrOutput)
+}
+
+// Keep only models that can be converted to scorable java code during Autopilot run.
+func (o DeploymentRetrainingPolicyAutopilotOptionsOutput) ScoringCodeOnly() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v DeploymentRetrainingPolicyAutopilotOptions) *bool { return v.ScoringCodeOnly }).(pulumi.BoolPtrOutput)
+}
+
+// Include only models with SHAP value support.
+func (o DeploymentRetrainingPolicyAutopilotOptionsOutput) ShapOnlyMode() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v DeploymentRetrainingPolicyAutopilotOptions) *bool { return v.ShapOnlyMode }).(pulumi.BoolPtrOutput)
+}
+
+type DeploymentRetrainingPolicyAutopilotOptionsPtrOutput struct{ *pulumi.OutputState }
+
+func (DeploymentRetrainingPolicyAutopilotOptionsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentRetrainingPolicyAutopilotOptions)(nil)).Elem()
+}
+
+func (o DeploymentRetrainingPolicyAutopilotOptionsPtrOutput) ToDeploymentRetrainingPolicyAutopilotOptionsPtrOutput() DeploymentRetrainingPolicyAutopilotOptionsPtrOutput {
+	return o
+}
+
+func (o DeploymentRetrainingPolicyAutopilotOptionsPtrOutput) ToDeploymentRetrainingPolicyAutopilotOptionsPtrOutputWithContext(ctx context.Context) DeploymentRetrainingPolicyAutopilotOptionsPtrOutput {
+	return o
+}
+
+func (o DeploymentRetrainingPolicyAutopilotOptionsPtrOutput) Elem() DeploymentRetrainingPolicyAutopilotOptionsOutput {
+	return o.ApplyT(func(v *DeploymentRetrainingPolicyAutopilotOptions) DeploymentRetrainingPolicyAutopilotOptions {
+		if v != nil {
+			return *v
+		}
+		var ret DeploymentRetrainingPolicyAutopilotOptions
+		return ret
+	}).(DeploymentRetrainingPolicyAutopilotOptionsOutput)
+}
+
+// Blend best models during Autopilot run. This option is not supported in SHAP-only mode.
+func (o DeploymentRetrainingPolicyAutopilotOptionsPtrOutput) BlendBestModels() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *DeploymentRetrainingPolicyAutopilotOptions) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.BlendBestModels
+	}).(pulumi.BoolPtrOutput)
+}
+
+// The autopiltot mode.
+func (o DeploymentRetrainingPolicyAutopilotOptionsPtrOutput) Mode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DeploymentRetrainingPolicyAutopilotOptions) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Mode
+	}).(pulumi.StringPtrOutput)
+}
+
+// Run Autopilot on Leakage Removed feature list (if exists).
+func (o DeploymentRetrainingPolicyAutopilotOptionsPtrOutput) RunLeakageRemovedFeatureList() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *DeploymentRetrainingPolicyAutopilotOptions) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.RunLeakageRemovedFeatureList
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Keep only models that can be converted to scorable java code during Autopilot run.
+func (o DeploymentRetrainingPolicyAutopilotOptionsPtrOutput) ScoringCodeOnly() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *DeploymentRetrainingPolicyAutopilotOptions) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.ScoringCodeOnly
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Include only models with SHAP value support.
+func (o DeploymentRetrainingPolicyAutopilotOptionsPtrOutput) ShapOnlyMode() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *DeploymentRetrainingPolicyAutopilotOptions) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.ShapOnlyMode
+	}).(pulumi.BoolPtrOutput)
+}
+
+type DeploymentRetrainingPolicyProjectOptions struct {
+	// The partitioning method for projects used to build new models.
+	CvMethod *string `pulumi:"cvMethod"`
+	// The percentage of dataset to assign to holdout set in projects used to build new models.
+	HoldoutPct *float64 `pulumi:"holdoutPct"`
+	// The model selection metric in projects used to build new models.
+	Metric *string `pulumi:"metric"`
+	// The number of cross validation folds to use for projects used to build new models.
+	Reps *float64 `pulumi:"reps"`
+	// The percentage of dataset to assign to validation set in projects used to build new models.
+	ValidationPct *float64 `pulumi:"validationPct"`
+	// The validation type for projects used to build new models.
+	ValidationType *string `pulumi:"validationType"`
+}
+
+// DeploymentRetrainingPolicyProjectOptionsInput is an input type that accepts DeploymentRetrainingPolicyProjectOptionsArgs and DeploymentRetrainingPolicyProjectOptionsOutput values.
+// You can construct a concrete instance of `DeploymentRetrainingPolicyProjectOptionsInput` via:
+//
+//	DeploymentRetrainingPolicyProjectOptionsArgs{...}
+type DeploymentRetrainingPolicyProjectOptionsInput interface {
+	pulumi.Input
+
+	ToDeploymentRetrainingPolicyProjectOptionsOutput() DeploymentRetrainingPolicyProjectOptionsOutput
+	ToDeploymentRetrainingPolicyProjectOptionsOutputWithContext(context.Context) DeploymentRetrainingPolicyProjectOptionsOutput
+}
+
+type DeploymentRetrainingPolicyProjectOptionsArgs struct {
+	// The partitioning method for projects used to build new models.
+	CvMethod pulumi.StringPtrInput `pulumi:"cvMethod"`
+	// The percentage of dataset to assign to holdout set in projects used to build new models.
+	HoldoutPct pulumi.Float64PtrInput `pulumi:"holdoutPct"`
+	// The model selection metric in projects used to build new models.
+	Metric pulumi.StringPtrInput `pulumi:"metric"`
+	// The number of cross validation folds to use for projects used to build new models.
+	Reps pulumi.Float64PtrInput `pulumi:"reps"`
+	// The percentage of dataset to assign to validation set in projects used to build new models.
+	ValidationPct pulumi.Float64PtrInput `pulumi:"validationPct"`
+	// The validation type for projects used to build new models.
+	ValidationType pulumi.StringPtrInput `pulumi:"validationType"`
+}
+
+func (DeploymentRetrainingPolicyProjectOptionsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentRetrainingPolicyProjectOptions)(nil)).Elem()
+}
+
+func (i DeploymentRetrainingPolicyProjectOptionsArgs) ToDeploymentRetrainingPolicyProjectOptionsOutput() DeploymentRetrainingPolicyProjectOptionsOutput {
+	return i.ToDeploymentRetrainingPolicyProjectOptionsOutputWithContext(context.Background())
+}
+
+func (i DeploymentRetrainingPolicyProjectOptionsArgs) ToDeploymentRetrainingPolicyProjectOptionsOutputWithContext(ctx context.Context) DeploymentRetrainingPolicyProjectOptionsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentRetrainingPolicyProjectOptionsOutput)
+}
+
+func (i DeploymentRetrainingPolicyProjectOptionsArgs) ToDeploymentRetrainingPolicyProjectOptionsPtrOutput() DeploymentRetrainingPolicyProjectOptionsPtrOutput {
+	return i.ToDeploymentRetrainingPolicyProjectOptionsPtrOutputWithContext(context.Background())
+}
+
+func (i DeploymentRetrainingPolicyProjectOptionsArgs) ToDeploymentRetrainingPolicyProjectOptionsPtrOutputWithContext(ctx context.Context) DeploymentRetrainingPolicyProjectOptionsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentRetrainingPolicyProjectOptionsOutput).ToDeploymentRetrainingPolicyProjectOptionsPtrOutputWithContext(ctx)
+}
+
+// DeploymentRetrainingPolicyProjectOptionsPtrInput is an input type that accepts DeploymentRetrainingPolicyProjectOptionsArgs, DeploymentRetrainingPolicyProjectOptionsPtr and DeploymentRetrainingPolicyProjectOptionsPtrOutput values.
+// You can construct a concrete instance of `DeploymentRetrainingPolicyProjectOptionsPtrInput` via:
+//
+//	        DeploymentRetrainingPolicyProjectOptionsArgs{...}
+//
+//	or:
+//
+//	        nil
+type DeploymentRetrainingPolicyProjectOptionsPtrInput interface {
+	pulumi.Input
+
+	ToDeploymentRetrainingPolicyProjectOptionsPtrOutput() DeploymentRetrainingPolicyProjectOptionsPtrOutput
+	ToDeploymentRetrainingPolicyProjectOptionsPtrOutputWithContext(context.Context) DeploymentRetrainingPolicyProjectOptionsPtrOutput
+}
+
+type deploymentRetrainingPolicyProjectOptionsPtrType DeploymentRetrainingPolicyProjectOptionsArgs
+
+func DeploymentRetrainingPolicyProjectOptionsPtr(v *DeploymentRetrainingPolicyProjectOptionsArgs) DeploymentRetrainingPolicyProjectOptionsPtrInput {
+	return (*deploymentRetrainingPolicyProjectOptionsPtrType)(v)
+}
+
+func (*deploymentRetrainingPolicyProjectOptionsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentRetrainingPolicyProjectOptions)(nil)).Elem()
+}
+
+func (i *deploymentRetrainingPolicyProjectOptionsPtrType) ToDeploymentRetrainingPolicyProjectOptionsPtrOutput() DeploymentRetrainingPolicyProjectOptionsPtrOutput {
+	return i.ToDeploymentRetrainingPolicyProjectOptionsPtrOutputWithContext(context.Background())
+}
+
+func (i *deploymentRetrainingPolicyProjectOptionsPtrType) ToDeploymentRetrainingPolicyProjectOptionsPtrOutputWithContext(ctx context.Context) DeploymentRetrainingPolicyProjectOptionsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentRetrainingPolicyProjectOptionsPtrOutput)
+}
+
+type DeploymentRetrainingPolicyProjectOptionsOutput struct{ *pulumi.OutputState }
+
+func (DeploymentRetrainingPolicyProjectOptionsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentRetrainingPolicyProjectOptions)(nil)).Elem()
+}
+
+func (o DeploymentRetrainingPolicyProjectOptionsOutput) ToDeploymentRetrainingPolicyProjectOptionsOutput() DeploymentRetrainingPolicyProjectOptionsOutput {
+	return o
+}
+
+func (o DeploymentRetrainingPolicyProjectOptionsOutput) ToDeploymentRetrainingPolicyProjectOptionsOutputWithContext(ctx context.Context) DeploymentRetrainingPolicyProjectOptionsOutput {
+	return o
+}
+
+func (o DeploymentRetrainingPolicyProjectOptionsOutput) ToDeploymentRetrainingPolicyProjectOptionsPtrOutput() DeploymentRetrainingPolicyProjectOptionsPtrOutput {
+	return o.ToDeploymentRetrainingPolicyProjectOptionsPtrOutputWithContext(context.Background())
+}
+
+func (o DeploymentRetrainingPolicyProjectOptionsOutput) ToDeploymentRetrainingPolicyProjectOptionsPtrOutputWithContext(ctx context.Context) DeploymentRetrainingPolicyProjectOptionsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DeploymentRetrainingPolicyProjectOptions) *DeploymentRetrainingPolicyProjectOptions {
+		return &v
+	}).(DeploymentRetrainingPolicyProjectOptionsPtrOutput)
+}
+
+// The partitioning method for projects used to build new models.
+func (o DeploymentRetrainingPolicyProjectOptionsOutput) CvMethod() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DeploymentRetrainingPolicyProjectOptions) *string { return v.CvMethod }).(pulumi.StringPtrOutput)
+}
+
+// The percentage of dataset to assign to holdout set in projects used to build new models.
+func (o DeploymentRetrainingPolicyProjectOptionsOutput) HoldoutPct() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v DeploymentRetrainingPolicyProjectOptions) *float64 { return v.HoldoutPct }).(pulumi.Float64PtrOutput)
+}
+
+// The model selection metric in projects used to build new models.
+func (o DeploymentRetrainingPolicyProjectOptionsOutput) Metric() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DeploymentRetrainingPolicyProjectOptions) *string { return v.Metric }).(pulumi.StringPtrOutput)
+}
+
+// The number of cross validation folds to use for projects used to build new models.
+func (o DeploymentRetrainingPolicyProjectOptionsOutput) Reps() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v DeploymentRetrainingPolicyProjectOptions) *float64 { return v.Reps }).(pulumi.Float64PtrOutput)
+}
+
+// The percentage of dataset to assign to validation set in projects used to build new models.
+func (o DeploymentRetrainingPolicyProjectOptionsOutput) ValidationPct() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v DeploymentRetrainingPolicyProjectOptions) *float64 { return v.ValidationPct }).(pulumi.Float64PtrOutput)
+}
+
+// The validation type for projects used to build new models.
+func (o DeploymentRetrainingPolicyProjectOptionsOutput) ValidationType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DeploymentRetrainingPolicyProjectOptions) *string { return v.ValidationType }).(pulumi.StringPtrOutput)
+}
+
+type DeploymentRetrainingPolicyProjectOptionsPtrOutput struct{ *pulumi.OutputState }
+
+func (DeploymentRetrainingPolicyProjectOptionsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentRetrainingPolicyProjectOptions)(nil)).Elem()
+}
+
+func (o DeploymentRetrainingPolicyProjectOptionsPtrOutput) ToDeploymentRetrainingPolicyProjectOptionsPtrOutput() DeploymentRetrainingPolicyProjectOptionsPtrOutput {
+	return o
+}
+
+func (o DeploymentRetrainingPolicyProjectOptionsPtrOutput) ToDeploymentRetrainingPolicyProjectOptionsPtrOutputWithContext(ctx context.Context) DeploymentRetrainingPolicyProjectOptionsPtrOutput {
+	return o
+}
+
+func (o DeploymentRetrainingPolicyProjectOptionsPtrOutput) Elem() DeploymentRetrainingPolicyProjectOptionsOutput {
+	return o.ApplyT(func(v *DeploymentRetrainingPolicyProjectOptions) DeploymentRetrainingPolicyProjectOptions {
+		if v != nil {
+			return *v
+		}
+		var ret DeploymentRetrainingPolicyProjectOptions
+		return ret
+	}).(DeploymentRetrainingPolicyProjectOptionsOutput)
+}
+
+// The partitioning method for projects used to build new models.
+func (o DeploymentRetrainingPolicyProjectOptionsPtrOutput) CvMethod() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DeploymentRetrainingPolicyProjectOptions) *string {
+		if v == nil {
+			return nil
+		}
+		return v.CvMethod
+	}).(pulumi.StringPtrOutput)
+}
+
+// The percentage of dataset to assign to holdout set in projects used to build new models.
+func (o DeploymentRetrainingPolicyProjectOptionsPtrOutput) HoldoutPct() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v *DeploymentRetrainingPolicyProjectOptions) *float64 {
+		if v == nil {
+			return nil
+		}
+		return v.HoldoutPct
+	}).(pulumi.Float64PtrOutput)
+}
+
+// The model selection metric in projects used to build new models.
+func (o DeploymentRetrainingPolicyProjectOptionsPtrOutput) Metric() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DeploymentRetrainingPolicyProjectOptions) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Metric
+	}).(pulumi.StringPtrOutput)
+}
+
+// The number of cross validation folds to use for projects used to build new models.
+func (o DeploymentRetrainingPolicyProjectOptionsPtrOutput) Reps() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v *DeploymentRetrainingPolicyProjectOptions) *float64 {
+		if v == nil {
+			return nil
+		}
+		return v.Reps
+	}).(pulumi.Float64PtrOutput)
+}
+
+// The percentage of dataset to assign to validation set in projects used to build new models.
+func (o DeploymentRetrainingPolicyProjectOptionsPtrOutput) ValidationPct() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v *DeploymentRetrainingPolicyProjectOptions) *float64 {
+		if v == nil {
+			return nil
+		}
+		return v.ValidationPct
+	}).(pulumi.Float64PtrOutput)
+}
+
+// The validation type for projects used to build new models.
+func (o DeploymentRetrainingPolicyProjectOptionsPtrOutput) ValidationType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DeploymentRetrainingPolicyProjectOptions) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ValidationType
+	}).(pulumi.StringPtrOutput)
+}
+
+type DeploymentRetrainingPolicyTimeSeriesOptions struct {
+	// The ID of the calendar to be used in this project.
+	CalendarId *string `pulumi:"calendarId"`
+	// For time series projects only. Used to specify which differencing method to apply if the data is stationary. For classification problems simple and seasonal are not allowed. Parameter periodicities must be specified if seasonal is chosen. Defaults to auto.
+	DifferencingMethod *string `pulumi:"differencingMethod"`
+	// Discount factor (alpha) used for exponentially weighted moving features.
+	ExponentiallyWeightedMovingAlpha *float64 `pulumi:"exponentiallyWeightedMovingAlpha"`
+	// A list of periodicities for time series projects only. For classification problems periodicities are not allowed. If this is provided, parameter 'differencing*method' will default to 'seasonal' if not provided or 'auto'.
+	Periodicities []DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicity `pulumi:"periodicities"`
+	// For time series projects only. Used to specify whether to treat data as exponential trend and apply transformations like log-transform. For classification problems always is not allowed. Defaults to auto.
+	TreatAsExponential *string `pulumi:"treatAsExponential"`
+}
+
+// DeploymentRetrainingPolicyTimeSeriesOptionsInput is an input type that accepts DeploymentRetrainingPolicyTimeSeriesOptionsArgs and DeploymentRetrainingPolicyTimeSeriesOptionsOutput values.
+// You can construct a concrete instance of `DeploymentRetrainingPolicyTimeSeriesOptionsInput` via:
+//
+//	DeploymentRetrainingPolicyTimeSeriesOptionsArgs{...}
+type DeploymentRetrainingPolicyTimeSeriesOptionsInput interface {
+	pulumi.Input
+
+	ToDeploymentRetrainingPolicyTimeSeriesOptionsOutput() DeploymentRetrainingPolicyTimeSeriesOptionsOutput
+	ToDeploymentRetrainingPolicyTimeSeriesOptionsOutputWithContext(context.Context) DeploymentRetrainingPolicyTimeSeriesOptionsOutput
+}
+
+type DeploymentRetrainingPolicyTimeSeriesOptionsArgs struct {
+	// The ID of the calendar to be used in this project.
+	CalendarId pulumi.StringPtrInput `pulumi:"calendarId"`
+	// For time series projects only. Used to specify which differencing method to apply if the data is stationary. For classification problems simple and seasonal are not allowed. Parameter periodicities must be specified if seasonal is chosen. Defaults to auto.
+	DifferencingMethod pulumi.StringPtrInput `pulumi:"differencingMethod"`
+	// Discount factor (alpha) used for exponentially weighted moving features.
+	ExponentiallyWeightedMovingAlpha pulumi.Float64PtrInput `pulumi:"exponentiallyWeightedMovingAlpha"`
+	// A list of periodicities for time series projects only. For classification problems periodicities are not allowed. If this is provided, parameter 'differencing*method' will default to 'seasonal' if not provided or 'auto'.
+	Periodicities DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityArrayInput `pulumi:"periodicities"`
+	// For time series projects only. Used to specify whether to treat data as exponential trend and apply transformations like log-transform. For classification problems always is not allowed. Defaults to auto.
+	TreatAsExponential pulumi.StringPtrInput `pulumi:"treatAsExponential"`
+}
+
+func (DeploymentRetrainingPolicyTimeSeriesOptionsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentRetrainingPolicyTimeSeriesOptions)(nil)).Elem()
+}
+
+func (i DeploymentRetrainingPolicyTimeSeriesOptionsArgs) ToDeploymentRetrainingPolicyTimeSeriesOptionsOutput() DeploymentRetrainingPolicyTimeSeriesOptionsOutput {
+	return i.ToDeploymentRetrainingPolicyTimeSeriesOptionsOutputWithContext(context.Background())
+}
+
+func (i DeploymentRetrainingPolicyTimeSeriesOptionsArgs) ToDeploymentRetrainingPolicyTimeSeriesOptionsOutputWithContext(ctx context.Context) DeploymentRetrainingPolicyTimeSeriesOptionsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentRetrainingPolicyTimeSeriesOptionsOutput)
+}
+
+func (i DeploymentRetrainingPolicyTimeSeriesOptionsArgs) ToDeploymentRetrainingPolicyTimeSeriesOptionsPtrOutput() DeploymentRetrainingPolicyTimeSeriesOptionsPtrOutput {
+	return i.ToDeploymentRetrainingPolicyTimeSeriesOptionsPtrOutputWithContext(context.Background())
+}
+
+func (i DeploymentRetrainingPolicyTimeSeriesOptionsArgs) ToDeploymentRetrainingPolicyTimeSeriesOptionsPtrOutputWithContext(ctx context.Context) DeploymentRetrainingPolicyTimeSeriesOptionsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentRetrainingPolicyTimeSeriesOptionsOutput).ToDeploymentRetrainingPolicyTimeSeriesOptionsPtrOutputWithContext(ctx)
+}
+
+// DeploymentRetrainingPolicyTimeSeriesOptionsPtrInput is an input type that accepts DeploymentRetrainingPolicyTimeSeriesOptionsArgs, DeploymentRetrainingPolicyTimeSeriesOptionsPtr and DeploymentRetrainingPolicyTimeSeriesOptionsPtrOutput values.
+// You can construct a concrete instance of `DeploymentRetrainingPolicyTimeSeriesOptionsPtrInput` via:
+//
+//	        DeploymentRetrainingPolicyTimeSeriesOptionsArgs{...}
+//
+//	or:
+//
+//	        nil
+type DeploymentRetrainingPolicyTimeSeriesOptionsPtrInput interface {
+	pulumi.Input
+
+	ToDeploymentRetrainingPolicyTimeSeriesOptionsPtrOutput() DeploymentRetrainingPolicyTimeSeriesOptionsPtrOutput
+	ToDeploymentRetrainingPolicyTimeSeriesOptionsPtrOutputWithContext(context.Context) DeploymentRetrainingPolicyTimeSeriesOptionsPtrOutput
+}
+
+type deploymentRetrainingPolicyTimeSeriesOptionsPtrType DeploymentRetrainingPolicyTimeSeriesOptionsArgs
+
+func DeploymentRetrainingPolicyTimeSeriesOptionsPtr(v *DeploymentRetrainingPolicyTimeSeriesOptionsArgs) DeploymentRetrainingPolicyTimeSeriesOptionsPtrInput {
+	return (*deploymentRetrainingPolicyTimeSeriesOptionsPtrType)(v)
+}
+
+func (*deploymentRetrainingPolicyTimeSeriesOptionsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentRetrainingPolicyTimeSeriesOptions)(nil)).Elem()
+}
+
+func (i *deploymentRetrainingPolicyTimeSeriesOptionsPtrType) ToDeploymentRetrainingPolicyTimeSeriesOptionsPtrOutput() DeploymentRetrainingPolicyTimeSeriesOptionsPtrOutput {
+	return i.ToDeploymentRetrainingPolicyTimeSeriesOptionsPtrOutputWithContext(context.Background())
+}
+
+func (i *deploymentRetrainingPolicyTimeSeriesOptionsPtrType) ToDeploymentRetrainingPolicyTimeSeriesOptionsPtrOutputWithContext(ctx context.Context) DeploymentRetrainingPolicyTimeSeriesOptionsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentRetrainingPolicyTimeSeriesOptionsPtrOutput)
+}
+
+type DeploymentRetrainingPolicyTimeSeriesOptionsOutput struct{ *pulumi.OutputState }
+
+func (DeploymentRetrainingPolicyTimeSeriesOptionsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentRetrainingPolicyTimeSeriesOptions)(nil)).Elem()
+}
+
+func (o DeploymentRetrainingPolicyTimeSeriesOptionsOutput) ToDeploymentRetrainingPolicyTimeSeriesOptionsOutput() DeploymentRetrainingPolicyTimeSeriesOptionsOutput {
+	return o
+}
+
+func (o DeploymentRetrainingPolicyTimeSeriesOptionsOutput) ToDeploymentRetrainingPolicyTimeSeriesOptionsOutputWithContext(ctx context.Context) DeploymentRetrainingPolicyTimeSeriesOptionsOutput {
+	return o
+}
+
+func (o DeploymentRetrainingPolicyTimeSeriesOptionsOutput) ToDeploymentRetrainingPolicyTimeSeriesOptionsPtrOutput() DeploymentRetrainingPolicyTimeSeriesOptionsPtrOutput {
+	return o.ToDeploymentRetrainingPolicyTimeSeriesOptionsPtrOutputWithContext(context.Background())
+}
+
+func (o DeploymentRetrainingPolicyTimeSeriesOptionsOutput) ToDeploymentRetrainingPolicyTimeSeriesOptionsPtrOutputWithContext(ctx context.Context) DeploymentRetrainingPolicyTimeSeriesOptionsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DeploymentRetrainingPolicyTimeSeriesOptions) *DeploymentRetrainingPolicyTimeSeriesOptions {
+		return &v
+	}).(DeploymentRetrainingPolicyTimeSeriesOptionsPtrOutput)
+}
+
+// The ID of the calendar to be used in this project.
+func (o DeploymentRetrainingPolicyTimeSeriesOptionsOutput) CalendarId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DeploymentRetrainingPolicyTimeSeriesOptions) *string { return v.CalendarId }).(pulumi.StringPtrOutput)
+}
+
+// For time series projects only. Used to specify which differencing method to apply if the data is stationary. For classification problems simple and seasonal are not allowed. Parameter periodicities must be specified if seasonal is chosen. Defaults to auto.
+func (o DeploymentRetrainingPolicyTimeSeriesOptionsOutput) DifferencingMethod() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DeploymentRetrainingPolicyTimeSeriesOptions) *string { return v.DifferencingMethod }).(pulumi.StringPtrOutput)
+}
+
+// Discount factor (alpha) used for exponentially weighted moving features.
+func (o DeploymentRetrainingPolicyTimeSeriesOptionsOutput) ExponentiallyWeightedMovingAlpha() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v DeploymentRetrainingPolicyTimeSeriesOptions) *float64 {
+		return v.ExponentiallyWeightedMovingAlpha
+	}).(pulumi.Float64PtrOutput)
+}
+
+// A list of periodicities for time series projects only. For classification problems periodicities are not allowed. If this is provided, parameter 'differencing*method' will default to 'seasonal' if not provided or 'auto'.
+func (o DeploymentRetrainingPolicyTimeSeriesOptionsOutput) Periodicities() DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityArrayOutput {
+	return o.ApplyT(func(v DeploymentRetrainingPolicyTimeSeriesOptions) []DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicity {
+		return v.Periodicities
+	}).(DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityArrayOutput)
+}
+
+// For time series projects only. Used to specify whether to treat data as exponential trend and apply transformations like log-transform. For classification problems always is not allowed. Defaults to auto.
+func (o DeploymentRetrainingPolicyTimeSeriesOptionsOutput) TreatAsExponential() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DeploymentRetrainingPolicyTimeSeriesOptions) *string { return v.TreatAsExponential }).(pulumi.StringPtrOutput)
+}
+
+type DeploymentRetrainingPolicyTimeSeriesOptionsPtrOutput struct{ *pulumi.OutputState }
+
+func (DeploymentRetrainingPolicyTimeSeriesOptionsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentRetrainingPolicyTimeSeriesOptions)(nil)).Elem()
+}
+
+func (o DeploymentRetrainingPolicyTimeSeriesOptionsPtrOutput) ToDeploymentRetrainingPolicyTimeSeriesOptionsPtrOutput() DeploymentRetrainingPolicyTimeSeriesOptionsPtrOutput {
+	return o
+}
+
+func (o DeploymentRetrainingPolicyTimeSeriesOptionsPtrOutput) ToDeploymentRetrainingPolicyTimeSeriesOptionsPtrOutputWithContext(ctx context.Context) DeploymentRetrainingPolicyTimeSeriesOptionsPtrOutput {
+	return o
+}
+
+func (o DeploymentRetrainingPolicyTimeSeriesOptionsPtrOutput) Elem() DeploymentRetrainingPolicyTimeSeriesOptionsOutput {
+	return o.ApplyT(func(v *DeploymentRetrainingPolicyTimeSeriesOptions) DeploymentRetrainingPolicyTimeSeriesOptions {
+		if v != nil {
+			return *v
+		}
+		var ret DeploymentRetrainingPolicyTimeSeriesOptions
+		return ret
+	}).(DeploymentRetrainingPolicyTimeSeriesOptionsOutput)
+}
+
+// The ID of the calendar to be used in this project.
+func (o DeploymentRetrainingPolicyTimeSeriesOptionsPtrOutput) CalendarId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DeploymentRetrainingPolicyTimeSeriesOptions) *string {
+		if v == nil {
+			return nil
+		}
+		return v.CalendarId
+	}).(pulumi.StringPtrOutput)
+}
+
+// For time series projects only. Used to specify which differencing method to apply if the data is stationary. For classification problems simple and seasonal are not allowed. Parameter periodicities must be specified if seasonal is chosen. Defaults to auto.
+func (o DeploymentRetrainingPolicyTimeSeriesOptionsPtrOutput) DifferencingMethod() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DeploymentRetrainingPolicyTimeSeriesOptions) *string {
+		if v == nil {
+			return nil
+		}
+		return v.DifferencingMethod
+	}).(pulumi.StringPtrOutput)
+}
+
+// Discount factor (alpha) used for exponentially weighted moving features.
+func (o DeploymentRetrainingPolicyTimeSeriesOptionsPtrOutput) ExponentiallyWeightedMovingAlpha() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v *DeploymentRetrainingPolicyTimeSeriesOptions) *float64 {
+		if v == nil {
+			return nil
+		}
+		return v.ExponentiallyWeightedMovingAlpha
+	}).(pulumi.Float64PtrOutput)
+}
+
+// A list of periodicities for time series projects only. For classification problems periodicities are not allowed. If this is provided, parameter 'differencing*method' will default to 'seasonal' if not provided or 'auto'.
+func (o DeploymentRetrainingPolicyTimeSeriesOptionsPtrOutput) Periodicities() DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityArrayOutput {
+	return o.ApplyT(func(v *DeploymentRetrainingPolicyTimeSeriesOptions) []DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicity {
+		if v == nil {
+			return nil
+		}
+		return v.Periodicities
+	}).(DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityArrayOutput)
+}
+
+// For time series projects only. Used to specify whether to treat data as exponential trend and apply transformations like log-transform. For classification problems always is not allowed. Defaults to auto.
+func (o DeploymentRetrainingPolicyTimeSeriesOptionsPtrOutput) TreatAsExponential() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DeploymentRetrainingPolicyTimeSeriesOptions) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TreatAsExponential
+	}).(pulumi.StringPtrOutput)
+}
+
+type DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicity struct {
+	// The number of time steps.
+	TimeSteps int `pulumi:"timeSteps"`
+	// The time unit or ROW if windowsBasisUnit is ROW
+	TimeUnit string `pulumi:"timeUnit"`
+}
+
+// DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityInput is an input type that accepts DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityArgs and DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityOutput values.
+// You can construct a concrete instance of `DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityInput` via:
+//
+//	DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityArgs{...}
+type DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityInput interface {
+	pulumi.Input
+
+	ToDeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityOutput() DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityOutput
+	ToDeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityOutputWithContext(context.Context) DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityOutput
+}
+
+type DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityArgs struct {
+	// The number of time steps.
+	TimeSteps pulumi.IntInput `pulumi:"timeSteps"`
+	// The time unit or ROW if windowsBasisUnit is ROW
+	TimeUnit pulumi.StringInput `pulumi:"timeUnit"`
+}
+
+func (DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicity)(nil)).Elem()
+}
+
+func (i DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityArgs) ToDeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityOutput() DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityOutput {
+	return i.ToDeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityOutputWithContext(context.Background())
+}
+
+func (i DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityArgs) ToDeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityOutputWithContext(ctx context.Context) DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityOutput)
+}
+
+// DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityArrayInput is an input type that accepts DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityArray and DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityArrayOutput values.
+// You can construct a concrete instance of `DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityArrayInput` via:
+//
+//	DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityArray{ DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityArgs{...} }
+type DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityArrayInput interface {
+	pulumi.Input
+
+	ToDeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityArrayOutput() DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityArrayOutput
+	ToDeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityArrayOutputWithContext(context.Context) DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityArrayOutput
+}
+
+type DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityArray []DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityInput
+
+func (DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicity)(nil)).Elem()
+}
+
+func (i DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityArray) ToDeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityArrayOutput() DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityArrayOutput {
+	return i.ToDeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityArrayOutputWithContext(context.Background())
+}
+
+func (i DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityArray) ToDeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityArrayOutputWithContext(ctx context.Context) DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityArrayOutput)
+}
+
+type DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityOutput struct{ *pulumi.OutputState }
+
+func (DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicity)(nil)).Elem()
+}
+
+func (o DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityOutput) ToDeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityOutput() DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityOutput {
+	return o
+}
+
+func (o DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityOutput) ToDeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityOutputWithContext(ctx context.Context) DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityOutput {
+	return o
+}
+
+// The number of time steps.
+func (o DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityOutput) TimeSteps() pulumi.IntOutput {
+	return o.ApplyT(func(v DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicity) int { return v.TimeSteps }).(pulumi.IntOutput)
+}
+
+// The time unit or ROW if windowsBasisUnit is ROW
+func (o DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityOutput) TimeUnit() pulumi.StringOutput {
+	return o.ApplyT(func(v DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicity) string { return v.TimeUnit }).(pulumi.StringOutput)
+}
+
+type DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityArrayOutput struct{ *pulumi.OutputState }
+
+func (DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicity)(nil)).Elem()
+}
+
+func (o DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityArrayOutput) ToDeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityArrayOutput() DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityArrayOutput {
+	return o
+}
+
+func (o DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityArrayOutput) ToDeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityArrayOutputWithContext(ctx context.Context) DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityArrayOutput {
+	return o
+}
+
+func (o DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityArrayOutput) Index(i pulumi.IntInput) DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicity {
+		return vs[0].([]DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicity)[vs[1].(int)]
+	}).(DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityOutput)
+}
+
+type DeploymentRetrainingPolicyTrigger struct {
+	// Custom job ID for the retraining policy.
+	CustomJobId *string `pulumi:"customJobId"`
+	// Minimal interval between policy runs in ISO 8601 duration string.
+	MinIntervalBetweenRuns *string `pulumi:"minIntervalBetweenRuns"`
+	// Schedule for the retraining policy.
+	Schedule *DeploymentRetrainingPolicyTriggerSchedule `pulumi:"schedule"`
+	// Identifies when trigger type is based on deployment a health status, whether the policy will run when health status declines to failing.
+	StatusDeclinesToFailing *bool `pulumi:"statusDeclinesToFailing"`
+	// Identifies when trigger type is based on deployment a health status, whether the policy will run when health status declines to warning.
+	StatusDeclinesToWarning *bool `pulumi:"statusDeclinesToWarning"`
+	// Identifies when trigger type is based on deployment a health status, whether the policy will run when health status still in decline.
+	StatusStillInDecline *bool `pulumi:"statusStillInDecline"`
+	// Type of retraining policy trigger.
+	Type *string `pulumi:"type"`
+}
+
+// DeploymentRetrainingPolicyTriggerInput is an input type that accepts DeploymentRetrainingPolicyTriggerArgs and DeploymentRetrainingPolicyTriggerOutput values.
+// You can construct a concrete instance of `DeploymentRetrainingPolicyTriggerInput` via:
+//
+//	DeploymentRetrainingPolicyTriggerArgs{...}
+type DeploymentRetrainingPolicyTriggerInput interface {
+	pulumi.Input
+
+	ToDeploymentRetrainingPolicyTriggerOutput() DeploymentRetrainingPolicyTriggerOutput
+	ToDeploymentRetrainingPolicyTriggerOutputWithContext(context.Context) DeploymentRetrainingPolicyTriggerOutput
+}
+
+type DeploymentRetrainingPolicyTriggerArgs struct {
+	// Custom job ID for the retraining policy.
+	CustomJobId pulumi.StringPtrInput `pulumi:"customJobId"`
+	// Minimal interval between policy runs in ISO 8601 duration string.
+	MinIntervalBetweenRuns pulumi.StringPtrInput `pulumi:"minIntervalBetweenRuns"`
+	// Schedule for the retraining policy.
+	Schedule DeploymentRetrainingPolicyTriggerSchedulePtrInput `pulumi:"schedule"`
+	// Identifies when trigger type is based on deployment a health status, whether the policy will run when health status declines to failing.
+	StatusDeclinesToFailing pulumi.BoolPtrInput `pulumi:"statusDeclinesToFailing"`
+	// Identifies when trigger type is based on deployment a health status, whether the policy will run when health status declines to warning.
+	StatusDeclinesToWarning pulumi.BoolPtrInput `pulumi:"statusDeclinesToWarning"`
+	// Identifies when trigger type is based on deployment a health status, whether the policy will run when health status still in decline.
+	StatusStillInDecline pulumi.BoolPtrInput `pulumi:"statusStillInDecline"`
+	// Type of retraining policy trigger.
+	Type pulumi.StringPtrInput `pulumi:"type"`
+}
+
+func (DeploymentRetrainingPolicyTriggerArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentRetrainingPolicyTrigger)(nil)).Elem()
+}
+
+func (i DeploymentRetrainingPolicyTriggerArgs) ToDeploymentRetrainingPolicyTriggerOutput() DeploymentRetrainingPolicyTriggerOutput {
+	return i.ToDeploymentRetrainingPolicyTriggerOutputWithContext(context.Background())
+}
+
+func (i DeploymentRetrainingPolicyTriggerArgs) ToDeploymentRetrainingPolicyTriggerOutputWithContext(ctx context.Context) DeploymentRetrainingPolicyTriggerOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentRetrainingPolicyTriggerOutput)
+}
+
+func (i DeploymentRetrainingPolicyTriggerArgs) ToDeploymentRetrainingPolicyTriggerPtrOutput() DeploymentRetrainingPolicyTriggerPtrOutput {
+	return i.ToDeploymentRetrainingPolicyTriggerPtrOutputWithContext(context.Background())
+}
+
+func (i DeploymentRetrainingPolicyTriggerArgs) ToDeploymentRetrainingPolicyTriggerPtrOutputWithContext(ctx context.Context) DeploymentRetrainingPolicyTriggerPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentRetrainingPolicyTriggerOutput).ToDeploymentRetrainingPolicyTriggerPtrOutputWithContext(ctx)
+}
+
+// DeploymentRetrainingPolicyTriggerPtrInput is an input type that accepts DeploymentRetrainingPolicyTriggerArgs, DeploymentRetrainingPolicyTriggerPtr and DeploymentRetrainingPolicyTriggerPtrOutput values.
+// You can construct a concrete instance of `DeploymentRetrainingPolicyTriggerPtrInput` via:
+//
+//	        DeploymentRetrainingPolicyTriggerArgs{...}
+//
+//	or:
+//
+//	        nil
+type DeploymentRetrainingPolicyTriggerPtrInput interface {
+	pulumi.Input
+
+	ToDeploymentRetrainingPolicyTriggerPtrOutput() DeploymentRetrainingPolicyTriggerPtrOutput
+	ToDeploymentRetrainingPolicyTriggerPtrOutputWithContext(context.Context) DeploymentRetrainingPolicyTriggerPtrOutput
+}
+
+type deploymentRetrainingPolicyTriggerPtrType DeploymentRetrainingPolicyTriggerArgs
+
+func DeploymentRetrainingPolicyTriggerPtr(v *DeploymentRetrainingPolicyTriggerArgs) DeploymentRetrainingPolicyTriggerPtrInput {
+	return (*deploymentRetrainingPolicyTriggerPtrType)(v)
+}
+
+func (*deploymentRetrainingPolicyTriggerPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentRetrainingPolicyTrigger)(nil)).Elem()
+}
+
+func (i *deploymentRetrainingPolicyTriggerPtrType) ToDeploymentRetrainingPolicyTriggerPtrOutput() DeploymentRetrainingPolicyTriggerPtrOutput {
+	return i.ToDeploymentRetrainingPolicyTriggerPtrOutputWithContext(context.Background())
+}
+
+func (i *deploymentRetrainingPolicyTriggerPtrType) ToDeploymentRetrainingPolicyTriggerPtrOutputWithContext(ctx context.Context) DeploymentRetrainingPolicyTriggerPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentRetrainingPolicyTriggerPtrOutput)
+}
+
+type DeploymentRetrainingPolicyTriggerOutput struct{ *pulumi.OutputState }
+
+func (DeploymentRetrainingPolicyTriggerOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentRetrainingPolicyTrigger)(nil)).Elem()
+}
+
+func (o DeploymentRetrainingPolicyTriggerOutput) ToDeploymentRetrainingPolicyTriggerOutput() DeploymentRetrainingPolicyTriggerOutput {
+	return o
+}
+
+func (o DeploymentRetrainingPolicyTriggerOutput) ToDeploymentRetrainingPolicyTriggerOutputWithContext(ctx context.Context) DeploymentRetrainingPolicyTriggerOutput {
+	return o
+}
+
+func (o DeploymentRetrainingPolicyTriggerOutput) ToDeploymentRetrainingPolicyTriggerPtrOutput() DeploymentRetrainingPolicyTriggerPtrOutput {
+	return o.ToDeploymentRetrainingPolicyTriggerPtrOutputWithContext(context.Background())
+}
+
+func (o DeploymentRetrainingPolicyTriggerOutput) ToDeploymentRetrainingPolicyTriggerPtrOutputWithContext(ctx context.Context) DeploymentRetrainingPolicyTriggerPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DeploymentRetrainingPolicyTrigger) *DeploymentRetrainingPolicyTrigger {
+		return &v
+	}).(DeploymentRetrainingPolicyTriggerPtrOutput)
+}
+
+// Custom job ID for the retraining policy.
+func (o DeploymentRetrainingPolicyTriggerOutput) CustomJobId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DeploymentRetrainingPolicyTrigger) *string { return v.CustomJobId }).(pulumi.StringPtrOutput)
+}
+
+// Minimal interval between policy runs in ISO 8601 duration string.
+func (o DeploymentRetrainingPolicyTriggerOutput) MinIntervalBetweenRuns() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DeploymentRetrainingPolicyTrigger) *string { return v.MinIntervalBetweenRuns }).(pulumi.StringPtrOutput)
+}
+
+// Schedule for the retraining policy.
+func (o DeploymentRetrainingPolicyTriggerOutput) Schedule() DeploymentRetrainingPolicyTriggerSchedulePtrOutput {
+	return o.ApplyT(func(v DeploymentRetrainingPolicyTrigger) *DeploymentRetrainingPolicyTriggerSchedule {
+		return v.Schedule
+	}).(DeploymentRetrainingPolicyTriggerSchedulePtrOutput)
+}
+
+// Identifies when trigger type is based on deployment a health status, whether the policy will run when health status declines to failing.
+func (o DeploymentRetrainingPolicyTriggerOutput) StatusDeclinesToFailing() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v DeploymentRetrainingPolicyTrigger) *bool { return v.StatusDeclinesToFailing }).(pulumi.BoolPtrOutput)
+}
+
+// Identifies when trigger type is based on deployment a health status, whether the policy will run when health status declines to warning.
+func (o DeploymentRetrainingPolicyTriggerOutput) StatusDeclinesToWarning() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v DeploymentRetrainingPolicyTrigger) *bool { return v.StatusDeclinesToWarning }).(pulumi.BoolPtrOutput)
+}
+
+// Identifies when trigger type is based on deployment a health status, whether the policy will run when health status still in decline.
+func (o DeploymentRetrainingPolicyTriggerOutput) StatusStillInDecline() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v DeploymentRetrainingPolicyTrigger) *bool { return v.StatusStillInDecline }).(pulumi.BoolPtrOutput)
+}
+
+// Type of retraining policy trigger.
+func (o DeploymentRetrainingPolicyTriggerOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DeploymentRetrainingPolicyTrigger) *string { return v.Type }).(pulumi.StringPtrOutput)
+}
+
+type DeploymentRetrainingPolicyTriggerPtrOutput struct{ *pulumi.OutputState }
+
+func (DeploymentRetrainingPolicyTriggerPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentRetrainingPolicyTrigger)(nil)).Elem()
+}
+
+func (o DeploymentRetrainingPolicyTriggerPtrOutput) ToDeploymentRetrainingPolicyTriggerPtrOutput() DeploymentRetrainingPolicyTriggerPtrOutput {
+	return o
+}
+
+func (o DeploymentRetrainingPolicyTriggerPtrOutput) ToDeploymentRetrainingPolicyTriggerPtrOutputWithContext(ctx context.Context) DeploymentRetrainingPolicyTriggerPtrOutput {
+	return o
+}
+
+func (o DeploymentRetrainingPolicyTriggerPtrOutput) Elem() DeploymentRetrainingPolicyTriggerOutput {
+	return o.ApplyT(func(v *DeploymentRetrainingPolicyTrigger) DeploymentRetrainingPolicyTrigger {
+		if v != nil {
+			return *v
+		}
+		var ret DeploymentRetrainingPolicyTrigger
+		return ret
+	}).(DeploymentRetrainingPolicyTriggerOutput)
+}
+
+// Custom job ID for the retraining policy.
+func (o DeploymentRetrainingPolicyTriggerPtrOutput) CustomJobId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DeploymentRetrainingPolicyTrigger) *string {
+		if v == nil {
+			return nil
+		}
+		return v.CustomJobId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Minimal interval between policy runs in ISO 8601 duration string.
+func (o DeploymentRetrainingPolicyTriggerPtrOutput) MinIntervalBetweenRuns() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DeploymentRetrainingPolicyTrigger) *string {
+		if v == nil {
+			return nil
+		}
+		return v.MinIntervalBetweenRuns
+	}).(pulumi.StringPtrOutput)
+}
+
+// Schedule for the retraining policy.
+func (o DeploymentRetrainingPolicyTriggerPtrOutput) Schedule() DeploymentRetrainingPolicyTriggerSchedulePtrOutput {
+	return o.ApplyT(func(v *DeploymentRetrainingPolicyTrigger) *DeploymentRetrainingPolicyTriggerSchedule {
+		if v == nil {
+			return nil
+		}
+		return v.Schedule
+	}).(DeploymentRetrainingPolicyTriggerSchedulePtrOutput)
+}
+
+// Identifies when trigger type is based on deployment a health status, whether the policy will run when health status declines to failing.
+func (o DeploymentRetrainingPolicyTriggerPtrOutput) StatusDeclinesToFailing() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *DeploymentRetrainingPolicyTrigger) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.StatusDeclinesToFailing
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Identifies when trigger type is based on deployment a health status, whether the policy will run when health status declines to warning.
+func (o DeploymentRetrainingPolicyTriggerPtrOutput) StatusDeclinesToWarning() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *DeploymentRetrainingPolicyTrigger) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.StatusDeclinesToWarning
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Identifies when trigger type is based on deployment a health status, whether the policy will run when health status still in decline.
+func (o DeploymentRetrainingPolicyTriggerPtrOutput) StatusStillInDecline() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *DeploymentRetrainingPolicyTrigger) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.StatusStillInDecline
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Type of retraining policy trigger.
+func (o DeploymentRetrainingPolicyTriggerPtrOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DeploymentRetrainingPolicyTrigger) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Type
+	}).(pulumi.StringPtrOutput)
+}
+
+type DeploymentRetrainingPolicyTriggerSchedule struct {
+	// Days of the month when the job will run.
+	DayOfMonths []string `pulumi:"dayOfMonths"`
+	// Days of the week when the job will run.
+	DayOfWeeks []string `pulumi:"dayOfWeeks"`
+	// Hours of the day when the job will run.
+	Hours []string `pulumi:"hours"`
+	// Minutes of the day when the job will run.
+	Minutes []string `pulumi:"minutes"`
+	// Months of the year when the job will run.
+	Months []string `pulumi:"months"`
+}
+
+// DeploymentRetrainingPolicyTriggerScheduleInput is an input type that accepts DeploymentRetrainingPolicyTriggerScheduleArgs and DeploymentRetrainingPolicyTriggerScheduleOutput values.
+// You can construct a concrete instance of `DeploymentRetrainingPolicyTriggerScheduleInput` via:
+//
+//	DeploymentRetrainingPolicyTriggerScheduleArgs{...}
+type DeploymentRetrainingPolicyTriggerScheduleInput interface {
+	pulumi.Input
+
+	ToDeploymentRetrainingPolicyTriggerScheduleOutput() DeploymentRetrainingPolicyTriggerScheduleOutput
+	ToDeploymentRetrainingPolicyTriggerScheduleOutputWithContext(context.Context) DeploymentRetrainingPolicyTriggerScheduleOutput
+}
+
+type DeploymentRetrainingPolicyTriggerScheduleArgs struct {
+	// Days of the month when the job will run.
+	DayOfMonths pulumi.StringArrayInput `pulumi:"dayOfMonths"`
+	// Days of the week when the job will run.
+	DayOfWeeks pulumi.StringArrayInput `pulumi:"dayOfWeeks"`
+	// Hours of the day when the job will run.
+	Hours pulumi.StringArrayInput `pulumi:"hours"`
+	// Minutes of the day when the job will run.
+	Minutes pulumi.StringArrayInput `pulumi:"minutes"`
+	// Months of the year when the job will run.
+	Months pulumi.StringArrayInput `pulumi:"months"`
+}
+
+func (DeploymentRetrainingPolicyTriggerScheduleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentRetrainingPolicyTriggerSchedule)(nil)).Elem()
+}
+
+func (i DeploymentRetrainingPolicyTriggerScheduleArgs) ToDeploymentRetrainingPolicyTriggerScheduleOutput() DeploymentRetrainingPolicyTriggerScheduleOutput {
+	return i.ToDeploymentRetrainingPolicyTriggerScheduleOutputWithContext(context.Background())
+}
+
+func (i DeploymentRetrainingPolicyTriggerScheduleArgs) ToDeploymentRetrainingPolicyTriggerScheduleOutputWithContext(ctx context.Context) DeploymentRetrainingPolicyTriggerScheduleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentRetrainingPolicyTriggerScheduleOutput)
+}
+
+func (i DeploymentRetrainingPolicyTriggerScheduleArgs) ToDeploymentRetrainingPolicyTriggerSchedulePtrOutput() DeploymentRetrainingPolicyTriggerSchedulePtrOutput {
+	return i.ToDeploymentRetrainingPolicyTriggerSchedulePtrOutputWithContext(context.Background())
+}
+
+func (i DeploymentRetrainingPolicyTriggerScheduleArgs) ToDeploymentRetrainingPolicyTriggerSchedulePtrOutputWithContext(ctx context.Context) DeploymentRetrainingPolicyTriggerSchedulePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentRetrainingPolicyTriggerScheduleOutput).ToDeploymentRetrainingPolicyTriggerSchedulePtrOutputWithContext(ctx)
+}
+
+// DeploymentRetrainingPolicyTriggerSchedulePtrInput is an input type that accepts DeploymentRetrainingPolicyTriggerScheduleArgs, DeploymentRetrainingPolicyTriggerSchedulePtr and DeploymentRetrainingPolicyTriggerSchedulePtrOutput values.
+// You can construct a concrete instance of `DeploymentRetrainingPolicyTriggerSchedulePtrInput` via:
+//
+//	        DeploymentRetrainingPolicyTriggerScheduleArgs{...}
+//
+//	or:
+//
+//	        nil
+type DeploymentRetrainingPolicyTriggerSchedulePtrInput interface {
+	pulumi.Input
+
+	ToDeploymentRetrainingPolicyTriggerSchedulePtrOutput() DeploymentRetrainingPolicyTriggerSchedulePtrOutput
+	ToDeploymentRetrainingPolicyTriggerSchedulePtrOutputWithContext(context.Context) DeploymentRetrainingPolicyTriggerSchedulePtrOutput
+}
+
+type deploymentRetrainingPolicyTriggerSchedulePtrType DeploymentRetrainingPolicyTriggerScheduleArgs
+
+func DeploymentRetrainingPolicyTriggerSchedulePtr(v *DeploymentRetrainingPolicyTriggerScheduleArgs) DeploymentRetrainingPolicyTriggerSchedulePtrInput {
+	return (*deploymentRetrainingPolicyTriggerSchedulePtrType)(v)
+}
+
+func (*deploymentRetrainingPolicyTriggerSchedulePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentRetrainingPolicyTriggerSchedule)(nil)).Elem()
+}
+
+func (i *deploymentRetrainingPolicyTriggerSchedulePtrType) ToDeploymentRetrainingPolicyTriggerSchedulePtrOutput() DeploymentRetrainingPolicyTriggerSchedulePtrOutput {
+	return i.ToDeploymentRetrainingPolicyTriggerSchedulePtrOutputWithContext(context.Background())
+}
+
+func (i *deploymentRetrainingPolicyTriggerSchedulePtrType) ToDeploymentRetrainingPolicyTriggerSchedulePtrOutputWithContext(ctx context.Context) DeploymentRetrainingPolicyTriggerSchedulePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentRetrainingPolicyTriggerSchedulePtrOutput)
+}
+
+type DeploymentRetrainingPolicyTriggerScheduleOutput struct{ *pulumi.OutputState }
+
+func (DeploymentRetrainingPolicyTriggerScheduleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentRetrainingPolicyTriggerSchedule)(nil)).Elem()
+}
+
+func (o DeploymentRetrainingPolicyTriggerScheduleOutput) ToDeploymentRetrainingPolicyTriggerScheduleOutput() DeploymentRetrainingPolicyTriggerScheduleOutput {
+	return o
+}
+
+func (o DeploymentRetrainingPolicyTriggerScheduleOutput) ToDeploymentRetrainingPolicyTriggerScheduleOutputWithContext(ctx context.Context) DeploymentRetrainingPolicyTriggerScheduleOutput {
+	return o
+}
+
+func (o DeploymentRetrainingPolicyTriggerScheduleOutput) ToDeploymentRetrainingPolicyTriggerSchedulePtrOutput() DeploymentRetrainingPolicyTriggerSchedulePtrOutput {
+	return o.ToDeploymentRetrainingPolicyTriggerSchedulePtrOutputWithContext(context.Background())
+}
+
+func (o DeploymentRetrainingPolicyTriggerScheduleOutput) ToDeploymentRetrainingPolicyTriggerSchedulePtrOutputWithContext(ctx context.Context) DeploymentRetrainingPolicyTriggerSchedulePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DeploymentRetrainingPolicyTriggerSchedule) *DeploymentRetrainingPolicyTriggerSchedule {
+		return &v
+	}).(DeploymentRetrainingPolicyTriggerSchedulePtrOutput)
+}
+
+// Days of the month when the job will run.
+func (o DeploymentRetrainingPolicyTriggerScheduleOutput) DayOfMonths() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v DeploymentRetrainingPolicyTriggerSchedule) []string { return v.DayOfMonths }).(pulumi.StringArrayOutput)
+}
+
+// Days of the week when the job will run.
+func (o DeploymentRetrainingPolicyTriggerScheduleOutput) DayOfWeeks() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v DeploymentRetrainingPolicyTriggerSchedule) []string { return v.DayOfWeeks }).(pulumi.StringArrayOutput)
+}
+
+// Hours of the day when the job will run.
+func (o DeploymentRetrainingPolicyTriggerScheduleOutput) Hours() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v DeploymentRetrainingPolicyTriggerSchedule) []string { return v.Hours }).(pulumi.StringArrayOutput)
+}
+
+// Minutes of the day when the job will run.
+func (o DeploymentRetrainingPolicyTriggerScheduleOutput) Minutes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v DeploymentRetrainingPolicyTriggerSchedule) []string { return v.Minutes }).(pulumi.StringArrayOutput)
+}
+
+// Months of the year when the job will run.
+func (o DeploymentRetrainingPolicyTriggerScheduleOutput) Months() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v DeploymentRetrainingPolicyTriggerSchedule) []string { return v.Months }).(pulumi.StringArrayOutput)
+}
+
+type DeploymentRetrainingPolicyTriggerSchedulePtrOutput struct{ *pulumi.OutputState }
+
+func (DeploymentRetrainingPolicyTriggerSchedulePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentRetrainingPolicyTriggerSchedule)(nil)).Elem()
+}
+
+func (o DeploymentRetrainingPolicyTriggerSchedulePtrOutput) ToDeploymentRetrainingPolicyTriggerSchedulePtrOutput() DeploymentRetrainingPolicyTriggerSchedulePtrOutput {
+	return o
+}
+
+func (o DeploymentRetrainingPolicyTriggerSchedulePtrOutput) ToDeploymentRetrainingPolicyTriggerSchedulePtrOutputWithContext(ctx context.Context) DeploymentRetrainingPolicyTriggerSchedulePtrOutput {
+	return o
+}
+
+func (o DeploymentRetrainingPolicyTriggerSchedulePtrOutput) Elem() DeploymentRetrainingPolicyTriggerScheduleOutput {
+	return o.ApplyT(func(v *DeploymentRetrainingPolicyTriggerSchedule) DeploymentRetrainingPolicyTriggerSchedule {
+		if v != nil {
+			return *v
+		}
+		var ret DeploymentRetrainingPolicyTriggerSchedule
+		return ret
+	}).(DeploymentRetrainingPolicyTriggerScheduleOutput)
+}
+
+// Days of the month when the job will run.
+func (o DeploymentRetrainingPolicyTriggerSchedulePtrOutput) DayOfMonths() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *DeploymentRetrainingPolicyTriggerSchedule) []string {
+		if v == nil {
+			return nil
+		}
+		return v.DayOfMonths
+	}).(pulumi.StringArrayOutput)
+}
+
+// Days of the week when the job will run.
+func (o DeploymentRetrainingPolicyTriggerSchedulePtrOutput) DayOfWeeks() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *DeploymentRetrainingPolicyTriggerSchedule) []string {
+		if v == nil {
+			return nil
+		}
+		return v.DayOfWeeks
+	}).(pulumi.StringArrayOutput)
+}
+
+// Hours of the day when the job will run.
+func (o DeploymentRetrainingPolicyTriggerSchedulePtrOutput) Hours() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *DeploymentRetrainingPolicyTriggerSchedule) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Hours
+	}).(pulumi.StringArrayOutput)
+}
+
+// Minutes of the day when the job will run.
+func (o DeploymentRetrainingPolicyTriggerSchedulePtrOutput) Minutes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *DeploymentRetrainingPolicyTriggerSchedule) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Minutes
+	}).(pulumi.StringArrayOutput)
+}
+
+// Months of the year when the job will run.
+func (o DeploymentRetrainingPolicyTriggerSchedulePtrOutput) Months() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *DeploymentRetrainingPolicyTriggerSchedule) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Months
+	}).(pulumi.StringArrayOutput)
+}
+
 type DeploymentSegmentAnalysisSettings struct {
 	// A list of strings that gives the segment attributes selected for tracking.
 	Attributes []string `pulumi:"attributes"`
@@ -8228,6 +9462,18 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentPredictionsDataCollectionSettingsPtrInput)(nil)).Elem(), DeploymentPredictionsDataCollectionSettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentPredictionsSettingsInput)(nil)).Elem(), DeploymentPredictionsSettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentPredictionsSettingsPtrInput)(nil)).Elem(), DeploymentPredictionsSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentRetrainingPolicyAutopilotOptionsInput)(nil)).Elem(), DeploymentRetrainingPolicyAutopilotOptionsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentRetrainingPolicyAutopilotOptionsPtrInput)(nil)).Elem(), DeploymentRetrainingPolicyAutopilotOptionsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentRetrainingPolicyProjectOptionsInput)(nil)).Elem(), DeploymentRetrainingPolicyProjectOptionsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentRetrainingPolicyProjectOptionsPtrInput)(nil)).Elem(), DeploymentRetrainingPolicyProjectOptionsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentRetrainingPolicyTimeSeriesOptionsInput)(nil)).Elem(), DeploymentRetrainingPolicyTimeSeriesOptionsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentRetrainingPolicyTimeSeriesOptionsPtrInput)(nil)).Elem(), DeploymentRetrainingPolicyTimeSeriesOptionsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityInput)(nil)).Elem(), DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityArrayInput)(nil)).Elem(), DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentRetrainingPolicyTriggerInput)(nil)).Elem(), DeploymentRetrainingPolicyTriggerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentRetrainingPolicyTriggerPtrInput)(nil)).Elem(), DeploymentRetrainingPolicyTriggerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentRetrainingPolicyTriggerScheduleInput)(nil)).Elem(), DeploymentRetrainingPolicyTriggerScheduleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentRetrainingPolicyTriggerSchedulePtrInput)(nil)).Elem(), DeploymentRetrainingPolicyTriggerScheduleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentSegmentAnalysisSettingsInput)(nil)).Elem(), DeploymentSegmentAnalysisSettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentSegmentAnalysisSettingsPtrInput)(nil)).Elem(), DeploymentSegmentAnalysisSettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*LlmBlueprintLlmSettingsInput)(nil)).Elem(), LlmBlueprintLlmSettingsArgs{})
@@ -8321,6 +9567,18 @@ func init() {
 	pulumi.RegisterOutputType(DeploymentPredictionsDataCollectionSettingsPtrOutput{})
 	pulumi.RegisterOutputType(DeploymentPredictionsSettingsOutput{})
 	pulumi.RegisterOutputType(DeploymentPredictionsSettingsPtrOutput{})
+	pulumi.RegisterOutputType(DeploymentRetrainingPolicyAutopilotOptionsOutput{})
+	pulumi.RegisterOutputType(DeploymentRetrainingPolicyAutopilotOptionsPtrOutput{})
+	pulumi.RegisterOutputType(DeploymentRetrainingPolicyProjectOptionsOutput{})
+	pulumi.RegisterOutputType(DeploymentRetrainingPolicyProjectOptionsPtrOutput{})
+	pulumi.RegisterOutputType(DeploymentRetrainingPolicyTimeSeriesOptionsOutput{})
+	pulumi.RegisterOutputType(DeploymentRetrainingPolicyTimeSeriesOptionsPtrOutput{})
+	pulumi.RegisterOutputType(DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityOutput{})
+	pulumi.RegisterOutputType(DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicityArrayOutput{})
+	pulumi.RegisterOutputType(DeploymentRetrainingPolicyTriggerOutput{})
+	pulumi.RegisterOutputType(DeploymentRetrainingPolicyTriggerPtrOutput{})
+	pulumi.RegisterOutputType(DeploymentRetrainingPolicyTriggerScheduleOutput{})
+	pulumi.RegisterOutputType(DeploymentRetrainingPolicyTriggerSchedulePtrOutput{})
 	pulumi.RegisterOutputType(DeploymentSegmentAnalysisSettingsOutput{})
 	pulumi.RegisterOutputType(DeploymentSegmentAnalysisSettingsPtrOutput{})
 	pulumi.RegisterOutputType(LlmBlueprintLlmSettingsOutput{})

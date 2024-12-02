@@ -30,6 +30,7 @@
         "datasource.ts",
         "datastore.ts",
         "deployment.ts",
+        "deploymentRetrainingPolicy.ts",
         "executionEnvironment.ts",
         "getExecutionEnvironment.ts",
         "getGlobalModel.ts",

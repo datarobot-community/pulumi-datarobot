@@ -20,6 +20,7 @@ from .dataset_from_url import *
 from .datasource import *
 from .datastore import *
 from .deployment import *
+from .deployment_retraining_policy import *
 from .execution_environment import *
 from .get_execution_environment import *
 from .get_global_model import *
@@ -165,6 +166,14 @@ _utilities.register(
   "fqn": "pulumi_datarobot",
   "classes": {
    "datarobot:index/deployment:Deployment": "Deployment"
+  }
+ },
+ {
+  "pkg": "datarobot",
+  "mod": "index/deploymentRetrainingPolicy",
+  "fqn": "pulumi_datarobot",
+  "classes": {
+   "datarobot:index/deploymentRetrainingPolicy:DeploymentRetrainingPolicy": "DeploymentRetrainingPolicy"
   }
  },
  {

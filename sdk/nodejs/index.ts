@@ -80,6 +80,11 @@ export type Deployment = import("./deployment").Deployment;
 export const Deployment: typeof import("./deployment").Deployment = null as any;
 utilities.lazyLoad(exports, ["Deployment"], () => require("./deployment"));
 
+export { DeploymentRetrainingPolicyArgs, DeploymentRetrainingPolicyState } from "./deploymentRetrainingPolicy";
+export type DeploymentRetrainingPolicy = import("./deploymentRetrainingPolicy").DeploymentRetrainingPolicy;
+export const DeploymentRetrainingPolicy: typeof import("./deploymentRetrainingPolicy").DeploymentRetrainingPolicy = null as any;
+utilities.lazyLoad(exports, ["DeploymentRetrainingPolicy"], () => require("./deploymentRetrainingPolicy"));
+
 export { ExecutionEnvironmentArgs, ExecutionEnvironmentState } from "./executionEnvironment";
 export type ExecutionEnvironment = import("./executionEnvironment").ExecutionEnvironment;
 export const ExecutionEnvironment: typeof import("./executionEnvironment").ExecutionEnvironment = null as any;
@@ -194,6 +199,8 @@ const _module = {
                 return new Datastore(name, <any>undefined, { urn })
             case "datarobot:index/deployment:Deployment":
                 return new Deployment(name, <any>undefined, { urn })
+            case "datarobot:index/deploymentRetrainingPolicy:DeploymentRetrainingPolicy":
+                return new DeploymentRetrainingPolicy(name, <any>undefined, { urn })
             case "datarobot:index/executionEnvironment:ExecutionEnvironment":
                 return new ExecutionEnvironment(name, <any>undefined, { urn })
             case "datarobot:index/googleCloudCredential:GoogleCloudCredential":
@@ -236,6 +243,7 @@ pulumi.runtime.registerResourceModule("datarobot", "index/datasetFromUrl", _modu
 pulumi.runtime.registerResourceModule("datarobot", "index/datasource", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/datastore", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/deployment", _module)
+pulumi.runtime.registerResourceModule("datarobot", "index/deploymentRetrainingPolicy", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/executionEnvironment", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/googleCloudCredential", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/llmBlueprint", _module)

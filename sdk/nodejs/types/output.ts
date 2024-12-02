@@ -774,6 +774,144 @@ export interface DeploymentPredictionsSettings {
     minComputes: number;
 }
 
+export interface DeploymentRetrainingPolicyAutopilotOptions {
+    /**
+     * Blend best models during Autopilot run. This option is not supported in SHAP-only mode.
+     */
+    blendBestModels: boolean;
+    /**
+     * The autopiltot mode.
+     */
+    mode: string;
+    /**
+     * Run Autopilot on Leakage Removed feature list (if exists).
+     */
+    runLeakageRemovedFeatureList: boolean;
+    /**
+     * Keep only models that can be converted to scorable java code during Autopilot run.
+     */
+    scoringCodeOnly: boolean;
+    /**
+     * Include only models with SHAP value support.
+     */
+    shapOnlyMode: boolean;
+}
+
+export interface DeploymentRetrainingPolicyProjectOptions {
+    /**
+     * The partitioning method for projects used to build new models.
+     */
+    cvMethod: string;
+    /**
+     * The percentage of dataset to assign to holdout set in projects used to build new models.
+     */
+    holdoutPct: number;
+    /**
+     * The model selection metric in projects used to build new models.
+     */
+    metric?: string;
+    /**
+     * The number of cross validation folds to use for projects used to build new models.
+     */
+    reps: number;
+    /**
+     * The percentage of dataset to assign to validation set in projects used to build new models.
+     */
+    validationPct?: number;
+    /**
+     * The validation type for projects used to build new models.
+     */
+    validationType: string;
+}
+
+export interface DeploymentRetrainingPolicyTimeSeriesOptions {
+    /**
+     * The ID of the calendar to be used in this project.
+     */
+    calendarId?: string;
+    /**
+     * For time series projects only. Used to specify which differencing method to apply if the data is stationary. For classification problems simple and seasonal are not allowed. Parameter periodicities must be specified if seasonal is chosen. Defaults to auto.
+     */
+    differencingMethod?: string;
+    /**
+     * Discount factor (alpha) used for exponentially weighted moving features.
+     */
+    exponentiallyWeightedMovingAlpha?: number;
+    /**
+     * A list of periodicities for time series projects only. For classification problems periodicities are not allowed. If this is provided, parameter 'differencing*method' will default to 'seasonal' if not provided or 'auto'.
+     */
+    periodicities?: outputs.DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicity[];
+    /**
+     * For time series projects only. Used to specify whether to treat data as exponential trend and apply transformations like log-transform. For classification problems always is not allowed. Defaults to auto.
+     */
+    treatAsExponential?: string;
+}
+
+export interface DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicity {
+    /**
+     * The number of time steps.
+     */
+    timeSteps: number;
+    /**
+     * The time unit or ROW if windowsBasisUnit is ROW
+     */
+    timeUnit: string;
+}
+
+export interface DeploymentRetrainingPolicyTrigger {
+    /**
+     * Custom job ID for the retraining policy.
+     */
+    customJobId?: string;
+    /**
+     * Minimal interval between policy runs in ISO 8601 duration string.
+     */
+    minIntervalBetweenRuns?: string;
+    /**
+     * Schedule for the retraining policy.
+     */
+    schedule?: outputs.DeploymentRetrainingPolicyTriggerSchedule;
+    /**
+     * Identifies when trigger type is based on deployment a health status, whether the policy will run when health status declines to failing.
+     */
+    statusDeclinesToFailing: boolean;
+    /**
+     * Identifies when trigger type is based on deployment a health status, whether the policy will run when health status declines to warning.
+     */
+    statusDeclinesToWarning: boolean;
+    /**
+     * Identifies when trigger type is based on deployment a health status, whether the policy will run when health status still in decline.
+     */
+    statusStillInDecline: boolean;
+    /**
+     * Type of retraining policy trigger.
+     */
+    type?: string;
+}
+
+export interface DeploymentRetrainingPolicyTriggerSchedule {
+    /**
+     * Days of the month when the job will run.
+     */
+    dayOfMonths: string[];
+    /**
+     * Days of the week when the job will run.
+     */
+    dayOfWeeks: string[];
+    /**
+     * Hours of the day when the job will run.
+     */
+    hours: string[];
+    /**
+     * Minutes of the day when the job will run.
+     */
+    minutes: string[];
+    /**
+     * Months of the year when the job will run.
+     */
+    months: string[];
+}
+
 export interface DeploymentSegmentAnalysisSettings {
     /**
      * A list of strings that gives the segment attributes selected for tracking.

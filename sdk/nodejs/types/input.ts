@@ -774,6 +774,144 @@ export interface DeploymentPredictionsSettings {
     minComputes: pulumi.Input<number>;
 }
 
+export interface DeploymentRetrainingPolicyAutopilotOptions {
+    /**
+     * Blend best models during Autopilot run. This option is not supported in SHAP-only mode.
+     */
+    blendBestModels?: pulumi.Input<boolean>;
+    /**
+     * The autopiltot mode.
+     */
+    mode?: pulumi.Input<string>;
+    /**
+     * Run Autopilot on Leakage Removed feature list (if exists).
+     */
+    runLeakageRemovedFeatureList?: pulumi.Input<boolean>;
+    /**
+     * Keep only models that can be converted to scorable java code during Autopilot run.
+     */
+    scoringCodeOnly?: pulumi.Input<boolean>;
+    /**
+     * Include only models with SHAP value support.
+     */
+    shapOnlyMode?: pulumi.Input<boolean>;
+}
+
+export interface DeploymentRetrainingPolicyProjectOptions {
+    /**
+     * The partitioning method for projects used to build new models.
+     */
+    cvMethod?: pulumi.Input<string>;
+    /**
+     * The percentage of dataset to assign to holdout set in projects used to build new models.
+     */
+    holdoutPct?: pulumi.Input<number>;
+    /**
+     * The model selection metric in projects used to build new models.
+     */
+    metric?: pulumi.Input<string>;
+    /**
+     * The number of cross validation folds to use for projects used to build new models.
+     */
+    reps?: pulumi.Input<number>;
+    /**
+     * The percentage of dataset to assign to validation set in projects used to build new models.
+     */
+    validationPct?: pulumi.Input<number>;
+    /**
+     * The validation type for projects used to build new models.
+     */
+    validationType?: pulumi.Input<string>;
+}
+
+export interface DeploymentRetrainingPolicyTimeSeriesOptions {
+    /**
+     * The ID of the calendar to be used in this project.
+     */
+    calendarId?: pulumi.Input<string>;
+    /**
+     * For time series projects only. Used to specify which differencing method to apply if the data is stationary. For classification problems simple and seasonal are not allowed. Parameter periodicities must be specified if seasonal is chosen. Defaults to auto.
+     */
+    differencingMethod?: pulumi.Input<string>;
+    /**
+     * Discount factor (alpha) used for exponentially weighted moving features.
+     */
+    exponentiallyWeightedMovingAlpha?: pulumi.Input<number>;
+    /**
+     * A list of periodicities for time series projects only. For classification problems periodicities are not allowed. If this is provided, parameter 'differencing*method' will default to 'seasonal' if not provided or 'auto'.
+     */
+    periodicities?: pulumi.Input<pulumi.Input<inputs.DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicity>[]>;
+    /**
+     * For time series projects only. Used to specify whether to treat data as exponential trend and apply transformations like log-transform. For classification problems always is not allowed. Defaults to auto.
+     */
+    treatAsExponential?: pulumi.Input<string>;
+}
+
+export interface DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicity {
+    /**
+     * The number of time steps.
+     */
+    timeSteps: pulumi.Input<number>;
+    /**
+     * The time unit or ROW if windowsBasisUnit is ROW
+     */
+    timeUnit: pulumi.Input<string>;
+}
+
+export interface DeploymentRetrainingPolicyTrigger {
+    /**
+     * Custom job ID for the retraining policy.
+     */
+    customJobId?: pulumi.Input<string>;
+    /**
+     * Minimal interval between policy runs in ISO 8601 duration string.
+     */
+    minIntervalBetweenRuns?: pulumi.Input<string>;
+    /**
+     * Schedule for the retraining policy.
+     */
+    schedule?: pulumi.Input<inputs.DeploymentRetrainingPolicyTriggerSchedule>;
+    /**
+     * Identifies when trigger type is based on deployment a health status, whether the policy will run when health status declines to failing.
+     */
+    statusDeclinesToFailing?: pulumi.Input<boolean>;
+    /**
+     * Identifies when trigger type is based on deployment a health status, whether the policy will run when health status declines to warning.
+     */
+    statusDeclinesToWarning?: pulumi.Input<boolean>;
+    /**
+     * Identifies when trigger type is based on deployment a health status, whether the policy will run when health status still in decline.
+     */
+    statusStillInDecline?: pulumi.Input<boolean>;
+    /**
+     * Type of retraining policy trigger.
+     */
+    type?: pulumi.Input<string>;
+}
+
+export interface DeploymentRetrainingPolicyTriggerSchedule {
+    /**
+     * Days of the month when the job will run.
+     */
+    dayOfMonths: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Days of the week when the job will run.
+     */
+    dayOfWeeks: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Hours of the day when the job will run.
+     */
+    hours: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Minutes of the day when the job will run.
+     */
+    minutes: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Months of the year when the job will run.
+     */
+    months: pulumi.Input<pulumi.Input<string>[]>;
+}
+
 export interface DeploymentSegmentAnalysisSettings {
     /**
      * A list of strings that gives the segment attributes selected for tracking.
