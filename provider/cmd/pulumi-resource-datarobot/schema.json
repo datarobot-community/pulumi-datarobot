@@ -1152,6 +1152,215 @@
                 "minComputes"
             ]
         },
+        "datarobot:index/DeploymentRetrainingPolicyAutopilotOptions:DeploymentRetrainingPolicyAutopilotOptions": {
+            "properties": {
+                "blendBestModels": {
+                    "type": "boolean",
+                    "description": "Blend best models during Autopilot run. This option is not supported in SHAP-only mode.\n"
+                },
+                "mode": {
+                    "type": "string",
+                    "description": "The autopiltot mode.\n"
+                },
+                "runLeakageRemovedFeatureList": {
+                    "type": "boolean",
+                    "description": "Run Autopilot on Leakage Removed feature list (if exists).\n"
+                },
+                "scoringCodeOnly": {
+                    "type": "boolean",
+                    "description": "Keep only models that can be converted to scorable java code during Autopilot run.\n"
+                },
+                "shapOnlyMode": {
+                    "type": "boolean",
+                    "description": "Include only models with SHAP value support.\n"
+                }
+            },
+            "type": "object",
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "blendBestModels",
+                        "mode",
+                        "runLeakageRemovedFeatureList",
+                        "scoringCodeOnly",
+                        "shapOnlyMode"
+                    ]
+                }
+            }
+        },
+        "datarobot:index/DeploymentRetrainingPolicyProjectOptions:DeploymentRetrainingPolicyProjectOptions": {
+            "properties": {
+                "cvMethod": {
+                    "type": "string",
+                    "description": "The partitioning method for projects used to build new models.\n"
+                },
+                "holdoutPct": {
+                    "type": "number",
+                    "description": "The percentage of dataset to assign to holdout set in projects used to build new models.\n"
+                },
+                "metric": {
+                    "type": "string",
+                    "description": "The model selection metric in projects used to build new models.\n"
+                },
+                "reps": {
+                    "type": "number",
+                    "description": "The number of cross validation folds to use for projects used to build new models.\n"
+                },
+                "validationPct": {
+                    "type": "number",
+                    "description": "The percentage of dataset to assign to validation set in projects used to build new models.\n"
+                },
+                "validationType": {
+                    "type": "string",
+                    "description": "The validation type for projects used to build new models.\n"
+                }
+            },
+            "type": "object",
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "cvMethod",
+                        "holdoutPct",
+                        "reps",
+                        "validationType"
+                    ]
+                }
+            }
+        },
+        "datarobot:index/DeploymentRetrainingPolicyTimeSeriesOptions:DeploymentRetrainingPolicyTimeSeriesOptions": {
+            "properties": {
+                "calendarId": {
+                    "type": "string",
+                    "description": "The ID of the calendar to be used in this project.\n"
+                },
+                "differencingMethod": {
+                    "type": "string",
+                    "description": "For time series projects only. Used to specify which differencing method to apply if the data is stationary. For classification problems simple and seasonal are not allowed. Parameter periodicities must be specified if seasonal is chosen. Defaults to auto.\n"
+                },
+                "exponentiallyWeightedMovingAlpha": {
+                    "type": "number",
+                    "description": "Discount factor (alpha) used for exponentially weighted moving features.\n"
+                },
+                "periodicities": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/datarobot:index/DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicity:DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicity"
+                    },
+                    "description": "A list of periodicities for time series projects only. For classification problems periodicities are not allowed. If this is provided, parameter 'differencing*method' will default to 'seasonal' if not provided or 'auto'.\n"
+                },
+                "treatAsExponential": {
+                    "type": "string",
+                    "description": "For time series projects only. Used to specify whether to treat data as exponential trend and apply transformations like log-transform. For classification problems always is not allowed. Defaults to auto.\n"
+                }
+            },
+            "type": "object"
+        },
+        "datarobot:index/DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicity:DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicity": {
+            "properties": {
+                "timeSteps": {
+                    "type": "integer",
+                    "description": "The number of time steps.\n"
+                },
+                "timeUnit": {
+                    "type": "string",
+                    "description": "The time unit or ROW if windowsBasisUnit is ROW\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "timeSteps",
+                "timeUnit"
+            ]
+        },
+        "datarobot:index/DeploymentRetrainingPolicyTrigger:DeploymentRetrainingPolicyTrigger": {
+            "properties": {
+                "customJobId": {
+                    "type": "string",
+                    "description": "Custom job ID for the retraining policy.\n"
+                },
+                "minIntervalBetweenRuns": {
+                    "type": "string",
+                    "description": "Minimal interval between policy runs in ISO 8601 duration string.\n"
+                },
+                "schedule": {
+                    "$ref": "#/types/datarobot:index/DeploymentRetrainingPolicyTriggerSchedule:DeploymentRetrainingPolicyTriggerSchedule",
+                    "description": "Schedule for the retraining policy.\n"
+                },
+                "statusDeclinesToFailing": {
+                    "type": "boolean",
+                    "description": "Identifies when trigger type is based on deployment a health status, whether the policy will run when health status declines to failing.\n"
+                },
+                "statusDeclinesToWarning": {
+                    "type": "boolean",
+                    "description": "Identifies when trigger type is based on deployment a health status, whether the policy will run when health status declines to warning.\n"
+                },
+                "statusStillInDecline": {
+                    "type": "boolean",
+                    "description": "Identifies when trigger type is based on deployment a health status, whether the policy will run when health status still in decline.\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "Type of retraining policy trigger.\n"
+                }
+            },
+            "type": "object",
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "statusDeclinesToFailing",
+                        "statusDeclinesToWarning",
+                        "statusStillInDecline"
+                    ]
+                }
+            }
+        },
+        "datarobot:index/DeploymentRetrainingPolicyTriggerSchedule:DeploymentRetrainingPolicyTriggerSchedule": {
+            "properties": {
+                "dayOfMonths": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Days of the month when the job will run.\n"
+                },
+                "dayOfWeeks": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Days of the week when the job will run.\n"
+                },
+                "hours": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Hours of the day when the job will run.\n"
+                },
+                "minutes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Minutes of the day when the job will run.\n"
+                },
+                "months": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Months of the year when the job will run.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "dayOfMonths",
+                "dayOfWeeks",
+                "hours",
+                "minutes",
+                "months"
+            ]
+        },
         "datarobot:index/DeploymentSegmentAnalysisSettings:DeploymentSegmentAnalysisSettings": {
             "properties": {
                 "attributes": {
@@ -3745,6 +3954,166 @@
                             "type": "string"
                         },
                         "description": "The list of Use Case IDs to add the Deployment to.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "datarobot:index/deploymentRetrainingPolicy:DeploymentRetrainingPolicy": {
+            "description": "Deployment Retraining Policy\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.DeploymentRetrainingPolicy;\nimport com.pulumi.datarobot.DeploymentRetrainingPolicyArgs;\nimport com.pulumi.datarobot.inputs.DeploymentRetrainingPolicyTriggerArgs;\nimport com.pulumi.datarobot.inputs.DeploymentRetrainingPolicyAutopilotOptionsArgs;\nimport com.pulumi.datarobot.inputs.DeploymentRetrainingPolicyProjectOptionsArgs;\nimport com.pulumi.datarobot.inputs.DeploymentRetrainingPolicyTimeSeriesOptionsArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new DeploymentRetrainingPolicy(\"example\", DeploymentRetrainingPolicyArgs.builder()\n            .deploymentId(datarobot_deployment.example().id())\n            .description(\"Example Description\")\n            .action(\"create_model_package\")\n            .modelSelectionStrategy(\"custom_job\")\n            .featureListStrategy(\"informative_features\")\n            .projectOptionsStrategy(\"custom\")\n            .trigger(DeploymentRetrainingPolicyTriggerArgs.builder()\n                .custom_job_id(datarobot_custom_job.example().id())\n                .build())\n            .autopilotOptions()\n            .projectOptions()\n            .timeSeriesOptions()\n            .build());\n\n        ctx.export(\"datarobotDeploymentRetrainingPolicyId\", example.id());\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: datarobot:DeploymentRetrainingPolicy\n    properties:\n      deploymentId: ${datarobot_deployment.example.id}\n      description: Example Description\n      # Optional\n      action: create_model_package\n      modelSelectionStrategy: custom_job\n      featureListStrategy: informative_features\n      projectOptionsStrategy: custom\n      trigger:\n        custom_job_id: ${datarobot_custom_job.example.id}\n      autopilotOptions: {}\n      projectOptions: {}\n      timeSeriesOptions: {}\noutputs:\n  datarobotDeploymentRetrainingPolicyId: ${example.id}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "properties": {
+                "action": {
+                    "type": "string",
+                    "description": "The the action to take on the resultant new model.\n"
+                },
+                "autopilotOptions": {
+                    "$ref": "#/types/datarobot:index/DeploymentRetrainingPolicyAutopilotOptions:DeploymentRetrainingPolicyAutopilotOptions",
+                    "description": "Options for projects used to build new models.\n"
+                },
+                "deploymentId": {
+                    "type": "string",
+                    "description": "The ID of the Deployment for the Retraining Policy.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The description of the Retraining Policy.\n"
+                },
+                "featureListStrategy": {
+                    "type": "string",
+                    "description": "The feature list strategy used for modeling.\n"
+                },
+                "modelSelectionStrategy": {
+                    "type": "string",
+                    "description": "Determines how the new model is selected when the retraining policy runs.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the Retraining Policy.\n"
+                },
+                "projectOptions": {
+                    "$ref": "#/types/datarobot:index/DeploymentRetrainingPolicyProjectOptions:DeploymentRetrainingPolicyProjectOptions",
+                    "description": "Options for projects used to build new models.\n"
+                },
+                "projectOptionsStrategy": {
+                    "type": "string",
+                    "description": "The project option strategy used for modeling.\n"
+                },
+                "timeSeriesOptions": {
+                    "$ref": "#/types/datarobot:index/DeploymentRetrainingPolicyTimeSeriesOptions:DeploymentRetrainingPolicyTimeSeriesOptions",
+                    "description": "Time Series project options used to build new models.\n"
+                },
+                "trigger": {
+                    "$ref": "#/types/datarobot:index/DeploymentRetrainingPolicyTrigger:DeploymentRetrainingPolicyTrigger",
+                    "description": "Retraining policy trigger.\n"
+                }
+            },
+            "required": [
+                "action",
+                "autopilotOptions",
+                "deploymentId",
+                "description",
+                "featureListStrategy",
+                "modelSelectionStrategy",
+                "name",
+                "projectOptions",
+                "projectOptionsStrategy"
+            ],
+            "inputProperties": {
+                "action": {
+                    "type": "string",
+                    "description": "The the action to take on the resultant new model.\n"
+                },
+                "autopilotOptions": {
+                    "$ref": "#/types/datarobot:index/DeploymentRetrainingPolicyAutopilotOptions:DeploymentRetrainingPolicyAutopilotOptions",
+                    "description": "Options for projects used to build new models.\n"
+                },
+                "deploymentId": {
+                    "type": "string",
+                    "description": "The ID of the Deployment for the Retraining Policy.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The description of the Retraining Policy.\n"
+                },
+                "featureListStrategy": {
+                    "type": "string",
+                    "description": "The feature list strategy used for modeling.\n"
+                },
+                "modelSelectionStrategy": {
+                    "type": "string",
+                    "description": "Determines how the new model is selected when the retraining policy runs.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the Retraining Policy.\n"
+                },
+                "projectOptions": {
+                    "$ref": "#/types/datarobot:index/DeploymentRetrainingPolicyProjectOptions:DeploymentRetrainingPolicyProjectOptions",
+                    "description": "Options for projects used to build new models.\n"
+                },
+                "projectOptionsStrategy": {
+                    "type": "string",
+                    "description": "The project option strategy used for modeling.\n"
+                },
+                "timeSeriesOptions": {
+                    "$ref": "#/types/datarobot:index/DeploymentRetrainingPolicyTimeSeriesOptions:DeploymentRetrainingPolicyTimeSeriesOptions",
+                    "description": "Time Series project options used to build new models.\n"
+                },
+                "trigger": {
+                    "$ref": "#/types/datarobot:index/DeploymentRetrainingPolicyTrigger:DeploymentRetrainingPolicyTrigger",
+                    "description": "Retraining policy trigger.\n"
+                }
+            },
+            "requiredInputs": [
+                "deploymentId",
+                "description"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering DeploymentRetrainingPolicy resources.\n",
+                "properties": {
+                    "action": {
+                        "type": "string",
+                        "description": "The the action to take on the resultant new model.\n"
+                    },
+                    "autopilotOptions": {
+                        "$ref": "#/types/datarobot:index/DeploymentRetrainingPolicyAutopilotOptions:DeploymentRetrainingPolicyAutopilotOptions",
+                        "description": "Options for projects used to build new models.\n"
+                    },
+                    "deploymentId": {
+                        "type": "string",
+                        "description": "The ID of the Deployment for the Retraining Policy.\n"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "The description of the Retraining Policy.\n"
+                    },
+                    "featureListStrategy": {
+                        "type": "string",
+                        "description": "The feature list strategy used for modeling.\n"
+                    },
+                    "modelSelectionStrategy": {
+                        "type": "string",
+                        "description": "Determines how the new model is selected when the retraining policy runs.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the Retraining Policy.\n"
+                    },
+                    "projectOptions": {
+                        "$ref": "#/types/datarobot:index/DeploymentRetrainingPolicyProjectOptions:DeploymentRetrainingPolicyProjectOptions",
+                        "description": "Options for projects used to build new models.\n"
+                    },
+                    "projectOptionsStrategy": {
+                        "type": "string",
+                        "description": "The project option strategy used for modeling.\n"
+                    },
+                    "timeSeriesOptions": {
+                        "$ref": "#/types/datarobot:index/DeploymentRetrainingPolicyTimeSeriesOptions:DeploymentRetrainingPolicyTimeSeriesOptions",
+                        "description": "Time Series project options used to build new models.\n"
+                    },
+                    "trigger": {
+                        "$ref": "#/types/datarobot:index/DeploymentRetrainingPolicyTrigger:DeploymentRetrainingPolicyTrigger",
+                        "description": "Retraining policy trigger.\n"
                     }
                 },
                 "type": "object"

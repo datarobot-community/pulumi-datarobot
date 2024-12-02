@@ -253,6 +253,41 @@
                     }
                 }
             },
+            "datarobot_deployment_retraining_policy": {
+                "current": "datarobot:index/deploymentRetrainingPolicy:DeploymentRetrainingPolicy",
+                "fields": {
+                    "time_series_options": {
+                        "fields": {
+                            "periodicities": {
+                                "maxItemsOne": false
+                            }
+                        }
+                    },
+                    "trigger": {
+                        "fields": {
+                            "schedule": {
+                                "fields": {
+                                    "day_of_month": {
+                                        "maxItemsOne": false
+                                    },
+                                    "day_of_week": {
+                                        "maxItemsOne": false
+                                    },
+                                    "hour": {
+                                        "maxItemsOne": false
+                                    },
+                                    "minute": {
+                                        "maxItemsOne": false
+                                    },
+                                    "month": {
+                                        "maxItemsOne": false
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
             "datarobot_execution_environment": {
                 "current": "datarobot:index/executionEnvironment:ExecutionEnvironment",
                 "fields": {
