@@ -1702,6 +1702,100 @@
                 "type": "object"
             }
         },
+        "datarobot:index/awsCredential:AwsCredential": {
+            "description": "AWS Credential\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@datarobot/pulumi-datarobot\";\n\nconst example = new datarobot.AwsCredential(\"example\", {\n    awsAccessKeyId: \"example_access_key_id\",\n    awsSecretAccessKey: \"example_secret_access_key\",\n    awsSessionToken: \"example_session_token\",\n    description: \"Description for the example AWS credential\",\n});\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample = datarobot.AwsCredential(\"example\",\n    aws_access_key_id=\"example_access_key_id\",\n    aws_secret_access_key=\"example_secret_access_key\",\n    aws_session_token=\"example_session_token\",\n    description=\"Description for the example AWS credential\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = DataRobotPulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Datarobot.AwsCredential(\"example\", new()\n    {\n        AwsAccessKeyId = \"example_access_key_id\",\n        AwsSecretAccessKey = \"example_secret_access_key\",\n        AwsSessionToken = \"example_session_token\",\n        Description = \"Description for the example AWS credential\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := datarobot.NewAwsCredential(ctx, \"example\", \u0026datarobot.AwsCredentialArgs{\n\t\t\tAwsAccessKeyId:     pulumi.String(\"example_access_key_id\"),\n\t\t\tAwsSecretAccessKey: pulumi.String(\"example_secret_access_key\"),\n\t\t\tAwsSessionToken:    pulumi.String(\"example_session_token\"),\n\t\t\tDescription:        pulumi.String(\"Description for the example AWS credential\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.AwsCredential;\nimport com.pulumi.datarobot.AwsCredentialArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new AwsCredential(\"example\", AwsCredentialArgs.builder()\n            .awsAccessKeyId(\"example_access_key_id\")\n            .awsSecretAccessKey(\"example_secret_access_key\")\n            .awsSessionToken(\"example_session_token\")\n            .description(\"Description for the example AWS credential\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: datarobot:AwsCredential\n    properties:\n      awsAccessKeyId: example_access_key_id\n      awsSecretAccessKey: example_secret_access_key\n      awsSessionToken: example_session_token\n      description: Description for the example AWS credential\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "properties": {
+                "awsAccessKeyId": {
+                    "type": "string",
+                    "description": "The AWS Access Key ID.\n"
+                },
+                "awsSecretAccessKey": {
+                    "type": "string",
+                    "description": "The AWS Secret Access Key.\n",
+                    "secret": true
+                },
+                "awsSessionToken": {
+                    "type": "string",
+                    "description": "The AWS Session Token.\n",
+                    "secret": true
+                },
+                "configId": {
+                    "type": "string",
+                    "description": "The ID of the saved shared secure configuration. If specified, cannot include awsAccessKeyId, awsSecretAccessKey or awsSessionToken.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The description of the AWS Credential.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the AWS Credential.\n"
+                }
+            },
+            "required": [
+                "name"
+            ],
+            "inputProperties": {
+                "awsAccessKeyId": {
+                    "type": "string",
+                    "description": "The AWS Access Key ID.\n"
+                },
+                "awsSecretAccessKey": {
+                    "type": "string",
+                    "description": "The AWS Secret Access Key.\n",
+                    "secret": true
+                },
+                "awsSessionToken": {
+                    "type": "string",
+                    "description": "The AWS Session Token.\n",
+                    "secret": true
+                },
+                "configId": {
+                    "type": "string",
+                    "description": "The ID of the saved shared secure configuration. If specified, cannot include awsAccessKeyId, awsSecretAccessKey or awsSessionToken.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The description of the AWS Credential.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the AWS Credential.\n"
+                }
+            },
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering AwsCredential resources.\n",
+                "properties": {
+                    "awsAccessKeyId": {
+                        "type": "string",
+                        "description": "The AWS Access Key ID.\n"
+                    },
+                    "awsSecretAccessKey": {
+                        "type": "string",
+                        "description": "The AWS Secret Access Key.\n",
+                        "secret": true
+                    },
+                    "awsSessionToken": {
+                        "type": "string",
+                        "description": "The AWS Session Token.\n",
+                        "secret": true
+                    },
+                    "configId": {
+                        "type": "string",
+                        "description": "The ID of the saved shared secure configuration. If specified, cannot include awsAccessKeyId, awsSecretAccessKey or awsSessionToken.\n"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "The description of the AWS Credential.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the AWS Credential.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
         "datarobot:index/basicCredential:BasicCredential": {
             "description": "Basic Credential\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@datarobot/pulumi-datarobot\";\n\nconst example = new datarobot.BasicCredential(\"example\", {\n    description: \"Description for the example basic credential\",\n    password: \"example_password\",\n    user: \"example_user\",\n});\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample = datarobot.BasicCredential(\"example\",\n    description=\"Description for the example basic credential\",\n    password=\"example_password\",\n    user=\"example_user\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = DataRobotPulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Datarobot.BasicCredential(\"example\", new()\n    {\n        Description = \"Description for the example basic credential\",\n        Password = \"example_password\",\n        User = \"example_user\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := datarobot.NewBasicCredential(ctx, \"example\", \u0026datarobot.BasicCredentialArgs{\n\t\t\tDescription: pulumi.String(\"Description for the example basic credential\"),\n\t\t\tPassword:    pulumi.String(\"example_password\"),\n\t\t\tUser:        pulumi.String(\"example_user\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.BasicCredential;\nimport com.pulumi.datarobot.BasicCredentialArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new BasicCredential(\"example\", BasicCredentialArgs.builder()\n            .description(\"Description for the example basic credential\")\n            .password(\"example_password\")\n            .user(\"example_user\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: datarobot:BasicCredential\n    properties:\n      description: Description for the example basic credential\n      password: example_password\n      user: example_user\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
             "properties": {
@@ -5190,7 +5284,7 @@
     },
     "functions": {
         "datarobot:index/getExecutionEnvironment:getExecutionEnvironment": {
-            "description": "Execution Environment\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@pulumi/datarobot\";\n\nconst example = datarobot.getExecutionEnvironment({\n    name: \"DataRobot] Python 3.12\",\n});\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample = datarobot.get_execution_environment(name=\"DataRobot] Python 3.12\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = Pulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = Datarobot.GetExecutionEnvironment.Invoke(new()\n    {\n        Name = \"DataRobot] Python 3.12\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := datarobot.LookupExecutionEnvironment(ctx, \u0026datarobot.LookupExecutionEnvironmentArgs{\n\t\t\tName: \"DataRobot] Python 3.12\",\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.DatarobotFunctions;\nimport com.pulumi.datarobot.inputs.GetExecutionEnvironmentArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var example = DatarobotFunctions.getExecutionEnvironment(GetExecutionEnvironmentArgs.builder()\n            .name(\"DataRobot] Python 3.12\")\n            .build());\n\n    }\n}\n```\n```yaml\nvariables:\n  example:\n    fn::invoke:\n      Function: datarobot:getExecutionEnvironment\n      Arguments:\n        name: DataRobot] Python 3.12\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "description": "Execution Environment\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@pulumi/datarobot\";\n\nconst example = datarobot.getExecutionEnvironment({\n    name: \"DataRobot] Python 3.12\",\n});\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample = datarobot.get_execution_environment(name=\"DataRobot] Python 3.12\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = Pulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = Datarobot.GetExecutionEnvironment.Invoke(new()\n    {\n        Name = \"DataRobot] Python 3.12\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := datarobot.LookupExecutionEnvironment(ctx, \u0026datarobot.LookupExecutionEnvironmentArgs{\n\t\t\tName: \"DataRobot] Python 3.12\",\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.DatarobotFunctions;\nimport com.pulumi.datarobot.inputs.GetExecutionEnvironmentArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var example = DatarobotFunctions.getExecutionEnvironment(GetExecutionEnvironmentArgs.builder()\n            .name(\"DataRobot] Python 3.12\")\n            .build());\n\n    }\n}\n```\n```yaml\nvariables:\n  example:\n    fn::invoke:\n      function: datarobot:getExecutionEnvironment\n      arguments:\n        name: DataRobot] Python 3.12\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
             "inputs": {
                 "description": "A collection of arguments for invoking getExecutionEnvironment.\n",
                 "properties": {
@@ -5239,7 +5333,7 @@
             }
         },
         "datarobot:index/getGlobalModel:getGlobalModel": {
-            "description": "Global Model\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@pulumi/datarobot\";\n\nconst dummyBinaryClassification = datarobot.getGlobalModel({\n    name: \"[DataRobot] Dummy Binary Classification\",\n});\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\ndummy_binary_classification = datarobot.get_global_model(name=\"[DataRobot] Dummy Binary Classification\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = Pulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var dummyBinaryClassification = Datarobot.GetGlobalModel.Invoke(new()\n    {\n        Name = \"[DataRobot] Dummy Binary Classification\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := datarobot.GetGlobalModel(ctx, \u0026datarobot.GetGlobalModelArgs{\n\t\t\tName: \"[DataRobot] Dummy Binary Classification\",\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.DatarobotFunctions;\nimport com.pulumi.datarobot.inputs.GetGlobalModelArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var dummyBinaryClassification = DatarobotFunctions.getGlobalModel(GetGlobalModelArgs.builder()\n            .name(\"[DataRobot] Dummy Binary Classification\")\n            .build());\n\n    }\n}\n```\n```yaml\nvariables:\n  dummyBinaryClassification:\n    fn::invoke:\n      Function: datarobot:getGlobalModel\n      Arguments:\n        name: '[DataRobot] Dummy Binary Classification'\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "description": "Global Model\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@pulumi/datarobot\";\n\nconst dummyBinaryClassification = datarobot.getGlobalModel({\n    name: \"[DataRobot] Dummy Binary Classification\",\n});\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\ndummy_binary_classification = datarobot.get_global_model(name=\"[DataRobot] Dummy Binary Classification\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = Pulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var dummyBinaryClassification = Datarobot.GetGlobalModel.Invoke(new()\n    {\n        Name = \"[DataRobot] Dummy Binary Classification\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := datarobot.GetGlobalModel(ctx, \u0026datarobot.GetGlobalModelArgs{\n\t\t\tName: \"[DataRobot] Dummy Binary Classification\",\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.DatarobotFunctions;\nimport com.pulumi.datarobot.inputs.GetGlobalModelArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var dummyBinaryClassification = DatarobotFunctions.getGlobalModel(GetGlobalModelArgs.builder()\n            .name(\"[DataRobot] Dummy Binary Classification\")\n            .build());\n\n    }\n}\n```\n```yaml\nvariables:\n  dummyBinaryClassification:\n    fn::invoke:\n      function: datarobot:getGlobalModel\n      arguments:\n        name: '[DataRobot] Dummy Binary Classification'\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
             "inputs": {
                 "description": "A collection of arguments for invoking getGlobalModel.\n",
                 "properties": {
