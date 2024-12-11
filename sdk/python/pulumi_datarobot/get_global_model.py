@@ -100,7 +100,7 @@ def get_global_model(name: Optional[str] = None,
         name=pulumi.get(__ret__, 'name'),
         version_id=pulumi.get(__ret__, 'version_id'))
 def get_global_model_output(name: Optional[pulumi.Input[str]] = None,
-                            opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetGlobalModelResult]:
+                            opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetGlobalModelResult]:
     """
     Global Model
 
@@ -118,7 +118,7 @@ def get_global_model_output(name: Optional[pulumi.Input[str]] = None,
     """
     __args__ = dict()
     __args__['name'] = name
-    opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
+    opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke_output('datarobot:index/getGlobalModel:getGlobalModel', __args__, opts=opts, typ=GetGlobalModelResult)
     return __ret__.apply(lambda __response__: GetGlobalModelResult(
         id=pulumi.get(__response__, 'id'),

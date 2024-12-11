@@ -15,6 +15,7 @@
     "files": [
         "apiTokenCredential.ts",
         "applicationSource.ts",
+        "awsCredential.ts",
         "basicCredential.ts",
         "batchPredictionJobDefinition.ts",
         "config/index.ts",

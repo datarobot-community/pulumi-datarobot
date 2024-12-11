@@ -25,6 +25,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &ApiTokenCredential{}
 	case "datarobot:index/applicationSource:ApplicationSource":
 		r = &ApplicationSource{}
+	case "datarobot:index/awsCredential:AwsCredential":
+		r = &AwsCredential{}
 	case "datarobot:index/basicCredential:BasicCredential":
 		r = &BasicCredential{}
 	case "datarobot:index/batchPredictionJobDefinition:BatchPredictionJobDefinition":
@@ -114,6 +116,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"datarobot",
 		"index/applicationSource",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"datarobot",
+		"index/awsCredential",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

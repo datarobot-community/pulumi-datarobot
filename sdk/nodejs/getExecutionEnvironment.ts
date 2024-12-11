@@ -74,7 +74,7 @@ export interface GetExecutionEnvironmentResult {
  * });
  * ```
  */
-export function getExecutionEnvironmentOutput(args: GetExecutionEnvironmentOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetExecutionEnvironmentResult> {
+export function getExecutionEnvironmentOutput(args: GetExecutionEnvironmentOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetExecutionEnvironmentResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invokeOutput("datarobot:index/getExecutionEnvironment:getExecutionEnvironment", {
         "name": args.name,
