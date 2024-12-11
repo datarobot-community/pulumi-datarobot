@@ -66,7 +66,7 @@ export interface GetGlobalModelResult {
  * });
  * ```
  */
-export function getGlobalModelOutput(args: GetGlobalModelOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetGlobalModelResult> {
+export function getGlobalModelOutput(args: GetGlobalModelOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetGlobalModelResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invokeOutput("datarobot:index/getGlobalModel:getGlobalModel", {
         "name": args.name,
