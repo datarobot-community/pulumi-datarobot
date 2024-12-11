@@ -126,7 +126,7 @@ def get_execution_environment(name: Optional[str] = None,
         programming_language=pulumi.get(__ret__, 'programming_language'),
         version_id=pulumi.get(__ret__, 'version_id'))
 def get_execution_environment_output(name: Optional[pulumi.Input[str]] = None,
-                                     opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetExecutionEnvironmentResult]:
+                                     opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetExecutionEnvironmentResult]:
     """
     Execution Environment
 
@@ -144,7 +144,7 @@ def get_execution_environment_output(name: Optional[pulumi.Input[str]] = None,
     """
     __args__ = dict()
     __args__['name'] = name
-    opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
+    opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke_output('datarobot:index/getExecutionEnvironment:getExecutionEnvironment', __args__, opts=opts, typ=GetExecutionEnvironmentResult)
     return __ret__.apply(lambda __response__: GetExecutionEnvironmentResult(
         description=pulumi.get(__response__, 'description'),

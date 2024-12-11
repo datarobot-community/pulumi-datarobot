@@ -15,6 +15,11 @@ export type ApplicationSource = import("./applicationSource").ApplicationSource;
 export const ApplicationSource: typeof import("./applicationSource").ApplicationSource = null as any;
 utilities.lazyLoad(exports, ["ApplicationSource"], () => require("./applicationSource"));
 
+export { AwsCredentialArgs, AwsCredentialState } from "./awsCredential";
+export type AwsCredential = import("./awsCredential").AwsCredential;
+export const AwsCredential: typeof import("./awsCredential").AwsCredential = null as any;
+utilities.lazyLoad(exports, ["AwsCredential"], () => require("./awsCredential"));
+
 export { BasicCredentialArgs, BasicCredentialState } from "./basicCredential";
 export type BasicCredential = import("./basicCredential").BasicCredential;
 export const BasicCredential: typeof import("./basicCredential").BasicCredential = null as any;
@@ -173,6 +178,8 @@ const _module = {
                 return new ApiTokenCredential(name, <any>undefined, { urn })
             case "datarobot:index/applicationSource:ApplicationSource":
                 return new ApplicationSource(name, <any>undefined, { urn })
+            case "datarobot:index/awsCredential:AwsCredential":
+                return new AwsCredential(name, <any>undefined, { urn })
             case "datarobot:index/basicCredential:BasicCredential":
                 return new BasicCredential(name, <any>undefined, { urn })
             case "datarobot:index/batchPredictionJobDefinition:BatchPredictionJobDefinition":
@@ -230,6 +237,7 @@ const _module = {
 };
 pulumi.runtime.registerResourceModule("datarobot", "index/apiTokenCredential", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/applicationSource", _module)
+pulumi.runtime.registerResourceModule("datarobot", "index/awsCredential", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/basicCredential", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/batchPredictionJobDefinition", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/customApplication", _module)
