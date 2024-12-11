@@ -15,6 +15,9 @@
                     }
                 }
             },
+            "datarobot_aws_credential": {
+                "current": "datarobot:index/awsCredential:AwsCredential"
+            },
             "datarobot_basic_credential": {
                 "current": "datarobot:index/basicCredential:BasicCredential"
             },
