@@ -59,6 +59,30 @@ namespace DataRobotPulumi.Datarobot
         /// </summary>
         public static Output<GetGlobalModelResult> Invoke(GetGlobalModelInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetGlobalModelResult>("datarobot:index/getGlobalModel:getGlobalModel", args ?? new GetGlobalModelInvokeArgs(), options.WithDefaults());
+
+        /// <summary>
+        /// Global Model
+        /// 
+        /// ## Example Usage
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Datarobot = Pulumi.Datarobot;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var dummyBinaryClassification = Datarobot.GetGlobalModel.Invoke(new()
+        ///     {
+        ///         Name = "[DataRobot] Dummy Binary Classification",
+        ///     });
+        /// 
+        /// });
+        /// ```
+        /// </summary>
+        public static Output<GetGlobalModelResult> Invoke(GetGlobalModelInvokeArgs args, InvokeOutputOptions options)
+            => global::Pulumi.Deployment.Instance.Invoke<GetGlobalModelResult>("datarobot:index/getGlobalModel:getGlobalModel", args ?? new GetGlobalModelInvokeArgs(), options.WithDefaults());
     }
 
 
