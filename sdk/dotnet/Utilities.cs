@@ -57,6 +57,14 @@ namespace DataRobotPulumi.Datarobot
             return dst;
         }
 
+        public static global::Pulumi.InvokeOutputOptions WithDefaults(this global::Pulumi.InvokeOutputOptions? src)
+        {
+            var dst = src ?? new global::Pulumi.InvokeOutputOptions{};
+            dst.Version = src?.Version ?? Version;
+            dst.PluginDownloadURL = src?.PluginDownloadURL ?? "github://api.github.com/datarobot-community/pulumi-datarobot";
+            return dst;
+        }
+
         private readonly static string version;
         public static string Version => version;
 
