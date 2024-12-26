@@ -69,21 +69,11 @@ type LookupExecutionEnvironmentResult struct {
 }
 
 func LookupExecutionEnvironmentOutput(ctx *pulumi.Context, args LookupExecutionEnvironmentOutputArgs, opts ...pulumi.InvokeOption) LookupExecutionEnvironmentResultOutput {
-	return pulumi.ToOutputWithContext(context.Background(), args).
+	return pulumi.ToOutputWithContext(ctx.Context(), args).
 		ApplyT(func(v interface{}) (LookupExecutionEnvironmentResultOutput, error) {
 			args := v.(LookupExecutionEnvironmentArgs)
-			opts = internal.PkgInvokeDefaultOpts(opts)
-			var rv LookupExecutionEnvironmentResult
-			secret, err := ctx.InvokePackageRaw("datarobot:index/getExecutionEnvironment:getExecutionEnvironment", args, &rv, "", opts...)
-			if err != nil {
-				return LookupExecutionEnvironmentResultOutput{}, err
-			}
-
-			output := pulumi.ToOutput(rv).(LookupExecutionEnvironmentResultOutput)
-			if secret {
-				return pulumi.ToSecret(output).(LookupExecutionEnvironmentResultOutput), nil
-			}
-			return output, nil
+			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+			return ctx.InvokeOutput("datarobot:index/getExecutionEnvironment:getExecutionEnvironment", args, LookupExecutionEnvironmentResultOutput{}, options).(LookupExecutionEnvironmentResultOutput), nil
 		}).(LookupExecutionEnvironmentResultOutput)
 }
 
