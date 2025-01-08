@@ -59,6 +59,30 @@ namespace DataRobotPulumi.Datarobot
         /// </summary>
         public static Output<GetExecutionEnvironmentResult> Invoke(GetExecutionEnvironmentInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetExecutionEnvironmentResult>("datarobot:index/getExecutionEnvironment:getExecutionEnvironment", args ?? new GetExecutionEnvironmentInvokeArgs(), options.WithDefaults());
+
+        /// <summary>
+        /// Execution Environment
+        /// 
+        /// ## Example Usage
+        /// 
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Datarobot = Pulumi.Datarobot;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var example = Datarobot.GetExecutionEnvironment.Invoke(new()
+        ///     {
+        ///         Name = "DataRobot] Python 3.12",
+        ///     });
+        /// 
+        /// });
+        /// ```
+        /// </summary>
+        public static Output<GetExecutionEnvironmentResult> Invoke(GetExecutionEnvironmentInvokeArgs args, InvokeOutputOptions options)
+            => global::Pulumi.Deployment.Instance.Invoke<GetExecutionEnvironmentResult>("datarobot:index/getExecutionEnvironment:getExecutionEnvironment", args ?? new GetExecutionEnvironmentInvokeArgs(), options.WithDefaults());
     }
 
 
