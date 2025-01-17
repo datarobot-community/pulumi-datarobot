@@ -65,21 +65,11 @@ type GetGlobalModelResult struct {
 }
 
 func GetGlobalModelOutput(ctx *pulumi.Context, args GetGlobalModelOutputArgs, opts ...pulumi.InvokeOption) GetGlobalModelResultOutput {
-	return pulumi.ToOutputWithContext(context.Background(), args).
+	return pulumi.ToOutputWithContext(ctx.Context(), args).
 		ApplyT(func(v interface{}) (GetGlobalModelResultOutput, error) {
 			args := v.(GetGlobalModelArgs)
-			opts = internal.PkgInvokeDefaultOpts(opts)
-			var rv GetGlobalModelResult
-			secret, err := ctx.InvokePackageRaw("datarobot:index/getGlobalModel:getGlobalModel", args, &rv, "", opts...)
-			if err != nil {
-				return GetGlobalModelResultOutput{}, err
-			}
-
-			output := pulumi.ToOutput(rv).(GetGlobalModelResultOutput)
-			if secret {
-				return pulumi.ToSecret(output).(GetGlobalModelResultOutput), nil
-			}
-			return output, nil
+			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+			return ctx.InvokeOutput("datarobot:index/getGlobalModel:getGlobalModel", args, GetGlobalModelResultOutput{}, options).(GetGlobalModelResultOutput), nil
 		}).(GetGlobalModelResultOutput)
 }
 
