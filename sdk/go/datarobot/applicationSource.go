@@ -12,42 +12,6 @@ import (
 )
 
 // Application Source
-//
-// ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-//
-//	"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//
-// )
-//
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			example, err := datarobot.NewApplicationSource(ctx, "example", &datarobot.ApplicationSourceArgs{
-//				BaseEnvironmentId: pulumi.String("6542cd582a9d3d51bf4ac71e"),
-//				Files: pulumi.Any{
-//					[]string{
-//						"start-app.sh",
-//					},
-//					[]string{
-//						"streamlit-app.py",
-//					},
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			ctx.Export("datarobotApplicationSourceId", example.ID())
-//			ctx.Export("datarobotApplicationSourceVersionId", example.VersionId)
-//			return nil
-//		})
-//	}
-//
-// ```
 type ApplicationSource struct {
 	pulumi.CustomResourceState
 
@@ -65,8 +29,8 @@ type ApplicationSource struct {
 	FolderPathHash pulumi.StringOutput `pulumi:"folderPathHash"`
 	// The name of the Application Source.
 	Name pulumi.StringOutput `pulumi:"name"`
-	// The replicas for the Application Source.
-	Replicas pulumi.IntOutput `pulumi:"replicas"`
+	// The resources for the Application Source.
+	Resources ApplicationSourceResourcesOutput `pulumi:"resources"`
 	// The runtime parameter values for the Application Source.
 	RuntimeParameterValues ApplicationSourceRuntimeParameterValueArrayOutput `pulumi:"runtimeParameterValues"`
 	// The version ID of the Application Source.
@@ -117,8 +81,8 @@ type applicationSourceState struct {
 	FolderPathHash *string `pulumi:"folderPathHash"`
 	// The name of the Application Source.
 	Name *string `pulumi:"name"`
-	// The replicas for the Application Source.
-	Replicas *int `pulumi:"replicas"`
+	// The resources for the Application Source.
+	Resources *ApplicationSourceResources `pulumi:"resources"`
 	// The runtime parameter values for the Application Source.
 	RuntimeParameterValues []ApplicationSourceRuntimeParameterValue `pulumi:"runtimeParameterValues"`
 	// The version ID of the Application Source.
@@ -140,8 +104,8 @@ type ApplicationSourceState struct {
 	FolderPathHash pulumi.StringPtrInput
 	// The name of the Application Source.
 	Name pulumi.StringPtrInput
-	// The replicas for the Application Source.
-	Replicas pulumi.IntPtrInput
+	// The resources for the Application Source.
+	Resources ApplicationSourceResourcesPtrInput
 	// The runtime parameter values for the Application Source.
 	RuntimeParameterValues ApplicationSourceRuntimeParameterValueArrayInput
 	// The version ID of the Application Source.
@@ -163,8 +127,8 @@ type applicationSourceArgs struct {
 	FolderPath *string `pulumi:"folderPath"`
 	// The name of the Application Source.
 	Name *string `pulumi:"name"`
-	// The replicas for the Application Source.
-	Replicas *int `pulumi:"replicas"`
+	// The resources for the Application Source.
+	Resources *ApplicationSourceResources `pulumi:"resources"`
 	// The runtime parameter values for the Application Source.
 	RuntimeParameterValues []ApplicationSourceRuntimeParameterValue `pulumi:"runtimeParameterValues"`
 }
@@ -181,8 +145,8 @@ type ApplicationSourceArgs struct {
 	FolderPath pulumi.StringPtrInput
 	// The name of the Application Source.
 	Name pulumi.StringPtrInput
-	// The replicas for the Application Source.
-	Replicas pulumi.IntPtrInput
+	// The resources for the Application Source.
+	Resources ApplicationSourceResourcesPtrInput
 	// The runtime parameter values for the Application Source.
 	RuntimeParameterValues ApplicationSourceRuntimeParameterValueArrayInput
 }
@@ -309,9 +273,9 @@ func (o ApplicationSourceOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *ApplicationSource) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// The replicas for the Application Source.
-func (o ApplicationSourceOutput) Replicas() pulumi.IntOutput {
-	return o.ApplyT(func(v *ApplicationSource) pulumi.IntOutput { return v.Replicas }).(pulumi.IntOutput)
+// The resources for the Application Source.
+func (o ApplicationSourceOutput) Resources() ApplicationSourceResourcesOutput {
+	return o.ApplyT(func(v *ApplicationSource) ApplicationSourceResourcesOutput { return v.Resources }).(ApplicationSourceResourcesOutput)
 }
 
 // The runtime parameter values for the Application Source.

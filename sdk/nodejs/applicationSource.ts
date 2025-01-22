@@ -8,23 +8,6 @@ import * as utilities from "./utilities";
 
 /**
  * Application Source
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as datarobot from "@datarobot/pulumi-datarobot";
- *
- * const example = new datarobot.ApplicationSource("example", {
- *     baseEnvironmentId: "6542cd582a9d3d51bf4ac71e",
- *     files: [
- *         ["start-app.sh"],
- *         ["streamlit-app.py"],
- *     ],
- * });
- * export const datarobotApplicationSourceId = example.id;
- * export const datarobotApplicationSourceVersionId = example.versionId;
- * ```
  */
 export class ApplicationSource extends pulumi.CustomResource {
     /**
@@ -83,9 +66,9 @@ export class ApplicationSource extends pulumi.CustomResource {
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * The replicas for the Application Source.
+     * The resources for the Application Source.
      */
-    public readonly replicas!: pulumi.Output<number>;
+    public readonly resources!: pulumi.Output<outputs.ApplicationSourceResources>;
     /**
      * The runtime parameter values for the Application Source.
      */
@@ -115,7 +98,7 @@ export class ApplicationSource extends pulumi.CustomResource {
             resourceInputs["folderPath"] = state ? state.folderPath : undefined;
             resourceInputs["folderPathHash"] = state ? state.folderPathHash : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
-            resourceInputs["replicas"] = state ? state.replicas : undefined;
+            resourceInputs["resources"] = state ? state.resources : undefined;
             resourceInputs["runtimeParameterValues"] = state ? state.runtimeParameterValues : undefined;
             resourceInputs["versionId"] = state ? state.versionId : undefined;
         } else {
@@ -125,7 +108,7 @@ export class ApplicationSource extends pulumi.CustomResource {
             resourceInputs["files"] = args ? args.files : undefined;
             resourceInputs["folderPath"] = args ? args.folderPath : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
-            resourceInputs["replicas"] = args ? args.replicas : undefined;
+            resourceInputs["resources"] = args ? args.resources : undefined;
             resourceInputs["runtimeParameterValues"] = args ? args.runtimeParameterValues : undefined;
             resourceInputs["filesHashes"] = undefined /*out*/;
             resourceInputs["folderPathHash"] = undefined /*out*/;
@@ -169,9 +152,9 @@ export interface ApplicationSourceState {
      */
     name?: pulumi.Input<string>;
     /**
-     * The replicas for the Application Source.
+     * The resources for the Application Source.
      */
-    replicas?: pulumi.Input<number>;
+    resources?: pulumi.Input<inputs.ApplicationSourceResources>;
     /**
      * The runtime parameter values for the Application Source.
      */
@@ -207,9 +190,9 @@ export interface ApplicationSourceArgs {
      */
     name?: pulumi.Input<string>;
     /**
-     * The replicas for the Application Source.
+     * The resources for the Application Source.
      */
-    replicas?: pulumi.Input<number>;
+    resources?: pulumi.Input<inputs.ApplicationSourceResources>;
     /**
      * The runtime parameter values for the Application Source.
      */

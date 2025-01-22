@@ -5,6 +5,21 @@ import * as pulumi from "@pulumi/pulumi";
 import * as inputs from "../types/input";
 import * as outputs from "../types/output";
 
+export interface ApplicationSourceResources {
+    /**
+     * The replicas for the Application Source.
+     */
+    replicas?: pulumi.Input<number>;
+    /**
+     * The resource label for the Application Source.
+     */
+    resourceLabel?: pulumi.Input<string>;
+    /**
+     * The session affinity for the Application Source.
+     */
+    sessionAffinity?: pulumi.Input<boolean>;
+}
+
 export interface ApplicationSourceRuntimeParameterValue {
     /**
      * The name of the runtime parameter.
