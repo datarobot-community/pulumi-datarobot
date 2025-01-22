@@ -13,6 +13,181 @@ import (
 
 var _ = internal.GetEnvOrDefault
 
+type ApplicationSourceResources struct {
+	// The replicas for the Application Source.
+	Replicas *int `pulumi:"replicas"`
+	// The resource label for the Application Source.
+	ResourceLabel *string `pulumi:"resourceLabel"`
+	// The session affinity for the Application Source.
+	SessionAffinity *bool `pulumi:"sessionAffinity"`
+}
+
+// ApplicationSourceResourcesInput is an input type that accepts ApplicationSourceResourcesArgs and ApplicationSourceResourcesOutput values.
+// You can construct a concrete instance of `ApplicationSourceResourcesInput` via:
+//
+//	ApplicationSourceResourcesArgs{...}
+type ApplicationSourceResourcesInput interface {
+	pulumi.Input
+
+	ToApplicationSourceResourcesOutput() ApplicationSourceResourcesOutput
+	ToApplicationSourceResourcesOutputWithContext(context.Context) ApplicationSourceResourcesOutput
+}
+
+type ApplicationSourceResourcesArgs struct {
+	// The replicas for the Application Source.
+	Replicas pulumi.IntPtrInput `pulumi:"replicas"`
+	// The resource label for the Application Source.
+	ResourceLabel pulumi.StringPtrInput `pulumi:"resourceLabel"`
+	// The session affinity for the Application Source.
+	SessionAffinity pulumi.BoolPtrInput `pulumi:"sessionAffinity"`
+}
+
+func (ApplicationSourceResourcesArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ApplicationSourceResources)(nil)).Elem()
+}
+
+func (i ApplicationSourceResourcesArgs) ToApplicationSourceResourcesOutput() ApplicationSourceResourcesOutput {
+	return i.ToApplicationSourceResourcesOutputWithContext(context.Background())
+}
+
+func (i ApplicationSourceResourcesArgs) ToApplicationSourceResourcesOutputWithContext(ctx context.Context) ApplicationSourceResourcesOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ApplicationSourceResourcesOutput)
+}
+
+func (i ApplicationSourceResourcesArgs) ToApplicationSourceResourcesPtrOutput() ApplicationSourceResourcesPtrOutput {
+	return i.ToApplicationSourceResourcesPtrOutputWithContext(context.Background())
+}
+
+func (i ApplicationSourceResourcesArgs) ToApplicationSourceResourcesPtrOutputWithContext(ctx context.Context) ApplicationSourceResourcesPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ApplicationSourceResourcesOutput).ToApplicationSourceResourcesPtrOutputWithContext(ctx)
+}
+
+// ApplicationSourceResourcesPtrInput is an input type that accepts ApplicationSourceResourcesArgs, ApplicationSourceResourcesPtr and ApplicationSourceResourcesPtrOutput values.
+// You can construct a concrete instance of `ApplicationSourceResourcesPtrInput` via:
+//
+//	        ApplicationSourceResourcesArgs{...}
+//
+//	or:
+//
+//	        nil
+type ApplicationSourceResourcesPtrInput interface {
+	pulumi.Input
+
+	ToApplicationSourceResourcesPtrOutput() ApplicationSourceResourcesPtrOutput
+	ToApplicationSourceResourcesPtrOutputWithContext(context.Context) ApplicationSourceResourcesPtrOutput
+}
+
+type applicationSourceResourcesPtrType ApplicationSourceResourcesArgs
+
+func ApplicationSourceResourcesPtr(v *ApplicationSourceResourcesArgs) ApplicationSourceResourcesPtrInput {
+	return (*applicationSourceResourcesPtrType)(v)
+}
+
+func (*applicationSourceResourcesPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ApplicationSourceResources)(nil)).Elem()
+}
+
+func (i *applicationSourceResourcesPtrType) ToApplicationSourceResourcesPtrOutput() ApplicationSourceResourcesPtrOutput {
+	return i.ToApplicationSourceResourcesPtrOutputWithContext(context.Background())
+}
+
+func (i *applicationSourceResourcesPtrType) ToApplicationSourceResourcesPtrOutputWithContext(ctx context.Context) ApplicationSourceResourcesPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ApplicationSourceResourcesPtrOutput)
+}
+
+type ApplicationSourceResourcesOutput struct{ *pulumi.OutputState }
+
+func (ApplicationSourceResourcesOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ApplicationSourceResources)(nil)).Elem()
+}
+
+func (o ApplicationSourceResourcesOutput) ToApplicationSourceResourcesOutput() ApplicationSourceResourcesOutput {
+	return o
+}
+
+func (o ApplicationSourceResourcesOutput) ToApplicationSourceResourcesOutputWithContext(ctx context.Context) ApplicationSourceResourcesOutput {
+	return o
+}
+
+func (o ApplicationSourceResourcesOutput) ToApplicationSourceResourcesPtrOutput() ApplicationSourceResourcesPtrOutput {
+	return o.ToApplicationSourceResourcesPtrOutputWithContext(context.Background())
+}
+
+func (o ApplicationSourceResourcesOutput) ToApplicationSourceResourcesPtrOutputWithContext(ctx context.Context) ApplicationSourceResourcesPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ApplicationSourceResources) *ApplicationSourceResources {
+		return &v
+	}).(ApplicationSourceResourcesPtrOutput)
+}
+
+// The replicas for the Application Source.
+func (o ApplicationSourceResourcesOutput) Replicas() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ApplicationSourceResources) *int { return v.Replicas }).(pulumi.IntPtrOutput)
+}
+
+// The resource label for the Application Source.
+func (o ApplicationSourceResourcesOutput) ResourceLabel() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ApplicationSourceResources) *string { return v.ResourceLabel }).(pulumi.StringPtrOutput)
+}
+
+// The session affinity for the Application Source.
+func (o ApplicationSourceResourcesOutput) SessionAffinity() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ApplicationSourceResources) *bool { return v.SessionAffinity }).(pulumi.BoolPtrOutput)
+}
+
+type ApplicationSourceResourcesPtrOutput struct{ *pulumi.OutputState }
+
+func (ApplicationSourceResourcesPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ApplicationSourceResources)(nil)).Elem()
+}
+
+func (o ApplicationSourceResourcesPtrOutput) ToApplicationSourceResourcesPtrOutput() ApplicationSourceResourcesPtrOutput {
+	return o
+}
+
+func (o ApplicationSourceResourcesPtrOutput) ToApplicationSourceResourcesPtrOutputWithContext(ctx context.Context) ApplicationSourceResourcesPtrOutput {
+	return o
+}
+
+func (o ApplicationSourceResourcesPtrOutput) Elem() ApplicationSourceResourcesOutput {
+	return o.ApplyT(func(v *ApplicationSourceResources) ApplicationSourceResources {
+		if v != nil {
+			return *v
+		}
+		var ret ApplicationSourceResources
+		return ret
+	}).(ApplicationSourceResourcesOutput)
+}
+
+// The replicas for the Application Source.
+func (o ApplicationSourceResourcesPtrOutput) Replicas() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ApplicationSourceResources) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Replicas
+	}).(pulumi.IntPtrOutput)
+}
+
+// The resource label for the Application Source.
+func (o ApplicationSourceResourcesPtrOutput) ResourceLabel() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ApplicationSourceResources) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ResourceLabel
+	}).(pulumi.StringPtrOutput)
+}
+
+// The session affinity for the Application Source.
+func (o ApplicationSourceResourcesPtrOutput) SessionAffinity() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ApplicationSourceResources) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.SessionAffinity
+	}).(pulumi.BoolPtrOutput)
+}
+
 type ApplicationSourceRuntimeParameterValue struct {
 	// The name of the runtime parameter.
 	Key string `pulumi:"key"`
@@ -9377,6 +9552,8 @@ func (o VectorDatabaseChunkingParametersPtrOutput) Separators() pulumi.StringArr
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*ApplicationSourceResourcesInput)(nil)).Elem(), ApplicationSourceResourcesArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ApplicationSourceResourcesPtrInput)(nil)).Elem(), ApplicationSourceResourcesArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ApplicationSourceRuntimeParameterValueInput)(nil)).Elem(), ApplicationSourceRuntimeParameterValueArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ApplicationSourceRuntimeParameterValueArrayInput)(nil)).Elem(), ApplicationSourceRuntimeParameterValueArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BatchPredictionJobDefinitionCsvSettingsInput)(nil)).Elem(), BatchPredictionJobDefinitionCsvSettingsArgs{})
@@ -9482,6 +9659,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*LlmBlueprintVectorDatabaseSettingsPtrInput)(nil)).Elem(), LlmBlueprintVectorDatabaseSettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*VectorDatabaseChunkingParametersInput)(nil)).Elem(), VectorDatabaseChunkingParametersArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*VectorDatabaseChunkingParametersPtrInput)(nil)).Elem(), VectorDatabaseChunkingParametersArgs{})
+	pulumi.RegisterOutputType(ApplicationSourceResourcesOutput{})
+	pulumi.RegisterOutputType(ApplicationSourceResourcesPtrOutput{})
 	pulumi.RegisterOutputType(ApplicationSourceRuntimeParameterValueOutput{})
 	pulumi.RegisterOutputType(ApplicationSourceRuntimeParameterValueArrayOutput{})
 	pulumi.RegisterOutputType(BatchPredictionJobDefinitionCsvSettingsOutput{})

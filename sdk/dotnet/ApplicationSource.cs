@@ -12,40 +12,6 @@ namespace DataRobotPulumi.Datarobot
 {
     /// <summary>
     /// Application Source
-    /// 
-    /// ## Example Usage
-    /// 
-    /// ```csharp
-    /// using System.Collections.Generic;
-    /// using System.Linq;
-    /// using Pulumi;
-    /// using Datarobot = DataRobotPulumi.Datarobot;
-    /// 
-    /// return await Deployment.RunAsync(() =&gt; 
-    /// {
-    ///     var example = new Datarobot.ApplicationSource("example", new()
-    ///     {
-    ///         BaseEnvironmentId = "6542cd582a9d3d51bf4ac71e",
-    ///         Files = new[]
-    ///         {
-    ///             new[]
-    ///             {
-    ///                 "start-app.sh",
-    ///             },
-    ///             new[]
-    ///             {
-    ///                 "streamlit-app.py",
-    ///             },
-    ///         },
-    ///     });
-    /// 
-    ///     return new Dictionary&lt;string, object?&gt;
-    ///     {
-    ///         ["datarobotApplicationSourceId"] = example.Id,
-    ///         ["datarobotApplicationSourceVersionId"] = example.VersionId,
-    ///     };
-    /// });
-    /// ```
     /// </summary>
     [DatarobotResourceType("datarobot:index/applicationSource:ApplicationSource")]
     public partial class ApplicationSource : global::Pulumi.CustomResource
@@ -93,10 +59,10 @@ namespace DataRobotPulumi.Datarobot
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// The replicas for the Application Source.
+        /// The resources for the Application Source.
         /// </summary>
-        [Output("replicas")]
-        public Output<int> Replicas { get; private set; } = null!;
+        [Output("resources")]
+        public Output<Outputs.ApplicationSourceResources> Resources { get; private set; } = null!;
 
         /// <summary>
         /// The runtime parameter values for the Application Source.
@@ -188,10 +154,10 @@ namespace DataRobotPulumi.Datarobot
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// The replicas for the Application Source.
+        /// The resources for the Application Source.
         /// </summary>
-        [Input("replicas")]
-        public Input<int>? Replicas { get; set; }
+        [Input("resources")]
+        public Input<Inputs.ApplicationSourceResourcesArgs>? Resources { get; set; }
 
         [Input("runtimeParameterValues")]
         private InputList<Inputs.ApplicationSourceRuntimeParameterValueArgs>? _runtimeParameterValues;
@@ -262,10 +228,10 @@ namespace DataRobotPulumi.Datarobot
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// The replicas for the Application Source.
+        /// The resources for the Application Source.
         /// </summary>
-        [Input("replicas")]
-        public Input<int>? Replicas { get; set; }
+        [Input("resources")]
+        public Input<Inputs.ApplicationSourceResourcesGetArgs>? Resources { get; set; }
 
         [Input("runtimeParameterValues")]
         private InputList<Inputs.ApplicationSourceRuntimeParameterValueGetArgs>? _runtimeParameterValues;

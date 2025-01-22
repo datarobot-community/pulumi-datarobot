@@ -15,6 +15,8 @@ else:
 from . import _utilities
 
 __all__ = [
+    'ApplicationSourceResourcesArgs',
+    'ApplicationSourceResourcesArgsDict',
     'ApplicationSourceRuntimeParameterValueArgs',
     'ApplicationSourceRuntimeParameterValueArgsDict',
     'BatchPredictionJobDefinitionCsvSettingsArgs',
@@ -124,6 +126,78 @@ __all__ = [
 ]
 
 MYPY = False
+
+if not MYPY:
+    class ApplicationSourceResourcesArgsDict(TypedDict):
+        replicas: NotRequired[pulumi.Input[int]]
+        """
+        The replicas for the Application Source.
+        """
+        resource_label: NotRequired[pulumi.Input[str]]
+        """
+        The resource label for the Application Source.
+        """
+        session_affinity: NotRequired[pulumi.Input[bool]]
+        """
+        The session affinity for the Application Source.
+        """
+elif False:
+    ApplicationSourceResourcesArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class ApplicationSourceResourcesArgs:
+    def __init__(__self__, *,
+                 replicas: Optional[pulumi.Input[int]] = None,
+                 resource_label: Optional[pulumi.Input[str]] = None,
+                 session_affinity: Optional[pulumi.Input[bool]] = None):
+        """
+        :param pulumi.Input[int] replicas: The replicas for the Application Source.
+        :param pulumi.Input[str] resource_label: The resource label for the Application Source.
+        :param pulumi.Input[bool] session_affinity: The session affinity for the Application Source.
+        """
+        if replicas is not None:
+            pulumi.set(__self__, "replicas", replicas)
+        if resource_label is not None:
+            pulumi.set(__self__, "resource_label", resource_label)
+        if session_affinity is not None:
+            pulumi.set(__self__, "session_affinity", session_affinity)
+
+    @property
+    @pulumi.getter
+    def replicas(self) -> Optional[pulumi.Input[int]]:
+        """
+        The replicas for the Application Source.
+        """
+        return pulumi.get(self, "replicas")
+
+    @replicas.setter
+    def replicas(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "replicas", value)
+
+    @property
+    @pulumi.getter(name="resourceLabel")
+    def resource_label(self) -> Optional[pulumi.Input[str]]:
+        """
+        The resource label for the Application Source.
+        """
+        return pulumi.get(self, "resource_label")
+
+    @resource_label.setter
+    def resource_label(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "resource_label", value)
+
+    @property
+    @pulumi.getter(name="sessionAffinity")
+    def session_affinity(self) -> Optional[pulumi.Input[bool]]:
+        """
+        The session affinity for the Application Source.
+        """
+        return pulumi.get(self, "session_affinity")
+
+    @session_affinity.setter
+    def session_affinity(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "session_affinity", value)
+
 
 if not MYPY:
     class ApplicationSourceRuntimeParameterValueArgsDict(TypedDict):
