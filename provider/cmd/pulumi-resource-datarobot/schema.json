@@ -73,6 +73,32 @@
         }
     },
     "types": {
+        "datarobot:index/ApplicationSourceResources:ApplicationSourceResources": {
+            "properties": {
+                "replicas": {
+                    "type": "integer",
+                    "description": "The replicas for the Application Source.\n"
+                },
+                "resourceLabel": {
+                    "type": "string",
+                    "description": "The resource label for the Application Source.\n"
+                },
+                "sessionAffinity": {
+                    "type": "boolean",
+                    "description": "The session affinity for the Application Source.\n"
+                }
+            },
+            "type": "object",
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "replicas",
+                        "resourceLabel",
+                        "sessionAffinity"
+                    ]
+                }
+            }
+        },
         "datarobot:index/ApplicationSourceRuntimeParameterValue:ApplicationSourceRuntimeParameterValue": {
             "properties": {
                 "key": {
@@ -1557,7 +1583,7 @@
             }
         },
         "datarobot:index/applicationSource:ApplicationSource": {
-            "description": "Application Source\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@datarobot/pulumi-datarobot\";\n\nconst example = new datarobot.ApplicationSource(\"example\", {\n    baseEnvironmentId: \"6542cd582a9d3d51bf4ac71e\",\n    files: [\n        [\"start-app.sh\"],\n        [\"streamlit-app.py\"],\n    ],\n});\nexport const datarobotApplicationSourceId = example.id;\nexport const datarobotApplicationSourceVersionId = example.versionId;\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample = datarobot.ApplicationSource(\"example\",\n    base_environment_id=\"6542cd582a9d3d51bf4ac71e\",\n    files=[\n        [\"start-app.sh\"],\n        [\"streamlit-app.py\"],\n    ])\npulumi.export(\"datarobotApplicationSourceId\", example.id)\npulumi.export(\"datarobotApplicationSourceVersionId\", example.version_id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = DataRobotPulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Datarobot.ApplicationSource(\"example\", new()\n    {\n        BaseEnvironmentId = \"6542cd582a9d3d51bf4ac71e\",\n        Files = new[]\n        {\n            new[]\n            {\n                \"start-app.sh\",\n            },\n            new[]\n            {\n                \"streamlit-app.py\",\n            },\n        },\n    });\n\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"datarobotApplicationSourceId\"] = example.Id,\n        [\"datarobotApplicationSourceVersionId\"] = example.VersionId,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texample, err := datarobot.NewApplicationSource(ctx, \"example\", \u0026datarobot.ApplicationSourceArgs{\n\t\t\tBaseEnvironmentId: pulumi.String(\"6542cd582a9d3d51bf4ac71e\"),\n\t\t\tFiles: pulumi.Any{\n\t\t\t\t[]string{\n\t\t\t\t\t\"start-app.sh\",\n\t\t\t\t},\n\t\t\t\t[]string{\n\t\t\t\t\t\"streamlit-app.py\",\n\t\t\t\t},\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"datarobotApplicationSourceId\", example.ID())\n\t\tctx.Export(\"datarobotApplicationSourceVersionId\", example.VersionId)\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.ApplicationSource;\nimport com.pulumi.datarobot.ApplicationSourceArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new ApplicationSource(\"example\", ApplicationSourceArgs.builder()\n            .baseEnvironmentId(\"6542cd582a9d3d51bf4ac71e\")\n            .files(            \n                \"start-app.sh\",\n                \"streamlit-app.py\")\n            .build());\n\n        ctx.export(\"datarobotApplicationSourceId\", example.id());\n        ctx.export(\"datarobotApplicationSourceVersionId\", example.versionId());\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: datarobot:ApplicationSource\n    properties:\n      baseEnvironmentId: 6542cd582a9d3d51bf4ac71e\n      files:\n        - - start-app.sh\n        - - streamlit-app.py\noutputs:\n  datarobotApplicationSourceId: ${example.id}\n  datarobotApplicationSourceVersionId: ${example.versionId}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "description": "Application Source\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.ApplicationSource;\nimport com.pulumi.datarobot.ApplicationSourceArgs;\nimport com.pulumi.datarobot.inputs.ApplicationSourceRuntimeParameterValueArgs;\nimport com.pulumi.datarobot.inputs.ApplicationSourceResourcesArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new ApplicationSource(\"example\", ApplicationSourceArgs.builder()\n            .baseEnvironmentId(\"6542cd582a9d3d51bf4ac71e\")\n            .files(            \n                \"start-app.sh\",\n                \"streamlit-app.py\")\n            .folderPath(\"example-app\")\n            .runtimeParameterValues(ApplicationSourceRuntimeParameterValueArgs.builder()\n                .key(\"EXAMPLE_PARAM\")\n                .type(\"string\")\n                .value(\"val\")\n                .build())\n            .resources(ApplicationSourceResourcesArgs.builder()\n                .replicas(2)\n                .session_affinity(true)\n                .resource_label(\"cpu.medium\")\n                .build())\n            .build());\n\n        ctx.export(\"datarobotApplicationSourceId\", example.id());\n        ctx.export(\"datarobotApplicationSourceVersionId\", example.versionId());\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: datarobot:ApplicationSource\n    properties:\n      baseEnvironmentId: 6542cd582a9d3d51bf4ac71e\n      # Optional\n      files:\n        - - start-app.sh\n        - - streamlit-app.py\n      folderPath: example-app\n      runtimeParameterValues:\n        - key: EXAMPLE_PARAM\n          type: string\n          value: val\n      resources:\n        replicas: 2\n        session_affinity: true\n        resource_label: cpu.medium\noutputs:\n  datarobotApplicationSourceId: ${example.id}\n  datarobotApplicationSourceVersionId: ${example.versionId}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
             "properties": {
                 "baseEnvironmentId": {
                     "type": "string",
@@ -1590,9 +1616,9 @@
                     "type": "string",
                     "description": "The name of the Application Source.\n"
                 },
-                "replicas": {
-                    "type": "integer",
-                    "description": "The replicas for the Application Source.\n"
+                "resources": {
+                    "$ref": "#/types/datarobot:index/ApplicationSourceResources:ApplicationSourceResources",
+                    "description": "The resources for the Application Source.\n"
                 },
                 "runtimeParameterValues": {
                     "type": "array",
@@ -1612,7 +1638,7 @@
                 "filesHashes",
                 "folderPathHash",
                 "name",
-                "replicas",
+                "resources",
                 "runtimeParameterValues",
                 "versionId"
             ],
@@ -1637,9 +1663,9 @@
                     "type": "string",
                     "description": "The name of the Application Source.\n"
                 },
-                "replicas": {
-                    "type": "integer",
-                    "description": "The replicas for the Application Source.\n"
+                "resources": {
+                    "$ref": "#/types/datarobot:index/ApplicationSourceResources:ApplicationSourceResources",
+                    "description": "The resources for the Application Source.\n"
                 },
                 "runtimeParameterValues": {
                     "type": "array",
@@ -1683,9 +1709,9 @@
                         "type": "string",
                         "description": "The name of the Application Source.\n"
                     },
-                    "replicas": {
-                        "type": "integer",
-                        "description": "The replicas for the Application Source.\n"
+                    "resources": {
+                        "$ref": "#/types/datarobot:index/ApplicationSourceResources:ApplicationSourceResources",
+                        "description": "The resources for the Application Source.\n"
                     },
                     "runtimeParameterValues": {
                         "type": "array",
