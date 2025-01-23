@@ -28,10 +28,11 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := datarobot.NewExecutionEnvironment(ctx, "example", &datarobot.ExecutionEnvironmentArgs{
+//			example, err := datarobot.NewExecutionEnvironment(ctx, "example", &datarobot.ExecutionEnvironmentArgs{
+//				ProgrammingLanguage: pulumi.String("python"),
 //				Description:         pulumi.String("Example Execution Environment Description"),
 //				DockerContextPath:   pulumi.String("docker_context.zip"),
-//				ProgrammingLanguage: pulumi.String("python"),
+//				DockerImage:         pulumi.String("docker_image.tar"),
 //				UseCases: pulumi.StringArray{
 //					pulumi.String("customModel"),
 //				},
@@ -39,6 +40,8 @@ import (
 //			if err != nil {
 //				return err
 //			}
+//			ctx.Export("datarobotExecutionEnvironmentId", example.ID())
+//			ctx.Export("datarobotExecutionEnvironmentVersionId", example.VersionId)
 //			return nil
 //		})
 //	}
@@ -52,7 +55,9 @@ type ExecutionEnvironment struct {
 	// The description of the Execution Environment.
 	Description pulumi.StringPtrOutput `pulumi:"description"`
 	// The path to a docker context archive or folder
-	DockerContextPath pulumi.StringOutput `pulumi:"dockerContextPath"`
+	DockerContextPath pulumi.StringPtrOutput `pulumi:"dockerContextPath"`
+	// A prebuilt environment image saved as a tarball using the Docker save command.
+	DockerImage pulumi.StringPtrOutput `pulumi:"dockerImage"`
 	// The name of the Execution Environment.
 	Name pulumi.StringOutput `pulumi:"name"`
 	// The programming language of the Execution Environment.
@@ -72,9 +77,6 @@ func NewExecutionEnvironment(ctx *pulumi.Context,
 		return nil, errors.New("missing one or more required arguments")
 	}
 
-	if args.DockerContextPath == nil {
-		return nil, errors.New("invalid value for required argument 'DockerContextPath'")
-	}
 	if args.ProgrammingLanguage == nil {
 		return nil, errors.New("invalid value for required argument 'ProgrammingLanguage'")
 	}
@@ -110,6 +112,8 @@ type executionEnvironmentState struct {
 	Description *string `pulumi:"description"`
 	// The path to a docker context archive or folder
 	DockerContextPath *string `pulumi:"dockerContextPath"`
+	// A prebuilt environment image saved as a tarball using the Docker save command.
+	DockerImage *string `pulumi:"dockerImage"`
 	// The name of the Execution Environment.
 	Name *string `pulumi:"name"`
 	// The programming language of the Execution Environment.
@@ -129,6 +133,8 @@ type ExecutionEnvironmentState struct {
 	Description pulumi.StringPtrInput
 	// The path to a docker context archive or folder
 	DockerContextPath pulumi.StringPtrInput
+	// A prebuilt environment image saved as a tarball using the Docker save command.
+	DockerImage pulumi.StringPtrInput
 	// The name of the Execution Environment.
 	Name pulumi.StringPtrInput
 	// The programming language of the Execution Environment.
@@ -149,7 +155,9 @@ type executionEnvironmentArgs struct {
 	// The description of the Execution Environment.
 	Description *string `pulumi:"description"`
 	// The path to a docker context archive or folder
-	DockerContextPath string `pulumi:"dockerContextPath"`
+	DockerContextPath *string `pulumi:"dockerContextPath"`
+	// A prebuilt environment image saved as a tarball using the Docker save command.
+	DockerImage *string `pulumi:"dockerImage"`
 	// The name of the Execution Environment.
 	Name *string `pulumi:"name"`
 	// The programming language of the Execution Environment.
@@ -165,7 +173,9 @@ type ExecutionEnvironmentArgs struct {
 	// The description of the Execution Environment.
 	Description pulumi.StringPtrInput
 	// The path to a docker context archive or folder
-	DockerContextPath pulumi.StringInput
+	DockerContextPath pulumi.StringPtrInput
+	// A prebuilt environment image saved as a tarball using the Docker save command.
+	DockerImage pulumi.StringPtrInput
 	// The name of the Execution Environment.
 	Name pulumi.StringPtrInput
 	// The programming language of the Execution Environment.
@@ -274,8 +284,13 @@ func (o ExecutionEnvironmentOutput) Description() pulumi.StringPtrOutput {
 }
 
 // The path to a docker context archive or folder
-func (o ExecutionEnvironmentOutput) DockerContextPath() pulumi.StringOutput {
-	return o.ApplyT(func(v *ExecutionEnvironment) pulumi.StringOutput { return v.DockerContextPath }).(pulumi.StringOutput)
+func (o ExecutionEnvironmentOutput) DockerContextPath() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ExecutionEnvironment) pulumi.StringPtrOutput { return v.DockerContextPath }).(pulumi.StringPtrOutput)
+}
+
+// A prebuilt environment image saved as a tarball using the Docker save command.
+func (o ExecutionEnvironmentOutput) DockerImage() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ExecutionEnvironment) pulumi.StringPtrOutput { return v.DockerImage }).(pulumi.StringPtrOutput)
 }
 
 // The name of the Execution Environment.

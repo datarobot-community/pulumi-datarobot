@@ -19,42 +19,35 @@ __all__ = ['ExecutionEnvironmentArgs', 'ExecutionEnvironment']
 @pulumi.input_type
 class ExecutionEnvironmentArgs:
     def __init__(__self__, *,
-                 docker_context_path: pulumi.Input[str],
                  programming_language: pulumi.Input[str],
                  use_cases: pulumi.Input[Sequence[pulumi.Input[str]]],
                  description: Optional[pulumi.Input[str]] = None,
+                 docker_context_path: Optional[pulumi.Input[str]] = None,
+                 docker_image: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  version_description: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a ExecutionEnvironment resource.
-        :param pulumi.Input[str] docker_context_path: The path to a docker context archive or folder
         :param pulumi.Input[str] programming_language: The programming language of the Execution Environment.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] use_cases: The list of Use Cases that the Execution Environment supports.
         :param pulumi.Input[str] description: The description of the Execution Environment.
+        :param pulumi.Input[str] docker_context_path: The path to a docker context archive or folder
+        :param pulumi.Input[str] docker_image: A prebuilt environment image saved as a tarball using the Docker save command.
         :param pulumi.Input[str] name: The name of the Execution Environment.
         :param pulumi.Input[str] version_description: The description of the Execution Environment version.
         """
-        pulumi.set(__self__, "docker_context_path", docker_context_path)
         pulumi.set(__self__, "programming_language", programming_language)
         pulumi.set(__self__, "use_cases", use_cases)
         if description is not None:
             pulumi.set(__self__, "description", description)
+        if docker_context_path is not None:
+            pulumi.set(__self__, "docker_context_path", docker_context_path)
+        if docker_image is not None:
+            pulumi.set(__self__, "docker_image", docker_image)
         if name is not None:
             pulumi.set(__self__, "name", name)
         if version_description is not None:
             pulumi.set(__self__, "version_description", version_description)
-
-    @property
-    @pulumi.getter(name="dockerContextPath")
-    def docker_context_path(self) -> pulumi.Input[str]:
-        """
-        The path to a docker context archive or folder
-        """
-        return pulumi.get(self, "docker_context_path")
-
-    @docker_context_path.setter
-    def docker_context_path(self, value: pulumi.Input[str]):
-        pulumi.set(self, "docker_context_path", value)
 
     @property
     @pulumi.getter(name="programmingLanguage")
@@ -93,6 +86,30 @@ class ExecutionEnvironmentArgs:
         pulumi.set(self, "description", value)
 
     @property
+    @pulumi.getter(name="dockerContextPath")
+    def docker_context_path(self) -> Optional[pulumi.Input[str]]:
+        """
+        The path to a docker context archive or folder
+        """
+        return pulumi.get(self, "docker_context_path")
+
+    @docker_context_path.setter
+    def docker_context_path(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "docker_context_path", value)
+
+    @property
+    @pulumi.getter(name="dockerImage")
+    def docker_image(self) -> Optional[pulumi.Input[str]]:
+        """
+        A prebuilt environment image saved as a tarball using the Docker save command.
+        """
+        return pulumi.get(self, "docker_image")
+
+    @docker_image.setter
+    def docker_image(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "docker_image", value)
+
+    @property
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
         """
@@ -123,6 +140,7 @@ class _ExecutionEnvironmentState:
                  build_status: Optional[pulumi.Input[str]] = None,
                  description: Optional[pulumi.Input[str]] = None,
                  docker_context_path: Optional[pulumi.Input[str]] = None,
+                 docker_image: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  programming_language: Optional[pulumi.Input[str]] = None,
                  use_cases: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
@@ -133,6 +151,7 @@ class _ExecutionEnvironmentState:
         :param pulumi.Input[str] build_status: The status of the Execution Environment version build.
         :param pulumi.Input[str] description: The description of the Execution Environment.
         :param pulumi.Input[str] docker_context_path: The path to a docker context archive or folder
+        :param pulumi.Input[str] docker_image: A prebuilt environment image saved as a tarball using the Docker save command.
         :param pulumi.Input[str] name: The name of the Execution Environment.
         :param pulumi.Input[str] programming_language: The programming language of the Execution Environment.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] use_cases: The list of Use Cases that the Execution Environment supports.
@@ -145,6 +164,8 @@ class _ExecutionEnvironmentState:
             pulumi.set(__self__, "description", description)
         if docker_context_path is not None:
             pulumi.set(__self__, "docker_context_path", docker_context_path)
+        if docker_image is not None:
+            pulumi.set(__self__, "docker_image", docker_image)
         if name is not None:
             pulumi.set(__self__, "name", name)
         if programming_language is not None:
@@ -191,6 +212,18 @@ class _ExecutionEnvironmentState:
     @docker_context_path.setter
     def docker_context_path(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "docker_context_path", value)
+
+    @property
+    @pulumi.getter(name="dockerImage")
+    def docker_image(self) -> Optional[pulumi.Input[str]]:
+        """
+        A prebuilt environment image saved as a tarball using the Docker save command.
+        """
+        return pulumi.get(self, "docker_image")
+
+    @docker_image.setter
+    def docker_image(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "docker_image", value)
 
     @property
     @pulumi.getter
@@ -260,6 +293,7 @@ class ExecutionEnvironment(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  description: Optional[pulumi.Input[str]] = None,
                  docker_context_path: Optional[pulumi.Input[str]] = None,
+                 docker_image: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  programming_language: Optional[pulumi.Input[str]] = None,
                  use_cases: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
@@ -275,16 +309,20 @@ class ExecutionEnvironment(pulumi.CustomResource):
         import pulumi_datarobot as datarobot
 
         example = datarobot.ExecutionEnvironment("example",
+            programming_language="python",
             description="Example Execution Environment Description",
             docker_context_path="docker_context.zip",
-            programming_language="python",
+            docker_image="docker_image.tar",
             use_cases=["customModel"])
+        pulumi.export("datarobotExecutionEnvironmentId", example.id)
+        pulumi.export("datarobotExecutionEnvironmentVersionId", example.version_id)
         ```
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] description: The description of the Execution Environment.
         :param pulumi.Input[str] docker_context_path: The path to a docker context archive or folder
+        :param pulumi.Input[str] docker_image: A prebuilt environment image saved as a tarball using the Docker save command.
         :param pulumi.Input[str] name: The name of the Execution Environment.
         :param pulumi.Input[str] programming_language: The programming language of the Execution Environment.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] use_cases: The list of Use Cases that the Execution Environment supports.
@@ -306,10 +344,13 @@ class ExecutionEnvironment(pulumi.CustomResource):
         import pulumi_datarobot as datarobot
 
         example = datarobot.ExecutionEnvironment("example",
+            programming_language="python",
             description="Example Execution Environment Description",
             docker_context_path="docker_context.zip",
-            programming_language="python",
+            docker_image="docker_image.tar",
             use_cases=["customModel"])
+        pulumi.export("datarobotExecutionEnvironmentId", example.id)
+        pulumi.export("datarobotExecutionEnvironmentVersionId", example.version_id)
         ```
 
         :param str resource_name: The name of the resource.
@@ -329,6 +370,7 @@ class ExecutionEnvironment(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  description: Optional[pulumi.Input[str]] = None,
                  docker_context_path: Optional[pulumi.Input[str]] = None,
+                 docker_image: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  programming_language: Optional[pulumi.Input[str]] = None,
                  use_cases: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
@@ -343,9 +385,8 @@ class ExecutionEnvironment(pulumi.CustomResource):
             __props__ = ExecutionEnvironmentArgs.__new__(ExecutionEnvironmentArgs)
 
             __props__.__dict__["description"] = description
-            if docker_context_path is None and not opts.urn:
-                raise TypeError("Missing required property 'docker_context_path'")
             __props__.__dict__["docker_context_path"] = docker_context_path
+            __props__.__dict__["docker_image"] = docker_image
             __props__.__dict__["name"] = name
             if programming_language is None and not opts.urn:
                 raise TypeError("Missing required property 'programming_language'")
@@ -369,6 +410,7 @@ class ExecutionEnvironment(pulumi.CustomResource):
             build_status: Optional[pulumi.Input[str]] = None,
             description: Optional[pulumi.Input[str]] = None,
             docker_context_path: Optional[pulumi.Input[str]] = None,
+            docker_image: Optional[pulumi.Input[str]] = None,
             name: Optional[pulumi.Input[str]] = None,
             programming_language: Optional[pulumi.Input[str]] = None,
             use_cases: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
@@ -384,6 +426,7 @@ class ExecutionEnvironment(pulumi.CustomResource):
         :param pulumi.Input[str] build_status: The status of the Execution Environment version build.
         :param pulumi.Input[str] description: The description of the Execution Environment.
         :param pulumi.Input[str] docker_context_path: The path to a docker context archive or folder
+        :param pulumi.Input[str] docker_image: A prebuilt environment image saved as a tarball using the Docker save command.
         :param pulumi.Input[str] name: The name of the Execution Environment.
         :param pulumi.Input[str] programming_language: The programming language of the Execution Environment.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] use_cases: The list of Use Cases that the Execution Environment supports.
@@ -397,6 +440,7 @@ class ExecutionEnvironment(pulumi.CustomResource):
         __props__.__dict__["build_status"] = build_status
         __props__.__dict__["description"] = description
         __props__.__dict__["docker_context_path"] = docker_context_path
+        __props__.__dict__["docker_image"] = docker_image
         __props__.__dict__["name"] = name
         __props__.__dict__["programming_language"] = programming_language
         __props__.__dict__["use_cases"] = use_cases
@@ -422,11 +466,19 @@ class ExecutionEnvironment(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="dockerContextPath")
-    def docker_context_path(self) -> pulumi.Output[str]:
+    def docker_context_path(self) -> pulumi.Output[Optional[str]]:
         """
         The path to a docker context archive or folder
         """
         return pulumi.get(self, "docker_context_path")
+
+    @property
+    @pulumi.getter(name="dockerImage")
+    def docker_image(self) -> pulumi.Output[Optional[str]]:
+        """
+        A prebuilt environment image saved as a tarball using the Docker save command.
+        """
+        return pulumi.get(self, "docker_image")
 
     @property
     @pulumi.getter

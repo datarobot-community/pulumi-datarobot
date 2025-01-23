@@ -25,15 +25,21 @@ namespace DataRobotPulumi.Datarobot
     /// {
     ///     var example = new Datarobot.ExecutionEnvironment("example", new()
     ///     {
+    ///         ProgrammingLanguage = "python",
     ///         Description = "Example Execution Environment Description",
     ///         DockerContextPath = "docker_context.zip",
-    ///         ProgrammingLanguage = "python",
+    ///         DockerImage = "docker_image.tar",
     ///         UseCases = new[]
     ///         {
     ///             "customModel",
     ///         },
     ///     });
     /// 
+    ///     return new Dictionary&lt;string, object?&gt;
+    ///     {
+    ///         ["datarobotExecutionEnvironmentId"] = example.Id,
+    ///         ["datarobotExecutionEnvironmentVersionId"] = example.VersionId,
+    ///     };
     /// });
     /// ```
     /// </summary>
@@ -56,7 +62,13 @@ namespace DataRobotPulumi.Datarobot
         /// The path to a docker context archive or folder
         /// </summary>
         [Output("dockerContextPath")]
-        public Output<string> DockerContextPath { get; private set; } = null!;
+        public Output<string?> DockerContextPath { get; private set; } = null!;
+
+        /// <summary>
+        /// A prebuilt environment image saved as a tarball using the Docker save command.
+        /// </summary>
+        [Output("dockerImage")]
+        public Output<string?> DockerImage { get; private set; } = null!;
 
         /// <summary>
         /// The name of the Execution Environment.
@@ -144,8 +156,14 @@ namespace DataRobotPulumi.Datarobot
         /// <summary>
         /// The path to a docker context archive or folder
         /// </summary>
-        [Input("dockerContextPath", required: true)]
-        public Input<string> DockerContextPath { get; set; } = null!;
+        [Input("dockerContextPath")]
+        public Input<string>? DockerContextPath { get; set; }
+
+        /// <summary>
+        /// A prebuilt environment image saved as a tarball using the Docker save command.
+        /// </summary>
+        [Input("dockerImage")]
+        public Input<string>? DockerImage { get; set; }
 
         /// <summary>
         /// The name of the Execution Environment.
@@ -202,6 +220,12 @@ namespace DataRobotPulumi.Datarobot
         /// </summary>
         [Input("dockerContextPath")]
         public Input<string>? DockerContextPath { get; set; }
+
+        /// <summary>
+        /// A prebuilt environment image saved as a tarball using the Docker save command.
+        /// </summary>
+        [Input("dockerImage")]
+        public Input<string>? DockerImage { get; set; }
 
         /// <summary>
         /// The name of the Execution Environment.
