@@ -14,11 +14,14 @@ import * as utilities from "./utilities";
  * import * as datarobot from "@datarobot/pulumi-datarobot";
  *
  * const example = new datarobot.ExecutionEnvironment("example", {
+ *     programmingLanguage: "python",
  *     description: "Example Execution Environment Description",
  *     dockerContextPath: "docker_context.zip",
- *     programmingLanguage: "python",
+ *     dockerImage: "docker_image.tar",
  *     useCases: ["customModel"],
  * });
+ * export const datarobotExecutionEnvironmentId = example.id;
+ * export const datarobotExecutionEnvironmentVersionId = example.versionId;
  * ```
  */
 export class ExecutionEnvironment extends pulumi.CustomResource {
@@ -60,7 +63,11 @@ export class ExecutionEnvironment extends pulumi.CustomResource {
     /**
      * The path to a docker context archive or folder
      */
-    public readonly dockerContextPath!: pulumi.Output<string>;
+    public readonly dockerContextPath!: pulumi.Output<string | undefined>;
+    /**
+     * A prebuilt environment image saved as a tarball using the Docker save command.
+     */
+    public readonly dockerImage!: pulumi.Output<string | undefined>;
     /**
      * The name of the Execution Environment.
      */
@@ -98,6 +105,7 @@ export class ExecutionEnvironment extends pulumi.CustomResource {
             resourceInputs["buildStatus"] = state ? state.buildStatus : undefined;
             resourceInputs["description"] = state ? state.description : undefined;
             resourceInputs["dockerContextPath"] = state ? state.dockerContextPath : undefined;
+            resourceInputs["dockerImage"] = state ? state.dockerImage : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["programmingLanguage"] = state ? state.programmingLanguage : undefined;
             resourceInputs["useCases"] = state ? state.useCases : undefined;
@@ -105,9 +113,6 @@ export class ExecutionEnvironment extends pulumi.CustomResource {
             resourceInputs["versionId"] = state ? state.versionId : undefined;
         } else {
             const args = argsOrState as ExecutionEnvironmentArgs | undefined;
-            if ((!args || args.dockerContextPath === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'dockerContextPath'");
-            }
             if ((!args || args.programmingLanguage === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'programmingLanguage'");
             }
@@ -116,6 +121,7 @@ export class ExecutionEnvironment extends pulumi.CustomResource {
             }
             resourceInputs["description"] = args ? args.description : undefined;
             resourceInputs["dockerContextPath"] = args ? args.dockerContextPath : undefined;
+            resourceInputs["dockerImage"] = args ? args.dockerImage : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["programmingLanguage"] = args ? args.programmingLanguage : undefined;
             resourceInputs["useCases"] = args ? args.useCases : undefined;
@@ -144,6 +150,10 @@ export interface ExecutionEnvironmentState {
      * The path to a docker context archive or folder
      */
     dockerContextPath?: pulumi.Input<string>;
+    /**
+     * A prebuilt environment image saved as a tarball using the Docker save command.
+     */
+    dockerImage?: pulumi.Input<string>;
     /**
      * The name of the Execution Environment.
      */
@@ -177,7 +187,11 @@ export interface ExecutionEnvironmentArgs {
     /**
      * The path to a docker context archive or folder
      */
-    dockerContextPath: pulumi.Input<string>;
+    dockerContextPath?: pulumi.Input<string>;
+    /**
+     * A prebuilt environment image saved as a tarball using the Docker save command.
+     */
+    dockerImage?: pulumi.Input<string>;
     /**
      * The name of the Execution Environment.
      */
