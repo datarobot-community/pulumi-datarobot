@@ -325,8 +325,8 @@ github.com/cpuguy83/go-md2man/v2 v2.0.3/go.mod h1:tgQtvFlXSQOSOSIRvRPT7W67SCa46t
 github.com/creack/pty v1.1.9/go.mod h1:oKZEueFk5CKHvIhNR5MUki03XCEU+Q6VDXinZuGJ33E=
 github.com/cyphar/filepath-securejoin v0.3.6 h1:4d9N5ykBnSp5Xn2JkhocYDkOpURL/18CYMpo6xB9uWM=
 github.com/cyphar/filepath-securejoin v0.3.6/go.mod h1:Sdj7gXlvMcPZsbhwhQ33GguGLDGQL7h7bg04C/+u9jI=
-github.com/datarobot-community/terraform-provider-datarobot v0.6.2 h1:No4irpuxz4AqGkZtU3oGBZc8e/rrJ3DqQCkF7yPCzyk=
-github.com/datarobot-community/terraform-provider-datarobot v0.6.2/go.mod h1:7dI1K7iqIOoD1QSsUcCUC+GKEU+K/T8oeY3Ru+wh9JE=
+github.com/datarobot-community/terraform-provider-datarobot v0.6.3 h1:avX/rIDDQ/nzGXRr6buq+wKXfDpb53BpCWvXNJIQxfI=
+github.com/datarobot-community/terraform-provider-datarobot v0.6.3/go.mod h1:7dI1K7iqIOoD1QSsUcCUC+GKEU+K/T8oeY3Ru+wh9JE=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
