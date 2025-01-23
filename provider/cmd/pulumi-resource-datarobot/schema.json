@@ -4240,7 +4240,7 @@
             }
         },
         "datarobot:index/executionEnvironment:ExecutionEnvironment": {
-            "description": "Execution Environment\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@datarobot/pulumi-datarobot\";\n\nconst example = new datarobot.ExecutionEnvironment(\"example\", {\n    description: \"Example Execution Environment Description\",\n    dockerContextPath: \"docker_context.zip\",\n    programmingLanguage: \"python\",\n    useCases: [\"customModel\"],\n});\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample = datarobot.ExecutionEnvironment(\"example\",\n    description=\"Example Execution Environment Description\",\n    docker_context_path=\"docker_context.zip\",\n    programming_language=\"python\",\n    use_cases=[\"customModel\"])\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = DataRobotPulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Datarobot.ExecutionEnvironment(\"example\", new()\n    {\n        Description = \"Example Execution Environment Description\",\n        DockerContextPath = \"docker_context.zip\",\n        ProgrammingLanguage = \"python\",\n        UseCases = new[]\n        {\n            \"customModel\",\n        },\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := datarobot.NewExecutionEnvironment(ctx, \"example\", \u0026datarobot.ExecutionEnvironmentArgs{\n\t\t\tDescription:         pulumi.String(\"Example Execution Environment Description\"),\n\t\t\tDockerContextPath:   pulumi.String(\"docker_context.zip\"),\n\t\t\tProgrammingLanguage: pulumi.String(\"python\"),\n\t\t\tUseCases: pulumi.StringArray{\n\t\t\t\tpulumi.String(\"customModel\"),\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.ExecutionEnvironment;\nimport com.pulumi.datarobot.ExecutionEnvironmentArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new ExecutionEnvironment(\"example\", ExecutionEnvironmentArgs.builder()\n            .description(\"Example Execution Environment Description\")\n            .dockerContextPath(\"docker_context.zip\")\n            .programmingLanguage(\"python\")\n            .useCases(\"customModel\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: datarobot:ExecutionEnvironment\n    properties:\n      description: Example Execution Environment Description\n      dockerContextPath: docker_context.zip\n      programmingLanguage: python\n      useCases:\n        - customModel\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "description": "Execution Environment\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@datarobot/pulumi-datarobot\";\n\nconst example = new datarobot.ExecutionEnvironment(\"example\", {\n    programmingLanguage: \"python\",\n    description: \"Example Execution Environment Description\",\n    dockerContextPath: \"docker_context.zip\",\n    dockerImage: \"docker_image.tar\",\n    useCases: [\"customModel\"],\n});\nexport const datarobotExecutionEnvironmentId = example.id;\nexport const datarobotExecutionEnvironmentVersionId = example.versionId;\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample = datarobot.ExecutionEnvironment(\"example\",\n    programming_language=\"python\",\n    description=\"Example Execution Environment Description\",\n    docker_context_path=\"docker_context.zip\",\n    docker_image=\"docker_image.tar\",\n    use_cases=[\"customModel\"])\npulumi.export(\"datarobotExecutionEnvironmentId\", example.id)\npulumi.export(\"datarobotExecutionEnvironmentVersionId\", example.version_id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = DataRobotPulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Datarobot.ExecutionEnvironment(\"example\", new()\n    {\n        ProgrammingLanguage = \"python\",\n        Description = \"Example Execution Environment Description\",\n        DockerContextPath = \"docker_context.zip\",\n        DockerImage = \"docker_image.tar\",\n        UseCases = new[]\n        {\n            \"customModel\",\n        },\n    });\n\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"datarobotExecutionEnvironmentId\"] = example.Id,\n        [\"datarobotExecutionEnvironmentVersionId\"] = example.VersionId,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texample, err := datarobot.NewExecutionEnvironment(ctx, \"example\", \u0026datarobot.ExecutionEnvironmentArgs{\n\t\t\tProgrammingLanguage: pulumi.String(\"python\"),\n\t\t\tDescription:         pulumi.String(\"Example Execution Environment Description\"),\n\t\t\tDockerContextPath:   pulumi.String(\"docker_context.zip\"),\n\t\t\tDockerImage:         pulumi.String(\"docker_image.tar\"),\n\t\t\tUseCases: pulumi.StringArray{\n\t\t\t\tpulumi.String(\"customModel\"),\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"datarobotExecutionEnvironmentId\", example.ID())\n\t\tctx.Export(\"datarobotExecutionEnvironmentVersionId\", example.VersionId)\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.ExecutionEnvironment;\nimport com.pulumi.datarobot.ExecutionEnvironmentArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new ExecutionEnvironment(\"example\", ExecutionEnvironmentArgs.builder()\n            .programmingLanguage(\"python\")\n            .description(\"Example Execution Environment Description\")\n            .dockerContextPath(\"docker_context.zip\")\n            .dockerImage(\"docker_image.tar\")\n            .useCases(\"customModel\")\n            .build());\n\n        ctx.export(\"datarobotExecutionEnvironmentId\", example.id());\n        ctx.export(\"datarobotExecutionEnvironmentVersionId\", example.versionId());\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: datarobot:ExecutionEnvironment\n    properties:\n      programmingLanguage: python\n      # Optional\n      description: Example Execution Environment Description\n      dockerContextPath: docker_context.zip\n      dockerImage: docker_image.tar\n      useCases:\n        - customModel\noutputs:\n  datarobotExecutionEnvironmentId: ${example.id}\n  datarobotExecutionEnvironmentVersionId: ${example.versionId}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
             "properties": {
                 "buildStatus": {
                     "type": "string",
@@ -4253,6 +4253,10 @@
                 "dockerContextPath": {
                     "type": "string",
                     "description": "The path to a docker context archive or folder\n"
+                },
+                "dockerImage": {
+                    "type": "string",
+                    "description": "A prebuilt environment image saved as a tarball using the Docker save command.\n"
                 },
                 "name": {
                     "type": "string",
@@ -4280,7 +4284,6 @@
             },
             "required": [
                 "buildStatus",
-                "dockerContextPath",
                 "name",
                 "programmingLanguage",
                 "useCases",
@@ -4294,6 +4297,10 @@
                 "dockerContextPath": {
                     "type": "string",
                     "description": "The path to a docker context archive or folder\n"
+                },
+                "dockerImage": {
+                    "type": "string",
+                    "description": "A prebuilt environment image saved as a tarball using the Docker save command.\n"
                 },
                 "name": {
                     "type": "string",
@@ -4316,7 +4323,6 @@
                 }
             },
             "requiredInputs": [
-                "dockerContextPath",
                 "programmingLanguage",
                 "useCases"
             ],
@@ -4334,6 +4340,10 @@
                     "dockerContextPath": {
                         "type": "string",
                         "description": "The path to a docker context archive or folder\n"
+                    },
+                    "dockerImage": {
+                        "type": "string",
+                        "description": "A prebuilt environment image saved as a tarball using the Docker save command.\n"
                     },
                     "name": {
                         "type": "string",
