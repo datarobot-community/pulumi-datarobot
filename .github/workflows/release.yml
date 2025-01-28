@@ -57,7 +57,7 @@ jobs:
     - name: Run GoReleaser
       uses: goreleaser/goreleaser-action@v6.1.0
       with:
-        args: -p 3 release --clean
+        args: -p 3 release --rm-dist
         version: latest
 
   publish_sdk:
