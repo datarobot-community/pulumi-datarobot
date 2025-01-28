@@ -72,6 +72,17 @@
                     }
                 }
             },
+            "datarobot_custom_application_from_environment": {
+                "current": "datarobot:index/customApplicationFromEnvironment:CustomApplicationFromEnvironment",
+                "fields": {
+                    "external_access_recipients": {
+                        "maxItemsOne": false
+                    },
+                    "use_case_ids": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
             "datarobot_custom_job": {
                 "current": "datarobot:index/customJob:CustomJob",
                 "fields": {
