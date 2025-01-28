@@ -11,6 +11,7 @@ from .aws_credential import *
 from .basic_credential import *
 from .batch_prediction_job_definition import *
 from .custom_application import *
+from .custom_application_from_environment import *
 from .custom_job import *
 from .custom_metric_from_job import *
 from .custom_metric_job import *
@@ -95,6 +96,14 @@ _utilities.register(
   "fqn": "pulumi_datarobot",
   "classes": {
    "datarobot:index/customApplication:CustomApplication": "CustomApplication"
+  }
+ },
+ {
+  "pkg": "datarobot",
+  "mod": "index/customApplicationFromEnvironment",
+  "fqn": "pulumi_datarobot",
+  "classes": {
+   "datarobot:index/customApplicationFromEnvironment:CustomApplicationFromEnvironment": "CustomApplicationFromEnvironment"
   }
  },
  {

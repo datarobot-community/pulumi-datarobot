@@ -35,6 +35,11 @@ export type CustomApplication = import("./customApplication").CustomApplication;
 export const CustomApplication: typeof import("./customApplication").CustomApplication = null as any;
 utilities.lazyLoad(exports, ["CustomApplication"], () => require("./customApplication"));
 
+export { CustomApplicationFromEnvironmentArgs, CustomApplicationFromEnvironmentState } from "./customApplicationFromEnvironment";
+export type CustomApplicationFromEnvironment = import("./customApplicationFromEnvironment").CustomApplicationFromEnvironment;
+export const CustomApplicationFromEnvironment: typeof import("./customApplicationFromEnvironment").CustomApplicationFromEnvironment = null as any;
+utilities.lazyLoad(exports, ["CustomApplicationFromEnvironment"], () => require("./customApplicationFromEnvironment"));
+
 export { CustomJobArgs, CustomJobState } from "./customJob";
 export type CustomJob = import("./customJob").CustomJob;
 export const CustomJob: typeof import("./customJob").CustomJob = null as any;
@@ -186,6 +191,8 @@ const _module = {
                 return new BatchPredictionJobDefinition(name, <any>undefined, { urn })
             case "datarobot:index/customApplication:CustomApplication":
                 return new CustomApplication(name, <any>undefined, { urn })
+            case "datarobot:index/customApplicationFromEnvironment:CustomApplicationFromEnvironment":
+                return new CustomApplicationFromEnvironment(name, <any>undefined, { urn })
             case "datarobot:index/customJob:CustomJob":
                 return new CustomJob(name, <any>undefined, { urn })
             case "datarobot:index/customMetricFromJob:CustomMetricFromJob":
@@ -241,6 +248,7 @@ pulumi.runtime.registerResourceModule("datarobot", "index/awsCredential", _modul
 pulumi.runtime.registerResourceModule("datarobot", "index/basicCredential", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/batchPredictionJobDefinition", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/customApplication", _module)
+pulumi.runtime.registerResourceModule("datarobot", "index/customApplicationFromEnvironment", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/customJob", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/customMetricFromJob", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/customMetricJob", _module)
