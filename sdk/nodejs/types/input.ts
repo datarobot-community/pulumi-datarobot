@@ -782,11 +782,15 @@ export interface DeploymentPredictionsSettings {
     /**
      * The maximum number of computes to use for predictions.
      */
-    maxComputes: pulumi.Input<number>;
+    maxComputes?: pulumi.Input<number>;
     /**
      * The minimum number of computes to use for predictions.
      */
-    minComputes: pulumi.Input<number>;
+    minComputes?: pulumi.Input<number>;
+    /**
+     * The resource bundle ID to use for predictions.
+     */
+    resourceBundleId?: pulumi.Input<string>;
 }
 
 export interface DeploymentRetrainingPolicyAutopilotOptions {
@@ -925,6 +929,21 @@ export interface DeploymentRetrainingPolicyTriggerSchedule {
      * Months of the year when the job will run.
      */
     months: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface DeploymentRuntimeParameterValue {
+    /**
+     * The name of the runtime parameter.
+     */
+    key: pulumi.Input<string>;
+    /**
+     * The type of the runtime parameter.
+     */
+    type: pulumi.Input<string>;
+    /**
+     * The value of the runtime parameter (type conversion is handled internally).
+     */
+    value: pulumi.Input<string>;
 }
 
 export interface DeploymentSegmentAnalysisSettings {

@@ -782,11 +782,15 @@ export interface DeploymentPredictionsSettings {
     /**
      * The maximum number of computes to use for predictions.
      */
-    maxComputes: number;
+    maxComputes?: number;
     /**
      * The minimum number of computes to use for predictions.
      */
-    minComputes: number;
+    minComputes?: number;
+    /**
+     * The resource bundle ID to use for predictions.
+     */
+    resourceBundleId?: string;
 }
 
 export interface DeploymentRetrainingPolicyAutopilotOptions {
@@ -925,6 +929,21 @@ export interface DeploymentRetrainingPolicyTriggerSchedule {
      * Months of the year when the job will run.
      */
     months: string[];
+}
+
+export interface DeploymentRuntimeParameterValue {
+    /**
+     * The name of the runtime parameter.
+     */
+    key: string;
+    /**
+     * The type of the runtime parameter.
+     */
+    type: string;
+    /**
+     * The value of the runtime parameter (type conversion is handled internally).
+     */
+    value: string;
 }
 
 export interface DeploymentSegmentAnalysisSettings {

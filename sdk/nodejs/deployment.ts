@@ -34,20 +34,24 @@ import * as utilities from "./utilities";
  *     label: "An example deployment",
  *     predictionEnvironmentId: examplePredictionEnvironment.id,
  *     registeredModelVersionId: exampleRegisteredModel.versionId,
+ *     challengerModelsSettings: {},
+ *     challengerReplaySettings: {},
+ *     segmentAnalysisSettings: {},
+ *     biasAndFairnessSettings: {},
+ *     predictionsByForecastDateSettings: {},
+ *     driftTrackingSettings: {},
+ *     associationIdSettings: {},
+ *     predictionsDataCollectionSettings: {},
+ *     predictionWarningSettings: {},
+ *     predictionIntervalsSettings: {},
+ *     predictionsSettings: {},
+ *     healthSettings: {},
+ *     runtimeParameterValues: [{
+ *         key: "EXAMPLE_PARAM",
+ *         type: "string",
+ *         value: "val",
+ *     }],
  * });
- * // Optional settings
- * // challenger_models_settings = {}
- * // challenger_replay_settings = {}
- * // segment_analysis_settings  = {}
- * // bias_and_fairness_settings = {}
- * // predictions_by_forecast_date_settings = {}
- * // drift_tracking_settings = {}
- * // association_id_settings = {}
- * // predictions_data_collection_settings = {}
- * // prediction_warning_settings = {}
- * // prediction_interval_settings = {}
- * // predictions_settings = {}
- * // health_settings = {}
  * export const datarobotDeploymentId = exampleDeployment.id;
  * ```
  */
@@ -140,6 +144,10 @@ export class Deployment extends pulumi.CustomResource {
      */
     public readonly registeredModelVersionId!: pulumi.Output<string>;
     /**
+     * The runtime parameter values for the Deployment.
+     */
+    public readonly runtimeParameterValues!: pulumi.Output<outputs.DeploymentRuntimeParameterValue[] | undefined>;
+    /**
      * The segment analysis settings for the Deployment.
      */
     public readonly segmentAnalysisSettings!: pulumi.Output<outputs.DeploymentSegmentAnalysisSettings | undefined>;
@@ -176,6 +184,7 @@ export class Deployment extends pulumi.CustomResource {
             resourceInputs["predictionsDataCollectionSettings"] = state ? state.predictionsDataCollectionSettings : undefined;
             resourceInputs["predictionsSettings"] = state ? state.predictionsSettings : undefined;
             resourceInputs["registeredModelVersionId"] = state ? state.registeredModelVersionId : undefined;
+            resourceInputs["runtimeParameterValues"] = state ? state.runtimeParameterValues : undefined;
             resourceInputs["segmentAnalysisSettings"] = state ? state.segmentAnalysisSettings : undefined;
             resourceInputs["useCaseIds"] = state ? state.useCaseIds : undefined;
         } else {
@@ -204,6 +213,7 @@ export class Deployment extends pulumi.CustomResource {
             resourceInputs["predictionsDataCollectionSettings"] = args ? args.predictionsDataCollectionSettings : undefined;
             resourceInputs["predictionsSettings"] = args ? args.predictionsSettings : undefined;
             resourceInputs["registeredModelVersionId"] = args ? args.registeredModelVersionId : undefined;
+            resourceInputs["runtimeParameterValues"] = args ? args.runtimeParameterValues : undefined;
             resourceInputs["segmentAnalysisSettings"] = args ? args.segmentAnalysisSettings : undefined;
             resourceInputs["useCaseIds"] = args ? args.useCaseIds : undefined;
         }
@@ -276,6 +286,10 @@ export interface DeploymentState {
      * The ID of the registered model version for this Deployment.
      */
     registeredModelVersionId?: pulumi.Input<string>;
+    /**
+     * The runtime parameter values for the Deployment.
+     */
+    runtimeParameterValues?: pulumi.Input<pulumi.Input<inputs.DeploymentRuntimeParameterValue>[]>;
     /**
      * The segment analysis settings for the Deployment.
      */
@@ -350,6 +364,10 @@ export interface DeploymentArgs {
      * The ID of the registered model version for this Deployment.
      */
     registeredModelVersionId: pulumi.Input<string>;
+    /**
+     * The runtime parameter values for the Deployment.
+     */
+    runtimeParameterValues?: pulumi.Input<pulumi.Input<inputs.DeploymentRuntimeParameterValue>[]>;
     /**
      * The segment analysis settings for the Deployment.
      */

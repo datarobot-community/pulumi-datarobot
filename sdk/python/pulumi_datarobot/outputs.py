@@ -66,6 +66,7 @@ __all__ = [
     'DeploymentRetrainingPolicyTimeSeriesOptionsPeriodicity',
     'DeploymentRetrainingPolicyTrigger',
     'DeploymentRetrainingPolicyTriggerSchedule',
+    'DeploymentRuntimeParameterValue',
     'DeploymentSegmentAnalysisSettings',
     'LlmBlueprintLlmSettings',
     'LlmBlueprintVectorDatabaseSettings',
@@ -2921,6 +2922,8 @@ class DeploymentPredictionsSettings(dict):
             suggest = "max_computes"
         elif key == "minComputes":
             suggest = "min_computes"
+        elif key == "resourceBundleId":
+            suggest = "resource_bundle_id"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in DeploymentPredictionsSettings. Access the value via the '{suggest}' property getter instead.")
@@ -2934,18 +2937,24 @@ class DeploymentPredictionsSettings(dict):
         return super().get(key, default)
 
     def __init__(__self__, *,
-                 max_computes: int,
-                 min_computes: int):
+                 max_computes: Optional[int] = None,
+                 min_computes: Optional[int] = None,
+                 resource_bundle_id: Optional[str] = None):
         """
         :param int max_computes: The maximum number of computes to use for predictions.
         :param int min_computes: The minimum number of computes to use for predictions.
+        :param str resource_bundle_id: The resource bundle ID to use for predictions.
         """
-        pulumi.set(__self__, "max_computes", max_computes)
-        pulumi.set(__self__, "min_computes", min_computes)
+        if max_computes is not None:
+            pulumi.set(__self__, "max_computes", max_computes)
+        if min_computes is not None:
+            pulumi.set(__self__, "min_computes", min_computes)
+        if resource_bundle_id is not None:
+            pulumi.set(__self__, "resource_bundle_id", resource_bundle_id)
 
     @property
     @pulumi.getter(name="maxComputes")
-    def max_computes(self) -> int:
+    def max_computes(self) -> Optional[int]:
         """
         The maximum number of computes to use for predictions.
         """
@@ -2953,11 +2962,19 @@ class DeploymentPredictionsSettings(dict):
 
     @property
     @pulumi.getter(name="minComputes")
-    def min_computes(self) -> int:
+    def min_computes(self) -> Optional[int]:
         """
         The minimum number of computes to use for predictions.
         """
         return pulumi.get(self, "min_computes")
+
+    @property
+    @pulumi.getter(name="resourceBundleId")
+    def resource_bundle_id(self) -> Optional[str]:
+        """
+        The resource bundle ID to use for predictions.
+        """
+        return pulumi.get(self, "resource_bundle_id")
 
 
 @pulumi.output_type
@@ -3485,6 +3502,46 @@ class DeploymentRetrainingPolicyTriggerSchedule(dict):
         Months of the year when the job will run.
         """
         return pulumi.get(self, "months")
+
+
+@pulumi.output_type
+class DeploymentRuntimeParameterValue(dict):
+    def __init__(__self__, *,
+                 key: str,
+                 type: str,
+                 value: str):
+        """
+        :param str key: The name of the runtime parameter.
+        :param str type: The type of the runtime parameter.
+        :param str value: The value of the runtime parameter (type conversion is handled internally).
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "type", type)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        """
+        The name of the runtime parameter.
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        The type of the runtime parameter.
+        """
+        return pulumi.get(self, "type")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        The value of the runtime parameter (type conversion is handled internally).
+        """
+        return pulumi.get(self, "value")
 
 
 @pulumi.output_type
