@@ -17,20 +17,27 @@ namespace DataRobotPulumi.Datarobot.Outputs
         /// <summary>
         /// The maximum number of computes to use for predictions.
         /// </summary>
-        public readonly int MaxComputes;
+        public readonly int? MaxComputes;
         /// <summary>
         /// The minimum number of computes to use for predictions.
         /// </summary>
-        public readonly int MinComputes;
+        public readonly int? MinComputes;
+        /// <summary>
+        /// The resource bundle ID to use for predictions.
+        /// </summary>
+        public readonly string? ResourceBundleId;
 
         [OutputConstructor]
         private DeploymentPredictionsSettings(
-            int maxComputes,
+            int? maxComputes,
 
-            int minComputes)
+            int? minComputes,
+
+            string? resourceBundleId)
         {
             MaxComputes = maxComputes;
             MinComputes = minComputes;
+            ResourceBundleId = resourceBundleId;
         }
     }
 }

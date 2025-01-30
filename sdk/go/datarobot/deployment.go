@@ -55,9 +55,28 @@ import (
 //				return err
 //			}
 //			exampleDeployment, err := datarobot.NewDeployment(ctx, "exampleDeployment", &datarobot.DeploymentArgs{
-//				Label:                    pulumi.String("An example deployment"),
-//				PredictionEnvironmentId:  examplePredictionEnvironment.ID(),
-//				RegisteredModelVersionId: exampleRegisteredModel.VersionId,
+//				Label:                             pulumi.String("An example deployment"),
+//				PredictionEnvironmentId:           examplePredictionEnvironment.ID(),
+//				RegisteredModelVersionId:          exampleRegisteredModel.VersionId,
+//				ChallengerModelsSettings:          &datarobot.DeploymentChallengerModelsSettingsArgs{},
+//				ChallengerReplaySettings:          &datarobot.DeploymentChallengerReplaySettingsArgs{},
+//				SegmentAnalysisSettings:           &datarobot.DeploymentSegmentAnalysisSettingsArgs{},
+//				BiasAndFairnessSettings:           &datarobot.DeploymentBiasAndFairnessSettingsArgs{},
+//				PredictionsByForecastDateSettings: &datarobot.DeploymentPredictionsByForecastDateSettingsArgs{},
+//				DriftTrackingSettings:             &datarobot.DeploymentDriftTrackingSettingsArgs{},
+//				AssociationIdSettings:             &datarobot.DeploymentAssociationIdSettingsArgs{},
+//				PredictionsDataCollectionSettings: &datarobot.DeploymentPredictionsDataCollectionSettingsArgs{},
+//				PredictionWarningSettings:         &datarobot.DeploymentPredictionWarningSettingsArgs{},
+//				PredictionIntervalsSettings:       &datarobot.DeploymentPredictionIntervalsSettingsArgs{},
+//				PredictionsSettings:               &datarobot.DeploymentPredictionsSettingsArgs{},
+//				HealthSettings:                    &datarobot.DeploymentHealthSettingsArgs{},
+//				RuntimeParameterValues: datarobot.DeploymentRuntimeParameterValueArray{
+//					&datarobot.DeploymentRuntimeParameterValueArgs{
+//						Key:   pulumi.String("EXAMPLE_PARAM"),
+//						Type:  pulumi.String("string"),
+//						Value: pulumi.String("val"),
+//					},
+//				},
 //			})
 //			if err != nil {
 //				return err
@@ -101,6 +120,8 @@ type Deployment struct {
 	PredictionsSettings DeploymentPredictionsSettingsPtrOutput `pulumi:"predictionsSettings"`
 	// The ID of the registered model version for this Deployment.
 	RegisteredModelVersionId pulumi.StringOutput `pulumi:"registeredModelVersionId"`
+	// The runtime parameter values for the Deployment.
+	RuntimeParameterValues DeploymentRuntimeParameterValueArrayOutput `pulumi:"runtimeParameterValues"`
 	// The segment analysis settings for the Deployment.
 	SegmentAnalysisSettings DeploymentSegmentAnalysisSettingsPtrOutput `pulumi:"segmentAnalysisSettings"`
 	// The list of Use Case IDs to add the Deployment to.
@@ -176,6 +197,8 @@ type deploymentState struct {
 	PredictionsSettings *DeploymentPredictionsSettings `pulumi:"predictionsSettings"`
 	// The ID of the registered model version for this Deployment.
 	RegisteredModelVersionId *string `pulumi:"registeredModelVersionId"`
+	// The runtime parameter values for the Deployment.
+	RuntimeParameterValues []DeploymentRuntimeParameterValue `pulumi:"runtimeParameterValues"`
 	// The segment analysis settings for the Deployment.
 	SegmentAnalysisSettings *DeploymentSegmentAnalysisSettings `pulumi:"segmentAnalysisSettings"`
 	// The list of Use Case IDs to add the Deployment to.
@@ -213,6 +236,8 @@ type DeploymentState struct {
 	PredictionsSettings DeploymentPredictionsSettingsPtrInput
 	// The ID of the registered model version for this Deployment.
 	RegisteredModelVersionId pulumi.StringPtrInput
+	// The runtime parameter values for the Deployment.
+	RuntimeParameterValues DeploymentRuntimeParameterValueArrayInput
 	// The segment analysis settings for the Deployment.
 	SegmentAnalysisSettings DeploymentSegmentAnalysisSettingsPtrInput
 	// The list of Use Case IDs to add the Deployment to.
@@ -254,6 +279,8 @@ type deploymentArgs struct {
 	PredictionsSettings *DeploymentPredictionsSettings `pulumi:"predictionsSettings"`
 	// The ID of the registered model version for this Deployment.
 	RegisteredModelVersionId string `pulumi:"registeredModelVersionId"`
+	// The runtime parameter values for the Deployment.
+	RuntimeParameterValues []DeploymentRuntimeParameterValue `pulumi:"runtimeParameterValues"`
 	// The segment analysis settings for the Deployment.
 	SegmentAnalysisSettings *DeploymentSegmentAnalysisSettings `pulumi:"segmentAnalysisSettings"`
 	// The list of Use Case IDs to add the Deployment to.
@@ -292,6 +319,8 @@ type DeploymentArgs struct {
 	PredictionsSettings DeploymentPredictionsSettingsPtrInput
 	// The ID of the registered model version for this Deployment.
 	RegisteredModelVersionId pulumi.StringInput
+	// The runtime parameter values for the Deployment.
+	RuntimeParameterValues DeploymentRuntimeParameterValueArrayInput
 	// The segment analysis settings for the Deployment.
 	SegmentAnalysisSettings DeploymentSegmentAnalysisSettingsPtrInput
 	// The list of Use Case IDs to add the Deployment to.
@@ -464,6 +493,11 @@ func (o DeploymentOutput) PredictionsSettings() DeploymentPredictionsSettingsPtr
 // The ID of the registered model version for this Deployment.
 func (o DeploymentOutput) RegisteredModelVersionId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Deployment) pulumi.StringOutput { return v.RegisteredModelVersionId }).(pulumi.StringOutput)
+}
+
+// The runtime parameter values for the Deployment.
+func (o DeploymentOutput) RuntimeParameterValues() DeploymentRuntimeParameterValueArrayOutput {
+	return o.ApplyT(func(v *Deployment) DeploymentRuntimeParameterValueArrayOutput { return v.RuntimeParameterValues }).(DeploymentRuntimeParameterValueArrayOutput)
 }
 
 // The segment analysis settings for the Deployment.

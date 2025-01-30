@@ -52,21 +52,29 @@ namespace DataRobotPulumi.Datarobot
     ///         Label = "An example deployment",
     ///         PredictionEnvironmentId = examplePredictionEnvironment.Id,
     ///         RegisteredModelVersionId = exampleRegisteredModel.VersionId,
+    ///         ChallengerModelsSettings = null,
+    ///         ChallengerReplaySettings = null,
+    ///         SegmentAnalysisSettings = null,
+    ///         BiasAndFairnessSettings = null,
+    ///         PredictionsByForecastDateSettings = null,
+    ///         DriftTrackingSettings = null,
+    ///         AssociationIdSettings = null,
+    ///         PredictionsDataCollectionSettings = null,
+    ///         PredictionWarningSettings = null,
+    ///         PredictionIntervalsSettings = null,
+    ///         PredictionsSettings = null,
+    ///         HealthSettings = null,
+    ///         RuntimeParameterValues = new[]
+    ///         {
+    ///             new Datarobot.Inputs.DeploymentRuntimeParameterValueArgs
+    ///             {
+    ///                 Key = "EXAMPLE_PARAM",
+    ///                 Type = "string",
+    ///                 Value = "val",
+    ///             },
+    ///         },
     ///     });
     /// 
-    ///     // Optional settings
-    ///     // challenger_models_settings = {}
-    ///     // challenger_replay_settings = {}
-    ///     // segment_analysis_settings  = {}
-    ///     // bias_and_fairness_settings = {}
-    ///     // predictions_by_forecast_date_settings = {}
-    ///     // drift_tracking_settings = {}
-    ///     // association_id_settings = {}
-    ///     // predictions_data_collection_settings = {}
-    ///     // prediction_warning_settings = {}
-    ///     // prediction_interval_settings = {}
-    ///     // predictions_settings = {}
-    ///     // health_settings = {}
     ///     return new Dictionary&lt;string, object?&gt;
     ///     {
     ///         ["datarobotDeploymentId"] = exampleDeployment.Id,
@@ -166,6 +174,12 @@ namespace DataRobotPulumi.Datarobot
         /// </summary>
         [Output("registeredModelVersionId")]
         public Output<string> RegisteredModelVersionId { get; private set; } = null!;
+
+        /// <summary>
+        /// The runtime parameter values for the Deployment.
+        /// </summary>
+        [Output("runtimeParameterValues")]
+        public Output<ImmutableArray<Outputs.DeploymentRuntimeParameterValue>> RuntimeParameterValues { get; private set; } = null!;
 
         /// <summary>
         /// The segment analysis settings for the Deployment.
@@ -316,6 +330,18 @@ namespace DataRobotPulumi.Datarobot
         [Input("registeredModelVersionId", required: true)]
         public Input<string> RegisteredModelVersionId { get; set; } = null!;
 
+        [Input("runtimeParameterValues")]
+        private InputList<Inputs.DeploymentRuntimeParameterValueArgs>? _runtimeParameterValues;
+
+        /// <summary>
+        /// The runtime parameter values for the Deployment.
+        /// </summary>
+        public InputList<Inputs.DeploymentRuntimeParameterValueArgs> RuntimeParameterValues
+        {
+            get => _runtimeParameterValues ?? (_runtimeParameterValues = new InputList<Inputs.DeploymentRuntimeParameterValueArgs>());
+            set => _runtimeParameterValues = value;
+        }
+
         /// <summary>
         /// The segment analysis settings for the Deployment.
         /// </summary>
@@ -431,6 +457,18 @@ namespace DataRobotPulumi.Datarobot
         /// </summary>
         [Input("registeredModelVersionId")]
         public Input<string>? RegisteredModelVersionId { get; set; }
+
+        [Input("runtimeParameterValues")]
+        private InputList<Inputs.DeploymentRuntimeParameterValueGetArgs>? _runtimeParameterValues;
+
+        /// <summary>
+        /// The runtime parameter values for the Deployment.
+        /// </summary>
+        public InputList<Inputs.DeploymentRuntimeParameterValueGetArgs> RuntimeParameterValues
+        {
+            get => _runtimeParameterValues ?? (_runtimeParameterValues = new InputList<Inputs.DeploymentRuntimeParameterValueGetArgs>());
+            set => _runtimeParameterValues = value;
+        }
 
         /// <summary>
         /// The segment analysis settings for the Deployment.

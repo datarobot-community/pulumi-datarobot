@@ -16,14 +16,20 @@ namespace DataRobotPulumi.Datarobot.Inputs
         /// <summary>
         /// The maximum number of computes to use for predictions.
         /// </summary>
-        [Input("maxComputes", required: true)]
-        public Input<int> MaxComputes { get; set; } = null!;
+        [Input("maxComputes")]
+        public Input<int>? MaxComputes { get; set; }
 
         /// <summary>
         /// The minimum number of computes to use for predictions.
         /// </summary>
-        [Input("minComputes", required: true)]
-        public Input<int> MinComputes { get; set; } = null!;
+        [Input("minComputes")]
+        public Input<int>? MinComputes { get; set; }
+
+        /// <summary>
+        /// The resource bundle ID to use for predictions.
+        /// </summary>
+        [Input("resourceBundleId")]
+        public Input<string>? ResourceBundleId { get; set; }
 
         public DeploymentPredictionsSettingsGetArgs()
         {

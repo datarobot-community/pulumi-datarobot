@@ -255,6 +255,9 @@
                             }
                         }
                     },
+                    "runtime_parameter_values": {
+                        "maxItemsOne": false
+                    },
                     "segment_analysis_settings": {
                         "fields": {
                             "attributes": {
