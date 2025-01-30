@@ -115,6 +115,8 @@ __all__ = [
     'DeploymentRetrainingPolicyTriggerArgsDict',
     'DeploymentRetrainingPolicyTriggerScheduleArgs',
     'DeploymentRetrainingPolicyTriggerScheduleArgsDict',
+    'DeploymentRuntimeParameterValueArgs',
+    'DeploymentRuntimeParameterValueArgsDict',
     'DeploymentSegmentAnalysisSettingsArgs',
     'DeploymentSegmentAnalysisSettingsArgsDict',
     'LlmBlueprintLlmSettingsArgs',
@@ -3808,13 +3810,17 @@ class DeploymentPredictionsDataCollectionSettingsArgs:
 
 if not MYPY:
     class DeploymentPredictionsSettingsArgsDict(TypedDict):
-        max_computes: pulumi.Input[int]
+        max_computes: NotRequired[pulumi.Input[int]]
         """
         The maximum number of computes to use for predictions.
         """
-        min_computes: pulumi.Input[int]
+        min_computes: NotRequired[pulumi.Input[int]]
         """
         The minimum number of computes to use for predictions.
+        """
+        resource_bundle_id: NotRequired[pulumi.Input[str]]
+        """
+        The resource bundle ID to use for predictions.
         """
 elif False:
     DeploymentPredictionsSettingsArgsDict: TypeAlias = Mapping[str, Any]
@@ -3822,38 +3828,56 @@ elif False:
 @pulumi.input_type
 class DeploymentPredictionsSettingsArgs:
     def __init__(__self__, *,
-                 max_computes: pulumi.Input[int],
-                 min_computes: pulumi.Input[int]):
+                 max_computes: Optional[pulumi.Input[int]] = None,
+                 min_computes: Optional[pulumi.Input[int]] = None,
+                 resource_bundle_id: Optional[pulumi.Input[str]] = None):
         """
         :param pulumi.Input[int] max_computes: The maximum number of computes to use for predictions.
         :param pulumi.Input[int] min_computes: The minimum number of computes to use for predictions.
+        :param pulumi.Input[str] resource_bundle_id: The resource bundle ID to use for predictions.
         """
-        pulumi.set(__self__, "max_computes", max_computes)
-        pulumi.set(__self__, "min_computes", min_computes)
+        if max_computes is not None:
+            pulumi.set(__self__, "max_computes", max_computes)
+        if min_computes is not None:
+            pulumi.set(__self__, "min_computes", min_computes)
+        if resource_bundle_id is not None:
+            pulumi.set(__self__, "resource_bundle_id", resource_bundle_id)
 
     @property
     @pulumi.getter(name="maxComputes")
-    def max_computes(self) -> pulumi.Input[int]:
+    def max_computes(self) -> Optional[pulumi.Input[int]]:
         """
         The maximum number of computes to use for predictions.
         """
         return pulumi.get(self, "max_computes")
 
     @max_computes.setter
-    def max_computes(self, value: pulumi.Input[int]):
+    def max_computes(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "max_computes", value)
 
     @property
     @pulumi.getter(name="minComputes")
-    def min_computes(self) -> pulumi.Input[int]:
+    def min_computes(self) -> Optional[pulumi.Input[int]]:
         """
         The minimum number of computes to use for predictions.
         """
         return pulumi.get(self, "min_computes")
 
     @min_computes.setter
-    def min_computes(self, value: pulumi.Input[int]):
+    def min_computes(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "min_computes", value)
+
+    @property
+    @pulumi.getter(name="resourceBundleId")
+    def resource_bundle_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The resource bundle ID to use for predictions.
+        """
+        return pulumi.get(self, "resource_bundle_id")
+
+    @resource_bundle_id.setter
+    def resource_bundle_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "resource_bundle_id", value)
 
 
 if not MYPY:
@@ -4519,6 +4543,75 @@ class DeploymentRetrainingPolicyTriggerScheduleArgs:
     @months.setter
     def months(self, value: pulumi.Input[Sequence[pulumi.Input[str]]]):
         pulumi.set(self, "months", value)
+
+
+if not MYPY:
+    class DeploymentRuntimeParameterValueArgsDict(TypedDict):
+        key: pulumi.Input[str]
+        """
+        The name of the runtime parameter.
+        """
+        type: pulumi.Input[str]
+        """
+        The type of the runtime parameter.
+        """
+        value: pulumi.Input[str]
+        """
+        The value of the runtime parameter (type conversion is handled internally).
+        """
+elif False:
+    DeploymentRuntimeParameterValueArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class DeploymentRuntimeParameterValueArgs:
+    def __init__(__self__, *,
+                 key: pulumi.Input[str],
+                 type: pulumi.Input[str],
+                 value: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] key: The name of the runtime parameter.
+        :param pulumi.Input[str] type: The type of the runtime parameter.
+        :param pulumi.Input[str] value: The value of the runtime parameter (type conversion is handled internally).
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "type", type)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> pulumi.Input[str]:
+        """
+        The name of the runtime parameter.
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: pulumi.Input[str]):
+        pulumi.set(self, "key", value)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        The type of the runtime parameter.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> pulumi.Input[str]:
+        """
+        The value of the runtime parameter (type conversion is handled internally).
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: pulumi.Input[str]):
+        pulumi.set(self, "value", value)
 
 
 if not MYPY:

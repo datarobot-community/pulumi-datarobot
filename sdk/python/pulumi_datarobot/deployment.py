@@ -36,6 +36,7 @@ class DeploymentArgs:
                  predictions_by_forecast_date_settings: Optional[pulumi.Input['DeploymentPredictionsByForecastDateSettingsArgs']] = None,
                  predictions_data_collection_settings: Optional[pulumi.Input['DeploymentPredictionsDataCollectionSettingsArgs']] = None,
                  predictions_settings: Optional[pulumi.Input['DeploymentPredictionsSettingsArgs']] = None,
+                 runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input['DeploymentRuntimeParameterValueArgs']]]] = None,
                  segment_analysis_settings: Optional[pulumi.Input['DeploymentSegmentAnalysisSettingsArgs']] = None,
                  use_case_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
@@ -55,6 +56,7 @@ class DeploymentArgs:
         :param pulumi.Input['DeploymentPredictionsByForecastDateSettingsArgs'] predictions_by_forecast_date_settings: The predictions by forecase date settings for the Deployment.
         :param pulumi.Input['DeploymentPredictionsDataCollectionSettingsArgs'] predictions_data_collection_settings: The predictions data collection settings for the Deployment.
         :param pulumi.Input['DeploymentPredictionsSettingsArgs'] predictions_settings: Settings for the predictions.
+        :param pulumi.Input[Sequence[pulumi.Input['DeploymentRuntimeParameterValueArgs']]] runtime_parameter_values: The runtime parameter values for the Deployment.
         :param pulumi.Input['DeploymentSegmentAnalysisSettingsArgs'] segment_analysis_settings: The segment analysis settings for the Deployment.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] use_case_ids: The list of Use Case IDs to add the Deployment to.
         """
@@ -85,6 +87,8 @@ class DeploymentArgs:
             pulumi.set(__self__, "predictions_data_collection_settings", predictions_data_collection_settings)
         if predictions_settings is not None:
             pulumi.set(__self__, "predictions_settings", predictions_settings)
+        if runtime_parameter_values is not None:
+            pulumi.set(__self__, "runtime_parameter_values", runtime_parameter_values)
         if segment_analysis_settings is not None:
             pulumi.set(__self__, "segment_analysis_settings", segment_analysis_settings)
         if use_case_ids is not None:
@@ -271,6 +275,18 @@ class DeploymentArgs:
         pulumi.set(self, "predictions_settings", value)
 
     @property
+    @pulumi.getter(name="runtimeParameterValues")
+    def runtime_parameter_values(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['DeploymentRuntimeParameterValueArgs']]]]:
+        """
+        The runtime parameter values for the Deployment.
+        """
+        return pulumi.get(self, "runtime_parameter_values")
+
+    @runtime_parameter_values.setter
+    def runtime_parameter_values(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['DeploymentRuntimeParameterValueArgs']]]]):
+        pulumi.set(self, "runtime_parameter_values", value)
+
+    @property
     @pulumi.getter(name="segmentAnalysisSettings")
     def segment_analysis_settings(self) -> Optional[pulumi.Input['DeploymentSegmentAnalysisSettingsArgs']]:
         """
@@ -313,6 +329,7 @@ class _DeploymentState:
                  predictions_data_collection_settings: Optional[pulumi.Input['DeploymentPredictionsDataCollectionSettingsArgs']] = None,
                  predictions_settings: Optional[pulumi.Input['DeploymentPredictionsSettingsArgs']] = None,
                  registered_model_version_id: Optional[pulumi.Input[str]] = None,
+                 runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input['DeploymentRuntimeParameterValueArgs']]]] = None,
                  segment_analysis_settings: Optional[pulumi.Input['DeploymentSegmentAnalysisSettingsArgs']] = None,
                  use_case_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
@@ -332,6 +349,7 @@ class _DeploymentState:
         :param pulumi.Input['DeploymentPredictionsDataCollectionSettingsArgs'] predictions_data_collection_settings: The predictions data collection settings for the Deployment.
         :param pulumi.Input['DeploymentPredictionsSettingsArgs'] predictions_settings: Settings for the predictions.
         :param pulumi.Input[str] registered_model_version_id: The ID of the registered model version for this Deployment.
+        :param pulumi.Input[Sequence[pulumi.Input['DeploymentRuntimeParameterValueArgs']]] runtime_parameter_values: The runtime parameter values for the Deployment.
         :param pulumi.Input['DeploymentSegmentAnalysisSettingsArgs'] segment_analysis_settings: The segment analysis settings for the Deployment.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] use_case_ids: The list of Use Case IDs to add the Deployment to.
         """
@@ -365,6 +383,8 @@ class _DeploymentState:
             pulumi.set(__self__, "predictions_settings", predictions_settings)
         if registered_model_version_id is not None:
             pulumi.set(__self__, "registered_model_version_id", registered_model_version_id)
+        if runtime_parameter_values is not None:
+            pulumi.set(__self__, "runtime_parameter_values", runtime_parameter_values)
         if segment_analysis_settings is not None:
             pulumi.set(__self__, "segment_analysis_settings", segment_analysis_settings)
         if use_case_ids is not None:
@@ -551,6 +571,18 @@ class _DeploymentState:
         pulumi.set(self, "registered_model_version_id", value)
 
     @property
+    @pulumi.getter(name="runtimeParameterValues")
+    def runtime_parameter_values(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['DeploymentRuntimeParameterValueArgs']]]]:
+        """
+        The runtime parameter values for the Deployment.
+        """
+        return pulumi.get(self, "runtime_parameter_values")
+
+    @runtime_parameter_values.setter
+    def runtime_parameter_values(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['DeploymentRuntimeParameterValueArgs']]]]):
+        pulumi.set(self, "runtime_parameter_values", value)
+
+    @property
     @pulumi.getter(name="segmentAnalysisSettings")
     def segment_analysis_settings(self) -> Optional[pulumi.Input['DeploymentSegmentAnalysisSettingsArgs']]:
         """
@@ -595,6 +627,7 @@ class Deployment(pulumi.CustomResource):
                  predictions_data_collection_settings: Optional[pulumi.Input[Union['DeploymentPredictionsDataCollectionSettingsArgs', 'DeploymentPredictionsDataCollectionSettingsArgsDict']]] = None,
                  predictions_settings: Optional[pulumi.Input[Union['DeploymentPredictionsSettingsArgs', 'DeploymentPredictionsSettingsArgsDict']]] = None,
                  registered_model_version_id: Optional[pulumi.Input[str]] = None,
+                 runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input[Union['DeploymentRuntimeParameterValueArgs', 'DeploymentRuntimeParameterValueArgsDict']]]]] = None,
                  segment_analysis_settings: Optional[pulumi.Input[Union['DeploymentSegmentAnalysisSettingsArgs', 'DeploymentSegmentAnalysisSettingsArgsDict']]] = None,
                  use_case_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
@@ -622,20 +655,24 @@ class Deployment(pulumi.CustomResource):
         example_deployment = datarobot.Deployment("exampleDeployment",
             label="An example deployment",
             prediction_environment_id=example_prediction_environment.id,
-            registered_model_version_id=example_registered_model.version_id)
-        # Optional settings
-        # challenger_models_settings = {}
-        # challenger_replay_settings = {}
-        # segment_analysis_settings  = {}
-        # bias_and_fairness_settings = {}
-        # predictions_by_forecast_date_settings = {}
-        # drift_tracking_settings = {}
-        # association_id_settings = {}
-        # predictions_data_collection_settings = {}
-        # prediction_warning_settings = {}
-        # prediction_interval_settings = {}
-        # predictions_settings = {}
-        # health_settings = {}
+            registered_model_version_id=example_registered_model.version_id,
+            challenger_models_settings={},
+            challenger_replay_settings={},
+            segment_analysis_settings={},
+            bias_and_fairness_settings={},
+            predictions_by_forecast_date_settings={},
+            drift_tracking_settings={},
+            association_id_settings={},
+            predictions_data_collection_settings={},
+            prediction_warning_settings={},
+            prediction_intervals_settings={},
+            predictions_settings={},
+            health_settings={},
+            runtime_parameter_values=[{
+                "key": "EXAMPLE_PARAM",
+                "type": "string",
+                "value": "val",
+            }])
         pulumi.export("datarobotDeploymentId", example_deployment.id)
         ```
 
@@ -656,6 +693,7 @@ class Deployment(pulumi.CustomResource):
         :param pulumi.Input[Union['DeploymentPredictionsDataCollectionSettingsArgs', 'DeploymentPredictionsDataCollectionSettingsArgsDict']] predictions_data_collection_settings: The predictions data collection settings for the Deployment.
         :param pulumi.Input[Union['DeploymentPredictionsSettingsArgs', 'DeploymentPredictionsSettingsArgsDict']] predictions_settings: Settings for the predictions.
         :param pulumi.Input[str] registered_model_version_id: The ID of the registered model version for this Deployment.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['DeploymentRuntimeParameterValueArgs', 'DeploymentRuntimeParameterValueArgsDict']]]] runtime_parameter_values: The runtime parameter values for the Deployment.
         :param pulumi.Input[Union['DeploymentSegmentAnalysisSettingsArgs', 'DeploymentSegmentAnalysisSettingsArgsDict']] segment_analysis_settings: The segment analysis settings for the Deployment.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] use_case_ids: The list of Use Case IDs to add the Deployment to.
         """
@@ -689,20 +727,24 @@ class Deployment(pulumi.CustomResource):
         example_deployment = datarobot.Deployment("exampleDeployment",
             label="An example deployment",
             prediction_environment_id=example_prediction_environment.id,
-            registered_model_version_id=example_registered_model.version_id)
-        # Optional settings
-        # challenger_models_settings = {}
-        # challenger_replay_settings = {}
-        # segment_analysis_settings  = {}
-        # bias_and_fairness_settings = {}
-        # predictions_by_forecast_date_settings = {}
-        # drift_tracking_settings = {}
-        # association_id_settings = {}
-        # predictions_data_collection_settings = {}
-        # prediction_warning_settings = {}
-        # prediction_interval_settings = {}
-        # predictions_settings = {}
-        # health_settings = {}
+            registered_model_version_id=example_registered_model.version_id,
+            challenger_models_settings={},
+            challenger_replay_settings={},
+            segment_analysis_settings={},
+            bias_and_fairness_settings={},
+            predictions_by_forecast_date_settings={},
+            drift_tracking_settings={},
+            association_id_settings={},
+            predictions_data_collection_settings={},
+            prediction_warning_settings={},
+            prediction_intervals_settings={},
+            predictions_settings={},
+            health_settings={},
+            runtime_parameter_values=[{
+                "key": "EXAMPLE_PARAM",
+                "type": "string",
+                "value": "val",
+            }])
         pulumi.export("datarobotDeploymentId", example_deployment.id)
         ```
 
@@ -736,6 +778,7 @@ class Deployment(pulumi.CustomResource):
                  predictions_data_collection_settings: Optional[pulumi.Input[Union['DeploymentPredictionsDataCollectionSettingsArgs', 'DeploymentPredictionsDataCollectionSettingsArgsDict']]] = None,
                  predictions_settings: Optional[pulumi.Input[Union['DeploymentPredictionsSettingsArgs', 'DeploymentPredictionsSettingsArgsDict']]] = None,
                  registered_model_version_id: Optional[pulumi.Input[str]] = None,
+                 runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input[Union['DeploymentRuntimeParameterValueArgs', 'DeploymentRuntimeParameterValueArgsDict']]]]] = None,
                  segment_analysis_settings: Optional[pulumi.Input[Union['DeploymentSegmentAnalysisSettingsArgs', 'DeploymentSegmentAnalysisSettingsArgsDict']]] = None,
                  use_case_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
@@ -768,6 +811,7 @@ class Deployment(pulumi.CustomResource):
             if registered_model_version_id is None and not opts.urn:
                 raise TypeError("Missing required property 'registered_model_version_id'")
             __props__.__dict__["registered_model_version_id"] = registered_model_version_id
+            __props__.__dict__["runtime_parameter_values"] = runtime_parameter_values
             __props__.__dict__["segment_analysis_settings"] = segment_analysis_settings
             __props__.__dict__["use_case_ids"] = use_case_ids
         super(Deployment, __self__).__init__(
@@ -795,6 +839,7 @@ class Deployment(pulumi.CustomResource):
             predictions_data_collection_settings: Optional[pulumi.Input[Union['DeploymentPredictionsDataCollectionSettingsArgs', 'DeploymentPredictionsDataCollectionSettingsArgsDict']]] = None,
             predictions_settings: Optional[pulumi.Input[Union['DeploymentPredictionsSettingsArgs', 'DeploymentPredictionsSettingsArgsDict']]] = None,
             registered_model_version_id: Optional[pulumi.Input[str]] = None,
+            runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input[Union['DeploymentRuntimeParameterValueArgs', 'DeploymentRuntimeParameterValueArgsDict']]]]] = None,
             segment_analysis_settings: Optional[pulumi.Input[Union['DeploymentSegmentAnalysisSettingsArgs', 'DeploymentSegmentAnalysisSettingsArgsDict']]] = None,
             use_case_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None) -> 'Deployment':
         """
@@ -819,6 +864,7 @@ class Deployment(pulumi.CustomResource):
         :param pulumi.Input[Union['DeploymentPredictionsDataCollectionSettingsArgs', 'DeploymentPredictionsDataCollectionSettingsArgsDict']] predictions_data_collection_settings: The predictions data collection settings for the Deployment.
         :param pulumi.Input[Union['DeploymentPredictionsSettingsArgs', 'DeploymentPredictionsSettingsArgsDict']] predictions_settings: Settings for the predictions.
         :param pulumi.Input[str] registered_model_version_id: The ID of the registered model version for this Deployment.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['DeploymentRuntimeParameterValueArgs', 'DeploymentRuntimeParameterValueArgsDict']]]] runtime_parameter_values: The runtime parameter values for the Deployment.
         :param pulumi.Input[Union['DeploymentSegmentAnalysisSettingsArgs', 'DeploymentSegmentAnalysisSettingsArgsDict']] segment_analysis_settings: The segment analysis settings for the Deployment.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] use_case_ids: The list of Use Case IDs to add the Deployment to.
         """
@@ -841,6 +887,7 @@ class Deployment(pulumi.CustomResource):
         __props__.__dict__["predictions_data_collection_settings"] = predictions_data_collection_settings
         __props__.__dict__["predictions_settings"] = predictions_settings
         __props__.__dict__["registered_model_version_id"] = registered_model_version_id
+        __props__.__dict__["runtime_parameter_values"] = runtime_parameter_values
         __props__.__dict__["segment_analysis_settings"] = segment_analysis_settings
         __props__.__dict__["use_case_ids"] = use_case_ids
         return Deployment(resource_name, opts=opts, __props__=__props__)
@@ -964,6 +1011,14 @@ class Deployment(pulumi.CustomResource):
         The ID of the registered model version for this Deployment.
         """
         return pulumi.get(self, "registered_model_version_id")
+
+    @property
+    @pulumi.getter(name="runtimeParameterValues")
+    def runtime_parameter_values(self) -> pulumi.Output[Optional[Sequence['outputs.DeploymentRuntimeParameterValue']]]:
+        """
+        The runtime parameter values for the Deployment.
+        """
+        return pulumi.get(self, "runtime_parameter_values")
 
     @property
     @pulumi.getter(name="segmentAnalysisSettings")

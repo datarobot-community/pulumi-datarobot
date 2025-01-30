@@ -7425,9 +7425,11 @@ func (o DeploymentPredictionsDataCollectionSettingsPtrOutput) Enabled() pulumi.B
 
 type DeploymentPredictionsSettings struct {
 	// The maximum number of computes to use for predictions.
-	MaxComputes int `pulumi:"maxComputes"`
+	MaxComputes *int `pulumi:"maxComputes"`
 	// The minimum number of computes to use for predictions.
-	MinComputes int `pulumi:"minComputes"`
+	MinComputes *int `pulumi:"minComputes"`
+	// The resource bundle ID to use for predictions.
+	ResourceBundleId *string `pulumi:"resourceBundleId"`
 }
 
 // DeploymentPredictionsSettingsInput is an input type that accepts DeploymentPredictionsSettingsArgs and DeploymentPredictionsSettingsOutput values.
@@ -7443,9 +7445,11 @@ type DeploymentPredictionsSettingsInput interface {
 
 type DeploymentPredictionsSettingsArgs struct {
 	// The maximum number of computes to use for predictions.
-	MaxComputes pulumi.IntInput `pulumi:"maxComputes"`
+	MaxComputes pulumi.IntPtrInput `pulumi:"maxComputes"`
 	// The minimum number of computes to use for predictions.
-	MinComputes pulumi.IntInput `pulumi:"minComputes"`
+	MinComputes pulumi.IntPtrInput `pulumi:"minComputes"`
+	// The resource bundle ID to use for predictions.
+	ResourceBundleId pulumi.StringPtrInput `pulumi:"resourceBundleId"`
 }
 
 func (DeploymentPredictionsSettingsArgs) ElementType() reflect.Type {
@@ -7526,13 +7530,18 @@ func (o DeploymentPredictionsSettingsOutput) ToDeploymentPredictionsSettingsPtrO
 }
 
 // The maximum number of computes to use for predictions.
-func (o DeploymentPredictionsSettingsOutput) MaxComputes() pulumi.IntOutput {
-	return o.ApplyT(func(v DeploymentPredictionsSettings) int { return v.MaxComputes }).(pulumi.IntOutput)
+func (o DeploymentPredictionsSettingsOutput) MaxComputes() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v DeploymentPredictionsSettings) *int { return v.MaxComputes }).(pulumi.IntPtrOutput)
 }
 
 // The minimum number of computes to use for predictions.
-func (o DeploymentPredictionsSettingsOutput) MinComputes() pulumi.IntOutput {
-	return o.ApplyT(func(v DeploymentPredictionsSettings) int { return v.MinComputes }).(pulumi.IntOutput)
+func (o DeploymentPredictionsSettingsOutput) MinComputes() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v DeploymentPredictionsSettings) *int { return v.MinComputes }).(pulumi.IntPtrOutput)
+}
+
+// The resource bundle ID to use for predictions.
+func (o DeploymentPredictionsSettingsOutput) ResourceBundleId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DeploymentPredictionsSettings) *string { return v.ResourceBundleId }).(pulumi.StringPtrOutput)
 }
 
 type DeploymentPredictionsSettingsPtrOutput struct{ *pulumi.OutputState }
@@ -7565,7 +7574,7 @@ func (o DeploymentPredictionsSettingsPtrOutput) MaxComputes() pulumi.IntPtrOutpu
 		if v == nil {
 			return nil
 		}
-		return &v.MaxComputes
+		return v.MaxComputes
 	}).(pulumi.IntPtrOutput)
 }
 
@@ -7575,8 +7584,18 @@ func (o DeploymentPredictionsSettingsPtrOutput) MinComputes() pulumi.IntPtrOutpu
 		if v == nil {
 			return nil
 		}
-		return &v.MinComputes
+		return v.MinComputes
 	}).(pulumi.IntPtrOutput)
+}
+
+// The resource bundle ID to use for predictions.
+func (o DeploymentPredictionsSettingsPtrOutput) ResourceBundleId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DeploymentPredictionsSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ResourceBundleId
+	}).(pulumi.StringPtrOutput)
 }
 
 type DeploymentRetrainingPolicyAutopilotOptions struct {
@@ -8813,6 +8832,121 @@ func (o DeploymentRetrainingPolicyTriggerSchedulePtrOutput) Months() pulumi.Stri
 	}).(pulumi.StringArrayOutput)
 }
 
+type DeploymentRuntimeParameterValue struct {
+	// The name of the runtime parameter.
+	Key string `pulumi:"key"`
+	// The type of the runtime parameter.
+	Type string `pulumi:"type"`
+	// The value of the runtime parameter (type conversion is handled internally).
+	Value string `pulumi:"value"`
+}
+
+// DeploymentRuntimeParameterValueInput is an input type that accepts DeploymentRuntimeParameterValueArgs and DeploymentRuntimeParameterValueOutput values.
+// You can construct a concrete instance of `DeploymentRuntimeParameterValueInput` via:
+//
+//	DeploymentRuntimeParameterValueArgs{...}
+type DeploymentRuntimeParameterValueInput interface {
+	pulumi.Input
+
+	ToDeploymentRuntimeParameterValueOutput() DeploymentRuntimeParameterValueOutput
+	ToDeploymentRuntimeParameterValueOutputWithContext(context.Context) DeploymentRuntimeParameterValueOutput
+}
+
+type DeploymentRuntimeParameterValueArgs struct {
+	// The name of the runtime parameter.
+	Key pulumi.StringInput `pulumi:"key"`
+	// The type of the runtime parameter.
+	Type pulumi.StringInput `pulumi:"type"`
+	// The value of the runtime parameter (type conversion is handled internally).
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (DeploymentRuntimeParameterValueArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentRuntimeParameterValue)(nil)).Elem()
+}
+
+func (i DeploymentRuntimeParameterValueArgs) ToDeploymentRuntimeParameterValueOutput() DeploymentRuntimeParameterValueOutput {
+	return i.ToDeploymentRuntimeParameterValueOutputWithContext(context.Background())
+}
+
+func (i DeploymentRuntimeParameterValueArgs) ToDeploymentRuntimeParameterValueOutputWithContext(ctx context.Context) DeploymentRuntimeParameterValueOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentRuntimeParameterValueOutput)
+}
+
+// DeploymentRuntimeParameterValueArrayInput is an input type that accepts DeploymentRuntimeParameterValueArray and DeploymentRuntimeParameterValueArrayOutput values.
+// You can construct a concrete instance of `DeploymentRuntimeParameterValueArrayInput` via:
+//
+//	DeploymentRuntimeParameterValueArray{ DeploymentRuntimeParameterValueArgs{...} }
+type DeploymentRuntimeParameterValueArrayInput interface {
+	pulumi.Input
+
+	ToDeploymentRuntimeParameterValueArrayOutput() DeploymentRuntimeParameterValueArrayOutput
+	ToDeploymentRuntimeParameterValueArrayOutputWithContext(context.Context) DeploymentRuntimeParameterValueArrayOutput
+}
+
+type DeploymentRuntimeParameterValueArray []DeploymentRuntimeParameterValueInput
+
+func (DeploymentRuntimeParameterValueArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DeploymentRuntimeParameterValue)(nil)).Elem()
+}
+
+func (i DeploymentRuntimeParameterValueArray) ToDeploymentRuntimeParameterValueArrayOutput() DeploymentRuntimeParameterValueArrayOutput {
+	return i.ToDeploymentRuntimeParameterValueArrayOutputWithContext(context.Background())
+}
+
+func (i DeploymentRuntimeParameterValueArray) ToDeploymentRuntimeParameterValueArrayOutputWithContext(ctx context.Context) DeploymentRuntimeParameterValueArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentRuntimeParameterValueArrayOutput)
+}
+
+type DeploymentRuntimeParameterValueOutput struct{ *pulumi.OutputState }
+
+func (DeploymentRuntimeParameterValueOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentRuntimeParameterValue)(nil)).Elem()
+}
+
+func (o DeploymentRuntimeParameterValueOutput) ToDeploymentRuntimeParameterValueOutput() DeploymentRuntimeParameterValueOutput {
+	return o
+}
+
+func (o DeploymentRuntimeParameterValueOutput) ToDeploymentRuntimeParameterValueOutputWithContext(ctx context.Context) DeploymentRuntimeParameterValueOutput {
+	return o
+}
+
+// The name of the runtime parameter.
+func (o DeploymentRuntimeParameterValueOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v DeploymentRuntimeParameterValue) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// The type of the runtime parameter.
+func (o DeploymentRuntimeParameterValueOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v DeploymentRuntimeParameterValue) string { return v.Type }).(pulumi.StringOutput)
+}
+
+// The value of the runtime parameter (type conversion is handled internally).
+func (o DeploymentRuntimeParameterValueOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v DeploymentRuntimeParameterValue) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type DeploymentRuntimeParameterValueArrayOutput struct{ *pulumi.OutputState }
+
+func (DeploymentRuntimeParameterValueArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DeploymentRuntimeParameterValue)(nil)).Elem()
+}
+
+func (o DeploymentRuntimeParameterValueArrayOutput) ToDeploymentRuntimeParameterValueArrayOutput() DeploymentRuntimeParameterValueArrayOutput {
+	return o
+}
+
+func (o DeploymentRuntimeParameterValueArrayOutput) ToDeploymentRuntimeParameterValueArrayOutputWithContext(ctx context.Context) DeploymentRuntimeParameterValueArrayOutput {
+	return o
+}
+
+func (o DeploymentRuntimeParameterValueArrayOutput) Index(i pulumi.IntInput) DeploymentRuntimeParameterValueOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DeploymentRuntimeParameterValue {
+		return vs[0].([]DeploymentRuntimeParameterValue)[vs[1].(int)]
+	}).(DeploymentRuntimeParameterValueOutput)
+}
+
 type DeploymentSegmentAnalysisSettings struct {
 	// A list of strings that gives the segment attributes selected for tracking.
 	Attributes []string `pulumi:"attributes"`
@@ -9651,6 +9785,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentRetrainingPolicyTriggerPtrInput)(nil)).Elem(), DeploymentRetrainingPolicyTriggerArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentRetrainingPolicyTriggerScheduleInput)(nil)).Elem(), DeploymentRetrainingPolicyTriggerScheduleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentRetrainingPolicyTriggerSchedulePtrInput)(nil)).Elem(), DeploymentRetrainingPolicyTriggerScheduleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentRuntimeParameterValueInput)(nil)).Elem(), DeploymentRuntimeParameterValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentRuntimeParameterValueArrayInput)(nil)).Elem(), DeploymentRuntimeParameterValueArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentSegmentAnalysisSettingsInput)(nil)).Elem(), DeploymentSegmentAnalysisSettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentSegmentAnalysisSettingsPtrInput)(nil)).Elem(), DeploymentSegmentAnalysisSettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*LlmBlueprintLlmSettingsInput)(nil)).Elem(), LlmBlueprintLlmSettingsArgs{})
@@ -9758,6 +9894,8 @@ func init() {
 	pulumi.RegisterOutputType(DeploymentRetrainingPolicyTriggerPtrOutput{})
 	pulumi.RegisterOutputType(DeploymentRetrainingPolicyTriggerScheduleOutput{})
 	pulumi.RegisterOutputType(DeploymentRetrainingPolicyTriggerSchedulePtrOutput{})
+	pulumi.RegisterOutputType(DeploymentRuntimeParameterValueOutput{})
+	pulumi.RegisterOutputType(DeploymentRuntimeParameterValueArrayOutput{})
 	pulumi.RegisterOutputType(DeploymentSegmentAnalysisSettingsOutput{})
 	pulumi.RegisterOutputType(DeploymentSegmentAnalysisSettingsPtrOutput{})
 	pulumi.RegisterOutputType(LlmBlueprintLlmSettingsOutput{})
