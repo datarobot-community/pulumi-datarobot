@@ -501,6 +501,13 @@ export interface DeploymentAssociationIdSettings {
     requiredInPredictionRequests?: pulumi.Input<boolean>;
 }
 
+export interface DeploymentBatchMonitoringSettings {
+    /**
+     * If batch monitoring is enabled.
+     */
+    enabled: pulumi.Input<boolean>;
+}
+
 export interface DeploymentBiasAndFairnessSettings {
     /**
      * A set of fairness metrics to use for calculating fairness.
@@ -540,9 +547,17 @@ export interface DeploymentDriftTrackingSettings {
      */
     featureDriftEnabled?: pulumi.Input<boolean>;
     /**
+     * The feature selection method to be used for drift tracking.
+     */
+    featureSelection?: pulumi.Input<string>;
+    /**
      * If target drift tracking is to be turned on.
      */
     targetDriftEnabled?: pulumi.Input<boolean>;
+    /**
+     * List of features to be tracked for drift.
+     */
+    trackedFeatures?: pulumi.Input<pulumi.Input<string>[]>;
 }
 
 export interface DeploymentHealthSettings {
@@ -985,6 +1000,28 @@ export interface LlmBlueprintVectorDatabaseSettings {
      * The maximum number of tokens to retrieve from the Vector Database.
      */
     maxTokens?: pulumi.Input<number>;
+}
+
+export interface NotificationChannelCustomHeader {
+    /**
+     * The name of the header.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * The value of the header.
+     */
+    value: pulumi.Input<string>;
+}
+
+export interface NotificationChannelDrEntity {
+    /**
+     * The ID of the DataRobot entity.
+     */
+    id: pulumi.Input<string>;
+    /**
+     * The name of the entity.
+     */
+    name: pulumi.Input<string>;
 }
 
 export interface VectorDatabaseChunkingParameters {

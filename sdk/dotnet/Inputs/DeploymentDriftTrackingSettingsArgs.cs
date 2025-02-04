@@ -20,10 +20,28 @@ namespace DataRobotPulumi.Datarobot.Inputs
         public Input<bool>? FeatureDriftEnabled { get; set; }
 
         /// <summary>
+        /// The feature selection method to be used for drift tracking.
+        /// </summary>
+        [Input("featureSelection")]
+        public Input<string>? FeatureSelection { get; set; }
+
+        /// <summary>
         /// If target drift tracking is to be turned on.
         /// </summary>
         [Input("targetDriftEnabled")]
         public Input<bool>? TargetDriftEnabled { get; set; }
+
+        [Input("trackedFeatures")]
+        private InputList<string>? _trackedFeatures;
+
+        /// <summary>
+        /// List of features to be tracked for drift.
+        /// </summary>
+        public InputList<string> TrackedFeatures
+        {
+            get => _trackedFeatures ?? (_trackedFeatures = new InputList<string>());
+            set => _trackedFeatures = value;
+        }
 
         public DeploymentDriftTrackingSettingsArgs()
         {

@@ -92,6 +92,12 @@ namespace DataRobotPulumi.Datarobot
         public Output<Outputs.DeploymentAssociationIdSettings?> AssociationIdSettings { get; private set; } = null!;
 
         /// <summary>
+        /// The batch monitoring settings for the Deployment.
+        /// </summary>
+        [Output("batchMonitoringSettings")]
+        public Output<Outputs.DeploymentBatchMonitoringSettings?> BatchMonitoringSettings { get; private set; } = null!;
+
+        /// <summary>
         /// Bias and fairness settings for the Deployment.
         /// </summary>
         [Output("biasAndFairnessSettings")]
@@ -247,6 +253,12 @@ namespace DataRobotPulumi.Datarobot
         public Input<Inputs.DeploymentAssociationIdSettingsArgs>? AssociationIdSettings { get; set; }
 
         /// <summary>
+        /// The batch monitoring settings for the Deployment.
+        /// </summary>
+        [Input("batchMonitoringSettings")]
+        public Input<Inputs.DeploymentBatchMonitoringSettingsArgs>? BatchMonitoringSettings { get; set; }
+
+        /// <summary>
         /// Bias and fairness settings for the Deployment.
         /// </summary>
         [Input("biasAndFairnessSettings")]
@@ -373,6 +385,12 @@ namespace DataRobotPulumi.Datarobot
         /// </summary>
         [Input("associationIdSettings")]
         public Input<Inputs.DeploymentAssociationIdSettingsGetArgs>? AssociationIdSettings { get; set; }
+
+        /// <summary>
+        /// The batch monitoring settings for the Deployment.
+        /// </summary>
+        [Input("batchMonitoringSettings")]
+        public Input<Inputs.DeploymentBatchMonitoringSettingsGetArgs>? BatchMonitoringSettings { get; set; }
 
         /// <summary>
         /// Bias and fairness settings for the Deployment.

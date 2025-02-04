@@ -40,6 +40,7 @@ __all__ = [
     'CustomModelSourceRemoteRepository',
     'DatasourceParams',
     'DeploymentAssociationIdSettings',
+    'DeploymentBatchMonitoringSettings',
     'DeploymentBiasAndFairnessSettings',
     'DeploymentChallengerModelsSettings',
     'DeploymentChallengerReplaySettings',
@@ -70,6 +71,8 @@ __all__ = [
     'DeploymentSegmentAnalysisSettings',
     'LlmBlueprintLlmSettings',
     'LlmBlueprintVectorDatabaseSettings',
+    'NotificationChannelCustomHeader',
+    'NotificationChannelDrEntity',
     'VectorDatabaseChunkingParameters',
 ]
 
@@ -1837,6 +1840,24 @@ class DeploymentAssociationIdSettings(dict):
 
 
 @pulumi.output_type
+class DeploymentBatchMonitoringSettings(dict):
+    def __init__(__self__, *,
+                 enabled: bool):
+        """
+        :param bool enabled: If batch monitoring is enabled.
+        """
+        pulumi.set(__self__, "enabled", enabled)
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> bool:
+        """
+        If batch monitoring is enabled.
+        """
+        return pulumi.get(self, "enabled")
+
+
+@pulumi.output_type
 class DeploymentBiasAndFairnessSettings(dict):
     @staticmethod
     def __key_warning(key: str):
@@ -1953,8 +1974,12 @@ class DeploymentDriftTrackingSettings(dict):
         suggest = None
         if key == "featureDriftEnabled":
             suggest = "feature_drift_enabled"
+        elif key == "featureSelection":
+            suggest = "feature_selection"
         elif key == "targetDriftEnabled":
             suggest = "target_drift_enabled"
+        elif key == "trackedFeatures":
+            suggest = "tracked_features"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in DeploymentDriftTrackingSettings. Access the value via the '{suggest}' property getter instead.")
@@ -1969,15 +1994,23 @@ class DeploymentDriftTrackingSettings(dict):
 
     def __init__(__self__, *,
                  feature_drift_enabled: Optional[bool] = None,
-                 target_drift_enabled: Optional[bool] = None):
+                 feature_selection: Optional[str] = None,
+                 target_drift_enabled: Optional[bool] = None,
+                 tracked_features: Optional[Sequence[str]] = None):
         """
         :param bool feature_drift_enabled: If feature drift tracking is to be turned on.
+        :param str feature_selection: The feature selection method to be used for drift tracking.
         :param bool target_drift_enabled: If target drift tracking is to be turned on.
+        :param Sequence[str] tracked_features: List of features to be tracked for drift.
         """
         if feature_drift_enabled is not None:
             pulumi.set(__self__, "feature_drift_enabled", feature_drift_enabled)
+        if feature_selection is not None:
+            pulumi.set(__self__, "feature_selection", feature_selection)
         if target_drift_enabled is not None:
             pulumi.set(__self__, "target_drift_enabled", target_drift_enabled)
+        if tracked_features is not None:
+            pulumi.set(__self__, "tracked_features", tracked_features)
 
     @property
     @pulumi.getter(name="featureDriftEnabled")
@@ -1988,12 +2021,28 @@ class DeploymentDriftTrackingSettings(dict):
         return pulumi.get(self, "feature_drift_enabled")
 
     @property
+    @pulumi.getter(name="featureSelection")
+    def feature_selection(self) -> Optional[str]:
+        """
+        The feature selection method to be used for drift tracking.
+        """
+        return pulumi.get(self, "feature_selection")
+
+    @property
     @pulumi.getter(name="targetDriftEnabled")
     def target_drift_enabled(self) -> Optional[bool]:
         """
         If target drift tracking is to be turned on.
         """
         return pulumi.get(self, "target_drift_enabled")
+
+    @property
+    @pulumi.getter(name="trackedFeatures")
+    def tracked_features(self) -> Optional[Sequence[str]]:
+        """
+        List of features to be tracked for drift.
+        """
+        return pulumi.get(self, "tracked_features")
 
 
 @pulumi.output_type
@@ -3698,6 +3747,64 @@ class LlmBlueprintVectorDatabaseSettings(dict):
         The maximum number of tokens to retrieve from the Vector Database.
         """
         return pulumi.get(self, "max_tokens")
+
+
+@pulumi.output_type
+class NotificationChannelCustomHeader(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 value: str):
+        """
+        :param str name: The name of the header.
+        :param str value: The value of the header.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        The name of the header.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        The value of the header.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class NotificationChannelDrEntity(dict):
+    def __init__(__self__, *,
+                 id: str,
+                 name: str):
+        """
+        :param str id: The ID of the DataRobot entity.
+        :param str name: The name of the entity.
+        """
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def id(self) -> str:
+        """
+        The ID of the DataRobot entity.
+        """
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        The name of the entity.
+        """
+        return pulumi.get(self, "name")
 
 
 @pulumi.output_type

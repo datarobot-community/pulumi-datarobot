@@ -19,18 +19,32 @@ namespace DataRobotPulumi.Datarobot.Outputs
         /// </summary>
         public readonly bool? FeatureDriftEnabled;
         /// <summary>
+        /// The feature selection method to be used for drift tracking.
+        /// </summary>
+        public readonly string? FeatureSelection;
+        /// <summary>
         /// If target drift tracking is to be turned on.
         /// </summary>
         public readonly bool? TargetDriftEnabled;
+        /// <summary>
+        /// List of features to be tracked for drift.
+        /// </summary>
+        public readonly ImmutableArray<string> TrackedFeatures;
 
         [OutputConstructor]
         private DeploymentDriftTrackingSettings(
             bool? featureDriftEnabled,
 
-            bool? targetDriftEnabled)
+            string? featureSelection,
+
+            bool? targetDriftEnabled,
+
+            ImmutableArray<string> trackedFeatures)
         {
             FeatureDriftEnabled = featureDriftEnabled;
+            FeatureSelection = featureSelection;
             TargetDriftEnabled = targetDriftEnabled;
+            TrackedFeatures = trackedFeatures;
         }
     }
 }

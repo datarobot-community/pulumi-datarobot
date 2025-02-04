@@ -501,6 +501,13 @@ export interface DeploymentAssociationIdSettings {
     requiredInPredictionRequests?: boolean;
 }
 
+export interface DeploymentBatchMonitoringSettings {
+    /**
+     * If batch monitoring is enabled.
+     */
+    enabled: boolean;
+}
+
 export interface DeploymentBiasAndFairnessSettings {
     /**
      * A set of fairness metrics to use for calculating fairness.
@@ -540,9 +547,17 @@ export interface DeploymentDriftTrackingSettings {
      */
     featureDriftEnabled?: boolean;
     /**
+     * The feature selection method to be used for drift tracking.
+     */
+    featureSelection?: string;
+    /**
      * If target drift tracking is to be turned on.
      */
     targetDriftEnabled?: boolean;
+    /**
+     * List of features to be tracked for drift.
+     */
+    trackedFeatures?: string[];
 }
 
 export interface DeploymentHealthSettings {
@@ -985,6 +1000,28 @@ export interface LlmBlueprintVectorDatabaseSettings {
      * The maximum number of tokens to retrieve from the Vector Database.
      */
     maxTokens?: number;
+}
+
+export interface NotificationChannelCustomHeader {
+    /**
+     * The name of the header.
+     */
+    name: string;
+    /**
+     * The value of the header.
+     */
+    value: string;
+}
+
+export interface NotificationChannelDrEntity {
+    /**
+     * The ID of the DataRobot entity.
+     */
+    id: string;
+    /**
+     * The name of the entity.
+     */
+    name: string;
 }
 
 export interface VectorDatabaseChunkingParameters {
