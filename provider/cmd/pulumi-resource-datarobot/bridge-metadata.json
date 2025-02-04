@@ -224,6 +224,13 @@
                             }
                         }
                     },
+                    "drift_tracking_settings": {
+                        "fields": {
+                            "tracked_features": {
+                                "maxItemsOne": false
+                            }
+                        }
+                    },
                     "health_settings": {
                         "fields": {
                             "custom_metrics": {
@@ -318,6 +325,20 @@
             },
             "datarobot_llm_blueprint": {
                 "current": "datarobot:index/llmBlueprint:LlmBlueprint"
+            },
+            "datarobot_notification_channel": {
+                "current": "datarobot:index/notificationChannel:NotificationChannel",
+                "fields": {
+                    "custom_headers": {
+                        "maxItemsOne": false
+                    },
+                    "dr_entities": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "datarobot_notification_policy": {
+                "current": "datarobot:index/notificationPolicy:NotificationPolicy"
             },
             "datarobot_playground": {
                 "current": "datarobot:index/playground:Playground"
