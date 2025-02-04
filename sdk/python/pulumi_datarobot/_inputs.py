@@ -63,6 +63,8 @@ __all__ = [
     'DatasourceParamsArgsDict',
     'DeploymentAssociationIdSettingsArgs',
     'DeploymentAssociationIdSettingsArgsDict',
+    'DeploymentBatchMonitoringSettingsArgs',
+    'DeploymentBatchMonitoringSettingsArgsDict',
     'DeploymentBiasAndFairnessSettingsArgs',
     'DeploymentBiasAndFairnessSettingsArgsDict',
     'DeploymentChallengerModelsSettingsArgs',
@@ -123,6 +125,10 @@ __all__ = [
     'LlmBlueprintLlmSettingsArgsDict',
     'LlmBlueprintVectorDatabaseSettingsArgs',
     'LlmBlueprintVectorDatabaseSettingsArgsDict',
+    'NotificationChannelCustomHeaderArgs',
+    'NotificationChannelCustomHeaderArgsDict',
+    'NotificationChannelDrEntityArgs',
+    'NotificationChannelDrEntityArgsDict',
     'VectorDatabaseChunkingParametersArgs',
     'VectorDatabaseChunkingParametersArgsDict',
 ]
@@ -2500,6 +2506,37 @@ class DeploymentAssociationIdSettingsArgs:
 
 
 if not MYPY:
+    class DeploymentBatchMonitoringSettingsArgsDict(TypedDict):
+        enabled: pulumi.Input[bool]
+        """
+        If batch monitoring is enabled.
+        """
+elif False:
+    DeploymentBatchMonitoringSettingsArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class DeploymentBatchMonitoringSettingsArgs:
+    def __init__(__self__, *,
+                 enabled: pulumi.Input[bool]):
+        """
+        :param pulumi.Input[bool] enabled: If batch monitoring is enabled.
+        """
+        pulumi.set(__self__, "enabled", enabled)
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> pulumi.Input[bool]:
+        """
+        If batch monitoring is enabled.
+        """
+        return pulumi.get(self, "enabled")
+
+    @enabled.setter
+    def enabled(self, value: pulumi.Input[bool]):
+        pulumi.set(self, "enabled", value)
+
+
+if not MYPY:
     class DeploymentBiasAndFairnessSettingsArgsDict(TypedDict):
         fairness_metric_set: pulumi.Input[str]
         """
@@ -2655,9 +2692,17 @@ if not MYPY:
         """
         If feature drift tracking is to be turned on.
         """
+        feature_selection: NotRequired[pulumi.Input[str]]
+        """
+        The feature selection method to be used for drift tracking.
+        """
         target_drift_enabled: NotRequired[pulumi.Input[bool]]
         """
         If target drift tracking is to be turned on.
+        """
+        tracked_features: NotRequired[pulumi.Input[Sequence[pulumi.Input[str]]]]
+        """
+        List of features to be tracked for drift.
         """
 elif False:
     DeploymentDriftTrackingSettingsArgsDict: TypeAlias = Mapping[str, Any]
@@ -2666,15 +2711,23 @@ elif False:
 class DeploymentDriftTrackingSettingsArgs:
     def __init__(__self__, *,
                  feature_drift_enabled: Optional[pulumi.Input[bool]] = None,
-                 target_drift_enabled: Optional[pulumi.Input[bool]] = None):
+                 feature_selection: Optional[pulumi.Input[str]] = None,
+                 target_drift_enabled: Optional[pulumi.Input[bool]] = None,
+                 tracked_features: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         :param pulumi.Input[bool] feature_drift_enabled: If feature drift tracking is to be turned on.
+        :param pulumi.Input[str] feature_selection: The feature selection method to be used for drift tracking.
         :param pulumi.Input[bool] target_drift_enabled: If target drift tracking is to be turned on.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tracked_features: List of features to be tracked for drift.
         """
         if feature_drift_enabled is not None:
             pulumi.set(__self__, "feature_drift_enabled", feature_drift_enabled)
+        if feature_selection is not None:
+            pulumi.set(__self__, "feature_selection", feature_selection)
         if target_drift_enabled is not None:
             pulumi.set(__self__, "target_drift_enabled", target_drift_enabled)
+        if tracked_features is not None:
+            pulumi.set(__self__, "tracked_features", tracked_features)
 
     @property
     @pulumi.getter(name="featureDriftEnabled")
@@ -2689,6 +2742,18 @@ class DeploymentDriftTrackingSettingsArgs:
         pulumi.set(self, "feature_drift_enabled", value)
 
     @property
+    @pulumi.getter(name="featureSelection")
+    def feature_selection(self) -> Optional[pulumi.Input[str]]:
+        """
+        The feature selection method to be used for drift tracking.
+        """
+        return pulumi.get(self, "feature_selection")
+
+    @feature_selection.setter
+    def feature_selection(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "feature_selection", value)
+
+    @property
     @pulumi.getter(name="targetDriftEnabled")
     def target_drift_enabled(self) -> Optional[pulumi.Input[bool]]:
         """
@@ -2699,6 +2764,18 @@ class DeploymentDriftTrackingSettingsArgs:
     @target_drift_enabled.setter
     def target_drift_enabled(self, value: Optional[pulumi.Input[bool]]):
         pulumi.set(self, "target_drift_enabled", value)
+
+    @property
+    @pulumi.getter(name="trackedFeatures")
+    def tracked_features(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        List of features to be tracked for drift.
+        """
+        return pulumi.get(self, "tracked_features")
+
+    @tracked_features.setter
+    def tracked_features(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "tracked_features", value)
 
 
 if not MYPY:
@@ -4807,6 +4884,106 @@ class LlmBlueprintVectorDatabaseSettingsArgs:
     @max_tokens.setter
     def max_tokens(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "max_tokens", value)
+
+
+if not MYPY:
+    class NotificationChannelCustomHeaderArgsDict(TypedDict):
+        name: pulumi.Input[str]
+        """
+        The name of the header.
+        """
+        value: pulumi.Input[str]
+        """
+        The value of the header.
+        """
+elif False:
+    NotificationChannelCustomHeaderArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class NotificationChannelCustomHeaderArgs:
+    def __init__(__self__, *,
+                 name: pulumi.Input[str],
+                 value: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] name: The name of the header.
+        :param pulumi.Input[str] value: The value of the header.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> pulumi.Input[str]:
+        """
+        The name of the header.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> pulumi.Input[str]:
+        """
+        The value of the header.
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: pulumi.Input[str]):
+        pulumi.set(self, "value", value)
+
+
+if not MYPY:
+    class NotificationChannelDrEntityArgsDict(TypedDict):
+        id: pulumi.Input[str]
+        """
+        The ID of the DataRobot entity.
+        """
+        name: pulumi.Input[str]
+        """
+        The name of the entity.
+        """
+elif False:
+    NotificationChannelDrEntityArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class NotificationChannelDrEntityArgs:
+    def __init__(__self__, *,
+                 id: pulumi.Input[str],
+                 name: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] id: The ID of the DataRobot entity.
+        :param pulumi.Input[str] name: The name of the entity.
+        """
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def id(self) -> pulumi.Input[str]:
+        """
+        The ID of the DataRobot entity.
+        """
+        return pulumi.get(self, "id")
+
+    @id.setter
+    def id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "id", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> pulumi.Input[str]:
+        """
+        The name of the entity.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "name", value)
 
 
 if not MYPY:

@@ -120,6 +120,16 @@ export type LlmBlueprint = import("./llmBlueprint").LlmBlueprint;
 export const LlmBlueprint: typeof import("./llmBlueprint").LlmBlueprint = null as any;
 utilities.lazyLoad(exports, ["LlmBlueprint"], () => require("./llmBlueprint"));
 
+export { NotificationChannelArgs, NotificationChannelState } from "./notificationChannel";
+export type NotificationChannel = import("./notificationChannel").NotificationChannel;
+export const NotificationChannel: typeof import("./notificationChannel").NotificationChannel = null as any;
+utilities.lazyLoad(exports, ["NotificationChannel"], () => require("./notificationChannel"));
+
+export { NotificationPolicyArgs, NotificationPolicyState } from "./notificationPolicy";
+export type NotificationPolicy = import("./notificationPolicy").NotificationPolicy;
+export const NotificationPolicy: typeof import("./notificationPolicy").NotificationPolicy = null as any;
+utilities.lazyLoad(exports, ["NotificationPolicy"], () => require("./notificationPolicy"));
+
 export { PlaygroundArgs, PlaygroundState } from "./playground";
 export type Playground = import("./playground").Playground;
 export const Playground: typeof import("./playground").Playground = null as any;
@@ -221,6 +231,10 @@ const _module = {
                 return new GoogleCloudCredential(name, <any>undefined, { urn })
             case "datarobot:index/llmBlueprint:LlmBlueprint":
                 return new LlmBlueprint(name, <any>undefined, { urn })
+            case "datarobot:index/notificationChannel:NotificationChannel":
+                return new NotificationChannel(name, <any>undefined, { urn })
+            case "datarobot:index/notificationPolicy:NotificationPolicy":
+                return new NotificationPolicy(name, <any>undefined, { urn })
             case "datarobot:index/playground:Playground":
                 return new Playground(name, <any>undefined, { urn })
             case "datarobot:index/predictionEnvironment:PredictionEnvironment":
@@ -263,6 +277,8 @@ pulumi.runtime.registerResourceModule("datarobot", "index/deploymentRetrainingPo
 pulumi.runtime.registerResourceModule("datarobot", "index/executionEnvironment", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/googleCloudCredential", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/llmBlueprint", _module)
+pulumi.runtime.registerResourceModule("datarobot", "index/notificationChannel", _module)
+pulumi.runtime.registerResourceModule("datarobot", "index/notificationPolicy", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/playground", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/predictionEnvironment", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/qaApplication", _module)

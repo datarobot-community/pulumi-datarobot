@@ -4246,6 +4246,143 @@ func (o DeploymentAssociationIdSettingsPtrOutput) RequiredInPredictionRequests()
 	}).(pulumi.BoolPtrOutput)
 }
 
+type DeploymentBatchMonitoringSettings struct {
+	// If batch monitoring is enabled.
+	Enabled bool `pulumi:"enabled"`
+}
+
+// DeploymentBatchMonitoringSettingsInput is an input type that accepts DeploymentBatchMonitoringSettingsArgs and DeploymentBatchMonitoringSettingsOutput values.
+// You can construct a concrete instance of `DeploymentBatchMonitoringSettingsInput` via:
+//
+//	DeploymentBatchMonitoringSettingsArgs{...}
+type DeploymentBatchMonitoringSettingsInput interface {
+	pulumi.Input
+
+	ToDeploymentBatchMonitoringSettingsOutput() DeploymentBatchMonitoringSettingsOutput
+	ToDeploymentBatchMonitoringSettingsOutputWithContext(context.Context) DeploymentBatchMonitoringSettingsOutput
+}
+
+type DeploymentBatchMonitoringSettingsArgs struct {
+	// If batch monitoring is enabled.
+	Enabled pulumi.BoolInput `pulumi:"enabled"`
+}
+
+func (DeploymentBatchMonitoringSettingsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentBatchMonitoringSettings)(nil)).Elem()
+}
+
+func (i DeploymentBatchMonitoringSettingsArgs) ToDeploymentBatchMonitoringSettingsOutput() DeploymentBatchMonitoringSettingsOutput {
+	return i.ToDeploymentBatchMonitoringSettingsOutputWithContext(context.Background())
+}
+
+func (i DeploymentBatchMonitoringSettingsArgs) ToDeploymentBatchMonitoringSettingsOutputWithContext(ctx context.Context) DeploymentBatchMonitoringSettingsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentBatchMonitoringSettingsOutput)
+}
+
+func (i DeploymentBatchMonitoringSettingsArgs) ToDeploymentBatchMonitoringSettingsPtrOutput() DeploymentBatchMonitoringSettingsPtrOutput {
+	return i.ToDeploymentBatchMonitoringSettingsPtrOutputWithContext(context.Background())
+}
+
+func (i DeploymentBatchMonitoringSettingsArgs) ToDeploymentBatchMonitoringSettingsPtrOutputWithContext(ctx context.Context) DeploymentBatchMonitoringSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentBatchMonitoringSettingsOutput).ToDeploymentBatchMonitoringSettingsPtrOutputWithContext(ctx)
+}
+
+// DeploymentBatchMonitoringSettingsPtrInput is an input type that accepts DeploymentBatchMonitoringSettingsArgs, DeploymentBatchMonitoringSettingsPtr and DeploymentBatchMonitoringSettingsPtrOutput values.
+// You can construct a concrete instance of `DeploymentBatchMonitoringSettingsPtrInput` via:
+//
+//	        DeploymentBatchMonitoringSettingsArgs{...}
+//
+//	or:
+//
+//	        nil
+type DeploymentBatchMonitoringSettingsPtrInput interface {
+	pulumi.Input
+
+	ToDeploymentBatchMonitoringSettingsPtrOutput() DeploymentBatchMonitoringSettingsPtrOutput
+	ToDeploymentBatchMonitoringSettingsPtrOutputWithContext(context.Context) DeploymentBatchMonitoringSettingsPtrOutput
+}
+
+type deploymentBatchMonitoringSettingsPtrType DeploymentBatchMonitoringSettingsArgs
+
+func DeploymentBatchMonitoringSettingsPtr(v *DeploymentBatchMonitoringSettingsArgs) DeploymentBatchMonitoringSettingsPtrInput {
+	return (*deploymentBatchMonitoringSettingsPtrType)(v)
+}
+
+func (*deploymentBatchMonitoringSettingsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentBatchMonitoringSettings)(nil)).Elem()
+}
+
+func (i *deploymentBatchMonitoringSettingsPtrType) ToDeploymentBatchMonitoringSettingsPtrOutput() DeploymentBatchMonitoringSettingsPtrOutput {
+	return i.ToDeploymentBatchMonitoringSettingsPtrOutputWithContext(context.Background())
+}
+
+func (i *deploymentBatchMonitoringSettingsPtrType) ToDeploymentBatchMonitoringSettingsPtrOutputWithContext(ctx context.Context) DeploymentBatchMonitoringSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentBatchMonitoringSettingsPtrOutput)
+}
+
+type DeploymentBatchMonitoringSettingsOutput struct{ *pulumi.OutputState }
+
+func (DeploymentBatchMonitoringSettingsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentBatchMonitoringSettings)(nil)).Elem()
+}
+
+func (o DeploymentBatchMonitoringSettingsOutput) ToDeploymentBatchMonitoringSettingsOutput() DeploymentBatchMonitoringSettingsOutput {
+	return o
+}
+
+func (o DeploymentBatchMonitoringSettingsOutput) ToDeploymentBatchMonitoringSettingsOutputWithContext(ctx context.Context) DeploymentBatchMonitoringSettingsOutput {
+	return o
+}
+
+func (o DeploymentBatchMonitoringSettingsOutput) ToDeploymentBatchMonitoringSettingsPtrOutput() DeploymentBatchMonitoringSettingsPtrOutput {
+	return o.ToDeploymentBatchMonitoringSettingsPtrOutputWithContext(context.Background())
+}
+
+func (o DeploymentBatchMonitoringSettingsOutput) ToDeploymentBatchMonitoringSettingsPtrOutputWithContext(ctx context.Context) DeploymentBatchMonitoringSettingsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DeploymentBatchMonitoringSettings) *DeploymentBatchMonitoringSettings {
+		return &v
+	}).(DeploymentBatchMonitoringSettingsPtrOutput)
+}
+
+// If batch monitoring is enabled.
+func (o DeploymentBatchMonitoringSettingsOutput) Enabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v DeploymentBatchMonitoringSettings) bool { return v.Enabled }).(pulumi.BoolOutput)
+}
+
+type DeploymentBatchMonitoringSettingsPtrOutput struct{ *pulumi.OutputState }
+
+func (DeploymentBatchMonitoringSettingsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentBatchMonitoringSettings)(nil)).Elem()
+}
+
+func (o DeploymentBatchMonitoringSettingsPtrOutput) ToDeploymentBatchMonitoringSettingsPtrOutput() DeploymentBatchMonitoringSettingsPtrOutput {
+	return o
+}
+
+func (o DeploymentBatchMonitoringSettingsPtrOutput) ToDeploymentBatchMonitoringSettingsPtrOutputWithContext(ctx context.Context) DeploymentBatchMonitoringSettingsPtrOutput {
+	return o
+}
+
+func (o DeploymentBatchMonitoringSettingsPtrOutput) Elem() DeploymentBatchMonitoringSettingsOutput {
+	return o.ApplyT(func(v *DeploymentBatchMonitoringSettings) DeploymentBatchMonitoringSettings {
+		if v != nil {
+			return *v
+		}
+		var ret DeploymentBatchMonitoringSettings
+		return ret
+	}).(DeploymentBatchMonitoringSettingsOutput)
+}
+
+// If batch monitoring is enabled.
+func (o DeploymentBatchMonitoringSettingsPtrOutput) Enabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *DeploymentBatchMonitoringSettings) *bool {
+		if v == nil {
+			return nil
+		}
+		return &v.Enabled
+	}).(pulumi.BoolPtrOutput)
+}
+
 type DeploymentBiasAndFairnessSettings struct {
 	// A set of fairness metrics to use for calculating fairness.
 	FairnessMetricSet string `pulumi:"fairnessMetricSet"`
@@ -4717,8 +4854,12 @@ func (o DeploymentChallengerReplaySettingsPtrOutput) Enabled() pulumi.BoolPtrOut
 type DeploymentDriftTrackingSettings struct {
 	// If feature drift tracking is to be turned on.
 	FeatureDriftEnabled *bool `pulumi:"featureDriftEnabled"`
+	// The feature selection method to be used for drift tracking.
+	FeatureSelection *string `pulumi:"featureSelection"`
 	// If target drift tracking is to be turned on.
 	TargetDriftEnabled *bool `pulumi:"targetDriftEnabled"`
+	// List of features to be tracked for drift.
+	TrackedFeatures []string `pulumi:"trackedFeatures"`
 }
 
 // DeploymentDriftTrackingSettingsInput is an input type that accepts DeploymentDriftTrackingSettingsArgs and DeploymentDriftTrackingSettingsOutput values.
@@ -4735,8 +4876,12 @@ type DeploymentDriftTrackingSettingsInput interface {
 type DeploymentDriftTrackingSettingsArgs struct {
 	// If feature drift tracking is to be turned on.
 	FeatureDriftEnabled pulumi.BoolPtrInput `pulumi:"featureDriftEnabled"`
+	// The feature selection method to be used for drift tracking.
+	FeatureSelection pulumi.StringPtrInput `pulumi:"featureSelection"`
 	// If target drift tracking is to be turned on.
 	TargetDriftEnabled pulumi.BoolPtrInput `pulumi:"targetDriftEnabled"`
+	// List of features to be tracked for drift.
+	TrackedFeatures pulumi.StringArrayInput `pulumi:"trackedFeatures"`
 }
 
 func (DeploymentDriftTrackingSettingsArgs) ElementType() reflect.Type {
@@ -4821,9 +4966,19 @@ func (o DeploymentDriftTrackingSettingsOutput) FeatureDriftEnabled() pulumi.Bool
 	return o.ApplyT(func(v DeploymentDriftTrackingSettings) *bool { return v.FeatureDriftEnabled }).(pulumi.BoolPtrOutput)
 }
 
+// The feature selection method to be used for drift tracking.
+func (o DeploymentDriftTrackingSettingsOutput) FeatureSelection() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DeploymentDriftTrackingSettings) *string { return v.FeatureSelection }).(pulumi.StringPtrOutput)
+}
+
 // If target drift tracking is to be turned on.
 func (o DeploymentDriftTrackingSettingsOutput) TargetDriftEnabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v DeploymentDriftTrackingSettings) *bool { return v.TargetDriftEnabled }).(pulumi.BoolPtrOutput)
+}
+
+// List of features to be tracked for drift.
+func (o DeploymentDriftTrackingSettingsOutput) TrackedFeatures() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v DeploymentDriftTrackingSettings) []string { return v.TrackedFeatures }).(pulumi.StringArrayOutput)
 }
 
 type DeploymentDriftTrackingSettingsPtrOutput struct{ *pulumi.OutputState }
@@ -4860,6 +5015,16 @@ func (o DeploymentDriftTrackingSettingsPtrOutput) FeatureDriftEnabled() pulumi.B
 	}).(pulumi.BoolPtrOutput)
 }
 
+// The feature selection method to be used for drift tracking.
+func (o DeploymentDriftTrackingSettingsPtrOutput) FeatureSelection() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DeploymentDriftTrackingSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.FeatureSelection
+	}).(pulumi.StringPtrOutput)
+}
+
 // If target drift tracking is to be turned on.
 func (o DeploymentDriftTrackingSettingsPtrOutput) TargetDriftEnabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *DeploymentDriftTrackingSettings) *bool {
@@ -4868,6 +5033,16 @@ func (o DeploymentDriftTrackingSettingsPtrOutput) TargetDriftEnabled() pulumi.Bo
 		}
 		return v.TargetDriftEnabled
 	}).(pulumi.BoolPtrOutput)
+}
+
+// List of features to be tracked for drift.
+func (o DeploymentDriftTrackingSettingsPtrOutput) TrackedFeatures() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *DeploymentDriftTrackingSettings) []string {
+		if v == nil {
+			return nil
+		}
+		return v.TrackedFeatures
+	}).(pulumi.StringArrayOutput)
 }
 
 type DeploymentHealthSettings struct {
@@ -9453,6 +9628,218 @@ func (o LlmBlueprintVectorDatabaseSettingsPtrOutput) MaxTokens() pulumi.IntPtrOu
 	}).(pulumi.IntPtrOutput)
 }
 
+type NotificationChannelCustomHeader struct {
+	// The name of the header.
+	Name string `pulumi:"name"`
+	// The value of the header.
+	Value string `pulumi:"value"`
+}
+
+// NotificationChannelCustomHeaderInput is an input type that accepts NotificationChannelCustomHeaderArgs and NotificationChannelCustomHeaderOutput values.
+// You can construct a concrete instance of `NotificationChannelCustomHeaderInput` via:
+//
+//	NotificationChannelCustomHeaderArgs{...}
+type NotificationChannelCustomHeaderInput interface {
+	pulumi.Input
+
+	ToNotificationChannelCustomHeaderOutput() NotificationChannelCustomHeaderOutput
+	ToNotificationChannelCustomHeaderOutputWithContext(context.Context) NotificationChannelCustomHeaderOutput
+}
+
+type NotificationChannelCustomHeaderArgs struct {
+	// The name of the header.
+	Name pulumi.StringInput `pulumi:"name"`
+	// The value of the header.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (NotificationChannelCustomHeaderArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NotificationChannelCustomHeader)(nil)).Elem()
+}
+
+func (i NotificationChannelCustomHeaderArgs) ToNotificationChannelCustomHeaderOutput() NotificationChannelCustomHeaderOutput {
+	return i.ToNotificationChannelCustomHeaderOutputWithContext(context.Background())
+}
+
+func (i NotificationChannelCustomHeaderArgs) ToNotificationChannelCustomHeaderOutputWithContext(ctx context.Context) NotificationChannelCustomHeaderOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NotificationChannelCustomHeaderOutput)
+}
+
+// NotificationChannelCustomHeaderArrayInput is an input type that accepts NotificationChannelCustomHeaderArray and NotificationChannelCustomHeaderArrayOutput values.
+// You can construct a concrete instance of `NotificationChannelCustomHeaderArrayInput` via:
+//
+//	NotificationChannelCustomHeaderArray{ NotificationChannelCustomHeaderArgs{...} }
+type NotificationChannelCustomHeaderArrayInput interface {
+	pulumi.Input
+
+	ToNotificationChannelCustomHeaderArrayOutput() NotificationChannelCustomHeaderArrayOutput
+	ToNotificationChannelCustomHeaderArrayOutputWithContext(context.Context) NotificationChannelCustomHeaderArrayOutput
+}
+
+type NotificationChannelCustomHeaderArray []NotificationChannelCustomHeaderInput
+
+func (NotificationChannelCustomHeaderArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]NotificationChannelCustomHeader)(nil)).Elem()
+}
+
+func (i NotificationChannelCustomHeaderArray) ToNotificationChannelCustomHeaderArrayOutput() NotificationChannelCustomHeaderArrayOutput {
+	return i.ToNotificationChannelCustomHeaderArrayOutputWithContext(context.Background())
+}
+
+func (i NotificationChannelCustomHeaderArray) ToNotificationChannelCustomHeaderArrayOutputWithContext(ctx context.Context) NotificationChannelCustomHeaderArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NotificationChannelCustomHeaderArrayOutput)
+}
+
+type NotificationChannelCustomHeaderOutput struct{ *pulumi.OutputState }
+
+func (NotificationChannelCustomHeaderOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NotificationChannelCustomHeader)(nil)).Elem()
+}
+
+func (o NotificationChannelCustomHeaderOutput) ToNotificationChannelCustomHeaderOutput() NotificationChannelCustomHeaderOutput {
+	return o
+}
+
+func (o NotificationChannelCustomHeaderOutput) ToNotificationChannelCustomHeaderOutputWithContext(ctx context.Context) NotificationChannelCustomHeaderOutput {
+	return o
+}
+
+// The name of the header.
+func (o NotificationChannelCustomHeaderOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v NotificationChannelCustomHeader) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// The value of the header.
+func (o NotificationChannelCustomHeaderOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v NotificationChannelCustomHeader) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type NotificationChannelCustomHeaderArrayOutput struct{ *pulumi.OutputState }
+
+func (NotificationChannelCustomHeaderArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]NotificationChannelCustomHeader)(nil)).Elem()
+}
+
+func (o NotificationChannelCustomHeaderArrayOutput) ToNotificationChannelCustomHeaderArrayOutput() NotificationChannelCustomHeaderArrayOutput {
+	return o
+}
+
+func (o NotificationChannelCustomHeaderArrayOutput) ToNotificationChannelCustomHeaderArrayOutputWithContext(ctx context.Context) NotificationChannelCustomHeaderArrayOutput {
+	return o
+}
+
+func (o NotificationChannelCustomHeaderArrayOutput) Index(i pulumi.IntInput) NotificationChannelCustomHeaderOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) NotificationChannelCustomHeader {
+		return vs[0].([]NotificationChannelCustomHeader)[vs[1].(int)]
+	}).(NotificationChannelCustomHeaderOutput)
+}
+
+type NotificationChannelDrEntity struct {
+	// The ID of the DataRobot entity.
+	Id string `pulumi:"id"`
+	// The name of the entity.
+	Name string `pulumi:"name"`
+}
+
+// NotificationChannelDrEntityInput is an input type that accepts NotificationChannelDrEntityArgs and NotificationChannelDrEntityOutput values.
+// You can construct a concrete instance of `NotificationChannelDrEntityInput` via:
+//
+//	NotificationChannelDrEntityArgs{...}
+type NotificationChannelDrEntityInput interface {
+	pulumi.Input
+
+	ToNotificationChannelDrEntityOutput() NotificationChannelDrEntityOutput
+	ToNotificationChannelDrEntityOutputWithContext(context.Context) NotificationChannelDrEntityOutput
+}
+
+type NotificationChannelDrEntityArgs struct {
+	// The ID of the DataRobot entity.
+	Id pulumi.StringInput `pulumi:"id"`
+	// The name of the entity.
+	Name pulumi.StringInput `pulumi:"name"`
+}
+
+func (NotificationChannelDrEntityArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NotificationChannelDrEntity)(nil)).Elem()
+}
+
+func (i NotificationChannelDrEntityArgs) ToNotificationChannelDrEntityOutput() NotificationChannelDrEntityOutput {
+	return i.ToNotificationChannelDrEntityOutputWithContext(context.Background())
+}
+
+func (i NotificationChannelDrEntityArgs) ToNotificationChannelDrEntityOutputWithContext(ctx context.Context) NotificationChannelDrEntityOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NotificationChannelDrEntityOutput)
+}
+
+// NotificationChannelDrEntityArrayInput is an input type that accepts NotificationChannelDrEntityArray and NotificationChannelDrEntityArrayOutput values.
+// You can construct a concrete instance of `NotificationChannelDrEntityArrayInput` via:
+//
+//	NotificationChannelDrEntityArray{ NotificationChannelDrEntityArgs{...} }
+type NotificationChannelDrEntityArrayInput interface {
+	pulumi.Input
+
+	ToNotificationChannelDrEntityArrayOutput() NotificationChannelDrEntityArrayOutput
+	ToNotificationChannelDrEntityArrayOutputWithContext(context.Context) NotificationChannelDrEntityArrayOutput
+}
+
+type NotificationChannelDrEntityArray []NotificationChannelDrEntityInput
+
+func (NotificationChannelDrEntityArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]NotificationChannelDrEntity)(nil)).Elem()
+}
+
+func (i NotificationChannelDrEntityArray) ToNotificationChannelDrEntityArrayOutput() NotificationChannelDrEntityArrayOutput {
+	return i.ToNotificationChannelDrEntityArrayOutputWithContext(context.Background())
+}
+
+func (i NotificationChannelDrEntityArray) ToNotificationChannelDrEntityArrayOutputWithContext(ctx context.Context) NotificationChannelDrEntityArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NotificationChannelDrEntityArrayOutput)
+}
+
+type NotificationChannelDrEntityOutput struct{ *pulumi.OutputState }
+
+func (NotificationChannelDrEntityOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NotificationChannelDrEntity)(nil)).Elem()
+}
+
+func (o NotificationChannelDrEntityOutput) ToNotificationChannelDrEntityOutput() NotificationChannelDrEntityOutput {
+	return o
+}
+
+func (o NotificationChannelDrEntityOutput) ToNotificationChannelDrEntityOutputWithContext(ctx context.Context) NotificationChannelDrEntityOutput {
+	return o
+}
+
+// The ID of the DataRobot entity.
+func (o NotificationChannelDrEntityOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v NotificationChannelDrEntity) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// The name of the entity.
+func (o NotificationChannelDrEntityOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v NotificationChannelDrEntity) string { return v.Name }).(pulumi.StringOutput)
+}
+
+type NotificationChannelDrEntityArrayOutput struct{ *pulumi.OutputState }
+
+func (NotificationChannelDrEntityArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]NotificationChannelDrEntity)(nil)).Elem()
+}
+
+func (o NotificationChannelDrEntityArrayOutput) ToNotificationChannelDrEntityArrayOutput() NotificationChannelDrEntityArrayOutput {
+	return o
+}
+
+func (o NotificationChannelDrEntityArrayOutput) ToNotificationChannelDrEntityArrayOutputWithContext(ctx context.Context) NotificationChannelDrEntityArrayOutput {
+	return o
+}
+
+func (o NotificationChannelDrEntityArrayOutput) Index(i pulumi.IntInput) NotificationChannelDrEntityOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) NotificationChannelDrEntity {
+		return vs[0].([]NotificationChannelDrEntity)[vs[1].(int)]
+	}).(NotificationChannelDrEntityOutput)
+}
+
 type VectorDatabaseChunkingParameters struct {
 	// The percentage of overlap between chunks.
 	ChunkOverlapPercentage *int `pulumi:"chunkOverlapPercentage"`
@@ -9733,6 +10120,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*DatasourceParamsPtrInput)(nil)).Elem(), DatasourceParamsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentAssociationIdSettingsInput)(nil)).Elem(), DeploymentAssociationIdSettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentAssociationIdSettingsPtrInput)(nil)).Elem(), DeploymentAssociationIdSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentBatchMonitoringSettingsInput)(nil)).Elem(), DeploymentBatchMonitoringSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentBatchMonitoringSettingsPtrInput)(nil)).Elem(), DeploymentBatchMonitoringSettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentBiasAndFairnessSettingsInput)(nil)).Elem(), DeploymentBiasAndFairnessSettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentBiasAndFairnessSettingsPtrInput)(nil)).Elem(), DeploymentBiasAndFairnessSettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentChallengerModelsSettingsInput)(nil)).Elem(), DeploymentChallengerModelsSettingsArgs{})
@@ -9793,6 +10182,10 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*LlmBlueprintLlmSettingsPtrInput)(nil)).Elem(), LlmBlueprintLlmSettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*LlmBlueprintVectorDatabaseSettingsInput)(nil)).Elem(), LlmBlueprintVectorDatabaseSettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*LlmBlueprintVectorDatabaseSettingsPtrInput)(nil)).Elem(), LlmBlueprintVectorDatabaseSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NotificationChannelCustomHeaderInput)(nil)).Elem(), NotificationChannelCustomHeaderArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NotificationChannelCustomHeaderArrayInput)(nil)).Elem(), NotificationChannelCustomHeaderArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NotificationChannelDrEntityInput)(nil)).Elem(), NotificationChannelDrEntityArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NotificationChannelDrEntityArrayInput)(nil)).Elem(), NotificationChannelDrEntityArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*VectorDatabaseChunkingParametersInput)(nil)).Elem(), VectorDatabaseChunkingParametersArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*VectorDatabaseChunkingParametersPtrInput)(nil)).Elem(), VectorDatabaseChunkingParametersArgs{})
 	pulumi.RegisterOutputType(ApplicationSourceResourcesOutput{})
@@ -9842,6 +10235,8 @@ func init() {
 	pulumi.RegisterOutputType(DatasourceParamsPtrOutput{})
 	pulumi.RegisterOutputType(DeploymentAssociationIdSettingsOutput{})
 	pulumi.RegisterOutputType(DeploymentAssociationIdSettingsPtrOutput{})
+	pulumi.RegisterOutputType(DeploymentBatchMonitoringSettingsOutput{})
+	pulumi.RegisterOutputType(DeploymentBatchMonitoringSettingsPtrOutput{})
 	pulumi.RegisterOutputType(DeploymentBiasAndFairnessSettingsOutput{})
 	pulumi.RegisterOutputType(DeploymentBiasAndFairnessSettingsPtrOutput{})
 	pulumi.RegisterOutputType(DeploymentChallengerModelsSettingsOutput{})
@@ -9902,6 +10297,10 @@ func init() {
 	pulumi.RegisterOutputType(LlmBlueprintLlmSettingsPtrOutput{})
 	pulumi.RegisterOutputType(LlmBlueprintVectorDatabaseSettingsOutput{})
 	pulumi.RegisterOutputType(LlmBlueprintVectorDatabaseSettingsPtrOutput{})
+	pulumi.RegisterOutputType(NotificationChannelCustomHeaderOutput{})
+	pulumi.RegisterOutputType(NotificationChannelCustomHeaderArrayOutput{})
+	pulumi.RegisterOutputType(NotificationChannelDrEntityOutput{})
+	pulumi.RegisterOutputType(NotificationChannelDrEntityArrayOutput{})
 	pulumi.RegisterOutputType(VectorDatabaseChunkingParametersOutput{})
 	pulumi.RegisterOutputType(VectorDatabaseChunkingParametersPtrOutput{})
 }

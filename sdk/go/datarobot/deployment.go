@@ -92,6 +92,8 @@ type Deployment struct {
 
 	// Association ID settings for this Deployment.
 	AssociationIdSettings DeploymentAssociationIdSettingsPtrOutput `pulumi:"associationIdSettings"`
+	// The batch monitoring settings for the Deployment.
+	BatchMonitoringSettings DeploymentBatchMonitoringSettingsPtrOutput `pulumi:"batchMonitoringSettings"`
 	// Bias and fairness settings for the Deployment.
 	BiasAndFairnessSettings DeploymentBiasAndFairnessSettingsPtrOutput `pulumi:"biasAndFairnessSettings"`
 	// The challenger models settings for the Deployment.
@@ -169,6 +171,8 @@ func GetDeployment(ctx *pulumi.Context,
 type deploymentState struct {
 	// Association ID settings for this Deployment.
 	AssociationIdSettings *DeploymentAssociationIdSettings `pulumi:"associationIdSettings"`
+	// The batch monitoring settings for the Deployment.
+	BatchMonitoringSettings *DeploymentBatchMonitoringSettings `pulumi:"batchMonitoringSettings"`
 	// Bias and fairness settings for the Deployment.
 	BiasAndFairnessSettings *DeploymentBiasAndFairnessSettings `pulumi:"biasAndFairnessSettings"`
 	// The challenger models settings for the Deployment.
@@ -208,6 +212,8 @@ type deploymentState struct {
 type DeploymentState struct {
 	// Association ID settings for this Deployment.
 	AssociationIdSettings DeploymentAssociationIdSettingsPtrInput
+	// The batch monitoring settings for the Deployment.
+	BatchMonitoringSettings DeploymentBatchMonitoringSettingsPtrInput
 	// Bias and fairness settings for the Deployment.
 	BiasAndFairnessSettings DeploymentBiasAndFairnessSettingsPtrInput
 	// The challenger models settings for the Deployment.
@@ -251,6 +257,8 @@ func (DeploymentState) ElementType() reflect.Type {
 type deploymentArgs struct {
 	// Association ID settings for this Deployment.
 	AssociationIdSettings *DeploymentAssociationIdSettings `pulumi:"associationIdSettings"`
+	// The batch monitoring settings for the Deployment.
+	BatchMonitoringSettings *DeploymentBatchMonitoringSettings `pulumi:"batchMonitoringSettings"`
 	// Bias and fairness settings for the Deployment.
 	BiasAndFairnessSettings *DeploymentBiasAndFairnessSettings `pulumi:"biasAndFairnessSettings"`
 	// The challenger models settings for the Deployment.
@@ -291,6 +299,8 @@ type deploymentArgs struct {
 type DeploymentArgs struct {
 	// Association ID settings for this Deployment.
 	AssociationIdSettings DeploymentAssociationIdSettingsPtrInput
+	// The batch monitoring settings for the Deployment.
+	BatchMonitoringSettings DeploymentBatchMonitoringSettingsPtrInput
 	// Bias and fairness settings for the Deployment.
 	BiasAndFairnessSettings DeploymentBiasAndFairnessSettingsPtrInput
 	// The challenger models settings for the Deployment.
@@ -417,6 +427,11 @@ func (o DeploymentOutput) ToDeploymentOutputWithContext(ctx context.Context) Dep
 // Association ID settings for this Deployment.
 func (o DeploymentOutput) AssociationIdSettings() DeploymentAssociationIdSettingsPtrOutput {
 	return o.ApplyT(func(v *Deployment) DeploymentAssociationIdSettingsPtrOutput { return v.AssociationIdSettings }).(DeploymentAssociationIdSettingsPtrOutput)
+}
+
+// The batch monitoring settings for the Deployment.
+func (o DeploymentOutput) BatchMonitoringSettings() DeploymentBatchMonitoringSettingsPtrOutput {
+	return o.ApplyT(func(v *Deployment) DeploymentBatchMonitoringSettingsPtrOutput { return v.BatchMonitoringSettings }).(DeploymentBatchMonitoringSettingsPtrOutput)
 }
 
 // Bias and fairness settings for the Deployment.

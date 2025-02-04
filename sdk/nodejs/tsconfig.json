@@ -39,6 +39,8 @@
         "googleCloudCredential.ts",
         "index.ts",
         "llmBlueprint.ts",
+        "notificationChannel.ts",
+        "notificationPolicy.ts",
         "playground.ts",
         "predictionEnvironment.ts",
         "provider.ts",

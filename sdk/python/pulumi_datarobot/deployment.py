@@ -25,6 +25,7 @@ class DeploymentArgs:
                  prediction_environment_id: pulumi.Input[str],
                  registered_model_version_id: pulumi.Input[str],
                  association_id_settings: Optional[pulumi.Input['DeploymentAssociationIdSettingsArgs']] = None,
+                 batch_monitoring_settings: Optional[pulumi.Input['DeploymentBatchMonitoringSettingsArgs']] = None,
                  bias_and_fairness_settings: Optional[pulumi.Input['DeploymentBiasAndFairnessSettingsArgs']] = None,
                  challenger_models_settings: Optional[pulumi.Input['DeploymentChallengerModelsSettingsArgs']] = None,
                  challenger_replay_settings: Optional[pulumi.Input['DeploymentChallengerReplaySettingsArgs']] = None,
@@ -45,6 +46,7 @@ class DeploymentArgs:
         :param pulumi.Input[str] prediction_environment_id: The ID of the predication environment for this Deployment.
         :param pulumi.Input[str] registered_model_version_id: The ID of the registered model version for this Deployment.
         :param pulumi.Input['DeploymentAssociationIdSettingsArgs'] association_id_settings: Association ID settings for this Deployment.
+        :param pulumi.Input['DeploymentBatchMonitoringSettingsArgs'] batch_monitoring_settings: The batch monitoring settings for the Deployment.
         :param pulumi.Input['DeploymentBiasAndFairnessSettingsArgs'] bias_and_fairness_settings: Bias and fairness settings for the Deployment.
         :param pulumi.Input['DeploymentChallengerModelsSettingsArgs'] challenger_models_settings: The challenger models settings for the Deployment.
         :param pulumi.Input['DeploymentChallengerReplaySettingsArgs'] challenger_replay_settings: The challenger replay settings for the Deployment.
@@ -65,6 +67,8 @@ class DeploymentArgs:
         pulumi.set(__self__, "registered_model_version_id", registered_model_version_id)
         if association_id_settings is not None:
             pulumi.set(__self__, "association_id_settings", association_id_settings)
+        if batch_monitoring_settings is not None:
+            pulumi.set(__self__, "batch_monitoring_settings", batch_monitoring_settings)
         if bias_and_fairness_settings is not None:
             pulumi.set(__self__, "bias_and_fairness_settings", bias_and_fairness_settings)
         if challenger_models_settings is not None:
@@ -141,6 +145,18 @@ class DeploymentArgs:
     @association_id_settings.setter
     def association_id_settings(self, value: Optional[pulumi.Input['DeploymentAssociationIdSettingsArgs']]):
         pulumi.set(self, "association_id_settings", value)
+
+    @property
+    @pulumi.getter(name="batchMonitoringSettings")
+    def batch_monitoring_settings(self) -> Optional[pulumi.Input['DeploymentBatchMonitoringSettingsArgs']]:
+        """
+        The batch monitoring settings for the Deployment.
+        """
+        return pulumi.get(self, "batch_monitoring_settings")
+
+    @batch_monitoring_settings.setter
+    def batch_monitoring_settings(self, value: Optional[pulumi.Input['DeploymentBatchMonitoringSettingsArgs']]):
+        pulumi.set(self, "batch_monitoring_settings", value)
 
     @property
     @pulumi.getter(name="biasAndFairnessSettings")
@@ -315,6 +331,7 @@ class DeploymentArgs:
 class _DeploymentState:
     def __init__(__self__, *,
                  association_id_settings: Optional[pulumi.Input['DeploymentAssociationIdSettingsArgs']] = None,
+                 batch_monitoring_settings: Optional[pulumi.Input['DeploymentBatchMonitoringSettingsArgs']] = None,
                  bias_and_fairness_settings: Optional[pulumi.Input['DeploymentBiasAndFairnessSettingsArgs']] = None,
                  challenger_models_settings: Optional[pulumi.Input['DeploymentChallengerModelsSettingsArgs']] = None,
                  challenger_replay_settings: Optional[pulumi.Input['DeploymentChallengerReplaySettingsArgs']] = None,
@@ -335,6 +352,7 @@ class _DeploymentState:
         """
         Input properties used for looking up and filtering Deployment resources.
         :param pulumi.Input['DeploymentAssociationIdSettingsArgs'] association_id_settings: Association ID settings for this Deployment.
+        :param pulumi.Input['DeploymentBatchMonitoringSettingsArgs'] batch_monitoring_settings: The batch monitoring settings for the Deployment.
         :param pulumi.Input['DeploymentBiasAndFairnessSettingsArgs'] bias_and_fairness_settings: Bias and fairness settings for the Deployment.
         :param pulumi.Input['DeploymentChallengerModelsSettingsArgs'] challenger_models_settings: The challenger models settings for the Deployment.
         :param pulumi.Input['DeploymentChallengerReplaySettingsArgs'] challenger_replay_settings: The challenger replay settings for the Deployment.
@@ -355,6 +373,8 @@ class _DeploymentState:
         """
         if association_id_settings is not None:
             pulumi.set(__self__, "association_id_settings", association_id_settings)
+        if batch_monitoring_settings is not None:
+            pulumi.set(__self__, "batch_monitoring_settings", batch_monitoring_settings)
         if bias_and_fairness_settings is not None:
             pulumi.set(__self__, "bias_and_fairness_settings", bias_and_fairness_settings)
         if challenger_models_settings is not None:
@@ -401,6 +421,18 @@ class _DeploymentState:
     @association_id_settings.setter
     def association_id_settings(self, value: Optional[pulumi.Input['DeploymentAssociationIdSettingsArgs']]):
         pulumi.set(self, "association_id_settings", value)
+
+    @property
+    @pulumi.getter(name="batchMonitoringSettings")
+    def batch_monitoring_settings(self) -> Optional[pulumi.Input['DeploymentBatchMonitoringSettingsArgs']]:
+        """
+        The batch monitoring settings for the Deployment.
+        """
+        return pulumi.get(self, "batch_monitoring_settings")
+
+    @batch_monitoring_settings.setter
+    def batch_monitoring_settings(self, value: Optional[pulumi.Input['DeploymentBatchMonitoringSettingsArgs']]):
+        pulumi.set(self, "batch_monitoring_settings", value)
 
     @property
     @pulumi.getter(name="biasAndFairnessSettings")
@@ -613,6 +645,7 @@ class Deployment(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  association_id_settings: Optional[pulumi.Input[Union['DeploymentAssociationIdSettingsArgs', 'DeploymentAssociationIdSettingsArgsDict']]] = None,
+                 batch_monitoring_settings: Optional[pulumi.Input[Union['DeploymentBatchMonitoringSettingsArgs', 'DeploymentBatchMonitoringSettingsArgsDict']]] = None,
                  bias_and_fairness_settings: Optional[pulumi.Input[Union['DeploymentBiasAndFairnessSettingsArgs', 'DeploymentBiasAndFairnessSettingsArgsDict']]] = None,
                  challenger_models_settings: Optional[pulumi.Input[Union['DeploymentChallengerModelsSettingsArgs', 'DeploymentChallengerModelsSettingsArgsDict']]] = None,
                  challenger_replay_settings: Optional[pulumi.Input[Union['DeploymentChallengerReplaySettingsArgs', 'DeploymentChallengerReplaySettingsArgsDict']]] = None,
@@ -679,6 +712,7 @@ class Deployment(pulumi.CustomResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Union['DeploymentAssociationIdSettingsArgs', 'DeploymentAssociationIdSettingsArgsDict']] association_id_settings: Association ID settings for this Deployment.
+        :param pulumi.Input[Union['DeploymentBatchMonitoringSettingsArgs', 'DeploymentBatchMonitoringSettingsArgsDict']] batch_monitoring_settings: The batch monitoring settings for the Deployment.
         :param pulumi.Input[Union['DeploymentBiasAndFairnessSettingsArgs', 'DeploymentBiasAndFairnessSettingsArgsDict']] bias_and_fairness_settings: Bias and fairness settings for the Deployment.
         :param pulumi.Input[Union['DeploymentChallengerModelsSettingsArgs', 'DeploymentChallengerModelsSettingsArgsDict']] challenger_models_settings: The challenger models settings for the Deployment.
         :param pulumi.Input[Union['DeploymentChallengerReplaySettingsArgs', 'DeploymentChallengerReplaySettingsArgsDict']] challenger_replay_settings: The challenger replay settings for the Deployment.
@@ -764,6 +798,7 @@ class Deployment(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  association_id_settings: Optional[pulumi.Input[Union['DeploymentAssociationIdSettingsArgs', 'DeploymentAssociationIdSettingsArgsDict']]] = None,
+                 batch_monitoring_settings: Optional[pulumi.Input[Union['DeploymentBatchMonitoringSettingsArgs', 'DeploymentBatchMonitoringSettingsArgsDict']]] = None,
                  bias_and_fairness_settings: Optional[pulumi.Input[Union['DeploymentBiasAndFairnessSettingsArgs', 'DeploymentBiasAndFairnessSettingsArgsDict']]] = None,
                  challenger_models_settings: Optional[pulumi.Input[Union['DeploymentChallengerModelsSettingsArgs', 'DeploymentChallengerModelsSettingsArgsDict']]] = None,
                  challenger_replay_settings: Optional[pulumi.Input[Union['DeploymentChallengerReplaySettingsArgs', 'DeploymentChallengerReplaySettingsArgsDict']]] = None,
@@ -791,6 +826,7 @@ class Deployment(pulumi.CustomResource):
             __props__ = DeploymentArgs.__new__(DeploymentArgs)
 
             __props__.__dict__["association_id_settings"] = association_id_settings
+            __props__.__dict__["batch_monitoring_settings"] = batch_monitoring_settings
             __props__.__dict__["bias_and_fairness_settings"] = bias_and_fairness_settings
             __props__.__dict__["challenger_models_settings"] = challenger_models_settings
             __props__.__dict__["challenger_replay_settings"] = challenger_replay_settings
@@ -825,6 +861,7 @@ class Deployment(pulumi.CustomResource):
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
             association_id_settings: Optional[pulumi.Input[Union['DeploymentAssociationIdSettingsArgs', 'DeploymentAssociationIdSettingsArgsDict']]] = None,
+            batch_monitoring_settings: Optional[pulumi.Input[Union['DeploymentBatchMonitoringSettingsArgs', 'DeploymentBatchMonitoringSettingsArgsDict']]] = None,
             bias_and_fairness_settings: Optional[pulumi.Input[Union['DeploymentBiasAndFairnessSettingsArgs', 'DeploymentBiasAndFairnessSettingsArgsDict']]] = None,
             challenger_models_settings: Optional[pulumi.Input[Union['DeploymentChallengerModelsSettingsArgs', 'DeploymentChallengerModelsSettingsArgsDict']]] = None,
             challenger_replay_settings: Optional[pulumi.Input[Union['DeploymentChallengerReplaySettingsArgs', 'DeploymentChallengerReplaySettingsArgsDict']]] = None,
@@ -850,6 +887,7 @@ class Deployment(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Union['DeploymentAssociationIdSettingsArgs', 'DeploymentAssociationIdSettingsArgsDict']] association_id_settings: Association ID settings for this Deployment.
+        :param pulumi.Input[Union['DeploymentBatchMonitoringSettingsArgs', 'DeploymentBatchMonitoringSettingsArgsDict']] batch_monitoring_settings: The batch monitoring settings for the Deployment.
         :param pulumi.Input[Union['DeploymentBiasAndFairnessSettingsArgs', 'DeploymentBiasAndFairnessSettingsArgsDict']] bias_and_fairness_settings: Bias and fairness settings for the Deployment.
         :param pulumi.Input[Union['DeploymentChallengerModelsSettingsArgs', 'DeploymentChallengerModelsSettingsArgsDict']] challenger_models_settings: The challenger models settings for the Deployment.
         :param pulumi.Input[Union['DeploymentChallengerReplaySettingsArgs', 'DeploymentChallengerReplaySettingsArgsDict']] challenger_replay_settings: The challenger replay settings for the Deployment.
@@ -873,6 +911,7 @@ class Deployment(pulumi.CustomResource):
         __props__ = _DeploymentState.__new__(_DeploymentState)
 
         __props__.__dict__["association_id_settings"] = association_id_settings
+        __props__.__dict__["batch_monitoring_settings"] = batch_monitoring_settings
         __props__.__dict__["bias_and_fairness_settings"] = bias_and_fairness_settings
         __props__.__dict__["challenger_models_settings"] = challenger_models_settings
         __props__.__dict__["challenger_replay_settings"] = challenger_replay_settings
@@ -899,6 +938,14 @@ class Deployment(pulumi.CustomResource):
         Association ID settings for this Deployment.
         """
         return pulumi.get(self, "association_id_settings")
+
+    @property
+    @pulumi.getter(name="batchMonitoringSettings")
+    def batch_monitoring_settings(self) -> pulumi.Output[Optional['outputs.DeploymentBatchMonitoringSettings']]:
+        """
+        The batch monitoring settings for the Deployment.
+        """
+        return pulumi.get(self, "batch_monitoring_settings")
 
     @property
     @pulumi.getter(name="biasAndFairnessSettings")

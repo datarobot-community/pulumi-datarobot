@@ -785,6 +785,18 @@
             },
             "type": "object"
         },
+        "datarobot:index/DeploymentBatchMonitoringSettings:DeploymentBatchMonitoringSettings": {
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "description": "If batch monitoring is enabled.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "enabled"
+            ]
+        },
         "datarobot:index/DeploymentBiasAndFairnessSettings:DeploymentBiasAndFairnessSettings": {
             "properties": {
                 "fairnessMetricSet": {
@@ -845,9 +857,20 @@
                     "type": "boolean",
                     "description": "If feature drift tracking is to be turned on.\n"
                 },
+                "featureSelection": {
+                    "type": "string",
+                    "description": "The feature selection method to be used for drift tracking.\n"
+                },
                 "targetDriftEnabled": {
                     "type": "boolean",
                     "description": "If target drift tracking is to be turned on.\n"
+                },
+                "trackedFeatures": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of features to be tracked for drift.\n"
                 }
             },
             "type": "object"
@@ -1461,6 +1484,40 @@
                 }
             },
             "type": "object"
+        },
+        "datarobot:index/NotificationChannelCustomHeader:NotificationChannelCustomHeader": {
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "The name of the header.\n"
+                },
+                "value": {
+                    "type": "string",
+                    "description": "The value of the header.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "name",
+                "value"
+            ]
+        },
+        "datarobot:index/NotificationChannelDrEntity:NotificationChannelDrEntity": {
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "The ID of the DataRobot entity.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the entity.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "id",
+                "name"
+            ]
         },
         "datarobot:index/VectorDatabaseChunkingParameters:VectorDatabaseChunkingParameters": {
             "properties": {
@@ -3988,6 +4045,10 @@
                     "$ref": "#/types/datarobot:index/DeploymentAssociationIdSettings:DeploymentAssociationIdSettings",
                     "description": "Association ID settings for this Deployment.\n"
                 },
+                "batchMonitoringSettings": {
+                    "$ref": "#/types/datarobot:index/DeploymentBatchMonitoringSettings:DeploymentBatchMonitoringSettings",
+                    "description": "The batch monitoring settings for the Deployment.\n"
+                },
                 "biasAndFairnessSettings": {
                     "$ref": "#/types/datarobot:index/DeploymentBiasAndFairnessSettings:DeploymentBiasAndFairnessSettings",
                     "description": "Bias and fairness settings for the Deployment.\n"
@@ -4073,6 +4134,10 @@
                 "associationIdSettings": {
                     "$ref": "#/types/datarobot:index/DeploymentAssociationIdSettings:DeploymentAssociationIdSettings",
                     "description": "Association ID settings for this Deployment.\n"
+                },
+                "batchMonitoringSettings": {
+                    "$ref": "#/types/datarobot:index/DeploymentBatchMonitoringSettings:DeploymentBatchMonitoringSettings",
+                    "description": "The batch monitoring settings for the Deployment.\n"
                 },
                 "biasAndFairnessSettings": {
                     "$ref": "#/types/datarobot:index/DeploymentBiasAndFairnessSettings:DeploymentBiasAndFairnessSettings",
@@ -4160,6 +4225,10 @@
                     "associationIdSettings": {
                         "$ref": "#/types/datarobot:index/DeploymentAssociationIdSettings:DeploymentAssociationIdSettings",
                         "description": "Association ID settings for this Deployment.\n"
+                    },
+                    "batchMonitoringSettings": {
+                        "$ref": "#/types/datarobot:index/DeploymentBatchMonitoringSettings:DeploymentBatchMonitoringSettings",
+                        "description": "The batch monitoring settings for the Deployment.\n"
                     },
                     "biasAndFairnessSettings": {
                         "$ref": "#/types/datarobot:index/DeploymentBiasAndFairnessSettings:DeploymentBiasAndFairnessSettings",
@@ -4710,6 +4779,340 @@
                     "vectorDatabaseSettings": {
                         "$ref": "#/types/datarobot:index/LlmBlueprintVectorDatabaseSettings:LlmBlueprintVectorDatabaseSettings",
                         "description": "The Vector Database settings for the LLM Blueprint.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "datarobot:index/notificationChannel:NotificationChannel": {
+            "description": "Notification Channel\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@datarobot/pulumi-datarobot\";\n\nconst example = new datarobot.NotificationChannel(\"example\", {\n    channelType: \"DataRobotUser\",\n    relatedEntityId: datarobot_deployment.example.id,\n    relatedEntityType: \"deployment\",\n    contentType: \"application/json\",\n    customHeaders: [{\n        name: \"header1\",\n        value: \"value1\",\n    }],\n    drEntities: [{\n        id: \"11111111111111\",\n        name: \"example user\",\n    }],\n    languageCode: \"en\",\n    emailAddress: \"example@datarobot.com\",\n    payloadUrl: \"https://example.com\",\n    secretToken: \"example_secret_token\",\n    validateSsl: true,\n    verificationCode: \"11111\",\n});\nexport const datarobotNotificationPolicyId = datarobot_notification_policy.example.id;\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample = datarobot.NotificationChannel(\"example\",\n    channel_type=\"DataRobotUser\",\n    related_entity_id=datarobot_deployment[\"example\"][\"id\"],\n    related_entity_type=\"deployment\",\n    content_type=\"application/json\",\n    custom_headers=[{\n        \"name\": \"header1\",\n        \"value\": \"value1\",\n    }],\n    dr_entities=[{\n        \"id\": \"11111111111111\",\n        \"name\": \"example user\",\n    }],\n    language_code=\"en\",\n    email_address=\"example@datarobot.com\",\n    payload_url=\"https://example.com\",\n    secret_token=\"example_secret_token\",\n    validate_ssl=True,\n    verification_code=\"11111\")\npulumi.export(\"datarobotNotificationPolicyId\", datarobot_notification_policy[\"example\"][\"id\"])\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = DataRobotPulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Datarobot.NotificationChannel(\"example\", new()\n    {\n        ChannelType = \"DataRobotUser\",\n        RelatedEntityId = datarobot_deployment.Example.Id,\n        RelatedEntityType = \"deployment\",\n        ContentType = \"application/json\",\n        CustomHeaders = new[]\n        {\n            new Datarobot.Inputs.NotificationChannelCustomHeaderArgs\n            {\n                Name = \"header1\",\n                Value = \"value1\",\n            },\n        },\n        DrEntities = new[]\n        {\n            new Datarobot.Inputs.NotificationChannelDrEntityArgs\n            {\n                Id = \"11111111111111\",\n                Name = \"example user\",\n            },\n        },\n        LanguageCode = \"en\",\n        EmailAddress = \"example@datarobot.com\",\n        PayloadUrl = \"https://example.com\",\n        SecretToken = \"example_secret_token\",\n        ValidateSsl = true,\n        VerificationCode = \"11111\",\n    });\n\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"datarobotNotificationPolicyId\"] = datarobot_notification_policy.Example.Id,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := datarobot.NewNotificationChannel(ctx, \"example\", \u0026datarobot.NotificationChannelArgs{\n\t\t\tChannelType:       pulumi.String(\"DataRobotUser\"),\n\t\t\tRelatedEntityId:   pulumi.Any(datarobot_deployment.Example.Id),\n\t\t\tRelatedEntityType: pulumi.String(\"deployment\"),\n\t\t\tContentType:       pulumi.String(\"application/json\"),\n\t\t\tCustomHeaders: datarobot.NotificationChannelCustomHeaderArray{\n\t\t\t\t\u0026datarobot.NotificationChannelCustomHeaderArgs{\n\t\t\t\t\tName:  pulumi.String(\"header1\"),\n\t\t\t\t\tValue: pulumi.String(\"value1\"),\n\t\t\t\t},\n\t\t\t},\n\t\t\tDrEntities: datarobot.NotificationChannelDrEntityArray{\n\t\t\t\t\u0026datarobot.NotificationChannelDrEntityArgs{\n\t\t\t\t\tId:   pulumi.String(\"11111111111111\"),\n\t\t\t\t\tName: pulumi.String(\"example user\"),\n\t\t\t\t},\n\t\t\t},\n\t\t\tLanguageCode:     pulumi.String(\"en\"),\n\t\t\tEmailAddress:     pulumi.String(\"example@datarobot.com\"),\n\t\t\tPayloadUrl:       pulumi.String(\"https://example.com\"),\n\t\t\tSecretToken:      pulumi.String(\"example_secret_token\"),\n\t\t\tValidateSsl:      pulumi.Bool(true),\n\t\t\tVerificationCode: pulumi.String(\"11111\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"datarobotNotificationPolicyId\", datarobot_notification_policy.Example.Id)\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.NotificationChannel;\nimport com.pulumi.datarobot.NotificationChannelArgs;\nimport com.pulumi.datarobot.inputs.NotificationChannelCustomHeaderArgs;\nimport com.pulumi.datarobot.inputs.NotificationChannelDrEntityArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new NotificationChannel(\"example\", NotificationChannelArgs.builder()\n            .channelType(\"DataRobotUser\")\n            .relatedEntityId(datarobot_deployment.example().id())\n            .relatedEntityType(\"deployment\")\n            .contentType(\"application/json\")\n            .customHeaders(NotificationChannelCustomHeaderArgs.builder()\n                .name(\"header1\")\n                .value(\"value1\")\n                .build())\n            .drEntities(NotificationChannelDrEntityArgs.builder()\n                .id(\"11111111111111\")\n                .name(\"example user\")\n                .build())\n            .languageCode(\"en\")\n            .emailAddress(\"example@datarobot.com\")\n            .payloadUrl(\"https://example.com\")\n            .secretToken(\"example_secret_token\")\n            .validateSsl(true)\n            .verificationCode(\"11111\")\n            .build());\n\n        ctx.export(\"datarobotNotificationPolicyId\", datarobot_notification_policy.example().id());\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: datarobot:NotificationChannel\n    properties:\n      channelType: DataRobotUser\n      relatedEntityId: ${datarobot_deployment.example.id}\n      relatedEntityType: deployment\n      # Optional\n      contentType: application/json\n      customHeaders:\n        - name: header1\n          value: value1\n      drEntities:\n        - id: '11111111111111'\n          name: example user\n      languageCode: en\n      emailAddress: example@datarobot.com\n      payloadUrl: https://example.com\n      secretToken: example_secret_token\n      validateSsl: true\n      verificationCode: '11111'\noutputs:\n  datarobotNotificationPolicyId: ${datarobot_notification_policy.example.id}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "properties": {
+                "channelType": {
+                    "type": "string",
+                    "description": "The Type of Notification Channel.\n"
+                },
+                "contentType": {
+                    "type": "string",
+                    "description": "The content type of the messages of the Notification Channel.\n"
+                },
+                "customHeaders": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/datarobot:index/NotificationChannelCustomHeader:NotificationChannelCustomHeader"
+                    },
+                    "description": "Custom headers and their values to be sent in the Notification Channel.\n"
+                },
+                "drEntities": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/datarobot:index/NotificationChannelDrEntity:NotificationChannelDrEntity"
+                    },
+                    "description": "The IDs of the DataRobot Users, Group or Custom Job associated with the DataRobotUser, DataRobotGroup or DataRobotCustomJob channel types.\n"
+                },
+                "emailAddress": {
+                    "type": "string",
+                    "description": "The email address to be used in the Notification Channel.\n"
+                },
+                "languageCode": {
+                    "type": "string",
+                    "description": "The preferred language code.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the Notification Channel.\n"
+                },
+                "payloadUrl": {
+                    "type": "string",
+                    "description": "The payload URL of the Notification Channel.\n"
+                },
+                "relatedEntityId": {
+                    "type": "string",
+                    "description": "The ID of related entity.\n"
+                },
+                "relatedEntityType": {
+                    "type": "string",
+                    "description": "The type of related entity.\n"
+                },
+                "secretToken": {
+                    "type": "string",
+                    "description": "The secret token to be used for the Notification Channel.\n"
+                },
+                "validateSsl": {
+                    "type": "boolean",
+                    "description": "Defines if validate ssl or not in the Notification Channel.\n"
+                },
+                "verificationCode": {
+                    "type": "string",
+                    "description": "Required if the channel type is email.\n"
+                }
+            },
+            "required": [
+                "channelType",
+                "languageCode",
+                "name",
+                "relatedEntityId",
+                "relatedEntityType"
+            ],
+            "inputProperties": {
+                "channelType": {
+                    "type": "string",
+                    "description": "The Type of Notification Channel.\n"
+                },
+                "contentType": {
+                    "type": "string",
+                    "description": "The content type of the messages of the Notification Channel.\n"
+                },
+                "customHeaders": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/datarobot:index/NotificationChannelCustomHeader:NotificationChannelCustomHeader"
+                    },
+                    "description": "Custom headers and their values to be sent in the Notification Channel.\n"
+                },
+                "drEntities": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/datarobot:index/NotificationChannelDrEntity:NotificationChannelDrEntity"
+                    },
+                    "description": "The IDs of the DataRobot Users, Group or Custom Job associated with the DataRobotUser, DataRobotGroup or DataRobotCustomJob channel types.\n"
+                },
+                "emailAddress": {
+                    "type": "string",
+                    "description": "The email address to be used in the Notification Channel.\n"
+                },
+                "languageCode": {
+                    "type": "string",
+                    "description": "The preferred language code.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the Notification Channel.\n"
+                },
+                "payloadUrl": {
+                    "type": "string",
+                    "description": "The payload URL of the Notification Channel.\n"
+                },
+                "relatedEntityId": {
+                    "type": "string",
+                    "description": "The ID of related entity.\n"
+                },
+                "relatedEntityType": {
+                    "type": "string",
+                    "description": "The type of related entity.\n"
+                },
+                "secretToken": {
+                    "type": "string",
+                    "description": "The secret token to be used for the Notification Channel.\n"
+                },
+                "validateSsl": {
+                    "type": "boolean",
+                    "description": "Defines if validate ssl or not in the Notification Channel.\n"
+                },
+                "verificationCode": {
+                    "type": "string",
+                    "description": "Required if the channel type is email.\n"
+                }
+            },
+            "requiredInputs": [
+                "channelType",
+                "relatedEntityId",
+                "relatedEntityType"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering NotificationChannel resources.\n",
+                "properties": {
+                    "channelType": {
+                        "type": "string",
+                        "description": "The Type of Notification Channel.\n"
+                    },
+                    "contentType": {
+                        "type": "string",
+                        "description": "The content type of the messages of the Notification Channel.\n"
+                    },
+                    "customHeaders": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/datarobot:index/NotificationChannelCustomHeader:NotificationChannelCustomHeader"
+                        },
+                        "description": "Custom headers and their values to be sent in the Notification Channel.\n"
+                    },
+                    "drEntities": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/datarobot:index/NotificationChannelDrEntity:NotificationChannelDrEntity"
+                        },
+                        "description": "The IDs of the DataRobot Users, Group or Custom Job associated with the DataRobotUser, DataRobotGroup or DataRobotCustomJob channel types.\n"
+                    },
+                    "emailAddress": {
+                        "type": "string",
+                        "description": "The email address to be used in the Notification Channel.\n"
+                    },
+                    "languageCode": {
+                        "type": "string",
+                        "description": "The preferred language code.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the Notification Channel.\n"
+                    },
+                    "payloadUrl": {
+                        "type": "string",
+                        "description": "The payload URL of the Notification Channel.\n"
+                    },
+                    "relatedEntityId": {
+                        "type": "string",
+                        "description": "The ID of related entity.\n"
+                    },
+                    "relatedEntityType": {
+                        "type": "string",
+                        "description": "The type of related entity.\n"
+                    },
+                    "secretToken": {
+                        "type": "string",
+                        "description": "The secret token to be used for the Notification Channel.\n"
+                    },
+                    "validateSsl": {
+                        "type": "boolean",
+                        "description": "Defines if validate ssl or not in the Notification Channel.\n"
+                    },
+                    "verificationCode": {
+                        "type": "string",
+                        "description": "Required if the channel type is email.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "datarobot:index/notificationPolicy:NotificationPolicy": {
+            "description": "Notification Policy\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@datarobot/pulumi-datarobot\";\n\nconst example = new datarobot.NotificationPolicy(\"example\", {\n    channelId: \"11111111111111\",\n    channelScope: \"template\",\n    eventGroup: \"model_deployments.all\",\n    relatedEntityId: datarobot_deployment.example.id,\n    relatedEntityType: \"deployment\",\n    eventType: \"model_deployments.accuracy_green\",\n    maximalFrequency: \"PT1H\",\n});\nexport const datarobotNotificationPolicyId = example.id;\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample = datarobot.NotificationPolicy(\"example\",\n    channel_id=\"11111111111111\",\n    channel_scope=\"template\",\n    event_group=\"model_deployments.all\",\n    related_entity_id=datarobot_deployment[\"example\"][\"id\"],\n    related_entity_type=\"deployment\",\n    event_type=\"model_deployments.accuracy_green\",\n    maximal_frequency=\"PT1H\")\npulumi.export(\"datarobotNotificationPolicyId\", example.id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = DataRobotPulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Datarobot.NotificationPolicy(\"example\", new()\n    {\n        ChannelId = \"11111111111111\",\n        ChannelScope = \"template\",\n        EventGroup = \"model_deployments.all\",\n        RelatedEntityId = datarobot_deployment.Example.Id,\n        RelatedEntityType = \"deployment\",\n        EventType = \"model_deployments.accuracy_green\",\n        MaximalFrequency = \"PT1H\",\n    });\n\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"datarobotNotificationPolicyId\"] = example.Id,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texample, err := datarobot.NewNotificationPolicy(ctx, \"example\", \u0026datarobot.NotificationPolicyArgs{\n\t\t\tChannelId:         pulumi.String(\"11111111111111\"),\n\t\t\tChannelScope:      pulumi.String(\"template\"),\n\t\t\tEventGroup:        pulumi.String(\"model_deployments.all\"),\n\t\t\tRelatedEntityId:   pulumi.Any(datarobot_deployment.Example.Id),\n\t\t\tRelatedEntityType: pulumi.String(\"deployment\"),\n\t\t\tEventType:         pulumi.String(\"model_deployments.accuracy_green\"),\n\t\t\tMaximalFrequency:  pulumi.String(\"PT1H\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"datarobotNotificationPolicyId\", example.ID())\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.NotificationPolicy;\nimport com.pulumi.datarobot.NotificationPolicyArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new NotificationPolicy(\"example\", NotificationPolicyArgs.builder()\n            .channelId(\"11111111111111\")\n            .channelScope(\"template\")\n            .eventGroup(\"model_deployments.all\")\n            .relatedEntityId(datarobot_deployment.example().id())\n            .relatedEntityType(\"deployment\")\n            .eventType(\"model_deployments.accuracy_green\")\n            .maximalFrequency(\"PT1H\")\n            .build());\n\n        ctx.export(\"datarobotNotificationPolicyId\", example.id());\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: datarobot:NotificationPolicy\n    properties:\n      channelId: '11111111111111'\n      channelScope: template\n      eventGroup: model_deployments.all\n      relatedEntityId: ${datarobot_deployment.example.id}\n      relatedEntityType: deployment\n      # Optional\n      eventType: model_deployments.accuracy_green\n      maximalFrequency: PT1H\noutputs:\n  datarobotNotificationPolicyId: ${example.id}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "properties": {
+                "active": {
+                    "type": "boolean",
+                    "description": "Whether or not the Notification Policy is active.\n"
+                },
+                "channelId": {
+                    "type": "string",
+                    "description": "The Channel ID of the Notification Policy.\n"
+                },
+                "channelScope": {
+                    "type": "string",
+                    "description": "The Channel scope of the Notification Policy.\n"
+                },
+                "eventGroup": {
+                    "type": "string",
+                    "description": "The group of the events that trigger the Notification.\n"
+                },
+                "eventType": {
+                    "type": "string",
+                    "description": "The group of the event that triggers the Notification.\n"
+                },
+                "maximalFrequency": {
+                    "type": "string",
+                    "description": "The maximal frequency between policy runs in ISO 8601 duration string.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the Notification Policy.\n"
+                },
+                "relatedEntityId": {
+                    "type": "string",
+                    "description": "The ID of the related entity for the Notification Policy.\n"
+                },
+                "relatedEntityType": {
+                    "type": "string",
+                    "description": "The Type of the related entity for the Notification Policy.\n"
+                }
+            },
+            "required": [
+                "active",
+                "channelId",
+                "channelScope",
+                "name",
+                "relatedEntityId",
+                "relatedEntityType"
+            ],
+            "inputProperties": {
+                "active": {
+                    "type": "boolean",
+                    "description": "Whether or not the Notification Policy is active.\n"
+                },
+                "channelId": {
+                    "type": "string",
+                    "description": "The Channel ID of the Notification Policy.\n"
+                },
+                "channelScope": {
+                    "type": "string",
+                    "description": "The Channel scope of the Notification Policy.\n"
+                },
+                "eventGroup": {
+                    "type": "string",
+                    "description": "The group of the events that trigger the Notification.\n"
+                },
+                "eventType": {
+                    "type": "string",
+                    "description": "The group of the event that triggers the Notification.\n"
+                },
+                "maximalFrequency": {
+                    "type": "string",
+                    "description": "The maximal frequency between policy runs in ISO 8601 duration string.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the Notification Policy.\n"
+                },
+                "relatedEntityId": {
+                    "type": "string",
+                    "description": "The ID of the related entity for the Notification Policy.\n"
+                },
+                "relatedEntityType": {
+                    "type": "string",
+                    "description": "The Type of the related entity for the Notification Policy.\n"
+                }
+            },
+            "requiredInputs": [
+                "channelId",
+                "channelScope",
+                "relatedEntityId",
+                "relatedEntityType"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering NotificationPolicy resources.\n",
+                "properties": {
+                    "active": {
+                        "type": "boolean",
+                        "description": "Whether or not the Notification Policy is active.\n"
+                    },
+                    "channelId": {
+                        "type": "string",
+                        "description": "The Channel ID of the Notification Policy.\n"
+                    },
+                    "channelScope": {
+                        "type": "string",
+                        "description": "The Channel scope of the Notification Policy.\n"
+                    },
+                    "eventGroup": {
+                        "type": "string",
+                        "description": "The group of the events that trigger the Notification.\n"
+                    },
+                    "eventType": {
+                        "type": "string",
+                        "description": "The group of the event that triggers the Notification.\n"
+                    },
+                    "maximalFrequency": {
+                        "type": "string",
+                        "description": "The maximal frequency between policy runs in ISO 8601 duration string.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the Notification Policy.\n"
+                    },
+                    "relatedEntityId": {
+                        "type": "string",
+                        "description": "The ID of the related entity for the Notification Policy.\n"
+                    },
+                    "relatedEntityType": {
+                        "type": "string",
+                        "description": "The Type of the related entity for the Notification Policy.\n"
                     }
                 },
                 "type": "object"

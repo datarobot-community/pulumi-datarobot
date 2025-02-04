@@ -28,6 +28,8 @@ from .get_execution_environment import *
 from .get_global_model import *
 from .google_cloud_credential import *
 from .llm_blueprint import *
+from .notification_channel import *
+from .notification_policy import *
 from .playground import *
 from .prediction_environment import *
 from .provider import *
@@ -216,6 +218,22 @@ _utilities.register(
   "fqn": "pulumi_datarobot",
   "classes": {
    "datarobot:index/llmBlueprint:LlmBlueprint": "LlmBlueprint"
+  }
+ },
+ {
+  "pkg": "datarobot",
+  "mod": "index/notificationChannel",
+  "fqn": "pulumi_datarobot",
+  "classes": {
+   "datarobot:index/notificationChannel:NotificationChannel": "NotificationChannel"
+  }
+ },
+ {
+  "pkg": "datarobot",
+  "mod": "index/notificationPolicy",
+  "fqn": "pulumi_datarobot",
+  "classes": {
+   "datarobot:index/notificationPolicy:NotificationPolicy": "NotificationPolicy"
   }
  },
  {

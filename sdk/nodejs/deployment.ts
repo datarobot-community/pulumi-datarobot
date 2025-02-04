@@ -88,6 +88,10 @@ export class Deployment extends pulumi.CustomResource {
      */
     public readonly associationIdSettings!: pulumi.Output<outputs.DeploymentAssociationIdSettings | undefined>;
     /**
+     * The batch monitoring settings for the Deployment.
+     */
+    public readonly batchMonitoringSettings!: pulumi.Output<outputs.DeploymentBatchMonitoringSettings | undefined>;
+    /**
      * Bias and fairness settings for the Deployment.
      */
     public readonly biasAndFairnessSettings!: pulumi.Output<outputs.DeploymentBiasAndFairnessSettings | undefined>;
@@ -170,6 +174,7 @@ export class Deployment extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as DeploymentState | undefined;
             resourceInputs["associationIdSettings"] = state ? state.associationIdSettings : undefined;
+            resourceInputs["batchMonitoringSettings"] = state ? state.batchMonitoringSettings : undefined;
             resourceInputs["biasAndFairnessSettings"] = state ? state.biasAndFairnessSettings : undefined;
             resourceInputs["challengerModelsSettings"] = state ? state.challengerModelsSettings : undefined;
             resourceInputs["challengerReplaySettings"] = state ? state.challengerReplaySettings : undefined;
@@ -199,6 +204,7 @@ export class Deployment extends pulumi.CustomResource {
                 throw new Error("Missing required property 'registeredModelVersionId'");
             }
             resourceInputs["associationIdSettings"] = args ? args.associationIdSettings : undefined;
+            resourceInputs["batchMonitoringSettings"] = args ? args.batchMonitoringSettings : undefined;
             resourceInputs["biasAndFairnessSettings"] = args ? args.biasAndFairnessSettings : undefined;
             resourceInputs["challengerModelsSettings"] = args ? args.challengerModelsSettings : undefined;
             resourceInputs["challengerReplaySettings"] = args ? args.challengerReplaySettings : undefined;
@@ -230,6 +236,10 @@ export interface DeploymentState {
      * Association ID settings for this Deployment.
      */
     associationIdSettings?: pulumi.Input<inputs.DeploymentAssociationIdSettings>;
+    /**
+     * The batch monitoring settings for the Deployment.
+     */
+    batchMonitoringSettings?: pulumi.Input<inputs.DeploymentBatchMonitoringSettings>;
     /**
      * Bias and fairness settings for the Deployment.
      */
@@ -308,6 +318,10 @@ export interface DeploymentArgs {
      * Association ID settings for this Deployment.
      */
     associationIdSettings?: pulumi.Input<inputs.DeploymentAssociationIdSettings>;
+    /**
+     * The batch monitoring settings for the Deployment.
+     */
+    batchMonitoringSettings?: pulumi.Input<inputs.DeploymentBatchMonitoringSettings>;
     /**
      * Bias and fairness settings for the Deployment.
      */
