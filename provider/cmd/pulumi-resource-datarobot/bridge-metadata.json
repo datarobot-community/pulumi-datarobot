@@ -231,6 +231,29 @@
                             }
                         }
                     },
+                    "feature_cache_settings": {
+                        "fields": {
+                            "schedule": {
+                                "fields": {
+                                    "day_of_month": {
+                                        "maxItemsOne": false
+                                    },
+                                    "day_of_week": {
+                                        "maxItemsOne": false
+                                    },
+                                    "hour": {
+                                        "maxItemsOne": false
+                                    },
+                                    "minute": {
+                                        "maxItemsOne": false
+                                    },
+                                    "month": {
+                                        "maxItemsOne": false
+                                    }
+                                }
+                            }
+                        }
+                    },
                     "health_settings": {
                         "fields": {
                             "custom_metrics": {
