@@ -45,6 +45,7 @@ import * as utilities from "./utilities";
  *     predictionWarningSettings: {},
  *     predictionIntervalsSettings: {},
  *     predictionsSettings: {},
+ *     featureCacheSettings: {},
  *     healthSettings: {},
  *     runtimeParameterValues: [{
  *         key: "EXAMPLE_PARAM",
@@ -107,6 +108,10 @@ export class Deployment extends pulumi.CustomResource {
      * The drift tracking settings for the Deployment.
      */
     public readonly driftTrackingSettings!: pulumi.Output<outputs.DeploymentDriftTrackingSettings | undefined>;
+    /**
+     * The feature cache settings for this Deployment.
+     */
+    public readonly featureCacheSettings!: pulumi.Output<outputs.DeploymentFeatureCacheSettings | undefined>;
     /**
      * The health settings for this Deployment.
      */
@@ -179,6 +184,7 @@ export class Deployment extends pulumi.CustomResource {
             resourceInputs["challengerModelsSettings"] = state ? state.challengerModelsSettings : undefined;
             resourceInputs["challengerReplaySettings"] = state ? state.challengerReplaySettings : undefined;
             resourceInputs["driftTrackingSettings"] = state ? state.driftTrackingSettings : undefined;
+            resourceInputs["featureCacheSettings"] = state ? state.featureCacheSettings : undefined;
             resourceInputs["healthSettings"] = state ? state.healthSettings : undefined;
             resourceInputs["importance"] = state ? state.importance : undefined;
             resourceInputs["label"] = state ? state.label : undefined;
@@ -209,6 +215,7 @@ export class Deployment extends pulumi.CustomResource {
             resourceInputs["challengerModelsSettings"] = args ? args.challengerModelsSettings : undefined;
             resourceInputs["challengerReplaySettings"] = args ? args.challengerReplaySettings : undefined;
             resourceInputs["driftTrackingSettings"] = args ? args.driftTrackingSettings : undefined;
+            resourceInputs["featureCacheSettings"] = args ? args.featureCacheSettings : undefined;
             resourceInputs["healthSettings"] = args ? args.healthSettings : undefined;
             resourceInputs["importance"] = args ? args.importance : undefined;
             resourceInputs["label"] = args ? args.label : undefined;
@@ -256,6 +263,10 @@ export interface DeploymentState {
      * The drift tracking settings for the Deployment.
      */
     driftTrackingSettings?: pulumi.Input<inputs.DeploymentDriftTrackingSettings>;
+    /**
+     * The feature cache settings for this Deployment.
+     */
+    featureCacheSettings?: pulumi.Input<inputs.DeploymentFeatureCacheSettings>;
     /**
      * The health settings for this Deployment.
      */
@@ -338,6 +349,10 @@ export interface DeploymentArgs {
      * The drift tracking settings for the Deployment.
      */
     driftTrackingSettings?: pulumi.Input<inputs.DeploymentDriftTrackingSettings>;
+    /**
+     * The feature cache settings for this Deployment.
+     */
+    featureCacheSettings?: pulumi.Input<inputs.DeploymentFeatureCacheSettings>;
     /**
      * The health settings for this Deployment.
      */

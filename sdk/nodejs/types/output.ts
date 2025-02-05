@@ -560,6 +560,44 @@ export interface DeploymentDriftTrackingSettings {
     trackedFeatures?: string[];
 }
 
+export interface DeploymentFeatureCacheSettings {
+    /**
+     * If feature cache is enabled for this Deployment.
+     */
+    enabled: boolean;
+    /**
+     * If feature cache fetching is enabled.
+     */
+    fetching?: boolean;
+    /**
+     * Defines the feature cache schedule.
+     */
+    schedule?: outputs.DeploymentFeatureCacheSettingsSchedule;
+}
+
+export interface DeploymentFeatureCacheSettingsSchedule {
+    /**
+     * Days of the month.
+     */
+    dayOfMonths: string[];
+    /**
+     * Days of the week.
+     */
+    dayOfWeeks: string[];
+    /**
+     * Hours of the day.
+     */
+    hours: string[];
+    /**
+     * Minutes of the day.
+     */
+    minutes: string[];
+    /**
+     * Months of the year.
+     */
+    months: string[];
+}
+
 export interface DeploymentHealthSettings {
     /**
      * The accuracy health settings for this Deployment.

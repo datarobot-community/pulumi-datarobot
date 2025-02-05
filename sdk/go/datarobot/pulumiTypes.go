@@ -5045,6 +5045,394 @@ func (o DeploymentDriftTrackingSettingsPtrOutput) TrackedFeatures() pulumi.Strin
 	}).(pulumi.StringArrayOutput)
 }
 
+type DeploymentFeatureCacheSettings struct {
+	// If feature cache is enabled for this Deployment.
+	Enabled bool `pulumi:"enabled"`
+	// If feature cache fetching is enabled.
+	Fetching *bool `pulumi:"fetching"`
+	// Defines the feature cache schedule.
+	Schedule *DeploymentFeatureCacheSettingsSchedule `pulumi:"schedule"`
+}
+
+// DeploymentFeatureCacheSettingsInput is an input type that accepts DeploymentFeatureCacheSettingsArgs and DeploymentFeatureCacheSettingsOutput values.
+// You can construct a concrete instance of `DeploymentFeatureCacheSettingsInput` via:
+//
+//	DeploymentFeatureCacheSettingsArgs{...}
+type DeploymentFeatureCacheSettingsInput interface {
+	pulumi.Input
+
+	ToDeploymentFeatureCacheSettingsOutput() DeploymentFeatureCacheSettingsOutput
+	ToDeploymentFeatureCacheSettingsOutputWithContext(context.Context) DeploymentFeatureCacheSettingsOutput
+}
+
+type DeploymentFeatureCacheSettingsArgs struct {
+	// If feature cache is enabled for this Deployment.
+	Enabled pulumi.BoolInput `pulumi:"enabled"`
+	// If feature cache fetching is enabled.
+	Fetching pulumi.BoolPtrInput `pulumi:"fetching"`
+	// Defines the feature cache schedule.
+	Schedule DeploymentFeatureCacheSettingsSchedulePtrInput `pulumi:"schedule"`
+}
+
+func (DeploymentFeatureCacheSettingsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentFeatureCacheSettings)(nil)).Elem()
+}
+
+func (i DeploymentFeatureCacheSettingsArgs) ToDeploymentFeatureCacheSettingsOutput() DeploymentFeatureCacheSettingsOutput {
+	return i.ToDeploymentFeatureCacheSettingsOutputWithContext(context.Background())
+}
+
+func (i DeploymentFeatureCacheSettingsArgs) ToDeploymentFeatureCacheSettingsOutputWithContext(ctx context.Context) DeploymentFeatureCacheSettingsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentFeatureCacheSettingsOutput)
+}
+
+func (i DeploymentFeatureCacheSettingsArgs) ToDeploymentFeatureCacheSettingsPtrOutput() DeploymentFeatureCacheSettingsPtrOutput {
+	return i.ToDeploymentFeatureCacheSettingsPtrOutputWithContext(context.Background())
+}
+
+func (i DeploymentFeatureCacheSettingsArgs) ToDeploymentFeatureCacheSettingsPtrOutputWithContext(ctx context.Context) DeploymentFeatureCacheSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentFeatureCacheSettingsOutput).ToDeploymentFeatureCacheSettingsPtrOutputWithContext(ctx)
+}
+
+// DeploymentFeatureCacheSettingsPtrInput is an input type that accepts DeploymentFeatureCacheSettingsArgs, DeploymentFeatureCacheSettingsPtr and DeploymentFeatureCacheSettingsPtrOutput values.
+// You can construct a concrete instance of `DeploymentFeatureCacheSettingsPtrInput` via:
+//
+//	        DeploymentFeatureCacheSettingsArgs{...}
+//
+//	or:
+//
+//	        nil
+type DeploymentFeatureCacheSettingsPtrInput interface {
+	pulumi.Input
+
+	ToDeploymentFeatureCacheSettingsPtrOutput() DeploymentFeatureCacheSettingsPtrOutput
+	ToDeploymentFeatureCacheSettingsPtrOutputWithContext(context.Context) DeploymentFeatureCacheSettingsPtrOutput
+}
+
+type deploymentFeatureCacheSettingsPtrType DeploymentFeatureCacheSettingsArgs
+
+func DeploymentFeatureCacheSettingsPtr(v *DeploymentFeatureCacheSettingsArgs) DeploymentFeatureCacheSettingsPtrInput {
+	return (*deploymentFeatureCacheSettingsPtrType)(v)
+}
+
+func (*deploymentFeatureCacheSettingsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentFeatureCacheSettings)(nil)).Elem()
+}
+
+func (i *deploymentFeatureCacheSettingsPtrType) ToDeploymentFeatureCacheSettingsPtrOutput() DeploymentFeatureCacheSettingsPtrOutput {
+	return i.ToDeploymentFeatureCacheSettingsPtrOutputWithContext(context.Background())
+}
+
+func (i *deploymentFeatureCacheSettingsPtrType) ToDeploymentFeatureCacheSettingsPtrOutputWithContext(ctx context.Context) DeploymentFeatureCacheSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentFeatureCacheSettingsPtrOutput)
+}
+
+type DeploymentFeatureCacheSettingsOutput struct{ *pulumi.OutputState }
+
+func (DeploymentFeatureCacheSettingsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentFeatureCacheSettings)(nil)).Elem()
+}
+
+func (o DeploymentFeatureCacheSettingsOutput) ToDeploymentFeatureCacheSettingsOutput() DeploymentFeatureCacheSettingsOutput {
+	return o
+}
+
+func (o DeploymentFeatureCacheSettingsOutput) ToDeploymentFeatureCacheSettingsOutputWithContext(ctx context.Context) DeploymentFeatureCacheSettingsOutput {
+	return o
+}
+
+func (o DeploymentFeatureCacheSettingsOutput) ToDeploymentFeatureCacheSettingsPtrOutput() DeploymentFeatureCacheSettingsPtrOutput {
+	return o.ToDeploymentFeatureCacheSettingsPtrOutputWithContext(context.Background())
+}
+
+func (o DeploymentFeatureCacheSettingsOutput) ToDeploymentFeatureCacheSettingsPtrOutputWithContext(ctx context.Context) DeploymentFeatureCacheSettingsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DeploymentFeatureCacheSettings) *DeploymentFeatureCacheSettings {
+		return &v
+	}).(DeploymentFeatureCacheSettingsPtrOutput)
+}
+
+// If feature cache is enabled for this Deployment.
+func (o DeploymentFeatureCacheSettingsOutput) Enabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v DeploymentFeatureCacheSettings) bool { return v.Enabled }).(pulumi.BoolOutput)
+}
+
+// If feature cache fetching is enabled.
+func (o DeploymentFeatureCacheSettingsOutput) Fetching() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v DeploymentFeatureCacheSettings) *bool { return v.Fetching }).(pulumi.BoolPtrOutput)
+}
+
+// Defines the feature cache schedule.
+func (o DeploymentFeatureCacheSettingsOutput) Schedule() DeploymentFeatureCacheSettingsSchedulePtrOutput {
+	return o.ApplyT(func(v DeploymentFeatureCacheSettings) *DeploymentFeatureCacheSettingsSchedule { return v.Schedule }).(DeploymentFeatureCacheSettingsSchedulePtrOutput)
+}
+
+type DeploymentFeatureCacheSettingsPtrOutput struct{ *pulumi.OutputState }
+
+func (DeploymentFeatureCacheSettingsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentFeatureCacheSettings)(nil)).Elem()
+}
+
+func (o DeploymentFeatureCacheSettingsPtrOutput) ToDeploymentFeatureCacheSettingsPtrOutput() DeploymentFeatureCacheSettingsPtrOutput {
+	return o
+}
+
+func (o DeploymentFeatureCacheSettingsPtrOutput) ToDeploymentFeatureCacheSettingsPtrOutputWithContext(ctx context.Context) DeploymentFeatureCacheSettingsPtrOutput {
+	return o
+}
+
+func (o DeploymentFeatureCacheSettingsPtrOutput) Elem() DeploymentFeatureCacheSettingsOutput {
+	return o.ApplyT(func(v *DeploymentFeatureCacheSettings) DeploymentFeatureCacheSettings {
+		if v != nil {
+			return *v
+		}
+		var ret DeploymentFeatureCacheSettings
+		return ret
+	}).(DeploymentFeatureCacheSettingsOutput)
+}
+
+// If feature cache is enabled for this Deployment.
+func (o DeploymentFeatureCacheSettingsPtrOutput) Enabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *DeploymentFeatureCacheSettings) *bool {
+		if v == nil {
+			return nil
+		}
+		return &v.Enabled
+	}).(pulumi.BoolPtrOutput)
+}
+
+// If feature cache fetching is enabled.
+func (o DeploymentFeatureCacheSettingsPtrOutput) Fetching() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *DeploymentFeatureCacheSettings) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.Fetching
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Defines the feature cache schedule.
+func (o DeploymentFeatureCacheSettingsPtrOutput) Schedule() DeploymentFeatureCacheSettingsSchedulePtrOutput {
+	return o.ApplyT(func(v *DeploymentFeatureCacheSettings) *DeploymentFeatureCacheSettingsSchedule {
+		if v == nil {
+			return nil
+		}
+		return v.Schedule
+	}).(DeploymentFeatureCacheSettingsSchedulePtrOutput)
+}
+
+type DeploymentFeatureCacheSettingsSchedule struct {
+	// Days of the month.
+	DayOfMonths []string `pulumi:"dayOfMonths"`
+	// Days of the week.
+	DayOfWeeks []string `pulumi:"dayOfWeeks"`
+	// Hours of the day.
+	Hours []string `pulumi:"hours"`
+	// Minutes of the day.
+	Minutes []string `pulumi:"minutes"`
+	// Months of the year.
+	Months []string `pulumi:"months"`
+}
+
+// DeploymentFeatureCacheSettingsScheduleInput is an input type that accepts DeploymentFeatureCacheSettingsScheduleArgs and DeploymentFeatureCacheSettingsScheduleOutput values.
+// You can construct a concrete instance of `DeploymentFeatureCacheSettingsScheduleInput` via:
+//
+//	DeploymentFeatureCacheSettingsScheduleArgs{...}
+type DeploymentFeatureCacheSettingsScheduleInput interface {
+	pulumi.Input
+
+	ToDeploymentFeatureCacheSettingsScheduleOutput() DeploymentFeatureCacheSettingsScheduleOutput
+	ToDeploymentFeatureCacheSettingsScheduleOutputWithContext(context.Context) DeploymentFeatureCacheSettingsScheduleOutput
+}
+
+type DeploymentFeatureCacheSettingsScheduleArgs struct {
+	// Days of the month.
+	DayOfMonths pulumi.StringArrayInput `pulumi:"dayOfMonths"`
+	// Days of the week.
+	DayOfWeeks pulumi.StringArrayInput `pulumi:"dayOfWeeks"`
+	// Hours of the day.
+	Hours pulumi.StringArrayInput `pulumi:"hours"`
+	// Minutes of the day.
+	Minutes pulumi.StringArrayInput `pulumi:"minutes"`
+	// Months of the year.
+	Months pulumi.StringArrayInput `pulumi:"months"`
+}
+
+func (DeploymentFeatureCacheSettingsScheduleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentFeatureCacheSettingsSchedule)(nil)).Elem()
+}
+
+func (i DeploymentFeatureCacheSettingsScheduleArgs) ToDeploymentFeatureCacheSettingsScheduleOutput() DeploymentFeatureCacheSettingsScheduleOutput {
+	return i.ToDeploymentFeatureCacheSettingsScheduleOutputWithContext(context.Background())
+}
+
+func (i DeploymentFeatureCacheSettingsScheduleArgs) ToDeploymentFeatureCacheSettingsScheduleOutputWithContext(ctx context.Context) DeploymentFeatureCacheSettingsScheduleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentFeatureCacheSettingsScheduleOutput)
+}
+
+func (i DeploymentFeatureCacheSettingsScheduleArgs) ToDeploymentFeatureCacheSettingsSchedulePtrOutput() DeploymentFeatureCacheSettingsSchedulePtrOutput {
+	return i.ToDeploymentFeatureCacheSettingsSchedulePtrOutputWithContext(context.Background())
+}
+
+func (i DeploymentFeatureCacheSettingsScheduleArgs) ToDeploymentFeatureCacheSettingsSchedulePtrOutputWithContext(ctx context.Context) DeploymentFeatureCacheSettingsSchedulePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentFeatureCacheSettingsScheduleOutput).ToDeploymentFeatureCacheSettingsSchedulePtrOutputWithContext(ctx)
+}
+
+// DeploymentFeatureCacheSettingsSchedulePtrInput is an input type that accepts DeploymentFeatureCacheSettingsScheduleArgs, DeploymentFeatureCacheSettingsSchedulePtr and DeploymentFeatureCacheSettingsSchedulePtrOutput values.
+// You can construct a concrete instance of `DeploymentFeatureCacheSettingsSchedulePtrInput` via:
+//
+//	        DeploymentFeatureCacheSettingsScheduleArgs{...}
+//
+//	or:
+//
+//	        nil
+type DeploymentFeatureCacheSettingsSchedulePtrInput interface {
+	pulumi.Input
+
+	ToDeploymentFeatureCacheSettingsSchedulePtrOutput() DeploymentFeatureCacheSettingsSchedulePtrOutput
+	ToDeploymentFeatureCacheSettingsSchedulePtrOutputWithContext(context.Context) DeploymentFeatureCacheSettingsSchedulePtrOutput
+}
+
+type deploymentFeatureCacheSettingsSchedulePtrType DeploymentFeatureCacheSettingsScheduleArgs
+
+func DeploymentFeatureCacheSettingsSchedulePtr(v *DeploymentFeatureCacheSettingsScheduleArgs) DeploymentFeatureCacheSettingsSchedulePtrInput {
+	return (*deploymentFeatureCacheSettingsSchedulePtrType)(v)
+}
+
+func (*deploymentFeatureCacheSettingsSchedulePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentFeatureCacheSettingsSchedule)(nil)).Elem()
+}
+
+func (i *deploymentFeatureCacheSettingsSchedulePtrType) ToDeploymentFeatureCacheSettingsSchedulePtrOutput() DeploymentFeatureCacheSettingsSchedulePtrOutput {
+	return i.ToDeploymentFeatureCacheSettingsSchedulePtrOutputWithContext(context.Background())
+}
+
+func (i *deploymentFeatureCacheSettingsSchedulePtrType) ToDeploymentFeatureCacheSettingsSchedulePtrOutputWithContext(ctx context.Context) DeploymentFeatureCacheSettingsSchedulePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentFeatureCacheSettingsSchedulePtrOutput)
+}
+
+type DeploymentFeatureCacheSettingsScheduleOutput struct{ *pulumi.OutputState }
+
+func (DeploymentFeatureCacheSettingsScheduleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentFeatureCacheSettingsSchedule)(nil)).Elem()
+}
+
+func (o DeploymentFeatureCacheSettingsScheduleOutput) ToDeploymentFeatureCacheSettingsScheduleOutput() DeploymentFeatureCacheSettingsScheduleOutput {
+	return o
+}
+
+func (o DeploymentFeatureCacheSettingsScheduleOutput) ToDeploymentFeatureCacheSettingsScheduleOutputWithContext(ctx context.Context) DeploymentFeatureCacheSettingsScheduleOutput {
+	return o
+}
+
+func (o DeploymentFeatureCacheSettingsScheduleOutput) ToDeploymentFeatureCacheSettingsSchedulePtrOutput() DeploymentFeatureCacheSettingsSchedulePtrOutput {
+	return o.ToDeploymentFeatureCacheSettingsSchedulePtrOutputWithContext(context.Background())
+}
+
+func (o DeploymentFeatureCacheSettingsScheduleOutput) ToDeploymentFeatureCacheSettingsSchedulePtrOutputWithContext(ctx context.Context) DeploymentFeatureCacheSettingsSchedulePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DeploymentFeatureCacheSettingsSchedule) *DeploymentFeatureCacheSettingsSchedule {
+		return &v
+	}).(DeploymentFeatureCacheSettingsSchedulePtrOutput)
+}
+
+// Days of the month.
+func (o DeploymentFeatureCacheSettingsScheduleOutput) DayOfMonths() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v DeploymentFeatureCacheSettingsSchedule) []string { return v.DayOfMonths }).(pulumi.StringArrayOutput)
+}
+
+// Days of the week.
+func (o DeploymentFeatureCacheSettingsScheduleOutput) DayOfWeeks() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v DeploymentFeatureCacheSettingsSchedule) []string { return v.DayOfWeeks }).(pulumi.StringArrayOutput)
+}
+
+// Hours of the day.
+func (o DeploymentFeatureCacheSettingsScheduleOutput) Hours() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v DeploymentFeatureCacheSettingsSchedule) []string { return v.Hours }).(pulumi.StringArrayOutput)
+}
+
+// Minutes of the day.
+func (o DeploymentFeatureCacheSettingsScheduleOutput) Minutes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v DeploymentFeatureCacheSettingsSchedule) []string { return v.Minutes }).(pulumi.StringArrayOutput)
+}
+
+// Months of the year.
+func (o DeploymentFeatureCacheSettingsScheduleOutput) Months() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v DeploymentFeatureCacheSettingsSchedule) []string { return v.Months }).(pulumi.StringArrayOutput)
+}
+
+type DeploymentFeatureCacheSettingsSchedulePtrOutput struct{ *pulumi.OutputState }
+
+func (DeploymentFeatureCacheSettingsSchedulePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentFeatureCacheSettingsSchedule)(nil)).Elem()
+}
+
+func (o DeploymentFeatureCacheSettingsSchedulePtrOutput) ToDeploymentFeatureCacheSettingsSchedulePtrOutput() DeploymentFeatureCacheSettingsSchedulePtrOutput {
+	return o
+}
+
+func (o DeploymentFeatureCacheSettingsSchedulePtrOutput) ToDeploymentFeatureCacheSettingsSchedulePtrOutputWithContext(ctx context.Context) DeploymentFeatureCacheSettingsSchedulePtrOutput {
+	return o
+}
+
+func (o DeploymentFeatureCacheSettingsSchedulePtrOutput) Elem() DeploymentFeatureCacheSettingsScheduleOutput {
+	return o.ApplyT(func(v *DeploymentFeatureCacheSettingsSchedule) DeploymentFeatureCacheSettingsSchedule {
+		if v != nil {
+			return *v
+		}
+		var ret DeploymentFeatureCacheSettingsSchedule
+		return ret
+	}).(DeploymentFeatureCacheSettingsScheduleOutput)
+}
+
+// Days of the month.
+func (o DeploymentFeatureCacheSettingsSchedulePtrOutput) DayOfMonths() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *DeploymentFeatureCacheSettingsSchedule) []string {
+		if v == nil {
+			return nil
+		}
+		return v.DayOfMonths
+	}).(pulumi.StringArrayOutput)
+}
+
+// Days of the week.
+func (o DeploymentFeatureCacheSettingsSchedulePtrOutput) DayOfWeeks() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *DeploymentFeatureCacheSettingsSchedule) []string {
+		if v == nil {
+			return nil
+		}
+		return v.DayOfWeeks
+	}).(pulumi.StringArrayOutput)
+}
+
+// Hours of the day.
+func (o DeploymentFeatureCacheSettingsSchedulePtrOutput) Hours() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *DeploymentFeatureCacheSettingsSchedule) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Hours
+	}).(pulumi.StringArrayOutput)
+}
+
+// Minutes of the day.
+func (o DeploymentFeatureCacheSettingsSchedulePtrOutput) Minutes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *DeploymentFeatureCacheSettingsSchedule) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Minutes
+	}).(pulumi.StringArrayOutput)
+}
+
+// Months of the year.
+func (o DeploymentFeatureCacheSettingsSchedulePtrOutput) Months() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *DeploymentFeatureCacheSettingsSchedule) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Months
+	}).(pulumi.StringArrayOutput)
+}
+
 type DeploymentHealthSettings struct {
 	// The accuracy health settings for this Deployment.
 	Accuracy *DeploymentHealthSettingsAccuracy `pulumi:"accuracy"`
@@ -10130,6 +10518,10 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentChallengerReplaySettingsPtrInput)(nil)).Elem(), DeploymentChallengerReplaySettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentDriftTrackingSettingsInput)(nil)).Elem(), DeploymentDriftTrackingSettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentDriftTrackingSettingsPtrInput)(nil)).Elem(), DeploymentDriftTrackingSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentFeatureCacheSettingsInput)(nil)).Elem(), DeploymentFeatureCacheSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentFeatureCacheSettingsPtrInput)(nil)).Elem(), DeploymentFeatureCacheSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentFeatureCacheSettingsScheduleInput)(nil)).Elem(), DeploymentFeatureCacheSettingsScheduleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentFeatureCacheSettingsSchedulePtrInput)(nil)).Elem(), DeploymentFeatureCacheSettingsScheduleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentHealthSettingsInput)(nil)).Elem(), DeploymentHealthSettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentHealthSettingsPtrInput)(nil)).Elem(), DeploymentHealthSettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentHealthSettingsAccuracyInput)(nil)).Elem(), DeploymentHealthSettingsAccuracyArgs{})
@@ -10245,6 +10637,10 @@ func init() {
 	pulumi.RegisterOutputType(DeploymentChallengerReplaySettingsPtrOutput{})
 	pulumi.RegisterOutputType(DeploymentDriftTrackingSettingsOutput{})
 	pulumi.RegisterOutputType(DeploymentDriftTrackingSettingsPtrOutput{})
+	pulumi.RegisterOutputType(DeploymentFeatureCacheSettingsOutput{})
+	pulumi.RegisterOutputType(DeploymentFeatureCacheSettingsPtrOutput{})
+	pulumi.RegisterOutputType(DeploymentFeatureCacheSettingsScheduleOutput{})
+	pulumi.RegisterOutputType(DeploymentFeatureCacheSettingsSchedulePtrOutput{})
 	pulumi.RegisterOutputType(DeploymentHealthSettingsOutput{})
 	pulumi.RegisterOutputType(DeploymentHealthSettingsPtrOutput{})
 	pulumi.RegisterOutputType(DeploymentHealthSettingsAccuracyOutput{})

@@ -63,6 +63,7 @@ namespace DataRobotPulumi.Datarobot
     ///         PredictionWarningSettings = null,
     ///         PredictionIntervalsSettings = null,
     ///         PredictionsSettings = null,
+    ///         FeatureCacheSettings = null,
     ///         HealthSettings = null,
     ///         RuntimeParameterValues = new[]
     ///         {
@@ -120,6 +121,12 @@ namespace DataRobotPulumi.Datarobot
         /// </summary>
         [Output("driftTrackingSettings")]
         public Output<Outputs.DeploymentDriftTrackingSettings?> DriftTrackingSettings { get; private set; } = null!;
+
+        /// <summary>
+        /// The feature cache settings for this Deployment.
+        /// </summary>
+        [Output("featureCacheSettings")]
+        public Output<Outputs.DeploymentFeatureCacheSettings?> FeatureCacheSettings { get; private set; } = null!;
 
         /// <summary>
         /// The health settings for this Deployment.
@@ -283,6 +290,12 @@ namespace DataRobotPulumi.Datarobot
         public Input<Inputs.DeploymentDriftTrackingSettingsArgs>? DriftTrackingSettings { get; set; }
 
         /// <summary>
+        /// The feature cache settings for this Deployment.
+        /// </summary>
+        [Input("featureCacheSettings")]
+        public Input<Inputs.DeploymentFeatureCacheSettingsArgs>? FeatureCacheSettings { get; set; }
+
+        /// <summary>
         /// The health settings for this Deployment.
         /// </summary>
         [Input("healthSettings")]
@@ -415,6 +428,12 @@ namespace DataRobotPulumi.Datarobot
         /// </summary>
         [Input("driftTrackingSettings")]
         public Input<Inputs.DeploymentDriftTrackingSettingsGetArgs>? DriftTrackingSettings { get; set; }
+
+        /// <summary>
+        /// The feature cache settings for this Deployment.
+        /// </summary>
+        [Input("featureCacheSettings")]
+        public Input<Inputs.DeploymentFeatureCacheSettingsGetArgs>? FeatureCacheSettings { get; set; }
 
         /// <summary>
         /// The health settings for this Deployment.
