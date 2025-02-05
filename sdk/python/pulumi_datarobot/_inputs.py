@@ -33,6 +33,8 @@ __all__ = [
     'BatchPredictionJobDefinitionTimeseriesSettingsArgsDict',
     'CustomJobRuntimeParameterValueArgs',
     'CustomJobRuntimeParameterValueArgsDict',
+    'CustomMetricBatchArgs',
+    'CustomMetricBatchArgsDict',
     'CustomMetricFromJobBatchArgs',
     'CustomMetricFromJobBatchArgsDict',
     'CustomMetricFromJobParameterOverrideArgs',
@@ -47,6 +49,12 @@ __all__ = [
     'CustomMetricFromJobValueArgsDict',
     'CustomMetricJobRuntimeParameterValueArgs',
     'CustomMetricJobRuntimeParameterValueArgsDict',
+    'CustomMetricSampleCountArgs',
+    'CustomMetricSampleCountArgsDict',
+    'CustomMetricTimestampArgs',
+    'CustomMetricTimestampArgsDict',
+    'CustomMetricValueArgs',
+    'CustomMetricValueArgsDict',
     'CustomModelGuardConfigurationArgs',
     'CustomModelGuardConfigurationArgsDict',
     'CustomModelGuardConfigurationInterventionArgs',
@@ -1255,6 +1263,38 @@ class CustomJobRuntimeParameterValueArgs:
 
 
 if not MYPY:
+    class CustomMetricBatchArgsDict(TypedDict):
+        column_name: NotRequired[pulumi.Input[str]]
+        """
+        Column name.
+        """
+elif False:
+    CustomMetricBatchArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class CustomMetricBatchArgs:
+    def __init__(__self__, *,
+                 column_name: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] column_name: Column name.
+        """
+        if column_name is not None:
+            pulumi.set(__self__, "column_name", column_name)
+
+    @property
+    @pulumi.getter(name="columnName")
+    def column_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Column name.
+        """
+        return pulumi.get(self, "column_name")
+
+    @column_name.setter
+    def column_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "column_name", value)
+
+
+if not MYPY:
     class CustomMetricFromJobBatchArgsDict(TypedDict):
         column_name: NotRequired[pulumi.Input[str]]
         """
@@ -1644,6 +1684,122 @@ class CustomMetricJobRuntimeParameterValueArgs:
     @value.setter
     def value(self, value: pulumi.Input[str]):
         pulumi.set(self, "value", value)
+
+
+if not MYPY:
+    class CustomMetricSampleCountArgsDict(TypedDict):
+        column_name: NotRequired[pulumi.Input[str]]
+        """
+        Column name.
+        """
+elif False:
+    CustomMetricSampleCountArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class CustomMetricSampleCountArgs:
+    def __init__(__self__, *,
+                 column_name: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] column_name: Column name.
+        """
+        if column_name is not None:
+            pulumi.set(__self__, "column_name", column_name)
+
+    @property
+    @pulumi.getter(name="columnName")
+    def column_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Column name.
+        """
+        return pulumi.get(self, "column_name")
+
+    @column_name.setter
+    def column_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "column_name", value)
+
+
+if not MYPY:
+    class CustomMetricTimestampArgsDict(TypedDict):
+        column_name: NotRequired[pulumi.Input[str]]
+        """
+        Column name.
+        """
+        time_format: NotRequired[pulumi.Input[str]]
+        """
+        Format.
+        """
+elif False:
+    CustomMetricTimestampArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class CustomMetricTimestampArgs:
+    def __init__(__self__, *,
+                 column_name: Optional[pulumi.Input[str]] = None,
+                 time_format: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] column_name: Column name.
+        :param pulumi.Input[str] time_format: Format.
+        """
+        if column_name is not None:
+            pulumi.set(__self__, "column_name", column_name)
+        if time_format is not None:
+            pulumi.set(__self__, "time_format", time_format)
+
+    @property
+    @pulumi.getter(name="columnName")
+    def column_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Column name.
+        """
+        return pulumi.get(self, "column_name")
+
+    @column_name.setter
+    def column_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "column_name", value)
+
+    @property
+    @pulumi.getter(name="timeFormat")
+    def time_format(self) -> Optional[pulumi.Input[str]]:
+        """
+        Format.
+        """
+        return pulumi.get(self, "time_format")
+
+    @time_format.setter
+    def time_format(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "time_format", value)
+
+
+if not MYPY:
+    class CustomMetricValueArgsDict(TypedDict):
+        column_name: NotRequired[pulumi.Input[str]]
+        """
+        Column name.
+        """
+elif False:
+    CustomMetricValueArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class CustomMetricValueArgs:
+    def __init__(__self__, *,
+                 column_name: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] column_name: Column name.
+        """
+        if column_name is not None:
+            pulumi.set(__self__, "column_name", column_name)
+
+    @property
+    @pulumi.getter(name="columnName")
+    def column_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Column name.
+        """
+        return pulumi.get(self, "column_name")
+
+    @column_name.setter
+    def column_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "column_name", value)
 
 
 if not MYPY:

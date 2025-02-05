@@ -406,6 +406,15 @@
                 "value"
             ]
         },
+        "datarobot:index/CustomMetricBatch:CustomMetricBatch": {
+            "properties": {
+                "columnName": {
+                    "type": "string",
+                    "description": "Column name.\n"
+                }
+            },
+            "type": "object"
+        },
         "datarobot:index/CustomMetricFromJobBatch:CustomMetricFromJobBatch": {
             "properties": {
                 "columnName": {
@@ -539,6 +548,37 @@
                 "type",
                 "value"
             ]
+        },
+        "datarobot:index/CustomMetricSampleCount:CustomMetricSampleCount": {
+            "properties": {
+                "columnName": {
+                    "type": "string",
+                    "description": "Column name.\n"
+                }
+            },
+            "type": "object"
+        },
+        "datarobot:index/CustomMetricTimestamp:CustomMetricTimestamp": {
+            "properties": {
+                "columnName": {
+                    "type": "string",
+                    "description": "Column name.\n"
+                },
+                "timeFormat": {
+                    "type": "string",
+                    "description": "Format.\n"
+                }
+            },
+            "type": "object"
+        },
+        "datarobot:index/CustomMetricValue:CustomMetricValue": {
+            "properties": {
+                "columnName": {
+                    "type": "string",
+                    "description": "Column name.\n"
+                }
+            },
+            "type": "object"
         },
         "datarobot:index/CustomModelGuardConfiguration:CustomModelGuardConfiguration": {
             "properties": {
@@ -2806,6 +2846,192 @@
                             "$ref": "#/types/datarobot:index/CustomJobRuntimeParameterValue:CustomJobRuntimeParameterValue"
                         },
                         "description": "Additional parameters to be injected into a Job at runtime.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "datarobot:index/customMetric:CustomMetric": {
+            "description": "Custom Metric\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```yaml\nresources:\n  example:\n    type: datarobot:CustomMetric\n    properties:\n      deploymentId: ${datarobot_deployment.example.id}\n      description: example description\n      units: dollars\n      directionality: higherIsBetter\n      type: sum\n      baselineValue: 0.5\n      isModelSpecific: true\n      isGeospatial: false\n      # Optional\n      timeStep: hour\n      timestamp:\n        column_name: timestamp_column\n        time_format: '%Y-%m-%dT%H:%M:%SZ'\n      value:\n        column_name: value_column\n      batch:\n        column_name: batch_column\n      sampleCount:\n        column_name: sample_count_column\n      associationId:\n        columnName: association_id_column\noutputs:\n  exampleId: ${example.id}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "properties": {
+                "baselineValue": {
+                    "type": "number",
+                    "description": "The baseline value used to add “reference dots” to the values over time chart.\n"
+                },
+                "batch": {
+                    "$ref": "#/types/datarobot:index/CustomMetricBatch:CustomMetricBatch",
+                    "description": "A Custom Metric batch ID source when reading values from columnar dataset.\n"
+                },
+                "deploymentId": {
+                    "type": "string",
+                    "description": "ID of the Deployment for the Custom Metric.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Description of the Custom Metric.\n"
+                },
+                "directionality": {
+                    "type": "string",
+                    "description": "Directionality of the Custom Metric\n"
+                },
+                "isGeospatial": {
+                    "type": "boolean",
+                    "description": "Determines whether the metric is geospatial.\n"
+                },
+                "isModelSpecific": {
+                    "type": "boolean",
+                    "description": "Determines whether the metric is related to the model or deployment.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Name of the Custom Metric.\n"
+                },
+                "sampleCount": {
+                    "$ref": "#/types/datarobot:index/CustomMetricSampleCount:CustomMetricSampleCount",
+                    "description": "A Custom Metric sample source when reading values from columnar dataset.\n"
+                },
+                "timestamp": {
+                    "$ref": "#/types/datarobot:index/CustomMetricTimestamp:CustomMetricTimestamp",
+                    "description": "A Custom Metric timestamp column source when reading values from columnar dataset.\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "Aggregation type of the Custom Metric.\n"
+                },
+                "units": {
+                    "type": "string",
+                    "description": "The units, or the y-axis label, of the given Custom Metric.\n"
+                },
+                "value": {
+                    "$ref": "#/types/datarobot:index/CustomMetricValue:CustomMetricValue",
+                    "description": "A Custom Metric value source when reading values from columnar dataset.\n"
+                }
+            },
+            "required": [
+                "deploymentId",
+                "directionality",
+                "isGeospatial",
+                "isModelSpecific",
+                "name",
+                "type",
+                "units"
+            ],
+            "inputProperties": {
+                "baselineValue": {
+                    "type": "number",
+                    "description": "The baseline value used to add “reference dots” to the values over time chart.\n"
+                },
+                "batch": {
+                    "$ref": "#/types/datarobot:index/CustomMetricBatch:CustomMetricBatch",
+                    "description": "A Custom Metric batch ID source when reading values from columnar dataset.\n"
+                },
+                "deploymentId": {
+                    "type": "string",
+                    "description": "ID of the Deployment for the Custom Metric.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Description of the Custom Metric.\n"
+                },
+                "directionality": {
+                    "type": "string",
+                    "description": "Directionality of the Custom Metric\n"
+                },
+                "isGeospatial": {
+                    "type": "boolean",
+                    "description": "Determines whether the metric is geospatial.\n"
+                },
+                "isModelSpecific": {
+                    "type": "boolean",
+                    "description": "Determines whether the metric is related to the model or deployment.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Name of the Custom Metric.\n"
+                },
+                "sampleCount": {
+                    "$ref": "#/types/datarobot:index/CustomMetricSampleCount:CustomMetricSampleCount",
+                    "description": "A Custom Metric sample source when reading values from columnar dataset.\n"
+                },
+                "timestamp": {
+                    "$ref": "#/types/datarobot:index/CustomMetricTimestamp:CustomMetricTimestamp",
+                    "description": "A Custom Metric timestamp column source when reading values from columnar dataset.\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "Aggregation type of the Custom Metric.\n"
+                },
+                "units": {
+                    "type": "string",
+                    "description": "The units, or the y-axis label, of the given Custom Metric.\n"
+                },
+                "value": {
+                    "$ref": "#/types/datarobot:index/CustomMetricValue:CustomMetricValue",
+                    "description": "A Custom Metric value source when reading values from columnar dataset.\n"
+                }
+            },
+            "requiredInputs": [
+                "deploymentId",
+                "directionality",
+                "isGeospatial",
+                "isModelSpecific",
+                "type",
+                "units"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering CustomMetric resources.\n",
+                "properties": {
+                    "baselineValue": {
+                        "type": "number",
+                        "description": "The baseline value used to add “reference dots” to the values over time chart.\n"
+                    },
+                    "batch": {
+                        "$ref": "#/types/datarobot:index/CustomMetricBatch:CustomMetricBatch",
+                        "description": "A Custom Metric batch ID source when reading values from columnar dataset.\n"
+                    },
+                    "deploymentId": {
+                        "type": "string",
+                        "description": "ID of the Deployment for the Custom Metric.\n"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Description of the Custom Metric.\n"
+                    },
+                    "directionality": {
+                        "type": "string",
+                        "description": "Directionality of the Custom Metric\n"
+                    },
+                    "isGeospatial": {
+                        "type": "boolean",
+                        "description": "Determines whether the metric is geospatial.\n"
+                    },
+                    "isModelSpecific": {
+                        "type": "boolean",
+                        "description": "Determines whether the metric is related to the model or deployment.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Name of the Custom Metric.\n"
+                    },
+                    "sampleCount": {
+                        "$ref": "#/types/datarobot:index/CustomMetricSampleCount:CustomMetricSampleCount",
+                        "description": "A Custom Metric sample source when reading values from columnar dataset.\n"
+                    },
+                    "timestamp": {
+                        "$ref": "#/types/datarobot:index/CustomMetricTimestamp:CustomMetricTimestamp",
+                        "description": "A Custom Metric timestamp column source when reading values from columnar dataset.\n"
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "Aggregation type of the Custom Metric.\n"
+                    },
+                    "units": {
+                        "type": "string",
+                        "description": "The units, or the y-axis label, of the given Custom Metric.\n"
+                    },
+                    "value": {
+                        "$ref": "#/types/datarobot:index/CustomMetricValue:CustomMetricValue",
+                        "description": "A Custom Metric value source when reading values from columnar dataset.\n"
                     }
                 },
                 "type": "object"

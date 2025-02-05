@@ -236,6 +236,13 @@ export interface CustomJobRuntimeParameterValue {
     value: pulumi.Input<string>;
 }
 
+export interface CustomMetricBatch {
+    /**
+     * Column name.
+     */
+    columnName?: pulumi.Input<string>;
+}
+
 export interface CustomMetricFromJobBatch {
     /**
      * Column name.
@@ -319,6 +326,31 @@ export interface CustomMetricJobRuntimeParameterValue {
      * The value of the runtime parameter (type conversion is handled internally).
      */
     value: pulumi.Input<string>;
+}
+
+export interface CustomMetricSampleCount {
+    /**
+     * Column name.
+     */
+    columnName?: pulumi.Input<string>;
+}
+
+export interface CustomMetricTimestamp {
+    /**
+     * Column name.
+     */
+    columnName?: pulumi.Input<string>;
+    /**
+     * Format.
+     */
+    timeFormat?: pulumi.Input<string>;
+}
+
+export interface CustomMetricValue {
+    /**
+     * Column name.
+     */
+    columnName?: pulumi.Input<string>;
 }
 
 export interface CustomModelGuardConfiguration {

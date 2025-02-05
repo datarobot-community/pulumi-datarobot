@@ -94,6 +94,9 @@
                     }
                 }
             },
+            "datarobot_custom_metric": {
+                "current": "datarobot:index/customMetric:CustomMetric"
+            },
             "datarobot_custom_metric_from_job": {
                 "current": "datarobot:index/customMetricFromJob:CustomMetricFromJob",
                 "fields": {

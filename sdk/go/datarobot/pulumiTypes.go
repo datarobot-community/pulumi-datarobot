@@ -1926,6 +1926,143 @@ func (o CustomJobRuntimeParameterValueArrayOutput) Index(i pulumi.IntInput) Cust
 	}).(CustomJobRuntimeParameterValueOutput)
 }
 
+type CustomMetricBatch struct {
+	// Column name.
+	ColumnName *string `pulumi:"columnName"`
+}
+
+// CustomMetricBatchInput is an input type that accepts CustomMetricBatchArgs and CustomMetricBatchOutput values.
+// You can construct a concrete instance of `CustomMetricBatchInput` via:
+//
+//	CustomMetricBatchArgs{...}
+type CustomMetricBatchInput interface {
+	pulumi.Input
+
+	ToCustomMetricBatchOutput() CustomMetricBatchOutput
+	ToCustomMetricBatchOutputWithContext(context.Context) CustomMetricBatchOutput
+}
+
+type CustomMetricBatchArgs struct {
+	// Column name.
+	ColumnName pulumi.StringPtrInput `pulumi:"columnName"`
+}
+
+func (CustomMetricBatchArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomMetricBatch)(nil)).Elem()
+}
+
+func (i CustomMetricBatchArgs) ToCustomMetricBatchOutput() CustomMetricBatchOutput {
+	return i.ToCustomMetricBatchOutputWithContext(context.Background())
+}
+
+func (i CustomMetricBatchArgs) ToCustomMetricBatchOutputWithContext(ctx context.Context) CustomMetricBatchOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomMetricBatchOutput)
+}
+
+func (i CustomMetricBatchArgs) ToCustomMetricBatchPtrOutput() CustomMetricBatchPtrOutput {
+	return i.ToCustomMetricBatchPtrOutputWithContext(context.Background())
+}
+
+func (i CustomMetricBatchArgs) ToCustomMetricBatchPtrOutputWithContext(ctx context.Context) CustomMetricBatchPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomMetricBatchOutput).ToCustomMetricBatchPtrOutputWithContext(ctx)
+}
+
+// CustomMetricBatchPtrInput is an input type that accepts CustomMetricBatchArgs, CustomMetricBatchPtr and CustomMetricBatchPtrOutput values.
+// You can construct a concrete instance of `CustomMetricBatchPtrInput` via:
+//
+//	        CustomMetricBatchArgs{...}
+//
+//	or:
+//
+//	        nil
+type CustomMetricBatchPtrInput interface {
+	pulumi.Input
+
+	ToCustomMetricBatchPtrOutput() CustomMetricBatchPtrOutput
+	ToCustomMetricBatchPtrOutputWithContext(context.Context) CustomMetricBatchPtrOutput
+}
+
+type customMetricBatchPtrType CustomMetricBatchArgs
+
+func CustomMetricBatchPtr(v *CustomMetricBatchArgs) CustomMetricBatchPtrInput {
+	return (*customMetricBatchPtrType)(v)
+}
+
+func (*customMetricBatchPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**CustomMetricBatch)(nil)).Elem()
+}
+
+func (i *customMetricBatchPtrType) ToCustomMetricBatchPtrOutput() CustomMetricBatchPtrOutput {
+	return i.ToCustomMetricBatchPtrOutputWithContext(context.Background())
+}
+
+func (i *customMetricBatchPtrType) ToCustomMetricBatchPtrOutputWithContext(ctx context.Context) CustomMetricBatchPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomMetricBatchPtrOutput)
+}
+
+type CustomMetricBatchOutput struct{ *pulumi.OutputState }
+
+func (CustomMetricBatchOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomMetricBatch)(nil)).Elem()
+}
+
+func (o CustomMetricBatchOutput) ToCustomMetricBatchOutput() CustomMetricBatchOutput {
+	return o
+}
+
+func (o CustomMetricBatchOutput) ToCustomMetricBatchOutputWithContext(ctx context.Context) CustomMetricBatchOutput {
+	return o
+}
+
+func (o CustomMetricBatchOutput) ToCustomMetricBatchPtrOutput() CustomMetricBatchPtrOutput {
+	return o.ToCustomMetricBatchPtrOutputWithContext(context.Background())
+}
+
+func (o CustomMetricBatchOutput) ToCustomMetricBatchPtrOutputWithContext(ctx context.Context) CustomMetricBatchPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v CustomMetricBatch) *CustomMetricBatch {
+		return &v
+	}).(CustomMetricBatchPtrOutput)
+}
+
+// Column name.
+func (o CustomMetricBatchOutput) ColumnName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CustomMetricBatch) *string { return v.ColumnName }).(pulumi.StringPtrOutput)
+}
+
+type CustomMetricBatchPtrOutput struct{ *pulumi.OutputState }
+
+func (CustomMetricBatchPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**CustomMetricBatch)(nil)).Elem()
+}
+
+func (o CustomMetricBatchPtrOutput) ToCustomMetricBatchPtrOutput() CustomMetricBatchPtrOutput {
+	return o
+}
+
+func (o CustomMetricBatchPtrOutput) ToCustomMetricBatchPtrOutputWithContext(ctx context.Context) CustomMetricBatchPtrOutput {
+	return o
+}
+
+func (o CustomMetricBatchPtrOutput) Elem() CustomMetricBatchOutput {
+	return o.ApplyT(func(v *CustomMetricBatch) CustomMetricBatch {
+		if v != nil {
+			return *v
+		}
+		var ret CustomMetricBatch
+		return ret
+	}).(CustomMetricBatchOutput)
+}
+
+// Column name.
+func (o CustomMetricBatchPtrOutput) ColumnName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CustomMetricBatch) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ColumnName
+	}).(pulumi.StringPtrOutput)
+}
+
 type CustomMetricFromJobBatch struct {
 	// Column name.
 	ColumnName *string `pulumi:"columnName"`
@@ -2934,6 +3071,436 @@ func (o CustomMetricJobRuntimeParameterValueArrayOutput) Index(i pulumi.IntInput
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CustomMetricJobRuntimeParameterValue {
 		return vs[0].([]CustomMetricJobRuntimeParameterValue)[vs[1].(int)]
 	}).(CustomMetricJobRuntimeParameterValueOutput)
+}
+
+type CustomMetricSampleCount struct {
+	// Column name.
+	ColumnName *string `pulumi:"columnName"`
+}
+
+// CustomMetricSampleCountInput is an input type that accepts CustomMetricSampleCountArgs and CustomMetricSampleCountOutput values.
+// You can construct a concrete instance of `CustomMetricSampleCountInput` via:
+//
+//	CustomMetricSampleCountArgs{...}
+type CustomMetricSampleCountInput interface {
+	pulumi.Input
+
+	ToCustomMetricSampleCountOutput() CustomMetricSampleCountOutput
+	ToCustomMetricSampleCountOutputWithContext(context.Context) CustomMetricSampleCountOutput
+}
+
+type CustomMetricSampleCountArgs struct {
+	// Column name.
+	ColumnName pulumi.StringPtrInput `pulumi:"columnName"`
+}
+
+func (CustomMetricSampleCountArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomMetricSampleCount)(nil)).Elem()
+}
+
+func (i CustomMetricSampleCountArgs) ToCustomMetricSampleCountOutput() CustomMetricSampleCountOutput {
+	return i.ToCustomMetricSampleCountOutputWithContext(context.Background())
+}
+
+func (i CustomMetricSampleCountArgs) ToCustomMetricSampleCountOutputWithContext(ctx context.Context) CustomMetricSampleCountOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomMetricSampleCountOutput)
+}
+
+func (i CustomMetricSampleCountArgs) ToCustomMetricSampleCountPtrOutput() CustomMetricSampleCountPtrOutput {
+	return i.ToCustomMetricSampleCountPtrOutputWithContext(context.Background())
+}
+
+func (i CustomMetricSampleCountArgs) ToCustomMetricSampleCountPtrOutputWithContext(ctx context.Context) CustomMetricSampleCountPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomMetricSampleCountOutput).ToCustomMetricSampleCountPtrOutputWithContext(ctx)
+}
+
+// CustomMetricSampleCountPtrInput is an input type that accepts CustomMetricSampleCountArgs, CustomMetricSampleCountPtr and CustomMetricSampleCountPtrOutput values.
+// You can construct a concrete instance of `CustomMetricSampleCountPtrInput` via:
+//
+//	        CustomMetricSampleCountArgs{...}
+//
+//	or:
+//
+//	        nil
+type CustomMetricSampleCountPtrInput interface {
+	pulumi.Input
+
+	ToCustomMetricSampleCountPtrOutput() CustomMetricSampleCountPtrOutput
+	ToCustomMetricSampleCountPtrOutputWithContext(context.Context) CustomMetricSampleCountPtrOutput
+}
+
+type customMetricSampleCountPtrType CustomMetricSampleCountArgs
+
+func CustomMetricSampleCountPtr(v *CustomMetricSampleCountArgs) CustomMetricSampleCountPtrInput {
+	return (*customMetricSampleCountPtrType)(v)
+}
+
+func (*customMetricSampleCountPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**CustomMetricSampleCount)(nil)).Elem()
+}
+
+func (i *customMetricSampleCountPtrType) ToCustomMetricSampleCountPtrOutput() CustomMetricSampleCountPtrOutput {
+	return i.ToCustomMetricSampleCountPtrOutputWithContext(context.Background())
+}
+
+func (i *customMetricSampleCountPtrType) ToCustomMetricSampleCountPtrOutputWithContext(ctx context.Context) CustomMetricSampleCountPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomMetricSampleCountPtrOutput)
+}
+
+type CustomMetricSampleCountOutput struct{ *pulumi.OutputState }
+
+func (CustomMetricSampleCountOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomMetricSampleCount)(nil)).Elem()
+}
+
+func (o CustomMetricSampleCountOutput) ToCustomMetricSampleCountOutput() CustomMetricSampleCountOutput {
+	return o
+}
+
+func (o CustomMetricSampleCountOutput) ToCustomMetricSampleCountOutputWithContext(ctx context.Context) CustomMetricSampleCountOutput {
+	return o
+}
+
+func (o CustomMetricSampleCountOutput) ToCustomMetricSampleCountPtrOutput() CustomMetricSampleCountPtrOutput {
+	return o.ToCustomMetricSampleCountPtrOutputWithContext(context.Background())
+}
+
+func (o CustomMetricSampleCountOutput) ToCustomMetricSampleCountPtrOutputWithContext(ctx context.Context) CustomMetricSampleCountPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v CustomMetricSampleCount) *CustomMetricSampleCount {
+		return &v
+	}).(CustomMetricSampleCountPtrOutput)
+}
+
+// Column name.
+func (o CustomMetricSampleCountOutput) ColumnName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CustomMetricSampleCount) *string { return v.ColumnName }).(pulumi.StringPtrOutput)
+}
+
+type CustomMetricSampleCountPtrOutput struct{ *pulumi.OutputState }
+
+func (CustomMetricSampleCountPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**CustomMetricSampleCount)(nil)).Elem()
+}
+
+func (o CustomMetricSampleCountPtrOutput) ToCustomMetricSampleCountPtrOutput() CustomMetricSampleCountPtrOutput {
+	return o
+}
+
+func (o CustomMetricSampleCountPtrOutput) ToCustomMetricSampleCountPtrOutputWithContext(ctx context.Context) CustomMetricSampleCountPtrOutput {
+	return o
+}
+
+func (o CustomMetricSampleCountPtrOutput) Elem() CustomMetricSampleCountOutput {
+	return o.ApplyT(func(v *CustomMetricSampleCount) CustomMetricSampleCount {
+		if v != nil {
+			return *v
+		}
+		var ret CustomMetricSampleCount
+		return ret
+	}).(CustomMetricSampleCountOutput)
+}
+
+// Column name.
+func (o CustomMetricSampleCountPtrOutput) ColumnName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CustomMetricSampleCount) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ColumnName
+	}).(pulumi.StringPtrOutput)
+}
+
+type CustomMetricTimestamp struct {
+	// Column name.
+	ColumnName *string `pulumi:"columnName"`
+	// Format.
+	TimeFormat *string `pulumi:"timeFormat"`
+}
+
+// CustomMetricTimestampInput is an input type that accepts CustomMetricTimestampArgs and CustomMetricTimestampOutput values.
+// You can construct a concrete instance of `CustomMetricTimestampInput` via:
+//
+//	CustomMetricTimestampArgs{...}
+type CustomMetricTimestampInput interface {
+	pulumi.Input
+
+	ToCustomMetricTimestampOutput() CustomMetricTimestampOutput
+	ToCustomMetricTimestampOutputWithContext(context.Context) CustomMetricTimestampOutput
+}
+
+type CustomMetricTimestampArgs struct {
+	// Column name.
+	ColumnName pulumi.StringPtrInput `pulumi:"columnName"`
+	// Format.
+	TimeFormat pulumi.StringPtrInput `pulumi:"timeFormat"`
+}
+
+func (CustomMetricTimestampArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomMetricTimestamp)(nil)).Elem()
+}
+
+func (i CustomMetricTimestampArgs) ToCustomMetricTimestampOutput() CustomMetricTimestampOutput {
+	return i.ToCustomMetricTimestampOutputWithContext(context.Background())
+}
+
+func (i CustomMetricTimestampArgs) ToCustomMetricTimestampOutputWithContext(ctx context.Context) CustomMetricTimestampOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomMetricTimestampOutput)
+}
+
+func (i CustomMetricTimestampArgs) ToCustomMetricTimestampPtrOutput() CustomMetricTimestampPtrOutput {
+	return i.ToCustomMetricTimestampPtrOutputWithContext(context.Background())
+}
+
+func (i CustomMetricTimestampArgs) ToCustomMetricTimestampPtrOutputWithContext(ctx context.Context) CustomMetricTimestampPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomMetricTimestampOutput).ToCustomMetricTimestampPtrOutputWithContext(ctx)
+}
+
+// CustomMetricTimestampPtrInput is an input type that accepts CustomMetricTimestampArgs, CustomMetricTimestampPtr and CustomMetricTimestampPtrOutput values.
+// You can construct a concrete instance of `CustomMetricTimestampPtrInput` via:
+//
+//	        CustomMetricTimestampArgs{...}
+//
+//	or:
+//
+//	        nil
+type CustomMetricTimestampPtrInput interface {
+	pulumi.Input
+
+	ToCustomMetricTimestampPtrOutput() CustomMetricTimestampPtrOutput
+	ToCustomMetricTimestampPtrOutputWithContext(context.Context) CustomMetricTimestampPtrOutput
+}
+
+type customMetricTimestampPtrType CustomMetricTimestampArgs
+
+func CustomMetricTimestampPtr(v *CustomMetricTimestampArgs) CustomMetricTimestampPtrInput {
+	return (*customMetricTimestampPtrType)(v)
+}
+
+func (*customMetricTimestampPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**CustomMetricTimestamp)(nil)).Elem()
+}
+
+func (i *customMetricTimestampPtrType) ToCustomMetricTimestampPtrOutput() CustomMetricTimestampPtrOutput {
+	return i.ToCustomMetricTimestampPtrOutputWithContext(context.Background())
+}
+
+func (i *customMetricTimestampPtrType) ToCustomMetricTimestampPtrOutputWithContext(ctx context.Context) CustomMetricTimestampPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomMetricTimestampPtrOutput)
+}
+
+type CustomMetricTimestampOutput struct{ *pulumi.OutputState }
+
+func (CustomMetricTimestampOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomMetricTimestamp)(nil)).Elem()
+}
+
+func (o CustomMetricTimestampOutput) ToCustomMetricTimestampOutput() CustomMetricTimestampOutput {
+	return o
+}
+
+func (o CustomMetricTimestampOutput) ToCustomMetricTimestampOutputWithContext(ctx context.Context) CustomMetricTimestampOutput {
+	return o
+}
+
+func (o CustomMetricTimestampOutput) ToCustomMetricTimestampPtrOutput() CustomMetricTimestampPtrOutput {
+	return o.ToCustomMetricTimestampPtrOutputWithContext(context.Background())
+}
+
+func (o CustomMetricTimestampOutput) ToCustomMetricTimestampPtrOutputWithContext(ctx context.Context) CustomMetricTimestampPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v CustomMetricTimestamp) *CustomMetricTimestamp {
+		return &v
+	}).(CustomMetricTimestampPtrOutput)
+}
+
+// Column name.
+func (o CustomMetricTimestampOutput) ColumnName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CustomMetricTimestamp) *string { return v.ColumnName }).(pulumi.StringPtrOutput)
+}
+
+// Format.
+func (o CustomMetricTimestampOutput) TimeFormat() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CustomMetricTimestamp) *string { return v.TimeFormat }).(pulumi.StringPtrOutput)
+}
+
+type CustomMetricTimestampPtrOutput struct{ *pulumi.OutputState }
+
+func (CustomMetricTimestampPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**CustomMetricTimestamp)(nil)).Elem()
+}
+
+func (o CustomMetricTimestampPtrOutput) ToCustomMetricTimestampPtrOutput() CustomMetricTimestampPtrOutput {
+	return o
+}
+
+func (o CustomMetricTimestampPtrOutput) ToCustomMetricTimestampPtrOutputWithContext(ctx context.Context) CustomMetricTimestampPtrOutput {
+	return o
+}
+
+func (o CustomMetricTimestampPtrOutput) Elem() CustomMetricTimestampOutput {
+	return o.ApplyT(func(v *CustomMetricTimestamp) CustomMetricTimestamp {
+		if v != nil {
+			return *v
+		}
+		var ret CustomMetricTimestamp
+		return ret
+	}).(CustomMetricTimestampOutput)
+}
+
+// Column name.
+func (o CustomMetricTimestampPtrOutput) ColumnName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CustomMetricTimestamp) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ColumnName
+	}).(pulumi.StringPtrOutput)
+}
+
+// Format.
+func (o CustomMetricTimestampPtrOutput) TimeFormat() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CustomMetricTimestamp) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TimeFormat
+	}).(pulumi.StringPtrOutput)
+}
+
+type CustomMetricValue struct {
+	// Column name.
+	ColumnName *string `pulumi:"columnName"`
+}
+
+// CustomMetricValueInput is an input type that accepts CustomMetricValueArgs and CustomMetricValueOutput values.
+// You can construct a concrete instance of `CustomMetricValueInput` via:
+//
+//	CustomMetricValueArgs{...}
+type CustomMetricValueInput interface {
+	pulumi.Input
+
+	ToCustomMetricValueOutput() CustomMetricValueOutput
+	ToCustomMetricValueOutputWithContext(context.Context) CustomMetricValueOutput
+}
+
+type CustomMetricValueArgs struct {
+	// Column name.
+	ColumnName pulumi.StringPtrInput `pulumi:"columnName"`
+}
+
+func (CustomMetricValueArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomMetricValue)(nil)).Elem()
+}
+
+func (i CustomMetricValueArgs) ToCustomMetricValueOutput() CustomMetricValueOutput {
+	return i.ToCustomMetricValueOutputWithContext(context.Background())
+}
+
+func (i CustomMetricValueArgs) ToCustomMetricValueOutputWithContext(ctx context.Context) CustomMetricValueOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomMetricValueOutput)
+}
+
+func (i CustomMetricValueArgs) ToCustomMetricValuePtrOutput() CustomMetricValuePtrOutput {
+	return i.ToCustomMetricValuePtrOutputWithContext(context.Background())
+}
+
+func (i CustomMetricValueArgs) ToCustomMetricValuePtrOutputWithContext(ctx context.Context) CustomMetricValuePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomMetricValueOutput).ToCustomMetricValuePtrOutputWithContext(ctx)
+}
+
+// CustomMetricValuePtrInput is an input type that accepts CustomMetricValueArgs, CustomMetricValuePtr and CustomMetricValuePtrOutput values.
+// You can construct a concrete instance of `CustomMetricValuePtrInput` via:
+//
+//	        CustomMetricValueArgs{...}
+//
+//	or:
+//
+//	        nil
+type CustomMetricValuePtrInput interface {
+	pulumi.Input
+
+	ToCustomMetricValuePtrOutput() CustomMetricValuePtrOutput
+	ToCustomMetricValuePtrOutputWithContext(context.Context) CustomMetricValuePtrOutput
+}
+
+type customMetricValuePtrType CustomMetricValueArgs
+
+func CustomMetricValuePtr(v *CustomMetricValueArgs) CustomMetricValuePtrInput {
+	return (*customMetricValuePtrType)(v)
+}
+
+func (*customMetricValuePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**CustomMetricValue)(nil)).Elem()
+}
+
+func (i *customMetricValuePtrType) ToCustomMetricValuePtrOutput() CustomMetricValuePtrOutput {
+	return i.ToCustomMetricValuePtrOutputWithContext(context.Background())
+}
+
+func (i *customMetricValuePtrType) ToCustomMetricValuePtrOutputWithContext(ctx context.Context) CustomMetricValuePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomMetricValuePtrOutput)
+}
+
+type CustomMetricValueOutput struct{ *pulumi.OutputState }
+
+func (CustomMetricValueOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomMetricValue)(nil)).Elem()
+}
+
+func (o CustomMetricValueOutput) ToCustomMetricValueOutput() CustomMetricValueOutput {
+	return o
+}
+
+func (o CustomMetricValueOutput) ToCustomMetricValueOutputWithContext(ctx context.Context) CustomMetricValueOutput {
+	return o
+}
+
+func (o CustomMetricValueOutput) ToCustomMetricValuePtrOutput() CustomMetricValuePtrOutput {
+	return o.ToCustomMetricValuePtrOutputWithContext(context.Background())
+}
+
+func (o CustomMetricValueOutput) ToCustomMetricValuePtrOutputWithContext(ctx context.Context) CustomMetricValuePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v CustomMetricValue) *CustomMetricValue {
+		return &v
+	}).(CustomMetricValuePtrOutput)
+}
+
+// Column name.
+func (o CustomMetricValueOutput) ColumnName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CustomMetricValue) *string { return v.ColumnName }).(pulumi.StringPtrOutput)
+}
+
+type CustomMetricValuePtrOutput struct{ *pulumi.OutputState }
+
+func (CustomMetricValuePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**CustomMetricValue)(nil)).Elem()
+}
+
+func (o CustomMetricValuePtrOutput) ToCustomMetricValuePtrOutput() CustomMetricValuePtrOutput {
+	return o
+}
+
+func (o CustomMetricValuePtrOutput) ToCustomMetricValuePtrOutputWithContext(ctx context.Context) CustomMetricValuePtrOutput {
+	return o
+}
+
+func (o CustomMetricValuePtrOutput) Elem() CustomMetricValueOutput {
+	return o.ApplyT(func(v *CustomMetricValue) CustomMetricValue {
+		if v != nil {
+			return *v
+		}
+		var ret CustomMetricValue
+		return ret
+	}).(CustomMetricValueOutput)
+}
+
+// Column name.
+func (o CustomMetricValuePtrOutput) ColumnName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CustomMetricValue) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ColumnName
+	}).(pulumi.StringPtrOutput)
 }
 
 type CustomModelGuardConfiguration struct {
@@ -10479,6 +11046,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*BatchPredictionJobDefinitionTimeseriesSettingsPtrInput)(nil)).Elem(), BatchPredictionJobDefinitionTimeseriesSettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomJobRuntimeParameterValueInput)(nil)).Elem(), CustomJobRuntimeParameterValueArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomJobRuntimeParameterValueArrayInput)(nil)).Elem(), CustomJobRuntimeParameterValueArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomMetricBatchInput)(nil)).Elem(), CustomMetricBatchArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomMetricBatchPtrInput)(nil)).Elem(), CustomMetricBatchArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomMetricFromJobBatchInput)(nil)).Elem(), CustomMetricFromJobBatchArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomMetricFromJobBatchPtrInput)(nil)).Elem(), CustomMetricFromJobBatchArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomMetricFromJobParameterOverrideInput)(nil)).Elem(), CustomMetricFromJobParameterOverrideArgs{})
@@ -10493,6 +11062,12 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomMetricFromJobValuePtrInput)(nil)).Elem(), CustomMetricFromJobValueArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomMetricJobRuntimeParameterValueInput)(nil)).Elem(), CustomMetricJobRuntimeParameterValueArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomMetricJobRuntimeParameterValueArrayInput)(nil)).Elem(), CustomMetricJobRuntimeParameterValueArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomMetricSampleCountInput)(nil)).Elem(), CustomMetricSampleCountArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomMetricSampleCountPtrInput)(nil)).Elem(), CustomMetricSampleCountArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomMetricTimestampInput)(nil)).Elem(), CustomMetricTimestampArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomMetricTimestampPtrInput)(nil)).Elem(), CustomMetricTimestampArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomMetricValueInput)(nil)).Elem(), CustomMetricValueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomMetricValuePtrInput)(nil)).Elem(), CustomMetricValueArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelGuardConfigurationInput)(nil)).Elem(), CustomModelGuardConfigurationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelGuardConfigurationArrayInput)(nil)).Elem(), CustomModelGuardConfigurationArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelGuardConfigurationInterventionInput)(nil)).Elem(), CustomModelGuardConfigurationInterventionArgs{})
@@ -10598,6 +11173,8 @@ func init() {
 	pulumi.RegisterOutputType(BatchPredictionJobDefinitionTimeseriesSettingsPtrOutput{})
 	pulumi.RegisterOutputType(CustomJobRuntimeParameterValueOutput{})
 	pulumi.RegisterOutputType(CustomJobRuntimeParameterValueArrayOutput{})
+	pulumi.RegisterOutputType(CustomMetricBatchOutput{})
+	pulumi.RegisterOutputType(CustomMetricBatchPtrOutput{})
 	pulumi.RegisterOutputType(CustomMetricFromJobBatchOutput{})
 	pulumi.RegisterOutputType(CustomMetricFromJobBatchPtrOutput{})
 	pulumi.RegisterOutputType(CustomMetricFromJobParameterOverrideOutput{})
@@ -10612,6 +11189,12 @@ func init() {
 	pulumi.RegisterOutputType(CustomMetricFromJobValuePtrOutput{})
 	pulumi.RegisterOutputType(CustomMetricJobRuntimeParameterValueOutput{})
 	pulumi.RegisterOutputType(CustomMetricJobRuntimeParameterValueArrayOutput{})
+	pulumi.RegisterOutputType(CustomMetricSampleCountOutput{})
+	pulumi.RegisterOutputType(CustomMetricSampleCountPtrOutput{})
+	pulumi.RegisterOutputType(CustomMetricTimestampOutput{})
+	pulumi.RegisterOutputType(CustomMetricTimestampPtrOutput{})
+	pulumi.RegisterOutputType(CustomMetricValueOutput{})
+	pulumi.RegisterOutputType(CustomMetricValuePtrOutput{})
 	pulumi.RegisterOutputType(CustomModelGuardConfigurationOutput{})
 	pulumi.RegisterOutputType(CustomModelGuardConfigurationArrayOutput{})
 	pulumi.RegisterOutputType(CustomModelGuardConfigurationInterventionOutput{})
