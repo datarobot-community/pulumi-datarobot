@@ -25,6 +25,7 @@ __all__ = [
     'BatchPredictionJobDefinitionSchedule',
     'BatchPredictionJobDefinitionTimeseriesSettings',
     'CustomJobRuntimeParameterValue',
+    'CustomMetricBatch',
     'CustomMetricFromJobBatch',
     'CustomMetricFromJobParameterOverride',
     'CustomMetricFromJobSampleCount',
@@ -32,6 +33,9 @@ __all__ = [
     'CustomMetricFromJobTimestamp',
     'CustomMetricFromJobValue',
     'CustomMetricJobRuntimeParameterValue',
+    'CustomMetricSampleCount',
+    'CustomMetricTimestamp',
+    'CustomMetricValue',
     'CustomModelGuardConfiguration',
     'CustomModelGuardConfigurationIntervention',
     'CustomModelGuardConfigurationNemoInfo',
@@ -879,6 +883,42 @@ class CustomJobRuntimeParameterValue(dict):
 
 
 @pulumi.output_type
+class CustomMetricBatch(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "columnName":
+            suggest = "column_name"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in CustomMetricBatch. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        CustomMetricBatch.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        CustomMetricBatch.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 column_name: Optional[str] = None):
+        """
+        :param str column_name: Column name.
+        """
+        if column_name is not None:
+            pulumi.set(__self__, "column_name", column_name)
+
+    @property
+    @pulumi.getter(name="columnName")
+    def column_name(self) -> Optional[str]:
+        """
+        Column name.
+        """
+        return pulumi.get(self, "column_name")
+
+
+@pulumi.output_type
 class CustomMetricFromJobBatch(dict):
     @staticmethod
     def __key_warning(key: str):
@@ -1194,6 +1234,128 @@ class CustomMetricJobRuntimeParameterValue(dict):
         The value of the runtime parameter (type conversion is handled internally).
         """
         return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class CustomMetricSampleCount(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "columnName":
+            suggest = "column_name"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in CustomMetricSampleCount. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        CustomMetricSampleCount.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        CustomMetricSampleCount.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 column_name: Optional[str] = None):
+        """
+        :param str column_name: Column name.
+        """
+        if column_name is not None:
+            pulumi.set(__self__, "column_name", column_name)
+
+    @property
+    @pulumi.getter(name="columnName")
+    def column_name(self) -> Optional[str]:
+        """
+        Column name.
+        """
+        return pulumi.get(self, "column_name")
+
+
+@pulumi.output_type
+class CustomMetricTimestamp(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "columnName":
+            suggest = "column_name"
+        elif key == "timeFormat":
+            suggest = "time_format"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in CustomMetricTimestamp. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        CustomMetricTimestamp.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        CustomMetricTimestamp.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 column_name: Optional[str] = None,
+                 time_format: Optional[str] = None):
+        """
+        :param str column_name: Column name.
+        :param str time_format: Format.
+        """
+        if column_name is not None:
+            pulumi.set(__self__, "column_name", column_name)
+        if time_format is not None:
+            pulumi.set(__self__, "time_format", time_format)
+
+    @property
+    @pulumi.getter(name="columnName")
+    def column_name(self) -> Optional[str]:
+        """
+        Column name.
+        """
+        return pulumi.get(self, "column_name")
+
+    @property
+    @pulumi.getter(name="timeFormat")
+    def time_format(self) -> Optional[str]:
+        """
+        Format.
+        """
+        return pulumi.get(self, "time_format")
+
+
+@pulumi.output_type
+class CustomMetricValue(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "columnName":
+            suggest = "column_name"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in CustomMetricValue. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        CustomMetricValue.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        CustomMetricValue.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 column_name: Optional[str] = None):
+        """
+        :param str column_name: Column name.
+        """
+        if column_name is not None:
+            pulumi.set(__self__, "column_name", column_name)
+
+    @property
+    @pulumi.getter(name="columnName")
+    def column_name(self) -> Optional[str]:
+        """
+        Column name.
+        """
+        return pulumi.get(self, "column_name")
 
 
 @pulumi.output_type

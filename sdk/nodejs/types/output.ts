@@ -236,6 +236,13 @@ export interface CustomJobRuntimeParameterValue {
     value: string;
 }
 
+export interface CustomMetricBatch {
+    /**
+     * Column name.
+     */
+    columnName?: string;
+}
+
 export interface CustomMetricFromJobBatch {
     /**
      * Column name.
@@ -319,6 +326,31 @@ export interface CustomMetricJobRuntimeParameterValue {
      * The value of the runtime parameter (type conversion is handled internally).
      */
     value: string;
+}
+
+export interface CustomMetricSampleCount {
+    /**
+     * Column name.
+     */
+    columnName?: string;
+}
+
+export interface CustomMetricTimestamp {
+    /**
+     * Column name.
+     */
+    columnName?: string;
+    /**
+     * Format.
+     */
+    timeFormat?: string;
+}
+
+export interface CustomMetricValue {
+    /**
+     * Column name.
+     */
+    columnName?: string;
 }
 
 export interface CustomModelGuardConfiguration {

@@ -23,6 +23,7 @@
         "customApplication.ts",
         "customApplicationFromEnvironment.ts",
         "customJob.ts",
+        "customMetric.ts",
         "customMetricFromJob.ts",
         "customMetricJob.ts",
         "customModel.ts",
