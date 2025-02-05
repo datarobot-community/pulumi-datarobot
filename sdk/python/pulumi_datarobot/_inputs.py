@@ -73,6 +73,10 @@ __all__ = [
     'DeploymentChallengerReplaySettingsArgsDict',
     'DeploymentDriftTrackingSettingsArgs',
     'DeploymentDriftTrackingSettingsArgsDict',
+    'DeploymentFeatureCacheSettingsArgs',
+    'DeploymentFeatureCacheSettingsArgsDict',
+    'DeploymentFeatureCacheSettingsScheduleArgs',
+    'DeploymentFeatureCacheSettingsScheduleArgsDict',
     'DeploymentHealthSettingsArgs',
     'DeploymentHealthSettingsArgsDict',
     'DeploymentHealthSettingsAccuracyArgs',
@@ -2776,6 +2780,184 @@ class DeploymentDriftTrackingSettingsArgs:
     @tracked_features.setter
     def tracked_features(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
         pulumi.set(self, "tracked_features", value)
+
+
+if not MYPY:
+    class DeploymentFeatureCacheSettingsArgsDict(TypedDict):
+        enabled: pulumi.Input[bool]
+        """
+        If feature cache is enabled for this Deployment.
+        """
+        fetching: NotRequired[pulumi.Input[bool]]
+        """
+        If feature cache fetching is enabled.
+        """
+        schedule: NotRequired[pulumi.Input['DeploymentFeatureCacheSettingsScheduleArgsDict']]
+        """
+        Defines the feature cache schedule.
+        """
+elif False:
+    DeploymentFeatureCacheSettingsArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class DeploymentFeatureCacheSettingsArgs:
+    def __init__(__self__, *,
+                 enabled: pulumi.Input[bool],
+                 fetching: Optional[pulumi.Input[bool]] = None,
+                 schedule: Optional[pulumi.Input['DeploymentFeatureCacheSettingsScheduleArgs']] = None):
+        """
+        :param pulumi.Input[bool] enabled: If feature cache is enabled for this Deployment.
+        :param pulumi.Input[bool] fetching: If feature cache fetching is enabled.
+        :param pulumi.Input['DeploymentFeatureCacheSettingsScheduleArgs'] schedule: Defines the feature cache schedule.
+        """
+        pulumi.set(__self__, "enabled", enabled)
+        if fetching is not None:
+            pulumi.set(__self__, "fetching", fetching)
+        if schedule is not None:
+            pulumi.set(__self__, "schedule", schedule)
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> pulumi.Input[bool]:
+        """
+        If feature cache is enabled for this Deployment.
+        """
+        return pulumi.get(self, "enabled")
+
+    @enabled.setter
+    def enabled(self, value: pulumi.Input[bool]):
+        pulumi.set(self, "enabled", value)
+
+    @property
+    @pulumi.getter
+    def fetching(self) -> Optional[pulumi.Input[bool]]:
+        """
+        If feature cache fetching is enabled.
+        """
+        return pulumi.get(self, "fetching")
+
+    @fetching.setter
+    def fetching(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "fetching", value)
+
+    @property
+    @pulumi.getter
+    def schedule(self) -> Optional[pulumi.Input['DeploymentFeatureCacheSettingsScheduleArgs']]:
+        """
+        Defines the feature cache schedule.
+        """
+        return pulumi.get(self, "schedule")
+
+    @schedule.setter
+    def schedule(self, value: Optional[pulumi.Input['DeploymentFeatureCacheSettingsScheduleArgs']]):
+        pulumi.set(self, "schedule", value)
+
+
+if not MYPY:
+    class DeploymentFeatureCacheSettingsScheduleArgsDict(TypedDict):
+        day_of_months: pulumi.Input[Sequence[pulumi.Input[str]]]
+        """
+        Days of the month.
+        """
+        day_of_weeks: pulumi.Input[Sequence[pulumi.Input[str]]]
+        """
+        Days of the week.
+        """
+        hours: pulumi.Input[Sequence[pulumi.Input[str]]]
+        """
+        Hours of the day.
+        """
+        minutes: pulumi.Input[Sequence[pulumi.Input[str]]]
+        """
+        Minutes of the day.
+        """
+        months: pulumi.Input[Sequence[pulumi.Input[str]]]
+        """
+        Months of the year.
+        """
+elif False:
+    DeploymentFeatureCacheSettingsScheduleArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class DeploymentFeatureCacheSettingsScheduleArgs:
+    def __init__(__self__, *,
+                 day_of_months: pulumi.Input[Sequence[pulumi.Input[str]]],
+                 day_of_weeks: pulumi.Input[Sequence[pulumi.Input[str]]],
+                 hours: pulumi.Input[Sequence[pulumi.Input[str]]],
+                 minutes: pulumi.Input[Sequence[pulumi.Input[str]]],
+                 months: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] day_of_months: Days of the month.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] day_of_weeks: Days of the week.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] hours: Hours of the day.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] minutes: Minutes of the day.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] months: Months of the year.
+        """
+        pulumi.set(__self__, "day_of_months", day_of_months)
+        pulumi.set(__self__, "day_of_weeks", day_of_weeks)
+        pulumi.set(__self__, "hours", hours)
+        pulumi.set(__self__, "minutes", minutes)
+        pulumi.set(__self__, "months", months)
+
+    @property
+    @pulumi.getter(name="dayOfMonths")
+    def day_of_months(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        Days of the month.
+        """
+        return pulumi.get(self, "day_of_months")
+
+    @day_of_months.setter
+    def day_of_months(self, value: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        pulumi.set(self, "day_of_months", value)
+
+    @property
+    @pulumi.getter(name="dayOfWeeks")
+    def day_of_weeks(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        Days of the week.
+        """
+        return pulumi.get(self, "day_of_weeks")
+
+    @day_of_weeks.setter
+    def day_of_weeks(self, value: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        pulumi.set(self, "day_of_weeks", value)
+
+    @property
+    @pulumi.getter
+    def hours(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        Hours of the day.
+        """
+        return pulumi.get(self, "hours")
+
+    @hours.setter
+    def hours(self, value: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        pulumi.set(self, "hours", value)
+
+    @property
+    @pulumi.getter
+    def minutes(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        Minutes of the day.
+        """
+        return pulumi.get(self, "minutes")
+
+    @minutes.setter
+    def minutes(self, value: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        pulumi.set(self, "minutes", value)
+
+    @property
+    @pulumi.getter
+    def months(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        Months of the year.
+        """
+        return pulumi.get(self, "months")
+
+    @months.setter
+    def months(self, value: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        pulumi.set(self, "months", value)
 
 
 if not MYPY:

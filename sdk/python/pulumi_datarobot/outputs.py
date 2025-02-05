@@ -45,6 +45,8 @@ __all__ = [
     'DeploymentChallengerModelsSettings',
     'DeploymentChallengerReplaySettings',
     'DeploymentDriftTrackingSettings',
+    'DeploymentFeatureCacheSettings',
+    'DeploymentFeatureCacheSettingsSchedule',
     'DeploymentHealthSettings',
     'DeploymentHealthSettingsAccuracy',
     'DeploymentHealthSettingsActualsTimeliness',
@@ -2043,6 +2045,129 @@ class DeploymentDriftTrackingSettings(dict):
         List of features to be tracked for drift.
         """
         return pulumi.get(self, "tracked_features")
+
+
+@pulumi.output_type
+class DeploymentFeatureCacheSettings(dict):
+    def __init__(__self__, *,
+                 enabled: bool,
+                 fetching: Optional[bool] = None,
+                 schedule: Optional['outputs.DeploymentFeatureCacheSettingsSchedule'] = None):
+        """
+        :param bool enabled: If feature cache is enabled for this Deployment.
+        :param bool fetching: If feature cache fetching is enabled.
+        :param 'DeploymentFeatureCacheSettingsScheduleArgs' schedule: Defines the feature cache schedule.
+        """
+        pulumi.set(__self__, "enabled", enabled)
+        if fetching is not None:
+            pulumi.set(__self__, "fetching", fetching)
+        if schedule is not None:
+            pulumi.set(__self__, "schedule", schedule)
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> bool:
+        """
+        If feature cache is enabled for this Deployment.
+        """
+        return pulumi.get(self, "enabled")
+
+    @property
+    @pulumi.getter
+    def fetching(self) -> Optional[bool]:
+        """
+        If feature cache fetching is enabled.
+        """
+        return pulumi.get(self, "fetching")
+
+    @property
+    @pulumi.getter
+    def schedule(self) -> Optional['outputs.DeploymentFeatureCacheSettingsSchedule']:
+        """
+        Defines the feature cache schedule.
+        """
+        return pulumi.get(self, "schedule")
+
+
+@pulumi.output_type
+class DeploymentFeatureCacheSettingsSchedule(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "dayOfMonths":
+            suggest = "day_of_months"
+        elif key == "dayOfWeeks":
+            suggest = "day_of_weeks"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in DeploymentFeatureCacheSettingsSchedule. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        DeploymentFeatureCacheSettingsSchedule.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        DeploymentFeatureCacheSettingsSchedule.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 day_of_months: Sequence[str],
+                 day_of_weeks: Sequence[str],
+                 hours: Sequence[str],
+                 minutes: Sequence[str],
+                 months: Sequence[str]):
+        """
+        :param Sequence[str] day_of_months: Days of the month.
+        :param Sequence[str] day_of_weeks: Days of the week.
+        :param Sequence[str] hours: Hours of the day.
+        :param Sequence[str] minutes: Minutes of the day.
+        :param Sequence[str] months: Months of the year.
+        """
+        pulumi.set(__self__, "day_of_months", day_of_months)
+        pulumi.set(__self__, "day_of_weeks", day_of_weeks)
+        pulumi.set(__self__, "hours", hours)
+        pulumi.set(__self__, "minutes", minutes)
+        pulumi.set(__self__, "months", months)
+
+    @property
+    @pulumi.getter(name="dayOfMonths")
+    def day_of_months(self) -> Sequence[str]:
+        """
+        Days of the month.
+        """
+        return pulumi.get(self, "day_of_months")
+
+    @property
+    @pulumi.getter(name="dayOfWeeks")
+    def day_of_weeks(self) -> Sequence[str]:
+        """
+        Days of the week.
+        """
+        return pulumi.get(self, "day_of_weeks")
+
+    @property
+    @pulumi.getter
+    def hours(self) -> Sequence[str]:
+        """
+        Hours of the day.
+        """
+        return pulumi.get(self, "hours")
+
+    @property
+    @pulumi.getter
+    def minutes(self) -> Sequence[str]:
+        """
+        Minutes of the day.
+        """
+        return pulumi.get(self, "minutes")
+
+    @property
+    @pulumi.getter
+    def months(self) -> Sequence[str]:
+        """
+        Months of the year.
+        """
+        return pulumi.get(self, "months")
 
 
 @pulumi.output_type

@@ -69,6 +69,7 @@ import (
 //				PredictionWarningSettings:         &datarobot.DeploymentPredictionWarningSettingsArgs{},
 //				PredictionIntervalsSettings:       &datarobot.DeploymentPredictionIntervalsSettingsArgs{},
 //				PredictionsSettings:               &datarobot.DeploymentPredictionsSettingsArgs{},
+//				FeatureCacheSettings:              &datarobot.DeploymentFeatureCacheSettingsArgs{},
 //				HealthSettings:                    &datarobot.DeploymentHealthSettingsArgs{},
 //				RuntimeParameterValues: datarobot.DeploymentRuntimeParameterValueArray{
 //					&datarobot.DeploymentRuntimeParameterValueArgs{
@@ -102,6 +103,8 @@ type Deployment struct {
 	ChallengerReplaySettings DeploymentChallengerReplaySettingsPtrOutput `pulumi:"challengerReplaySettings"`
 	// The drift tracking settings for the Deployment.
 	DriftTrackingSettings DeploymentDriftTrackingSettingsPtrOutput `pulumi:"driftTrackingSettings"`
+	// The feature cache settings for this Deployment.
+	FeatureCacheSettings DeploymentFeatureCacheSettingsPtrOutput `pulumi:"featureCacheSettings"`
 	// The health settings for this Deployment.
 	HealthSettings DeploymentHealthSettingsPtrOutput `pulumi:"healthSettings"`
 	// The importance of the Deployment.
@@ -181,6 +184,8 @@ type deploymentState struct {
 	ChallengerReplaySettings *DeploymentChallengerReplaySettings `pulumi:"challengerReplaySettings"`
 	// The drift tracking settings for the Deployment.
 	DriftTrackingSettings *DeploymentDriftTrackingSettings `pulumi:"driftTrackingSettings"`
+	// The feature cache settings for this Deployment.
+	FeatureCacheSettings *DeploymentFeatureCacheSettings `pulumi:"featureCacheSettings"`
 	// The health settings for this Deployment.
 	HealthSettings *DeploymentHealthSettings `pulumi:"healthSettings"`
 	// The importance of the Deployment.
@@ -222,6 +227,8 @@ type DeploymentState struct {
 	ChallengerReplaySettings DeploymentChallengerReplaySettingsPtrInput
 	// The drift tracking settings for the Deployment.
 	DriftTrackingSettings DeploymentDriftTrackingSettingsPtrInput
+	// The feature cache settings for this Deployment.
+	FeatureCacheSettings DeploymentFeatureCacheSettingsPtrInput
 	// The health settings for this Deployment.
 	HealthSettings DeploymentHealthSettingsPtrInput
 	// The importance of the Deployment.
@@ -267,6 +274,8 @@ type deploymentArgs struct {
 	ChallengerReplaySettings *DeploymentChallengerReplaySettings `pulumi:"challengerReplaySettings"`
 	// The drift tracking settings for the Deployment.
 	DriftTrackingSettings *DeploymentDriftTrackingSettings `pulumi:"driftTrackingSettings"`
+	// The feature cache settings for this Deployment.
+	FeatureCacheSettings *DeploymentFeatureCacheSettings `pulumi:"featureCacheSettings"`
 	// The health settings for this Deployment.
 	HealthSettings *DeploymentHealthSettings `pulumi:"healthSettings"`
 	// The importance of the Deployment.
@@ -309,6 +318,8 @@ type DeploymentArgs struct {
 	ChallengerReplaySettings DeploymentChallengerReplaySettingsPtrInput
 	// The drift tracking settings for the Deployment.
 	DriftTrackingSettings DeploymentDriftTrackingSettingsPtrInput
+	// The feature cache settings for this Deployment.
+	FeatureCacheSettings DeploymentFeatureCacheSettingsPtrInput
 	// The health settings for this Deployment.
 	HealthSettings DeploymentHealthSettingsPtrInput
 	// The importance of the Deployment.
@@ -452,6 +463,11 @@ func (o DeploymentOutput) ChallengerReplaySettings() DeploymentChallengerReplayS
 // The drift tracking settings for the Deployment.
 func (o DeploymentOutput) DriftTrackingSettings() DeploymentDriftTrackingSettingsPtrOutput {
 	return o.ApplyT(func(v *Deployment) DeploymentDriftTrackingSettingsPtrOutput { return v.DriftTrackingSettings }).(DeploymentDriftTrackingSettingsPtrOutput)
+}
+
+// The feature cache settings for this Deployment.
+func (o DeploymentOutput) FeatureCacheSettings() DeploymentFeatureCacheSettingsPtrOutput {
+	return o.ApplyT(func(v *Deployment) DeploymentFeatureCacheSettingsPtrOutput { return v.FeatureCacheSettings }).(DeploymentFeatureCacheSettingsPtrOutput)
 }
 
 // The health settings for this Deployment.

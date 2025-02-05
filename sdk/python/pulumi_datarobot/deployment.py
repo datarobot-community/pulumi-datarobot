@@ -30,6 +30,7 @@ class DeploymentArgs:
                  challenger_models_settings: Optional[pulumi.Input['DeploymentChallengerModelsSettingsArgs']] = None,
                  challenger_replay_settings: Optional[pulumi.Input['DeploymentChallengerReplaySettingsArgs']] = None,
                  drift_tracking_settings: Optional[pulumi.Input['DeploymentDriftTrackingSettingsArgs']] = None,
+                 feature_cache_settings: Optional[pulumi.Input['DeploymentFeatureCacheSettingsArgs']] = None,
                  health_settings: Optional[pulumi.Input['DeploymentHealthSettingsArgs']] = None,
                  importance: Optional[pulumi.Input[str]] = None,
                  prediction_intervals_settings: Optional[pulumi.Input['DeploymentPredictionIntervalsSettingsArgs']] = None,
@@ -51,6 +52,7 @@ class DeploymentArgs:
         :param pulumi.Input['DeploymentChallengerModelsSettingsArgs'] challenger_models_settings: The challenger models settings for the Deployment.
         :param pulumi.Input['DeploymentChallengerReplaySettingsArgs'] challenger_replay_settings: The challenger replay settings for the Deployment.
         :param pulumi.Input['DeploymentDriftTrackingSettingsArgs'] drift_tracking_settings: The drift tracking settings for the Deployment.
+        :param pulumi.Input['DeploymentFeatureCacheSettingsArgs'] feature_cache_settings: The feature cache settings for this Deployment.
         :param pulumi.Input['DeploymentHealthSettingsArgs'] health_settings: The health settings for this Deployment.
         :param pulumi.Input[str] importance: The importance of the Deployment.
         :param pulumi.Input['DeploymentPredictionIntervalsSettingsArgs'] prediction_intervals_settings: The prediction intervals settings for this Deployment.
@@ -77,6 +79,8 @@ class DeploymentArgs:
             pulumi.set(__self__, "challenger_replay_settings", challenger_replay_settings)
         if drift_tracking_settings is not None:
             pulumi.set(__self__, "drift_tracking_settings", drift_tracking_settings)
+        if feature_cache_settings is not None:
+            pulumi.set(__self__, "feature_cache_settings", feature_cache_settings)
         if health_settings is not None:
             pulumi.set(__self__, "health_settings", health_settings)
         if importance is not None:
@@ -205,6 +209,18 @@ class DeploymentArgs:
     @drift_tracking_settings.setter
     def drift_tracking_settings(self, value: Optional[pulumi.Input['DeploymentDriftTrackingSettingsArgs']]):
         pulumi.set(self, "drift_tracking_settings", value)
+
+    @property
+    @pulumi.getter(name="featureCacheSettings")
+    def feature_cache_settings(self) -> Optional[pulumi.Input['DeploymentFeatureCacheSettingsArgs']]:
+        """
+        The feature cache settings for this Deployment.
+        """
+        return pulumi.get(self, "feature_cache_settings")
+
+    @feature_cache_settings.setter
+    def feature_cache_settings(self, value: Optional[pulumi.Input['DeploymentFeatureCacheSettingsArgs']]):
+        pulumi.set(self, "feature_cache_settings", value)
 
     @property
     @pulumi.getter(name="healthSettings")
@@ -336,6 +352,7 @@ class _DeploymentState:
                  challenger_models_settings: Optional[pulumi.Input['DeploymentChallengerModelsSettingsArgs']] = None,
                  challenger_replay_settings: Optional[pulumi.Input['DeploymentChallengerReplaySettingsArgs']] = None,
                  drift_tracking_settings: Optional[pulumi.Input['DeploymentDriftTrackingSettingsArgs']] = None,
+                 feature_cache_settings: Optional[pulumi.Input['DeploymentFeatureCacheSettingsArgs']] = None,
                  health_settings: Optional[pulumi.Input['DeploymentHealthSettingsArgs']] = None,
                  importance: Optional[pulumi.Input[str]] = None,
                  label: Optional[pulumi.Input[str]] = None,
@@ -357,6 +374,7 @@ class _DeploymentState:
         :param pulumi.Input['DeploymentChallengerModelsSettingsArgs'] challenger_models_settings: The challenger models settings for the Deployment.
         :param pulumi.Input['DeploymentChallengerReplaySettingsArgs'] challenger_replay_settings: The challenger replay settings for the Deployment.
         :param pulumi.Input['DeploymentDriftTrackingSettingsArgs'] drift_tracking_settings: The drift tracking settings for the Deployment.
+        :param pulumi.Input['DeploymentFeatureCacheSettingsArgs'] feature_cache_settings: The feature cache settings for this Deployment.
         :param pulumi.Input['DeploymentHealthSettingsArgs'] health_settings: The health settings for this Deployment.
         :param pulumi.Input[str] importance: The importance of the Deployment.
         :param pulumi.Input[str] label: The label of the Deployment.
@@ -383,6 +401,8 @@ class _DeploymentState:
             pulumi.set(__self__, "challenger_replay_settings", challenger_replay_settings)
         if drift_tracking_settings is not None:
             pulumi.set(__self__, "drift_tracking_settings", drift_tracking_settings)
+        if feature_cache_settings is not None:
+            pulumi.set(__self__, "feature_cache_settings", feature_cache_settings)
         if health_settings is not None:
             pulumi.set(__self__, "health_settings", health_settings)
         if importance is not None:
@@ -481,6 +501,18 @@ class _DeploymentState:
     @drift_tracking_settings.setter
     def drift_tracking_settings(self, value: Optional[pulumi.Input['DeploymentDriftTrackingSettingsArgs']]):
         pulumi.set(self, "drift_tracking_settings", value)
+
+    @property
+    @pulumi.getter(name="featureCacheSettings")
+    def feature_cache_settings(self) -> Optional[pulumi.Input['DeploymentFeatureCacheSettingsArgs']]:
+        """
+        The feature cache settings for this Deployment.
+        """
+        return pulumi.get(self, "feature_cache_settings")
+
+    @feature_cache_settings.setter
+    def feature_cache_settings(self, value: Optional[pulumi.Input['DeploymentFeatureCacheSettingsArgs']]):
+        pulumi.set(self, "feature_cache_settings", value)
 
     @property
     @pulumi.getter(name="healthSettings")
@@ -650,6 +682,7 @@ class Deployment(pulumi.CustomResource):
                  challenger_models_settings: Optional[pulumi.Input[Union['DeploymentChallengerModelsSettingsArgs', 'DeploymentChallengerModelsSettingsArgsDict']]] = None,
                  challenger_replay_settings: Optional[pulumi.Input[Union['DeploymentChallengerReplaySettingsArgs', 'DeploymentChallengerReplaySettingsArgsDict']]] = None,
                  drift_tracking_settings: Optional[pulumi.Input[Union['DeploymentDriftTrackingSettingsArgs', 'DeploymentDriftTrackingSettingsArgsDict']]] = None,
+                 feature_cache_settings: Optional[pulumi.Input[Union['DeploymentFeatureCacheSettingsArgs', 'DeploymentFeatureCacheSettingsArgsDict']]] = None,
                  health_settings: Optional[pulumi.Input[Union['DeploymentHealthSettingsArgs', 'DeploymentHealthSettingsArgsDict']]] = None,
                  importance: Optional[pulumi.Input[str]] = None,
                  label: Optional[pulumi.Input[str]] = None,
@@ -700,6 +733,7 @@ class Deployment(pulumi.CustomResource):
             prediction_warning_settings={},
             prediction_intervals_settings={},
             predictions_settings={},
+            feature_cache_settings={},
             health_settings={},
             runtime_parameter_values=[{
                 "key": "EXAMPLE_PARAM",
@@ -717,6 +751,7 @@ class Deployment(pulumi.CustomResource):
         :param pulumi.Input[Union['DeploymentChallengerModelsSettingsArgs', 'DeploymentChallengerModelsSettingsArgsDict']] challenger_models_settings: The challenger models settings for the Deployment.
         :param pulumi.Input[Union['DeploymentChallengerReplaySettingsArgs', 'DeploymentChallengerReplaySettingsArgsDict']] challenger_replay_settings: The challenger replay settings for the Deployment.
         :param pulumi.Input[Union['DeploymentDriftTrackingSettingsArgs', 'DeploymentDriftTrackingSettingsArgsDict']] drift_tracking_settings: The drift tracking settings for the Deployment.
+        :param pulumi.Input[Union['DeploymentFeatureCacheSettingsArgs', 'DeploymentFeatureCacheSettingsArgsDict']] feature_cache_settings: The feature cache settings for this Deployment.
         :param pulumi.Input[Union['DeploymentHealthSettingsArgs', 'DeploymentHealthSettingsArgsDict']] health_settings: The health settings for this Deployment.
         :param pulumi.Input[str] importance: The importance of the Deployment.
         :param pulumi.Input[str] label: The label of the Deployment.
@@ -773,6 +808,7 @@ class Deployment(pulumi.CustomResource):
             prediction_warning_settings={},
             prediction_intervals_settings={},
             predictions_settings={},
+            feature_cache_settings={},
             health_settings={},
             runtime_parameter_values=[{
                 "key": "EXAMPLE_PARAM",
@@ -803,6 +839,7 @@ class Deployment(pulumi.CustomResource):
                  challenger_models_settings: Optional[pulumi.Input[Union['DeploymentChallengerModelsSettingsArgs', 'DeploymentChallengerModelsSettingsArgsDict']]] = None,
                  challenger_replay_settings: Optional[pulumi.Input[Union['DeploymentChallengerReplaySettingsArgs', 'DeploymentChallengerReplaySettingsArgsDict']]] = None,
                  drift_tracking_settings: Optional[pulumi.Input[Union['DeploymentDriftTrackingSettingsArgs', 'DeploymentDriftTrackingSettingsArgsDict']]] = None,
+                 feature_cache_settings: Optional[pulumi.Input[Union['DeploymentFeatureCacheSettingsArgs', 'DeploymentFeatureCacheSettingsArgsDict']]] = None,
                  health_settings: Optional[pulumi.Input[Union['DeploymentHealthSettingsArgs', 'DeploymentHealthSettingsArgsDict']]] = None,
                  importance: Optional[pulumi.Input[str]] = None,
                  label: Optional[pulumi.Input[str]] = None,
@@ -831,6 +868,7 @@ class Deployment(pulumi.CustomResource):
             __props__.__dict__["challenger_models_settings"] = challenger_models_settings
             __props__.__dict__["challenger_replay_settings"] = challenger_replay_settings
             __props__.__dict__["drift_tracking_settings"] = drift_tracking_settings
+            __props__.__dict__["feature_cache_settings"] = feature_cache_settings
             __props__.__dict__["health_settings"] = health_settings
             __props__.__dict__["importance"] = importance
             if label is None and not opts.urn:
@@ -866,6 +904,7 @@ class Deployment(pulumi.CustomResource):
             challenger_models_settings: Optional[pulumi.Input[Union['DeploymentChallengerModelsSettingsArgs', 'DeploymentChallengerModelsSettingsArgsDict']]] = None,
             challenger_replay_settings: Optional[pulumi.Input[Union['DeploymentChallengerReplaySettingsArgs', 'DeploymentChallengerReplaySettingsArgsDict']]] = None,
             drift_tracking_settings: Optional[pulumi.Input[Union['DeploymentDriftTrackingSettingsArgs', 'DeploymentDriftTrackingSettingsArgsDict']]] = None,
+            feature_cache_settings: Optional[pulumi.Input[Union['DeploymentFeatureCacheSettingsArgs', 'DeploymentFeatureCacheSettingsArgsDict']]] = None,
             health_settings: Optional[pulumi.Input[Union['DeploymentHealthSettingsArgs', 'DeploymentHealthSettingsArgsDict']]] = None,
             importance: Optional[pulumi.Input[str]] = None,
             label: Optional[pulumi.Input[str]] = None,
@@ -892,6 +931,7 @@ class Deployment(pulumi.CustomResource):
         :param pulumi.Input[Union['DeploymentChallengerModelsSettingsArgs', 'DeploymentChallengerModelsSettingsArgsDict']] challenger_models_settings: The challenger models settings for the Deployment.
         :param pulumi.Input[Union['DeploymentChallengerReplaySettingsArgs', 'DeploymentChallengerReplaySettingsArgsDict']] challenger_replay_settings: The challenger replay settings for the Deployment.
         :param pulumi.Input[Union['DeploymentDriftTrackingSettingsArgs', 'DeploymentDriftTrackingSettingsArgsDict']] drift_tracking_settings: The drift tracking settings for the Deployment.
+        :param pulumi.Input[Union['DeploymentFeatureCacheSettingsArgs', 'DeploymentFeatureCacheSettingsArgsDict']] feature_cache_settings: The feature cache settings for this Deployment.
         :param pulumi.Input[Union['DeploymentHealthSettingsArgs', 'DeploymentHealthSettingsArgsDict']] health_settings: The health settings for this Deployment.
         :param pulumi.Input[str] importance: The importance of the Deployment.
         :param pulumi.Input[str] label: The label of the Deployment.
@@ -916,6 +956,7 @@ class Deployment(pulumi.CustomResource):
         __props__.__dict__["challenger_models_settings"] = challenger_models_settings
         __props__.__dict__["challenger_replay_settings"] = challenger_replay_settings
         __props__.__dict__["drift_tracking_settings"] = drift_tracking_settings
+        __props__.__dict__["feature_cache_settings"] = feature_cache_settings
         __props__.__dict__["health_settings"] = health_settings
         __props__.__dict__["importance"] = importance
         __props__.__dict__["label"] = label
@@ -978,6 +1019,14 @@ class Deployment(pulumi.CustomResource):
         The drift tracking settings for the Deployment.
         """
         return pulumi.get(self, "drift_tracking_settings")
+
+    @property
+    @pulumi.getter(name="featureCacheSettings")
+    def feature_cache_settings(self) -> pulumi.Output[Optional['outputs.DeploymentFeatureCacheSettings']]:
+        """
+        The feature cache settings for this Deployment.
+        """
+        return pulumi.get(self, "feature_cache_settings")
 
     @property
     @pulumi.getter(name="healthSettings")

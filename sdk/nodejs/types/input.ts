@@ -560,6 +560,44 @@ export interface DeploymentDriftTrackingSettings {
     trackedFeatures?: pulumi.Input<pulumi.Input<string>[]>;
 }
 
+export interface DeploymentFeatureCacheSettings {
+    /**
+     * If feature cache is enabled for this Deployment.
+     */
+    enabled: pulumi.Input<boolean>;
+    /**
+     * If feature cache fetching is enabled.
+     */
+    fetching?: pulumi.Input<boolean>;
+    /**
+     * Defines the feature cache schedule.
+     */
+    schedule?: pulumi.Input<inputs.DeploymentFeatureCacheSettingsSchedule>;
+}
+
+export interface DeploymentFeatureCacheSettingsSchedule {
+    /**
+     * Days of the month.
+     */
+    dayOfMonths: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Days of the week.
+     */
+    dayOfWeeks: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Hours of the day.
+     */
+    hours: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Minutes of the day.
+     */
+    minutes: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Months of the year.
+     */
+    months: pulumi.Input<pulumi.Input<string>[]>;
+}
+
 export interface DeploymentHealthSettings {
     /**
      * The accuracy health settings for this Deployment.
