@@ -5,6 +5,36 @@ import * as pulumi from "@pulumi/pulumi";
 import * as inputs from "../types/input";
 import * as outputs from "../types/output";
 
+export interface ApplicationSourceFromTemplateResources {
+    /**
+     * The replicas for the Application Source.
+     */
+    replicas: number;
+    /**
+     * The resource label for the Application Source.
+     */
+    resourceLabel: string;
+    /**
+     * The session affinity for the Application Source.
+     */
+    sessionAffinity: boolean;
+}
+
+export interface ApplicationSourceFromTemplateRuntimeParameterValue {
+    /**
+     * The name of the runtime parameter.
+     */
+    key: string;
+    /**
+     * The type of the runtime parameter.
+     */
+    type: string;
+    /**
+     * The value of the runtime parameter (type conversion is handled internally).
+     */
+    value: string;
+}
+
 export interface ApplicationSourceResources {
     /**
      * The replicas for the Application Source.
