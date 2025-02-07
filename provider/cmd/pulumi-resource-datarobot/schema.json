@@ -73,6 +73,54 @@
         }
     },
     "types": {
+        "datarobot:index/ApplicationSourceFromTemplateResources:ApplicationSourceFromTemplateResources": {
+            "properties": {
+                "replicas": {
+                    "type": "integer",
+                    "description": "The replicas for the Application Source.\n"
+                },
+                "resourceLabel": {
+                    "type": "string",
+                    "description": "The resource label for the Application Source.\n"
+                },
+                "sessionAffinity": {
+                    "type": "boolean",
+                    "description": "The session affinity for the Application Source.\n"
+                }
+            },
+            "type": "object",
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "replicas",
+                        "resourceLabel",
+                        "sessionAffinity"
+                    ]
+                }
+            }
+        },
+        "datarobot:index/ApplicationSourceFromTemplateRuntimeParameterValue:ApplicationSourceFromTemplateRuntimeParameterValue": {
+            "properties": {
+                "key": {
+                    "type": "string",
+                    "description": "The name of the runtime parameter.\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The type of the runtime parameter.\n"
+                },
+                "value": {
+                    "type": "string",
+                    "description": "The value of the runtime parameter (type conversion is handled internally).\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "key",
+                "type",
+                "value"
+            ]
+        },
         "datarobot:index/ApplicationSourceResources:ApplicationSourceResources": {
             "properties": {
                 "replicas": {
@@ -1905,6 +1953,168 @@
                             "$ref": "#/types/datarobot:index/ApplicationSourceRuntimeParameterValue:ApplicationSourceRuntimeParameterValue"
                         },
                         "description": "The runtime parameter values for the Application Source.\n"
+                    },
+                    "versionId": {
+                        "type": "string",
+                        "description": "The version ID of the Application Source.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "datarobot:index/applicationSourceFromTemplate:ApplicationSourceFromTemplate": {
+            "description": "Application Source\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.ApplicationSourceFromTemplate;\nimport com.pulumi.datarobot.ApplicationSourceFromTemplateArgs;\nimport com.pulumi.datarobot.inputs.ApplicationSourceFromTemplateRuntimeParameterValueArgs;\nimport com.pulumi.datarobot.inputs.ApplicationSourceFromTemplateResourcesArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new ApplicationSourceFromTemplate(\"example\", ApplicationSourceFromTemplateArgs.builder()\n            .templateId(\"67126757e7819551baceb22b\")\n            .baseEnvironmentId(\"6542cd582a9d3d51bf4ac71e\")\n            .files(            \n                \"start-app.sh\",\n                \"streamlit-app.py\")\n            .folderPath(\"example-app\")\n            .runtimeParameterValues(ApplicationSourceFromTemplateRuntimeParameterValueArgs.builder()\n                .key(\"EXAMPLE_PARAM\")\n                .type(\"string\")\n                .value(\"val\")\n                .build())\n            .resources(ApplicationSourceFromTemplateResourcesArgs.builder()\n                .replicas(2)\n                .session_affinity(true)\n                .resource_label(\"cpu.medium\")\n                .build())\n            .build());\n\n        ctx.export(\"datarobotApplicationSourceId\", example.id());\n        ctx.export(\"datarobotApplicationSourceVersionId\", example.versionId());\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: datarobot:ApplicationSourceFromTemplate\n    properties:\n      templateId: 67126757e7819551baceb22b\n      # Optional\n      baseEnvironmentId: 6542cd582a9d3d51bf4ac71e\n      files:\n        - - start-app.sh\n        - - streamlit-app.py\n      folderPath: example-app\n      runtimeParameterValues:\n        - key: EXAMPLE_PARAM\n          type: string\n          value: val\n      resources:\n        replicas: 2\n        session_affinity: true\n        resource_label: cpu.medium\noutputs:\n  datarobotApplicationSourceId: ${example.id}\n  datarobotApplicationSourceVersionId: ${example.versionId}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "properties": {
+                "baseEnvironmentId": {
+                    "type": "string",
+                    "description": "The ID of the base environment for the Application Source.\n"
+                },
+                "baseEnvironmentVersionId": {
+                    "type": "string",
+                    "description": "The ID of the base environment version for the Application Source.\n"
+                },
+                "files": {
+                    "$ref": "pulumi.json#/Any",
+                    "description": "The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.\n"
+                },
+                "filesHashes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The hash of file contents for each file in files.\n"
+                },
+                "folderPath": {
+                    "type": "string",
+                    "description": "The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.\n"
+                },
+                "folderPathHash": {
+                    "type": "string",
+                    "description": "The hash of the folder path contents.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the Application Source.\n"
+                },
+                "resources": {
+                    "$ref": "#/types/datarobot:index/ApplicationSourceFromTemplateResources:ApplicationSourceFromTemplateResources",
+                    "description": "The resources for the Application Source.\n"
+                },
+                "runtimeParameterValues": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/datarobot:index/ApplicationSourceFromTemplateRuntimeParameterValue:ApplicationSourceFromTemplateRuntimeParameterValue"
+                    },
+                    "description": "The runtime parameter values for the Application Source.\n"
+                },
+                "templateId": {
+                    "type": "string",
+                    "description": "The ID of the template used to create the Application Source.\n"
+                },
+                "versionId": {
+                    "type": "string",
+                    "description": "The version ID of the Application Source.\n"
+                }
+            },
+            "required": [
+                "baseEnvironmentId",
+                "baseEnvironmentVersionId",
+                "filesHashes",
+                "folderPathHash",
+                "name",
+                "resources",
+                "runtimeParameterValues",
+                "templateId",
+                "versionId"
+            ],
+            "inputProperties": {
+                "baseEnvironmentId": {
+                    "type": "string",
+                    "description": "The ID of the base environment for the Application Source.\n"
+                },
+                "baseEnvironmentVersionId": {
+                    "type": "string",
+                    "description": "The ID of the base environment version for the Application Source.\n"
+                },
+                "files": {
+                    "$ref": "pulumi.json#/Any",
+                    "description": "The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.\n"
+                },
+                "folderPath": {
+                    "type": "string",
+                    "description": "The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the Application Source.\n"
+                },
+                "resources": {
+                    "$ref": "#/types/datarobot:index/ApplicationSourceFromTemplateResources:ApplicationSourceFromTemplateResources",
+                    "description": "The resources for the Application Source.\n"
+                },
+                "runtimeParameterValues": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/datarobot:index/ApplicationSourceFromTemplateRuntimeParameterValue:ApplicationSourceFromTemplateRuntimeParameterValue"
+                    },
+                    "description": "The runtime parameter values for the Application Source.\n"
+                },
+                "templateId": {
+                    "type": "string",
+                    "description": "The ID of the template used to create the Application Source.\n"
+                }
+            },
+            "requiredInputs": [
+                "templateId"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering ApplicationSourceFromTemplate resources.\n",
+                "properties": {
+                    "baseEnvironmentId": {
+                        "type": "string",
+                        "description": "The ID of the base environment for the Application Source.\n"
+                    },
+                    "baseEnvironmentVersionId": {
+                        "type": "string",
+                        "description": "The ID of the base environment version for the Application Source.\n"
+                    },
+                    "files": {
+                        "$ref": "pulumi.json#/Any",
+                        "description": "The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.\n"
+                    },
+                    "filesHashes": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "The hash of file contents for each file in files.\n"
+                    },
+                    "folderPath": {
+                        "type": "string",
+                        "description": "The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.\n"
+                    },
+                    "folderPathHash": {
+                        "type": "string",
+                        "description": "The hash of the folder path contents.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the Application Source.\n"
+                    },
+                    "resources": {
+                        "$ref": "#/types/datarobot:index/ApplicationSourceFromTemplateResources:ApplicationSourceFromTemplateResources",
+                        "description": "The resources for the Application Source.\n"
+                    },
+                    "runtimeParameterValues": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/datarobot:index/ApplicationSourceFromTemplateRuntimeParameterValue:ApplicationSourceFromTemplateRuntimeParameterValue"
+                        },
+                        "description": "The runtime parameter values for the Application Source.\n"
+                    },
+                    "templateId": {
+                        "type": "string",
+                        "description": "The ID of the template used to create the Application Source.\n"
                     },
                     "versionId": {
                         "type": "string",
