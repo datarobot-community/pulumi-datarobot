@@ -7,6 +7,7 @@ import typing
 # Export this package's modules as members:
 from .api_token_credential import *
 from .application_source import *
+from .application_source_from_template import *
 from .aws_credential import *
 from .basic_credential import *
 from .batch_prediction_job_definition import *
@@ -67,6 +68,14 @@ _utilities.register(
   "fqn": "pulumi_datarobot",
   "classes": {
    "datarobot:index/applicationSource:ApplicationSource": "ApplicationSource"
+  }
+ },
+ {
+  "pkg": "datarobot",
+  "mod": "index/applicationSourceFromTemplate",
+  "fqn": "pulumi_datarobot",
+  "classes": {
+   "datarobot:index/applicationSourceFromTemplate:ApplicationSourceFromTemplate": "ApplicationSourceFromTemplate"
   }
  },
  {

@@ -15,6 +15,11 @@ export type ApplicationSource = import("./applicationSource").ApplicationSource;
 export const ApplicationSource: typeof import("./applicationSource").ApplicationSource = null as any;
 utilities.lazyLoad(exports, ["ApplicationSource"], () => require("./applicationSource"));
 
+export { ApplicationSourceFromTemplateArgs, ApplicationSourceFromTemplateState } from "./applicationSourceFromTemplate";
+export type ApplicationSourceFromTemplate = import("./applicationSourceFromTemplate").ApplicationSourceFromTemplate;
+export const ApplicationSourceFromTemplate: typeof import("./applicationSourceFromTemplate").ApplicationSourceFromTemplate = null as any;
+utilities.lazyLoad(exports, ["ApplicationSourceFromTemplate"], () => require("./applicationSourceFromTemplate"));
+
 export { AwsCredentialArgs, AwsCredentialState } from "./awsCredential";
 export type AwsCredential = import("./awsCredential").AwsCredential;
 export const AwsCredential: typeof import("./awsCredential").AwsCredential = null as any;
@@ -198,6 +203,8 @@ const _module = {
                 return new ApiTokenCredential(name, <any>undefined, { urn })
             case "datarobot:index/applicationSource:ApplicationSource":
                 return new ApplicationSource(name, <any>undefined, { urn })
+            case "datarobot:index/applicationSourceFromTemplate:ApplicationSourceFromTemplate":
+                return new ApplicationSourceFromTemplate(name, <any>undefined, { urn })
             case "datarobot:index/awsCredential:AwsCredential":
                 return new AwsCredential(name, <any>undefined, { urn })
             case "datarobot:index/basicCredential:BasicCredential":
@@ -265,6 +272,7 @@ const _module = {
 };
 pulumi.runtime.registerResourceModule("datarobot", "index/apiTokenCredential", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/applicationSource", _module)
+pulumi.runtime.registerResourceModule("datarobot", "index/applicationSourceFromTemplate", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/awsCredential", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/basicCredential", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/batchPredictionJobDefinition", _module)

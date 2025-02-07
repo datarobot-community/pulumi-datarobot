@@ -15,6 +15,17 @@
                     }
                 }
             },
+            "datarobot_application_source_from_template": {
+                "current": "datarobot:index/applicationSourceFromTemplate:ApplicationSourceFromTemplate",
+                "fields": {
+                    "files_hashes": {
+                        "maxItemsOne": false
+                    },
+                    "runtime_parameter_values": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
             "datarobot_aws_credential": {
                 "current": "datarobot:index/awsCredential:AwsCredential"
             },

@@ -16,6 +16,8 @@ from . import _utilities
 from . import outputs
 
 __all__ = [
+    'ApplicationSourceFromTemplateResources',
+    'ApplicationSourceFromTemplateRuntimeParameterValue',
     'ApplicationSourceResources',
     'ApplicationSourceRuntimeParameterValue',
     'BatchPredictionJobDefinitionCsvSettings',
@@ -81,6 +83,108 @@ __all__ = [
     'NotificationChannelDrEntity',
     'VectorDatabaseChunkingParameters',
 ]
+
+@pulumi.output_type
+class ApplicationSourceFromTemplateResources(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "resourceLabel":
+            suggest = "resource_label"
+        elif key == "sessionAffinity":
+            suggest = "session_affinity"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ApplicationSourceFromTemplateResources. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ApplicationSourceFromTemplateResources.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ApplicationSourceFromTemplateResources.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 replicas: Optional[int] = None,
+                 resource_label: Optional[str] = None,
+                 session_affinity: Optional[bool] = None):
+        """
+        :param int replicas: The replicas for the Application Source.
+        :param str resource_label: The resource label for the Application Source.
+        :param bool session_affinity: The session affinity for the Application Source.
+        """
+        if replicas is not None:
+            pulumi.set(__self__, "replicas", replicas)
+        if resource_label is not None:
+            pulumi.set(__self__, "resource_label", resource_label)
+        if session_affinity is not None:
+            pulumi.set(__self__, "session_affinity", session_affinity)
+
+    @property
+    @pulumi.getter
+    def replicas(self) -> Optional[int]:
+        """
+        The replicas for the Application Source.
+        """
+        return pulumi.get(self, "replicas")
+
+    @property
+    @pulumi.getter(name="resourceLabel")
+    def resource_label(self) -> Optional[str]:
+        """
+        The resource label for the Application Source.
+        """
+        return pulumi.get(self, "resource_label")
+
+    @property
+    @pulumi.getter(name="sessionAffinity")
+    def session_affinity(self) -> Optional[bool]:
+        """
+        The session affinity for the Application Source.
+        """
+        return pulumi.get(self, "session_affinity")
+
+
+@pulumi.output_type
+class ApplicationSourceFromTemplateRuntimeParameterValue(dict):
+    def __init__(__self__, *,
+                 key: str,
+                 type: str,
+                 value: str):
+        """
+        :param str key: The name of the runtime parameter.
+        :param str type: The type of the runtime parameter.
+        :param str value: The value of the runtime parameter (type conversion is handled internally).
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "type", type)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        """
+        The name of the runtime parameter.
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        The type of the runtime parameter.
+        """
+        return pulumi.get(self, "type")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        The value of the runtime parameter (type conversion is handled internally).
+        """
+        return pulumi.get(self, "value")
+
 
 @pulumi.output_type
 class ApplicationSourceResources(dict):
