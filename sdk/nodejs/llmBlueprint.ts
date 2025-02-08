@@ -69,13 +69,17 @@ export class LlmBlueprint extends pulumi.CustomResource {
     }
 
     /**
+     * The custom model LLM settings for the LLM Blueprint.
+     */
+    public readonly customModelLlmSettings!: pulumi.Output<outputs.LlmBlueprintCustomModelLlmSettings | undefined>;
+    /**
      * The description of the LLM Blueprint.
      */
     public readonly description!: pulumi.Output<string | undefined>;
     /**
      * The id of the LLM for the LLM Blueprint.
      */
-    public readonly llmId!: pulumi.Output<string>;
+    public readonly llmId!: pulumi.Output<string | undefined>;
     /**
      * The LLM settings for the LLM Blueprint.
      */
@@ -114,6 +118,7 @@ export class LlmBlueprint extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as LlmBlueprintState | undefined;
+            resourceInputs["customModelLlmSettings"] = state ? state.customModelLlmSettings : undefined;
             resourceInputs["description"] = state ? state.description : undefined;
             resourceInputs["llmId"] = state ? state.llmId : undefined;
             resourceInputs["llmSettings"] = state ? state.llmSettings : undefined;
@@ -124,12 +129,10 @@ export class LlmBlueprint extends pulumi.CustomResource {
             resourceInputs["vectorDatabaseSettings"] = state ? state.vectorDatabaseSettings : undefined;
         } else {
             const args = argsOrState as LlmBlueprintArgs | undefined;
-            if ((!args || args.llmId === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'llmId'");
-            }
             if ((!args || args.playgroundId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'playgroundId'");
             }
+            resourceInputs["customModelLlmSettings"] = args ? args.customModelLlmSettings : undefined;
             resourceInputs["description"] = args ? args.description : undefined;
             resourceInputs["llmId"] = args ? args.llmId : undefined;
             resourceInputs["llmSettings"] = args ? args.llmSettings : undefined;
@@ -148,6 +151,10 @@ export class LlmBlueprint extends pulumi.CustomResource {
  * Input properties used for looking up and filtering LlmBlueprint resources.
  */
 export interface LlmBlueprintState {
+    /**
+     * The custom model LLM settings for the LLM Blueprint.
+     */
+    customModelLlmSettings?: pulumi.Input<inputs.LlmBlueprintCustomModelLlmSettings>;
     /**
      * The description of the LLM Blueprint.
      */
@@ -187,13 +194,17 @@ export interface LlmBlueprintState {
  */
 export interface LlmBlueprintArgs {
     /**
+     * The custom model LLM settings for the LLM Blueprint.
+     */
+    customModelLlmSettings?: pulumi.Input<inputs.LlmBlueprintCustomModelLlmSettings>;
+    /**
      * The description of the LLM Blueprint.
      */
     description?: pulumi.Input<string>;
     /**
      * The id of the LLM for the LLM Blueprint.
      */
-    llmId: pulumi.Input<string>;
+    llmId?: pulumi.Input<string>;
     /**
      * The LLM settings for the LLM Blueprint.
      */

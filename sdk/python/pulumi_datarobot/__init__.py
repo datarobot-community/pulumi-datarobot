@@ -18,6 +18,7 @@ from .custom_metric import *
 from .custom_metric_from_job import *
 from .custom_metric_job import *
 from .custom_model import *
+from .custom_model_llm_validation import *
 from .dataset_from_datasource import *
 from .dataset_from_file import *
 from .dataset_from_url import *
@@ -156,6 +157,14 @@ _utilities.register(
   "fqn": "pulumi_datarobot",
   "classes": {
    "datarobot:index/customModel:CustomModel": "CustomModel"
+  }
+ },
+ {
+  "pkg": "datarobot",
+  "mod": "index/customModelLlmValidation",
+  "fqn": "pulumi_datarobot",
+  "classes": {
+   "datarobot:index/customModelLlmValidation:CustomModelLlmValidation": "CustomModelLlmValidation"
   }
  },
  {

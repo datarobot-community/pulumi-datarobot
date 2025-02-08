@@ -1072,6 +1072,21 @@ export interface DeploymentSegmentAnalysisSettings {
     enabled: boolean;
 }
 
+export interface LlmBlueprintCustomModelLlmSettings {
+    /**
+     * The external LLM's context size, in tokens. This value is only used for pruning documents supplied to the LLM when a vector database is associated with the LLM blueprint. It does not affect the external LLM's actual context size in any way and is not supplied to the LLM.
+     */
+    externalLlmContextSize?: number;
+    /**
+     * System prompt guides the style of the LLM response. It is a 'universal' prompt, prepended to all individual prompts.
+     */
+    systemPrompt?: string;
+    /**
+     * The validation ID of the custom model LLM.
+     */
+    validationId?: string;
+}
+
 export interface LlmBlueprintLlmSettings {
     /**
      * The maximum number of tokens allowed in the completion. The combined count of this value and prompt tokens must be below the model's maximum context size, where prompt token count is comprised of system prompt, user prompt, recent chat history, and vector database citations.

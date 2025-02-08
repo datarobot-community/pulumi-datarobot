@@ -61,6 +61,12 @@ namespace DataRobotPulumi.Datarobot
     public partial class LlmBlueprint : global::Pulumi.CustomResource
     {
         /// <summary>
+        /// The custom model LLM settings for the LLM Blueprint.
+        /// </summary>
+        [Output("customModelLlmSettings")]
+        public Output<Outputs.LlmBlueprintCustomModelLlmSettings?> CustomModelLlmSettings { get; private set; } = null!;
+
+        /// <summary>
         /// The description of the LLM Blueprint.
         /// </summary>
         [Output("description")]
@@ -70,7 +76,7 @@ namespace DataRobotPulumi.Datarobot
         /// The id of the LLM for the LLM Blueprint.
         /// </summary>
         [Output("llmId")]
-        public Output<string> LlmId { get; private set; } = null!;
+        public Output<string?> LlmId { get; private set; } = null!;
 
         /// <summary>
         /// The LLM settings for the LLM Blueprint.
@@ -156,6 +162,12 @@ namespace DataRobotPulumi.Datarobot
     public sealed class LlmBlueprintArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// The custom model LLM settings for the LLM Blueprint.
+        /// </summary>
+        [Input("customModelLlmSettings")]
+        public Input<Inputs.LlmBlueprintCustomModelLlmSettingsArgs>? CustomModelLlmSettings { get; set; }
+
+        /// <summary>
         /// The description of the LLM Blueprint.
         /// </summary>
         [Input("description")]
@@ -164,8 +176,8 @@ namespace DataRobotPulumi.Datarobot
         /// <summary>
         /// The id of the LLM for the LLM Blueprint.
         /// </summary>
-        [Input("llmId", required: true)]
-        public Input<string> LlmId { get; set; } = null!;
+        [Input("llmId")]
+        public Input<string>? LlmId { get; set; }
 
         /// <summary>
         /// The LLM settings for the LLM Blueprint.
@@ -211,6 +223,12 @@ namespace DataRobotPulumi.Datarobot
 
     public sealed class LlmBlueprintState : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// The custom model LLM settings for the LLM Blueprint.
+        /// </summary>
+        [Input("customModelLlmSettings")]
+        public Input<Inputs.LlmBlueprintCustomModelLlmSettingsGetArgs>? CustomModelLlmSettings { get; set; }
+
         /// <summary>
         /// The description of the LLM Blueprint.
         /// </summary>
