@@ -70,6 +70,11 @@ export type CustomModel = import("./customModel").CustomModel;
 export const CustomModel: typeof import("./customModel").CustomModel = null as any;
 utilities.lazyLoad(exports, ["CustomModel"], () => require("./customModel"));
 
+export { CustomModelLlmValidationArgs, CustomModelLlmValidationState } from "./customModelLlmValidation";
+export type CustomModelLlmValidation = import("./customModelLlmValidation").CustomModelLlmValidation;
+export const CustomModelLlmValidation: typeof import("./customModelLlmValidation").CustomModelLlmValidation = null as any;
+utilities.lazyLoad(exports, ["CustomModelLlmValidation"], () => require("./customModelLlmValidation"));
+
 export { DatasetFromDatasourceArgs, DatasetFromDatasourceState } from "./datasetFromDatasource";
 export type DatasetFromDatasource = import("./datasetFromDatasource").DatasetFromDatasource;
 export const DatasetFromDatasource: typeof import("./datasetFromDatasource").DatasetFromDatasource = null as any;
@@ -225,6 +230,8 @@ const _module = {
                 return new CustomMetricJob(name, <any>undefined, { urn })
             case "datarobot:index/customModel:CustomModel":
                 return new CustomModel(name, <any>undefined, { urn })
+            case "datarobot:index/customModelLlmValidation:CustomModelLlmValidation":
+                return new CustomModelLlmValidation(name, <any>undefined, { urn })
             case "datarobot:index/datasetFromDatasource:DatasetFromDatasource":
                 return new DatasetFromDatasource(name, <any>undefined, { urn })
             case "datarobot:index/datasetFromFile:DatasetFromFile":
@@ -283,6 +290,7 @@ pulumi.runtime.registerResourceModule("datarobot", "index/customMetric", _module
 pulumi.runtime.registerResourceModule("datarobot", "index/customMetricFromJob", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/customMetricJob", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/customModel", _module)
+pulumi.runtime.registerResourceModule("datarobot", "index/customModelLlmValidation", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/datasetFromDatasource", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/datasetFromFile", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/datasetFromUrl", _module)

@@ -21,9 +21,10 @@ __all__ = ['LlmBlueprintArgs', 'LlmBlueprint']
 @pulumi.input_type
 class LlmBlueprintArgs:
     def __init__(__self__, *,
-                 llm_id: pulumi.Input[str],
                  playground_id: pulumi.Input[str],
+                 custom_model_llm_settings: Optional[pulumi.Input['LlmBlueprintCustomModelLlmSettingsArgs']] = None,
                  description: Optional[pulumi.Input[str]] = None,
+                 llm_id: Optional[pulumi.Input[str]] = None,
                  llm_settings: Optional[pulumi.Input['LlmBlueprintLlmSettingsArgs']] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  prompt_type: Optional[pulumi.Input[str]] = None,
@@ -31,19 +32,23 @@ class LlmBlueprintArgs:
                  vector_database_settings: Optional[pulumi.Input['LlmBlueprintVectorDatabaseSettingsArgs']] = None):
         """
         The set of arguments for constructing a LlmBlueprint resource.
-        :param pulumi.Input[str] llm_id: The id of the LLM for the LLM Blueprint.
         :param pulumi.Input[str] playground_id: The id of the Playground for the LLM Blueprint.
+        :param pulumi.Input['LlmBlueprintCustomModelLlmSettingsArgs'] custom_model_llm_settings: The custom model LLM settings for the LLM Blueprint.
         :param pulumi.Input[str] description: The description of the LLM Blueprint.
+        :param pulumi.Input[str] llm_id: The id of the LLM for the LLM Blueprint.
         :param pulumi.Input['LlmBlueprintLlmSettingsArgs'] llm_settings: The LLM settings for the LLM Blueprint.
         :param pulumi.Input[str] name: The name of the LLM Blueprint.
         :param pulumi.Input[str] prompt_type: The prompt type for the LLM Blueprint.
         :param pulumi.Input[str] vector_database_id: The id of the Vector Database for the LLM Blueprint.
         :param pulumi.Input['LlmBlueprintVectorDatabaseSettingsArgs'] vector_database_settings: The Vector Database settings for the LLM Blueprint.
         """
-        pulumi.set(__self__, "llm_id", llm_id)
         pulumi.set(__self__, "playground_id", playground_id)
+        if custom_model_llm_settings is not None:
+            pulumi.set(__self__, "custom_model_llm_settings", custom_model_llm_settings)
         if description is not None:
             pulumi.set(__self__, "description", description)
+        if llm_id is not None:
+            pulumi.set(__self__, "llm_id", llm_id)
         if llm_settings is not None:
             pulumi.set(__self__, "llm_settings", llm_settings)
         if name is not None:
@@ -54,18 +59,6 @@ class LlmBlueprintArgs:
             pulumi.set(__self__, "vector_database_id", vector_database_id)
         if vector_database_settings is not None:
             pulumi.set(__self__, "vector_database_settings", vector_database_settings)
-
-    @property
-    @pulumi.getter(name="llmId")
-    def llm_id(self) -> pulumi.Input[str]:
-        """
-        The id of the LLM for the LLM Blueprint.
-        """
-        return pulumi.get(self, "llm_id")
-
-    @llm_id.setter
-    def llm_id(self, value: pulumi.Input[str]):
-        pulumi.set(self, "llm_id", value)
 
     @property
     @pulumi.getter(name="playgroundId")
@@ -80,6 +73,18 @@ class LlmBlueprintArgs:
         pulumi.set(self, "playground_id", value)
 
     @property
+    @pulumi.getter(name="customModelLlmSettings")
+    def custom_model_llm_settings(self) -> Optional[pulumi.Input['LlmBlueprintCustomModelLlmSettingsArgs']]:
+        """
+        The custom model LLM settings for the LLM Blueprint.
+        """
+        return pulumi.get(self, "custom_model_llm_settings")
+
+    @custom_model_llm_settings.setter
+    def custom_model_llm_settings(self, value: Optional[pulumi.Input['LlmBlueprintCustomModelLlmSettingsArgs']]):
+        pulumi.set(self, "custom_model_llm_settings", value)
+
+    @property
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[str]]:
         """
@@ -90,6 +95,18 @@ class LlmBlueprintArgs:
     @description.setter
     def description(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "description", value)
+
+    @property
+    @pulumi.getter(name="llmId")
+    def llm_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The id of the LLM for the LLM Blueprint.
+        """
+        return pulumi.get(self, "llm_id")
+
+    @llm_id.setter
+    def llm_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "llm_id", value)
 
     @property
     @pulumi.getter(name="llmSettings")
@@ -155,6 +172,7 @@ class LlmBlueprintArgs:
 @pulumi.input_type
 class _LlmBlueprintState:
     def __init__(__self__, *,
+                 custom_model_llm_settings: Optional[pulumi.Input['LlmBlueprintCustomModelLlmSettingsArgs']] = None,
                  description: Optional[pulumi.Input[str]] = None,
                  llm_id: Optional[pulumi.Input[str]] = None,
                  llm_settings: Optional[pulumi.Input['LlmBlueprintLlmSettingsArgs']] = None,
@@ -165,6 +183,7 @@ class _LlmBlueprintState:
                  vector_database_settings: Optional[pulumi.Input['LlmBlueprintVectorDatabaseSettingsArgs']] = None):
         """
         Input properties used for looking up and filtering LlmBlueprint resources.
+        :param pulumi.Input['LlmBlueprintCustomModelLlmSettingsArgs'] custom_model_llm_settings: The custom model LLM settings for the LLM Blueprint.
         :param pulumi.Input[str] description: The description of the LLM Blueprint.
         :param pulumi.Input[str] llm_id: The id of the LLM for the LLM Blueprint.
         :param pulumi.Input['LlmBlueprintLlmSettingsArgs'] llm_settings: The LLM settings for the LLM Blueprint.
@@ -174,6 +193,8 @@ class _LlmBlueprintState:
         :param pulumi.Input[str] vector_database_id: The id of the Vector Database for the LLM Blueprint.
         :param pulumi.Input['LlmBlueprintVectorDatabaseSettingsArgs'] vector_database_settings: The Vector Database settings for the LLM Blueprint.
         """
+        if custom_model_llm_settings is not None:
+            pulumi.set(__self__, "custom_model_llm_settings", custom_model_llm_settings)
         if description is not None:
             pulumi.set(__self__, "description", description)
         if llm_id is not None:
@@ -190,6 +211,18 @@ class _LlmBlueprintState:
             pulumi.set(__self__, "vector_database_id", vector_database_id)
         if vector_database_settings is not None:
             pulumi.set(__self__, "vector_database_settings", vector_database_settings)
+
+    @property
+    @pulumi.getter(name="customModelLlmSettings")
+    def custom_model_llm_settings(self) -> Optional[pulumi.Input['LlmBlueprintCustomModelLlmSettingsArgs']]:
+        """
+        The custom model LLM settings for the LLM Blueprint.
+        """
+        return pulumi.get(self, "custom_model_llm_settings")
+
+    @custom_model_llm_settings.setter
+    def custom_model_llm_settings(self, value: Optional[pulumi.Input['LlmBlueprintCustomModelLlmSettingsArgs']]):
+        pulumi.set(self, "custom_model_llm_settings", value)
 
     @property
     @pulumi.getter
@@ -293,6 +326,7 @@ class LlmBlueprint(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 custom_model_llm_settings: Optional[pulumi.Input[Union['LlmBlueprintCustomModelLlmSettingsArgs', 'LlmBlueprintCustomModelLlmSettingsArgsDict']]] = None,
                  description: Optional[pulumi.Input[str]] = None,
                  llm_id: Optional[pulumi.Input[str]] = None,
                  llm_settings: Optional[pulumi.Input[Union['LlmBlueprintLlmSettingsArgs', 'LlmBlueprintLlmSettingsArgsDict']]] = None,
@@ -336,6 +370,7 @@ class LlmBlueprint(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[Union['LlmBlueprintCustomModelLlmSettingsArgs', 'LlmBlueprintCustomModelLlmSettingsArgsDict']] custom_model_llm_settings: The custom model LLM settings for the LLM Blueprint.
         :param pulumi.Input[str] description: The description of the LLM Blueprint.
         :param pulumi.Input[str] llm_id: The id of the LLM for the LLM Blueprint.
         :param pulumi.Input[Union['LlmBlueprintLlmSettingsArgs', 'LlmBlueprintLlmSettingsArgsDict']] llm_settings: The LLM settings for the LLM Blueprint.
@@ -398,6 +433,7 @@ class LlmBlueprint(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 custom_model_llm_settings: Optional[pulumi.Input[Union['LlmBlueprintCustomModelLlmSettingsArgs', 'LlmBlueprintCustomModelLlmSettingsArgsDict']]] = None,
                  description: Optional[pulumi.Input[str]] = None,
                  llm_id: Optional[pulumi.Input[str]] = None,
                  llm_settings: Optional[pulumi.Input[Union['LlmBlueprintLlmSettingsArgs', 'LlmBlueprintLlmSettingsArgsDict']]] = None,
@@ -415,9 +451,8 @@ class LlmBlueprint(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = LlmBlueprintArgs.__new__(LlmBlueprintArgs)
 
+            __props__.__dict__["custom_model_llm_settings"] = custom_model_llm_settings
             __props__.__dict__["description"] = description
-            if llm_id is None and not opts.urn:
-                raise TypeError("Missing required property 'llm_id'")
             __props__.__dict__["llm_id"] = llm_id
             __props__.__dict__["llm_settings"] = llm_settings
             __props__.__dict__["name"] = name
@@ -437,6 +472,7 @@ class LlmBlueprint(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
+            custom_model_llm_settings: Optional[pulumi.Input[Union['LlmBlueprintCustomModelLlmSettingsArgs', 'LlmBlueprintCustomModelLlmSettingsArgsDict']]] = None,
             description: Optional[pulumi.Input[str]] = None,
             llm_id: Optional[pulumi.Input[str]] = None,
             llm_settings: Optional[pulumi.Input[Union['LlmBlueprintLlmSettingsArgs', 'LlmBlueprintLlmSettingsArgsDict']]] = None,
@@ -452,6 +488,7 @@ class LlmBlueprint(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[Union['LlmBlueprintCustomModelLlmSettingsArgs', 'LlmBlueprintCustomModelLlmSettingsArgsDict']] custom_model_llm_settings: The custom model LLM settings for the LLM Blueprint.
         :param pulumi.Input[str] description: The description of the LLM Blueprint.
         :param pulumi.Input[str] llm_id: The id of the LLM for the LLM Blueprint.
         :param pulumi.Input[Union['LlmBlueprintLlmSettingsArgs', 'LlmBlueprintLlmSettingsArgsDict']] llm_settings: The LLM settings for the LLM Blueprint.
@@ -465,6 +502,7 @@ class LlmBlueprint(pulumi.CustomResource):
 
         __props__ = _LlmBlueprintState.__new__(_LlmBlueprintState)
 
+        __props__.__dict__["custom_model_llm_settings"] = custom_model_llm_settings
         __props__.__dict__["description"] = description
         __props__.__dict__["llm_id"] = llm_id
         __props__.__dict__["llm_settings"] = llm_settings
@@ -476,6 +514,14 @@ class LlmBlueprint(pulumi.CustomResource):
         return LlmBlueprint(resource_name, opts=opts, __props__=__props__)
 
     @property
+    @pulumi.getter(name="customModelLlmSettings")
+    def custom_model_llm_settings(self) -> pulumi.Output[Optional['outputs.LlmBlueprintCustomModelLlmSettings']]:
+        """
+        The custom model LLM settings for the LLM Blueprint.
+        """
+        return pulumi.get(self, "custom_model_llm_settings")
+
+    @property
     @pulumi.getter
     def description(self) -> pulumi.Output[Optional[str]]:
         """
@@ -485,7 +531,7 @@ class LlmBlueprint(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="llmId")
-    def llm_id(self) -> pulumi.Output[str]:
+    def llm_id(self) -> pulumi.Output[Optional[str]]:
         """
         The id of the LLM for the LLM Blueprint.
         """

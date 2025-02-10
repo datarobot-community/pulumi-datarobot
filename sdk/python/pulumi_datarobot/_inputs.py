@@ -137,6 +137,8 @@ __all__ = [
     'DeploymentRuntimeParameterValueArgsDict',
     'DeploymentSegmentAnalysisSettingsArgs',
     'DeploymentSegmentAnalysisSettingsArgsDict',
+    'LlmBlueprintCustomModelLlmSettingsArgs',
+    'LlmBlueprintCustomModelLlmSettingsArgsDict',
     'LlmBlueprintLlmSettingsArgs',
     'LlmBlueprintLlmSettingsArgsDict',
     'LlmBlueprintVectorDatabaseSettingsArgs',
@@ -5223,6 +5225,78 @@ class DeploymentSegmentAnalysisSettingsArgs:
     @attributes.setter
     def attributes(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
         pulumi.set(self, "attributes", value)
+
+
+if not MYPY:
+    class LlmBlueprintCustomModelLlmSettingsArgsDict(TypedDict):
+        external_llm_context_size: NotRequired[pulumi.Input[int]]
+        """
+        The external LLM's context size, in tokens. This value is only used for pruning documents supplied to the LLM when a vector database is associated with the LLM blueprint. It does not affect the external LLM's actual context size in any way and is not supplied to the LLM.
+        """
+        system_prompt: NotRequired[pulumi.Input[str]]
+        """
+        System prompt guides the style of the LLM response. It is a 'universal' prompt, prepended to all individual prompts.
+        """
+        validation_id: NotRequired[pulumi.Input[str]]
+        """
+        The validation ID of the custom model LLM.
+        """
+elif False:
+    LlmBlueprintCustomModelLlmSettingsArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class LlmBlueprintCustomModelLlmSettingsArgs:
+    def __init__(__self__, *,
+                 external_llm_context_size: Optional[pulumi.Input[int]] = None,
+                 system_prompt: Optional[pulumi.Input[str]] = None,
+                 validation_id: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[int] external_llm_context_size: The external LLM's context size, in tokens. This value is only used for pruning documents supplied to the LLM when a vector database is associated with the LLM blueprint. It does not affect the external LLM's actual context size in any way and is not supplied to the LLM.
+        :param pulumi.Input[str] system_prompt: System prompt guides the style of the LLM response. It is a 'universal' prompt, prepended to all individual prompts.
+        :param pulumi.Input[str] validation_id: The validation ID of the custom model LLM.
+        """
+        if external_llm_context_size is not None:
+            pulumi.set(__self__, "external_llm_context_size", external_llm_context_size)
+        if system_prompt is not None:
+            pulumi.set(__self__, "system_prompt", system_prompt)
+        if validation_id is not None:
+            pulumi.set(__self__, "validation_id", validation_id)
+
+    @property
+    @pulumi.getter(name="externalLlmContextSize")
+    def external_llm_context_size(self) -> Optional[pulumi.Input[int]]:
+        """
+        The external LLM's context size, in tokens. This value is only used for pruning documents supplied to the LLM when a vector database is associated with the LLM blueprint. It does not affect the external LLM's actual context size in any way and is not supplied to the LLM.
+        """
+        return pulumi.get(self, "external_llm_context_size")
+
+    @external_llm_context_size.setter
+    def external_llm_context_size(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "external_llm_context_size", value)
+
+    @property
+    @pulumi.getter(name="systemPrompt")
+    def system_prompt(self) -> Optional[pulumi.Input[str]]:
+        """
+        System prompt guides the style of the LLM response. It is a 'universal' prompt, prepended to all individual prompts.
+        """
+        return pulumi.get(self, "system_prompt")
+
+    @system_prompt.setter
+    def system_prompt(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "system_prompt", value)
+
+    @property
+    @pulumi.getter(name="validationId")
+    def validation_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The validation ID of the custom model LLM.
+        """
+        return pulumi.get(self, "validation_id")
+
+    @validation_id.setter
+    def validation_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "validation_id", value)
 
 
 if not MYPY:

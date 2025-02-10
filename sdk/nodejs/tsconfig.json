@@ -28,6 +28,7 @@
         "customMetricFromJob.ts",
         "customMetricJob.ts",
         "customModel.ts",
+        "customModelLlmValidation.ts",
         "datasetFromDatasource.ts",
         "datasetFromFile.ts",
         "datasetFromUrl.ts",
