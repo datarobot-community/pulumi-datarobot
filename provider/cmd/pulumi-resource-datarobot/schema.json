@@ -1606,6 +1606,23 @@
                 "enabled"
             ]
         },
+        "datarobot:index/LlmBlueprintCustomModelLlmSettings:LlmBlueprintCustomModelLlmSettings": {
+            "properties": {
+                "externalLlmContextSize": {
+                    "type": "integer",
+                    "description": "The external LLM's context size, in tokens. This value is only used for pruning documents supplied to the LLM when a vector database is associated with the LLM blueprint. It does not affect the external LLM's actual context size in any way and is not supplied to the LLM.\n"
+                },
+                "systemPrompt": {
+                    "type": "string",
+                    "description": "System prompt guides the style of the LLM response. It is a 'universal' prompt, prepended to all individual prompts.\n"
+                },
+                "validationId": {
+                    "type": "string",
+                    "description": "The validation ID of the custom model LLM.\n"
+                }
+            },
+            "type": "object"
+        },
         "datarobot:index/LlmBlueprintLlmSettings:LlmBlueprintLlmSettings": {
             "properties": {
                 "maxCompletionLength": {
@@ -4094,6 +4111,116 @@
                 "type": "object"
             }
         },
+        "datarobot:index/customModelLlmValidation:CustomModelLlmValidation": {
+            "description": "Custom Model LLM Validation\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@datarobot/pulumi-datarobot\";\n\nconst example = new datarobot.CustomModelLlmValidation(\"example\", {\n    deploymentId: datarobot_deployment.example.id,\n    promptColumnName: \"promptText\",\n    targetColumnName: \"resultText\",\n    predictionTimeout: 100,\n    useCaseId: datarobot.use_case.example.id,\n});\nexport const exampleId = example.id;\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample = datarobot.CustomModelLlmValidation(\"example\",\n    deployment_id=datarobot_deployment[\"example\"][\"id\"],\n    prompt_column_name=\"promptText\",\n    target_column_name=\"resultText\",\n    prediction_timeout=100,\n    use_case_id=datarobot[\"use_case\"][\"example\"][\"id\"])\npulumi.export(\"exampleId\", example.id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = DataRobotPulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Datarobot.CustomModelLlmValidation(\"example\", new()\n    {\n        DeploymentId = datarobot_deployment.Example.Id,\n        PromptColumnName = \"promptText\",\n        TargetColumnName = \"resultText\",\n        PredictionTimeout = 100,\n        UseCaseId = datarobot.Use_case.Example.Id,\n    });\n\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"exampleId\"] = example.Id,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texample, err := datarobot.NewCustomModelLlmValidation(ctx, \"example\", \u0026datarobot.CustomModelLlmValidationArgs{\n\t\t\tDeploymentId:      pulumi.Any(datarobot_deployment.Example.Id),\n\t\t\tPromptColumnName:  pulumi.String(\"promptText\"),\n\t\t\tTargetColumnName:  pulumi.String(\"resultText\"),\n\t\t\tPredictionTimeout: pulumi.Int(100),\n\t\t\tUseCaseId:         pulumi.Any(datarobot.Use_case.Example.Id),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"exampleId\", example.ID())\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.CustomModelLlmValidation;\nimport com.pulumi.datarobot.CustomModelLlmValidationArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new CustomModelLlmValidation(\"example\", CustomModelLlmValidationArgs.builder()\n            .deploymentId(datarobot_deployment.example().id())\n            .promptColumnName(\"promptText\")\n            .targetColumnName(\"resultText\")\n            .predictionTimeout(100)\n            .useCaseId(datarobot.use_case().example().id())\n            .build());\n\n        ctx.export(\"exampleId\", example.id());\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: datarobot:CustomModelLlmValidation\n    properties:\n      deploymentId: ${datarobot_deployment.example.id}\n      promptColumnName: promptText\n      targetColumnName: resultText\n      # Optional\n      predictionTimeout: 100\n      useCaseId: ${datarobot.use_case.example.id}\noutputs:\n  exampleId: ${example.id}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "properties": {
+                "deploymentId": {
+                    "type": "string",
+                    "description": "The ID of the custom model deployment.\n"
+                },
+                "modelId": {
+                    "type": "string",
+                    "description": "The ID of the model used in the deployment.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name to use for the validated custom model.\n"
+                },
+                "predictionTimeout": {
+                    "type": "integer",
+                    "description": "The timeout in seconds for the prediction when validating a custom model. Defaults to 300.\n"
+                },
+                "promptColumnName": {
+                    "type": "string",
+                    "description": "The name of the column the custom model uses for prompt text input.\n"
+                },
+                "targetColumnName": {
+                    "type": "string",
+                    "description": "The name of the column the custom model uses for prediction output.\n"
+                },
+                "useCaseId": {
+                    "type": "string",
+                    "description": "The ID of the use case to associate with the validated custom model.\n"
+                }
+            },
+            "required": [
+                "deploymentId",
+                "modelId",
+                "name",
+                "predictionTimeout",
+                "promptColumnName",
+                "targetColumnName"
+            ],
+            "inputProperties": {
+                "deploymentId": {
+                    "type": "string",
+                    "description": "The ID of the custom model deployment.\n"
+                },
+                "modelId": {
+                    "type": "string",
+                    "description": "The ID of the model used in the deployment.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name to use for the validated custom model.\n"
+                },
+                "predictionTimeout": {
+                    "type": "integer",
+                    "description": "The timeout in seconds for the prediction when validating a custom model. Defaults to 300.\n"
+                },
+                "promptColumnName": {
+                    "type": "string",
+                    "description": "The name of the column the custom model uses for prompt text input.\n"
+                },
+                "targetColumnName": {
+                    "type": "string",
+                    "description": "The name of the column the custom model uses for prediction output.\n"
+                },
+                "useCaseId": {
+                    "type": "string",
+                    "description": "The ID of the use case to associate with the validated custom model.\n"
+                }
+            },
+            "requiredInputs": [
+                "deploymentId",
+                "promptColumnName",
+                "targetColumnName"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering CustomModelLlmValidation resources.\n",
+                "properties": {
+                    "deploymentId": {
+                        "type": "string",
+                        "description": "The ID of the custom model deployment.\n"
+                    },
+                    "modelId": {
+                        "type": "string",
+                        "description": "The ID of the model used in the deployment.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name to use for the validated custom model.\n"
+                    },
+                    "predictionTimeout": {
+                        "type": "integer",
+                        "description": "The timeout in seconds for the prediction when validating a custom model. Defaults to 300.\n"
+                    },
+                    "promptColumnName": {
+                        "type": "string",
+                        "description": "The name of the column the custom model uses for prompt text input.\n"
+                    },
+                    "targetColumnName": {
+                        "type": "string",
+                        "description": "The name of the column the custom model uses for prediction output.\n"
+                    },
+                    "useCaseId": {
+                        "type": "string",
+                        "description": "The ID of the use case to associate with the validated custom model.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
         "datarobot:index/datasetFromDatasource:DatasetFromDatasource": {
             "description": "Data Set from Data Source.\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@datarobot/pulumi-datarobot\";\n\nconst example = new datarobot.DatasetFromDatasource(\"example\", {\n    datasourceId: datarobot_datasource.example.id,\n    credentialId: datarobot_credential.example.id,\n    doSnapshot: false,\n    persistDataAfterIngestion: false,\n    useKerberos: true,\n    categories: [\"TRAINING\"],\n    useCaseIds: [datarobot_use_case.example.id],\n});\nexport const exampleId = example.id;\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample = datarobot.DatasetFromDatasource(\"example\",\n    datasource_id=datarobot_datasource[\"example\"][\"id\"],\n    credential_id=datarobot_credential[\"example\"][\"id\"],\n    do_snapshot=False,\n    persist_data_after_ingestion=False,\n    use_kerberos=True,\n    categories=[\"TRAINING\"],\n    use_case_ids=[datarobot_use_case[\"example\"][\"id\"]])\npulumi.export(\"exampleId\", example.id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = DataRobotPulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Datarobot.DatasetFromDatasource(\"example\", new()\n    {\n        DatasourceId = datarobot_datasource.Example.Id,\n        CredentialId = datarobot_credential.Example.Id,\n        DoSnapshot = false,\n        PersistDataAfterIngestion = false,\n        UseKerberos = true,\n        Categories = new[]\n        {\n            \"TRAINING\",\n        },\n        UseCaseIds = new[]\n        {\n            datarobot_use_case.Example.Id,\n        },\n    });\n\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"exampleId\"] = example.Id,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texample, err := datarobot.NewDatasetFromDatasource(ctx, \"example\", \u0026datarobot.DatasetFromDatasourceArgs{\n\t\t\tDatasourceId:              pulumi.Any(datarobot_datasource.Example.Id),\n\t\t\tCredentialId:              pulumi.Any(datarobot_credential.Example.Id),\n\t\t\tDoSnapshot:                pulumi.Bool(false),\n\t\t\tPersistDataAfterIngestion: pulumi.Bool(false),\n\t\t\tUseKerberos:               pulumi.Bool(true),\n\t\t\tCategories: pulumi.StringArray{\n\t\t\t\tpulumi.String(\"TRAINING\"),\n\t\t\t},\n\t\t\tUseCaseIds: pulumi.StringArray{\n\t\t\t\tdatarobot_use_case.Example.Id,\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"exampleId\", example.ID())\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.DatasetFromDatasource;\nimport com.pulumi.datarobot.DatasetFromDatasourceArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new DatasetFromDatasource(\"example\", DatasetFromDatasourceArgs.builder()\n            .datasourceId(datarobot_datasource.example().id())\n            .credentialId(datarobot_credential.example().id())\n            .doSnapshot(false)\n            .persistDataAfterIngestion(false)\n            .useKerberos(true)\n            .categories(\"TRAINING\")\n            .useCaseIds(datarobot_use_case.example().id())\n            .build());\n\n        ctx.export(\"exampleId\", example.id());\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: datarobot:DatasetFromDatasource\n    properties:\n      datasourceId: ${datarobot_datasource.example.id}\n      credentialId: ${datarobot_credential.example.id}\n      # Optional\n      doSnapshot: false\n      persistDataAfterIngestion: false\n      useKerberos: true\n      categories:\n        - TRAINING\n      useCaseIds:\n        - ${datarobot_use_case.example.id}\noutputs:\n  exampleId: ${example.id}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
             "properties": {
@@ -5183,6 +5310,10 @@
         "datarobot:index/llmBlueprint:LlmBlueprint": {
             "description": "LLMBlueprint\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@datarobot/pulumi-datarobot\";\n\nconst exampleUseCase = new datarobot.UseCase(\"exampleUseCase\", {});\nconst examplePlayground = new datarobot.Playground(\"examplePlayground\", {\n    description: \"Description for the example playground\",\n    useCaseId: exampleUseCase.id,\n});\nconst exampleLlmBlueprint = new datarobot.LlmBlueprint(\"exampleLlmBlueprint\", {\n    description: \"Description for the example LLM blueprint\",\n    playgroundId: examplePlayground.id,\n    llmId: \"azure-openai-gpt-3.5-turbo\",\n    promptType: \"ONE_TIME_PROMPT\",\n});\n// Optional\n// llm_settings {\n//   max_completion_length = 1000\n//   temperature           = 0.5\n//   top_p                 = 0.9\n//   system_prompt         = \"My Prompt:\"\n// }\n// vector_database_settings = {\n//   max_documents_retrieved_per_prompt = 5\n//   max_tokens = 1000\n// }\nexport const exampleId = exampleLlmBlueprint.id;\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample_use_case = datarobot.UseCase(\"exampleUseCase\")\nexample_playground = datarobot.Playground(\"examplePlayground\",\n    description=\"Description for the example playground\",\n    use_case_id=example_use_case.id)\nexample_llm_blueprint = datarobot.LlmBlueprint(\"exampleLlmBlueprint\",\n    description=\"Description for the example LLM blueprint\",\n    playground_id=example_playground.id,\n    llm_id=\"azure-openai-gpt-3.5-turbo\",\n    prompt_type=\"ONE_TIME_PROMPT\")\n# Optional\n# llm_settings {\n#   max_completion_length = 1000\n#   temperature           = 0.5\n#   top_p                 = 0.9\n#   system_prompt         = \"My Prompt:\"\n# }\n# vector_database_settings = {\n#   max_documents_retrieved_per_prompt = 5\n#   max_tokens = 1000\n# }\npulumi.export(\"exampleId\", example_llm_blueprint.id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = DataRobotPulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var exampleUseCase = new Datarobot.UseCase(\"exampleUseCase\");\n\n    var examplePlayground = new Datarobot.Playground(\"examplePlayground\", new()\n    {\n        Description = \"Description for the example playground\",\n        UseCaseId = exampleUseCase.Id,\n    });\n\n    var exampleLlmBlueprint = new Datarobot.LlmBlueprint(\"exampleLlmBlueprint\", new()\n    {\n        Description = \"Description for the example LLM blueprint\",\n        PlaygroundId = examplePlayground.Id,\n        LlmId = \"azure-openai-gpt-3.5-turbo\",\n        PromptType = \"ONE_TIME_PROMPT\",\n    });\n\n    // Optional\n    // llm_settings {\n    //   max_completion_length = 1000\n    //   temperature           = 0.5\n    //   top_p                 = 0.9\n    //   system_prompt         = \"My Prompt:\"\n    // }\n    // vector_database_settings = {\n    //   max_documents_retrieved_per_prompt = 5\n    //   max_tokens = 1000\n    // }\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"exampleId\"] = exampleLlmBlueprint.Id,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texampleUseCase, err := datarobot.NewUseCase(ctx, \"exampleUseCase\", nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\texamplePlayground, err := datarobot.NewPlayground(ctx, \"examplePlayground\", \u0026datarobot.PlaygroundArgs{\n\t\t\tDescription: pulumi.String(\"Description for the example playground\"),\n\t\t\tUseCaseId:   exampleUseCase.ID(),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\texampleLlmBlueprint, err := datarobot.NewLlmBlueprint(ctx, \"exampleLlmBlueprint\", \u0026datarobot.LlmBlueprintArgs{\n\t\t\tDescription:  pulumi.String(\"Description for the example LLM blueprint\"),\n\t\t\tPlaygroundId: examplePlayground.ID(),\n\t\t\tLlmId:        pulumi.String(\"azure-openai-gpt-3.5-turbo\"),\n\t\t\tPromptType:   pulumi.String(\"ONE_TIME_PROMPT\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"exampleId\", exampleLlmBlueprint.ID())\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.UseCase;\nimport com.pulumi.datarobot.Playground;\nimport com.pulumi.datarobot.PlaygroundArgs;\nimport com.pulumi.datarobot.LlmBlueprint;\nimport com.pulumi.datarobot.LlmBlueprintArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var exampleUseCase = new UseCase(\"exampleUseCase\");\n\n        var examplePlayground = new Playground(\"examplePlayground\", PlaygroundArgs.builder()\n            .description(\"Description for the example playground\")\n            .useCaseId(exampleUseCase.id())\n            .build());\n\n        var exampleLlmBlueprint = new LlmBlueprint(\"exampleLlmBlueprint\", LlmBlueprintArgs.builder()\n            .description(\"Description for the example LLM blueprint\")\n            .playgroundId(examplePlayground.id())\n            .llmId(\"azure-openai-gpt-3.5-turbo\")\n            .promptType(\"ONE_TIME_PROMPT\")\n            .build());\n\n        // Optional\n        // llm_settings {\n        //   max_completion_length = 1000\n        //   temperature           = 0.5\n        //   top_p                 = 0.9\n        //   system_prompt         = \"My Prompt:\"\n        // }\n        // vector_database_settings = {\n        //   max_documents_retrieved_per_prompt = 5\n        //   max_tokens = 1000\n        // }\n        ctx.export(\"exampleId\", exampleLlmBlueprint.id());\n    }\n}\n```\n```yaml\nresources:\n  exampleUseCase:\n    type: datarobot:UseCase\n  examplePlayground:\n    type: datarobot:Playground\n    properties:\n      description: Description for the example playground\n      useCaseId: ${exampleUseCase.id}\n  exampleLlmBlueprint:\n    type: datarobot:LlmBlueprint\n    properties:\n      description: Description for the example LLM blueprint\n      playgroundId: ${examplePlayground.id}\n      llmId: azure-openai-gpt-3.5-turbo\n      promptType: ONE_TIME_PROMPT\noutputs:\n  exampleId: ${exampleLlmBlueprint.id}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
             "properties": {
+                "customModelLlmSettings": {
+                    "$ref": "#/types/datarobot:index/LlmBlueprintCustomModelLlmSettings:LlmBlueprintCustomModelLlmSettings",
+                    "description": "The custom model LLM settings for the LLM Blueprint.\n"
+                },
                 "description": {
                     "type": "string",
                     "description": "The description of the LLM Blueprint.\n"
@@ -5217,12 +5348,15 @@
                 }
             },
             "required": [
-                "llmId",
                 "name",
                 "playgroundId",
                 "promptType"
             ],
             "inputProperties": {
+                "customModelLlmSettings": {
+                    "$ref": "#/types/datarobot:index/LlmBlueprintCustomModelLlmSettings:LlmBlueprintCustomModelLlmSettings",
+                    "description": "The custom model LLM settings for the LLM Blueprint.\n"
+                },
                 "description": {
                     "type": "string",
                     "description": "The description of the LLM Blueprint.\n"
@@ -5257,12 +5391,15 @@
                 }
             },
             "requiredInputs": [
-                "llmId",
                 "playgroundId"
             ],
             "stateInputs": {
                 "description": "Input properties used for looking up and filtering LlmBlueprint resources.\n",
                 "properties": {
+                    "customModelLlmSettings": {
+                        "$ref": "#/types/datarobot:index/LlmBlueprintCustomModelLlmSettings:LlmBlueprintCustomModelLlmSettings",
+                        "description": "The custom model LLM settings for the LLM Blueprint.\n"
+                    },
                     "description": {
                         "type": "string",
                         "description": "The description of the LLM Blueprint.\n"

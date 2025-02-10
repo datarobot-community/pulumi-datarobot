@@ -10523,6 +10523,181 @@ func (o DeploymentSegmentAnalysisSettingsPtrOutput) Enabled() pulumi.BoolPtrOutp
 	}).(pulumi.BoolPtrOutput)
 }
 
+type LlmBlueprintCustomModelLlmSettings struct {
+	// The external LLM's context size, in tokens. This value is only used for pruning documents supplied to the LLM when a vector database is associated with the LLM blueprint. It does not affect the external LLM's actual context size in any way and is not supplied to the LLM.
+	ExternalLlmContextSize *int `pulumi:"externalLlmContextSize"`
+	// System prompt guides the style of the LLM response. It is a 'universal' prompt, prepended to all individual prompts.
+	SystemPrompt *string `pulumi:"systemPrompt"`
+	// The validation ID of the custom model LLM.
+	ValidationId *string `pulumi:"validationId"`
+}
+
+// LlmBlueprintCustomModelLlmSettingsInput is an input type that accepts LlmBlueprintCustomModelLlmSettingsArgs and LlmBlueprintCustomModelLlmSettingsOutput values.
+// You can construct a concrete instance of `LlmBlueprintCustomModelLlmSettingsInput` via:
+//
+//	LlmBlueprintCustomModelLlmSettingsArgs{...}
+type LlmBlueprintCustomModelLlmSettingsInput interface {
+	pulumi.Input
+
+	ToLlmBlueprintCustomModelLlmSettingsOutput() LlmBlueprintCustomModelLlmSettingsOutput
+	ToLlmBlueprintCustomModelLlmSettingsOutputWithContext(context.Context) LlmBlueprintCustomModelLlmSettingsOutput
+}
+
+type LlmBlueprintCustomModelLlmSettingsArgs struct {
+	// The external LLM's context size, in tokens. This value is only used for pruning documents supplied to the LLM when a vector database is associated with the LLM blueprint. It does not affect the external LLM's actual context size in any way and is not supplied to the LLM.
+	ExternalLlmContextSize pulumi.IntPtrInput `pulumi:"externalLlmContextSize"`
+	// System prompt guides the style of the LLM response. It is a 'universal' prompt, prepended to all individual prompts.
+	SystemPrompt pulumi.StringPtrInput `pulumi:"systemPrompt"`
+	// The validation ID of the custom model LLM.
+	ValidationId pulumi.StringPtrInput `pulumi:"validationId"`
+}
+
+func (LlmBlueprintCustomModelLlmSettingsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*LlmBlueprintCustomModelLlmSettings)(nil)).Elem()
+}
+
+func (i LlmBlueprintCustomModelLlmSettingsArgs) ToLlmBlueprintCustomModelLlmSettingsOutput() LlmBlueprintCustomModelLlmSettingsOutput {
+	return i.ToLlmBlueprintCustomModelLlmSettingsOutputWithContext(context.Background())
+}
+
+func (i LlmBlueprintCustomModelLlmSettingsArgs) ToLlmBlueprintCustomModelLlmSettingsOutputWithContext(ctx context.Context) LlmBlueprintCustomModelLlmSettingsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(LlmBlueprintCustomModelLlmSettingsOutput)
+}
+
+func (i LlmBlueprintCustomModelLlmSettingsArgs) ToLlmBlueprintCustomModelLlmSettingsPtrOutput() LlmBlueprintCustomModelLlmSettingsPtrOutput {
+	return i.ToLlmBlueprintCustomModelLlmSettingsPtrOutputWithContext(context.Background())
+}
+
+func (i LlmBlueprintCustomModelLlmSettingsArgs) ToLlmBlueprintCustomModelLlmSettingsPtrOutputWithContext(ctx context.Context) LlmBlueprintCustomModelLlmSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(LlmBlueprintCustomModelLlmSettingsOutput).ToLlmBlueprintCustomModelLlmSettingsPtrOutputWithContext(ctx)
+}
+
+// LlmBlueprintCustomModelLlmSettingsPtrInput is an input type that accepts LlmBlueprintCustomModelLlmSettingsArgs, LlmBlueprintCustomModelLlmSettingsPtr and LlmBlueprintCustomModelLlmSettingsPtrOutput values.
+// You can construct a concrete instance of `LlmBlueprintCustomModelLlmSettingsPtrInput` via:
+//
+//	        LlmBlueprintCustomModelLlmSettingsArgs{...}
+//
+//	or:
+//
+//	        nil
+type LlmBlueprintCustomModelLlmSettingsPtrInput interface {
+	pulumi.Input
+
+	ToLlmBlueprintCustomModelLlmSettingsPtrOutput() LlmBlueprintCustomModelLlmSettingsPtrOutput
+	ToLlmBlueprintCustomModelLlmSettingsPtrOutputWithContext(context.Context) LlmBlueprintCustomModelLlmSettingsPtrOutput
+}
+
+type llmBlueprintCustomModelLlmSettingsPtrType LlmBlueprintCustomModelLlmSettingsArgs
+
+func LlmBlueprintCustomModelLlmSettingsPtr(v *LlmBlueprintCustomModelLlmSettingsArgs) LlmBlueprintCustomModelLlmSettingsPtrInput {
+	return (*llmBlueprintCustomModelLlmSettingsPtrType)(v)
+}
+
+func (*llmBlueprintCustomModelLlmSettingsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**LlmBlueprintCustomModelLlmSettings)(nil)).Elem()
+}
+
+func (i *llmBlueprintCustomModelLlmSettingsPtrType) ToLlmBlueprintCustomModelLlmSettingsPtrOutput() LlmBlueprintCustomModelLlmSettingsPtrOutput {
+	return i.ToLlmBlueprintCustomModelLlmSettingsPtrOutputWithContext(context.Background())
+}
+
+func (i *llmBlueprintCustomModelLlmSettingsPtrType) ToLlmBlueprintCustomModelLlmSettingsPtrOutputWithContext(ctx context.Context) LlmBlueprintCustomModelLlmSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(LlmBlueprintCustomModelLlmSettingsPtrOutput)
+}
+
+type LlmBlueprintCustomModelLlmSettingsOutput struct{ *pulumi.OutputState }
+
+func (LlmBlueprintCustomModelLlmSettingsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*LlmBlueprintCustomModelLlmSettings)(nil)).Elem()
+}
+
+func (o LlmBlueprintCustomModelLlmSettingsOutput) ToLlmBlueprintCustomModelLlmSettingsOutput() LlmBlueprintCustomModelLlmSettingsOutput {
+	return o
+}
+
+func (o LlmBlueprintCustomModelLlmSettingsOutput) ToLlmBlueprintCustomModelLlmSettingsOutputWithContext(ctx context.Context) LlmBlueprintCustomModelLlmSettingsOutput {
+	return o
+}
+
+func (o LlmBlueprintCustomModelLlmSettingsOutput) ToLlmBlueprintCustomModelLlmSettingsPtrOutput() LlmBlueprintCustomModelLlmSettingsPtrOutput {
+	return o.ToLlmBlueprintCustomModelLlmSettingsPtrOutputWithContext(context.Background())
+}
+
+func (o LlmBlueprintCustomModelLlmSettingsOutput) ToLlmBlueprintCustomModelLlmSettingsPtrOutputWithContext(ctx context.Context) LlmBlueprintCustomModelLlmSettingsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v LlmBlueprintCustomModelLlmSettings) *LlmBlueprintCustomModelLlmSettings {
+		return &v
+	}).(LlmBlueprintCustomModelLlmSettingsPtrOutput)
+}
+
+// The external LLM's context size, in tokens. This value is only used for pruning documents supplied to the LLM when a vector database is associated with the LLM blueprint. It does not affect the external LLM's actual context size in any way and is not supplied to the LLM.
+func (o LlmBlueprintCustomModelLlmSettingsOutput) ExternalLlmContextSize() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v LlmBlueprintCustomModelLlmSettings) *int { return v.ExternalLlmContextSize }).(pulumi.IntPtrOutput)
+}
+
+// System prompt guides the style of the LLM response. It is a 'universal' prompt, prepended to all individual prompts.
+func (o LlmBlueprintCustomModelLlmSettingsOutput) SystemPrompt() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v LlmBlueprintCustomModelLlmSettings) *string { return v.SystemPrompt }).(pulumi.StringPtrOutput)
+}
+
+// The validation ID of the custom model LLM.
+func (o LlmBlueprintCustomModelLlmSettingsOutput) ValidationId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v LlmBlueprintCustomModelLlmSettings) *string { return v.ValidationId }).(pulumi.StringPtrOutput)
+}
+
+type LlmBlueprintCustomModelLlmSettingsPtrOutput struct{ *pulumi.OutputState }
+
+func (LlmBlueprintCustomModelLlmSettingsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**LlmBlueprintCustomModelLlmSettings)(nil)).Elem()
+}
+
+func (o LlmBlueprintCustomModelLlmSettingsPtrOutput) ToLlmBlueprintCustomModelLlmSettingsPtrOutput() LlmBlueprintCustomModelLlmSettingsPtrOutput {
+	return o
+}
+
+func (o LlmBlueprintCustomModelLlmSettingsPtrOutput) ToLlmBlueprintCustomModelLlmSettingsPtrOutputWithContext(ctx context.Context) LlmBlueprintCustomModelLlmSettingsPtrOutput {
+	return o
+}
+
+func (o LlmBlueprintCustomModelLlmSettingsPtrOutput) Elem() LlmBlueprintCustomModelLlmSettingsOutput {
+	return o.ApplyT(func(v *LlmBlueprintCustomModelLlmSettings) LlmBlueprintCustomModelLlmSettings {
+		if v != nil {
+			return *v
+		}
+		var ret LlmBlueprintCustomModelLlmSettings
+		return ret
+	}).(LlmBlueprintCustomModelLlmSettingsOutput)
+}
+
+// The external LLM's context size, in tokens. This value is only used for pruning documents supplied to the LLM when a vector database is associated with the LLM blueprint. It does not affect the external LLM's actual context size in any way and is not supplied to the LLM.
+func (o LlmBlueprintCustomModelLlmSettingsPtrOutput) ExternalLlmContextSize() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *LlmBlueprintCustomModelLlmSettings) *int {
+		if v == nil {
+			return nil
+		}
+		return v.ExternalLlmContextSize
+	}).(pulumi.IntPtrOutput)
+}
+
+// System prompt guides the style of the LLM response. It is a 'universal' prompt, prepended to all individual prompts.
+func (o LlmBlueprintCustomModelLlmSettingsPtrOutput) SystemPrompt() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *LlmBlueprintCustomModelLlmSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.SystemPrompt
+	}).(pulumi.StringPtrOutput)
+}
+
+// The validation ID of the custom model LLM.
+func (o LlmBlueprintCustomModelLlmSettingsPtrOutput) ValidationId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *LlmBlueprintCustomModelLlmSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ValidationId
+	}).(pulumi.StringPtrOutput)
+}
+
 type LlmBlueprintLlmSettings struct {
 	// The maximum number of tokens allowed in the completion. The combined count of this value and prompt tokens must be below the model's maximum context size, where prompt token count is comprised of system prompt, user prompt, recent chat history, and vector database citations.
 	MaxCompletionLength *int `pulumi:"maxCompletionLength"`
@@ -11439,6 +11614,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentRuntimeParameterValueArrayInput)(nil)).Elem(), DeploymentRuntimeParameterValueArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentSegmentAnalysisSettingsInput)(nil)).Elem(), DeploymentSegmentAnalysisSettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentSegmentAnalysisSettingsPtrInput)(nil)).Elem(), DeploymentSegmentAnalysisSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*LlmBlueprintCustomModelLlmSettingsInput)(nil)).Elem(), LlmBlueprintCustomModelLlmSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*LlmBlueprintCustomModelLlmSettingsPtrInput)(nil)).Elem(), LlmBlueprintCustomModelLlmSettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*LlmBlueprintLlmSettingsInput)(nil)).Elem(), LlmBlueprintLlmSettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*LlmBlueprintLlmSettingsPtrInput)(nil)).Elem(), LlmBlueprintLlmSettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*LlmBlueprintVectorDatabaseSettingsInput)(nil)).Elem(), LlmBlueprintVectorDatabaseSettingsArgs{})
@@ -11570,6 +11747,8 @@ func init() {
 	pulumi.RegisterOutputType(DeploymentRuntimeParameterValueArrayOutput{})
 	pulumi.RegisterOutputType(DeploymentSegmentAnalysisSettingsOutput{})
 	pulumi.RegisterOutputType(DeploymentSegmentAnalysisSettingsPtrOutput{})
+	pulumi.RegisterOutputType(LlmBlueprintCustomModelLlmSettingsOutput{})
+	pulumi.RegisterOutputType(LlmBlueprintCustomModelLlmSettingsPtrOutput{})
 	pulumi.RegisterOutputType(LlmBlueprintLlmSettingsOutput{})
 	pulumi.RegisterOutputType(LlmBlueprintLlmSettingsPtrOutput{})
 	pulumi.RegisterOutputType(LlmBlueprintVectorDatabaseSettingsOutput{})

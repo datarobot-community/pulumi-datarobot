@@ -57,10 +57,12 @@ import (
 type LlmBlueprint struct {
 	pulumi.CustomResourceState
 
+	// The custom model LLM settings for the LLM Blueprint.
+	CustomModelLlmSettings LlmBlueprintCustomModelLlmSettingsPtrOutput `pulumi:"customModelLlmSettings"`
 	// The description of the LLM Blueprint.
 	Description pulumi.StringPtrOutput `pulumi:"description"`
 	// The id of the LLM for the LLM Blueprint.
-	LlmId pulumi.StringOutput `pulumi:"llmId"`
+	LlmId pulumi.StringPtrOutput `pulumi:"llmId"`
 	// The LLM settings for the LLM Blueprint.
 	LlmSettings LlmBlueprintLlmSettingsPtrOutput `pulumi:"llmSettings"`
 	// The name of the LLM Blueprint.
@@ -82,9 +84,6 @@ func NewLlmBlueprint(ctx *pulumi.Context,
 		return nil, errors.New("missing one or more required arguments")
 	}
 
-	if args.LlmId == nil {
-		return nil, errors.New("invalid value for required argument 'LlmId'")
-	}
 	if args.PlaygroundId == nil {
 		return nil, errors.New("invalid value for required argument 'PlaygroundId'")
 	}
@@ -111,6 +110,8 @@ func GetLlmBlueprint(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering LlmBlueprint resources.
 type llmBlueprintState struct {
+	// The custom model LLM settings for the LLM Blueprint.
+	CustomModelLlmSettings *LlmBlueprintCustomModelLlmSettings `pulumi:"customModelLlmSettings"`
 	// The description of the LLM Blueprint.
 	Description *string `pulumi:"description"`
 	// The id of the LLM for the LLM Blueprint.
@@ -130,6 +131,8 @@ type llmBlueprintState struct {
 }
 
 type LlmBlueprintState struct {
+	// The custom model LLM settings for the LLM Blueprint.
+	CustomModelLlmSettings LlmBlueprintCustomModelLlmSettingsPtrInput
 	// The description of the LLM Blueprint.
 	Description pulumi.StringPtrInput
 	// The id of the LLM for the LLM Blueprint.
@@ -153,10 +156,12 @@ func (LlmBlueprintState) ElementType() reflect.Type {
 }
 
 type llmBlueprintArgs struct {
+	// The custom model LLM settings for the LLM Blueprint.
+	CustomModelLlmSettings *LlmBlueprintCustomModelLlmSettings `pulumi:"customModelLlmSettings"`
 	// The description of the LLM Blueprint.
 	Description *string `pulumi:"description"`
 	// The id of the LLM for the LLM Blueprint.
-	LlmId string `pulumi:"llmId"`
+	LlmId *string `pulumi:"llmId"`
 	// The LLM settings for the LLM Blueprint.
 	LlmSettings *LlmBlueprintLlmSettings `pulumi:"llmSettings"`
 	// The name of the LLM Blueprint.
@@ -173,10 +178,12 @@ type llmBlueprintArgs struct {
 
 // The set of arguments for constructing a LlmBlueprint resource.
 type LlmBlueprintArgs struct {
+	// The custom model LLM settings for the LLM Blueprint.
+	CustomModelLlmSettings LlmBlueprintCustomModelLlmSettingsPtrInput
 	// The description of the LLM Blueprint.
 	Description pulumi.StringPtrInput
 	// The id of the LLM for the LLM Blueprint.
-	LlmId pulumi.StringInput
+	LlmId pulumi.StringPtrInput
 	// The LLM settings for the LLM Blueprint.
 	LlmSettings LlmBlueprintLlmSettingsPtrInput
 	// The name of the LLM Blueprint.
@@ -278,14 +285,19 @@ func (o LlmBlueprintOutput) ToLlmBlueprintOutputWithContext(ctx context.Context)
 	return o
 }
 
+// The custom model LLM settings for the LLM Blueprint.
+func (o LlmBlueprintOutput) CustomModelLlmSettings() LlmBlueprintCustomModelLlmSettingsPtrOutput {
+	return o.ApplyT(func(v *LlmBlueprint) LlmBlueprintCustomModelLlmSettingsPtrOutput { return v.CustomModelLlmSettings }).(LlmBlueprintCustomModelLlmSettingsPtrOutput)
+}
+
 // The description of the LLM Blueprint.
 func (o LlmBlueprintOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *LlmBlueprint) pulumi.StringPtrOutput { return v.Description }).(pulumi.StringPtrOutput)
 }
 
 // The id of the LLM for the LLM Blueprint.
-func (o LlmBlueprintOutput) LlmId() pulumi.StringOutput {
-	return o.ApplyT(func(v *LlmBlueprint) pulumi.StringOutput { return v.LlmId }).(pulumi.StringOutput)
+func (o LlmBlueprintOutput) LlmId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *LlmBlueprint) pulumi.StringPtrOutput { return v.LlmId }).(pulumi.StringPtrOutput)
 }
 
 // The LLM settings for the LLM Blueprint.

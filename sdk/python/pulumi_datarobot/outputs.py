@@ -77,6 +77,7 @@ __all__ = [
     'DeploymentRetrainingPolicyTriggerSchedule',
     'DeploymentRuntimeParameterValue',
     'DeploymentSegmentAnalysisSettings',
+    'LlmBlueprintCustomModelLlmSettings',
     'LlmBlueprintLlmSettings',
     'LlmBlueprintVectorDatabaseSettings',
     'NotificationChannelCustomHeader',
@@ -4012,6 +4013,70 @@ class DeploymentSegmentAnalysisSettings(dict):
         A list of strings that gives the segment attributes selected for tracking.
         """
         return pulumi.get(self, "attributes")
+
+
+@pulumi.output_type
+class LlmBlueprintCustomModelLlmSettings(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "externalLlmContextSize":
+            suggest = "external_llm_context_size"
+        elif key == "systemPrompt":
+            suggest = "system_prompt"
+        elif key == "validationId":
+            suggest = "validation_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in LlmBlueprintCustomModelLlmSettings. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        LlmBlueprintCustomModelLlmSettings.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        LlmBlueprintCustomModelLlmSettings.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 external_llm_context_size: Optional[int] = None,
+                 system_prompt: Optional[str] = None,
+                 validation_id: Optional[str] = None):
+        """
+        :param int external_llm_context_size: The external LLM's context size, in tokens. This value is only used for pruning documents supplied to the LLM when a vector database is associated with the LLM blueprint. It does not affect the external LLM's actual context size in any way and is not supplied to the LLM.
+        :param str system_prompt: System prompt guides the style of the LLM response. It is a 'universal' prompt, prepended to all individual prompts.
+        :param str validation_id: The validation ID of the custom model LLM.
+        """
+        if external_llm_context_size is not None:
+            pulumi.set(__self__, "external_llm_context_size", external_llm_context_size)
+        if system_prompt is not None:
+            pulumi.set(__self__, "system_prompt", system_prompt)
+        if validation_id is not None:
+            pulumi.set(__self__, "validation_id", validation_id)
+
+    @property
+    @pulumi.getter(name="externalLlmContextSize")
+    def external_llm_context_size(self) -> Optional[int]:
+        """
+        The external LLM's context size, in tokens. This value is only used for pruning documents supplied to the LLM when a vector database is associated with the LLM blueprint. It does not affect the external LLM's actual context size in any way and is not supplied to the LLM.
+        """
+        return pulumi.get(self, "external_llm_context_size")
+
+    @property
+    @pulumi.getter(name="systemPrompt")
+    def system_prompt(self) -> Optional[str]:
+        """
+        System prompt guides the style of the LLM response. It is a 'universal' prompt, prepended to all individual prompts.
+        """
+        return pulumi.get(self, "system_prompt")
+
+    @property
+    @pulumi.getter(name="validationId")
+    def validation_id(self) -> Optional[str]:
+        """
+        The validation ID of the custom model LLM.
+        """
+        return pulumi.get(self, "validation_id")
 
 
 @pulumi.output_type
