@@ -183,6 +183,9 @@
                     }
                 }
             },
+            "datarobot_custom_model_llm_validation": {
+                "current": "datarobot:index/customModelLlmValidation:CustomModelLlmValidation"
+            },
             "datarobot_dataset_from_datasource": {
                 "current": "datarobot:index/datasetFromDatasource:DatasetFromDatasource",
                 "fields": {
