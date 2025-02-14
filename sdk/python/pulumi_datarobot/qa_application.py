@@ -20,17 +20,21 @@ __all__ = ['QaApplicationArgs', 'QaApplication']
 class QaApplicationArgs:
     def __init__(__self__, *,
                  deployment_id: pulumi.Input[str],
+                 allow_auto_stopping: Optional[pulumi.Input[bool]] = None,
                  external_access_enabled: Optional[pulumi.Input[bool]] = None,
                  external_access_recipients: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  name: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a QaApplication resource.
         :param pulumi.Input[str] deployment_id: The deployment ID of the Q&A Application.
+        :param pulumi.Input[bool] allow_auto_stopping: Whether auto stopping is allowed for the Q&A Application.
         :param pulumi.Input[bool] external_access_enabled: Whether external access is enabled for the Q&A Application.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] external_access_recipients: The list of external email addresses that have access to the Q&A Application.
         :param pulumi.Input[str] name: The name of the Q&A Application.
         """
         pulumi.set(__self__, "deployment_id", deployment_id)
+        if allow_auto_stopping is not None:
+            pulumi.set(__self__, "allow_auto_stopping", allow_auto_stopping)
         if external_access_enabled is not None:
             pulumi.set(__self__, "external_access_enabled", external_access_enabled)
         if external_access_recipients is not None:
@@ -49,6 +53,18 @@ class QaApplicationArgs:
     @deployment_id.setter
     def deployment_id(self, value: pulumi.Input[str]):
         pulumi.set(self, "deployment_id", value)
+
+    @property
+    @pulumi.getter(name="allowAutoStopping")
+    def allow_auto_stopping(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether auto stopping is allowed for the Q&A Application.
+        """
+        return pulumi.get(self, "allow_auto_stopping")
+
+    @allow_auto_stopping.setter
+    def allow_auto_stopping(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "allow_auto_stopping", value)
 
     @property
     @pulumi.getter(name="externalAccessEnabled")
@@ -90,6 +106,7 @@ class QaApplicationArgs:
 @pulumi.input_type
 class _QaApplicationState:
     def __init__(__self__, *,
+                 allow_auto_stopping: Optional[pulumi.Input[bool]] = None,
                  application_url: Optional[pulumi.Input[str]] = None,
                  deployment_id: Optional[pulumi.Input[str]] = None,
                  external_access_enabled: Optional[pulumi.Input[bool]] = None,
@@ -99,6 +116,7 @@ class _QaApplicationState:
                  source_version_id: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering QaApplication resources.
+        :param pulumi.Input[bool] allow_auto_stopping: Whether auto stopping is allowed for the Q&A Application.
         :param pulumi.Input[str] application_url: The URL of the Q&A Application.
         :param pulumi.Input[str] deployment_id: The deployment ID of the Q&A Application.
         :param pulumi.Input[bool] external_access_enabled: Whether external access is enabled for the Q&A Application.
@@ -107,6 +125,8 @@ class _QaApplicationState:
         :param pulumi.Input[str] source_id: The ID of the Q&A Application Source.
         :param pulumi.Input[str] source_version_id: The version ID of the Q&A Application Source.
         """
+        if allow_auto_stopping is not None:
+            pulumi.set(__self__, "allow_auto_stopping", allow_auto_stopping)
         if application_url is not None:
             pulumi.set(__self__, "application_url", application_url)
         if deployment_id is not None:
@@ -121,6 +141,18 @@ class _QaApplicationState:
             pulumi.set(__self__, "source_id", source_id)
         if source_version_id is not None:
             pulumi.set(__self__, "source_version_id", source_version_id)
+
+    @property
+    @pulumi.getter(name="allowAutoStopping")
+    def allow_auto_stopping(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether auto stopping is allowed for the Q&A Application.
+        """
+        return pulumi.get(self, "allow_auto_stopping")
+
+    @allow_auto_stopping.setter
+    def allow_auto_stopping(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "allow_auto_stopping", value)
 
     @property
     @pulumi.getter(name="applicationUrl")
@@ -212,6 +244,7 @@ class QaApplication(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 allow_auto_stopping: Optional[pulumi.Input[bool]] = None,
                  deployment_id: Optional[pulumi.Input[str]] = None,
                  external_access_enabled: Optional[pulumi.Input[bool]] = None,
                  external_access_recipients: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
@@ -245,7 +278,8 @@ class QaApplication(pulumi.CustomResource):
         example_qa_application = datarobot.QaApplication("exampleQaApplication",
             deployment_id=example_deployment.id,
             external_access_enabled=True,
-            external_access_recipients=["recipient@example.com"])
+            external_access_recipients=["recipient@example.com"],
+            allow_auto_stopping=False)
         pulumi.export("datarobotQaApplicationId", example_qa_application.id)
         pulumi.export("datarobotQaApplicationSourceId", example_qa_application.source_id)
         pulumi.export("datarobotQaApplicationSourceVersionId", example_qa_application.source_version_id)
@@ -254,6 +288,7 @@ class QaApplication(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[bool] allow_auto_stopping: Whether auto stopping is allowed for the Q&A Application.
         :param pulumi.Input[str] deployment_id: The deployment ID of the Q&A Application.
         :param pulumi.Input[bool] external_access_enabled: Whether external access is enabled for the Q&A Application.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] external_access_recipients: The list of external email addresses that have access to the Q&A Application.
@@ -293,7 +328,8 @@ class QaApplication(pulumi.CustomResource):
         example_qa_application = datarobot.QaApplication("exampleQaApplication",
             deployment_id=example_deployment.id,
             external_access_enabled=True,
-            external_access_recipients=["recipient@example.com"])
+            external_access_recipients=["recipient@example.com"],
+            allow_auto_stopping=False)
         pulumi.export("datarobotQaApplicationId", example_qa_application.id)
         pulumi.export("datarobotQaApplicationSourceId", example_qa_application.source_id)
         pulumi.export("datarobotQaApplicationSourceVersionId", example_qa_application.source_version_id)
@@ -315,6 +351,7 @@ class QaApplication(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 allow_auto_stopping: Optional[pulumi.Input[bool]] = None,
                  deployment_id: Optional[pulumi.Input[str]] = None,
                  external_access_enabled: Optional[pulumi.Input[bool]] = None,
                  external_access_recipients: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
@@ -328,6 +365,7 @@ class QaApplication(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = QaApplicationArgs.__new__(QaApplicationArgs)
 
+            __props__.__dict__["allow_auto_stopping"] = allow_auto_stopping
             if deployment_id is None and not opts.urn:
                 raise TypeError("Missing required property 'deployment_id'")
             __props__.__dict__["deployment_id"] = deployment_id
@@ -347,6 +385,7 @@ class QaApplication(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
+            allow_auto_stopping: Optional[pulumi.Input[bool]] = None,
             application_url: Optional[pulumi.Input[str]] = None,
             deployment_id: Optional[pulumi.Input[str]] = None,
             external_access_enabled: Optional[pulumi.Input[bool]] = None,
@@ -361,6 +400,7 @@ class QaApplication(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[bool] allow_auto_stopping: Whether auto stopping is allowed for the Q&A Application.
         :param pulumi.Input[str] application_url: The URL of the Q&A Application.
         :param pulumi.Input[str] deployment_id: The deployment ID of the Q&A Application.
         :param pulumi.Input[bool] external_access_enabled: Whether external access is enabled for the Q&A Application.
@@ -373,6 +413,7 @@ class QaApplication(pulumi.CustomResource):
 
         __props__ = _QaApplicationState.__new__(_QaApplicationState)
 
+        __props__.__dict__["allow_auto_stopping"] = allow_auto_stopping
         __props__.__dict__["application_url"] = application_url
         __props__.__dict__["deployment_id"] = deployment_id
         __props__.__dict__["external_access_enabled"] = external_access_enabled
@@ -381,6 +422,14 @@ class QaApplication(pulumi.CustomResource):
         __props__.__dict__["source_id"] = source_id
         __props__.__dict__["source_version_id"] = source_version_id
         return QaApplication(resource_name, opts=opts, __props__=__props__)
+
+    @property
+    @pulumi.getter(name="allowAutoStopping")
+    def allow_auto_stopping(self) -> pulumi.Output[bool]:
+        """
+        Whether auto stopping is allowed for the Q&A Application.
+        """
+        return pulumi.get(self, "allow_auto_stopping")
 
     @property
     @pulumi.getter(name="applicationUrl")
