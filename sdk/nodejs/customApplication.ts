@@ -21,6 +21,7 @@ import * as utilities from "./utilities";
  *     sourceVersionId: exampleApplicationSource.versionId,
  *     externalAccessEnabled: true,
  *     externalAccessRecipients: ["recipient@example.com"],
+ *     allowAutoStopping: false,
  * });
  * export const datarobotCustomApplicationId = exampleCustomApplication.id;
  * export const datarobotCustomApplicationSourceId = exampleCustomApplication.sourceId;
@@ -56,6 +57,10 @@ export class CustomApplication extends pulumi.CustomResource {
         return obj['__pulumiType'] === CustomApplication.__pulumiType;
     }
 
+    /**
+     * Whether auto stopping is allowed for the Custom Application.
+     */
+    public readonly allowAutoStopping!: pulumi.Output<boolean>;
     /**
      * The URL of the Custom Application.
      */
@@ -98,6 +103,7 @@ export class CustomApplication extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as CustomApplicationState | undefined;
+            resourceInputs["allowAutoStopping"] = state ? state.allowAutoStopping : undefined;
             resourceInputs["applicationUrl"] = state ? state.applicationUrl : undefined;
             resourceInputs["externalAccessEnabled"] = state ? state.externalAccessEnabled : undefined;
             resourceInputs["externalAccessRecipients"] = state ? state.externalAccessRecipients : undefined;
@@ -110,6 +116,7 @@ export class CustomApplication extends pulumi.CustomResource {
             if ((!args || args.sourceVersionId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'sourceVersionId'");
             }
+            resourceInputs["allowAutoStopping"] = args ? args.allowAutoStopping : undefined;
             resourceInputs["externalAccessEnabled"] = args ? args.externalAccessEnabled : undefined;
             resourceInputs["externalAccessRecipients"] = args ? args.externalAccessRecipients : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
@@ -127,6 +134,10 @@ export class CustomApplication extends pulumi.CustomResource {
  * Input properties used for looking up and filtering CustomApplication resources.
  */
 export interface CustomApplicationState {
+    /**
+     * Whether auto stopping is allowed for the Custom Application.
+     */
+    allowAutoStopping?: pulumi.Input<boolean>;
     /**
      * The URL of the Custom Application.
      */
@@ -161,6 +172,10 @@ export interface CustomApplicationState {
  * The set of arguments for constructing a CustomApplication resource.
  */
 export interface CustomApplicationArgs {
+    /**
+     * Whether auto stopping is allowed for the Custom Application.
+     */
+    allowAutoStopping?: pulumi.Input<boolean>;
     /**
      * Whether external access is enabled for the Custom Application.
      */

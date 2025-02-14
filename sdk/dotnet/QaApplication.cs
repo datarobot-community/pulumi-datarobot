@@ -62,6 +62,7 @@ namespace DataRobotPulumi.Datarobot
     ///         {
     ///             "recipient@example.com",
     ///         },
+    ///         AllowAutoStopping = false,
     ///     });
     /// 
     ///     return new Dictionary&lt;string, object?&gt;
@@ -77,6 +78,12 @@ namespace DataRobotPulumi.Datarobot
     [DatarobotResourceType("datarobot:index/qaApplication:QaApplication")]
     public partial class QaApplication : global::Pulumi.CustomResource
     {
+        /// <summary>
+        /// Whether auto stopping is allowed for the Q&amp;A Application.
+        /// </summary>
+        [Output("allowAutoStopping")]
+        public Output<bool> AllowAutoStopping { get; private set; } = null!;
+
         /// <summary>
         /// The URL of the Q&amp;A Application.
         /// </summary>
@@ -167,6 +174,12 @@ namespace DataRobotPulumi.Datarobot
     public sealed class QaApplicationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Whether auto stopping is allowed for the Q&amp;A Application.
+        /// </summary>
+        [Input("allowAutoStopping")]
+        public Input<bool>? AllowAutoStopping { get; set; }
+
+        /// <summary>
         /// The deployment ID of the Q&amp;A Application.
         /// </summary>
         [Input("deploymentId", required: true)]
@@ -204,6 +217,12 @@ namespace DataRobotPulumi.Datarobot
 
     public sealed class QaApplicationState : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Whether auto stopping is allowed for the Q&amp;A Application.
+        /// </summary>
+        [Input("allowAutoStopping")]
+        public Input<bool>? AllowAutoStopping { get; set; }
+
         /// <summary>
         /// The URL of the Q&amp;A Application.
         /// </summary>

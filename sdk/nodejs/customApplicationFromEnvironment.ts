@@ -17,6 +17,7 @@ import * as utilities from "./utilities";
  *     environmentId: "6542cd582a9d3d51bf4ac71e",
  *     externalAccessEnabled: true,
  *     externalAccessRecipients: ["recipient@example.com"],
+ *     allowAutoStopping: false,
  * });
  * export const datarobotCustomApplicationId = example.id;
  * export const datarobotCustomApplicationUrl = example.applicationUrl;
@@ -50,6 +51,10 @@ export class CustomApplicationFromEnvironment extends pulumi.CustomResource {
         return obj['__pulumiType'] === CustomApplicationFromEnvironment.__pulumiType;
     }
 
+    /**
+     * Whether auto stopping is allowed for the Custom Application.
+     */
+    public readonly allowAutoStopping!: pulumi.Output<boolean>;
     /**
      * The URL of the Custom Application.
      */
@@ -92,6 +97,7 @@ export class CustomApplicationFromEnvironment extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as CustomApplicationFromEnvironmentState | undefined;
+            resourceInputs["allowAutoStopping"] = state ? state.allowAutoStopping : undefined;
             resourceInputs["applicationUrl"] = state ? state.applicationUrl : undefined;
             resourceInputs["environmentId"] = state ? state.environmentId : undefined;
             resourceInputs["environmentVersionId"] = state ? state.environmentVersionId : undefined;
@@ -104,6 +110,7 @@ export class CustomApplicationFromEnvironment extends pulumi.CustomResource {
             if ((!args || args.environmentId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'environmentId'");
             }
+            resourceInputs["allowAutoStopping"] = args ? args.allowAutoStopping : undefined;
             resourceInputs["environmentId"] = args ? args.environmentId : undefined;
             resourceInputs["externalAccessEnabled"] = args ? args.externalAccessEnabled : undefined;
             resourceInputs["externalAccessRecipients"] = args ? args.externalAccessRecipients : undefined;
@@ -121,6 +128,10 @@ export class CustomApplicationFromEnvironment extends pulumi.CustomResource {
  * Input properties used for looking up and filtering CustomApplicationFromEnvironment resources.
  */
 export interface CustomApplicationFromEnvironmentState {
+    /**
+     * Whether auto stopping is allowed for the Custom Application.
+     */
+    allowAutoStopping?: pulumi.Input<boolean>;
     /**
      * The URL of the Custom Application.
      */
@@ -155,6 +166,10 @@ export interface CustomApplicationFromEnvironmentState {
  * The set of arguments for constructing a CustomApplicationFromEnvironment resource.
  */
 export interface CustomApplicationFromEnvironmentArgs {
+    /**
+     * Whether auto stopping is allowed for the Custom Application.
+     */
+    allowAutoStopping?: pulumi.Input<boolean>;
     /**
      * The ID of the Execution Environment used to create the Custom Application.
      */

@@ -20,6 +20,7 @@ __all__ = ['CustomApplicationArgs', 'CustomApplication']
 class CustomApplicationArgs:
     def __init__(__self__, *,
                  source_version_id: pulumi.Input[str],
+                 allow_auto_stopping: Optional[pulumi.Input[bool]] = None,
                  external_access_enabled: Optional[pulumi.Input[bool]] = None,
                  external_access_recipients: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  name: Optional[pulumi.Input[str]] = None,
@@ -27,12 +28,15 @@ class CustomApplicationArgs:
         """
         The set of arguments for constructing a CustomApplication resource.
         :param pulumi.Input[str] source_version_id: The version ID of the Custom Application Source.
+        :param pulumi.Input[bool] allow_auto_stopping: Whether auto stopping is allowed for the Custom Application.
         :param pulumi.Input[bool] external_access_enabled: Whether external access is enabled for the Custom Application.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] external_access_recipients: The list of external email addresses that have access to the Custom Application.
         :param pulumi.Input[str] name: The name of the Custom Application.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] use_case_ids: The list of Use Case IDs to add the Custom Application to.
         """
         pulumi.set(__self__, "source_version_id", source_version_id)
+        if allow_auto_stopping is not None:
+            pulumi.set(__self__, "allow_auto_stopping", allow_auto_stopping)
         if external_access_enabled is not None:
             pulumi.set(__self__, "external_access_enabled", external_access_enabled)
         if external_access_recipients is not None:
@@ -53,6 +57,18 @@ class CustomApplicationArgs:
     @source_version_id.setter
     def source_version_id(self, value: pulumi.Input[str]):
         pulumi.set(self, "source_version_id", value)
+
+    @property
+    @pulumi.getter(name="allowAutoStopping")
+    def allow_auto_stopping(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether auto stopping is allowed for the Custom Application.
+        """
+        return pulumi.get(self, "allow_auto_stopping")
+
+    @allow_auto_stopping.setter
+    def allow_auto_stopping(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "allow_auto_stopping", value)
 
     @property
     @pulumi.getter(name="externalAccessEnabled")
@@ -106,6 +122,7 @@ class CustomApplicationArgs:
 @pulumi.input_type
 class _CustomApplicationState:
     def __init__(__self__, *,
+                 allow_auto_stopping: Optional[pulumi.Input[bool]] = None,
                  application_url: Optional[pulumi.Input[str]] = None,
                  external_access_enabled: Optional[pulumi.Input[bool]] = None,
                  external_access_recipients: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
@@ -115,6 +132,7 @@ class _CustomApplicationState:
                  use_case_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         Input properties used for looking up and filtering CustomApplication resources.
+        :param pulumi.Input[bool] allow_auto_stopping: Whether auto stopping is allowed for the Custom Application.
         :param pulumi.Input[str] application_url: The URL of the Custom Application.
         :param pulumi.Input[bool] external_access_enabled: Whether external access is enabled for the Custom Application.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] external_access_recipients: The list of external email addresses that have access to the Custom Application.
@@ -123,6 +141,8 @@ class _CustomApplicationState:
         :param pulumi.Input[str] source_version_id: The version ID of the Custom Application Source.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] use_case_ids: The list of Use Case IDs to add the Custom Application to.
         """
+        if allow_auto_stopping is not None:
+            pulumi.set(__self__, "allow_auto_stopping", allow_auto_stopping)
         if application_url is not None:
             pulumi.set(__self__, "application_url", application_url)
         if external_access_enabled is not None:
@@ -137,6 +157,18 @@ class _CustomApplicationState:
             pulumi.set(__self__, "source_version_id", source_version_id)
         if use_case_ids is not None:
             pulumi.set(__self__, "use_case_ids", use_case_ids)
+
+    @property
+    @pulumi.getter(name="allowAutoStopping")
+    def allow_auto_stopping(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether auto stopping is allowed for the Custom Application.
+        """
+        return pulumi.get(self, "allow_auto_stopping")
+
+    @allow_auto_stopping.setter
+    def allow_auto_stopping(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "allow_auto_stopping", value)
 
     @property
     @pulumi.getter(name="applicationUrl")
@@ -228,6 +260,7 @@ class CustomApplication(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 allow_auto_stopping: Optional[pulumi.Input[bool]] = None,
                  external_access_enabled: Optional[pulumi.Input[bool]] = None,
                  external_access_recipients: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  name: Optional[pulumi.Input[str]] = None,
@@ -250,7 +283,8 @@ class CustomApplication(pulumi.CustomResource):
         example_custom_application = datarobot.CustomApplication("exampleCustomApplication",
             source_version_id=example_application_source.version_id,
             external_access_enabled=True,
-            external_access_recipients=["recipient@example.com"])
+            external_access_recipients=["recipient@example.com"],
+            allow_auto_stopping=False)
         pulumi.export("datarobotCustomApplicationId", example_custom_application.id)
         pulumi.export("datarobotCustomApplicationSourceId", example_custom_application.source_id)
         pulumi.export("datarobotCustomApplicationSourceVersionId", example_custom_application.source_version_id)
@@ -259,6 +293,7 @@ class CustomApplication(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[bool] allow_auto_stopping: Whether auto stopping is allowed for the Custom Application.
         :param pulumi.Input[bool] external_access_enabled: Whether external access is enabled for the Custom Application.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] external_access_recipients: The list of external email addresses that have access to the Custom Application.
         :param pulumi.Input[str] name: The name of the Custom Application.
@@ -287,7 +322,8 @@ class CustomApplication(pulumi.CustomResource):
         example_custom_application = datarobot.CustomApplication("exampleCustomApplication",
             source_version_id=example_application_source.version_id,
             external_access_enabled=True,
-            external_access_recipients=["recipient@example.com"])
+            external_access_recipients=["recipient@example.com"],
+            allow_auto_stopping=False)
         pulumi.export("datarobotCustomApplicationId", example_custom_application.id)
         pulumi.export("datarobotCustomApplicationSourceId", example_custom_application.source_id)
         pulumi.export("datarobotCustomApplicationSourceVersionId", example_custom_application.source_version_id)
@@ -309,6 +345,7 @@ class CustomApplication(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 allow_auto_stopping: Optional[pulumi.Input[bool]] = None,
                  external_access_enabled: Optional[pulumi.Input[bool]] = None,
                  external_access_recipients: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  name: Optional[pulumi.Input[str]] = None,
@@ -323,6 +360,7 @@ class CustomApplication(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = CustomApplicationArgs.__new__(CustomApplicationArgs)
 
+            __props__.__dict__["allow_auto_stopping"] = allow_auto_stopping
             __props__.__dict__["external_access_enabled"] = external_access_enabled
             __props__.__dict__["external_access_recipients"] = external_access_recipients
             __props__.__dict__["name"] = name
@@ -342,6 +380,7 @@ class CustomApplication(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
+            allow_auto_stopping: Optional[pulumi.Input[bool]] = None,
             application_url: Optional[pulumi.Input[str]] = None,
             external_access_enabled: Optional[pulumi.Input[bool]] = None,
             external_access_recipients: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
@@ -356,6 +395,7 @@ class CustomApplication(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[bool] allow_auto_stopping: Whether auto stopping is allowed for the Custom Application.
         :param pulumi.Input[str] application_url: The URL of the Custom Application.
         :param pulumi.Input[bool] external_access_enabled: Whether external access is enabled for the Custom Application.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] external_access_recipients: The list of external email addresses that have access to the Custom Application.
@@ -368,6 +408,7 @@ class CustomApplication(pulumi.CustomResource):
 
         __props__ = _CustomApplicationState.__new__(_CustomApplicationState)
 
+        __props__.__dict__["allow_auto_stopping"] = allow_auto_stopping
         __props__.__dict__["application_url"] = application_url
         __props__.__dict__["external_access_enabled"] = external_access_enabled
         __props__.__dict__["external_access_recipients"] = external_access_recipients
@@ -376,6 +417,14 @@ class CustomApplication(pulumi.CustomResource):
         __props__.__dict__["source_version_id"] = source_version_id
         __props__.__dict__["use_case_ids"] = use_case_ids
         return CustomApplication(resource_name, opts=opts, __props__=__props__)
+
+    @property
+    @pulumi.getter(name="allowAutoStopping")
+    def allow_auto_stopping(self) -> pulumi.Output[bool]:
+        """
+        Whether auto stopping is allowed for the Custom Application.
+        """
+        return pulumi.get(self, "allow_auto_stopping")
 
     @property
     @pulumi.getter(name="applicationUrl")

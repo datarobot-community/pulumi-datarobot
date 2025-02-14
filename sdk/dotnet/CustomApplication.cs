@@ -46,6 +46,7 @@ namespace DataRobotPulumi.Datarobot
     ///         {
     ///             "recipient@example.com",
     ///         },
+    ///         AllowAutoStopping = false,
     ///     });
     /// 
     ///     return new Dictionary&lt;string, object?&gt;
@@ -61,6 +62,12 @@ namespace DataRobotPulumi.Datarobot
     [DatarobotResourceType("datarobot:index/customApplication:CustomApplication")]
     public partial class CustomApplication : global::Pulumi.CustomResource
     {
+        /// <summary>
+        /// Whether auto stopping is allowed for the Custom Application.
+        /// </summary>
+        [Output("allowAutoStopping")]
+        public Output<bool> AllowAutoStopping { get; private set; } = null!;
+
         /// <summary>
         /// The URL of the Custom Application.
         /// </summary>
@@ -151,6 +158,12 @@ namespace DataRobotPulumi.Datarobot
     public sealed class CustomApplicationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Whether auto stopping is allowed for the Custom Application.
+        /// </summary>
+        [Input("allowAutoStopping")]
+        public Input<bool>? AllowAutoStopping { get; set; }
+
+        /// <summary>
         /// Whether external access is enabled for the Custom Application.
         /// </summary>
         [Input("externalAccessEnabled")]
@@ -200,6 +213,12 @@ namespace DataRobotPulumi.Datarobot
 
     public sealed class CustomApplicationState : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Whether auto stopping is allowed for the Custom Application.
+        /// </summary>
+        [Input("allowAutoStopping")]
+        public Input<bool>? AllowAutoStopping { get; set; }
+
         /// <summary>
         /// The URL of the Custom Application.
         /// </summary>

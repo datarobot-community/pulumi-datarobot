@@ -34,6 +34,7 @@ import (
 //				ExternalAccessRecipients: pulumi.StringArray{
 //					pulumi.String("recipient@example.com"),
 //				},
+//				AllowAutoStopping: pulumi.Bool(false),
 //			})
 //			if err != nil {
 //				return err
@@ -48,6 +49,8 @@ import (
 type CustomApplicationFromEnvironment struct {
 	pulumi.CustomResourceState
 
+	// Whether auto stopping is allowed for the Custom Application.
+	AllowAutoStopping pulumi.BoolOutput `pulumi:"allowAutoStopping"`
 	// The URL of the Custom Application.
 	ApplicationUrl pulumi.StringOutput `pulumi:"applicationUrl"`
 	// The ID of the Execution Environment used to create the Custom Application.
@@ -97,6 +100,8 @@ func GetCustomApplicationFromEnvironment(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering CustomApplicationFromEnvironment resources.
 type customApplicationFromEnvironmentState struct {
+	// Whether auto stopping is allowed for the Custom Application.
+	AllowAutoStopping *bool `pulumi:"allowAutoStopping"`
 	// The URL of the Custom Application.
 	ApplicationUrl *string `pulumi:"applicationUrl"`
 	// The ID of the Execution Environment used to create the Custom Application.
@@ -114,6 +119,8 @@ type customApplicationFromEnvironmentState struct {
 }
 
 type CustomApplicationFromEnvironmentState struct {
+	// Whether auto stopping is allowed for the Custom Application.
+	AllowAutoStopping pulumi.BoolPtrInput
 	// The URL of the Custom Application.
 	ApplicationUrl pulumi.StringPtrInput
 	// The ID of the Execution Environment used to create the Custom Application.
@@ -135,6 +142,8 @@ func (CustomApplicationFromEnvironmentState) ElementType() reflect.Type {
 }
 
 type customApplicationFromEnvironmentArgs struct {
+	// Whether auto stopping is allowed for the Custom Application.
+	AllowAutoStopping *bool `pulumi:"allowAutoStopping"`
 	// The ID of the Execution Environment used to create the Custom Application.
 	EnvironmentId string `pulumi:"environmentId"`
 	// Whether external access is enabled for the Custom Application.
@@ -149,6 +158,8 @@ type customApplicationFromEnvironmentArgs struct {
 
 // The set of arguments for constructing a CustomApplicationFromEnvironment resource.
 type CustomApplicationFromEnvironmentArgs struct {
+	// Whether auto stopping is allowed for the Custom Application.
+	AllowAutoStopping pulumi.BoolPtrInput
 	// The ID of the Execution Environment used to create the Custom Application.
 	EnvironmentId pulumi.StringInput
 	// Whether external access is enabled for the Custom Application.
@@ -246,6 +257,11 @@ func (o CustomApplicationFromEnvironmentOutput) ToCustomApplicationFromEnvironme
 
 func (o CustomApplicationFromEnvironmentOutput) ToCustomApplicationFromEnvironmentOutputWithContext(ctx context.Context) CustomApplicationFromEnvironmentOutput {
 	return o
+}
+
+// Whether auto stopping is allowed for the Custom Application.
+func (o CustomApplicationFromEnvironmentOutput) AllowAutoStopping() pulumi.BoolOutput {
+	return o.ApplyT(func(v *CustomApplicationFromEnvironment) pulumi.BoolOutput { return v.AllowAutoStopping }).(pulumi.BoolOutput)
 }
 
 // The URL of the Custom Application.

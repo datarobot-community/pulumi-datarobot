@@ -37,6 +37,7 @@ import * as utilities from "./utilities";
  *     deploymentId: exampleDeployment.id,
  *     externalAccessEnabled: true,
  *     externalAccessRecipients: ["recipient@example.com"],
+ *     allowAutoStopping: false,
  * });
  * export const datarobotQaApplicationId = exampleQaApplication.id;
  * export const datarobotQaApplicationSourceId = exampleQaApplication.sourceId;
@@ -72,6 +73,10 @@ export class QaApplication extends pulumi.CustomResource {
         return obj['__pulumiType'] === QaApplication.__pulumiType;
     }
 
+    /**
+     * Whether auto stopping is allowed for the Q&A Application.
+     */
+    public readonly allowAutoStopping!: pulumi.Output<boolean>;
     /**
      * The URL of the Q&A Application.
      */
@@ -114,6 +119,7 @@ export class QaApplication extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as QaApplicationState | undefined;
+            resourceInputs["allowAutoStopping"] = state ? state.allowAutoStopping : undefined;
             resourceInputs["applicationUrl"] = state ? state.applicationUrl : undefined;
             resourceInputs["deploymentId"] = state ? state.deploymentId : undefined;
             resourceInputs["externalAccessEnabled"] = state ? state.externalAccessEnabled : undefined;
@@ -126,6 +132,7 @@ export class QaApplication extends pulumi.CustomResource {
             if ((!args || args.deploymentId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'deploymentId'");
             }
+            resourceInputs["allowAutoStopping"] = args ? args.allowAutoStopping : undefined;
             resourceInputs["deploymentId"] = args ? args.deploymentId : undefined;
             resourceInputs["externalAccessEnabled"] = args ? args.externalAccessEnabled : undefined;
             resourceInputs["externalAccessRecipients"] = args ? args.externalAccessRecipients : undefined;
@@ -143,6 +150,10 @@ export class QaApplication extends pulumi.CustomResource {
  * Input properties used for looking up and filtering QaApplication resources.
  */
 export interface QaApplicationState {
+    /**
+     * Whether auto stopping is allowed for the Q&A Application.
+     */
+    allowAutoStopping?: pulumi.Input<boolean>;
     /**
      * The URL of the Q&A Application.
      */
@@ -177,6 +188,10 @@ export interface QaApplicationState {
  * The set of arguments for constructing a QaApplication resource.
  */
 export interface QaApplicationArgs {
+    /**
+     * Whether auto stopping is allowed for the Q&A Application.
+     */
+    allowAutoStopping?: pulumi.Input<boolean>;
     /**
      * The deployment ID of the Q&A Application.
      */
