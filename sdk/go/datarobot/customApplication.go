@@ -47,6 +47,7 @@ import (
 //				ExternalAccessRecipients: pulumi.StringArray{
 //					pulumi.String("recipient@example.com"),
 //				},
+//				AllowAutoStopping: pulumi.Bool(false),
 //			})
 //			if err != nil {
 //				return err
@@ -63,6 +64,8 @@ import (
 type CustomApplication struct {
 	pulumi.CustomResourceState
 
+	// Whether auto stopping is allowed for the Custom Application.
+	AllowAutoStopping pulumi.BoolOutput `pulumi:"allowAutoStopping"`
 	// The URL of the Custom Application.
 	ApplicationUrl pulumi.StringOutput `pulumi:"applicationUrl"`
 	// Whether external access is enabled for the Custom Application.
@@ -112,6 +115,8 @@ func GetCustomApplication(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering CustomApplication resources.
 type customApplicationState struct {
+	// Whether auto stopping is allowed for the Custom Application.
+	AllowAutoStopping *bool `pulumi:"allowAutoStopping"`
 	// The URL of the Custom Application.
 	ApplicationUrl *string `pulumi:"applicationUrl"`
 	// Whether external access is enabled for the Custom Application.
@@ -129,6 +134,8 @@ type customApplicationState struct {
 }
 
 type CustomApplicationState struct {
+	// Whether auto stopping is allowed for the Custom Application.
+	AllowAutoStopping pulumi.BoolPtrInput
 	// The URL of the Custom Application.
 	ApplicationUrl pulumi.StringPtrInput
 	// Whether external access is enabled for the Custom Application.
@@ -150,6 +157,8 @@ func (CustomApplicationState) ElementType() reflect.Type {
 }
 
 type customApplicationArgs struct {
+	// Whether auto stopping is allowed for the Custom Application.
+	AllowAutoStopping *bool `pulumi:"allowAutoStopping"`
 	// Whether external access is enabled for the Custom Application.
 	ExternalAccessEnabled *bool `pulumi:"externalAccessEnabled"`
 	// The list of external email addresses that have access to the Custom Application.
@@ -164,6 +173,8 @@ type customApplicationArgs struct {
 
 // The set of arguments for constructing a CustomApplication resource.
 type CustomApplicationArgs struct {
+	// Whether auto stopping is allowed for the Custom Application.
+	AllowAutoStopping pulumi.BoolPtrInput
 	// Whether external access is enabled for the Custom Application.
 	ExternalAccessEnabled pulumi.BoolPtrInput
 	// The list of external email addresses that have access to the Custom Application.
@@ -261,6 +272,11 @@ func (o CustomApplicationOutput) ToCustomApplicationOutput() CustomApplicationOu
 
 func (o CustomApplicationOutput) ToCustomApplicationOutputWithContext(ctx context.Context) CustomApplicationOutput {
 	return o
+}
+
+// Whether auto stopping is allowed for the Custom Application.
+func (o CustomApplicationOutput) AllowAutoStopping() pulumi.BoolOutput {
+	return o.ApplyT(func(v *CustomApplication) pulumi.BoolOutput { return v.AllowAutoStopping }).(pulumi.BoolOutput)
 }
 
 // The URL of the Custom Application.

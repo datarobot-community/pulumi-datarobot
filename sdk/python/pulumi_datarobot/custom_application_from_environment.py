@@ -20,6 +20,7 @@ __all__ = ['CustomApplicationFromEnvironmentArgs', 'CustomApplicationFromEnviron
 class CustomApplicationFromEnvironmentArgs:
     def __init__(__self__, *,
                  environment_id: pulumi.Input[str],
+                 allow_auto_stopping: Optional[pulumi.Input[bool]] = None,
                  external_access_enabled: Optional[pulumi.Input[bool]] = None,
                  external_access_recipients: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  name: Optional[pulumi.Input[str]] = None,
@@ -27,12 +28,15 @@ class CustomApplicationFromEnvironmentArgs:
         """
         The set of arguments for constructing a CustomApplicationFromEnvironment resource.
         :param pulumi.Input[str] environment_id: The ID of the Execution Environment used to create the Custom Application.
+        :param pulumi.Input[bool] allow_auto_stopping: Whether auto stopping is allowed for the Custom Application.
         :param pulumi.Input[bool] external_access_enabled: Whether external access is enabled for the Custom Application.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] external_access_recipients: The list of external email addresses that have access to the Custom Application.
         :param pulumi.Input[str] name: The name of the Custom Application.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] use_case_ids: The list of Use Case IDs to add the Custom Application to.
         """
         pulumi.set(__self__, "environment_id", environment_id)
+        if allow_auto_stopping is not None:
+            pulumi.set(__self__, "allow_auto_stopping", allow_auto_stopping)
         if external_access_enabled is not None:
             pulumi.set(__self__, "external_access_enabled", external_access_enabled)
         if external_access_recipients is not None:
@@ -53,6 +57,18 @@ class CustomApplicationFromEnvironmentArgs:
     @environment_id.setter
     def environment_id(self, value: pulumi.Input[str]):
         pulumi.set(self, "environment_id", value)
+
+    @property
+    @pulumi.getter(name="allowAutoStopping")
+    def allow_auto_stopping(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether auto stopping is allowed for the Custom Application.
+        """
+        return pulumi.get(self, "allow_auto_stopping")
+
+    @allow_auto_stopping.setter
+    def allow_auto_stopping(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "allow_auto_stopping", value)
 
     @property
     @pulumi.getter(name="externalAccessEnabled")
@@ -106,6 +122,7 @@ class CustomApplicationFromEnvironmentArgs:
 @pulumi.input_type
 class _CustomApplicationFromEnvironmentState:
     def __init__(__self__, *,
+                 allow_auto_stopping: Optional[pulumi.Input[bool]] = None,
                  application_url: Optional[pulumi.Input[str]] = None,
                  environment_id: Optional[pulumi.Input[str]] = None,
                  environment_version_id: Optional[pulumi.Input[str]] = None,
@@ -115,6 +132,7 @@ class _CustomApplicationFromEnvironmentState:
                  use_case_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         Input properties used for looking up and filtering CustomApplicationFromEnvironment resources.
+        :param pulumi.Input[bool] allow_auto_stopping: Whether auto stopping is allowed for the Custom Application.
         :param pulumi.Input[str] application_url: The URL of the Custom Application.
         :param pulumi.Input[str] environment_id: The ID of the Execution Environment used to create the Custom Application.
         :param pulumi.Input[str] environment_version_id: The version ID of the Execution Environment used to create the Custom Application.
@@ -123,6 +141,8 @@ class _CustomApplicationFromEnvironmentState:
         :param pulumi.Input[str] name: The name of the Custom Application.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] use_case_ids: The list of Use Case IDs to add the Custom Application to.
         """
+        if allow_auto_stopping is not None:
+            pulumi.set(__self__, "allow_auto_stopping", allow_auto_stopping)
         if application_url is not None:
             pulumi.set(__self__, "application_url", application_url)
         if environment_id is not None:
@@ -137,6 +157,18 @@ class _CustomApplicationFromEnvironmentState:
             pulumi.set(__self__, "name", name)
         if use_case_ids is not None:
             pulumi.set(__self__, "use_case_ids", use_case_ids)
+
+    @property
+    @pulumi.getter(name="allowAutoStopping")
+    def allow_auto_stopping(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether auto stopping is allowed for the Custom Application.
+        """
+        return pulumi.get(self, "allow_auto_stopping")
+
+    @allow_auto_stopping.setter
+    def allow_auto_stopping(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "allow_auto_stopping", value)
 
     @property
     @pulumi.getter(name="applicationUrl")
@@ -228,6 +260,7 @@ class CustomApplicationFromEnvironment(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 allow_auto_stopping: Optional[pulumi.Input[bool]] = None,
                  environment_id: Optional[pulumi.Input[str]] = None,
                  external_access_enabled: Optional[pulumi.Input[bool]] = None,
                  external_access_recipients: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
@@ -246,13 +279,15 @@ class CustomApplicationFromEnvironment(pulumi.CustomResource):
         example = datarobot.CustomApplicationFromEnvironment("example",
             environment_id="6542cd582a9d3d51bf4ac71e",
             external_access_enabled=True,
-            external_access_recipients=["recipient@example.com"])
+            external_access_recipients=["recipient@example.com"],
+            allow_auto_stopping=False)
         pulumi.export("datarobotCustomApplicationId", example.id)
         pulumi.export("datarobotCustomApplicationUrl", example.application_url)
         ```
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[bool] allow_auto_stopping: Whether auto stopping is allowed for the Custom Application.
         :param pulumi.Input[str] environment_id: The ID of the Execution Environment used to create the Custom Application.
         :param pulumi.Input[bool] external_access_enabled: Whether external access is enabled for the Custom Application.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] external_access_recipients: The list of external email addresses that have access to the Custom Application.
@@ -277,7 +312,8 @@ class CustomApplicationFromEnvironment(pulumi.CustomResource):
         example = datarobot.CustomApplicationFromEnvironment("example",
             environment_id="6542cd582a9d3d51bf4ac71e",
             external_access_enabled=True,
-            external_access_recipients=["recipient@example.com"])
+            external_access_recipients=["recipient@example.com"],
+            allow_auto_stopping=False)
         pulumi.export("datarobotCustomApplicationId", example.id)
         pulumi.export("datarobotCustomApplicationUrl", example.application_url)
         ```
@@ -297,6 +333,7 @@ class CustomApplicationFromEnvironment(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 allow_auto_stopping: Optional[pulumi.Input[bool]] = None,
                  environment_id: Optional[pulumi.Input[str]] = None,
                  external_access_enabled: Optional[pulumi.Input[bool]] = None,
                  external_access_recipients: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
@@ -311,6 +348,7 @@ class CustomApplicationFromEnvironment(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = CustomApplicationFromEnvironmentArgs.__new__(CustomApplicationFromEnvironmentArgs)
 
+            __props__.__dict__["allow_auto_stopping"] = allow_auto_stopping
             if environment_id is None and not opts.urn:
                 raise TypeError("Missing required property 'environment_id'")
             __props__.__dict__["environment_id"] = environment_id
@@ -330,6 +368,7 @@ class CustomApplicationFromEnvironment(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
+            allow_auto_stopping: Optional[pulumi.Input[bool]] = None,
             application_url: Optional[pulumi.Input[str]] = None,
             environment_id: Optional[pulumi.Input[str]] = None,
             environment_version_id: Optional[pulumi.Input[str]] = None,
@@ -344,6 +383,7 @@ class CustomApplicationFromEnvironment(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[bool] allow_auto_stopping: Whether auto stopping is allowed for the Custom Application.
         :param pulumi.Input[str] application_url: The URL of the Custom Application.
         :param pulumi.Input[str] environment_id: The ID of the Execution Environment used to create the Custom Application.
         :param pulumi.Input[str] environment_version_id: The version ID of the Execution Environment used to create the Custom Application.
@@ -356,6 +396,7 @@ class CustomApplicationFromEnvironment(pulumi.CustomResource):
 
         __props__ = _CustomApplicationFromEnvironmentState.__new__(_CustomApplicationFromEnvironmentState)
 
+        __props__.__dict__["allow_auto_stopping"] = allow_auto_stopping
         __props__.__dict__["application_url"] = application_url
         __props__.__dict__["environment_id"] = environment_id
         __props__.__dict__["environment_version_id"] = environment_version_id
@@ -364,6 +405,14 @@ class CustomApplicationFromEnvironment(pulumi.CustomResource):
         __props__.__dict__["name"] = name
         __props__.__dict__["use_case_ids"] = use_case_ids
         return CustomApplicationFromEnvironment(resource_name, opts=opts, __props__=__props__)
+
+    @property
+    @pulumi.getter(name="allowAutoStopping")
+    def allow_auto_stopping(self) -> pulumi.Output[bool]:
+        """
+        Whether auto stopping is allowed for the Custom Application.
+        """
+        return pulumi.get(self, "allow_auto_stopping")
 
     @property
     @pulumi.getter(name="applicationUrl")

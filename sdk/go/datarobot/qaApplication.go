@@ -68,6 +68,7 @@ import (
 //				ExternalAccessRecipients: pulumi.StringArray{
 //					pulumi.String("recipient@example.com"),
 //				},
+//				AllowAutoStopping: pulumi.Bool(false),
 //			})
 //			if err != nil {
 //				return err
@@ -84,6 +85,8 @@ import (
 type QaApplication struct {
 	pulumi.CustomResourceState
 
+	// Whether auto stopping is allowed for the Q&A Application.
+	AllowAutoStopping pulumi.BoolOutput `pulumi:"allowAutoStopping"`
 	// The URL of the Q&A Application.
 	ApplicationUrl pulumi.StringOutput `pulumi:"applicationUrl"`
 	// The deployment ID of the Q&A Application.
@@ -133,6 +136,8 @@ func GetQaApplication(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering QaApplication resources.
 type qaApplicationState struct {
+	// Whether auto stopping is allowed for the Q&A Application.
+	AllowAutoStopping *bool `pulumi:"allowAutoStopping"`
 	// The URL of the Q&A Application.
 	ApplicationUrl *string `pulumi:"applicationUrl"`
 	// The deployment ID of the Q&A Application.
@@ -150,6 +155,8 @@ type qaApplicationState struct {
 }
 
 type QaApplicationState struct {
+	// Whether auto stopping is allowed for the Q&A Application.
+	AllowAutoStopping pulumi.BoolPtrInput
 	// The URL of the Q&A Application.
 	ApplicationUrl pulumi.StringPtrInput
 	// The deployment ID of the Q&A Application.
@@ -171,6 +178,8 @@ func (QaApplicationState) ElementType() reflect.Type {
 }
 
 type qaApplicationArgs struct {
+	// Whether auto stopping is allowed for the Q&A Application.
+	AllowAutoStopping *bool `pulumi:"allowAutoStopping"`
 	// The deployment ID of the Q&A Application.
 	DeploymentId string `pulumi:"deploymentId"`
 	// Whether external access is enabled for the Q&A Application.
@@ -183,6 +192,8 @@ type qaApplicationArgs struct {
 
 // The set of arguments for constructing a QaApplication resource.
 type QaApplicationArgs struct {
+	// Whether auto stopping is allowed for the Q&A Application.
+	AllowAutoStopping pulumi.BoolPtrInput
 	// The deployment ID of the Q&A Application.
 	DeploymentId pulumi.StringInput
 	// Whether external access is enabled for the Q&A Application.
@@ -278,6 +289,11 @@ func (o QaApplicationOutput) ToQaApplicationOutput() QaApplicationOutput {
 
 func (o QaApplicationOutput) ToQaApplicationOutputWithContext(ctx context.Context) QaApplicationOutput {
 	return o
+}
+
+// Whether auto stopping is allowed for the Q&A Application.
+func (o QaApplicationOutput) AllowAutoStopping() pulumi.BoolOutput {
+	return o.ApplyT(func(v *QaApplication) pulumi.BoolOutput { return v.AllowAutoStopping }).(pulumi.BoolOutput)
 }
 
 // The URL of the Q&A Application.
