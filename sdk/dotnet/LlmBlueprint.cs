@@ -12,50 +12,6 @@ namespace DataRobotPulumi.Datarobot
 {
     /// <summary>
     /// LLMBlueprint
-    /// 
-    /// ## Example Usage
-    /// 
-    /// ```csharp
-    /// using System.Collections.Generic;
-    /// using System.Linq;
-    /// using Pulumi;
-    /// using Datarobot = DataRobotPulumi.Datarobot;
-    /// 
-    /// return await Deployment.RunAsync(() =&gt; 
-    /// {
-    ///     var exampleUseCase = new Datarobot.UseCase("exampleUseCase");
-    /// 
-    ///     var examplePlayground = new Datarobot.Playground("examplePlayground", new()
-    ///     {
-    ///         Description = "Description for the example playground",
-    ///         UseCaseId = exampleUseCase.Id,
-    ///     });
-    /// 
-    ///     var exampleLlmBlueprint = new Datarobot.LlmBlueprint("exampleLlmBlueprint", new()
-    ///     {
-    ///         Description = "Description for the example LLM blueprint",
-    ///         PlaygroundId = examplePlayground.Id,
-    ///         LlmId = "azure-openai-gpt-3.5-turbo",
-    ///         PromptType = "ONE_TIME_PROMPT",
-    ///     });
-    /// 
-    ///     // Optional
-    ///     // llm_settings {
-    ///     //   max_completion_length = 1000
-    ///     //   temperature           = 0.5
-    ///     //   top_p                 = 0.9
-    ///     //   system_prompt         = "My Prompt:"
-    ///     // }
-    ///     // vector_database_settings = {
-    ///     //   max_documents_retrieved_per_prompt = 5
-    ///     //   max_tokens = 1000
-    ///     // }
-    ///     return new Dictionary&lt;string, object?&gt;
-    ///     {
-    ///         ["exampleId"] = exampleLlmBlueprint.Id,
-    ///     };
-    /// });
-    /// ```
     /// </summary>
     [DatarobotResourceType("datarobot:index/llmBlueprint:LlmBlueprint")]
     public partial class LlmBlueprint : global::Pulumi.CustomResource
@@ -73,7 +29,7 @@ namespace DataRobotPulumi.Datarobot
         public Output<string?> Description { get; private set; } = null!;
 
         /// <summary>
-        /// The id of the LLM for the LLM Blueprint.
+        /// The id of the LLM for the LLM Blueprint. If custom*model*llm_settings is set, this value must be 'custom-model'.
         /// </summary>
         [Output("llmId")]
         public Output<string?> LlmId { get; private set; } = null!;
@@ -174,7 +130,7 @@ namespace DataRobotPulumi.Datarobot
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// The id of the LLM for the LLM Blueprint.
+        /// The id of the LLM for the LLM Blueprint. If custom*model*llm_settings is set, this value must be 'custom-model'.
         /// </summary>
         [Input("llmId")]
         public Input<string>? LlmId { get; set; }
@@ -236,7 +192,7 @@ namespace DataRobotPulumi.Datarobot
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// The id of the LLM for the LLM Blueprint.
+        /// The id of the LLM for the LLM Blueprint. If custom*model*llm_settings is set, this value must be 'custom-model'.
         /// </summary>
         [Input("llmId")]
         public Input<string>? LlmId { get; set; }

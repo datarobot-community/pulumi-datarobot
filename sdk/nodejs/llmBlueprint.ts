@@ -8,37 +8,6 @@ import * as utilities from "./utilities";
 
 /**
  * LLMBlueprint
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as datarobot from "@datarobot/pulumi-datarobot";
- *
- * const exampleUseCase = new datarobot.UseCase("exampleUseCase", {});
- * const examplePlayground = new datarobot.Playground("examplePlayground", {
- *     description: "Description for the example playground",
- *     useCaseId: exampleUseCase.id,
- * });
- * const exampleLlmBlueprint = new datarobot.LlmBlueprint("exampleLlmBlueprint", {
- *     description: "Description for the example LLM blueprint",
- *     playgroundId: examplePlayground.id,
- *     llmId: "azure-openai-gpt-3.5-turbo",
- *     promptType: "ONE_TIME_PROMPT",
- * });
- * // Optional
- * // llm_settings {
- * //   max_completion_length = 1000
- * //   temperature           = 0.5
- * //   top_p                 = 0.9
- * //   system_prompt         = "My Prompt:"
- * // }
- * // vector_database_settings = {
- * //   max_documents_retrieved_per_prompt = 5
- * //   max_tokens = 1000
- * // }
- * export const exampleId = exampleLlmBlueprint.id;
- * ```
  */
 export class LlmBlueprint extends pulumi.CustomResource {
     /**
@@ -77,7 +46,7 @@ export class LlmBlueprint extends pulumi.CustomResource {
      */
     public readonly description!: pulumi.Output<string | undefined>;
     /**
-     * The id of the LLM for the LLM Blueprint.
+     * The id of the LLM for the LLM Blueprint. If custom*model*llm_settings is set, this value must be 'custom-model'.
      */
     public readonly llmId!: pulumi.Output<string | undefined>;
     /**
@@ -160,7 +129,7 @@ export interface LlmBlueprintState {
      */
     description?: pulumi.Input<string>;
     /**
-     * The id of the LLM for the LLM Blueprint.
+     * The id of the LLM for the LLM Blueprint. If custom*model*llm_settings is set, this value must be 'custom-model'.
      */
     llmId?: pulumi.Input<string>;
     /**
@@ -202,7 +171,7 @@ export interface LlmBlueprintArgs {
      */
     description?: pulumi.Input<string>;
     /**
-     * The id of the LLM for the LLM Blueprint.
+     * The id of the LLM for the LLM Blueprint. If custom*model*llm_settings is set, this value must be 'custom-model'.
      */
     llmId?: pulumi.Input<string>;
     /**
