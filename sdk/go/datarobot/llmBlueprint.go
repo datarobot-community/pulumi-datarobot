@@ -13,47 +13,6 @@ import (
 )
 
 // LLMBlueprint
-//
-// ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-//
-//	"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//
-// )
-//
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			exampleUseCase, err := datarobot.NewUseCase(ctx, "exampleUseCase", nil)
-//			if err != nil {
-//				return err
-//			}
-//			examplePlayground, err := datarobot.NewPlayground(ctx, "examplePlayground", &datarobot.PlaygroundArgs{
-//				Description: pulumi.String("Description for the example playground"),
-//				UseCaseId:   exampleUseCase.ID(),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			exampleLlmBlueprint, err := datarobot.NewLlmBlueprint(ctx, "exampleLlmBlueprint", &datarobot.LlmBlueprintArgs{
-//				Description:  pulumi.String("Description for the example LLM blueprint"),
-//				PlaygroundId: examplePlayground.ID(),
-//				LlmId:        pulumi.String("azure-openai-gpt-3.5-turbo"),
-//				PromptType:   pulumi.String("ONE_TIME_PROMPT"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			ctx.Export("exampleId", exampleLlmBlueprint.ID())
-//			return nil
-//		})
-//	}
-//
-// ```
 type LlmBlueprint struct {
 	pulumi.CustomResourceState
 
@@ -61,7 +20,7 @@ type LlmBlueprint struct {
 	CustomModelLlmSettings LlmBlueprintCustomModelLlmSettingsPtrOutput `pulumi:"customModelLlmSettings"`
 	// The description of the LLM Blueprint.
 	Description pulumi.StringPtrOutput `pulumi:"description"`
-	// The id of the LLM for the LLM Blueprint.
+	// The id of the LLM for the LLM Blueprint. If custom*model*llm_settings is set, this value must be 'custom-model'.
 	LlmId pulumi.StringPtrOutput `pulumi:"llmId"`
 	// The LLM settings for the LLM Blueprint.
 	LlmSettings LlmBlueprintLlmSettingsPtrOutput `pulumi:"llmSettings"`
@@ -114,7 +73,7 @@ type llmBlueprintState struct {
 	CustomModelLlmSettings *LlmBlueprintCustomModelLlmSettings `pulumi:"customModelLlmSettings"`
 	// The description of the LLM Blueprint.
 	Description *string `pulumi:"description"`
-	// The id of the LLM for the LLM Blueprint.
+	// The id of the LLM for the LLM Blueprint. If custom*model*llm_settings is set, this value must be 'custom-model'.
 	LlmId *string `pulumi:"llmId"`
 	// The LLM settings for the LLM Blueprint.
 	LlmSettings *LlmBlueprintLlmSettings `pulumi:"llmSettings"`
@@ -135,7 +94,7 @@ type LlmBlueprintState struct {
 	CustomModelLlmSettings LlmBlueprintCustomModelLlmSettingsPtrInput
 	// The description of the LLM Blueprint.
 	Description pulumi.StringPtrInput
-	// The id of the LLM for the LLM Blueprint.
+	// The id of the LLM for the LLM Blueprint. If custom*model*llm_settings is set, this value must be 'custom-model'.
 	LlmId pulumi.StringPtrInput
 	// The LLM settings for the LLM Blueprint.
 	LlmSettings LlmBlueprintLlmSettingsPtrInput
@@ -160,7 +119,7 @@ type llmBlueprintArgs struct {
 	CustomModelLlmSettings *LlmBlueprintCustomModelLlmSettings `pulumi:"customModelLlmSettings"`
 	// The description of the LLM Blueprint.
 	Description *string `pulumi:"description"`
-	// The id of the LLM for the LLM Blueprint.
+	// The id of the LLM for the LLM Blueprint. If custom*model*llm_settings is set, this value must be 'custom-model'.
 	LlmId *string `pulumi:"llmId"`
 	// The LLM settings for the LLM Blueprint.
 	LlmSettings *LlmBlueprintLlmSettings `pulumi:"llmSettings"`
@@ -182,7 +141,7 @@ type LlmBlueprintArgs struct {
 	CustomModelLlmSettings LlmBlueprintCustomModelLlmSettingsPtrInput
 	// The description of the LLM Blueprint.
 	Description pulumi.StringPtrInput
-	// The id of the LLM for the LLM Blueprint.
+	// The id of the LLM for the LLM Blueprint. If custom*model*llm_settings is set, this value must be 'custom-model'.
 	LlmId pulumi.StringPtrInput
 	// The LLM settings for the LLM Blueprint.
 	LlmSettings LlmBlueprintLlmSettingsPtrInput
@@ -295,7 +254,7 @@ func (o LlmBlueprintOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *LlmBlueprint) pulumi.StringPtrOutput { return v.Description }).(pulumi.StringPtrOutput)
 }
 
-// The id of the LLM for the LLM Blueprint.
+// The id of the LLM for the LLM Blueprint. If custom*model*llm_settings is set, this value must be 'custom-model'.
 func (o LlmBlueprintOutput) LlmId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *LlmBlueprint) pulumi.StringPtrOutput { return v.LlmId }).(pulumi.StringPtrOutput)
 }

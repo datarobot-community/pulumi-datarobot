@@ -35,7 +35,7 @@ class LlmBlueprintArgs:
         :param pulumi.Input[str] playground_id: The id of the Playground for the LLM Blueprint.
         :param pulumi.Input['LlmBlueprintCustomModelLlmSettingsArgs'] custom_model_llm_settings: The custom model LLM settings for the LLM Blueprint.
         :param pulumi.Input[str] description: The description of the LLM Blueprint.
-        :param pulumi.Input[str] llm_id: The id of the LLM for the LLM Blueprint.
+        :param pulumi.Input[str] llm_id: The id of the LLM for the LLM Blueprint. If custom*model*llm_settings is set, this value must be 'custom-model'.
         :param pulumi.Input['LlmBlueprintLlmSettingsArgs'] llm_settings: The LLM settings for the LLM Blueprint.
         :param pulumi.Input[str] name: The name of the LLM Blueprint.
         :param pulumi.Input[str] prompt_type: The prompt type for the LLM Blueprint.
@@ -100,7 +100,7 @@ class LlmBlueprintArgs:
     @pulumi.getter(name="llmId")
     def llm_id(self) -> Optional[pulumi.Input[str]]:
         """
-        The id of the LLM for the LLM Blueprint.
+        The id of the LLM for the LLM Blueprint. If custom*model*llm_settings is set, this value must be 'custom-model'.
         """
         return pulumi.get(self, "llm_id")
 
@@ -185,7 +185,7 @@ class _LlmBlueprintState:
         Input properties used for looking up and filtering LlmBlueprint resources.
         :param pulumi.Input['LlmBlueprintCustomModelLlmSettingsArgs'] custom_model_llm_settings: The custom model LLM settings for the LLM Blueprint.
         :param pulumi.Input[str] description: The description of the LLM Blueprint.
-        :param pulumi.Input[str] llm_id: The id of the LLM for the LLM Blueprint.
+        :param pulumi.Input[str] llm_id: The id of the LLM for the LLM Blueprint. If custom*model*llm_settings is set, this value must be 'custom-model'.
         :param pulumi.Input['LlmBlueprintLlmSettingsArgs'] llm_settings: The LLM settings for the LLM Blueprint.
         :param pulumi.Input[str] name: The name of the LLM Blueprint.
         :param pulumi.Input[str] playground_id: The id of the Playground for the LLM Blueprint.
@@ -240,7 +240,7 @@ class _LlmBlueprintState:
     @pulumi.getter(name="llmId")
     def llm_id(self) -> Optional[pulumi.Input[str]]:
         """
-        The id of the LLM for the LLM Blueprint.
+        The id of the LLM for the LLM Blueprint. If custom*model*llm_settings is set, this value must be 'custom-model'.
         """
         return pulumi.get(self, "llm_id")
 
@@ -339,40 +339,11 @@ class LlmBlueprint(pulumi.CustomResource):
         """
         LLMBlueprint
 
-        ## Example Usage
-
-        ```python
-        import pulumi
-        import pulumi_datarobot as datarobot
-
-        example_use_case = datarobot.UseCase("exampleUseCase")
-        example_playground = datarobot.Playground("examplePlayground",
-            description="Description for the example playground",
-            use_case_id=example_use_case.id)
-        example_llm_blueprint = datarobot.LlmBlueprint("exampleLlmBlueprint",
-            description="Description for the example LLM blueprint",
-            playground_id=example_playground.id,
-            llm_id="azure-openai-gpt-3.5-turbo",
-            prompt_type="ONE_TIME_PROMPT")
-        # Optional
-        # llm_settings {
-        #   max_completion_length = 1000
-        #   temperature           = 0.5
-        #   top_p                 = 0.9
-        #   system_prompt         = "My Prompt:"
-        # }
-        # vector_database_settings = {
-        #   max_documents_retrieved_per_prompt = 5
-        #   max_tokens = 1000
-        # }
-        pulumi.export("exampleId", example_llm_blueprint.id)
-        ```
-
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Union['LlmBlueprintCustomModelLlmSettingsArgs', 'LlmBlueprintCustomModelLlmSettingsArgsDict']] custom_model_llm_settings: The custom model LLM settings for the LLM Blueprint.
         :param pulumi.Input[str] description: The description of the LLM Blueprint.
-        :param pulumi.Input[str] llm_id: The id of the LLM for the LLM Blueprint.
+        :param pulumi.Input[str] llm_id: The id of the LLM for the LLM Blueprint. If custom*model*llm_settings is set, this value must be 'custom-model'.
         :param pulumi.Input[Union['LlmBlueprintLlmSettingsArgs', 'LlmBlueprintLlmSettingsArgsDict']] llm_settings: The LLM settings for the LLM Blueprint.
         :param pulumi.Input[str] name: The name of the LLM Blueprint.
         :param pulumi.Input[str] playground_id: The id of the Playground for the LLM Blueprint.
@@ -388,35 +359,6 @@ class LlmBlueprint(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         LLMBlueprint
-
-        ## Example Usage
-
-        ```python
-        import pulumi
-        import pulumi_datarobot as datarobot
-
-        example_use_case = datarobot.UseCase("exampleUseCase")
-        example_playground = datarobot.Playground("examplePlayground",
-            description="Description for the example playground",
-            use_case_id=example_use_case.id)
-        example_llm_blueprint = datarobot.LlmBlueprint("exampleLlmBlueprint",
-            description="Description for the example LLM blueprint",
-            playground_id=example_playground.id,
-            llm_id="azure-openai-gpt-3.5-turbo",
-            prompt_type="ONE_TIME_PROMPT")
-        # Optional
-        # llm_settings {
-        #   max_completion_length = 1000
-        #   temperature           = 0.5
-        #   top_p                 = 0.9
-        #   system_prompt         = "My Prompt:"
-        # }
-        # vector_database_settings = {
-        #   max_documents_retrieved_per_prompt = 5
-        #   max_tokens = 1000
-        # }
-        pulumi.export("exampleId", example_llm_blueprint.id)
-        ```
 
         :param str resource_name: The name of the resource.
         :param LlmBlueprintArgs args: The arguments to use to populate this resource's properties.
@@ -490,7 +432,7 @@ class LlmBlueprint(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Union['LlmBlueprintCustomModelLlmSettingsArgs', 'LlmBlueprintCustomModelLlmSettingsArgsDict']] custom_model_llm_settings: The custom model LLM settings for the LLM Blueprint.
         :param pulumi.Input[str] description: The description of the LLM Blueprint.
-        :param pulumi.Input[str] llm_id: The id of the LLM for the LLM Blueprint.
+        :param pulumi.Input[str] llm_id: The id of the LLM for the LLM Blueprint. If custom*model*llm_settings is set, this value must be 'custom-model'.
         :param pulumi.Input[Union['LlmBlueprintLlmSettingsArgs', 'LlmBlueprintLlmSettingsArgsDict']] llm_settings: The LLM settings for the LLM Blueprint.
         :param pulumi.Input[str] name: The name of the LLM Blueprint.
         :param pulumi.Input[str] playground_id: The id of the Playground for the LLM Blueprint.
@@ -533,7 +475,7 @@ class LlmBlueprint(pulumi.CustomResource):
     @pulumi.getter(name="llmId")
     def llm_id(self) -> pulumi.Output[Optional[str]]:
         """
-        The id of the LLM for the LLM Blueprint.
+        The id of the LLM for the LLM Blueprint. If custom*model*llm_settings is set, this value must be 'custom-model'.
         """
         return pulumi.get(self, "llm_id")
 
