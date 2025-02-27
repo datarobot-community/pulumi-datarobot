@@ -79,6 +79,10 @@ export class VectorDatabase extends pulumi.CustomResource {
      * The id of the Use Case.
      */
     public readonly useCaseId!: pulumi.Output<string>;
+    /**
+     * The version of the VectorDatabase.
+     */
+    public /*out*/ readonly version!: pulumi.Output<number>;
 
     /**
      * Create a VectorDatabase resource with the given unique name, arguments, and options.
@@ -97,6 +101,7 @@ export class VectorDatabase extends pulumi.CustomResource {
             resourceInputs["datasetId"] = state ? state.datasetId : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["useCaseId"] = state ? state.useCaseId : undefined;
+            resourceInputs["version"] = state ? state.version : undefined;
         } else {
             const args = argsOrState as VectorDatabaseArgs | undefined;
             if ((!args || args.datasetId === undefined) && !opts.urn) {
@@ -109,6 +114,7 @@ export class VectorDatabase extends pulumi.CustomResource {
             resourceInputs["datasetId"] = args ? args.datasetId : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["useCaseId"] = args ? args.useCaseId : undefined;
+            resourceInputs["version"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(VectorDatabase.__pulumiType, name, resourceInputs, opts);
@@ -135,6 +141,10 @@ export interface VectorDatabaseState {
      * The id of the Use Case.
      */
     useCaseId?: pulumi.Input<string>;
+    /**
+     * The version of the VectorDatabase.
+     */
+    version?: pulumi.Input<number>;
 }
 
 /**

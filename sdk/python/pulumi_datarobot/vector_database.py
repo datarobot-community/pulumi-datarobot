@@ -94,13 +94,15 @@ class _VectorDatabaseState:
                  chunking_parameters: Optional[pulumi.Input['VectorDatabaseChunkingParametersArgs']] = None,
                  dataset_id: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
-                 use_case_id: Optional[pulumi.Input[str]] = None):
+                 use_case_id: Optional[pulumi.Input[str]] = None,
+                 version: Optional[pulumi.Input[int]] = None):
         """
         Input properties used for looking up and filtering VectorDatabase resources.
         :param pulumi.Input['VectorDatabaseChunkingParametersArgs'] chunking_parameters: The chunking parameters for the Model.
         :param pulumi.Input[str] dataset_id: The id of the Vector Database.
         :param pulumi.Input[str] name: The name of the VectorDatabase.
         :param pulumi.Input[str] use_case_id: The id of the Use Case.
+        :param pulumi.Input[int] version: The version of the VectorDatabase.
         """
         if chunking_parameters is not None:
             pulumi.set(__self__, "chunking_parameters", chunking_parameters)
@@ -110,6 +112,8 @@ class _VectorDatabaseState:
             pulumi.set(__self__, "name", name)
         if use_case_id is not None:
             pulumi.set(__self__, "use_case_id", use_case_id)
+        if version is not None:
+            pulumi.set(__self__, "version", version)
 
     @property
     @pulumi.getter(name="chunkingParameters")
@@ -158,6 +162,18 @@ class _VectorDatabaseState:
     @use_case_id.setter
     def use_case_id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "use_case_id", value)
+
+    @property
+    @pulumi.getter
+    def version(self) -> Optional[pulumi.Input[int]]:
+        """
+        The version of the VectorDatabase.
+        """
+        return pulumi.get(self, "version")
+
+    @version.setter
+    def version(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "version", value)
 
 
 class VectorDatabase(pulumi.CustomResource):
@@ -273,6 +289,7 @@ class VectorDatabase(pulumi.CustomResource):
             if use_case_id is None and not opts.urn:
                 raise TypeError("Missing required property 'use_case_id'")
             __props__.__dict__["use_case_id"] = use_case_id
+            __props__.__dict__["version"] = None
         super(VectorDatabase, __self__).__init__(
             'datarobot:index/vectorDatabase:VectorDatabase',
             resource_name,
@@ -286,7 +303,8 @@ class VectorDatabase(pulumi.CustomResource):
             chunking_parameters: Optional[pulumi.Input[Union['VectorDatabaseChunkingParametersArgs', 'VectorDatabaseChunkingParametersArgsDict']]] = None,
             dataset_id: Optional[pulumi.Input[str]] = None,
             name: Optional[pulumi.Input[str]] = None,
-            use_case_id: Optional[pulumi.Input[str]] = None) -> 'VectorDatabase':
+            use_case_id: Optional[pulumi.Input[str]] = None,
+            version: Optional[pulumi.Input[int]] = None) -> 'VectorDatabase':
         """
         Get an existing VectorDatabase resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -298,6 +316,7 @@ class VectorDatabase(pulumi.CustomResource):
         :param pulumi.Input[str] dataset_id: The id of the Vector Database.
         :param pulumi.Input[str] name: The name of the VectorDatabase.
         :param pulumi.Input[str] use_case_id: The id of the Use Case.
+        :param pulumi.Input[int] version: The version of the VectorDatabase.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -307,6 +326,7 @@ class VectorDatabase(pulumi.CustomResource):
         __props__.__dict__["dataset_id"] = dataset_id
         __props__.__dict__["name"] = name
         __props__.__dict__["use_case_id"] = use_case_id
+        __props__.__dict__["version"] = version
         return VectorDatabase(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -340,4 +360,12 @@ class VectorDatabase(pulumi.CustomResource):
         The id of the Use Case.
         """
         return pulumi.get(self, "use_case_id")
+
+    @property
+    @pulumi.getter
+    def version(self) -> pulumi.Output[int]:
+        """
+        The version of the VectorDatabase.
+        """
+        return pulumi.get(self, "version")
 

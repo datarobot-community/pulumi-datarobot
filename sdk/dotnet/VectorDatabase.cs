@@ -85,6 +85,12 @@ namespace DataRobotPulumi.Datarobot
         [Output("useCaseId")]
         public Output<string> UseCaseId { get; private set; } = null!;
 
+        /// <summary>
+        /// The version of the VectorDatabase.
+        /// </summary>
+        [Output("version")]
+        public Output<int> Version { get; private set; } = null!;
+
 
         /// <summary>
         /// Create a VectorDatabase resource with the given unique name, arguments, and options.
@@ -187,6 +193,12 @@ namespace DataRobotPulumi.Datarobot
         /// </summary>
         [Input("useCaseId")]
         public Input<string>? UseCaseId { get; set; }
+
+        /// <summary>
+        /// The version of the VectorDatabase.
+        /// </summary>
+        [Input("version")]
+        public Input<int>? Version { get; set; }
 
         public VectorDatabaseState()
         {
