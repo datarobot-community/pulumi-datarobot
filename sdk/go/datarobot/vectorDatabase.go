@@ -67,6 +67,8 @@ type VectorDatabase struct {
 	Name pulumi.StringOutput `pulumi:"name"`
 	// The id of the Use Case.
 	UseCaseId pulumi.StringOutput `pulumi:"useCaseId"`
+	// The version of the VectorDatabase.
+	Version pulumi.IntOutput `pulumi:"version"`
 }
 
 // NewVectorDatabase registers a new resource with the given unique name, arguments, and options.
@@ -113,6 +115,8 @@ type vectorDatabaseState struct {
 	Name *string `pulumi:"name"`
 	// The id of the Use Case.
 	UseCaseId *string `pulumi:"useCaseId"`
+	// The version of the VectorDatabase.
+	Version *int `pulumi:"version"`
 }
 
 type VectorDatabaseState struct {
@@ -124,6 +128,8 @@ type VectorDatabaseState struct {
 	Name pulumi.StringPtrInput
 	// The id of the Use Case.
 	UseCaseId pulumi.StringPtrInput
+	// The version of the VectorDatabase.
+	Version pulumi.IntPtrInput
 }
 
 func (VectorDatabaseState) ElementType() reflect.Type {
@@ -258,6 +264,11 @@ func (o VectorDatabaseOutput) Name() pulumi.StringOutput {
 // The id of the Use Case.
 func (o VectorDatabaseOutput) UseCaseId() pulumi.StringOutput {
 	return o.ApplyT(func(v *VectorDatabase) pulumi.StringOutput { return v.UseCaseId }).(pulumi.StringOutput)
+}
+
+// The version of the VectorDatabase.
+func (o VectorDatabaseOutput) Version() pulumi.IntOutput {
+	return o.ApplyT(func(v *VectorDatabase) pulumi.IntOutput { return v.Version }).(pulumi.IntOutput)
 }
 
 type VectorDatabaseArrayOutput struct{ *pulumi.OutputState }
