@@ -6518,13 +6518,18 @@
                 "useCaseId": {
                     "type": "string",
                     "description": "The id of the Use Case.\n"
+                },
+                "version": {
+                    "type": "integer",
+                    "description": "The version of the VectorDatabase.\n"
                 }
             },
             "required": [
                 "chunkingParameters",
                 "datasetId",
                 "name",
-                "useCaseId"
+                "useCaseId",
+                "version"
             ],
             "inputProperties": {
                 "chunkingParameters": {
@@ -6566,6 +6571,10 @@
                     "useCaseId": {
                         "type": "string",
                         "description": "The id of the Use Case.\n"
+                    },
+                    "version": {
+                        "type": "integer",
+                        "description": "The version of the VectorDatabase.\n"
                     }
                 },
                 "type": "object"
