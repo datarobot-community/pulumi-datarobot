@@ -5147,6 +5147,10 @@
                     "type": "string",
                     "description": "The description of the Execution Environment.\n"
                 },
+                "dockerContextHash": {
+                    "type": "string",
+                    "description": "The hash of the docker context contents.\n"
+                },
                 "dockerContextPath": {
                     "type": "string",
                     "description": "The path to a docker context archive or folder\n"
@@ -5181,6 +5185,7 @@
             },
             "required": [
                 "buildStatus",
+                "dockerContextHash",
                 "name",
                 "programmingLanguage",
                 "useCases",
@@ -5233,6 +5238,10 @@
                     "description": {
                         "type": "string",
                         "description": "The description of the Execution Environment.\n"
+                    },
+                    "dockerContextHash": {
+                        "type": "string",
+                        "description": "The hash of the docker context contents.\n"
                     },
                     "dockerContextPath": {
                         "type": "string",
