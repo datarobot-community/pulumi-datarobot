@@ -59,6 +59,12 @@ namespace DataRobotPulumi.Datarobot
         public Output<string?> Description { get; private set; } = null!;
 
         /// <summary>
+        /// The hash of the docker context contents.
+        /// </summary>
+        [Output("dockerContextHash")]
+        public Output<string> DockerContextHash { get; private set; } = null!;
+
+        /// <summary>
         /// The path to a docker context archive or folder
         /// </summary>
         [Output("dockerContextPath")]
@@ -214,6 +220,12 @@ namespace DataRobotPulumi.Datarobot
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
+
+        /// <summary>
+        /// The hash of the docker context contents.
+        /// </summary>
+        [Input("dockerContextHash")]
+        public Input<string>? DockerContextHash { get; set; }
 
         /// <summary>
         /// The path to a docker context archive or folder
