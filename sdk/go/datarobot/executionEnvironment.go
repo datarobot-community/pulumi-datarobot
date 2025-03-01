@@ -54,6 +54,8 @@ type ExecutionEnvironment struct {
 	BuildStatus pulumi.StringOutput `pulumi:"buildStatus"`
 	// The description of the Execution Environment.
 	Description pulumi.StringPtrOutput `pulumi:"description"`
+	// The hash of the docker context contents.
+	DockerContextHash pulumi.StringOutput `pulumi:"dockerContextHash"`
 	// The path to a docker context archive or folder
 	DockerContextPath pulumi.StringPtrOutput `pulumi:"dockerContextPath"`
 	// A prebuilt environment image saved as a tarball using the Docker save command.
@@ -110,6 +112,8 @@ type executionEnvironmentState struct {
 	BuildStatus *string `pulumi:"buildStatus"`
 	// The description of the Execution Environment.
 	Description *string `pulumi:"description"`
+	// The hash of the docker context contents.
+	DockerContextHash *string `pulumi:"dockerContextHash"`
 	// The path to a docker context archive or folder
 	DockerContextPath *string `pulumi:"dockerContextPath"`
 	// A prebuilt environment image saved as a tarball using the Docker save command.
@@ -131,6 +135,8 @@ type ExecutionEnvironmentState struct {
 	BuildStatus pulumi.StringPtrInput
 	// The description of the Execution Environment.
 	Description pulumi.StringPtrInput
+	// The hash of the docker context contents.
+	DockerContextHash pulumi.StringPtrInput
 	// The path to a docker context archive or folder
 	DockerContextPath pulumi.StringPtrInput
 	// A prebuilt environment image saved as a tarball using the Docker save command.
@@ -281,6 +287,11 @@ func (o ExecutionEnvironmentOutput) BuildStatus() pulumi.StringOutput {
 // The description of the Execution Environment.
 func (o ExecutionEnvironmentOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ExecutionEnvironment) pulumi.StringPtrOutput { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// The hash of the docker context contents.
+func (o ExecutionEnvironmentOutput) DockerContextHash() pulumi.StringOutput {
+	return o.ApplyT(func(v *ExecutionEnvironment) pulumi.StringOutput { return v.DockerContextHash }).(pulumi.StringOutput)
 }
 
 // The path to a docker context archive or folder

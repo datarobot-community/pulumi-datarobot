@@ -139,6 +139,7 @@ class _ExecutionEnvironmentState:
     def __init__(__self__, *,
                  build_status: Optional[pulumi.Input[str]] = None,
                  description: Optional[pulumi.Input[str]] = None,
+                 docker_context_hash: Optional[pulumi.Input[str]] = None,
                  docker_context_path: Optional[pulumi.Input[str]] = None,
                  docker_image: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
@@ -150,6 +151,7 @@ class _ExecutionEnvironmentState:
         Input properties used for looking up and filtering ExecutionEnvironment resources.
         :param pulumi.Input[str] build_status: The status of the Execution Environment version build.
         :param pulumi.Input[str] description: The description of the Execution Environment.
+        :param pulumi.Input[str] docker_context_hash: The hash of the docker context contents.
         :param pulumi.Input[str] docker_context_path: The path to a docker context archive or folder
         :param pulumi.Input[str] docker_image: A prebuilt environment image saved as a tarball using the Docker save command.
         :param pulumi.Input[str] name: The name of the Execution Environment.
@@ -162,6 +164,8 @@ class _ExecutionEnvironmentState:
             pulumi.set(__self__, "build_status", build_status)
         if description is not None:
             pulumi.set(__self__, "description", description)
+        if docker_context_hash is not None:
+            pulumi.set(__self__, "docker_context_hash", docker_context_hash)
         if docker_context_path is not None:
             pulumi.set(__self__, "docker_context_path", docker_context_path)
         if docker_image is not None:
@@ -200,6 +204,18 @@ class _ExecutionEnvironmentState:
     @description.setter
     def description(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "description", value)
+
+    @property
+    @pulumi.getter(name="dockerContextHash")
+    def docker_context_hash(self) -> Optional[pulumi.Input[str]]:
+        """
+        The hash of the docker context contents.
+        """
+        return pulumi.get(self, "docker_context_hash")
+
+    @docker_context_hash.setter
+    def docker_context_hash(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "docker_context_hash", value)
 
     @property
     @pulumi.getter(name="dockerContextPath")
@@ -396,6 +412,7 @@ class ExecutionEnvironment(pulumi.CustomResource):
             __props__.__dict__["use_cases"] = use_cases
             __props__.__dict__["version_description"] = version_description
             __props__.__dict__["build_status"] = None
+            __props__.__dict__["docker_context_hash"] = None
             __props__.__dict__["version_id"] = None
         super(ExecutionEnvironment, __self__).__init__(
             'datarobot:index/executionEnvironment:ExecutionEnvironment',
@@ -409,6 +426,7 @@ class ExecutionEnvironment(pulumi.CustomResource):
             opts: Optional[pulumi.ResourceOptions] = None,
             build_status: Optional[pulumi.Input[str]] = None,
             description: Optional[pulumi.Input[str]] = None,
+            docker_context_hash: Optional[pulumi.Input[str]] = None,
             docker_context_path: Optional[pulumi.Input[str]] = None,
             docker_image: Optional[pulumi.Input[str]] = None,
             name: Optional[pulumi.Input[str]] = None,
@@ -425,6 +443,7 @@ class ExecutionEnvironment(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] build_status: The status of the Execution Environment version build.
         :param pulumi.Input[str] description: The description of the Execution Environment.
+        :param pulumi.Input[str] docker_context_hash: The hash of the docker context contents.
         :param pulumi.Input[str] docker_context_path: The path to a docker context archive or folder
         :param pulumi.Input[str] docker_image: A prebuilt environment image saved as a tarball using the Docker save command.
         :param pulumi.Input[str] name: The name of the Execution Environment.
@@ -439,6 +458,7 @@ class ExecutionEnvironment(pulumi.CustomResource):
 
         __props__.__dict__["build_status"] = build_status
         __props__.__dict__["description"] = description
+        __props__.__dict__["docker_context_hash"] = docker_context_hash
         __props__.__dict__["docker_context_path"] = docker_context_path
         __props__.__dict__["docker_image"] = docker_image
         __props__.__dict__["name"] = name
@@ -463,6 +483,14 @@ class ExecutionEnvironment(pulumi.CustomResource):
         The description of the Execution Environment.
         """
         return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter(name="dockerContextHash")
+    def docker_context_hash(self) -> pulumi.Output[str]:
+        """
+        The hash of the docker context contents.
+        """
+        return pulumi.get(self, "docker_context_hash")
 
     @property
     @pulumi.getter(name="dockerContextPath")
