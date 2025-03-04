@@ -6,6 +6,25 @@ import * as utilities from "./utilities";
 
 /**
  * registered model from leaderboard
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as datarobot from "@datarobot/pulumi-datarobot";
+ *
+ * const example = new datarobot.RegisteredModelFromLeaderboard("example", {
+ *     modelId: "111111111111",
+ *     description: "example description",
+ *     versionName: "example version name",
+ *     predictionThreshold: 0.5,
+ *     computeAllTsIntervals: true,
+ *     distributionPredictionModelId: "222222222222",
+ *     useCaseIds: [datarobot_use_case.example.id],
+ * });
+ * export const datarobotRegisteredModelFromLeaderboardId = example.id;
+ * export const datarobotRegisteredModelFromLeaderboardVersionId = example.versionId;
+ * ```
  */
 export class RegisteredModelFromLeaderboard extends pulumi.CustomResource {
     /**

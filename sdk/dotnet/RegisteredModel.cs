@@ -41,12 +41,6 @@ namespace DataRobotPulumi.Datarobot
     ///         Description = "Description for the example registered model",
     ///     });
     /// 
-    ///     var examplePredictionEnvironment = new Datarobot.PredictionEnvironment("examplePredictionEnvironment", new()
-    ///     {
-    ///         Description = "Description for the example prediction environment",
-    ///         Platform = "datarobotServerless",
-    ///     });
-    /// 
     ///     return new Dictionary&lt;string, object?&gt;
     ///     {
     ///         ["datarobotRegisteredModelId"] = exampleRegisteredModel.Id,

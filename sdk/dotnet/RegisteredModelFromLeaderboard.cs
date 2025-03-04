@@ -12,6 +12,38 @@ namespace DataRobotPulumi.Datarobot
 {
     /// <summary>
     /// registered model from leaderboard
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Datarobot = DataRobotPulumi.Datarobot;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Datarobot.RegisteredModelFromLeaderboard("example", new()
+    ///     {
+    ///         ModelId = "111111111111",
+    ///         Description = "example description",
+    ///         VersionName = "example version name",
+    ///         PredictionThreshold = 0.5,
+    ///         ComputeAllTsIntervals = true,
+    ///         DistributionPredictionModelId = "222222222222",
+    ///         UseCaseIds = new[]
+    ///         {
+    ///             datarobot_use_case.Example.Id,
+    ///         },
+    ///     });
+    /// 
+    ///     return new Dictionary&lt;string, object?&gt;
+    ///     {
+    ///         ["datarobotRegisteredModelFromLeaderboardId"] = example.Id,
+    ///         ["datarobotRegisteredModelFromLeaderboardVersionId"] = example.VersionId,
+    ///     };
+    /// });
+    /// ```
     /// </summary>
     [DatarobotResourceType("datarobot:index/registeredModelFromLeaderboard:RegisteredModelFromLeaderboard")]
     public partial class RegisteredModelFromLeaderboard : global::Pulumi.CustomResource

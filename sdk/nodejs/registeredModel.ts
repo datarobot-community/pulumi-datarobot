@@ -24,10 +24,6 @@ import * as utilities from "./utilities";
  *     customModelVersionId: exampleCustomModel.versionId,
  *     description: "Description for the example registered model",
  * });
- * const examplePredictionEnvironment = new datarobot.PredictionEnvironment("examplePredictionEnvironment", {
- *     description: "Description for the example prediction environment",
- *     platform: "datarobotServerless",
- * });
  * export const datarobotRegisteredModelId = exampleRegisteredModel.id;
  * export const datarobotRegisteredModelVersionId = exampleRegisteredModel.versionId;
  * ```
