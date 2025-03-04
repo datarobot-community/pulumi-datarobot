@@ -13,6 +13,42 @@ import (
 )
 
 // registered model from leaderboard
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			example, err := datarobot.NewRegisteredModelFromLeaderboard(ctx, "example", &datarobot.RegisteredModelFromLeaderboardArgs{
+//				ModelId:                       pulumi.String("111111111111"),
+//				Description:                   pulumi.String("example description"),
+//				VersionName:                   pulumi.String("example version name"),
+//				PredictionThreshold:           pulumi.Float64(0.5),
+//				ComputeAllTsIntervals:         pulumi.Bool(true),
+//				DistributionPredictionModelId: pulumi.String("222222222222"),
+//				UseCaseIds: pulumi.StringArray{
+//					datarobot_use_case.Example.Id,
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			ctx.Export("datarobotRegisteredModelFromLeaderboardId", example.ID())
+//			ctx.Export("datarobotRegisteredModelFromLeaderboardVersionId", example.VersionId)
+//			return nil
+//		})
+//	}
+//
+// ```
 type RegisteredModelFromLeaderboard struct {
 	pulumi.CustomResourceState
 

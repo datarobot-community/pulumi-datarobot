@@ -320,6 +320,24 @@ class RegisteredModelFromLeaderboard(pulumi.CustomResource):
         """
         registered model from leaderboard
 
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_datarobot as datarobot
+
+        example = datarobot.RegisteredModelFromLeaderboard("example",
+            model_id="111111111111",
+            description="example description",
+            version_name="example version name",
+            prediction_threshold=0.5,
+            compute_all_ts_intervals=True,
+            distribution_prediction_model_id="222222222222",
+            use_case_ids=[datarobot_use_case["example"]["id"]])
+        pulumi.export("datarobotRegisteredModelFromLeaderboardId", example.id)
+        pulumi.export("datarobotRegisteredModelFromLeaderboardVersionId", example.version_id)
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[bool] compute_all_ts_intervals: Whether to compute all time series intervals (1-100 percentiles).
@@ -339,6 +357,24 @@ class RegisteredModelFromLeaderboard(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         registered model from leaderboard
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_datarobot as datarobot
+
+        example = datarobot.RegisteredModelFromLeaderboard("example",
+            model_id="111111111111",
+            description="example description",
+            version_name="example version name",
+            prediction_threshold=0.5,
+            compute_all_ts_intervals=True,
+            distribution_prediction_model_id="222222222222",
+            use_case_ids=[datarobot_use_case["example"]["id"]])
+        pulumi.export("datarobotRegisteredModelFromLeaderboardId", example.id)
+        pulumi.export("datarobotRegisteredModelFromLeaderboardVersionId", example.version_id)
+        ```
 
         :param str resource_name: The name of the resource.
         :param RegisteredModelFromLeaderboardArgs args: The arguments to use to populate this resource's properties.

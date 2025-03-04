@@ -47,13 +47,6 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			_, err = datarobot.NewPredictionEnvironment(ctx, "examplePredictionEnvironment", &datarobot.PredictionEnvironmentArgs{
-//				Description: pulumi.String("Description for the example prediction environment"),
-//				Platform:    pulumi.String("datarobotServerless"),
-//			})
-//			if err != nil {
-//				return err
-//			}
 //			ctx.Export("datarobotRegisteredModelId", exampleRegisteredModel.ID())
 //			ctx.Export("datarobotRegisteredModelVersionId", exampleRegisteredModel.VersionId)
 //			return nil

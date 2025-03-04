@@ -236,9 +236,6 @@ class RegisteredModel(pulumi.CustomResource):
         example_registered_model = datarobot.RegisteredModel("exampleRegisteredModel",
             custom_model_version_id=example_custom_model.version_id,
             description="Description for the example registered model")
-        example_prediction_environment = datarobot.PredictionEnvironment("examplePredictionEnvironment",
-            description="Description for the example prediction environment",
-            platform="datarobotServerless")
         pulumi.export("datarobotRegisteredModelId", example_registered_model.id)
         pulumi.export("datarobotRegisteredModelVersionId", example_registered_model.version_id)
         ```
@@ -275,9 +272,6 @@ class RegisteredModel(pulumi.CustomResource):
         example_registered_model = datarobot.RegisteredModel("exampleRegisteredModel",
             custom_model_version_id=example_custom_model.version_id,
             description="Description for the example registered model")
-        example_prediction_environment = datarobot.PredictionEnvironment("examplePredictionEnvironment",
-            description="Description for the example prediction environment",
-            platform="datarobotServerless")
         pulumi.export("datarobotRegisteredModelId", example_registered_model.id)
         pulumi.export("datarobotRegisteredModelVersionId", example_registered_model.version_id)
         ```
