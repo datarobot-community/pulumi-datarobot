@@ -28,6 +28,7 @@ namespace DataRobotPulumi.Datarobot
     ///         DeploymentId = datarobot_deployment.Example.Id,
     ///         PromptColumnName = "promptText",
     ///         TargetColumnName = "resultText",
+    ///         ChatModelId = "111111111111",
     ///         PredictionTimeout = 100,
     ///         UseCaseId = datarobot.Use_case.Example.Id,
     ///     });
@@ -42,6 +43,12 @@ namespace DataRobotPulumi.Datarobot
     [DatarobotResourceType("datarobot:index/customModelLlmValidation:CustomModelLlmValidation")]
     public partial class CustomModelLlmValidation : global::Pulumi.CustomResource
     {
+        /// <summary>
+        /// The ID of the chat model to use for the custom model LLM validation.
+        /// </summary>
+        [Output("chatModelId")]
+        public Output<string?> ChatModelId { get; private set; } = null!;
+
         /// <summary>
         /// The ID of the custom model deployment.
         /// </summary>
@@ -70,13 +77,13 @@ namespace DataRobotPulumi.Datarobot
         /// The name of the column the custom model uses for prompt text input.
         /// </summary>
         [Output("promptColumnName")]
-        public Output<string> PromptColumnName { get; private set; } = null!;
+        public Output<string?> PromptColumnName { get; private set; } = null!;
 
         /// <summary>
         /// The name of the column the custom model uses for prediction output.
         /// </summary>
         [Output("targetColumnName")]
-        public Output<string> TargetColumnName { get; private set; } = null!;
+        public Output<string?> TargetColumnName { get; private set; } = null!;
 
         /// <summary>
         /// The ID of the use case to associate with the validated custom model.
@@ -132,6 +139,12 @@ namespace DataRobotPulumi.Datarobot
     public sealed class CustomModelLlmValidationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// The ID of the chat model to use for the custom model LLM validation.
+        /// </summary>
+        [Input("chatModelId")]
+        public Input<string>? ChatModelId { get; set; }
+
+        /// <summary>
         /// The ID of the custom model deployment.
         /// </summary>
         [Input("deploymentId", required: true)]
@@ -158,14 +171,14 @@ namespace DataRobotPulumi.Datarobot
         /// <summary>
         /// The name of the column the custom model uses for prompt text input.
         /// </summary>
-        [Input("promptColumnName", required: true)]
-        public Input<string> PromptColumnName { get; set; } = null!;
+        [Input("promptColumnName")]
+        public Input<string>? PromptColumnName { get; set; }
 
         /// <summary>
         /// The name of the column the custom model uses for prediction output.
         /// </summary>
-        [Input("targetColumnName", required: true)]
-        public Input<string> TargetColumnName { get; set; } = null!;
+        [Input("targetColumnName")]
+        public Input<string>? TargetColumnName { get; set; }
 
         /// <summary>
         /// The ID of the use case to associate with the validated custom model.
@@ -181,6 +194,12 @@ namespace DataRobotPulumi.Datarobot
 
     public sealed class CustomModelLlmValidationState : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// The ID of the chat model to use for the custom model LLM validation.
+        /// </summary>
+        [Input("chatModelId")]
+        public Input<string>? ChatModelId { get; set; }
+
         /// <summary>
         /// The ID of the custom model deployment.
         /// </summary>

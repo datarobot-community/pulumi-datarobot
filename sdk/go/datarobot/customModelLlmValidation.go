@@ -32,6 +32,7 @@ import (
 //				DeploymentId:      pulumi.Any(datarobot_deployment.Example.Id),
 //				PromptColumnName:  pulumi.String("promptText"),
 //				TargetColumnName:  pulumi.String("resultText"),
+//				ChatModelId:       pulumi.String("111111111111"),
 //				PredictionTimeout: pulumi.Int(100),
 //				UseCaseId:         pulumi.Any(datarobot.Use_case.Example.Id),
 //			})
@@ -47,6 +48,8 @@ import (
 type CustomModelLlmValidation struct {
 	pulumi.CustomResourceState
 
+	// The ID of the chat model to use for the custom model LLM validation.
+	ChatModelId pulumi.StringPtrOutput `pulumi:"chatModelId"`
 	// The ID of the custom model deployment.
 	DeploymentId pulumi.StringOutput `pulumi:"deploymentId"`
 	// The ID of the model used in the deployment.
@@ -56,9 +59,9 @@ type CustomModelLlmValidation struct {
 	// The timeout in seconds for the prediction when validating a custom model. Defaults to 300.
 	PredictionTimeout pulumi.IntOutput `pulumi:"predictionTimeout"`
 	// The name of the column the custom model uses for prompt text input.
-	PromptColumnName pulumi.StringOutput `pulumi:"promptColumnName"`
+	PromptColumnName pulumi.StringPtrOutput `pulumi:"promptColumnName"`
 	// The name of the column the custom model uses for prediction output.
-	TargetColumnName pulumi.StringOutput `pulumi:"targetColumnName"`
+	TargetColumnName pulumi.StringPtrOutput `pulumi:"targetColumnName"`
 	// The ID of the use case to associate with the validated custom model.
 	UseCaseId pulumi.StringPtrOutput `pulumi:"useCaseId"`
 }
@@ -72,12 +75,6 @@ func NewCustomModelLlmValidation(ctx *pulumi.Context,
 
 	if args.DeploymentId == nil {
 		return nil, errors.New("invalid value for required argument 'DeploymentId'")
-	}
-	if args.PromptColumnName == nil {
-		return nil, errors.New("invalid value for required argument 'PromptColumnName'")
-	}
-	if args.TargetColumnName == nil {
-		return nil, errors.New("invalid value for required argument 'TargetColumnName'")
 	}
 	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource CustomModelLlmValidation
@@ -102,6 +99,8 @@ func GetCustomModelLlmValidation(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering CustomModelLlmValidation resources.
 type customModelLlmValidationState struct {
+	// The ID of the chat model to use for the custom model LLM validation.
+	ChatModelId *string `pulumi:"chatModelId"`
 	// The ID of the custom model deployment.
 	DeploymentId *string `pulumi:"deploymentId"`
 	// The ID of the model used in the deployment.
@@ -119,6 +118,8 @@ type customModelLlmValidationState struct {
 }
 
 type CustomModelLlmValidationState struct {
+	// The ID of the chat model to use for the custom model LLM validation.
+	ChatModelId pulumi.StringPtrInput
 	// The ID of the custom model deployment.
 	DeploymentId pulumi.StringPtrInput
 	// The ID of the model used in the deployment.
@@ -140,6 +141,8 @@ func (CustomModelLlmValidationState) ElementType() reflect.Type {
 }
 
 type customModelLlmValidationArgs struct {
+	// The ID of the chat model to use for the custom model LLM validation.
+	ChatModelId *string `pulumi:"chatModelId"`
 	// The ID of the custom model deployment.
 	DeploymentId string `pulumi:"deploymentId"`
 	// The ID of the model used in the deployment.
@@ -149,15 +152,17 @@ type customModelLlmValidationArgs struct {
 	// The timeout in seconds for the prediction when validating a custom model. Defaults to 300.
 	PredictionTimeout *int `pulumi:"predictionTimeout"`
 	// The name of the column the custom model uses for prompt text input.
-	PromptColumnName string `pulumi:"promptColumnName"`
+	PromptColumnName *string `pulumi:"promptColumnName"`
 	// The name of the column the custom model uses for prediction output.
-	TargetColumnName string `pulumi:"targetColumnName"`
+	TargetColumnName *string `pulumi:"targetColumnName"`
 	// The ID of the use case to associate with the validated custom model.
 	UseCaseId *string `pulumi:"useCaseId"`
 }
 
 // The set of arguments for constructing a CustomModelLlmValidation resource.
 type CustomModelLlmValidationArgs struct {
+	// The ID of the chat model to use for the custom model LLM validation.
+	ChatModelId pulumi.StringPtrInput
 	// The ID of the custom model deployment.
 	DeploymentId pulumi.StringInput
 	// The ID of the model used in the deployment.
@@ -167,9 +172,9 @@ type CustomModelLlmValidationArgs struct {
 	// The timeout in seconds for the prediction when validating a custom model. Defaults to 300.
 	PredictionTimeout pulumi.IntPtrInput
 	// The name of the column the custom model uses for prompt text input.
-	PromptColumnName pulumi.StringInput
+	PromptColumnName pulumi.StringPtrInput
 	// The name of the column the custom model uses for prediction output.
-	TargetColumnName pulumi.StringInput
+	TargetColumnName pulumi.StringPtrInput
 	// The ID of the use case to associate with the validated custom model.
 	UseCaseId pulumi.StringPtrInput
 }
@@ -261,6 +266,11 @@ func (o CustomModelLlmValidationOutput) ToCustomModelLlmValidationOutputWithCont
 	return o
 }
 
+// The ID of the chat model to use for the custom model LLM validation.
+func (o CustomModelLlmValidationOutput) ChatModelId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CustomModelLlmValidation) pulumi.StringPtrOutput { return v.ChatModelId }).(pulumi.StringPtrOutput)
+}
+
 // The ID of the custom model deployment.
 func (o CustomModelLlmValidationOutput) DeploymentId() pulumi.StringOutput {
 	return o.ApplyT(func(v *CustomModelLlmValidation) pulumi.StringOutput { return v.DeploymentId }).(pulumi.StringOutput)
@@ -282,13 +292,13 @@ func (o CustomModelLlmValidationOutput) PredictionTimeout() pulumi.IntOutput {
 }
 
 // The name of the column the custom model uses for prompt text input.
-func (o CustomModelLlmValidationOutput) PromptColumnName() pulumi.StringOutput {
-	return o.ApplyT(func(v *CustomModelLlmValidation) pulumi.StringOutput { return v.PromptColumnName }).(pulumi.StringOutput)
+func (o CustomModelLlmValidationOutput) PromptColumnName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CustomModelLlmValidation) pulumi.StringPtrOutput { return v.PromptColumnName }).(pulumi.StringPtrOutput)
 }
 
 // The name of the column the custom model uses for prediction output.
-func (o CustomModelLlmValidationOutput) TargetColumnName() pulumi.StringOutput {
-	return o.ApplyT(func(v *CustomModelLlmValidation) pulumi.StringOutput { return v.TargetColumnName }).(pulumi.StringOutput)
+func (o CustomModelLlmValidationOutput) TargetColumnName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CustomModelLlmValidation) pulumi.StringPtrOutput { return v.TargetColumnName }).(pulumi.StringPtrOutput)
 }
 
 // The ID of the use case to associate with the validated custom model.

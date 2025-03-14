@@ -17,6 +17,7 @@ import * as utilities from "./utilities";
  *     deploymentId: datarobot_deployment.example.id,
  *     promptColumnName: "promptText",
  *     targetColumnName: "resultText",
+ *     chatModelId: "111111111111",
  *     predictionTimeout: 100,
  *     useCaseId: datarobot.use_case.example.id,
  * });
@@ -52,6 +53,10 @@ export class CustomModelLlmValidation extends pulumi.CustomResource {
     }
 
     /**
+     * The ID of the chat model to use for the custom model LLM validation.
+     */
+    public readonly chatModelId!: pulumi.Output<string | undefined>;
+    /**
      * The ID of the custom model deployment.
      */
     public readonly deploymentId!: pulumi.Output<string>;
@@ -70,11 +75,11 @@ export class CustomModelLlmValidation extends pulumi.CustomResource {
     /**
      * The name of the column the custom model uses for prompt text input.
      */
-    public readonly promptColumnName!: pulumi.Output<string>;
+    public readonly promptColumnName!: pulumi.Output<string | undefined>;
     /**
      * The name of the column the custom model uses for prediction output.
      */
-    public readonly targetColumnName!: pulumi.Output<string>;
+    public readonly targetColumnName!: pulumi.Output<string | undefined>;
     /**
      * The ID of the use case to associate with the validated custom model.
      */
@@ -93,6 +98,7 @@ export class CustomModelLlmValidation extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as CustomModelLlmValidationState | undefined;
+            resourceInputs["chatModelId"] = state ? state.chatModelId : undefined;
             resourceInputs["deploymentId"] = state ? state.deploymentId : undefined;
             resourceInputs["modelId"] = state ? state.modelId : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
@@ -105,12 +111,7 @@ export class CustomModelLlmValidation extends pulumi.CustomResource {
             if ((!args || args.deploymentId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'deploymentId'");
             }
-            if ((!args || args.promptColumnName === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'promptColumnName'");
-            }
-            if ((!args || args.targetColumnName === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'targetColumnName'");
-            }
+            resourceInputs["chatModelId"] = args ? args.chatModelId : undefined;
             resourceInputs["deploymentId"] = args ? args.deploymentId : undefined;
             resourceInputs["modelId"] = args ? args.modelId : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
@@ -128,6 +129,10 @@ export class CustomModelLlmValidation extends pulumi.CustomResource {
  * Input properties used for looking up and filtering CustomModelLlmValidation resources.
  */
 export interface CustomModelLlmValidationState {
+    /**
+     * The ID of the chat model to use for the custom model LLM validation.
+     */
+    chatModelId?: pulumi.Input<string>;
     /**
      * The ID of the custom model deployment.
      */
@@ -163,6 +168,10 @@ export interface CustomModelLlmValidationState {
  */
 export interface CustomModelLlmValidationArgs {
     /**
+     * The ID of the chat model to use for the custom model LLM validation.
+     */
+    chatModelId?: pulumi.Input<string>;
+    /**
      * The ID of the custom model deployment.
      */
     deploymentId: pulumi.Input<string>;
@@ -181,11 +190,11 @@ export interface CustomModelLlmValidationArgs {
     /**
      * The name of the column the custom model uses for prompt text input.
      */
-    promptColumnName: pulumi.Input<string>;
+    promptColumnName?: pulumi.Input<string>;
     /**
      * The name of the column the custom model uses for prediction output.
      */
-    targetColumnName: pulumi.Input<string>;
+    targetColumnName?: pulumi.Input<string>;
     /**
      * The ID of the use case to associate with the validated custom model.
      */
