@@ -44,9 +44,9 @@ jobs:
       run: make tidy
 
     - name: golangci-lint
-      uses: golangci/golangci-lint-action@2226d7cb06a077cd73e56eedd38eecad18e5d837 # v6.5.0
+      uses: golangci/golangci-lint-action@v3
       with:
-        version: v1.60.2
+        version: latest
         working-directory: provider
         skip-cache: true
 
