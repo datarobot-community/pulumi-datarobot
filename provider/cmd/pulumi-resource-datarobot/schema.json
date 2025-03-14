@@ -4138,8 +4138,12 @@
             }
         },
         "datarobot:index/customModelLlmValidation:CustomModelLlmValidation": {
-            "description": "Custom Model LLM Validation\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@datarobot/pulumi-datarobot\";\n\nconst example = new datarobot.CustomModelLlmValidation(\"example\", {\n    deploymentId: datarobot_deployment.example.id,\n    promptColumnName: \"promptText\",\n    targetColumnName: \"resultText\",\n    predictionTimeout: 100,\n    useCaseId: datarobot.use_case.example.id,\n});\nexport const exampleId = example.id;\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample = datarobot.CustomModelLlmValidation(\"example\",\n    deployment_id=datarobot_deployment[\"example\"][\"id\"],\n    prompt_column_name=\"promptText\",\n    target_column_name=\"resultText\",\n    prediction_timeout=100,\n    use_case_id=datarobot[\"use_case\"][\"example\"][\"id\"])\npulumi.export(\"exampleId\", example.id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = DataRobotPulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Datarobot.CustomModelLlmValidation(\"example\", new()\n    {\n        DeploymentId = datarobot_deployment.Example.Id,\n        PromptColumnName = \"promptText\",\n        TargetColumnName = \"resultText\",\n        PredictionTimeout = 100,\n        UseCaseId = datarobot.Use_case.Example.Id,\n    });\n\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"exampleId\"] = example.Id,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texample, err := datarobot.NewCustomModelLlmValidation(ctx, \"example\", \u0026datarobot.CustomModelLlmValidationArgs{\n\t\t\tDeploymentId:      pulumi.Any(datarobot_deployment.Example.Id),\n\t\t\tPromptColumnName:  pulumi.String(\"promptText\"),\n\t\t\tTargetColumnName:  pulumi.String(\"resultText\"),\n\t\t\tPredictionTimeout: pulumi.Int(100),\n\t\t\tUseCaseId:         pulumi.Any(datarobot.Use_case.Example.Id),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"exampleId\", example.ID())\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.CustomModelLlmValidation;\nimport com.pulumi.datarobot.CustomModelLlmValidationArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new CustomModelLlmValidation(\"example\", CustomModelLlmValidationArgs.builder()\n            .deploymentId(datarobot_deployment.example().id())\n            .promptColumnName(\"promptText\")\n            .targetColumnName(\"resultText\")\n            .predictionTimeout(100)\n            .useCaseId(datarobot.use_case().example().id())\n            .build());\n\n        ctx.export(\"exampleId\", example.id());\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: datarobot:CustomModelLlmValidation\n    properties:\n      deploymentId: ${datarobot_deployment.example.id}\n      promptColumnName: promptText\n      targetColumnName: resultText\n      # Optional\n      predictionTimeout: 100\n      useCaseId: ${datarobot.use_case.example.id}\noutputs:\n  exampleId: ${example.id}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "description": "Custom Model LLM Validation\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@datarobot/pulumi-datarobot\";\n\nconst example = new datarobot.CustomModelLlmValidation(\"example\", {\n    deploymentId: datarobot_deployment.example.id,\n    promptColumnName: \"promptText\",\n    targetColumnName: \"resultText\",\n    chatModelId: \"111111111111\",\n    predictionTimeout: 100,\n    useCaseId: datarobot.use_case.example.id,\n});\nexport const exampleId = example.id;\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample = datarobot.CustomModelLlmValidation(\"example\",\n    deployment_id=datarobot_deployment[\"example\"][\"id\"],\n    prompt_column_name=\"promptText\",\n    target_column_name=\"resultText\",\n    chat_model_id=\"111111111111\",\n    prediction_timeout=100,\n    use_case_id=datarobot[\"use_case\"][\"example\"][\"id\"])\npulumi.export(\"exampleId\", example.id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = DataRobotPulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Datarobot.CustomModelLlmValidation(\"example\", new()\n    {\n        DeploymentId = datarobot_deployment.Example.Id,\n        PromptColumnName = \"promptText\",\n        TargetColumnName = \"resultText\",\n        ChatModelId = \"111111111111\",\n        PredictionTimeout = 100,\n        UseCaseId = datarobot.Use_case.Example.Id,\n    });\n\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"exampleId\"] = example.Id,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texample, err := datarobot.NewCustomModelLlmValidation(ctx, \"example\", \u0026datarobot.CustomModelLlmValidationArgs{\n\t\t\tDeploymentId:      pulumi.Any(datarobot_deployment.Example.Id),\n\t\t\tPromptColumnName:  pulumi.String(\"promptText\"),\n\t\t\tTargetColumnName:  pulumi.String(\"resultText\"),\n\t\t\tChatModelId:       pulumi.String(\"111111111111\"),\n\t\t\tPredictionTimeout: pulumi.Int(100),\n\t\t\tUseCaseId:         pulumi.Any(datarobot.Use_case.Example.Id),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"exampleId\", example.ID())\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.CustomModelLlmValidation;\nimport com.pulumi.datarobot.CustomModelLlmValidationArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new CustomModelLlmValidation(\"example\", CustomModelLlmValidationArgs.builder()\n            .deploymentId(datarobot_deployment.example().id())\n            .promptColumnName(\"promptText\")\n            .targetColumnName(\"resultText\")\n            .chatModelId(\"111111111111\")\n            .predictionTimeout(100)\n            .useCaseId(datarobot.use_case().example().id())\n            .build());\n\n        ctx.export(\"exampleId\", example.id());\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: datarobot:CustomModelLlmValidation\n    properties:\n      deploymentId: ${datarobot_deployment.example.id}\n      # Optional\n      promptColumnName: promptText\n      targetColumnName: resultText\n      chatModelId: '111111111111'\n      predictionTimeout: 100\n      useCaseId: ${datarobot.use_case.example.id}\noutputs:\n  exampleId: ${example.id}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
             "properties": {
+                "chatModelId": {
+                    "type": "string",
+                    "description": "The ID of the chat model to use for the custom model LLM validation.\n"
+                },
                 "deploymentId": {
                     "type": "string",
                     "description": "The ID of the custom model deployment.\n"
@@ -4173,11 +4177,13 @@
                 "deploymentId",
                 "modelId",
                 "name",
-                "predictionTimeout",
-                "promptColumnName",
-                "targetColumnName"
+                "predictionTimeout"
             ],
             "inputProperties": {
+                "chatModelId": {
+                    "type": "string",
+                    "description": "The ID of the chat model to use for the custom model LLM validation.\n"
+                },
                 "deploymentId": {
                     "type": "string",
                     "description": "The ID of the custom model deployment.\n"
@@ -4208,13 +4214,15 @@
                 }
             },
             "requiredInputs": [
-                "deploymentId",
-                "promptColumnName",
-                "targetColumnName"
+                "deploymentId"
             ],
             "stateInputs": {
                 "description": "Input properties used for looking up and filtering CustomModelLlmValidation resources.\n",
                 "properties": {
+                    "chatModelId": {
+                        "type": "string",
+                        "description": "The ID of the chat model to use for the custom model LLM validation.\n"
+                    },
                     "deploymentId": {
                         "type": "string",
                         "description": "The ID of the custom model deployment.\n"

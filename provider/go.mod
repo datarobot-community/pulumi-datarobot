@@ -4,7 +4,7 @@ go 1.23
 toolchain go1.24.1
 
 require (
-	github.com/datarobot-community/terraform-provider-datarobot v0.8.14
+	github.com/datarobot-community/terraform-provider-datarobot v0.8.15
 	github.com/pulumi/pulumi-terraform-bridge/v3 v3.104.0
 )
 
