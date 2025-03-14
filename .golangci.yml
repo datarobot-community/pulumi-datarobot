@@ -4,13 +4,14 @@ linters:
     - goconst
     - gofmt
     - gosec
+    - gosimple
     - govet
     - ineffassign
     - lll
-    - megacheck
     - misspell
     - nakedret
     - revive
+    - staticcheck
     - unconvert
     - unused
   enable-all: false
