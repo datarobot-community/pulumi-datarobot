@@ -20,31 +20,37 @@ __all__ = ['CustomModelLlmValidationArgs', 'CustomModelLlmValidation']
 class CustomModelLlmValidationArgs:
     def __init__(__self__, *,
                  deployment_id: pulumi.Input[str],
-                 prompt_column_name: pulumi.Input[str],
-                 target_column_name: pulumi.Input[str],
+                 chat_model_id: Optional[pulumi.Input[str]] = None,
                  model_id: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  prediction_timeout: Optional[pulumi.Input[int]] = None,
+                 prompt_column_name: Optional[pulumi.Input[str]] = None,
+                 target_column_name: Optional[pulumi.Input[str]] = None,
                  use_case_id: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a CustomModelLlmValidation resource.
         :param pulumi.Input[str] deployment_id: The ID of the custom model deployment.
-        :param pulumi.Input[str] prompt_column_name: The name of the column the custom model uses for prompt text input.
-        :param pulumi.Input[str] target_column_name: The name of the column the custom model uses for prediction output.
+        :param pulumi.Input[str] chat_model_id: The ID of the chat model to use for the custom model LLM validation.
         :param pulumi.Input[str] model_id: The ID of the model used in the deployment.
         :param pulumi.Input[str] name: The name to use for the validated custom model.
         :param pulumi.Input[int] prediction_timeout: The timeout in seconds for the prediction when validating a custom model. Defaults to 300.
+        :param pulumi.Input[str] prompt_column_name: The name of the column the custom model uses for prompt text input.
+        :param pulumi.Input[str] target_column_name: The name of the column the custom model uses for prediction output.
         :param pulumi.Input[str] use_case_id: The ID of the use case to associate with the validated custom model.
         """
         pulumi.set(__self__, "deployment_id", deployment_id)
-        pulumi.set(__self__, "prompt_column_name", prompt_column_name)
-        pulumi.set(__self__, "target_column_name", target_column_name)
+        if chat_model_id is not None:
+            pulumi.set(__self__, "chat_model_id", chat_model_id)
         if model_id is not None:
             pulumi.set(__self__, "model_id", model_id)
         if name is not None:
             pulumi.set(__self__, "name", name)
         if prediction_timeout is not None:
             pulumi.set(__self__, "prediction_timeout", prediction_timeout)
+        if prompt_column_name is not None:
+            pulumi.set(__self__, "prompt_column_name", prompt_column_name)
+        if target_column_name is not None:
+            pulumi.set(__self__, "target_column_name", target_column_name)
         if use_case_id is not None:
             pulumi.set(__self__, "use_case_id", use_case_id)
 
@@ -61,28 +67,16 @@ class CustomModelLlmValidationArgs:
         pulumi.set(self, "deployment_id", value)
 
     @property
-    @pulumi.getter(name="promptColumnName")
-    def prompt_column_name(self) -> pulumi.Input[str]:
+    @pulumi.getter(name="chatModelId")
+    def chat_model_id(self) -> Optional[pulumi.Input[str]]:
         """
-        The name of the column the custom model uses for prompt text input.
+        The ID of the chat model to use for the custom model LLM validation.
         """
-        return pulumi.get(self, "prompt_column_name")
+        return pulumi.get(self, "chat_model_id")
 
-    @prompt_column_name.setter
-    def prompt_column_name(self, value: pulumi.Input[str]):
-        pulumi.set(self, "prompt_column_name", value)
-
-    @property
-    @pulumi.getter(name="targetColumnName")
-    def target_column_name(self) -> pulumi.Input[str]:
-        """
-        The name of the column the custom model uses for prediction output.
-        """
-        return pulumi.get(self, "target_column_name")
-
-    @target_column_name.setter
-    def target_column_name(self, value: pulumi.Input[str]):
-        pulumi.set(self, "target_column_name", value)
+    @chat_model_id.setter
+    def chat_model_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "chat_model_id", value)
 
     @property
     @pulumi.getter(name="modelId")
@@ -121,6 +115,30 @@ class CustomModelLlmValidationArgs:
         pulumi.set(self, "prediction_timeout", value)
 
     @property
+    @pulumi.getter(name="promptColumnName")
+    def prompt_column_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of the column the custom model uses for prompt text input.
+        """
+        return pulumi.get(self, "prompt_column_name")
+
+    @prompt_column_name.setter
+    def prompt_column_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "prompt_column_name", value)
+
+    @property
+    @pulumi.getter(name="targetColumnName")
+    def target_column_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of the column the custom model uses for prediction output.
+        """
+        return pulumi.get(self, "target_column_name")
+
+    @target_column_name.setter
+    def target_column_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "target_column_name", value)
+
+    @property
     @pulumi.getter(name="useCaseId")
     def use_case_id(self) -> Optional[pulumi.Input[str]]:
         """
@@ -136,6 +154,7 @@ class CustomModelLlmValidationArgs:
 @pulumi.input_type
 class _CustomModelLlmValidationState:
     def __init__(__self__, *,
+                 chat_model_id: Optional[pulumi.Input[str]] = None,
                  deployment_id: Optional[pulumi.Input[str]] = None,
                  model_id: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
@@ -145,6 +164,7 @@ class _CustomModelLlmValidationState:
                  use_case_id: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering CustomModelLlmValidation resources.
+        :param pulumi.Input[str] chat_model_id: The ID of the chat model to use for the custom model LLM validation.
         :param pulumi.Input[str] deployment_id: The ID of the custom model deployment.
         :param pulumi.Input[str] model_id: The ID of the model used in the deployment.
         :param pulumi.Input[str] name: The name to use for the validated custom model.
@@ -153,6 +173,8 @@ class _CustomModelLlmValidationState:
         :param pulumi.Input[str] target_column_name: The name of the column the custom model uses for prediction output.
         :param pulumi.Input[str] use_case_id: The ID of the use case to associate with the validated custom model.
         """
+        if chat_model_id is not None:
+            pulumi.set(__self__, "chat_model_id", chat_model_id)
         if deployment_id is not None:
             pulumi.set(__self__, "deployment_id", deployment_id)
         if model_id is not None:
@@ -167,6 +189,18 @@ class _CustomModelLlmValidationState:
             pulumi.set(__self__, "target_column_name", target_column_name)
         if use_case_id is not None:
             pulumi.set(__self__, "use_case_id", use_case_id)
+
+    @property
+    @pulumi.getter(name="chatModelId")
+    def chat_model_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The ID of the chat model to use for the custom model LLM validation.
+        """
+        return pulumi.get(self, "chat_model_id")
+
+    @chat_model_id.setter
+    def chat_model_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "chat_model_id", value)
 
     @property
     @pulumi.getter(name="deploymentId")
@@ -258,6 +292,7 @@ class CustomModelLlmValidation(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 chat_model_id: Optional[pulumi.Input[str]] = None,
                  deployment_id: Optional[pulumi.Input[str]] = None,
                  model_id: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
@@ -279,6 +314,7 @@ class CustomModelLlmValidation(pulumi.CustomResource):
             deployment_id=datarobot_deployment["example"]["id"],
             prompt_column_name="promptText",
             target_column_name="resultText",
+            chat_model_id="111111111111",
             prediction_timeout=100,
             use_case_id=datarobot["use_case"]["example"]["id"])
         pulumi.export("exampleId", example.id)
@@ -286,6 +322,7 @@ class CustomModelLlmValidation(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[str] chat_model_id: The ID of the chat model to use for the custom model LLM validation.
         :param pulumi.Input[str] deployment_id: The ID of the custom model deployment.
         :param pulumi.Input[str] model_id: The ID of the model used in the deployment.
         :param pulumi.Input[str] name: The name to use for the validated custom model.
@@ -313,6 +350,7 @@ class CustomModelLlmValidation(pulumi.CustomResource):
             deployment_id=datarobot_deployment["example"]["id"],
             prompt_column_name="promptText",
             target_column_name="resultText",
+            chat_model_id="111111111111",
             prediction_timeout=100,
             use_case_id=datarobot["use_case"]["example"]["id"])
         pulumi.export("exampleId", example.id)
@@ -333,6 +371,7 @@ class CustomModelLlmValidation(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 chat_model_id: Optional[pulumi.Input[str]] = None,
                  deployment_id: Optional[pulumi.Input[str]] = None,
                  model_id: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
@@ -349,17 +388,14 @@ class CustomModelLlmValidation(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = CustomModelLlmValidationArgs.__new__(CustomModelLlmValidationArgs)
 
+            __props__.__dict__["chat_model_id"] = chat_model_id
             if deployment_id is None and not opts.urn:
                 raise TypeError("Missing required property 'deployment_id'")
             __props__.__dict__["deployment_id"] = deployment_id
             __props__.__dict__["model_id"] = model_id
             __props__.__dict__["name"] = name
             __props__.__dict__["prediction_timeout"] = prediction_timeout
-            if prompt_column_name is None and not opts.urn:
-                raise TypeError("Missing required property 'prompt_column_name'")
             __props__.__dict__["prompt_column_name"] = prompt_column_name
-            if target_column_name is None and not opts.urn:
-                raise TypeError("Missing required property 'target_column_name'")
             __props__.__dict__["target_column_name"] = target_column_name
             __props__.__dict__["use_case_id"] = use_case_id
         super(CustomModelLlmValidation, __self__).__init__(
@@ -372,6 +408,7 @@ class CustomModelLlmValidation(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
+            chat_model_id: Optional[pulumi.Input[str]] = None,
             deployment_id: Optional[pulumi.Input[str]] = None,
             model_id: Optional[pulumi.Input[str]] = None,
             name: Optional[pulumi.Input[str]] = None,
@@ -386,6 +423,7 @@ class CustomModelLlmValidation(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[str] chat_model_id: The ID of the chat model to use for the custom model LLM validation.
         :param pulumi.Input[str] deployment_id: The ID of the custom model deployment.
         :param pulumi.Input[str] model_id: The ID of the model used in the deployment.
         :param pulumi.Input[str] name: The name to use for the validated custom model.
@@ -398,6 +436,7 @@ class CustomModelLlmValidation(pulumi.CustomResource):
 
         __props__ = _CustomModelLlmValidationState.__new__(_CustomModelLlmValidationState)
 
+        __props__.__dict__["chat_model_id"] = chat_model_id
         __props__.__dict__["deployment_id"] = deployment_id
         __props__.__dict__["model_id"] = model_id
         __props__.__dict__["name"] = name
@@ -406,6 +445,14 @@ class CustomModelLlmValidation(pulumi.CustomResource):
         __props__.__dict__["target_column_name"] = target_column_name
         __props__.__dict__["use_case_id"] = use_case_id
         return CustomModelLlmValidation(resource_name, opts=opts, __props__=__props__)
+
+    @property
+    @pulumi.getter(name="chatModelId")
+    def chat_model_id(self) -> pulumi.Output[Optional[str]]:
+        """
+        The ID of the chat model to use for the custom model LLM validation.
+        """
+        return pulumi.get(self, "chat_model_id")
 
     @property
     @pulumi.getter(name="deploymentId")
@@ -441,7 +488,7 @@ class CustomModelLlmValidation(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="promptColumnName")
-    def prompt_column_name(self) -> pulumi.Output[str]:
+    def prompt_column_name(self) -> pulumi.Output[Optional[str]]:
         """
         The name of the column the custom model uses for prompt text input.
         """
@@ -449,7 +496,7 @@ class CustomModelLlmValidation(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="targetColumnName")
-    def target_column_name(self) -> pulumi.Output[str]:
+    def target_column_name(self) -> pulumi.Output[Optional[str]]:
         """
         The name of the column the custom model uses for prediction output.
         """
