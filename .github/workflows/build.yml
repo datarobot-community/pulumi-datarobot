@@ -70,7 +70,7 @@ jobs:
         cache: true
 
     - name: Install pulumictl
-      uses: jaxxstorm/action-install-gh-release@cd6b2b78ad38bdd294341cda064ec0692b06215b
+      uses: jaxxstorm/action-install-gh-release@4304621e8c48d66093a8a214af5d5b5bc3b3d943
       with:
         repo: pulumi/pulumictl
       
