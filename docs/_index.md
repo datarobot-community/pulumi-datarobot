@@ -13,7 +13,7 @@ The `DataRobot` provider for Pulumi can be used to provision any of the resource
 {{% choosable language python %}}
 
 ```python
-import pulumiverse_datarobot as datarobot
+import pulumi_datarobot as datarobot
 import pulumi
 
 use_case = datarobot.UseCase("example fom python",
