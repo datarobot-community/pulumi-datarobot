@@ -17,6 +17,7 @@
         "applicationSource.ts",
         "applicationSourceFromTemplate.ts",
         "awsCredential.ts",
+        "azureCredential.ts",
         "basicCredential.ts",
         "batchPredictionJobDefinition.ts",
         "config/index.ts",
