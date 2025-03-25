@@ -29,6 +29,9 @@
             "datarobot_aws_credential": {
                 "current": "datarobot:index/awsCredential:AwsCredential"
             },
+            "datarobot_azure_credential": {
+                "current": "datarobot:index/azureCredential:AzureCredential"
+            },
             "datarobot_basic_credential": {
                 "current": "datarobot:index/basicCredential:BasicCredential"
             },
