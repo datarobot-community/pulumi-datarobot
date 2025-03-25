@@ -2235,6 +2235,65 @@
                 "type": "object"
             }
         },
+        "datarobot:index/azureCredential:AzureCredential": {
+            "description": "Azure Credential\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@datarobot/pulumi-datarobot\";\n\nconst example = new datarobot.AzureCredential(\"example\", {\n    azureConnectionString: \"example_connection_string\",\n    description: \"Description for the example Azure credential\",\n});\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample = datarobot.AzureCredential(\"example\",\n    azure_connection_string=\"example_connection_string\",\n    description=\"Description for the example Azure credential\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = DataRobotPulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Datarobot.AzureCredential(\"example\", new()\n    {\n        AzureConnectionString = \"example_connection_string\",\n        Description = \"Description for the example Azure credential\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := datarobot.NewAzureCredential(ctx, \"example\", \u0026datarobot.AzureCredentialArgs{\n\t\t\tAzureConnectionString: pulumi.String(\"example_connection_string\"),\n\t\t\tDescription:           pulumi.String(\"Description for the example Azure credential\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.AzureCredential;\nimport com.pulumi.datarobot.AzureCredentialArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new AzureCredential(\"example\", AzureCredentialArgs.builder()\n            .azureConnectionString(\"example_connection_string\")\n            .description(\"Description for the example Azure credential\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: datarobot:AzureCredential\n    properties:\n      azureConnectionString: example_connection_string\n      description: Description for the example Azure credential\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "properties": {
+                "azureConnectionString": {
+                    "type": "string",
+                    "description": "The connection string of the Azure Credential.\n",
+                    "secret": true
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The description of the Azure Credential.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the Azure Credential.\n"
+                }
+            },
+            "required": [
+                "azureConnectionString",
+                "name"
+            ],
+            "inputProperties": {
+                "azureConnectionString": {
+                    "type": "string",
+                    "description": "The connection string of the Azure Credential.\n",
+                    "secret": true
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The description of the Azure Credential.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the Azure Credential.\n"
+                }
+            },
+            "requiredInputs": [
+                "azureConnectionString"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering AzureCredential resources.\n",
+                "properties": {
+                    "azureConnectionString": {
+                        "type": "string",
+                        "description": "The connection string of the Azure Credential.\n",
+                        "secret": true
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "The description of the Azure Credential.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the Azure Credential.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
         "datarobot:index/basicCredential:BasicCredential": {
             "description": "Basic Credential\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@datarobot/pulumi-datarobot\";\n\nconst example = new datarobot.BasicCredential(\"example\", {\n    description: \"Description for the example basic credential\",\n    password: \"example_password\",\n    user: \"example_user\",\n});\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample = datarobot.BasicCredential(\"example\",\n    description=\"Description for the example basic credential\",\n    password=\"example_password\",\n    user=\"example_user\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = DataRobotPulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Datarobot.BasicCredential(\"example\", new()\n    {\n        Description = \"Description for the example basic credential\",\n        Password = \"example_password\",\n        User = \"example_user\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := datarobot.NewBasicCredential(ctx, \"example\", \u0026datarobot.BasicCredentialArgs{\n\t\t\tDescription: pulumi.String(\"Description for the example basic credential\"),\n\t\t\tPassword:    pulumi.String(\"example_password\"),\n\t\t\tUser:        pulumi.String(\"example_user\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.BasicCredential;\nimport com.pulumi.datarobot.BasicCredentialArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new BasicCredential(\"example\", BasicCredentialArgs.builder()\n            .description(\"Description for the example basic credential\")\n            .password(\"example_password\")\n            .user(\"example_user\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: datarobot:BasicCredential\n    properties:\n      description: Description for the example basic credential\n      password: example_password\n      user: example_user\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
             "properties": {
