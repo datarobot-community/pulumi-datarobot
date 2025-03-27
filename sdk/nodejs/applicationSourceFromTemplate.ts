@@ -68,7 +68,7 @@ export class ApplicationSourceFromTemplate extends pulumi.CustomResource {
     /**
      * The resources for the Application Source.
      */
-    public readonly resources!: pulumi.Output<outputs.ApplicationSourceFromTemplateResources>;
+    public readonly resources!: pulumi.Output<outputs.ApplicationSourceFromTemplateResources | undefined>;
     /**
      * The runtime parameter values for the Application Source.
      */

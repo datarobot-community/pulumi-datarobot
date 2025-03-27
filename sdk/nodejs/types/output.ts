@@ -9,15 +9,15 @@ export interface ApplicationSourceFromTemplateResources {
     /**
      * The replicas for the Application Source.
      */
-    replicas: number;
+    replicas?: number;
     /**
      * The resource label for the Application Source.
      */
-    resourceLabel: string;
+    resourceLabel?: string;
     /**
      * The session affinity for the Application Source.
      */
-    sessionAffinity: boolean;
+    sessionAffinity?: boolean;
 }
 
 export interface ApplicationSourceFromTemplateRuntimeParameterValue {
@@ -39,15 +39,15 @@ export interface ApplicationSourceResources {
     /**
      * The replicas for the Application Source.
      */
-    replicas: number;
+    replicas?: number;
     /**
      * The resource label for the Application Source.
      */
-    resourceLabel: string;
+    resourceLabel?: string;
     /**
      * The session affinity for the Application Source.
      */
-    sessionAffinity: boolean;
+    sessionAffinity?: boolean;
 }
 
 export interface ApplicationSourceRuntimeParameterValue {

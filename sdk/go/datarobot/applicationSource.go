@@ -30,7 +30,7 @@ type ApplicationSource struct {
 	// The name of the Application Source.
 	Name pulumi.StringOutput `pulumi:"name"`
 	// The resources for the Application Source.
-	Resources ApplicationSourceResourcesOutput `pulumi:"resources"`
+	Resources ApplicationSourceResourcesPtrOutput `pulumi:"resources"`
 	// The runtime parameter values for the Application Source.
 	RuntimeParameterValues ApplicationSourceRuntimeParameterValueArrayOutput `pulumi:"runtimeParameterValues"`
 	// The version ID of the Application Source.
@@ -274,8 +274,8 @@ func (o ApplicationSourceOutput) Name() pulumi.StringOutput {
 }
 
 // The resources for the Application Source.
-func (o ApplicationSourceOutput) Resources() ApplicationSourceResourcesOutput {
-	return o.ApplyT(func(v *ApplicationSource) ApplicationSourceResourcesOutput { return v.Resources }).(ApplicationSourceResourcesOutput)
+func (o ApplicationSourceOutput) Resources() ApplicationSourceResourcesPtrOutput {
+	return o.ApplyT(func(v *ApplicationSource) ApplicationSourceResourcesPtrOutput { return v.Resources }).(ApplicationSourceResourcesPtrOutput)
 }
 
 // The runtime parameter values for the Application Source.
