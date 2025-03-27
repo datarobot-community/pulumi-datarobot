@@ -62,7 +62,7 @@ namespace DataRobotPulumi.Datarobot
         /// The resources for the Application Source.
         /// </summary>
         [Output("resources")]
-        public Output<Outputs.ApplicationSourceResources> Resources { get; private set; } = null!;
+        public Output<Outputs.ApplicationSourceResources?> Resources { get; private set; } = null!;
 
         /// <summary>
         /// The runtime parameter values for the Application Source.

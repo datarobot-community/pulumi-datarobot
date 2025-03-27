@@ -534,7 +534,7 @@ class ApplicationSourceFromTemplate(pulumi.CustomResource):
 
     @property
     @pulumi.getter
-    def resources(self) -> pulumi.Output['outputs.ApplicationSourceFromTemplateResources']:
+    def resources(self) -> pulumi.Output[Optional['outputs.ApplicationSourceFromTemplateResources']]:
         """
         The resources for the Application Source.
         """

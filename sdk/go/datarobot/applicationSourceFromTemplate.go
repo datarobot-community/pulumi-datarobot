@@ -31,7 +31,7 @@ type ApplicationSourceFromTemplate struct {
 	// The name of the Application Source.
 	Name pulumi.StringOutput `pulumi:"name"`
 	// The resources for the Application Source.
-	Resources ApplicationSourceFromTemplateResourcesOutput `pulumi:"resources"`
+	Resources ApplicationSourceFromTemplateResourcesPtrOutput `pulumi:"resources"`
 	// The runtime parameter values for the Application Source.
 	RuntimeParameterValues ApplicationSourceFromTemplateRuntimeParameterValueArrayOutput `pulumi:"runtimeParameterValues"`
 	// The ID of the template used to create the Application Source.
@@ -288,10 +288,10 @@ func (o ApplicationSourceFromTemplateOutput) Name() pulumi.StringOutput {
 }
 
 // The resources for the Application Source.
-func (o ApplicationSourceFromTemplateOutput) Resources() ApplicationSourceFromTemplateResourcesOutput {
-	return o.ApplyT(func(v *ApplicationSourceFromTemplate) ApplicationSourceFromTemplateResourcesOutput {
+func (o ApplicationSourceFromTemplateOutput) Resources() ApplicationSourceFromTemplateResourcesPtrOutput {
+	return o.ApplyT(func(v *ApplicationSourceFromTemplate) ApplicationSourceFromTemplateResourcesPtrOutput {
 		return v.Resources
-	}).(ApplicationSourceFromTemplateResourcesOutput)
+	}).(ApplicationSourceFromTemplateResourcesPtrOutput)
 }
 
 // The runtime parameter values for the Application Source.

@@ -88,16 +88,7 @@
                     "description": "The session affinity for the Application Source.\n"
                 }
             },
-            "type": "object",
-            "language": {
-                "nodejs": {
-                    "requiredOutputs": [
-                        "replicas",
-                        "resourceLabel",
-                        "sessionAffinity"
-                    ]
-                }
-            }
+            "type": "object"
         },
         "datarobot:index/ApplicationSourceFromTemplateRuntimeParameterValue:ApplicationSourceFromTemplateRuntimeParameterValue": {
             "properties": {
@@ -136,16 +127,7 @@
                     "description": "The session affinity for the Application Source.\n"
                 }
             },
-            "type": "object",
-            "language": {
-                "nodejs": {
-                    "requiredOutputs": [
-                        "replicas",
-                        "resourceLabel",
-                        "sessionAffinity"
-                    ]
-                }
-            }
+            "type": "object"
         },
         "datarobot:index/ApplicationSourceRuntimeParameterValue:ApplicationSourceRuntimeParameterValue": {
             "properties": {
@@ -1889,7 +1871,6 @@
                 "filesHashes",
                 "folderPathHash",
                 "name",
-                "resources",
                 "runtimeParameterValues",
                 "versionId"
             ],
@@ -2039,7 +2020,6 @@
                 "filesHashes",
                 "folderPathHash",
                 "name",
-                "resources",
                 "runtimeParameterValues",
                 "templateId",
                 "versionId"
