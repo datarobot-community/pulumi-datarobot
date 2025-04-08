@@ -5518,6 +5518,76 @@
                 "type": "object"
             }
         },
+        "datarobot:index/notebook:Notebook": {
+            "description": "Notebook resource for importing and managing Jupyter notebooks in DataRobot.\n\n**NOTE**\n\nThe synchronization of the file hash is one way. The provider will track changes of the Notebook file on disk\nand update _only_ when that changes. If the remote Notebook changes, the provider will not update the local file.\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@datarobot/pulumi-datarobot\";\n\nconst exampleUseCase = new datarobot.UseCase(\"exampleUseCase\", {});\nconst exampleNotebook = new datarobot.Notebook(\"exampleNotebook\", {\n    filePath: \"/path/to/your/notebook.ipynb\",\n    useCaseId: exampleUseCase.id,\n});\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample_use_case = datarobot.UseCase(\"exampleUseCase\")\nexample_notebook = datarobot.Notebook(\"exampleNotebook\",\n    file_path=\"/path/to/your/notebook.ipynb\",\n    use_case_id=example_use_case.id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = DataRobotPulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var exampleUseCase = new Datarobot.UseCase(\"exampleUseCase\");\n\n    var exampleNotebook = new Datarobot.Notebook(\"exampleNotebook\", new()\n    {\n        FilePath = \"/path/to/your/notebook.ipynb\",\n        UseCaseId = exampleUseCase.Id,\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texampleUseCase, err := datarobot.NewUseCase(ctx, \"exampleUseCase\", nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = datarobot.NewNotebook(ctx, \"exampleNotebook\", \u0026datarobot.NotebookArgs{\n\t\t\tFilePath:  pulumi.String(\"/path/to/your/notebook.ipynb\"),\n\t\t\tUseCaseId: exampleUseCase.ID(),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.UseCase;\nimport com.pulumi.datarobot.Notebook;\nimport com.pulumi.datarobot.NotebookArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var exampleUseCase = new UseCase(\"exampleUseCase\");\n\n        var exampleNotebook = new Notebook(\"exampleNotebook\", NotebookArgs.builder()\n            .filePath(\"/path/to/your/notebook.ipynb\")\n            .useCaseId(exampleUseCase.id())\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  exampleUseCase:\n    type: datarobot:UseCase\n  exampleNotebook:\n    type: datarobot:Notebook\n    properties:\n      filePath: /path/to/your/notebook.ipynb\n      useCaseId: ${exampleUseCase.id}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "properties": {
+                "fileHash": {
+                    "type": "string",
+                    "description": "The SHA-256 hash of the file contents.\n"
+                },
+                "filePath": {
+                    "type": "string",
+                    "description": "The path to the .ipynb file to import.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the Notebook.\n"
+                },
+                "url": {
+                    "type": "string",
+                    "description": "The URL to the Notebook.\n"
+                },
+                "useCaseId": {
+                    "type": "string",
+                    "description": "The Use Case ID to add the Notebook to.\n"
+                }
+            },
+            "required": [
+                "fileHash",
+                "filePath",
+                "name",
+                "url"
+            ],
+            "inputProperties": {
+                "filePath": {
+                    "type": "string",
+                    "description": "The path to the .ipynb file to import.\n"
+                },
+                "useCaseId": {
+                    "type": "string",
+                    "description": "The Use Case ID to add the Notebook to.\n"
+                }
+            },
+            "requiredInputs": [
+                "filePath"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Notebook resources.\n",
+                "properties": {
+                    "fileHash": {
+                        "type": "string",
+                        "description": "The SHA-256 hash of the file contents.\n"
+                    },
+                    "filePath": {
+                        "type": "string",
+                        "description": "The path to the .ipynb file to import.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the Notebook.\n"
+                    },
+                    "url": {
+                        "type": "string",
+                        "description": "The URL to the Notebook.\n"
+                    },
+                    "useCaseId": {
+                        "type": "string",
+                        "description": "The Use Case ID to add the Notebook to.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
         "datarobot:index/notificationChannel:NotificationChannel": {
             "description": "Notification Channel\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@datarobot/pulumi-datarobot\";\n\nconst example = new datarobot.NotificationChannel(\"example\", {\n    channelType: \"DataRobotUser\",\n    relatedEntityId: datarobot_deployment.example.id,\n    relatedEntityType: \"deployment\",\n    contentType: \"application/json\",\n    customHeaders: [{\n        name: \"header1\",\n        value: \"value1\",\n    }],\n    drEntities: [{\n        id: \"11111111111111\",\n        name: \"example user\",\n    }],\n    languageCode: \"en\",\n    emailAddress: \"example@datarobot.com\",\n    payloadUrl: \"https://example.com\",\n    secretToken: \"example_secret_token\",\n    validateSsl: true,\n    verificationCode: \"11111\",\n});\nexport const datarobotNotificationPolicyId = datarobot_notification_policy.example.id;\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample = datarobot.NotificationChannel(\"example\",\n    channel_type=\"DataRobotUser\",\n    related_entity_id=datarobot_deployment[\"example\"][\"id\"],\n    related_entity_type=\"deployment\",\n    content_type=\"application/json\",\n    custom_headers=[{\n        \"name\": \"header1\",\n        \"value\": \"value1\",\n    }],\n    dr_entities=[{\n        \"id\": \"11111111111111\",\n        \"name\": \"example user\",\n    }],\n    language_code=\"en\",\n    email_address=\"example@datarobot.com\",\n    payload_url=\"https://example.com\",\n    secret_token=\"example_secret_token\",\n    validate_ssl=True,\n    verification_code=\"11111\")\npulumi.export(\"datarobotNotificationPolicyId\", datarobot_notification_policy[\"example\"][\"id\"])\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = DataRobotPulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Datarobot.NotificationChannel(\"example\", new()\n    {\n        ChannelType = \"DataRobotUser\",\n        RelatedEntityId = datarobot_deployment.Example.Id,\n        RelatedEntityType = \"deployment\",\n        ContentType = \"application/json\",\n        CustomHeaders = new[]\n        {\n            new Datarobot.Inputs.NotificationChannelCustomHeaderArgs\n            {\n                Name = \"header1\",\n                Value = \"value1\",\n            },\n        },\n        DrEntities = new[]\n        {\n            new Datarobot.Inputs.NotificationChannelDrEntityArgs\n            {\n                Id = \"11111111111111\",\n                Name = \"example user\",\n            },\n        },\n        LanguageCode = \"en\",\n        EmailAddress = \"example@datarobot.com\",\n        PayloadUrl = \"https://example.com\",\n        SecretToken = \"example_secret_token\",\n        ValidateSsl = true,\n        VerificationCode = \"11111\",\n    });\n\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"datarobotNotificationPolicyId\"] = datarobot_notification_policy.Example.Id,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := datarobot.NewNotificationChannel(ctx, \"example\", \u0026datarobot.NotificationChannelArgs{\n\t\t\tChannelType:       pulumi.String(\"DataRobotUser\"),\n\t\t\tRelatedEntityId:   pulumi.Any(datarobot_deployment.Example.Id),\n\t\t\tRelatedEntityType: pulumi.String(\"deployment\"),\n\t\t\tContentType:       pulumi.String(\"application/json\"),\n\t\t\tCustomHeaders: datarobot.NotificationChannelCustomHeaderArray{\n\t\t\t\t\u0026datarobot.NotificationChannelCustomHeaderArgs{\n\t\t\t\t\tName:  pulumi.String(\"header1\"),\n\t\t\t\t\tValue: pulumi.String(\"value1\"),\n\t\t\t\t},\n\t\t\t},\n\t\t\tDrEntities: datarobot.NotificationChannelDrEntityArray{\n\t\t\t\t\u0026datarobot.NotificationChannelDrEntityArgs{\n\t\t\t\t\tId:   pulumi.String(\"11111111111111\"),\n\t\t\t\t\tName: pulumi.String(\"example user\"),\n\t\t\t\t},\n\t\t\t},\n\t\t\tLanguageCode:     pulumi.String(\"en\"),\n\t\t\tEmailAddress:     pulumi.String(\"example@datarobot.com\"),\n\t\t\tPayloadUrl:       pulumi.String(\"https://example.com\"),\n\t\t\tSecretToken:      pulumi.String(\"example_secret_token\"),\n\t\t\tValidateSsl:      pulumi.Bool(true),\n\t\t\tVerificationCode: pulumi.String(\"11111\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"datarobotNotificationPolicyId\", datarobot_notification_policy.Example.Id)\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.NotificationChannel;\nimport com.pulumi.datarobot.NotificationChannelArgs;\nimport com.pulumi.datarobot.inputs.NotificationChannelCustomHeaderArgs;\nimport com.pulumi.datarobot.inputs.NotificationChannelDrEntityArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new NotificationChannel(\"example\", NotificationChannelArgs.builder()\n            .channelType(\"DataRobotUser\")\n            .relatedEntityId(datarobot_deployment.example().id())\n            .relatedEntityType(\"deployment\")\n            .contentType(\"application/json\")\n            .customHeaders(NotificationChannelCustomHeaderArgs.builder()\n                .name(\"header1\")\n                .value(\"value1\")\n                .build())\n            .drEntities(NotificationChannelDrEntityArgs.builder()\n                .id(\"11111111111111\")\n                .name(\"example user\")\n                .build())\n            .languageCode(\"en\")\n            .emailAddress(\"example@datarobot.com\")\n            .payloadUrl(\"https://example.com\")\n            .secretToken(\"example_secret_token\")\n            .validateSsl(true)\n            .verificationCode(\"11111\")\n            .build());\n\n        ctx.export(\"datarobotNotificationPolicyId\", datarobot_notification_policy.example().id());\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: datarobot:NotificationChannel\n    properties:\n      channelType: DataRobotUser\n      relatedEntityId: ${datarobot_deployment.example.id}\n      relatedEntityType: deployment\n      # Optional\n      contentType: application/json\n      customHeaders:\n        - name: header1\n          value: value1\n      drEntities:\n        - id: '11111111111111'\n          name: example user\n      languageCode: en\n      emailAddress: example@datarobot.com\n      payloadUrl: https://example.com\n      secretToken: example_secret_token\n      validateSsl: true\n      verificationCode: '11111'\noutputs:\n  datarobotNotificationPolicyId: ${datarobot_notification_policy.example.id}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
             "properties": {
