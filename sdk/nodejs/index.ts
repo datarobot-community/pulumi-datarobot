@@ -140,6 +140,11 @@ export type LlmBlueprint = import("./llmBlueprint").LlmBlueprint;
 export const LlmBlueprint: typeof import("./llmBlueprint").LlmBlueprint = null as any;
 utilities.lazyLoad(exports, ["LlmBlueprint"], () => require("./llmBlueprint"));
 
+export { NotebookArgs, NotebookState } from "./notebook";
+export type Notebook = import("./notebook").Notebook;
+export const Notebook: typeof import("./notebook").Notebook = null as any;
+utilities.lazyLoad(exports, ["Notebook"], () => require("./notebook"));
+
 export { NotificationChannelArgs, NotificationChannelState } from "./notificationChannel";
 export type NotificationChannel = import("./notificationChannel").NotificationChannel;
 export const NotificationChannel: typeof import("./notificationChannel").NotificationChannel = null as any;
@@ -259,6 +264,8 @@ const _module = {
                 return new GoogleCloudCredential(name, <any>undefined, { urn })
             case "datarobot:index/llmBlueprint:LlmBlueprint":
                 return new LlmBlueprint(name, <any>undefined, { urn })
+            case "datarobot:index/notebook:Notebook":
+                return new Notebook(name, <any>undefined, { urn })
             case "datarobot:index/notificationChannel:NotificationChannel":
                 return new NotificationChannel(name, <any>undefined, { urn })
             case "datarobot:index/notificationPolicy:NotificationPolicy":
@@ -309,6 +316,7 @@ pulumi.runtime.registerResourceModule("datarobot", "index/deploymentRetrainingPo
 pulumi.runtime.registerResourceModule("datarobot", "index/executionEnvironment", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/googleCloudCredential", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/llmBlueprint", _module)
+pulumi.runtime.registerResourceModule("datarobot", "index/notebook", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/notificationChannel", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/notificationPolicy", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/playground", _module)
