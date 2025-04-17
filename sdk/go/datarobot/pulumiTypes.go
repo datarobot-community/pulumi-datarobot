@@ -10252,6 +10252,200 @@ func (o DeploymentRetrainingPolicyTriggerSchedulePtrOutput) Months() pulumi.Stri
 	}).(pulumi.StringArrayOutput)
 }
 
+type DeploymentRetrainingSettings struct {
+	// ID of the credential used to refresh retraining dataset.
+	CredentialId *string `pulumi:"credentialId"`
+	// ID of the retraining dataset.
+	DatasetId *string `pulumi:"datasetId"`
+	// ID of the prediction environment to associate with the challengers created by retraining policies.
+	PredictionEnvironmentId *string `pulumi:"predictionEnvironmentId"`
+	// ID of the retraining user.
+	RetrainingUserId *string `pulumi:"retrainingUserId"`
+}
+
+// DeploymentRetrainingSettingsInput is an input type that accepts DeploymentRetrainingSettingsArgs and DeploymentRetrainingSettingsOutput values.
+// You can construct a concrete instance of `DeploymentRetrainingSettingsInput` via:
+//
+//	DeploymentRetrainingSettingsArgs{...}
+type DeploymentRetrainingSettingsInput interface {
+	pulumi.Input
+
+	ToDeploymentRetrainingSettingsOutput() DeploymentRetrainingSettingsOutput
+	ToDeploymentRetrainingSettingsOutputWithContext(context.Context) DeploymentRetrainingSettingsOutput
+}
+
+type DeploymentRetrainingSettingsArgs struct {
+	// ID of the credential used to refresh retraining dataset.
+	CredentialId pulumi.StringPtrInput `pulumi:"credentialId"`
+	// ID of the retraining dataset.
+	DatasetId pulumi.StringPtrInput `pulumi:"datasetId"`
+	// ID of the prediction environment to associate with the challengers created by retraining policies.
+	PredictionEnvironmentId pulumi.StringPtrInput `pulumi:"predictionEnvironmentId"`
+	// ID of the retraining user.
+	RetrainingUserId pulumi.StringPtrInput `pulumi:"retrainingUserId"`
+}
+
+func (DeploymentRetrainingSettingsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentRetrainingSettings)(nil)).Elem()
+}
+
+func (i DeploymentRetrainingSettingsArgs) ToDeploymentRetrainingSettingsOutput() DeploymentRetrainingSettingsOutput {
+	return i.ToDeploymentRetrainingSettingsOutputWithContext(context.Background())
+}
+
+func (i DeploymentRetrainingSettingsArgs) ToDeploymentRetrainingSettingsOutputWithContext(ctx context.Context) DeploymentRetrainingSettingsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentRetrainingSettingsOutput)
+}
+
+func (i DeploymentRetrainingSettingsArgs) ToDeploymentRetrainingSettingsPtrOutput() DeploymentRetrainingSettingsPtrOutput {
+	return i.ToDeploymentRetrainingSettingsPtrOutputWithContext(context.Background())
+}
+
+func (i DeploymentRetrainingSettingsArgs) ToDeploymentRetrainingSettingsPtrOutputWithContext(ctx context.Context) DeploymentRetrainingSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentRetrainingSettingsOutput).ToDeploymentRetrainingSettingsPtrOutputWithContext(ctx)
+}
+
+// DeploymentRetrainingSettingsPtrInput is an input type that accepts DeploymentRetrainingSettingsArgs, DeploymentRetrainingSettingsPtr and DeploymentRetrainingSettingsPtrOutput values.
+// You can construct a concrete instance of `DeploymentRetrainingSettingsPtrInput` via:
+//
+//	        DeploymentRetrainingSettingsArgs{...}
+//
+//	or:
+//
+//	        nil
+type DeploymentRetrainingSettingsPtrInput interface {
+	pulumi.Input
+
+	ToDeploymentRetrainingSettingsPtrOutput() DeploymentRetrainingSettingsPtrOutput
+	ToDeploymentRetrainingSettingsPtrOutputWithContext(context.Context) DeploymentRetrainingSettingsPtrOutput
+}
+
+type deploymentRetrainingSettingsPtrType DeploymentRetrainingSettingsArgs
+
+func DeploymentRetrainingSettingsPtr(v *DeploymentRetrainingSettingsArgs) DeploymentRetrainingSettingsPtrInput {
+	return (*deploymentRetrainingSettingsPtrType)(v)
+}
+
+func (*deploymentRetrainingSettingsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentRetrainingSettings)(nil)).Elem()
+}
+
+func (i *deploymentRetrainingSettingsPtrType) ToDeploymentRetrainingSettingsPtrOutput() DeploymentRetrainingSettingsPtrOutput {
+	return i.ToDeploymentRetrainingSettingsPtrOutputWithContext(context.Background())
+}
+
+func (i *deploymentRetrainingSettingsPtrType) ToDeploymentRetrainingSettingsPtrOutputWithContext(ctx context.Context) DeploymentRetrainingSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeploymentRetrainingSettingsPtrOutput)
+}
+
+type DeploymentRetrainingSettingsOutput struct{ *pulumi.OutputState }
+
+func (DeploymentRetrainingSettingsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeploymentRetrainingSettings)(nil)).Elem()
+}
+
+func (o DeploymentRetrainingSettingsOutput) ToDeploymentRetrainingSettingsOutput() DeploymentRetrainingSettingsOutput {
+	return o
+}
+
+func (o DeploymentRetrainingSettingsOutput) ToDeploymentRetrainingSettingsOutputWithContext(ctx context.Context) DeploymentRetrainingSettingsOutput {
+	return o
+}
+
+func (o DeploymentRetrainingSettingsOutput) ToDeploymentRetrainingSettingsPtrOutput() DeploymentRetrainingSettingsPtrOutput {
+	return o.ToDeploymentRetrainingSettingsPtrOutputWithContext(context.Background())
+}
+
+func (o DeploymentRetrainingSettingsOutput) ToDeploymentRetrainingSettingsPtrOutputWithContext(ctx context.Context) DeploymentRetrainingSettingsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DeploymentRetrainingSettings) *DeploymentRetrainingSettings {
+		return &v
+	}).(DeploymentRetrainingSettingsPtrOutput)
+}
+
+// ID of the credential used to refresh retraining dataset.
+func (o DeploymentRetrainingSettingsOutput) CredentialId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DeploymentRetrainingSettings) *string { return v.CredentialId }).(pulumi.StringPtrOutput)
+}
+
+// ID of the retraining dataset.
+func (o DeploymentRetrainingSettingsOutput) DatasetId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DeploymentRetrainingSettings) *string { return v.DatasetId }).(pulumi.StringPtrOutput)
+}
+
+// ID of the prediction environment to associate with the challengers created by retraining policies.
+func (o DeploymentRetrainingSettingsOutput) PredictionEnvironmentId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DeploymentRetrainingSettings) *string { return v.PredictionEnvironmentId }).(pulumi.StringPtrOutput)
+}
+
+// ID of the retraining user.
+func (o DeploymentRetrainingSettingsOutput) RetrainingUserId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DeploymentRetrainingSettings) *string { return v.RetrainingUserId }).(pulumi.StringPtrOutput)
+}
+
+type DeploymentRetrainingSettingsPtrOutput struct{ *pulumi.OutputState }
+
+func (DeploymentRetrainingSettingsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeploymentRetrainingSettings)(nil)).Elem()
+}
+
+func (o DeploymentRetrainingSettingsPtrOutput) ToDeploymentRetrainingSettingsPtrOutput() DeploymentRetrainingSettingsPtrOutput {
+	return o
+}
+
+func (o DeploymentRetrainingSettingsPtrOutput) ToDeploymentRetrainingSettingsPtrOutputWithContext(ctx context.Context) DeploymentRetrainingSettingsPtrOutput {
+	return o
+}
+
+func (o DeploymentRetrainingSettingsPtrOutput) Elem() DeploymentRetrainingSettingsOutput {
+	return o.ApplyT(func(v *DeploymentRetrainingSettings) DeploymentRetrainingSettings {
+		if v != nil {
+			return *v
+		}
+		var ret DeploymentRetrainingSettings
+		return ret
+	}).(DeploymentRetrainingSettingsOutput)
+}
+
+// ID of the credential used to refresh retraining dataset.
+func (o DeploymentRetrainingSettingsPtrOutput) CredentialId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DeploymentRetrainingSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.CredentialId
+	}).(pulumi.StringPtrOutput)
+}
+
+// ID of the retraining dataset.
+func (o DeploymentRetrainingSettingsPtrOutput) DatasetId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DeploymentRetrainingSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.DatasetId
+	}).(pulumi.StringPtrOutput)
+}
+
+// ID of the prediction environment to associate with the challengers created by retraining policies.
+func (o DeploymentRetrainingSettingsPtrOutput) PredictionEnvironmentId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DeploymentRetrainingSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.PredictionEnvironmentId
+	}).(pulumi.StringPtrOutput)
+}
+
+// ID of the retraining user.
+func (o DeploymentRetrainingSettingsPtrOutput) RetrainingUserId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DeploymentRetrainingSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.RetrainingUserId
+	}).(pulumi.StringPtrOutput)
+}
+
 type DeploymentRuntimeParameterValue struct {
 	// The name of the runtime parameter.
 	Key string `pulumi:"key"`
@@ -11610,6 +11804,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentRetrainingPolicyTriggerPtrInput)(nil)).Elem(), DeploymentRetrainingPolicyTriggerArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentRetrainingPolicyTriggerScheduleInput)(nil)).Elem(), DeploymentRetrainingPolicyTriggerScheduleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentRetrainingPolicyTriggerSchedulePtrInput)(nil)).Elem(), DeploymentRetrainingPolicyTriggerScheduleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentRetrainingSettingsInput)(nil)).Elem(), DeploymentRetrainingSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentRetrainingSettingsPtrInput)(nil)).Elem(), DeploymentRetrainingSettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentRuntimeParameterValueInput)(nil)).Elem(), DeploymentRuntimeParameterValueArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentRuntimeParameterValueArrayInput)(nil)).Elem(), DeploymentRuntimeParameterValueArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentSegmentAnalysisSettingsInput)(nil)).Elem(), DeploymentSegmentAnalysisSettingsArgs{})
@@ -11743,6 +11939,8 @@ func init() {
 	pulumi.RegisterOutputType(DeploymentRetrainingPolicyTriggerPtrOutput{})
 	pulumi.RegisterOutputType(DeploymentRetrainingPolicyTriggerScheduleOutput{})
 	pulumi.RegisterOutputType(DeploymentRetrainingPolicyTriggerSchedulePtrOutput{})
+	pulumi.RegisterOutputType(DeploymentRetrainingSettingsOutput{})
+	pulumi.RegisterOutputType(DeploymentRetrainingSettingsPtrOutput{})
 	pulumi.RegisterOutputType(DeploymentRuntimeParameterValueOutput{})
 	pulumi.RegisterOutputType(DeploymentRuntimeParameterValueArrayOutput{})
 	pulumi.RegisterOutputType(DeploymentSegmentAnalysisSettingsOutput{})

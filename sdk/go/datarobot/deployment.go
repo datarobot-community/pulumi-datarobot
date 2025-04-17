@@ -78,6 +78,7 @@ import (
 //						Value: pulumi.String("val"),
 //					},
 //				},
+//				RetrainingSettings: &datarobot.DeploymentRetrainingSettingsArgs{},
 //			})
 //			if err != nil {
 //				return err
@@ -125,6 +126,8 @@ type Deployment struct {
 	PredictionsSettings DeploymentPredictionsSettingsPtrOutput `pulumi:"predictionsSettings"`
 	// The ID of the registered model version for this Deployment.
 	RegisteredModelVersionId pulumi.StringOutput `pulumi:"registeredModelVersionId"`
+	// The retraining settings for this Deployment.
+	RetrainingSettings DeploymentRetrainingSettingsPtrOutput `pulumi:"retrainingSettings"`
 	// The runtime parameter values for the Deployment.
 	RuntimeParameterValues DeploymentRuntimeParameterValueArrayOutput `pulumi:"runtimeParameterValues"`
 	// The segment analysis settings for the Deployment.
@@ -206,6 +209,8 @@ type deploymentState struct {
 	PredictionsSettings *DeploymentPredictionsSettings `pulumi:"predictionsSettings"`
 	// The ID of the registered model version for this Deployment.
 	RegisteredModelVersionId *string `pulumi:"registeredModelVersionId"`
+	// The retraining settings for this Deployment.
+	RetrainingSettings *DeploymentRetrainingSettings `pulumi:"retrainingSettings"`
 	// The runtime parameter values for the Deployment.
 	RuntimeParameterValues []DeploymentRuntimeParameterValue `pulumi:"runtimeParameterValues"`
 	// The segment analysis settings for the Deployment.
@@ -249,6 +254,8 @@ type DeploymentState struct {
 	PredictionsSettings DeploymentPredictionsSettingsPtrInput
 	// The ID of the registered model version for this Deployment.
 	RegisteredModelVersionId pulumi.StringPtrInput
+	// The retraining settings for this Deployment.
+	RetrainingSettings DeploymentRetrainingSettingsPtrInput
 	// The runtime parameter values for the Deployment.
 	RuntimeParameterValues DeploymentRuntimeParameterValueArrayInput
 	// The segment analysis settings for the Deployment.
@@ -296,6 +303,8 @@ type deploymentArgs struct {
 	PredictionsSettings *DeploymentPredictionsSettings `pulumi:"predictionsSettings"`
 	// The ID of the registered model version for this Deployment.
 	RegisteredModelVersionId string `pulumi:"registeredModelVersionId"`
+	// The retraining settings for this Deployment.
+	RetrainingSettings *DeploymentRetrainingSettings `pulumi:"retrainingSettings"`
 	// The runtime parameter values for the Deployment.
 	RuntimeParameterValues []DeploymentRuntimeParameterValue `pulumi:"runtimeParameterValues"`
 	// The segment analysis settings for the Deployment.
@@ -340,6 +349,8 @@ type DeploymentArgs struct {
 	PredictionsSettings DeploymentPredictionsSettingsPtrInput
 	// The ID of the registered model version for this Deployment.
 	RegisteredModelVersionId pulumi.StringInput
+	// The retraining settings for this Deployment.
+	RetrainingSettings DeploymentRetrainingSettingsPtrInput
 	// The runtime parameter values for the Deployment.
 	RuntimeParameterValues DeploymentRuntimeParameterValueArrayInput
 	// The segment analysis settings for the Deployment.
@@ -524,6 +535,11 @@ func (o DeploymentOutput) PredictionsSettings() DeploymentPredictionsSettingsPtr
 // The ID of the registered model version for this Deployment.
 func (o DeploymentOutput) RegisteredModelVersionId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Deployment) pulumi.StringOutput { return v.RegisteredModelVersionId }).(pulumi.StringOutput)
+}
+
+// The retraining settings for this Deployment.
+func (o DeploymentOutput) RetrainingSettings() DeploymentRetrainingSettingsPtrOutput {
+	return o.ApplyT(func(v *Deployment) DeploymentRetrainingSettingsPtrOutput { return v.RetrainingSettings }).(DeploymentRetrainingSettingsPtrOutput)
 }
 
 // The runtime parameter values for the Deployment.
