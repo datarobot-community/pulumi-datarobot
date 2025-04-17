@@ -43,24 +43,24 @@ jobs:
     - name: Download dependencies
       run: make tidy
 
-    - name: golangci-lint
+    - name: Run golangci-lint
       uses: golangci/golangci-lint-action@v3
       with:
-        version: latest
+        version: latest # Ensures the latest v2 version is used
         working-directory: provider
         skip-cache: true
-
+        args: --out-format=colored-line-number # Use the new output format
   build:
     name: Build
     runs-on: ubuntu-latest
     steps:
-    
+
     - name: Checkout Repo
       uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
     - name: Unshallow clone for tags
       run: git fetch --prune --unshallow --tags
-    
+
     - name: Install go
       uses: actions/setup-go@0aaccfd150d50ccaeb58ebd88d36e91967a5f35b # v5.4.0
       with:
@@ -73,7 +73,7 @@ jobs:
       uses: jaxxstorm/action-install-gh-release@4304621e8c48d66093a8a214af5d5b5bc3b3d943
       with:
         repo: pulumi/pulumictl
-      
+
     - name: Download dependencies
       run: make tidy
 
