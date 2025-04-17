@@ -1,23 +1,34 @@
+version: "2"
 linters:
   enable:
-    - errcheck
     - goconst
-    - gofmt
     - gosec
-    - gosimple
-    - govet
-    - ineffassign
     - lll
     - misspell
     - nakedret
     - revive
-    - staticcheck
     - unconvert
-    - unused
-  enable-all: false
-run:
-  timeout: 20m
-issues:
-  exclude-files:
-    - schema.go
-    - pulumiManifest.go
+  exclusions:
+    generated: lax
+    presets:
+      - comments
+      - common-false-positives
+      - legacy
+      - std-error-handling
+    paths:
+      - schema.go
+      - pulumiManifest.go
+      - third_party$
+      - builtin$
+      - examples$
+formatters:
+  enable:
+    - gofmt
+  exclusions:
+    generated: lax
+    paths:
+      - schema.go
+      - pulumiManifest.go
+      - third_party$
+      - builtin$
+      - examples$
