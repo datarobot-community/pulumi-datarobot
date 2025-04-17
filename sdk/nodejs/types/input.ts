@@ -1046,6 +1046,25 @@ export interface DeploymentRetrainingPolicyTriggerSchedule {
     months: pulumi.Input<pulumi.Input<string>[]>;
 }
 
+export interface DeploymentRetrainingSettings {
+    /**
+     * ID of the credential used to refresh retraining dataset.
+     */
+    credentialId?: pulumi.Input<string>;
+    /**
+     * ID of the retraining dataset.
+     */
+    datasetId?: pulumi.Input<string>;
+    /**
+     * ID of the prediction environment to associate with the challengers created by retraining policies.
+     */
+    predictionEnvironmentId?: pulumi.Input<string>;
+    /**
+     * ID of the retraining user.
+     */
+    retrainingUserId?: pulumi.Input<string>;
+}
+
 export interface DeploymentRuntimeParameterValue {
     /**
      * The name of the runtime parameter.

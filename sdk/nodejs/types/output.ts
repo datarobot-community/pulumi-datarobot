@@ -1046,6 +1046,25 @@ export interface DeploymentRetrainingPolicyTriggerSchedule {
     months: string[];
 }
 
+export interface DeploymentRetrainingSettings {
+    /**
+     * ID of the credential used to refresh retraining dataset.
+     */
+    credentialId?: string;
+    /**
+     * ID of the retraining dataset.
+     */
+    datasetId?: string;
+    /**
+     * ID of the prediction environment to associate with the challengers created by retraining policies.
+     */
+    predictionEnvironmentId?: string;
+    /**
+     * ID of the retraining user.
+     */
+    retrainingUserId?: string;
+}
+
 export interface DeploymentRuntimeParameterValue {
     /**
      * The name of the runtime parameter.
