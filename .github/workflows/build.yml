@@ -49,7 +49,7 @@ jobs:
         version: latest # Ensures the latest v2 version is used
         working-directory: provider
         skip-cache: true
-        args: --out-format=colored-line-number # Use the new output format
+
   build:
     name: Build
     runs-on: ubuntu-latest
