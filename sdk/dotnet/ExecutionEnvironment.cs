@@ -77,6 +77,12 @@ namespace DataRobotPulumi.Datarobot
         public Output<string?> DockerImage { get; private set; } = null!;
 
         /// <summary>
+        /// The hash of the docker image file
+        /// </summary>
+        [Output("dockerImageHash")]
+        public Output<string> DockerImageHash { get; private set; } = null!;
+
+        /// <summary>
         /// The name of the Execution Environment.
         /// </summary>
         [Output("name")]
@@ -238,6 +244,12 @@ namespace DataRobotPulumi.Datarobot
         /// </summary>
         [Input("dockerImage")]
         public Input<string>? DockerImage { get; set; }
+
+        /// <summary>
+        /// The hash of the docker image file
+        /// </summary>
+        [Input("dockerImageHash")]
+        public Input<string>? DockerImageHash { get; set; }
 
         /// <summary>
         /// The name of the Execution Environment.

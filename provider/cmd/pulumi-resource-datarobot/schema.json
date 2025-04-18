@@ -5239,6 +5239,10 @@
                     "type": "string",
                     "description": "A prebuilt environment image saved as a tarball using the Docker save command.\n"
                 },
+                "dockerImageHash": {
+                    "type": "string",
+                    "description": "The hash of the docker image file\n"
+                },
                 "name": {
                     "type": "string",
                     "description": "The name of the Execution Environment.\n"
@@ -5266,6 +5270,7 @@
             "required": [
                 "buildStatus",
                 "dockerContextHash",
+                "dockerImageHash",
                 "name",
                 "programmingLanguage",
                 "useCases",
@@ -5330,6 +5335,10 @@
                     "dockerImage": {
                         "type": "string",
                         "description": "A prebuilt environment image saved as a tarball using the Docker save command.\n"
+                    },
+                    "dockerImageHash": {
+                        "type": "string",
+                        "description": "The hash of the docker image file\n"
                     },
                     "name": {
                         "type": "string",

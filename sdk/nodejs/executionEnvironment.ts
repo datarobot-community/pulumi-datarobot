@@ -73,6 +73,10 @@ export class ExecutionEnvironment extends pulumi.CustomResource {
      */
     public readonly dockerImage!: pulumi.Output<string | undefined>;
     /**
+     * The hash of the docker image file
+     */
+    public /*out*/ readonly dockerImageHash!: pulumi.Output<string>;
+    /**
      * The name of the Execution Environment.
      */
     public readonly name!: pulumi.Output<string>;
@@ -111,6 +115,7 @@ export class ExecutionEnvironment extends pulumi.CustomResource {
             resourceInputs["dockerContextHash"] = state ? state.dockerContextHash : undefined;
             resourceInputs["dockerContextPath"] = state ? state.dockerContextPath : undefined;
             resourceInputs["dockerImage"] = state ? state.dockerImage : undefined;
+            resourceInputs["dockerImageHash"] = state ? state.dockerImageHash : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["programmingLanguage"] = state ? state.programmingLanguage : undefined;
             resourceInputs["useCases"] = state ? state.useCases : undefined;
@@ -133,6 +138,7 @@ export class ExecutionEnvironment extends pulumi.CustomResource {
             resourceInputs["versionDescription"] = args ? args.versionDescription : undefined;
             resourceInputs["buildStatus"] = undefined /*out*/;
             resourceInputs["dockerContextHash"] = undefined /*out*/;
+            resourceInputs["dockerImageHash"] = undefined /*out*/;
             resourceInputs["versionId"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -164,6 +170,10 @@ export interface ExecutionEnvironmentState {
      * A prebuilt environment image saved as a tarball using the Docker save command.
      */
     dockerImage?: pulumi.Input<string>;
+    /**
+     * The hash of the docker image file
+     */
+    dockerImageHash?: pulumi.Input<string>;
     /**
      * The name of the Execution Environment.
      */
