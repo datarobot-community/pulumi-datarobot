@@ -74,6 +74,7 @@ namespace DataRobotPulumi.Datarobot
     ///                 Value = "val",
     ///             },
     ///         },
+    ///         RetrainingSettings = null,
     ///     });
     /// 
     ///     return new Dictionary&lt;string, object?&gt;
@@ -187,6 +188,12 @@ namespace DataRobotPulumi.Datarobot
         /// </summary>
         [Output("registeredModelVersionId")]
         public Output<string> RegisteredModelVersionId { get; private set; } = null!;
+
+        /// <summary>
+        /// The retraining settings for this Deployment.
+        /// </summary>
+        [Output("retrainingSettings")]
+        public Output<Outputs.DeploymentRetrainingSettings?> RetrainingSettings { get; private set; } = null!;
 
         /// <summary>
         /// The runtime parameter values for the Deployment.
@@ -355,6 +362,12 @@ namespace DataRobotPulumi.Datarobot
         [Input("registeredModelVersionId", required: true)]
         public Input<string> RegisteredModelVersionId { get; set; } = null!;
 
+        /// <summary>
+        /// The retraining settings for this Deployment.
+        /// </summary>
+        [Input("retrainingSettings")]
+        public Input<Inputs.DeploymentRetrainingSettingsArgs>? RetrainingSettings { get; set; }
+
         [Input("runtimeParameterValues")]
         private InputList<Inputs.DeploymentRuntimeParameterValueArgs>? _runtimeParameterValues;
 
@@ -494,6 +507,12 @@ namespace DataRobotPulumi.Datarobot
         /// </summary>
         [Input("registeredModelVersionId")]
         public Input<string>? RegisteredModelVersionId { get; set; }
+
+        /// <summary>
+        /// The retraining settings for this Deployment.
+        /// </summary>
+        [Input("retrainingSettings")]
+        public Input<Inputs.DeploymentRetrainingSettingsGetArgs>? RetrainingSettings { get; set; }
 
         [Input("runtimeParameterValues")]
         private InputList<Inputs.DeploymentRuntimeParameterValueGetArgs>? _runtimeParameterValues;

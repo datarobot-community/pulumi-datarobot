@@ -17,7 +17,7 @@ TESTPARALLELISM := 4
 WORKING_DIR     := $(shell pwd)
 
 OS := $(shell uname)
-EMPTY_TO_AVOID_SED := 
+EMPTY_TO_AVOID_SED :=
 
 prepare::
 	@if test -z "${NAME}"; then echo "NAME not set"; exit 1; fi
@@ -117,7 +117,7 @@ install_dotnet_sdk::
 
 install_python_sdk::
 	pip3 install $(WORKING_DIR)/sdk/python
-    # if the command fails, you may need to add --break-system-packages 
+    # if the command fails, you may need to add --break-system-packages
     # in order to override pip's default behavior of preventing conflicts with system package managers.
 
 install_go_sdk::
