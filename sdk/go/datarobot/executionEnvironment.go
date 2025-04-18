@@ -60,6 +60,8 @@ type ExecutionEnvironment struct {
 	DockerContextPath pulumi.StringPtrOutput `pulumi:"dockerContextPath"`
 	// A prebuilt environment image saved as a tarball using the Docker save command.
 	DockerImage pulumi.StringPtrOutput `pulumi:"dockerImage"`
+	// The hash of the docker image file
+	DockerImageHash pulumi.StringOutput `pulumi:"dockerImageHash"`
 	// The name of the Execution Environment.
 	Name pulumi.StringOutput `pulumi:"name"`
 	// The programming language of the Execution Environment.
@@ -118,6 +120,8 @@ type executionEnvironmentState struct {
 	DockerContextPath *string `pulumi:"dockerContextPath"`
 	// A prebuilt environment image saved as a tarball using the Docker save command.
 	DockerImage *string `pulumi:"dockerImage"`
+	// The hash of the docker image file
+	DockerImageHash *string `pulumi:"dockerImageHash"`
 	// The name of the Execution Environment.
 	Name *string `pulumi:"name"`
 	// The programming language of the Execution Environment.
@@ -141,6 +145,8 @@ type ExecutionEnvironmentState struct {
 	DockerContextPath pulumi.StringPtrInput
 	// A prebuilt environment image saved as a tarball using the Docker save command.
 	DockerImage pulumi.StringPtrInput
+	// The hash of the docker image file
+	DockerImageHash pulumi.StringPtrInput
 	// The name of the Execution Environment.
 	Name pulumi.StringPtrInput
 	// The programming language of the Execution Environment.
@@ -302,6 +308,11 @@ func (o ExecutionEnvironmentOutput) DockerContextPath() pulumi.StringPtrOutput {
 // A prebuilt environment image saved as a tarball using the Docker save command.
 func (o ExecutionEnvironmentOutput) DockerImage() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ExecutionEnvironment) pulumi.StringPtrOutput { return v.DockerImage }).(pulumi.StringPtrOutput)
+}
+
+// The hash of the docker image file
+func (o ExecutionEnvironmentOutput) DockerImageHash() pulumi.StringOutput {
+	return o.ApplyT(func(v *ExecutionEnvironment) pulumi.StringOutput { return v.DockerImageHash }).(pulumi.StringOutput)
 }
 
 // The name of the Execution Environment.

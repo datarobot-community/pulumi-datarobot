@@ -21,7 +21,7 @@ To use from Python, install using `pip`:
 pip install pulumi_datarobot
 ```
 
-### Javscript/Typescript
+### Javascript/Typescript
 
 To use from JavaScript or TypeScript in Node.js, install using either `npm`:
 
