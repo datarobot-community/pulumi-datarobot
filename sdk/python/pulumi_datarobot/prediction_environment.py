@@ -321,6 +321,9 @@ class _PredictionEnvironmentState:
 
 
 class PredictionEnvironment(pulumi.CustomResource):
+
+    pulumi_type = "datarobot:index/predictionEnvironment:PredictionEnvironment"
+
     @overload
     def __init__(__self__,
                  resource_name: str,

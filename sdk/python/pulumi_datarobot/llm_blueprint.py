@@ -323,6 +323,9 @@ class _LlmBlueprintState:
 
 
 class LlmBlueprint(pulumi.CustomResource):
+
+    pulumi_type = "datarobot:index/llmBlueprint:LlmBlueprint"
+
     @overload
     def __init__(__self__,
                  resource_name: str,

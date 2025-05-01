@@ -241,6 +241,9 @@ class _QaApplicationState:
 
 
 class QaApplication(pulumi.CustomResource):
+
+    pulumi_type = "datarobot:index/qaApplication:QaApplication"
+
     @overload
     def __init__(__self__,
                  resource_name: str,

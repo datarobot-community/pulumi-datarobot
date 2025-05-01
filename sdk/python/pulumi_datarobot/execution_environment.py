@@ -320,6 +320,9 @@ class _ExecutionEnvironmentState:
 
 
 class ExecutionEnvironment(pulumi.CustomResource):
+
+    pulumi_type = "datarobot:index/executionEnvironment:ExecutionEnvironment"
+
     @overload
     def __init__(__self__,
                  resource_name: str,

@@ -288,6 +288,9 @@ class _RemoteRepositoryState:
 
 
 class RemoteRepository(pulumi.CustomResource):
+
+    pulumi_type = "datarobot:index/remoteRepository:RemoteRepository"
+
     @overload
     def __init__(__self__,
                  resource_name: str,

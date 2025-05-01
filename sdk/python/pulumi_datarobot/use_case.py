@@ -98,6 +98,9 @@ class _UseCaseState:
 
 
 class UseCase(pulumi.CustomResource):
+
+    pulumi_type = "datarobot:index/useCase:UseCase"
+
     @overload
     def __init__(__self__,
                  resource_name: str,
