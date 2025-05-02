@@ -129,6 +129,9 @@ class _AzureCredentialState:
 
 
 class AzureCredential(pulumi.CustomResource):
+
+    pulumi_type = "datarobot:index/azureCredential:AzureCredential"
+
     @overload
     def __init__(__self__,
                  resource_name: str,

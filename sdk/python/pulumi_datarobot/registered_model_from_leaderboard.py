@@ -305,6 +305,9 @@ class _RegisteredModelFromLeaderboardState:
 
 
 class RegisteredModelFromLeaderboard(pulumi.CustomResource):
+
+    pulumi_type = "datarobot:index/registeredModelFromLeaderboard:RegisteredModelFromLeaderboard"
+
     @overload
     def __init__(__self__,
                  resource_name: str,

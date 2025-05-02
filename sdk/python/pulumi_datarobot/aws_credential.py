@@ -226,6 +226,9 @@ class _AwsCredentialState:
 
 
 class AwsCredential(pulumi.CustomResource):
+
+    pulumi_type = "datarobot:index/awsCredential:AwsCredential"
+
     @overload
     def __init__(__self__,
                  resource_name: str,

@@ -289,6 +289,9 @@ class _CustomModelLlmValidationState:
 
 
 class CustomModelLlmValidation(pulumi.CustomResource):
+
+    pulumi_type = "datarobot:index/customModelLlmValidation:CustomModelLlmValidation"
+
     @overload
     def __init__(__self__,
                  resource_name: str,

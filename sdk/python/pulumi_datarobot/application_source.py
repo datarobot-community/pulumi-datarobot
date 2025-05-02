@@ -308,6 +308,9 @@ class _ApplicationSourceState:
 
 
 class ApplicationSource(pulumi.CustomResource):
+
+    pulumi_type = "datarobot:index/applicationSource:ApplicationSource"
+
     @overload
     def __init__(__self__,
                  resource_name: str,

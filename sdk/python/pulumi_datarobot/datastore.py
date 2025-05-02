@@ -224,6 +224,9 @@ class _DatastoreState:
 
 
 class Datastore(pulumi.CustomResource):
+
+    pulumi_type = "datarobot:index/datastore:Datastore"
+
     @overload
     def __init__(__self__,
                  resource_name: str,

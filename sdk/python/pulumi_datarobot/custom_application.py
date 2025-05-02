@@ -257,6 +257,9 @@ class _CustomApplicationState:
 
 
 class CustomApplication(pulumi.CustomResource):
+
+    pulumi_type = "datarobot:index/customApplication:CustomApplication"
+
     @overload
     def __init__(__self__,
                  resource_name: str,

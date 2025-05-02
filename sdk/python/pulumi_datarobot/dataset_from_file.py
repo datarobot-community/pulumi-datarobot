@@ -145,6 +145,9 @@ class _DatasetFromFileState:
 
 
 class DatasetFromFile(pulumi.CustomResource):
+
+    pulumi_type = "datarobot:index/datasetFromFile:DatasetFromFile"
+
     @overload
     def __init__(__self__,
                  resource_name: str,

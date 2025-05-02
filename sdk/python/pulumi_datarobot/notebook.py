@@ -145,6 +145,9 @@ class _NotebookState:
 
 
 class Notebook(pulumi.CustomResource):
+
+    pulumi_type = "datarobot:index/notebook:Notebook"
+
     @overload
     def __init__(__self__,
                  resource_name: str,

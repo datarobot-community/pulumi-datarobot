@@ -386,6 +386,9 @@ class _DeploymentRetrainingPolicyState:
 
 
 class DeploymentRetrainingPolicy(pulumi.CustomResource):
+
+    pulumi_type = "datarobot:index/deploymentRetrainingPolicy:DeploymentRetrainingPolicy"
+
     @overload
     def __init__(__self__,
                  resource_name: str,
