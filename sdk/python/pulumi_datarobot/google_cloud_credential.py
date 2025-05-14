@@ -145,6 +145,7 @@ class _GoogleCloudCredentialState:
         pulumi.set(self, "name", value)
 
 
+@pulumi.type_token("datarobot:index/googleCloudCredential:GoogleCloudCredential")
 class GoogleCloudCredential(pulumi.CustomResource):
     @overload
     def __init__(__self__,

@@ -165,10 +165,8 @@ export type PredictionEnvironment = import("./predictionEnvironment").Prediction
 export const PredictionEnvironment: typeof import("./predictionEnvironment").PredictionEnvironment = null as any;
 utilities.lazyLoad(exports, ["PredictionEnvironment"], () => require("./predictionEnvironment"));
 
-export { ProviderArgs } from "./provider";
-export type Provider = import("./provider").Provider;
-export const Provider: typeof import("./provider").Provider = null as any;
-utilities.lazyLoad(exports, ["Provider"], () => require("./provider"));
+export * from "./provider";
+import { Provider } from "./provider";
 
 export { QaApplicationArgs, QaApplicationState } from "./qaApplication";
 export type QaApplication = import("./qaApplication").QaApplication;

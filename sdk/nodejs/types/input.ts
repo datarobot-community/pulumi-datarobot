@@ -266,6 +266,29 @@ export interface CustomJobRuntimeParameterValue {
     value: pulumi.Input<string>;
 }
 
+export interface CustomJobSchedule {
+    /**
+     * Days of the month when the job will run.
+     */
+    dayOfMonths: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Days of the week when the job will run.
+     */
+    dayOfWeeks: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Hours of the day when the job will run.
+     */
+    hours: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Minutes of the day when the job will run.
+     */
+    minutes: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Months of the year when the job will run.
+     */
+    months: pulumi.Input<pulumi.Input<string>[]>;
+}
+
 export interface CustomMetricBatch {
     /**
      * Column name.
