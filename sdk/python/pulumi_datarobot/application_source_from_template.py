@@ -338,6 +338,7 @@ class _ApplicationSourceFromTemplateState:
         pulumi.set(self, "version_id", value)
 
 
+@pulumi.type_token("datarobot:index/applicationSourceFromTemplate:ApplicationSourceFromTemplate")
 class ApplicationSourceFromTemplate(pulumi.CustomResource):
     @overload
     def __init__(__self__,

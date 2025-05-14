@@ -12,48 +12,6 @@ import (
 )
 
 // Custom Job
-//
-// ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-//
-//	"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//
-// )
-//
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			example, err := datarobot.NewCustomJob(ctx, "example", &datarobot.CustomJobArgs{
-//				JobType: pulumi.String("retraining"),
-//				Files: pulumi.Any{
-//					"file1.py",
-//					"file2.py",
-//				},
-//				EnvironmentId: pulumi.String("65f9b27eab986d30d4c64268"),
-//				Description:   pulumi.String("Example Custom Job Description"),
-//				RuntimeParameterValues: datarobot.CustomJobRuntimeParameterValueArray{
-//					&datarobot.CustomJobRuntimeParameterValueArgs{
-//						Key:   pulumi.String("EXAMPLE_PARAM"),
-//						Type:  pulumi.String("string"),
-//						Value: pulumi.String("val"),
-//					},
-//				},
-//				EgressNetworkPolicy: pulumi.String("none"),
-//				ResourceBundleId:    pulumi.String("cpu.micro"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			ctx.Export("exampleId", example.ID())
-//			return nil
-//		})
-//	}
-//
-// ```
 type CustomJob struct {
 	pulumi.CustomResourceState
 
@@ -81,6 +39,10 @@ type CustomJob struct {
 	ResourceBundleId pulumi.StringPtrOutput `pulumi:"resourceBundleId"`
 	// Additional parameters to be injected into a Job at runtime.
 	RuntimeParameterValues CustomJobRuntimeParameterValueArrayOutput `pulumi:"runtimeParameterValues"`
+	// The schedule configuration for the custom job.
+	Schedule CustomJobSchedulePtrOutput `pulumi:"schedule"`
+	// The ID of the schedule associated with the custom job.
+	ScheduleId pulumi.StringOutput `pulumi:"scheduleId"`
 }
 
 // NewCustomJob registers a new resource with the given unique name, arguments, and options.
@@ -137,6 +99,10 @@ type customJobState struct {
 	ResourceBundleId *string `pulumi:"resourceBundleId"`
 	// Additional parameters to be injected into a Job at runtime.
 	RuntimeParameterValues []CustomJobRuntimeParameterValue `pulumi:"runtimeParameterValues"`
+	// The schedule configuration for the custom job.
+	Schedule *CustomJobSchedule `pulumi:"schedule"`
+	// The ID of the schedule associated with the custom job.
+	ScheduleId *string `pulumi:"scheduleId"`
 }
 
 type CustomJobState struct {
@@ -164,6 +130,10 @@ type CustomJobState struct {
 	ResourceBundleId pulumi.StringPtrInput
 	// Additional parameters to be injected into a Job at runtime.
 	RuntimeParameterValues CustomJobRuntimeParameterValueArrayInput
+	// The schedule configuration for the custom job.
+	Schedule CustomJobSchedulePtrInput
+	// The ID of the schedule associated with the custom job.
+	ScheduleId pulumi.StringPtrInput
 }
 
 func (CustomJobState) ElementType() reflect.Type {
@@ -191,6 +161,10 @@ type customJobArgs struct {
 	ResourceBundleId *string `pulumi:"resourceBundleId"`
 	// Additional parameters to be injected into a Job at runtime.
 	RuntimeParameterValues []CustomJobRuntimeParameterValue `pulumi:"runtimeParameterValues"`
+	// The schedule configuration for the custom job.
+	Schedule *CustomJobSchedule `pulumi:"schedule"`
+	// The ID of the schedule associated with the custom job.
+	ScheduleId *string `pulumi:"scheduleId"`
 }
 
 // The set of arguments for constructing a CustomJob resource.
@@ -215,6 +189,10 @@ type CustomJobArgs struct {
 	ResourceBundleId pulumi.StringPtrInput
 	// Additional parameters to be injected into a Job at runtime.
 	RuntimeParameterValues CustomJobRuntimeParameterValueArrayInput
+	// The schedule configuration for the custom job.
+	Schedule CustomJobSchedulePtrInput
+	// The ID of the schedule associated with the custom job.
+	ScheduleId pulumi.StringPtrInput
 }
 
 func (CustomJobArgs) ElementType() reflect.Type {
@@ -362,6 +340,16 @@ func (o CustomJobOutput) ResourceBundleId() pulumi.StringPtrOutput {
 // Additional parameters to be injected into a Job at runtime.
 func (o CustomJobOutput) RuntimeParameterValues() CustomJobRuntimeParameterValueArrayOutput {
 	return o.ApplyT(func(v *CustomJob) CustomJobRuntimeParameterValueArrayOutput { return v.RuntimeParameterValues }).(CustomJobRuntimeParameterValueArrayOutput)
+}
+
+// The schedule configuration for the custom job.
+func (o CustomJobOutput) Schedule() CustomJobSchedulePtrOutput {
+	return o.ApplyT(func(v *CustomJob) CustomJobSchedulePtrOutput { return v.Schedule }).(CustomJobSchedulePtrOutput)
+}
+
+// The ID of the schedule associated with the custom job.
+func (o CustomJobOutput) ScheduleId() pulumi.StringOutput {
+	return o.ApplyT(func(v *CustomJob) pulumi.StringOutput { return v.ScheduleId }).(pulumi.StringOutput)
 }
 
 type CustomJobArrayOutput struct{ *pulumi.OutputState }

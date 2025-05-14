@@ -320,6 +320,7 @@ class _PredictionEnvironmentState:
         pulumi.set(self, "supported_model_formats", value)
 
 
+@pulumi.type_token("datarobot:index/predictionEnvironment:PredictionEnvironment")
 class PredictionEnvironment(pulumi.CustomResource):
     @overload
     def __init__(__self__,

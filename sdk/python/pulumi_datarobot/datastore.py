@@ -223,6 +223,7 @@ class _DatastoreState:
         pulumi.set(self, "jdbc_url", value)
 
 
+@pulumi.type_token("datarobot:index/datastore:Datastore")
 class Datastore(pulumi.CustomResource):
     @overload
     def __init__(__self__,

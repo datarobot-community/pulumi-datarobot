@@ -32,7 +32,8 @@ class DeploymentRetrainingPolicyArgs:
                  project_options: Optional[pulumi.Input['DeploymentRetrainingPolicyProjectOptionsArgs']] = None,
                  project_options_strategy: Optional[pulumi.Input[builtins.str]] = None,
                  time_series_options: Optional[pulumi.Input['DeploymentRetrainingPolicyTimeSeriesOptionsArgs']] = None,
-                 trigger: Optional[pulumi.Input['DeploymentRetrainingPolicyTriggerArgs']] = None):
+                 trigger: Optional[pulumi.Input['DeploymentRetrainingPolicyTriggerArgs']] = None,
+                 use_case_id: Optional[pulumi.Input[builtins.str]] = None):
         """
         The set of arguments for constructing a DeploymentRetrainingPolicy resource.
         :param pulumi.Input[builtins.str] deployment_id: The ID of the Deployment for the Retraining Policy.
@@ -46,6 +47,7 @@ class DeploymentRetrainingPolicyArgs:
         :param pulumi.Input[builtins.str] project_options_strategy: The project option strategy used for modeling.
         :param pulumi.Input['DeploymentRetrainingPolicyTimeSeriesOptionsArgs'] time_series_options: Time Series project options used to build new models.
         :param pulumi.Input['DeploymentRetrainingPolicyTriggerArgs'] trigger: Retraining policy trigger.
+        :param pulumi.Input[builtins.str] use_case_id: The ID of the use case to which the retraining policy belongs.
         """
         pulumi.set(__self__, "deployment_id", deployment_id)
         pulumi.set(__self__, "description", description)
@@ -67,6 +69,8 @@ class DeploymentRetrainingPolicyArgs:
             pulumi.set(__self__, "time_series_options", time_series_options)
         if trigger is not None:
             pulumi.set(__self__, "trigger", trigger)
+        if use_case_id is not None:
+            pulumi.set(__self__, "use_case_id", use_case_id)
 
     @property
     @pulumi.getter(name="deploymentId")
@@ -200,6 +204,18 @@ class DeploymentRetrainingPolicyArgs:
     def trigger(self, value: Optional[pulumi.Input['DeploymentRetrainingPolicyTriggerArgs']]):
         pulumi.set(self, "trigger", value)
 
+    @property
+    @pulumi.getter(name="useCaseId")
+    def use_case_id(self) -> Optional[pulumi.Input[builtins.str]]:
+        """
+        The ID of the use case to which the retraining policy belongs.
+        """
+        return pulumi.get(self, "use_case_id")
+
+    @use_case_id.setter
+    def use_case_id(self, value: Optional[pulumi.Input[builtins.str]]):
+        pulumi.set(self, "use_case_id", value)
+
 
 @pulumi.input_type
 class _DeploymentRetrainingPolicyState:
@@ -214,7 +230,8 @@ class _DeploymentRetrainingPolicyState:
                  project_options: Optional[pulumi.Input['DeploymentRetrainingPolicyProjectOptionsArgs']] = None,
                  project_options_strategy: Optional[pulumi.Input[builtins.str]] = None,
                  time_series_options: Optional[pulumi.Input['DeploymentRetrainingPolicyTimeSeriesOptionsArgs']] = None,
-                 trigger: Optional[pulumi.Input['DeploymentRetrainingPolicyTriggerArgs']] = None):
+                 trigger: Optional[pulumi.Input['DeploymentRetrainingPolicyTriggerArgs']] = None,
+                 use_case_id: Optional[pulumi.Input[builtins.str]] = None):
         """
         Input properties used for looking up and filtering DeploymentRetrainingPolicy resources.
         :param pulumi.Input[builtins.str] action: The the action to take on the resultant new model.
@@ -228,6 +245,7 @@ class _DeploymentRetrainingPolicyState:
         :param pulumi.Input[builtins.str] project_options_strategy: The project option strategy used for modeling.
         :param pulumi.Input['DeploymentRetrainingPolicyTimeSeriesOptionsArgs'] time_series_options: Time Series project options used to build new models.
         :param pulumi.Input['DeploymentRetrainingPolicyTriggerArgs'] trigger: Retraining policy trigger.
+        :param pulumi.Input[builtins.str] use_case_id: The ID of the use case to which the retraining policy belongs.
         """
         if action is not None:
             pulumi.set(__self__, "action", action)
@@ -251,6 +269,8 @@ class _DeploymentRetrainingPolicyState:
             pulumi.set(__self__, "time_series_options", time_series_options)
         if trigger is not None:
             pulumi.set(__self__, "trigger", trigger)
+        if use_case_id is not None:
+            pulumi.set(__self__, "use_case_id", use_case_id)
 
     @property
     @pulumi.getter
@@ -384,7 +404,20 @@ class _DeploymentRetrainingPolicyState:
     def trigger(self, value: Optional[pulumi.Input['DeploymentRetrainingPolicyTriggerArgs']]):
         pulumi.set(self, "trigger", value)
 
+    @property
+    @pulumi.getter(name="useCaseId")
+    def use_case_id(self) -> Optional[pulumi.Input[builtins.str]]:
+        """
+        The ID of the use case to which the retraining policy belongs.
+        """
+        return pulumi.get(self, "use_case_id")
 
+    @use_case_id.setter
+    def use_case_id(self, value: Optional[pulumi.Input[builtins.str]]):
+        pulumi.set(self, "use_case_id", value)
+
+
+@pulumi.type_token("datarobot:index/deploymentRetrainingPolicy:DeploymentRetrainingPolicy")
 class DeploymentRetrainingPolicy(pulumi.CustomResource):
     @overload
     def __init__(__self__,
@@ -401,6 +434,7 @@ class DeploymentRetrainingPolicy(pulumi.CustomResource):
                  project_options_strategy: Optional[pulumi.Input[builtins.str]] = None,
                  time_series_options: Optional[pulumi.Input[Union['DeploymentRetrainingPolicyTimeSeriesOptionsArgs', 'DeploymentRetrainingPolicyTimeSeriesOptionsArgsDict']]] = None,
                  trigger: Optional[pulumi.Input[Union['DeploymentRetrainingPolicyTriggerArgs', 'DeploymentRetrainingPolicyTriggerArgsDict']]] = None,
+                 use_case_id: Optional[pulumi.Input[builtins.str]] = None,
                  __props__=None):
         """
         Deployment Retraining Policy
@@ -418,6 +452,7 @@ class DeploymentRetrainingPolicy(pulumi.CustomResource):
         :param pulumi.Input[builtins.str] project_options_strategy: The project option strategy used for modeling.
         :param pulumi.Input[Union['DeploymentRetrainingPolicyTimeSeriesOptionsArgs', 'DeploymentRetrainingPolicyTimeSeriesOptionsArgsDict']] time_series_options: Time Series project options used to build new models.
         :param pulumi.Input[Union['DeploymentRetrainingPolicyTriggerArgs', 'DeploymentRetrainingPolicyTriggerArgsDict']] trigger: Retraining policy trigger.
+        :param pulumi.Input[builtins.str] use_case_id: The ID of the use case to which the retraining policy belongs.
         """
         ...
     @overload
@@ -454,6 +489,7 @@ class DeploymentRetrainingPolicy(pulumi.CustomResource):
                  project_options_strategy: Optional[pulumi.Input[builtins.str]] = None,
                  time_series_options: Optional[pulumi.Input[Union['DeploymentRetrainingPolicyTimeSeriesOptionsArgs', 'DeploymentRetrainingPolicyTimeSeriesOptionsArgsDict']]] = None,
                  trigger: Optional[pulumi.Input[Union['DeploymentRetrainingPolicyTriggerArgs', 'DeploymentRetrainingPolicyTriggerArgsDict']]] = None,
+                 use_case_id: Optional[pulumi.Input[builtins.str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -478,6 +514,7 @@ class DeploymentRetrainingPolicy(pulumi.CustomResource):
             __props__.__dict__["project_options_strategy"] = project_options_strategy
             __props__.__dict__["time_series_options"] = time_series_options
             __props__.__dict__["trigger"] = trigger
+            __props__.__dict__["use_case_id"] = use_case_id
         super(DeploymentRetrainingPolicy, __self__).__init__(
             'datarobot:index/deploymentRetrainingPolicy:DeploymentRetrainingPolicy',
             resource_name,
@@ -498,7 +535,8 @@ class DeploymentRetrainingPolicy(pulumi.CustomResource):
             project_options: Optional[pulumi.Input[Union['DeploymentRetrainingPolicyProjectOptionsArgs', 'DeploymentRetrainingPolicyProjectOptionsArgsDict']]] = None,
             project_options_strategy: Optional[pulumi.Input[builtins.str]] = None,
             time_series_options: Optional[pulumi.Input[Union['DeploymentRetrainingPolicyTimeSeriesOptionsArgs', 'DeploymentRetrainingPolicyTimeSeriesOptionsArgsDict']]] = None,
-            trigger: Optional[pulumi.Input[Union['DeploymentRetrainingPolicyTriggerArgs', 'DeploymentRetrainingPolicyTriggerArgsDict']]] = None) -> 'DeploymentRetrainingPolicy':
+            trigger: Optional[pulumi.Input[Union['DeploymentRetrainingPolicyTriggerArgs', 'DeploymentRetrainingPolicyTriggerArgsDict']]] = None,
+            use_case_id: Optional[pulumi.Input[builtins.str]] = None) -> 'DeploymentRetrainingPolicy':
         """
         Get an existing DeploymentRetrainingPolicy resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -517,6 +555,7 @@ class DeploymentRetrainingPolicy(pulumi.CustomResource):
         :param pulumi.Input[builtins.str] project_options_strategy: The project option strategy used for modeling.
         :param pulumi.Input[Union['DeploymentRetrainingPolicyTimeSeriesOptionsArgs', 'DeploymentRetrainingPolicyTimeSeriesOptionsArgsDict']] time_series_options: Time Series project options used to build new models.
         :param pulumi.Input[Union['DeploymentRetrainingPolicyTriggerArgs', 'DeploymentRetrainingPolicyTriggerArgsDict']] trigger: Retraining policy trigger.
+        :param pulumi.Input[builtins.str] use_case_id: The ID of the use case to which the retraining policy belongs.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -533,6 +572,7 @@ class DeploymentRetrainingPolicy(pulumi.CustomResource):
         __props__.__dict__["project_options_strategy"] = project_options_strategy
         __props__.__dict__["time_series_options"] = time_series_options
         __props__.__dict__["trigger"] = trigger
+        __props__.__dict__["use_case_id"] = use_case_id
         return DeploymentRetrainingPolicy(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -622,4 +662,12 @@ class DeploymentRetrainingPolicy(pulumi.CustomResource):
         Retraining policy trigger.
         """
         return pulumi.get(self, "trigger")
+
+    @property
+    @pulumi.getter(name="useCaseId")
+    def use_case_id(self) -> pulumi.Output[Optional[builtins.str]]:
+        """
+        The ID of the use case to which the retraining policy belongs.
+        """
+        return pulumi.get(self, "use_case_id")
 

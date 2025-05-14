@@ -81,6 +81,10 @@ export class DeploymentRetrainingPolicy extends pulumi.CustomResource {
      * Retraining policy trigger.
      */
     public readonly trigger!: pulumi.Output<outputs.DeploymentRetrainingPolicyTrigger | undefined>;
+    /**
+     * The ID of the use case to which the retraining policy belongs.
+     */
+    public readonly useCaseId!: pulumi.Output<string | undefined>;
 
     /**
      * Create a DeploymentRetrainingPolicy resource with the given unique name, arguments, and options.
@@ -106,6 +110,7 @@ export class DeploymentRetrainingPolicy extends pulumi.CustomResource {
             resourceInputs["projectOptionsStrategy"] = state ? state.projectOptionsStrategy : undefined;
             resourceInputs["timeSeriesOptions"] = state ? state.timeSeriesOptions : undefined;
             resourceInputs["trigger"] = state ? state.trigger : undefined;
+            resourceInputs["useCaseId"] = state ? state.useCaseId : undefined;
         } else {
             const args = argsOrState as DeploymentRetrainingPolicyArgs | undefined;
             if ((!args || args.deploymentId === undefined) && !opts.urn) {
@@ -125,6 +130,7 @@ export class DeploymentRetrainingPolicy extends pulumi.CustomResource {
             resourceInputs["projectOptionsStrategy"] = args ? args.projectOptionsStrategy : undefined;
             resourceInputs["timeSeriesOptions"] = args ? args.timeSeriesOptions : undefined;
             resourceInputs["trigger"] = args ? args.trigger : undefined;
+            resourceInputs["useCaseId"] = args ? args.useCaseId : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(DeploymentRetrainingPolicy.__pulumiType, name, resourceInputs, opts);
@@ -179,6 +185,10 @@ export interface DeploymentRetrainingPolicyState {
      * Retraining policy trigger.
      */
     trigger?: pulumi.Input<inputs.DeploymentRetrainingPolicyTrigger>;
+    /**
+     * The ID of the use case to which the retraining policy belongs.
+     */
+    useCaseId?: pulumi.Input<string>;
 }
 
 /**
@@ -229,4 +239,8 @@ export interface DeploymentRetrainingPolicyArgs {
      * Retraining policy trigger.
      */
     trigger?: pulumi.Input<inputs.DeploymentRetrainingPolicyTrigger>;
+    /**
+     * The ID of the use case to which the retraining policy belongs.
+     */
+    useCaseId?: pulumi.Input<string>;
 }

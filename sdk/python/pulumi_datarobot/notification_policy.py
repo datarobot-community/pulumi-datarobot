@@ -317,6 +317,7 @@ class _NotificationPolicyState:
         pulumi.set(self, "related_entity_type", value)
 
 
+@pulumi.type_token("datarobot:index/notificationPolicy:NotificationPolicy")
 class NotificationPolicy(pulumi.CustomResource):
     @overload
     def __init__(__self__,

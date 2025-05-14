@@ -12,46 +12,6 @@ namespace DataRobotPulumi.Datarobot
 {
     /// <summary>
     /// Custom Job
-    /// 
-    /// ## Example Usage
-    /// 
-    /// ```csharp
-    /// using System.Collections.Generic;
-    /// using System.Linq;
-    /// using Pulumi;
-    /// using Datarobot = DataRobotPulumi.Datarobot;
-    /// 
-    /// return await Deployment.RunAsync(() =&gt; 
-    /// {
-    ///     var example = new Datarobot.CustomJob("example", new()
-    ///     {
-    ///         JobType = "retraining",
-    ///         Files = new[]
-    ///         {
-    ///             "file1.py",
-    ///             "file2.py",
-    ///         },
-    ///         EnvironmentId = "65f9b27eab986d30d4c64268",
-    ///         Description = "Example Custom Job Description",
-    ///         RuntimeParameterValues = new[]
-    ///         {
-    ///             new Datarobot.Inputs.CustomJobRuntimeParameterValueArgs
-    ///             {
-    ///                 Key = "EXAMPLE_PARAM",
-    ///                 Type = "string",
-    ///                 Value = "val",
-    ///             },
-    ///         },
-    ///         EgressNetworkPolicy = "none",
-    ///         ResourceBundleId = "cpu.micro",
-    ///     });
-    /// 
-    ///     return new Dictionary&lt;string, object?&gt;
-    ///     {
-    ///         ["exampleId"] = example.Id,
-    ///     };
-    /// });
-    /// ```
     /// </summary>
     [DatarobotResourceType("datarobot:index/customJob:CustomJob")]
     public partial class CustomJob : global::Pulumi.CustomResource
@@ -127,6 +87,18 @@ namespace DataRobotPulumi.Datarobot
         /// </summary>
         [Output("runtimeParameterValues")]
         public Output<ImmutableArray<Outputs.CustomJobRuntimeParameterValue>> RuntimeParameterValues { get; private set; } = null!;
+
+        /// <summary>
+        /// The schedule configuration for the custom job.
+        /// </summary>
+        [Output("schedule")]
+        public Output<Outputs.CustomJobSchedule?> Schedule { get; private set; } = null!;
+
+        /// <summary>
+        /// The ID of the schedule associated with the custom job.
+        /// </summary>
+        [Output("scheduleId")]
+        public Output<string> ScheduleId { get; private set; } = null!;
 
 
         /// <summary>
@@ -241,6 +213,18 @@ namespace DataRobotPulumi.Datarobot
             set => _runtimeParameterValues = value;
         }
 
+        /// <summary>
+        /// The schedule configuration for the custom job.
+        /// </summary>
+        [Input("schedule")]
+        public Input<Inputs.CustomJobScheduleArgs>? Schedule { get; set; }
+
+        /// <summary>
+        /// The ID of the schedule associated with the custom job.
+        /// </summary>
+        [Input("scheduleId")]
+        public Input<string>? ScheduleId { get; set; }
+
         public CustomJobArgs()
         {
         }
@@ -332,6 +316,18 @@ namespace DataRobotPulumi.Datarobot
             get => _runtimeParameterValues ?? (_runtimeParameterValues = new InputList<Inputs.CustomJobRuntimeParameterValueGetArgs>());
             set => _runtimeParameterValues = value;
         }
+
+        /// <summary>
+        /// The schedule configuration for the custom job.
+        /// </summary>
+        [Input("schedule")]
+        public Input<Inputs.CustomJobScheduleGetArgs>? Schedule { get; set; }
+
+        /// <summary>
+        /// The ID of the schedule associated with the custom job.
+        /// </summary>
+        [Input("scheduleId")]
+        public Input<string>? ScheduleId { get; set; }
 
         public CustomJobState()
         {

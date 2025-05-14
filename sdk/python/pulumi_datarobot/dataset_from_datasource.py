@@ -287,6 +287,7 @@ class _DatasetFromDatasourceState:
         pulumi.set(self, "use_kerberos", value)
 
 
+@pulumi.type_token("datarobot:index/datasetFromDatasource:DatasetFromDatasource")
 class DatasetFromDatasource(pulumi.CustomResource):
     @overload
     def __init__(__self__,
