@@ -46,9 +46,9 @@ export class ApplicationSource extends pulumi.CustomResource {
      */
     public readonly baseEnvironmentVersionId!: pulumi.Output<string>;
     /**
-     * The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
+     * List of files to upload, each with a source (local path) and destination (path in application source).
      */
-    public readonly files!: pulumi.Output<any | undefined>;
+    public readonly files!: pulumi.Output<outputs.ApplicationSourceFile[] | undefined>;
     /**
      * The hash of file contents for each file in files.
      */
@@ -132,9 +132,9 @@ export interface ApplicationSourceState {
      */
     baseEnvironmentVersionId?: pulumi.Input<string>;
     /**
-     * The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
+     * List of files to upload, each with a source (local path) and destination (path in application source).
      */
-    files?: any;
+    files?: pulumi.Input<pulumi.Input<inputs.ApplicationSourceFile>[]>;
     /**
      * The hash of file contents for each file in files.
      */
@@ -178,9 +178,9 @@ export interface ApplicationSourceArgs {
      */
     baseEnvironmentVersionId?: pulumi.Input<string>;
     /**
-     * The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
+     * List of files to upload, each with a source (local path) and destination (path in application source).
      */
-    files?: any;
+    files?: pulumi.Input<pulumi.Input<inputs.ApplicationSourceFile>[]>;
     /**
      * The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
      */
