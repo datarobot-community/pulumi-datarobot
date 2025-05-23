@@ -41,10 +41,10 @@ namespace DataRobotPulumi.Datarobot
         public Output<string> EnvironmentVersionId { get; private set; } = null!;
 
         /// <summary>
-        /// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Job. If list is of strings, then basenames will be used for tuples.
+        /// List of files to upload, each with a source (local path) and destination (path in job).
         /// </summary>
         [Output("files")]
-        public Output<object?> Files { get; private set; } = null!;
+        public Output<ImmutableArray<Outputs.CustomJobFile>> Files { get; private set; } = null!;
 
         /// <summary>
         /// The hash of file contents for each file in files.
@@ -171,11 +171,17 @@ namespace DataRobotPulumi.Datarobot
         [Input("environmentVersionId")]
         public Input<string>? EnvironmentVersionId { get; set; }
 
-        /// <summary>
-        /// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Job. If list is of strings, then basenames will be used for tuples.
-        /// </summary>
         [Input("files")]
-        public Input<object>? Files { get; set; }
+        private InputList<Inputs.CustomJobFileArgs>? _files;
+
+        /// <summary>
+        /// List of files to upload, each with a source (local path) and destination (path in job).
+        /// </summary>
+        public InputList<Inputs.CustomJobFileArgs> Files
+        {
+            get => _files ?? (_files = new InputList<Inputs.CustomJobFileArgs>());
+            set => _files = value;
+        }
 
         /// <summary>
         /// The path to a folder containing files to be uploaded. Each file in the folder is uploaded under path relative to a folder path.
@@ -257,11 +263,17 @@ namespace DataRobotPulumi.Datarobot
         [Input("environmentVersionId")]
         public Input<string>? EnvironmentVersionId { get; set; }
 
-        /// <summary>
-        /// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Job. If list is of strings, then basenames will be used for tuples.
-        /// </summary>
         [Input("files")]
-        public Input<object>? Files { get; set; }
+        private InputList<Inputs.CustomJobFileGetArgs>? _files;
+
+        /// <summary>
+        /// List of files to upload, each with a source (local path) and destination (path in job).
+        /// </summary>
+        public InputList<Inputs.CustomJobFileGetArgs> Files
+        {
+            get => _files ?? (_files = new InputList<Inputs.CustomJobFileGetArgs>());
+            set => _files = value;
+        }
 
         [Input("filesHashes")]
         private InputList<string>? _filesHashes;
