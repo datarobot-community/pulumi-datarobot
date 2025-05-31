@@ -17,6 +17,8 @@ from . import _utilities
 from . import outputs
 
 __all__ = [
+    'ApplicationSourceFile',
+    'ApplicationSourceFromTemplateFile',
     'ApplicationSourceFromTemplateResources',
     'ApplicationSourceFromTemplateRuntimeParameterValue',
     'ApplicationSourceResources',
@@ -27,6 +29,7 @@ __all__ = [
     'BatchPredictionJobDefinitionPredictionInstance',
     'BatchPredictionJobDefinitionSchedule',
     'BatchPredictionJobDefinitionTimeseriesSettings',
+    'CustomJobFile',
     'CustomJobRuntimeParameterValue',
     'CustomJobSchedule',
     'CustomMetricBatch',
@@ -36,10 +39,12 @@ __all__ = [
     'CustomMetricFromJobSchedule',
     'CustomMetricFromJobTimestamp',
     'CustomMetricFromJobValue',
+    'CustomMetricJobFile',
     'CustomMetricJobRuntimeParameterValue',
     'CustomMetricSampleCount',
     'CustomMetricTimestamp',
     'CustomMetricValue',
+    'CustomModelFile',
     'CustomModelGuardConfiguration',
     'CustomModelGuardConfigurationIntervention',
     'CustomModelGuardConfigurationNemoInfo',
@@ -87,6 +92,64 @@ __all__ = [
     'NotificationChannelDrEntity',
     'VectorDatabaseChunkingParameters',
 ]
+
+@pulumi.output_type
+class ApplicationSourceFile(dict):
+    def __init__(__self__, *,
+                 destination: builtins.str,
+                 source: builtins.str):
+        """
+        :param builtins.str destination: Path in the application source.
+        :param builtins.str source: Local filesystem path.
+        """
+        pulumi.set(__self__, "destination", destination)
+        pulumi.set(__self__, "source", source)
+
+    @property
+    @pulumi.getter
+    def destination(self) -> builtins.str:
+        """
+        Path in the application source.
+        """
+        return pulumi.get(self, "destination")
+
+    @property
+    @pulumi.getter
+    def source(self) -> builtins.str:
+        """
+        Local filesystem path.
+        """
+        return pulumi.get(self, "source")
+
+
+@pulumi.output_type
+class ApplicationSourceFromTemplateFile(dict):
+    def __init__(__self__, *,
+                 destination: builtins.str,
+                 source: builtins.str):
+        """
+        :param builtins.str destination: Path in the application source.
+        :param builtins.str source: Local filesystem path.
+        """
+        pulumi.set(__self__, "destination", destination)
+        pulumi.set(__self__, "source", source)
+
+    @property
+    @pulumi.getter
+    def destination(self) -> builtins.str:
+        """
+        Path in the application source.
+        """
+        return pulumi.get(self, "destination")
+
+    @property
+    @pulumi.getter
+    def source(self) -> builtins.str:
+        """
+        Local filesystem path.
+        """
+        return pulumi.get(self, "source")
+
 
 @pulumi.output_type
 class ApplicationSourceFromTemplateResources(dict):
@@ -951,6 +1014,35 @@ class BatchPredictionJobDefinitionTimeseriesSettings(dict):
 
 
 @pulumi.output_type
+class CustomJobFile(dict):
+    def __init__(__self__, *,
+                 destination: builtins.str,
+                 source: builtins.str):
+        """
+        :param builtins.str destination: Path in the job.
+        :param builtins.str source: Local filesystem path.
+        """
+        pulumi.set(__self__, "destination", destination)
+        pulumi.set(__self__, "source", source)
+
+    @property
+    @pulumi.getter
+    def destination(self) -> builtins.str:
+        """
+        Path in the job.
+        """
+        return pulumi.get(self, "destination")
+
+    @property
+    @pulumi.getter
+    def source(self) -> builtins.str:
+        """
+        Local filesystem path.
+        """
+        return pulumi.get(self, "source")
+
+
+@pulumi.output_type
 class CustomJobRuntimeParameterValue(dict):
     def __init__(__self__, *,
                  key: builtins.str,
@@ -1386,6 +1478,35 @@ class CustomMetricFromJobValue(dict):
 
 
 @pulumi.output_type
+class CustomMetricJobFile(dict):
+    def __init__(__self__, *,
+                 destination: builtins.str,
+                 source: builtins.str):
+        """
+        :param builtins.str destination: Path in the job.
+        :param builtins.str source: Local filesystem path.
+        """
+        pulumi.set(__self__, "destination", destination)
+        pulumi.set(__self__, "source", source)
+
+    @property
+    @pulumi.getter
+    def destination(self) -> builtins.str:
+        """
+        Path in the job.
+        """
+        return pulumi.get(self, "destination")
+
+    @property
+    @pulumi.getter
+    def source(self) -> builtins.str:
+        """
+        Local filesystem path.
+        """
+        return pulumi.get(self, "source")
+
+
+@pulumi.output_type
 class CustomMetricJobRuntimeParameterValue(dict):
     def __init__(__self__, *,
                  key: builtins.str,
@@ -1545,6 +1666,35 @@ class CustomMetricValue(dict):
         Column name.
         """
         return pulumi.get(self, "column_name")
+
+
+@pulumi.output_type
+class CustomModelFile(dict):
+    def __init__(__self__, *,
+                 destination: builtins.str,
+                 source: builtins.str):
+        """
+        :param builtins.str destination: Path in the model.
+        :param builtins.str source: Local filesystem path.
+        """
+        pulumi.set(__self__, "destination", destination)
+        pulumi.set(__self__, "source", source)
+
+    @property
+    @pulumi.getter
+    def destination(self) -> builtins.str:
+        """
+        Path in the model.
+        """
+        return pulumi.get(self, "destination")
+
+    @property
+    @pulumi.getter
+    def source(self) -> builtins.str:
+        """
+        Local filesystem path.
+        """
+        return pulumi.get(self, "source")
 
 
 @pulumi.output_type

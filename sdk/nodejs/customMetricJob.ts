@@ -86,9 +86,9 @@ export class CustomMetricJob extends pulumi.CustomResource {
      */
     public readonly environmentVersionId!: pulumi.Output<string>;
     /**
-     * The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Job. If list is of strings, then basenames will be used for tuples.
+     * List of files to upload, each with a source (local path) and destination (path in job).
      */
-    public readonly files!: pulumi.Output<any | undefined>;
+    public readonly files!: pulumi.Output<outputs.CustomMetricJobFile[] | undefined>;
     /**
      * The hash of file contents for each file in files.
      */
@@ -208,9 +208,9 @@ export interface CustomMetricJobState {
      */
     environmentVersionId?: pulumi.Input<string>;
     /**
-     * The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Job. If list is of strings, then basenames will be used for tuples.
+     * List of files to upload, each with a source (local path) and destination (path in job).
      */
-    files?: any;
+    files?: pulumi.Input<pulumi.Input<inputs.CustomMetricJobFile>[]>;
     /**
      * The hash of file contents for each file in files.
      */
@@ -278,9 +278,9 @@ export interface CustomMetricJobArgs {
      */
     environmentVersionId?: pulumi.Input<string>;
     /**
-     * The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Job. If list is of strings, then basenames will be used for tuples.
+     * List of files to upload, each with a source (local path) and destination (path in job).
      */
-    files?: any;
+    files?: pulumi.Input<pulumi.Input<inputs.CustomMetricJobFile>[]>;
     /**
      * The path to a folder containing files to be uploaded. Each file in the folder is uploaded under path relative to a folder path.
      */

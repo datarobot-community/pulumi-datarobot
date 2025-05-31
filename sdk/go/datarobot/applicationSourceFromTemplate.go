@@ -20,8 +20,8 @@ type ApplicationSourceFromTemplate struct {
 	BaseEnvironmentId pulumi.StringOutput `pulumi:"baseEnvironmentId"`
 	// The ID of the base environment version for the Application Source.
 	BaseEnvironmentVersionId pulumi.StringOutput `pulumi:"baseEnvironmentVersionId"`
-	// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
-	Files pulumi.AnyOutput `pulumi:"files"`
+	// List of files to upload, each with a source (local path) and destination (path in application source).
+	Files ApplicationSourceFromTemplateFileArrayOutput `pulumi:"files"`
 	// The hash of file contents for each file in files.
 	FilesHashes pulumi.StringArrayOutput `pulumi:"filesHashes"`
 	// The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
@@ -77,8 +77,8 @@ type applicationSourceFromTemplateState struct {
 	BaseEnvironmentId *string `pulumi:"baseEnvironmentId"`
 	// The ID of the base environment version for the Application Source.
 	BaseEnvironmentVersionId *string `pulumi:"baseEnvironmentVersionId"`
-	// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
-	Files interface{} `pulumi:"files"`
+	// List of files to upload, each with a source (local path) and destination (path in application source).
+	Files []ApplicationSourceFromTemplateFile `pulumi:"files"`
 	// The hash of file contents for each file in files.
 	FilesHashes []string `pulumi:"filesHashes"`
 	// The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
@@ -102,8 +102,8 @@ type ApplicationSourceFromTemplateState struct {
 	BaseEnvironmentId pulumi.StringPtrInput
 	// The ID of the base environment version for the Application Source.
 	BaseEnvironmentVersionId pulumi.StringPtrInput
-	// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
-	Files pulumi.Input
+	// List of files to upload, each with a source (local path) and destination (path in application source).
+	Files ApplicationSourceFromTemplateFileArrayInput
 	// The hash of file contents for each file in files.
 	FilesHashes pulumi.StringArrayInput
 	// The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
@@ -131,8 +131,8 @@ type applicationSourceFromTemplateArgs struct {
 	BaseEnvironmentId *string `pulumi:"baseEnvironmentId"`
 	// The ID of the base environment version for the Application Source.
 	BaseEnvironmentVersionId *string `pulumi:"baseEnvironmentVersionId"`
-	// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
-	Files interface{} `pulumi:"files"`
+	// List of files to upload, each with a source (local path) and destination (path in application source).
+	Files []ApplicationSourceFromTemplateFile `pulumi:"files"`
 	// The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
 	FolderPath *string `pulumi:"folderPath"`
 	// The name of the Application Source.
@@ -151,8 +151,8 @@ type ApplicationSourceFromTemplateArgs struct {
 	BaseEnvironmentId pulumi.StringPtrInput
 	// The ID of the base environment version for the Application Source.
 	BaseEnvironmentVersionId pulumi.StringPtrInput
-	// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
-	Files pulumi.Input
+	// List of files to upload, each with a source (local path) and destination (path in application source).
+	Files ApplicationSourceFromTemplateFileArrayInput
 	// The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
 	FolderPath pulumi.StringPtrInput
 	// The name of the Application Source.
@@ -262,9 +262,9 @@ func (o ApplicationSourceFromTemplateOutput) BaseEnvironmentVersionId() pulumi.S
 	return o.ApplyT(func(v *ApplicationSourceFromTemplate) pulumi.StringOutput { return v.BaseEnvironmentVersionId }).(pulumi.StringOutput)
 }
 
-// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
-func (o ApplicationSourceFromTemplateOutput) Files() pulumi.AnyOutput {
-	return o.ApplyT(func(v *ApplicationSourceFromTemplate) pulumi.AnyOutput { return v.Files }).(pulumi.AnyOutput)
+// List of files to upload, each with a source (local path) and destination (path in application source).
+func (o ApplicationSourceFromTemplateOutput) Files() ApplicationSourceFromTemplateFileArrayOutput {
+	return o.ApplyT(func(v *ApplicationSourceFromTemplate) ApplicationSourceFromTemplateFileArrayOutput { return v.Files }).(ApplicationSourceFromTemplateFileArrayOutput)
 }
 
 // The hash of file contents for each file in files.
