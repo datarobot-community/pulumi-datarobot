@@ -6,6 +6,28 @@ import * as utilities from "./utilities";
 
 /**
  * Custom Application
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as datarobot from "@datarobot/pulumi-datarobot";
+ *
+ * const exampleApplicationSource = new datarobot.ApplicationSource("exampleApplicationSource", {files: [
+ *     ["start-app.sh"],
+ *     ["streamlit-app.py"],
+ * ]});
+ * const exampleCustomApplication = new datarobot.CustomApplication("exampleCustomApplication", {
+ *     sourceVersionId: exampleApplicationSource.versionId,
+ *     externalAccessEnabled: true,
+ *     externalAccessRecipients: ["recipient@example.com"],
+ *     allowAutoStopping: false,
+ * });
+ * export const datarobotCustomApplicationId = exampleCustomApplication.id;
+ * export const datarobotCustomApplicationSourceId = exampleCustomApplication.sourceId;
+ * export const datarobotCustomApplicationSourceVersionId = exampleCustomApplication.sourceVersionId;
+ * export const datarobotCustomApplicationUrl = exampleCustomApplication.applicationUrl;
+ * ```
  */
 export class CustomApplication extends pulumi.CustomResource {
     /**

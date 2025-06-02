@@ -46,9 +46,9 @@ export class ApplicationSourceFromTemplate extends pulumi.CustomResource {
      */
     public readonly baseEnvironmentVersionId!: pulumi.Output<string>;
     /**
-     * List of files to upload, each with a source (local path) and destination (path in application source).
+     * The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
      */
-    public readonly files!: pulumi.Output<outputs.ApplicationSourceFromTemplateFile[] | undefined>;
+    public readonly files!: pulumi.Output<any | undefined>;
     /**
      * The hash of file contents for each file in files.
      */
@@ -141,9 +141,9 @@ export interface ApplicationSourceFromTemplateState {
      */
     baseEnvironmentVersionId?: pulumi.Input<string>;
     /**
-     * List of files to upload, each with a source (local path) and destination (path in application source).
+     * The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
      */
-    files?: pulumi.Input<pulumi.Input<inputs.ApplicationSourceFromTemplateFile>[]>;
+    files?: any;
     /**
      * The hash of file contents for each file in files.
      */
@@ -191,9 +191,9 @@ export interface ApplicationSourceFromTemplateArgs {
      */
     baseEnvironmentVersionId?: pulumi.Input<string>;
     /**
-     * List of files to upload, each with a source (local path) and destination (path in application source).
+     * The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
      */
-    files?: pulumi.Input<pulumi.Input<inputs.ApplicationSourceFromTemplateFile>[]>;
+    files?: any;
     /**
      * The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
      */

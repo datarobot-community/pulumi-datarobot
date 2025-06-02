@@ -29,10 +29,10 @@ namespace DataRobotPulumi.Datarobot
         public Output<string> BaseEnvironmentVersionId { get; private set; } = null!;
 
         /// <summary>
-        /// List of files to upload, each with a source (local path) and destination (path in application source).
+        /// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
         /// </summary>
         [Output("files")]
-        public Output<ImmutableArray<Outputs.ApplicationSourceFile>> Files { get; private set; } = null!;
+        public Output<object?> Files { get; private set; } = null!;
 
         /// <summary>
         /// The hash of file contents for each file in files.
@@ -135,17 +135,11 @@ namespace DataRobotPulumi.Datarobot
         [Input("baseEnvironmentVersionId")]
         public Input<string>? BaseEnvironmentVersionId { get; set; }
 
-        [Input("files")]
-        private InputList<Inputs.ApplicationSourceFileArgs>? _files;
-
         /// <summary>
-        /// List of files to upload, each with a source (local path) and destination (path in application source).
+        /// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
         /// </summary>
-        public InputList<Inputs.ApplicationSourceFileArgs> Files
-        {
-            get => _files ?? (_files = new InputList<Inputs.ApplicationSourceFileArgs>());
-            set => _files = value;
-        }
+        [Input("files")]
+        public Input<object>? Files { get; set; }
 
         /// <summary>
         /// The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
@@ -197,17 +191,11 @@ namespace DataRobotPulumi.Datarobot
         [Input("baseEnvironmentVersionId")]
         public Input<string>? BaseEnvironmentVersionId { get; set; }
 
-        [Input("files")]
-        private InputList<Inputs.ApplicationSourceFileGetArgs>? _files;
-
         /// <summary>
-        /// List of files to upload, each with a source (local path) and destination (path in application source).
+        /// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
         /// </summary>
-        public InputList<Inputs.ApplicationSourceFileGetArgs> Files
-        {
-            get => _files ?? (_files = new InputList<Inputs.ApplicationSourceFileGetArgs>());
-            set => _files = value;
-        }
+        [Input("files")]
+        public Input<object>? Files { get; set; }
 
         [Input("filesHashes")]
         private InputList<string>? _filesHashes;

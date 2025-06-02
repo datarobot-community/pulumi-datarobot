@@ -23,7 +23,6 @@ class RegisteredModelArgs:
                  custom_model_version_id: pulumi.Input[builtins.str],
                  description: Optional[pulumi.Input[builtins.str]] = None,
                  name: Optional[pulumi.Input[builtins.str]] = None,
-                 runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input[Mapping[str, pulumi.Input[builtins.str]]]]]] = None,
                  use_case_ids: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.str]]]] = None,
                  version_name: Optional[pulumi.Input[builtins.str]] = None):
         """
@@ -31,7 +30,6 @@ class RegisteredModelArgs:
         :param pulumi.Input[builtins.str] custom_model_version_id: The ID of the custom model version for this Registered Model.
         :param pulumi.Input[builtins.str] description: The description of the Registered Model.
         :param pulumi.Input[builtins.str] name: The name of the Registered Model.
-        :param pulumi.Input[Sequence[pulumi.Input[Mapping[str, pulumi.Input[builtins.str]]]]] runtime_parameter_values: Runtime parameter values to set on the registered model
         :param pulumi.Input[Sequence[pulumi.Input[builtins.str]]] use_case_ids: The list of Use Case IDs to add the Registered Model version to.
         :param pulumi.Input[builtins.str] version_name: The name of the Registered Model Version.
         """
@@ -40,8 +38,6 @@ class RegisteredModelArgs:
             pulumi.set(__self__, "description", description)
         if name is not None:
             pulumi.set(__self__, "name", name)
-        if runtime_parameter_values is not None:
-            pulumi.set(__self__, "runtime_parameter_values", runtime_parameter_values)
         if use_case_ids is not None:
             pulumi.set(__self__, "use_case_ids", use_case_ids)
         if version_name is not None:
@@ -84,18 +80,6 @@ class RegisteredModelArgs:
         pulumi.set(self, "name", value)
 
     @property
-    @pulumi.getter(name="runtimeParameterValues")
-    def runtime_parameter_values(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[Mapping[str, pulumi.Input[builtins.str]]]]]]:
-        """
-        Runtime parameter values to set on the registered model
-        """
-        return pulumi.get(self, "runtime_parameter_values")
-
-    @runtime_parameter_values.setter
-    def runtime_parameter_values(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[Mapping[str, pulumi.Input[builtins.str]]]]]]):
-        pulumi.set(self, "runtime_parameter_values", value)
-
-    @property
     @pulumi.getter(name="useCaseIds")
     def use_case_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[builtins.str]]]]:
         """
@@ -126,7 +110,6 @@ class _RegisteredModelState:
                  custom_model_version_id: Optional[pulumi.Input[builtins.str]] = None,
                  description: Optional[pulumi.Input[builtins.str]] = None,
                  name: Optional[pulumi.Input[builtins.str]] = None,
-                 runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input[Mapping[str, pulumi.Input[builtins.str]]]]]] = None,
                  use_case_ids: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.str]]]] = None,
                  version_id: Optional[pulumi.Input[builtins.str]] = None,
                  version_name: Optional[pulumi.Input[builtins.str]] = None):
@@ -135,7 +118,6 @@ class _RegisteredModelState:
         :param pulumi.Input[builtins.str] custom_model_version_id: The ID of the custom model version for this Registered Model.
         :param pulumi.Input[builtins.str] description: The description of the Registered Model.
         :param pulumi.Input[builtins.str] name: The name of the Registered Model.
-        :param pulumi.Input[Sequence[pulumi.Input[Mapping[str, pulumi.Input[builtins.str]]]]] runtime_parameter_values: Runtime parameter values to set on the registered model
         :param pulumi.Input[Sequence[pulumi.Input[builtins.str]]] use_case_ids: The list of Use Case IDs to add the Registered Model version to.
         :param pulumi.Input[builtins.str] version_id: The ID of the Registered Model Version.
         :param pulumi.Input[builtins.str] version_name: The name of the Registered Model Version.
@@ -146,8 +128,6 @@ class _RegisteredModelState:
             pulumi.set(__self__, "description", description)
         if name is not None:
             pulumi.set(__self__, "name", name)
-        if runtime_parameter_values is not None:
-            pulumi.set(__self__, "runtime_parameter_values", runtime_parameter_values)
         if use_case_ids is not None:
             pulumi.set(__self__, "use_case_ids", use_case_ids)
         if version_id is not None:
@@ -190,18 +170,6 @@ class _RegisteredModelState:
     @name.setter
     def name(self, value: Optional[pulumi.Input[builtins.str]]):
         pulumi.set(self, "name", value)
-
-    @property
-    @pulumi.getter(name="runtimeParameterValues")
-    def runtime_parameter_values(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[Mapping[str, pulumi.Input[builtins.str]]]]]]:
-        """
-        Runtime parameter values to set on the registered model
-        """
-        return pulumi.get(self, "runtime_parameter_values")
-
-    @runtime_parameter_values.setter
-    def runtime_parameter_values(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[Mapping[str, pulumi.Input[builtins.str]]]]]]):
-        pulumi.set(self, "runtime_parameter_values", value)
 
     @property
     @pulumi.getter(name="useCaseIds")
@@ -249,7 +217,6 @@ class RegisteredModel(pulumi.CustomResource):
                  custom_model_version_id: Optional[pulumi.Input[builtins.str]] = None,
                  description: Optional[pulumi.Input[builtins.str]] = None,
                  name: Optional[pulumi.Input[builtins.str]] = None,
-                 runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input[Mapping[str, pulumi.Input[builtins.str]]]]]] = None,
                  use_case_ids: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.str]]]] = None,
                  version_name: Optional[pulumi.Input[builtins.str]] = None,
                  __props__=None):
@@ -280,7 +247,6 @@ class RegisteredModel(pulumi.CustomResource):
         :param pulumi.Input[builtins.str] custom_model_version_id: The ID of the custom model version for this Registered Model.
         :param pulumi.Input[builtins.str] description: The description of the Registered Model.
         :param pulumi.Input[builtins.str] name: The name of the Registered Model.
-        :param pulumi.Input[Sequence[pulumi.Input[Mapping[str, pulumi.Input[builtins.str]]]]] runtime_parameter_values: Runtime parameter values to set on the registered model
         :param pulumi.Input[Sequence[pulumi.Input[builtins.str]]] use_case_ids: The list of Use Case IDs to add the Registered Model version to.
         :param pulumi.Input[builtins.str] version_name: The name of the Registered Model Version.
         """
@@ -330,7 +296,6 @@ class RegisteredModel(pulumi.CustomResource):
                  custom_model_version_id: Optional[pulumi.Input[builtins.str]] = None,
                  description: Optional[pulumi.Input[builtins.str]] = None,
                  name: Optional[pulumi.Input[builtins.str]] = None,
-                 runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input[Mapping[str, pulumi.Input[builtins.str]]]]]] = None,
                  use_case_ids: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.str]]]] = None,
                  version_name: Optional[pulumi.Input[builtins.str]] = None,
                  __props__=None):
@@ -347,7 +312,6 @@ class RegisteredModel(pulumi.CustomResource):
             __props__.__dict__["custom_model_version_id"] = custom_model_version_id
             __props__.__dict__["description"] = description
             __props__.__dict__["name"] = name
-            __props__.__dict__["runtime_parameter_values"] = runtime_parameter_values
             __props__.__dict__["use_case_ids"] = use_case_ids
             __props__.__dict__["version_name"] = version_name
             __props__.__dict__["version_id"] = None
@@ -364,7 +328,6 @@ class RegisteredModel(pulumi.CustomResource):
             custom_model_version_id: Optional[pulumi.Input[builtins.str]] = None,
             description: Optional[pulumi.Input[builtins.str]] = None,
             name: Optional[pulumi.Input[builtins.str]] = None,
-            runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input[Mapping[str, pulumi.Input[builtins.str]]]]]] = None,
             use_case_ids: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.str]]]] = None,
             version_id: Optional[pulumi.Input[builtins.str]] = None,
             version_name: Optional[pulumi.Input[builtins.str]] = None) -> 'RegisteredModel':
@@ -378,7 +341,6 @@ class RegisteredModel(pulumi.CustomResource):
         :param pulumi.Input[builtins.str] custom_model_version_id: The ID of the custom model version for this Registered Model.
         :param pulumi.Input[builtins.str] description: The description of the Registered Model.
         :param pulumi.Input[builtins.str] name: The name of the Registered Model.
-        :param pulumi.Input[Sequence[pulumi.Input[Mapping[str, pulumi.Input[builtins.str]]]]] runtime_parameter_values: Runtime parameter values to set on the registered model
         :param pulumi.Input[Sequence[pulumi.Input[builtins.str]]] use_case_ids: The list of Use Case IDs to add the Registered Model version to.
         :param pulumi.Input[builtins.str] version_id: The ID of the Registered Model Version.
         :param pulumi.Input[builtins.str] version_name: The name of the Registered Model Version.
@@ -390,7 +352,6 @@ class RegisteredModel(pulumi.CustomResource):
         __props__.__dict__["custom_model_version_id"] = custom_model_version_id
         __props__.__dict__["description"] = description
         __props__.__dict__["name"] = name
-        __props__.__dict__["runtime_parameter_values"] = runtime_parameter_values
         __props__.__dict__["use_case_ids"] = use_case_ids
         __props__.__dict__["version_id"] = version_id
         __props__.__dict__["version_name"] = version_name
@@ -419,14 +380,6 @@ class RegisteredModel(pulumi.CustomResource):
         The name of the Registered Model.
         """
         return pulumi.get(self, "name")
-
-    @property
-    @pulumi.getter(name="runtimeParameterValues")
-    def runtime_parameter_values(self) -> pulumi.Output[Optional[Sequence[Mapping[str, builtins.str]]]]:
-        """
-        Runtime parameter values to set on the registered model
-        """
-        return pulumi.get(self, "runtime_parameter_values")
 
     @property
     @pulumi.getter(name="useCaseIds")

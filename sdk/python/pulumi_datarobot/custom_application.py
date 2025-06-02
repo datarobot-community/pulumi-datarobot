@@ -272,6 +272,27 @@ class CustomApplication(pulumi.CustomResource):
         """
         Custom Application
 
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_datarobot as datarobot
+
+        example_application_source = datarobot.ApplicationSource("exampleApplicationSource", files=[
+            ["start-app.sh"],
+            ["streamlit-app.py"],
+        ])
+        example_custom_application = datarobot.CustomApplication("exampleCustomApplication",
+            source_version_id=example_application_source.version_id,
+            external_access_enabled=True,
+            external_access_recipients=["recipient@example.com"],
+            allow_auto_stopping=False)
+        pulumi.export("datarobotCustomApplicationId", example_custom_application.id)
+        pulumi.export("datarobotCustomApplicationSourceId", example_custom_application.source_id)
+        pulumi.export("datarobotCustomApplicationSourceVersionId", example_custom_application.source_version_id)
+        pulumi.export("datarobotCustomApplicationUrl", example_custom_application.application_url)
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[builtins.bool] allow_auto_stopping: Whether auto stopping is allowed for the Custom Application.
@@ -289,6 +310,27 @@ class CustomApplication(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Custom Application
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_datarobot as datarobot
+
+        example_application_source = datarobot.ApplicationSource("exampleApplicationSource", files=[
+            ["start-app.sh"],
+            ["streamlit-app.py"],
+        ])
+        example_custom_application = datarobot.CustomApplication("exampleCustomApplication",
+            source_version_id=example_application_source.version_id,
+            external_access_enabled=True,
+            external_access_recipients=["recipient@example.com"],
+            allow_auto_stopping=False)
+        pulumi.export("datarobotCustomApplicationId", example_custom_application.id)
+        pulumi.export("datarobotCustomApplicationSourceId", example_custom_application.source_id)
+        pulumi.export("datarobotCustomApplicationSourceVersionId", example_custom_application.source_version_id)
+        pulumi.export("datarobotCustomApplicationUrl", example_custom_application.application_url)
+        ```
 
         :param str resource_name: The name of the resource.
         :param CustomApplicationArgs args: The arguments to use to populate this resource's properties.
