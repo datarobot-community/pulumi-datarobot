@@ -69,6 +69,10 @@ export class RegisteredModel extends pulumi.CustomResource {
      */
     public readonly name!: pulumi.Output<string>;
     /**
+     * Runtime parameter values to set on the registered model
+     */
+    public readonly runtimeParameterValues!: pulumi.Output<{[key: string]: string}[] | undefined>;
+    /**
      * The list of Use Case IDs to add the Registered Model version to.
      */
     public readonly useCaseIds!: pulumi.Output<string[] | undefined>;
@@ -97,6 +101,7 @@ export class RegisteredModel extends pulumi.CustomResource {
             resourceInputs["customModelVersionId"] = state ? state.customModelVersionId : undefined;
             resourceInputs["description"] = state ? state.description : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
+            resourceInputs["runtimeParameterValues"] = state ? state.runtimeParameterValues : undefined;
             resourceInputs["useCaseIds"] = state ? state.useCaseIds : undefined;
             resourceInputs["versionId"] = state ? state.versionId : undefined;
             resourceInputs["versionName"] = state ? state.versionName : undefined;
@@ -108,6 +113,7 @@ export class RegisteredModel extends pulumi.CustomResource {
             resourceInputs["customModelVersionId"] = args ? args.customModelVersionId : undefined;
             resourceInputs["description"] = args ? args.description : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
+            resourceInputs["runtimeParameterValues"] = args ? args.runtimeParameterValues : undefined;
             resourceInputs["useCaseIds"] = args ? args.useCaseIds : undefined;
             resourceInputs["versionName"] = args ? args.versionName : undefined;
             resourceInputs["versionId"] = undefined /*out*/;
@@ -133,6 +139,10 @@ export interface RegisteredModelState {
      * The name of the Registered Model.
      */
     name?: pulumi.Input<string>;
+    /**
+     * Runtime parameter values to set on the registered model
+     */
+    runtimeParameterValues?: pulumi.Input<pulumi.Input<{[key: string]: pulumi.Input<string>}>[]>;
     /**
      * The list of Use Case IDs to add the Registered Model version to.
      */
@@ -163,6 +173,10 @@ export interface RegisteredModelArgs {
      * The name of the Registered Model.
      */
     name?: pulumi.Input<string>;
+    /**
+     * Runtime parameter values to set on the registered model
+     */
+    runtimeParameterValues?: pulumi.Input<pulumi.Input<{[key: string]: pulumi.Input<string>}>[]>;
     /**
      * The list of Use Case IDs to add the Registered Model version to.
      */

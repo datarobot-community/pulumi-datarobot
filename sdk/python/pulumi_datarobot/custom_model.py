@@ -27,7 +27,7 @@ class CustomModelArgs:
                  class_labels: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.str]]]] = None,
                  class_labels_file: Optional[pulumi.Input[builtins.str]] = None,
                  description: Optional[pulumi.Input[builtins.str]] = None,
-                 files: Optional[Any] = None,
+                 files: Optional[pulumi.Input[Sequence[pulumi.Input['CustomModelFileArgs']]]] = None,
                  folder_path: Optional[pulumi.Input[builtins.str]] = None,
                  guard_configurations: Optional[pulumi.Input[Sequence[pulumi.Input['CustomModelGuardConfigurationArgs']]]] = None,
                  is_proxy: Optional[pulumi.Input[builtins.bool]] = None,
@@ -56,7 +56,7 @@ class CustomModelArgs:
         :param pulumi.Input[Sequence[pulumi.Input[builtins.str]]] class_labels: Class labels for multiclass classification. Cannot be used with class*labels*file.
         :param pulumi.Input[builtins.str] class_labels_file: Path to file containing newline separated class labels for multiclass classification. Cannot be used with class_labels.
         :param pulumi.Input[builtins.str] description: The description of the Custom Model.
-        :param Any files: The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Custom Model. If list is of strings, then basenames will be used for tuples.
+        :param pulumi.Input[Sequence[pulumi.Input['CustomModelFileArgs']]] files: List of files to upload, each with a source (local path) and destination (path in model).
         :param pulumi.Input[builtins.str] folder_path: The path to a folder containing files to build the Custom Model. Each file in the folder is uploaded under path relative to a folder path.
         :param pulumi.Input[Sequence[pulumi.Input['CustomModelGuardConfigurationArgs']]] guard_configurations: The guard configurations for the Custom Model.
         :param pulumi.Input[builtins.bool] is_proxy: Flag indicating if the Custom Model is a proxy model.
@@ -196,14 +196,14 @@ class CustomModelArgs:
 
     @property
     @pulumi.getter
-    def files(self) -> Optional[Any]:
+    def files(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CustomModelFileArgs']]]]:
         """
-        The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Custom Model. If list is of strings, then basenames will be used for tuples.
+        List of files to upload, each with a source (local path) and destination (path in model).
         """
         return pulumi.get(self, "files")
 
     @files.setter
-    def files(self, value: Optional[Any]):
+    def files(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CustomModelFileArgs']]]]):
         pulumi.set(self, "files", value)
 
     @property
@@ -468,7 +468,7 @@ class _CustomModelState:
                  class_labels_file: Optional[pulumi.Input[builtins.str]] = None,
                  deployments_count: Optional[pulumi.Input[builtins.int]] = None,
                  description: Optional[pulumi.Input[builtins.str]] = None,
-                 files: Optional[Any] = None,
+                 files: Optional[pulumi.Input[Sequence[pulumi.Input['CustomModelFileArgs']]]] = None,
                  files_hashes: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.str]]]] = None,
                  folder_path: Optional[pulumi.Input[builtins.str]] = None,
                  folder_path_hash: Optional[pulumi.Input[builtins.str]] = None,
@@ -503,7 +503,7 @@ class _CustomModelState:
         :param pulumi.Input[builtins.str] class_labels_file: Path to file containing newline separated class labels for multiclass classification. Cannot be used with class_labels.
         :param pulumi.Input[builtins.int] deployments_count: The number of deployments for the Custom Model.
         :param pulumi.Input[builtins.str] description: The description of the Custom Model.
-        :param Any files: The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Custom Model. If list is of strings, then basenames will be used for tuples.
+        :param pulumi.Input[Sequence[pulumi.Input['CustomModelFileArgs']]] files: List of files to upload, each with a source (local path) and destination (path in model).
         :param pulumi.Input[Sequence[pulumi.Input[builtins.str]]] files_hashes: The hash of file contents for each file in files.
         :param pulumi.Input[builtins.str] folder_path: The path to a folder containing files to build the Custom Model. Each file in the folder is uploaded under path relative to a folder path.
         :param pulumi.Input[builtins.str] folder_path_hash: The hash of the folder path contents.
@@ -672,14 +672,14 @@ class _CustomModelState:
 
     @property
     @pulumi.getter
-    def files(self) -> Optional[Any]:
+    def files(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CustomModelFileArgs']]]]:
         """
-        The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Custom Model. If list is of strings, then basenames will be used for tuples.
+        List of files to upload, each with a source (local path) and destination (path in model).
         """
         return pulumi.get(self, "files")
 
     @files.setter
-    def files(self, value: Optional[Any]):
+    def files(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CustomModelFileArgs']]]]):
         pulumi.set(self, "files", value)
 
     @property
@@ -1006,7 +1006,7 @@ class CustomModel(pulumi.CustomResource):
                  class_labels: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.str]]]] = None,
                  class_labels_file: Optional[pulumi.Input[builtins.str]] = None,
                  description: Optional[pulumi.Input[builtins.str]] = None,
-                 files: Optional[Any] = None,
+                 files: Optional[pulumi.Input[Sequence[pulumi.Input[Union['CustomModelFileArgs', 'CustomModelFileArgsDict']]]]] = None,
                  folder_path: Optional[pulumi.Input[builtins.str]] = None,
                  guard_configurations: Optional[pulumi.Input[Sequence[pulumi.Input[Union['CustomModelGuardConfigurationArgs', 'CustomModelGuardConfigurationArgsDict']]]]] = None,
                  is_proxy: Optional[pulumi.Input[builtins.bool]] = None,
@@ -1095,7 +1095,7 @@ class CustomModel(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[builtins.str]]] class_labels: Class labels for multiclass classification. Cannot be used with class*labels*file.
         :param pulumi.Input[builtins.str] class_labels_file: Path to file containing newline separated class labels for multiclass classification. Cannot be used with class_labels.
         :param pulumi.Input[builtins.str] description: The description of the Custom Model.
-        :param Any files: The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Custom Model. If list is of strings, then basenames will be used for tuples.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['CustomModelFileArgs', 'CustomModelFileArgsDict']]]] files: List of files to upload, each with a source (local path) and destination (path in model).
         :param pulumi.Input[builtins.str] folder_path: The path to a folder containing files to build the Custom Model. Each file in the folder is uploaded under path relative to a folder path.
         :param pulumi.Input[Sequence[pulumi.Input[Union['CustomModelGuardConfigurationArgs', 'CustomModelGuardConfigurationArgsDict']]]] guard_configurations: The guard configurations for the Custom Model.
         :param pulumi.Input[builtins.bool] is_proxy: Flag indicating if the Custom Model is a proxy model.
@@ -1203,7 +1203,7 @@ class CustomModel(pulumi.CustomResource):
                  class_labels: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.str]]]] = None,
                  class_labels_file: Optional[pulumi.Input[builtins.str]] = None,
                  description: Optional[pulumi.Input[builtins.str]] = None,
-                 files: Optional[Any] = None,
+                 files: Optional[pulumi.Input[Sequence[pulumi.Input[Union['CustomModelFileArgs', 'CustomModelFileArgsDict']]]]] = None,
                  folder_path: Optional[pulumi.Input[builtins.str]] = None,
                  guard_configurations: Optional[pulumi.Input[Sequence[pulumi.Input[Union['CustomModelGuardConfigurationArgs', 'CustomModelGuardConfigurationArgsDict']]]]] = None,
                  is_proxy: Optional[pulumi.Input[builtins.bool]] = None,
@@ -1283,7 +1283,7 @@ class CustomModel(pulumi.CustomResource):
             class_labels_file: Optional[pulumi.Input[builtins.str]] = None,
             deployments_count: Optional[pulumi.Input[builtins.int]] = None,
             description: Optional[pulumi.Input[builtins.str]] = None,
-            files: Optional[Any] = None,
+            files: Optional[pulumi.Input[Sequence[pulumi.Input[Union['CustomModelFileArgs', 'CustomModelFileArgsDict']]]]] = None,
             files_hashes: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.str]]]] = None,
             folder_path: Optional[pulumi.Input[builtins.str]] = None,
             folder_path_hash: Optional[pulumi.Input[builtins.str]] = None,
@@ -1323,7 +1323,7 @@ class CustomModel(pulumi.CustomResource):
         :param pulumi.Input[builtins.str] class_labels_file: Path to file containing newline separated class labels for multiclass classification. Cannot be used with class_labels.
         :param pulumi.Input[builtins.int] deployments_count: The number of deployments for the Custom Model.
         :param pulumi.Input[builtins.str] description: The description of the Custom Model.
-        :param Any files: The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Custom Model. If list is of strings, then basenames will be used for tuples.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['CustomModelFileArgs', 'CustomModelFileArgsDict']]]] files: List of files to upload, each with a source (local path) and destination (path in model).
         :param pulumi.Input[Sequence[pulumi.Input[builtins.str]]] files_hashes: The hash of file contents for each file in files.
         :param pulumi.Input[builtins.str] folder_path: The path to a folder containing files to build the Custom Model. Each file in the folder is uploaded under path relative to a folder path.
         :param pulumi.Input[builtins.str] folder_path_hash: The hash of the folder path contents.
@@ -1440,9 +1440,9 @@ class CustomModel(pulumi.CustomResource):
 
     @property
     @pulumi.getter
-    def files(self) -> pulumi.Output[Optional[Any]]:
+    def files(self) -> pulumi.Output[Optional[Sequence['outputs.CustomModelFile']]]:
         """
-        The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Custom Model. If list is of strings, then basenames will be used for tuples.
+        List of files to upload, each with a source (local path) and destination (path in model).
         """
         return pulumi.get(self, "files")
 

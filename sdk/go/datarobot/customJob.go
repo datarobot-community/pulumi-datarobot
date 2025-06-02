@@ -23,8 +23,8 @@ type CustomJob struct {
 	EnvironmentId pulumi.StringOutput `pulumi:"environmentId"`
 	// The ID of the environment version to use with the Job.
 	EnvironmentVersionId pulumi.StringOutput `pulumi:"environmentVersionId"`
-	// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Job. If list is of strings, then basenames will be used for tuples.
-	Files pulumi.AnyOutput `pulumi:"files"`
+	// List of files to upload, each with a source (local path) and destination (path in job).
+	Files CustomJobFileArrayOutput `pulumi:"files"`
 	// The hash of file contents for each file in files.
 	FilesHashes pulumi.StringArrayOutput `pulumi:"filesHashes"`
 	// The path to a folder containing files to be uploaded. Each file in the folder is uploaded under path relative to a folder path.
@@ -83,8 +83,8 @@ type customJobState struct {
 	EnvironmentId *string `pulumi:"environmentId"`
 	// The ID of the environment version to use with the Job.
 	EnvironmentVersionId *string `pulumi:"environmentVersionId"`
-	// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Job. If list is of strings, then basenames will be used for tuples.
-	Files interface{} `pulumi:"files"`
+	// List of files to upload, each with a source (local path) and destination (path in job).
+	Files []CustomJobFile `pulumi:"files"`
 	// The hash of file contents for each file in files.
 	FilesHashes []string `pulumi:"filesHashes"`
 	// The path to a folder containing files to be uploaded. Each file in the folder is uploaded under path relative to a folder path.
@@ -114,8 +114,8 @@ type CustomJobState struct {
 	EnvironmentId pulumi.StringPtrInput
 	// The ID of the environment version to use with the Job.
 	EnvironmentVersionId pulumi.StringPtrInput
-	// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Job. If list is of strings, then basenames will be used for tuples.
-	Files pulumi.Input
+	// List of files to upload, each with a source (local path) and destination (path in job).
+	Files CustomJobFileArrayInput
 	// The hash of file contents for each file in files.
 	FilesHashes pulumi.StringArrayInput
 	// The path to a folder containing files to be uploaded. Each file in the folder is uploaded under path relative to a folder path.
@@ -149,8 +149,8 @@ type customJobArgs struct {
 	EnvironmentId *string `pulumi:"environmentId"`
 	// The ID of the environment version to use with the Job.
 	EnvironmentVersionId *string `pulumi:"environmentVersionId"`
-	// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Job. If list is of strings, then basenames will be used for tuples.
-	Files interface{} `pulumi:"files"`
+	// List of files to upload, each with a source (local path) and destination (path in job).
+	Files []CustomJobFile `pulumi:"files"`
 	// The path to a folder containing files to be uploaded. Each file in the folder is uploaded under path relative to a folder path.
 	FolderPath *string `pulumi:"folderPath"`
 	// The type of the Custom Job.
@@ -177,8 +177,8 @@ type CustomJobArgs struct {
 	EnvironmentId pulumi.StringPtrInput
 	// The ID of the environment version to use with the Job.
 	EnvironmentVersionId pulumi.StringPtrInput
-	// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Job. If list is of strings, then basenames will be used for tuples.
-	Files pulumi.Input
+	// List of files to upload, each with a source (local path) and destination (path in job).
+	Files CustomJobFileArrayInput
 	// The path to a folder containing files to be uploaded. Each file in the folder is uploaded under path relative to a folder path.
 	FolderPath pulumi.StringPtrInput
 	// The type of the Custom Job.
@@ -302,9 +302,9 @@ func (o CustomJobOutput) EnvironmentVersionId() pulumi.StringOutput {
 	return o.ApplyT(func(v *CustomJob) pulumi.StringOutput { return v.EnvironmentVersionId }).(pulumi.StringOutput)
 }
 
-// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Job. If list is of strings, then basenames will be used for tuples.
-func (o CustomJobOutput) Files() pulumi.AnyOutput {
-	return o.ApplyT(func(v *CustomJob) pulumi.AnyOutput { return v.Files }).(pulumi.AnyOutput)
+// List of files to upload, each with a source (local path) and destination (path in job).
+func (o CustomJobOutput) Files() CustomJobFileArrayOutput {
+	return o.ApplyT(func(v *CustomJob) CustomJobFileArrayOutput { return v.Files }).(CustomJobFileArrayOutput)
 }
 
 // The hash of file contents for each file in files.

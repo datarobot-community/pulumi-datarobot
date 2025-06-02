@@ -5,6 +5,28 @@ import * as pulumi from "@pulumi/pulumi";
 import * as inputs from "../types/input";
 import * as outputs from "../types/output";
 
+export interface ApplicationSourceFile {
+    /**
+     * Path in the application source.
+     */
+    destination: pulumi.Input<string>;
+    /**
+     * Local filesystem path.
+     */
+    source: pulumi.Input<string>;
+}
+
+export interface ApplicationSourceFromTemplateFile {
+    /**
+     * Path in the application source.
+     */
+    destination: pulumi.Input<string>;
+    /**
+     * Local filesystem path.
+     */
+    source: pulumi.Input<string>;
+}
+
 export interface ApplicationSourceFromTemplateResources {
     /**
      * The replicas for the Application Source.
@@ -251,6 +273,17 @@ export interface BatchPredictionJobDefinitionTimeseriesSettings {
     type?: pulumi.Input<string>;
 }
 
+export interface CustomJobFile {
+    /**
+     * Path in the job.
+     */
+    destination: pulumi.Input<string>;
+    /**
+     * Local filesystem path.
+     */
+    source: pulumi.Input<string>;
+}
+
 export interface CustomJobRuntimeParameterValue {
     /**
      * The name of the runtime parameter.
@@ -366,6 +399,17 @@ export interface CustomMetricFromJobValue {
     columnName?: pulumi.Input<string>;
 }
 
+export interface CustomMetricJobFile {
+    /**
+     * Path in the job.
+     */
+    destination: pulumi.Input<string>;
+    /**
+     * Local filesystem path.
+     */
+    source: pulumi.Input<string>;
+}
+
 export interface CustomMetricJobRuntimeParameterValue {
     /**
      * The name of the runtime parameter.
@@ -404,6 +448,17 @@ export interface CustomMetricValue {
      * Column name.
      */
     columnName?: pulumi.Input<string>;
+}
+
+export interface CustomModelFile {
+    /**
+     * Path in the model.
+     */
+    destination: pulumi.Input<string>;
+    /**
+     * Local filesystem path.
+     */
+    source: pulumi.Input<string>;
 }
 
 export interface CustomModelGuardConfiguration {
