@@ -33,7 +33,7 @@ import (
 //				TargetType:        pulumi.String("Binary"),
 //				TargetName:        pulumi.String("my_label"),
 //				BaseEnvironmentId: pulumi.String("65f9b27eab986d30d4c64268"),
-//				Files: pulumi.Any{
+//				Files: datarobot.CustomModelFileArray{
 //					"example.py",
 //				},
 //			})
@@ -63,6 +63,8 @@ type RegisteredModel struct {
 	Description pulumi.StringPtrOutput `pulumi:"description"`
 	// The name of the Registered Model.
 	Name pulumi.StringOutput `pulumi:"name"`
+	// Runtime parameter values to set on the registered model
+	RuntimeParameterValues pulumi.StringMapArrayOutput `pulumi:"runtimeParameterValues"`
 	// The list of Use Case IDs to add the Registered Model version to.
 	UseCaseIds pulumi.StringArrayOutput `pulumi:"useCaseIds"`
 	// The ID of the Registered Model Version.
@@ -110,6 +112,8 @@ type registeredModelState struct {
 	Description *string `pulumi:"description"`
 	// The name of the Registered Model.
 	Name *string `pulumi:"name"`
+	// Runtime parameter values to set on the registered model
+	RuntimeParameterValues []map[string]string `pulumi:"runtimeParameterValues"`
 	// The list of Use Case IDs to add the Registered Model version to.
 	UseCaseIds []string `pulumi:"useCaseIds"`
 	// The ID of the Registered Model Version.
@@ -125,6 +129,8 @@ type RegisteredModelState struct {
 	Description pulumi.StringPtrInput
 	// The name of the Registered Model.
 	Name pulumi.StringPtrInput
+	// Runtime parameter values to set on the registered model
+	RuntimeParameterValues pulumi.StringMapArrayInput
 	// The list of Use Case IDs to add the Registered Model version to.
 	UseCaseIds pulumi.StringArrayInput
 	// The ID of the Registered Model Version.
@@ -144,6 +150,8 @@ type registeredModelArgs struct {
 	Description *string `pulumi:"description"`
 	// The name of the Registered Model.
 	Name *string `pulumi:"name"`
+	// Runtime parameter values to set on the registered model
+	RuntimeParameterValues []map[string]string `pulumi:"runtimeParameterValues"`
 	// The list of Use Case IDs to add the Registered Model version to.
 	UseCaseIds []string `pulumi:"useCaseIds"`
 	// The name of the Registered Model Version.
@@ -158,6 +166,8 @@ type RegisteredModelArgs struct {
 	Description pulumi.StringPtrInput
 	// The name of the Registered Model.
 	Name pulumi.StringPtrInput
+	// Runtime parameter values to set on the registered model
+	RuntimeParameterValues pulumi.StringMapArrayInput
 	// The list of Use Case IDs to add the Registered Model version to.
 	UseCaseIds pulumi.StringArrayInput
 	// The name of the Registered Model Version.
@@ -264,6 +274,11 @@ func (o RegisteredModelOutput) Description() pulumi.StringPtrOutput {
 // The name of the Registered Model.
 func (o RegisteredModelOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *RegisteredModel) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
+}
+
+// Runtime parameter values to set on the registered model
+func (o RegisteredModelOutput) RuntimeParameterValues() pulumi.StringMapArrayOutput {
+	return o.ApplyT(func(v *RegisteredModel) pulumi.StringMapArrayOutput { return v.RuntimeParameterValues }).(pulumi.StringMapArrayOutput)
 }
 
 // The list of Use Case IDs to add the Registered Model version to.
