@@ -120,9 +120,9 @@ export class CustomModel extends pulumi.CustomResource {
      */
     public readonly description!: pulumi.Output<string>;
     /**
-     * List of files to upload, each with a source (local path) and destination (path in model).
+     * The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Custom Model. If list is of strings, then basenames will be used for tuples.
      */
-    public readonly files!: pulumi.Output<outputs.CustomModelFile[] | undefined>;
+    public readonly files!: pulumi.Output<any | undefined>;
     /**
      * The hash of file contents for each file in files.
      */
@@ -344,9 +344,9 @@ export interface CustomModelState {
      */
     description?: pulumi.Input<string>;
     /**
-     * List of files to upload, each with a source (local path) and destination (path in model).
+     * The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Custom Model. If list is of strings, then basenames will be used for tuples.
      */
-    files?: pulumi.Input<pulumi.Input<inputs.CustomModelFile>[]>;
+    files?: any;
     /**
      * The hash of file contents for each file in files.
      */
@@ -478,9 +478,9 @@ export interface CustomModelArgs {
      */
     description?: pulumi.Input<string>;
     /**
-     * List of files to upload, each with a source (local path) and destination (path in model).
+     * The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Custom Model. If list is of strings, then basenames will be used for tuples.
      */
-    files?: pulumi.Input<pulumi.Input<inputs.CustomModelFile>[]>;
+    files?: any;
     /**
      * The path to a folder containing files to build the Custom Model. Each file in the folder is uploaded under path relative to a folder path.
      */

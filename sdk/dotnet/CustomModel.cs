@@ -124,10 +124,10 @@ namespace DataRobotPulumi.Datarobot
         public Output<string> Description { get; private set; } = null!;
 
         /// <summary>
-        /// List of files to upload, each with a source (local path) and destination (path in model).
+        /// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Custom Model. If list is of strings, then basenames will be used for tuples.
         /// </summary>
         [Output("files")]
-        public Output<ImmutableArray<Outputs.CustomModelFile>> Files { get; private set; } = null!;
+        public Output<object?> Files { get; private set; } = null!;
 
         /// <summary>
         /// The hash of file contents for each file in files.
@@ -368,17 +368,11 @@ namespace DataRobotPulumi.Datarobot
         [Input("description")]
         public Input<string>? Description { get; set; }
 
-        [Input("files")]
-        private InputList<Inputs.CustomModelFileArgs>? _files;
-
         /// <summary>
-        /// List of files to upload, each with a source (local path) and destination (path in model).
+        /// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Custom Model. If list is of strings, then basenames will be used for tuples.
         /// </summary>
-        public InputList<Inputs.CustomModelFileArgs> Files
-        {
-            get => _files ?? (_files = new InputList<Inputs.CustomModelFileArgs>());
-            set => _files = value;
-        }
+        [Input("files")]
+        public Input<object>? Files { get; set; }
 
         /// <summary>
         /// The path to a folder containing files to build the Custom Model. Each file in the folder is uploaded under path relative to a folder path.
@@ -580,17 +574,11 @@ namespace DataRobotPulumi.Datarobot
         [Input("description")]
         public Input<string>? Description { get; set; }
 
-        [Input("files")]
-        private InputList<Inputs.CustomModelFileGetArgs>? _files;
-
         /// <summary>
-        /// List of files to upload, each with a source (local path) and destination (path in model).
+        /// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Custom Model. If list is of strings, then basenames will be used for tuples.
         /// </summary>
-        public InputList<Inputs.CustomModelFileGetArgs> Files
-        {
-            get => _files ?? (_files = new InputList<Inputs.CustomModelFileGetArgs>());
-            set => _files = value;
-        }
+        [Input("files")]
+        public Input<object>? Files { get; set; }
 
         [Input("filesHashes")]
         private InputList<string>? _filesHashes;
