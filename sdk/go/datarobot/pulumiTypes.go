@@ -2216,6 +2216,219 @@ func (o CustomJobRuntimeParameterValueArrayOutput) Index(i pulumi.IntInput) Cust
 	}).(CustomJobRuntimeParameterValueOutput)
 }
 
+type CustomJobSchedule struct {
+	// Days of the month when the job will run.
+	DayOfMonths []string `pulumi:"dayOfMonths"`
+	// Days of the week when the job will run.
+	DayOfWeeks []string `pulumi:"dayOfWeeks"`
+	// Hours of the day when the job will run.
+	Hours []string `pulumi:"hours"`
+	// Minutes of the day when the job will run.
+	Minutes []string `pulumi:"minutes"`
+	// Months of the year when the job will run.
+	Months []string `pulumi:"months"`
+}
+
+// CustomJobScheduleInput is an input type that accepts CustomJobScheduleArgs and CustomJobScheduleOutput values.
+// You can construct a concrete instance of `CustomJobScheduleInput` via:
+//
+//	CustomJobScheduleArgs{...}
+type CustomJobScheduleInput interface {
+	pulumi.Input
+
+	ToCustomJobScheduleOutput() CustomJobScheduleOutput
+	ToCustomJobScheduleOutputWithContext(context.Context) CustomJobScheduleOutput
+}
+
+type CustomJobScheduleArgs struct {
+	// Days of the month when the job will run.
+	DayOfMonths pulumi.StringArrayInput `pulumi:"dayOfMonths"`
+	// Days of the week when the job will run.
+	DayOfWeeks pulumi.StringArrayInput `pulumi:"dayOfWeeks"`
+	// Hours of the day when the job will run.
+	Hours pulumi.StringArrayInput `pulumi:"hours"`
+	// Minutes of the day when the job will run.
+	Minutes pulumi.StringArrayInput `pulumi:"minutes"`
+	// Months of the year when the job will run.
+	Months pulumi.StringArrayInput `pulumi:"months"`
+}
+
+func (CustomJobScheduleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomJobSchedule)(nil)).Elem()
+}
+
+func (i CustomJobScheduleArgs) ToCustomJobScheduleOutput() CustomJobScheduleOutput {
+	return i.ToCustomJobScheduleOutputWithContext(context.Background())
+}
+
+func (i CustomJobScheduleArgs) ToCustomJobScheduleOutputWithContext(ctx context.Context) CustomJobScheduleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomJobScheduleOutput)
+}
+
+func (i CustomJobScheduleArgs) ToCustomJobSchedulePtrOutput() CustomJobSchedulePtrOutput {
+	return i.ToCustomJobSchedulePtrOutputWithContext(context.Background())
+}
+
+func (i CustomJobScheduleArgs) ToCustomJobSchedulePtrOutputWithContext(ctx context.Context) CustomJobSchedulePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomJobScheduleOutput).ToCustomJobSchedulePtrOutputWithContext(ctx)
+}
+
+// CustomJobSchedulePtrInput is an input type that accepts CustomJobScheduleArgs, CustomJobSchedulePtr and CustomJobSchedulePtrOutput values.
+// You can construct a concrete instance of `CustomJobSchedulePtrInput` via:
+//
+//	        CustomJobScheduleArgs{...}
+//
+//	or:
+//
+//	        nil
+type CustomJobSchedulePtrInput interface {
+	pulumi.Input
+
+	ToCustomJobSchedulePtrOutput() CustomJobSchedulePtrOutput
+	ToCustomJobSchedulePtrOutputWithContext(context.Context) CustomJobSchedulePtrOutput
+}
+
+type customJobSchedulePtrType CustomJobScheduleArgs
+
+func CustomJobSchedulePtr(v *CustomJobScheduleArgs) CustomJobSchedulePtrInput {
+	return (*customJobSchedulePtrType)(v)
+}
+
+func (*customJobSchedulePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**CustomJobSchedule)(nil)).Elem()
+}
+
+func (i *customJobSchedulePtrType) ToCustomJobSchedulePtrOutput() CustomJobSchedulePtrOutput {
+	return i.ToCustomJobSchedulePtrOutputWithContext(context.Background())
+}
+
+func (i *customJobSchedulePtrType) ToCustomJobSchedulePtrOutputWithContext(ctx context.Context) CustomJobSchedulePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomJobSchedulePtrOutput)
+}
+
+type CustomJobScheduleOutput struct{ *pulumi.OutputState }
+
+func (CustomJobScheduleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomJobSchedule)(nil)).Elem()
+}
+
+func (o CustomJobScheduleOutput) ToCustomJobScheduleOutput() CustomJobScheduleOutput {
+	return o
+}
+
+func (o CustomJobScheduleOutput) ToCustomJobScheduleOutputWithContext(ctx context.Context) CustomJobScheduleOutput {
+	return o
+}
+
+func (o CustomJobScheduleOutput) ToCustomJobSchedulePtrOutput() CustomJobSchedulePtrOutput {
+	return o.ToCustomJobSchedulePtrOutputWithContext(context.Background())
+}
+
+func (o CustomJobScheduleOutput) ToCustomJobSchedulePtrOutputWithContext(ctx context.Context) CustomJobSchedulePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v CustomJobSchedule) *CustomJobSchedule {
+		return &v
+	}).(CustomJobSchedulePtrOutput)
+}
+
+// Days of the month when the job will run.
+func (o CustomJobScheduleOutput) DayOfMonths() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v CustomJobSchedule) []string { return v.DayOfMonths }).(pulumi.StringArrayOutput)
+}
+
+// Days of the week when the job will run.
+func (o CustomJobScheduleOutput) DayOfWeeks() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v CustomJobSchedule) []string { return v.DayOfWeeks }).(pulumi.StringArrayOutput)
+}
+
+// Hours of the day when the job will run.
+func (o CustomJobScheduleOutput) Hours() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v CustomJobSchedule) []string { return v.Hours }).(pulumi.StringArrayOutput)
+}
+
+// Minutes of the day when the job will run.
+func (o CustomJobScheduleOutput) Minutes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v CustomJobSchedule) []string { return v.Minutes }).(pulumi.StringArrayOutput)
+}
+
+// Months of the year when the job will run.
+func (o CustomJobScheduleOutput) Months() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v CustomJobSchedule) []string { return v.Months }).(pulumi.StringArrayOutput)
+}
+
+type CustomJobSchedulePtrOutput struct{ *pulumi.OutputState }
+
+func (CustomJobSchedulePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**CustomJobSchedule)(nil)).Elem()
+}
+
+func (o CustomJobSchedulePtrOutput) ToCustomJobSchedulePtrOutput() CustomJobSchedulePtrOutput {
+	return o
+}
+
+func (o CustomJobSchedulePtrOutput) ToCustomJobSchedulePtrOutputWithContext(ctx context.Context) CustomJobSchedulePtrOutput {
+	return o
+}
+
+func (o CustomJobSchedulePtrOutput) Elem() CustomJobScheduleOutput {
+	return o.ApplyT(func(v *CustomJobSchedule) CustomJobSchedule {
+		if v != nil {
+			return *v
+		}
+		var ret CustomJobSchedule
+		return ret
+	}).(CustomJobScheduleOutput)
+}
+
+// Days of the month when the job will run.
+func (o CustomJobSchedulePtrOutput) DayOfMonths() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *CustomJobSchedule) []string {
+		if v == nil {
+			return nil
+		}
+		return v.DayOfMonths
+	}).(pulumi.StringArrayOutput)
+}
+
+// Days of the week when the job will run.
+func (o CustomJobSchedulePtrOutput) DayOfWeeks() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *CustomJobSchedule) []string {
+		if v == nil {
+			return nil
+		}
+		return v.DayOfWeeks
+	}).(pulumi.StringArrayOutput)
+}
+
+// Hours of the day when the job will run.
+func (o CustomJobSchedulePtrOutput) Hours() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *CustomJobSchedule) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Hours
+	}).(pulumi.StringArrayOutput)
+}
+
+// Minutes of the day when the job will run.
+func (o CustomJobSchedulePtrOutput) Minutes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *CustomJobSchedule) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Minutes
+	}).(pulumi.StringArrayOutput)
+}
+
+// Months of the year when the job will run.
+func (o CustomJobSchedulePtrOutput) Months() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *CustomJobSchedule) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Months
+	}).(pulumi.StringArrayOutput)
+}
+
 type CustomMetricBatch struct {
 	// Column name.
 	ColumnName *string `pulumi:"columnName"`
@@ -11709,6 +11922,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*BatchPredictionJobDefinitionTimeseriesSettingsPtrInput)(nil)).Elem(), BatchPredictionJobDefinitionTimeseriesSettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomJobRuntimeParameterValueInput)(nil)).Elem(), CustomJobRuntimeParameterValueArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomJobRuntimeParameterValueArrayInput)(nil)).Elem(), CustomJobRuntimeParameterValueArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomJobScheduleInput)(nil)).Elem(), CustomJobScheduleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomJobSchedulePtrInput)(nil)).Elem(), CustomJobScheduleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomMetricBatchInput)(nil)).Elem(), CustomMetricBatchArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomMetricBatchPtrInput)(nil)).Elem(), CustomMetricBatchArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomMetricFromJobBatchInput)(nil)).Elem(), CustomMetricFromJobBatchArgs{})
@@ -11844,6 +12059,8 @@ func init() {
 	pulumi.RegisterOutputType(BatchPredictionJobDefinitionTimeseriesSettingsPtrOutput{})
 	pulumi.RegisterOutputType(CustomJobRuntimeParameterValueOutput{})
 	pulumi.RegisterOutputType(CustomJobRuntimeParameterValueArrayOutput{})
+	pulumi.RegisterOutputType(CustomJobScheduleOutput{})
+	pulumi.RegisterOutputType(CustomJobSchedulePtrOutput{})
 	pulumi.RegisterOutputType(CustomMetricBatchOutput{})
 	pulumi.RegisterOutputType(CustomMetricBatchPtrOutput{})
 	pulumi.RegisterOutputType(CustomMetricFromJobBatchOutput{})
