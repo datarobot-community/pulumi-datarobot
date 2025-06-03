@@ -266,29 +266,6 @@ export interface CustomJobRuntimeParameterValue {
     value: string;
 }
 
-export interface CustomJobSchedule {
-    /**
-     * Days of the month when the job will run.
-     */
-    dayOfMonths: string[];
-    /**
-     * Days of the week when the job will run.
-     */
-    dayOfWeeks: string[];
-    /**
-     * Hours of the day when the job will run.
-     */
-    hours: string[];
-    /**
-     * Minutes of the day when the job will run.
-     */
-    minutes: string[];
-    /**
-     * Months of the year when the job will run.
-     */
-    months: string[];
-}
-
 export interface CustomMetricBatch {
     /**
      * Column name.

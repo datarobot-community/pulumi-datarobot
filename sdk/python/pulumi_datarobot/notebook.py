@@ -144,7 +144,6 @@ class _NotebookState:
         pulumi.set(self, "use_case_id", value)
 
 
-@pulumi.type_token("datarobot:index/notebook:Notebook")
 class Notebook(pulumi.CustomResource):
     @overload
     def __init__(__self__,

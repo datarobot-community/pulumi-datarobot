@@ -208,7 +208,6 @@ class _RegisteredModelState:
         pulumi.set(self, "version_name", value)
 
 
-@pulumi.type_token("datarobot:index/registeredModel:RegisteredModel")
 class RegisteredModel(pulumi.CustomResource):
     @overload
     def __init__(__self__,

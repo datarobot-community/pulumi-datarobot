@@ -128,7 +128,6 @@ class _AzureCredentialState:
         pulumi.set(self, "name", value)
 
 
-@pulumi.type_token("datarobot:index/azureCredential:AzureCredential")
 class AzureCredential(pulumi.CustomResource):
     @overload
     def __init__(__self__,

@@ -256,7 +256,6 @@ class _CustomApplicationFromEnvironmentState:
         pulumi.set(self, "use_case_ids", value)
 
 
-@pulumi.type_token("datarobot:index/customApplicationFromEnvironment:CustomApplicationFromEnvironment")
 class CustomApplicationFromEnvironment(pulumi.CustomResource):
     @overload
     def __init__(__self__,

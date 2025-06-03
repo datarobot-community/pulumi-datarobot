@@ -128,7 +128,6 @@ class _DatasourceState:
         pulumi.set(self, "params", value)
 
 
-@pulumi.type_token("datarobot:index/datasource:Datasource")
 class Datasource(pulumi.CustomResource):
     @overload
     def __init__(__self__,

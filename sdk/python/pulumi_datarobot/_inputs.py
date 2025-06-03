@@ -38,8 +38,6 @@ __all__ = [
     'BatchPredictionJobDefinitionTimeseriesSettingsArgsDict',
     'CustomJobRuntimeParameterValueArgs',
     'CustomJobRuntimeParameterValueArgsDict',
-    'CustomJobScheduleArgs',
-    'CustomJobScheduleArgsDict',
     'CustomMetricBatchArgs',
     'CustomMetricBatchArgsDict',
     'CustomMetricFromJobBatchArgs',
@@ -1412,113 +1410,6 @@ class CustomJobRuntimeParameterValueArgs:
     @value.setter
     def value(self, value: pulumi.Input[builtins.str]):
         pulumi.set(self, "value", value)
-
-
-if not MYPY:
-    class CustomJobScheduleArgsDict(TypedDict):
-        day_of_months: pulumi.Input[Sequence[pulumi.Input[builtins.str]]]
-        """
-        Days of the month when the job will run.
-        """
-        day_of_weeks: pulumi.Input[Sequence[pulumi.Input[builtins.str]]]
-        """
-        Days of the week when the job will run.
-        """
-        hours: pulumi.Input[Sequence[pulumi.Input[builtins.str]]]
-        """
-        Hours of the day when the job will run.
-        """
-        minutes: pulumi.Input[Sequence[pulumi.Input[builtins.str]]]
-        """
-        Minutes of the day when the job will run.
-        """
-        months: pulumi.Input[Sequence[pulumi.Input[builtins.str]]]
-        """
-        Months of the year when the job will run.
-        """
-elif False:
-    CustomJobScheduleArgsDict: TypeAlias = Mapping[str, Any]
-
-@pulumi.input_type
-class CustomJobScheduleArgs:
-    def __init__(__self__, *,
-                 day_of_months: pulumi.Input[Sequence[pulumi.Input[builtins.str]]],
-                 day_of_weeks: pulumi.Input[Sequence[pulumi.Input[builtins.str]]],
-                 hours: pulumi.Input[Sequence[pulumi.Input[builtins.str]]],
-                 minutes: pulumi.Input[Sequence[pulumi.Input[builtins.str]]],
-                 months: pulumi.Input[Sequence[pulumi.Input[builtins.str]]]):
-        """
-        :param pulumi.Input[Sequence[pulumi.Input[builtins.str]]] day_of_months: Days of the month when the job will run.
-        :param pulumi.Input[Sequence[pulumi.Input[builtins.str]]] day_of_weeks: Days of the week when the job will run.
-        :param pulumi.Input[Sequence[pulumi.Input[builtins.str]]] hours: Hours of the day when the job will run.
-        :param pulumi.Input[Sequence[pulumi.Input[builtins.str]]] minutes: Minutes of the day when the job will run.
-        :param pulumi.Input[Sequence[pulumi.Input[builtins.str]]] months: Months of the year when the job will run.
-        """
-        pulumi.set(__self__, "day_of_months", day_of_months)
-        pulumi.set(__self__, "day_of_weeks", day_of_weeks)
-        pulumi.set(__self__, "hours", hours)
-        pulumi.set(__self__, "minutes", minutes)
-        pulumi.set(__self__, "months", months)
-
-    @property
-    @pulumi.getter(name="dayOfMonths")
-    def day_of_months(self) -> pulumi.Input[Sequence[pulumi.Input[builtins.str]]]:
-        """
-        Days of the month when the job will run.
-        """
-        return pulumi.get(self, "day_of_months")
-
-    @day_of_months.setter
-    def day_of_months(self, value: pulumi.Input[Sequence[pulumi.Input[builtins.str]]]):
-        pulumi.set(self, "day_of_months", value)
-
-    @property
-    @pulumi.getter(name="dayOfWeeks")
-    def day_of_weeks(self) -> pulumi.Input[Sequence[pulumi.Input[builtins.str]]]:
-        """
-        Days of the week when the job will run.
-        """
-        return pulumi.get(self, "day_of_weeks")
-
-    @day_of_weeks.setter
-    def day_of_weeks(self, value: pulumi.Input[Sequence[pulumi.Input[builtins.str]]]):
-        pulumi.set(self, "day_of_weeks", value)
-
-    @property
-    @pulumi.getter
-    def hours(self) -> pulumi.Input[Sequence[pulumi.Input[builtins.str]]]:
-        """
-        Hours of the day when the job will run.
-        """
-        return pulumi.get(self, "hours")
-
-    @hours.setter
-    def hours(self, value: pulumi.Input[Sequence[pulumi.Input[builtins.str]]]):
-        pulumi.set(self, "hours", value)
-
-    @property
-    @pulumi.getter
-    def minutes(self) -> pulumi.Input[Sequence[pulumi.Input[builtins.str]]]:
-        """
-        Minutes of the day when the job will run.
-        """
-        return pulumi.get(self, "minutes")
-
-    @minutes.setter
-    def minutes(self, value: pulumi.Input[Sequence[pulumi.Input[builtins.str]]]):
-        pulumi.set(self, "minutes", value)
-
-    @property
-    @pulumi.getter
-    def months(self) -> pulumi.Input[Sequence[pulumi.Input[builtins.str]]]:
-        """
-        Months of the year when the job will run.
-        """
-        return pulumi.get(self, "months")
-
-    @months.setter
-    def months(self, value: pulumi.Input[Sequence[pulumi.Input[builtins.str]]]):
-        pulumi.set(self, "months", value)
 
 
 if not MYPY:

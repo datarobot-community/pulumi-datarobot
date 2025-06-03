@@ -159,7 +159,6 @@ class _BasicCredentialState:
         pulumi.set(self, "user", value)
 
 
-@pulumi.type_token("datarobot:index/basicCredential:BasicCredential")
 class BasicCredential(pulumi.CustomResource):
     @overload
     def __init__(__self__,

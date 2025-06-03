@@ -995,7 +995,6 @@ class _CustomModelState:
         pulumi.set(self, "version_id", value)
 
 
-@pulumi.type_token("datarobot:index/customModel:CustomModel")
 class CustomModel(pulumi.CustomResource):
     @overload
     def __init__(__self__,

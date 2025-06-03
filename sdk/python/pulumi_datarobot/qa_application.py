@@ -240,7 +240,6 @@ class _QaApplicationState:
         pulumi.set(self, "source_version_id", value)
 
 
-@pulumi.type_token("datarobot:index/qaApplication:QaApplication")
 class QaApplication(pulumi.CustomResource):
     @overload
     def __init__(__self__,
