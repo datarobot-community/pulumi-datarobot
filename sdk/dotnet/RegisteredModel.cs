@@ -71,12 +71,6 @@ namespace DataRobotPulumi.Datarobot
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// Runtime parameter values to set on the registered model
-        /// </summary>
-        [Output("runtimeParameterValues")]
-        public Output<ImmutableArray<ImmutableDictionary<string, string>>> RuntimeParameterValues { get; private set; } = null!;
-
-        /// <summary>
         /// The list of Use Case IDs to add the Registered Model version to.
         /// </summary>
         [Output("useCaseIds")]
@@ -159,18 +153,6 @@ namespace DataRobotPulumi.Datarobot
         [Input("name")]
         public Input<string>? Name { get; set; }
 
-        [Input("runtimeParameterValues")]
-        private InputList<ImmutableDictionary<string, string>>? _runtimeParameterValues;
-
-        /// <summary>
-        /// Runtime parameter values to set on the registered model
-        /// </summary>
-        public InputList<ImmutableDictionary<string, string>> RuntimeParameterValues
-        {
-            get => _runtimeParameterValues ?? (_runtimeParameterValues = new InputList<ImmutableDictionary<string, string>>());
-            set => _runtimeParameterValues = value;
-        }
-
         [Input("useCaseIds")]
         private InputList<string>? _useCaseIds;
 
@@ -214,18 +196,6 @@ namespace DataRobotPulumi.Datarobot
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
-
-        [Input("runtimeParameterValues")]
-        private InputList<ImmutableDictionary<string, string>>? _runtimeParameterValues;
-
-        /// <summary>
-        /// Runtime parameter values to set on the registered model
-        /// </summary>
-        public InputList<ImmutableDictionary<string, string>> RuntimeParameterValues
-        {
-            get => _runtimeParameterValues ?? (_runtimeParameterValues = new InputList<ImmutableDictionary<string, string>>());
-            set => _runtimeParameterValues = value;
-        }
 
         [Input("useCaseIds")]
         private InputList<string>? _useCaseIds;

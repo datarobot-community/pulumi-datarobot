@@ -37,7 +37,7 @@ import (
 //			}
 //			exampleCustomModel, err := datarobot.NewCustomModel(ctx, "exampleCustomModel", &datarobot.CustomModelArgs{
 //				Description: pulumi.String("An example custom model from GitHub repository"),
-//				Files: datarobot.CustomModelFileArray{
+//				Files: pulumi.Any{
 //					"file1.py",
 //					"file2.py",
 //				},
@@ -69,8 +69,8 @@ type CustomModel struct {
 	DeploymentsCount pulumi.IntOutput `pulumi:"deploymentsCount"`
 	// The description of the Custom Model.
 	Description pulumi.StringOutput `pulumi:"description"`
-	// List of files to upload, each with a source (local path) and destination (path in model).
-	Files CustomModelFileArrayOutput `pulumi:"files"`
+	// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Custom Model. If list is of strings, then basenames will be used for tuples.
+	Files pulumi.AnyOutput `pulumi:"files"`
 	// The hash of file contents for each file in files.
 	FilesHashes pulumi.StringArrayOutput `pulumi:"filesHashes"`
 	// The path to a folder containing files to build the Custom Model. Each file in the folder is uploaded under path relative to a folder path.
@@ -167,8 +167,8 @@ type customModelState struct {
 	DeploymentsCount *int `pulumi:"deploymentsCount"`
 	// The description of the Custom Model.
 	Description *string `pulumi:"description"`
-	// List of files to upload, each with a source (local path) and destination (path in model).
-	Files []CustomModelFile `pulumi:"files"`
+	// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Custom Model. If list is of strings, then basenames will be used for tuples.
+	Files interface{} `pulumi:"files"`
 	// The hash of file contents for each file in files.
 	FilesHashes []string `pulumi:"filesHashes"`
 	// The path to a folder containing files to build the Custom Model. Each file in the folder is uploaded under path relative to a folder path.
@@ -236,8 +236,8 @@ type CustomModelState struct {
 	DeploymentsCount pulumi.IntPtrInput
 	// The description of the Custom Model.
 	Description pulumi.StringPtrInput
-	// List of files to upload, each with a source (local path) and destination (path in model).
-	Files CustomModelFileArrayInput
+	// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Custom Model. If list is of strings, then basenames will be used for tuples.
+	Files pulumi.Input
 	// The hash of file contents for each file in files.
 	FilesHashes pulumi.StringArrayInput
 	// The path to a folder containing files to build the Custom Model. Each file in the folder is uploaded under path relative to a folder path.
@@ -307,8 +307,8 @@ type customModelArgs struct {
 	ClassLabelsFile *string `pulumi:"classLabelsFile"`
 	// The description of the Custom Model.
 	Description *string `pulumi:"description"`
-	// List of files to upload, each with a source (local path) and destination (path in model).
-	Files []CustomModelFile `pulumi:"files"`
+	// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Custom Model. If list is of strings, then basenames will be used for tuples.
+	Files interface{} `pulumi:"files"`
 	// The path to a folder containing files to build the Custom Model. Each file in the folder is uploaded under path relative to a folder path.
 	FolderPath *string `pulumi:"folderPath"`
 	// The guard configurations for the Custom Model.
@@ -365,8 +365,8 @@ type CustomModelArgs struct {
 	ClassLabelsFile pulumi.StringPtrInput
 	// The description of the Custom Model.
 	Description pulumi.StringPtrInput
-	// List of files to upload, each with a source (local path) and destination (path in model).
-	Files CustomModelFileArrayInput
+	// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Custom Model. If list is of strings, then basenames will be used for tuples.
+	Files pulumi.Input
 	// The path to a folder containing files to build the Custom Model. Each file in the folder is uploaded under path relative to a folder path.
 	FolderPath pulumi.StringPtrInput
 	// The guard configurations for the Custom Model.
@@ -528,9 +528,9 @@ func (o CustomModelOutput) Description() pulumi.StringOutput {
 	return o.ApplyT(func(v *CustomModel) pulumi.StringOutput { return v.Description }).(pulumi.StringOutput)
 }
 
-// List of files to upload, each with a source (local path) and destination (path in model).
-func (o CustomModelOutput) Files() CustomModelFileArrayOutput {
-	return o.ApplyT(func(v *CustomModel) CustomModelFileArrayOutput { return v.Files }).(CustomModelFileArrayOutput)
+// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Custom Model. If list is of strings, then basenames will be used for tuples.
+func (o CustomModelOutput) Files() pulumi.AnyOutput {
+	return o.ApplyT(func(v *CustomModel) pulumi.AnyOutput { return v.Files }).(pulumi.AnyOutput)
 }
 
 // The hash of file contents for each file in files.

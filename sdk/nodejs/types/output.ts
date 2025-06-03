@@ -5,28 +5,6 @@ import * as pulumi from "@pulumi/pulumi";
 import * as inputs from "../types/input";
 import * as outputs from "../types/output";
 
-export interface ApplicationSourceFile {
-    /**
-     * Path in the application source.
-     */
-    destination: string;
-    /**
-     * Local filesystem path.
-     */
-    source: string;
-}
-
-export interface ApplicationSourceFromTemplateFile {
-    /**
-     * Path in the application source.
-     */
-    destination: string;
-    /**
-     * Local filesystem path.
-     */
-    source: string;
-}
-
 export interface ApplicationSourceFromTemplateResources {
     /**
      * The replicas for the Application Source.
@@ -273,17 +251,6 @@ export interface BatchPredictionJobDefinitionTimeseriesSettings {
     type?: string;
 }
 
-export interface CustomJobFile {
-    /**
-     * Path in the job.
-     */
-    destination: string;
-    /**
-     * Local filesystem path.
-     */
-    source: string;
-}
-
 export interface CustomJobRuntimeParameterValue {
     /**
      * The name of the runtime parameter.
@@ -399,17 +366,6 @@ export interface CustomMetricFromJobValue {
     columnName?: string;
 }
 
-export interface CustomMetricJobFile {
-    /**
-     * Path in the job.
-     */
-    destination: string;
-    /**
-     * Local filesystem path.
-     */
-    source: string;
-}
-
 export interface CustomMetricJobRuntimeParameterValue {
     /**
      * The name of the runtime parameter.
@@ -448,17 +404,6 @@ export interface CustomMetricValue {
      * Column name.
      */
     columnName?: string;
-}
-
-export interface CustomModelFile {
-    /**
-     * Path in the model.
-     */
-    destination: string;
-    /**
-     * Local filesystem path.
-     */
-    source: string;
 }
 
 export interface CustomModelGuardConfiguration {
