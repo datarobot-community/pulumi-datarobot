@@ -105,6 +105,25 @@
                     },
                     "runtime_parameter_values": {
                         "maxItemsOne": false
+                    },
+                    "schedule": {
+                        "fields": {
+                            "day_of_month": {
+                                "maxItemsOne": false
+                            },
+                            "day_of_week": {
+                                "maxItemsOne": false
+                            },
+                            "hour": {
+                                "maxItemsOne": false
+                            },
+                            "minute": {
+                                "maxItemsOne": false
+                            },
+                            "month": {
+                                "maxItemsOne": false
+                            }
+                        }
                     }
                 }
             },

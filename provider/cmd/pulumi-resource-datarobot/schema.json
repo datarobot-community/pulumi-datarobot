@@ -436,6 +436,53 @@
                 "value"
             ]
         },
+        "datarobot:index/CustomJobSchedule:CustomJobSchedule": {
+            "properties": {
+                "dayOfMonths": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Days of the month when the job will run.\n"
+                },
+                "dayOfWeeks": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Days of the week when the job will run.\n"
+                },
+                "hours": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Hours of the day when the job will run.\n"
+                },
+                "minutes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Minutes of the day when the job will run.\n"
+                },
+                "months": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Months of the year when the job will run.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "dayOfMonths",
+                "dayOfWeeks",
+                "hours",
+                "minutes",
+                "months"
+            ]
+        },
         "datarobot:index/CustomMetricBatch:CustomMetricBatch": {
             "properties": {
                 "columnName": {
@@ -2991,7 +3038,7 @@
             }
         },
         "datarobot:index/customJob:CustomJob": {
-            "description": "Custom Job\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@datarobot/pulumi-datarobot\";\n\nconst example = new datarobot.CustomJob(\"example\", {\n    jobType: \"retraining\",\n    files: [\n        \"file1.py\",\n        \"file2.py\",\n    ],\n    environmentId: \"65f9b27eab986d30d4c64268\",\n    description: \"Example Custom Job Description\",\n    runtimeParameterValues: [{\n        key: \"EXAMPLE_PARAM\",\n        type: \"string\",\n        value: \"val\",\n    }],\n    egressNetworkPolicy: \"none\",\n    resourceBundleId: \"cpu.micro\",\n});\nexport const exampleId = example.id;\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample = datarobot.CustomJob(\"example\",\n    job_type=\"retraining\",\n    files=[\n        \"file1.py\",\n        \"file2.py\",\n    ],\n    environment_id=\"65f9b27eab986d30d4c64268\",\n    description=\"Example Custom Job Description\",\n    runtime_parameter_values=[{\n        \"key\": \"EXAMPLE_PARAM\",\n        \"type\": \"string\",\n        \"value\": \"val\",\n    }],\n    egress_network_policy=\"none\",\n    resource_bundle_id=\"cpu.micro\")\npulumi.export(\"exampleId\", example.id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = DataRobotPulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Datarobot.CustomJob(\"example\", new()\n    {\n        JobType = \"retraining\",\n        Files = new[]\n        {\n            \"file1.py\",\n            \"file2.py\",\n        },\n        EnvironmentId = \"65f9b27eab986d30d4c64268\",\n        Description = \"Example Custom Job Description\",\n        RuntimeParameterValues = new[]\n        {\n            new Datarobot.Inputs.CustomJobRuntimeParameterValueArgs\n            {\n                Key = \"EXAMPLE_PARAM\",\n                Type = \"string\",\n                Value = \"val\",\n            },\n        },\n        EgressNetworkPolicy = \"none\",\n        ResourceBundleId = \"cpu.micro\",\n    });\n\n    return new Dictionary\u003cstring, object?\u003e\n    {\n        [\"exampleId\"] = example.Id,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texample, err := datarobot.NewCustomJob(ctx, \"example\", \u0026datarobot.CustomJobArgs{\n\t\t\tJobType: pulumi.String(\"retraining\"),\n\t\t\tFiles: pulumi.Any{\n\t\t\t\t\"file1.py\",\n\t\t\t\t\"file2.py\",\n\t\t\t},\n\t\t\tEnvironmentId: pulumi.String(\"65f9b27eab986d30d4c64268\"),\n\t\t\tDescription:   pulumi.String(\"Example Custom Job Description\"),\n\t\t\tRuntimeParameterValues: datarobot.CustomJobRuntimeParameterValueArray{\n\t\t\t\t\u0026datarobot.CustomJobRuntimeParameterValueArgs{\n\t\t\t\t\tKey:   pulumi.String(\"EXAMPLE_PARAM\"),\n\t\t\t\t\tType:  pulumi.String(\"string\"),\n\t\t\t\t\tValue: pulumi.String(\"val\"),\n\t\t\t\t},\n\t\t\t},\n\t\t\tEgressNetworkPolicy: pulumi.String(\"none\"),\n\t\t\tResourceBundleId:    pulumi.String(\"cpu.micro\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"exampleId\", example.ID())\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.CustomJob;\nimport com.pulumi.datarobot.CustomJobArgs;\nimport com.pulumi.datarobot.inputs.CustomJobRuntimeParameterValueArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new CustomJob(\"example\", CustomJobArgs.builder()\n            .jobType(\"retraining\")\n            .files(            \n                \"file1.py\",\n                \"file2.py\")\n            .environmentId(\"65f9b27eab986d30d4c64268\")\n            .description(\"Example Custom Job Description\")\n            .runtimeParameterValues(CustomJobRuntimeParameterValueArgs.builder()\n                .key(\"EXAMPLE_PARAM\")\n                .type(\"string\")\n                .value(\"val\")\n                .build())\n            .egressNetworkPolicy(\"none\")\n            .resourceBundleId(\"cpu.micro\")\n            .build());\n\n        ctx.export(\"exampleId\", example.id());\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: datarobot:CustomJob\n    properties:\n      jobType: retraining\n      files:\n        - file1.py\n        - file2.py\n      environmentId: 65f9b27eab986d30d4c64268\n      # Optional\n      description: Example Custom Job Description\n      runtimeParameterValues:\n        - key: EXAMPLE_PARAM\n          type: string\n          value: val\n      egressNetworkPolicy: none\n      resourceBundleId: cpu.micro\noutputs:\n  exampleId: ${example.id}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "description": "Custom Job\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```yaml\nresources:\n  example:\n    type: datarobot:CustomJob\n    properties:\n      jobType: retraining\n      files:\n        - file1.py\n        - file2.py\n      environmentId: 65f9b27eab986d30d4c64268\n      # Optional\n      description: Example Custom Job Description\n      runtimeParameterValues:\n        - key: EXAMPLE_PARAM\n          type: string\n          value: val\n      egressNetworkPolicy: none\n      resourceBundleId: cpu.micro\n      schedule:\n        minute:\n          - '15'\n          - '45'\n        hour:\n          - '*'\n        month:\n          - '*'\n        day_of_month:\n          - '*'\n        day_of_week:\n          - '*'\noutputs:\n  exampleId: ${example.id}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
             "properties": {
                 "description": {
                     "type": "string",
@@ -3046,6 +3093,14 @@
                         "$ref": "#/types/datarobot:index/CustomJobRuntimeParameterValue:CustomJobRuntimeParameterValue"
                     },
                     "description": "Additional parameters to be injected into a Job at runtime.\n"
+                },
+                "schedule": {
+                    "$ref": "#/types/datarobot:index/CustomJobSchedule:CustomJobSchedule",
+                    "description": "The schedule configuration for the custom job.\n"
+                },
+                "scheduleId": {
+                    "type": "string",
+                    "description": "The ID of the schedule associated with the custom job.\n"
                 }
             },
             "required": [
@@ -3056,7 +3111,8 @@
                 "folderPathHash",
                 "jobType",
                 "name",
-                "runtimeParameterValues"
+                "runtimeParameterValues",
+                "scheduleId"
             ],
             "inputProperties": {
                 "description": {
@@ -3101,6 +3157,14 @@
                         "$ref": "#/types/datarobot:index/CustomJobRuntimeParameterValue:CustomJobRuntimeParameterValue"
                     },
                     "description": "Additional parameters to be injected into a Job at runtime.\n"
+                },
+                "schedule": {
+                    "$ref": "#/types/datarobot:index/CustomJobSchedule:CustomJobSchedule",
+                    "description": "The schedule configuration for the custom job.\n"
+                },
+                "scheduleId": {
+                    "type": "string",
+                    "description": "The ID of the schedule associated with the custom job.\n"
                 }
             },
             "stateInputs": {
@@ -3159,6 +3223,14 @@
                             "$ref": "#/types/datarobot:index/CustomJobRuntimeParameterValue:CustomJobRuntimeParameterValue"
                         },
                         "description": "Additional parameters to be injected into a Job at runtime.\n"
+                    },
+                    "schedule": {
+                        "$ref": "#/types/datarobot:index/CustomJobSchedule:CustomJobSchedule",
+                        "description": "The schedule configuration for the custom job.\n"
+                    },
+                    "scheduleId": {
+                        "type": "string",
+                        "description": "The ID of the schedule associated with the custom job.\n"
                     }
                 },
                 "type": "object"
@@ -5057,7 +5129,7 @@
             }
         },
         "datarobot:index/deploymentRetrainingPolicy:DeploymentRetrainingPolicy": {
-            "description": "Deployment Retraining Policy\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```yaml\nresources:\n  example:\n    type: datarobot:DeploymentRetrainingPolicy\n    properties:\n      deploymentId: ${datarobot_deployment.example.id}\n      description: Example Description\n      # Optional\n      action: create_model_package\n      modelSelectionStrategy: custom_job\n      featureListStrategy: informative_features\n      projectOptionsStrategy: custom\n      trigger:\n        custom_job_id: ${datarobot_custom_job.example.id}\n      autopilotOptions: {}\n      projectOptions: {}\n      timeSeriesOptions: {}\noutputs:\n  datarobotDeploymentRetrainingPolicyId: ${example.id}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
+            "description": "Deployment Retraining Policy\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```yaml\nresources:\n  example:\n    type: datarobot:DeploymentRetrainingPolicy\n    properties:\n      deploymentId: ${datarobot_deployment.example.id}\n      description: Example Description\n      # Optional\n      action: create_model_package\n      modelSelectionStrategy: custom_job\n      featureListStrategy: informative_features\n      projectOptionsStrategy: custom\n      trigger:\n        custom_job_id: ${datarobot_custom_job.example.id}\n      autopilotOptions: {}\n      projectOptions: {}\n      timeSeriesOptions: {}\n      useCaseId: ${datarobot_use_case.example.id}\noutputs:\n  datarobotDeploymentRetrainingPolicyId: ${example.id}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
             "properties": {
                 "action": {
                     "type": "string",
@@ -5102,6 +5174,10 @@
                 "trigger": {
                     "$ref": "#/types/datarobot:index/DeploymentRetrainingPolicyTrigger:DeploymentRetrainingPolicyTrigger",
                     "description": "Retraining policy trigger.\n"
+                },
+                "useCaseId": {
+                    "type": "string",
+                    "description": "The ID of the use case to which the retraining policy belongs.\n"
                 }
             },
             "required": [
@@ -5159,6 +5235,10 @@
                 "trigger": {
                     "$ref": "#/types/datarobot:index/DeploymentRetrainingPolicyTrigger:DeploymentRetrainingPolicyTrigger",
                     "description": "Retraining policy trigger.\n"
+                },
+                "useCaseId": {
+                    "type": "string",
+                    "description": "The ID of the use case to which the retraining policy belongs.\n"
                 }
             },
             "requiredInputs": [
@@ -5211,6 +5291,10 @@
                     "trigger": {
                         "$ref": "#/types/datarobot:index/DeploymentRetrainingPolicyTrigger:DeploymentRetrainingPolicyTrigger",
                         "description": "Retraining policy trigger.\n"
+                    },
+                    "useCaseId": {
+                        "type": "string",
+                        "description": "The ID of the use case to which the retraining policy belongs.\n"
                     }
                 },
                 "type": "object"

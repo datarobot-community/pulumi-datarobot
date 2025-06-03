@@ -28,6 +28,7 @@ __all__ = [
     'BatchPredictionJobDefinitionSchedule',
     'BatchPredictionJobDefinitionTimeseriesSettings',
     'CustomJobRuntimeParameterValue',
+    'CustomJobSchedule',
     'CustomMetricBatch',
     'CustomMetricFromJobBatch',
     'CustomMetricFromJobParameterOverride',
@@ -987,6 +988,87 @@ class CustomJobRuntimeParameterValue(dict):
         The value of the runtime parameter (type conversion is handled internally).
         """
         return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class CustomJobSchedule(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "dayOfMonths":
+            suggest = "day_of_months"
+        elif key == "dayOfWeeks":
+            suggest = "day_of_weeks"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in CustomJobSchedule. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        CustomJobSchedule.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        CustomJobSchedule.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 day_of_months: Sequence[builtins.str],
+                 day_of_weeks: Sequence[builtins.str],
+                 hours: Sequence[builtins.str],
+                 minutes: Sequence[builtins.str],
+                 months: Sequence[builtins.str]):
+        """
+        :param Sequence[builtins.str] day_of_months: Days of the month when the job will run.
+        :param Sequence[builtins.str] day_of_weeks: Days of the week when the job will run.
+        :param Sequence[builtins.str] hours: Hours of the day when the job will run.
+        :param Sequence[builtins.str] minutes: Minutes of the day when the job will run.
+        :param Sequence[builtins.str] months: Months of the year when the job will run.
+        """
+        pulumi.set(__self__, "day_of_months", day_of_months)
+        pulumi.set(__self__, "day_of_weeks", day_of_weeks)
+        pulumi.set(__self__, "hours", hours)
+        pulumi.set(__self__, "minutes", minutes)
+        pulumi.set(__self__, "months", months)
+
+    @property
+    @pulumi.getter(name="dayOfMonths")
+    def day_of_months(self) -> Sequence[builtins.str]:
+        """
+        Days of the month when the job will run.
+        """
+        return pulumi.get(self, "day_of_months")
+
+    @property
+    @pulumi.getter(name="dayOfWeeks")
+    def day_of_weeks(self) -> Sequence[builtins.str]:
+        """
+        Days of the week when the job will run.
+        """
+        return pulumi.get(self, "day_of_weeks")
+
+    @property
+    @pulumi.getter
+    def hours(self) -> Sequence[builtins.str]:
+        """
+        Hours of the day when the job will run.
+        """
+        return pulumi.get(self, "hours")
+
+    @property
+    @pulumi.getter
+    def minutes(self) -> Sequence[builtins.str]:
+        """
+        Minutes of the day when the job will run.
+        """
+        return pulumi.get(self, "minutes")
+
+    @property
+    @pulumi.getter
+    def months(self) -> Sequence[builtins.str]:
+        """
+        Months of the year when the job will run.
+        """
+        return pulumi.get(self, "months")
 
 
 @pulumi.output_type
