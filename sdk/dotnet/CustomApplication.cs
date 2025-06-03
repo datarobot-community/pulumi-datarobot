@@ -12,6 +12,52 @@ namespace DataRobotPulumi.Datarobot
 {
     /// <summary>
     /// Custom Application
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Datarobot = DataRobotPulumi.Datarobot;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var exampleApplicationSource = new Datarobot.ApplicationSource("exampleApplicationSource", new()
+    ///     {
+    ///         Files = new[]
+    ///         {
+    ///             new[]
+    ///             {
+    ///                 "start-app.sh",
+    ///             },
+    ///             new[]
+    ///             {
+    ///                 "streamlit-app.py",
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    ///     var exampleCustomApplication = new Datarobot.CustomApplication("exampleCustomApplication", new()
+    ///     {
+    ///         SourceVersionId = exampleApplicationSource.VersionId,
+    ///         ExternalAccessEnabled = true,
+    ///         ExternalAccessRecipients = new[]
+    ///         {
+    ///             "recipient@example.com",
+    ///         },
+    ///         AllowAutoStopping = false,
+    ///     });
+    /// 
+    ///     return new Dictionary&lt;string, object?&gt;
+    ///     {
+    ///         ["datarobotCustomApplicationId"] = exampleCustomApplication.Id,
+    ///         ["datarobotCustomApplicationSourceId"] = exampleCustomApplication.SourceId,
+    ///         ["datarobotCustomApplicationSourceVersionId"] = exampleCustomApplication.SourceVersionId,
+    ///         ["datarobotCustomApplicationUrl"] = exampleCustomApplication.ApplicationUrl,
+    ///     };
+    /// });
+    /// ```
     /// </summary>
     [DatarobotResourceType("datarobot:index/customApplication:CustomApplication")]
     public partial class CustomApplication : global::Pulumi.CustomResource

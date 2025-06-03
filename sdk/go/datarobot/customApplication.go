@@ -13,6 +13,54 @@ import (
 )
 
 // Custom Application
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			exampleApplicationSource, err := datarobot.NewApplicationSource(ctx, "exampleApplicationSource", &datarobot.ApplicationSourceArgs{
+//				Files: pulumi.Any{
+//					[]string{
+//						"start-app.sh",
+//					},
+//					[]string{
+//						"streamlit-app.py",
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleCustomApplication, err := datarobot.NewCustomApplication(ctx, "exampleCustomApplication", &datarobot.CustomApplicationArgs{
+//				SourceVersionId:       exampleApplicationSource.VersionId,
+//				ExternalAccessEnabled: pulumi.Bool(true),
+//				ExternalAccessRecipients: pulumi.StringArray{
+//					pulumi.String("recipient@example.com"),
+//				},
+//				AllowAutoStopping: pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			ctx.Export("datarobotCustomApplicationId", exampleCustomApplication.ID())
+//			ctx.Export("datarobotCustomApplicationSourceId", exampleCustomApplication.SourceId)
+//			ctx.Export("datarobotCustomApplicationSourceVersionId", exampleCustomApplication.SourceVersionId)
+//			ctx.Export("datarobotCustomApplicationUrl", exampleCustomApplication.ApplicationUrl)
+//			return nil
+//		})
+//	}
+//
+// ```
 type CustomApplication struct {
 	pulumi.CustomResourceState
 

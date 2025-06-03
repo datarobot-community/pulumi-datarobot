@@ -13,218 +13,6 @@ import (
 
 var _ = internal.GetEnvOrDefault
 
-type ApplicationSourceFile struct {
-	// Path in the application source.
-	Destination string `pulumi:"destination"`
-	// Local filesystem path.
-	Source string `pulumi:"source"`
-}
-
-// ApplicationSourceFileInput is an input type that accepts ApplicationSourceFileArgs and ApplicationSourceFileOutput values.
-// You can construct a concrete instance of `ApplicationSourceFileInput` via:
-//
-//	ApplicationSourceFileArgs{...}
-type ApplicationSourceFileInput interface {
-	pulumi.Input
-
-	ToApplicationSourceFileOutput() ApplicationSourceFileOutput
-	ToApplicationSourceFileOutputWithContext(context.Context) ApplicationSourceFileOutput
-}
-
-type ApplicationSourceFileArgs struct {
-	// Path in the application source.
-	Destination pulumi.StringInput `pulumi:"destination"`
-	// Local filesystem path.
-	Source pulumi.StringInput `pulumi:"source"`
-}
-
-func (ApplicationSourceFileArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ApplicationSourceFile)(nil)).Elem()
-}
-
-func (i ApplicationSourceFileArgs) ToApplicationSourceFileOutput() ApplicationSourceFileOutput {
-	return i.ToApplicationSourceFileOutputWithContext(context.Background())
-}
-
-func (i ApplicationSourceFileArgs) ToApplicationSourceFileOutputWithContext(ctx context.Context) ApplicationSourceFileOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ApplicationSourceFileOutput)
-}
-
-// ApplicationSourceFileArrayInput is an input type that accepts ApplicationSourceFileArray and ApplicationSourceFileArrayOutput values.
-// You can construct a concrete instance of `ApplicationSourceFileArrayInput` via:
-//
-//	ApplicationSourceFileArray{ ApplicationSourceFileArgs{...} }
-type ApplicationSourceFileArrayInput interface {
-	pulumi.Input
-
-	ToApplicationSourceFileArrayOutput() ApplicationSourceFileArrayOutput
-	ToApplicationSourceFileArrayOutputWithContext(context.Context) ApplicationSourceFileArrayOutput
-}
-
-type ApplicationSourceFileArray []ApplicationSourceFileInput
-
-func (ApplicationSourceFileArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ApplicationSourceFile)(nil)).Elem()
-}
-
-func (i ApplicationSourceFileArray) ToApplicationSourceFileArrayOutput() ApplicationSourceFileArrayOutput {
-	return i.ToApplicationSourceFileArrayOutputWithContext(context.Background())
-}
-
-func (i ApplicationSourceFileArray) ToApplicationSourceFileArrayOutputWithContext(ctx context.Context) ApplicationSourceFileArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ApplicationSourceFileArrayOutput)
-}
-
-type ApplicationSourceFileOutput struct{ *pulumi.OutputState }
-
-func (ApplicationSourceFileOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ApplicationSourceFile)(nil)).Elem()
-}
-
-func (o ApplicationSourceFileOutput) ToApplicationSourceFileOutput() ApplicationSourceFileOutput {
-	return o
-}
-
-func (o ApplicationSourceFileOutput) ToApplicationSourceFileOutputWithContext(ctx context.Context) ApplicationSourceFileOutput {
-	return o
-}
-
-// Path in the application source.
-func (o ApplicationSourceFileOutput) Destination() pulumi.StringOutput {
-	return o.ApplyT(func(v ApplicationSourceFile) string { return v.Destination }).(pulumi.StringOutput)
-}
-
-// Local filesystem path.
-func (o ApplicationSourceFileOutput) Source() pulumi.StringOutput {
-	return o.ApplyT(func(v ApplicationSourceFile) string { return v.Source }).(pulumi.StringOutput)
-}
-
-type ApplicationSourceFileArrayOutput struct{ *pulumi.OutputState }
-
-func (ApplicationSourceFileArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ApplicationSourceFile)(nil)).Elem()
-}
-
-func (o ApplicationSourceFileArrayOutput) ToApplicationSourceFileArrayOutput() ApplicationSourceFileArrayOutput {
-	return o
-}
-
-func (o ApplicationSourceFileArrayOutput) ToApplicationSourceFileArrayOutputWithContext(ctx context.Context) ApplicationSourceFileArrayOutput {
-	return o
-}
-
-func (o ApplicationSourceFileArrayOutput) Index(i pulumi.IntInput) ApplicationSourceFileOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ApplicationSourceFile {
-		return vs[0].([]ApplicationSourceFile)[vs[1].(int)]
-	}).(ApplicationSourceFileOutput)
-}
-
-type ApplicationSourceFromTemplateFile struct {
-	// Path in the application source.
-	Destination string `pulumi:"destination"`
-	// Local filesystem path.
-	Source string `pulumi:"source"`
-}
-
-// ApplicationSourceFromTemplateFileInput is an input type that accepts ApplicationSourceFromTemplateFileArgs and ApplicationSourceFromTemplateFileOutput values.
-// You can construct a concrete instance of `ApplicationSourceFromTemplateFileInput` via:
-//
-//	ApplicationSourceFromTemplateFileArgs{...}
-type ApplicationSourceFromTemplateFileInput interface {
-	pulumi.Input
-
-	ToApplicationSourceFromTemplateFileOutput() ApplicationSourceFromTemplateFileOutput
-	ToApplicationSourceFromTemplateFileOutputWithContext(context.Context) ApplicationSourceFromTemplateFileOutput
-}
-
-type ApplicationSourceFromTemplateFileArgs struct {
-	// Path in the application source.
-	Destination pulumi.StringInput `pulumi:"destination"`
-	// Local filesystem path.
-	Source pulumi.StringInput `pulumi:"source"`
-}
-
-func (ApplicationSourceFromTemplateFileArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ApplicationSourceFromTemplateFile)(nil)).Elem()
-}
-
-func (i ApplicationSourceFromTemplateFileArgs) ToApplicationSourceFromTemplateFileOutput() ApplicationSourceFromTemplateFileOutput {
-	return i.ToApplicationSourceFromTemplateFileOutputWithContext(context.Background())
-}
-
-func (i ApplicationSourceFromTemplateFileArgs) ToApplicationSourceFromTemplateFileOutputWithContext(ctx context.Context) ApplicationSourceFromTemplateFileOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ApplicationSourceFromTemplateFileOutput)
-}
-
-// ApplicationSourceFromTemplateFileArrayInput is an input type that accepts ApplicationSourceFromTemplateFileArray and ApplicationSourceFromTemplateFileArrayOutput values.
-// You can construct a concrete instance of `ApplicationSourceFromTemplateFileArrayInput` via:
-//
-//	ApplicationSourceFromTemplateFileArray{ ApplicationSourceFromTemplateFileArgs{...} }
-type ApplicationSourceFromTemplateFileArrayInput interface {
-	pulumi.Input
-
-	ToApplicationSourceFromTemplateFileArrayOutput() ApplicationSourceFromTemplateFileArrayOutput
-	ToApplicationSourceFromTemplateFileArrayOutputWithContext(context.Context) ApplicationSourceFromTemplateFileArrayOutput
-}
-
-type ApplicationSourceFromTemplateFileArray []ApplicationSourceFromTemplateFileInput
-
-func (ApplicationSourceFromTemplateFileArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ApplicationSourceFromTemplateFile)(nil)).Elem()
-}
-
-func (i ApplicationSourceFromTemplateFileArray) ToApplicationSourceFromTemplateFileArrayOutput() ApplicationSourceFromTemplateFileArrayOutput {
-	return i.ToApplicationSourceFromTemplateFileArrayOutputWithContext(context.Background())
-}
-
-func (i ApplicationSourceFromTemplateFileArray) ToApplicationSourceFromTemplateFileArrayOutputWithContext(ctx context.Context) ApplicationSourceFromTemplateFileArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ApplicationSourceFromTemplateFileArrayOutput)
-}
-
-type ApplicationSourceFromTemplateFileOutput struct{ *pulumi.OutputState }
-
-func (ApplicationSourceFromTemplateFileOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ApplicationSourceFromTemplateFile)(nil)).Elem()
-}
-
-func (o ApplicationSourceFromTemplateFileOutput) ToApplicationSourceFromTemplateFileOutput() ApplicationSourceFromTemplateFileOutput {
-	return o
-}
-
-func (o ApplicationSourceFromTemplateFileOutput) ToApplicationSourceFromTemplateFileOutputWithContext(ctx context.Context) ApplicationSourceFromTemplateFileOutput {
-	return o
-}
-
-// Path in the application source.
-func (o ApplicationSourceFromTemplateFileOutput) Destination() pulumi.StringOutput {
-	return o.ApplyT(func(v ApplicationSourceFromTemplateFile) string { return v.Destination }).(pulumi.StringOutput)
-}
-
-// Local filesystem path.
-func (o ApplicationSourceFromTemplateFileOutput) Source() pulumi.StringOutput {
-	return o.ApplyT(func(v ApplicationSourceFromTemplateFile) string { return v.Source }).(pulumi.StringOutput)
-}
-
-type ApplicationSourceFromTemplateFileArrayOutput struct{ *pulumi.OutputState }
-
-func (ApplicationSourceFromTemplateFileArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]ApplicationSourceFromTemplateFile)(nil)).Elem()
-}
-
-func (o ApplicationSourceFromTemplateFileArrayOutput) ToApplicationSourceFromTemplateFileArrayOutput() ApplicationSourceFromTemplateFileArrayOutput {
-	return o
-}
-
-func (o ApplicationSourceFromTemplateFileArrayOutput) ToApplicationSourceFromTemplateFileArrayOutputWithContext(ctx context.Context) ApplicationSourceFromTemplateFileArrayOutput {
-	return o
-}
-
-func (o ApplicationSourceFromTemplateFileArrayOutput) Index(i pulumi.IntInput) ApplicationSourceFromTemplateFileOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ApplicationSourceFromTemplateFile {
-		return vs[0].([]ApplicationSourceFromTemplateFile)[vs[1].(int)]
-	}).(ApplicationSourceFromTemplateFileOutput)
-}
-
 type ApplicationSourceFromTemplateResources struct {
 	// The replicas for the Application Source.
 	Replicas *int `pulumi:"replicas"`
@@ -2313,112 +2101,6 @@ func (o BatchPredictionJobDefinitionTimeseriesSettingsPtrOutput) Type() pulumi.S
 	}).(pulumi.StringPtrOutput)
 }
 
-type CustomJobFile struct {
-	// Path in the job.
-	Destination string `pulumi:"destination"`
-	// Local filesystem path.
-	Source string `pulumi:"source"`
-}
-
-// CustomJobFileInput is an input type that accepts CustomJobFileArgs and CustomJobFileOutput values.
-// You can construct a concrete instance of `CustomJobFileInput` via:
-//
-//	CustomJobFileArgs{...}
-type CustomJobFileInput interface {
-	pulumi.Input
-
-	ToCustomJobFileOutput() CustomJobFileOutput
-	ToCustomJobFileOutputWithContext(context.Context) CustomJobFileOutput
-}
-
-type CustomJobFileArgs struct {
-	// Path in the job.
-	Destination pulumi.StringInput `pulumi:"destination"`
-	// Local filesystem path.
-	Source pulumi.StringInput `pulumi:"source"`
-}
-
-func (CustomJobFileArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CustomJobFile)(nil)).Elem()
-}
-
-func (i CustomJobFileArgs) ToCustomJobFileOutput() CustomJobFileOutput {
-	return i.ToCustomJobFileOutputWithContext(context.Background())
-}
-
-func (i CustomJobFileArgs) ToCustomJobFileOutputWithContext(ctx context.Context) CustomJobFileOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CustomJobFileOutput)
-}
-
-// CustomJobFileArrayInput is an input type that accepts CustomJobFileArray and CustomJobFileArrayOutput values.
-// You can construct a concrete instance of `CustomJobFileArrayInput` via:
-//
-//	CustomJobFileArray{ CustomJobFileArgs{...} }
-type CustomJobFileArrayInput interface {
-	pulumi.Input
-
-	ToCustomJobFileArrayOutput() CustomJobFileArrayOutput
-	ToCustomJobFileArrayOutputWithContext(context.Context) CustomJobFileArrayOutput
-}
-
-type CustomJobFileArray []CustomJobFileInput
-
-func (CustomJobFileArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CustomJobFile)(nil)).Elem()
-}
-
-func (i CustomJobFileArray) ToCustomJobFileArrayOutput() CustomJobFileArrayOutput {
-	return i.ToCustomJobFileArrayOutputWithContext(context.Background())
-}
-
-func (i CustomJobFileArray) ToCustomJobFileArrayOutputWithContext(ctx context.Context) CustomJobFileArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CustomJobFileArrayOutput)
-}
-
-type CustomJobFileOutput struct{ *pulumi.OutputState }
-
-func (CustomJobFileOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CustomJobFile)(nil)).Elem()
-}
-
-func (o CustomJobFileOutput) ToCustomJobFileOutput() CustomJobFileOutput {
-	return o
-}
-
-func (o CustomJobFileOutput) ToCustomJobFileOutputWithContext(ctx context.Context) CustomJobFileOutput {
-	return o
-}
-
-// Path in the job.
-func (o CustomJobFileOutput) Destination() pulumi.StringOutput {
-	return o.ApplyT(func(v CustomJobFile) string { return v.Destination }).(pulumi.StringOutput)
-}
-
-// Local filesystem path.
-func (o CustomJobFileOutput) Source() pulumi.StringOutput {
-	return o.ApplyT(func(v CustomJobFile) string { return v.Source }).(pulumi.StringOutput)
-}
-
-type CustomJobFileArrayOutput struct{ *pulumi.OutputState }
-
-func (CustomJobFileArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CustomJobFile)(nil)).Elem()
-}
-
-func (o CustomJobFileArrayOutput) ToCustomJobFileArrayOutput() CustomJobFileArrayOutput {
-	return o
-}
-
-func (o CustomJobFileArrayOutput) ToCustomJobFileArrayOutputWithContext(ctx context.Context) CustomJobFileArrayOutput {
-	return o
-}
-
-func (o CustomJobFileArrayOutput) Index(i pulumi.IntInput) CustomJobFileOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CustomJobFile {
-		return vs[0].([]CustomJobFile)[vs[1].(int)]
-	}).(CustomJobFileOutput)
-}
-
 type CustomJobRuntimeParameterValue struct {
 	// The name of the runtime parameter.
 	Key string `pulumi:"key"`
@@ -2532,219 +2214,6 @@ func (o CustomJobRuntimeParameterValueArrayOutput) Index(i pulumi.IntInput) Cust
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CustomJobRuntimeParameterValue {
 		return vs[0].([]CustomJobRuntimeParameterValue)[vs[1].(int)]
 	}).(CustomJobRuntimeParameterValueOutput)
-}
-
-type CustomJobSchedule struct {
-	// Days of the month when the job will run.
-	DayOfMonths []string `pulumi:"dayOfMonths"`
-	// Days of the week when the job will run.
-	DayOfWeeks []string `pulumi:"dayOfWeeks"`
-	// Hours of the day when the job will run.
-	Hours []string `pulumi:"hours"`
-	// Minutes of the day when the job will run.
-	Minutes []string `pulumi:"minutes"`
-	// Months of the year when the job will run.
-	Months []string `pulumi:"months"`
-}
-
-// CustomJobScheduleInput is an input type that accepts CustomJobScheduleArgs and CustomJobScheduleOutput values.
-// You can construct a concrete instance of `CustomJobScheduleInput` via:
-//
-//	CustomJobScheduleArgs{...}
-type CustomJobScheduleInput interface {
-	pulumi.Input
-
-	ToCustomJobScheduleOutput() CustomJobScheduleOutput
-	ToCustomJobScheduleOutputWithContext(context.Context) CustomJobScheduleOutput
-}
-
-type CustomJobScheduleArgs struct {
-	// Days of the month when the job will run.
-	DayOfMonths pulumi.StringArrayInput `pulumi:"dayOfMonths"`
-	// Days of the week when the job will run.
-	DayOfWeeks pulumi.StringArrayInput `pulumi:"dayOfWeeks"`
-	// Hours of the day when the job will run.
-	Hours pulumi.StringArrayInput `pulumi:"hours"`
-	// Minutes of the day when the job will run.
-	Minutes pulumi.StringArrayInput `pulumi:"minutes"`
-	// Months of the year when the job will run.
-	Months pulumi.StringArrayInput `pulumi:"months"`
-}
-
-func (CustomJobScheduleArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CustomJobSchedule)(nil)).Elem()
-}
-
-func (i CustomJobScheduleArgs) ToCustomJobScheduleOutput() CustomJobScheduleOutput {
-	return i.ToCustomJobScheduleOutputWithContext(context.Background())
-}
-
-func (i CustomJobScheduleArgs) ToCustomJobScheduleOutputWithContext(ctx context.Context) CustomJobScheduleOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CustomJobScheduleOutput)
-}
-
-func (i CustomJobScheduleArgs) ToCustomJobSchedulePtrOutput() CustomJobSchedulePtrOutput {
-	return i.ToCustomJobSchedulePtrOutputWithContext(context.Background())
-}
-
-func (i CustomJobScheduleArgs) ToCustomJobSchedulePtrOutputWithContext(ctx context.Context) CustomJobSchedulePtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CustomJobScheduleOutput).ToCustomJobSchedulePtrOutputWithContext(ctx)
-}
-
-// CustomJobSchedulePtrInput is an input type that accepts CustomJobScheduleArgs, CustomJobSchedulePtr and CustomJobSchedulePtrOutput values.
-// You can construct a concrete instance of `CustomJobSchedulePtrInput` via:
-//
-//	        CustomJobScheduleArgs{...}
-//
-//	or:
-//
-//	        nil
-type CustomJobSchedulePtrInput interface {
-	pulumi.Input
-
-	ToCustomJobSchedulePtrOutput() CustomJobSchedulePtrOutput
-	ToCustomJobSchedulePtrOutputWithContext(context.Context) CustomJobSchedulePtrOutput
-}
-
-type customJobSchedulePtrType CustomJobScheduleArgs
-
-func CustomJobSchedulePtr(v *CustomJobScheduleArgs) CustomJobSchedulePtrInput {
-	return (*customJobSchedulePtrType)(v)
-}
-
-func (*customJobSchedulePtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**CustomJobSchedule)(nil)).Elem()
-}
-
-func (i *customJobSchedulePtrType) ToCustomJobSchedulePtrOutput() CustomJobSchedulePtrOutput {
-	return i.ToCustomJobSchedulePtrOutputWithContext(context.Background())
-}
-
-func (i *customJobSchedulePtrType) ToCustomJobSchedulePtrOutputWithContext(ctx context.Context) CustomJobSchedulePtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CustomJobSchedulePtrOutput)
-}
-
-type CustomJobScheduleOutput struct{ *pulumi.OutputState }
-
-func (CustomJobScheduleOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CustomJobSchedule)(nil)).Elem()
-}
-
-func (o CustomJobScheduleOutput) ToCustomJobScheduleOutput() CustomJobScheduleOutput {
-	return o
-}
-
-func (o CustomJobScheduleOutput) ToCustomJobScheduleOutputWithContext(ctx context.Context) CustomJobScheduleOutput {
-	return o
-}
-
-func (o CustomJobScheduleOutput) ToCustomJobSchedulePtrOutput() CustomJobSchedulePtrOutput {
-	return o.ToCustomJobSchedulePtrOutputWithContext(context.Background())
-}
-
-func (o CustomJobScheduleOutput) ToCustomJobSchedulePtrOutputWithContext(ctx context.Context) CustomJobSchedulePtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v CustomJobSchedule) *CustomJobSchedule {
-		return &v
-	}).(CustomJobSchedulePtrOutput)
-}
-
-// Days of the month when the job will run.
-func (o CustomJobScheduleOutput) DayOfMonths() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v CustomJobSchedule) []string { return v.DayOfMonths }).(pulumi.StringArrayOutput)
-}
-
-// Days of the week when the job will run.
-func (o CustomJobScheduleOutput) DayOfWeeks() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v CustomJobSchedule) []string { return v.DayOfWeeks }).(pulumi.StringArrayOutput)
-}
-
-// Hours of the day when the job will run.
-func (o CustomJobScheduleOutput) Hours() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v CustomJobSchedule) []string { return v.Hours }).(pulumi.StringArrayOutput)
-}
-
-// Minutes of the day when the job will run.
-func (o CustomJobScheduleOutput) Minutes() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v CustomJobSchedule) []string { return v.Minutes }).(pulumi.StringArrayOutput)
-}
-
-// Months of the year when the job will run.
-func (o CustomJobScheduleOutput) Months() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v CustomJobSchedule) []string { return v.Months }).(pulumi.StringArrayOutput)
-}
-
-type CustomJobSchedulePtrOutput struct{ *pulumi.OutputState }
-
-func (CustomJobSchedulePtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**CustomJobSchedule)(nil)).Elem()
-}
-
-func (o CustomJobSchedulePtrOutput) ToCustomJobSchedulePtrOutput() CustomJobSchedulePtrOutput {
-	return o
-}
-
-func (o CustomJobSchedulePtrOutput) ToCustomJobSchedulePtrOutputWithContext(ctx context.Context) CustomJobSchedulePtrOutput {
-	return o
-}
-
-func (o CustomJobSchedulePtrOutput) Elem() CustomJobScheduleOutput {
-	return o.ApplyT(func(v *CustomJobSchedule) CustomJobSchedule {
-		if v != nil {
-			return *v
-		}
-		var ret CustomJobSchedule
-		return ret
-	}).(CustomJobScheduleOutput)
-}
-
-// Days of the month when the job will run.
-func (o CustomJobSchedulePtrOutput) DayOfMonths() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v *CustomJobSchedule) []string {
-		if v == nil {
-			return nil
-		}
-		return v.DayOfMonths
-	}).(pulumi.StringArrayOutput)
-}
-
-// Days of the week when the job will run.
-func (o CustomJobSchedulePtrOutput) DayOfWeeks() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v *CustomJobSchedule) []string {
-		if v == nil {
-			return nil
-		}
-		return v.DayOfWeeks
-	}).(pulumi.StringArrayOutput)
-}
-
-// Hours of the day when the job will run.
-func (o CustomJobSchedulePtrOutput) Hours() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v *CustomJobSchedule) []string {
-		if v == nil {
-			return nil
-		}
-		return v.Hours
-	}).(pulumi.StringArrayOutput)
-}
-
-// Minutes of the day when the job will run.
-func (o CustomJobSchedulePtrOutput) Minutes() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v *CustomJobSchedule) []string {
-		if v == nil {
-			return nil
-		}
-		return v.Minutes
-	}).(pulumi.StringArrayOutput)
-}
-
-// Months of the year when the job will run.
-func (o CustomJobSchedulePtrOutput) Months() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v *CustomJobSchedule) []string {
-		if v == nil {
-			return nil
-		}
-		return v.Months
-	}).(pulumi.StringArrayOutput)
 }
 
 type CustomMetricBatch struct {
@@ -3779,112 +3248,6 @@ func (o CustomMetricFromJobValuePtrOutput) ColumnName() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-type CustomMetricJobFile struct {
-	// Path in the job.
-	Destination string `pulumi:"destination"`
-	// Local filesystem path.
-	Source string `pulumi:"source"`
-}
-
-// CustomMetricJobFileInput is an input type that accepts CustomMetricJobFileArgs and CustomMetricJobFileOutput values.
-// You can construct a concrete instance of `CustomMetricJobFileInput` via:
-//
-//	CustomMetricJobFileArgs{...}
-type CustomMetricJobFileInput interface {
-	pulumi.Input
-
-	ToCustomMetricJobFileOutput() CustomMetricJobFileOutput
-	ToCustomMetricJobFileOutputWithContext(context.Context) CustomMetricJobFileOutput
-}
-
-type CustomMetricJobFileArgs struct {
-	// Path in the job.
-	Destination pulumi.StringInput `pulumi:"destination"`
-	// Local filesystem path.
-	Source pulumi.StringInput `pulumi:"source"`
-}
-
-func (CustomMetricJobFileArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CustomMetricJobFile)(nil)).Elem()
-}
-
-func (i CustomMetricJobFileArgs) ToCustomMetricJobFileOutput() CustomMetricJobFileOutput {
-	return i.ToCustomMetricJobFileOutputWithContext(context.Background())
-}
-
-func (i CustomMetricJobFileArgs) ToCustomMetricJobFileOutputWithContext(ctx context.Context) CustomMetricJobFileOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CustomMetricJobFileOutput)
-}
-
-// CustomMetricJobFileArrayInput is an input type that accepts CustomMetricJobFileArray and CustomMetricJobFileArrayOutput values.
-// You can construct a concrete instance of `CustomMetricJobFileArrayInput` via:
-//
-//	CustomMetricJobFileArray{ CustomMetricJobFileArgs{...} }
-type CustomMetricJobFileArrayInput interface {
-	pulumi.Input
-
-	ToCustomMetricJobFileArrayOutput() CustomMetricJobFileArrayOutput
-	ToCustomMetricJobFileArrayOutputWithContext(context.Context) CustomMetricJobFileArrayOutput
-}
-
-type CustomMetricJobFileArray []CustomMetricJobFileInput
-
-func (CustomMetricJobFileArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CustomMetricJobFile)(nil)).Elem()
-}
-
-func (i CustomMetricJobFileArray) ToCustomMetricJobFileArrayOutput() CustomMetricJobFileArrayOutput {
-	return i.ToCustomMetricJobFileArrayOutputWithContext(context.Background())
-}
-
-func (i CustomMetricJobFileArray) ToCustomMetricJobFileArrayOutputWithContext(ctx context.Context) CustomMetricJobFileArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CustomMetricJobFileArrayOutput)
-}
-
-type CustomMetricJobFileOutput struct{ *pulumi.OutputState }
-
-func (CustomMetricJobFileOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CustomMetricJobFile)(nil)).Elem()
-}
-
-func (o CustomMetricJobFileOutput) ToCustomMetricJobFileOutput() CustomMetricJobFileOutput {
-	return o
-}
-
-func (o CustomMetricJobFileOutput) ToCustomMetricJobFileOutputWithContext(ctx context.Context) CustomMetricJobFileOutput {
-	return o
-}
-
-// Path in the job.
-func (o CustomMetricJobFileOutput) Destination() pulumi.StringOutput {
-	return o.ApplyT(func(v CustomMetricJobFile) string { return v.Destination }).(pulumi.StringOutput)
-}
-
-// Local filesystem path.
-func (o CustomMetricJobFileOutput) Source() pulumi.StringOutput {
-	return o.ApplyT(func(v CustomMetricJobFile) string { return v.Source }).(pulumi.StringOutput)
-}
-
-type CustomMetricJobFileArrayOutput struct{ *pulumi.OutputState }
-
-func (CustomMetricJobFileArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CustomMetricJobFile)(nil)).Elem()
-}
-
-func (o CustomMetricJobFileArrayOutput) ToCustomMetricJobFileArrayOutput() CustomMetricJobFileArrayOutput {
-	return o
-}
-
-func (o CustomMetricJobFileArrayOutput) ToCustomMetricJobFileArrayOutputWithContext(ctx context.Context) CustomMetricJobFileArrayOutput {
-	return o
-}
-
-func (o CustomMetricJobFileArrayOutput) Index(i pulumi.IntInput) CustomMetricJobFileOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CustomMetricJobFile {
-		return vs[0].([]CustomMetricJobFile)[vs[1].(int)]
-	}).(CustomMetricJobFileOutput)
-}
-
 type CustomMetricJobRuntimeParameterValue struct {
 	// The name of the runtime parameter.
 	Key string `pulumi:"key"`
@@ -4428,112 +3791,6 @@ func (o CustomMetricValuePtrOutput) ColumnName() pulumi.StringPtrOutput {
 		}
 		return v.ColumnName
 	}).(pulumi.StringPtrOutput)
-}
-
-type CustomModelFile struct {
-	// Path in the model.
-	Destination string `pulumi:"destination"`
-	// Local filesystem path.
-	Source string `pulumi:"source"`
-}
-
-// CustomModelFileInput is an input type that accepts CustomModelFileArgs and CustomModelFileOutput values.
-// You can construct a concrete instance of `CustomModelFileInput` via:
-//
-//	CustomModelFileArgs{...}
-type CustomModelFileInput interface {
-	pulumi.Input
-
-	ToCustomModelFileOutput() CustomModelFileOutput
-	ToCustomModelFileOutputWithContext(context.Context) CustomModelFileOutput
-}
-
-type CustomModelFileArgs struct {
-	// Path in the model.
-	Destination pulumi.StringInput `pulumi:"destination"`
-	// Local filesystem path.
-	Source pulumi.StringInput `pulumi:"source"`
-}
-
-func (CustomModelFileArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*CustomModelFile)(nil)).Elem()
-}
-
-func (i CustomModelFileArgs) ToCustomModelFileOutput() CustomModelFileOutput {
-	return i.ToCustomModelFileOutputWithContext(context.Background())
-}
-
-func (i CustomModelFileArgs) ToCustomModelFileOutputWithContext(ctx context.Context) CustomModelFileOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CustomModelFileOutput)
-}
-
-// CustomModelFileArrayInput is an input type that accepts CustomModelFileArray and CustomModelFileArrayOutput values.
-// You can construct a concrete instance of `CustomModelFileArrayInput` via:
-//
-//	CustomModelFileArray{ CustomModelFileArgs{...} }
-type CustomModelFileArrayInput interface {
-	pulumi.Input
-
-	ToCustomModelFileArrayOutput() CustomModelFileArrayOutput
-	ToCustomModelFileArrayOutputWithContext(context.Context) CustomModelFileArrayOutput
-}
-
-type CustomModelFileArray []CustomModelFileInput
-
-func (CustomModelFileArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CustomModelFile)(nil)).Elem()
-}
-
-func (i CustomModelFileArray) ToCustomModelFileArrayOutput() CustomModelFileArrayOutput {
-	return i.ToCustomModelFileArrayOutputWithContext(context.Background())
-}
-
-func (i CustomModelFileArray) ToCustomModelFileArrayOutputWithContext(ctx context.Context) CustomModelFileArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(CustomModelFileArrayOutput)
-}
-
-type CustomModelFileOutput struct{ *pulumi.OutputState }
-
-func (CustomModelFileOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*CustomModelFile)(nil)).Elem()
-}
-
-func (o CustomModelFileOutput) ToCustomModelFileOutput() CustomModelFileOutput {
-	return o
-}
-
-func (o CustomModelFileOutput) ToCustomModelFileOutputWithContext(ctx context.Context) CustomModelFileOutput {
-	return o
-}
-
-// Path in the model.
-func (o CustomModelFileOutput) Destination() pulumi.StringOutput {
-	return o.ApplyT(func(v CustomModelFile) string { return v.Destination }).(pulumi.StringOutput)
-}
-
-// Local filesystem path.
-func (o CustomModelFileOutput) Source() pulumi.StringOutput {
-	return o.ApplyT(func(v CustomModelFile) string { return v.Source }).(pulumi.StringOutput)
-}
-
-type CustomModelFileArrayOutput struct{ *pulumi.OutputState }
-
-func (CustomModelFileArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]CustomModelFile)(nil)).Elem()
-}
-
-func (o CustomModelFileArrayOutput) ToCustomModelFileArrayOutput() CustomModelFileArrayOutput {
-	return o
-}
-
-func (o CustomModelFileArrayOutput) ToCustomModelFileArrayOutputWithContext(ctx context.Context) CustomModelFileArrayOutput {
-	return o
-}
-
-func (o CustomModelFileArrayOutput) Index(i pulumi.IntInput) CustomModelFileOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CustomModelFile {
-		return vs[0].([]CustomModelFile)[vs[1].(int)]
-	}).(CustomModelFileOutput)
 }
 
 type CustomModelGuardConfiguration struct {
@@ -12430,10 +11687,6 @@ func (o VectorDatabaseChunkingParametersPtrOutput) Separators() pulumi.StringArr
 }
 
 func init() {
-	pulumi.RegisterInputType(reflect.TypeOf((*ApplicationSourceFileInput)(nil)).Elem(), ApplicationSourceFileArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ApplicationSourceFileArrayInput)(nil)).Elem(), ApplicationSourceFileArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ApplicationSourceFromTemplateFileInput)(nil)).Elem(), ApplicationSourceFromTemplateFileArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ApplicationSourceFromTemplateFileArrayInput)(nil)).Elem(), ApplicationSourceFromTemplateFileArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ApplicationSourceFromTemplateResourcesInput)(nil)).Elem(), ApplicationSourceFromTemplateResourcesArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ApplicationSourceFromTemplateResourcesPtrInput)(nil)).Elem(), ApplicationSourceFromTemplateResourcesArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ApplicationSourceFromTemplateRuntimeParameterValueInput)(nil)).Elem(), ApplicationSourceFromTemplateRuntimeParameterValueArgs{})
@@ -12454,12 +11707,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*BatchPredictionJobDefinitionSchedulePtrInput)(nil)).Elem(), BatchPredictionJobDefinitionScheduleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BatchPredictionJobDefinitionTimeseriesSettingsInput)(nil)).Elem(), BatchPredictionJobDefinitionTimeseriesSettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BatchPredictionJobDefinitionTimeseriesSettingsPtrInput)(nil)).Elem(), BatchPredictionJobDefinitionTimeseriesSettingsArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CustomJobFileInput)(nil)).Elem(), CustomJobFileArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CustomJobFileArrayInput)(nil)).Elem(), CustomJobFileArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomJobRuntimeParameterValueInput)(nil)).Elem(), CustomJobRuntimeParameterValueArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomJobRuntimeParameterValueArrayInput)(nil)).Elem(), CustomJobRuntimeParameterValueArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CustomJobScheduleInput)(nil)).Elem(), CustomJobScheduleArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CustomJobSchedulePtrInput)(nil)).Elem(), CustomJobScheduleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomMetricBatchInput)(nil)).Elem(), CustomMetricBatchArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomMetricBatchPtrInput)(nil)).Elem(), CustomMetricBatchArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomMetricFromJobBatchInput)(nil)).Elem(), CustomMetricFromJobBatchArgs{})
@@ -12474,8 +11723,6 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomMetricFromJobTimestampPtrInput)(nil)).Elem(), CustomMetricFromJobTimestampArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomMetricFromJobValueInput)(nil)).Elem(), CustomMetricFromJobValueArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomMetricFromJobValuePtrInput)(nil)).Elem(), CustomMetricFromJobValueArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CustomMetricJobFileInput)(nil)).Elem(), CustomMetricJobFileArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CustomMetricJobFileArrayInput)(nil)).Elem(), CustomMetricJobFileArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomMetricJobRuntimeParameterValueInput)(nil)).Elem(), CustomMetricJobRuntimeParameterValueArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomMetricJobRuntimeParameterValueArrayInput)(nil)).Elem(), CustomMetricJobRuntimeParameterValueArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomMetricSampleCountInput)(nil)).Elem(), CustomMetricSampleCountArgs{})
@@ -12484,8 +11731,6 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomMetricTimestampPtrInput)(nil)).Elem(), CustomMetricTimestampArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomMetricValueInput)(nil)).Elem(), CustomMetricValueArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomMetricValuePtrInput)(nil)).Elem(), CustomMetricValueArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelFileInput)(nil)).Elem(), CustomModelFileArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelFileArrayInput)(nil)).Elem(), CustomModelFileArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelGuardConfigurationInput)(nil)).Elem(), CustomModelGuardConfigurationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelGuardConfigurationArrayInput)(nil)).Elem(), CustomModelGuardConfigurationArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelGuardConfigurationInterventionInput)(nil)).Elem(), CustomModelGuardConfigurationInterventionArgs{})
@@ -12577,10 +11822,6 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*NotificationChannelDrEntityArrayInput)(nil)).Elem(), NotificationChannelDrEntityArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*VectorDatabaseChunkingParametersInput)(nil)).Elem(), VectorDatabaseChunkingParametersArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*VectorDatabaseChunkingParametersPtrInput)(nil)).Elem(), VectorDatabaseChunkingParametersArgs{})
-	pulumi.RegisterOutputType(ApplicationSourceFileOutput{})
-	pulumi.RegisterOutputType(ApplicationSourceFileArrayOutput{})
-	pulumi.RegisterOutputType(ApplicationSourceFromTemplateFileOutput{})
-	pulumi.RegisterOutputType(ApplicationSourceFromTemplateFileArrayOutput{})
 	pulumi.RegisterOutputType(ApplicationSourceFromTemplateResourcesOutput{})
 	pulumi.RegisterOutputType(ApplicationSourceFromTemplateResourcesPtrOutput{})
 	pulumi.RegisterOutputType(ApplicationSourceFromTemplateRuntimeParameterValueOutput{})
@@ -12601,12 +11842,8 @@ func init() {
 	pulumi.RegisterOutputType(BatchPredictionJobDefinitionSchedulePtrOutput{})
 	pulumi.RegisterOutputType(BatchPredictionJobDefinitionTimeseriesSettingsOutput{})
 	pulumi.RegisterOutputType(BatchPredictionJobDefinitionTimeseriesSettingsPtrOutput{})
-	pulumi.RegisterOutputType(CustomJobFileOutput{})
-	pulumi.RegisterOutputType(CustomJobFileArrayOutput{})
 	pulumi.RegisterOutputType(CustomJobRuntimeParameterValueOutput{})
 	pulumi.RegisterOutputType(CustomJobRuntimeParameterValueArrayOutput{})
-	pulumi.RegisterOutputType(CustomJobScheduleOutput{})
-	pulumi.RegisterOutputType(CustomJobSchedulePtrOutput{})
 	pulumi.RegisterOutputType(CustomMetricBatchOutput{})
 	pulumi.RegisterOutputType(CustomMetricBatchPtrOutput{})
 	pulumi.RegisterOutputType(CustomMetricFromJobBatchOutput{})
@@ -12621,8 +11858,6 @@ func init() {
 	pulumi.RegisterOutputType(CustomMetricFromJobTimestampPtrOutput{})
 	pulumi.RegisterOutputType(CustomMetricFromJobValueOutput{})
 	pulumi.RegisterOutputType(CustomMetricFromJobValuePtrOutput{})
-	pulumi.RegisterOutputType(CustomMetricJobFileOutput{})
-	pulumi.RegisterOutputType(CustomMetricJobFileArrayOutput{})
 	pulumi.RegisterOutputType(CustomMetricJobRuntimeParameterValueOutput{})
 	pulumi.RegisterOutputType(CustomMetricJobRuntimeParameterValueArrayOutput{})
 	pulumi.RegisterOutputType(CustomMetricSampleCountOutput{})
@@ -12631,8 +11866,6 @@ func init() {
 	pulumi.RegisterOutputType(CustomMetricTimestampPtrOutput{})
 	pulumi.RegisterOutputType(CustomMetricValueOutput{})
 	pulumi.RegisterOutputType(CustomMetricValuePtrOutput{})
-	pulumi.RegisterOutputType(CustomModelFileOutput{})
-	pulumi.RegisterOutputType(CustomModelFileArrayOutput{})
 	pulumi.RegisterOutputType(CustomModelGuardConfigurationOutput{})
 	pulumi.RegisterOutputType(CustomModelGuardConfigurationArrayOutput{})
 	pulumi.RegisterOutputType(CustomModelGuardConfigurationInterventionOutput{})

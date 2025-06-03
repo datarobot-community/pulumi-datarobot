@@ -17,8 +17,6 @@ from . import _utilities
 from . import outputs
 
 __all__ = [
-    'ApplicationSourceFile',
-    'ApplicationSourceFromTemplateFile',
     'ApplicationSourceFromTemplateResources',
     'ApplicationSourceFromTemplateRuntimeParameterValue',
     'ApplicationSourceResources',
@@ -29,9 +27,7 @@ __all__ = [
     'BatchPredictionJobDefinitionPredictionInstance',
     'BatchPredictionJobDefinitionSchedule',
     'BatchPredictionJobDefinitionTimeseriesSettings',
-    'CustomJobFile',
     'CustomJobRuntimeParameterValue',
-    'CustomJobSchedule',
     'CustomMetricBatch',
     'CustomMetricFromJobBatch',
     'CustomMetricFromJobParameterOverride',
@@ -39,12 +35,10 @@ __all__ = [
     'CustomMetricFromJobSchedule',
     'CustomMetricFromJobTimestamp',
     'CustomMetricFromJobValue',
-    'CustomMetricJobFile',
     'CustomMetricJobRuntimeParameterValue',
     'CustomMetricSampleCount',
     'CustomMetricTimestamp',
     'CustomMetricValue',
-    'CustomModelFile',
     'CustomModelGuardConfiguration',
     'CustomModelGuardConfigurationIntervention',
     'CustomModelGuardConfigurationNemoInfo',
@@ -92,64 +86,6 @@ __all__ = [
     'NotificationChannelDrEntity',
     'VectorDatabaseChunkingParameters',
 ]
-
-@pulumi.output_type
-class ApplicationSourceFile(dict):
-    def __init__(__self__, *,
-                 destination: builtins.str,
-                 source: builtins.str):
-        """
-        :param builtins.str destination: Path in the application source.
-        :param builtins.str source: Local filesystem path.
-        """
-        pulumi.set(__self__, "destination", destination)
-        pulumi.set(__self__, "source", source)
-
-    @property
-    @pulumi.getter
-    def destination(self) -> builtins.str:
-        """
-        Path in the application source.
-        """
-        return pulumi.get(self, "destination")
-
-    @property
-    @pulumi.getter
-    def source(self) -> builtins.str:
-        """
-        Local filesystem path.
-        """
-        return pulumi.get(self, "source")
-
-
-@pulumi.output_type
-class ApplicationSourceFromTemplateFile(dict):
-    def __init__(__self__, *,
-                 destination: builtins.str,
-                 source: builtins.str):
-        """
-        :param builtins.str destination: Path in the application source.
-        :param builtins.str source: Local filesystem path.
-        """
-        pulumi.set(__self__, "destination", destination)
-        pulumi.set(__self__, "source", source)
-
-    @property
-    @pulumi.getter
-    def destination(self) -> builtins.str:
-        """
-        Path in the application source.
-        """
-        return pulumi.get(self, "destination")
-
-    @property
-    @pulumi.getter
-    def source(self) -> builtins.str:
-        """
-        Local filesystem path.
-        """
-        return pulumi.get(self, "source")
-
 
 @pulumi.output_type
 class ApplicationSourceFromTemplateResources(dict):
@@ -1014,35 +950,6 @@ class BatchPredictionJobDefinitionTimeseriesSettings(dict):
 
 
 @pulumi.output_type
-class CustomJobFile(dict):
-    def __init__(__self__, *,
-                 destination: builtins.str,
-                 source: builtins.str):
-        """
-        :param builtins.str destination: Path in the job.
-        :param builtins.str source: Local filesystem path.
-        """
-        pulumi.set(__self__, "destination", destination)
-        pulumi.set(__self__, "source", source)
-
-    @property
-    @pulumi.getter
-    def destination(self) -> builtins.str:
-        """
-        Path in the job.
-        """
-        return pulumi.get(self, "destination")
-
-    @property
-    @pulumi.getter
-    def source(self) -> builtins.str:
-        """
-        Local filesystem path.
-        """
-        return pulumi.get(self, "source")
-
-
-@pulumi.output_type
 class CustomJobRuntimeParameterValue(dict):
     def __init__(__self__, *,
                  key: builtins.str,
@@ -1080,87 +987,6 @@ class CustomJobRuntimeParameterValue(dict):
         The value of the runtime parameter (type conversion is handled internally).
         """
         return pulumi.get(self, "value")
-
-
-@pulumi.output_type
-class CustomJobSchedule(dict):
-    @staticmethod
-    def __key_warning(key: str):
-        suggest = None
-        if key == "dayOfMonths":
-            suggest = "day_of_months"
-        elif key == "dayOfWeeks":
-            suggest = "day_of_weeks"
-
-        if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in CustomJobSchedule. Access the value via the '{suggest}' property getter instead.")
-
-    def __getitem__(self, key: str) -> Any:
-        CustomJobSchedule.__key_warning(key)
-        return super().__getitem__(key)
-
-    def get(self, key: str, default = None) -> Any:
-        CustomJobSchedule.__key_warning(key)
-        return super().get(key, default)
-
-    def __init__(__self__, *,
-                 day_of_months: Sequence[builtins.str],
-                 day_of_weeks: Sequence[builtins.str],
-                 hours: Sequence[builtins.str],
-                 minutes: Sequence[builtins.str],
-                 months: Sequence[builtins.str]):
-        """
-        :param Sequence[builtins.str] day_of_months: Days of the month when the job will run.
-        :param Sequence[builtins.str] day_of_weeks: Days of the week when the job will run.
-        :param Sequence[builtins.str] hours: Hours of the day when the job will run.
-        :param Sequence[builtins.str] minutes: Minutes of the day when the job will run.
-        :param Sequence[builtins.str] months: Months of the year when the job will run.
-        """
-        pulumi.set(__self__, "day_of_months", day_of_months)
-        pulumi.set(__self__, "day_of_weeks", day_of_weeks)
-        pulumi.set(__self__, "hours", hours)
-        pulumi.set(__self__, "minutes", minutes)
-        pulumi.set(__self__, "months", months)
-
-    @property
-    @pulumi.getter(name="dayOfMonths")
-    def day_of_months(self) -> Sequence[builtins.str]:
-        """
-        Days of the month when the job will run.
-        """
-        return pulumi.get(self, "day_of_months")
-
-    @property
-    @pulumi.getter(name="dayOfWeeks")
-    def day_of_weeks(self) -> Sequence[builtins.str]:
-        """
-        Days of the week when the job will run.
-        """
-        return pulumi.get(self, "day_of_weeks")
-
-    @property
-    @pulumi.getter
-    def hours(self) -> Sequence[builtins.str]:
-        """
-        Hours of the day when the job will run.
-        """
-        return pulumi.get(self, "hours")
-
-    @property
-    @pulumi.getter
-    def minutes(self) -> Sequence[builtins.str]:
-        """
-        Minutes of the day when the job will run.
-        """
-        return pulumi.get(self, "minutes")
-
-    @property
-    @pulumi.getter
-    def months(self) -> Sequence[builtins.str]:
-        """
-        Months of the year when the job will run.
-        """
-        return pulumi.get(self, "months")
 
 
 @pulumi.output_type
@@ -1478,35 +1304,6 @@ class CustomMetricFromJobValue(dict):
 
 
 @pulumi.output_type
-class CustomMetricJobFile(dict):
-    def __init__(__self__, *,
-                 destination: builtins.str,
-                 source: builtins.str):
-        """
-        :param builtins.str destination: Path in the job.
-        :param builtins.str source: Local filesystem path.
-        """
-        pulumi.set(__self__, "destination", destination)
-        pulumi.set(__self__, "source", source)
-
-    @property
-    @pulumi.getter
-    def destination(self) -> builtins.str:
-        """
-        Path in the job.
-        """
-        return pulumi.get(self, "destination")
-
-    @property
-    @pulumi.getter
-    def source(self) -> builtins.str:
-        """
-        Local filesystem path.
-        """
-        return pulumi.get(self, "source")
-
-
-@pulumi.output_type
 class CustomMetricJobRuntimeParameterValue(dict):
     def __init__(__self__, *,
                  key: builtins.str,
@@ -1666,35 +1463,6 @@ class CustomMetricValue(dict):
         Column name.
         """
         return pulumi.get(self, "column_name")
-
-
-@pulumi.output_type
-class CustomModelFile(dict):
-    def __init__(__self__, *,
-                 destination: builtins.str,
-                 source: builtins.str):
-        """
-        :param builtins.str destination: Path in the model.
-        :param builtins.str source: Local filesystem path.
-        """
-        pulumi.set(__self__, "destination", destination)
-        pulumi.set(__self__, "source", source)
-
-    @property
-    @pulumi.getter
-    def destination(self) -> builtins.str:
-        """
-        Path in the model.
-        """
-        return pulumi.get(self, "destination")
-
-    @property
-    @pulumi.getter
-    def source(self) -> builtins.str:
-        """
-        Local filesystem path.
-        """
-        return pulumi.get(self, "source")
 
 
 @pulumi.output_type

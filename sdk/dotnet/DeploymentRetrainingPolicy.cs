@@ -82,12 +82,6 @@ namespace DataRobotPulumi.Datarobot
         [Output("trigger")]
         public Output<Outputs.DeploymentRetrainingPolicyTrigger?> Trigger { get; private set; } = null!;
 
-        /// <summary>
-        /// The ID of the use case to which the retraining policy belongs.
-        /// </summary>
-        [Output("useCaseId")]
-        public Output<string?> UseCaseId { get; private set; } = null!;
-
 
         /// <summary>
         /// Create a DeploymentRetrainingPolicy resource with the given unique name, arguments, and options.
@@ -201,12 +195,6 @@ namespace DataRobotPulumi.Datarobot
         [Input("trigger")]
         public Input<Inputs.DeploymentRetrainingPolicyTriggerArgs>? Trigger { get; set; }
 
-        /// <summary>
-        /// The ID of the use case to which the retraining policy belongs.
-        /// </summary>
-        [Input("useCaseId")]
-        public Input<string>? UseCaseId { get; set; }
-
         public DeploymentRetrainingPolicyArgs()
         {
         }
@@ -280,12 +268,6 @@ namespace DataRobotPulumi.Datarobot
         /// </summary>
         [Input("trigger")]
         public Input<Inputs.DeploymentRetrainingPolicyTriggerGetArgs>? Trigger { get; set; }
-
-        /// <summary>
-        /// The ID of the use case to which the retraining policy belongs.
-        /// </summary>
-        [Input("useCaseId")]
-        public Input<string>? UseCaseId { get; set; }
 
         public DeploymentRetrainingPolicyState()
         {

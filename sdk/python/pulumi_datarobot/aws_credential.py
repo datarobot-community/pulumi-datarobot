@@ -225,7 +225,6 @@ class _AwsCredentialState:
         pulumi.set(self, "name", value)
 
 
-@pulumi.type_token("datarobot:index/awsCredential:AwsCredential")
 class AwsCredential(pulumi.CustomResource):
     @overload
     def __init__(__self__,

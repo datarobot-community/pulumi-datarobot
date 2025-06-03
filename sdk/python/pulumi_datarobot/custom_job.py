@@ -26,28 +26,24 @@ class CustomJobArgs:
                  egress_network_policy: Optional[pulumi.Input[builtins.str]] = None,
                  environment_id: Optional[pulumi.Input[builtins.str]] = None,
                  environment_version_id: Optional[pulumi.Input[builtins.str]] = None,
-                 files: Optional[pulumi.Input[Sequence[pulumi.Input['CustomJobFileArgs']]]] = None,
+                 files: Optional[Any] = None,
                  folder_path: Optional[pulumi.Input[builtins.str]] = None,
                  job_type: Optional[pulumi.Input[builtins.str]] = None,
                  name: Optional[pulumi.Input[builtins.str]] = None,
                  resource_bundle_id: Optional[pulumi.Input[builtins.str]] = None,
-                 runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input['CustomJobRuntimeParameterValueArgs']]]] = None,
-                 schedule: Optional[pulumi.Input['CustomJobScheduleArgs']] = None,
-                 schedule_id: Optional[pulumi.Input[builtins.str]] = None):
+                 runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input['CustomJobRuntimeParameterValueArgs']]]] = None):
         """
         The set of arguments for constructing a CustomJob resource.
         :param pulumi.Input[builtins.str] description: The description of the Custom Job.
         :param pulumi.Input[builtins.str] egress_network_policy: The egress network policy for the Job.
         :param pulumi.Input[builtins.str] environment_id: The ID of the environment to use with the Job.
         :param pulumi.Input[builtins.str] environment_version_id: The ID of the environment version to use with the Job.
-        :param pulumi.Input[Sequence[pulumi.Input['CustomJobFileArgs']]] files: List of files to upload, each with a source (local path) and destination (path in job).
+        :param Any files: The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Job. If list is of strings, then basenames will be used for tuples.
         :param pulumi.Input[builtins.str] folder_path: The path to a folder containing files to be uploaded. Each file in the folder is uploaded under path relative to a folder path.
         :param pulumi.Input[builtins.str] job_type: The type of the Custom Job.
         :param pulumi.Input[builtins.str] name: The name of the Custom Job.
         :param pulumi.Input[builtins.str] resource_bundle_id: A single identifier that represents a bundle of resources: Memory, CPU, GPU, etc.
         :param pulumi.Input[Sequence[pulumi.Input['CustomJobRuntimeParameterValueArgs']]] runtime_parameter_values: Additional parameters to be injected into a Job at runtime.
-        :param pulumi.Input['CustomJobScheduleArgs'] schedule: The schedule configuration for the custom job.
-        :param pulumi.Input[builtins.str] schedule_id: The ID of the schedule associated with the custom job.
         """
         if description is not None:
             pulumi.set(__self__, "description", description)
@@ -69,10 +65,6 @@ class CustomJobArgs:
             pulumi.set(__self__, "resource_bundle_id", resource_bundle_id)
         if runtime_parameter_values is not None:
             pulumi.set(__self__, "runtime_parameter_values", runtime_parameter_values)
-        if schedule is not None:
-            pulumi.set(__self__, "schedule", schedule)
-        if schedule_id is not None:
-            pulumi.set(__self__, "schedule_id", schedule_id)
 
     @property
     @pulumi.getter
@@ -124,14 +116,14 @@ class CustomJobArgs:
 
     @property
     @pulumi.getter
-    def files(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CustomJobFileArgs']]]]:
+    def files(self) -> Optional[Any]:
         """
-        List of files to upload, each with a source (local path) and destination (path in job).
+        The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Job. If list is of strings, then basenames will be used for tuples.
         """
         return pulumi.get(self, "files")
 
     @files.setter
-    def files(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CustomJobFileArgs']]]]):
+    def files(self, value: Optional[Any]):
         pulumi.set(self, "files", value)
 
     @property
@@ -194,30 +186,6 @@ class CustomJobArgs:
     def runtime_parameter_values(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CustomJobRuntimeParameterValueArgs']]]]):
         pulumi.set(self, "runtime_parameter_values", value)
 
-    @property
-    @pulumi.getter
-    def schedule(self) -> Optional[pulumi.Input['CustomJobScheduleArgs']]:
-        """
-        The schedule configuration for the custom job.
-        """
-        return pulumi.get(self, "schedule")
-
-    @schedule.setter
-    def schedule(self, value: Optional[pulumi.Input['CustomJobScheduleArgs']]):
-        pulumi.set(self, "schedule", value)
-
-    @property
-    @pulumi.getter(name="scheduleId")
-    def schedule_id(self) -> Optional[pulumi.Input[builtins.str]]:
-        """
-        The ID of the schedule associated with the custom job.
-        """
-        return pulumi.get(self, "schedule_id")
-
-    @schedule_id.setter
-    def schedule_id(self, value: Optional[pulumi.Input[builtins.str]]):
-        pulumi.set(self, "schedule_id", value)
-
 
 @pulumi.input_type
 class _CustomJobState:
@@ -226,23 +194,21 @@ class _CustomJobState:
                  egress_network_policy: Optional[pulumi.Input[builtins.str]] = None,
                  environment_id: Optional[pulumi.Input[builtins.str]] = None,
                  environment_version_id: Optional[pulumi.Input[builtins.str]] = None,
-                 files: Optional[pulumi.Input[Sequence[pulumi.Input['CustomJobFileArgs']]]] = None,
+                 files: Optional[Any] = None,
                  files_hashes: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.str]]]] = None,
                  folder_path: Optional[pulumi.Input[builtins.str]] = None,
                  folder_path_hash: Optional[pulumi.Input[builtins.str]] = None,
                  job_type: Optional[pulumi.Input[builtins.str]] = None,
                  name: Optional[pulumi.Input[builtins.str]] = None,
                  resource_bundle_id: Optional[pulumi.Input[builtins.str]] = None,
-                 runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input['CustomJobRuntimeParameterValueArgs']]]] = None,
-                 schedule: Optional[pulumi.Input['CustomJobScheduleArgs']] = None,
-                 schedule_id: Optional[pulumi.Input[builtins.str]] = None):
+                 runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input['CustomJobRuntimeParameterValueArgs']]]] = None):
         """
         Input properties used for looking up and filtering CustomJob resources.
         :param pulumi.Input[builtins.str] description: The description of the Custom Job.
         :param pulumi.Input[builtins.str] egress_network_policy: The egress network policy for the Job.
         :param pulumi.Input[builtins.str] environment_id: The ID of the environment to use with the Job.
         :param pulumi.Input[builtins.str] environment_version_id: The ID of the environment version to use with the Job.
-        :param pulumi.Input[Sequence[pulumi.Input['CustomJobFileArgs']]] files: List of files to upload, each with a source (local path) and destination (path in job).
+        :param Any files: The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Job. If list is of strings, then basenames will be used for tuples.
         :param pulumi.Input[Sequence[pulumi.Input[builtins.str]]] files_hashes: The hash of file contents for each file in files.
         :param pulumi.Input[builtins.str] folder_path: The path to a folder containing files to be uploaded. Each file in the folder is uploaded under path relative to a folder path.
         :param pulumi.Input[builtins.str] folder_path_hash: The hash of the folder path contents.
@@ -250,8 +216,6 @@ class _CustomJobState:
         :param pulumi.Input[builtins.str] name: The name of the Custom Job.
         :param pulumi.Input[builtins.str] resource_bundle_id: A single identifier that represents a bundle of resources: Memory, CPU, GPU, etc.
         :param pulumi.Input[Sequence[pulumi.Input['CustomJobRuntimeParameterValueArgs']]] runtime_parameter_values: Additional parameters to be injected into a Job at runtime.
-        :param pulumi.Input['CustomJobScheduleArgs'] schedule: The schedule configuration for the custom job.
-        :param pulumi.Input[builtins.str] schedule_id: The ID of the schedule associated with the custom job.
         """
         if description is not None:
             pulumi.set(__self__, "description", description)
@@ -277,10 +241,6 @@ class _CustomJobState:
             pulumi.set(__self__, "resource_bundle_id", resource_bundle_id)
         if runtime_parameter_values is not None:
             pulumi.set(__self__, "runtime_parameter_values", runtime_parameter_values)
-        if schedule is not None:
-            pulumi.set(__self__, "schedule", schedule)
-        if schedule_id is not None:
-            pulumi.set(__self__, "schedule_id", schedule_id)
 
     @property
     @pulumi.getter
@@ -332,14 +292,14 @@ class _CustomJobState:
 
     @property
     @pulumi.getter
-    def files(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CustomJobFileArgs']]]]:
+    def files(self) -> Optional[Any]:
         """
-        List of files to upload, each with a source (local path) and destination (path in job).
+        The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Job. If list is of strings, then basenames will be used for tuples.
         """
         return pulumi.get(self, "files")
 
     @files.setter
-    def files(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CustomJobFileArgs']]]]):
+    def files(self, value: Optional[Any]):
         pulumi.set(self, "files", value)
 
     @property
@@ -426,32 +386,7 @@ class _CustomJobState:
     def runtime_parameter_values(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CustomJobRuntimeParameterValueArgs']]]]):
         pulumi.set(self, "runtime_parameter_values", value)
 
-    @property
-    @pulumi.getter
-    def schedule(self) -> Optional[pulumi.Input['CustomJobScheduleArgs']]:
-        """
-        The schedule configuration for the custom job.
-        """
-        return pulumi.get(self, "schedule")
 
-    @schedule.setter
-    def schedule(self, value: Optional[pulumi.Input['CustomJobScheduleArgs']]):
-        pulumi.set(self, "schedule", value)
-
-    @property
-    @pulumi.getter(name="scheduleId")
-    def schedule_id(self) -> Optional[pulumi.Input[builtins.str]]:
-        """
-        The ID of the schedule associated with the custom job.
-        """
-        return pulumi.get(self, "schedule_id")
-
-    @schedule_id.setter
-    def schedule_id(self, value: Optional[pulumi.Input[builtins.str]]):
-        pulumi.set(self, "schedule_id", value)
-
-
-@pulumi.type_token("datarobot:index/customJob:CustomJob")
 class CustomJob(pulumi.CustomResource):
     @overload
     def __init__(__self__,
@@ -461,17 +396,39 @@ class CustomJob(pulumi.CustomResource):
                  egress_network_policy: Optional[pulumi.Input[builtins.str]] = None,
                  environment_id: Optional[pulumi.Input[builtins.str]] = None,
                  environment_version_id: Optional[pulumi.Input[builtins.str]] = None,
-                 files: Optional[pulumi.Input[Sequence[pulumi.Input[Union['CustomJobFileArgs', 'CustomJobFileArgsDict']]]]] = None,
+                 files: Optional[Any] = None,
                  folder_path: Optional[pulumi.Input[builtins.str]] = None,
                  job_type: Optional[pulumi.Input[builtins.str]] = None,
                  name: Optional[pulumi.Input[builtins.str]] = None,
                  resource_bundle_id: Optional[pulumi.Input[builtins.str]] = None,
                  runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input[Union['CustomJobRuntimeParameterValueArgs', 'CustomJobRuntimeParameterValueArgsDict']]]]] = None,
-                 schedule: Optional[pulumi.Input[Union['CustomJobScheduleArgs', 'CustomJobScheduleArgsDict']]] = None,
-                 schedule_id: Optional[pulumi.Input[builtins.str]] = None,
                  __props__=None):
         """
         Custom Job
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_datarobot as datarobot
+
+        example = datarobot.CustomJob("example",
+            job_type="retraining",
+            files=[
+                "file1.py",
+                "file2.py",
+            ],
+            environment_id="65f9b27eab986d30d4c64268",
+            description="Example Custom Job Description",
+            runtime_parameter_values=[{
+                "key": "EXAMPLE_PARAM",
+                "type": "string",
+                "value": "val",
+            }],
+            egress_network_policy="none",
+            resource_bundle_id="cpu.micro")
+        pulumi.export("exampleId", example.id)
+        ```
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -479,14 +436,12 @@ class CustomJob(pulumi.CustomResource):
         :param pulumi.Input[builtins.str] egress_network_policy: The egress network policy for the Job.
         :param pulumi.Input[builtins.str] environment_id: The ID of the environment to use with the Job.
         :param pulumi.Input[builtins.str] environment_version_id: The ID of the environment version to use with the Job.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['CustomJobFileArgs', 'CustomJobFileArgsDict']]]] files: List of files to upload, each with a source (local path) and destination (path in job).
+        :param Any files: The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Job. If list is of strings, then basenames will be used for tuples.
         :param pulumi.Input[builtins.str] folder_path: The path to a folder containing files to be uploaded. Each file in the folder is uploaded under path relative to a folder path.
         :param pulumi.Input[builtins.str] job_type: The type of the Custom Job.
         :param pulumi.Input[builtins.str] name: The name of the Custom Job.
         :param pulumi.Input[builtins.str] resource_bundle_id: A single identifier that represents a bundle of resources: Memory, CPU, GPU, etc.
         :param pulumi.Input[Sequence[pulumi.Input[Union['CustomJobRuntimeParameterValueArgs', 'CustomJobRuntimeParameterValueArgsDict']]]] runtime_parameter_values: Additional parameters to be injected into a Job at runtime.
-        :param pulumi.Input[Union['CustomJobScheduleArgs', 'CustomJobScheduleArgsDict']] schedule: The schedule configuration for the custom job.
-        :param pulumi.Input[builtins.str] schedule_id: The ID of the schedule associated with the custom job.
         """
         ...
     @overload
@@ -496,6 +451,30 @@ class CustomJob(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Custom Job
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import pulumi_datarobot as datarobot
+
+        example = datarobot.CustomJob("example",
+            job_type="retraining",
+            files=[
+                "file1.py",
+                "file2.py",
+            ],
+            environment_id="65f9b27eab986d30d4c64268",
+            description="Example Custom Job Description",
+            runtime_parameter_values=[{
+                "key": "EXAMPLE_PARAM",
+                "type": "string",
+                "value": "val",
+            }],
+            egress_network_policy="none",
+            resource_bundle_id="cpu.micro")
+        pulumi.export("exampleId", example.id)
+        ```
 
         :param str resource_name: The name of the resource.
         :param CustomJobArgs args: The arguments to use to populate this resource's properties.
@@ -516,14 +495,12 @@ class CustomJob(pulumi.CustomResource):
                  egress_network_policy: Optional[pulumi.Input[builtins.str]] = None,
                  environment_id: Optional[pulumi.Input[builtins.str]] = None,
                  environment_version_id: Optional[pulumi.Input[builtins.str]] = None,
-                 files: Optional[pulumi.Input[Sequence[pulumi.Input[Union['CustomJobFileArgs', 'CustomJobFileArgsDict']]]]] = None,
+                 files: Optional[Any] = None,
                  folder_path: Optional[pulumi.Input[builtins.str]] = None,
                  job_type: Optional[pulumi.Input[builtins.str]] = None,
                  name: Optional[pulumi.Input[builtins.str]] = None,
                  resource_bundle_id: Optional[pulumi.Input[builtins.str]] = None,
                  runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input[Union['CustomJobRuntimeParameterValueArgs', 'CustomJobRuntimeParameterValueArgsDict']]]]] = None,
-                 schedule: Optional[pulumi.Input[Union['CustomJobScheduleArgs', 'CustomJobScheduleArgsDict']]] = None,
-                 schedule_id: Optional[pulumi.Input[builtins.str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -543,8 +520,6 @@ class CustomJob(pulumi.CustomResource):
             __props__.__dict__["name"] = name
             __props__.__dict__["resource_bundle_id"] = resource_bundle_id
             __props__.__dict__["runtime_parameter_values"] = runtime_parameter_values
-            __props__.__dict__["schedule"] = schedule
-            __props__.__dict__["schedule_id"] = schedule_id
             __props__.__dict__["files_hashes"] = None
             __props__.__dict__["folder_path_hash"] = None
         super(CustomJob, __self__).__init__(
@@ -561,16 +536,14 @@ class CustomJob(pulumi.CustomResource):
             egress_network_policy: Optional[pulumi.Input[builtins.str]] = None,
             environment_id: Optional[pulumi.Input[builtins.str]] = None,
             environment_version_id: Optional[pulumi.Input[builtins.str]] = None,
-            files: Optional[pulumi.Input[Sequence[pulumi.Input[Union['CustomJobFileArgs', 'CustomJobFileArgsDict']]]]] = None,
+            files: Optional[Any] = None,
             files_hashes: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.str]]]] = None,
             folder_path: Optional[pulumi.Input[builtins.str]] = None,
             folder_path_hash: Optional[pulumi.Input[builtins.str]] = None,
             job_type: Optional[pulumi.Input[builtins.str]] = None,
             name: Optional[pulumi.Input[builtins.str]] = None,
             resource_bundle_id: Optional[pulumi.Input[builtins.str]] = None,
-            runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input[Union['CustomJobRuntimeParameterValueArgs', 'CustomJobRuntimeParameterValueArgsDict']]]]] = None,
-            schedule: Optional[pulumi.Input[Union['CustomJobScheduleArgs', 'CustomJobScheduleArgsDict']]] = None,
-            schedule_id: Optional[pulumi.Input[builtins.str]] = None) -> 'CustomJob':
+            runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input[Union['CustomJobRuntimeParameterValueArgs', 'CustomJobRuntimeParameterValueArgsDict']]]]] = None) -> 'CustomJob':
         """
         Get an existing CustomJob resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -582,7 +555,7 @@ class CustomJob(pulumi.CustomResource):
         :param pulumi.Input[builtins.str] egress_network_policy: The egress network policy for the Job.
         :param pulumi.Input[builtins.str] environment_id: The ID of the environment to use with the Job.
         :param pulumi.Input[builtins.str] environment_version_id: The ID of the environment version to use with the Job.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['CustomJobFileArgs', 'CustomJobFileArgsDict']]]] files: List of files to upload, each with a source (local path) and destination (path in job).
+        :param Any files: The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Job. If list is of strings, then basenames will be used for tuples.
         :param pulumi.Input[Sequence[pulumi.Input[builtins.str]]] files_hashes: The hash of file contents for each file in files.
         :param pulumi.Input[builtins.str] folder_path: The path to a folder containing files to be uploaded. Each file in the folder is uploaded under path relative to a folder path.
         :param pulumi.Input[builtins.str] folder_path_hash: The hash of the folder path contents.
@@ -590,8 +563,6 @@ class CustomJob(pulumi.CustomResource):
         :param pulumi.Input[builtins.str] name: The name of the Custom Job.
         :param pulumi.Input[builtins.str] resource_bundle_id: A single identifier that represents a bundle of resources: Memory, CPU, GPU, etc.
         :param pulumi.Input[Sequence[pulumi.Input[Union['CustomJobRuntimeParameterValueArgs', 'CustomJobRuntimeParameterValueArgsDict']]]] runtime_parameter_values: Additional parameters to be injected into a Job at runtime.
-        :param pulumi.Input[Union['CustomJobScheduleArgs', 'CustomJobScheduleArgsDict']] schedule: The schedule configuration for the custom job.
-        :param pulumi.Input[builtins.str] schedule_id: The ID of the schedule associated with the custom job.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -609,8 +580,6 @@ class CustomJob(pulumi.CustomResource):
         __props__.__dict__["name"] = name
         __props__.__dict__["resource_bundle_id"] = resource_bundle_id
         __props__.__dict__["runtime_parameter_values"] = runtime_parameter_values
-        __props__.__dict__["schedule"] = schedule
-        __props__.__dict__["schedule_id"] = schedule_id
         return CustomJob(resource_name, opts=opts, __props__=__props__)
 
     @property
@@ -647,9 +616,9 @@ class CustomJob(pulumi.CustomResource):
 
     @property
     @pulumi.getter
-    def files(self) -> pulumi.Output[Optional[Sequence['outputs.CustomJobFile']]]:
+    def files(self) -> pulumi.Output[Optional[Any]]:
         """
-        List of files to upload, each with a source (local path) and destination (path in job).
+        The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Job. If list is of strings, then basenames will be used for tuples.
         """
         return pulumi.get(self, "files")
 
@@ -708,20 +677,4 @@ class CustomJob(pulumi.CustomResource):
         Additional parameters to be injected into a Job at runtime.
         """
         return pulumi.get(self, "runtime_parameter_values")
-
-    @property
-    @pulumi.getter
-    def schedule(self) -> pulumi.Output[Optional['outputs.CustomJobSchedule']]:
-        """
-        The schedule configuration for the custom job.
-        """
-        return pulumi.get(self, "schedule")
-
-    @property
-    @pulumi.getter(name="scheduleId")
-    def schedule_id(self) -> pulumi.Output[builtins.str]:
-        """
-        The ID of the schedule associated with the custom job.
-        """
-        return pulumi.get(self, "schedule_id")
 

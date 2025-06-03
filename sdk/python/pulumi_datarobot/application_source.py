@@ -24,7 +24,7 @@ class ApplicationSourceArgs:
     def __init__(__self__, *,
                  base_environment_id: Optional[pulumi.Input[builtins.str]] = None,
                  base_environment_version_id: Optional[pulumi.Input[builtins.str]] = None,
-                 files: Optional[pulumi.Input[Sequence[pulumi.Input['ApplicationSourceFileArgs']]]] = None,
+                 files: Optional[Any] = None,
                  folder_path: Optional[pulumi.Input[builtins.str]] = None,
                  name: Optional[pulumi.Input[builtins.str]] = None,
                  resources: Optional[pulumi.Input['ApplicationSourceResourcesArgs']] = None,
@@ -33,7 +33,7 @@ class ApplicationSourceArgs:
         The set of arguments for constructing a ApplicationSource resource.
         :param pulumi.Input[builtins.str] base_environment_id: The ID of the base environment for the Application Source.
         :param pulumi.Input[builtins.str] base_environment_version_id: The ID of the base environment version for the Application Source.
-        :param pulumi.Input[Sequence[pulumi.Input['ApplicationSourceFileArgs']]] files: List of files to upload, each with a source (local path) and destination (path in application source).
+        :param Any files: The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
         :param pulumi.Input[builtins.str] folder_path: The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
         :param pulumi.Input[builtins.str] name: The name of the Application Source.
         :param pulumi.Input['ApplicationSourceResourcesArgs'] resources: The resources for the Application Source.
@@ -80,14 +80,14 @@ class ApplicationSourceArgs:
 
     @property
     @pulumi.getter
-    def files(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ApplicationSourceFileArgs']]]]:
+    def files(self) -> Optional[Any]:
         """
-        List of files to upload, each with a source (local path) and destination (path in application source).
+        The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
         """
         return pulumi.get(self, "files")
 
     @files.setter
-    def files(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ApplicationSourceFileArgs']]]]):
+    def files(self, value: Optional[Any]):
         pulumi.set(self, "files", value)
 
     @property
@@ -144,7 +144,7 @@ class _ApplicationSourceState:
     def __init__(__self__, *,
                  base_environment_id: Optional[pulumi.Input[builtins.str]] = None,
                  base_environment_version_id: Optional[pulumi.Input[builtins.str]] = None,
-                 files: Optional[pulumi.Input[Sequence[pulumi.Input['ApplicationSourceFileArgs']]]] = None,
+                 files: Optional[Any] = None,
                  files_hashes: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.str]]]] = None,
                  folder_path: Optional[pulumi.Input[builtins.str]] = None,
                  folder_path_hash: Optional[pulumi.Input[builtins.str]] = None,
@@ -156,7 +156,7 @@ class _ApplicationSourceState:
         Input properties used for looking up and filtering ApplicationSource resources.
         :param pulumi.Input[builtins.str] base_environment_id: The ID of the base environment for the Application Source.
         :param pulumi.Input[builtins.str] base_environment_version_id: The ID of the base environment version for the Application Source.
-        :param pulumi.Input[Sequence[pulumi.Input['ApplicationSourceFileArgs']]] files: List of files to upload, each with a source (local path) and destination (path in application source).
+        :param Any files: The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
         :param pulumi.Input[Sequence[pulumi.Input[builtins.str]]] files_hashes: The hash of file contents for each file in files.
         :param pulumi.Input[builtins.str] folder_path: The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
         :param pulumi.Input[builtins.str] folder_path_hash: The hash of the folder path contents.
@@ -212,14 +212,14 @@ class _ApplicationSourceState:
 
     @property
     @pulumi.getter
-    def files(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ApplicationSourceFileArgs']]]]:
+    def files(self) -> Optional[Any]:
         """
-        List of files to upload, each with a source (local path) and destination (path in application source).
+        The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
         """
         return pulumi.get(self, "files")
 
     @files.setter
-    def files(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ApplicationSourceFileArgs']]]]):
+    def files(self, value: Optional[Any]):
         pulumi.set(self, "files", value)
 
     @property
@@ -307,7 +307,6 @@ class _ApplicationSourceState:
         pulumi.set(self, "version_id", value)
 
 
-@pulumi.type_token("datarobot:index/applicationSource:ApplicationSource")
 class ApplicationSource(pulumi.CustomResource):
     @overload
     def __init__(__self__,
@@ -315,7 +314,7 @@ class ApplicationSource(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  base_environment_id: Optional[pulumi.Input[builtins.str]] = None,
                  base_environment_version_id: Optional[pulumi.Input[builtins.str]] = None,
-                 files: Optional[pulumi.Input[Sequence[pulumi.Input[Union['ApplicationSourceFileArgs', 'ApplicationSourceFileArgsDict']]]]] = None,
+                 files: Optional[Any] = None,
                  folder_path: Optional[pulumi.Input[builtins.str]] = None,
                  name: Optional[pulumi.Input[builtins.str]] = None,
                  resources: Optional[pulumi.Input[Union['ApplicationSourceResourcesArgs', 'ApplicationSourceResourcesArgsDict']]] = None,
@@ -328,7 +327,7 @@ class ApplicationSource(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[builtins.str] base_environment_id: The ID of the base environment for the Application Source.
         :param pulumi.Input[builtins.str] base_environment_version_id: The ID of the base environment version for the Application Source.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['ApplicationSourceFileArgs', 'ApplicationSourceFileArgsDict']]]] files: List of files to upload, each with a source (local path) and destination (path in application source).
+        :param Any files: The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
         :param pulumi.Input[builtins.str] folder_path: The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
         :param pulumi.Input[builtins.str] name: The name of the Application Source.
         :param pulumi.Input[Union['ApplicationSourceResourcesArgs', 'ApplicationSourceResourcesArgsDict']] resources: The resources for the Application Source.
@@ -360,7 +359,7 @@ class ApplicationSource(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  base_environment_id: Optional[pulumi.Input[builtins.str]] = None,
                  base_environment_version_id: Optional[pulumi.Input[builtins.str]] = None,
-                 files: Optional[pulumi.Input[Sequence[pulumi.Input[Union['ApplicationSourceFileArgs', 'ApplicationSourceFileArgsDict']]]]] = None,
+                 files: Optional[Any] = None,
                  folder_path: Optional[pulumi.Input[builtins.str]] = None,
                  name: Optional[pulumi.Input[builtins.str]] = None,
                  resources: Optional[pulumi.Input[Union['ApplicationSourceResourcesArgs', 'ApplicationSourceResourcesArgsDict']]] = None,
@@ -396,7 +395,7 @@ class ApplicationSource(pulumi.CustomResource):
             opts: Optional[pulumi.ResourceOptions] = None,
             base_environment_id: Optional[pulumi.Input[builtins.str]] = None,
             base_environment_version_id: Optional[pulumi.Input[builtins.str]] = None,
-            files: Optional[pulumi.Input[Sequence[pulumi.Input[Union['ApplicationSourceFileArgs', 'ApplicationSourceFileArgsDict']]]]] = None,
+            files: Optional[Any] = None,
             files_hashes: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.str]]]] = None,
             folder_path: Optional[pulumi.Input[builtins.str]] = None,
             folder_path_hash: Optional[pulumi.Input[builtins.str]] = None,
@@ -413,7 +412,7 @@ class ApplicationSource(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[builtins.str] base_environment_id: The ID of the base environment for the Application Source.
         :param pulumi.Input[builtins.str] base_environment_version_id: The ID of the base environment version for the Application Source.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['ApplicationSourceFileArgs', 'ApplicationSourceFileArgsDict']]]] files: List of files to upload, each with a source (local path) and destination (path in application source).
+        :param Any files: The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
         :param pulumi.Input[Sequence[pulumi.Input[builtins.str]]] files_hashes: The hash of file contents for each file in files.
         :param pulumi.Input[builtins.str] folder_path: The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
         :param pulumi.Input[builtins.str] folder_path_hash: The hash of the folder path contents.
@@ -456,9 +455,9 @@ class ApplicationSource(pulumi.CustomResource):
 
     @property
     @pulumi.getter
-    def files(self) -> pulumi.Output[Optional[Sequence['outputs.ApplicationSourceFile']]]:
+    def files(self) -> pulumi.Output[Optional[Any]]:
         """
-        List of files to upload, each with a source (local path) and destination (path in application source).
+        The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
         """
         return pulumi.get(self, "files")
 

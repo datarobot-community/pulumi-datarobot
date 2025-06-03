@@ -445,7 +445,6 @@ class _CustomMetricState:
         pulumi.set(self, "value", value)
 
 
-@pulumi.type_token("datarobot:index/customMetric:CustomMetric")
 class CustomMetric(pulumi.CustomResource):
     @overload
     def __init__(__self__,

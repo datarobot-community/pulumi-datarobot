@@ -27,7 +27,7 @@ class CustomMetricJobArgs:
                  egress_network_policy: Optional[pulumi.Input[builtins.str]] = None,
                  environment_id: Optional[pulumi.Input[builtins.str]] = None,
                  environment_version_id: Optional[pulumi.Input[builtins.str]] = None,
-                 files: Optional[pulumi.Input[Sequence[pulumi.Input['CustomMetricJobFileArgs']]]] = None,
+                 files: Optional[Any] = None,
                  folder_path: Optional[pulumi.Input[builtins.str]] = None,
                  is_model_specific: Optional[pulumi.Input[builtins.bool]] = None,
                  name: Optional[pulumi.Input[builtins.str]] = None,
@@ -43,7 +43,7 @@ class CustomMetricJobArgs:
         :param pulumi.Input[builtins.str] egress_network_policy: The egress network policy for the Job.
         :param pulumi.Input[builtins.str] environment_id: The ID of the environment to use with the Job.
         :param pulumi.Input[builtins.str] environment_version_id: The ID of the environment version to use with the Job.
-        :param pulumi.Input[Sequence[pulumi.Input['CustomMetricJobFileArgs']]] files: List of files to upload, each with a source (local path) and destination (path in job).
+        :param Any files: The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Job. If list is of strings, then basenames will be used for tuples.
         :param pulumi.Input[builtins.str] folder_path: The path to a folder containing files to be uploaded. Each file in the folder is uploaded under path relative to a folder path.
         :param pulumi.Input[builtins.bool] is_model_specific: Determines whether the metric is related to the model or deployment.
         :param pulumi.Input[builtins.str] name: The name of the Custom Metric Job.
@@ -144,14 +144,14 @@ class CustomMetricJobArgs:
 
     @property
     @pulumi.getter
-    def files(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CustomMetricJobFileArgs']]]]:
+    def files(self) -> Optional[Any]:
         """
-        List of files to upload, each with a source (local path) and destination (path in job).
+        The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Job. If list is of strings, then basenames will be used for tuples.
         """
         return pulumi.get(self, "files")
 
     @files.setter
-    def files(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CustomMetricJobFileArgs']]]]):
+    def files(self, value: Optional[Any]):
         pulumi.set(self, "files", value)
 
     @property
@@ -259,7 +259,7 @@ class _CustomMetricJobState:
                  egress_network_policy: Optional[pulumi.Input[builtins.str]] = None,
                  environment_id: Optional[pulumi.Input[builtins.str]] = None,
                  environment_version_id: Optional[pulumi.Input[builtins.str]] = None,
-                 files: Optional[pulumi.Input[Sequence[pulumi.Input['CustomMetricJobFileArgs']]]] = None,
+                 files: Optional[Any] = None,
                  files_hashes: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.str]]]] = None,
                  folder_path: Optional[pulumi.Input[builtins.str]] = None,
                  folder_path_hash: Optional[pulumi.Input[builtins.str]] = None,
@@ -277,7 +277,7 @@ class _CustomMetricJobState:
         :param pulumi.Input[builtins.str] egress_network_policy: The egress network policy for the Job.
         :param pulumi.Input[builtins.str] environment_id: The ID of the environment to use with the Job.
         :param pulumi.Input[builtins.str] environment_version_id: The ID of the environment version to use with the Job.
-        :param pulumi.Input[Sequence[pulumi.Input['CustomMetricJobFileArgs']]] files: List of files to upload, each with a source (local path) and destination (path in job).
+        :param Any files: The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Job. If list is of strings, then basenames will be used for tuples.
         :param pulumi.Input[Sequence[pulumi.Input[builtins.str]]] files_hashes: The hash of file contents for each file in files.
         :param pulumi.Input[builtins.str] folder_path: The path to a folder containing files to be uploaded. Each file in the folder is uploaded under path relative to a folder path.
         :param pulumi.Input[builtins.str] folder_path_hash: The hash of the folder path contents.
@@ -384,14 +384,14 @@ class _CustomMetricJobState:
 
     @property
     @pulumi.getter
-    def files(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CustomMetricJobFileArgs']]]]:
+    def files(self) -> Optional[Any]:
         """
-        List of files to upload, each with a source (local path) and destination (path in job).
+        The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Job. If list is of strings, then basenames will be used for tuples.
         """
         return pulumi.get(self, "files")
 
     @files.setter
-    def files(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CustomMetricJobFileArgs']]]]):
+    def files(self, value: Optional[Any]):
         pulumi.set(self, "files", value)
 
     @property
@@ -515,7 +515,6 @@ class _CustomMetricJobState:
         pulumi.set(self, "units", value)
 
 
-@pulumi.type_token("datarobot:index/customMetricJob:CustomMetricJob")
 class CustomMetricJob(pulumi.CustomResource):
     @overload
     def __init__(__self__,
@@ -526,7 +525,7 @@ class CustomMetricJob(pulumi.CustomResource):
                  egress_network_policy: Optional[pulumi.Input[builtins.str]] = None,
                  environment_id: Optional[pulumi.Input[builtins.str]] = None,
                  environment_version_id: Optional[pulumi.Input[builtins.str]] = None,
-                 files: Optional[pulumi.Input[Sequence[pulumi.Input[Union['CustomMetricJobFileArgs', 'CustomMetricJobFileArgsDict']]]]] = None,
+                 files: Optional[Any] = None,
                  folder_path: Optional[pulumi.Input[builtins.str]] = None,
                  is_model_specific: Optional[pulumi.Input[builtins.bool]] = None,
                  name: Optional[pulumi.Input[builtins.str]] = None,
@@ -573,7 +572,7 @@ class CustomMetricJob(pulumi.CustomResource):
         :param pulumi.Input[builtins.str] egress_network_policy: The egress network policy for the Job.
         :param pulumi.Input[builtins.str] environment_id: The ID of the environment to use with the Job.
         :param pulumi.Input[builtins.str] environment_version_id: The ID of the environment version to use with the Job.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['CustomMetricJobFileArgs', 'CustomMetricJobFileArgsDict']]]] files: List of files to upload, each with a source (local path) and destination (path in job).
+        :param Any files: The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Job. If list is of strings, then basenames will be used for tuples.
         :param pulumi.Input[builtins.str] folder_path: The path to a folder containing files to be uploaded. Each file in the folder is uploaded under path relative to a folder path.
         :param pulumi.Input[builtins.bool] is_model_specific: Determines whether the metric is related to the model or deployment.
         :param pulumi.Input[builtins.str] name: The name of the Custom Metric Job.
@@ -639,7 +638,7 @@ class CustomMetricJob(pulumi.CustomResource):
                  egress_network_policy: Optional[pulumi.Input[builtins.str]] = None,
                  environment_id: Optional[pulumi.Input[builtins.str]] = None,
                  environment_version_id: Optional[pulumi.Input[builtins.str]] = None,
-                 files: Optional[pulumi.Input[Sequence[pulumi.Input[Union['CustomMetricJobFileArgs', 'CustomMetricJobFileArgsDict']]]]] = None,
+                 files: Optional[Any] = None,
                  folder_path: Optional[pulumi.Input[builtins.str]] = None,
                  is_model_specific: Optional[pulumi.Input[builtins.bool]] = None,
                  name: Optional[pulumi.Input[builtins.str]] = None,
@@ -688,7 +687,7 @@ class CustomMetricJob(pulumi.CustomResource):
             egress_network_policy: Optional[pulumi.Input[builtins.str]] = None,
             environment_id: Optional[pulumi.Input[builtins.str]] = None,
             environment_version_id: Optional[pulumi.Input[builtins.str]] = None,
-            files: Optional[pulumi.Input[Sequence[pulumi.Input[Union['CustomMetricJobFileArgs', 'CustomMetricJobFileArgsDict']]]]] = None,
+            files: Optional[Any] = None,
             files_hashes: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.str]]]] = None,
             folder_path: Optional[pulumi.Input[builtins.str]] = None,
             folder_path_hash: Optional[pulumi.Input[builtins.str]] = None,
@@ -711,7 +710,7 @@ class CustomMetricJob(pulumi.CustomResource):
         :param pulumi.Input[builtins.str] egress_network_policy: The egress network policy for the Job.
         :param pulumi.Input[builtins.str] environment_id: The ID of the environment to use with the Job.
         :param pulumi.Input[builtins.str] environment_version_id: The ID of the environment version to use with the Job.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['CustomMetricJobFileArgs', 'CustomMetricJobFileArgsDict']]]] files: List of files to upload, each with a source (local path) and destination (path in job).
+        :param Any files: The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Job. If list is of strings, then basenames will be used for tuples.
         :param pulumi.Input[Sequence[pulumi.Input[builtins.str]]] files_hashes: The hash of file contents for each file in files.
         :param pulumi.Input[builtins.str] folder_path: The path to a folder containing files to be uploaded. Each file in the folder is uploaded under path relative to a folder path.
         :param pulumi.Input[builtins.str] folder_path_hash: The hash of the folder path contents.
@@ -787,9 +786,9 @@ class CustomMetricJob(pulumi.CustomResource):
 
     @property
     @pulumi.getter
-    def files(self) -> pulumi.Output[Optional[Sequence['outputs.CustomMetricJobFile']]]:
+    def files(self) -> pulumi.Output[Optional[Any]]:
         """
-        List of files to upload, each with a source (local path) and destination (path in job).
+        The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Job. If list is of strings, then basenames will be used for tuples.
         """
         return pulumi.get(self, "files")
 

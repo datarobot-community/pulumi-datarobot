@@ -16,10 +16,6 @@ else:
 from . import _utilities
 
 __all__ = [
-    'ApplicationSourceFileArgs',
-    'ApplicationSourceFileArgsDict',
-    'ApplicationSourceFromTemplateFileArgs',
-    'ApplicationSourceFromTemplateFileArgsDict',
     'ApplicationSourceFromTemplateResourcesArgs',
     'ApplicationSourceFromTemplateResourcesArgsDict',
     'ApplicationSourceFromTemplateRuntimeParameterValueArgs',
@@ -40,12 +36,8 @@ __all__ = [
     'BatchPredictionJobDefinitionScheduleArgsDict',
     'BatchPredictionJobDefinitionTimeseriesSettingsArgs',
     'BatchPredictionJobDefinitionTimeseriesSettingsArgsDict',
-    'CustomJobFileArgs',
-    'CustomJobFileArgsDict',
     'CustomJobRuntimeParameterValueArgs',
     'CustomJobRuntimeParameterValueArgsDict',
-    'CustomJobScheduleArgs',
-    'CustomJobScheduleArgsDict',
     'CustomMetricBatchArgs',
     'CustomMetricBatchArgsDict',
     'CustomMetricFromJobBatchArgs',
@@ -60,8 +52,6 @@ __all__ = [
     'CustomMetricFromJobTimestampArgsDict',
     'CustomMetricFromJobValueArgs',
     'CustomMetricFromJobValueArgsDict',
-    'CustomMetricJobFileArgs',
-    'CustomMetricJobFileArgsDict',
     'CustomMetricJobRuntimeParameterValueArgs',
     'CustomMetricJobRuntimeParameterValueArgsDict',
     'CustomMetricSampleCountArgs',
@@ -70,8 +60,6 @@ __all__ = [
     'CustomMetricTimestampArgsDict',
     'CustomMetricValueArgs',
     'CustomMetricValueArgsDict',
-    'CustomModelFileArgs',
-    'CustomModelFileArgsDict',
     'CustomModelGuardConfigurationArgs',
     'CustomModelGuardConfigurationArgsDict',
     'CustomModelGuardConfigurationInterventionArgs',
@@ -167,106 +155,6 @@ __all__ = [
 ]
 
 MYPY = False
-
-if not MYPY:
-    class ApplicationSourceFileArgsDict(TypedDict):
-        destination: pulumi.Input[builtins.str]
-        """
-        Path in the application source.
-        """
-        source: pulumi.Input[builtins.str]
-        """
-        Local filesystem path.
-        """
-elif False:
-    ApplicationSourceFileArgsDict: TypeAlias = Mapping[str, Any]
-
-@pulumi.input_type
-class ApplicationSourceFileArgs:
-    def __init__(__self__, *,
-                 destination: pulumi.Input[builtins.str],
-                 source: pulumi.Input[builtins.str]):
-        """
-        :param pulumi.Input[builtins.str] destination: Path in the application source.
-        :param pulumi.Input[builtins.str] source: Local filesystem path.
-        """
-        pulumi.set(__self__, "destination", destination)
-        pulumi.set(__self__, "source", source)
-
-    @property
-    @pulumi.getter
-    def destination(self) -> pulumi.Input[builtins.str]:
-        """
-        Path in the application source.
-        """
-        return pulumi.get(self, "destination")
-
-    @destination.setter
-    def destination(self, value: pulumi.Input[builtins.str]):
-        pulumi.set(self, "destination", value)
-
-    @property
-    @pulumi.getter
-    def source(self) -> pulumi.Input[builtins.str]:
-        """
-        Local filesystem path.
-        """
-        return pulumi.get(self, "source")
-
-    @source.setter
-    def source(self, value: pulumi.Input[builtins.str]):
-        pulumi.set(self, "source", value)
-
-
-if not MYPY:
-    class ApplicationSourceFromTemplateFileArgsDict(TypedDict):
-        destination: pulumi.Input[builtins.str]
-        """
-        Path in the application source.
-        """
-        source: pulumi.Input[builtins.str]
-        """
-        Local filesystem path.
-        """
-elif False:
-    ApplicationSourceFromTemplateFileArgsDict: TypeAlias = Mapping[str, Any]
-
-@pulumi.input_type
-class ApplicationSourceFromTemplateFileArgs:
-    def __init__(__self__, *,
-                 destination: pulumi.Input[builtins.str],
-                 source: pulumi.Input[builtins.str]):
-        """
-        :param pulumi.Input[builtins.str] destination: Path in the application source.
-        :param pulumi.Input[builtins.str] source: Local filesystem path.
-        """
-        pulumi.set(__self__, "destination", destination)
-        pulumi.set(__self__, "source", source)
-
-    @property
-    @pulumi.getter
-    def destination(self) -> pulumi.Input[builtins.str]:
-        """
-        Path in the application source.
-        """
-        return pulumi.get(self, "destination")
-
-    @destination.setter
-    def destination(self, value: pulumi.Input[builtins.str]):
-        pulumi.set(self, "destination", value)
-
-    @property
-    @pulumi.getter
-    def source(self) -> pulumi.Input[builtins.str]:
-        """
-        Local filesystem path.
-        """
-        return pulumi.get(self, "source")
-
-    @source.setter
-    def source(self, value: pulumi.Input[builtins.str]):
-        pulumi.set(self, "source", value)
-
 
 if not MYPY:
     class ApplicationSourceFromTemplateResourcesArgsDict(TypedDict):
@@ -1456,56 +1344,6 @@ class BatchPredictionJobDefinitionTimeseriesSettingsArgs:
 
 
 if not MYPY:
-    class CustomJobFileArgsDict(TypedDict):
-        destination: pulumi.Input[builtins.str]
-        """
-        Path in the job.
-        """
-        source: pulumi.Input[builtins.str]
-        """
-        Local filesystem path.
-        """
-elif False:
-    CustomJobFileArgsDict: TypeAlias = Mapping[str, Any]
-
-@pulumi.input_type
-class CustomJobFileArgs:
-    def __init__(__self__, *,
-                 destination: pulumi.Input[builtins.str],
-                 source: pulumi.Input[builtins.str]):
-        """
-        :param pulumi.Input[builtins.str] destination: Path in the job.
-        :param pulumi.Input[builtins.str] source: Local filesystem path.
-        """
-        pulumi.set(__self__, "destination", destination)
-        pulumi.set(__self__, "source", source)
-
-    @property
-    @pulumi.getter
-    def destination(self) -> pulumi.Input[builtins.str]:
-        """
-        Path in the job.
-        """
-        return pulumi.get(self, "destination")
-
-    @destination.setter
-    def destination(self, value: pulumi.Input[builtins.str]):
-        pulumi.set(self, "destination", value)
-
-    @property
-    @pulumi.getter
-    def source(self) -> pulumi.Input[builtins.str]:
-        """
-        Local filesystem path.
-        """
-        return pulumi.get(self, "source")
-
-    @source.setter
-    def source(self, value: pulumi.Input[builtins.str]):
-        pulumi.set(self, "source", value)
-
-
-if not MYPY:
     class CustomJobRuntimeParameterValueArgsDict(TypedDict):
         key: pulumi.Input[builtins.str]
         """
@@ -1572,113 +1410,6 @@ class CustomJobRuntimeParameterValueArgs:
     @value.setter
     def value(self, value: pulumi.Input[builtins.str]):
         pulumi.set(self, "value", value)
-
-
-if not MYPY:
-    class CustomJobScheduleArgsDict(TypedDict):
-        day_of_months: pulumi.Input[Sequence[pulumi.Input[builtins.str]]]
-        """
-        Days of the month when the job will run.
-        """
-        day_of_weeks: pulumi.Input[Sequence[pulumi.Input[builtins.str]]]
-        """
-        Days of the week when the job will run.
-        """
-        hours: pulumi.Input[Sequence[pulumi.Input[builtins.str]]]
-        """
-        Hours of the day when the job will run.
-        """
-        minutes: pulumi.Input[Sequence[pulumi.Input[builtins.str]]]
-        """
-        Minutes of the day when the job will run.
-        """
-        months: pulumi.Input[Sequence[pulumi.Input[builtins.str]]]
-        """
-        Months of the year when the job will run.
-        """
-elif False:
-    CustomJobScheduleArgsDict: TypeAlias = Mapping[str, Any]
-
-@pulumi.input_type
-class CustomJobScheduleArgs:
-    def __init__(__self__, *,
-                 day_of_months: pulumi.Input[Sequence[pulumi.Input[builtins.str]]],
-                 day_of_weeks: pulumi.Input[Sequence[pulumi.Input[builtins.str]]],
-                 hours: pulumi.Input[Sequence[pulumi.Input[builtins.str]]],
-                 minutes: pulumi.Input[Sequence[pulumi.Input[builtins.str]]],
-                 months: pulumi.Input[Sequence[pulumi.Input[builtins.str]]]):
-        """
-        :param pulumi.Input[Sequence[pulumi.Input[builtins.str]]] day_of_months: Days of the month when the job will run.
-        :param pulumi.Input[Sequence[pulumi.Input[builtins.str]]] day_of_weeks: Days of the week when the job will run.
-        :param pulumi.Input[Sequence[pulumi.Input[builtins.str]]] hours: Hours of the day when the job will run.
-        :param pulumi.Input[Sequence[pulumi.Input[builtins.str]]] minutes: Minutes of the day when the job will run.
-        :param pulumi.Input[Sequence[pulumi.Input[builtins.str]]] months: Months of the year when the job will run.
-        """
-        pulumi.set(__self__, "day_of_months", day_of_months)
-        pulumi.set(__self__, "day_of_weeks", day_of_weeks)
-        pulumi.set(__self__, "hours", hours)
-        pulumi.set(__self__, "minutes", minutes)
-        pulumi.set(__self__, "months", months)
-
-    @property
-    @pulumi.getter(name="dayOfMonths")
-    def day_of_months(self) -> pulumi.Input[Sequence[pulumi.Input[builtins.str]]]:
-        """
-        Days of the month when the job will run.
-        """
-        return pulumi.get(self, "day_of_months")
-
-    @day_of_months.setter
-    def day_of_months(self, value: pulumi.Input[Sequence[pulumi.Input[builtins.str]]]):
-        pulumi.set(self, "day_of_months", value)
-
-    @property
-    @pulumi.getter(name="dayOfWeeks")
-    def day_of_weeks(self) -> pulumi.Input[Sequence[pulumi.Input[builtins.str]]]:
-        """
-        Days of the week when the job will run.
-        """
-        return pulumi.get(self, "day_of_weeks")
-
-    @day_of_weeks.setter
-    def day_of_weeks(self, value: pulumi.Input[Sequence[pulumi.Input[builtins.str]]]):
-        pulumi.set(self, "day_of_weeks", value)
-
-    @property
-    @pulumi.getter
-    def hours(self) -> pulumi.Input[Sequence[pulumi.Input[builtins.str]]]:
-        """
-        Hours of the day when the job will run.
-        """
-        return pulumi.get(self, "hours")
-
-    @hours.setter
-    def hours(self, value: pulumi.Input[Sequence[pulumi.Input[builtins.str]]]):
-        pulumi.set(self, "hours", value)
-
-    @property
-    @pulumi.getter
-    def minutes(self) -> pulumi.Input[Sequence[pulumi.Input[builtins.str]]]:
-        """
-        Minutes of the day when the job will run.
-        """
-        return pulumi.get(self, "minutes")
-
-    @minutes.setter
-    def minutes(self, value: pulumi.Input[Sequence[pulumi.Input[builtins.str]]]):
-        pulumi.set(self, "minutes", value)
-
-    @property
-    @pulumi.getter
-    def months(self) -> pulumi.Input[Sequence[pulumi.Input[builtins.str]]]:
-        """
-        Months of the year when the job will run.
-        """
-        return pulumi.get(self, "months")
-
-    @months.setter
-    def months(self, value: pulumi.Input[Sequence[pulumi.Input[builtins.str]]]):
-        pulumi.set(self, "months", value)
 
 
 if not MYPY:
@@ -2037,56 +1768,6 @@ class CustomMetricFromJobValueArgs:
 
 
 if not MYPY:
-    class CustomMetricJobFileArgsDict(TypedDict):
-        destination: pulumi.Input[builtins.str]
-        """
-        Path in the job.
-        """
-        source: pulumi.Input[builtins.str]
-        """
-        Local filesystem path.
-        """
-elif False:
-    CustomMetricJobFileArgsDict: TypeAlias = Mapping[str, Any]
-
-@pulumi.input_type
-class CustomMetricJobFileArgs:
-    def __init__(__self__, *,
-                 destination: pulumi.Input[builtins.str],
-                 source: pulumi.Input[builtins.str]):
-        """
-        :param pulumi.Input[builtins.str] destination: Path in the job.
-        :param pulumi.Input[builtins.str] source: Local filesystem path.
-        """
-        pulumi.set(__self__, "destination", destination)
-        pulumi.set(__self__, "source", source)
-
-    @property
-    @pulumi.getter
-    def destination(self) -> pulumi.Input[builtins.str]:
-        """
-        Path in the job.
-        """
-        return pulumi.get(self, "destination")
-
-    @destination.setter
-    def destination(self, value: pulumi.Input[builtins.str]):
-        pulumi.set(self, "destination", value)
-
-    @property
-    @pulumi.getter
-    def source(self) -> pulumi.Input[builtins.str]:
-        """
-        Local filesystem path.
-        """
-        return pulumi.get(self, "source")
-
-    @source.setter
-    def source(self, value: pulumi.Input[builtins.str]):
-        pulumi.set(self, "source", value)
-
-
-if not MYPY:
     class CustomMetricJobRuntimeParameterValueArgsDict(TypedDict):
         key: pulumi.Input[builtins.str]
         """
@@ -2269,56 +1950,6 @@ class CustomMetricValueArgs:
     @column_name.setter
     def column_name(self, value: Optional[pulumi.Input[builtins.str]]):
         pulumi.set(self, "column_name", value)
-
-
-if not MYPY:
-    class CustomModelFileArgsDict(TypedDict):
-        destination: pulumi.Input[builtins.str]
-        """
-        Path in the model.
-        """
-        source: pulumi.Input[builtins.str]
-        """
-        Local filesystem path.
-        """
-elif False:
-    CustomModelFileArgsDict: TypeAlias = Mapping[str, Any]
-
-@pulumi.input_type
-class CustomModelFileArgs:
-    def __init__(__self__, *,
-                 destination: pulumi.Input[builtins.str],
-                 source: pulumi.Input[builtins.str]):
-        """
-        :param pulumi.Input[builtins.str] destination: Path in the model.
-        :param pulumi.Input[builtins.str] source: Local filesystem path.
-        """
-        pulumi.set(__self__, "destination", destination)
-        pulumi.set(__self__, "source", source)
-
-    @property
-    @pulumi.getter
-    def destination(self) -> pulumi.Input[builtins.str]:
-        """
-        Path in the model.
-        """
-        return pulumi.get(self, "destination")
-
-    @destination.setter
-    def destination(self, value: pulumi.Input[builtins.str]):
-        pulumi.set(self, "destination", value)
-
-    @property
-    @pulumi.getter
-    def source(self) -> pulumi.Input[builtins.str]:
-        """
-        Local filesystem path.
-        """
-        return pulumi.get(self, "source")
-
-    @source.setter
-    def source(self, value: pulumi.Input[builtins.str]):
-        pulumi.set(self, "source", value)
 
 
 if not MYPY:

@@ -12,6 +12,46 @@ namespace DataRobotPulumi.Datarobot
 {
     /// <summary>
     /// Custom Job
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Datarobot = DataRobotPulumi.Datarobot;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Datarobot.CustomJob("example", new()
+    ///     {
+    ///         JobType = "retraining",
+    ///         Files = new[]
+    ///         {
+    ///             "file1.py",
+    ///             "file2.py",
+    ///         },
+    ///         EnvironmentId = "65f9b27eab986d30d4c64268",
+    ///         Description = "Example Custom Job Description",
+    ///         RuntimeParameterValues = new[]
+    ///         {
+    ///             new Datarobot.Inputs.CustomJobRuntimeParameterValueArgs
+    ///             {
+    ///                 Key = "EXAMPLE_PARAM",
+    ///                 Type = "string",
+    ///                 Value = "val",
+    ///             },
+    ///         },
+    ///         EgressNetworkPolicy = "none",
+    ///         ResourceBundleId = "cpu.micro",
+    ///     });
+    /// 
+    ///     return new Dictionary&lt;string, object?&gt;
+    ///     {
+    ///         ["exampleId"] = example.Id,
+    ///     };
+    /// });
+    /// ```
     /// </summary>
     [DatarobotResourceType("datarobot:index/customJob:CustomJob")]
     public partial class CustomJob : global::Pulumi.CustomResource
@@ -41,10 +81,10 @@ namespace DataRobotPulumi.Datarobot
         public Output<string> EnvironmentVersionId { get; private set; } = null!;
 
         /// <summary>
-        /// List of files to upload, each with a source (local path) and destination (path in job).
+        /// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Job. If list is of strings, then basenames will be used for tuples.
         /// </summary>
         [Output("files")]
-        public Output<ImmutableArray<Outputs.CustomJobFile>> Files { get; private set; } = null!;
+        public Output<object?> Files { get; private set; } = null!;
 
         /// <summary>
         /// The hash of file contents for each file in files.
@@ -87,18 +127,6 @@ namespace DataRobotPulumi.Datarobot
         /// </summary>
         [Output("runtimeParameterValues")]
         public Output<ImmutableArray<Outputs.CustomJobRuntimeParameterValue>> RuntimeParameterValues { get; private set; } = null!;
-
-        /// <summary>
-        /// The schedule configuration for the custom job.
-        /// </summary>
-        [Output("schedule")]
-        public Output<Outputs.CustomJobSchedule?> Schedule { get; private set; } = null!;
-
-        /// <summary>
-        /// The ID of the schedule associated with the custom job.
-        /// </summary>
-        [Output("scheduleId")]
-        public Output<string> ScheduleId { get; private set; } = null!;
 
 
         /// <summary>
@@ -171,17 +199,11 @@ namespace DataRobotPulumi.Datarobot
         [Input("environmentVersionId")]
         public Input<string>? EnvironmentVersionId { get; set; }
 
-        [Input("files")]
-        private InputList<Inputs.CustomJobFileArgs>? _files;
-
         /// <summary>
-        /// List of files to upload, each with a source (local path) and destination (path in job).
+        /// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Job. If list is of strings, then basenames will be used for tuples.
         /// </summary>
-        public InputList<Inputs.CustomJobFileArgs> Files
-        {
-            get => _files ?? (_files = new InputList<Inputs.CustomJobFileArgs>());
-            set => _files = value;
-        }
+        [Input("files")]
+        public Input<object>? Files { get; set; }
 
         /// <summary>
         /// The path to a folder containing files to be uploaded. Each file in the folder is uploaded under path relative to a folder path.
@@ -219,18 +241,6 @@ namespace DataRobotPulumi.Datarobot
             set => _runtimeParameterValues = value;
         }
 
-        /// <summary>
-        /// The schedule configuration for the custom job.
-        /// </summary>
-        [Input("schedule")]
-        public Input<Inputs.CustomJobScheduleArgs>? Schedule { get; set; }
-
-        /// <summary>
-        /// The ID of the schedule associated with the custom job.
-        /// </summary>
-        [Input("scheduleId")]
-        public Input<string>? ScheduleId { get; set; }
-
         public CustomJobArgs()
         {
         }
@@ -263,17 +273,11 @@ namespace DataRobotPulumi.Datarobot
         [Input("environmentVersionId")]
         public Input<string>? EnvironmentVersionId { get; set; }
 
-        [Input("files")]
-        private InputList<Inputs.CustomJobFileGetArgs>? _files;
-
         /// <summary>
-        /// List of files to upload, each with a source (local path) and destination (path in job).
+        /// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Job. If list is of strings, then basenames will be used for tuples.
         /// </summary>
-        public InputList<Inputs.CustomJobFileGetArgs> Files
-        {
-            get => _files ?? (_files = new InputList<Inputs.CustomJobFileGetArgs>());
-            set => _files = value;
-        }
+        [Input("files")]
+        public Input<object>? Files { get; set; }
 
         [Input("filesHashes")]
         private InputList<string>? _filesHashes;
@@ -328,18 +332,6 @@ namespace DataRobotPulumi.Datarobot
             get => _runtimeParameterValues ?? (_runtimeParameterValues = new InputList<Inputs.CustomJobRuntimeParameterValueGetArgs>());
             set => _runtimeParameterValues = value;
         }
-
-        /// <summary>
-        /// The schedule configuration for the custom job.
-        /// </summary>
-        [Input("schedule")]
-        public Input<Inputs.CustomJobScheduleGetArgs>? Schedule { get; set; }
-
-        /// <summary>
-        /// The ID of the schedule associated with the custom job.
-        /// </summary>
-        [Input("scheduleId")]
-        public Input<string>? ScheduleId { get; set; }
 
         public CustomJobState()
         {

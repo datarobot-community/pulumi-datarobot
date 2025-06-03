@@ -144,7 +144,6 @@ class _DatasetFromFileState:
         pulumi.set(self, "use_case_ids", value)
 
 
-@pulumi.type_token("datarobot:index/datasetFromFile:DatasetFromFile")
 class DatasetFromFile(pulumi.CustomResource):
     @overload
     def __init__(__self__,

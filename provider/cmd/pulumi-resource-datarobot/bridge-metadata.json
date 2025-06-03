@@ -7,9 +7,6 @@
             "datarobot_application_source": {
                 "current": "datarobot:index/applicationSource:ApplicationSource",
                 "fields": {
-                    "files": {
-                        "maxItemsOne": false
-                    },
                     "files_hashes": {
                         "maxItemsOne": false
                     },
@@ -21,9 +18,6 @@
             "datarobot_application_source_from_template": {
                 "current": "datarobot:index/applicationSourceFromTemplate:ApplicationSourceFromTemplate",
                 "fields": {
-                    "files": {
-                        "maxItemsOne": false
-                    },
                     "files_hashes": {
                         "maxItemsOne": false
                     },
@@ -106,33 +100,11 @@
             "datarobot_custom_job": {
                 "current": "datarobot:index/customJob:CustomJob",
                 "fields": {
-                    "files": {
-                        "maxItemsOne": false
-                    },
                     "files_hashes": {
                         "maxItemsOne": false
                     },
                     "runtime_parameter_values": {
                         "maxItemsOne": false
-                    },
-                    "schedule": {
-                        "fields": {
-                            "day_of_month": {
-                                "maxItemsOne": false
-                            },
-                            "day_of_week": {
-                                "maxItemsOne": false
-                            },
-                            "hour": {
-                                "maxItemsOne": false
-                            },
-                            "minute": {
-                                "maxItemsOne": false
-                            },
-                            "month": {
-                                "maxItemsOne": false
-                            }
-                        }
                     }
                 }
             },
@@ -169,9 +141,6 @@
             "datarobot_custom_metric_job": {
                 "current": "datarobot:index/customMetricJob:CustomMetricJob",
                 "fields": {
-                    "files": {
-                        "maxItemsOne": false
-                    },
                     "files_hashes": {
                         "maxItemsOne": false
                     },
@@ -184,9 +153,6 @@
                 "current": "datarobot:index/customModel:CustomModel",
                 "fields": {
                     "class_labels": {
-                        "maxItemsOne": false
-                    },
-                    "files": {
                         "maxItemsOne": false
                     },
                     "files_hashes": {
@@ -442,9 +408,6 @@
             "datarobot_registered_model": {
                 "current": "datarobot:index/registeredModel:RegisteredModel",
                 "fields": {
-                    "runtime_parameter_values": {
-                        "maxItemsOne": false
-                    },
                     "use_case_ids": {
                         "maxItemsOne": false
                     }

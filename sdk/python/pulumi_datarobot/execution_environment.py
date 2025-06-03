@@ -319,7 +319,6 @@ class _ExecutionEnvironmentState:
         pulumi.set(self, "version_id", value)
 
 
-@pulumi.type_token("datarobot:index/executionEnvironment:ExecutionEnvironment")
 class ExecutionEnvironment(pulumi.CustomResource):
     @overload
     def __init__(__self__,

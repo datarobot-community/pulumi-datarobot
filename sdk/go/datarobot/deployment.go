@@ -33,7 +33,7 @@ import (
 //				TargetType:        pulumi.String("Binary"),
 //				TargetName:        pulumi.String("my_label"),
 //				BaseEnvironmentId: pulumi.String("65f9b27eab986d30d4c64268"),
-//				Files: datarobot.CustomModelFileArray{
+//				Files: pulumi.Any{
 //					"example.py",
 //				},
 //			})

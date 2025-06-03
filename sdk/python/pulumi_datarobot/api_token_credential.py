@@ -128,7 +128,6 @@ class _ApiTokenCredentialState:
         pulumi.set(self, "name", value)
 
 
-@pulumi.type_token("datarobot:index/apiTokenCredential:ApiTokenCredential")
 class ApiTokenCredential(pulumi.CustomResource):
     @overload
     def __init__(__self__,

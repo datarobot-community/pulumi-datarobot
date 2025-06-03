@@ -8,6 +8,31 @@ import * as utilities from "./utilities";
 
 /**
  * Custom Job
+ *
+ * ## Example Usage
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as datarobot from "@datarobot/pulumi-datarobot";
+ *
+ * const example = new datarobot.CustomJob("example", {
+ *     jobType: "retraining",
+ *     files: [
+ *         "file1.py",
+ *         "file2.py",
+ *     ],
+ *     environmentId: "65f9b27eab986d30d4c64268",
+ *     description: "Example Custom Job Description",
+ *     runtimeParameterValues: [{
+ *         key: "EXAMPLE_PARAM",
+ *         type: "string",
+ *         value: "val",
+ *     }],
+ *     egressNetworkPolicy: "none",
+ *     resourceBundleId: "cpu.micro",
+ * });
+ * export const exampleId = example.id;
+ * ```
  */
 export class CustomJob extends pulumi.CustomResource {
     /**
@@ -54,9 +79,9 @@ export class CustomJob extends pulumi.CustomResource {
      */
     public readonly environmentVersionId!: pulumi.Output<string>;
     /**
-     * List of files to upload, each with a source (local path) and destination (path in job).
+     * The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Job. If list is of strings, then basenames will be used for tuples.
      */
-    public readonly files!: pulumi.Output<outputs.CustomJobFile[] | undefined>;
+    public readonly files!: pulumi.Output<any | undefined>;
     /**
      * The hash of file contents for each file in files.
      */
@@ -85,14 +110,6 @@ export class CustomJob extends pulumi.CustomResource {
      * Additional parameters to be injected into a Job at runtime.
      */
     public readonly runtimeParameterValues!: pulumi.Output<outputs.CustomJobRuntimeParameterValue[]>;
-    /**
-     * The schedule configuration for the custom job.
-     */
-    public readonly schedule!: pulumi.Output<outputs.CustomJobSchedule | undefined>;
-    /**
-     * The ID of the schedule associated with the custom job.
-     */
-    public readonly scheduleId!: pulumi.Output<string>;
 
     /**
      * Create a CustomJob resource with the given unique name, arguments, and options.
@@ -119,8 +136,6 @@ export class CustomJob extends pulumi.CustomResource {
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["resourceBundleId"] = state ? state.resourceBundleId : undefined;
             resourceInputs["runtimeParameterValues"] = state ? state.runtimeParameterValues : undefined;
-            resourceInputs["schedule"] = state ? state.schedule : undefined;
-            resourceInputs["scheduleId"] = state ? state.scheduleId : undefined;
         } else {
             const args = argsOrState as CustomJobArgs | undefined;
             resourceInputs["description"] = args ? args.description : undefined;
@@ -133,8 +148,6 @@ export class CustomJob extends pulumi.CustomResource {
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["resourceBundleId"] = args ? args.resourceBundleId : undefined;
             resourceInputs["runtimeParameterValues"] = args ? args.runtimeParameterValues : undefined;
-            resourceInputs["schedule"] = args ? args.schedule : undefined;
-            resourceInputs["scheduleId"] = args ? args.scheduleId : undefined;
             resourceInputs["filesHashes"] = undefined /*out*/;
             resourceInputs["folderPathHash"] = undefined /*out*/;
         }
@@ -164,9 +177,9 @@ export interface CustomJobState {
      */
     environmentVersionId?: pulumi.Input<string>;
     /**
-     * List of files to upload, each with a source (local path) and destination (path in job).
+     * The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Job. If list is of strings, then basenames will be used for tuples.
      */
-    files?: pulumi.Input<pulumi.Input<inputs.CustomJobFile>[]>;
+    files?: any;
     /**
      * The hash of file contents for each file in files.
      */
@@ -195,14 +208,6 @@ export interface CustomJobState {
      * Additional parameters to be injected into a Job at runtime.
      */
     runtimeParameterValues?: pulumi.Input<pulumi.Input<inputs.CustomJobRuntimeParameterValue>[]>;
-    /**
-     * The schedule configuration for the custom job.
-     */
-    schedule?: pulumi.Input<inputs.CustomJobSchedule>;
-    /**
-     * The ID of the schedule associated with the custom job.
-     */
-    scheduleId?: pulumi.Input<string>;
 }
 
 /**
@@ -226,9 +231,9 @@ export interface CustomJobArgs {
      */
     environmentVersionId?: pulumi.Input<string>;
     /**
-     * List of files to upload, each with a source (local path) and destination (path in job).
+     * The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Job. If list is of strings, then basenames will be used for tuples.
      */
-    files?: pulumi.Input<pulumi.Input<inputs.CustomJobFile>[]>;
+    files?: any;
     /**
      * The path to a folder containing files to be uploaded. Each file in the folder is uploaded under path relative to a folder path.
      */
@@ -249,12 +254,4 @@ export interface CustomJobArgs {
      * Additional parameters to be injected into a Job at runtime.
      */
     runtimeParameterValues?: pulumi.Input<pulumi.Input<inputs.CustomJobRuntimeParameterValue>[]>;
-    /**
-     * The schedule configuration for the custom job.
-     */
-    schedule?: pulumi.Input<inputs.CustomJobSchedule>;
-    /**
-     * The ID of the schedule associated with the custom job.
-     */
-    scheduleId?: pulumi.Input<string>;
 }

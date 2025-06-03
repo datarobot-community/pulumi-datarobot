@@ -38,8 +38,6 @@ type DeploymentRetrainingPolicy struct {
 	TimeSeriesOptions DeploymentRetrainingPolicyTimeSeriesOptionsPtrOutput `pulumi:"timeSeriesOptions"`
 	// Retraining policy trigger.
 	Trigger DeploymentRetrainingPolicyTriggerPtrOutput `pulumi:"trigger"`
-	// The ID of the use case to which the retraining policy belongs.
-	UseCaseId pulumi.StringPtrOutput `pulumi:"useCaseId"`
 }
 
 // NewDeploymentRetrainingPolicy registers a new resource with the given unique name, arguments, and options.
@@ -100,8 +98,6 @@ type deploymentRetrainingPolicyState struct {
 	TimeSeriesOptions *DeploymentRetrainingPolicyTimeSeriesOptions `pulumi:"timeSeriesOptions"`
 	// Retraining policy trigger.
 	Trigger *DeploymentRetrainingPolicyTrigger `pulumi:"trigger"`
-	// The ID of the use case to which the retraining policy belongs.
-	UseCaseId *string `pulumi:"useCaseId"`
 }
 
 type DeploymentRetrainingPolicyState struct {
@@ -127,8 +123,6 @@ type DeploymentRetrainingPolicyState struct {
 	TimeSeriesOptions DeploymentRetrainingPolicyTimeSeriesOptionsPtrInput
 	// Retraining policy trigger.
 	Trigger DeploymentRetrainingPolicyTriggerPtrInput
-	// The ID of the use case to which the retraining policy belongs.
-	UseCaseId pulumi.StringPtrInput
 }
 
 func (DeploymentRetrainingPolicyState) ElementType() reflect.Type {
@@ -158,8 +152,6 @@ type deploymentRetrainingPolicyArgs struct {
 	TimeSeriesOptions *DeploymentRetrainingPolicyTimeSeriesOptions `pulumi:"timeSeriesOptions"`
 	// Retraining policy trigger.
 	Trigger *DeploymentRetrainingPolicyTrigger `pulumi:"trigger"`
-	// The ID of the use case to which the retraining policy belongs.
-	UseCaseId *string `pulumi:"useCaseId"`
 }
 
 // The set of arguments for constructing a DeploymentRetrainingPolicy resource.
@@ -186,8 +178,6 @@ type DeploymentRetrainingPolicyArgs struct {
 	TimeSeriesOptions DeploymentRetrainingPolicyTimeSeriesOptionsPtrInput
 	// Retraining policy trigger.
 	Trigger DeploymentRetrainingPolicyTriggerPtrInput
-	// The ID of the use case to which the retraining policy belongs.
-	UseCaseId pulumi.StringPtrInput
 }
 
 func (DeploymentRetrainingPolicyArgs) ElementType() reflect.Type {
@@ -336,11 +326,6 @@ func (o DeploymentRetrainingPolicyOutput) TimeSeriesOptions() DeploymentRetraini
 // Retraining policy trigger.
 func (o DeploymentRetrainingPolicyOutput) Trigger() DeploymentRetrainingPolicyTriggerPtrOutput {
 	return o.ApplyT(func(v *DeploymentRetrainingPolicy) DeploymentRetrainingPolicyTriggerPtrOutput { return v.Trigger }).(DeploymentRetrainingPolicyTriggerPtrOutput)
-}
-
-// The ID of the use case to which the retraining policy belongs.
-func (o DeploymentRetrainingPolicyOutput) UseCaseId() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *DeploymentRetrainingPolicy) pulumi.StringPtrOutput { return v.UseCaseId }).(pulumi.StringPtrOutput)
 }
 
 type DeploymentRetrainingPolicyArrayOutput struct{ *pulumi.OutputState }

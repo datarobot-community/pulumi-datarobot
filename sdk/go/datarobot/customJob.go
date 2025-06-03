@@ -12,6 +12,48 @@ import (
 )
 
 // Custom Job
+//
+// ## Example Usage
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			example, err := datarobot.NewCustomJob(ctx, "example", &datarobot.CustomJobArgs{
+//				JobType: pulumi.String("retraining"),
+//				Files: pulumi.Any{
+//					"file1.py",
+//					"file2.py",
+//				},
+//				EnvironmentId: pulumi.String("65f9b27eab986d30d4c64268"),
+//				Description:   pulumi.String("Example Custom Job Description"),
+//				RuntimeParameterValues: datarobot.CustomJobRuntimeParameterValueArray{
+//					&datarobot.CustomJobRuntimeParameterValueArgs{
+//						Key:   pulumi.String("EXAMPLE_PARAM"),
+//						Type:  pulumi.String("string"),
+//						Value: pulumi.String("val"),
+//					},
+//				},
+//				EgressNetworkPolicy: pulumi.String("none"),
+//				ResourceBundleId:    pulumi.String("cpu.micro"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			ctx.Export("exampleId", example.ID())
+//			return nil
+//		})
+//	}
+//
+// ```
 type CustomJob struct {
 	pulumi.CustomResourceState
 
@@ -23,8 +65,8 @@ type CustomJob struct {
 	EnvironmentId pulumi.StringOutput `pulumi:"environmentId"`
 	// The ID of the environment version to use with the Job.
 	EnvironmentVersionId pulumi.StringOutput `pulumi:"environmentVersionId"`
-	// List of files to upload, each with a source (local path) and destination (path in job).
-	Files CustomJobFileArrayOutput `pulumi:"files"`
+	// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Job. If list is of strings, then basenames will be used for tuples.
+	Files pulumi.AnyOutput `pulumi:"files"`
 	// The hash of file contents for each file in files.
 	FilesHashes pulumi.StringArrayOutput `pulumi:"filesHashes"`
 	// The path to a folder containing files to be uploaded. Each file in the folder is uploaded under path relative to a folder path.
@@ -39,10 +81,6 @@ type CustomJob struct {
 	ResourceBundleId pulumi.StringPtrOutput `pulumi:"resourceBundleId"`
 	// Additional parameters to be injected into a Job at runtime.
 	RuntimeParameterValues CustomJobRuntimeParameterValueArrayOutput `pulumi:"runtimeParameterValues"`
-	// The schedule configuration for the custom job.
-	Schedule CustomJobSchedulePtrOutput `pulumi:"schedule"`
-	// The ID of the schedule associated with the custom job.
-	ScheduleId pulumi.StringOutput `pulumi:"scheduleId"`
 }
 
 // NewCustomJob registers a new resource with the given unique name, arguments, and options.
@@ -83,8 +121,8 @@ type customJobState struct {
 	EnvironmentId *string `pulumi:"environmentId"`
 	// The ID of the environment version to use with the Job.
 	EnvironmentVersionId *string `pulumi:"environmentVersionId"`
-	// List of files to upload, each with a source (local path) and destination (path in job).
-	Files []CustomJobFile `pulumi:"files"`
+	// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Job. If list is of strings, then basenames will be used for tuples.
+	Files interface{} `pulumi:"files"`
 	// The hash of file contents for each file in files.
 	FilesHashes []string `pulumi:"filesHashes"`
 	// The path to a folder containing files to be uploaded. Each file in the folder is uploaded under path relative to a folder path.
@@ -99,10 +137,6 @@ type customJobState struct {
 	ResourceBundleId *string `pulumi:"resourceBundleId"`
 	// Additional parameters to be injected into a Job at runtime.
 	RuntimeParameterValues []CustomJobRuntimeParameterValue `pulumi:"runtimeParameterValues"`
-	// The schedule configuration for the custom job.
-	Schedule *CustomJobSchedule `pulumi:"schedule"`
-	// The ID of the schedule associated with the custom job.
-	ScheduleId *string `pulumi:"scheduleId"`
 }
 
 type CustomJobState struct {
@@ -114,8 +148,8 @@ type CustomJobState struct {
 	EnvironmentId pulumi.StringPtrInput
 	// The ID of the environment version to use with the Job.
 	EnvironmentVersionId pulumi.StringPtrInput
-	// List of files to upload, each with a source (local path) and destination (path in job).
-	Files CustomJobFileArrayInput
+	// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Job. If list is of strings, then basenames will be used for tuples.
+	Files pulumi.Input
 	// The hash of file contents for each file in files.
 	FilesHashes pulumi.StringArrayInput
 	// The path to a folder containing files to be uploaded. Each file in the folder is uploaded under path relative to a folder path.
@@ -130,10 +164,6 @@ type CustomJobState struct {
 	ResourceBundleId pulumi.StringPtrInput
 	// Additional parameters to be injected into a Job at runtime.
 	RuntimeParameterValues CustomJobRuntimeParameterValueArrayInput
-	// The schedule configuration for the custom job.
-	Schedule CustomJobSchedulePtrInput
-	// The ID of the schedule associated with the custom job.
-	ScheduleId pulumi.StringPtrInput
 }
 
 func (CustomJobState) ElementType() reflect.Type {
@@ -149,8 +179,8 @@ type customJobArgs struct {
 	EnvironmentId *string `pulumi:"environmentId"`
 	// The ID of the environment version to use with the Job.
 	EnvironmentVersionId *string `pulumi:"environmentVersionId"`
-	// List of files to upload, each with a source (local path) and destination (path in job).
-	Files []CustomJobFile `pulumi:"files"`
+	// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Job. If list is of strings, then basenames will be used for tuples.
+	Files interface{} `pulumi:"files"`
 	// The path to a folder containing files to be uploaded. Each file in the folder is uploaded under path relative to a folder path.
 	FolderPath *string `pulumi:"folderPath"`
 	// The type of the Custom Job.
@@ -161,10 +191,6 @@ type customJobArgs struct {
 	ResourceBundleId *string `pulumi:"resourceBundleId"`
 	// Additional parameters to be injected into a Job at runtime.
 	RuntimeParameterValues []CustomJobRuntimeParameterValue `pulumi:"runtimeParameterValues"`
-	// The schedule configuration for the custom job.
-	Schedule *CustomJobSchedule `pulumi:"schedule"`
-	// The ID of the schedule associated with the custom job.
-	ScheduleId *string `pulumi:"scheduleId"`
 }
 
 // The set of arguments for constructing a CustomJob resource.
@@ -177,8 +203,8 @@ type CustomJobArgs struct {
 	EnvironmentId pulumi.StringPtrInput
 	// The ID of the environment version to use with the Job.
 	EnvironmentVersionId pulumi.StringPtrInput
-	// List of files to upload, each with a source (local path) and destination (path in job).
-	Files CustomJobFileArrayInput
+	// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Job. If list is of strings, then basenames will be used for tuples.
+	Files pulumi.Input
 	// The path to a folder containing files to be uploaded. Each file in the folder is uploaded under path relative to a folder path.
 	FolderPath pulumi.StringPtrInput
 	// The type of the Custom Job.
@@ -189,10 +215,6 @@ type CustomJobArgs struct {
 	ResourceBundleId pulumi.StringPtrInput
 	// Additional parameters to be injected into a Job at runtime.
 	RuntimeParameterValues CustomJobRuntimeParameterValueArrayInput
-	// The schedule configuration for the custom job.
-	Schedule CustomJobSchedulePtrInput
-	// The ID of the schedule associated with the custom job.
-	ScheduleId pulumi.StringPtrInput
 }
 
 func (CustomJobArgs) ElementType() reflect.Type {
@@ -302,9 +324,9 @@ func (o CustomJobOutput) EnvironmentVersionId() pulumi.StringOutput {
 	return o.ApplyT(func(v *CustomJob) pulumi.StringOutput { return v.EnvironmentVersionId }).(pulumi.StringOutput)
 }
 
-// List of files to upload, each with a source (local path) and destination (path in job).
-func (o CustomJobOutput) Files() CustomJobFileArrayOutput {
-	return o.ApplyT(func(v *CustomJob) CustomJobFileArrayOutput { return v.Files }).(CustomJobFileArrayOutput)
+// The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Job. If list is of strings, then basenames will be used for tuples.
+func (o CustomJobOutput) Files() pulumi.AnyOutput {
+	return o.ApplyT(func(v *CustomJob) pulumi.AnyOutput { return v.Files }).(pulumi.AnyOutput)
 }
 
 // The hash of file contents for each file in files.
@@ -340,16 +362,6 @@ func (o CustomJobOutput) ResourceBundleId() pulumi.StringPtrOutput {
 // Additional parameters to be injected into a Job at runtime.
 func (o CustomJobOutput) RuntimeParameterValues() CustomJobRuntimeParameterValueArrayOutput {
 	return o.ApplyT(func(v *CustomJob) CustomJobRuntimeParameterValueArrayOutput { return v.RuntimeParameterValues }).(CustomJobRuntimeParameterValueArrayOutput)
-}
-
-// The schedule configuration for the custom job.
-func (o CustomJobOutput) Schedule() CustomJobSchedulePtrOutput {
-	return o.ApplyT(func(v *CustomJob) CustomJobSchedulePtrOutput { return v.Schedule }).(CustomJobSchedulePtrOutput)
-}
-
-// The ID of the schedule associated with the custom job.
-func (o CustomJobOutput) ScheduleId() pulumi.StringOutput {
-	return o.ApplyT(func(v *CustomJob) pulumi.StringOutput { return v.ScheduleId }).(pulumi.StringOutput)
 }
 
 type CustomJobArrayOutput struct{ *pulumi.OutputState }
