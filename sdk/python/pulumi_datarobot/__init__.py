@@ -7,6 +7,7 @@ from . import _utilities
 import typing
 # Export this package's modules as members:
 from .api_token_credential import *
+from .app_oauth import *
 from .application_source import *
 from .application_source_from_template import *
 from .aws_credential import *
@@ -64,6 +65,14 @@ _utilities.register(
   "fqn": "pulumi_datarobot",
   "classes": {
    "datarobot:index/apiTokenCredential:ApiTokenCredential": "ApiTokenCredential"
+  }
+ },
+ {
+  "pkg": "datarobot",
+  "mod": "index/appOauth",
+  "fqn": "pulumi_datarobot",
+  "classes": {
+   "datarobot:index/appOauth:AppOauth": "AppOauth"
   }
  },
  {

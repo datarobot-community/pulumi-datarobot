@@ -10,6 +10,11 @@ export type ApiTokenCredential = import("./apiTokenCredential").ApiTokenCredenti
 export const ApiTokenCredential: typeof import("./apiTokenCredential").ApiTokenCredential = null as any;
 utilities.lazyLoad(exports, ["ApiTokenCredential"], () => require("./apiTokenCredential"));
 
+export { AppOauthArgs, AppOauthState } from "./appOauth";
+export type AppOauth = import("./appOauth").AppOauth;
+export const AppOauth: typeof import("./appOauth").AppOauth = null as any;
+utilities.lazyLoad(exports, ["AppOauth"], () => require("./appOauth"));
+
 export { ApplicationSourceArgs, ApplicationSourceState } from "./applicationSource";
 export type ApplicationSource = import("./applicationSource").ApplicationSource;
 export const ApplicationSource: typeof import("./applicationSource").ApplicationSource = null as any;
@@ -216,6 +221,8 @@ const _module = {
         switch (type) {
             case "datarobot:index/apiTokenCredential:ApiTokenCredential":
                 return new ApiTokenCredential(name, <any>undefined, { urn })
+            case "datarobot:index/appOauth:AppOauth":
+                return new AppOauth(name, <any>undefined, { urn })
             case "datarobot:index/applicationSource:ApplicationSource":
                 return new ApplicationSource(name, <any>undefined, { urn })
             case "datarobot:index/applicationSourceFromTemplate:ApplicationSourceFromTemplate":
@@ -292,6 +299,7 @@ const _module = {
     },
 };
 pulumi.runtime.registerResourceModule("datarobot", "index/apiTokenCredential", _module)
+pulumi.runtime.registerResourceModule("datarobot", "index/appOauth", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/applicationSource", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/applicationSourceFromTemplate", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/awsCredential", _module)

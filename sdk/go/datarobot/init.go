@@ -23,6 +23,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 	switch typ {
 	case "datarobot:index/apiTokenCredential:ApiTokenCredential":
 		r = &ApiTokenCredential{}
+	case "datarobot:index/appOauth:AppOauth":
+		r = &AppOauth{}
 	case "datarobot:index/applicationSource:ApplicationSource":
 		r = &ApplicationSource{}
 	case "datarobot:index/applicationSourceFromTemplate:ApplicationSourceFromTemplate":
@@ -127,6 +129,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"datarobot",
 		"index/apiTokenCredential",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"datarobot",
+		"index/appOauth",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
