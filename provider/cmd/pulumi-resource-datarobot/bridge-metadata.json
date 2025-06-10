@@ -4,6 +4,9 @@
             "datarobot_api_token_credential": {
                 "current": "datarobot:index/apiTokenCredential:ApiTokenCredential"
             },
+            "datarobot_app_oauth": {
+                "current": "datarobot:index/appOauth:AppOauth"
+            },
             "datarobot_application_source": {
                 "current": "datarobot:index/applicationSource:ApplicationSource",
                 "fields": {

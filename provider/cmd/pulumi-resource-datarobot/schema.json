@@ -1883,6 +1883,111 @@
                 "type": "object"
             }
         },
+        "datarobot:index/appOauth:AppOauth": {
+            "description": "Resource for managing OAuth providers in DataRobot. This resource allows you to create, read, update, and delete OAuth provider configurations.\n",
+            "properties": {
+                "clientId": {
+                    "type": "string",
+                    "description": "OAuth client ID.\n",
+                    "secret": true
+                },
+                "clientSecret": {
+                    "type": "string",
+                    "description": "OAuth client secret.\n",
+                    "secret": true
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Name of the OAuth provider.\n"
+                },
+                "orgId": {
+                    "type": "string",
+                    "description": "Organization ID associated with the OAuth provider.\n"
+                },
+                "secureConfigId": {
+                    "type": "string",
+                    "description": "Secure config ID for the OAuth provider.\n"
+                },
+                "status": {
+                    "type": "string",
+                    "description": "Status of the OAuth provider.\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "Type of the OAuth provider, e.g., 'google', 'box', etc.\n"
+                }
+            },
+            "required": [
+                "clientId",
+                "clientSecret",
+                "name",
+                "orgId",
+                "secureConfigId",
+                "status",
+                "type"
+            ],
+            "inputProperties": {
+                "clientId": {
+                    "type": "string",
+                    "description": "OAuth client ID.\n",
+                    "secret": true
+                },
+                "clientSecret": {
+                    "type": "string",
+                    "description": "OAuth client secret.\n",
+                    "secret": true
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Name of the OAuth provider.\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "Type of the OAuth provider, e.g., 'google', 'box', etc.\n"
+                }
+            },
+            "requiredInputs": [
+                "clientId",
+                "clientSecret",
+                "type"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering AppOauth resources.\n",
+                "properties": {
+                    "clientId": {
+                        "type": "string",
+                        "description": "OAuth client ID.\n",
+                        "secret": true
+                    },
+                    "clientSecret": {
+                        "type": "string",
+                        "description": "OAuth client secret.\n",
+                        "secret": true
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Name of the OAuth provider.\n"
+                    },
+                    "orgId": {
+                        "type": "string",
+                        "description": "Organization ID associated with the OAuth provider.\n"
+                    },
+                    "secureConfigId": {
+                        "type": "string",
+                        "description": "Secure config ID for the OAuth provider.\n"
+                    },
+                    "status": {
+                        "type": "string",
+                        "description": "Status of the OAuth provider.\n"
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "Type of the OAuth provider, e.g., 'google', 'box', etc.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
         "datarobot:index/applicationSource:ApplicationSource": {
             "description": "Application Source\n\n## Example Usage\n\n\u003c!--Start PulumiCodeChooser --\u003e\n```yaml\nresources:\n  example:\n    type: datarobot:ApplicationSource\n    properties:\n      baseEnvironmentId: 6542cd582a9d3d51bf4ac71e\n      # Optional\n      files:\n        - - start-app.sh\n        - - streamlit-app.py\n      folderPath: example-app\n      runtimeParameterValues:\n        - key: EXAMPLE_PARAM\n          type: string\n          value: val\n      resources:\n        replicas: 2\n        session_affinity: true\n        resource_label: cpu.medium\noutputs:\n  datarobotApplicationSourceId: ${example.id}\n  datarobotApplicationSourceVersionId: ${example.versionId}\n```\n\u003c!--End PulumiCodeChooser --\u003e\n",
             "properties": {
