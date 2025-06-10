@@ -1,8 +1,10 @@
 name: Release
 on:
+  workflow_dispatch:
   push:
     tags:
       - v*.*.*
+  
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
