@@ -833,6 +833,7 @@ class _BatchPredictionJobDefinitionState:
         pulumi.set(self, "timeseries_settings", value)
 
 
+@pulumi.type_token("datarobot:index/batchPredictionJobDefinition:BatchPredictionJobDefinition")
 class BatchPredictionJobDefinition(pulumi.CustomResource):
     @overload
     def __init__(__self__,

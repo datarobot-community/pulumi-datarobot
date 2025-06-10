@@ -177,6 +177,7 @@ class _VectorDatabaseState:
         pulumi.set(self, "version", value)
 
 
+@pulumi.type_token("datarobot:index/vectorDatabase:VectorDatabase")
 class VectorDatabase(pulumi.CustomResource):
     @overload
     def __init__(__self__,

@@ -417,6 +417,7 @@ class _DeploymentRetrainingPolicyState:
         pulumi.set(self, "use_case_id", value)
 
 
+@pulumi.type_token("datarobot:index/deploymentRetrainingPolicy:DeploymentRetrainingPolicy")
 class DeploymentRetrainingPolicy(pulumi.CustomResource):
     @overload
     def __init__(__self__,

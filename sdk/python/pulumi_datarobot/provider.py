@@ -73,6 +73,7 @@ class ProviderArgs:
         pulumi.set(self, "tracecontext", value)
 
 
+@pulumi.type_token("pulumi:providers:datarobot")
 class Provider(pulumi.ProviderResource):
     @overload
     def __init__(__self__,

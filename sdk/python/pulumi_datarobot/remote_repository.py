@@ -287,6 +287,7 @@ class _RemoteRepositoryState:
         pulumi.set(self, "source_type", value)
 
 
+@pulumi.type_token("datarobot:index/remoteRepository:RemoteRepository")
 class RemoteRepository(pulumi.CustomResource):
     @overload
     def __init__(__self__,

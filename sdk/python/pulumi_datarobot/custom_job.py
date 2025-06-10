@@ -451,6 +451,7 @@ class _CustomJobState:
         pulumi.set(self, "schedule_id", value)
 
 
+@pulumi.type_token("datarobot:index/customJob:CustomJob")
 class CustomJob(pulumi.CustomResource):
     @overload
     def __init__(__self__,

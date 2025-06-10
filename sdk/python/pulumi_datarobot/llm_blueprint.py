@@ -322,6 +322,7 @@ class _LlmBlueprintState:
         pulumi.set(self, "vector_database_settings", value)
 
 
+@pulumi.type_token("datarobot:index/llmBlueprint:LlmBlueprint")
 class LlmBlueprint(pulumi.CustomResource):
     @overload
     def __init__(__self__,

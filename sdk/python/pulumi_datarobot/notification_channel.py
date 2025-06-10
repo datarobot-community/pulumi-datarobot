@@ -448,6 +448,7 @@ class _NotificationChannelState:
         pulumi.set(self, "verification_code", value)
 
 
+@pulumi.type_token("datarobot:index/notificationChannel:NotificationChannel")
 class NotificationChannel(pulumi.CustomResource):
     @overload
     def __init__(__self__,

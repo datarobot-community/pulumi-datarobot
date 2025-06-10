@@ -304,6 +304,7 @@ class _RegisteredModelFromLeaderboardState:
         pulumi.set(self, "version_name", value)
 
 
+@pulumi.type_token("datarobot:index/registeredModelFromLeaderboard:RegisteredModelFromLeaderboard")
 class RegisteredModelFromLeaderboard(pulumi.CustomResource):
     @overload
     def __init__(__self__,
