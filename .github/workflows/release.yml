@@ -1,8 +1,10 @@
 name: Release
 on:
+  workflow_dispatch:
   push:
     tags:
       - v*.*.*
+  
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -137,6 +139,6 @@ jobs:
           - dotnet
           - go
         nodeversion:
-          - 18
+          - 20
         pythonversion:
-          - 3.9
+          - 3.10
