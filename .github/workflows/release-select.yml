@@ -1,8 +1,5 @@
 name: Release-select
 on:
-  push:
-    tags:
-      - v*.*.*
   workflow_dispatch:
     inputs:
       PUBLISH_PYPI:
