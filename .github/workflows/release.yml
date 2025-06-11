@@ -141,4 +141,4 @@ jobs:
         nodeversion:
           - 20
         pythonversion:
-          - 3.10
+          - "3.10"
