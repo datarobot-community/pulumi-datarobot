@@ -26,6 +26,12 @@ namespace DataRobotPulumi.Datarobot.Inputs
         public Input<string>? ResourceLabel { get; set; }
 
         /// <summary>
+        /// Whether to service web requests on the root path for the Application Source.
+        /// </summary>
+        [Input("serviceWebRequestsOnRootPath")]
+        public Input<bool>? ServiceWebRequestsOnRootPath { get; set; }
+
+        /// <summary>
         /// The session affinity for the Application Source.
         /// </summary>
         [Input("sessionAffinity")]

@@ -13,54 +13,6 @@ import (
 )
 
 // Custom Application
-//
-// ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-//
-//	"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//
-// )
-//
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			exampleApplicationSource, err := datarobot.NewApplicationSource(ctx, "exampleApplicationSource", &datarobot.ApplicationSourceArgs{
-//				Files: pulumi.Any{
-//					[]string{
-//						"start-app.sh",
-//					},
-//					[]string{
-//						"streamlit-app.py",
-//					},
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			exampleCustomApplication, err := datarobot.NewCustomApplication(ctx, "exampleCustomApplication", &datarobot.CustomApplicationArgs{
-//				SourceVersionId:       exampleApplicationSource.VersionId,
-//				ExternalAccessEnabled: pulumi.Bool(true),
-//				ExternalAccessRecipients: pulumi.StringArray{
-//					pulumi.String("recipient@example.com"),
-//				},
-//				AllowAutoStopping: pulumi.Bool(false),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			ctx.Export("datarobotCustomApplicationId", exampleCustomApplication.ID())
-//			ctx.Export("datarobotCustomApplicationSourceId", exampleCustomApplication.SourceId)
-//			ctx.Export("datarobotCustomApplicationSourceVersionId", exampleCustomApplication.SourceVersionId)
-//			ctx.Export("datarobotCustomApplicationUrl", exampleCustomApplication.ApplicationUrl)
-//			return nil
-//		})
-//	}
-//
-// ```
 type CustomApplication struct {
 	pulumi.CustomResourceState
 
@@ -74,6 +26,8 @@ type CustomApplication struct {
 	ExternalAccessRecipients pulumi.StringArrayOutput `pulumi:"externalAccessRecipients"`
 	// The name of the Custom Application.
 	Name pulumi.StringOutput `pulumi:"name"`
+	// The resources for the Custom Application.
+	Resources CustomApplicationResourcesPtrOutput `pulumi:"resources"`
 	// The ID of the Custom Application Source.
 	SourceId pulumi.StringOutput `pulumi:"sourceId"`
 	// The version ID of the Custom Application Source.
@@ -125,6 +79,8 @@ type customApplicationState struct {
 	ExternalAccessRecipients []string `pulumi:"externalAccessRecipients"`
 	// The name of the Custom Application.
 	Name *string `pulumi:"name"`
+	// The resources for the Custom Application.
+	Resources *CustomApplicationResources `pulumi:"resources"`
 	// The ID of the Custom Application Source.
 	SourceId *string `pulumi:"sourceId"`
 	// The version ID of the Custom Application Source.
@@ -144,6 +100,8 @@ type CustomApplicationState struct {
 	ExternalAccessRecipients pulumi.StringArrayInput
 	// The name of the Custom Application.
 	Name pulumi.StringPtrInput
+	// The resources for the Custom Application.
+	Resources CustomApplicationResourcesPtrInput
 	// The ID of the Custom Application Source.
 	SourceId pulumi.StringPtrInput
 	// The version ID of the Custom Application Source.
@@ -165,6 +123,8 @@ type customApplicationArgs struct {
 	ExternalAccessRecipients []string `pulumi:"externalAccessRecipients"`
 	// The name of the Custom Application.
 	Name *string `pulumi:"name"`
+	// The resources for the Custom Application.
+	Resources *CustomApplicationResources `pulumi:"resources"`
 	// The version ID of the Custom Application Source.
 	SourceVersionId string `pulumi:"sourceVersionId"`
 	// The list of Use Case IDs to add the Custom Application to.
@@ -181,6 +141,8 @@ type CustomApplicationArgs struct {
 	ExternalAccessRecipients pulumi.StringArrayInput
 	// The name of the Custom Application.
 	Name pulumi.StringPtrInput
+	// The resources for the Custom Application.
+	Resources CustomApplicationResourcesPtrInput
 	// The version ID of the Custom Application Source.
 	SourceVersionId pulumi.StringInput
 	// The list of Use Case IDs to add the Custom Application to.
@@ -297,6 +259,11 @@ func (o CustomApplicationOutput) ExternalAccessRecipients() pulumi.StringArrayOu
 // The name of the Custom Application.
 func (o CustomApplicationOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *CustomApplication) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
+}
+
+// The resources for the Custom Application.
+func (o CustomApplicationOutput) Resources() CustomApplicationResourcesPtrOutput {
+	return o.ApplyT(func(v *CustomApplication) CustomApplicationResourcesPtrOutput { return v.Resources }).(CustomApplicationResourcesPtrOutput)
 }
 
 // The ID of the Custom Application Source.
