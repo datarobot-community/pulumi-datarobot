@@ -11,35 +11,35 @@ using Pulumi;
 namespace DataRobotPulumi.Datarobot.Inputs
 {
 
-    public sealed class ApplicationSourceResourcesArgs : global::Pulumi.ResourceArgs
+    public sealed class CustomApplicationResourcesGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The replicas for the Application Source.
+        /// The number of replicas for the Custom Application.
         /// </summary>
         [Input("replicas")]
         public Input<int>? Replicas { get; set; }
 
         /// <summary>
-        /// The resource label for the Application Source.
+        /// The resource label for the Custom Application.
         /// </summary>
         [Input("resourceLabel")]
         public Input<string>? ResourceLabel { get; set; }
 
         /// <summary>
-        /// Whether to service web requests on the root path for the Application Source.
+        /// Whether to service web requests on the root path for the Custom Application.
         /// </summary>
         [Input("serviceWebRequestsOnRootPath")]
         public Input<bool>? ServiceWebRequestsOnRootPath { get; set; }
 
         /// <summary>
-        /// The session affinity for the Application Source.
+        /// Whether session affinity is enabled for the Custom Application.
         /// </summary>
         [Input("sessionAffinity")]
         public Input<bool>? SessionAffinity { get; set; }
 
-        public ApplicationSourceResourcesArgs()
+        public CustomApplicationResourcesGetArgs()
         {
         }
-        public static new ApplicationSourceResourcesArgs Empty => new ApplicationSourceResourcesArgs();
+        public static new CustomApplicationResourcesGetArgs Empty => new CustomApplicationResourcesGetArgs();
     }
 }

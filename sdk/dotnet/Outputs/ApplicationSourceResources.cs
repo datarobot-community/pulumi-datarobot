@@ -23,6 +23,10 @@ namespace DataRobotPulumi.Datarobot.Outputs
         /// </summary>
         public readonly string? ResourceLabel;
         /// <summary>
+        /// Whether to service web requests on the root path for the Application Source.
+        /// </summary>
+        public readonly bool? ServiceWebRequestsOnRootPath;
+        /// <summary>
         /// The session affinity for the Application Source.
         /// </summary>
         public readonly bool? SessionAffinity;
@@ -33,10 +37,13 @@ namespace DataRobotPulumi.Datarobot.Outputs
 
             string? resourceLabel,
 
+            bool? serviceWebRequestsOnRootPath,
+
             bool? sessionAffinity)
         {
             Replicas = replicas;
             ResourceLabel = resourceLabel;
+            ServiceWebRequestsOnRootPath = serviceWebRequestsOnRootPath;
             SessionAffinity = sessionAffinity;
         }
     }

@@ -12,52 +12,6 @@ namespace DataRobotPulumi.Datarobot
 {
     /// <summary>
     /// Custom Application
-    /// 
-    /// ## Example Usage
-    /// 
-    /// ```csharp
-    /// using System.Collections.Generic;
-    /// using System.Linq;
-    /// using Pulumi;
-    /// using Datarobot = DataRobotPulumi.Datarobot;
-    /// 
-    /// return await Deployment.RunAsync(() =&gt; 
-    /// {
-    ///     var exampleApplicationSource = new Datarobot.ApplicationSource("exampleApplicationSource", new()
-    ///     {
-    ///         Files = new[]
-    ///         {
-    ///             new[]
-    ///             {
-    ///                 "start-app.sh",
-    ///             },
-    ///             new[]
-    ///             {
-    ///                 "streamlit-app.py",
-    ///             },
-    ///         },
-    ///     });
-    /// 
-    ///     var exampleCustomApplication = new Datarobot.CustomApplication("exampleCustomApplication", new()
-    ///     {
-    ///         SourceVersionId = exampleApplicationSource.VersionId,
-    ///         ExternalAccessEnabled = true,
-    ///         ExternalAccessRecipients = new[]
-    ///         {
-    ///             "recipient@example.com",
-    ///         },
-    ///         AllowAutoStopping = false,
-    ///     });
-    /// 
-    ///     return new Dictionary&lt;string, object?&gt;
-    ///     {
-    ///         ["datarobotCustomApplicationId"] = exampleCustomApplication.Id,
-    ///         ["datarobotCustomApplicationSourceId"] = exampleCustomApplication.SourceId,
-    ///         ["datarobotCustomApplicationSourceVersionId"] = exampleCustomApplication.SourceVersionId,
-    ///         ["datarobotCustomApplicationUrl"] = exampleCustomApplication.ApplicationUrl,
-    ///     };
-    /// });
-    /// ```
     /// </summary>
     [DatarobotResourceType("datarobot:index/customApplication:CustomApplication")]
     public partial class CustomApplication : global::Pulumi.CustomResource
@@ -91,6 +45,12 @@ namespace DataRobotPulumi.Datarobot
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
+
+        /// <summary>
+        /// The resources for the Custom Application.
+        /// </summary>
+        [Output("resources")]
+        public Output<Outputs.CustomApplicationResources?> Resources { get; private set; } = null!;
 
         /// <summary>
         /// The ID of the Custom Application Source.
@@ -188,6 +148,12 @@ namespace DataRobotPulumi.Datarobot
         public Input<string>? Name { get; set; }
 
         /// <summary>
+        /// The resources for the Custom Application.
+        /// </summary>
+        [Input("resources")]
+        public Input<Inputs.CustomApplicationResourcesArgs>? Resources { get; set; }
+
+        /// <summary>
         /// The version ID of the Custom Application Source.
         /// </summary>
         [Input("sourceVersionId", required: true)]
@@ -248,6 +214,12 @@ namespace DataRobotPulumi.Datarobot
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
+
+        /// <summary>
+        /// The resources for the Custom Application.
+        /// </summary>
+        [Input("resources")]
+        public Input<Inputs.CustomApplicationResourcesGetArgs>? Resources { get; set; }
 
         /// <summary>
         /// The ID of the Custom Application Source.

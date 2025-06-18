@@ -13,39 +13,6 @@ import (
 )
 
 // Custom Application created from an Execution Environment.
-//
-// ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-//
-//	"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot"
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//
-// )
-//
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			example, err := datarobot.NewCustomApplicationFromEnvironment(ctx, "example", &datarobot.CustomApplicationFromEnvironmentArgs{
-//				EnvironmentId:         pulumi.String("6542cd582a9d3d51bf4ac71e"),
-//				ExternalAccessEnabled: pulumi.Bool(true),
-//				ExternalAccessRecipients: pulumi.StringArray{
-//					pulumi.String("recipient@example.com"),
-//				},
-//				AllowAutoStopping: pulumi.Bool(false),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			ctx.Export("datarobotCustomApplicationId", example.ID())
-//			ctx.Export("datarobotCustomApplicationUrl", example.ApplicationUrl)
-//			return nil
-//		})
-//	}
-//
-// ```
 type CustomApplicationFromEnvironment struct {
 	pulumi.CustomResourceState
 
@@ -63,6 +30,8 @@ type CustomApplicationFromEnvironment struct {
 	ExternalAccessRecipients pulumi.StringArrayOutput `pulumi:"externalAccessRecipients"`
 	// The name of the Custom Application.
 	Name pulumi.StringOutput `pulumi:"name"`
+	// The resources for the Custom Application.
+	Resources CustomApplicationFromEnvironmentResourcesPtrOutput `pulumi:"resources"`
 	// The list of Use Case IDs to add the Custom Application to.
 	UseCaseIds pulumi.StringArrayOutput `pulumi:"useCaseIds"`
 }
@@ -114,6 +83,8 @@ type customApplicationFromEnvironmentState struct {
 	ExternalAccessRecipients []string `pulumi:"externalAccessRecipients"`
 	// The name of the Custom Application.
 	Name *string `pulumi:"name"`
+	// The resources for the Custom Application.
+	Resources *CustomApplicationFromEnvironmentResources `pulumi:"resources"`
 	// The list of Use Case IDs to add the Custom Application to.
 	UseCaseIds []string `pulumi:"useCaseIds"`
 }
@@ -133,6 +104,8 @@ type CustomApplicationFromEnvironmentState struct {
 	ExternalAccessRecipients pulumi.StringArrayInput
 	// The name of the Custom Application.
 	Name pulumi.StringPtrInput
+	// The resources for the Custom Application.
+	Resources CustomApplicationFromEnvironmentResourcesPtrInput
 	// The list of Use Case IDs to add the Custom Application to.
 	UseCaseIds pulumi.StringArrayInput
 }
@@ -152,6 +125,8 @@ type customApplicationFromEnvironmentArgs struct {
 	ExternalAccessRecipients []string `pulumi:"externalAccessRecipients"`
 	// The name of the Custom Application.
 	Name *string `pulumi:"name"`
+	// The resources for the Custom Application.
+	Resources *CustomApplicationFromEnvironmentResources `pulumi:"resources"`
 	// The list of Use Case IDs to add the Custom Application to.
 	UseCaseIds []string `pulumi:"useCaseIds"`
 }
@@ -168,6 +143,8 @@ type CustomApplicationFromEnvironmentArgs struct {
 	ExternalAccessRecipients pulumi.StringArrayInput
 	// The name of the Custom Application.
 	Name pulumi.StringPtrInput
+	// The resources for the Custom Application.
+	Resources CustomApplicationFromEnvironmentResourcesPtrInput
 	// The list of Use Case IDs to add the Custom Application to.
 	UseCaseIds pulumi.StringArrayInput
 }
@@ -292,6 +269,13 @@ func (o CustomApplicationFromEnvironmentOutput) ExternalAccessRecipients() pulum
 // The name of the Custom Application.
 func (o CustomApplicationFromEnvironmentOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *CustomApplicationFromEnvironment) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
+}
+
+// The resources for the Custom Application.
+func (o CustomApplicationFromEnvironmentOutput) Resources() CustomApplicationFromEnvironmentResourcesPtrOutput {
+	return o.ApplyT(func(v *CustomApplicationFromEnvironment) CustomApplicationFromEnvironmentResourcesPtrOutput {
+		return v.Resources
+	}).(CustomApplicationFromEnvironmentResourcesPtrOutput)
 }
 
 // The list of Use Case IDs to add the Custom Application to.
