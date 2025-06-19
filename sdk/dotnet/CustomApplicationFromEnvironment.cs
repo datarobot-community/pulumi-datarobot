@@ -12,35 +12,6 @@ namespace DataRobotPulumi.Datarobot
 {
     /// <summary>
     /// Custom Application created from an Execution Environment.
-    /// 
-    /// ## Example Usage
-    /// 
-    /// ```csharp
-    /// using System.Collections.Generic;
-    /// using System.Linq;
-    /// using Pulumi;
-    /// using Datarobot = DataRobotPulumi.Datarobot;
-    /// 
-    /// return await Deployment.RunAsync(() =&gt; 
-    /// {
-    ///     var example = new Datarobot.CustomApplicationFromEnvironment("example", new()
-    ///     {
-    ///         EnvironmentId = "6542cd582a9d3d51bf4ac71e",
-    ///         ExternalAccessEnabled = true,
-    ///         ExternalAccessRecipients = new[]
-    ///         {
-    ///             "recipient@example.com",
-    ///         },
-    ///         AllowAutoStopping = false,
-    ///     });
-    /// 
-    ///     return new Dictionary&lt;string, object?&gt;
-    ///     {
-    ///         ["datarobotCustomApplicationId"] = example.Id,
-    ///         ["datarobotCustomApplicationUrl"] = example.ApplicationUrl,
-    ///     };
-    /// });
-    /// ```
     /// </summary>
     [DatarobotResourceType("datarobot:index/customApplicationFromEnvironment:CustomApplicationFromEnvironment")]
     public partial class CustomApplicationFromEnvironment : global::Pulumi.CustomResource
@@ -86,6 +57,12 @@ namespace DataRobotPulumi.Datarobot
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
+
+        /// <summary>
+        /// The resources for the Custom Application.
+        /// </summary>
+        [Output("resources")]
+        public Output<Outputs.CustomApplicationFromEnvironmentResources?> Resources { get; private set; } = null!;
 
         /// <summary>
         /// The list of Use Case IDs to add the Custom Application to.
@@ -176,6 +153,12 @@ namespace DataRobotPulumi.Datarobot
         [Input("name")]
         public Input<string>? Name { get; set; }
 
+        /// <summary>
+        /// The resources for the Custom Application.
+        /// </summary>
+        [Input("resources")]
+        public Input<Inputs.CustomApplicationFromEnvironmentResourcesArgs>? Resources { get; set; }
+
         [Input("useCaseIds")]
         private InputList<string>? _useCaseIds;
 
@@ -243,6 +226,12 @@ namespace DataRobotPulumi.Datarobot
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
+
+        /// <summary>
+        /// The resources for the Custom Application.
+        /// </summary>
+        [Input("resources")]
+        public Input<Inputs.CustomApplicationFromEnvironmentResourcesGetArgs>? Resources { get; set; }
 
         [Input("useCaseIds")]
         private InputList<string>? _useCaseIds;
