@@ -15,6 +15,10 @@ export interface ApplicationSourceFromTemplateResources {
      */
     resourceLabel?: pulumi.Input<string>;
     /**
+     * Whether to service web requests on the root path for the Application Source.
+     */
+    serviceWebRequestsOnRootPath?: pulumi.Input<boolean>;
+    /**
      * The session affinity for the Application Source.
      */
     sessionAffinity?: pulumi.Input<boolean>;
@@ -44,6 +48,10 @@ export interface ApplicationSourceResources {
      * The resource label for the Application Source.
      */
     resourceLabel?: pulumi.Input<string>;
+    /**
+     * Whether to service web requests on the root path for the Application Source.
+     */
+    serviceWebRequestsOnRootPath?: pulumi.Input<boolean>;
     /**
      * The session affinity for the Application Source.
      */
@@ -249,6 +257,44 @@ export interface BatchPredictionJobDefinitionTimeseriesSettings {
      * Type of time-series prediction. Must be 'forecast' or 'historical'. Default is 'forecast'.
      */
     type?: pulumi.Input<string>;
+}
+
+export interface CustomApplicationFromEnvironmentResources {
+    /**
+     * The number of replicas for the Custom Application.
+     */
+    replicas?: pulumi.Input<number>;
+    /**
+     * The resource label for the Custom Application.
+     */
+    resourceLabel?: pulumi.Input<string>;
+    /**
+     * Whether to service web requests on the root path for the Custom Application.
+     */
+    serviceWebRequestsOnRootPath?: pulumi.Input<boolean>;
+    /**
+     * Whether session affinity is enabled for the Custom Application.
+     */
+    sessionAffinity?: pulumi.Input<boolean>;
+}
+
+export interface CustomApplicationResources {
+    /**
+     * The number of replicas for the Custom Application.
+     */
+    replicas?: pulumi.Input<number>;
+    /**
+     * The resource label for the Custom Application.
+     */
+    resourceLabel?: pulumi.Input<string>;
+    /**
+     * Whether to service web requests on the root path for the Custom Application.
+     */
+    serviceWebRequestsOnRootPath?: pulumi.Input<boolean>;
+    /**
+     * Whether session affinity is enabled for the Custom Application.
+     */
+    sessionAffinity?: pulumi.Input<boolean>;
 }
 
 export interface CustomJobRuntimeParameterValue {

@@ -18,6 +18,8 @@ type ApplicationSourceFromTemplateResources struct {
 	Replicas *int `pulumi:"replicas"`
 	// The resource label for the Application Source.
 	ResourceLabel *string `pulumi:"resourceLabel"`
+	// Whether to service web requests on the root path for the Application Source.
+	ServiceWebRequestsOnRootPath *bool `pulumi:"serviceWebRequestsOnRootPath"`
 	// The session affinity for the Application Source.
 	SessionAffinity *bool `pulumi:"sessionAffinity"`
 }
@@ -38,6 +40,8 @@ type ApplicationSourceFromTemplateResourcesArgs struct {
 	Replicas pulumi.IntPtrInput `pulumi:"replicas"`
 	// The resource label for the Application Source.
 	ResourceLabel pulumi.StringPtrInput `pulumi:"resourceLabel"`
+	// Whether to service web requests on the root path for the Application Source.
+	ServiceWebRequestsOnRootPath pulumi.BoolPtrInput `pulumi:"serviceWebRequestsOnRootPath"`
 	// The session affinity for the Application Source.
 	SessionAffinity pulumi.BoolPtrInput `pulumi:"sessionAffinity"`
 }
@@ -129,6 +133,11 @@ func (o ApplicationSourceFromTemplateResourcesOutput) ResourceLabel() pulumi.Str
 	return o.ApplyT(func(v ApplicationSourceFromTemplateResources) *string { return v.ResourceLabel }).(pulumi.StringPtrOutput)
 }
 
+// Whether to service web requests on the root path for the Application Source.
+func (o ApplicationSourceFromTemplateResourcesOutput) ServiceWebRequestsOnRootPath() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ApplicationSourceFromTemplateResources) *bool { return v.ServiceWebRequestsOnRootPath }).(pulumi.BoolPtrOutput)
+}
+
 // The session affinity for the Application Source.
 func (o ApplicationSourceFromTemplateResourcesOutput) SessionAffinity() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ApplicationSourceFromTemplateResources) *bool { return v.SessionAffinity }).(pulumi.BoolPtrOutput)
@@ -176,6 +185,16 @@ func (o ApplicationSourceFromTemplateResourcesPtrOutput) ResourceLabel() pulumi.
 		}
 		return v.ResourceLabel
 	}).(pulumi.StringPtrOutput)
+}
+
+// Whether to service web requests on the root path for the Application Source.
+func (o ApplicationSourceFromTemplateResourcesPtrOutput) ServiceWebRequestsOnRootPath() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ApplicationSourceFromTemplateResources) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.ServiceWebRequestsOnRootPath
+	}).(pulumi.BoolPtrOutput)
 }
 
 // The session affinity for the Application Source.
@@ -308,6 +327,8 @@ type ApplicationSourceResources struct {
 	Replicas *int `pulumi:"replicas"`
 	// The resource label for the Application Source.
 	ResourceLabel *string `pulumi:"resourceLabel"`
+	// Whether to service web requests on the root path for the Application Source.
+	ServiceWebRequestsOnRootPath *bool `pulumi:"serviceWebRequestsOnRootPath"`
 	// The session affinity for the Application Source.
 	SessionAffinity *bool `pulumi:"sessionAffinity"`
 }
@@ -328,6 +349,8 @@ type ApplicationSourceResourcesArgs struct {
 	Replicas pulumi.IntPtrInput `pulumi:"replicas"`
 	// The resource label for the Application Source.
 	ResourceLabel pulumi.StringPtrInput `pulumi:"resourceLabel"`
+	// Whether to service web requests on the root path for the Application Source.
+	ServiceWebRequestsOnRootPath pulumi.BoolPtrInput `pulumi:"serviceWebRequestsOnRootPath"`
 	// The session affinity for the Application Source.
 	SessionAffinity pulumi.BoolPtrInput `pulumi:"sessionAffinity"`
 }
@@ -419,6 +442,11 @@ func (o ApplicationSourceResourcesOutput) ResourceLabel() pulumi.StringPtrOutput
 	return o.ApplyT(func(v ApplicationSourceResources) *string { return v.ResourceLabel }).(pulumi.StringPtrOutput)
 }
 
+// Whether to service web requests on the root path for the Application Source.
+func (o ApplicationSourceResourcesOutput) ServiceWebRequestsOnRootPath() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ApplicationSourceResources) *bool { return v.ServiceWebRequestsOnRootPath }).(pulumi.BoolPtrOutput)
+}
+
 // The session affinity for the Application Source.
 func (o ApplicationSourceResourcesOutput) SessionAffinity() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ApplicationSourceResources) *bool { return v.SessionAffinity }).(pulumi.BoolPtrOutput)
@@ -466,6 +494,16 @@ func (o ApplicationSourceResourcesPtrOutput) ResourceLabel() pulumi.StringPtrOut
 		}
 		return v.ResourceLabel
 	}).(pulumi.StringPtrOutput)
+}
+
+// Whether to service web requests on the root path for the Application Source.
+func (o ApplicationSourceResourcesPtrOutput) ServiceWebRequestsOnRootPath() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ApplicationSourceResources) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.ServiceWebRequestsOnRootPath
+	}).(pulumi.BoolPtrOutput)
 }
 
 // The session affinity for the Application Source.
@@ -2099,6 +2137,394 @@ func (o BatchPredictionJobDefinitionTimeseriesSettingsPtrOutput) Type() pulumi.S
 		}
 		return v.Type
 	}).(pulumi.StringPtrOutput)
+}
+
+type CustomApplicationFromEnvironmentResources struct {
+	// The number of replicas for the Custom Application.
+	Replicas *int `pulumi:"replicas"`
+	// The resource label for the Custom Application.
+	ResourceLabel *string `pulumi:"resourceLabel"`
+	// Whether to service web requests on the root path for the Custom Application.
+	ServiceWebRequestsOnRootPath *bool `pulumi:"serviceWebRequestsOnRootPath"`
+	// Whether session affinity is enabled for the Custom Application.
+	SessionAffinity *bool `pulumi:"sessionAffinity"`
+}
+
+// CustomApplicationFromEnvironmentResourcesInput is an input type that accepts CustomApplicationFromEnvironmentResourcesArgs and CustomApplicationFromEnvironmentResourcesOutput values.
+// You can construct a concrete instance of `CustomApplicationFromEnvironmentResourcesInput` via:
+//
+//	CustomApplicationFromEnvironmentResourcesArgs{...}
+type CustomApplicationFromEnvironmentResourcesInput interface {
+	pulumi.Input
+
+	ToCustomApplicationFromEnvironmentResourcesOutput() CustomApplicationFromEnvironmentResourcesOutput
+	ToCustomApplicationFromEnvironmentResourcesOutputWithContext(context.Context) CustomApplicationFromEnvironmentResourcesOutput
+}
+
+type CustomApplicationFromEnvironmentResourcesArgs struct {
+	// The number of replicas for the Custom Application.
+	Replicas pulumi.IntPtrInput `pulumi:"replicas"`
+	// The resource label for the Custom Application.
+	ResourceLabel pulumi.StringPtrInput `pulumi:"resourceLabel"`
+	// Whether to service web requests on the root path for the Custom Application.
+	ServiceWebRequestsOnRootPath pulumi.BoolPtrInput `pulumi:"serviceWebRequestsOnRootPath"`
+	// Whether session affinity is enabled for the Custom Application.
+	SessionAffinity pulumi.BoolPtrInput `pulumi:"sessionAffinity"`
+}
+
+func (CustomApplicationFromEnvironmentResourcesArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomApplicationFromEnvironmentResources)(nil)).Elem()
+}
+
+func (i CustomApplicationFromEnvironmentResourcesArgs) ToCustomApplicationFromEnvironmentResourcesOutput() CustomApplicationFromEnvironmentResourcesOutput {
+	return i.ToCustomApplicationFromEnvironmentResourcesOutputWithContext(context.Background())
+}
+
+func (i CustomApplicationFromEnvironmentResourcesArgs) ToCustomApplicationFromEnvironmentResourcesOutputWithContext(ctx context.Context) CustomApplicationFromEnvironmentResourcesOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomApplicationFromEnvironmentResourcesOutput)
+}
+
+func (i CustomApplicationFromEnvironmentResourcesArgs) ToCustomApplicationFromEnvironmentResourcesPtrOutput() CustomApplicationFromEnvironmentResourcesPtrOutput {
+	return i.ToCustomApplicationFromEnvironmentResourcesPtrOutputWithContext(context.Background())
+}
+
+func (i CustomApplicationFromEnvironmentResourcesArgs) ToCustomApplicationFromEnvironmentResourcesPtrOutputWithContext(ctx context.Context) CustomApplicationFromEnvironmentResourcesPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomApplicationFromEnvironmentResourcesOutput).ToCustomApplicationFromEnvironmentResourcesPtrOutputWithContext(ctx)
+}
+
+// CustomApplicationFromEnvironmentResourcesPtrInput is an input type that accepts CustomApplicationFromEnvironmentResourcesArgs, CustomApplicationFromEnvironmentResourcesPtr and CustomApplicationFromEnvironmentResourcesPtrOutput values.
+// You can construct a concrete instance of `CustomApplicationFromEnvironmentResourcesPtrInput` via:
+//
+//	        CustomApplicationFromEnvironmentResourcesArgs{...}
+//
+//	or:
+//
+//	        nil
+type CustomApplicationFromEnvironmentResourcesPtrInput interface {
+	pulumi.Input
+
+	ToCustomApplicationFromEnvironmentResourcesPtrOutput() CustomApplicationFromEnvironmentResourcesPtrOutput
+	ToCustomApplicationFromEnvironmentResourcesPtrOutputWithContext(context.Context) CustomApplicationFromEnvironmentResourcesPtrOutput
+}
+
+type customApplicationFromEnvironmentResourcesPtrType CustomApplicationFromEnvironmentResourcesArgs
+
+func CustomApplicationFromEnvironmentResourcesPtr(v *CustomApplicationFromEnvironmentResourcesArgs) CustomApplicationFromEnvironmentResourcesPtrInput {
+	return (*customApplicationFromEnvironmentResourcesPtrType)(v)
+}
+
+func (*customApplicationFromEnvironmentResourcesPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**CustomApplicationFromEnvironmentResources)(nil)).Elem()
+}
+
+func (i *customApplicationFromEnvironmentResourcesPtrType) ToCustomApplicationFromEnvironmentResourcesPtrOutput() CustomApplicationFromEnvironmentResourcesPtrOutput {
+	return i.ToCustomApplicationFromEnvironmentResourcesPtrOutputWithContext(context.Background())
+}
+
+func (i *customApplicationFromEnvironmentResourcesPtrType) ToCustomApplicationFromEnvironmentResourcesPtrOutputWithContext(ctx context.Context) CustomApplicationFromEnvironmentResourcesPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomApplicationFromEnvironmentResourcesPtrOutput)
+}
+
+type CustomApplicationFromEnvironmentResourcesOutput struct{ *pulumi.OutputState }
+
+func (CustomApplicationFromEnvironmentResourcesOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomApplicationFromEnvironmentResources)(nil)).Elem()
+}
+
+func (o CustomApplicationFromEnvironmentResourcesOutput) ToCustomApplicationFromEnvironmentResourcesOutput() CustomApplicationFromEnvironmentResourcesOutput {
+	return o
+}
+
+func (o CustomApplicationFromEnvironmentResourcesOutput) ToCustomApplicationFromEnvironmentResourcesOutputWithContext(ctx context.Context) CustomApplicationFromEnvironmentResourcesOutput {
+	return o
+}
+
+func (o CustomApplicationFromEnvironmentResourcesOutput) ToCustomApplicationFromEnvironmentResourcesPtrOutput() CustomApplicationFromEnvironmentResourcesPtrOutput {
+	return o.ToCustomApplicationFromEnvironmentResourcesPtrOutputWithContext(context.Background())
+}
+
+func (o CustomApplicationFromEnvironmentResourcesOutput) ToCustomApplicationFromEnvironmentResourcesPtrOutputWithContext(ctx context.Context) CustomApplicationFromEnvironmentResourcesPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v CustomApplicationFromEnvironmentResources) *CustomApplicationFromEnvironmentResources {
+		return &v
+	}).(CustomApplicationFromEnvironmentResourcesPtrOutput)
+}
+
+// The number of replicas for the Custom Application.
+func (o CustomApplicationFromEnvironmentResourcesOutput) Replicas() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v CustomApplicationFromEnvironmentResources) *int { return v.Replicas }).(pulumi.IntPtrOutput)
+}
+
+// The resource label for the Custom Application.
+func (o CustomApplicationFromEnvironmentResourcesOutput) ResourceLabel() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CustomApplicationFromEnvironmentResources) *string { return v.ResourceLabel }).(pulumi.StringPtrOutput)
+}
+
+// Whether to service web requests on the root path for the Custom Application.
+func (o CustomApplicationFromEnvironmentResourcesOutput) ServiceWebRequestsOnRootPath() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v CustomApplicationFromEnvironmentResources) *bool { return v.ServiceWebRequestsOnRootPath }).(pulumi.BoolPtrOutput)
+}
+
+// Whether session affinity is enabled for the Custom Application.
+func (o CustomApplicationFromEnvironmentResourcesOutput) SessionAffinity() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v CustomApplicationFromEnvironmentResources) *bool { return v.SessionAffinity }).(pulumi.BoolPtrOutput)
+}
+
+type CustomApplicationFromEnvironmentResourcesPtrOutput struct{ *pulumi.OutputState }
+
+func (CustomApplicationFromEnvironmentResourcesPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**CustomApplicationFromEnvironmentResources)(nil)).Elem()
+}
+
+func (o CustomApplicationFromEnvironmentResourcesPtrOutput) ToCustomApplicationFromEnvironmentResourcesPtrOutput() CustomApplicationFromEnvironmentResourcesPtrOutput {
+	return o
+}
+
+func (o CustomApplicationFromEnvironmentResourcesPtrOutput) ToCustomApplicationFromEnvironmentResourcesPtrOutputWithContext(ctx context.Context) CustomApplicationFromEnvironmentResourcesPtrOutput {
+	return o
+}
+
+func (o CustomApplicationFromEnvironmentResourcesPtrOutput) Elem() CustomApplicationFromEnvironmentResourcesOutput {
+	return o.ApplyT(func(v *CustomApplicationFromEnvironmentResources) CustomApplicationFromEnvironmentResources {
+		if v != nil {
+			return *v
+		}
+		var ret CustomApplicationFromEnvironmentResources
+		return ret
+	}).(CustomApplicationFromEnvironmentResourcesOutput)
+}
+
+// The number of replicas for the Custom Application.
+func (o CustomApplicationFromEnvironmentResourcesPtrOutput) Replicas() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *CustomApplicationFromEnvironmentResources) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Replicas
+	}).(pulumi.IntPtrOutput)
+}
+
+// The resource label for the Custom Application.
+func (o CustomApplicationFromEnvironmentResourcesPtrOutput) ResourceLabel() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CustomApplicationFromEnvironmentResources) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ResourceLabel
+	}).(pulumi.StringPtrOutput)
+}
+
+// Whether to service web requests on the root path for the Custom Application.
+func (o CustomApplicationFromEnvironmentResourcesPtrOutput) ServiceWebRequestsOnRootPath() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *CustomApplicationFromEnvironmentResources) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.ServiceWebRequestsOnRootPath
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Whether session affinity is enabled for the Custom Application.
+func (o CustomApplicationFromEnvironmentResourcesPtrOutput) SessionAffinity() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *CustomApplicationFromEnvironmentResources) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.SessionAffinity
+	}).(pulumi.BoolPtrOutput)
+}
+
+type CustomApplicationResources struct {
+	// The number of replicas for the Custom Application.
+	Replicas *int `pulumi:"replicas"`
+	// The resource label for the Custom Application.
+	ResourceLabel *string `pulumi:"resourceLabel"`
+	// Whether to service web requests on the root path for the Custom Application.
+	ServiceWebRequestsOnRootPath *bool `pulumi:"serviceWebRequestsOnRootPath"`
+	// Whether session affinity is enabled for the Custom Application.
+	SessionAffinity *bool `pulumi:"sessionAffinity"`
+}
+
+// CustomApplicationResourcesInput is an input type that accepts CustomApplicationResourcesArgs and CustomApplicationResourcesOutput values.
+// You can construct a concrete instance of `CustomApplicationResourcesInput` via:
+//
+//	CustomApplicationResourcesArgs{...}
+type CustomApplicationResourcesInput interface {
+	pulumi.Input
+
+	ToCustomApplicationResourcesOutput() CustomApplicationResourcesOutput
+	ToCustomApplicationResourcesOutputWithContext(context.Context) CustomApplicationResourcesOutput
+}
+
+type CustomApplicationResourcesArgs struct {
+	// The number of replicas for the Custom Application.
+	Replicas pulumi.IntPtrInput `pulumi:"replicas"`
+	// The resource label for the Custom Application.
+	ResourceLabel pulumi.StringPtrInput `pulumi:"resourceLabel"`
+	// Whether to service web requests on the root path for the Custom Application.
+	ServiceWebRequestsOnRootPath pulumi.BoolPtrInput `pulumi:"serviceWebRequestsOnRootPath"`
+	// Whether session affinity is enabled for the Custom Application.
+	SessionAffinity pulumi.BoolPtrInput `pulumi:"sessionAffinity"`
+}
+
+func (CustomApplicationResourcesArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomApplicationResources)(nil)).Elem()
+}
+
+func (i CustomApplicationResourcesArgs) ToCustomApplicationResourcesOutput() CustomApplicationResourcesOutput {
+	return i.ToCustomApplicationResourcesOutputWithContext(context.Background())
+}
+
+func (i CustomApplicationResourcesArgs) ToCustomApplicationResourcesOutputWithContext(ctx context.Context) CustomApplicationResourcesOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomApplicationResourcesOutput)
+}
+
+func (i CustomApplicationResourcesArgs) ToCustomApplicationResourcesPtrOutput() CustomApplicationResourcesPtrOutput {
+	return i.ToCustomApplicationResourcesPtrOutputWithContext(context.Background())
+}
+
+func (i CustomApplicationResourcesArgs) ToCustomApplicationResourcesPtrOutputWithContext(ctx context.Context) CustomApplicationResourcesPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomApplicationResourcesOutput).ToCustomApplicationResourcesPtrOutputWithContext(ctx)
+}
+
+// CustomApplicationResourcesPtrInput is an input type that accepts CustomApplicationResourcesArgs, CustomApplicationResourcesPtr and CustomApplicationResourcesPtrOutput values.
+// You can construct a concrete instance of `CustomApplicationResourcesPtrInput` via:
+//
+//	        CustomApplicationResourcesArgs{...}
+//
+//	or:
+//
+//	        nil
+type CustomApplicationResourcesPtrInput interface {
+	pulumi.Input
+
+	ToCustomApplicationResourcesPtrOutput() CustomApplicationResourcesPtrOutput
+	ToCustomApplicationResourcesPtrOutputWithContext(context.Context) CustomApplicationResourcesPtrOutput
+}
+
+type customApplicationResourcesPtrType CustomApplicationResourcesArgs
+
+func CustomApplicationResourcesPtr(v *CustomApplicationResourcesArgs) CustomApplicationResourcesPtrInput {
+	return (*customApplicationResourcesPtrType)(v)
+}
+
+func (*customApplicationResourcesPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**CustomApplicationResources)(nil)).Elem()
+}
+
+func (i *customApplicationResourcesPtrType) ToCustomApplicationResourcesPtrOutput() CustomApplicationResourcesPtrOutput {
+	return i.ToCustomApplicationResourcesPtrOutputWithContext(context.Background())
+}
+
+func (i *customApplicationResourcesPtrType) ToCustomApplicationResourcesPtrOutputWithContext(ctx context.Context) CustomApplicationResourcesPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomApplicationResourcesPtrOutput)
+}
+
+type CustomApplicationResourcesOutput struct{ *pulumi.OutputState }
+
+func (CustomApplicationResourcesOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomApplicationResources)(nil)).Elem()
+}
+
+func (o CustomApplicationResourcesOutput) ToCustomApplicationResourcesOutput() CustomApplicationResourcesOutput {
+	return o
+}
+
+func (o CustomApplicationResourcesOutput) ToCustomApplicationResourcesOutputWithContext(ctx context.Context) CustomApplicationResourcesOutput {
+	return o
+}
+
+func (o CustomApplicationResourcesOutput) ToCustomApplicationResourcesPtrOutput() CustomApplicationResourcesPtrOutput {
+	return o.ToCustomApplicationResourcesPtrOutputWithContext(context.Background())
+}
+
+func (o CustomApplicationResourcesOutput) ToCustomApplicationResourcesPtrOutputWithContext(ctx context.Context) CustomApplicationResourcesPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v CustomApplicationResources) *CustomApplicationResources {
+		return &v
+	}).(CustomApplicationResourcesPtrOutput)
+}
+
+// The number of replicas for the Custom Application.
+func (o CustomApplicationResourcesOutput) Replicas() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v CustomApplicationResources) *int { return v.Replicas }).(pulumi.IntPtrOutput)
+}
+
+// The resource label for the Custom Application.
+func (o CustomApplicationResourcesOutput) ResourceLabel() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CustomApplicationResources) *string { return v.ResourceLabel }).(pulumi.StringPtrOutput)
+}
+
+// Whether to service web requests on the root path for the Custom Application.
+func (o CustomApplicationResourcesOutput) ServiceWebRequestsOnRootPath() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v CustomApplicationResources) *bool { return v.ServiceWebRequestsOnRootPath }).(pulumi.BoolPtrOutput)
+}
+
+// Whether session affinity is enabled for the Custom Application.
+func (o CustomApplicationResourcesOutput) SessionAffinity() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v CustomApplicationResources) *bool { return v.SessionAffinity }).(pulumi.BoolPtrOutput)
+}
+
+type CustomApplicationResourcesPtrOutput struct{ *pulumi.OutputState }
+
+func (CustomApplicationResourcesPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**CustomApplicationResources)(nil)).Elem()
+}
+
+func (o CustomApplicationResourcesPtrOutput) ToCustomApplicationResourcesPtrOutput() CustomApplicationResourcesPtrOutput {
+	return o
+}
+
+func (o CustomApplicationResourcesPtrOutput) ToCustomApplicationResourcesPtrOutputWithContext(ctx context.Context) CustomApplicationResourcesPtrOutput {
+	return o
+}
+
+func (o CustomApplicationResourcesPtrOutput) Elem() CustomApplicationResourcesOutput {
+	return o.ApplyT(func(v *CustomApplicationResources) CustomApplicationResources {
+		if v != nil {
+			return *v
+		}
+		var ret CustomApplicationResources
+		return ret
+	}).(CustomApplicationResourcesOutput)
+}
+
+// The number of replicas for the Custom Application.
+func (o CustomApplicationResourcesPtrOutput) Replicas() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *CustomApplicationResources) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Replicas
+	}).(pulumi.IntPtrOutput)
+}
+
+// The resource label for the Custom Application.
+func (o CustomApplicationResourcesPtrOutput) ResourceLabel() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CustomApplicationResources) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ResourceLabel
+	}).(pulumi.StringPtrOutput)
+}
+
+// Whether to service web requests on the root path for the Custom Application.
+func (o CustomApplicationResourcesPtrOutput) ServiceWebRequestsOnRootPath() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *CustomApplicationResources) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.ServiceWebRequestsOnRootPath
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Whether session affinity is enabled for the Custom Application.
+func (o CustomApplicationResourcesPtrOutput) SessionAffinity() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *CustomApplicationResources) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.SessionAffinity
+	}).(pulumi.BoolPtrOutput)
 }
 
 type CustomJobRuntimeParameterValue struct {
@@ -11920,6 +12346,10 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*BatchPredictionJobDefinitionSchedulePtrInput)(nil)).Elem(), BatchPredictionJobDefinitionScheduleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BatchPredictionJobDefinitionTimeseriesSettingsInput)(nil)).Elem(), BatchPredictionJobDefinitionTimeseriesSettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BatchPredictionJobDefinitionTimeseriesSettingsPtrInput)(nil)).Elem(), BatchPredictionJobDefinitionTimeseriesSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomApplicationFromEnvironmentResourcesInput)(nil)).Elem(), CustomApplicationFromEnvironmentResourcesArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomApplicationFromEnvironmentResourcesPtrInput)(nil)).Elem(), CustomApplicationFromEnvironmentResourcesArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomApplicationResourcesInput)(nil)).Elem(), CustomApplicationResourcesArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomApplicationResourcesPtrInput)(nil)).Elem(), CustomApplicationResourcesArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomJobRuntimeParameterValueInput)(nil)).Elem(), CustomJobRuntimeParameterValueArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomJobRuntimeParameterValueArrayInput)(nil)).Elem(), CustomJobRuntimeParameterValueArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomJobScheduleInput)(nil)).Elem(), CustomJobScheduleArgs{})
@@ -12057,6 +12487,10 @@ func init() {
 	pulumi.RegisterOutputType(BatchPredictionJobDefinitionSchedulePtrOutput{})
 	pulumi.RegisterOutputType(BatchPredictionJobDefinitionTimeseriesSettingsOutput{})
 	pulumi.RegisterOutputType(BatchPredictionJobDefinitionTimeseriesSettingsPtrOutput{})
+	pulumi.RegisterOutputType(CustomApplicationFromEnvironmentResourcesOutput{})
+	pulumi.RegisterOutputType(CustomApplicationFromEnvironmentResourcesPtrOutput{})
+	pulumi.RegisterOutputType(CustomApplicationResourcesOutput{})
+	pulumi.RegisterOutputType(CustomApplicationResourcesPtrOutput{})
 	pulumi.RegisterOutputType(CustomJobRuntimeParameterValueOutput{})
 	pulumi.RegisterOutputType(CustomJobRuntimeParameterValueArrayOutput{})
 	pulumi.RegisterOutputType(CustomJobScheduleOutput{})
