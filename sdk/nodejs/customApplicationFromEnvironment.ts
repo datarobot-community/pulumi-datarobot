@@ -2,26 +2,12 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
+import * as inputs from "./types/input";
+import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
 /**
  * Custom Application created from an Execution Environment.
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as datarobot from "@datarobot/pulumi-datarobot";
- *
- * const example = new datarobot.CustomApplicationFromEnvironment("example", {
- *     environmentId: "6542cd582a9d3d51bf4ac71e",
- *     externalAccessEnabled: true,
- *     externalAccessRecipients: ["recipient@example.com"],
- *     allowAutoStopping: false,
- * });
- * export const datarobotCustomApplicationId = example.id;
- * export const datarobotCustomApplicationUrl = example.applicationUrl;
- * ```
  */
 export class CustomApplicationFromEnvironment extends pulumi.CustomResource {
     /**
@@ -80,6 +66,10 @@ export class CustomApplicationFromEnvironment extends pulumi.CustomResource {
      */
     public readonly name!: pulumi.Output<string>;
     /**
+     * The resources for the Custom Application.
+     */
+    public readonly resources!: pulumi.Output<outputs.CustomApplicationFromEnvironmentResources | undefined>;
+    /**
      * The list of Use Case IDs to add the Custom Application to.
      */
     public readonly useCaseIds!: pulumi.Output<string[] | undefined>;
@@ -104,6 +94,7 @@ export class CustomApplicationFromEnvironment extends pulumi.CustomResource {
             resourceInputs["externalAccessEnabled"] = state ? state.externalAccessEnabled : undefined;
             resourceInputs["externalAccessRecipients"] = state ? state.externalAccessRecipients : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
+            resourceInputs["resources"] = state ? state.resources : undefined;
             resourceInputs["useCaseIds"] = state ? state.useCaseIds : undefined;
         } else {
             const args = argsOrState as CustomApplicationFromEnvironmentArgs | undefined;
@@ -115,6 +106,7 @@ export class CustomApplicationFromEnvironment extends pulumi.CustomResource {
             resourceInputs["externalAccessEnabled"] = args ? args.externalAccessEnabled : undefined;
             resourceInputs["externalAccessRecipients"] = args ? args.externalAccessRecipients : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
+            resourceInputs["resources"] = args ? args.resources : undefined;
             resourceInputs["useCaseIds"] = args ? args.useCaseIds : undefined;
             resourceInputs["applicationUrl"] = undefined /*out*/;
             resourceInputs["environmentVersionId"] = undefined /*out*/;
@@ -157,6 +149,10 @@ export interface CustomApplicationFromEnvironmentState {
      */
     name?: pulumi.Input<string>;
     /**
+     * The resources for the Custom Application.
+     */
+    resources?: pulumi.Input<inputs.CustomApplicationFromEnvironmentResources>;
+    /**
      * The list of Use Case IDs to add the Custom Application to.
      */
     useCaseIds?: pulumi.Input<pulumi.Input<string>[]>;
@@ -186,6 +182,10 @@ export interface CustomApplicationFromEnvironmentArgs {
      * The name of the Custom Application.
      */
     name?: pulumi.Input<string>;
+    /**
+     * The resources for the Custom Application.
+     */
+    resources?: pulumi.Input<inputs.CustomApplicationFromEnvironmentResources>;
     /**
      * The list of Use Case IDs to add the Custom Application to.
      */
