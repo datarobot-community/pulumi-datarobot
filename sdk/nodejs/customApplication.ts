@@ -2,32 +2,12 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
+import * as inputs from "./types/input";
+import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
 /**
  * Custom Application
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as datarobot from "@datarobot/pulumi-datarobot";
- *
- * const exampleApplicationSource = new datarobot.ApplicationSource("exampleApplicationSource", {files: [
- *     ["start-app.sh"],
- *     ["streamlit-app.py"],
- * ]});
- * const exampleCustomApplication = new datarobot.CustomApplication("exampleCustomApplication", {
- *     sourceVersionId: exampleApplicationSource.versionId,
- *     externalAccessEnabled: true,
- *     externalAccessRecipients: ["recipient@example.com"],
- *     allowAutoStopping: false,
- * });
- * export const datarobotCustomApplicationId = exampleCustomApplication.id;
- * export const datarobotCustomApplicationSourceId = exampleCustomApplication.sourceId;
- * export const datarobotCustomApplicationSourceVersionId = exampleCustomApplication.sourceVersionId;
- * export const datarobotCustomApplicationUrl = exampleCustomApplication.applicationUrl;
- * ```
  */
 export class CustomApplication extends pulumi.CustomResource {
     /**
@@ -78,6 +58,10 @@ export class CustomApplication extends pulumi.CustomResource {
      */
     public readonly name!: pulumi.Output<string>;
     /**
+     * The resources for the Custom Application.
+     */
+    public readonly resources!: pulumi.Output<outputs.CustomApplicationResources | undefined>;
+    /**
      * The ID of the Custom Application Source.
      */
     public /*out*/ readonly sourceId!: pulumi.Output<string>;
@@ -108,6 +92,7 @@ export class CustomApplication extends pulumi.CustomResource {
             resourceInputs["externalAccessEnabled"] = state ? state.externalAccessEnabled : undefined;
             resourceInputs["externalAccessRecipients"] = state ? state.externalAccessRecipients : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
+            resourceInputs["resources"] = state ? state.resources : undefined;
             resourceInputs["sourceId"] = state ? state.sourceId : undefined;
             resourceInputs["sourceVersionId"] = state ? state.sourceVersionId : undefined;
             resourceInputs["useCaseIds"] = state ? state.useCaseIds : undefined;
@@ -120,6 +105,7 @@ export class CustomApplication extends pulumi.CustomResource {
             resourceInputs["externalAccessEnabled"] = args ? args.externalAccessEnabled : undefined;
             resourceInputs["externalAccessRecipients"] = args ? args.externalAccessRecipients : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
+            resourceInputs["resources"] = args ? args.resources : undefined;
             resourceInputs["sourceVersionId"] = args ? args.sourceVersionId : undefined;
             resourceInputs["useCaseIds"] = args ? args.useCaseIds : undefined;
             resourceInputs["applicationUrl"] = undefined /*out*/;
@@ -155,6 +141,10 @@ export interface CustomApplicationState {
      */
     name?: pulumi.Input<string>;
     /**
+     * The resources for the Custom Application.
+     */
+    resources?: pulumi.Input<inputs.CustomApplicationResources>;
+    /**
      * The ID of the Custom Application Source.
      */
     sourceId?: pulumi.Input<string>;
@@ -188,6 +178,10 @@ export interface CustomApplicationArgs {
      * The name of the Custom Application.
      */
     name?: pulumi.Input<string>;
+    /**
+     * The resources for the Custom Application.
+     */
+    resources?: pulumi.Input<inputs.CustomApplicationResources>;
     /**
      * The version ID of the Custom Application Source.
      */

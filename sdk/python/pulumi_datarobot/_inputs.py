@@ -36,6 +36,10 @@ __all__ = [
     'BatchPredictionJobDefinitionScheduleArgsDict',
     'BatchPredictionJobDefinitionTimeseriesSettingsArgs',
     'BatchPredictionJobDefinitionTimeseriesSettingsArgsDict',
+    'CustomApplicationFromEnvironmentResourcesArgs',
+    'CustomApplicationFromEnvironmentResourcesArgsDict',
+    'CustomApplicationResourcesArgs',
+    'CustomApplicationResourcesArgsDict',
     'CustomJobRuntimeParameterValueArgs',
     'CustomJobRuntimeParameterValueArgsDict',
     'CustomJobScheduleArgs',
@@ -168,6 +172,10 @@ if not MYPY:
         """
         The resource label for the Application Source.
         """
+        service_web_requests_on_root_path: NotRequired[pulumi.Input[builtins.bool]]
+        """
+        Whether to service web requests on the root path for the Application Source.
+        """
         session_affinity: NotRequired[pulumi.Input[builtins.bool]]
         """
         The session affinity for the Application Source.
@@ -180,16 +188,20 @@ class ApplicationSourceFromTemplateResourcesArgs:
     def __init__(__self__, *,
                  replicas: Optional[pulumi.Input[builtins.int]] = None,
                  resource_label: Optional[pulumi.Input[builtins.str]] = None,
+                 service_web_requests_on_root_path: Optional[pulumi.Input[builtins.bool]] = None,
                  session_affinity: Optional[pulumi.Input[builtins.bool]] = None):
         """
         :param pulumi.Input[builtins.int] replicas: The replicas for the Application Source.
         :param pulumi.Input[builtins.str] resource_label: The resource label for the Application Source.
+        :param pulumi.Input[builtins.bool] service_web_requests_on_root_path: Whether to service web requests on the root path for the Application Source.
         :param pulumi.Input[builtins.bool] session_affinity: The session affinity for the Application Source.
         """
         if replicas is not None:
             pulumi.set(__self__, "replicas", replicas)
         if resource_label is not None:
             pulumi.set(__self__, "resource_label", resource_label)
+        if service_web_requests_on_root_path is not None:
+            pulumi.set(__self__, "service_web_requests_on_root_path", service_web_requests_on_root_path)
         if session_affinity is not None:
             pulumi.set(__self__, "session_affinity", session_affinity)
 
@@ -216,6 +228,18 @@ class ApplicationSourceFromTemplateResourcesArgs:
     @resource_label.setter
     def resource_label(self, value: Optional[pulumi.Input[builtins.str]]):
         pulumi.set(self, "resource_label", value)
+
+    @property
+    @pulumi.getter(name="serviceWebRequestsOnRootPath")
+    def service_web_requests_on_root_path(self) -> Optional[pulumi.Input[builtins.bool]]:
+        """
+        Whether to service web requests on the root path for the Application Source.
+        """
+        return pulumi.get(self, "service_web_requests_on_root_path")
+
+    @service_web_requests_on_root_path.setter
+    def service_web_requests_on_root_path(self, value: Optional[pulumi.Input[builtins.bool]]):
+        pulumi.set(self, "service_web_requests_on_root_path", value)
 
     @property
     @pulumi.getter(name="sessionAffinity")
@@ -309,6 +333,10 @@ if not MYPY:
         """
         The resource label for the Application Source.
         """
+        service_web_requests_on_root_path: NotRequired[pulumi.Input[builtins.bool]]
+        """
+        Whether to service web requests on the root path for the Application Source.
+        """
         session_affinity: NotRequired[pulumi.Input[builtins.bool]]
         """
         The session affinity for the Application Source.
@@ -321,16 +349,20 @@ class ApplicationSourceResourcesArgs:
     def __init__(__self__, *,
                  replicas: Optional[pulumi.Input[builtins.int]] = None,
                  resource_label: Optional[pulumi.Input[builtins.str]] = None,
+                 service_web_requests_on_root_path: Optional[pulumi.Input[builtins.bool]] = None,
                  session_affinity: Optional[pulumi.Input[builtins.bool]] = None):
         """
         :param pulumi.Input[builtins.int] replicas: The replicas for the Application Source.
         :param pulumi.Input[builtins.str] resource_label: The resource label for the Application Source.
+        :param pulumi.Input[builtins.bool] service_web_requests_on_root_path: Whether to service web requests on the root path for the Application Source.
         :param pulumi.Input[builtins.bool] session_affinity: The session affinity for the Application Source.
         """
         if replicas is not None:
             pulumi.set(__self__, "replicas", replicas)
         if resource_label is not None:
             pulumi.set(__self__, "resource_label", resource_label)
+        if service_web_requests_on_root_path is not None:
+            pulumi.set(__self__, "service_web_requests_on_root_path", service_web_requests_on_root_path)
         if session_affinity is not None:
             pulumi.set(__self__, "session_affinity", session_affinity)
 
@@ -357,6 +389,18 @@ class ApplicationSourceResourcesArgs:
     @resource_label.setter
     def resource_label(self, value: Optional[pulumi.Input[builtins.str]]):
         pulumi.set(self, "resource_label", value)
+
+    @property
+    @pulumi.getter(name="serviceWebRequestsOnRootPath")
+    def service_web_requests_on_root_path(self) -> Optional[pulumi.Input[builtins.bool]]:
+        """
+        Whether to service web requests on the root path for the Application Source.
+        """
+        return pulumi.get(self, "service_web_requests_on_root_path")
+
+    @service_web_requests_on_root_path.setter
+    def service_web_requests_on_root_path(self, value: Optional[pulumi.Input[builtins.bool]]):
+        pulumi.set(self, "service_web_requests_on_root_path", value)
 
     @property
     @pulumi.getter(name="sessionAffinity")
@@ -1343,6 +1387,190 @@ class BatchPredictionJobDefinitionTimeseriesSettingsArgs:
     @type.setter
     def type(self, value: Optional[pulumi.Input[builtins.str]]):
         pulumi.set(self, "type", value)
+
+
+if not MYPY:
+    class CustomApplicationFromEnvironmentResourcesArgsDict(TypedDict):
+        replicas: NotRequired[pulumi.Input[builtins.int]]
+        """
+        The number of replicas for the Custom Application.
+        """
+        resource_label: NotRequired[pulumi.Input[builtins.str]]
+        """
+        The resource label for the Custom Application.
+        """
+        service_web_requests_on_root_path: NotRequired[pulumi.Input[builtins.bool]]
+        """
+        Whether to service web requests on the root path for the Custom Application.
+        """
+        session_affinity: NotRequired[pulumi.Input[builtins.bool]]
+        """
+        Whether session affinity is enabled for the Custom Application.
+        """
+elif False:
+    CustomApplicationFromEnvironmentResourcesArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class CustomApplicationFromEnvironmentResourcesArgs:
+    def __init__(__self__, *,
+                 replicas: Optional[pulumi.Input[builtins.int]] = None,
+                 resource_label: Optional[pulumi.Input[builtins.str]] = None,
+                 service_web_requests_on_root_path: Optional[pulumi.Input[builtins.bool]] = None,
+                 session_affinity: Optional[pulumi.Input[builtins.bool]] = None):
+        """
+        :param pulumi.Input[builtins.int] replicas: The number of replicas for the Custom Application.
+        :param pulumi.Input[builtins.str] resource_label: The resource label for the Custom Application.
+        :param pulumi.Input[builtins.bool] service_web_requests_on_root_path: Whether to service web requests on the root path for the Custom Application.
+        :param pulumi.Input[builtins.bool] session_affinity: Whether session affinity is enabled for the Custom Application.
+        """
+        if replicas is not None:
+            pulumi.set(__self__, "replicas", replicas)
+        if resource_label is not None:
+            pulumi.set(__self__, "resource_label", resource_label)
+        if service_web_requests_on_root_path is not None:
+            pulumi.set(__self__, "service_web_requests_on_root_path", service_web_requests_on_root_path)
+        if session_affinity is not None:
+            pulumi.set(__self__, "session_affinity", session_affinity)
+
+    @property
+    @pulumi.getter
+    def replicas(self) -> Optional[pulumi.Input[builtins.int]]:
+        """
+        The number of replicas for the Custom Application.
+        """
+        return pulumi.get(self, "replicas")
+
+    @replicas.setter
+    def replicas(self, value: Optional[pulumi.Input[builtins.int]]):
+        pulumi.set(self, "replicas", value)
+
+    @property
+    @pulumi.getter(name="resourceLabel")
+    def resource_label(self) -> Optional[pulumi.Input[builtins.str]]:
+        """
+        The resource label for the Custom Application.
+        """
+        return pulumi.get(self, "resource_label")
+
+    @resource_label.setter
+    def resource_label(self, value: Optional[pulumi.Input[builtins.str]]):
+        pulumi.set(self, "resource_label", value)
+
+    @property
+    @pulumi.getter(name="serviceWebRequestsOnRootPath")
+    def service_web_requests_on_root_path(self) -> Optional[pulumi.Input[builtins.bool]]:
+        """
+        Whether to service web requests on the root path for the Custom Application.
+        """
+        return pulumi.get(self, "service_web_requests_on_root_path")
+
+    @service_web_requests_on_root_path.setter
+    def service_web_requests_on_root_path(self, value: Optional[pulumi.Input[builtins.bool]]):
+        pulumi.set(self, "service_web_requests_on_root_path", value)
+
+    @property
+    @pulumi.getter(name="sessionAffinity")
+    def session_affinity(self) -> Optional[pulumi.Input[builtins.bool]]:
+        """
+        Whether session affinity is enabled for the Custom Application.
+        """
+        return pulumi.get(self, "session_affinity")
+
+    @session_affinity.setter
+    def session_affinity(self, value: Optional[pulumi.Input[builtins.bool]]):
+        pulumi.set(self, "session_affinity", value)
+
+
+if not MYPY:
+    class CustomApplicationResourcesArgsDict(TypedDict):
+        replicas: NotRequired[pulumi.Input[builtins.int]]
+        """
+        The number of replicas for the Custom Application.
+        """
+        resource_label: NotRequired[pulumi.Input[builtins.str]]
+        """
+        The resource label for the Custom Application.
+        """
+        service_web_requests_on_root_path: NotRequired[pulumi.Input[builtins.bool]]
+        """
+        Whether to service web requests on the root path for the Custom Application.
+        """
+        session_affinity: NotRequired[pulumi.Input[builtins.bool]]
+        """
+        Whether session affinity is enabled for the Custom Application.
+        """
+elif False:
+    CustomApplicationResourcesArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class CustomApplicationResourcesArgs:
+    def __init__(__self__, *,
+                 replicas: Optional[pulumi.Input[builtins.int]] = None,
+                 resource_label: Optional[pulumi.Input[builtins.str]] = None,
+                 service_web_requests_on_root_path: Optional[pulumi.Input[builtins.bool]] = None,
+                 session_affinity: Optional[pulumi.Input[builtins.bool]] = None):
+        """
+        :param pulumi.Input[builtins.int] replicas: The number of replicas for the Custom Application.
+        :param pulumi.Input[builtins.str] resource_label: The resource label for the Custom Application.
+        :param pulumi.Input[builtins.bool] service_web_requests_on_root_path: Whether to service web requests on the root path for the Custom Application.
+        :param pulumi.Input[builtins.bool] session_affinity: Whether session affinity is enabled for the Custom Application.
+        """
+        if replicas is not None:
+            pulumi.set(__self__, "replicas", replicas)
+        if resource_label is not None:
+            pulumi.set(__self__, "resource_label", resource_label)
+        if service_web_requests_on_root_path is not None:
+            pulumi.set(__self__, "service_web_requests_on_root_path", service_web_requests_on_root_path)
+        if session_affinity is not None:
+            pulumi.set(__self__, "session_affinity", session_affinity)
+
+    @property
+    @pulumi.getter
+    def replicas(self) -> Optional[pulumi.Input[builtins.int]]:
+        """
+        The number of replicas for the Custom Application.
+        """
+        return pulumi.get(self, "replicas")
+
+    @replicas.setter
+    def replicas(self, value: Optional[pulumi.Input[builtins.int]]):
+        pulumi.set(self, "replicas", value)
+
+    @property
+    @pulumi.getter(name="resourceLabel")
+    def resource_label(self) -> Optional[pulumi.Input[builtins.str]]:
+        """
+        The resource label for the Custom Application.
+        """
+        return pulumi.get(self, "resource_label")
+
+    @resource_label.setter
+    def resource_label(self, value: Optional[pulumi.Input[builtins.str]]):
+        pulumi.set(self, "resource_label", value)
+
+    @property
+    @pulumi.getter(name="serviceWebRequestsOnRootPath")
+    def service_web_requests_on_root_path(self) -> Optional[pulumi.Input[builtins.bool]]:
+        """
+        Whether to service web requests on the root path for the Custom Application.
+        """
+        return pulumi.get(self, "service_web_requests_on_root_path")
+
+    @service_web_requests_on_root_path.setter
+    def service_web_requests_on_root_path(self, value: Optional[pulumi.Input[builtins.bool]]):
+        pulumi.set(self, "service_web_requests_on_root_path", value)
+
+    @property
+    @pulumi.getter(name="sessionAffinity")
+    def session_affinity(self) -> Optional[pulumi.Input[builtins.bool]]:
+        """
+        Whether session affinity is enabled for the Custom Application.
+        """
+        return pulumi.get(self, "session_affinity")
+
+    @session_affinity.setter
+    def session_affinity(self, value: Optional[pulumi.Input[builtins.bool]]):
+        pulumi.set(self, "session_affinity", value)
 
 
 if not MYPY:
