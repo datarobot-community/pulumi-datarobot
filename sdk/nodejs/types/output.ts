@@ -9,15 +9,19 @@ export interface ApplicationSourceFromTemplateResources {
     /**
      * The replicas for the Application Source.
      */
-    replicas?: number;
+    replicas: number;
     /**
      * The resource label for the Application Source.
      */
-    resourceLabel?: string;
+    resourceLabel: string;
+    /**
+     * Whether to service web requests on the root path for the Application Source.
+     */
+    serviceWebRequestsOnRootPath: boolean;
     /**
      * The session affinity for the Application Source.
      */
-    sessionAffinity?: boolean;
+    sessionAffinity: boolean;
 }
 
 export interface ApplicationSourceFromTemplateRuntimeParameterValue {
@@ -39,15 +43,19 @@ export interface ApplicationSourceResources {
     /**
      * The replicas for the Application Source.
      */
-    replicas?: number;
+    replicas: number;
     /**
      * The resource label for the Application Source.
      */
-    resourceLabel?: string;
+    resourceLabel: string;
+    /**
+     * Whether to service web requests on the root path for the Application Source.
+     */
+    serviceWebRequestsOnRootPath: boolean;
     /**
      * The session affinity for the Application Source.
      */
-    sessionAffinity?: boolean;
+    sessionAffinity: boolean;
 }
 
 export interface ApplicationSourceRuntimeParameterValue {
@@ -249,6 +257,44 @@ export interface BatchPredictionJobDefinitionTimeseriesSettings {
      * Type of time-series prediction. Must be 'forecast' or 'historical'. Default is 'forecast'.
      */
     type?: string;
+}
+
+export interface CustomApplicationFromEnvironmentResources {
+    /**
+     * The number of replicas for the Custom Application.
+     */
+    replicas?: number;
+    /**
+     * The resource label for the Custom Application.
+     */
+    resourceLabel?: string;
+    /**
+     * Whether to service web requests on the root path for the Custom Application.
+     */
+    serviceWebRequestsOnRootPath?: boolean;
+    /**
+     * Whether session affinity is enabled for the Custom Application.
+     */
+    sessionAffinity?: boolean;
+}
+
+export interface CustomApplicationResources {
+    /**
+     * The number of replicas for the Custom Application.
+     */
+    replicas?: number;
+    /**
+     * The resource label for the Custom Application.
+     */
+    resourceLabel?: string;
+    /**
+     * Whether to service web requests on the root path for the Custom Application.
+     */
+    serviceWebRequestsOnRootPath?: boolean;
+    /**
+     * Whether session affinity is enabled for the Custom Application.
+     */
+    sessionAffinity?: boolean;
 }
 
 export interface CustomJobRuntimeParameterValue {

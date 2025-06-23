@@ -12,27 +12,27 @@ namespace DataRobotPulumi.Datarobot.Outputs
 {
 
     [OutputType]
-    public sealed class ApplicationSourceFromTemplateResources
+    public sealed class CustomApplicationFromEnvironmentResources
     {
         /// <summary>
-        /// The replicas for the Application Source.
+        /// The number of replicas for the Custom Application.
         /// </summary>
         public readonly int? Replicas;
         /// <summary>
-        /// The resource label for the Application Source.
+        /// The resource label for the Custom Application.
         /// </summary>
         public readonly string? ResourceLabel;
         /// <summary>
-        /// Whether to service web requests on the root path for the Application Source.
+        /// Whether to service web requests on the root path for the Custom Application.
         /// </summary>
         public readonly bool? ServiceWebRequestsOnRootPath;
         /// <summary>
-        /// The session affinity for the Application Source.
+        /// Whether session affinity is enabled for the Custom Application.
         /// </summary>
         public readonly bool? SessionAffinity;
 
         [OutputConstructor]
-        private ApplicationSourceFromTemplateResources(
+        private CustomApplicationFromEnvironmentResources(
             int? replicas,
 
             string? resourceLabel,
