@@ -5526,6 +5526,10 @@
                     "type": "string",
                     "description": "The hash of the docker image file\n"
                 },
+                "dockerImageUri": {
+                    "type": "string",
+                    "description": "The URI of a pre-built environment image (e.g., in a remote Docker registry).\n"
+                },
                 "name": {
                     "type": "string",
                     "description": "The name of the Execution Environment.\n"
@@ -5571,6 +5575,10 @@
                 "dockerImage": {
                     "type": "string",
                     "description": "A prebuilt environment image saved as a tarball using the Docker save command.\n"
+                },
+                "dockerImageUri": {
+                    "type": "string",
+                    "description": "The URI of a pre-built environment image (e.g., in a remote Docker registry).\n"
                 },
                 "name": {
                     "type": "string",
@@ -5622,6 +5630,10 @@
                     "dockerImageHash": {
                         "type": "string",
                         "description": "The hash of the docker image file\n"
+                    },
+                    "dockerImageUri": {
+                        "type": "string",
+                        "description": "The URI of a pre-built environment image (e.g., in a remote Docker registry).\n"
                     },
                     "name": {
                         "type": "string",
