@@ -77,6 +77,10 @@ export class ExecutionEnvironment extends pulumi.CustomResource {
      */
     public /*out*/ readonly dockerImageHash!: pulumi.Output<string>;
     /**
+     * The URI of a pre-built environment image (e.g., in a remote Docker registry).
+     */
+    public readonly dockerImageUri!: pulumi.Output<string | undefined>;
+    /**
      * The name of the Execution Environment.
      */
     public readonly name!: pulumi.Output<string>;
@@ -116,6 +120,7 @@ export class ExecutionEnvironment extends pulumi.CustomResource {
             resourceInputs["dockerContextPath"] = state ? state.dockerContextPath : undefined;
             resourceInputs["dockerImage"] = state ? state.dockerImage : undefined;
             resourceInputs["dockerImageHash"] = state ? state.dockerImageHash : undefined;
+            resourceInputs["dockerImageUri"] = state ? state.dockerImageUri : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["programmingLanguage"] = state ? state.programmingLanguage : undefined;
             resourceInputs["useCases"] = state ? state.useCases : undefined;
@@ -132,6 +137,7 @@ export class ExecutionEnvironment extends pulumi.CustomResource {
             resourceInputs["description"] = args ? args.description : undefined;
             resourceInputs["dockerContextPath"] = args ? args.dockerContextPath : undefined;
             resourceInputs["dockerImage"] = args ? args.dockerImage : undefined;
+            resourceInputs["dockerImageUri"] = args ? args.dockerImageUri : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["programmingLanguage"] = args ? args.programmingLanguage : undefined;
             resourceInputs["useCases"] = args ? args.useCases : undefined;
@@ -175,6 +181,10 @@ export interface ExecutionEnvironmentState {
      */
     dockerImageHash?: pulumi.Input<string>;
     /**
+     * The URI of a pre-built environment image (e.g., in a remote Docker registry).
+     */
+    dockerImageUri?: pulumi.Input<string>;
+    /**
      * The name of the Execution Environment.
      */
     name?: pulumi.Input<string>;
@@ -212,6 +222,10 @@ export interface ExecutionEnvironmentArgs {
      * A prebuilt environment image saved as a tarball using the Docker save command.
      */
     dockerImage?: pulumi.Input<string>;
+    /**
+     * The URI of a pre-built environment image (e.g., in a remote Docker registry).
+     */
+    dockerImageUri?: pulumi.Input<string>;
     /**
      * The name of the Execution Environment.
      */
