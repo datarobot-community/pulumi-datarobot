@@ -25,6 +25,7 @@ class ExecutionEnvironmentArgs:
                  description: Optional[pulumi.Input[builtins.str]] = None,
                  docker_context_path: Optional[pulumi.Input[builtins.str]] = None,
                  docker_image: Optional[pulumi.Input[builtins.str]] = None,
+                 docker_image_uri: Optional[pulumi.Input[builtins.str]] = None,
                  name: Optional[pulumi.Input[builtins.str]] = None,
                  version_description: Optional[pulumi.Input[builtins.str]] = None):
         """
@@ -34,6 +35,7 @@ class ExecutionEnvironmentArgs:
         :param pulumi.Input[builtins.str] description: The description of the Execution Environment.
         :param pulumi.Input[builtins.str] docker_context_path: The path to a docker context archive or folder
         :param pulumi.Input[builtins.str] docker_image: A prebuilt environment image saved as a tarball using the Docker save command.
+        :param pulumi.Input[builtins.str] docker_image_uri: The URI of a pre-built environment image (e.g., in a remote Docker registry).
         :param pulumi.Input[builtins.str] name: The name of the Execution Environment.
         :param pulumi.Input[builtins.str] version_description: The description of the Execution Environment version.
         """
@@ -45,6 +47,8 @@ class ExecutionEnvironmentArgs:
             pulumi.set(__self__, "docker_context_path", docker_context_path)
         if docker_image is not None:
             pulumi.set(__self__, "docker_image", docker_image)
+        if docker_image_uri is not None:
+            pulumi.set(__self__, "docker_image_uri", docker_image_uri)
         if name is not None:
             pulumi.set(__self__, "name", name)
         if version_description is not None:
@@ -111,6 +115,18 @@ class ExecutionEnvironmentArgs:
         pulumi.set(self, "docker_image", value)
 
     @property
+    @pulumi.getter(name="dockerImageUri")
+    def docker_image_uri(self) -> Optional[pulumi.Input[builtins.str]]:
+        """
+        The URI of a pre-built environment image (e.g., in a remote Docker registry).
+        """
+        return pulumi.get(self, "docker_image_uri")
+
+    @docker_image_uri.setter
+    def docker_image_uri(self, value: Optional[pulumi.Input[builtins.str]]):
+        pulumi.set(self, "docker_image_uri", value)
+
+    @property
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[builtins.str]]:
         """
@@ -144,6 +160,7 @@ class _ExecutionEnvironmentState:
                  docker_context_path: Optional[pulumi.Input[builtins.str]] = None,
                  docker_image: Optional[pulumi.Input[builtins.str]] = None,
                  docker_image_hash: Optional[pulumi.Input[builtins.str]] = None,
+                 docker_image_uri: Optional[pulumi.Input[builtins.str]] = None,
                  name: Optional[pulumi.Input[builtins.str]] = None,
                  programming_language: Optional[pulumi.Input[builtins.str]] = None,
                  use_cases: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.str]]]] = None,
@@ -157,6 +174,7 @@ class _ExecutionEnvironmentState:
         :param pulumi.Input[builtins.str] docker_context_path: The path to a docker context archive or folder
         :param pulumi.Input[builtins.str] docker_image: A prebuilt environment image saved as a tarball using the Docker save command.
         :param pulumi.Input[builtins.str] docker_image_hash: The hash of the docker image file
+        :param pulumi.Input[builtins.str] docker_image_uri: The URI of a pre-built environment image (e.g., in a remote Docker registry).
         :param pulumi.Input[builtins.str] name: The name of the Execution Environment.
         :param pulumi.Input[builtins.str] programming_language: The programming language of the Execution Environment.
         :param pulumi.Input[Sequence[pulumi.Input[builtins.str]]] use_cases: The list of Use Cases that the Execution Environment supports.
@@ -175,6 +193,8 @@ class _ExecutionEnvironmentState:
             pulumi.set(__self__, "docker_image", docker_image)
         if docker_image_hash is not None:
             pulumi.set(__self__, "docker_image_hash", docker_image_hash)
+        if docker_image_uri is not None:
+            pulumi.set(__self__, "docker_image_uri", docker_image_uri)
         if name is not None:
             pulumi.set(__self__, "name", name)
         if programming_language is not None:
@@ -259,6 +279,18 @@ class _ExecutionEnvironmentState:
         pulumi.set(self, "docker_image_hash", value)
 
     @property
+    @pulumi.getter(name="dockerImageUri")
+    def docker_image_uri(self) -> Optional[pulumi.Input[builtins.str]]:
+        """
+        The URI of a pre-built environment image (e.g., in a remote Docker registry).
+        """
+        return pulumi.get(self, "docker_image_uri")
+
+    @docker_image_uri.setter
+    def docker_image_uri(self, value: Optional[pulumi.Input[builtins.str]]):
+        pulumi.set(self, "docker_image_uri", value)
+
+    @property
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[builtins.str]]:
         """
@@ -327,6 +359,7 @@ class ExecutionEnvironment(pulumi.CustomResource):
                  description: Optional[pulumi.Input[builtins.str]] = None,
                  docker_context_path: Optional[pulumi.Input[builtins.str]] = None,
                  docker_image: Optional[pulumi.Input[builtins.str]] = None,
+                 docker_image_uri: Optional[pulumi.Input[builtins.str]] = None,
                  name: Optional[pulumi.Input[builtins.str]] = None,
                  programming_language: Optional[pulumi.Input[builtins.str]] = None,
                  use_cases: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.str]]]] = None,
@@ -356,6 +389,7 @@ class ExecutionEnvironment(pulumi.CustomResource):
         :param pulumi.Input[builtins.str] description: The description of the Execution Environment.
         :param pulumi.Input[builtins.str] docker_context_path: The path to a docker context archive or folder
         :param pulumi.Input[builtins.str] docker_image: A prebuilt environment image saved as a tarball using the Docker save command.
+        :param pulumi.Input[builtins.str] docker_image_uri: The URI of a pre-built environment image (e.g., in a remote Docker registry).
         :param pulumi.Input[builtins.str] name: The name of the Execution Environment.
         :param pulumi.Input[builtins.str] programming_language: The programming language of the Execution Environment.
         :param pulumi.Input[Sequence[pulumi.Input[builtins.str]]] use_cases: The list of Use Cases that the Execution Environment supports.
@@ -404,6 +438,7 @@ class ExecutionEnvironment(pulumi.CustomResource):
                  description: Optional[pulumi.Input[builtins.str]] = None,
                  docker_context_path: Optional[pulumi.Input[builtins.str]] = None,
                  docker_image: Optional[pulumi.Input[builtins.str]] = None,
+                 docker_image_uri: Optional[pulumi.Input[builtins.str]] = None,
                  name: Optional[pulumi.Input[builtins.str]] = None,
                  programming_language: Optional[pulumi.Input[builtins.str]] = None,
                  use_cases: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.str]]]] = None,
@@ -420,6 +455,7 @@ class ExecutionEnvironment(pulumi.CustomResource):
             __props__.__dict__["description"] = description
             __props__.__dict__["docker_context_path"] = docker_context_path
             __props__.__dict__["docker_image"] = docker_image
+            __props__.__dict__["docker_image_uri"] = docker_image_uri
             __props__.__dict__["name"] = name
             if programming_language is None and not opts.urn:
                 raise TypeError("Missing required property 'programming_language'")
@@ -448,6 +484,7 @@ class ExecutionEnvironment(pulumi.CustomResource):
             docker_context_path: Optional[pulumi.Input[builtins.str]] = None,
             docker_image: Optional[pulumi.Input[builtins.str]] = None,
             docker_image_hash: Optional[pulumi.Input[builtins.str]] = None,
+            docker_image_uri: Optional[pulumi.Input[builtins.str]] = None,
             name: Optional[pulumi.Input[builtins.str]] = None,
             programming_language: Optional[pulumi.Input[builtins.str]] = None,
             use_cases: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.str]]]] = None,
@@ -466,6 +503,7 @@ class ExecutionEnvironment(pulumi.CustomResource):
         :param pulumi.Input[builtins.str] docker_context_path: The path to a docker context archive or folder
         :param pulumi.Input[builtins.str] docker_image: A prebuilt environment image saved as a tarball using the Docker save command.
         :param pulumi.Input[builtins.str] docker_image_hash: The hash of the docker image file
+        :param pulumi.Input[builtins.str] docker_image_uri: The URI of a pre-built environment image (e.g., in a remote Docker registry).
         :param pulumi.Input[builtins.str] name: The name of the Execution Environment.
         :param pulumi.Input[builtins.str] programming_language: The programming language of the Execution Environment.
         :param pulumi.Input[Sequence[pulumi.Input[builtins.str]]] use_cases: The list of Use Cases that the Execution Environment supports.
@@ -482,6 +520,7 @@ class ExecutionEnvironment(pulumi.CustomResource):
         __props__.__dict__["docker_context_path"] = docker_context_path
         __props__.__dict__["docker_image"] = docker_image
         __props__.__dict__["docker_image_hash"] = docker_image_hash
+        __props__.__dict__["docker_image_uri"] = docker_image_uri
         __props__.__dict__["name"] = name
         __props__.__dict__["programming_language"] = programming_language
         __props__.__dict__["use_cases"] = use_cases
@@ -536,6 +575,14 @@ class ExecutionEnvironment(pulumi.CustomResource):
         The hash of the docker image file
         """
         return pulumi.get(self, "docker_image_hash")
+
+    @property
+    @pulumi.getter(name="dockerImageUri")
+    def docker_image_uri(self) -> pulumi.Output[Optional[builtins.str]]:
+        """
+        The URI of a pre-built environment image (e.g., in a remote Docker registry).
+        """
+        return pulumi.get(self, "docker_image_uri")
 
     @property
     @pulumi.getter

@@ -83,6 +83,12 @@ namespace DataRobotPulumi.Datarobot
         public Output<string> DockerImageHash { get; private set; } = null!;
 
         /// <summary>
+        /// The URI of a pre-built environment image (e.g., in a remote Docker registry).
+        /// </summary>
+        [Output("dockerImageUri")]
+        public Output<string?> DockerImageUri { get; private set; } = null!;
+
+        /// <summary>
         /// The name of the Execution Environment.
         /// </summary>
         [Output("name")]
@@ -178,6 +184,12 @@ namespace DataRobotPulumi.Datarobot
         public Input<string>? DockerImage { get; set; }
 
         /// <summary>
+        /// The URI of a pre-built environment image (e.g., in a remote Docker registry).
+        /// </summary>
+        [Input("dockerImageUri")]
+        public Input<string>? DockerImageUri { get; set; }
+
+        /// <summary>
         /// The name of the Execution Environment.
         /// </summary>
         [Input("name")]
@@ -250,6 +262,12 @@ namespace DataRobotPulumi.Datarobot
         /// </summary>
         [Input("dockerImageHash")]
         public Input<string>? DockerImageHash { get; set; }
+
+        /// <summary>
+        /// The URI of a pre-built environment image (e.g., in a remote Docker registry).
+        /// </summary>
+        [Input("dockerImageUri")]
+        public Input<string>? DockerImageUri { get; set; }
 
         /// <summary>
         /// The name of the Execution Environment.
