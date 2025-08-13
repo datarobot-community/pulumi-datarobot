@@ -14,6 +14,12 @@ namespace DataRobotPulumi.Datarobot.Inputs
     public sealed class CustomModelGuardConfigurationGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Additional guard configuration
+        /// </summary>
+        [Input("additionalGuardConfig")]
+        public Input<Inputs.CustomModelGuardConfigurationAdditionalGuardConfigGetArgs>? AdditionalGuardConfig { get; set; }
+
+        /// <summary>
         /// The deployment ID of this guard.
         /// </summary>
         [Input("deploymentId")]

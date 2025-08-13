@@ -729,6 +729,10 @@
         },
         "datarobot:index/CustomModelGuardConfiguration:CustomModelGuardConfiguration": {
             "properties": {
+                "additionalGuardConfig": {
+                    "$ref": "#/types/datarobot:index/CustomModelGuardConfigurationAdditionalGuardConfig:CustomModelGuardConfigurationAdditionalGuardConfig",
+                    "description": "Additional guard configuration\n"
+                },
                 "deploymentId": {
                     "type": "string",
                     "description": "The deployment ID of this guard.\n"
@@ -787,6 +791,47 @@
                 "name",
                 "stages",
                 "templateName"
+            ]
+        },
+        "datarobot:index/CustomModelGuardConfigurationAdditionalGuardConfig:CustomModelGuardConfigurationAdditionalGuardConfig": {
+            "properties": {
+                "cost": {
+                    "$ref": "#/types/datarobot:index/CustomModelGuardConfigurationAdditionalGuardConfigCost:CustomModelGuardConfigurationAdditionalGuardConfigCost",
+                    "description": "Cost metric configuration\n"
+                }
+            },
+            "type": "object"
+        },
+        "datarobot:index/CustomModelGuardConfigurationAdditionalGuardConfigCost:CustomModelGuardConfigurationAdditionalGuardConfigCost": {
+            "properties": {
+                "currency": {
+                    "type": "string",
+                    "description": "Currency for cost calculation (USD)\n"
+                },
+                "inputPrice": {
+                    "type": "number",
+                    "description": "LLM Price for input_unit tokens\n"
+                },
+                "inputUnit": {
+                    "type": "integer",
+                    "description": "No of input tokens for given price\n"
+                },
+                "outputPrice": {
+                    "type": "number",
+                    "description": "LLM Price for output_unit tokens\n"
+                },
+                "outputUnit": {
+                    "type": "integer",
+                    "description": "No of output tokens for given price\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "currency",
+                "inputPrice",
+                "inputUnit",
+                "outputPrice",
+                "outputUnit"
             ]
         },
         "datarobot:index/CustomModelGuardConfigurationIntervention:CustomModelGuardConfigurationIntervention": {

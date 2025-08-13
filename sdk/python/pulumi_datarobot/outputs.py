@@ -43,6 +43,8 @@ __all__ = [
     'CustomMetricTimestamp',
     'CustomMetricValue',
     'CustomModelGuardConfiguration',
+    'CustomModelGuardConfigurationAdditionalGuardConfig',
+    'CustomModelGuardConfigurationAdditionalGuardConfigCost',
     'CustomModelGuardConfigurationIntervention',
     'CustomModelGuardConfigurationNemoInfo',
     'CustomModelOverallModerationConfiguration',
@@ -1736,6 +1738,8 @@ class CustomModelGuardConfiguration(dict):
         suggest = None
         if key == "templateName":
             suggest = "template_name"
+        elif key == "additionalGuardConfig":
+            suggest = "additional_guard_config"
         elif key == "deploymentId":
             suggest = "deployment_id"
         elif key == "inputColumnName":
@@ -1769,6 +1773,7 @@ class CustomModelGuardConfiguration(dict):
                  name: builtins.str,
                  stages: Sequence[builtins.str],
                  template_name: builtins.str,
+                 additional_guard_config: Optional['outputs.CustomModelGuardConfigurationAdditionalGuardConfig'] = None,
                  deployment_id: Optional[builtins.str] = None,
                  input_column_name: Optional[builtins.str] = None,
                  llm_type: Optional[builtins.str] = None,
@@ -1782,6 +1787,7 @@ class CustomModelGuardConfiguration(dict):
         :param builtins.str name: The name of the guard configuration.
         :param Sequence[builtins.str] stages: The list of stages for the guard configuration.
         :param builtins.str template_name: The template name of the guard configuration.
+        :param 'CustomModelGuardConfigurationAdditionalGuardConfigArgs' additional_guard_config: Additional guard configuration
         :param builtins.str deployment_id: The deployment ID of this guard.
         :param builtins.str input_column_name: The input column name of this guard.
         :param builtins.str llm_type: The LLM type for this guard.
@@ -1795,6 +1801,8 @@ class CustomModelGuardConfiguration(dict):
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "stages", stages)
         pulumi.set(__self__, "template_name", template_name)
+        if additional_guard_config is not None:
+            pulumi.set(__self__, "additional_guard_config", additional_guard_config)
         if deployment_id is not None:
             pulumi.set(__self__, "deployment_id", deployment_id)
         if input_column_name is not None:
@@ -1843,6 +1851,14 @@ class CustomModelGuardConfiguration(dict):
         The template name of the guard configuration.
         """
         return pulumi.get(self, "template_name")
+
+    @property
+    @pulumi.getter(name="additionalGuardConfig")
+    def additional_guard_config(self) -> Optional['outputs.CustomModelGuardConfigurationAdditionalGuardConfig']:
+        """
+        Additional guard configuration
+        """
+        return pulumi.get(self, "additional_guard_config")
 
     @property
     @pulumi.getter(name="deploymentId")
@@ -1907,6 +1923,110 @@ class CustomModelGuardConfiguration(dict):
         The output column name of this guard.
         """
         return pulumi.get(self, "output_column_name")
+
+
+@pulumi.output_type
+class CustomModelGuardConfigurationAdditionalGuardConfig(dict):
+    def __init__(__self__, *,
+                 cost: Optional['outputs.CustomModelGuardConfigurationAdditionalGuardConfigCost'] = None):
+        """
+        :param 'CustomModelGuardConfigurationAdditionalGuardConfigCostArgs' cost: Cost metric configuration
+        """
+        if cost is not None:
+            pulumi.set(__self__, "cost", cost)
+
+    @property
+    @pulumi.getter
+    def cost(self) -> Optional['outputs.CustomModelGuardConfigurationAdditionalGuardConfigCost']:
+        """
+        Cost metric configuration
+        """
+        return pulumi.get(self, "cost")
+
+
+@pulumi.output_type
+class CustomModelGuardConfigurationAdditionalGuardConfigCost(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "inputPrice":
+            suggest = "input_price"
+        elif key == "inputUnit":
+            suggest = "input_unit"
+        elif key == "outputPrice":
+            suggest = "output_price"
+        elif key == "outputUnit":
+            suggest = "output_unit"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in CustomModelGuardConfigurationAdditionalGuardConfigCost. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        CustomModelGuardConfigurationAdditionalGuardConfigCost.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        CustomModelGuardConfigurationAdditionalGuardConfigCost.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 currency: builtins.str,
+                 input_price: builtins.float,
+                 input_unit: builtins.int,
+                 output_price: builtins.float,
+                 output_unit: builtins.int):
+        """
+        :param builtins.str currency: Currency for cost calculation (USD)
+        :param builtins.float input_price: LLM Price for input_unit tokens
+        :param builtins.int input_unit: No of input tokens for given price
+        :param builtins.float output_price: LLM Price for output_unit tokens
+        :param builtins.int output_unit: No of output tokens for given price
+        """
+        pulumi.set(__self__, "currency", currency)
+        pulumi.set(__self__, "input_price", input_price)
+        pulumi.set(__self__, "input_unit", input_unit)
+        pulumi.set(__self__, "output_price", output_price)
+        pulumi.set(__self__, "output_unit", output_unit)
+
+    @property
+    @pulumi.getter
+    def currency(self) -> builtins.str:
+        """
+        Currency for cost calculation (USD)
+        """
+        return pulumi.get(self, "currency")
+
+    @property
+    @pulumi.getter(name="inputPrice")
+    def input_price(self) -> builtins.float:
+        """
+        LLM Price for input_unit tokens
+        """
+        return pulumi.get(self, "input_price")
+
+    @property
+    @pulumi.getter(name="inputUnit")
+    def input_unit(self) -> builtins.int:
+        """
+        No of input tokens for given price
+        """
+        return pulumi.get(self, "input_unit")
+
+    @property
+    @pulumi.getter(name="outputPrice")
+    def output_price(self) -> builtins.float:
+        """
+        LLM Price for output_unit tokens
+        """
+        return pulumi.get(self, "output_price")
+
+    @property
+    @pulumi.getter(name="outputUnit")
+    def output_unit(self) -> builtins.int:
+        """
+        No of output tokens for given price
+        """
+        return pulumi.get(self, "output_unit")
 
 
 @pulumi.output_type
