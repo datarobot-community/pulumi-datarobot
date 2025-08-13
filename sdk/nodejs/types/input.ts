@@ -454,6 +454,10 @@ export interface CustomMetricValue {
 
 export interface CustomModelGuardConfiguration {
     /**
+     * Additional guard configuration
+     */
+    additionalGuardConfig?: pulumi.Input<inputs.CustomModelGuardConfigurationAdditionalGuardConfig>;
+    /**
      * The deployment ID of this guard.
      */
     deploymentId?: pulumi.Input<string>;
@@ -501,6 +505,36 @@ export interface CustomModelGuardConfiguration {
      * The template name of the guard configuration.
      */
     templateName: pulumi.Input<string>;
+}
+
+export interface CustomModelGuardConfigurationAdditionalGuardConfig {
+    /**
+     * Cost metric configuration
+     */
+    cost?: pulumi.Input<inputs.CustomModelGuardConfigurationAdditionalGuardConfigCost>;
+}
+
+export interface CustomModelGuardConfigurationAdditionalGuardConfigCost {
+    /**
+     * Currency for cost calculation (USD)
+     */
+    currency: pulumi.Input<string>;
+    /**
+     * LLM Price for inputUnit tokens
+     */
+    inputPrice: pulumi.Input<number>;
+    /**
+     * No of input tokens for given price
+     */
+    inputUnit: pulumi.Input<number>;
+    /**
+     * LLM Price for outputUnit tokens
+     */
+    outputPrice: pulumi.Input<number>;
+    /**
+     * No of output tokens for given price
+     */
+    outputUnit: pulumi.Input<number>;
 }
 
 export interface CustomModelGuardConfigurationIntervention {

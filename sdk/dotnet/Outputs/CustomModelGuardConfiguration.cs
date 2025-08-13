@@ -15,6 +15,10 @@ namespace DataRobotPulumi.Datarobot.Outputs
     public sealed class CustomModelGuardConfiguration
     {
         /// <summary>
+        /// Additional guard configuration
+        /// </summary>
+        public readonly Outputs.CustomModelGuardConfigurationAdditionalGuardConfig? AdditionalGuardConfig;
+        /// <summary>
         /// The deployment ID of this guard.
         /// </summary>
         public readonly string? DeploymentId;
@@ -65,6 +69,8 @@ namespace DataRobotPulumi.Datarobot.Outputs
 
         [OutputConstructor]
         private CustomModelGuardConfiguration(
+            Outputs.CustomModelGuardConfigurationAdditionalGuardConfig? additionalGuardConfig,
+
             string? deploymentId,
 
             string? inputColumnName,
@@ -89,6 +95,7 @@ namespace DataRobotPulumi.Datarobot.Outputs
 
             string templateName)
         {
+            AdditionalGuardConfig = additionalGuardConfig;
             DeploymentId = deploymentId;
             InputColumnName = inputColumnName;
             Intervention = intervention;

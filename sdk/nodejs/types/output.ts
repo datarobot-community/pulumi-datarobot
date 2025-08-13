@@ -454,6 +454,10 @@ export interface CustomMetricValue {
 
 export interface CustomModelGuardConfiguration {
     /**
+     * Additional guard configuration
+     */
+    additionalGuardConfig?: outputs.CustomModelGuardConfigurationAdditionalGuardConfig;
+    /**
      * The deployment ID of this guard.
      */
     deploymentId?: string;
@@ -501,6 +505,36 @@ export interface CustomModelGuardConfiguration {
      * The template name of the guard configuration.
      */
     templateName: string;
+}
+
+export interface CustomModelGuardConfigurationAdditionalGuardConfig {
+    /**
+     * Cost metric configuration
+     */
+    cost?: outputs.CustomModelGuardConfigurationAdditionalGuardConfigCost;
+}
+
+export interface CustomModelGuardConfigurationAdditionalGuardConfigCost {
+    /**
+     * Currency for cost calculation (USD)
+     */
+    currency: string;
+    /**
+     * LLM Price for inputUnit tokens
+     */
+    inputPrice: number;
+    /**
+     * No of input tokens for given price
+     */
+    inputUnit: number;
+    /**
+     * LLM Price for outputUnit tokens
+     */
+    outputPrice: number;
+    /**
+     * No of output tokens for given price
+     */
+    outputUnit: number;
 }
 
 export interface CustomModelGuardConfigurationIntervention {

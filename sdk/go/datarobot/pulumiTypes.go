@@ -4433,6 +4433,8 @@ func (o CustomMetricValuePtrOutput) ColumnName() pulumi.StringPtrOutput {
 }
 
 type CustomModelGuardConfiguration struct {
+	// Additional guard configuration
+	AdditionalGuardConfig *CustomModelGuardConfigurationAdditionalGuardConfig `pulumi:"additionalGuardConfig"`
 	// The deployment ID of this guard.
 	DeploymentId *string `pulumi:"deploymentId"`
 	// The input column name of this guard.
@@ -4471,6 +4473,8 @@ type CustomModelGuardConfigurationInput interface {
 }
 
 type CustomModelGuardConfigurationArgs struct {
+	// Additional guard configuration
+	AdditionalGuardConfig CustomModelGuardConfigurationAdditionalGuardConfigPtrInput `pulumi:"additionalGuardConfig"`
 	// The deployment ID of this guard.
 	DeploymentId pulumi.StringPtrInput `pulumi:"deploymentId"`
 	// The input column name of this guard.
@@ -4546,6 +4550,13 @@ func (o CustomModelGuardConfigurationOutput) ToCustomModelGuardConfigurationOutp
 
 func (o CustomModelGuardConfigurationOutput) ToCustomModelGuardConfigurationOutputWithContext(ctx context.Context) CustomModelGuardConfigurationOutput {
 	return o
+}
+
+// Additional guard configuration
+func (o CustomModelGuardConfigurationOutput) AdditionalGuardConfig() CustomModelGuardConfigurationAdditionalGuardConfigPtrOutput {
+	return o.ApplyT(func(v CustomModelGuardConfiguration) *CustomModelGuardConfigurationAdditionalGuardConfig {
+		return v.AdditionalGuardConfig
+	}).(CustomModelGuardConfigurationAdditionalGuardConfigPtrOutput)
 }
 
 // The deployment ID of this guard.
@@ -4626,6 +4637,358 @@ func (o CustomModelGuardConfigurationArrayOutput) Index(i pulumi.IntInput) Custo
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CustomModelGuardConfiguration {
 		return vs[0].([]CustomModelGuardConfiguration)[vs[1].(int)]
 	}).(CustomModelGuardConfigurationOutput)
+}
+
+type CustomModelGuardConfigurationAdditionalGuardConfig struct {
+	// Cost metric configuration
+	Cost *CustomModelGuardConfigurationAdditionalGuardConfigCost `pulumi:"cost"`
+}
+
+// CustomModelGuardConfigurationAdditionalGuardConfigInput is an input type that accepts CustomModelGuardConfigurationAdditionalGuardConfigArgs and CustomModelGuardConfigurationAdditionalGuardConfigOutput values.
+// You can construct a concrete instance of `CustomModelGuardConfigurationAdditionalGuardConfigInput` via:
+//
+//	CustomModelGuardConfigurationAdditionalGuardConfigArgs{...}
+type CustomModelGuardConfigurationAdditionalGuardConfigInput interface {
+	pulumi.Input
+
+	ToCustomModelGuardConfigurationAdditionalGuardConfigOutput() CustomModelGuardConfigurationAdditionalGuardConfigOutput
+	ToCustomModelGuardConfigurationAdditionalGuardConfigOutputWithContext(context.Context) CustomModelGuardConfigurationAdditionalGuardConfigOutput
+}
+
+type CustomModelGuardConfigurationAdditionalGuardConfigArgs struct {
+	// Cost metric configuration
+	Cost CustomModelGuardConfigurationAdditionalGuardConfigCostPtrInput `pulumi:"cost"`
+}
+
+func (CustomModelGuardConfigurationAdditionalGuardConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomModelGuardConfigurationAdditionalGuardConfig)(nil)).Elem()
+}
+
+func (i CustomModelGuardConfigurationAdditionalGuardConfigArgs) ToCustomModelGuardConfigurationAdditionalGuardConfigOutput() CustomModelGuardConfigurationAdditionalGuardConfigOutput {
+	return i.ToCustomModelGuardConfigurationAdditionalGuardConfigOutputWithContext(context.Background())
+}
+
+func (i CustomModelGuardConfigurationAdditionalGuardConfigArgs) ToCustomModelGuardConfigurationAdditionalGuardConfigOutputWithContext(ctx context.Context) CustomModelGuardConfigurationAdditionalGuardConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomModelGuardConfigurationAdditionalGuardConfigOutput)
+}
+
+func (i CustomModelGuardConfigurationAdditionalGuardConfigArgs) ToCustomModelGuardConfigurationAdditionalGuardConfigPtrOutput() CustomModelGuardConfigurationAdditionalGuardConfigPtrOutput {
+	return i.ToCustomModelGuardConfigurationAdditionalGuardConfigPtrOutputWithContext(context.Background())
+}
+
+func (i CustomModelGuardConfigurationAdditionalGuardConfigArgs) ToCustomModelGuardConfigurationAdditionalGuardConfigPtrOutputWithContext(ctx context.Context) CustomModelGuardConfigurationAdditionalGuardConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomModelGuardConfigurationAdditionalGuardConfigOutput).ToCustomModelGuardConfigurationAdditionalGuardConfigPtrOutputWithContext(ctx)
+}
+
+// CustomModelGuardConfigurationAdditionalGuardConfigPtrInput is an input type that accepts CustomModelGuardConfigurationAdditionalGuardConfigArgs, CustomModelGuardConfigurationAdditionalGuardConfigPtr and CustomModelGuardConfigurationAdditionalGuardConfigPtrOutput values.
+// You can construct a concrete instance of `CustomModelGuardConfigurationAdditionalGuardConfigPtrInput` via:
+//
+//	        CustomModelGuardConfigurationAdditionalGuardConfigArgs{...}
+//
+//	or:
+//
+//	        nil
+type CustomModelGuardConfigurationAdditionalGuardConfigPtrInput interface {
+	pulumi.Input
+
+	ToCustomModelGuardConfigurationAdditionalGuardConfigPtrOutput() CustomModelGuardConfigurationAdditionalGuardConfigPtrOutput
+	ToCustomModelGuardConfigurationAdditionalGuardConfigPtrOutputWithContext(context.Context) CustomModelGuardConfigurationAdditionalGuardConfigPtrOutput
+}
+
+type customModelGuardConfigurationAdditionalGuardConfigPtrType CustomModelGuardConfigurationAdditionalGuardConfigArgs
+
+func CustomModelGuardConfigurationAdditionalGuardConfigPtr(v *CustomModelGuardConfigurationAdditionalGuardConfigArgs) CustomModelGuardConfigurationAdditionalGuardConfigPtrInput {
+	return (*customModelGuardConfigurationAdditionalGuardConfigPtrType)(v)
+}
+
+func (*customModelGuardConfigurationAdditionalGuardConfigPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**CustomModelGuardConfigurationAdditionalGuardConfig)(nil)).Elem()
+}
+
+func (i *customModelGuardConfigurationAdditionalGuardConfigPtrType) ToCustomModelGuardConfigurationAdditionalGuardConfigPtrOutput() CustomModelGuardConfigurationAdditionalGuardConfigPtrOutput {
+	return i.ToCustomModelGuardConfigurationAdditionalGuardConfigPtrOutputWithContext(context.Background())
+}
+
+func (i *customModelGuardConfigurationAdditionalGuardConfigPtrType) ToCustomModelGuardConfigurationAdditionalGuardConfigPtrOutputWithContext(ctx context.Context) CustomModelGuardConfigurationAdditionalGuardConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomModelGuardConfigurationAdditionalGuardConfigPtrOutput)
+}
+
+type CustomModelGuardConfigurationAdditionalGuardConfigOutput struct{ *pulumi.OutputState }
+
+func (CustomModelGuardConfigurationAdditionalGuardConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomModelGuardConfigurationAdditionalGuardConfig)(nil)).Elem()
+}
+
+func (o CustomModelGuardConfigurationAdditionalGuardConfigOutput) ToCustomModelGuardConfigurationAdditionalGuardConfigOutput() CustomModelGuardConfigurationAdditionalGuardConfigOutput {
+	return o
+}
+
+func (o CustomModelGuardConfigurationAdditionalGuardConfigOutput) ToCustomModelGuardConfigurationAdditionalGuardConfigOutputWithContext(ctx context.Context) CustomModelGuardConfigurationAdditionalGuardConfigOutput {
+	return o
+}
+
+func (o CustomModelGuardConfigurationAdditionalGuardConfigOutput) ToCustomModelGuardConfigurationAdditionalGuardConfigPtrOutput() CustomModelGuardConfigurationAdditionalGuardConfigPtrOutput {
+	return o.ToCustomModelGuardConfigurationAdditionalGuardConfigPtrOutputWithContext(context.Background())
+}
+
+func (o CustomModelGuardConfigurationAdditionalGuardConfigOutput) ToCustomModelGuardConfigurationAdditionalGuardConfigPtrOutputWithContext(ctx context.Context) CustomModelGuardConfigurationAdditionalGuardConfigPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v CustomModelGuardConfigurationAdditionalGuardConfig) *CustomModelGuardConfigurationAdditionalGuardConfig {
+		return &v
+	}).(CustomModelGuardConfigurationAdditionalGuardConfigPtrOutput)
+}
+
+// Cost metric configuration
+func (o CustomModelGuardConfigurationAdditionalGuardConfigOutput) Cost() CustomModelGuardConfigurationAdditionalGuardConfigCostPtrOutput {
+	return o.ApplyT(func(v CustomModelGuardConfigurationAdditionalGuardConfig) *CustomModelGuardConfigurationAdditionalGuardConfigCost {
+		return v.Cost
+	}).(CustomModelGuardConfigurationAdditionalGuardConfigCostPtrOutput)
+}
+
+type CustomModelGuardConfigurationAdditionalGuardConfigPtrOutput struct{ *pulumi.OutputState }
+
+func (CustomModelGuardConfigurationAdditionalGuardConfigPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**CustomModelGuardConfigurationAdditionalGuardConfig)(nil)).Elem()
+}
+
+func (o CustomModelGuardConfigurationAdditionalGuardConfigPtrOutput) ToCustomModelGuardConfigurationAdditionalGuardConfigPtrOutput() CustomModelGuardConfigurationAdditionalGuardConfigPtrOutput {
+	return o
+}
+
+func (o CustomModelGuardConfigurationAdditionalGuardConfigPtrOutput) ToCustomModelGuardConfigurationAdditionalGuardConfigPtrOutputWithContext(ctx context.Context) CustomModelGuardConfigurationAdditionalGuardConfigPtrOutput {
+	return o
+}
+
+func (o CustomModelGuardConfigurationAdditionalGuardConfigPtrOutput) Elem() CustomModelGuardConfigurationAdditionalGuardConfigOutput {
+	return o.ApplyT(func(v *CustomModelGuardConfigurationAdditionalGuardConfig) CustomModelGuardConfigurationAdditionalGuardConfig {
+		if v != nil {
+			return *v
+		}
+		var ret CustomModelGuardConfigurationAdditionalGuardConfig
+		return ret
+	}).(CustomModelGuardConfigurationAdditionalGuardConfigOutput)
+}
+
+// Cost metric configuration
+func (o CustomModelGuardConfigurationAdditionalGuardConfigPtrOutput) Cost() CustomModelGuardConfigurationAdditionalGuardConfigCostPtrOutput {
+	return o.ApplyT(func(v *CustomModelGuardConfigurationAdditionalGuardConfig) *CustomModelGuardConfigurationAdditionalGuardConfigCost {
+		if v == nil {
+			return nil
+		}
+		return v.Cost
+	}).(CustomModelGuardConfigurationAdditionalGuardConfigCostPtrOutput)
+}
+
+type CustomModelGuardConfigurationAdditionalGuardConfigCost struct {
+	// Currency for cost calculation (USD)
+	Currency string `pulumi:"currency"`
+	// LLM Price for inputUnit tokens
+	InputPrice float64 `pulumi:"inputPrice"`
+	// No of input tokens for given price
+	InputUnit int `pulumi:"inputUnit"`
+	// LLM Price for outputUnit tokens
+	OutputPrice float64 `pulumi:"outputPrice"`
+	// No of output tokens for given price
+	OutputUnit int `pulumi:"outputUnit"`
+}
+
+// CustomModelGuardConfigurationAdditionalGuardConfigCostInput is an input type that accepts CustomModelGuardConfigurationAdditionalGuardConfigCostArgs and CustomModelGuardConfigurationAdditionalGuardConfigCostOutput values.
+// You can construct a concrete instance of `CustomModelGuardConfigurationAdditionalGuardConfigCostInput` via:
+//
+//	CustomModelGuardConfigurationAdditionalGuardConfigCostArgs{...}
+type CustomModelGuardConfigurationAdditionalGuardConfigCostInput interface {
+	pulumi.Input
+
+	ToCustomModelGuardConfigurationAdditionalGuardConfigCostOutput() CustomModelGuardConfigurationAdditionalGuardConfigCostOutput
+	ToCustomModelGuardConfigurationAdditionalGuardConfigCostOutputWithContext(context.Context) CustomModelGuardConfigurationAdditionalGuardConfigCostOutput
+}
+
+type CustomModelGuardConfigurationAdditionalGuardConfigCostArgs struct {
+	// Currency for cost calculation (USD)
+	Currency pulumi.StringInput `pulumi:"currency"`
+	// LLM Price for inputUnit tokens
+	InputPrice pulumi.Float64Input `pulumi:"inputPrice"`
+	// No of input tokens for given price
+	InputUnit pulumi.IntInput `pulumi:"inputUnit"`
+	// LLM Price for outputUnit tokens
+	OutputPrice pulumi.Float64Input `pulumi:"outputPrice"`
+	// No of output tokens for given price
+	OutputUnit pulumi.IntInput `pulumi:"outputUnit"`
+}
+
+func (CustomModelGuardConfigurationAdditionalGuardConfigCostArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomModelGuardConfigurationAdditionalGuardConfigCost)(nil)).Elem()
+}
+
+func (i CustomModelGuardConfigurationAdditionalGuardConfigCostArgs) ToCustomModelGuardConfigurationAdditionalGuardConfigCostOutput() CustomModelGuardConfigurationAdditionalGuardConfigCostOutput {
+	return i.ToCustomModelGuardConfigurationAdditionalGuardConfigCostOutputWithContext(context.Background())
+}
+
+func (i CustomModelGuardConfigurationAdditionalGuardConfigCostArgs) ToCustomModelGuardConfigurationAdditionalGuardConfigCostOutputWithContext(ctx context.Context) CustomModelGuardConfigurationAdditionalGuardConfigCostOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomModelGuardConfigurationAdditionalGuardConfigCostOutput)
+}
+
+func (i CustomModelGuardConfigurationAdditionalGuardConfigCostArgs) ToCustomModelGuardConfigurationAdditionalGuardConfigCostPtrOutput() CustomModelGuardConfigurationAdditionalGuardConfigCostPtrOutput {
+	return i.ToCustomModelGuardConfigurationAdditionalGuardConfigCostPtrOutputWithContext(context.Background())
+}
+
+func (i CustomModelGuardConfigurationAdditionalGuardConfigCostArgs) ToCustomModelGuardConfigurationAdditionalGuardConfigCostPtrOutputWithContext(ctx context.Context) CustomModelGuardConfigurationAdditionalGuardConfigCostPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomModelGuardConfigurationAdditionalGuardConfigCostOutput).ToCustomModelGuardConfigurationAdditionalGuardConfigCostPtrOutputWithContext(ctx)
+}
+
+// CustomModelGuardConfigurationAdditionalGuardConfigCostPtrInput is an input type that accepts CustomModelGuardConfigurationAdditionalGuardConfigCostArgs, CustomModelGuardConfigurationAdditionalGuardConfigCostPtr and CustomModelGuardConfigurationAdditionalGuardConfigCostPtrOutput values.
+// You can construct a concrete instance of `CustomModelGuardConfigurationAdditionalGuardConfigCostPtrInput` via:
+//
+//	        CustomModelGuardConfigurationAdditionalGuardConfigCostArgs{...}
+//
+//	or:
+//
+//	        nil
+type CustomModelGuardConfigurationAdditionalGuardConfigCostPtrInput interface {
+	pulumi.Input
+
+	ToCustomModelGuardConfigurationAdditionalGuardConfigCostPtrOutput() CustomModelGuardConfigurationAdditionalGuardConfigCostPtrOutput
+	ToCustomModelGuardConfigurationAdditionalGuardConfigCostPtrOutputWithContext(context.Context) CustomModelGuardConfigurationAdditionalGuardConfigCostPtrOutput
+}
+
+type customModelGuardConfigurationAdditionalGuardConfigCostPtrType CustomModelGuardConfigurationAdditionalGuardConfigCostArgs
+
+func CustomModelGuardConfigurationAdditionalGuardConfigCostPtr(v *CustomModelGuardConfigurationAdditionalGuardConfigCostArgs) CustomModelGuardConfigurationAdditionalGuardConfigCostPtrInput {
+	return (*customModelGuardConfigurationAdditionalGuardConfigCostPtrType)(v)
+}
+
+func (*customModelGuardConfigurationAdditionalGuardConfigCostPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**CustomModelGuardConfigurationAdditionalGuardConfigCost)(nil)).Elem()
+}
+
+func (i *customModelGuardConfigurationAdditionalGuardConfigCostPtrType) ToCustomModelGuardConfigurationAdditionalGuardConfigCostPtrOutput() CustomModelGuardConfigurationAdditionalGuardConfigCostPtrOutput {
+	return i.ToCustomModelGuardConfigurationAdditionalGuardConfigCostPtrOutputWithContext(context.Background())
+}
+
+func (i *customModelGuardConfigurationAdditionalGuardConfigCostPtrType) ToCustomModelGuardConfigurationAdditionalGuardConfigCostPtrOutputWithContext(ctx context.Context) CustomModelGuardConfigurationAdditionalGuardConfigCostPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomModelGuardConfigurationAdditionalGuardConfigCostPtrOutput)
+}
+
+type CustomModelGuardConfigurationAdditionalGuardConfigCostOutput struct{ *pulumi.OutputState }
+
+func (CustomModelGuardConfigurationAdditionalGuardConfigCostOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomModelGuardConfigurationAdditionalGuardConfigCost)(nil)).Elem()
+}
+
+func (o CustomModelGuardConfigurationAdditionalGuardConfigCostOutput) ToCustomModelGuardConfigurationAdditionalGuardConfigCostOutput() CustomModelGuardConfigurationAdditionalGuardConfigCostOutput {
+	return o
+}
+
+func (o CustomModelGuardConfigurationAdditionalGuardConfigCostOutput) ToCustomModelGuardConfigurationAdditionalGuardConfigCostOutputWithContext(ctx context.Context) CustomModelGuardConfigurationAdditionalGuardConfigCostOutput {
+	return o
+}
+
+func (o CustomModelGuardConfigurationAdditionalGuardConfigCostOutput) ToCustomModelGuardConfigurationAdditionalGuardConfigCostPtrOutput() CustomModelGuardConfigurationAdditionalGuardConfigCostPtrOutput {
+	return o.ToCustomModelGuardConfigurationAdditionalGuardConfigCostPtrOutputWithContext(context.Background())
+}
+
+func (o CustomModelGuardConfigurationAdditionalGuardConfigCostOutput) ToCustomModelGuardConfigurationAdditionalGuardConfigCostPtrOutputWithContext(ctx context.Context) CustomModelGuardConfigurationAdditionalGuardConfigCostPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v CustomModelGuardConfigurationAdditionalGuardConfigCost) *CustomModelGuardConfigurationAdditionalGuardConfigCost {
+		return &v
+	}).(CustomModelGuardConfigurationAdditionalGuardConfigCostPtrOutput)
+}
+
+// Currency for cost calculation (USD)
+func (o CustomModelGuardConfigurationAdditionalGuardConfigCostOutput) Currency() pulumi.StringOutput {
+	return o.ApplyT(func(v CustomModelGuardConfigurationAdditionalGuardConfigCost) string { return v.Currency }).(pulumi.StringOutput)
+}
+
+// LLM Price for inputUnit tokens
+func (o CustomModelGuardConfigurationAdditionalGuardConfigCostOutput) InputPrice() pulumi.Float64Output {
+	return o.ApplyT(func(v CustomModelGuardConfigurationAdditionalGuardConfigCost) float64 { return v.InputPrice }).(pulumi.Float64Output)
+}
+
+// No of input tokens for given price
+func (o CustomModelGuardConfigurationAdditionalGuardConfigCostOutput) InputUnit() pulumi.IntOutput {
+	return o.ApplyT(func(v CustomModelGuardConfigurationAdditionalGuardConfigCost) int { return v.InputUnit }).(pulumi.IntOutput)
+}
+
+// LLM Price for outputUnit tokens
+func (o CustomModelGuardConfigurationAdditionalGuardConfigCostOutput) OutputPrice() pulumi.Float64Output {
+	return o.ApplyT(func(v CustomModelGuardConfigurationAdditionalGuardConfigCost) float64 { return v.OutputPrice }).(pulumi.Float64Output)
+}
+
+// No of output tokens for given price
+func (o CustomModelGuardConfigurationAdditionalGuardConfigCostOutput) OutputUnit() pulumi.IntOutput {
+	return o.ApplyT(func(v CustomModelGuardConfigurationAdditionalGuardConfigCost) int { return v.OutputUnit }).(pulumi.IntOutput)
+}
+
+type CustomModelGuardConfigurationAdditionalGuardConfigCostPtrOutput struct{ *pulumi.OutputState }
+
+func (CustomModelGuardConfigurationAdditionalGuardConfigCostPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**CustomModelGuardConfigurationAdditionalGuardConfigCost)(nil)).Elem()
+}
+
+func (o CustomModelGuardConfigurationAdditionalGuardConfigCostPtrOutput) ToCustomModelGuardConfigurationAdditionalGuardConfigCostPtrOutput() CustomModelGuardConfigurationAdditionalGuardConfigCostPtrOutput {
+	return o
+}
+
+func (o CustomModelGuardConfigurationAdditionalGuardConfigCostPtrOutput) ToCustomModelGuardConfigurationAdditionalGuardConfigCostPtrOutputWithContext(ctx context.Context) CustomModelGuardConfigurationAdditionalGuardConfigCostPtrOutput {
+	return o
+}
+
+func (o CustomModelGuardConfigurationAdditionalGuardConfigCostPtrOutput) Elem() CustomModelGuardConfigurationAdditionalGuardConfigCostOutput {
+	return o.ApplyT(func(v *CustomModelGuardConfigurationAdditionalGuardConfigCost) CustomModelGuardConfigurationAdditionalGuardConfigCost {
+		if v != nil {
+			return *v
+		}
+		var ret CustomModelGuardConfigurationAdditionalGuardConfigCost
+		return ret
+	}).(CustomModelGuardConfigurationAdditionalGuardConfigCostOutput)
+}
+
+// Currency for cost calculation (USD)
+func (o CustomModelGuardConfigurationAdditionalGuardConfigCostPtrOutput) Currency() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CustomModelGuardConfigurationAdditionalGuardConfigCost) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Currency
+	}).(pulumi.StringPtrOutput)
+}
+
+// LLM Price for inputUnit tokens
+func (o CustomModelGuardConfigurationAdditionalGuardConfigCostPtrOutput) InputPrice() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v *CustomModelGuardConfigurationAdditionalGuardConfigCost) *float64 {
+		if v == nil {
+			return nil
+		}
+		return &v.InputPrice
+	}).(pulumi.Float64PtrOutput)
+}
+
+// No of input tokens for given price
+func (o CustomModelGuardConfigurationAdditionalGuardConfigCostPtrOutput) InputUnit() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *CustomModelGuardConfigurationAdditionalGuardConfigCost) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.InputUnit
+	}).(pulumi.IntPtrOutput)
+}
+
+// LLM Price for outputUnit tokens
+func (o CustomModelGuardConfigurationAdditionalGuardConfigCostPtrOutput) OutputPrice() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v *CustomModelGuardConfigurationAdditionalGuardConfigCost) *float64 {
+		if v == nil {
+			return nil
+		}
+		return &v.OutputPrice
+	}).(pulumi.Float64PtrOutput)
+}
+
+// No of output tokens for given price
+func (o CustomModelGuardConfigurationAdditionalGuardConfigCostPtrOutput) OutputUnit() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *CustomModelGuardConfigurationAdditionalGuardConfigCost) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.OutputUnit
+	}).(pulumi.IntPtrOutput)
 }
 
 type CustomModelGuardConfigurationIntervention struct {
@@ -12378,6 +12741,10 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomMetricValuePtrInput)(nil)).Elem(), CustomMetricValueArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelGuardConfigurationInput)(nil)).Elem(), CustomModelGuardConfigurationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelGuardConfigurationArrayInput)(nil)).Elem(), CustomModelGuardConfigurationArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelGuardConfigurationAdditionalGuardConfigInput)(nil)).Elem(), CustomModelGuardConfigurationAdditionalGuardConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelGuardConfigurationAdditionalGuardConfigPtrInput)(nil)).Elem(), CustomModelGuardConfigurationAdditionalGuardConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelGuardConfigurationAdditionalGuardConfigCostInput)(nil)).Elem(), CustomModelGuardConfigurationAdditionalGuardConfigCostArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelGuardConfigurationAdditionalGuardConfigCostPtrInput)(nil)).Elem(), CustomModelGuardConfigurationAdditionalGuardConfigCostArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelGuardConfigurationInterventionInput)(nil)).Elem(), CustomModelGuardConfigurationInterventionArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelGuardConfigurationNemoInfoInput)(nil)).Elem(), CustomModelGuardConfigurationNemoInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelGuardConfigurationNemoInfoPtrInput)(nil)).Elem(), CustomModelGuardConfigurationNemoInfoArgs{})
@@ -12519,6 +12886,10 @@ func init() {
 	pulumi.RegisterOutputType(CustomMetricValuePtrOutput{})
 	pulumi.RegisterOutputType(CustomModelGuardConfigurationOutput{})
 	pulumi.RegisterOutputType(CustomModelGuardConfigurationArrayOutput{})
+	pulumi.RegisterOutputType(CustomModelGuardConfigurationAdditionalGuardConfigOutput{})
+	pulumi.RegisterOutputType(CustomModelGuardConfigurationAdditionalGuardConfigPtrOutput{})
+	pulumi.RegisterOutputType(CustomModelGuardConfigurationAdditionalGuardConfigCostOutput{})
+	pulumi.RegisterOutputType(CustomModelGuardConfigurationAdditionalGuardConfigCostPtrOutput{})
 	pulumi.RegisterOutputType(CustomModelGuardConfigurationInterventionOutput{})
 	pulumi.RegisterOutputType(CustomModelGuardConfigurationNemoInfoOutput{})
 	pulumi.RegisterOutputType(CustomModelGuardConfigurationNemoInfoPtrOutput{})
