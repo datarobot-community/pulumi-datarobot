@@ -117,9 +117,20 @@ install it with `pulumi plugin install resource datarobot <version> -f <path-to-
 
 ## Rate limited by GitHub?
 
-GitHub has hard limits on API calls that cannot be changed. If you are running into this when running deployment tasks
-you have a couple of options. You can wait until the [rate limit](https://docs.github.com/en/enterprise-cloud@latest/rest/using-the-rest-api/rate-limits-for-the-rest-api?apiVersion=2022-11-28#primary-rate-limit-for-unauthenticated-users) expires or you can do a direct download from the releases page which will not use the API and hit the limit.
+GitHub has hard limits on API calls that cannot be changed. If you are
+running into this when running deployment tasks you have a couple of
+options. You can wait until the [rate
+limit](https://docs.github.com/en/enterprise-cloud@latest/rest/using-the-rest-api/rate-limits-for-the-rest-api?apiVersion=2022-11-28#primary-rate-limit-for-unauthenticated-users)
+expires or you can do a direct download from the releases page which
+will not use the API and hit the limit.
 
-To directly download the plugin and bypass the GitHub API run `pulumi plugin install resource datarobot <version> --server https://github.com/datarobot-community/pulumi-datarobot/releases/download/<version>/`
+To directly download the plugin and bypass the GitHub API run:
+`pulumi plugin install resource datarobot <version> --server https://github.com/datarobot-community/pulumi-datarobot/releases/download/<version>/`
 
-For example, to download version 0.10.14, you can run `pulumi plugin install resource datarobot v0.10.14 --server https://github.com/datarobot-community/pulumi-datarobot/releases/download/v0.10.14/` prior to running the deploy to directly install the plugin.
+For example, to download version 0.10.14, you can run:
+`pulumi plugin install resource datarobot v0.10.14 --server https://github.com/datarobot-community/pulumi-datarobot/releases/download/v0.10.14/`
+prior to running the deploy to directly install the plugin.
+
+After you have it downloaded, it will still attempt to query for
+updates via the GitHub API that can trigger rate limits. To bypass
+that, set the environment variable: `PULUMI_SKIP_UPDATE_CHECK=1` or `PULUMI_SKIP_UPDATE_CHECK=true`
