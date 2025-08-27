@@ -73,18 +73,18 @@ jobs:
               exit 1
           fi
       - name: Release with GoReleaser
-        uses: goreleaser/goreleaser-action@v5
+        uses: goreleaser/goreleaser-action@v2
         with:
           args: release --clean
           version: latest
-      - name: Publish SDK
+      - name: Publish Python SDK
         if: ${{ github.event.inputs.SDK_LANGUAGE == 'python' && env.PUBLISH_PYPI == 'true' }}
         uses: pypa/gh-action-pypi-publish@v1.12.4
         with:
           user: ${{ env.PYPI_USERNAME }}
           password: ${{ env.PYPI_PASSWORD }}
           packages_dir: ${{github.workspace}}/sdk/python/bin/dist
-      - name: Publish SDK
+      - name: Publish JS SDK
         if: ${{ github.event.inputs.SDK_LANGUAGE == 'nodejs' && env.PUBLISH_NPM == 'true' }}
         uses: JS-DevTools/npm-publish@v3.1.1
         with:
@@ -92,7 +92,7 @@ jobs:
           token: ${{ env.NPM_TOKEN }}
           package: ${{github.workspace}}/sdk/nodejs/bin/package.json
           provenance: true
-      - name: Publish SDK
+      - name: Publish .NET SDK
         if: ${{ github.event.inputs.SDK_LANGUAGE == 'dotnet' && env.PUBLISH_NUGET == 'true' }}
         run: |
           dotnet nuget push ${{github.workspace}}/sdk/dotnet/bin/Debug/*.nupkg -s ${{ env.NUGET_FEED_URL }} -k ${{ env.NUGET_PUBLISH_KEY }}
