@@ -1,10 +1,10 @@
-## DataRobot Resource Provider
+# DataRobot Resource Provider
 
 The DataRobot Resource Provider lets you manage [DataRobot](https://www.datarobot.com/) resources.
 The provider is built on [terraform-provider-datarobot](https://github.com/datarobot-community/terraform-provider-datarobot).
 To use this package, please install the [Pulumi CLI](https://pulumi.io/) first.
 
-## Installing
+## Installing -s
 
 This package is available for several languages/platforms:
 
