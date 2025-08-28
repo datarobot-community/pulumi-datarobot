@@ -14,35 +14,32 @@ on:
         description: 'Publish to NuGet'
         required: false
         default: 'true'
-
       SDK_LANGUAGE:
         description: 'SDK language to release (nodejs, python, dotnet, go)'
         required: true
         default: 'python'
+      USE_EXISTING_RELEASE:
+        description: 'Use existing GoReleaser artifacts (skip build/release)'
+        required: false
+        default: 'false'
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
   NODE_AUTH_TOKEN:  ${{ secrets.NPM_TOKEN }}
   NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
   NPM_REGISTRY_URL: https://registry.npmjs.org
   PUBLISH_NPM: ${{ github.event.inputs.PUBLISH_NPM || 'true' }}
-
   NUGET_PUBLISH_KEY: ${{ secrets.NUGET_PUBLISH_KEY }}
   NUGET_FEED_URL: https://api.nuget.org/v3/index.json
   PUBLISH_NUGET: ${{ github.event.inputs.PUBLISH_NUGET || 'true' }}
-
   PYPI_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
   PYPI_USERNAME: __token__
   PUBLISH_PYPI: ${{ github.event.inputs.PUBLISH_PYPI || 'true' }}
-
-  # MAVEN
   SIGNING_KEY: ${{ secrets.JAVA_SIGNING_KEY }}
   SIGNING_KEY_ID: ${{ secrets.JAVA_SIGNING_KEY_ID }}
   SIGNING_PASSWORD: ${{ secrets.JAVA_SIGNING_PASSWORD }}
 
 jobs:
-
   release_sdk:
     name: Release Selected SDK
     runs-on: ubuntu-latest
@@ -61,9 +58,20 @@ jobs:
           repo: pulumi/pulumictl
       - name: Set PreRelease Version
         run: echo "GORELEASER_CURRENT_TAG=v$(pulumictl get version --language generic)" >> $GITHUB_ENV
+
+      - name: Download latest release artifacts
+        if: ${{ github.event.inputs.USE_EXISTING_RELEASE == 'true' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release download --repo ${{ github.repository }} --pattern "*${{ github.event.inputs.SDK_LANGUAGE }}*" --dir ./release-assets
+
       - name: Build SDK
+        if: ${{ github.event.inputs.USE_EXISTING_RELEASE != 'true' }}
         run: make build_${{ github.event.inputs.SDK_LANGUAGE }}
+
       - name: Check worktree clean
+        if: ${{ github.event.inputs.USE_EXISTING_RELEASE != 'true' }}
         run: |
           git update-index -q --refresh
           if ! git diff-files --quiet; then
@@ -72,11 +80,14 @@ jobs:
               git diff
               exit 1
           fi
+
       - name: Release with GoReleaser
+        if: ${{ github.event.inputs.USE_EXISTING_RELEASE != 'true' }}
         uses: goreleaser/goreleaser-action@v2
         with:
           args: release --clean
           version: latest
+
       - name: Publish Python SDK
         if: ${{ github.event.inputs.SDK_LANGUAGE == 'python' && env.PUBLISH_PYPI == 'true' }}
         uses: pypa/gh-action-pypi-publish@v1.12.4
@@ -84,6 +95,7 @@ jobs:
           user: ${{ env.PYPI_USERNAME }}
           password: ${{ env.PYPI_PASSWORD }}
           packages_dir: ${{github.workspace}}/sdk/python/bin/dist
+
       - name: Publish JS SDK
         if: ${{ github.event.inputs.SDK_LANGUAGE == 'nodejs' && env.PUBLISH_NPM == 'true' }}
         uses: JS-DevTools/npm-publish@v3.1.1
@@ -92,6 +104,7 @@ jobs:
           token: ${{ env.NPM_TOKEN }}
           package: ${{github.workspace}}/sdk/nodejs/bin/package.json
           provenance: true
+
       - name: Publish .NET SDK
         if: ${{ github.event.inputs.SDK_LANGUAGE == 'dotnet' && env.PUBLISH_NUGET == 'true' }}
         run: |
