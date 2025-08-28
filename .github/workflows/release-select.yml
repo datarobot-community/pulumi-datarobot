@@ -64,7 +64,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release download --repo ${{ github.repository }} --pattern "*${{ github.event.inputs.SDK_LANGUAGE }}*" --dir ./release-assets
+          gh release download --repo ${{ github.repository }} --pattern "pulumi-resource-datarobot-*" --dir ./release-assets
 
       - name: Build SDK
         if: ${{ github.event.inputs.USE_EXISTING_RELEASE != 'true' }}
