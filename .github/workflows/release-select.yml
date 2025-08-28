@@ -66,6 +66,12 @@ jobs:
         run: |
           gh release download --repo ${{ github.repository }} --pattern "pulumi-resource-datarobot-*" --dir ./release-assets
 
+      - name: Setup Python
+        if: ${{ github.event.inputs.SDK_LANGUAGE == 'python' && env.PUBLISH_PYPI == 'true' }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
       - name: Build SDK
         if: ${{ github.event.inputs.USE_EXISTING_RELEASE != 'true' }}
         run: make build_${{ github.event.inputs.SDK_LANGUAGE }}
