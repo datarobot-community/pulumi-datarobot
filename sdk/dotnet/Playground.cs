@@ -53,6 +53,12 @@ namespace DataRobotPulumi.Datarobot
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
+        /// The type of the Playground, either 'rag' (default) or 'agentic'.
+        /// </summary>
+        [Output("playgroundType")]
+        public Output<string> PlaygroundType { get; private set; } = null!;
+
+        /// <summary>
         /// The id of the Playground.
         /// </summary>
         [Output("useCaseId")]
@@ -118,6 +124,12 @@ namespace DataRobotPulumi.Datarobot
         public Input<string>? Name { get; set; }
 
         /// <summary>
+        /// The type of the Playground, either 'rag' (default) or 'agentic'.
+        /// </summary>
+        [Input("playgroundType")]
+        public Input<string>? PlaygroundType { get; set; }
+
+        /// <summary>
         /// The id of the Playground.
         /// </summary>
         [Input("useCaseId", required: true)]
@@ -142,6 +154,12 @@ namespace DataRobotPulumi.Datarobot
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
+
+        /// <summary>
+        /// The type of the Playground, either 'rag' (default) or 'agentic'.
+        /// </summary>
+        [Input("playgroundType")]
+        public Input<string>? PlaygroundType { get; set; }
 
         /// <summary>
         /// The id of the Playground.

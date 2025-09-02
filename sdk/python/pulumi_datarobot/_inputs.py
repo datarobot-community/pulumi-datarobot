@@ -5896,6 +5896,10 @@ class LlmBlueprintCustomModelLlmSettingsArgs:
 
 if not MYPY:
     class LlmBlueprintLlmSettingsArgsDict(TypedDict):
+        custom_model_id: NotRequired[pulumi.Input[builtins.str]]
+        """
+        The ID of the custom model to use via chat completion interface.
+        """
         max_completion_length: NotRequired[pulumi.Input[builtins.int]]
         """
         The maximum number of tokens allowed in the completion. The combined count of this value and prompt tokens must be below the model's maximum context size, where prompt token count is comprised of system prompt, user prompt, recent chat history, and vector database citations.
@@ -5918,16 +5922,20 @@ elif False:
 @pulumi.input_type
 class LlmBlueprintLlmSettingsArgs:
     def __init__(__self__, *,
+                 custom_model_id: Optional[pulumi.Input[builtins.str]] = None,
                  max_completion_length: Optional[pulumi.Input[builtins.int]] = None,
                  system_prompt: Optional[pulumi.Input[builtins.str]] = None,
                  temperature: Optional[pulumi.Input[builtins.float]] = None,
                  top_p: Optional[pulumi.Input[builtins.float]] = None):
         """
+        :param pulumi.Input[builtins.str] custom_model_id: The ID of the custom model to use via chat completion interface.
         :param pulumi.Input[builtins.int] max_completion_length: The maximum number of tokens allowed in the completion. The combined count of this value and prompt tokens must be below the model's maximum context size, where prompt token count is comprised of system prompt, user prompt, recent chat history, and vector database citations.
         :param pulumi.Input[builtins.str] system_prompt: Guides the style of the LLM response. It is a 'universal' prompt, prepended to all individual prompts.
         :param pulumi.Input[builtins.float] temperature: Controls the randomness of model output, where higher values return more diverse output and lower values return more deterministic results.
         :param pulumi.Input[builtins.float] top_p: Threshold that controls the selection of words included in the response, based on a cumulative probability cutoff for token selection. Higher numbers return more diverse options for outputs.
         """
+        if custom_model_id is not None:
+            pulumi.set(__self__, "custom_model_id", custom_model_id)
         if max_completion_length is not None:
             pulumi.set(__self__, "max_completion_length", max_completion_length)
         if system_prompt is not None:
@@ -5936,6 +5944,18 @@ class LlmBlueprintLlmSettingsArgs:
             pulumi.set(__self__, "temperature", temperature)
         if top_p is not None:
             pulumi.set(__self__, "top_p", top_p)
+
+    @property
+    @pulumi.getter(name="customModelId")
+    def custom_model_id(self) -> Optional[pulumi.Input[builtins.str]]:
+        """
+        The ID of the custom model to use via chat completion interface.
+        """
+        return pulumi.get(self, "custom_model_id")
+
+    @custom_model_id.setter
+    def custom_model_id(self, value: Optional[pulumi.Input[builtins.str]]):
+        pulumi.set(self, "custom_model_id", value)
 
     @property
     @pulumi.getter(name="maxCompletionLength")

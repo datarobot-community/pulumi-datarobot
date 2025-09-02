@@ -77,6 +77,9 @@ namespace DataRobotPulumi.Datarobot
     ///         RetrainingSettings = null,
     ///     });
     /// 
+    ///     // Note: Deployment operations can take significant time, especially for GPU provisioning.
+    ///     // Use DATAROBOT_TIMEOUT_MINUTES environment variable to increase the default 30-minute timeout:
+    ///     // export DATAROBOT_TIMEOUT_MINUTES="120"  # 2 hours for GPU deployments
     ///     return new Dictionary&lt;string, object?&gt;
     ///     {
     ///         ["datarobotDeploymentId"] = exampleDeployment.Id,

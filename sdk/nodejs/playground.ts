@@ -55,6 +55,10 @@ export class Playground extends pulumi.CustomResource {
      */
     public readonly name!: pulumi.Output<string>;
     /**
+     * The type of the Playground, either 'rag' (default) or 'agentic'.
+     */
+    public readonly playgroundType!: pulumi.Output<string>;
+    /**
      * The id of the Playground.
      */
     public readonly useCaseId!: pulumi.Output<string>;
@@ -74,6 +78,7 @@ export class Playground extends pulumi.CustomResource {
             const state = argsOrState as PlaygroundState | undefined;
             resourceInputs["description"] = state ? state.description : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
+            resourceInputs["playgroundType"] = state ? state.playgroundType : undefined;
             resourceInputs["useCaseId"] = state ? state.useCaseId : undefined;
         } else {
             const args = argsOrState as PlaygroundArgs | undefined;
@@ -82,6 +87,7 @@ export class Playground extends pulumi.CustomResource {
             }
             resourceInputs["description"] = args ? args.description : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
+            resourceInputs["playgroundType"] = args ? args.playgroundType : undefined;
             resourceInputs["useCaseId"] = args ? args.useCaseId : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -102,6 +108,10 @@ export interface PlaygroundState {
      */
     name?: pulumi.Input<string>;
     /**
+     * The type of the Playground, either 'rag' (default) or 'agentic'.
+     */
+    playgroundType?: pulumi.Input<string>;
+    /**
      * The id of the Playground.
      */
     useCaseId?: pulumi.Input<string>;
@@ -119,6 +129,10 @@ export interface PlaygroundArgs {
      * The name of the Playground.
      */
     name?: pulumi.Input<string>;
+    /**
+     * The type of the Playground, either 'rag' (default) or 'agentic'.
+     */
+    playgroundType?: pulumi.Input<string>;
     /**
      * The id of the Playground.
      */

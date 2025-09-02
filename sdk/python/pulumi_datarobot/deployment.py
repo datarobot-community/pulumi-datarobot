@@ -775,6 +775,9 @@ class Deployment(pulumi.CustomResource):
                 "value": "val",
             }],
             retraining_settings={})
+        # Note: Deployment operations can take significant time, especially for GPU provisioning.
+        # Use DATAROBOT_TIMEOUT_MINUTES environment variable to increase the default 30-minute timeout:
+        # export DATAROBOT_TIMEOUT_MINUTES="120"  # 2 hours for GPU deployments
         pulumi.export("datarobotDeploymentId", example_deployment.id)
         ```
 
@@ -852,6 +855,9 @@ class Deployment(pulumi.CustomResource):
                 "value": "val",
             }],
             retraining_settings={})
+        # Note: Deployment operations can take significant time, especially for GPU provisioning.
+        # Use DATAROBOT_TIMEOUT_MINUTES environment variable to increase the default 30-minute timeout:
+        # export DATAROBOT_TIMEOUT_MINUTES="120"  # 2 hours for GPU deployments
         pulumi.export("datarobotDeploymentId", example_deployment.id)
         ```
 

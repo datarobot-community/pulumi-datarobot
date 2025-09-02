@@ -51,6 +51,8 @@ type Playground struct {
 	Description pulumi.StringPtrOutput `pulumi:"description"`
 	// The name of the Playground.
 	Name pulumi.StringOutput `pulumi:"name"`
+	// The type of the Playground, either 'rag' (default) or 'agentic'.
+	PlaygroundType pulumi.StringOutput `pulumi:"playgroundType"`
 	// The id of the Playground.
 	UseCaseId pulumi.StringOutput `pulumi:"useCaseId"`
 }
@@ -92,6 +94,8 @@ type playgroundState struct {
 	Description *string `pulumi:"description"`
 	// The name of the Playground.
 	Name *string `pulumi:"name"`
+	// The type of the Playground, either 'rag' (default) or 'agentic'.
+	PlaygroundType *string `pulumi:"playgroundType"`
 	// The id of the Playground.
 	UseCaseId *string `pulumi:"useCaseId"`
 }
@@ -101,6 +105,8 @@ type PlaygroundState struct {
 	Description pulumi.StringPtrInput
 	// The name of the Playground.
 	Name pulumi.StringPtrInput
+	// The type of the Playground, either 'rag' (default) or 'agentic'.
+	PlaygroundType pulumi.StringPtrInput
 	// The id of the Playground.
 	UseCaseId pulumi.StringPtrInput
 }
@@ -114,6 +120,8 @@ type playgroundArgs struct {
 	Description *string `pulumi:"description"`
 	// The name of the Playground.
 	Name *string `pulumi:"name"`
+	// The type of the Playground, either 'rag' (default) or 'agentic'.
+	PlaygroundType *string `pulumi:"playgroundType"`
 	// The id of the Playground.
 	UseCaseId string `pulumi:"useCaseId"`
 }
@@ -124,6 +132,8 @@ type PlaygroundArgs struct {
 	Description pulumi.StringPtrInput
 	// The name of the Playground.
 	Name pulumi.StringPtrInput
+	// The type of the Playground, either 'rag' (default) or 'agentic'.
+	PlaygroundType pulumi.StringPtrInput
 	// The id of the Playground.
 	UseCaseId pulumi.StringInput
 }
@@ -223,6 +233,11 @@ func (o PlaygroundOutput) Description() pulumi.StringPtrOutput {
 // The name of the Playground.
 func (o PlaygroundOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *Playground) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
+}
+
+// The type of the Playground, either 'rag' (default) or 'agentic'.
+func (o PlaygroundOutput) PlaygroundType() pulumi.StringOutput {
+	return o.ApplyT(func(v *Playground) pulumi.StringOutput { return v.PlaygroundType }).(pulumi.StringOutput)
 }
 
 // The id of the Playground.
