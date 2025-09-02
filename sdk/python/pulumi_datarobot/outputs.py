@@ -4548,7 +4548,9 @@ class LlmBlueprintLlmSettings(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
-        if key == "maxCompletionLength":
+        if key == "customModelId":
+            suggest = "custom_model_id"
+        elif key == "maxCompletionLength":
             suggest = "max_completion_length"
         elif key == "systemPrompt":
             suggest = "system_prompt"
@@ -4567,16 +4569,20 @@ class LlmBlueprintLlmSettings(dict):
         return super().get(key, default)
 
     def __init__(__self__, *,
+                 custom_model_id: Optional[builtins.str] = None,
                  max_completion_length: Optional[builtins.int] = None,
                  system_prompt: Optional[builtins.str] = None,
                  temperature: Optional[builtins.float] = None,
                  top_p: Optional[builtins.float] = None):
         """
+        :param builtins.str custom_model_id: The ID of the custom model to use via chat completion interface.
         :param builtins.int max_completion_length: The maximum number of tokens allowed in the completion. The combined count of this value and prompt tokens must be below the model's maximum context size, where prompt token count is comprised of system prompt, user prompt, recent chat history, and vector database citations.
         :param builtins.str system_prompt: Guides the style of the LLM response. It is a 'universal' prompt, prepended to all individual prompts.
         :param builtins.float temperature: Controls the randomness of model output, where higher values return more diverse output and lower values return more deterministic results.
         :param builtins.float top_p: Threshold that controls the selection of words included in the response, based on a cumulative probability cutoff for token selection. Higher numbers return more diverse options for outputs.
         """
+        if custom_model_id is not None:
+            pulumi.set(__self__, "custom_model_id", custom_model_id)
         if max_completion_length is not None:
             pulumi.set(__self__, "max_completion_length", max_completion_length)
         if system_prompt is not None:
@@ -4585,6 +4591,14 @@ class LlmBlueprintLlmSettings(dict):
             pulumi.set(__self__, "temperature", temperature)
         if top_p is not None:
             pulumi.set(__self__, "top_p", top_p)
+
+    @property
+    @pulumi.getter(name="customModelId")
+    def custom_model_id(self) -> Optional[builtins.str]:
+        """
+        The ID of the custom model to use via chat completion interface.
+        """
+        return pulumi.get(self, "custom_model_id")
 
     @property
     @pulumi.getter(name="maxCompletionLength")

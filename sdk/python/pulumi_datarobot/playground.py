@@ -22,18 +22,22 @@ class PlaygroundArgs:
     def __init__(__self__, *,
                  use_case_id: pulumi.Input[builtins.str],
                  description: Optional[pulumi.Input[builtins.str]] = None,
-                 name: Optional[pulumi.Input[builtins.str]] = None):
+                 name: Optional[pulumi.Input[builtins.str]] = None,
+                 playground_type: Optional[pulumi.Input[builtins.str]] = None):
         """
         The set of arguments for constructing a Playground resource.
         :param pulumi.Input[builtins.str] use_case_id: The id of the Playground.
         :param pulumi.Input[builtins.str] description: The description of the Playground.
         :param pulumi.Input[builtins.str] name: The name of the Playground.
+        :param pulumi.Input[builtins.str] playground_type: The type of the Playground, either 'rag' (default) or 'agentic'.
         """
         pulumi.set(__self__, "use_case_id", use_case_id)
         if description is not None:
             pulumi.set(__self__, "description", description)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if playground_type is not None:
+            pulumi.set(__self__, "playground_type", playground_type)
 
     @property
     @pulumi.getter(name="useCaseId")
@@ -71,23 +75,39 @@ class PlaygroundArgs:
     def name(self, value: Optional[pulumi.Input[builtins.str]]):
         pulumi.set(self, "name", value)
 
+    @property
+    @pulumi.getter(name="playgroundType")
+    def playground_type(self) -> Optional[pulumi.Input[builtins.str]]:
+        """
+        The type of the Playground, either 'rag' (default) or 'agentic'.
+        """
+        return pulumi.get(self, "playground_type")
+
+    @playground_type.setter
+    def playground_type(self, value: Optional[pulumi.Input[builtins.str]]):
+        pulumi.set(self, "playground_type", value)
+
 
 @pulumi.input_type
 class _PlaygroundState:
     def __init__(__self__, *,
                  description: Optional[pulumi.Input[builtins.str]] = None,
                  name: Optional[pulumi.Input[builtins.str]] = None,
+                 playground_type: Optional[pulumi.Input[builtins.str]] = None,
                  use_case_id: Optional[pulumi.Input[builtins.str]] = None):
         """
         Input properties used for looking up and filtering Playground resources.
         :param pulumi.Input[builtins.str] description: The description of the Playground.
         :param pulumi.Input[builtins.str] name: The name of the Playground.
+        :param pulumi.Input[builtins.str] playground_type: The type of the Playground, either 'rag' (default) or 'agentic'.
         :param pulumi.Input[builtins.str] use_case_id: The id of the Playground.
         """
         if description is not None:
             pulumi.set(__self__, "description", description)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if playground_type is not None:
+            pulumi.set(__self__, "playground_type", playground_type)
         if use_case_id is not None:
             pulumi.set(__self__, "use_case_id", use_case_id)
 
@@ -116,6 +136,18 @@ class _PlaygroundState:
         pulumi.set(self, "name", value)
 
     @property
+    @pulumi.getter(name="playgroundType")
+    def playground_type(self) -> Optional[pulumi.Input[builtins.str]]:
+        """
+        The type of the Playground, either 'rag' (default) or 'agentic'.
+        """
+        return pulumi.get(self, "playground_type")
+
+    @playground_type.setter
+    def playground_type(self, value: Optional[pulumi.Input[builtins.str]]):
+        pulumi.set(self, "playground_type", value)
+
+    @property
     @pulumi.getter(name="useCaseId")
     def use_case_id(self) -> Optional[pulumi.Input[builtins.str]]:
         """
@@ -135,6 +167,7 @@ class Playground(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  description: Optional[pulumi.Input[builtins.str]] = None,
                  name: Optional[pulumi.Input[builtins.str]] = None,
+                 playground_type: Optional[pulumi.Input[builtins.str]] = None,
                  use_case_id: Optional[pulumi.Input[builtins.str]] = None,
                  __props__=None):
         """
@@ -155,6 +188,7 @@ class Playground(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[builtins.str] description: The description of the Playground.
         :param pulumi.Input[builtins.str] name: The name of the Playground.
+        :param pulumi.Input[builtins.str] playground_type: The type of the Playground, either 'rag' (default) or 'agentic'.
         :param pulumi.Input[builtins.str] use_case_id: The id of the Playground.
         """
         ...
@@ -194,6 +228,7 @@ class Playground(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  description: Optional[pulumi.Input[builtins.str]] = None,
                  name: Optional[pulumi.Input[builtins.str]] = None,
+                 playground_type: Optional[pulumi.Input[builtins.str]] = None,
                  use_case_id: Optional[pulumi.Input[builtins.str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
@@ -206,6 +241,7 @@ class Playground(pulumi.CustomResource):
 
             __props__.__dict__["description"] = description
             __props__.__dict__["name"] = name
+            __props__.__dict__["playground_type"] = playground_type
             if use_case_id is None and not opts.urn:
                 raise TypeError("Missing required property 'use_case_id'")
             __props__.__dict__["use_case_id"] = use_case_id
@@ -221,6 +257,7 @@ class Playground(pulumi.CustomResource):
             opts: Optional[pulumi.ResourceOptions] = None,
             description: Optional[pulumi.Input[builtins.str]] = None,
             name: Optional[pulumi.Input[builtins.str]] = None,
+            playground_type: Optional[pulumi.Input[builtins.str]] = None,
             use_case_id: Optional[pulumi.Input[builtins.str]] = None) -> 'Playground':
         """
         Get an existing Playground resource's state with the given name, id, and optional extra
@@ -231,6 +268,7 @@ class Playground(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[builtins.str] description: The description of the Playground.
         :param pulumi.Input[builtins.str] name: The name of the Playground.
+        :param pulumi.Input[builtins.str] playground_type: The type of the Playground, either 'rag' (default) or 'agentic'.
         :param pulumi.Input[builtins.str] use_case_id: The id of the Playground.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -239,6 +277,7 @@ class Playground(pulumi.CustomResource):
 
         __props__.__dict__["description"] = description
         __props__.__dict__["name"] = name
+        __props__.__dict__["playground_type"] = playground_type
         __props__.__dict__["use_case_id"] = use_case_id
         return Playground(resource_name, opts=opts, __props__=__props__)
 
@@ -257,6 +296,14 @@ class Playground(pulumi.CustomResource):
         The name of the Playground.
         """
         return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="playgroundType")
+    def playground_type(self) -> pulumi.Output[builtins.str]:
+        """
+        The type of the Playground, either 'rag' (default) or 'agentic'.
+        """
+        return pulumi.get(self, "playground_type")
 
     @property
     @pulumi.getter(name="useCaseId")

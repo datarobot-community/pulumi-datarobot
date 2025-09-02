@@ -1211,6 +1211,10 @@ export interface LlmBlueprintCustomModelLlmSettings {
 
 export interface LlmBlueprintLlmSettings {
     /**
+     * The ID of the custom model to use via chat completion interface.
+     */
+    customModelId?: string;
+    /**
      * The maximum number of tokens allowed in the completion. The combined count of this value and prompt tokens must be below the model's maximum context size, where prompt token count is comprised of system prompt, user prompt, recent chat history, and vector database citations.
      */
     maxCompletionLength?: number;

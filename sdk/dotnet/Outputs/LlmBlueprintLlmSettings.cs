@@ -15,6 +15,10 @@ namespace DataRobotPulumi.Datarobot.Outputs
     public sealed class LlmBlueprintLlmSettings
     {
         /// <summary>
+        /// The ID of the custom model to use via chat completion interface.
+        /// </summary>
+        public readonly string? CustomModelId;
+        /// <summary>
         /// The maximum number of tokens allowed in the completion. The combined count of this value and prompt tokens must be below the model's maximum context size, where prompt token count is comprised of system prompt, user prompt, recent chat history, and vector database citations.
         /// </summary>
         public readonly int? MaxCompletionLength;
@@ -33,6 +37,8 @@ namespace DataRobotPulumi.Datarobot.Outputs
 
         [OutputConstructor]
         private LlmBlueprintLlmSettings(
+            string? customModelId,
+
             int? maxCompletionLength,
 
             string? systemPrompt,
@@ -41,6 +47,7 @@ namespace DataRobotPulumi.Datarobot.Outputs
 
             double? topP)
         {
+            CustomModelId = customModelId;
             MaxCompletionLength = maxCompletionLength;
             SystemPrompt = systemPrompt;
             Temperature = temperature;

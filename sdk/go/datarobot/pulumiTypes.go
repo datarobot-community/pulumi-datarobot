@@ -11895,6 +11895,8 @@ func (o LlmBlueprintCustomModelLlmSettingsPtrOutput) ValidationId() pulumi.Strin
 }
 
 type LlmBlueprintLlmSettings struct {
+	// The ID of the custom model to use via chat completion interface.
+	CustomModelId *string `pulumi:"customModelId"`
 	// The maximum number of tokens allowed in the completion. The combined count of this value and prompt tokens must be below the model's maximum context size, where prompt token count is comprised of system prompt, user prompt, recent chat history, and vector database citations.
 	MaxCompletionLength *int `pulumi:"maxCompletionLength"`
 	// Guides the style of the LLM response. It is a 'universal' prompt, prepended to all individual prompts.
@@ -11917,6 +11919,8 @@ type LlmBlueprintLlmSettingsInput interface {
 }
 
 type LlmBlueprintLlmSettingsArgs struct {
+	// The ID of the custom model to use via chat completion interface.
+	CustomModelId pulumi.StringPtrInput `pulumi:"customModelId"`
 	// The maximum number of tokens allowed in the completion. The combined count of this value and prompt tokens must be below the model's maximum context size, where prompt token count is comprised of system prompt, user prompt, recent chat history, and vector database citations.
 	MaxCompletionLength pulumi.IntPtrInput `pulumi:"maxCompletionLength"`
 	// Guides the style of the LLM response. It is a 'universal' prompt, prepended to all individual prompts.
@@ -12004,6 +12008,11 @@ func (o LlmBlueprintLlmSettingsOutput) ToLlmBlueprintLlmSettingsPtrOutputWithCon
 	}).(LlmBlueprintLlmSettingsPtrOutput)
 }
 
+// The ID of the custom model to use via chat completion interface.
+func (o LlmBlueprintLlmSettingsOutput) CustomModelId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v LlmBlueprintLlmSettings) *string { return v.CustomModelId }).(pulumi.StringPtrOutput)
+}
+
 // The maximum number of tokens allowed in the completion. The combined count of this value and prompt tokens must be below the model's maximum context size, where prompt token count is comprised of system prompt, user prompt, recent chat history, and vector database citations.
 func (o LlmBlueprintLlmSettingsOutput) MaxCompletionLength() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v LlmBlueprintLlmSettings) *int { return v.MaxCompletionLength }).(pulumi.IntPtrOutput)
@@ -12046,6 +12055,16 @@ func (o LlmBlueprintLlmSettingsPtrOutput) Elem() LlmBlueprintLlmSettingsOutput {
 		var ret LlmBlueprintLlmSettings
 		return ret
 	}).(LlmBlueprintLlmSettingsOutput)
+}
+
+// The ID of the custom model to use via chat completion interface.
+func (o LlmBlueprintLlmSettingsPtrOutput) CustomModelId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *LlmBlueprintLlmSettings) *string {
+		if v == nil {
+			return nil
+		}
+		return v.CustomModelId
+	}).(pulumi.StringPtrOutput)
 }
 
 // The maximum number of tokens allowed in the completion. The combined count of this value and prompt tokens must be below the model's maximum context size, where prompt token count is comprised of system prompt, user prompt, recent chat history, and vector database citations.
