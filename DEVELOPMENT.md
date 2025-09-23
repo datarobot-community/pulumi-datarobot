@@ -45,3 +45,113 @@ Now, in your example Pulumi project, you should be ready to install the local de
 * Next, install the provider binary with `pulumi plugin install resource datarobot v0.0.0 -f ~/path/to/pulumi-datarobot/bin/pulumi-resource-datarobot`
 
 From there, you should have everything ready to test with a `pulumi up`!
+
+## Development with Local Terraform Provider
+
+For developing and testing changes across both the terraform provider and pulumi provider repositories, this repository includes targets that allow you to build using a local copy of the terraform provider.
+
+### Prerequisites
+
+- Clone the [terraform-provider-datarobot](https://github.com/datarobot-community/terraform-provider-datarobot) repository adjacent to this one:
+  ```bash
+  # Your directory structure should look like:
+  # code/
+  # ├── pulumi-datarobot/          (this repo)
+  # └── terraform-provider-datarobot/
+  ```
+
+### Local Development Targets
+
+#### `make build_local_provider`
+Builds native binaries for your current platform using the local terraform provider:
+- Uses your local terraform provider from `../terraform-provider-datarobot`
+- Builds native binaries for your current platform (macOS ARM64, Linux x86_64, etc.)
+- Keeps the binaries in `bin/` directory for testing
+- Generates schema using the local provider
+- Automatically manages go.mod replace directives
+
+Example:
+```bash
+make build_local_provider
+# Results in:
+# - bin/pulumi-tfgen-datarobot
+# - bin/pulumi-resource-datarobot
+```
+
+#### `make test_local_provider`
+Complete test build including SDK generation and installation:
+- Uses your local terraform provider
+- Builds provider binaries
+- Generates all SDKs (Node.js, Python, Go, .NET)
+- Installs SDKs locally for testing
+- Cleans up temporary files when complete
+
+#### `make cross_compile_windows`
+Cross-compiles for Windows using your local terraform provider:
+- Builds the local terraform provider for Windows
+- Cross-compiles Pulumi binaries for Windows (x86-64)
+- Generates all SDKs using native binaries (since Windows .exe can't run on macOS)
+- Creates both native and Windows binaries in `bin/` directory
+
+Example:
+```bash
+make cross_compile_windows
+# Results in:
+# - bin/pulumi-tfgen-datarobot.exe         (Windows)
+# - bin/pulumi-resource-datarobot.exe      (Windows)
+# - ../terraform-provider-datarobot/terraform-provider-datarobot.exe
+```
+
+#### `make clean_windows`
+Cleans up Windows cross-compilation artifacts:
+```bash
+make clean_windows
+```
+
+### Local Development Workflow
+
+1. **Make changes** to your terraform provider in `../terraform-provider-datarobot`
+
+2. **Test locally first** (recommended):
+   ```bash
+   make test_local_provider
+   ```
+
+3. **Build local binaries** for development:
+   ```bash
+   make build_local_provider
+   ```
+
+4. **Cross-compile for Windows** testing:
+   ```bash
+   make cross_compile_windows
+   ```
+
+5. **Install and test** with a Pulumi project:
+   ```bash
+   # Install the Python SDK
+   pip install -e ~/path/to/pulumi-datarobot/sdk/python
+
+   # Install the provider binary
+   pulumi plugin install resource datarobot v0.0.0 -f ~/path/to/pulumi-datarobot/bin/pulumi-resource-datarobot
+
+   # Test with pulumi up
+   pulumi up
+   ```
+
+   Alternatively, for a quick test, you can swap out the executable file on your test machine that is in `~/.pulumi/plugins/...`
+   with the binaries produced and added to the `bin` folder on an existing install of the plugin.
+
+6. **Clean up** when done:
+   ```bash
+   make clean_windows  # Remove Windows artifacts
+   make clean          # Remove all SDK builds
+   ```
+
+### Notes
+
+- All targets automatically manage go.mod replace directives and restore the original state
+- The `+dirty` version suffix appears when you have uncommitted changes - this is normal during development
+- Windows binaries cannot be executed on macOS, so SDK generation uses native binaries even during cross-compilation
+- The local terraform provider path can be customized by modifying the `LOCAL_TF_PROVIDER_PATH` variable in the Makefile
+- This will change the source code in your tree, do not commit it since it will not work outside of your local environment
