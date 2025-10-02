@@ -4,13 +4,8 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "$0")"; pwd)"
 TEMPLATES_DIR="$ROOT/templates"
 
-# Get version from provider
-VERSION_FILE="$ROOT/provider/cmd/pulumi-resource-datarobot/version.txt"
-if [[ -f "$VERSION_FILE" ]]; then
-  VERSION="$(cat "$VERSION_FILE" | tr -d '\n')"
-else
-  VERSION="$(git describe --tags --abbrev=0 2>/dev/null || echo 'dev')"
-fi
+# Use git tags as version source for releases
+VERSION="$(git describe --tags --exact-match 2>/dev/null || git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0-dev")"
 
 # SDK configurations using arrays (compatible with older bash)
 SDKS=(python nodejs go dotnet)
