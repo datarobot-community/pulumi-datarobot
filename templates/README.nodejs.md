@@ -8,10 +8,10 @@ Install the package using npm or yarn:
 
 ```bash
 # Using npm
-npm install @datarobot/pulumi-datarobot
+npm install {{PACKAGE_NAME}}
 
 # Using yarn
-yarn add @datarobot/pulumi-datarobot
+yarn add {{PACKAGE_NAME}}
 ```
 
 ## Configuration
@@ -34,7 +34,7 @@ pulumi config set datarobot:endpoint https://your.datarobot.instance/api/v2
 
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
-import * as datarobot from "@datarobot/pulumi-datarobot";
+import * as datarobot from "{{PACKAGE_NAME}}";
 
 // Create a DataRobot use case
 const useCase = new datarobot.UseCase("my-use-case", {
@@ -66,7 +66,7 @@ export const deploymentId = deployment.id;
 
 ```javascript
 const pulumi = require("@pulumi/pulumi");
-const datarobot = require("@datarobot/pulumi-datarobot");
+const datarobot = require("{{PACKAGE_NAME}}");
 
 // Create a DataRobot use case
 const useCase = new datarobot.UseCase("my-use-case", {
@@ -96,7 +96,7 @@ exports.deploymentId = deployment.id;
 
 ## Examples
 
-Complete examples are available in the [examples directory](https://github.com/datarobot-community/pulumi-datarobot/tree/main/examples/nodejs).
+Complete examples are available in the [examples directory](https://github.com/datarobot-community/pulumi-datarobot/tree/main/{{EXAMPLES_PATH}}).
 
 ## Air-Gapped Environments
 
@@ -116,11 +116,11 @@ mkdir offline-packages
 cd offline-packages
 
 # Download the package and all dependencies
-npm pack @datarobot/pulumi-datarobot
+npm pack {{PACKAGE_NAME}}
 npm pack @pulumi/pulumi
 
 # Create a package-lock.json for offline install
-npm install --package-lock-only @datarobot/pulumi-datarobot
+npm install --package-lock-only {{PACKAGE_NAME}}
 ```
 
 Transfer the packages to your air-gapped system and install:
@@ -134,9 +134,9 @@ npm install ./offline-packages/*.tgz
 Download the plugin binary from the [releases page](https://github.com/datarobot-community/pulumi-datarobot/releases):
 
 ```bash
-# Replace v0.10.20 with your version, e.g., v0.10.14
-pulumi plugin install resource datarobot v0.10.20 --server \
-  https://github.com/datarobot-community/pulumi-datarobot/releases/v0.10.20/
+# Replace {{VERSION}} with your version, e.g., v0.10.14
+pulumi plugin install resource datarobot {{VERSION}} --server \
+  https://github.com/datarobot-community/pulumi-datarobot/releases/{{VERSION}}/
 ```
 
 ### 4. Skip update checks
@@ -149,7 +149,7 @@ export PULUMI_SKIP_UPDATE_CHECK=true
 ### Custom Authentication
 
 ```typescript
-import * as datarobot from "@datarobot/pulumi-datarobot";
+import * as datarobot from "{{PACKAGE_NAME}}";
 
 // Using API token credential
 const apiToken = new datarobot.ApiTokenCredential("my-token", {
@@ -230,4 +230,4 @@ my-datarobot-project/
 
 ## Version
 
-Package version: v0.10.20
+Package version: {{VERSION}}
