@@ -12475,6 +12475,112 @@ func (o NotificationChannelDrEntityArrayOutput) Index(i pulumi.IntInput) Notific
 	}).(NotificationChannelDrEntityOutput)
 }
 
+type RegisteredModelTag struct {
+	// The name of the tag.
+	Name string `pulumi:"name"`
+	// The value of the tag.
+	Value string `pulumi:"value"`
+}
+
+// RegisteredModelTagInput is an input type that accepts RegisteredModelTagArgs and RegisteredModelTagOutput values.
+// You can construct a concrete instance of `RegisteredModelTagInput` via:
+//
+//	RegisteredModelTagArgs{...}
+type RegisteredModelTagInput interface {
+	pulumi.Input
+
+	ToRegisteredModelTagOutput() RegisteredModelTagOutput
+	ToRegisteredModelTagOutputWithContext(context.Context) RegisteredModelTagOutput
+}
+
+type RegisteredModelTagArgs struct {
+	// The name of the tag.
+	Name pulumi.StringInput `pulumi:"name"`
+	// The value of the tag.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (RegisteredModelTagArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RegisteredModelTag)(nil)).Elem()
+}
+
+func (i RegisteredModelTagArgs) ToRegisteredModelTagOutput() RegisteredModelTagOutput {
+	return i.ToRegisteredModelTagOutputWithContext(context.Background())
+}
+
+func (i RegisteredModelTagArgs) ToRegisteredModelTagOutputWithContext(ctx context.Context) RegisteredModelTagOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RegisteredModelTagOutput)
+}
+
+// RegisteredModelTagArrayInput is an input type that accepts RegisteredModelTagArray and RegisteredModelTagArrayOutput values.
+// You can construct a concrete instance of `RegisteredModelTagArrayInput` via:
+//
+//	RegisteredModelTagArray{ RegisteredModelTagArgs{...} }
+type RegisteredModelTagArrayInput interface {
+	pulumi.Input
+
+	ToRegisteredModelTagArrayOutput() RegisteredModelTagArrayOutput
+	ToRegisteredModelTagArrayOutputWithContext(context.Context) RegisteredModelTagArrayOutput
+}
+
+type RegisteredModelTagArray []RegisteredModelTagInput
+
+func (RegisteredModelTagArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]RegisteredModelTag)(nil)).Elem()
+}
+
+func (i RegisteredModelTagArray) ToRegisteredModelTagArrayOutput() RegisteredModelTagArrayOutput {
+	return i.ToRegisteredModelTagArrayOutputWithContext(context.Background())
+}
+
+func (i RegisteredModelTagArray) ToRegisteredModelTagArrayOutputWithContext(ctx context.Context) RegisteredModelTagArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RegisteredModelTagArrayOutput)
+}
+
+type RegisteredModelTagOutput struct{ *pulumi.OutputState }
+
+func (RegisteredModelTagOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RegisteredModelTag)(nil)).Elem()
+}
+
+func (o RegisteredModelTagOutput) ToRegisteredModelTagOutput() RegisteredModelTagOutput {
+	return o
+}
+
+func (o RegisteredModelTagOutput) ToRegisteredModelTagOutputWithContext(ctx context.Context) RegisteredModelTagOutput {
+	return o
+}
+
+// The name of the tag.
+func (o RegisteredModelTagOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v RegisteredModelTag) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// The value of the tag.
+func (o RegisteredModelTagOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v RegisteredModelTag) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type RegisteredModelTagArrayOutput struct{ *pulumi.OutputState }
+
+func (RegisteredModelTagArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]RegisteredModelTag)(nil)).Elem()
+}
+
+func (o RegisteredModelTagArrayOutput) ToRegisteredModelTagArrayOutput() RegisteredModelTagArrayOutput {
+	return o
+}
+
+func (o RegisteredModelTagArrayOutput) ToRegisteredModelTagArrayOutputWithContext(ctx context.Context) RegisteredModelTagArrayOutput {
+	return o
+}
+
+func (o RegisteredModelTagArrayOutput) Index(i pulumi.IntInput) RegisteredModelTagOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) RegisteredModelTag {
+		return vs[0].([]RegisteredModelTag)[vs[1].(int)]
+	}).(RegisteredModelTagOutput)
+}
+
 type VectorDatabaseChunkingParameters struct {
 	// The percentage of overlap between chunks.
 	ChunkOverlapPercentage *int `pulumi:"chunkOverlapPercentage"`
@@ -12851,6 +12957,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*NotificationChannelCustomHeaderArrayInput)(nil)).Elem(), NotificationChannelCustomHeaderArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NotificationChannelDrEntityInput)(nil)).Elem(), NotificationChannelDrEntityArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NotificationChannelDrEntityArrayInput)(nil)).Elem(), NotificationChannelDrEntityArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RegisteredModelTagInput)(nil)).Elem(), RegisteredModelTagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RegisteredModelTagArrayInput)(nil)).Elem(), RegisteredModelTagArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*VectorDatabaseChunkingParametersInput)(nil)).Elem(), VectorDatabaseChunkingParametersArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*VectorDatabaseChunkingParametersPtrInput)(nil)).Elem(), VectorDatabaseChunkingParametersArgs{})
 	pulumi.RegisterOutputType(ApplicationSourceFromTemplateResourcesOutput{})
@@ -12996,6 +13104,8 @@ func init() {
 	pulumi.RegisterOutputType(NotificationChannelCustomHeaderArrayOutput{})
 	pulumi.RegisterOutputType(NotificationChannelDrEntityOutput{})
 	pulumi.RegisterOutputType(NotificationChannelDrEntityArrayOutput{})
+	pulumi.RegisterOutputType(RegisteredModelTagOutput{})
+	pulumi.RegisterOutputType(RegisteredModelTagArrayOutput{})
 	pulumi.RegisterOutputType(VectorDatabaseChunkingParametersOutput{})
 	pulumi.RegisterOutputType(VectorDatabaseChunkingParametersPtrOutput{})
 }

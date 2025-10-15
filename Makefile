@@ -11,6 +11,7 @@ VERSION_PATH     := ${PROVIDER_PATH}/pkg/version.Version
 TFGEN           := pulumi-tfgen-${PACK}
 PROVIDER        := pulumi-resource-${PACK}
 VERSION         := $(shell git describe --tags --exact-match 2>/dev/null || git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0-dev")
+VERSION_DOTNET  := $(shell echo $(VERSION) | sed 's/^v//')
 
 TESTPARALLELISM := 4
 
@@ -88,8 +89,8 @@ build_python:: install_plugins tfgen # build the python sdk
 build_dotnet:: install_plugins tfgen # build the dotnet sdk
 	$(WORKING_DIR)/bin/$(TFGEN) dotnet --overlays provider/overlays/dotnet --out sdk/dotnet/
 	cd sdk/dotnet/ && \
-		echo "$(VERSION)" >version.txt && \
-        dotnet build /p:Version=$(VERSION)
+		echo "$(VERSION_DOTNET)" >version.txt && \
+        dotnet build /p:Version=$(VERSION_DOTNET)
 
 build_go:: install_plugins tfgen # build the go sdk
 	$(WORKING_DIR)/bin/$(TFGEN) go --overlays provider/overlays/go --out sdk/go/

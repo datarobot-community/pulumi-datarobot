@@ -17,6 +17,10 @@ jobs:
       pull-requests: write
       issues: write
     steps:
+    - name: Install mise
+      run: |
+        curl https://mise.run | sh
+        echo "$HOME/.local/bin" >> $GITHUB_PATH
     - name: Call upgrade provider action
       uses: pulumi/pulumi-upgrade-provider-action@v0.0.18
       with:

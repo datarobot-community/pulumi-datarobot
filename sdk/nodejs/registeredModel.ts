@@ -2,6 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
+import * as inputs from "./types/input";
+import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
 /**
@@ -23,6 +25,16 @@ import * as utilities from "./utilities";
  * const exampleRegisteredModel = new datarobot.RegisteredModel("exampleRegisteredModel", {
  *     customModelVersionId: exampleCustomModel.versionId,
  *     description: "Description for the example registered model",
+ *     tags: [
+ *         {
+ *             name: "ab-test",
+ *             value: "a1",
+ *         },
+ *         {
+ *             name: "team",
+ *             value: "marketing",
+ *         },
+ *     ],
  * });
  * export const datarobotRegisteredModelId = exampleRegisteredModel.id;
  * export const datarobotRegisteredModelVersionId = exampleRegisteredModel.versionId;
@@ -69,6 +81,10 @@ export class RegisteredModel extends pulumi.CustomResource {
      */
     public readonly name!: pulumi.Output<string>;
     /**
+     * The list of tags to assign to the Registered Model version.
+     */
+    public readonly tags!: pulumi.Output<outputs.RegisteredModelTag[] | undefined>;
+    /**
      * The list of Use Case IDs to add the Registered Model version to.
      */
     public readonly useCaseIds!: pulumi.Output<string[] | undefined>;
@@ -97,6 +113,7 @@ export class RegisteredModel extends pulumi.CustomResource {
             resourceInputs["customModelVersionId"] = state ? state.customModelVersionId : undefined;
             resourceInputs["description"] = state ? state.description : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
+            resourceInputs["tags"] = state ? state.tags : undefined;
             resourceInputs["useCaseIds"] = state ? state.useCaseIds : undefined;
             resourceInputs["versionId"] = state ? state.versionId : undefined;
             resourceInputs["versionName"] = state ? state.versionName : undefined;
@@ -108,6 +125,7 @@ export class RegisteredModel extends pulumi.CustomResource {
             resourceInputs["customModelVersionId"] = args ? args.customModelVersionId : undefined;
             resourceInputs["description"] = args ? args.description : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
+            resourceInputs["tags"] = args ? args.tags : undefined;
             resourceInputs["useCaseIds"] = args ? args.useCaseIds : undefined;
             resourceInputs["versionName"] = args ? args.versionName : undefined;
             resourceInputs["versionId"] = undefined /*out*/;
@@ -133,6 +151,10 @@ export interface RegisteredModelState {
      * The name of the Registered Model.
      */
     name?: pulumi.Input<string>;
+    /**
+     * The list of tags to assign to the Registered Model version.
+     */
+    tags?: pulumi.Input<pulumi.Input<inputs.RegisteredModelTag>[]>;
     /**
      * The list of Use Case IDs to add the Registered Model version to.
      */
@@ -163,6 +185,10 @@ export interface RegisteredModelArgs {
      * The name of the Registered Model.
      */
     name?: pulumi.Input<string>;
+    /**
+     * The list of tags to assign to the Registered Model version.
+     */
+    tags?: pulumi.Input<pulumi.Input<inputs.RegisteredModelTag>[]>;
     /**
      * The list of Use Case IDs to add the Registered Model version to.
      */

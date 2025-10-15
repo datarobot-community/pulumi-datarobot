@@ -39,6 +39,19 @@ namespace DataRobotPulumi.Datarobot
     ///     {
     ///         CustomModelVersionId = exampleCustomModel.VersionId,
     ///         Description = "Description for the example registered model",
+    ///         Tags = new[]
+    ///         {
+    ///             new Datarobot.Inputs.RegisteredModelTagArgs
+    ///             {
+    ///                 Name = "ab-test",
+    ///                 Value = "a1",
+    ///             },
+    ///             new Datarobot.Inputs.RegisteredModelTagArgs
+    ///             {
+    ///                 Name = "team",
+    ///                 Value = "marketing",
+    ///             },
+    ///         },
     ///     });
     /// 
     ///     return new Dictionary&lt;string, object?&gt;
@@ -69,6 +82,12 @@ namespace DataRobotPulumi.Datarobot
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
+
+        /// <summary>
+        /// The list of tags to assign to the Registered Model version.
+        /// </summary>
+        [Output("tags")]
+        public Output<ImmutableArray<Outputs.RegisteredModelTag>> Tags { get; private set; } = null!;
 
         /// <summary>
         /// The list of Use Case IDs to add the Registered Model version to.
@@ -153,6 +172,18 @@ namespace DataRobotPulumi.Datarobot
         [Input("name")]
         public Input<string>? Name { get; set; }
 
+        [Input("tags")]
+        private InputList<Inputs.RegisteredModelTagArgs>? _tags;
+
+        /// <summary>
+        /// The list of tags to assign to the Registered Model version.
+        /// </summary>
+        public InputList<Inputs.RegisteredModelTagArgs> Tags
+        {
+            get => _tags ?? (_tags = new InputList<Inputs.RegisteredModelTagArgs>());
+            set => _tags = value;
+        }
+
         [Input("useCaseIds")]
         private InputList<string>? _useCaseIds;
 
@@ -196,6 +227,18 @@ namespace DataRobotPulumi.Datarobot
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
+
+        [Input("tags")]
+        private InputList<Inputs.RegisteredModelTagGetArgs>? _tags;
+
+        /// <summary>
+        /// The list of tags to assign to the Registered Model version.
+        /// </summary>
+        public InputList<Inputs.RegisteredModelTagGetArgs> Tags
+        {
+            get => _tags ?? (_tags = new InputList<Inputs.RegisteredModelTagGetArgs>());
+            set => _tags = value;
+        }
 
         [Input("useCaseIds")]
         private InputList<string>? _useCaseIds;
