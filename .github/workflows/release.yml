@@ -157,7 +157,7 @@ jobs:
     if: success()
     steps:
       - name: Compose message
-        if: env.SLACK_WEBHOOK_URL != ''
+        if: ${{ env.SLACK_WEBHOOK_URL != '' }}
         env:
           GITHUB_REF_NAME: ${{ github.ref_name }}
         run: |
@@ -173,6 +173,6 @@ jobs:
           echo "$MSG"
           echo "$MSG" | jq -R --slurp '{text: .}' > payload.json
       - name: Send to Slack
-        if: env.SLACK_WEBHOOK_URL != ''
+        if: ${{ env.SLACK_WEBHOOK_URL != '' }}
         run: |
           curl -X POST -H 'Content-type: application/json' --data @payload.json "${{ env.SLACK_WEBHOOK_URL }}"
