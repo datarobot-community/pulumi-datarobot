@@ -8,10 +8,10 @@ Install the package using the .NET CLI or Package Manager:
 
 ```bash
 # Using .NET CLI
-dotnet add package DataRobotPulumi.Datarobot
+dotnet add package {{PACKAGE_NAME}}
 
 # Using Package Manager Console in Visual Studio
-Install-Package DataRobotPulumi.Datarobot
+Install-Package {{PACKAGE_NAME}}
 ```
 
 ## Configuration
@@ -124,7 +124,7 @@ let main _ = Deployment.run infra
 
 ## Examples
 
-Complete examples are available in the [examples directory](https://github.com/datarobot-community/pulumi-datarobot/tree/main/examples/dotnet).
+Complete examples are available in the [examples directory](https://github.com/datarobot-community/pulumi-datarobot/tree/main/{{EXAMPLES_PATH}}).
 
 ## Air-Gapped Environments
 
@@ -164,9 +164,9 @@ dotnet restore --packages packages --source packages
 Download the plugin binary from the [releases page](https://github.com/datarobot-community/pulumi-datarobot/releases):
 
 ```bash
-# Replace v0.10.20 with your version, e.g., v0.10.14
-pulumi plugin install resource datarobot v0.10.20 --server \
-  https://github.com/datarobot-community/pulumi-datarobot/releases/v0.10.20/
+# Replace {{VERSION}} with your version, e.g., v0.10.14
+pulumi plugin install resource datarobot {{VERSION}} --server \
+  https://github.com/datarobot-community/pulumi-datarobot/releases/{{VERSION}}/
 ```
 
 ### 4. Skip update checks
@@ -314,7 +314,7 @@ Example `.csproj` file:
 
   <ItemGroup>
     <PackageReference Include="Pulumi" Version="3.88.1" />
-    <PackageReference Include="DataRobotPulumi.Datarobot" Version="v0.10.20" />
+    <PackageReference Include="{{PACKAGE_NAME}}" Version="{{VERSION}}" />
   </ItemGroup>
 
 </Project>
@@ -355,9 +355,9 @@ public class DataRobotStackTests
 - [Pulumi Documentation](https://www.pulumi.com/docs/)
 - [.NET Language Guide](https://www.pulumi.com/docs/languages-sdks/dotnet/)
 - [Provider Documentation](https://github.com/datarobot-community/pulumi-datarobot)
-- [NuGet Package](https://www.nuget.org/packages/DataRobotPulumi.Datarobot)
+- [NuGet Package](https://www.nuget.org/packages/{{PACKAGE_NAME}})
 - [Report Issues](https://github.com/datarobot-community/pulumi-datarobot/issues)
 
 ## Version
 
-Package version: v0.10.20
+Package version: {{VERSION}}
