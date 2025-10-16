@@ -92,6 +92,9 @@ jobs:
           grep "VERSION =" "$SETUP_FILE"
 
       - name: Build Python SDK
+        env:
+          TEST_PYPI_MODE: '1'
+          TEST_PYPI_VERSION: ${{ steps.version.outputs.clean_version }}
         run: make build_python
 
       - name: Show dist artifacts

@@ -80,11 +80,22 @@ build_nodejs:: install_plugins tfgen # build the node sdk
 build_python:: install_plugins tfgen # build the python sdk
 	$(WORKING_DIR)/bin/$(TFGEN) python --overlays provider/overlays/python --out sdk/python/
 	cd sdk/python/ && \
-        python3 setup.py clean --all 2>/dev/null && \
-        rm -rf ./bin/ ../python.bin/ && cp -R . ../python.bin && mv ../python.bin ./bin && \
-        sed -i.bak -e 's/^VERSION = .*/VERSION = "$(VERSION)"/g' -e 's/^PLUGIN_VERSION = .*/PLUGIN_VERSION = "$(VERSION)"/g' ./bin/setup.py && \
-        rm ./bin/setup.py.bak && \
-        cd ./bin && python3 setup.py build sdist
+				python3 setup.py clean --all 2>/dev/null && \
+				rm -rf ./bin/ ../python.bin/ && cp -R . ../python.bin && mv ../python.bin ./bin && \
+				sed -i.bak -e 's/^VERSION = .*/VERSION = "$(VERSION)"/g' -e 's/^PLUGIN_VERSION = .*/PLUGIN_VERSION = "$(VERSION)"/g' ./bin/setup.py && \
+				rm ./bin/setup.py.bak && \
+				if [[ "$$TEST_PYPI_MODE" == "1" ]]; then \
+					echo "Applying Test PyPI transformations..."; \
+					# Replace distribution name only (keep importable module pulumi_datarobot) \
+					sed -i.bak -e "s/setup(name='pulumi_datarobot'/setup(name='datarobot-pulumi-test'/" ./bin/setup.py && rm ./bin/setup.py.bak; \
+					# Override version to dev pre-release if provided via TEST_PYPI_VERSION \
+					if [[ -n "$$TEST_PYPI_VERSION" ]]; then \
+						sed -i.bak -e "s/^VERSION = .*/VERSION = \"$$TEST_PYPI_VERSION\"/" ./bin/setup.py && rm ./bin/setup.py.bak; \
+					fi; \
+					echo "Resulting name line:"; grep "setup(name" ./bin/setup.py || true; \
+					echo "Resulting version line:"; grep "^VERSION =" ./bin/setup.py || true; \
+				fi && \
+				cd ./bin && python3 setup.py build sdist
 
 build_dotnet:: install_plugins tfgen # build the dotnet sdk
 	$(WORKING_DIR)/bin/$(TFGEN) dotnet --overlays provider/overlays/dotnet --out sdk/dotnet/
