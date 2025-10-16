@@ -16,6 +16,9 @@ jobs:
       contents: write
       pull-requests: write
       issues: write
+    outputs:
+      pr_branch: ${{ steps.detect_pr.outputs.pr_branch }}
+      version: ${{ steps.version.outputs.version }}
     steps:
     - name: Install mise
       run: |
@@ -25,30 +28,6 @@ jobs:
       uses: pulumi/pulumi-upgrade-provider-action@v0.0.18
       with:
         target-bridge-version: 'v3.106.0'
-    - name: Checkout upgrade PR branch
-      id: checkout_pr_branch
-      env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: |
-        echo "Locating upgrade provider PR branch..."
-        # Find the most recently updated open PR whose title contains 'Upgrade provider'
-        PR_JSON=$(gh pr list --search "Upgrade provider" --state open --json number,headRefName,updatedAt,title --limit 10 | jq -r 'sort_by(.updatedAt) | reverse | .[0]')
-        if [[ -z "$PR_JSON" || "$PR_JSON" == "null" ]]; then
-          echo "No open 'Upgrade provider' PR found; will fall back to current branch." >&2
-          echo "pr_branch=" >> $GITHUB_OUTPUT
-          exit 0
-        fi
-        PR_BRANCH=$(echo "$PR_JSON" | jq -r '.headRefName')
-        PR_TITLE=$(echo "$PR_JSON" | jq -r '.title')
-        if [[ -z "$PR_BRANCH" || "$PR_BRANCH" == "null" ]]; then
-          echo "Failed to extract PR branch; aborting checkout." >&2
-          echo "pr_branch=" >> $GITHUB_OUTPUT
-          exit 0
-        fi
-        echo "Found PR branch: $PR_BRANCH (title: $PR_TITLE)"
-        git fetch origin "$PR_BRANCH"
-        git checkout "$PR_BRANCH"
-        echo "pr_branch=$PR_BRANCH" >> $GITHUB_OUTPUT
     - name: Fetch upstream Terraform provider latest release
       id: upstream
       env:
@@ -90,28 +69,59 @@ jobs:
 
         echo "Next version: $NEXT_VERSION"
         echo "version=$NEXT_VERSION" >> $GITHUB_OUTPUT
-    - name: Generate SDK READMEs
+    - name: Detect upgrade provider PR branch
+      id: detect_pr
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        TARGET_BRANCH="${{ steps.checkout_pr_branch.outputs.pr_branch }}"
-        if [[ -n "$TARGET_BRANCH" ]]; then
-          echo "Operating on upgrade PR branch: $TARGET_BRANCH"
-        else
-          echo "No PR branch detected; operating on current branch $(git rev-parse --abbrev-ref HEAD)" >&2
+        echo "Detecting upgrade provider PR branch (post action)..."
+        # Narrow search: open PRs authored by github-actions[bot] containing 'Upgrade provider'
+        PR_JSON=$(gh pr list --state open --author github-actions[bot] --search "Upgrade terraform-provider-datarobot" --json number,headRefName,title,updatedAt --limit 20 | jq -r 'sort_by(.updatedAt) | reverse | .[0]')
+        if [[ -z "$PR_JSON" || "$PR_JSON" == "null" ]]; then
+          echo "No matching upgrade provider PR found."
+          echo "pr_branch=" >> $GITHUB_OUTPUT
+          exit 0
         fi
-        if [[ -f "./build-readme.sh" ]]; then
-          chmod +x ./build-readme.sh
-          VERSION="${{ steps.version.outputs.version }}" ./build-readme.sh
-        else
-          echo "build-readme.sh not found, skipping README generation"
-        fi
-        # Commit and push README changes only if there are diffs
-        if ! git diff --quiet sdk/*/README.md; then
-          echo "README changes detected; committing..."
-          git add sdk/*/README.md
-          git commit -m "Update SDK READMEs after provider upgrade" || echo "Commit skipped"
-          CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
-          echo "Pushing README changes to $CURRENT_BRANCH"
-          git push origin "$CURRENT_BRANCH"
-        else
-          echo "No changes in SDK READMEs; nothing to commit."
-        fi
+        PR_BRANCH=$(echo "$PR_JSON" | jq -r '.headRefName')
+        PR_TITLE=$(echo "$PR_JSON" | jq -r '.title')
+        echo "Found PR: $PR_TITLE (branch: $PR_BRANCH)"
+        echo "pr_branch=$PR_BRANCH" >> $GITHUB_OUTPUT
+
+  generate_readmes:
+    name: generate-readmes
+    runs-on: ubuntu-latest
+    needs: upgrade_provider
+    if: needs.upgrade_provider.outputs.pr_branch != ''
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout PR branch
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ needs.upgrade_provider.outputs.pr_branch }}
+          fetch-depth: 0
+      - name: Prepare repository (fetch tags)
+        run: git fetch --prune --tags
+      - name: Generate SDK READMEs
+        env:
+          VERSION: ${{ needs.upgrade_provider.outputs.version }}
+        run: |
+          if [[ -f "./build-readme.sh" ]]; then
+            chmod +x ./build-readme.sh
+            VERSION="$VERSION" ./build-readme.sh
+          else
+            echo "build-readme.sh not found, skipping README generation"
+          fi
+      - name: Commit README changes (if any)
+        run: |
+          if ! git diff --quiet sdk/*/README.md; then
+            echo "README changes detected; committing..."
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add sdk/*/README.md
+            git commit -m "Update SDK READMEs after provider upgrade" || echo "Commit skipped"
+            git push origin HEAD
+          else
+            echo "No changes in SDK READMEs; nothing to commit."
+          fi
