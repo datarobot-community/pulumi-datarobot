@@ -114,7 +114,25 @@ jobs:
           else
             echo "No Test PyPI token present."; fi
 
-      - name: Publish to Test PyPI
+      - name: Rewrite distribution name post-build & rebuild
+        run: |
+          set -e
+          cd sdk/python/bin
+          echo "Before rewrite setup.py name line:"; grep "setup(name" setup.py || true
+          sed -i "s/setup(name='pulumi_datarobot'/setup(name='datarobot-pulumi-test'/" setup.py
+          # Ensure version matches dev version chosen
+          sed -i "s/^VERSION = .*/VERSION = \"${{ steps.version.outputs.clean_version }}\"/" setup.py
+          echo "After rewrite setup.py name line:"; grep "setup(name" setup.py || true
+          echo "After rewrite version line:"; grep "^VERSION =" setup.py || true
+          # Remove previous dist artifacts referencing old name
+          rm -rf dist
+          python -m pip install build
+          python -m build --sdist --wheel .
+          echo "Rebuilt artifacts:"; ls -l dist
+          python -m pip install twine
+          twine check dist/* || echo 'Twine check reported issues (non-fatal).'
+
+      - name: Publish to Test PyPI (rebuilt artifacts)
         if: env.TEST_PYPI_TOKEN != ''
         uses: pypa/gh-action-pypi-publish@ab69e431e9c9f48a3310be0a56527c679f56e04d # v1.12.4
         with:
@@ -124,9 +142,10 @@ jobs:
           packages-dir: sdk/python/bin/dist
           skip-existing: true
 
-      - name: Skip publish (no Test PyPI token)
+      - name: Skip publish (no Test PyPI token) (rebuilt)
         if: env.TEST_PYPI_TOKEN == ''
         run: echo 'TEST_PYPI_PASSWORD secret missing; skipping publish.'
+
 
       - name: Verify install from Test PyPI
         if: env.TEST_PYPI_TOKEN != ''
