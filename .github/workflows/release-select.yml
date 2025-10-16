@@ -98,7 +98,7 @@ jobs:
         with:
           user: ${{ env.PYPI_USERNAME }}
           password: ${{ env.PYPI_PASSWORD }}
-          packages_dir: ${{github.workspace}}/sdk/python/bin/dist
+          packages-dir: ${{github.workspace}}/sdk/python/bin/dist
 
       - name: Publish JS SDK
         if: ${{ github.event.inputs.SDK_LANGUAGE == 'nodejs' && env.PUBLISH_NPM == 'true' }}
