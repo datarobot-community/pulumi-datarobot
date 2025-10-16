@@ -25,6 +25,30 @@ jobs:
       uses: pulumi/pulumi-upgrade-provider-action@v0.0.18
       with:
         target-bridge-version: 'v3.106.0'
+    - name: Checkout upgrade PR branch
+      id: checkout_pr_branch
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        echo "Locating upgrade provider PR branch..."
+        # Find the most recently updated open PR whose title contains 'Upgrade provider'
+        PR_JSON=$(gh pr list --search "Upgrade provider" --state open --json number,headRefName,updatedAt,title --limit 10 | jq -r 'sort_by(.updatedAt) | reverse | .[0]')
+        if [[ -z "$PR_JSON" || "$PR_JSON" == "null" ]]; then
+          echo "No open 'Upgrade provider' PR found; will fall back to current branch." >&2
+          echo "pr_branch=" >> $GITHUB_OUTPUT
+          exit 0
+        fi
+        PR_BRANCH=$(echo "$PR_JSON" | jq -r '.headRefName')
+        PR_TITLE=$(echo "$PR_JSON" | jq -r '.title')
+        if [[ -z "$PR_BRANCH" || "$PR_BRANCH" == "null" ]]; then
+          echo "Failed to extract PR branch; aborting checkout." >&2
+          echo "pr_branch=" >> $GITHUB_OUTPUT
+          exit 0
+        fi
+        echo "Found PR branch: $PR_BRANCH (title: $PR_TITLE)"
+        git fetch origin "$PR_BRANCH"
+        git checkout "$PR_BRANCH"
+        echo "pr_branch=$PR_BRANCH" >> $GITHUB_OUTPUT
     - name: Fetch upstream Terraform provider latest release
       id: upstream
       env:
@@ -68,16 +92,26 @@ jobs:
         echo "version=$NEXT_VERSION" >> $GITHUB_OUTPUT
     - name: Generate SDK READMEs
       run: |
+        TARGET_BRANCH="${{ steps.checkout_pr_branch.outputs.pr_branch }}"
+        if [[ -n "$TARGET_BRANCH" ]]; then
+          echo "Operating on upgrade PR branch: $TARGET_BRANCH"
+        else
+          echo "No PR branch detected; operating on current branch $(git rev-parse --abbrev-ref HEAD)" >&2
+        fi
         if [[ -f "./build-readme.sh" ]]; then
           chmod +x ./build-readme.sh
-          # Pass the version as environment variable
           VERSION="${{ steps.version.outputs.version }}" ./build-readme.sh
         else
           echo "build-readme.sh not found, skipping README generation"
         fi
-    - name: Commit README changes
-      uses: stefanzweifel/git-auto-commit-action@v5
-      with:
-        commit_message: "Update SDK READMEs after provider upgrade"
-        file_pattern: "sdk/*/README.md"
-        skip_dirty_check: false
+        # Commit and push README changes only if there are diffs
+        if ! git diff --quiet sdk/*/README.md; then
+          echo "README changes detected; committing..."
+          git add sdk/*/README.md
+          git commit -m "Update SDK READMEs after provider upgrade" || echo "Commit skipped"
+          CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+          echo "Pushing README changes to $CURRENT_BRANCH"
+          git push origin "$CURRENT_BRANCH"
+        else
+          echo "No changes in SDK READMEs; nothing to commit."
+        fi
