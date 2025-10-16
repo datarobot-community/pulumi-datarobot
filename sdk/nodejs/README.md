@@ -134,9 +134,9 @@ npm install ./offline-packages/*.tgz
 Download the plugin binary from the [releases page](https://github.com/datarobot-community/pulumi-datarobot/releases):
 
 ```bash
-# Replace v0.10.20 with your version, e.g., v0.10.14
-pulumi plugin install resource datarobot v0.10.20 --server \
-  https://github.com/datarobot-community/pulumi-datarobot/releases/v0.10.20/
+# Replace v0.10.21 with your version, e.g., v0.10.14
+pulumi plugin install resource datarobot v0.10.21 --server \
+  https://github.com/datarobot-community/pulumi-datarobot/releases/v0.10.21/
 ```
 
 ### 4. Skip update checks
@@ -230,4 +230,4 @@ my-datarobot-project/
 
 ## Version
 
-Package version: v0.10.20
+Package version: v0.10.21
