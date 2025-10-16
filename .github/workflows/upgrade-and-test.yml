@@ -94,9 +94,6 @@ jobs:
         fi
 
     # === BUILD AND TEST SECTION ===
-    - name: Unshallow clone for tags
-      run: git fetch --prune --unshallow --tags
-
     - name: Install Go
       uses: actions/setup-go@d35c59abb061a4a6fb18e82ac0862c26744d6ab5 # v5.5.0
       with:
