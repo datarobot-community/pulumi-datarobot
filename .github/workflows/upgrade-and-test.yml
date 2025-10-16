@@ -116,6 +116,16 @@ jobs:
       run: |
         echo "GORELEASER_CURRENT_TAG=${{ steps.version.outputs.version }}" >> $GITHUB_ENV
 
+    - name: Prepare test package name
+      run: |
+        # Modify setup.py to use test package name for Test PyPI
+        if [[ -f "sdk/python/setup.py" ]]; then
+          sed -i 's/name="pulumi-datarobot"/name="pulumi-datarobot-test"/g' sdk/python/setup.py
+          echo "✅ Modified package name to pulumi-datarobot-test for Test PyPI"
+        else
+          echo "⚠️ setup.py not found, will use original package name"
+        fi
+
     - name: Build Python SDK
       run: make build_python
 
@@ -174,9 +184,9 @@ jobs:
         python -m venv test_env
         source test_env/bin/activate
 
-        # Install from test PyPI
-        echo "Installing pulumi-datarobot version ${{ steps.version.outputs.version_clean }} from Test PyPI..."
-        pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ "pulumi-datarobot==${{ steps.version.outputs.version_clean }}"
+        # Install from test PyPI using test package name
+        echo "Installing pulumi-datarobot-test version ${{ steps.version.outputs.version_clean }} from Test PyPI..."
+        pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ "pulumi-datarobot-test==${{ steps.version.outputs.version_clean }}"
 
         # Basic import test
         python -c "
@@ -227,18 +237,18 @@ jobs:
 
           This PR includes:
           - 🔄 Provider upgrade to `${{ inputs.target_bridge_version }}`
-          - 📦 Test release published to Test PyPI: `${{ steps.version.outputs.version_clean }}`
+          - 📦 Test release published to Test PyPI: `pulumi-datarobot-test@${{ steps.version.outputs.version_clean }}`
           - 📝 Updated SDK READMEs with test version
 
           ### Test PyPI Package
           You can test the package with:
           ```bash
-          pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ "pulumi-datarobot==${{ steps.version.outputs.version_clean }}"
+          pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ "pulumi-datarobot-test==${{ steps.version.outputs.version_clean }}"
           ```
 
           ### Validation Results
           ✅ Package built successfully
-          ✅ Published to Test PyPI
+          ✅ Published to Test PyPI as `pulumi-datarobot-test`
           ✅ Installation from Test PyPI verified
           ✅ Basic import functionality tested
 
@@ -258,12 +268,12 @@ jobs:
         echo "### Results:" >> $GITHUB_STEP_SUMMARY
         echo "- ✅ Provider upgraded to: \`${{ inputs.target_bridge_version }}\`" >> $GITHUB_STEP_SUMMARY
         echo "- ✅ Test version: \`${{ steps.version.outputs.version }}\`" >> $GITHUB_STEP_SUMMARY
-        echo "- ✅ Published to Test PyPI" >> $GITHUB_STEP_SUMMARY
+        echo "- ✅ Published to Test PyPI as \`pulumi-datarobot-test\`" >> $GITHUB_STEP_SUMMARY
         echo "- ✅ Installation verified" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
         echo "### Test the package:" >> $GITHUB_STEP_SUMMARY
         echo "\`\`\`bash" >> $GITHUB_STEP_SUMMARY
-        echo "pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ \"pulumi-datarobot==${{ steps.version.outputs.version_clean }}\"" >> $GITHUB_STEP_SUMMARY
+        echo "pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ \"pulumi-datarobot-test==${{ steps.version.outputs.version_clean }}\"" >> $GITHUB_STEP_SUMMARY
         echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
         echo "A pull request has been created with all the changes." >> $GITHUB_STEP_SUMMARY
