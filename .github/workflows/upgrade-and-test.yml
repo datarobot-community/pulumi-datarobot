@@ -1,0 +1,247 @@
+name: Upgrade Provider and Test Release
+on:
+  workflow_dispatch:
+    inputs:
+      target_bridge_version:
+        description: 'Target bridge version (e.g., v3.106.0)'
+        required: false
+        default: 'v3.106.0'
+        type: string
+      test_version_suffix:
+        description: 'Test version suffix (e.g., test1, rc1)'
+        required: false
+        default: 'test'
+        type: string
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # Test PyPI configuration
+  PYPI_PASSWORD: ${{ secrets.TEST_PYPI_PASSWORD }}
+  PYPI_USERNAME: __token__
+  PYPI_REPOSITORY_URL: https://test.pypi.org/legacy/
+  PUBLISH_PYPI: true
+
+jobs:
+  upgrade_and_test:
+    name: Upgrade Provider and Test Release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+      id-token: write
+    strategy:
+      matrix:
+        pythonversion:
+          - "3.10"
+        goversion:
+          - 1.22.x
+
+    steps:
+    # === UPGRADE PROVIDER SECTION ===
+    - name: Checkout Repo
+      uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Install mise
+      run: |
+        curl https://mise.run | sh
+        echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+    - name: Call upgrade provider action
+      uses: pulumi/pulumi-upgrade-provider-action@v0.0.18
+      with:
+        target-bridge-version: ${{ inputs.target_bridge_version }}
+
+    - name: Determine test version
+      id: version
+      run: |
+        # Get the current version from the last tag
+        CURRENT_VERSION=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
+        echo "Current version: $CURRENT_VERSION"
+
+        # Extract version parts (assuming semver: v1.2.3)
+        VERSION_NUMBER=${CURRENT_VERSION#v}
+        IFS='.' read -r MAJOR MINOR PATCH <<< "$VERSION_NUMBER"
+
+        # Increment patch version for provider upgrade
+        NEXT_PATCH=$((PATCH + 1))
+
+        # Create test version with suffix
+        TEST_SUFFIX="${{ inputs.test_version_suffix }}"
+        if [[ -z "$TEST_SUFFIX" ]]; then
+          TEST_SUFFIX="test"
+        fi
+
+        # Add timestamp for uniqueness
+        TIMESTAMP=$(date +%Y%m%d%H%M)
+        TEST_VERSION="v${MAJOR}.${MINOR}.${NEXT_PATCH}-${TEST_SUFFIX}.${TIMESTAMP}"
+
+        echo "Test version: $TEST_VERSION"
+        echo "version=$TEST_VERSION" >> $GITHUB_OUTPUT
+        echo "version_clean=${MAJOR}.${MINOR}.${NEXT_PATCH}-${TEST_SUFFIX}.${TIMESTAMP}" >> $GITHUB_OUTPUT
+
+    - name: Generate SDK READMEs with test version
+      run: |
+        if [[ -f "./build-readme.sh" ]]; then
+          chmod +x ./build-readme.sh
+          # Pass the test version as environment variable
+          VERSION="${{ steps.version.outputs.version }}" ./build-readme.sh
+        else
+          echo "build-readme.sh not found, skipping README generation"
+        fi
+
+    # === BUILD AND TEST SECTION ===
+    - name: Unshallow clone for tags
+      run: git fetch --prune --unshallow --tags
+
+    - name: Install Go
+      uses: actions/setup-go@d35c59abb061a4a6fb18e82ac0862c26744d6ab5 # v5.5.0
+      with:
+        go-version: ${{ matrix.goversion }}
+
+    - name: Install pulumictl
+      uses: jaxxstorm/action-install-gh-release@6096f2a2bbfee498ced520b6922ac2c06e990ed2
+      with:
+        repo: pulumi/pulumictl
+
+    - name: Install Pulumi CLI
+      uses: pulumi/action-install-pulumi-cli@b374ceb6168550de27c6eba92e01c1a774040e11
+
+    - name: Setup Python
+      uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+      with:
+        python-version: ${{ matrix.pythonversion }}
+
+    - name: Set test version for build
+      run: |
+        echo "GORELEASER_CURRENT_TAG=${{ steps.version.outputs.version }}" >> $GITHUB_ENV
+
+    - name: Build Python SDK
+      run: make build_python
+
+    - name: Check build results
+      run: |
+        echo "=== Build completed ==="
+        echo "Python SDK directory:"
+        ls -la sdk/python/bin/dist/ || echo "No dist directory found"
+
+        # Check if package was built
+        if [[ -d "sdk/python/bin/dist" && -n "$(ls -A sdk/python/bin/dist)" ]]; then
+          echo "✅ Python package built successfully"
+          ls -la sdk/python/bin/dist/
+        else
+          echo "❌ Python package build failed - no files in dist directory"
+          exit 1
+        fi
+
+    - name: Publish to Test PyPI
+      uses: pypa/gh-action-pypi-publish@ab69e431e9c9f48a3310be0a56527c679f56e04d # v1.12.4
+      with:
+        user: ${{ env.PYPI_USERNAME }}
+        password: ${{ env.PYPI_PASSWORD }}
+        repository-url: ${{ env.PYPI_REPOSITORY_URL }}
+        packages-dir: ${{github.workspace}}/sdk/python/bin/dist
+        skip-existing: true
+
+    # === VALIDATION SECTION ===
+    - name: Wait for package availability
+      run: |
+        echo "Waiting 60 seconds for package to be available on Test PyPI..."
+        sleep 60
+
+    - name: Test install from Test PyPI
+      run: |
+        # Create a fresh virtual environment for testing
+        python -m venv test_env
+        source test_env/bin/activate
+
+        # Install from test PyPI
+        echo "Installing pulumi-datarobot version ${{ steps.version.outputs.version_clean }} from Test PyPI..."
+        pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ "pulumi-datarobot==${{ steps.version.outputs.version_clean }}"
+
+        # Basic import test
+        python -c "
+        try:
+            import pulumi_datarobot
+            print('✅ Package imported successfully')
+
+            # Try to access some basic functionality
+            from pulumi_datarobot import Provider
+            print('✅ Provider class accessible')
+
+            print(f'Package location: {pulumi_datarobot.__file__}')
+            if hasattr(pulumi_datarobot, '__version__'):
+                print(f'Package version: {pulumi_datarobot.__version__}')
+            else:
+                print('No version attribute found')
+
+        except ImportError as e:
+            print(f'❌ Failed to import package: {e}')
+            exit(1)
+        except Exception as e:
+            print(f'❌ Error during testing: {e}')
+            exit(1)
+        "
+
+    # === COMMIT AND CREATE PR ===
+    - name: Commit all changes
+      uses: stefanzweifel/git-auto-commit-action@v5
+      with:
+        commit_message: "Upgrade provider to ${{ inputs.target_bridge_version }} and test release ${{ steps.version.outputs.version }}"
+        file_pattern: "."
+        skip_dirty_check: false
+
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v5
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        commit-message: "Upgrade provider to ${{ inputs.target_bridge_version }} with test release"
+        title: "Provider upgrade to ${{ inputs.target_bridge_version }} (Test: ${{ steps.version.outputs.version }})"
+        body: |
+          ## Provider Upgrade and Test Release
+
+          This PR includes:
+          - 🔄 Provider upgrade to `${{ inputs.target_bridge_version }}`
+          - 📦 Test release published to Test PyPI: `${{ steps.version.outputs.version_clean }}`
+          - 📝 Updated SDK READMEs with test version
+
+          ### Test PyPI Package
+          You can test the package with:
+          ```bash
+          pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ "pulumi-datarobot==${{ steps.version.outputs.version_clean }}"
+          ```
+
+          ### Validation Results
+          ✅ Package built successfully
+          ✅ Published to Test PyPI
+          ✅ Installation from Test PyPI verified
+          ✅ Basic import functionality tested
+
+          ### Next Steps
+          1. Review the changes in this PR
+          2. Test the package from Test PyPI in your environment
+          3. If everything looks good, merge this PR
+          4. Create a production release when ready
+        branch: upgrade-${{ inputs.target_bridge_version }}-test-${{ steps.version.outputs.version_clean }}
+        delete-branch: true
+
+    # === SUMMARY ===
+    - name: Job Summary
+      run: |
+        echo "## Upgrade and Test Release Completed! 🎉" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### Results:" >> $GITHUB_STEP_SUMMARY
+        echo "- ✅ Provider upgraded to: \`${{ inputs.target_bridge_version }}\`" >> $GITHUB_STEP_SUMMARY
+        echo "- ✅ Test version: \`${{ steps.version.outputs.version }}\`" >> $GITHUB_STEP_SUMMARY
+        echo "- ✅ Published to Test PyPI" >> $GITHUB_STEP_SUMMARY
+        echo "- ✅ Installation verified" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### Test the package:" >> $GITHUB_STEP_SUMMARY
+        echo "\`\`\`bash" >> $GITHUB_STEP_SUMMARY
+        echo "pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ \"pulumi-datarobot==${{ steps.version.outputs.version_clean }}\"" >> $GITHUB_STEP_SUMMARY
+        echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "A pull request has been created with all the changes." >> $GITHUB_STEP_SUMMARY

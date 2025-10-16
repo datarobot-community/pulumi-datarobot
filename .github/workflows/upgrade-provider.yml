@@ -25,3 +25,35 @@ jobs:
       uses: pulumi/pulumi-upgrade-provider-action@v0.0.18
       with:
         target-bridge-version: 'v3.106.0'
+    - name: Determine next version
+      id: version
+      run: |
+        # Get the current version from the last tag
+        CURRENT_VERSION=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
+        echo "Current version: $CURRENT_VERSION"
+
+        # Extract version parts (assuming semver: v1.2.3)
+        VERSION_NUMBER=${CURRENT_VERSION#v}
+        IFS='.' read -r MAJOR MINOR PATCH <<< "$VERSION_NUMBER"
+
+        # Increment patch version for provider upgrade
+        NEXT_PATCH=$((PATCH + 1))
+        NEXT_VERSION="v${MAJOR}.${MINOR}.${NEXT_PATCH}"
+
+        echo "Next version: $NEXT_VERSION"
+        echo "version=$NEXT_VERSION" >> $GITHUB_OUTPUT
+    - name: Generate SDK READMEs
+      run: |
+        if [[ -f "./build-readme.sh" ]]; then
+          chmod +x ./build-readme.sh
+          # Pass the version as environment variable
+          VERSION="${{ steps.version.outputs.version }}" ./build-readme.sh
+        else
+          echo "build-readme.sh not found, skipping README generation"
+        fi
+    - name: Commit README changes
+      uses: stefanzweifel/git-auto-commit-action@v5
+      with:
+        commit_message: "Update SDK READMEs after provider upgrade"
+        file_pattern: "sdk/*/README.md"
+        skip_dirty_check: false

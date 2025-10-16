@@ -4,8 +4,8 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "$0")"; pwd)"
 TEMPLATES_DIR="$ROOT/templates"
 
-# Use git tags as version source for releases
-VERSION="$(git describe --tags --exact-match 2>/dev/null || git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0-dev")"
+# Use provided VERSION env var, otherwise fall back to git tags as version source for releases
+VERSION="${VERSION:-$(git describe --tags --exact-match 2>/dev/null || git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0-dev")}"
 
 # SDK configurations using arrays (compatible with older bash)
 SDKS=(python nodejs go dotnet)
