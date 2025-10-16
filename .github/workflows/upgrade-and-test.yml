@@ -134,7 +134,17 @@ jobs:
           exit 1
         fi
 
+    - name: Check Test PyPI credentials
+      id: check_credentials
+      run: |
+        if [[ -n "${{ secrets.TEST_PYPI_PASSWORD }}" ]]; then
+          echo "credentials_available=true" >> $GITHUB_OUTPUT
+        else
+          echo "credentials_available=false" >> $GITHUB_OUTPUT
+        fi
+
     - name: Publish to Test PyPI
+      if: steps.check_credentials.outputs.credentials_available == 'true'
       uses: pypa/gh-action-pypi-publish@ab69e431e9c9f48a3310be0a56527c679f56e04d # v1.12.4
       with:
         user: ${{ env.PYPI_USERNAME }}
@@ -143,13 +153,22 @@ jobs:
         packages-dir: ${{github.workspace}}/sdk/python/bin/dist
         skip-existing: true
 
+    - name: Skip publishing notification
+      if: steps.check_credentials.outputs.credentials_available == 'false'
+      run: |
+        echo "⚠️ TEST_PYPI_PASSWORD not configured - skipping Test PyPI publish"
+        echo "Package built successfully but not published"
+        echo "To enable publishing, add TEST_PYPI_PASSWORD secret to the repository"
+
     # === VALIDATION SECTION ===
     - name: Wait for package availability
+      if: steps.check_credentials.outputs.credentials_available == 'true'
       run: |
         echo "Waiting 60 seconds for package to be available on Test PyPI..."
         sleep 60
 
     - name: Test install from Test PyPI
+      if: steps.check_credentials.outputs.credentials_available == 'true'
       run: |
         # Create a fresh virtual environment for testing
         python -m venv test_env
@@ -182,6 +201,12 @@ jobs:
             print(f'❌ Error during testing: {e}')
             exit(1)
         "
+
+    - name: Skip installation test
+      if: steps.check_credentials.outputs.credentials_available == 'false'
+      run: |
+        echo "⚠️ Skipping installation test (no Test PyPI credentials)"
+        echo "Build completed successfully - package ready for manual testing"
 
     # === COMMIT AND CREATE PR ===
     - name: Commit all changes
