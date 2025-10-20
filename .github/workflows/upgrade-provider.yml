@@ -97,7 +97,7 @@ jobs:
       pull-requests: write
     steps:
       - name: Checkout PR branch
-        uses: actions/checkout@v3
+        uses: actions/checkout@v5
         with:
           ref: ${{ needs.upgrade_provider.outputs.pr_branch }}
           fetch-depth: 0
