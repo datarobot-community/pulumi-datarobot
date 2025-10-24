@@ -59,10 +59,10 @@ namespace DataRobotPulumi.Datarobot
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// The resources for the Application Source.
+        /// The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.
         /// </summary>
         [Output("resources")]
-        public Output<Outputs.ApplicationSourceResources?> Resources { get; private set; } = null!;
+        public Output<Outputs.ApplicationSourceResources> Resources { get; private set; } = null!;
 
         /// <summary>
         /// The runtime parameter values for the Application Source.
@@ -154,7 +154,7 @@ namespace DataRobotPulumi.Datarobot
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// The resources for the Application Source.
+        /// The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.
         /// </summary>
         [Input("resources")]
         public Input<Inputs.ApplicationSourceResourcesArgs>? Resources { get; set; }
@@ -228,7 +228,7 @@ namespace DataRobotPulumi.Datarobot
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// The resources for the Application Source.
+        /// The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.
         /// </summary>
         [Input("resources")]
         public Input<Inputs.ApplicationSourceResourcesGetArgs>? Resources { get; set; }

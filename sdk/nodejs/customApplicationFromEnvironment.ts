@@ -66,9 +66,9 @@ export class CustomApplicationFromEnvironment extends pulumi.CustomResource {
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * The resources for the Custom Application.
+     * The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.
      */
-    public readonly resources!: pulumi.Output<outputs.CustomApplicationFromEnvironmentResources | undefined>;
+    public readonly resources!: pulumi.Output<outputs.CustomApplicationFromEnvironmentResources>;
     /**
      * The list of Use Case IDs to add the Custom Application to.
      */
@@ -149,7 +149,7 @@ export interface CustomApplicationFromEnvironmentState {
      */
     name?: pulumi.Input<string>;
     /**
-     * The resources for the Custom Application.
+     * The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.
      */
     resources?: pulumi.Input<inputs.CustomApplicationFromEnvironmentResources>;
     /**
@@ -183,7 +183,7 @@ export interface CustomApplicationFromEnvironmentArgs {
      */
     name?: pulumi.Input<string>;
     /**
-     * The resources for the Custom Application.
+     * The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.
      */
     resources?: pulumi.Input<inputs.CustomApplicationFromEnvironmentResources>;
     /**
