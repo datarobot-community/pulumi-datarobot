@@ -47,7 +47,7 @@ jobs:
         run: |
           echo "Finding upgrade provider PR created by the action..."
           # Find the most recent open PR by github-actions[bot] with "Upgrade terraform-provider-datarobot" in title
-          PR_JSON=$(gh pr list --state open --author github-actions[bot] --search "Upgrade terraform-provider-datarobot" --json number,headRefName,title,updatedAt --limit 10 | jq -r 'sort_by(.updatedAt) | reverse | .[0]')
+          PR_JSON=$(gh pr list --state open --search "Upgrade terraform-provider-datarobot" --json number,headRefName,title,updatedAt --limit 10 | jq -r 'sort_by(.updatedAt) | reverse | .[0]')
           if [[ -z "$PR_JSON" || "$PR_JSON" == "null" ]]; then
             echo "No upgrade terraform-provider-datarobot PR found! The upgrade action may have failed or not created a PR."
             exit 1
