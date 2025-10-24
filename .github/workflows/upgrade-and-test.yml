@@ -124,6 +124,10 @@ jobs:
           sed -i "s/^VERSION = .*/VERSION = \"${{ steps.version.outputs.clean_version }}\"/" setup.py
           echo "After rewrite setup.py name line:"; grep "setup(name" setup.py || true
           echo "After rewrite version line:"; grep "^VERSION =" setup.py || true
+          # Patch _utilities.py to use correct package name for metadata lookup
+          echo "Patching _utilities.py for test package name..."
+          sed -i 's/pep440_version_string = importlib.metadata.version(root_package)/pep440_version_string = importlib.metadata.version("datarobot-pulumi-test")/' pulumi_datarobot/_utilities.py
+          grep -A2 -B2 "importlib.metadata.version" pulumi_datarobot/_utilities.py || true
           # Remove previous dist artifacts referencing old name
           rm -rf dist
           python -m pip install build
@@ -150,8 +154,8 @@ jobs:
       - name: Verify install from Test PyPI
         if: env.TEST_PYPI_TOKEN != ''
         run: |
-          python -m venv venv
-          source venv/bin/activate
+          python -m venv .venv
+          source .venv/bin/activate
           pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ "datarobot-pulumi-test==${{ steps.version.outputs.clean_version }}"
           python -c "import pulumi_datarobot; print('Imported pulumi_datarobot from test distribution OK')"
 
@@ -162,6 +166,7 @@ jobs:
           file_pattern: '.'
 
       - name: Create validation PR
+        id: create_pr
         uses: peter-evans/create-pull-request@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -186,6 +191,35 @@ jobs:
             ```
 
             After confirmation, proceed to real release tagging.
+
+      - name: Comment on PR with Test PyPI release info
+        if: env.TEST_PYPI_TOKEN != '' && steps.create_pr.outputs.pull-request-number != ''
+        uses: peter-evans/create-or-update-comment@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ steps.create_pr.outputs.pull-request-number }}
+          body: |
+            ## 🚀 Test PyPI Package Released
+
+            **Package:** `datarobot-pulumi-test==${{ steps.version.outputs.clean_version }}`
+            **Status:** ✅ Successfully published to Test PyPI
+
+            ### Quick Install & Test
+            ```bash
+            # Install from Test PyPI
+            pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ datarobot-pulumi-test==${{ steps.version.outputs.clean_version }}
+
+            # Verify import works
+            python -c "import pulumi_datarobot; print('✅ Import successful')"
+            ```
+
+            ### Test PyPI Package Details
+            - **Distribution name:** `datarobot-pulumi-test`
+            - **Version:** `${{ steps.version.outputs.clean_version }}`
+            - **Bridge version:** `${{ inputs.target_bridge_version }}`
+            - **Package URL:** https://test.pypi.org/project/datarobot-pulumi-test/${{ steps.version.outputs.clean_version }}/
+
+            Ready for validation! 🎯
 
       - name: Summary
         run: |
