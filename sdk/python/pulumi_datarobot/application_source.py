@@ -36,7 +36,7 @@ class ApplicationSourceArgs:
         :param Any files: The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
         :param pulumi.Input[builtins.str] folder_path: The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
         :param pulumi.Input[builtins.str] name: The name of the Application Source.
-        :param pulumi.Input['ApplicationSourceResourcesArgs'] resources: The resources for the Application Source.
+        :param pulumi.Input['ApplicationSourceResourcesArgs'] resources: The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.
         :param pulumi.Input[Sequence[pulumi.Input['ApplicationSourceRuntimeParameterValueArgs']]] runtime_parameter_values: The runtime parameter values for the Application Source.
         """
         if base_environment_id is not None:
@@ -118,7 +118,7 @@ class ApplicationSourceArgs:
     @pulumi.getter
     def resources(self) -> Optional[pulumi.Input['ApplicationSourceResourcesArgs']]:
         """
-        The resources for the Application Source.
+        The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.
         """
         return pulumi.get(self, "resources")
 
@@ -161,7 +161,7 @@ class _ApplicationSourceState:
         :param pulumi.Input[builtins.str] folder_path: The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
         :param pulumi.Input[builtins.str] folder_path_hash: The hash of the folder path contents.
         :param pulumi.Input[builtins.str] name: The name of the Application Source.
-        :param pulumi.Input['ApplicationSourceResourcesArgs'] resources: The resources for the Application Source.
+        :param pulumi.Input['ApplicationSourceResourcesArgs'] resources: The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.
         :param pulumi.Input[Sequence[pulumi.Input['ApplicationSourceRuntimeParameterValueArgs']]] runtime_parameter_values: The runtime parameter values for the Application Source.
         :param pulumi.Input[builtins.str] version_id: The version ID of the Application Source.
         """
@@ -274,7 +274,7 @@ class _ApplicationSourceState:
     @pulumi.getter
     def resources(self) -> Optional[pulumi.Input['ApplicationSourceResourcesArgs']]:
         """
-        The resources for the Application Source.
+        The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.
         """
         return pulumi.get(self, "resources")
 
@@ -330,7 +330,7 @@ class ApplicationSource(pulumi.CustomResource):
         :param Any files: The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
         :param pulumi.Input[builtins.str] folder_path: The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
         :param pulumi.Input[builtins.str] name: The name of the Application Source.
-        :param pulumi.Input[Union['ApplicationSourceResourcesArgs', 'ApplicationSourceResourcesArgsDict']] resources: The resources for the Application Source.
+        :param pulumi.Input[Union['ApplicationSourceResourcesArgs', 'ApplicationSourceResourcesArgsDict']] resources: The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.
         :param pulumi.Input[Sequence[pulumi.Input[Union['ApplicationSourceRuntimeParameterValueArgs', 'ApplicationSourceRuntimeParameterValueArgsDict']]]] runtime_parameter_values: The runtime parameter values for the Application Source.
         """
         ...
@@ -417,7 +417,7 @@ class ApplicationSource(pulumi.CustomResource):
         :param pulumi.Input[builtins.str] folder_path: The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
         :param pulumi.Input[builtins.str] folder_path_hash: The hash of the folder path contents.
         :param pulumi.Input[builtins.str] name: The name of the Application Source.
-        :param pulumi.Input[Union['ApplicationSourceResourcesArgs', 'ApplicationSourceResourcesArgsDict']] resources: The resources for the Application Source.
+        :param pulumi.Input[Union['ApplicationSourceResourcesArgs', 'ApplicationSourceResourcesArgsDict']] resources: The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.
         :param pulumi.Input[Sequence[pulumi.Input[Union['ApplicationSourceRuntimeParameterValueArgs', 'ApplicationSourceRuntimeParameterValueArgsDict']]]] runtime_parameter_values: The runtime parameter values for the Application Source.
         :param pulumi.Input[builtins.str] version_id: The version ID of the Application Source.
         """
@@ -495,9 +495,9 @@ class ApplicationSource(pulumi.CustomResource):
 
     @property
     @pulumi.getter
-    def resources(self) -> pulumi.Output[Optional['outputs.ApplicationSourceResources']]:
+    def resources(self) -> pulumi.Output['outputs.ApplicationSourceResources']:
         """
-        The resources for the Application Source.
+        The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.
         """
         return pulumi.get(self, "resources")
 

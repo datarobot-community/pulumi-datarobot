@@ -14,25 +14,25 @@ namespace DataRobotPulumi.Datarobot.Inputs
     public sealed class CustomApplicationResourcesArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The number of replicas for the Custom Application.
+        /// The number of replicas for the Custom Application. Computed by API if not specified.
         /// </summary>
         [Input("replicas")]
         public Input<int>? Replicas { get; set; }
 
         /// <summary>
-        /// The resource label for the Custom Application.
+        /// The resource label for the Custom Application (e.g., 'cpu.small', 'cpu.medium'). Computed by API if not specified.
         /// </summary>
         [Input("resourceLabel")]
         public Input<string>? ResourceLabel { get; set; }
 
         /// <summary>
-        /// Whether to service web requests on the root path for the Custom Application.
+        /// Whether to service web requests on the root path for the Custom Application. Computed by API if not specified.
         /// </summary>
         [Input("serviceWebRequestsOnRootPath")]
         public Input<bool>? ServiceWebRequestsOnRootPath { get; set; }
 
         /// <summary>
-        /// Whether session affinity is enabled for the Custom Application.
+        /// Whether session affinity is enabled for the Custom Application. Computed by API if not specified.
         /// </summary>
         [Input("sessionAffinity")]
         public Input<bool>? SessionAffinity { get; set; }
