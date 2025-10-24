@@ -40,6 +40,30 @@ jobs:
         with:
           target-bridge-version: ${{ inputs.target_bridge_version }}
 
+      - name: Find and checkout upgrade PR branch
+        id: find_pr
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "Finding upgrade provider PR created by the action..."
+          # Find the most recent open PR by github-actions[bot] with "Upgrade provider" in title
+          PR_JSON=$(gh pr list --state open --author github-actions[bot] --search "Upgrade provider" --json number,headRefName,title,updatedAt --limit 10 | jq -r 'sort_by(.updatedAt) | reverse | .[0]')
+          if [[ -z "$PR_JSON" || "$PR_JSON" == "null" ]]; then
+            echo "No upgrade provider PR found! The upgrade action may have failed or not created a PR."
+            exit 1
+          fi
+          PR_BRANCH=$(echo "$PR_JSON" | jq -r '.headRefName')
+          PR_NUMBER=$(echo "$PR_JSON" | jq -r '.number')
+          PR_TITLE=$(echo "$PR_JSON" | jq -r '.title')
+          echo "Found upgrade PR #$PR_NUMBER: $PR_TITLE (branch: $PR_BRANCH)"
+
+          # Checkout the upgrade PR branch
+          git fetch origin "$PR_BRANCH"
+          git checkout "$PR_BRANCH"
+
+          echo "pr_branch=$PR_BRANCH" >> $GITHUB_OUTPUT
+          echo "pr_number=$PR_NUMBER" >> $GITHUB_OUTPUT
+
       - name: Compute test version
         id: version
         run: |
@@ -159,45 +183,28 @@ jobs:
           pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ "datarobot-pulumi-test==${{ steps.version.outputs.clean_version }}"
           python -c "import pulumi_datarobot; print('Imported pulumi_datarobot from test distribution OK')"
 
-      - name: Commit upgrade + test artifacts
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "Upgrade provider to ${{ inputs.target_bridge_version }} (test version ${{ steps.version.outputs.test_version }})"
-          file_pattern: '.'
+      - name: Commit Test PyPI changes to upgrade PR
+        run: |
+          # Add Test PyPI artifacts to the existing upgrade PR
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-      - name: Create validation PR
-        id: create_pr
-        uses: peter-evans/create-pull-request@v5
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          branch: "upgrade-${{ inputs.target_bridge_version }}-test-${{ steps.version.outputs.clean_version }}"
-          delete-branch: true
-          title: "Upgrade provider to ${{ inputs.target_bridge_version }} (Test PyPI: datarobot-pulumi-test@${{ steps.version.outputs.clean_version }})"
-          body: |
-            ## Provider Upgrade (Test PyPI Validation)
+          # Check if there are any changes to commit
+          if ! git diff --quiet HEAD -- sdk/ docs/ examples/ *.md; then
+            git add sdk/ docs/ examples/ *.md *.json *.yaml *.yml *.go *.mod *.sum Makefile
+            git commit -m "Add Test PyPI validation artifacts (version ${{ steps.version.outputs.test_version }})" || echo "Nothing to commit"
+            git push origin HEAD
+            echo "Pushed Test PyPI changes to upgrade PR branch: ${{ steps.find_pr.outputs.pr_branch }}"
+          else
+            echo "No additional changes to commit to upgrade PR"
+          fi
 
-            - Target bridge: `${{ inputs.target_bridge_version }}`
-            - Test distribution: `datarobot-pulumi-test==${{ steps.version.outputs.clean_version }}`
-            - README regenerated with version `${{ steps.version.outputs.test_version }}`
-
-            Install to validate:
-            ```bash
-            pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ datarobot-pulumi-test==${{ steps.version.outputs.clean_version }}
-            ```
-
-            Import remains:
-            ```python
-            import pulumi_datarobot
-            ```
-
-            After confirmation, proceed to real release tagging.
-
-      - name: Comment on PR with Test PyPI release info
-        if: env.TEST_PYPI_TOKEN != '' && steps.create_pr.outputs.pull-request-number != ''
+      - name: Comment on upgrade PR with Test PyPI info
+        if: env.TEST_PYPI_TOKEN != ''
         uses: peter-evans/create-or-update-comment@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          issue-number: ${{ steps.create_pr.outputs.pull-request-number }}
+          issue-number: ${{ steps.find_pr.outputs.pr_number }}
           body: |
             ## 🚀 Test PyPI Package Released
 
@@ -232,4 +239,4 @@ jobs:
           else
             echo "Publish skipped (missing TEST_PYPI_PASSWORD secret) ⚠️" >> $GITHUB_STEP_SUMMARY
           fi
-          echo "Validation PR created." >> $GITHUB_STEP_SUMMARY
+          echo "Test PyPI package added to upgrade PR #${{ steps.find_pr.outputs.pr_number }}" >> $GITHUB_STEP_SUMMARY
