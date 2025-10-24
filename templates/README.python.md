@@ -55,7 +55,7 @@ pulumi.export("deployment_id", deployment.id)
 
 ## Examples
 
-Complete examples are available in the [examples directory](https://github.com/datarobot-community/pulumi-datarobot/tree/main/examples/python).
+Complete examples are available in the [examples directory](https://github.com/datarobot-community/pulumi-datarobot/tree/main/{{EXAMPLES_PATH}}).
 
 ## Air-Gapped Environments
 
@@ -86,9 +86,9 @@ pip install wheels/* -f wheels/ --no-index
 Download the plugin binary from the [releases page](https://github.com/datarobot-community/pulumi-datarobot/releases):
 
 ```bash
-# Replace v0.10.21 with your version, e.g., v0.10.14
-pulumi plugin install resource datarobot v0.10.21 --server \
-  https://github.com/datarobot-community/pulumi-datarobot/releases/v0.10.21/
+# Replace {{VERSION}} with your version, e.g., v0.10.14
+pulumi plugin install resource datarobot {{VERSION}} --server \
+  https://github.com/datarobot-community/pulumi-datarobot/releases/{{VERSION}}/
 ```
 
 ### 4. Skip update checks
@@ -141,4 +141,4 @@ registered_model = dr.RegisteredModelFromLeaderboard("my-registered-model",
 
 ## Version
 
-Package version: v0.10.21
+Package version: {{VERSION}}

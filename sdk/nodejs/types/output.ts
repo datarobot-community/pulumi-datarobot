@@ -1265,6 +1265,17 @@ export interface NotificationChannelDrEntity {
     name: string;
 }
 
+export interface RegisteredModelTag {
+    /**
+     * The name of the tag.
+     */
+    name: string;
+    /**
+     * The value of the tag.
+     */
+    value: string;
+}
+
 export interface VectorDatabaseChunkingParameters {
     /**
      * The percentage of overlap between chunks.

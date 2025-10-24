@@ -430,6 +430,9 @@
             "datarobot_registered_model": {
                 "current": "datarobot:index/registeredModel:RegisteredModel",
                 "fields": {
+                    "tags": {
+                        "maxItemsOne": false
+                    },
                     "use_case_ids": {
                         "maxItemsOne": false
                     }

@@ -4,7 +4,7 @@ on:
   push:
     tags:
       - v*.*.*
-  
+
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -21,10 +21,17 @@ env:
   PYPI_USERNAME: __token__
   PUBLISH_PYPI: true
 
-  # MAVEN
   SIGNING_KEY: ${{ secrets.JAVA_SIGNING_KEY }}
   SIGNING_KEY_ID: ${{ secrets.JAVA_SIGNING_KEY_ID }}
   SIGNING_PASSWORD: ${{ secrets.JAVA_SIGNING_PASSWORD }}
+
+  # --- Added for Slack notification & link rendering ---
+  SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+  PACKAGE_NPM: "@datarobot/pulumi-datarobot"
+  PACKAGE_PYPI: pulumi-datarobot
+  PACKAGE_NUGET: DataRobotPulumi.Datarobot
+  GO_MODULE: github.com/datarobot-community/pulumi-datarobot/sdk
+  # -----------------------------------------------------
 
 jobs:
   publish_binary:
@@ -38,7 +45,7 @@ jobs:
 
     steps:
     - name: Checkout Repo
-      uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
 
     - name: Unshallow clone for tags
       run: git fetch --prune --unshallow --tags
@@ -70,7 +77,7 @@ jobs:
     needs: publish_binary
     steps:
       - name: Checkout Repo
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       - name: Unshallow clone for tags
         run: git fetch --prune --unshallow --tags
       - name: Install Go
@@ -84,14 +91,14 @@ jobs:
       - name: Install Pulumi CLI
         uses: pulumi/action-install-pulumi-cli@b374ceb6168550de27c6eba92e01c1a774040e11 # tag=v2.0.0
       - name: Setup Node
-        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
         with:
           node-version: ${{matrix.nodeversion}}
           registry-url: ${{env.NPM_REGISTRY_URL}}
       - name: Setup DotNet
-        uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4.3.1
+        uses: actions/setup-dotnet@d4c94342e560b34958eacfc5d055d21461ed1c5d # v5.0.0
         with:
-          dotnet-version: ${{matrix.dotnetverson}}
+          dotnet-version: ${{matrix.dotnetversion}}
       - name: Setup Python
         uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
         with:
@@ -109,7 +116,7 @@ jobs:
           fi
       - if: ${{ matrix.language == 'python' && env.PUBLISH_PYPI == 'true' }}
         name: Publish package to PyPI
-        uses: pypa/gh-action-pypi-publish@76f52bc884231f62b9a034ebfe128415bbaabdfc # v1.12.4
+        uses: pypa/gh-action-pypi-publish@ab69e431e9c9f48a3310be0a56527c679f56e04d # v1.12.4
         with:
           user: ${{ env.PYPI_USERNAME }}
           password: ${{ env.PYPI_PASSWORD }}
@@ -142,3 +149,30 @@ jobs:
           - 20
         pythonversion:
           - "3.10"
+
+  notify_slack:
+    name: Notify Slack
+    runs-on: ubuntu-latest
+    needs: publish_sdk
+    if: success()
+    steps:
+      - name: Compose message
+        if: ${{ env.SLACK_WEBHOOK_URL != '' }}
+        env:
+          GITHUB_REF_NAME: ${{ github.ref_name }}
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          RELEASE_URL="https://github.com/${{ github.repository }}/releases/tag/${GITHUB_REF_NAME}"
+          MSG=":tada: Release ${GITHUB_REF_NAME} published for ${{ github.repository }}\n\
+          GitHub Release: ${RELEASE_URL}\n\
+          SDKs:\n\
+          - Node.js (npm): https://www.npmjs.com/package/${{ env.PACKAGE_NPM }}/v/${VERSION}\n\
+          - PyPI: https://pypi.org/project/${{ env.PACKAGE_PYPI }}/${VERSION}/\n\
+          - NuGet: https://www.nuget.org/packages/${{ env.PACKAGE_NUGET }}/${VERSION}\n\
+          - Go: go get ${{ env.GO_MODULE }}@v${VERSION}\n"
+          echo "$MSG"
+          echo "$MSG" | jq -R --slurp '{text: .}' > payload.json
+      - name: Send to Slack
+        if: ${{ env.SLACK_WEBHOOK_URL != '' }}
+        run: |
+          curl -X POST -H 'Content-type: application/json' --data @payload.json "${{ env.SLACK_WEBHOOK_URL }}"

@@ -1265,6 +1265,17 @@ export interface NotificationChannelDrEntity {
     name: pulumi.Input<string>;
 }
 
+export interface RegisteredModelTag {
+    /**
+     * The name of the tag.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * The value of the tag.
+     */
+    value: pulumi.Input<string>;
+}
+
 export interface VectorDatabaseChunkingParameters {
     /**
      * The percentage of overlap between chunks.

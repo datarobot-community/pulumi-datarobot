@@ -1,0 +1,201 @@
+name: Upgrade Provider & Publish Test PyPI
+on:
+  workflow_dispatch:
+    inputs:
+      target_bridge_version:
+        description: 'Pulumi TF Bridge target version (e.g. v3.106.0)'
+        required: false
+        default: 'v3.106.0'
+        type: string
+      test_version_suffix:
+        description: 'Suffix for test version (e.g. test, rc1)'
+        required: false
+        default: 'test'
+        type: string
+
+env:
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  TEST_PYPI_TOKEN: ${{ secrets.TEST_PYPI_PASSWORD }}
+  PYPI_USERNAME: __token__
+  TEST_PYPI_REPOSITORY_URL: https://test.pypi.org/legacy/
+
+jobs:
+  upgrade_and_publish_test:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      id-token: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+
+      - name: Install mise (tool manager)
+        run: |
+          curl https://mise.run | sh
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+      - name: Run provider upgrade
+        uses: pulumi/pulumi-upgrade-provider-action@v0.0.18
+        with:
+          target-bridge-version: ${{ inputs.target_bridge_version }}
+
+      - name: Compute test version
+        id: version
+        run: |
+          CURRENT_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
+          BASE=${CURRENT_TAG#v}
+          IFS='.' read -r MAJOR MINOR PATCH <<< "$BASE"
+          PATCH=$((PATCH + 1))
+          TS=$(date +%Y%m%d%H%M)
+          # Use dev pre-release PEP 440 format (no leading v for distribution version)
+          CLEAN_VERSION="${MAJOR}.${MINOR}.${PATCH}.dev${TS}"
+          TEST_VERSION="v${CLEAN_VERSION}"  # keep v-prefixed for docs/readme
+          echo "test_version=$TEST_VERSION" >> $GITHUB_OUTPUT
+          echo "clean_version=$CLEAN_VERSION" >> $GITHUB_OUTPUT
+          echo "Will use test version: $TEST_VERSION"
+
+      - name: Regenerate SDK READMEs (test)
+        run: |
+          if [[ -f ./build-readme.sh ]]; then
+            chmod +x ./build-readme.sh
+            VERSION="${{ steps.version.outputs.test_version }}" ./build-readme.sh
+          else
+            echo 'No build-readme.sh found.'
+          fi
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: '3.10'
+
+      - name: Prepare test package (distribution name)
+        run: |
+          SETUP_FILE=sdk/python/setup.py
+          if [[ -f "$SETUP_FILE" ]]; then
+            echo 'Original setup.py name line:'
+            grep "setup(name" "$SETUP_FILE" || true
+            # Replace with explicit hyphenated distribution name (PyPI normalization keeps hyphen)
+            sed -i "s/setup(name='pulumi_datarobot'/setup(name='datarobot-pulumi-test'/" "$SETUP_FILE"
+            echo 'Modified setup.py name line:'
+            grep "setup(name" "$SETUP_FILE" || true
+          else
+            echo 'setup.py not found; aborting.'
+            exit 1
+          fi
+
+      - name: Inject test version into setup.py
+        run: |
+          SETUP_FILE=sdk/python/setup.py
+          VERSION_LINE="VERSION = \"${{ steps.version.outputs.clean_version }}\""
+          sed -i "s/^VERSION = \"0.0.0\"/$VERSION_LINE/" "$SETUP_FILE"
+          grep "VERSION =" "$SETUP_FILE"
+
+      - name: Build Python SDK
+        env:
+          TEST_PYPI_MODE: '1'
+          TEST_PYPI_VERSION: ${{ steps.version.outputs.clean_version }}
+        run: make build_python
+
+      - name: Show dist artifacts
+        run: |
+          ls -R sdk/python/bin/dist || (echo 'No dist directory' && exit 1)
+
+      - name: Pre-publish diagnostics (twine check)
+        run: |
+          python -m pip install --upgrade pip wheel
+          python -m pip install twine
+          echo "Artifact listing:"\n
+          ls -l sdk/python/bin/dist
+          echo "Running twine check:"\n
+          twine check sdk/python/bin/dist/* || echo 'Twine check reported issues (non-fatal for test).'
+          if [[ -n "$TEST_PYPI_TOKEN" ]]; then
+            echo "Test PyPI token length: ${#TEST_PYPI_TOKEN}"  # Do not print token itself
+          else
+            echo "No Test PyPI token present."; fi
+
+      - name: Rewrite distribution name post-build & rebuild
+        run: |
+          set -e
+          cd sdk/python/bin
+          echo "Before rewrite setup.py name line:"; grep "setup(name" setup.py || true
+          sed -i "s/setup(name='pulumi_datarobot'/setup(name='datarobot-pulumi-test'/" setup.py
+          # Ensure version matches dev version chosen
+          sed -i "s/^VERSION = .*/VERSION = \"${{ steps.version.outputs.clean_version }}\"/" setup.py
+          echo "After rewrite setup.py name line:"; grep "setup(name" setup.py || true
+          echo "After rewrite version line:"; grep "^VERSION =" setup.py || true
+          # Remove previous dist artifacts referencing old name
+          rm -rf dist
+          python -m pip install build
+          python -m build --sdist --wheel .
+          echo "Rebuilt artifacts:"; ls -l dist
+          python -m pip install twine
+          twine check dist/* || echo 'Twine check reported issues (non-fatal).'
+
+      - name: Publish to Test PyPI (rebuilt artifacts)
+        if: env.TEST_PYPI_TOKEN != ''
+        uses: pypa/gh-action-pypi-publish@ab69e431e9c9f48a3310be0a56527c679f56e04d # v1.12.4
+        with:
+          user: ${{ env.PYPI_USERNAME }}
+          password: ${{ env.TEST_PYPI_TOKEN }}
+          repository-url: ${{ env.TEST_PYPI_REPOSITORY_URL }}
+          packages-dir: sdk/python/bin/dist
+          skip-existing: true
+
+      - name: Skip publish (no Test PyPI token) (rebuilt)
+        if: env.TEST_PYPI_TOKEN == ''
+        run: echo 'TEST_PYPI_PASSWORD secret missing; skipping publish.'
+
+
+      - name: Verify install from Test PyPI
+        if: env.TEST_PYPI_TOKEN != ''
+        run: |
+          python -m venv venv
+          source venv/bin/activate
+          pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ "datarobot-pulumi-test==${{ steps.version.outputs.clean_version }}"
+          python -c "import pulumi_datarobot; print('Imported pulumi_datarobot from test distribution OK')"
+
+      - name: Commit upgrade + test artifacts
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Upgrade provider to ${{ inputs.target_bridge_version }} (test version ${{ steps.version.outputs.test_version }})"
+          file_pattern: '.'
+
+      - name: Create validation PR
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: "upgrade-${{ inputs.target_bridge_version }}-test-${{ steps.version.outputs.clean_version }}"
+          delete-branch: true
+          title: "Upgrade provider to ${{ inputs.target_bridge_version }} (Test PyPI: datarobot-pulumi-test@${{ steps.version.outputs.clean_version }})"
+          body: |
+            ## Provider Upgrade (Test PyPI Validation)
+
+            - Target bridge: `${{ inputs.target_bridge_version }}`
+            - Test distribution: `datarobot-pulumi-test==${{ steps.version.outputs.clean_version }}`
+            - README regenerated with version `${{ steps.version.outputs.test_version }}`
+
+            Install to validate:
+            ```bash
+            pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ datarobot-pulumi-test==${{ steps.version.outputs.clean_version }}
+            ```
+
+            Import remains:
+            ```python
+            import pulumi_datarobot
+            ```
+
+            After confirmation, proceed to real release tagging.
+
+      - name: Summary
+        run: |
+          echo '### Upgrade & Test PyPI Summary' >> $GITHUB_STEP_SUMMARY
+          echo "Bridge version: ${{ inputs.target_bridge_version }}" >> $GITHUB_STEP_SUMMARY
+          echo "Test distribution version: ${{ steps.version.outputs.clean_version }}" >> $GITHUB_STEP_SUMMARY
+          echo "Distribution name: datarobot-pulumi-test" >> $GITHUB_STEP_SUMMARY
+          if [[ -n "$TEST_PYPI_TOKEN" ]]; then
+            echo "Published to Test PyPI ✅" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "Publish skipped (missing TEST_PYPI_PASSWORD secret) ⚠️" >> $GITHUB_STEP_SUMMARY
+          fi
+          echo "Validation PR created." >> $GITHUB_STEP_SUMMARY

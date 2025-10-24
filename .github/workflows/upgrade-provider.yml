@@ -16,8 +16,112 @@ jobs:
       contents: write
       pull-requests: write
       issues: write
+    outputs:
+      pr_branch: ${{ steps.detect_pr.outputs.pr_branch }}
+      version: ${{ steps.version.outputs.version }}
     steps:
+    - name: Install mise
+      run: |
+        curl https://mise.run | sh
+        echo "$HOME/.local/bin" >> $GITHUB_PATH
     - name: Call upgrade provider action
-      uses: pulumi/pulumi-upgrade-provider-action@v0.0.17
+      uses: pulumi/pulumi-upgrade-provider-action@v0.0.18
       with:
         target-bridge-version: 'v3.106.0'
+    - name: Fetch upstream Terraform provider latest release
+      id: upstream
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        API_URL="https://api.github.com/repos/datarobot-community/terraform-provider-datarobot/releases/latest"
+        echo "Fetching latest upstream Terraform provider release..."
+        JSON=$(curl -s -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" "$API_URL")
+        UPSTREAM_TAG=$(echo "$JSON" | jq -r .tag_name)
+        if [[ -z "$UPSTREAM_TAG" || "$UPSTREAM_TAG" == "null" ]]; then
+          echo "Failed to fetch upstream tag; falling back to v0.0.0" >&2
+          UPSTREAM_TAG="v0.0.0"
+        fi
+        echo "Upstream Terraform provider latest tag: $UPSTREAM_TAG"
+        echo "upstream_tag=$UPSTREAM_TAG" >> $GITHUB_OUTPUT
+    - name: Determine next version
+      id: version
+      run: |
+        # Get the current version from the last tag
+        CURRENT_VERSION=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
+        echo "Current version: $CURRENT_VERSION"
+
+        # Extract version parts (assuming semver: v1.2.3)
+        VERSION_NUMBER=${CURRENT_VERSION#v}
+        IFS='.' read -r MAJOR MINOR PATCH <<< "$VERSION_NUMBER"
+
+        # Decide next version based on upstream provider
+        UPSTREAM="${{ steps.upstream.outputs.upstream_tag }}"
+        UPSTREAM_BASE=${UPSTREAM#v}
+        IFS='.' read -r U_MAJOR U_MINOR U_PATCH <<< "$UPSTREAM_BASE"
+        if [[ $U_MAJOR -gt $MAJOR ]] || [[ $U_MAJOR -eq $MAJOR && $U_MINOR -gt $MINOR ]] || [[ $U_MAJOR -eq $MAJOR && $U_MINOR -eq $MINOR && $U_PATCH -gt $PATCH ]]; then
+          NEXT_VERSION="v${U_MAJOR}.${U_MINOR}.${U_PATCH}"
+          echo "Adopting upstream provider version $NEXT_VERSION"
+        else
+          NEXT_PATCH=$((PATCH + 1))
+          NEXT_VERSION="v${MAJOR}.${MINOR}.${NEXT_PATCH}"
+          echo "Upstream not ahead; incrementing patch to $NEXT_VERSION"
+        fi
+
+        echo "Next version: $NEXT_VERSION"
+        echo "version=$NEXT_VERSION" >> $GITHUB_OUTPUT
+    - name: Detect upgrade provider PR branch
+      id: detect_pr
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        echo "Detecting upgrade provider PR branch (post action)..."
+        # Narrow search: open PRs authored by github-actions[bot] containing 'Upgrade provider'
+        PR_JSON=$(gh pr list --state open --author github-actions[bot] --search "Upgrade terraform-provider-datarobot" --json number,headRefName,title,updatedAt --limit 20 | jq -r 'sort_by(.updatedAt) | reverse | .[0]')
+        if [[ -z "$PR_JSON" || "$PR_JSON" == "null" ]]; then
+          echo "No matching upgrade provider PR found."
+          echo "pr_branch=" >> $GITHUB_OUTPUT
+          exit 0
+        fi
+        PR_BRANCH=$(echo "$PR_JSON" | jq -r '.headRefName')
+        PR_TITLE=$(echo "$PR_JSON" | jq -r '.title')
+        echo "Found PR: $PR_TITLE (branch: $PR_BRANCH)"
+        echo "pr_branch=$PR_BRANCH" >> $GITHUB_OUTPUT
+
+  generate_readmes:
+    name: generate-readmes
+    runs-on: ubuntu-latest
+    needs: upgrade_provider
+    if: needs.upgrade_provider.outputs.pr_branch != ''
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout PR branch
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ needs.upgrade_provider.outputs.pr_branch }}
+          fetch-depth: 0
+      - name: Prepare repository (fetch tags)
+        run: git fetch --prune --tags
+      - name: Generate SDK READMEs
+        env:
+          VERSION: ${{ needs.upgrade_provider.outputs.version }}
+        run: |
+          if [[ -f "./build-readme.sh" ]]; then
+            chmod +x ./build-readme.sh
+            VERSION="$VERSION" ./build-readme.sh
+          else
+            echo "build-readme.sh not found, skipping README generation"
+          fi
+      - name: Commit README changes (if any)
+        run: |
+          if ! git diff --quiet sdk/*/README.md; then
+            echo "README changes detected; committing..."
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add sdk/*/README.md
+            git commit -m "Update SDK READMEs after provider upgrade" || echo "Commit skipped"
+            git push origin HEAD
+          else
+            echo "No changes in SDK READMEs; nothing to commit."
+          fi

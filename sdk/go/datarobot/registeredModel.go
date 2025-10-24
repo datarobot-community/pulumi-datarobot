@@ -43,6 +43,16 @@ import (
 //			exampleRegisteredModel, err := datarobot.NewRegisteredModel(ctx, "exampleRegisteredModel", &datarobot.RegisteredModelArgs{
 //				CustomModelVersionId: exampleCustomModel.VersionId,
 //				Description:          pulumi.String("Description for the example registered model"),
+//				Tags: datarobot.RegisteredModelTagArray{
+//					&datarobot.RegisteredModelTagArgs{
+//						Name:  pulumi.String("ab-test"),
+//						Value: pulumi.String("a1"),
+//					},
+//					&datarobot.RegisteredModelTagArgs{
+//						Name:  pulumi.String("team"),
+//						Value: pulumi.String("marketing"),
+//					},
+//				},
 //			})
 //			if err != nil {
 //				return err
@@ -63,6 +73,8 @@ type RegisteredModel struct {
 	Description pulumi.StringPtrOutput `pulumi:"description"`
 	// The name of the Registered Model.
 	Name pulumi.StringOutput `pulumi:"name"`
+	// The list of tags to assign to the Registered Model version.
+	Tags RegisteredModelTagArrayOutput `pulumi:"tags"`
 	// The list of Use Case IDs to add the Registered Model version to.
 	UseCaseIds pulumi.StringArrayOutput `pulumi:"useCaseIds"`
 	// The ID of the Registered Model Version.
@@ -110,6 +122,8 @@ type registeredModelState struct {
 	Description *string `pulumi:"description"`
 	// The name of the Registered Model.
 	Name *string `pulumi:"name"`
+	// The list of tags to assign to the Registered Model version.
+	Tags []RegisteredModelTag `pulumi:"tags"`
 	// The list of Use Case IDs to add the Registered Model version to.
 	UseCaseIds []string `pulumi:"useCaseIds"`
 	// The ID of the Registered Model Version.
@@ -125,6 +139,8 @@ type RegisteredModelState struct {
 	Description pulumi.StringPtrInput
 	// The name of the Registered Model.
 	Name pulumi.StringPtrInput
+	// The list of tags to assign to the Registered Model version.
+	Tags RegisteredModelTagArrayInput
 	// The list of Use Case IDs to add the Registered Model version to.
 	UseCaseIds pulumi.StringArrayInput
 	// The ID of the Registered Model Version.
@@ -144,6 +160,8 @@ type registeredModelArgs struct {
 	Description *string `pulumi:"description"`
 	// The name of the Registered Model.
 	Name *string `pulumi:"name"`
+	// The list of tags to assign to the Registered Model version.
+	Tags []RegisteredModelTag `pulumi:"tags"`
 	// The list of Use Case IDs to add the Registered Model version to.
 	UseCaseIds []string `pulumi:"useCaseIds"`
 	// The name of the Registered Model Version.
@@ -158,6 +176,8 @@ type RegisteredModelArgs struct {
 	Description pulumi.StringPtrInput
 	// The name of the Registered Model.
 	Name pulumi.StringPtrInput
+	// The list of tags to assign to the Registered Model version.
+	Tags RegisteredModelTagArrayInput
 	// The list of Use Case IDs to add the Registered Model version to.
 	UseCaseIds pulumi.StringArrayInput
 	// The name of the Registered Model Version.
@@ -264,6 +284,11 @@ func (o RegisteredModelOutput) Description() pulumi.StringPtrOutput {
 // The name of the Registered Model.
 func (o RegisteredModelOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *RegisteredModel) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
+}
+
+// The list of tags to assign to the Registered Model version.
+func (o RegisteredModelOutput) Tags() RegisteredModelTagArrayOutput {
+	return o.ApplyT(func(v *RegisteredModel) RegisteredModelTagArrayOutput { return v.Tags }).(RegisteredModelTagArrayOutput)
 }
 
 // The list of Use Case IDs to add the Registered Model version to.
