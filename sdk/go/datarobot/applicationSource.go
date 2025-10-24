@@ -29,8 +29,8 @@ type ApplicationSource struct {
 	FolderPathHash pulumi.StringOutput `pulumi:"folderPathHash"`
 	// The name of the Application Source.
 	Name pulumi.StringOutput `pulumi:"name"`
-	// The resources for the Application Source.
-	Resources ApplicationSourceResourcesPtrOutput `pulumi:"resources"`
+	// The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.
+	Resources ApplicationSourceResourcesOutput `pulumi:"resources"`
 	// The runtime parameter values for the Application Source.
 	RuntimeParameterValues ApplicationSourceRuntimeParameterValueArrayOutput `pulumi:"runtimeParameterValues"`
 	// The version ID of the Application Source.
@@ -81,7 +81,7 @@ type applicationSourceState struct {
 	FolderPathHash *string `pulumi:"folderPathHash"`
 	// The name of the Application Source.
 	Name *string `pulumi:"name"`
-	// The resources for the Application Source.
+	// The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.
 	Resources *ApplicationSourceResources `pulumi:"resources"`
 	// The runtime parameter values for the Application Source.
 	RuntimeParameterValues []ApplicationSourceRuntimeParameterValue `pulumi:"runtimeParameterValues"`
@@ -104,7 +104,7 @@ type ApplicationSourceState struct {
 	FolderPathHash pulumi.StringPtrInput
 	// The name of the Application Source.
 	Name pulumi.StringPtrInput
-	// The resources for the Application Source.
+	// The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.
 	Resources ApplicationSourceResourcesPtrInput
 	// The runtime parameter values for the Application Source.
 	RuntimeParameterValues ApplicationSourceRuntimeParameterValueArrayInput
@@ -127,7 +127,7 @@ type applicationSourceArgs struct {
 	FolderPath *string `pulumi:"folderPath"`
 	// The name of the Application Source.
 	Name *string `pulumi:"name"`
-	// The resources for the Application Source.
+	// The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.
 	Resources *ApplicationSourceResources `pulumi:"resources"`
 	// The runtime parameter values for the Application Source.
 	RuntimeParameterValues []ApplicationSourceRuntimeParameterValue `pulumi:"runtimeParameterValues"`
@@ -145,7 +145,7 @@ type ApplicationSourceArgs struct {
 	FolderPath pulumi.StringPtrInput
 	// The name of the Application Source.
 	Name pulumi.StringPtrInput
-	// The resources for the Application Source.
+	// The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.
 	Resources ApplicationSourceResourcesPtrInput
 	// The runtime parameter values for the Application Source.
 	RuntimeParameterValues ApplicationSourceRuntimeParameterValueArrayInput
@@ -273,9 +273,9 @@ func (o ApplicationSourceOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *ApplicationSource) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// The resources for the Application Source.
-func (o ApplicationSourceOutput) Resources() ApplicationSourceResourcesPtrOutput {
-	return o.ApplyT(func(v *ApplicationSource) ApplicationSourceResourcesPtrOutput { return v.Resources }).(ApplicationSourceResourcesPtrOutput)
+// The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.
+func (o ApplicationSourceOutput) Resources() ApplicationSourceResourcesOutput {
+	return o.ApplyT(func(v *ApplicationSource) ApplicationSourceResourcesOutput { return v.Resources }).(ApplicationSourceResourcesOutput)
 }
 
 // The runtime parameter values for the Application Source.

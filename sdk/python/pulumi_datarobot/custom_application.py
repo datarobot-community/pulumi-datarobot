@@ -36,7 +36,7 @@ class CustomApplicationArgs:
         :param pulumi.Input[builtins.bool] external_access_enabled: Whether external access is enabled for the Custom Application.
         :param pulumi.Input[Sequence[pulumi.Input[builtins.str]]] external_access_recipients: The list of external email addresses that have access to the Custom Application.
         :param pulumi.Input[builtins.str] name: The name of the Custom Application.
-        :param pulumi.Input['CustomApplicationResourcesArgs'] resources: The resources for the Custom Application.
+        :param pulumi.Input['CustomApplicationResourcesArgs'] resources: The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.
         :param pulumi.Input[Sequence[pulumi.Input[builtins.str]]] use_case_ids: The list of Use Case IDs to add the Custom Application to.
         """
         pulumi.set(__self__, "source_version_id", source_version_id)
@@ -117,7 +117,7 @@ class CustomApplicationArgs:
     @pulumi.getter
     def resources(self) -> Optional[pulumi.Input['CustomApplicationResourcesArgs']]:
         """
-        The resources for the Custom Application.
+        The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.
         """
         return pulumi.get(self, "resources")
 
@@ -157,7 +157,7 @@ class _CustomApplicationState:
         :param pulumi.Input[builtins.bool] external_access_enabled: Whether external access is enabled for the Custom Application.
         :param pulumi.Input[Sequence[pulumi.Input[builtins.str]]] external_access_recipients: The list of external email addresses that have access to the Custom Application.
         :param pulumi.Input[builtins.str] name: The name of the Custom Application.
-        :param pulumi.Input['CustomApplicationResourcesArgs'] resources: The resources for the Custom Application.
+        :param pulumi.Input['CustomApplicationResourcesArgs'] resources: The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.
         :param pulumi.Input[builtins.str] source_id: The ID of the Custom Application Source.
         :param pulumi.Input[builtins.str] source_version_id: The version ID of the Custom Application Source.
         :param pulumi.Input[Sequence[pulumi.Input[builtins.str]]] use_case_ids: The list of Use Case IDs to add the Custom Application to.
@@ -245,7 +245,7 @@ class _CustomApplicationState:
     @pulumi.getter
     def resources(self) -> Optional[pulumi.Input['CustomApplicationResourcesArgs']]:
         """
-        The resources for the Custom Application.
+        The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.
         """
         return pulumi.get(self, "resources")
 
@@ -312,7 +312,7 @@ class CustomApplication(pulumi.CustomResource):
         :param pulumi.Input[builtins.bool] external_access_enabled: Whether external access is enabled for the Custom Application.
         :param pulumi.Input[Sequence[pulumi.Input[builtins.str]]] external_access_recipients: The list of external email addresses that have access to the Custom Application.
         :param pulumi.Input[builtins.str] name: The name of the Custom Application.
-        :param pulumi.Input[Union['CustomApplicationResourcesArgs', 'CustomApplicationResourcesArgsDict']] resources: The resources for the Custom Application.
+        :param pulumi.Input[Union['CustomApplicationResourcesArgs', 'CustomApplicationResourcesArgsDict']] resources: The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.
         :param pulumi.Input[builtins.str] source_version_id: The version ID of the Custom Application Source.
         :param pulumi.Input[Sequence[pulumi.Input[builtins.str]]] use_case_ids: The list of Use Case IDs to add the Custom Application to.
         """
@@ -398,7 +398,7 @@ class CustomApplication(pulumi.CustomResource):
         :param pulumi.Input[builtins.bool] external_access_enabled: Whether external access is enabled for the Custom Application.
         :param pulumi.Input[Sequence[pulumi.Input[builtins.str]]] external_access_recipients: The list of external email addresses that have access to the Custom Application.
         :param pulumi.Input[builtins.str] name: The name of the Custom Application.
-        :param pulumi.Input[Union['CustomApplicationResourcesArgs', 'CustomApplicationResourcesArgsDict']] resources: The resources for the Custom Application.
+        :param pulumi.Input[Union['CustomApplicationResourcesArgs', 'CustomApplicationResourcesArgsDict']] resources: The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.
         :param pulumi.Input[builtins.str] source_id: The ID of the Custom Application Source.
         :param pulumi.Input[builtins.str] source_version_id: The version ID of the Custom Application Source.
         :param pulumi.Input[Sequence[pulumi.Input[builtins.str]]] use_case_ids: The list of Use Case IDs to add the Custom Application to.
@@ -460,9 +460,9 @@ class CustomApplication(pulumi.CustomResource):
 
     @property
     @pulumi.getter
-    def resources(self) -> pulumi.Output[Optional['outputs.CustomApplicationResources']]:
+    def resources(self) -> pulumi.Output['outputs.CustomApplicationResources']:
         """
-        The resources for the Custom Application.
+        The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.
         """
         return pulumi.get(self, "resources")
 

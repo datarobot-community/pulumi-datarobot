@@ -15,19 +15,19 @@ namespace DataRobotPulumi.Datarobot.Outputs
     public sealed class CustomApplicationResources
     {
         /// <summary>
-        /// The number of replicas for the Custom Application.
+        /// The number of replicas for the Custom Application. Computed by API if not specified.
         /// </summary>
         public readonly int? Replicas;
         /// <summary>
-        /// The resource label for the Custom Application.
+        /// The resource label for the Custom Application (e.g., 'cpu.small', 'cpu.medium'). Computed by API if not specified.
         /// </summary>
         public readonly string? ResourceLabel;
         /// <summary>
-        /// Whether to service web requests on the root path for the Custom Application.
+        /// Whether to service web requests on the root path for the Custom Application. Computed by API if not specified.
         /// </summary>
         public readonly bool? ServiceWebRequestsOnRootPath;
         /// <summary>
-        /// Whether session affinity is enabled for the Custom Application.
+        /// Whether session affinity is enabled for the Custom Application. Computed by API if not specified.
         /// </summary>
         public readonly bool? SessionAffinity;
 
