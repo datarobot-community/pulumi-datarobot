@@ -30,8 +30,8 @@ type ApplicationSourceFromTemplate struct {
 	FolderPathHash pulumi.StringOutput `pulumi:"folderPathHash"`
 	// The name of the Application Source.
 	Name pulumi.StringOutput `pulumi:"name"`
-	// The resources for the Application Source.
-	Resources ApplicationSourceFromTemplateResourcesPtrOutput `pulumi:"resources"`
+	// The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.
+	Resources ApplicationSourceFromTemplateResourcesOutput `pulumi:"resources"`
 	// The runtime parameter values for the Application Source.
 	RuntimeParameterValues ApplicationSourceFromTemplateRuntimeParameterValueArrayOutput `pulumi:"runtimeParameterValues"`
 	// The ID of the template used to create the Application Source.
@@ -87,7 +87,7 @@ type applicationSourceFromTemplateState struct {
 	FolderPathHash *string `pulumi:"folderPathHash"`
 	// The name of the Application Source.
 	Name *string `pulumi:"name"`
-	// The resources for the Application Source.
+	// The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.
 	Resources *ApplicationSourceFromTemplateResources `pulumi:"resources"`
 	// The runtime parameter values for the Application Source.
 	RuntimeParameterValues []ApplicationSourceFromTemplateRuntimeParameterValue `pulumi:"runtimeParameterValues"`
@@ -112,7 +112,7 @@ type ApplicationSourceFromTemplateState struct {
 	FolderPathHash pulumi.StringPtrInput
 	// The name of the Application Source.
 	Name pulumi.StringPtrInput
-	// The resources for the Application Source.
+	// The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.
 	Resources ApplicationSourceFromTemplateResourcesPtrInput
 	// The runtime parameter values for the Application Source.
 	RuntimeParameterValues ApplicationSourceFromTemplateRuntimeParameterValueArrayInput
@@ -137,7 +137,7 @@ type applicationSourceFromTemplateArgs struct {
 	FolderPath *string `pulumi:"folderPath"`
 	// The name of the Application Source.
 	Name *string `pulumi:"name"`
-	// The resources for the Application Source.
+	// The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.
 	Resources *ApplicationSourceFromTemplateResources `pulumi:"resources"`
 	// The runtime parameter values for the Application Source.
 	RuntimeParameterValues []ApplicationSourceFromTemplateRuntimeParameterValue `pulumi:"runtimeParameterValues"`
@@ -157,7 +157,7 @@ type ApplicationSourceFromTemplateArgs struct {
 	FolderPath pulumi.StringPtrInput
 	// The name of the Application Source.
 	Name pulumi.StringPtrInput
-	// The resources for the Application Source.
+	// The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.
 	Resources ApplicationSourceFromTemplateResourcesPtrInput
 	// The runtime parameter values for the Application Source.
 	RuntimeParameterValues ApplicationSourceFromTemplateRuntimeParameterValueArrayInput
@@ -287,11 +287,11 @@ func (o ApplicationSourceFromTemplateOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *ApplicationSourceFromTemplate) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// The resources for the Application Source.
-func (o ApplicationSourceFromTemplateOutput) Resources() ApplicationSourceFromTemplateResourcesPtrOutput {
-	return o.ApplyT(func(v *ApplicationSourceFromTemplate) ApplicationSourceFromTemplateResourcesPtrOutput {
+// The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.
+func (o ApplicationSourceFromTemplateOutput) Resources() ApplicationSourceFromTemplateResourcesOutput {
+	return o.ApplyT(func(v *ApplicationSourceFromTemplate) ApplicationSourceFromTemplateResourcesOutput {
 		return v.Resources
-	}).(ApplicationSourceFromTemplateResourcesPtrOutput)
+	}).(ApplicationSourceFromTemplateResourcesOutput)
 }
 
 // The runtime parameter values for the Application Source.
