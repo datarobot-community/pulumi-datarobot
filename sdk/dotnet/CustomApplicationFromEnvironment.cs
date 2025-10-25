@@ -59,10 +59,10 @@ namespace DataRobotPulumi.Datarobot
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// The resources for the Custom Application.
+        /// The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.
         /// </summary>
         [Output("resources")]
-        public Output<Outputs.CustomApplicationFromEnvironmentResources?> Resources { get; private set; } = null!;
+        public Output<Outputs.CustomApplicationFromEnvironmentResources> Resources { get; private set; } = null!;
 
         /// <summary>
         /// The list of Use Case IDs to add the Custom Application to.
@@ -154,7 +154,7 @@ namespace DataRobotPulumi.Datarobot
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// The resources for the Custom Application.
+        /// The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.
         /// </summary>
         [Input("resources")]
         public Input<Inputs.CustomApplicationFromEnvironmentResourcesArgs>? Resources { get; set; }
@@ -228,7 +228,7 @@ namespace DataRobotPulumi.Datarobot
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// The resources for the Custom Application.
+        /// The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.
         /// </summary>
         [Input("resources")]
         public Input<Inputs.CustomApplicationFromEnvironmentResourcesGetArgs>? Resources { get; set; }

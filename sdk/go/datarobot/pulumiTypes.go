@@ -14,13 +14,13 @@ import (
 var _ = internal.GetEnvOrDefault
 
 type ApplicationSourceFromTemplateResources struct {
-	// The replicas for the Application Source.
+	// The number of replicas for the Application Source. Computed by API if not specified.
 	Replicas *int `pulumi:"replicas"`
-	// The resource label for the Application Source.
+	// The resource label for the Application Source (e.g., 'cpu.small', 'cpu.medium'). Computed by API if not specified.
 	ResourceLabel *string `pulumi:"resourceLabel"`
-	// Whether to service web requests on the root path for the Application Source.
+	// Whether to service web requests on the root path for the Application Source. Computed by API if not specified.
 	ServiceWebRequestsOnRootPath *bool `pulumi:"serviceWebRequestsOnRootPath"`
-	// The session affinity for the Application Source.
+	// Whether session affinity is enabled for the Application Source. Computed by API if not specified.
 	SessionAffinity *bool `pulumi:"sessionAffinity"`
 }
 
@@ -36,13 +36,13 @@ type ApplicationSourceFromTemplateResourcesInput interface {
 }
 
 type ApplicationSourceFromTemplateResourcesArgs struct {
-	// The replicas for the Application Source.
+	// The number of replicas for the Application Source. Computed by API if not specified.
 	Replicas pulumi.IntPtrInput `pulumi:"replicas"`
-	// The resource label for the Application Source.
+	// The resource label for the Application Source (e.g., 'cpu.small', 'cpu.medium'). Computed by API if not specified.
 	ResourceLabel pulumi.StringPtrInput `pulumi:"resourceLabel"`
-	// Whether to service web requests on the root path for the Application Source.
+	// Whether to service web requests on the root path for the Application Source. Computed by API if not specified.
 	ServiceWebRequestsOnRootPath pulumi.BoolPtrInput `pulumi:"serviceWebRequestsOnRootPath"`
-	// The session affinity for the Application Source.
+	// Whether session affinity is enabled for the Application Source. Computed by API if not specified.
 	SessionAffinity pulumi.BoolPtrInput `pulumi:"sessionAffinity"`
 }
 
@@ -123,22 +123,22 @@ func (o ApplicationSourceFromTemplateResourcesOutput) ToApplicationSourceFromTem
 	}).(ApplicationSourceFromTemplateResourcesPtrOutput)
 }
 
-// The replicas for the Application Source.
+// The number of replicas for the Application Source. Computed by API if not specified.
 func (o ApplicationSourceFromTemplateResourcesOutput) Replicas() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ApplicationSourceFromTemplateResources) *int { return v.Replicas }).(pulumi.IntPtrOutput)
 }
 
-// The resource label for the Application Source.
+// The resource label for the Application Source (e.g., 'cpu.small', 'cpu.medium'). Computed by API if not specified.
 func (o ApplicationSourceFromTemplateResourcesOutput) ResourceLabel() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ApplicationSourceFromTemplateResources) *string { return v.ResourceLabel }).(pulumi.StringPtrOutput)
 }
 
-// Whether to service web requests on the root path for the Application Source.
+// Whether to service web requests on the root path for the Application Source. Computed by API if not specified.
 func (o ApplicationSourceFromTemplateResourcesOutput) ServiceWebRequestsOnRootPath() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ApplicationSourceFromTemplateResources) *bool { return v.ServiceWebRequestsOnRootPath }).(pulumi.BoolPtrOutput)
 }
 
-// The session affinity for the Application Source.
+// Whether session affinity is enabled for the Application Source. Computed by API if not specified.
 func (o ApplicationSourceFromTemplateResourcesOutput) SessionAffinity() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ApplicationSourceFromTemplateResources) *bool { return v.SessionAffinity }).(pulumi.BoolPtrOutput)
 }
@@ -167,7 +167,7 @@ func (o ApplicationSourceFromTemplateResourcesPtrOutput) Elem() ApplicationSourc
 	}).(ApplicationSourceFromTemplateResourcesOutput)
 }
 
-// The replicas for the Application Source.
+// The number of replicas for the Application Source. Computed by API if not specified.
 func (o ApplicationSourceFromTemplateResourcesPtrOutput) Replicas() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ApplicationSourceFromTemplateResources) *int {
 		if v == nil {
@@ -177,7 +177,7 @@ func (o ApplicationSourceFromTemplateResourcesPtrOutput) Replicas() pulumi.IntPt
 	}).(pulumi.IntPtrOutput)
 }
 
-// The resource label for the Application Source.
+// The resource label for the Application Source (e.g., 'cpu.small', 'cpu.medium'). Computed by API if not specified.
 func (o ApplicationSourceFromTemplateResourcesPtrOutput) ResourceLabel() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ApplicationSourceFromTemplateResources) *string {
 		if v == nil {
@@ -187,7 +187,7 @@ func (o ApplicationSourceFromTemplateResourcesPtrOutput) ResourceLabel() pulumi.
 	}).(pulumi.StringPtrOutput)
 }
 
-// Whether to service web requests on the root path for the Application Source.
+// Whether to service web requests on the root path for the Application Source. Computed by API if not specified.
 func (o ApplicationSourceFromTemplateResourcesPtrOutput) ServiceWebRequestsOnRootPath() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ApplicationSourceFromTemplateResources) *bool {
 		if v == nil {
@@ -197,7 +197,7 @@ func (o ApplicationSourceFromTemplateResourcesPtrOutput) ServiceWebRequestsOnRoo
 	}).(pulumi.BoolPtrOutput)
 }
 
-// The session affinity for the Application Source.
+// Whether session affinity is enabled for the Application Source. Computed by API if not specified.
 func (o ApplicationSourceFromTemplateResourcesPtrOutput) SessionAffinity() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ApplicationSourceFromTemplateResources) *bool {
 		if v == nil {
@@ -323,13 +323,13 @@ func (o ApplicationSourceFromTemplateRuntimeParameterValueArrayOutput) Index(i p
 }
 
 type ApplicationSourceResources struct {
-	// The replicas for the Application Source.
+	// The number of replicas for the Application Source. Computed by API if not specified.
 	Replicas *int `pulumi:"replicas"`
-	// The resource label for the Application Source.
+	// The resource label for the Application Source (e.g., 'cpu.small', 'cpu.medium'). Computed by API if not specified.
 	ResourceLabel *string `pulumi:"resourceLabel"`
-	// Whether to service web requests on the root path for the Application Source.
+	// Whether to service web requests on the root path for the Application Source. Computed by API if not specified.
 	ServiceWebRequestsOnRootPath *bool `pulumi:"serviceWebRequestsOnRootPath"`
-	// The session affinity for the Application Source.
+	// Whether session affinity is enabled for the Application Source. Computed by API if not specified.
 	SessionAffinity *bool `pulumi:"sessionAffinity"`
 }
 
@@ -345,13 +345,13 @@ type ApplicationSourceResourcesInput interface {
 }
 
 type ApplicationSourceResourcesArgs struct {
-	// The replicas for the Application Source.
+	// The number of replicas for the Application Source. Computed by API if not specified.
 	Replicas pulumi.IntPtrInput `pulumi:"replicas"`
-	// The resource label for the Application Source.
+	// The resource label for the Application Source (e.g., 'cpu.small', 'cpu.medium'). Computed by API if not specified.
 	ResourceLabel pulumi.StringPtrInput `pulumi:"resourceLabel"`
-	// Whether to service web requests on the root path for the Application Source.
+	// Whether to service web requests on the root path for the Application Source. Computed by API if not specified.
 	ServiceWebRequestsOnRootPath pulumi.BoolPtrInput `pulumi:"serviceWebRequestsOnRootPath"`
-	// The session affinity for the Application Source.
+	// Whether session affinity is enabled for the Application Source. Computed by API if not specified.
 	SessionAffinity pulumi.BoolPtrInput `pulumi:"sessionAffinity"`
 }
 
@@ -432,22 +432,22 @@ func (o ApplicationSourceResourcesOutput) ToApplicationSourceResourcesPtrOutputW
 	}).(ApplicationSourceResourcesPtrOutput)
 }
 
-// The replicas for the Application Source.
+// The number of replicas for the Application Source. Computed by API if not specified.
 func (o ApplicationSourceResourcesOutput) Replicas() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ApplicationSourceResources) *int { return v.Replicas }).(pulumi.IntPtrOutput)
 }
 
-// The resource label for the Application Source.
+// The resource label for the Application Source (e.g., 'cpu.small', 'cpu.medium'). Computed by API if not specified.
 func (o ApplicationSourceResourcesOutput) ResourceLabel() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ApplicationSourceResources) *string { return v.ResourceLabel }).(pulumi.StringPtrOutput)
 }
 
-// Whether to service web requests on the root path for the Application Source.
+// Whether to service web requests on the root path for the Application Source. Computed by API if not specified.
 func (o ApplicationSourceResourcesOutput) ServiceWebRequestsOnRootPath() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ApplicationSourceResources) *bool { return v.ServiceWebRequestsOnRootPath }).(pulumi.BoolPtrOutput)
 }
 
-// The session affinity for the Application Source.
+// Whether session affinity is enabled for the Application Source. Computed by API if not specified.
 func (o ApplicationSourceResourcesOutput) SessionAffinity() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ApplicationSourceResources) *bool { return v.SessionAffinity }).(pulumi.BoolPtrOutput)
 }
@@ -476,7 +476,7 @@ func (o ApplicationSourceResourcesPtrOutput) Elem() ApplicationSourceResourcesOu
 	}).(ApplicationSourceResourcesOutput)
 }
 
-// The replicas for the Application Source.
+// The number of replicas for the Application Source. Computed by API if not specified.
 func (o ApplicationSourceResourcesPtrOutput) Replicas() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ApplicationSourceResources) *int {
 		if v == nil {
@@ -486,7 +486,7 @@ func (o ApplicationSourceResourcesPtrOutput) Replicas() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
-// The resource label for the Application Source.
+// The resource label for the Application Source (e.g., 'cpu.small', 'cpu.medium'). Computed by API if not specified.
 func (o ApplicationSourceResourcesPtrOutput) ResourceLabel() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ApplicationSourceResources) *string {
 		if v == nil {
@@ -496,7 +496,7 @@ func (o ApplicationSourceResourcesPtrOutput) ResourceLabel() pulumi.StringPtrOut
 	}).(pulumi.StringPtrOutput)
 }
 
-// Whether to service web requests on the root path for the Application Source.
+// Whether to service web requests on the root path for the Application Source. Computed by API if not specified.
 func (o ApplicationSourceResourcesPtrOutput) ServiceWebRequestsOnRootPath() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ApplicationSourceResources) *bool {
 		if v == nil {
@@ -506,7 +506,7 @@ func (o ApplicationSourceResourcesPtrOutput) ServiceWebRequestsOnRootPath() pulu
 	}).(pulumi.BoolPtrOutput)
 }
 
-// The session affinity for the Application Source.
+// Whether session affinity is enabled for the Application Source. Computed by API if not specified.
 func (o ApplicationSourceResourcesPtrOutput) SessionAffinity() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ApplicationSourceResources) *bool {
 		if v == nil {
@@ -2140,13 +2140,13 @@ func (o BatchPredictionJobDefinitionTimeseriesSettingsPtrOutput) Type() pulumi.S
 }
 
 type CustomApplicationFromEnvironmentResources struct {
-	// The number of replicas for the Custom Application.
+	// The number of replicas for the Custom Application. Computed by API if not specified.
 	Replicas *int `pulumi:"replicas"`
-	// The resource label for the Custom Application.
+	// The resource label for the Custom Application (e.g., 'cpu.small', 'cpu.medium'). Computed by API if not specified.
 	ResourceLabel *string `pulumi:"resourceLabel"`
-	// Whether to service web requests on the root path for the Custom Application.
+	// Whether to service web requests on the root path for the Custom Application. Computed by API if not specified.
 	ServiceWebRequestsOnRootPath *bool `pulumi:"serviceWebRequestsOnRootPath"`
-	// Whether session affinity is enabled for the Custom Application.
+	// Whether session affinity is enabled for the Custom Application. Computed by API if not specified.
 	SessionAffinity *bool `pulumi:"sessionAffinity"`
 }
 
@@ -2162,13 +2162,13 @@ type CustomApplicationFromEnvironmentResourcesInput interface {
 }
 
 type CustomApplicationFromEnvironmentResourcesArgs struct {
-	// The number of replicas for the Custom Application.
+	// The number of replicas for the Custom Application. Computed by API if not specified.
 	Replicas pulumi.IntPtrInput `pulumi:"replicas"`
-	// The resource label for the Custom Application.
+	// The resource label for the Custom Application (e.g., 'cpu.small', 'cpu.medium'). Computed by API if not specified.
 	ResourceLabel pulumi.StringPtrInput `pulumi:"resourceLabel"`
-	// Whether to service web requests on the root path for the Custom Application.
+	// Whether to service web requests on the root path for the Custom Application. Computed by API if not specified.
 	ServiceWebRequestsOnRootPath pulumi.BoolPtrInput `pulumi:"serviceWebRequestsOnRootPath"`
-	// Whether session affinity is enabled for the Custom Application.
+	// Whether session affinity is enabled for the Custom Application. Computed by API if not specified.
 	SessionAffinity pulumi.BoolPtrInput `pulumi:"sessionAffinity"`
 }
 
@@ -2249,22 +2249,22 @@ func (o CustomApplicationFromEnvironmentResourcesOutput) ToCustomApplicationFrom
 	}).(CustomApplicationFromEnvironmentResourcesPtrOutput)
 }
 
-// The number of replicas for the Custom Application.
+// The number of replicas for the Custom Application. Computed by API if not specified.
 func (o CustomApplicationFromEnvironmentResourcesOutput) Replicas() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v CustomApplicationFromEnvironmentResources) *int { return v.Replicas }).(pulumi.IntPtrOutput)
 }
 
-// The resource label for the Custom Application.
+// The resource label for the Custom Application (e.g., 'cpu.small', 'cpu.medium'). Computed by API if not specified.
 func (o CustomApplicationFromEnvironmentResourcesOutput) ResourceLabel() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v CustomApplicationFromEnvironmentResources) *string { return v.ResourceLabel }).(pulumi.StringPtrOutput)
 }
 
-// Whether to service web requests on the root path for the Custom Application.
+// Whether to service web requests on the root path for the Custom Application. Computed by API if not specified.
 func (o CustomApplicationFromEnvironmentResourcesOutput) ServiceWebRequestsOnRootPath() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v CustomApplicationFromEnvironmentResources) *bool { return v.ServiceWebRequestsOnRootPath }).(pulumi.BoolPtrOutput)
 }
 
-// Whether session affinity is enabled for the Custom Application.
+// Whether session affinity is enabled for the Custom Application. Computed by API if not specified.
 func (o CustomApplicationFromEnvironmentResourcesOutput) SessionAffinity() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v CustomApplicationFromEnvironmentResources) *bool { return v.SessionAffinity }).(pulumi.BoolPtrOutput)
 }
@@ -2293,7 +2293,7 @@ func (o CustomApplicationFromEnvironmentResourcesPtrOutput) Elem() CustomApplica
 	}).(CustomApplicationFromEnvironmentResourcesOutput)
 }
 
-// The number of replicas for the Custom Application.
+// The number of replicas for the Custom Application. Computed by API if not specified.
 func (o CustomApplicationFromEnvironmentResourcesPtrOutput) Replicas() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *CustomApplicationFromEnvironmentResources) *int {
 		if v == nil {
@@ -2303,7 +2303,7 @@ func (o CustomApplicationFromEnvironmentResourcesPtrOutput) Replicas() pulumi.In
 	}).(pulumi.IntPtrOutput)
 }
 
-// The resource label for the Custom Application.
+// The resource label for the Custom Application (e.g., 'cpu.small', 'cpu.medium'). Computed by API if not specified.
 func (o CustomApplicationFromEnvironmentResourcesPtrOutput) ResourceLabel() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *CustomApplicationFromEnvironmentResources) *string {
 		if v == nil {
@@ -2313,7 +2313,7 @@ func (o CustomApplicationFromEnvironmentResourcesPtrOutput) ResourceLabel() pulu
 	}).(pulumi.StringPtrOutput)
 }
 
-// Whether to service web requests on the root path for the Custom Application.
+// Whether to service web requests on the root path for the Custom Application. Computed by API if not specified.
 func (o CustomApplicationFromEnvironmentResourcesPtrOutput) ServiceWebRequestsOnRootPath() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *CustomApplicationFromEnvironmentResources) *bool {
 		if v == nil {
@@ -2323,7 +2323,7 @@ func (o CustomApplicationFromEnvironmentResourcesPtrOutput) ServiceWebRequestsOn
 	}).(pulumi.BoolPtrOutput)
 }
 
-// Whether session affinity is enabled for the Custom Application.
+// Whether session affinity is enabled for the Custom Application. Computed by API if not specified.
 func (o CustomApplicationFromEnvironmentResourcesPtrOutput) SessionAffinity() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *CustomApplicationFromEnvironmentResources) *bool {
 		if v == nil {
@@ -2334,13 +2334,13 @@ func (o CustomApplicationFromEnvironmentResourcesPtrOutput) SessionAffinity() pu
 }
 
 type CustomApplicationResources struct {
-	// The number of replicas for the Custom Application.
+	// The number of replicas for the Custom Application. Computed by API if not specified.
 	Replicas *int `pulumi:"replicas"`
-	// The resource label for the Custom Application.
+	// The resource label for the Custom Application (e.g., 'cpu.small', 'cpu.medium'). Computed by API if not specified.
 	ResourceLabel *string `pulumi:"resourceLabel"`
-	// Whether to service web requests on the root path for the Custom Application.
+	// Whether to service web requests on the root path for the Custom Application. Computed by API if not specified.
 	ServiceWebRequestsOnRootPath *bool `pulumi:"serviceWebRequestsOnRootPath"`
-	// Whether session affinity is enabled for the Custom Application.
+	// Whether session affinity is enabled for the Custom Application. Computed by API if not specified.
 	SessionAffinity *bool `pulumi:"sessionAffinity"`
 }
 
@@ -2356,13 +2356,13 @@ type CustomApplicationResourcesInput interface {
 }
 
 type CustomApplicationResourcesArgs struct {
-	// The number of replicas for the Custom Application.
+	// The number of replicas for the Custom Application. Computed by API if not specified.
 	Replicas pulumi.IntPtrInput `pulumi:"replicas"`
-	// The resource label for the Custom Application.
+	// The resource label for the Custom Application (e.g., 'cpu.small', 'cpu.medium'). Computed by API if not specified.
 	ResourceLabel pulumi.StringPtrInput `pulumi:"resourceLabel"`
-	// Whether to service web requests on the root path for the Custom Application.
+	// Whether to service web requests on the root path for the Custom Application. Computed by API if not specified.
 	ServiceWebRequestsOnRootPath pulumi.BoolPtrInput `pulumi:"serviceWebRequestsOnRootPath"`
-	// Whether session affinity is enabled for the Custom Application.
+	// Whether session affinity is enabled for the Custom Application. Computed by API if not specified.
 	SessionAffinity pulumi.BoolPtrInput `pulumi:"sessionAffinity"`
 }
 
@@ -2443,22 +2443,22 @@ func (o CustomApplicationResourcesOutput) ToCustomApplicationResourcesPtrOutputW
 	}).(CustomApplicationResourcesPtrOutput)
 }
 
-// The number of replicas for the Custom Application.
+// The number of replicas for the Custom Application. Computed by API if not specified.
 func (o CustomApplicationResourcesOutput) Replicas() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v CustomApplicationResources) *int { return v.Replicas }).(pulumi.IntPtrOutput)
 }
 
-// The resource label for the Custom Application.
+// The resource label for the Custom Application (e.g., 'cpu.small', 'cpu.medium'). Computed by API if not specified.
 func (o CustomApplicationResourcesOutput) ResourceLabel() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v CustomApplicationResources) *string { return v.ResourceLabel }).(pulumi.StringPtrOutput)
 }
 
-// Whether to service web requests on the root path for the Custom Application.
+// Whether to service web requests on the root path for the Custom Application. Computed by API if not specified.
 func (o CustomApplicationResourcesOutput) ServiceWebRequestsOnRootPath() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v CustomApplicationResources) *bool { return v.ServiceWebRequestsOnRootPath }).(pulumi.BoolPtrOutput)
 }
 
-// Whether session affinity is enabled for the Custom Application.
+// Whether session affinity is enabled for the Custom Application. Computed by API if not specified.
 func (o CustomApplicationResourcesOutput) SessionAffinity() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v CustomApplicationResources) *bool { return v.SessionAffinity }).(pulumi.BoolPtrOutput)
 }
@@ -2487,7 +2487,7 @@ func (o CustomApplicationResourcesPtrOutput) Elem() CustomApplicationResourcesOu
 	}).(CustomApplicationResourcesOutput)
 }
 
-// The number of replicas for the Custom Application.
+// The number of replicas for the Custom Application. Computed by API if not specified.
 func (o CustomApplicationResourcesPtrOutput) Replicas() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *CustomApplicationResources) *int {
 		if v == nil {
@@ -2497,7 +2497,7 @@ func (o CustomApplicationResourcesPtrOutput) Replicas() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
-// The resource label for the Custom Application.
+// The resource label for the Custom Application (e.g., 'cpu.small', 'cpu.medium'). Computed by API if not specified.
 func (o CustomApplicationResourcesPtrOutput) ResourceLabel() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *CustomApplicationResources) *string {
 		if v == nil {
@@ -2507,7 +2507,7 @@ func (o CustomApplicationResourcesPtrOutput) ResourceLabel() pulumi.StringPtrOut
 	}).(pulumi.StringPtrOutput)
 }
 
-// Whether to service web requests on the root path for the Custom Application.
+// Whether to service web requests on the root path for the Custom Application. Computed by API if not specified.
 func (o CustomApplicationResourcesPtrOutput) ServiceWebRequestsOnRootPath() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *CustomApplicationResources) *bool {
 		if v == nil {
@@ -2517,7 +2517,7 @@ func (o CustomApplicationResourcesPtrOutput) ServiceWebRequestsOnRootPath() pulu
 	}).(pulumi.BoolPtrOutput)
 }
 
-// Whether session affinity is enabled for the Custom Application.
+// Whether session affinity is enabled for the Custom Application. Computed by API if not specified.
 func (o CustomApplicationResourcesPtrOutput) SessionAffinity() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *CustomApplicationResources) *bool {
 		if v == nil {

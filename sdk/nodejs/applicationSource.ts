@@ -66,9 +66,9 @@ export class ApplicationSource extends pulumi.CustomResource {
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * The resources for the Application Source.
+     * The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.
      */
-    public readonly resources!: pulumi.Output<outputs.ApplicationSourceResources | undefined>;
+    public readonly resources!: pulumi.Output<outputs.ApplicationSourceResources>;
     /**
      * The runtime parameter values for the Application Source.
      */
@@ -152,7 +152,7 @@ export interface ApplicationSourceState {
      */
     name?: pulumi.Input<string>;
     /**
-     * The resources for the Application Source.
+     * The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.
      */
     resources?: pulumi.Input<inputs.ApplicationSourceResources>;
     /**
@@ -190,7 +190,7 @@ export interface ApplicationSourceArgs {
      */
     name?: pulumi.Input<string>;
     /**
-     * The resources for the Application Source.
+     * The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.
      */
     resources?: pulumi.Input<inputs.ApplicationSourceResources>;
     /**

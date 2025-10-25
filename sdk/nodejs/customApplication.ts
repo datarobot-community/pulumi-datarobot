@@ -58,9 +58,9 @@ export class CustomApplication extends pulumi.CustomResource {
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * The resources for the Custom Application.
+     * The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.
      */
-    public readonly resources!: pulumi.Output<outputs.CustomApplicationResources | undefined>;
+    public readonly resources!: pulumi.Output<outputs.CustomApplicationResources>;
     /**
      * The ID of the Custom Application Source.
      */
@@ -141,7 +141,7 @@ export interface CustomApplicationState {
      */
     name?: pulumi.Input<string>;
     /**
-     * The resources for the Custom Application.
+     * The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.
      */
     resources?: pulumi.Input<inputs.CustomApplicationResources>;
     /**
@@ -179,7 +179,7 @@ export interface CustomApplicationArgs {
      */
     name?: pulumi.Input<string>;
     /**
-     * The resources for the Custom Application.
+     * The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.
      */
     resources?: pulumi.Input<inputs.CustomApplicationResources>;
     /**
