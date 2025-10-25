@@ -78,19 +78,19 @@
       "properties": {
         "replicas": {
           "type": "integer",
-          "description": "The replicas for the Application Source.\n"
+          "description": "The number of replicas for the Application Source. Computed by API if not specified.\n"
         },
         "resourceLabel": {
           "type": "string",
-          "description": "The resource label for the Application Source.\n"
+          "description": "The resource label for the Application Source (e.g., 'cpu.small', 'cpu.medium'). Computed by API if not specified.\n"
         },
         "serviceWebRequestsOnRootPath": {
           "type": "boolean",
-          "description": "Whether to service web requests on the root path for the Application Source.\n"
+          "description": "Whether to service web requests on the root path for the Application Source. Computed by API if not specified.\n"
         },
         "sessionAffinity": {
           "type": "boolean",
-          "description": "The session affinity for the Application Source.\n"
+          "description": "Whether session affinity is enabled for the Application Source. Computed by API if not specified.\n"
         }
       },
       "type": "object",
@@ -131,19 +131,19 @@
       "properties": {
         "replicas": {
           "type": "integer",
-          "description": "The replicas for the Application Source.\n"
+          "description": "The number of replicas for the Application Source. Computed by API if not specified.\n"
         },
         "resourceLabel": {
           "type": "string",
-          "description": "The resource label for the Application Source.\n"
+          "description": "The resource label for the Application Source (e.g., 'cpu.small', 'cpu.medium'). Computed by API if not specified.\n"
         },
         "serviceWebRequestsOnRootPath": {
           "type": "boolean",
-          "description": "Whether to service web requests on the root path for the Application Source.\n"
+          "description": "Whether to service web requests on the root path for the Application Source. Computed by API if not specified.\n"
         },
         "sessionAffinity": {
           "type": "boolean",
-          "description": "The session affinity for the Application Source.\n"
+          "description": "Whether session affinity is enabled for the Application Source. Computed by API if not specified.\n"
         }
       },
       "type": "object",
@@ -447,19 +447,19 @@
       "properties": {
         "replicas": {
           "type": "integer",
-          "description": "The number of replicas for the Custom Application.\n"
+          "description": "The number of replicas for the Custom Application. Computed by API if not specified.\n"
         },
         "resourceLabel": {
           "type": "string",
-          "description": "The resource label for the Custom Application.\n"
+          "description": "The resource label for the Custom Application (e.g., 'cpu.small', 'cpu.medium'). Computed by API if not specified.\n"
         },
         "serviceWebRequestsOnRootPath": {
           "type": "boolean",
-          "description": "Whether to service web requests on the root path for the Custom Application.\n"
+          "description": "Whether to service web requests on the root path for the Custom Application. Computed by API if not specified.\n"
         },
         "sessionAffinity": {
           "type": "boolean",
-          "description": "Whether session affinity is enabled for the Custom Application.\n"
+          "description": "Whether session affinity is enabled for the Custom Application. Computed by API if not specified.\n"
         }
       },
       "type": "object"
@@ -468,19 +468,19 @@
       "properties": {
         "replicas": {
           "type": "integer",
-          "description": "The number of replicas for the Custom Application.\n"
+          "description": "The number of replicas for the Custom Application. Computed by API if not specified.\n"
         },
         "resourceLabel": {
           "type": "string",
-          "description": "The resource label for the Custom Application.\n"
+          "description": "The resource label for the Custom Application (e.g., 'cpu.small', 'cpu.medium'). Computed by API if not specified.\n"
         },
         "serviceWebRequestsOnRootPath": {
           "type": "boolean",
-          "description": "Whether to service web requests on the root path for the Custom Application.\n"
+          "description": "Whether to service web requests on the root path for the Custom Application. Computed by API if not specified.\n"
         },
         "sessionAffinity": {
           "type": "boolean",
-          "description": "Whether session affinity is enabled for the Custom Application.\n"
+          "description": "Whether session affinity is enabled for the Custom Application. Computed by API if not specified.\n"
         }
       },
       "type": "object"
@@ -2126,7 +2126,7 @@
       }
     },
     "datarobot:index/applicationSource:ApplicationSource": {
-      "description": "Application Source\n\n## Example Usage\n\n<!--Start PulumiCodeChooser -->\n```yaml\nresources:\n  example:\n    type: datarobot:ApplicationSource\n    properties:\n      baseEnvironmentId: 6542cd582a9d3d51bf4ac71e\n      # Optional\n      files:\n        - - start-app.sh\n        - - streamlit-app.py\n      folderPath: example-app\n      runtimeParameterValues:\n        - key: EXAMPLE_PARAM\n          type: string\n          value: val\n      resources:\n        replicas: 2\n        session_affinity: true\n        resource_label: cpu.medium\noutputs:\n  datarobotApplicationSourceId: ${example.id}\n  datarobotApplicationSourceVersionId: ${example.versionId}\n```\n<!--End PulumiCodeChooser -->\n",
+      "description": "Application Source\n\n## Example Usage\n\n<!--Start PulumiCodeChooser -->\n```yaml\nresources:\n  example:\n    type: datarobot:ApplicationSource\n    properties:\n      baseEnvironmentId: 6542cd582a9d3d51bf4ac71e\n      # Optional\n      files:\n        - - start-app.sh\n        - - streamlit-app.py\n      folderPath: example-app\n      runtimeParameterValues:\n        - key: EXAMPLE_PARAM\n          type: string\n          value: val\n      resources:\n        replicas: 2\n        session_affinity: true\n        resource_label: cpu.medium\noutputs:\n  datarobotApplicationSourceId: ${example.id}\n  datarobotApplicationSourceVersionId: ${example.versionId}\n  datarobotApplicationSourceResources: ${example.resources}\n```\n<!--End PulumiCodeChooser -->\n",
       "properties": {
         "baseEnvironmentId": {
           "type": "string",
@@ -2161,7 +2161,7 @@
         },
         "resources": {
           "$ref": "#/types/datarobot:index/ApplicationSourceResources:ApplicationSourceResources",
-          "description": "The resources for the Application Source.\n"
+          "description": "The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.\n"
         },
         "runtimeParameterValues": {
           "type": "array",
@@ -2181,6 +2181,7 @@
         "filesHashes",
         "folderPathHash",
         "name",
+        "resources",
         "runtimeParameterValues",
         "versionId"
       ],
@@ -2207,7 +2208,7 @@
         },
         "resources": {
           "$ref": "#/types/datarobot:index/ApplicationSourceResources:ApplicationSourceResources",
-          "description": "The resources for the Application Source.\n"
+          "description": "The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.\n"
         },
         "runtimeParameterValues": {
           "type": "array",
@@ -2253,7 +2254,7 @@
           },
           "resources": {
             "$ref": "#/types/datarobot:index/ApplicationSourceResources:ApplicationSourceResources",
-            "description": "The resources for the Application Source.\n"
+            "description": "The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.\n"
           },
           "runtimeParameterValues": {
             "type": "array",
@@ -2271,7 +2272,7 @@
       }
     },
     "datarobot:index/applicationSourceFromTemplate:ApplicationSourceFromTemplate": {
-      "description": "Application Source\n\n## Example Usage\n\n<!--Start PulumiCodeChooser -->\n```yaml\nresources:\n  example:\n    type: datarobot:ApplicationSourceFromTemplate\n    properties:\n      templateId: 67126757e7819551baceb22b\n      # Optional\n      baseEnvironmentId: 6542cd582a9d3d51bf4ac71e\n      files:\n        - - start-app.sh\n        - - streamlit-app.py\n      folderPath: example-app\n      runtimeParameterValues:\n        - key: EXAMPLE_PARAM\n          type: string\n          value: val\n      resources:\n        replicas: 2\n        session_affinity: true\n        resource_label: cpu.medium\noutputs:\n  datarobotApplicationSourceId: ${example.id}\n  datarobotApplicationSourceVersionId: ${example.versionId}\n```\n<!--End PulumiCodeChooser -->\n",
+      "description": "Application Source\n\n## Example Usage\n\n<!--Start PulumiCodeChooser -->\n```yaml\nresources:\n  example:\n    type: datarobot:ApplicationSourceFromTemplate\n    properties:\n      templateId: 67126757e7819551baceb22b\n      # Optional\n      baseEnvironmentId: 6542cd582a9d3d51bf4ac71e\n      files:\n        - - start-app.sh\n        - - streamlit-app.py\n      folderPath: example-app\n      runtimeParameterValues:\n        - key: EXAMPLE_PARAM\n          type: string\n          value: val\n      resources:\n        replicas: 2\n        session_affinity: true\n        resource_label: cpu.medium\noutputs:\n  datarobotApplicationSourceId: ${example.id}\n  datarobotApplicationSourceVersionId: ${example.versionId}\n  datarobotApplicationSourceResources: ${example.resources}\n```\n<!--End PulumiCodeChooser -->\n",
       "properties": {
         "baseEnvironmentId": {
           "type": "string",
@@ -2306,7 +2307,7 @@
         },
         "resources": {
           "$ref": "#/types/datarobot:index/ApplicationSourceFromTemplateResources:ApplicationSourceFromTemplateResources",
-          "description": "The resources for the Application Source.\n"
+          "description": "The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.\n"
         },
         "runtimeParameterValues": {
           "type": "array",
@@ -2330,6 +2331,7 @@
         "filesHashes",
         "folderPathHash",
         "name",
+        "resources",
         "runtimeParameterValues",
         "templateId",
         "versionId"
@@ -2357,7 +2359,7 @@
         },
         "resources": {
           "$ref": "#/types/datarobot:index/ApplicationSourceFromTemplateResources:ApplicationSourceFromTemplateResources",
-          "description": "The resources for the Application Source.\n"
+          "description": "The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.\n"
         },
         "runtimeParameterValues": {
           "type": "array",
@@ -2410,7 +2412,7 @@
           },
           "resources": {
             "$ref": "#/types/datarobot:index/ApplicationSourceFromTemplateResources:ApplicationSourceFromTemplateResources",
-            "description": "The resources for the Application Source.\n"
+            "description": "The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.\n"
           },
           "runtimeParameterValues": {
             "type": "array",
@@ -3020,7 +3022,7 @@
       }
     },
     "datarobot:index/customApplication:CustomApplication": {
-      "description": "Custom Application\n\n## Example Usage\n\n<!--Start PulumiCodeChooser -->\n```yaml\nresources:\n  exampleApplicationSource:\n    type: datarobot:ApplicationSource\n    properties:\n      files:\n        - - start-app.sh\n        - - streamlit-app.py\n  exampleCustomApplication:\n    type: datarobot:CustomApplication\n    properties:\n      sourceVersionId: ${exampleApplicationSource.versionId}\n      # optional settings\n      externalAccessEnabled: true\n      externalAccessRecipients:\n        - recipient@example.com\n      allowAutoStopping: false\n      resources:\n        - replicas: 2\n          resourceLabel: cpu.medium\n          sessionAffinity: true\n          serviceWebRequestsOnRootPath: false\noutputs:\n  datarobotCustomApplicationId: ${exampleCustomApplication.id}\n  datarobotCustomApplicationSourceId: ${exampleCustomApplication.sourceId}\n  datarobotCustomApplicationSourceVersionId: ${exampleCustomApplication.sourceVersionId}\n  datarobotCustomApplicationUrl: ${exampleCustomApplication.applicationUrl}\n```\n<!--End PulumiCodeChooser -->\n",
+      "description": "Custom Application\n\n## Example Usage\n\n<!--Start PulumiCodeChooser -->\n```yaml\nresources:\n  exampleApplicationSource:\n    type: datarobot:ApplicationSource\n    properties:\n      files:\n        - - start-app.sh\n        - - streamlit-app.py\n  exampleCustomApplication:\n    type: datarobot:CustomApplication\n    properties:\n      sourceVersionId: ${exampleApplicationSource.versionId}\n      # optional settings\n      externalAccessEnabled: true\n      externalAccessRecipients:\n        - recipient@example.com\n      allowAutoStopping: false\n      resources:\n        - replicas: 2\n          resourceLabel: cpu.medium\n          sessionAffinity: true\n          serviceWebRequestsOnRootPath: false\noutputs:\n  datarobotCustomApplicationId: ${exampleCustomApplication.id}\n  datarobotCustomApplicationSourceId: ${exampleCustomApplication.sourceId}\n  datarobotCustomApplicationSourceVersionId: ${exampleCustomApplication.sourceVersionId}\n  datarobotCustomApplicationUrl: ${exampleCustomApplication.applicationUrl}\n  datarobotCustomApplicationResources: ${exampleCustomApplication.resources}\n```\n<!--End PulumiCodeChooser -->\n",
       "properties": {
         "allowAutoStopping": {
           "type": "boolean",
@@ -3047,7 +3049,7 @@
         },
         "resources": {
           "$ref": "#/types/datarobot:index/CustomApplicationResources:CustomApplicationResources",
-          "description": "The resources for the Custom Application.\n"
+          "description": "The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.\n"
         },
         "sourceId": {
           "type": "string",
@@ -3070,6 +3072,7 @@
         "applicationUrl",
         "externalAccessEnabled",
         "name",
+        "resources",
         "sourceId",
         "sourceVersionId"
       ],
@@ -3095,7 +3098,7 @@
         },
         "resources": {
           "$ref": "#/types/datarobot:index/CustomApplicationResources:CustomApplicationResources",
-          "description": "The resources for the Custom Application.\n"
+          "description": "The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.\n"
         },
         "sourceVersionId": {
           "type": "string",
@@ -3140,7 +3143,7 @@
           },
           "resources": {
             "$ref": "#/types/datarobot:index/CustomApplicationResources:CustomApplicationResources",
-            "description": "The resources for the Custom Application.\n"
+            "description": "The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.\n"
           },
           "sourceId": {
             "type": "string",
@@ -3162,7 +3165,7 @@
       }
     },
     "datarobot:index/customApplicationFromEnvironment:CustomApplicationFromEnvironment": {
-      "description": "Custom Application created from an Execution Environment.\n\n## Example Usage\n\n<!--Start PulumiCodeChooser -->\n```yaml\nresources:\n  example:\n    type: datarobot:CustomApplicationFromEnvironment\n    properties:\n      environmentId: ${datarobot_execution_environment.example.id}\n      # optional settings\n      externalAccessEnabled: true\n      externalAccessRecipients:\n        - recipient@example.com\n      allowAutoStopping: false\n      resources:\n        - replicas: 1\n          resourceLabel: cpu.small\n          sessionAffinity: false\n          serviceWebRequestsOnRootPath: true\noutputs:\n  datarobotCustomApplicationId: ${example.id}\n  datarobotCustomApplicationUrl: ${example.applicationUrl}\n```\n<!--End PulumiCodeChooser -->\n",
+      "description": "Custom Application created from an Execution Environment.\n\n## Example Usage\n\n<!--Start PulumiCodeChooser -->\n```yaml\nresources:\n  example:\n    type: datarobot:CustomApplicationFromEnvironment\n    properties:\n      environmentId: ${datarobot_execution_environment.example.id}\n      # optional settings\n      externalAccessEnabled: true\n      externalAccessRecipients:\n        - recipient@example.com\n      allowAutoStopping: false\n      resources:\n        - replicas: 1\n          resourceLabel: cpu.small\n          sessionAffinity: false\n          serviceWebRequestsOnRootPath: true\noutputs:\n  datarobotCustomApplicationId: ${example.id}\n  datarobotCustomApplicationUrl: ${example.applicationUrl}\n  datarobotCustomApplicationResources: ${example.resources}\n```\n<!--End PulumiCodeChooser -->\n",
       "properties": {
         "allowAutoStopping": {
           "type": "boolean",
@@ -3197,7 +3200,7 @@
         },
         "resources": {
           "$ref": "#/types/datarobot:index/CustomApplicationFromEnvironmentResources:CustomApplicationFromEnvironmentResources",
-          "description": "The resources for the Custom Application.\n"
+          "description": "The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.\n"
         },
         "useCaseIds": {
           "type": "array",
@@ -3213,7 +3216,8 @@
         "environmentId",
         "environmentVersionId",
         "externalAccessEnabled",
-        "name"
+        "name",
+        "resources"
       ],
       "inputProperties": {
         "allowAutoStopping": {
@@ -3241,7 +3245,7 @@
         },
         "resources": {
           "$ref": "#/types/datarobot:index/CustomApplicationFromEnvironmentResources:CustomApplicationFromEnvironmentResources",
-          "description": "The resources for the Custom Application.\n"
+          "description": "The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.\n"
         },
         "useCaseIds": {
           "type": "array",
@@ -3290,7 +3294,7 @@
           },
           "resources": {
             "$ref": "#/types/datarobot:index/CustomApplicationFromEnvironmentResources:CustomApplicationFromEnvironmentResources",
-            "description": "The resources for the Custom Application.\n"
+            "description": "The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.\n"
           },
           "useCaseIds": {
             "type": "array",
