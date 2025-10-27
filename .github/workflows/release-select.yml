@@ -68,7 +68,7 @@ jobs:
 
       - name: Setup Python
         if: ${{ github.event.inputs.SDK_LANGUAGE == 'python' && env.PUBLISH_PYPI == 'true' }}
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: '3.11'
 
