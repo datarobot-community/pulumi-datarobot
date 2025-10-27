@@ -156,7 +156,7 @@ jobs:
           python -c "import pulumi_datarobot; print('Imported pulumi_datarobot from test distribution OK')"
 
       - name: Commit upgrade + test artifacts
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v7
         with:
           commit_message: "Upgrade provider to ${{ inputs.target_bridge_version }} (test version ${{ steps.version.outputs.test_version }})"
           file_pattern: '.'
