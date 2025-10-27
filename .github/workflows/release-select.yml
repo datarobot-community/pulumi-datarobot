@@ -102,7 +102,7 @@ jobs:
 
       - name: Publish JS SDK
         if: ${{ github.event.inputs.SDK_LANGUAGE == 'nodejs' && env.PUBLISH_NPM == 'true' }}
-        uses: JS-DevTools/npm-publish@v3.1.1
+        uses: JS-DevTools/npm-publish@v4.1.1
         with:
           access: "public"
           token: ${{ env.NPM_TOKEN }}
