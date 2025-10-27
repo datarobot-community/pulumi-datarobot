@@ -82,6 +82,11 @@ build_nodejs:: install_plugins tfgen # build the node sdk
 
 build_python:: install_plugins tfgen # build the python sdk
 	$(WORKING_DIR)/bin/$(TFGEN) python --overlays provider/overlays/python --out sdk/python/
+	@echo "Restoring Python-specific README..."
+	@sed -e "s/{{VERSION}}/$(VERSION)/g" \
+		-e "s|{{PACKAGE_NAME}}|pulumi-datarobot|g" \
+		-e "s|{{EXAMPLES_PATH}}|examples/python|g" \
+		templates/README.python.md > sdk/python/README.md
 	cd sdk/python/ && \
 				python3 setup.py clean --all 2>/dev/null && \
 				rm -rf ./bin/ ../python.bin/ && cp -R . ../python.bin && mv ../python.bin ./bin && \
@@ -89,9 +94,7 @@ build_python:: install_plugins tfgen # build the python sdk
 				rm ./bin/setup.py.bak && \
 				if [[ "$$TEST_PYPI_MODE" == "1" ]]; then \
 					echo "Applying Test PyPI transformations..."; \
-					# Replace distribution name only (keep importable module pulumi_datarobot) \
 					sed -i.bak -e "s/setup(name='pulumi_datarobot'/setup(name='datarobot-pulumi-test'/" ./bin/setup.py && rm ./bin/setup.py.bak; \
-					# Override version to dev pre-release if provided via TEST_PYPI_VERSION \
 					if [[ -n "$$TEST_PYPI_VERSION" ]]; then \
 						sed -i.bak -e "s/^VERSION = .*/VERSION = \"$$TEST_PYPI_VERSION\"/" ./bin/setup.py && rm ./bin/setup.py.bak; \
 					fi; \
@@ -102,6 +105,11 @@ build_python:: install_plugins tfgen # build the python sdk
 
 build_dotnet:: install_plugins tfgen # build the dotnet sdk
 	$(WORKING_DIR)/bin/$(TFGEN) dotnet --overlays provider/overlays/dotnet --out sdk/dotnet/
+	@echo "Restoring .NET-specific README..."
+	@sed -e "s/{{VERSION}}/$(VERSION)/g" \
+		-e "s|{{PACKAGE_NAME}}|DataRobotPulumi.Datarobot|g" \
+		-e "s|{{EXAMPLES_PATH}}|examples/dotnet|g" \
+		templates/README.dotnet.md > sdk/dotnet/README.md
 	cd sdk/dotnet/ && \
 		echo "$(VERSION_DOTNET)" >version.txt && \
         dotnet build /p:Version=$(VERSION_DOTNET)
@@ -129,7 +137,7 @@ help::
 		expand -t20
 	@echo ""
 	@echo "Cross-compilation targets:"
-	@echo "  cross_compile_windows   Cross-compile for Windows using local terraform provider"  
+	@echo "  cross_compile_windows   Cross-compile for Windows using local terraform provider"
 	@echo "  test_local_provider     Test using local terraform provider on current platform"
 	@echo "  build_local_provider    Build local binaries using local terraform provider (keeps in bin/)"
 	@echo "  clean_windows          Clean Windows cross-compilation artifacts"
@@ -207,20 +215,36 @@ build_sdks_windows:: # build SDKs using native binaries since Windows binaries w
 	cd provider && go build -o $(WORKING_DIR)/bin/$(TFGEN)-native -ldflags "-X ${PROJECT}/${VERSION_PATH}=${VERSION}" ${PROJECT}/${PROVIDER_PATH}/cmd/${TFGEN}
 	@# Node.js SDK
 	$(WORKING_DIR)/bin/$(TFGEN)-native nodejs --overlays provider/overlays/nodejs --out sdk/nodejs/ && \
+	sed -e "s/{{VERSION}}/$(VERSION)/g" \
+		-e "s|{{PACKAGE_NAME}}|@datarobot/pulumi-datarobot|g" \
+		-e "s|{{EXAMPLES_PATH}}|examples/nodejs|g" \
+		templates/README.nodejs.md > sdk/nodejs/README.md && \
 	cd sdk/nodejs/ && yarn install && yarn run tsc && \
 	cp ../../README.md ../../LICENSE package.json yarn.lock ./bin/ && \
 	sed -i.bak -e "s/\$${VERSION}/$(VERSION)/g" ./bin/package.json || echo "Node.js SDK generation completed"
 	@# Python SDK
 	$(WORKING_DIR)/bin/$(TFGEN)-native python --overlays provider/overlays/python --out sdk/python/ && \
-	cd sdk/python/ && cp ../../README.md . && python3 setup.py clean --all 2>/dev/null && \
+	sed -e "s/{{VERSION}}/$(VERSION)/g" \
+		-e "s|{{PACKAGE_NAME}}|pulumi-datarobot|g" \
+		-e "s|{{EXAMPLES_PATH}}|examples/python|g" \
+		templates/README.python.md > sdk/python/README.md && \
+	cd sdk/python/ && python3 setup.py clean --all 2>/dev/null && \
 	rm -rf ./bin/ ../python.bin/ && cp -R . ../python.bin && mv ../python.bin ./bin && \
 	sed -i.bak -e 's/^VERSION = .*/VERSION = "$(VERSION)"/g' -e 's/^PLUGIN_VERSION = .*/PLUGIN_VERSION = "$(VERSION)"/g' ./bin/setup.py && \
 	rm ./bin/setup.py.bak && cd ./bin && python3 setup.py build sdist || echo "Python SDK generation completed"
 	@# Go SDK
-	$(WORKING_DIR)/bin/$(TFGEN)-native go --overlays provider/overlays/go --out sdk/go/ || echo "Go SDK generation completed"
+	$(WORKING_DIR)/bin/$(TFGEN)-native go --overlays provider/overlays/go --out sdk/go/ && \
+	sed -e "s/{{VERSION}}/$(VERSION)/g" \
+		-e "s|{{PACKAGE_NAME}}|github.com/datarobot-community/pulumi-datarobot/sdk|g" \
+		-e "s|{{EXAMPLES_PATH}}|examples/go|g" \
+		templates/README.go.md > sdk/go/README.md || echo "Go SDK generation completed"
 	@# .NET SDK
 	$(WORKING_DIR)/bin/$(TFGEN)-native dotnet --overlays provider/overlays/dotnet --out sdk/dotnet/ && \
-	cd sdk/dotnet/ && echo "${VERSION}" >version.txt && dotnet build /p:Version=${VERSION} || echo ".NET SDK generation completed"
+	sed -e "s/{{VERSION}}/$(VERSION)/g" \
+		-e "s|{{PACKAGE_NAME}}|DataRobotPulumi.Datarobot|g" \
+		-e "s|{{EXAMPLES_PATH}}|examples/dotnet|g" \
+		templates/README.dotnet.md > sdk/dotnet/README.md && \
+	cd sdk/dotnet/ && echo "${VERSION_DOTNET}" >version.txt && dotnet build /p:Version=${VERSION_DOTNET} || echo ".NET SDK generation completed"
 	@# Clean up native binary
 	rm -f $(WORKING_DIR)/bin/$(TFGEN)-native
 	@echo "SDK generation completed successfully"
