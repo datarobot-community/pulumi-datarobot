@@ -15,19 +15,19 @@ namespace DataRobotPulumi.Datarobot.Outputs
     public sealed class ApplicationSourceFromTemplateResources
     {
         /// <summary>
-        /// The replicas for the Application Source.
+        /// The number of replicas for the Application Source. Computed by API if not specified.
         /// </summary>
         public readonly int? Replicas;
         /// <summary>
-        /// The resource label for the Application Source.
+        /// The resource label for the Application Source (e.g., 'cpu.small', 'cpu.medium'). Computed by API if not specified.
         /// </summary>
         public readonly string? ResourceLabel;
         /// <summary>
-        /// Whether to service web requests on the root path for the Application Source.
+        /// Whether to service web requests on the root path for the Application Source. Computed by API if not specified.
         /// </summary>
         public readonly bool? ServiceWebRequestsOnRootPath;
         /// <summary>
-        /// The session affinity for the Application Source.
+        /// Whether session affinity is enabled for the Application Source. Computed by API if not specified.
         /// </summary>
         public readonly bool? SessionAffinity;
 

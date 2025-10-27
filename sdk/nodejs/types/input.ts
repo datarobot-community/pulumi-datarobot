@@ -7,19 +7,19 @@ import * as outputs from "../types/output";
 
 export interface ApplicationSourceFromTemplateResources {
     /**
-     * The replicas for the Application Source.
+     * The number of replicas for the Application Source. Computed by API if not specified.
      */
     replicas?: pulumi.Input<number>;
     /**
-     * The resource label for the Application Source.
+     * The resource label for the Application Source (e.g., 'cpu.small', 'cpu.medium'). Computed by API if not specified.
      */
     resourceLabel?: pulumi.Input<string>;
     /**
-     * Whether to service web requests on the root path for the Application Source.
+     * Whether to service web requests on the root path for the Application Source. Computed by API if not specified.
      */
     serviceWebRequestsOnRootPath?: pulumi.Input<boolean>;
     /**
-     * The session affinity for the Application Source.
+     * Whether session affinity is enabled for the Application Source. Computed by API if not specified.
      */
     sessionAffinity?: pulumi.Input<boolean>;
 }
@@ -41,19 +41,19 @@ export interface ApplicationSourceFromTemplateRuntimeParameterValue {
 
 export interface ApplicationSourceResources {
     /**
-     * The replicas for the Application Source.
+     * The number of replicas for the Application Source. Computed by API if not specified.
      */
     replicas?: pulumi.Input<number>;
     /**
-     * The resource label for the Application Source.
+     * The resource label for the Application Source (e.g., 'cpu.small', 'cpu.medium'). Computed by API if not specified.
      */
     resourceLabel?: pulumi.Input<string>;
     /**
-     * Whether to service web requests on the root path for the Application Source.
+     * Whether to service web requests on the root path for the Application Source. Computed by API if not specified.
      */
     serviceWebRequestsOnRootPath?: pulumi.Input<boolean>;
     /**
-     * The session affinity for the Application Source.
+     * Whether session affinity is enabled for the Application Source. Computed by API if not specified.
      */
     sessionAffinity?: pulumi.Input<boolean>;
 }
@@ -261,38 +261,38 @@ export interface BatchPredictionJobDefinitionTimeseriesSettings {
 
 export interface CustomApplicationFromEnvironmentResources {
     /**
-     * The number of replicas for the Custom Application.
+     * The number of replicas for the Custom Application. Computed by API if not specified.
      */
     replicas?: pulumi.Input<number>;
     /**
-     * The resource label for the Custom Application.
+     * The resource label for the Custom Application (e.g., 'cpu.small', 'cpu.medium'). Computed by API if not specified.
      */
     resourceLabel?: pulumi.Input<string>;
     /**
-     * Whether to service web requests on the root path for the Custom Application.
+     * Whether to service web requests on the root path for the Custom Application. Computed by API if not specified.
      */
     serviceWebRequestsOnRootPath?: pulumi.Input<boolean>;
     /**
-     * Whether session affinity is enabled for the Custom Application.
+     * Whether session affinity is enabled for the Custom Application. Computed by API if not specified.
      */
     sessionAffinity?: pulumi.Input<boolean>;
 }
 
 export interface CustomApplicationResources {
     /**
-     * The number of replicas for the Custom Application.
+     * The number of replicas for the Custom Application. Computed by API if not specified.
      */
     replicas?: pulumi.Input<number>;
     /**
-     * The resource label for the Custom Application.
+     * The resource label for the Custom Application (e.g., 'cpu.small', 'cpu.medium'). Computed by API if not specified.
      */
     resourceLabel?: pulumi.Input<string>;
     /**
-     * Whether to service web requests on the root path for the Custom Application.
+     * Whether to service web requests on the root path for the Custom Application. Computed by API if not specified.
      */
     serviceWebRequestsOnRootPath?: pulumi.Input<boolean>;
     /**
-     * Whether session affinity is enabled for the Custom Application.
+     * Whether session affinity is enabled for the Custom Application. Computed by API if not specified.
      */
     sessionAffinity?: pulumi.Input<boolean>;
 }

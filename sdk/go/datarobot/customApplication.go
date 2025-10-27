@@ -26,8 +26,8 @@ type CustomApplication struct {
 	ExternalAccessRecipients pulumi.StringArrayOutput `pulumi:"externalAccessRecipients"`
 	// The name of the Custom Application.
 	Name pulumi.StringOutput `pulumi:"name"`
-	// The resources for the Custom Application.
-	Resources CustomApplicationResourcesPtrOutput `pulumi:"resources"`
+	// The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.
+	Resources CustomApplicationResourcesOutput `pulumi:"resources"`
 	// The ID of the Custom Application Source.
 	SourceId pulumi.StringOutput `pulumi:"sourceId"`
 	// The version ID of the Custom Application Source.
@@ -79,7 +79,7 @@ type customApplicationState struct {
 	ExternalAccessRecipients []string `pulumi:"externalAccessRecipients"`
 	// The name of the Custom Application.
 	Name *string `pulumi:"name"`
-	// The resources for the Custom Application.
+	// The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.
 	Resources *CustomApplicationResources `pulumi:"resources"`
 	// The ID of the Custom Application Source.
 	SourceId *string `pulumi:"sourceId"`
@@ -100,7 +100,7 @@ type CustomApplicationState struct {
 	ExternalAccessRecipients pulumi.StringArrayInput
 	// The name of the Custom Application.
 	Name pulumi.StringPtrInput
-	// The resources for the Custom Application.
+	// The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.
 	Resources CustomApplicationResourcesPtrInput
 	// The ID of the Custom Application Source.
 	SourceId pulumi.StringPtrInput
@@ -123,7 +123,7 @@ type customApplicationArgs struct {
 	ExternalAccessRecipients []string `pulumi:"externalAccessRecipients"`
 	// The name of the Custom Application.
 	Name *string `pulumi:"name"`
-	// The resources for the Custom Application.
+	// The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.
 	Resources *CustomApplicationResources `pulumi:"resources"`
 	// The version ID of the Custom Application Source.
 	SourceVersionId string `pulumi:"sourceVersionId"`
@@ -141,7 +141,7 @@ type CustomApplicationArgs struct {
 	ExternalAccessRecipients pulumi.StringArrayInput
 	// The name of the Custom Application.
 	Name pulumi.StringPtrInput
-	// The resources for the Custom Application.
+	// The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.
 	Resources CustomApplicationResourcesPtrInput
 	// The version ID of the Custom Application Source.
 	SourceVersionId pulumi.StringInput
@@ -261,9 +261,9 @@ func (o CustomApplicationOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *CustomApplication) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// The resources for the Custom Application.
-func (o CustomApplicationOutput) Resources() CustomApplicationResourcesPtrOutput {
-	return o.ApplyT(func(v *CustomApplication) CustomApplicationResourcesPtrOutput { return v.Resources }).(CustomApplicationResourcesPtrOutput)
+// The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.
+func (o CustomApplicationOutput) Resources() CustomApplicationResourcesOutput {
+	return o.ApplyT(func(v *CustomApplication) CustomApplicationResourcesOutput { return v.Resources }).(CustomApplicationResourcesOutput)
 }
 
 // The ID of the Custom Application Source.
