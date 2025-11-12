@@ -13,15 +13,22 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as datarobot from "@pulumi/datarobot";
  *
- * const example = datarobot.getExecutionEnvironment({
- *     name: "DataRobot] Python 3.12",
+ * const lookupByName = datarobot.getExecutionEnvironment({
+ *     name: "[DataRobot] Python 3.12",
+ * });
+ * const lookupByIdAndVersionId = datarobot.getExecutionEnvironment({
+ *     id: "67a554bbfbef3a4ce2ab6700",
+ *     versionId: "68e53eb0b995c5121a0b583b",
  * });
  * ```
  */
-export function getExecutionEnvironment(args: GetExecutionEnvironmentArgs, opts?: pulumi.InvokeOptions): Promise<GetExecutionEnvironmentResult> {
+export function getExecutionEnvironment(args?: GetExecutionEnvironmentArgs, opts?: pulumi.InvokeOptions): Promise<GetExecutionEnvironmentResult> {
+    args = args || {};
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("datarobot:index/getExecutionEnvironment:getExecutionEnvironment", {
+        "id": args.id,
         "name": args.name,
+        "versionId": args.versionId,
     }, opts);
 }
 
@@ -30,9 +37,17 @@ export function getExecutionEnvironment(args: GetExecutionEnvironmentArgs, opts?
  */
 export interface GetExecutionEnvironmentArgs {
     /**
-     * The name of the Execution Environment.
+     * The ID of the Execution Environment. Either `id` or `name` must be provided.
      */
-    name: string;
+    id?: string;
+    /**
+     * The name of the Execution Environment. Either `id` or `name` must be provided.
+     */
+    name?: string;
+    /**
+     * The ID of the Execution Environment Version.
+     */
+    versionId?: string;
 }
 
 /**
@@ -44,11 +59,11 @@ export interface GetExecutionEnvironmentResult {
      */
     readonly description: string;
     /**
-     * The ID of the Execution Environment.
+     * The ID of the Execution Environment. Either `id` or `name` must be provided.
      */
     readonly id: string;
     /**
-     * The name of the Execution Environment.
+     * The name of the Execution Environment. Either `id` or `name` must be provided.
      */
     readonly name: string;
     /**
@@ -69,15 +84,22 @@ export interface GetExecutionEnvironmentResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as datarobot from "@pulumi/datarobot";
  *
- * const example = datarobot.getExecutionEnvironment({
- *     name: "DataRobot] Python 3.12",
+ * const lookupByName = datarobot.getExecutionEnvironment({
+ *     name: "[DataRobot] Python 3.12",
+ * });
+ * const lookupByIdAndVersionId = datarobot.getExecutionEnvironment({
+ *     id: "67a554bbfbef3a4ce2ab6700",
+ *     versionId: "68e53eb0b995c5121a0b583b",
  * });
  * ```
  */
-export function getExecutionEnvironmentOutput(args: GetExecutionEnvironmentOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetExecutionEnvironmentResult> {
+export function getExecutionEnvironmentOutput(args?: GetExecutionEnvironmentOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetExecutionEnvironmentResult> {
+    args = args || {};
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invokeOutput("datarobot:index/getExecutionEnvironment:getExecutionEnvironment", {
+        "id": args.id,
         "name": args.name,
+        "versionId": args.versionId,
     }, opts);
 }
 
@@ -86,7 +108,15 @@ export function getExecutionEnvironmentOutput(args: GetExecutionEnvironmentOutpu
  */
 export interface GetExecutionEnvironmentOutputArgs {
     /**
-     * The name of the Execution Environment.
+     * The ID of the Execution Environment. Either `id` or `name` must be provided.
      */
-    name: pulumi.Input<string>;
+    id?: pulumi.Input<string>;
+    /**
+     * The name of the Execution Environment. Either `id` or `name` must be provided.
+     */
+    name?: pulumi.Input<string>;
+    /**
+     * The ID of the Execution Environment Version.
+     */
+    versionId?: pulumi.Input<string>;
 }

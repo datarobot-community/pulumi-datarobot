@@ -3,7 +3,7 @@ module github.com/datarobot-community/pulumi-datarobot/provider
 go 1.24.1
 
 require (
-	github.com/datarobot-community/terraform-provider-datarobot v0.10.22
+	github.com/datarobot-community/terraform-provider-datarobot v0.10.23
 	github.com/pulumi/pulumi-terraform-bridge/v3 v3.106.0
 )
 
