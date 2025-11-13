@@ -15,6 +15,7 @@
 package datarobot
 
 import (
+	"context"
 	"path"
 
 	// Allow embedding bridge-metadata.json in the provider.
@@ -23,6 +24,7 @@ import (
 	pfbridge "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/pf/tfbridge"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge/tokens"
+	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
 
 	// Replace this provider with the provider you are bridging.
 	datarobot "github.com/datarobot-community/terraform-provider-datarobot/pkg/provider"
@@ -178,6 +180,16 @@ func Provider() tfbridge.ProviderInfo {
 			RootNamespace: "DataRobotPulumi",
 			PackageReferences: map[string]string{
 				"Pulumi": "3.*",
+			},
+		},
+		Resources: map[string]*tfbridge.ResourceInfo{
+			"datarobot_execution_environment": {
+				ComputeID: func(ctx context.Context, state resource.PropertyMap) (resource.ID, error) {
+					if idProp, ok := state["id"]; ok && idProp.IsString() {
+						return resource.ID(idProp.StringValue()), nil
+					}
+					return "", nil
+				},
 			},
 		},
 	}
