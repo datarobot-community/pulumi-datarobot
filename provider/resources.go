@@ -184,7 +184,7 @@ func Provider() tfbridge.ProviderInfo {
 		},
 		Resources: map[string]*tfbridge.ResourceInfo{
 			"datarobot_execution_environment": {
-				ComputeID: func(ctx context.Context, state resource.PropertyMap) (resource.ID, error) {
+				ComputeID: func(_ context.Context, state resource.PropertyMap) (resource.ID, error) {
 					if idProp, ok := state["id"]; ok && idProp.IsString() {
 						return resource.ID(idProp.StringValue()), nil
 					}
