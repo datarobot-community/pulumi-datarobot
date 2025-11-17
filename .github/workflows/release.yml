@@ -163,15 +163,35 @@ jobs:
         run: |
           VERSION="${GITHUB_REF_NAME#v}"
           RELEASE_URL="https://github.com/${{ github.repository }}/releases/tag/${GITHUB_REF_NAME}"
-          MSG=":tada: Release ${GITHUB_REF_NAME} published for ${{ github.repository }}\n\
-          GitHub Release: ${RELEASE_URL}\n\
-          SDKs:\n\
-          - Node.js (npm): https://www.npmjs.com/package/${{ env.PACKAGE_NPM }}/v/${VERSION}\n\
-          - PyPI: https://pypi.org/project/${{ env.PACKAGE_PYPI }}/${VERSION}/\n\
-          - NuGet: https://www.nuget.org/packages/${{ env.PACKAGE_NUGET }}/${VERSION}\n\
-          - Go: go get ${{ env.GO_MODULE }}@v${VERSION}\n"
-          echo "$MSG"
-          echo "$MSG" | jq -R --slurp '{text: .}' > payload.json
+          cat > payload.json <<EOF
+          {
+            "text": ":tada: Release ${GITHUB_REF_NAME} published for ${{ github.repository }}",
+            "blocks": [
+              {
+                "type": "section",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": ":tada: *Release ${GITHUB_REF_NAME}* published for \`${{ github.repository }}\`"
+                }
+              },
+              {
+                "type": "section",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": "*GitHub Release:*\n<${RELEASE_URL}|${GITHUB_REF_NAME}>"
+                }
+              },
+              {
+                "type": "section",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": "*SDKs:*\n• <https://www.npmjs.com/package/${{ env.PACKAGE_NPM }}/v/${VERSION}|Node.js (npm)>\n• <https://pypi.org/project/${{ env.PACKAGE_PYPI }}/${VERSION}/|PyPI>\n• <https://www.nuget.org/packages/${{ env.PACKAGE_NUGET }}/${VERSION}|NuGet>\n• Go: \`go get ${{ env.GO_MODULE }}@v${VERSION}\`"
+                }
+              }
+            ]
+          }
+          EOF
+          cat payload.json
       - name: Send to Slack
         if: ${{ env.SLACK_WEBHOOK_URL != '' }}
         run: |
