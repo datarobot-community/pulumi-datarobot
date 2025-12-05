@@ -47,6 +47,12 @@ namespace DataRobotPulumi.Datarobot
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
+        /// The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.
+        /// </summary>
+        [Output("requiredKeyScopeLevel")]
+        public Output<string> RequiredKeyScopeLevel { get; private set; } = null!;
+
+        /// <summary>
         /// The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.
         /// </summary>
         [Output("resources")]
@@ -148,6 +154,12 @@ namespace DataRobotPulumi.Datarobot
         public Input<string>? Name { get; set; }
 
         /// <summary>
+        /// The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.
+        /// </summary>
+        [Input("requiredKeyScopeLevel")]
+        public Input<string>? RequiredKeyScopeLevel { get; set; }
+
+        /// <summary>
         /// The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.
         /// </summary>
         [Input("resources")]
@@ -214,6 +226,12 @@ namespace DataRobotPulumi.Datarobot
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
+
+        /// <summary>
+        /// The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.
+        /// </summary>
+        [Input("requiredKeyScopeLevel")]
+        public Input<string>? RequiredKeyScopeLevel { get; set; }
 
         /// <summary>
         /// The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.

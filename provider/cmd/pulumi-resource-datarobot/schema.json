@@ -2159,6 +2159,10 @@
           "type": "string",
           "description": "The name of the Application Source.\n"
         },
+        "requiredKeyScopeLevel": {
+          "type": "string",
+          "description": "The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.\n"
+        },
         "resources": {
           "$ref": "#/types/datarobot:index/ApplicationSourceResources:ApplicationSourceResources",
           "description": "The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.\n"
@@ -2181,6 +2185,7 @@
         "filesHashes",
         "folderPathHash",
         "name",
+        "requiredKeyScopeLevel",
         "resources",
         "runtimeParameterValues",
         "versionId"
@@ -2205,6 +2210,10 @@
         "name": {
           "type": "string",
           "description": "The name of the Application Source.\n"
+        },
+        "requiredKeyScopeLevel": {
+          "type": "string",
+          "description": "The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.\n"
         },
         "resources": {
           "$ref": "#/types/datarobot:index/ApplicationSourceResources:ApplicationSourceResources",
@@ -2251,6 +2260,10 @@
           "name": {
             "type": "string",
             "description": "The name of the Application Source.\n"
+          },
+          "requiredKeyScopeLevel": {
+            "type": "string",
+            "description": "The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.\n"
           },
           "resources": {
             "$ref": "#/types/datarobot:index/ApplicationSourceResources:ApplicationSourceResources",
@@ -3047,6 +3060,10 @@
           "type": "string",
           "description": "The name of the Custom Application.\n"
         },
+        "requiredKeyScopeLevel": {
+          "type": "string",
+          "description": "The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.\n"
+        },
         "resources": {
           "$ref": "#/types/datarobot:index/CustomApplicationResources:CustomApplicationResources",
           "description": "The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.\n"
@@ -3072,6 +3089,7 @@
         "applicationUrl",
         "externalAccessEnabled",
         "name",
+        "requiredKeyScopeLevel",
         "resources",
         "sourceId",
         "sourceVersionId"
@@ -3095,6 +3113,10 @@
         "name": {
           "type": "string",
           "description": "The name of the Custom Application.\n"
+        },
+        "requiredKeyScopeLevel": {
+          "type": "string",
+          "description": "The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.\n"
         },
         "resources": {
           "$ref": "#/types/datarobot:index/CustomApplicationResources:CustomApplicationResources",
@@ -3140,6 +3162,10 @@
           "name": {
             "type": "string",
             "description": "The name of the Custom Application.\n"
+          },
+          "requiredKeyScopeLevel": {
+            "type": "string",
+            "description": "The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.\n"
           },
           "resources": {
             "$ref": "#/types/datarobot:index/CustomApplicationResources:CustomApplicationResources",
