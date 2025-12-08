@@ -27,6 +27,7 @@ class CustomApplicationArgs:
                  external_access_enabled: Optional[pulumi.Input[builtins.bool]] = None,
                  external_access_recipients: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.str]]]] = None,
                  name: Optional[pulumi.Input[builtins.str]] = None,
+                 required_key_scope_level: Optional[pulumi.Input[builtins.str]] = None,
                  resources: Optional[pulumi.Input['CustomApplicationResourcesArgs']] = None,
                  use_case_ids: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.str]]]] = None):
         """
@@ -36,6 +37,7 @@ class CustomApplicationArgs:
         :param pulumi.Input[builtins.bool] external_access_enabled: Whether external access is enabled for the Custom Application.
         :param pulumi.Input[Sequence[pulumi.Input[builtins.str]]] external_access_recipients: The list of external email addresses that have access to the Custom Application.
         :param pulumi.Input[builtins.str] name: The name of the Custom Application.
+        :param pulumi.Input[builtins.str] required_key_scope_level: The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.
         :param pulumi.Input['CustomApplicationResourcesArgs'] resources: The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.
         :param pulumi.Input[Sequence[pulumi.Input[builtins.str]]] use_case_ids: The list of Use Case IDs to add the Custom Application to.
         """
@@ -48,6 +50,8 @@ class CustomApplicationArgs:
             pulumi.set(__self__, "external_access_recipients", external_access_recipients)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if required_key_scope_level is not None:
+            pulumi.set(__self__, "required_key_scope_level", required_key_scope_level)
         if resources is not None:
             pulumi.set(__self__, "resources", resources)
         if use_case_ids is not None:
@@ -114,6 +118,18 @@ class CustomApplicationArgs:
         pulumi.set(self, "name", value)
 
     @property
+    @pulumi.getter(name="requiredKeyScopeLevel")
+    def required_key_scope_level(self) -> Optional[pulumi.Input[builtins.str]]:
+        """
+        The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.
+        """
+        return pulumi.get(self, "required_key_scope_level")
+
+    @required_key_scope_level.setter
+    def required_key_scope_level(self, value: Optional[pulumi.Input[builtins.str]]):
+        pulumi.set(self, "required_key_scope_level", value)
+
+    @property
     @pulumi.getter
     def resources(self) -> Optional[pulumi.Input['CustomApplicationResourcesArgs']]:
         """
@@ -146,6 +162,7 @@ class _CustomApplicationState:
                  external_access_enabled: Optional[pulumi.Input[builtins.bool]] = None,
                  external_access_recipients: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.str]]]] = None,
                  name: Optional[pulumi.Input[builtins.str]] = None,
+                 required_key_scope_level: Optional[pulumi.Input[builtins.str]] = None,
                  resources: Optional[pulumi.Input['CustomApplicationResourcesArgs']] = None,
                  source_id: Optional[pulumi.Input[builtins.str]] = None,
                  source_version_id: Optional[pulumi.Input[builtins.str]] = None,
@@ -157,6 +174,7 @@ class _CustomApplicationState:
         :param pulumi.Input[builtins.bool] external_access_enabled: Whether external access is enabled for the Custom Application.
         :param pulumi.Input[Sequence[pulumi.Input[builtins.str]]] external_access_recipients: The list of external email addresses that have access to the Custom Application.
         :param pulumi.Input[builtins.str] name: The name of the Custom Application.
+        :param pulumi.Input[builtins.str] required_key_scope_level: The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.
         :param pulumi.Input['CustomApplicationResourcesArgs'] resources: The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.
         :param pulumi.Input[builtins.str] source_id: The ID of the Custom Application Source.
         :param pulumi.Input[builtins.str] source_version_id: The version ID of the Custom Application Source.
@@ -172,6 +190,8 @@ class _CustomApplicationState:
             pulumi.set(__self__, "external_access_recipients", external_access_recipients)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if required_key_scope_level is not None:
+            pulumi.set(__self__, "required_key_scope_level", required_key_scope_level)
         if resources is not None:
             pulumi.set(__self__, "resources", resources)
         if source_id is not None:
@@ -242,6 +262,18 @@ class _CustomApplicationState:
         pulumi.set(self, "name", value)
 
     @property
+    @pulumi.getter(name="requiredKeyScopeLevel")
+    def required_key_scope_level(self) -> Optional[pulumi.Input[builtins.str]]:
+        """
+        The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.
+        """
+        return pulumi.get(self, "required_key_scope_level")
+
+    @required_key_scope_level.setter
+    def required_key_scope_level(self, value: Optional[pulumi.Input[builtins.str]]):
+        pulumi.set(self, "required_key_scope_level", value)
+
+    @property
     @pulumi.getter
     def resources(self) -> Optional[pulumi.Input['CustomApplicationResourcesArgs']]:
         """
@@ -299,6 +331,7 @@ class CustomApplication(pulumi.CustomResource):
                  external_access_enabled: Optional[pulumi.Input[builtins.bool]] = None,
                  external_access_recipients: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.str]]]] = None,
                  name: Optional[pulumi.Input[builtins.str]] = None,
+                 required_key_scope_level: Optional[pulumi.Input[builtins.str]] = None,
                  resources: Optional[pulumi.Input[Union['CustomApplicationResourcesArgs', 'CustomApplicationResourcesArgsDict']]] = None,
                  source_version_id: Optional[pulumi.Input[builtins.str]] = None,
                  use_case_ids: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.str]]]] = None,
@@ -312,6 +345,7 @@ class CustomApplication(pulumi.CustomResource):
         :param pulumi.Input[builtins.bool] external_access_enabled: Whether external access is enabled for the Custom Application.
         :param pulumi.Input[Sequence[pulumi.Input[builtins.str]]] external_access_recipients: The list of external email addresses that have access to the Custom Application.
         :param pulumi.Input[builtins.str] name: The name of the Custom Application.
+        :param pulumi.Input[builtins.str] required_key_scope_level: The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.
         :param pulumi.Input[Union['CustomApplicationResourcesArgs', 'CustomApplicationResourcesArgsDict']] resources: The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.
         :param pulumi.Input[builtins.str] source_version_id: The version ID of the Custom Application Source.
         :param pulumi.Input[Sequence[pulumi.Input[builtins.str]]] use_case_ids: The list of Use Case IDs to add the Custom Application to.
@@ -344,6 +378,7 @@ class CustomApplication(pulumi.CustomResource):
                  external_access_enabled: Optional[pulumi.Input[builtins.bool]] = None,
                  external_access_recipients: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.str]]]] = None,
                  name: Optional[pulumi.Input[builtins.str]] = None,
+                 required_key_scope_level: Optional[pulumi.Input[builtins.str]] = None,
                  resources: Optional[pulumi.Input[Union['CustomApplicationResourcesArgs', 'CustomApplicationResourcesArgsDict']]] = None,
                  source_version_id: Optional[pulumi.Input[builtins.str]] = None,
                  use_case_ids: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.str]]]] = None,
@@ -360,6 +395,7 @@ class CustomApplication(pulumi.CustomResource):
             __props__.__dict__["external_access_enabled"] = external_access_enabled
             __props__.__dict__["external_access_recipients"] = external_access_recipients
             __props__.__dict__["name"] = name
+            __props__.__dict__["required_key_scope_level"] = required_key_scope_level
             __props__.__dict__["resources"] = resources
             if source_version_id is None and not opts.urn:
                 raise TypeError("Missing required property 'source_version_id'")
@@ -382,6 +418,7 @@ class CustomApplication(pulumi.CustomResource):
             external_access_enabled: Optional[pulumi.Input[builtins.bool]] = None,
             external_access_recipients: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.str]]]] = None,
             name: Optional[pulumi.Input[builtins.str]] = None,
+            required_key_scope_level: Optional[pulumi.Input[builtins.str]] = None,
             resources: Optional[pulumi.Input[Union['CustomApplicationResourcesArgs', 'CustomApplicationResourcesArgsDict']]] = None,
             source_id: Optional[pulumi.Input[builtins.str]] = None,
             source_version_id: Optional[pulumi.Input[builtins.str]] = None,
@@ -398,6 +435,7 @@ class CustomApplication(pulumi.CustomResource):
         :param pulumi.Input[builtins.bool] external_access_enabled: Whether external access is enabled for the Custom Application.
         :param pulumi.Input[Sequence[pulumi.Input[builtins.str]]] external_access_recipients: The list of external email addresses that have access to the Custom Application.
         :param pulumi.Input[builtins.str] name: The name of the Custom Application.
+        :param pulumi.Input[builtins.str] required_key_scope_level: The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.
         :param pulumi.Input[Union['CustomApplicationResourcesArgs', 'CustomApplicationResourcesArgsDict']] resources: The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.
         :param pulumi.Input[builtins.str] source_id: The ID of the Custom Application Source.
         :param pulumi.Input[builtins.str] source_version_id: The version ID of the Custom Application Source.
@@ -412,6 +450,7 @@ class CustomApplication(pulumi.CustomResource):
         __props__.__dict__["external_access_enabled"] = external_access_enabled
         __props__.__dict__["external_access_recipients"] = external_access_recipients
         __props__.__dict__["name"] = name
+        __props__.__dict__["required_key_scope_level"] = required_key_scope_level
         __props__.__dict__["resources"] = resources
         __props__.__dict__["source_id"] = source_id
         __props__.__dict__["source_version_id"] = source_version_id
@@ -457,6 +496,14 @@ class CustomApplication(pulumi.CustomResource):
         The name of the Custom Application.
         """
         return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="requiredKeyScopeLevel")
+    def required_key_scope_level(self) -> pulumi.Output[builtins.str]:
+        """
+        The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.
+        """
+        return pulumi.get(self, "required_key_scope_level")
 
     @property
     @pulumi.getter

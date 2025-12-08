@@ -66,6 +66,10 @@ export class ApplicationSource extends pulumi.CustomResource {
      */
     public readonly name!: pulumi.Output<string>;
     /**
+     * The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.
+     */
+    public readonly requiredKeyScopeLevel!: pulumi.Output<string>;
+    /**
      * The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.
      */
     public readonly resources!: pulumi.Output<outputs.ApplicationSourceResources>;
@@ -98,6 +102,7 @@ export class ApplicationSource extends pulumi.CustomResource {
             resourceInputs["folderPath"] = state ? state.folderPath : undefined;
             resourceInputs["folderPathHash"] = state ? state.folderPathHash : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
+            resourceInputs["requiredKeyScopeLevel"] = state ? state.requiredKeyScopeLevel : undefined;
             resourceInputs["resources"] = state ? state.resources : undefined;
             resourceInputs["runtimeParameterValues"] = state ? state.runtimeParameterValues : undefined;
             resourceInputs["versionId"] = state ? state.versionId : undefined;
@@ -108,6 +113,7 @@ export class ApplicationSource extends pulumi.CustomResource {
             resourceInputs["files"] = args ? args.files : undefined;
             resourceInputs["folderPath"] = args ? args.folderPath : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
+            resourceInputs["requiredKeyScopeLevel"] = args ? args.requiredKeyScopeLevel : undefined;
             resourceInputs["resources"] = args ? args.resources : undefined;
             resourceInputs["runtimeParameterValues"] = args ? args.runtimeParameterValues : undefined;
             resourceInputs["filesHashes"] = undefined /*out*/;
@@ -152,6 +158,10 @@ export interface ApplicationSourceState {
      */
     name?: pulumi.Input<string>;
     /**
+     * The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.
+     */
+    requiredKeyScopeLevel?: pulumi.Input<string>;
+    /**
      * The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.
      */
     resources?: pulumi.Input<inputs.ApplicationSourceResources>;
@@ -189,6 +199,10 @@ export interface ApplicationSourceArgs {
      * The name of the Application Source.
      */
     name?: pulumi.Input<string>;
+    /**
+     * The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.
+     */
+    requiredKeyScopeLevel?: pulumi.Input<string>;
     /**
      * The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.
      */
