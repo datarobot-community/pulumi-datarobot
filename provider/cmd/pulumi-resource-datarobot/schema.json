@@ -2159,6 +2159,10 @@
           "type": "string",
           "description": "The name of the Application Source.\n"
         },
+        "requiredKeyScopeLevel": {
+          "type": "string",
+          "description": "The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.\n"
+        },
         "resources": {
           "$ref": "#/types/datarobot:index/ApplicationSourceResources:ApplicationSourceResources",
           "description": "The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.\n"
@@ -2181,6 +2185,7 @@
         "filesHashes",
         "folderPathHash",
         "name",
+        "requiredKeyScopeLevel",
         "resources",
         "runtimeParameterValues",
         "versionId"
@@ -2205,6 +2210,10 @@
         "name": {
           "type": "string",
           "description": "The name of the Application Source.\n"
+        },
+        "requiredKeyScopeLevel": {
+          "type": "string",
+          "description": "The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.\n"
         },
         "resources": {
           "$ref": "#/types/datarobot:index/ApplicationSourceResources:ApplicationSourceResources",
@@ -2251,6 +2260,10 @@
           "name": {
             "type": "string",
             "description": "The name of the Application Source.\n"
+          },
+          "requiredKeyScopeLevel": {
+            "type": "string",
+            "description": "The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.\n"
           },
           "resources": {
             "$ref": "#/types/datarobot:index/ApplicationSourceResources:ApplicationSourceResources",
@@ -3047,6 +3060,10 @@
           "type": "string",
           "description": "The name of the Custom Application.\n"
         },
+        "requiredKeyScopeLevel": {
+          "type": "string",
+          "description": "The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.\n"
+        },
         "resources": {
           "$ref": "#/types/datarobot:index/CustomApplicationResources:CustomApplicationResources",
           "description": "The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.\n"
@@ -3072,6 +3089,7 @@
         "applicationUrl",
         "externalAccessEnabled",
         "name",
+        "requiredKeyScopeLevel",
         "resources",
         "sourceId",
         "sourceVersionId"
@@ -3095,6 +3113,10 @@
         "name": {
           "type": "string",
           "description": "The name of the Custom Application.\n"
+        },
+        "requiredKeyScopeLevel": {
+          "type": "string",
+          "description": "The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.\n"
         },
         "resources": {
           "$ref": "#/types/datarobot:index/CustomApplicationResources:CustomApplicationResources",
@@ -3140,6 +3162,10 @@
           "name": {
             "type": "string",
             "description": "The name of the Custom Application.\n"
+          },
+          "requiredKeyScopeLevel": {
+            "type": "string",
+            "description": "The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.\n"
           },
           "resources": {
             "$ref": "#/types/datarobot:index/CustomApplicationResources:CustomApplicationResources",
@@ -7151,19 +7177,24 @@
   },
   "functions": {
     "datarobot:index/getExecutionEnvironment:getExecutionEnvironment": {
-      "description": "Execution Environment\n\n## Example Usage\n\n<!--Start PulumiCodeChooser -->\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@pulumi/datarobot\";\n\nconst example = datarobot.getExecutionEnvironment({\n    name: \"DataRobot] Python 3.12\",\n});\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample = datarobot.get_execution_environment(name=\"DataRobot] Python 3.12\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = Pulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() => \n{\n    var example = Datarobot.GetExecutionEnvironment.Invoke(new()\n    {\n        Name = \"DataRobot] Python 3.12\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := datarobot.LookupExecutionEnvironment(ctx, &datarobot.LookupExecutionEnvironmentArgs{\n\t\t\tName: \"DataRobot] Python 3.12\",\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.DatarobotFunctions;\nimport com.pulumi.datarobot.inputs.GetExecutionEnvironmentArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var example = DatarobotFunctions.getExecutionEnvironment(GetExecutionEnvironmentArgs.builder()\n            .name(\"DataRobot] Python 3.12\")\n            .build());\n\n    }\n}\n```\n```yaml\nvariables:\n  example:\n    fn::invoke:\n      function: datarobot:getExecutionEnvironment\n      arguments:\n        name: DataRobot] Python 3.12\n```\n<!--End PulumiCodeChooser -->\n",
+      "description": "Execution Environment\n\n## Example Usage\n\n<!--Start PulumiCodeChooser -->\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@pulumi/datarobot\";\n\nconst lookupByName = datarobot.getExecutionEnvironment({\n    name: \"[DataRobot] Python 3.12\",\n});\nconst lookupByIdAndVersionId = datarobot.getExecutionEnvironment({\n    id: \"67a554bbfbef3a4ce2ab6700\",\n    versionId: \"68e53eb0b995c5121a0b583b\",\n});\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nlookup_by_name = datarobot.get_execution_environment(name=\"[DataRobot] Python 3.12\")\nlookup_by_id_and_version_id = datarobot.get_execution_environment(id=\"67a554bbfbef3a4ce2ab6700\",\n    version_id=\"68e53eb0b995c5121a0b583b\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = Pulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() => \n{\n    var lookupByName = Datarobot.GetExecutionEnvironment.Invoke(new()\n    {\n        Name = \"[DataRobot] Python 3.12\",\n    });\n\n    var lookupByIdAndVersionId = Datarobot.GetExecutionEnvironment.Invoke(new()\n    {\n        Id = \"67a554bbfbef3a4ce2ab6700\",\n        VersionId = \"68e53eb0b995c5121a0b583b\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := datarobot.LookupExecutionEnvironment(ctx, &datarobot.LookupExecutionEnvironmentArgs{\n\t\t\tName: pulumi.StringRef(\"[DataRobot] Python 3.12\"),\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = datarobot.LookupExecutionEnvironment(ctx, &datarobot.LookupExecutionEnvironmentArgs{\n\t\t\tId:        pulumi.StringRef(\"67a554bbfbef3a4ce2ab6700\"),\n\t\t\tVersionId: pulumi.StringRef(\"68e53eb0b995c5121a0b583b\"),\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.DatarobotFunctions;\nimport com.pulumi.datarobot.inputs.GetExecutionEnvironmentArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var lookupByName = DatarobotFunctions.getExecutionEnvironment(GetExecutionEnvironmentArgs.builder()\n            .name(\"[DataRobot] Python 3.12\")\n            .build());\n\n        final var lookupByIdAndVersionId = DatarobotFunctions.getExecutionEnvironment(GetExecutionEnvironmentArgs.builder()\n            .id(\"67a554bbfbef3a4ce2ab6700\")\n            .versionId(\"68e53eb0b995c5121a0b583b\")\n            .build());\n\n    }\n}\n```\n```yaml\nvariables:\n  lookupByName:\n    fn::invoke:\n      function: datarobot:getExecutionEnvironment\n      arguments:\n        name: '[DataRobot] Python 3.12'\n  lookupByIdAndVersionId:\n    fn::invoke:\n      function: datarobot:getExecutionEnvironment\n      arguments:\n        id: 67a554bbfbef3a4ce2ab6700\n        versionId: 68e53eb0b995c5121a0b583b\n```\n<!--End PulumiCodeChooser -->\n",
       "inputs": {
         "description": "A collection of arguments for invoking getExecutionEnvironment.\n",
         "properties": {
+          "id": {
+            "type": "string",
+            "description": "The ID of the Execution Environment. Either `id` or `name` must be provided.\n"
+          },
           "name": {
             "type": "string",
-            "description": "The name of the Execution Environment.\n"
+            "description": "The name of the Execution Environment. Either `id` or `name` must be provided.\n"
+          },
+          "versionId": {
+            "type": "string",
+            "description": "The ID of the Execution Environment Version.\n"
           }
         },
-        "type": "object",
-        "required": [
-          "name"
-        ]
+        "type": "object"
       },
       "outputs": {
         "description": "A collection of values returned by getExecutionEnvironment.\n",
@@ -7174,11 +7205,11 @@
           },
           "id": {
             "type": "string",
-            "description": "The ID of the Execution Environment.\n"
+            "description": "The ID of the Execution Environment. Either `id` or `name` must be provided.\n"
           },
           "name": {
             "type": "string",
-            "description": "The name of the Execution Environment.\n"
+            "description": "The name of the Execution Environment. Either `id` or `name` must be provided.\n"
           },
           "programmingLanguage": {
             "type": "string",

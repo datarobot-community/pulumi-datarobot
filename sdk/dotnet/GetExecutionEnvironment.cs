@@ -25,15 +25,21 @@ namespace DataRobotPulumi.Datarobot
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var example = Datarobot.GetExecutionEnvironment.Invoke(new()
+        ///     var lookupByName = Datarobot.GetExecutionEnvironment.Invoke(new()
         ///     {
-        ///         Name = "DataRobot] Python 3.12",
+        ///         Name = "[DataRobot] Python 3.12",
+        ///     });
+        /// 
+        ///     var lookupByIdAndVersionId = Datarobot.GetExecutionEnvironment.Invoke(new()
+        ///     {
+        ///         Id = "67a554bbfbef3a4ce2ab6700",
+        ///         VersionId = "68e53eb0b995c5121a0b583b",
         ///     });
         /// 
         /// });
         /// ```
         /// </summary>
-        public static Task<GetExecutionEnvironmentResult> InvokeAsync(GetExecutionEnvironmentArgs args, InvokeOptions? options = null)
+        public static Task<GetExecutionEnvironmentResult> InvokeAsync(GetExecutionEnvironmentArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetExecutionEnvironmentResult>("datarobot:index/getExecutionEnvironment:getExecutionEnvironment", args ?? new GetExecutionEnvironmentArgs(), options.WithDefaults());
 
         /// <summary>
@@ -49,15 +55,21 @@ namespace DataRobotPulumi.Datarobot
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var example = Datarobot.GetExecutionEnvironment.Invoke(new()
+        ///     var lookupByName = Datarobot.GetExecutionEnvironment.Invoke(new()
         ///     {
-        ///         Name = "DataRobot] Python 3.12",
+        ///         Name = "[DataRobot] Python 3.12",
+        ///     });
+        /// 
+        ///     var lookupByIdAndVersionId = Datarobot.GetExecutionEnvironment.Invoke(new()
+        ///     {
+        ///         Id = "67a554bbfbef3a4ce2ab6700",
+        ///         VersionId = "68e53eb0b995c5121a0b583b",
         ///     });
         /// 
         /// });
         /// ```
         /// </summary>
-        public static Output<GetExecutionEnvironmentResult> Invoke(GetExecutionEnvironmentInvokeArgs args, InvokeOptions? options = null)
+        public static Output<GetExecutionEnvironmentResult> Invoke(GetExecutionEnvironmentInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetExecutionEnvironmentResult>("datarobot:index/getExecutionEnvironment:getExecutionEnvironment", args ?? new GetExecutionEnvironmentInvokeArgs(), options.WithDefaults());
 
         /// <summary>
@@ -73,9 +85,15 @@ namespace DataRobotPulumi.Datarobot
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var example = Datarobot.GetExecutionEnvironment.Invoke(new()
+        ///     var lookupByName = Datarobot.GetExecutionEnvironment.Invoke(new()
         ///     {
-        ///         Name = "DataRobot] Python 3.12",
+        ///         Name = "[DataRobot] Python 3.12",
+        ///     });
+        /// 
+        ///     var lookupByIdAndVersionId = Datarobot.GetExecutionEnvironment.Invoke(new()
+        ///     {
+        ///         Id = "67a554bbfbef3a4ce2ab6700",
+        ///         VersionId = "68e53eb0b995c5121a0b583b",
         ///     });
         /// 
         /// });
@@ -89,10 +107,22 @@ namespace DataRobotPulumi.Datarobot
     public sealed class GetExecutionEnvironmentArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
-        /// The name of the Execution Environment.
+        /// The ID of the Execution Environment. Either `id` or `name` must be provided.
         /// </summary>
-        [Input("name", required: true)]
-        public string Name { get; set; } = null!;
+        [Input("id")]
+        public string? Id { get; set; }
+
+        /// <summary>
+        /// The name of the Execution Environment. Either `id` or `name` must be provided.
+        /// </summary>
+        [Input("name")]
+        public string? Name { get; set; }
+
+        /// <summary>
+        /// The ID of the Execution Environment Version.
+        /// </summary>
+        [Input("versionId")]
+        public string? VersionId { get; set; }
 
         public GetExecutionEnvironmentArgs()
         {
@@ -103,10 +133,22 @@ namespace DataRobotPulumi.Datarobot
     public sealed class GetExecutionEnvironmentInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
-        /// The name of the Execution Environment.
+        /// The ID of the Execution Environment. Either `id` or `name` must be provided.
         /// </summary>
-        [Input("name", required: true)]
-        public Input<string> Name { get; set; } = null!;
+        [Input("id")]
+        public Input<string>? Id { get; set; }
+
+        /// <summary>
+        /// The name of the Execution Environment. Either `id` or `name` must be provided.
+        /// </summary>
+        [Input("name")]
+        public Input<string>? Name { get; set; }
+
+        /// <summary>
+        /// The ID of the Execution Environment Version.
+        /// </summary>
+        [Input("versionId")]
+        public Input<string>? VersionId { get; set; }
 
         public GetExecutionEnvironmentInvokeArgs()
         {
@@ -123,11 +165,11 @@ namespace DataRobotPulumi.Datarobot
         /// </summary>
         public readonly string Description;
         /// <summary>
-        /// The ID of the Execution Environment.
+        /// The ID of the Execution Environment. Either `id` or `name` must be provided.
         /// </summary>
         public readonly string Id;
         /// <summary>
-        /// The name of the Execution Environment.
+        /// The name of the Execution Environment. Either `id` or `name` must be provided.
         /// </summary>
         public readonly string Name;
         /// <summary>

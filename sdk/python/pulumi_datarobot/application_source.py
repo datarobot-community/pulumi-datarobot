@@ -27,6 +27,7 @@ class ApplicationSourceArgs:
                  files: Optional[Any] = None,
                  folder_path: Optional[pulumi.Input[builtins.str]] = None,
                  name: Optional[pulumi.Input[builtins.str]] = None,
+                 required_key_scope_level: Optional[pulumi.Input[builtins.str]] = None,
                  resources: Optional[pulumi.Input['ApplicationSourceResourcesArgs']] = None,
                  runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input['ApplicationSourceRuntimeParameterValueArgs']]]] = None):
         """
@@ -36,6 +37,7 @@ class ApplicationSourceArgs:
         :param Any files: The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
         :param pulumi.Input[builtins.str] folder_path: The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
         :param pulumi.Input[builtins.str] name: The name of the Application Source.
+        :param pulumi.Input[builtins.str] required_key_scope_level: The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.
         :param pulumi.Input['ApplicationSourceResourcesArgs'] resources: The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.
         :param pulumi.Input[Sequence[pulumi.Input['ApplicationSourceRuntimeParameterValueArgs']]] runtime_parameter_values: The runtime parameter values for the Application Source.
         """
@@ -49,6 +51,8 @@ class ApplicationSourceArgs:
             pulumi.set(__self__, "folder_path", folder_path)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if required_key_scope_level is not None:
+            pulumi.set(__self__, "required_key_scope_level", required_key_scope_level)
         if resources is not None:
             pulumi.set(__self__, "resources", resources)
         if runtime_parameter_values is not None:
@@ -115,6 +119,18 @@ class ApplicationSourceArgs:
         pulumi.set(self, "name", value)
 
     @property
+    @pulumi.getter(name="requiredKeyScopeLevel")
+    def required_key_scope_level(self) -> Optional[pulumi.Input[builtins.str]]:
+        """
+        The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.
+        """
+        return pulumi.get(self, "required_key_scope_level")
+
+    @required_key_scope_level.setter
+    def required_key_scope_level(self, value: Optional[pulumi.Input[builtins.str]]):
+        pulumi.set(self, "required_key_scope_level", value)
+
+    @property
     @pulumi.getter
     def resources(self) -> Optional[pulumi.Input['ApplicationSourceResourcesArgs']]:
         """
@@ -149,6 +165,7 @@ class _ApplicationSourceState:
                  folder_path: Optional[pulumi.Input[builtins.str]] = None,
                  folder_path_hash: Optional[pulumi.Input[builtins.str]] = None,
                  name: Optional[pulumi.Input[builtins.str]] = None,
+                 required_key_scope_level: Optional[pulumi.Input[builtins.str]] = None,
                  resources: Optional[pulumi.Input['ApplicationSourceResourcesArgs']] = None,
                  runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input['ApplicationSourceRuntimeParameterValueArgs']]]] = None,
                  version_id: Optional[pulumi.Input[builtins.str]] = None):
@@ -161,6 +178,7 @@ class _ApplicationSourceState:
         :param pulumi.Input[builtins.str] folder_path: The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
         :param pulumi.Input[builtins.str] folder_path_hash: The hash of the folder path contents.
         :param pulumi.Input[builtins.str] name: The name of the Application Source.
+        :param pulumi.Input[builtins.str] required_key_scope_level: The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.
         :param pulumi.Input['ApplicationSourceResourcesArgs'] resources: The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.
         :param pulumi.Input[Sequence[pulumi.Input['ApplicationSourceRuntimeParameterValueArgs']]] runtime_parameter_values: The runtime parameter values for the Application Source.
         :param pulumi.Input[builtins.str] version_id: The version ID of the Application Source.
@@ -179,6 +197,8 @@ class _ApplicationSourceState:
             pulumi.set(__self__, "folder_path_hash", folder_path_hash)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if required_key_scope_level is not None:
+            pulumi.set(__self__, "required_key_scope_level", required_key_scope_level)
         if resources is not None:
             pulumi.set(__self__, "resources", resources)
         if runtime_parameter_values is not None:
@@ -271,6 +291,18 @@ class _ApplicationSourceState:
         pulumi.set(self, "name", value)
 
     @property
+    @pulumi.getter(name="requiredKeyScopeLevel")
+    def required_key_scope_level(self) -> Optional[pulumi.Input[builtins.str]]:
+        """
+        The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.
+        """
+        return pulumi.get(self, "required_key_scope_level")
+
+    @required_key_scope_level.setter
+    def required_key_scope_level(self, value: Optional[pulumi.Input[builtins.str]]):
+        pulumi.set(self, "required_key_scope_level", value)
+
+    @property
     @pulumi.getter
     def resources(self) -> Optional[pulumi.Input['ApplicationSourceResourcesArgs']]:
         """
@@ -317,6 +349,7 @@ class ApplicationSource(pulumi.CustomResource):
                  files: Optional[Any] = None,
                  folder_path: Optional[pulumi.Input[builtins.str]] = None,
                  name: Optional[pulumi.Input[builtins.str]] = None,
+                 required_key_scope_level: Optional[pulumi.Input[builtins.str]] = None,
                  resources: Optional[pulumi.Input[Union['ApplicationSourceResourcesArgs', 'ApplicationSourceResourcesArgsDict']]] = None,
                  runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input[Union['ApplicationSourceRuntimeParameterValueArgs', 'ApplicationSourceRuntimeParameterValueArgsDict']]]]] = None,
                  __props__=None):
@@ -330,6 +363,7 @@ class ApplicationSource(pulumi.CustomResource):
         :param Any files: The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
         :param pulumi.Input[builtins.str] folder_path: The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
         :param pulumi.Input[builtins.str] name: The name of the Application Source.
+        :param pulumi.Input[builtins.str] required_key_scope_level: The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.
         :param pulumi.Input[Union['ApplicationSourceResourcesArgs', 'ApplicationSourceResourcesArgsDict']] resources: The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.
         :param pulumi.Input[Sequence[pulumi.Input[Union['ApplicationSourceRuntimeParameterValueArgs', 'ApplicationSourceRuntimeParameterValueArgsDict']]]] runtime_parameter_values: The runtime parameter values for the Application Source.
         """
@@ -362,6 +396,7 @@ class ApplicationSource(pulumi.CustomResource):
                  files: Optional[Any] = None,
                  folder_path: Optional[pulumi.Input[builtins.str]] = None,
                  name: Optional[pulumi.Input[builtins.str]] = None,
+                 required_key_scope_level: Optional[pulumi.Input[builtins.str]] = None,
                  resources: Optional[pulumi.Input[Union['ApplicationSourceResourcesArgs', 'ApplicationSourceResourcesArgsDict']]] = None,
                  runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input[Union['ApplicationSourceRuntimeParameterValueArgs', 'ApplicationSourceRuntimeParameterValueArgsDict']]]]] = None,
                  __props__=None):
@@ -378,6 +413,7 @@ class ApplicationSource(pulumi.CustomResource):
             __props__.__dict__["files"] = files
             __props__.__dict__["folder_path"] = folder_path
             __props__.__dict__["name"] = name
+            __props__.__dict__["required_key_scope_level"] = required_key_scope_level
             __props__.__dict__["resources"] = resources
             __props__.__dict__["runtime_parameter_values"] = runtime_parameter_values
             __props__.__dict__["files_hashes"] = None
@@ -400,6 +436,7 @@ class ApplicationSource(pulumi.CustomResource):
             folder_path: Optional[pulumi.Input[builtins.str]] = None,
             folder_path_hash: Optional[pulumi.Input[builtins.str]] = None,
             name: Optional[pulumi.Input[builtins.str]] = None,
+            required_key_scope_level: Optional[pulumi.Input[builtins.str]] = None,
             resources: Optional[pulumi.Input[Union['ApplicationSourceResourcesArgs', 'ApplicationSourceResourcesArgsDict']]] = None,
             runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input[Union['ApplicationSourceRuntimeParameterValueArgs', 'ApplicationSourceRuntimeParameterValueArgsDict']]]]] = None,
             version_id: Optional[pulumi.Input[builtins.str]] = None) -> 'ApplicationSource':
@@ -417,6 +454,7 @@ class ApplicationSource(pulumi.CustomResource):
         :param pulumi.Input[builtins.str] folder_path: The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
         :param pulumi.Input[builtins.str] folder_path_hash: The hash of the folder path contents.
         :param pulumi.Input[builtins.str] name: The name of the Application Source.
+        :param pulumi.Input[builtins.str] required_key_scope_level: The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.
         :param pulumi.Input[Union['ApplicationSourceResourcesArgs', 'ApplicationSourceResourcesArgsDict']] resources: The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.
         :param pulumi.Input[Sequence[pulumi.Input[Union['ApplicationSourceRuntimeParameterValueArgs', 'ApplicationSourceRuntimeParameterValueArgsDict']]]] runtime_parameter_values: The runtime parameter values for the Application Source.
         :param pulumi.Input[builtins.str] version_id: The version ID of the Application Source.
@@ -432,6 +470,7 @@ class ApplicationSource(pulumi.CustomResource):
         __props__.__dict__["folder_path"] = folder_path
         __props__.__dict__["folder_path_hash"] = folder_path_hash
         __props__.__dict__["name"] = name
+        __props__.__dict__["required_key_scope_level"] = required_key_scope_level
         __props__.__dict__["resources"] = resources
         __props__.__dict__["runtime_parameter_values"] = runtime_parameter_values
         __props__.__dict__["version_id"] = version_id
@@ -492,6 +531,14 @@ class ApplicationSource(pulumi.CustomResource):
         The name of the Application Source.
         """
         return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="requiredKeyScopeLevel")
+    def required_key_scope_level(self) -> pulumi.Output[builtins.str]:
+        """
+        The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.
+        """
+        return pulumi.get(self, "required_key_scope_level")
 
     @property
     @pulumi.getter

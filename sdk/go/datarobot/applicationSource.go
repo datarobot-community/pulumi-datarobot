@@ -29,6 +29,8 @@ type ApplicationSource struct {
 	FolderPathHash pulumi.StringOutput `pulumi:"folderPathHash"`
 	// The name of the Application Source.
 	Name pulumi.StringOutput `pulumi:"name"`
+	// The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.
+	RequiredKeyScopeLevel pulumi.StringOutput `pulumi:"requiredKeyScopeLevel"`
 	// The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.
 	Resources ApplicationSourceResourcesOutput `pulumi:"resources"`
 	// The runtime parameter values for the Application Source.
@@ -81,6 +83,8 @@ type applicationSourceState struct {
 	FolderPathHash *string `pulumi:"folderPathHash"`
 	// The name of the Application Source.
 	Name *string `pulumi:"name"`
+	// The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.
+	RequiredKeyScopeLevel *string `pulumi:"requiredKeyScopeLevel"`
 	// The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.
 	Resources *ApplicationSourceResources `pulumi:"resources"`
 	// The runtime parameter values for the Application Source.
@@ -104,6 +108,8 @@ type ApplicationSourceState struct {
 	FolderPathHash pulumi.StringPtrInput
 	// The name of the Application Source.
 	Name pulumi.StringPtrInput
+	// The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.
+	RequiredKeyScopeLevel pulumi.StringPtrInput
 	// The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.
 	Resources ApplicationSourceResourcesPtrInput
 	// The runtime parameter values for the Application Source.
@@ -127,6 +133,8 @@ type applicationSourceArgs struct {
 	FolderPath *string `pulumi:"folderPath"`
 	// The name of the Application Source.
 	Name *string `pulumi:"name"`
+	// The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.
+	RequiredKeyScopeLevel *string `pulumi:"requiredKeyScopeLevel"`
 	// The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.
 	Resources *ApplicationSourceResources `pulumi:"resources"`
 	// The runtime parameter values for the Application Source.
@@ -145,6 +153,8 @@ type ApplicationSourceArgs struct {
 	FolderPath pulumi.StringPtrInput
 	// The name of the Application Source.
 	Name pulumi.StringPtrInput
+	// The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.
+	RequiredKeyScopeLevel pulumi.StringPtrInput
 	// The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.
 	Resources ApplicationSourceResourcesPtrInput
 	// The runtime parameter values for the Application Source.
@@ -271,6 +281,11 @@ func (o ApplicationSourceOutput) FolderPathHash() pulumi.StringOutput {
 // The name of the Application Source.
 func (o ApplicationSourceOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *ApplicationSource) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
+}
+
+// The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.
+func (o ApplicationSourceOutput) RequiredKeyScopeLevel() pulumi.StringOutput {
+	return o.ApplyT(func(v *ApplicationSource) pulumi.StringOutput { return v.RequiredKeyScopeLevel }).(pulumi.StringOutput)
 }
 
 // The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.

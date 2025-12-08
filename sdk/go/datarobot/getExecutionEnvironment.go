@@ -28,7 +28,14 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := datarobot.LookupExecutionEnvironment(ctx, &datarobot.LookupExecutionEnvironmentArgs{
-//				Name: "DataRobot] Python 3.12",
+//				Name: pulumi.StringRef("[DataRobot] Python 3.12"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = datarobot.LookupExecutionEnvironment(ctx, &datarobot.LookupExecutionEnvironmentArgs{
+//				Id:        pulumi.StringRef("67a554bbfbef3a4ce2ab6700"),
+//				VersionId: pulumi.StringRef("68e53eb0b995c5121a0b583b"),
 //			}, nil)
 //			if err != nil {
 //				return err
@@ -50,17 +57,21 @@ func LookupExecutionEnvironment(ctx *pulumi.Context, args *LookupExecutionEnviro
 
 // A collection of arguments for invoking getExecutionEnvironment.
 type LookupExecutionEnvironmentArgs struct {
-	// The name of the Execution Environment.
-	Name string `pulumi:"name"`
+	// The ID of the Execution Environment. Either `id` or `name` must be provided.
+	Id *string `pulumi:"id"`
+	// The name of the Execution Environment. Either `id` or `name` must be provided.
+	Name *string `pulumi:"name"`
+	// The ID of the Execution Environment Version.
+	VersionId *string `pulumi:"versionId"`
 }
 
 // A collection of values returned by getExecutionEnvironment.
 type LookupExecutionEnvironmentResult struct {
 	// The description of the Execution Environment.
 	Description string `pulumi:"description"`
-	// The ID of the Execution Environment.
+	// The ID of the Execution Environment. Either `id` or `name` must be provided.
 	Id string `pulumi:"id"`
-	// The name of the Execution Environment.
+	// The name of the Execution Environment. Either `id` or `name` must be provided.
 	Name string `pulumi:"name"`
 	// The programming language of the Execution Environment.
 	ProgrammingLanguage string `pulumi:"programmingLanguage"`
@@ -79,8 +90,12 @@ func LookupExecutionEnvironmentOutput(ctx *pulumi.Context, args LookupExecutionE
 
 // A collection of arguments for invoking getExecutionEnvironment.
 type LookupExecutionEnvironmentOutputArgs struct {
-	// The name of the Execution Environment.
-	Name pulumi.StringInput `pulumi:"name"`
+	// The ID of the Execution Environment. Either `id` or `name` must be provided.
+	Id pulumi.StringPtrInput `pulumi:"id"`
+	// The name of the Execution Environment. Either `id` or `name` must be provided.
+	Name pulumi.StringPtrInput `pulumi:"name"`
+	// The ID of the Execution Environment Version.
+	VersionId pulumi.StringPtrInput `pulumi:"versionId"`
 }
 
 func (LookupExecutionEnvironmentOutputArgs) ElementType() reflect.Type {
@@ -107,12 +122,12 @@ func (o LookupExecutionEnvironmentResultOutput) Description() pulumi.StringOutpu
 	return o.ApplyT(func(v LookupExecutionEnvironmentResult) string { return v.Description }).(pulumi.StringOutput)
 }
 
-// The ID of the Execution Environment.
+// The ID of the Execution Environment. Either `id` or `name` must be provided.
 func (o LookupExecutionEnvironmentResultOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupExecutionEnvironmentResult) string { return v.Id }).(pulumi.StringOutput)
 }
 
-// The name of the Execution Environment.
+// The name of the Execution Environment. Either `id` or `name` must be provided.
 func (o LookupExecutionEnvironmentResultOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupExecutionEnvironmentResult) string { return v.Name }).(pulumi.StringOutput)
 }

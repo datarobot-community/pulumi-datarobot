@@ -56,7 +56,7 @@ class GetExecutionEnvironmentResult:
     @pulumi.getter
     def id(self) -> builtins.str:
         """
-        The ID of the Execution Environment.
+        The ID of the Execution Environment. Either `id` or `name` must be provided.
         """
         return pulumi.get(self, "id")
 
@@ -64,7 +64,7 @@ class GetExecutionEnvironmentResult:
     @pulumi.getter
     def name(self) -> builtins.str:
         """
-        The name of the Execution Environment.
+        The name of the Execution Environment. Either `id` or `name` must be provided.
         """
         return pulumi.get(self, "name")
 
@@ -98,7 +98,9 @@ class AwaitableGetExecutionEnvironmentResult(GetExecutionEnvironmentResult):
             version_id=self.version_id)
 
 
-def get_execution_environment(name: Optional[builtins.str] = None,
+def get_execution_environment(id: Optional[builtins.str] = None,
+                              name: Optional[builtins.str] = None,
+                              version_id: Optional[builtins.str] = None,
                               opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetExecutionEnvironmentResult:
     """
     Execution Environment
@@ -109,14 +111,20 @@ def get_execution_environment(name: Optional[builtins.str] = None,
     import pulumi
     import pulumi_datarobot as datarobot
 
-    example = datarobot.get_execution_environment(name="DataRobot] Python 3.12")
+    lookup_by_name = datarobot.get_execution_environment(name="[DataRobot] Python 3.12")
+    lookup_by_id_and_version_id = datarobot.get_execution_environment(id="67a554bbfbef3a4ce2ab6700",
+        version_id="68e53eb0b995c5121a0b583b")
     ```
 
 
-    :param builtins.str name: The name of the Execution Environment.
+    :param builtins.str id: The ID of the Execution Environment. Either `id` or `name` must be provided.
+    :param builtins.str name: The name of the Execution Environment. Either `id` or `name` must be provided.
+    :param builtins.str version_id: The ID of the Execution Environment Version.
     """
     __args__ = dict()
+    __args__['id'] = id
     __args__['name'] = name
+    __args__['versionId'] = version_id
     opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke('datarobot:index/getExecutionEnvironment:getExecutionEnvironment', __args__, opts=opts, typ=GetExecutionEnvironmentResult).value
 
@@ -126,7 +134,9 @@ def get_execution_environment(name: Optional[builtins.str] = None,
         name=pulumi.get(__ret__, 'name'),
         programming_language=pulumi.get(__ret__, 'programming_language'),
         version_id=pulumi.get(__ret__, 'version_id'))
-def get_execution_environment_output(name: Optional[pulumi.Input[builtins.str]] = None,
+def get_execution_environment_output(id: Optional[pulumi.Input[Optional[builtins.str]]] = None,
+                                     name: Optional[pulumi.Input[Optional[builtins.str]]] = None,
+                                     version_id: Optional[pulumi.Input[Optional[builtins.str]]] = None,
                                      opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetExecutionEnvironmentResult]:
     """
     Execution Environment
@@ -137,14 +147,20 @@ def get_execution_environment_output(name: Optional[pulumi.Input[builtins.str]] 
     import pulumi
     import pulumi_datarobot as datarobot
 
-    example = datarobot.get_execution_environment(name="DataRobot] Python 3.12")
+    lookup_by_name = datarobot.get_execution_environment(name="[DataRobot] Python 3.12")
+    lookup_by_id_and_version_id = datarobot.get_execution_environment(id="67a554bbfbef3a4ce2ab6700",
+        version_id="68e53eb0b995c5121a0b583b")
     ```
 
 
-    :param builtins.str name: The name of the Execution Environment.
+    :param builtins.str id: The ID of the Execution Environment. Either `id` or `name` must be provided.
+    :param builtins.str name: The name of the Execution Environment. Either `id` or `name` must be provided.
+    :param builtins.str version_id: The ID of the Execution Environment Version.
     """
     __args__ = dict()
+    __args__['id'] = id
     __args__['name'] = name
+    __args__['versionId'] = version_id
     opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke_output('datarobot:index/getExecutionEnvironment:getExecutionEnvironment', __args__, opts=opts, typ=GetExecutionEnvironmentResult)
     return __ret__.apply(lambda __response__: GetExecutionEnvironmentResult(
