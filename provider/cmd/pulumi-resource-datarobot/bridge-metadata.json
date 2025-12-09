@@ -203,6 +203,9 @@
                             }
                         }
                     },
+                    "tags": {
+                        "maxItemsOne": false
+                    },
                     "use_case_ids": {
                         "maxItemsOne": false
                     }
