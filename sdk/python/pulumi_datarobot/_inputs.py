@@ -82,6 +82,8 @@ __all__ = [
     'CustomModelRuntimeParameterValueArgsDict',
     'CustomModelSourceRemoteRepositoryArgs',
     'CustomModelSourceRemoteRepositoryArgsDict',
+    'CustomModelTagArgs',
+    'CustomModelTagArgsDict',
     'DatasourceParamsArgs',
     'DatasourceParamsArgsDict',
     'DeploymentAssociationIdSettingsArgs',
@@ -3072,6 +3074,56 @@ class CustomModelSourceRemoteRepositoryArgs:
     @source_paths.setter
     def source_paths(self, value: pulumi.Input[Sequence[pulumi.Input[builtins.str]]]):
         pulumi.set(self, "source_paths", value)
+
+
+if not MYPY:
+    class CustomModelTagArgsDict(TypedDict):
+        name: pulumi.Input[builtins.str]
+        """
+        The name of the tag.
+        """
+        value: pulumi.Input[builtins.str]
+        """
+        The value of the tag.
+        """
+elif False:
+    CustomModelTagArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class CustomModelTagArgs:
+    def __init__(__self__, *,
+                 name: pulumi.Input[builtins.str],
+                 value: pulumi.Input[builtins.str]):
+        """
+        :param pulumi.Input[builtins.str] name: The name of the tag.
+        :param pulumi.Input[builtins.str] value: The value of the tag.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> pulumi.Input[builtins.str]:
+        """
+        The name of the tag.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: pulumi.Input[builtins.str]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> pulumi.Input[builtins.str]:
+        """
+        The value of the tag.
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: pulumi.Input[builtins.str]):
+        pulumi.set(self, "value", value)
 
 
 if not MYPY:

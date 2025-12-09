@@ -77,6 +77,16 @@ namespace DataRobotPulumi.Datarobot
     ///     // memory_mb      = 512
     ///     // replicas       = 2
     ///     // network_access = "NONE"
+    ///     // tags = [
+    ///     //   {
+    ///     //     name  = "team"
+    ///     //     value = "engineering"
+    ///     //   },
+    ///     //   {
+    ///     //     name  = "env"
+    ///     //     value = "test"
+    ///     //   }
+    ///     // ]
     ///     return new Dictionary&lt;string, object?&gt;
     ///     {
     ///         ["exampleId"] = exampleCustomModel.Id,
@@ -236,6 +246,12 @@ namespace DataRobotPulumi.Datarobot
         /// </summary>
         [Output("sourceRemoteRepositories")]
         public Output<ImmutableArray<Outputs.CustomModelSourceRemoteRepository>> SourceRemoteRepositories { get; private set; } = null!;
+
+        /// <summary>
+        /// The list of tags to assign to the Custom Model.
+        /// </summary>
+        [Output("tags")]
+        public Output<ImmutableArray<Outputs.CustomModelTag>> Tags { get; private set; } = null!;
 
         /// <summary>
         /// The target name of the Custom Model.
@@ -488,6 +504,18 @@ namespace DataRobotPulumi.Datarobot
             set => _sourceRemoteRepositories = value;
         }
 
+        [Input("tags")]
+        private InputList<Inputs.CustomModelTagArgs>? _tags;
+
+        /// <summary>
+        /// The list of tags to assign to the Custom Model.
+        /// </summary>
+        public InputList<Inputs.CustomModelTagArgs> Tags
+        {
+            get => _tags ?? (_tags = new InputList<Inputs.CustomModelTagArgs>());
+            set => _tags = value;
+        }
+
         /// <summary>
         /// The target name of the Custom Model.
         /// </summary>
@@ -710,6 +738,18 @@ namespace DataRobotPulumi.Datarobot
         {
             get => _sourceRemoteRepositories ?? (_sourceRemoteRepositories = new InputList<Inputs.CustomModelSourceRemoteRepositoryGetArgs>());
             set => _sourceRemoteRepositories = value;
+        }
+
+        [Input("tags")]
+        private InputList<Inputs.CustomModelTagGetArgs>? _tags;
+
+        /// <summary>
+        /// The list of tags to assign to the Custom Model.
+        /// </summary>
+        public InputList<Inputs.CustomModelTagGetArgs> Tags
+        {
+            get => _tags ?? (_tags = new InputList<Inputs.CustomModelTagGetArgs>());
+            set => _tags = value;
         }
 
         /// <summary>

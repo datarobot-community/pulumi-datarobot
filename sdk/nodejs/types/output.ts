@@ -616,6 +616,17 @@ export interface CustomModelSourceRemoteRepository {
     sourcePaths: string[];
 }
 
+export interface CustomModelTag {
+    /**
+     * The name of the tag.
+     */
+    name: string;
+    /**
+     * The value of the tag.
+     */
+    value: string;
+}
+
 export interface DatasourceParams {
     /**
      * The Catalog name in the database if supported.

@@ -5660,6 +5660,112 @@ func (o CustomModelSourceRemoteRepositoryArrayOutput) Index(i pulumi.IntInput) C
 	}).(CustomModelSourceRemoteRepositoryOutput)
 }
 
+type CustomModelTag struct {
+	// The name of the tag.
+	Name string `pulumi:"name"`
+	// The value of the tag.
+	Value string `pulumi:"value"`
+}
+
+// CustomModelTagInput is an input type that accepts CustomModelTagArgs and CustomModelTagOutput values.
+// You can construct a concrete instance of `CustomModelTagInput` via:
+//
+//	CustomModelTagArgs{...}
+type CustomModelTagInput interface {
+	pulumi.Input
+
+	ToCustomModelTagOutput() CustomModelTagOutput
+	ToCustomModelTagOutputWithContext(context.Context) CustomModelTagOutput
+}
+
+type CustomModelTagArgs struct {
+	// The name of the tag.
+	Name pulumi.StringInput `pulumi:"name"`
+	// The value of the tag.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (CustomModelTagArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomModelTag)(nil)).Elem()
+}
+
+func (i CustomModelTagArgs) ToCustomModelTagOutput() CustomModelTagOutput {
+	return i.ToCustomModelTagOutputWithContext(context.Background())
+}
+
+func (i CustomModelTagArgs) ToCustomModelTagOutputWithContext(ctx context.Context) CustomModelTagOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomModelTagOutput)
+}
+
+// CustomModelTagArrayInput is an input type that accepts CustomModelTagArray and CustomModelTagArrayOutput values.
+// You can construct a concrete instance of `CustomModelTagArrayInput` via:
+//
+//	CustomModelTagArray{ CustomModelTagArgs{...} }
+type CustomModelTagArrayInput interface {
+	pulumi.Input
+
+	ToCustomModelTagArrayOutput() CustomModelTagArrayOutput
+	ToCustomModelTagArrayOutputWithContext(context.Context) CustomModelTagArrayOutput
+}
+
+type CustomModelTagArray []CustomModelTagInput
+
+func (CustomModelTagArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CustomModelTag)(nil)).Elem()
+}
+
+func (i CustomModelTagArray) ToCustomModelTagArrayOutput() CustomModelTagArrayOutput {
+	return i.ToCustomModelTagArrayOutputWithContext(context.Background())
+}
+
+func (i CustomModelTagArray) ToCustomModelTagArrayOutputWithContext(ctx context.Context) CustomModelTagArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomModelTagArrayOutput)
+}
+
+type CustomModelTagOutput struct{ *pulumi.OutputState }
+
+func (CustomModelTagOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomModelTag)(nil)).Elem()
+}
+
+func (o CustomModelTagOutput) ToCustomModelTagOutput() CustomModelTagOutput {
+	return o
+}
+
+func (o CustomModelTagOutput) ToCustomModelTagOutputWithContext(ctx context.Context) CustomModelTagOutput {
+	return o
+}
+
+// The name of the tag.
+func (o CustomModelTagOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v CustomModelTag) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// The value of the tag.
+func (o CustomModelTagOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v CustomModelTag) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type CustomModelTagArrayOutput struct{ *pulumi.OutputState }
+
+func (CustomModelTagArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CustomModelTag)(nil)).Elem()
+}
+
+func (o CustomModelTagArrayOutput) ToCustomModelTagArrayOutput() CustomModelTagArrayOutput {
+	return o
+}
+
+func (o CustomModelTagArrayOutput) ToCustomModelTagArrayOutputWithContext(ctx context.Context) CustomModelTagArrayOutput {
+	return o
+}
+
+func (o CustomModelTagArrayOutput) Index(i pulumi.IntInput) CustomModelTagOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CustomModelTag {
+		return vs[0].([]CustomModelTag)[vs[1].(int)]
+	}).(CustomModelTagOutput)
+}
+
 type DatasourceParams struct {
 	// The Catalog name in the database if supported.
 	Catalog *string `pulumi:"catalog"`
@@ -12879,6 +12985,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelRuntimeParameterValueArrayInput)(nil)).Elem(), CustomModelRuntimeParameterValueArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelSourceRemoteRepositoryInput)(nil)).Elem(), CustomModelSourceRemoteRepositoryArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelSourceRemoteRepositoryArrayInput)(nil)).Elem(), CustomModelSourceRemoteRepositoryArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelTagInput)(nil)).Elem(), CustomModelTagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelTagArrayInput)(nil)).Elem(), CustomModelTagArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DatasourceParamsInput)(nil)).Elem(), DatasourceParamsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DatasourceParamsPtrInput)(nil)).Elem(), DatasourceParamsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DeploymentAssociationIdSettingsInput)(nil)).Elem(), DeploymentAssociationIdSettingsArgs{})
@@ -13026,6 +13134,8 @@ func init() {
 	pulumi.RegisterOutputType(CustomModelRuntimeParameterValueArrayOutput{})
 	pulumi.RegisterOutputType(CustomModelSourceRemoteRepositoryOutput{})
 	pulumi.RegisterOutputType(CustomModelSourceRemoteRepositoryArrayOutput{})
+	pulumi.RegisterOutputType(CustomModelTagOutput{})
+	pulumi.RegisterOutputType(CustomModelTagArrayOutput{})
 	pulumi.RegisterOutputType(DatasourceParamsOutput{})
 	pulumi.RegisterOutputType(DatasourceParamsPtrOutput{})
 	pulumi.RegisterOutputType(DeploymentAssociationIdSettingsOutput{})

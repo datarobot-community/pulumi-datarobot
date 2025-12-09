@@ -50,6 +50,7 @@ __all__ = [
     'CustomModelOverallModerationConfiguration',
     'CustomModelRuntimeParameterValue',
     'CustomModelSourceRemoteRepository',
+    'CustomModelTag',
     'DatasourceParams',
     'DeploymentAssociationIdSettings',
     'DeploymentBatchMonitoringSettings',
@@ -2306,6 +2307,35 @@ class CustomModelSourceRemoteRepository(dict):
         The list of source paths in the source remote repository.
         """
         return pulumi.get(self, "source_paths")
+
+
+@pulumi.output_type
+class CustomModelTag(dict):
+    def __init__(__self__, *,
+                 name: builtins.str,
+                 value: builtins.str):
+        """
+        :param builtins.str name: The name of the tag.
+        :param builtins.str value: The value of the tag.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> builtins.str:
+        """
+        The name of the tag.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def value(self) -> builtins.str:
+        """
+        The value of the tag.
+        """
+        return pulumi.get(self, "value")
 
 
 @pulumi.output_type
