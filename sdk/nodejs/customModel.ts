@@ -64,6 +64,16 @@ import * as utilities from "./utilities";
  * // memory_mb      = 512
  * // replicas       = 2
  * // network_access = "NONE"
+ * // tags = [
+ * //   {
+ * //     name  = "team"
+ * //     value = "engineering"
+ * //   },
+ * //   {
+ * //     name  = "env"
+ * //     value = "test"
+ * //   }
+ * // ]
  * export const exampleId = exampleCustomModel.id;
  * ```
  */
@@ -196,6 +206,10 @@ export class CustomModel extends pulumi.CustomResource {
      */
     public readonly sourceRemoteRepositories!: pulumi.Output<outputs.CustomModelSourceRemoteRepository[] | undefined>;
     /**
+     * The list of tags to assign to the Custom Model.
+     */
+    public readonly tags!: pulumi.Output<outputs.CustomModelTag[] | undefined>;
+    /**
      * The target name of the Custom Model.
      */
     public readonly targetName!: pulumi.Output<string>;
@@ -266,6 +280,7 @@ export class CustomModel extends pulumi.CustomResource {
             resourceInputs["runtimeParameterValues"] = state ? state.runtimeParameterValues : undefined;
             resourceInputs["sourceLlmBlueprintId"] = state ? state.sourceLlmBlueprintId : undefined;
             resourceInputs["sourceRemoteRepositories"] = state ? state.sourceRemoteRepositories : undefined;
+            resourceInputs["tags"] = state ? state.tags : undefined;
             resourceInputs["targetName"] = state ? state.targetName : undefined;
             resourceInputs["targetType"] = state ? state.targetType : undefined;
             resourceInputs["trainingDataPartitionColumn"] = state ? state.trainingDataPartitionColumn : undefined;
@@ -298,6 +313,7 @@ export class CustomModel extends pulumi.CustomResource {
             resourceInputs["runtimeParameterValues"] = args ? args.runtimeParameterValues : undefined;
             resourceInputs["sourceLlmBlueprintId"] = args ? args.sourceLlmBlueprintId : undefined;
             resourceInputs["sourceRemoteRepositories"] = args ? args.sourceRemoteRepositories : undefined;
+            resourceInputs["tags"] = args ? args.tags : undefined;
             resourceInputs["targetName"] = args ? args.targetName : undefined;
             resourceInputs["targetType"] = args ? args.targetType : undefined;
             resourceInputs["trainingDataPartitionColumn"] = args ? args.trainingDataPartitionColumn : undefined;
@@ -419,6 +435,10 @@ export interface CustomModelState {
      * The source remote repositories for the Custom Model.
      */
     sourceRemoteRepositories?: pulumi.Input<pulumi.Input<inputs.CustomModelSourceRemoteRepository>[]>;
+    /**
+     * The list of tags to assign to the Custom Model.
+     */
+    tags?: pulumi.Input<pulumi.Input<inputs.CustomModelTag>[]>;
     /**
      * The target name of the Custom Model.
      */
@@ -545,6 +565,10 @@ export interface CustomModelArgs {
      * The source remote repositories for the Custom Model.
      */
     sourceRemoteRepositories?: pulumi.Input<pulumi.Input<inputs.CustomModelSourceRemoteRepository>[]>;
+    /**
+     * The list of tags to assign to the Custom Model.
+     */
+    tags?: pulumi.Input<pulumi.Input<inputs.CustomModelTag>[]>;
     /**
      * The target name of the Custom Model.
      */

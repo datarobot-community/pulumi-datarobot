@@ -616,6 +616,17 @@ export interface CustomModelSourceRemoteRepository {
     sourcePaths: pulumi.Input<pulumi.Input<string>[]>;
 }
 
+export interface CustomModelTag {
+    /**
+     * The name of the tag.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * The value of the tag.
+     */
+    value: pulumi.Input<string>;
+}
+
 export interface DatasourceParams {
     /**
      * The Catalog name in the database if supported.

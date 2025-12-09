@@ -107,6 +107,8 @@ type CustomModel struct {
 	SourceLlmBlueprintId pulumi.StringPtrOutput `pulumi:"sourceLlmBlueprintId"`
 	// The source remote repositories for the Custom Model.
 	SourceRemoteRepositories CustomModelSourceRemoteRepositoryArrayOutput `pulumi:"sourceRemoteRepositories"`
+	// The list of tags to assign to the Custom Model.
+	Tags CustomModelTagArrayOutput `pulumi:"tags"`
 	// The target name of the Custom Model.
 	TargetName pulumi.StringOutput `pulumi:"targetName"`
 	// The target type of the Custom Model.
@@ -205,6 +207,8 @@ type customModelState struct {
 	SourceLlmBlueprintId *string `pulumi:"sourceLlmBlueprintId"`
 	// The source remote repositories for the Custom Model.
 	SourceRemoteRepositories []CustomModelSourceRemoteRepository `pulumi:"sourceRemoteRepositories"`
+	// The list of tags to assign to the Custom Model.
+	Tags []CustomModelTag `pulumi:"tags"`
 	// The target name of the Custom Model.
 	TargetName *string `pulumi:"targetName"`
 	// The target type of the Custom Model.
@@ -274,6 +278,8 @@ type CustomModelState struct {
 	SourceLlmBlueprintId pulumi.StringPtrInput
 	// The source remote repositories for the Custom Model.
 	SourceRemoteRepositories CustomModelSourceRemoteRepositoryArrayInput
+	// The list of tags to assign to the Custom Model.
+	Tags CustomModelTagArrayInput
 	// The target name of the Custom Model.
 	TargetName pulumi.StringPtrInput
 	// The target type of the Custom Model.
@@ -341,6 +347,8 @@ type customModelArgs struct {
 	SourceLlmBlueprintId *string `pulumi:"sourceLlmBlueprintId"`
 	// The source remote repositories for the Custom Model.
 	SourceRemoteRepositories []CustomModelSourceRemoteRepository `pulumi:"sourceRemoteRepositories"`
+	// The list of tags to assign to the Custom Model.
+	Tags []CustomModelTag `pulumi:"tags"`
 	// The target name of the Custom Model.
 	TargetName *string `pulumi:"targetName"`
 	// The target type of the Custom Model.
@@ -399,6 +407,8 @@ type CustomModelArgs struct {
 	SourceLlmBlueprintId pulumi.StringPtrInput
 	// The source remote repositories for the Custom Model.
 	SourceRemoteRepositories CustomModelSourceRemoteRepositoryArrayInput
+	// The list of tags to assign to the Custom Model.
+	Tags CustomModelTagArrayInput
 	// The target name of the Custom Model.
 	TargetName pulumi.StringPtrInput
 	// The target type of the Custom Model.
@@ -623,6 +633,11 @@ func (o CustomModelOutput) SourceLlmBlueprintId() pulumi.StringPtrOutput {
 // The source remote repositories for the Custom Model.
 func (o CustomModelOutput) SourceRemoteRepositories() CustomModelSourceRemoteRepositoryArrayOutput {
 	return o.ApplyT(func(v *CustomModel) CustomModelSourceRemoteRepositoryArrayOutput { return v.SourceRemoteRepositories }).(CustomModelSourceRemoteRepositoryArrayOutput)
+}
+
+// The list of tags to assign to the Custom Model.
+func (o CustomModelOutput) Tags() CustomModelTagArrayOutput {
+	return o.ApplyT(func(v *CustomModel) CustomModelTagArrayOutput { return v.Tags }).(CustomModelTagArrayOutput)
 }
 
 // The target name of the Custom Model.

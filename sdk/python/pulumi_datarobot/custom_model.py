@@ -44,6 +44,7 @@ class CustomModelArgs:
                  runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input['CustomModelRuntimeParameterValueArgs']]]] = None,
                  source_llm_blueprint_id: Optional[pulumi.Input[builtins.str]] = None,
                  source_remote_repositories: Optional[pulumi.Input[Sequence[pulumi.Input['CustomModelSourceRemoteRepositoryArgs']]]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input['CustomModelTagArgs']]]] = None,
                  target_name: Optional[pulumi.Input[builtins.str]] = None,
                  target_type: Optional[pulumi.Input[builtins.str]] = None,
                  training_data_partition_column: Optional[pulumi.Input[builtins.str]] = None,
@@ -73,6 +74,7 @@ class CustomModelArgs:
         :param pulumi.Input[Sequence[pulumi.Input['CustomModelRuntimeParameterValueArgs']]] runtime_parameter_values: The runtime parameter values for the Custom Model.
         :param pulumi.Input[builtins.str] source_llm_blueprint_id: The ID of the source LLM Blueprint for the Custom Model.
         :param pulumi.Input[Sequence[pulumi.Input['CustomModelSourceRemoteRepositoryArgs']]] source_remote_repositories: The source remote repositories for the Custom Model.
+        :param pulumi.Input[Sequence[pulumi.Input['CustomModelTagArgs']]] tags: The list of tags to assign to the Custom Model.
         :param pulumi.Input[builtins.str] target_name: The target name of the Custom Model.
         :param pulumi.Input[builtins.str] target_type: The target type of the Custom Model.
         :param pulumi.Input[builtins.str] training_data_partition_column: The name of the partition column in the training dataset assigned to the Custom Model.
@@ -123,6 +125,8 @@ class CustomModelArgs:
             pulumi.set(__self__, "source_llm_blueprint_id", source_llm_blueprint_id)
         if source_remote_repositories is not None:
             pulumi.set(__self__, "source_remote_repositories", source_remote_repositories)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
         if target_name is not None:
             pulumi.set(__self__, "target_name", target_name)
         if target_type is not None:
@@ -399,6 +403,18 @@ class CustomModelArgs:
         pulumi.set(self, "source_remote_repositories", value)
 
     @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CustomModelTagArgs']]]]:
+        """
+        The list of tags to assign to the Custom Model.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CustomModelTagArgs']]]]):
+        pulumi.set(self, "tags", value)
+
+    @property
     @pulumi.getter(name="targetName")
     def target_name(self) -> Optional[pulumi.Input[builtins.str]]:
         """
@@ -487,6 +503,7 @@ class _CustomModelState:
                  runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input['CustomModelRuntimeParameterValueArgs']]]] = None,
                  source_llm_blueprint_id: Optional[pulumi.Input[builtins.str]] = None,
                  source_remote_repositories: Optional[pulumi.Input[Sequence[pulumi.Input['CustomModelSourceRemoteRepositoryArgs']]]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input['CustomModelTagArgs']]]] = None,
                  target_name: Optional[pulumi.Input[builtins.str]] = None,
                  target_type: Optional[pulumi.Input[builtins.str]] = None,
                  training_data_partition_column: Optional[pulumi.Input[builtins.str]] = None,
@@ -522,6 +539,7 @@ class _CustomModelState:
         :param pulumi.Input[Sequence[pulumi.Input['CustomModelRuntimeParameterValueArgs']]] runtime_parameter_values: The runtime parameter values for the Custom Model.
         :param pulumi.Input[builtins.str] source_llm_blueprint_id: The ID of the source LLM Blueprint for the Custom Model.
         :param pulumi.Input[Sequence[pulumi.Input['CustomModelSourceRemoteRepositoryArgs']]] source_remote_repositories: The source remote repositories for the Custom Model.
+        :param pulumi.Input[Sequence[pulumi.Input['CustomModelTagArgs']]] tags: The list of tags to assign to the Custom Model.
         :param pulumi.Input[builtins.str] target_name: The target name of the Custom Model.
         :param pulumi.Input[builtins.str] target_type: The target type of the Custom Model.
         :param pulumi.Input[builtins.str] training_data_partition_column: The name of the partition column in the training dataset assigned to the Custom Model.
@@ -581,6 +599,8 @@ class _CustomModelState:
             pulumi.set(__self__, "source_llm_blueprint_id", source_llm_blueprint_id)
         if source_remote_repositories is not None:
             pulumi.set(__self__, "source_remote_repositories", source_remote_repositories)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
         if target_name is not None:
             pulumi.set(__self__, "target_name", target_name)
         if target_type is not None:
@@ -899,6 +919,18 @@ class _CustomModelState:
         pulumi.set(self, "source_remote_repositories", value)
 
     @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CustomModelTagArgs']]]]:
+        """
+        The list of tags to assign to the Custom Model.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CustomModelTagArgs']]]]):
+        pulumi.set(self, "tags", value)
+
+    @property
     @pulumi.getter(name="targetName")
     def target_name(self) -> Optional[pulumi.Input[builtins.str]]:
         """
@@ -1022,6 +1054,7 @@ class CustomModel(pulumi.CustomResource):
                  runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input[Union['CustomModelRuntimeParameterValueArgs', 'CustomModelRuntimeParameterValueArgsDict']]]]] = None,
                  source_llm_blueprint_id: Optional[pulumi.Input[builtins.str]] = None,
                  source_remote_repositories: Optional[pulumi.Input[Sequence[pulumi.Input[Union['CustomModelSourceRemoteRepositoryArgs', 'CustomModelSourceRemoteRepositoryArgsDict']]]]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[Union['CustomModelTagArgs', 'CustomModelTagArgsDict']]]]] = None,
                  target_name: Optional[pulumi.Input[builtins.str]] = None,
                  target_type: Optional[pulumi.Input[builtins.str]] = None,
                  training_data_partition_column: Optional[pulumi.Input[builtins.str]] = None,
@@ -1084,6 +1117,16 @@ class CustomModel(pulumi.CustomResource):
         # memory_mb      = 512
         # replicas       = 2
         # network_access = "NONE"
+        # tags = [
+        #   {
+        #     name  = "team"
+        #     value = "engineering"
+        #   },
+        #   {
+        #     name  = "env"
+        #     value = "test"
+        #   }
+        # ]
         pulumi.export("exampleId", example_custom_model.id)
         ```
 
@@ -1111,6 +1154,7 @@ class CustomModel(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[Union['CustomModelRuntimeParameterValueArgs', 'CustomModelRuntimeParameterValueArgsDict']]]] runtime_parameter_values: The runtime parameter values for the Custom Model.
         :param pulumi.Input[builtins.str] source_llm_blueprint_id: The ID of the source LLM Blueprint for the Custom Model.
         :param pulumi.Input[Sequence[pulumi.Input[Union['CustomModelSourceRemoteRepositoryArgs', 'CustomModelSourceRemoteRepositoryArgsDict']]]] source_remote_repositories: The source remote repositories for the Custom Model.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['CustomModelTagArgs', 'CustomModelTagArgsDict']]]] tags: The list of tags to assign to the Custom Model.
         :param pulumi.Input[builtins.str] target_name: The target name of the Custom Model.
         :param pulumi.Input[builtins.str] target_type: The target type of the Custom Model.
         :param pulumi.Input[builtins.str] training_data_partition_column: The name of the partition column in the training dataset assigned to the Custom Model.
@@ -1179,6 +1223,16 @@ class CustomModel(pulumi.CustomResource):
         # memory_mb      = 512
         # replicas       = 2
         # network_access = "NONE"
+        # tags = [
+        #   {
+        #     name  = "team"
+        #     value = "engineering"
+        #   },
+        #   {
+        #     name  = "env"
+        #     value = "test"
+        #   }
+        # ]
         pulumi.export("exampleId", example_custom_model.id)
         ```
 
@@ -1219,6 +1273,7 @@ class CustomModel(pulumi.CustomResource):
                  runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input[Union['CustomModelRuntimeParameterValueArgs', 'CustomModelRuntimeParameterValueArgsDict']]]]] = None,
                  source_llm_blueprint_id: Optional[pulumi.Input[builtins.str]] = None,
                  source_remote_repositories: Optional[pulumi.Input[Sequence[pulumi.Input[Union['CustomModelSourceRemoteRepositoryArgs', 'CustomModelSourceRemoteRepositoryArgsDict']]]]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[Union['CustomModelTagArgs', 'CustomModelTagArgsDict']]]]] = None,
                  target_name: Optional[pulumi.Input[builtins.str]] = None,
                  target_type: Optional[pulumi.Input[builtins.str]] = None,
                  training_data_partition_column: Optional[pulumi.Input[builtins.str]] = None,
@@ -1255,6 +1310,7 @@ class CustomModel(pulumi.CustomResource):
             __props__.__dict__["runtime_parameter_values"] = runtime_parameter_values
             __props__.__dict__["source_llm_blueprint_id"] = source_llm_blueprint_id
             __props__.__dict__["source_remote_repositories"] = source_remote_repositories
+            __props__.__dict__["tags"] = tags
             __props__.__dict__["target_name"] = target_name
             __props__.__dict__["target_type"] = target_type
             __props__.__dict__["training_data_partition_column"] = training_data_partition_column
@@ -1301,6 +1357,7 @@ class CustomModel(pulumi.CustomResource):
             runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input[Union['CustomModelRuntimeParameterValueArgs', 'CustomModelRuntimeParameterValueArgsDict']]]]] = None,
             source_llm_blueprint_id: Optional[pulumi.Input[builtins.str]] = None,
             source_remote_repositories: Optional[pulumi.Input[Sequence[pulumi.Input[Union['CustomModelSourceRemoteRepositoryArgs', 'CustomModelSourceRemoteRepositoryArgsDict']]]]] = None,
+            tags: Optional[pulumi.Input[Sequence[pulumi.Input[Union['CustomModelTagArgs', 'CustomModelTagArgsDict']]]]] = None,
             target_name: Optional[pulumi.Input[builtins.str]] = None,
             target_type: Optional[pulumi.Input[builtins.str]] = None,
             training_data_partition_column: Optional[pulumi.Input[builtins.str]] = None,
@@ -1341,6 +1398,7 @@ class CustomModel(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[Union['CustomModelRuntimeParameterValueArgs', 'CustomModelRuntimeParameterValueArgsDict']]]] runtime_parameter_values: The runtime parameter values for the Custom Model.
         :param pulumi.Input[builtins.str] source_llm_blueprint_id: The ID of the source LLM Blueprint for the Custom Model.
         :param pulumi.Input[Sequence[pulumi.Input[Union['CustomModelSourceRemoteRepositoryArgs', 'CustomModelSourceRemoteRepositoryArgsDict']]]] source_remote_repositories: The source remote repositories for the Custom Model.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['CustomModelTagArgs', 'CustomModelTagArgsDict']]]] tags: The list of tags to assign to the Custom Model.
         :param pulumi.Input[builtins.str] target_name: The target name of the Custom Model.
         :param pulumi.Input[builtins.str] target_type: The target type of the Custom Model.
         :param pulumi.Input[builtins.str] training_data_partition_column: The name of the partition column in the training dataset assigned to the Custom Model.
@@ -1379,6 +1437,7 @@ class CustomModel(pulumi.CustomResource):
         __props__.__dict__["runtime_parameter_values"] = runtime_parameter_values
         __props__.__dict__["source_llm_blueprint_id"] = source_llm_blueprint_id
         __props__.__dict__["source_remote_repositories"] = source_remote_repositories
+        __props__.__dict__["tags"] = tags
         __props__.__dict__["target_name"] = target_name
         __props__.__dict__["target_type"] = target_type
         __props__.__dict__["training_data_partition_column"] = training_data_partition_column
@@ -1588,6 +1647,14 @@ class CustomModel(pulumi.CustomResource):
         The source remote repositories for the Custom Model.
         """
         return pulumi.get(self, "source_remote_repositories")
+
+    @property
+    @pulumi.getter
+    def tags(self) -> pulumi.Output[Optional[Sequence['outputs.CustomModelTag']]]:
+        """
+        The list of tags to assign to the Custom Model.
+        """
+        return pulumi.get(self, "tags")
 
     @property
     @pulumi.getter(name="targetName")
