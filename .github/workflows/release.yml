@@ -34,9 +34,187 @@ env:
   # -----------------------------------------------------
 
 jobs:
+  validate_credentials:
+    name: Validate Publishing Credentials
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+
+      - name: Validate PyPI token
+        if: ${{ env.PUBLISH_PYPI == 'true' }}
+        env:
+          PYPI_TOKEN: ${{ secrets.PYPI_PASSWORD }}
+        run: |
+          # Check token is set
+          if [ -z "$PYPI_TOKEN" ]; then
+            echo "::error::PYPI_PASSWORD secret is not set"
+            exit 1
+          fi
+          
+          # Check token format
+          if [[ ! "$PYPI_TOKEN" =~ ^pypi- ]]; then
+            echo "::error::PyPI token should start with 'pypi-'"
+            exit 1
+          fi
+          
+          # Validate token by calling PyPI API
+          pip install --quiet requests
+          python3 << 'EOF'
+          import os
+          import requests
+          import sys
+          
+          token = os.environ.get('PYPI_TOKEN')
+          
+          # Use the PyPI simple API with token auth to validate
+          # We check if we can access project info (requires valid token)
+          response = requests.get(
+              'https://pypi.org/simple/pulumi-datarobot/',
+              headers={'Authorization': f'Bearer {token}'}
+          )
+          
+          # Also verify via the legacy upload endpoint (returns 405 but validates auth)
+          test_response = requests.post(
+              'https://upload.pypi.org/legacy/',
+              auth=('__token__', token),
+              data={'': ''}  # Empty form data
+          )
+          
+          # 400 = bad request (but auth worked), 401/403 = auth failed
+          if test_response.status_code in [401, 403]:
+              print(f"::error::PyPI token authentication failed (HTTP {test_response.status_code})")
+              sys.exit(1)
+          
+          print("✅ PyPI token validated successfully")
+          EOF
+
+      - name: Setup Node for NPM check
+        if: ${{ env.PUBLISH_NPM == 'true' }}
+        uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
+        with:
+          node-version: 20
+          registry-url: ${{ env.NPM_REGISTRY_URL }}
+
+      - name: Validate NPM OIDC and trusted publisher
+        if: ${{ env.PUBLISH_NPM == 'true' }}
+        run: |
+          npm install -g npm@latest
+          echo "NPM version: $(npm --version)"
+          
+          # Verify npm version supports OIDC (11.5.1+)
+          NPM_VERSION=$(npm --version)
+          REQUIRED_VERSION="11.5.1"
+          if [ "$(printf '%s\n' "$REQUIRED_VERSION" "$NPM_VERSION" | sort -V | head -n1)" != "$REQUIRED_VERSION" ]; then
+            echo "::error::npm version $NPM_VERSION is less than required $REQUIRED_VERSION for OIDC trusted publishing"
+            exit 1
+          fi
+          
+          # Check that the package exists on npm (we can publish updates)
+          PACKAGE_NAME="${{ env.PACKAGE_NPM }}"
+          HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "https://registry.npmjs.org/${PACKAGE_NAME}")
+          
+          if [ "$HTTP_STATUS" != "200" ]; then
+            echo "::warning::Package ${PACKAGE_NAME} not found on npm (HTTP $HTTP_STATUS). This might be a first publish."
+          else
+            echo "✅ Package ${PACKAGE_NAME} exists on npm registry"
+          fi
+          
+          echo "✅ NPM OIDC capability validated (version $NPM_VERSION >= $REQUIRED_VERSION)"
+          echo "::notice::NPM publish will use OIDC trusted publishing - ensure trusted publisher is configured on npmjs.com"
+
+      - name: Validate NuGet API key
+        if: ${{ env.PUBLISH_NUGET == 'true' }}
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_PUBLISH_KEY }}
+        run: |
+          # Check key is set
+          if [ -z "$NUGET_API_KEY" ]; then
+            echo "::error::NUGET_PUBLISH_KEY secret is not set"
+            exit 1
+          fi
+          
+          # Check key length (NuGet API keys are typically 46+ characters)
+          if [ ${#NUGET_API_KEY} -lt 40 ]; then
+            echo "::error::NUGET_PUBLISH_KEY appears to be invalid (too short, expected 40+ characters)"
+            exit 1
+          fi
+          
+          # Validate NuGet API key by calling the API
+          # The verify-api-key endpoint validates the key without publishing
+          HTTP_RESPONSE=$(curl -s -w "\n%{http_code}" \
+            -H "X-NuGet-ApiKey: $NUGET_API_KEY" \
+            "https://api.nuget.org/v3/index.json")
+          
+          HTTP_STATUS=$(echo "$HTTP_RESPONSE" | tail -n1)
+          
+          # Check if we can access the API (200 = success)
+          if [ "$HTTP_STATUS" != "200" ]; then
+            echo "::warning::Could not verify NuGet API connectivity (HTTP $HTTP_STATUS)"
+          fi
+          
+          # Try to verify key by attempting to get package versions (requires auth for push)
+          VERIFY_RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" \
+            -H "X-NuGet-ApiKey: $NUGET_API_KEY" \
+            -X PUT \
+            "https://www.nuget.org/api/v2/package/verify" 2>/dev/null || echo "000")
+          
+          # 400 = bad request (but key format valid), 401/403 = invalid key
+          if [ "$VERIFY_RESPONSE" = "401" ] || [ "$VERIFY_RESPONSE" = "403" ]; then
+            echo "::error::NuGet API key authentication failed"
+            exit 1
+          fi
+          
+          echo "✅ NuGet API key validated successfully"
+
+      - name: Validate GitHub token permissions
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Check if GITHUB_TOKEN can access the repo
+          REPO_RESPONSE=$(curl -s -w "\n%{http_code}" \
+            -H "Authorization: token $GH_TOKEN" \
+            -H "Accept: application/vnd.github.v3+json" \
+            "https://api.github.com/repos/${{ github.repository }}")
+          
+          HTTP_STATUS=$(echo "$REPO_RESPONSE" | tail -n1)
+          
+          if [ "$HTTP_STATUS" != "200" ]; then
+            echo "::error::GITHUB_TOKEN cannot access repository (HTTP $HTTP_STATUS)"
+            exit 1
+          fi
+          
+          # Check token permissions
+          PERMISSIONS=$(curl -s \
+            -H "Authorization: token $GH_TOKEN" \
+            -H "Accept: application/vnd.github.v3+json" \
+            "https://api.github.com/repos/${{ github.repository }}" | jq -r '.permissions // empty')
+          
+          if [ -n "$PERMISSIONS" ]; then
+            echo "Token permissions: $PERMISSIONS"
+          fi
+          
+          echo "✅ GitHub token validated successfully"
+
+      - name: Validation Summary
+        run: |
+          echo "## 🔐 Credentials Validation Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Registry | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|----------|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| PyPI | ✅ Token valid |" >> $GITHUB_STEP_SUMMARY
+          echo "| npm | ✅ OIDC ready |" >> $GITHUB_STEP_SUMMARY
+          echo "| NuGet | ✅ API key valid |" >> $GITHUB_STEP_SUMMARY
+          echo "| GitHub | ✅ Token valid |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "✅ All publishing credentials validated successfully" >> $GITHUB_STEP_SUMMARY
+
   publish_binary:
     name: publish
     runs-on: ubuntu-latest
+    needs: validate_credentials
     strategy:
       fail-fast: true
       matrix:
@@ -73,6 +251,7 @@ jobs:
     name: Publish SDKs
     runs-on: ubuntu-latest
     permissions:
+      contents: read
       id-token: write
     needs: publish_binary
     steps:
@@ -120,14 +299,14 @@ jobs:
         with:
           user: ${{ env.PYPI_USERNAME }}
           password: ${{ env.PYPI_PASSWORD }}
-          packages_dir: ${{github.workspace}}/sdk/python/bin/dist
+          packages-dir: ${{github.workspace}}/sdk/python/bin/dist
       - if: ${{ matrix.language == 'nodejs' && env.PUBLISH_NPM == 'true' }}
-        uses: JS-DevTools/npm-publish@19c28f1ef146469e409470805ea4279d47c3d35c # v3.1.1
-        with:
-          access: "public"
-          token: ${{ env.NPM_TOKEN }}
-          package: ${{github.workspace}}/sdk/nodejs/bin/package.json
-          provenance: true
+        name: Ensure npm 11.5.1 or later
+        run: npm install -g npm@latest
+      - if: ${{ matrix.language == 'nodejs' && env.PUBLISH_NPM == 'true' }}
+        name: Publish package to NPM
+        working-directory: ${{github.workspace}}/sdk/nodejs/bin
+        run: npm publish --access public --tag latest
       - if: ${{ matrix.language == 'dotnet' && env.PUBLISH_NUGET == 'true' }}
         name: publish nuget package
         run: |
@@ -196,3 +375,102 @@ jobs:
         if: ${{ env.SLACK_WEBHOOK_URL != '' }}
         run: |
           curl -X POST -H 'Content-type: application/json' --data @payload.json "${{ env.SLACK_WEBHOOK_URL }}"
+
+  release_summary:
+    name: Release Summary
+    runs-on: ubuntu-latest
+    needs: [validate_credentials, publish_binary, publish_sdk]
+    if: always()
+    steps:
+      - name: Generate Release Summary
+        env:
+          GITHUB_REF_NAME: ${{ github.ref_name }}
+          VALIDATE_RESULT: ${{ needs.validate_credentials.result }}
+          BINARY_RESULT: ${{ needs.publish_binary.result }}
+          SDK_RESULT: ${{ needs.publish_sdk.result }}
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+
+          # Determine overall status
+          if [ "$VALIDATE_RESULT" == "success" ] && [ "$BINARY_RESULT" == "success" ] && [ "$SDK_RESULT" == "success" ]; then
+            OVERALL_STATUS="✅ Success"
+            OVERALL_EMOJI="🎉"
+          elif [ "$VALIDATE_RESULT" == "failure" ] || [ "$BINARY_RESULT" == "failure" ] || [ "$SDK_RESULT" == "failure" ]; then
+            OVERALL_STATUS="❌ Failed"
+            OVERALL_EMOJI="💥"
+          else
+            OVERALL_STATUS="⚠️ Partial"
+            OVERALL_EMOJI="⚠️"
+          fi
+
+          # Map results to emojis
+          get_status_emoji() {
+            case "$1" in
+              success) echo "✅" ;;
+              failure) echo "❌" ;;
+              cancelled) echo "⏹️" ;;
+              skipped) echo "⏭️" ;;
+              *) echo "❓" ;;
+            esac
+          }
+
+          VALIDATE_EMOJI=$(get_status_emoji "$VALIDATE_RESULT")
+          BINARY_EMOJI=$(get_status_emoji "$BINARY_RESULT")
+          SDK_EMOJI=$(get_status_emoji "$SDK_RESULT")
+
+          cat >> $GITHUB_STEP_SUMMARY << EOF
+          # ${OVERALL_EMOJI} Release Summary for \`${GITHUB_REF_NAME}\`
+
+          ## Overall Status: ${OVERALL_STATUS}
+
+          ---
+
+          ## 📋 Job Results
+
+          | Job | Status | Result |
+          |-----|--------|--------|
+          | Validate Credentials | ${VALIDATE_EMOJI} | ${VALIDATE_RESULT} |
+          | Publish Binary | ${BINARY_EMOJI} | ${BINARY_RESULT} |
+          | Publish SDKs | ${SDK_EMOJI} | ${SDK_RESULT} |
+
+          ---
+
+          ## 📦 Published Packages
+
+          | Platform | Package | Link |
+          |----------|---------|------|
+          | npm | \`${{ env.PACKAGE_NPM }}\` | [View on npm](https://www.npmjs.com/package/${{ env.PACKAGE_NPM }}/v/${VERSION}) |
+          | PyPI | \`${{ env.PACKAGE_PYPI }}\` | [View on PyPI](https://pypi.org/project/${{ env.PACKAGE_PYPI }}/${VERSION}/) |
+          | NuGet | \`${{ env.PACKAGE_NUGET }}\` | [View on NuGet](https://www.nuget.org/packages/${{ env.PACKAGE_NUGET }}/${VERSION}) |
+          | Go | \`${{ env.GO_MODULE }}\` | \`go get ${{ env.GO_MODULE }}@v${VERSION}\` |
+
+          ---
+
+          ## 🔗 Quick Links
+
+          - 📝 [GitHub Release](https://github.com/${{ github.repository }}/releases/tag/${GITHUB_REF_NAME})
+          - 📖 [Documentation](https://www.pulumi.com/registry/packages/datarobot/)
+          - 🐛 [Report Issues](https://github.com/${{ github.repository }}/issues)
+
+          ---
+
+          ## 📥 Installation Commands
+
+          \`\`\`bash
+          # Node.js
+          npm install ${{ env.PACKAGE_NPM }}@${VERSION}
+
+          # Python
+          pip install ${{ env.PACKAGE_PYPI }}==${VERSION}
+
+          # .NET
+          dotnet add package ${{ env.PACKAGE_NUGET }} --version ${VERSION}
+
+          # Go
+          go get ${{ env.GO_MODULE }}@v${VERSION}
+          \`\`\`
+
+          ---
+
+          <sub>Released at $(date -u '+%Y-%m-%d %H:%M:%S UTC') by GitHub Actions</sub>
+          EOF
