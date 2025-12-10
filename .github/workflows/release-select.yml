@@ -117,7 +117,7 @@ jobs:
       - name: Publish JS SDK
         if: ${{ github.event.inputs.SDK_LANGUAGE == 'nodejs' && env.PUBLISH_NPM == 'true' }}
         working-directory: ${{github.workspace}}/sdk/nodejs/bin
-        run: npm publish --access public
+        run: npm publish --access public --tag latest
 
       - name: Publish .NET SDK
         if: ${{ github.event.inputs.SDK_LANGUAGE == 'dotnet' && env.PUBLISH_NUGET == 'true' }}
