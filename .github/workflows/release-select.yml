@@ -44,7 +44,7 @@ jobs:
     name: Release Selected SDK
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
       id-token: write
     steps:
       - name: Checkout Repo
@@ -103,14 +103,21 @@ jobs:
           password: ${{ env.PYPI_PASSWORD }}
           packages-dir: ${{github.workspace}}/sdk/python/bin/dist
 
+      - name: Setup Node.js for NPM publish
+        if: ${{ github.event.inputs.SDK_LANGUAGE == 'nodejs' && env.PUBLISH_NPM == 'true' }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Ensure npm 11.5.1 or later
+        if: ${{ github.event.inputs.SDK_LANGUAGE == 'nodejs' && env.PUBLISH_NPM == 'true' }}
+        run: npm install -g npm@latest
+
       - name: Publish JS SDK
         if: ${{ github.event.inputs.SDK_LANGUAGE == 'nodejs' && env.PUBLISH_NPM == 'true' }}
-        uses: JS-DevTools/npm-publish@v3.1.1
-        with:
-          access: "public"
-          token: ${{ env.NPM_TOKEN }}
-          package: ${{github.workspace}}/sdk/nodejs/bin/package.json
-          provenance: true
+        working-directory: ${{github.workspace}}/sdk/nodejs/bin
+        run: npm publish --access public
 
       - name: Publish .NET SDK
         if: ${{ github.event.inputs.SDK_LANGUAGE == 'dotnet' && env.PUBLISH_NUGET == 'true' }}
