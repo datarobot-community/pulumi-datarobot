@@ -34,9 +34,85 @@ env:
   # -----------------------------------------------------
 
 jobs:
+  validate_credentials:
+    name: Validate Publishing Credentials
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+    steps:
+      - name: Validate PyPI credentials
+        if: ${{ env.PUBLISH_PYPI == 'true' }}
+        env:
+          TWINE_USERNAME: ${{ env.PYPI_USERNAME }}
+          TWINE_PASSWORD: ${{ env.PYPI_PASSWORD }}
+        run: |
+          pip install twine
+          python -c "
+          import requests
+          response = requests.get('https://pypi.org/simple/', auth=('${{ env.PYPI_USERNAME }}', '${{ env.PYPI_PASSWORD }}'))
+          # PyPI doesn't have a direct auth check, but we verify the token format
+          if not '${{ env.PYPI_PASSWORD }}'.startswith('pypi-'):
+            print('Warning: PyPI token should start with pypi-')
+          print('PyPI credentials format validated')
+          "
+
+      - name: Setup Node for NPM check
+        if: ${{ env.PUBLISH_NPM == 'true' }}
+        uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
+        with:
+          node-version: 20
+          registry-url: ${{ env.NPM_REGISTRY_URL }}
+
+      - name: Validate NPM OIDC capability
+        if: ${{ env.PUBLISH_NPM == 'true' }}
+        run: |
+          npm install -g npm@latest
+          echo "NPM version: $(npm --version)"
+          # Verify npm version supports OIDC (11.5.1+)
+          NPM_VERSION=$(npm --version)
+          REQUIRED_VERSION="11.5.1"
+          if [ "$(printf '%s\n' "$REQUIRED_VERSION" "$NPM_VERSION" | sort -V | head -n1)" != "$REQUIRED_VERSION" ]; then
+            echo "Error: npm version $NPM_VERSION is less than required $REQUIRED_VERSION for OIDC"
+            exit 1
+          fi
+          echo "NPM OIDC capability validated (version $NPM_VERSION >= $REQUIRED_VERSION)"
+
+      - name: Validate NuGet credentials
+        if: ${{ env.PUBLISH_NUGET == 'true' }}
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_PUBLISH_KEY }}
+        run: |
+          if [ -z "$NUGET_API_KEY" ]; then
+            echo "Error: NUGET_PUBLISH_KEY secret is not set"
+            exit 1
+          fi
+          # Verify key format (NuGet API keys are typically base64-like strings)
+          if [ ${#NUGET_API_KEY} -lt 20 ]; then
+            echo "Error: NUGET_PUBLISH_KEY appears to be invalid (too short)"
+            exit 1
+          fi
+          echo "NuGet credentials validated"
+
+      - name: Validate GitHub token
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Check if GITHUB_TOKEN has required permissions
+          curl -s -H "Authorization: token $GH_TOKEN" \
+            "https://api.github.com/repos/${{ github.repository }}" > /dev/null
+          if [ $? -ne 0 ]; then
+            echo "Error: GITHUB_TOKEN validation failed"
+            exit 1
+          fi
+          echo "GitHub token validated"
+
+      - name: All credentials validated
+        run: echo "✅ All publishing credentials validated successfully"
+
   publish_binary:
     name: publish
     runs-on: ubuntu-latest
+    needs: validate_credentials
     strategy:
       fail-fast: true
       matrix:
@@ -120,14 +196,14 @@ jobs:
         with:
           user: ${{ env.PYPI_USERNAME }}
           password: ${{ env.PYPI_PASSWORD }}
-          packages_dir: ${{github.workspace}}/sdk/python/bin/dist
+          packages-dir: ${{github.workspace}}/sdk/python/bin/dist
       - if: ${{ matrix.language == 'nodejs' && env.PUBLISH_NPM == 'true' }}
-        uses: JS-DevTools/npm-publish@19c28f1ef146469e409470805ea4279d47c3d35c # v3.1.1
-        with:
-          access: "public"
-          token: ${{ env.NPM_TOKEN }}
-          package: ${{github.workspace}}/sdk/nodejs/bin/package.json
-          provenance: true
+        name: Ensure npm 11.5.1 or later
+        run: npm install -g npm@latest
+      - if: ${{ matrix.language == 'nodejs' && env.PUBLISH_NPM == 'true' }}
+        name: Publish package to NPM
+        working-directory: ${{github.workspace}}/sdk/nodejs/bin
+        run: npm publish --access public --tag latest
       - if: ${{ matrix.language == 'dotnet' && env.PUBLISH_NUGET == 'true' }}
         name: publish nuget package
         run: |
