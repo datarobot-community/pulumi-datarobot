@@ -43,6 +43,9 @@ jobs:
   release_sdk:
     name: Release Selected SDK
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v5
