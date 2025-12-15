@@ -44,7 +44,7 @@ jobs:
       run: make tidy
 
     - name: Run golangci-lint
-      uses: golangci/golangci-lint-action@v8
+      uses: golangci/golangci-lint-action@v9
       with:
         version: latest # Ensures the latest v2 version is used
         working-directory: provider
