@@ -86,9 +86,9 @@ pip install wheels/* -f wheels/ --no-index
 Download the plugin binary from the [releases page](https://github.com/datarobot-community/pulumi-datarobot/releases):
 
 ```bash
-# Replace v0.10.27 with your version, e.g., v0.10.14
-pulumi plugin install resource datarobot v0.10.27 --server \
-  https://github.com/datarobot-community/pulumi-datarobot/releases/v0.10.27/
+# Replace v0.10.28 with your version, e.g., v0.10.14
+pulumi plugin install resource datarobot v0.10.28 --server \
+  https://github.com/datarobot-community/pulumi-datarobot/releases/v0.10.28/
 ```
 
 ### 4. Skip update checks
@@ -141,4 +141,4 @@ registered_model = dr.RegisteredModelFromLeaderboard("my-registered-model",
 
 ## Version
 
-Package version: v0.10.27
+Package version: v0.10.28

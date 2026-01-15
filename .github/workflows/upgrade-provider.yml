@@ -1,6 +1,11 @@
 name: Upgrade provider
 on:
   workflow_dispatch:
+    inputs:
+      version_override:
+        description: 'Override version (e.g., v0.10.27)'
+        required: false
+        type: string
   issues:
     types:
     - opened
@@ -46,6 +51,14 @@ jobs:
     - name: Determine next version
       id: version
       run: |
+        # Check for manual version override
+        if [[ -n "${{ inputs.version_override }}" ]]; then
+          NEXT_VERSION="${{ inputs.version_override }}"
+          echo "Using manual version override: $NEXT_VERSION"
+          echo "version=$NEXT_VERSION" >> $GITHUB_OUTPUT
+          exit 0
+        fi
+
         # Get the current version from the last tag
         CURRENT_VERSION=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
         echo "Current version: $CURRENT_VERSION"
