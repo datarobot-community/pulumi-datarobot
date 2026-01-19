@@ -1,0 +1,11 @@
+blank_issues_enabled: true
+contact_links:
+  - name: DataRobot Documentation
+    url: https://docs.datarobot.com/
+    about: Official DataRobot documentation
+  - name: Pulumi Documentation
+    url: https://www.pulumi.com/docs/
+    about: Official Pulumi documentation
+  - name: Terraform Provider
+    url: https://github.com/datarobot-community/terraform-provider-datarobot
+    about: Upstream Terraform provider for DataRobot

@@ -1,0 +1,22 @@
+# CODEOWNERS file for pulumi-datarobot
+# https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Default owners for everything in the repo
+* @datarobot-community/dsx
+
+# Provider core code
+/provider/ @datarobot-community/dsx
+
+# SDK directories (auto-generated, but review changes)
+/sdk/ @datarobot-community/dsx
+
+# CI/CD workflows
+/.github/ @datarobot-community/dsx
+
+# Documentation
+/docs/ @datarobot-community/dsx
+README.md @datarobot-community/dsx
+CONTRIBUTING.md @datarobot-community/dsx
+
+# Examples
+/examples/ @datarobot-community/dsx
