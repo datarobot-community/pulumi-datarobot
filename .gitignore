@@ -29,6 +29,7 @@ sdk/java/gradlew
 sdk/java/gradlew.bat
 
 sdk/python/venv
+.venv
 
 go.work
 go.work.sum

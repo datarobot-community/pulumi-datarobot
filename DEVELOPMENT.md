@@ -6,6 +6,34 @@ provider](https://github.com/pulumi/pulumi-terraform-bridge) for the
 provider](https://github.com/datarobot-community/terraform-provider-datarobot)
 
 
+## Versioning
+
+Local development builds automatically compute a pre-release version based on git tags:
+
+- **On an exact tag** (e.g., `v0.10.28`): Uses the tag as-is (release build)
+- **After commits past a tag**: Computes the next patch version with a `-dev.0` suffix
+
+For example, if the latest tag is `v0.10.28`:
+
+| Variable | Value | Usage |
+|----------|-------|-------|
+| `VERSION` | `v0.10.29-dev.0` | Provider binary (semver) |
+| `VERSION_PYTHON` | `0.10.29.dev0` | Python SDK (PEP 440) |
+| `VERSION_NODEJS` | `0.10.29-dev.0` | Node.js SDK (npm semver) |
+| `VERSION_DOTNET` | `0.10.29-dev.0` | .NET SDK (NuGet semver) |
+
+This ensures:
+- Local dev builds are always "newer" than the last release
+- Local dev builds are "older" than the next official release (proper semver pre-release ordering)
+- Installing an official release (e.g., `pip install pulumi-datarobot==0.10.29`) will replace your dev version
+- Python uses PEP 440 `.dev0` format (no hyphen) while Node.js/.NET use standard semver `-dev.0`
+- The version is constant during development - you always replace the same `-dev.0` version
+
+You can check the computed versions with:
+```bash
+make -np 2>/dev/null | grep -E '^VERSION'
+```
+
 ## Releasing
 
 To release, run the ["Upgrade provider"
@@ -36,13 +64,31 @@ locally with the newest release.
 
 * Checkout the main branch locally after the PR created above is merged.
 * Ensure you have a valid NodeJS, .NET, JVM, and Python installation available locally in the environment when you are in the repo.
+* **Set up Python virtual environment** (recommended to avoid conflicts with system packages):
+  ```bash
+  python3 -m venv .venv
+  source .venv/bin/activate  # On macOS/Linux
+  # Or on Windows: .venv\Scripts\activate
+  pip install --upgrade pip setuptools wheel
+  ```
 * Run `make generate_sdk` and resolve any errors that occur. Warnings are okay. It will drop installers into the `sdk` folder by language
 * Run `make provider`. This will compile the binary of the provider for your platform that is required in addition to install the platform specific SDK.
 
 Now, in your example Pulumi project, you should be ready to install the local development version. Here is the procedure for that. We'll show Python here because that is our most critical SDK
 
-* First, install the Python package `pip install -e ~/path/to/pulumi-datarobot/sdk/python`
-* Next, install the provider binary with `pulumi plugin install resource datarobot v0.0.0 -f ~/path/to/pulumi-datarobot/bin/pulumi-resource-datarobot`
+* First, install the Python package (from the built version with correct VERSION):
+  ```bash
+  # Using pip
+  pip install -e ~/path/to/pulumi-datarobot/sdk/python/bin
+
+  # Or using uv (updates pyproject.toml)
+  uv add --editable ~/path/to/pulumi-datarobot/sdk/python/bin
+  ```
+* Next, install the provider binary:
+  ```bash
+  # If the latest git tag is v0.10.28, use v0.10.29-dev.0 (next patch + -dev.0)
+  pulumi plugin install resource datarobot v0.10.29-dev.0 -f ~/path/to/pulumi-datarobot/bin/pulumi-resource-datarobot
+  ```
 
 From there, you should have everything ready to test with a `pulumi up`!
 
@@ -58,6 +104,13 @@ For developing and testing changes across both the terraform provider and pulumi
   # code/
   # ├── pulumi-datarobot/          (this repo)
   # └── terraform-provider-datarobot/
+  ```
+- Set up a Python virtual environment (recommended):
+  ```bash
+  cd pulumi-datarobot
+  python3 -m venv .venv
+  source .venv/bin/activate
+  pip install --upgrade pip setuptools wheel
   ```
 
 ### Local Development Targets
@@ -127,22 +180,32 @@ make clean_windows
    make cross_compile_windows
    ```
 
-5. **Install and test** with a Pulumi project:
+5. **Generate SDKs** (if you ran `build_local_provider` instead of `test_local_provider`):
    ```bash
-   # Install the Python SDK
-   pip install -e ~/path/to/pulumi-datarobot/sdk/python
+   make generate_sdk
+   ```
+
+6. **Install and test** with a Pulumi project:
+   ```bash
+   # Install the Python SDK (from the built version with correct VERSION)
+   # Using pip:
+   pip install -e ~/path/to/pulumi-datarobot/sdk/python/bin
+   # Or using uv (updates pyproject.toml):
+   uv add --editable ~/path/to/pulumi-datarobot/sdk/python/bin
 
    # Install the provider binary
-   pulumi plugin install resource datarobot v0.0.0 -f ~/path/to/pulumi-datarobot/bin/pulumi-resource-datarobot
+   # If the latest git tag is v0.10.28, use v0.10.29-dev.0 (next patch + -dev.0)
+   pulumi plugin install resource datarobot v0.10.29-dev.0 -f ~/path/to/pulumi-datarobot/bin/pulumi-resource-datarobot
 
    # Test with pulumi up
+   cd ~/path/to/your-pulumi-project
    pulumi up
    ```
 
    Alternatively, for a quick test, you can swap out the executable file on your test machine that is in `~/.pulumi/plugins/...`
    with the binaries produced and added to the `bin` folder on an existing install of the plugin.
 
-6. **Clean up** when done:
+7. **Clean up** when done:
    ```bash
    make clean_windows  # Remove Windows artifacts
    make clean          # Remove all SDK builds
@@ -151,7 +214,9 @@ make clean_windows
 ### Notes
 
 - All targets automatically manage go.mod replace directives and restore the original state
-- The `+dirty` version suffix appears when you have uncommitted changes - this is normal during development
+- Version is auto-computed from git tags (see [Versioning](#versioning) section above)
+- Python virtual environment: If you created a `.venv` at the repo root, keep it activated when running `make` commands that build Python SDKs
+- **Important**: Always install from `sdk/python/bin`, not `sdk/python`. The source template in `sdk/python/` has `VERSION = "0.0.0"`. The build process copies to `sdk/python/bin/` and injects the correct version there.
 - Windows binaries cannot be executed on macOS, so SDK generation uses native binaries even during cross-compilation
 - The local terraform provider path can be customized by modifying the `LOCAL_TF_PROVIDER_PATH` variable in the Makefile
 - This will change the source code in your tree, do not commit it since it will not work outside of your local environment
