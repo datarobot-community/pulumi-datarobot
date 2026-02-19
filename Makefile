@@ -27,25 +27,23 @@ VERSION_PATCH   := $(shell echo $(LATEST_TAG) | sed 's/^v//' | cut -d. -f3)
 NEXT_PATCH      := $(shell echo $$(($(VERSION_PATCH) + 1)))
 
 # VERSION: used for provider binary and general display
-# - On exact tag: v0.10.28
-# - Otherwise: v0.10.29-dev.0 (next patch with -dev.0 suffix)
+# - If on exact tag: use the tag (release build)
+# - Otherwise: use next patch version (no suffix to avoid semver/PEP440 conversion issues)
 ifdef EXACT_TAG
   VERSION       := $(EXACT_TAG)
 else
-  VERSION       := v$(VERSION_MAJOR).$(VERSION_MINOR).$(NEXT_PATCH)-dev.0
+  VERSION       := v$(VERSION_MAJOR).$(VERSION_MINOR).$(NEXT_PATCH)
 endif
 
-# SDK-specific versions (different pre-release formats)
-# Python (PEP 440): 0.10.29.dev0 (no hyphen, .dev0 format)
-# Node.js/NuGet: 0.10.29-dev.0 (hyphen style)
+# SDK-specific versions (strip 'v' prefix)
 ifdef EXACT_TAG
   VERSION_PYTHON  := $(shell echo $(EXACT_TAG) | sed 's/^v//')
   VERSION_NODEJS  := $(shell echo $(EXACT_TAG) | sed 's/^v//')
   VERSION_DOTNET  := $(shell echo $(EXACT_TAG) | sed 's/^v//')
 else
-  VERSION_PYTHON  := $(VERSION_MAJOR).$(VERSION_MINOR).$(NEXT_PATCH).dev0
-  VERSION_NODEJS  := $(VERSION_MAJOR).$(VERSION_MINOR).$(NEXT_PATCH)-dev.0
-  VERSION_DOTNET  := $(VERSION_MAJOR).$(VERSION_MINOR).$(NEXT_PATCH)-dev.0
+  VERSION_PYTHON  := $(VERSION_MAJOR).$(VERSION_MINOR).$(NEXT_PATCH)
+  VERSION_NODEJS  := $(VERSION_MAJOR).$(VERSION_MINOR).$(NEXT_PATCH)
+  VERSION_DOTNET  := $(VERSION_MAJOR).$(VERSION_MINOR).$(NEXT_PATCH)
 endif
 
 TESTPARALLELISM := 4

@@ -8,26 +8,25 @@ provider](https://github.com/datarobot-community/terraform-provider-datarobot)
 
 ## Versioning
 
-Local development builds automatically compute a pre-release version based on git tags:
+Local development builds automatically compute a version based on git tags:
 
 - **On an exact tag** (e.g., `v0.10.28`): Uses the tag as-is (release build)
-- **After commits past a tag**: Computes the next patch version with a `-dev.0` suffix
+- **After commits past a tag**: Computes the next patch version (no suffix)
 
 For example, if the latest tag is `v0.10.28`:
 
 | Variable | Value | Usage |
 |----------|-------|-------|
-| `VERSION` | `v0.10.29-dev.0` | Provider binary (semver) |
-| `VERSION_PYTHON` | `0.10.29.dev0` | Python SDK (PEP 440) |
-| `VERSION_NODEJS` | `0.10.29-dev.0` | Node.js SDK (npm semver) |
-| `VERSION_DOTNET` | `0.10.29-dev.0` | .NET SDK (NuGet semver) |
+| `VERSION` | `v0.10.29` | Provider binary |
+| `VERSION_PYTHON` | `0.10.29` | Python SDK |
+| `VERSION_NODEJS` | `0.10.29` | Node.js SDK |
+| `VERSION_DOTNET` | `0.10.29` | .NET SDK |
 
 This ensures:
-- Local dev builds are always "newer" than the last release
-- Local dev builds are "older" than the next official release (proper semver pre-release ordering)
-- Installing an official release (e.g., `pip install pulumi-datarobot==0.10.29`) will replace your dev version
-- Python uses PEP 440 `.dev0` format (no hyphen) while Node.js/.NET use standard semver `-dev.0`
-- The version is constant during development - you always replace the same `-dev.0` version
+- Local dev builds use the next patch version
+- No pre-release suffix (avoids semver/PEP440 conversion issues)
+- The version is constant during development - you always replace the same version
+- **Important**: Only create git tags when doing official releases
 
 You can check the computed versions with:
 ```bash
@@ -84,11 +83,15 @@ Now, in your example Pulumi project, you should be ready to install the local de
   # Or using uv (updates pyproject.toml)
   uv add --editable ~/path/to/pulumi-datarobot/sdk/python/bin
   ```
-* Next, install the provider binary:
+* Next, clean old plugins, rebuild, and install the provider binary:
   ```bash
-  # If the latest git tag is v0.10.28, use v0.10.29-dev.0 (next patch + -dev.0)
-  pulumi plugin install resource datarobot v0.10.29-dev.0 -f ~/path/to/pulumi-datarobot/bin/pulumi-resource-datarobot
+  # If the latest git tag is v0.10.28, use v0.10.29 (next patch)
+  rm -r ~/.pulumi/plugins/resource-datarobot* && \
+    make provider && \
+    pulumi plugin install resource datarobot v0.10.29 -f ~/path/to/pulumi-datarobot/bin/pulumi-resource-datarobot
   ```
+  
+  **Note**: The cleanup step ensures you always have a fresh binary without cached artifacts.
 
 From there, you should have everything ready to test with a `pulumi up`!
 
@@ -193,17 +196,63 @@ make clean_windows
    # Or using uv (updates pyproject.toml):
    uv add --editable ~/path/to/pulumi-datarobot/sdk/python/bin
 
-   # Install the provider binary
-   # If the latest git tag is v0.10.28, use v0.10.29-dev.0 (next patch + -dev.0)
-   pulumi plugin install resource datarobot v0.10.29-dev.0 -f ~/path/to/pulumi-datarobot/bin/pulumi-resource-datarobot
+   # Clean old plugins, rebuild, and install the provider binary
+   # If the latest git tag is v0.10.28, use v0.10.29 (next patch)
+   rm -r ~/.pulumi/plugins/resource-datarobot* && \
+     make build_local_provider && \
+     pulumi plugin install resource datarobot v0.10.29 -f ~/path/to/pulumi-datarobot/bin/pulumi-resource-datarobot
 
    # Test with pulumi up
    cd ~/path/to/your-pulumi-project
    pulumi up
    ```
+   
+   **Note**: The cleanup step (`rm -r ~/.pulumi/plugins/resource-datarobot*`) ensures you always have a fresh binary without cached artifacts. This is important when iterating during development.
 
    Alternatively, for a quick test, you can swap out the executable file on your test machine that is in `~/.pulumi/plugins/...`
    with the binaries produced and added to the `bin` folder on an existing install of the plugin.
+
+### Managing Plugin Versions in Pulumi Stacks
+
+When switching between different versions of the DataRobot provider during development, your Pulumi stack state may reference a different plugin version than the one you have installed. This can cause errors like:
+
+```
+error: could not load plugin for datarobot provider 'urn:pulumi:stack::project::pulumi:providers:datarobot::default': 
+no resource plugin 'pulumi-resource-datarobot' found in the workspace at version v0.10.28
+```
+
+To fix this, you need to update the plugin version in your stack state:
+
+1. **Export the stack state**:
+   ```bash
+   pulumi stack export > export.json
+   ```
+
+2. **Edit the plugin version**:
+   Open `export.json` and find the `provider` section. Look for entries like:
+   ```json
+   "urn:pulumi:dev::my-project::pulumi:providers:datarobot::default_0_10_28": {
+   ```
+   Update the version number to match your installed plugin (e.g., change `0_10_28` to `0_10_29`).
+   
+   Also update any `pluginDownloadURL` references if present.
+
+3. **Import the updated state**:
+   ```bash
+   pulumi stack import < export.json
+   ```
+
+4. **Verify the change**:
+   ```bash
+   pulumi preview
+   ```
+
+**Tip**: When developing locally, it's often easier to create a new test stack rather than updating plugin versions in existing stacks:
+```bash
+pulumi stack init dev-local
+# ... test your changes ...
+pulumi stack rm dev-local  # Clean up when done
+```
 
 7. **Clean up** when done:
    ```bash
