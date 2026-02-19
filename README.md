@@ -122,20 +122,20 @@ pulumi plugin install resource datarobot <version> -f <path-to-extracted-folder>
 
 ## Custom Plugin Download Locations
 
-If you need to host the pulumi-datarobot plugin in your own artifact repository or air-gapped environment, you can use Pulumi's `PLUGIN_DOWNLOAD_URL_OVERRIDES` environment variable to redirect plugin downloads to your custom location.
+If you need to host the pulumi-datarobot plugin in your own artifact repository or air-gapped environment, you can use Pulumi's `PULUMI_PLUGIN_DOWNLOAD_URL_OVERRIDES` environment variable to redirect plugin downloads to your custom location.
 
 ### Basic Usage
 
-The `PLUGIN_DOWNLOAD_URL_OVERRIDES` environment variable allows you to override plugin download URLs using regular expressions. The format is:
+The `PULUMI_PLUGIN_DOWNLOAD_URL_OVERRIDES` environment variable allows you to override plugin download URLs using regular expressions. The format is:
 
 ```
-PLUGIN_DOWNLOAD_URL_OVERRIDES="regexp=URL"
+PULUMI_PLUGIN_DOWNLOAD_URL_OVERRIDES="regexp=URL"
 ```
 
 Multiple overrides can be specified by separating them with commas:
 
 ```
-PLUGIN_DOWNLOAD_URL_OVERRIDES="regexp1=URL1,regexp2=URL2"
+PULUMI_PLUGIN_DOWNLOAD_URL_OVERRIDES="regexp1=URL1,regexp2=URL2"
 ```
 
 ### Redirecting DataRobot Plugin Downloads
@@ -150,7 +150,7 @@ github://api.github.com/datarobot-community/pulumi-datarobot
 To redirect all DataRobot plugin downloads to your internal artifact repository:
 
 ```bash
-export PLUGIN_DOWNLOAD_URL_OVERRIDES="^github://api.github.com/datarobot-community/pulumi-datarobot=https://artifactory.yourcompany.com/pulumi/datarobot"
+export PULUMI_PLUGIN_DOWNLOAD_URL_OVERRIDES="^github://api.github.com/datarobot-community/pulumi-datarobot=https://artifactory.yourcompany.com/pulumi/datarobot"
 ```
 
 Your artifact repository should host the plugin binaries with the same structure as GitHub releases. For example, for version v0.10.26, the plugin binary should be available at:
@@ -165,7 +165,7 @@ https://artifactory.yourcompany.com/pulumi/datarobot/pulumi-resource-datarobot-v
 To redirect all GitHub-hosted plugins to your internal mirror:
 
 ```bash
-export PLUGIN_DOWNLOAD_URL_OVERRIDES="^github://=https://internal-mirror.yourcompany.com/github-plugins/"
+export PULUMI_PLUGIN_DOWNLOAD_URL_OVERRIDES="^github://=https://internal-mirror.yourcompany.com/github-plugins/"
 ```
 
 #### Example 3: Using Named Capture Groups
@@ -173,7 +173,7 @@ export PLUGIN_DOWNLOAD_URL_OVERRIDES="^github://=https://internal-mirror.yourcom
 You can use named regular expression groups to dynamically build redirect URLs. This is useful for maintaining the same folder structure in your artifact repository:
 
 ```bash
-export PLUGIN_DOWNLOAD_URL_OVERRIDES="^github://api.github.com/(?P<org>[^/]+)/(?P<repo>[^/]+)=https://artifactory.yourcompany.com/pulumi/\${org}/\${repo}"
+export PULUMI_PLUGIN_DOWNLOAD_URL_OVERRIDES="^github://api.github.com/(?P<org>[^/]+)/(?P<repo>[^/]+)=https://artifactory.yourcompany.com/pulumi/\${org}/\${repo}"
 ```
 
 With this configuration, the DataRobot plugin would be downloaded from:
@@ -184,7 +184,7 @@ https://artifactory.yourcompany.com/pulumi/datarobot-community/pulumi-datarobot
 You can also use numeric capture groups like `$1`, `$2`, etc.:
 
 ```bash
-export PLUGIN_DOWNLOAD_URL_OVERRIDES="^github://api.github.com/([^/]+)/([^/]+)=https://artifactory.yourcompany.com/pulumi/$1/$2"
+export PULUMI_PLUGIN_DOWNLOAD_URL_OVERRIDES="^github://api.github.com/([^/]+)/([^/]+)=https://artifactory.yourcompany.com/pulumi/$1/$2"
 ```
 
 #### Example 4: Air-Gapped Environment with Local File Server
@@ -192,7 +192,7 @@ export PLUGIN_DOWNLOAD_URL_OVERRIDES="^github://api.github.com/([^/]+)/([^/]+)=h
 For completely air-gapped environments, you can host plugins on a local HTTP server:
 
 ```bash
-export PLUGIN_DOWNLOAD_URL_OVERRIDES="^github://api.github.com/datarobot-community/pulumi-datarobot=http://local-server.internal/pulumi-plugins/datarobot"
+export PULUMI_PLUGIN_DOWNLOAD_URL_OVERRIDES="^github://api.github.com/datarobot-community/pulumi-datarobot=http://local-server.internal/pulumi-plugins/datarobot"
 ```
 
 ### Setting Up Your Artifact Repository
@@ -246,7 +246,7 @@ curl -u "${ARTIFACTORY_USER}:${ARTIFACTORY_TOKEN}" \
 
 ```bash
 # Set the override to redirect DataRobot plugin downloads to your Artifactory
-export PLUGIN_DOWNLOAD_URL_OVERRIDES="^github://api.github.com/datarobot-community/pulumi-datarobot=https://artifactory.infra.io/artifactory/pulumi-plugins/datarobot"
+export PULUMI_PLUGIN_DOWNLOAD_URL_OVERRIDES="^github://api.github.com/datarobot-community/pulumi-datarobot=https://artifactory.infra.io/artifactory/pulumi-plugins/datarobot"
 ```
 
 #### Step 4: Remove Existing Plugin (for Testing)
@@ -296,7 +296,7 @@ If the download fails, check:
 2. **Authentication**: If your Artifactory requires authentication, you may need to configure credentials:
    ```bash
    # For basic auth, include credentials in the URL (not recommended for production)
-   export PLUGIN_DOWNLOAD_URL_OVERRIDES="^github://api.github.com/datarobot-community/pulumi-datarobot=https://${ARTIFACTORY_USER}:${ARTIFACTORY_TOKEN}@artifactory.infra.io/artifactory/pulumi-plugins/datarobot"
+   export PULUMI_PLUGIN_DOWNLOAD_URL_OVERRIDES="^github://api.github.com/datarobot-community/pulumi-datarobot=https://${ARTIFACTORY_USER}:${ARTIFACTORY_TOKEN}@artifactory.infra.io/artifactory/pulumi-plugins/datarobot"
    ```
 
 3. **File naming**: Ensure the uploaded files match the expected naming convention exactly:
@@ -327,7 +327,7 @@ VERSION="v0.10.26"
 ARTIFACTORY_BASE="https://artifactory.infra.io/artifactory/pulumi-plugins/datarobot"
 
 # Configure plugin download override
-export PLUGIN_DOWNLOAD_URL_OVERRIDES="^github://api.github.com/datarobot-community/pulumi-datarobot=${ARTIFACTORY_BASE}"
+export PULUMI_PLUGIN_DOWNLOAD_URL_OVERRIDES="^github://api.github.com/datarobot-community/pulumi-datarobot=${ARTIFACTORY_BASE}"
 
 # Skip update checks to avoid GitHub API calls
 export PULUMI_SKIP_UPDATE_CHECK=true
@@ -347,14 +347,14 @@ echo "✅ Plugin successfully installed from Artifactory!"
 
 ### Combining with Other Air-Gapped Settings
 
-For fully air-gapped deployments, combine `PLUGIN_DOWNLOAD_URL_OVERRIDES` with other settings:
+For fully air-gapped deployments, combine `PULUMI_PLUGIN_DOWNLOAD_URL_OVERRIDES` with other settings:
 
 ```bash
 # Skip update checks to avoid GitHub API calls
 export PULUMI_SKIP_UPDATE_CHECK=true
 
 # Redirect plugin downloads to internal repository
-export PLUGIN_DOWNLOAD_URL_OVERRIDES="^github://api.github.com/datarobot-community/pulumi-datarobot=https://artifactory.yourcompany.com/pulumi/datarobot"
+export PULUMI_PLUGIN_DOWNLOAD_URL_OVERRIDES="^github://api.github.com/datarobot-community/pulumi-datarobot=https://artifactory.yourcompany.com/pulumi/datarobot"
 
 # Use local state storage
 pulumi login --local
