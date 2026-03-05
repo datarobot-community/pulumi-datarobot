@@ -82,9 +82,13 @@ export class CustomJob extends pulumi.CustomResource {
      */
     public readonly resourceBundleId!: pulumi.Output<string | undefined>;
     /**
-     * Additional parameters to be injected into a Job at runtime.
+     * @deprecated Additional parameters to be injected into a Job at runtime. Deprecated: use `runtimeParameters` instead.
      */
     public readonly runtimeParameterValues!: pulumi.Output<outputs.CustomJobRuntimeParameterValue[]>;
+    /**
+     * The runtime parameters for the Custom Job. Use instead of `runtimeParameterValues`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.
+     */
+    public readonly runtimeParameters!: pulumi.Output<outputs.CustomJobRuntimeParameter[] | undefined>;
     /**
      * The schedule configuration for the custom job.
      */
@@ -119,6 +123,7 @@ export class CustomJob extends pulumi.CustomResource {
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["resourceBundleId"] = state ? state.resourceBundleId : undefined;
             resourceInputs["runtimeParameterValues"] = state ? state.runtimeParameterValues : undefined;
+            resourceInputs["runtimeParameters"] = state ? state.runtimeParameters : undefined;
             resourceInputs["schedule"] = state ? state.schedule : undefined;
             resourceInputs["scheduleId"] = state ? state.scheduleId : undefined;
         } else {
@@ -133,6 +138,7 @@ export class CustomJob extends pulumi.CustomResource {
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["resourceBundleId"] = args ? args.resourceBundleId : undefined;
             resourceInputs["runtimeParameterValues"] = args ? args.runtimeParameterValues : undefined;
+            resourceInputs["runtimeParameters"] = args ? args.runtimeParameters : undefined;
             resourceInputs["schedule"] = args ? args.schedule : undefined;
             resourceInputs["scheduleId"] = args ? args.scheduleId : undefined;
             resourceInputs["filesHashes"] = undefined /*out*/;
@@ -192,9 +198,13 @@ export interface CustomJobState {
      */
     resourceBundleId?: pulumi.Input<string>;
     /**
-     * Additional parameters to be injected into a Job at runtime.
+     * @deprecated Additional parameters to be injected into a Job at runtime. Deprecated: use `runtimeParameters` instead.
      */
     runtimeParameterValues?: pulumi.Input<pulumi.Input<inputs.CustomJobRuntimeParameterValue>[]>;
+    /**
+     * The runtime parameters for the Custom Job. Use instead of `runtimeParameterValues`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.
+     */
+    runtimeParameters?: pulumi.Input<pulumi.Input<inputs.CustomJobRuntimeParameter>[]>;
     /**
      * The schedule configuration for the custom job.
      */
@@ -246,9 +256,13 @@ export interface CustomJobArgs {
      */
     resourceBundleId?: pulumi.Input<string>;
     /**
-     * Additional parameters to be injected into a Job at runtime.
+     * @deprecated Additional parameters to be injected into a Job at runtime. Deprecated: use `runtimeParameters` instead.
      */
     runtimeParameterValues?: pulumi.Input<pulumi.Input<inputs.CustomJobRuntimeParameterValue>[]>;
+    /**
+     * The runtime parameters for the Custom Job. Use instead of `runtimeParameterValues`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.
+     */
+    runtimeParameters?: pulumi.Input<pulumi.Input<inputs.CustomJobRuntimeParameter>[]>;
     /**
      * The schedule configuration for the custom job.
      */

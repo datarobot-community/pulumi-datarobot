@@ -20,6 +20,7 @@ __all__ = [
     'ApplicationSourceFromTemplateResources',
     'ApplicationSourceFromTemplateRuntimeParameterValue',
     'ApplicationSourceResources',
+    'ApplicationSourceRuntimeParameter',
     'ApplicationSourceRuntimeParameterValue',
     'BatchPredictionJobDefinitionCsvSettings',
     'BatchPredictionJobDefinitionIntakeSettings',
@@ -29,6 +30,7 @@ __all__ = [
     'BatchPredictionJobDefinitionTimeseriesSettings',
     'CustomApplicationFromEnvironmentResources',
     'CustomApplicationResources',
+    'CustomJobRuntimeParameter',
     'CustomJobRuntimeParameterValue',
     'CustomJobSchedule',
     'CustomMetricBatch',
@@ -48,6 +50,7 @@ __all__ = [
     'CustomModelGuardConfigurationIntervention',
     'CustomModelGuardConfigurationNemoInfo',
     'CustomModelOverallModerationConfiguration',
+    'CustomModelRuntimeParameter',
     'CustomModelRuntimeParameterValue',
     'CustomModelSourceRemoteRepository',
     'CustomModelTag',
@@ -284,6 +287,46 @@ class ApplicationSourceResources(dict):
         Whether session affinity is enabled for the Application Source. Computed by API if not specified.
         """
         return pulumi.get(self, "session_affinity")
+
+
+@pulumi.output_type
+class ApplicationSourceRuntimeParameter(dict):
+    def __init__(__self__, *,
+                 key: builtins.str,
+                 type: builtins.str,
+                 value: builtins.str):
+        """
+        :param builtins.str key: The name of the runtime parameter.
+        :param builtins.str type: The type of the runtime parameter.
+        :param builtins.str value: The value of the runtime parameter (type conversion is handled internally).
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "type", type)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> builtins.str:
+        """
+        The name of the runtime parameter.
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def type(self) -> builtins.str:
+        """
+        The type of the runtime parameter.
+        """
+        return pulumi.get(self, "type")
+
+    @property
+    @pulumi.getter
+    def value(self) -> builtins.str:
+        """
+        The value of the runtime parameter (type conversion is handled internally).
+        """
+        return pulumi.get(self, "value")
 
 
 @pulumi.output_type
@@ -1134,6 +1177,46 @@ class CustomApplicationResources(dict):
         Whether session affinity is enabled for the Custom Application. Computed by API if not specified.
         """
         return pulumi.get(self, "session_affinity")
+
+
+@pulumi.output_type
+class CustomJobRuntimeParameter(dict):
+    def __init__(__self__, *,
+                 key: builtins.str,
+                 type: builtins.str,
+                 value: builtins.str):
+        """
+        :param builtins.str key: The name of the runtime parameter.
+        :param builtins.str type: The type of the runtime parameter.
+        :param builtins.str value: The value of the runtime parameter (type conversion is handled internally).
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "type", type)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> builtins.str:
+        """
+        The name of the runtime parameter.
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def type(self) -> builtins.str:
+        """
+        The type of the runtime parameter.
+        """
+        return pulumi.get(self, "type")
+
+    @property
+    @pulumi.getter
+    def value(self) -> builtins.str:
+        """
+        The value of the runtime parameter (type conversion is handled internally).
+        """
+        return pulumi.get(self, "value")
 
 
 @pulumi.output_type
@@ -2210,6 +2293,46 @@ class CustomModelOverallModerationConfiguration(dict):
         The timeout in seconds of the overall moderation configuration.
         """
         return pulumi.get(self, "timeout_sec")
+
+
+@pulumi.output_type
+class CustomModelRuntimeParameter(dict):
+    def __init__(__self__, *,
+                 key: builtins.str,
+                 type: builtins.str,
+                 value: builtins.str):
+        """
+        :param builtins.str key: The name of the runtime parameter.
+        :param builtins.str type: The type of the runtime parameter.
+        :param builtins.str value: The value of the runtime parameter (type conversion is handled internally).
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "type", type)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> builtins.str:
+        """
+        The name of the runtime parameter.
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def type(self) -> builtins.str:
+        """
+        The type of the runtime parameter.
+        """
+        return pulumi.get(self, "type")
+
+    @property
+    @pulumi.getter
+    def value(self) -> builtins.str:
+        """
+        The value of the runtime parameter (type conversion is handled internally).
+        """
+        return pulumi.get(self, "value")
 
 
 @pulumi.output_type

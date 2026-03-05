@@ -22,6 +22,8 @@ __all__ = [
     'ApplicationSourceFromTemplateRuntimeParameterValueArgsDict',
     'ApplicationSourceResourcesArgs',
     'ApplicationSourceResourcesArgsDict',
+    'ApplicationSourceRuntimeParameterArgs',
+    'ApplicationSourceRuntimeParameterArgsDict',
     'ApplicationSourceRuntimeParameterValueArgs',
     'ApplicationSourceRuntimeParameterValueArgsDict',
     'BatchPredictionJobDefinitionCsvSettingsArgs',
@@ -40,6 +42,8 @@ __all__ = [
     'CustomApplicationFromEnvironmentResourcesArgsDict',
     'CustomApplicationResourcesArgs',
     'CustomApplicationResourcesArgsDict',
+    'CustomJobRuntimeParameterArgs',
+    'CustomJobRuntimeParameterArgsDict',
     'CustomJobRuntimeParameterValueArgs',
     'CustomJobRuntimeParameterValueArgsDict',
     'CustomJobScheduleArgs',
@@ -78,6 +82,8 @@ __all__ = [
     'CustomModelGuardConfigurationNemoInfoArgsDict',
     'CustomModelOverallModerationConfigurationArgs',
     'CustomModelOverallModerationConfigurationArgsDict',
+    'CustomModelRuntimeParameterArgs',
+    'CustomModelRuntimeParameterArgsDict',
     'CustomModelRuntimeParameterValueArgs',
     'CustomModelRuntimeParameterValueArgsDict',
     'CustomModelSourceRemoteRepositoryArgs',
@@ -421,6 +427,75 @@ class ApplicationSourceResourcesArgs:
     @session_affinity.setter
     def session_affinity(self, value: Optional[pulumi.Input[builtins.bool]]):
         pulumi.set(self, "session_affinity", value)
+
+
+if not MYPY:
+    class ApplicationSourceRuntimeParameterArgsDict(TypedDict):
+        key: pulumi.Input[builtins.str]
+        """
+        The name of the runtime parameter.
+        """
+        type: pulumi.Input[builtins.str]
+        """
+        The type of the runtime parameter.
+        """
+        value: pulumi.Input[builtins.str]
+        """
+        The value of the runtime parameter (type conversion is handled internally).
+        """
+elif False:
+    ApplicationSourceRuntimeParameterArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class ApplicationSourceRuntimeParameterArgs:
+    def __init__(__self__, *,
+                 key: pulumi.Input[builtins.str],
+                 type: pulumi.Input[builtins.str],
+                 value: pulumi.Input[builtins.str]):
+        """
+        :param pulumi.Input[builtins.str] key: The name of the runtime parameter.
+        :param pulumi.Input[builtins.str] type: The type of the runtime parameter.
+        :param pulumi.Input[builtins.str] value: The value of the runtime parameter (type conversion is handled internally).
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "type", type)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> pulumi.Input[builtins.str]:
+        """
+        The name of the runtime parameter.
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: pulumi.Input[builtins.str]):
+        pulumi.set(self, "key", value)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[builtins.str]:
+        """
+        The type of the runtime parameter.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[builtins.str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> pulumi.Input[builtins.str]:
+        """
+        The value of the runtime parameter (type conversion is handled internally).
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: pulumi.Input[builtins.str]):
+        pulumi.set(self, "value", value)
 
 
 if not MYPY:
@@ -1579,6 +1654,75 @@ class CustomApplicationResourcesArgs:
     @session_affinity.setter
     def session_affinity(self, value: Optional[pulumi.Input[builtins.bool]]):
         pulumi.set(self, "session_affinity", value)
+
+
+if not MYPY:
+    class CustomJobRuntimeParameterArgsDict(TypedDict):
+        key: pulumi.Input[builtins.str]
+        """
+        The name of the runtime parameter.
+        """
+        type: pulumi.Input[builtins.str]
+        """
+        The type of the runtime parameter.
+        """
+        value: pulumi.Input[builtins.str]
+        """
+        The value of the runtime parameter (type conversion is handled internally).
+        """
+elif False:
+    CustomJobRuntimeParameterArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class CustomJobRuntimeParameterArgs:
+    def __init__(__self__, *,
+                 key: pulumi.Input[builtins.str],
+                 type: pulumi.Input[builtins.str],
+                 value: pulumi.Input[builtins.str]):
+        """
+        :param pulumi.Input[builtins.str] key: The name of the runtime parameter.
+        :param pulumi.Input[builtins.str] type: The type of the runtime parameter.
+        :param pulumi.Input[builtins.str] value: The value of the runtime parameter (type conversion is handled internally).
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "type", type)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> pulumi.Input[builtins.str]:
+        """
+        The name of the runtime parameter.
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: pulumi.Input[builtins.str]):
+        pulumi.set(self, "key", value)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[builtins.str]:
+        """
+        The type of the runtime parameter.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[builtins.str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> pulumi.Input[builtins.str]:
+        """
+        The value of the runtime parameter (type conversion is handled internally).
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: pulumi.Input[builtins.str]):
+        pulumi.set(self, "value", value)
 
 
 if not MYPY:
@@ -2936,6 +3080,75 @@ class CustomModelOverallModerationConfigurationArgs:
     @timeout_sec.setter
     def timeout_sec(self, value: Optional[pulumi.Input[builtins.int]]):
         pulumi.set(self, "timeout_sec", value)
+
+
+if not MYPY:
+    class CustomModelRuntimeParameterArgsDict(TypedDict):
+        key: pulumi.Input[builtins.str]
+        """
+        The name of the runtime parameter.
+        """
+        type: pulumi.Input[builtins.str]
+        """
+        The type of the runtime parameter.
+        """
+        value: pulumi.Input[builtins.str]
+        """
+        The value of the runtime parameter (type conversion is handled internally).
+        """
+elif False:
+    CustomModelRuntimeParameterArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class CustomModelRuntimeParameterArgs:
+    def __init__(__self__, *,
+                 key: pulumi.Input[builtins.str],
+                 type: pulumi.Input[builtins.str],
+                 value: pulumi.Input[builtins.str]):
+        """
+        :param pulumi.Input[builtins.str] key: The name of the runtime parameter.
+        :param pulumi.Input[builtins.str] type: The type of the runtime parameter.
+        :param pulumi.Input[builtins.str] value: The value of the runtime parameter (type conversion is handled internally).
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "type", type)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> pulumi.Input[builtins.str]:
+        """
+        The name of the runtime parameter.
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: pulumi.Input[builtins.str]):
+        pulumi.set(self, "key", value)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[builtins.str]:
+        """
+        The type of the runtime parameter.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[builtins.str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> pulumi.Input[builtins.str]:
+        """
+        The value of the runtime parameter (type conversion is handled internally).
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: pulumi.Input[builtins.str]):
+        pulumi.set(self, "value", value)
 
 
 if not MYPY:

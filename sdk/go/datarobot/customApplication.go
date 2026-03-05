@@ -26,8 +26,8 @@ type CustomApplication struct {
 	ExternalAccessRecipients pulumi.StringArrayOutput `pulumi:"externalAccessRecipients"`
 	// The name of the Custom Application.
 	Name pulumi.StringOutput `pulumi:"name"`
-	// The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.
-	RequiredKeyScopeLevel pulumi.StringOutput `pulumi:"requiredKeyScopeLevel"`
+	// The API key scope level required for requests to this custom application. Can be set to 'viewer', 'user', or 'admin'.
+	RequiredKeyScopeLevel pulumi.StringPtrOutput `pulumi:"requiredKeyScopeLevel"`
 	// The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.
 	Resources CustomApplicationResourcesOutput `pulumi:"resources"`
 	// The ID of the Custom Application Source.
@@ -81,7 +81,7 @@ type customApplicationState struct {
 	ExternalAccessRecipients []string `pulumi:"externalAccessRecipients"`
 	// The name of the Custom Application.
 	Name *string `pulumi:"name"`
-	// The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.
+	// The API key scope level required for requests to this custom application. Can be set to 'viewer', 'user', or 'admin'.
 	RequiredKeyScopeLevel *string `pulumi:"requiredKeyScopeLevel"`
 	// The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.
 	Resources *CustomApplicationResources `pulumi:"resources"`
@@ -104,7 +104,7 @@ type CustomApplicationState struct {
 	ExternalAccessRecipients pulumi.StringArrayInput
 	// The name of the Custom Application.
 	Name pulumi.StringPtrInput
-	// The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.
+	// The API key scope level required for requests to this custom application. Can be set to 'viewer', 'user', or 'admin'.
 	RequiredKeyScopeLevel pulumi.StringPtrInput
 	// The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.
 	Resources CustomApplicationResourcesPtrInput
@@ -129,7 +129,7 @@ type customApplicationArgs struct {
 	ExternalAccessRecipients []string `pulumi:"externalAccessRecipients"`
 	// The name of the Custom Application.
 	Name *string `pulumi:"name"`
-	// The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.
+	// The API key scope level required for requests to this custom application. Can be set to 'viewer', 'user', or 'admin'.
 	RequiredKeyScopeLevel *string `pulumi:"requiredKeyScopeLevel"`
 	// The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.
 	Resources *CustomApplicationResources `pulumi:"resources"`
@@ -149,7 +149,7 @@ type CustomApplicationArgs struct {
 	ExternalAccessRecipients pulumi.StringArrayInput
 	// The name of the Custom Application.
 	Name pulumi.StringPtrInput
-	// The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.
+	// The API key scope level required for requests to this custom application. Can be set to 'viewer', 'user', or 'admin'.
 	RequiredKeyScopeLevel pulumi.StringPtrInput
 	// The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.
 	Resources CustomApplicationResourcesPtrInput
@@ -271,9 +271,9 @@ func (o CustomApplicationOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *CustomApplication) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.
-func (o CustomApplicationOutput) RequiredKeyScopeLevel() pulumi.StringOutput {
-	return o.ApplyT(func(v *CustomApplication) pulumi.StringOutput { return v.RequiredKeyScopeLevel }).(pulumi.StringOutput)
+// The API key scope level required for requests to this custom application. Can be set to 'viewer', 'user', or 'admin'.
+func (o CustomApplicationOutput) RequiredKeyScopeLevel() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CustomApplication) pulumi.StringPtrOutput { return v.RequiredKeyScopeLevel }).(pulumi.StringPtrOutput)
 }
 
 // The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.
