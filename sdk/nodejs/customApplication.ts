@@ -58,9 +58,9 @@ export class CustomApplication extends pulumi.CustomResource {
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.
+     * The API key scope level required for requests to this custom application. Can be set to 'viewer', 'user', or 'admin'.
      */
-    public readonly requiredKeyScopeLevel!: pulumi.Output<string>;
+    public readonly requiredKeyScopeLevel!: pulumi.Output<string | undefined>;
     /**
      * The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.
      */
@@ -147,7 +147,7 @@ export interface CustomApplicationState {
      */
     name?: pulumi.Input<string>;
     /**
-     * The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.
+     * The API key scope level required for requests to this custom application. Can be set to 'viewer', 'user', or 'admin'.
      */
     requiredKeyScopeLevel?: pulumi.Input<string>;
     /**
@@ -189,7 +189,7 @@ export interface CustomApplicationArgs {
      */
     name?: pulumi.Input<string>;
     /**
-     * The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.
+     * The API key scope level required for requests to this custom application. Can be set to 'viewer', 'user', or 'admin'.
      */
     requiredKeyScopeLevel?: pulumi.Input<string>;
     /**

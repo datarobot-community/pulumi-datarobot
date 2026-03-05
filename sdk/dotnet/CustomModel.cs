@@ -229,11 +229,14 @@ namespace DataRobotPulumi.Datarobot
         [Output("resourceBundleId")]
         public Output<string?> ResourceBundleId { get; private set; } = null!;
 
-        /// <summary>
-        /// The runtime parameter values for the Custom Model.
-        /// </summary>
         [Output("runtimeParameterValues")]
         public Output<ImmutableArray<Outputs.CustomModelRuntimeParameterValue>> RuntimeParameterValues { get; private set; } = null!;
+
+        /// <summary>
+        /// The runtime parameters for the Custom Model version. Use instead of `runtime_parameter_values`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.
+        /// </summary>
+        [Output("runtimeParameters")]
+        public Output<ImmutableArray<Outputs.CustomModelRuntimeParameter>> RuntimeParameters { get; private set; } = null!;
 
         /// <summary>
         /// The ID of the source LLM Blueprint for the Custom Model.
@@ -476,14 +479,23 @@ namespace DataRobotPulumi.Datarobot
 
         [Input("runtimeParameterValues")]
         private InputList<Inputs.CustomModelRuntimeParameterValueArgs>? _runtimeParameterValues;
-
-        /// <summary>
-        /// The runtime parameter values for the Custom Model.
-        /// </summary>
+        [Obsolete(@"The runtime parameter values for the Custom Model. Deprecated: use `runtime_parameters` instead.")]
         public InputList<Inputs.CustomModelRuntimeParameterValueArgs> RuntimeParameterValues
         {
             get => _runtimeParameterValues ?? (_runtimeParameterValues = new InputList<Inputs.CustomModelRuntimeParameterValueArgs>());
             set => _runtimeParameterValues = value;
+        }
+
+        [Input("runtimeParameters")]
+        private InputList<Inputs.CustomModelRuntimeParameterArgs>? _runtimeParameters;
+
+        /// <summary>
+        /// The runtime parameters for the Custom Model version. Use instead of `runtime_parameter_values`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.
+        /// </summary>
+        public InputList<Inputs.CustomModelRuntimeParameterArgs> RuntimeParameters
+        {
+            get => _runtimeParameters ?? (_runtimeParameters = new InputList<Inputs.CustomModelRuntimeParameterArgs>());
+            set => _runtimeParameters = value;
         }
 
         /// <summary>
@@ -712,14 +724,23 @@ namespace DataRobotPulumi.Datarobot
 
         [Input("runtimeParameterValues")]
         private InputList<Inputs.CustomModelRuntimeParameterValueGetArgs>? _runtimeParameterValues;
-
-        /// <summary>
-        /// The runtime parameter values for the Custom Model.
-        /// </summary>
+        [Obsolete(@"The runtime parameter values for the Custom Model. Deprecated: use `runtime_parameters` instead.")]
         public InputList<Inputs.CustomModelRuntimeParameterValueGetArgs> RuntimeParameterValues
         {
             get => _runtimeParameterValues ?? (_runtimeParameterValues = new InputList<Inputs.CustomModelRuntimeParameterValueGetArgs>());
             set => _runtimeParameterValues = value;
+        }
+
+        [Input("runtimeParameters")]
+        private InputList<Inputs.CustomModelRuntimeParameterGetArgs>? _runtimeParameters;
+
+        /// <summary>
+        /// The runtime parameters for the Custom Model version. Use instead of `runtime_parameter_values`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.
+        /// </summary>
+        public InputList<Inputs.CustomModelRuntimeParameterGetArgs> RuntimeParameters
+        {
+            get => _runtimeParameters ?? (_runtimeParameters = new InputList<Inputs.CustomModelRuntimeParameterGetArgs>());
+            set => _runtimeParameters = value;
         }
 
         /// <summary>

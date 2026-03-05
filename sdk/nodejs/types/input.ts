@@ -58,6 +58,21 @@ export interface ApplicationSourceResources {
     sessionAffinity?: pulumi.Input<boolean>;
 }
 
+export interface ApplicationSourceRuntimeParameter {
+    /**
+     * The name of the runtime parameter.
+     */
+    key: pulumi.Input<string>;
+    /**
+     * The type of the runtime parameter.
+     */
+    type: pulumi.Input<string>;
+    /**
+     * The value of the runtime parameter (type conversion is handled internally).
+     */
+    value: pulumi.Input<string>;
+}
+
 export interface ApplicationSourceRuntimeParameterValue {
     /**
      * The name of the runtime parameter.
@@ -295,6 +310,21 @@ export interface CustomApplicationResources {
      * Whether session affinity is enabled for the Custom Application. Computed by API if not specified.
      */
     sessionAffinity?: pulumi.Input<boolean>;
+}
+
+export interface CustomJobRuntimeParameter {
+    /**
+     * The name of the runtime parameter.
+     */
+    key: pulumi.Input<string>;
+    /**
+     * The type of the runtime parameter.
+     */
+    type: pulumi.Input<string>;
+    /**
+     * The value of the runtime parameter (type conversion is handled internally).
+     */
+    value: pulumi.Input<string>;
 }
 
 export interface CustomJobRuntimeParameterValue {
@@ -584,6 +614,21 @@ export interface CustomModelOverallModerationConfiguration {
      * The timeout in seconds of the overall moderation configuration.
      */
     timeoutSec?: pulumi.Input<number>;
+}
+
+export interface CustomModelRuntimeParameter {
+    /**
+     * The name of the runtime parameter.
+     */
+    key: pulumi.Input<string>;
+    /**
+     * The type of the runtime parameter.
+     */
+    type: pulumi.Input<string>;
+    /**
+     * The value of the runtime parameter (type conversion is handled internally).
+     */
+    value: pulumi.Input<string>;
 }
 
 export interface CustomModelRuntimeParameterValue {
