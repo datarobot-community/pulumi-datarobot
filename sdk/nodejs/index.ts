@@ -200,6 +200,21 @@ export type UseCase = import("./useCase").UseCase;
 export const UseCase: typeof import("./useCase").UseCase = null as any;
 utilities.lazyLoad(exports, ["UseCase"], () => require("./useCase"));
 
+export { UserMcpPromptMetadataArgs, UserMcpPromptMetadataState } from "./userMcpPromptMetadata";
+export type UserMcpPromptMetadata = import("./userMcpPromptMetadata").UserMcpPromptMetadata;
+export const UserMcpPromptMetadata: typeof import("./userMcpPromptMetadata").UserMcpPromptMetadata = null as any;
+utilities.lazyLoad(exports, ["UserMcpPromptMetadata"], () => require("./userMcpPromptMetadata"));
+
+export { UserMcpResourceMetadataArgs, UserMcpResourceMetadataState } from "./userMcpResourceMetadata";
+export type UserMcpResourceMetadata = import("./userMcpResourceMetadata").UserMcpResourceMetadata;
+export const UserMcpResourceMetadata: typeof import("./userMcpResourceMetadata").UserMcpResourceMetadata = null as any;
+utilities.lazyLoad(exports, ["UserMcpResourceMetadata"], () => require("./userMcpResourceMetadata"));
+
+export { UserMcpToolMetadataArgs, UserMcpToolMetadataState } from "./userMcpToolMetadata";
+export type UserMcpToolMetadata = import("./userMcpToolMetadata").UserMcpToolMetadata;
+export const UserMcpToolMetadata: typeof import("./userMcpToolMetadata").UserMcpToolMetadata = null as any;
+utilities.lazyLoad(exports, ["UserMcpToolMetadata"], () => require("./userMcpToolMetadata"));
+
 export { VectorDatabaseArgs, VectorDatabaseState } from "./vectorDatabase";
 export type VectorDatabase = import("./vectorDatabase").VectorDatabase;
 export const VectorDatabase: typeof import("./vectorDatabase").VectorDatabase = null as any;
@@ -291,6 +306,12 @@ const _module = {
                 return new RemoteRepository(name, <any>undefined, { urn })
             case "datarobot:index/useCase:UseCase":
                 return new UseCase(name, <any>undefined, { urn })
+            case "datarobot:index/userMcpPromptMetadata:UserMcpPromptMetadata":
+                return new UserMcpPromptMetadata(name, <any>undefined, { urn })
+            case "datarobot:index/userMcpResourceMetadata:UserMcpResourceMetadata":
+                return new UserMcpResourceMetadata(name, <any>undefined, { urn })
+            case "datarobot:index/userMcpToolMetadata:UserMcpToolMetadata":
+                return new UserMcpToolMetadata(name, <any>undefined, { urn })
             case "datarobot:index/vectorDatabase:VectorDatabase":
                 return new VectorDatabase(name, <any>undefined, { urn })
             default:
@@ -334,6 +355,9 @@ pulumi.runtime.registerResourceModule("datarobot", "index/registeredModel", _mod
 pulumi.runtime.registerResourceModule("datarobot", "index/registeredModelFromLeaderboard", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/remoteRepository", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/useCase", _module)
+pulumi.runtime.registerResourceModule("datarobot", "index/userMcpPromptMetadata", _module)
+pulumi.runtime.registerResourceModule("datarobot", "index/userMcpResourceMetadata", _module)
+pulumi.runtime.registerResourceModule("datarobot", "index/userMcpToolMetadata", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/vectorDatabase", _module)
 pulumi.runtime.registerResourcePackage("datarobot", {
     version: utilities.getVersion(),

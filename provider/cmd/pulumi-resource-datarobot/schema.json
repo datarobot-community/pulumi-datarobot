@@ -7260,6 +7260,275 @@
         "type": "object"
       }
     },
+    "datarobot:index/userMcpPromptMetadata:UserMcpPromptMetadata": {
+      "description": "User MCP prompt metadata. This resource creates a prompt metadata entry for a given MCP server version using the User MCP public API.\n\n## Example Usage\n\n<!--Start PulumiCodeChooser -->\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@datarobot/pulumi-datarobot\";\n\nconst example = new datarobot.UserMcpPromptMetadata(\"example\", {\n    type: \"userPrompt\",\n    mcpServerVersionId: \"69a761e40746897942318e2f\",\n});\nexport const exampleId = example.id;\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample = datarobot.UserMcpPromptMetadata(\"example\",\n    type=\"userPrompt\",\n    mcp_server_version_id=\"69a761e40746897942318e2f\")\npulumi.export(\"exampleId\", example.id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = DataRobotPulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() => \n{\n    var example = new Datarobot.UserMcpPromptMetadata(\"example\", new()\n    {\n        Type = \"userPrompt\",\n        McpServerVersionId = \"69a761e40746897942318e2f\",\n    });\n\n    return new Dictionary<string, object?>\n    {\n        [\"exampleId\"] = example.Id,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texample, err := datarobot.NewUserMcpPromptMetadata(ctx, \"example\", &datarobot.UserMcpPromptMetadataArgs{\n\t\t\tType:               pulumi.String(\"userPrompt\"),\n\t\t\tMcpServerVersionId: pulumi.String(\"69a761e40746897942318e2f\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"exampleId\", example.ID())\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.UserMcpPromptMetadata;\nimport com.pulumi.datarobot.UserMcpPromptMetadataArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new UserMcpPromptMetadata(\"example\", UserMcpPromptMetadataArgs.builder()\n            .type(\"userPrompt\")\n            .mcpServerVersionId(\"69a761e40746897942318e2f\")\n            .build());\n\n        ctx.export(\"exampleId\", example.id());\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: datarobot:UserMcpPromptMetadata\n    properties:\n      type: userPrompt\n      mcpServerVersionId: 69a761e40746897942318e2f\noutputs:\n  exampleId: ${example.id}\n```\n<!--End PulumiCodeChooser -->\n",
+      "properties": {
+        "createdAt": {
+          "type": "string",
+          "description": "When the MCP prompt is created.\n"
+        },
+        "mcpServerVersionId": {
+          "type": "string",
+          "description": "The ID of the MCP server version this prompt belongs to.\n"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the MCP prompt.\n"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the MCP prompt.\n"
+        },
+        "userId": {
+          "type": "string",
+          "description": "The id of the user who created the MCP prompt.\n"
+        },
+        "userName": {
+          "type": "string",
+          "description": "The name of the user who created the MCP prompt\n"
+        }
+      },
+      "required": [
+        "createdAt",
+        "mcpServerVersionId",
+        "name",
+        "type",
+        "userId",
+        "userName"
+      ],
+      "inputProperties": {
+        "mcpServerVersionId": {
+          "type": "string",
+          "description": "The ID of the MCP server version this prompt belongs to.\n"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the MCP prompt.\n"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the MCP prompt.\n"
+        }
+      },
+      "requiredInputs": [
+        "mcpServerVersionId",
+        "type"
+      ],
+      "stateInputs": {
+        "description": "Input properties used for looking up and filtering UserMcpPromptMetadata resources.\n",
+        "properties": {
+          "createdAt": {
+            "type": "string",
+            "description": "When the MCP prompt is created.\n"
+          },
+          "mcpServerVersionId": {
+            "type": "string",
+            "description": "The ID of the MCP server version this prompt belongs to.\n"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the MCP prompt.\n"
+          },
+          "type": {
+            "type": "string",
+            "description": "The type of the MCP prompt.\n"
+          },
+          "userId": {
+            "type": "string",
+            "description": "The id of the user who created the MCP prompt.\n"
+          },
+          "userName": {
+            "type": "string",
+            "description": "The name of the user who created the MCP prompt\n"
+          }
+        },
+        "type": "object"
+      }
+    },
+    "datarobot:index/userMcpResourceMetadata:UserMcpResourceMetadata": {
+      "description": "User MCP resource metadata. This resource creates a resource metadata entry for a given MCP server version using the User MCP public API.\n\n## Example Usage\n\n<!--Start PulumiCodeChooser -->\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@datarobot/pulumi-datarobot\";\n\nconst example = new datarobot.UserMcpResourceMetadata(\"example\", {\n    type: \"userResce\",\n    mcpServerVersionId: \"69a761e40746897942318e2f\",\n    uri: \"uri://example_uri\",\n});\nexport const exampleId = example.id;\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample = datarobot.UserMcpResourceMetadata(\"example\",\n    type=\"userResce\",\n    mcp_server_version_id=\"69a761e40746897942318e2f\",\n    uri=\"uri://example_uri\")\npulumi.export(\"exampleId\", example.id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = DataRobotPulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() => \n{\n    var example = new Datarobot.UserMcpResourceMetadata(\"example\", new()\n    {\n        Type = \"userResce\",\n        McpServerVersionId = \"69a761e40746897942318e2f\",\n        Uri = \"uri://example_uri\",\n    });\n\n    return new Dictionary<string, object?>\n    {\n        [\"exampleId\"] = example.Id,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texample, err := datarobot.NewUserMcpResourceMetadata(ctx, \"example\", &datarobot.UserMcpResourceMetadataArgs{\n\t\t\tType:               pulumi.String(\"userResce\"),\n\t\t\tMcpServerVersionId: pulumi.String(\"69a761e40746897942318e2f\"),\n\t\t\tUri:                pulumi.String(\"uri://example_uri\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"exampleId\", example.ID())\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.UserMcpResourceMetadata;\nimport com.pulumi.datarobot.UserMcpResourceMetadataArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new UserMcpResourceMetadata(\"example\", UserMcpResourceMetadataArgs.builder()\n            .type(\"userResce\")\n            .mcpServerVersionId(\"69a761e40746897942318e2f\")\n            .uri(\"uri://example_uri\")\n            .build());\n\n        ctx.export(\"exampleId\", example.id());\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: datarobot:UserMcpResourceMetadata\n    properties:\n      type: userResce\n      mcpServerVersionId: 69a761e40746897942318e2f\n      uri: uri://example_uri\noutputs:\n  exampleId: ${example.id}\n```\n<!--End PulumiCodeChooser -->\n",
+      "properties": {
+        "createdAt": {
+          "type": "string",
+          "description": "When the MCP resource is created.\n"
+        },
+        "mcpServerVersionId": {
+          "type": "string",
+          "description": "The ID of the MCP server version this resource belongs to.\n"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the MCP resource.\n"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the MCP resource.\n"
+        },
+        "uri": {
+          "type": "string",
+          "description": "The URI of the MCP resource.\n"
+        },
+        "userId": {
+          "type": "string",
+          "description": "The id of the user who created the MCP resource.\n"
+        },
+        "userName": {
+          "type": "string",
+          "description": "The name of the user who created the MCP resource\n"
+        }
+      },
+      "required": [
+        "createdAt",
+        "mcpServerVersionId",
+        "name",
+        "type",
+        "uri",
+        "userId",
+        "userName"
+      ],
+      "inputProperties": {
+        "mcpServerVersionId": {
+          "type": "string",
+          "description": "The ID of the MCP server version this resource belongs to.\n"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the MCP resource.\n"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the MCP resource.\n"
+        },
+        "uri": {
+          "type": "string",
+          "description": "The URI of the MCP resource.\n"
+        }
+      },
+      "requiredInputs": [
+        "mcpServerVersionId",
+        "type",
+        "uri"
+      ],
+      "stateInputs": {
+        "description": "Input properties used for looking up and filtering UserMcpResourceMetadata resources.\n",
+        "properties": {
+          "createdAt": {
+            "type": "string",
+            "description": "When the MCP resource is created.\n"
+          },
+          "mcpServerVersionId": {
+            "type": "string",
+            "description": "The ID of the MCP server version this resource belongs to.\n"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the MCP resource.\n"
+          },
+          "type": {
+            "type": "string",
+            "description": "The type of the MCP resource.\n"
+          },
+          "uri": {
+            "type": "string",
+            "description": "The URI of the MCP resource.\n"
+          },
+          "userId": {
+            "type": "string",
+            "description": "The id of the user who created the MCP resource.\n"
+          },
+          "userName": {
+            "type": "string",
+            "description": "The name of the user who created the MCP resource\n"
+          }
+        },
+        "type": "object"
+      }
+    },
+    "datarobot:index/userMcpToolMetadata:UserMcpToolMetadata": {
+      "description": "User MCP tool metadata. This resource creates a tool metadata entry for a given MCP server version using the User MCP public API.\n\n## Example Usage\n\n<!--Start PulumiCodeChooser -->\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@datarobot/pulumi-datarobot\";\n\nconst example = new datarobot.UserMcpToolMetadata(\"example\", {\n    type: \"userTool\",\n    mcpServerVersionId: \"69a761e40746897942318e2f\",\n});\nexport const exampleId = example.id;\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample = datarobot.UserMcpToolMetadata(\"example\",\n    type=\"userTool\",\n    mcp_server_version_id=\"69a761e40746897942318e2f\")\npulumi.export(\"exampleId\", example.id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = DataRobotPulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() => \n{\n    var example = new Datarobot.UserMcpToolMetadata(\"example\", new()\n    {\n        Type = \"userTool\",\n        McpServerVersionId = \"69a761e40746897942318e2f\",\n    });\n\n    return new Dictionary<string, object?>\n    {\n        [\"exampleId\"] = example.Id,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texample, err := datarobot.NewUserMcpToolMetadata(ctx, \"example\", &datarobot.UserMcpToolMetadataArgs{\n\t\t\tType:               pulumi.String(\"userTool\"),\n\t\t\tMcpServerVersionId: pulumi.String(\"69a761e40746897942318e2f\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"exampleId\", example.ID())\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.UserMcpToolMetadata;\nimport com.pulumi.datarobot.UserMcpToolMetadataArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new UserMcpToolMetadata(\"example\", UserMcpToolMetadataArgs.builder()\n            .type(\"userTool\")\n            .mcpServerVersionId(\"69a761e40746897942318e2f\")\n            .build());\n\n        ctx.export(\"exampleId\", example.id());\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: datarobot:UserMcpToolMetadata\n    properties:\n      type: userTool\n      mcpServerVersionId: 69a761e40746897942318e2f\noutputs:\n  exampleId: ${example.id}\n```\n<!--End PulumiCodeChooser -->\n",
+      "properties": {
+        "createdAt": {
+          "type": "string",
+          "description": "When the MCP tool is created.\n"
+        },
+        "mcpServerVersionId": {
+          "type": "string",
+          "description": "The ID of the MCP server version this tool belongs to.\n"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the MCP tool.\n"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the MCP tool.\n"
+        },
+        "userId": {
+          "type": "string",
+          "description": "The id of the user who created the MCP tool.\n"
+        },
+        "userName": {
+          "type": "string",
+          "description": "The name of the user who created the MCP tool\n"
+        }
+      },
+      "required": [
+        "createdAt",
+        "mcpServerVersionId",
+        "name",
+        "type",
+        "userId",
+        "userName"
+      ],
+      "inputProperties": {
+        "mcpServerVersionId": {
+          "type": "string",
+          "description": "The ID of the MCP server version this tool belongs to.\n"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the MCP tool.\n"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the MCP tool.\n"
+        }
+      },
+      "requiredInputs": [
+        "mcpServerVersionId",
+        "type"
+      ],
+      "stateInputs": {
+        "description": "Input properties used for looking up and filtering UserMcpToolMetadata resources.\n",
+        "properties": {
+          "createdAt": {
+            "type": "string",
+            "description": "When the MCP tool is created.\n"
+          },
+          "mcpServerVersionId": {
+            "type": "string",
+            "description": "The ID of the MCP server version this tool belongs to.\n"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the MCP tool.\n"
+          },
+          "type": {
+            "type": "string",
+            "description": "The type of the MCP tool.\n"
+          },
+          "userId": {
+            "type": "string",
+            "description": "The id of the user who created the MCP tool.\n"
+          },
+          "userName": {
+            "type": "string",
+            "description": "The name of the user who created the MCP tool\n"
+          }
+        },
+        "type": "object"
+      }
+    },
     "datarobot:index/vectorDatabase:VectorDatabase": {
       "description": "Vector database\n\n## Example Usage\n\n<!--Start PulumiCodeChooser -->\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@datarobot/pulumi-datarobot\";\n\nconst exampleUseCase = new datarobot.UseCase(\"exampleUseCase\", {description: \"Description for the example use case\"});\nconst exampleDatasetFromFile = new datarobot.DatasetFromFile(\"exampleDatasetFromFile\", {\n    filePath: \"[Path to file to upload]\",\n    useCaseIds: [exampleUseCase.id],\n});\nconst exampleVectorDatabase = new datarobot.VectorDatabase(\"exampleVectorDatabase\", {\n    useCaseId: exampleUseCase.id,\n    datasetId: exampleDatasetFromFile.id,\n});\n// Optional\n// chunking_parameters = {\n//   chunk_overlap_percentage = 0\n//   chunk_size               = 512\n//   chunking_method          = \"recursive\"\n//   embedding_model          = \"jinaai/jina-embedding-t-en-v1\"\n//   separators               = [\"\\n\", \" \"]\n// }\nexport const exampleId = exampleVectorDatabase.id;\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample_use_case = datarobot.UseCase(\"exampleUseCase\", description=\"Description for the example use case\")\nexample_dataset_from_file = datarobot.DatasetFromFile(\"exampleDatasetFromFile\",\n    file_path=\"[Path to file to upload]\",\n    use_case_ids=[example_use_case.id])\nexample_vector_database = datarobot.VectorDatabase(\"exampleVectorDatabase\",\n    use_case_id=example_use_case.id,\n    dataset_id=example_dataset_from_file.id)\n# Optional\n# chunking_parameters = {\n#   chunk_overlap_percentage = 0\n#   chunk_size               = 512\n#   chunking_method          = \"recursive\"\n#   embedding_model          = \"jinaai/jina-embedding-t-en-v1\"\n#   separators               = [\"\\n\", \" \"]\n# }\npulumi.export(\"exampleId\", example_vector_database.id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = DataRobotPulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() => \n{\n    var exampleUseCase = new Datarobot.UseCase(\"exampleUseCase\", new()\n    {\n        Description = \"Description for the example use case\",\n    });\n\n    var exampleDatasetFromFile = new Datarobot.DatasetFromFile(\"exampleDatasetFromFile\", new()\n    {\n        FilePath = \"[Path to file to upload]\",\n        UseCaseIds = new[]\n        {\n            exampleUseCase.Id,\n        },\n    });\n\n    var exampleVectorDatabase = new Datarobot.VectorDatabase(\"exampleVectorDatabase\", new()\n    {\n        UseCaseId = exampleUseCase.Id,\n        DatasetId = exampleDatasetFromFile.Id,\n    });\n\n    // Optional\n    // chunking_parameters = {\n    //   chunk_overlap_percentage = 0\n    //   chunk_size               = 512\n    //   chunking_method          = \"recursive\"\n    //   embedding_model          = \"jinaai/jina-embedding-t-en-v1\"\n    //   separators               = [\"\\n\", \" \"]\n    // }\n    return new Dictionary<string, object?>\n    {\n        [\"exampleId\"] = exampleVectorDatabase.Id,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texampleUseCase, err := datarobot.NewUseCase(ctx, \"exampleUseCase\", &datarobot.UseCaseArgs{\n\t\t\tDescription: pulumi.String(\"Description for the example use case\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\texampleDatasetFromFile, err := datarobot.NewDatasetFromFile(ctx, \"exampleDatasetFromFile\", &datarobot.DatasetFromFileArgs{\n\t\t\tFilePath: pulumi.String(\"[Path to file to upload]\"),\n\t\t\tUseCaseIds: pulumi.StringArray{\n\t\t\t\texampleUseCase.ID(),\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\texampleVectorDatabase, err := datarobot.NewVectorDatabase(ctx, \"exampleVectorDatabase\", &datarobot.VectorDatabaseArgs{\n\t\t\tUseCaseId: exampleUseCase.ID(),\n\t\t\tDatasetId: exampleDatasetFromFile.ID(),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"exampleId\", exampleVectorDatabase.ID())\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.UseCase;\nimport com.pulumi.datarobot.UseCaseArgs;\nimport com.pulumi.datarobot.DatasetFromFile;\nimport com.pulumi.datarobot.DatasetFromFileArgs;\nimport com.pulumi.datarobot.VectorDatabase;\nimport com.pulumi.datarobot.VectorDatabaseArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var exampleUseCase = new UseCase(\"exampleUseCase\", UseCaseArgs.builder()\n            .description(\"Description for the example use case\")\n            .build());\n\n        var exampleDatasetFromFile = new DatasetFromFile(\"exampleDatasetFromFile\", DatasetFromFileArgs.builder()\n            .filePath(\"[Path to file to upload]\")\n            .useCaseIds(exampleUseCase.id())\n            .build());\n\n        var exampleVectorDatabase = new VectorDatabase(\"exampleVectorDatabase\", VectorDatabaseArgs.builder()\n            .useCaseId(exampleUseCase.id())\n            .datasetId(exampleDatasetFromFile.id())\n            .build());\n\n        // Optional\n        // chunking_parameters = {\n        //   chunk_overlap_percentage = 0\n        //   chunk_size               = 512\n        //   chunking_method          = \"recursive\"\n        //   embedding_model          = \"jinaai/jina-embedding-t-en-v1\"\n        //   separators               = [\"\\n\", \" \"]\n        // }\n        ctx.export(\"exampleId\", exampleVectorDatabase.id());\n    }\n}\n```\n```yaml\nresources:\n  exampleUseCase:\n    type: datarobot:UseCase\n    properties:\n      description: Description for the example use case\n  exampleDatasetFromFile:\n    type: datarobot:DatasetFromFile\n    properties:\n      filePath: '[Path to file to upload]'\n      useCaseIds:\n        - ${exampleUseCase.id}\n  exampleVectorDatabase:\n    type: datarobot:VectorDatabase\n    properties:\n      useCaseId: ${exampleUseCase.id}\n      datasetId: ${exampleDatasetFromFile.id}\noutputs:\n  exampleId: ${exampleVectorDatabase.id}\n```\n<!--End PulumiCodeChooser -->\n",
       "properties": {

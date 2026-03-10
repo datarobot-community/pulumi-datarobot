@@ -93,6 +93,12 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &RemoteRepository{}
 	case "datarobot:index/useCase:UseCase":
 		r = &UseCase{}
+	case "datarobot:index/userMcpPromptMetadata:UserMcpPromptMetadata":
+		r = &UserMcpPromptMetadata{}
+	case "datarobot:index/userMcpResourceMetadata:UserMcpResourceMetadata":
+		r = &UserMcpResourceMetadata{}
+	case "datarobot:index/userMcpToolMetadata:UserMcpToolMetadata":
+		r = &UserMcpToolMetadata{}
 	case "datarobot:index/vectorDatabase:VectorDatabase":
 		r = &VectorDatabase{}
 	default:
@@ -304,6 +310,21 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"datarobot",
 		"index/useCase",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"datarobot",
+		"index/userMcpPromptMetadata",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"datarobot",
+		"index/userMcpResourceMetadata",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"datarobot",
+		"index/userMcpToolMetadata",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
