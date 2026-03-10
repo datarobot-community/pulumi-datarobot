@@ -464,6 +464,15 @@
             "datarobot_use_case": {
                 "current": "datarobot:index/useCase:UseCase"
             },
+            "datarobot_user_mcp_prompt_metadata": {
+                "current": "datarobot:index/userMcpPromptMetadata:UserMcpPromptMetadata"
+            },
+            "datarobot_user_mcp_resource_metadata": {
+                "current": "datarobot:index/userMcpResourceMetadata:UserMcpResourceMetadata"
+            },
+            "datarobot_user_mcp_tool_metadata": {
+                "current": "datarobot:index/userMcpToolMetadata:UserMcpToolMetadata"
+            },
             "datarobot_vector_database": {
                 "current": "datarobot:index/vectorDatabase:VectorDatabase",
                 "fields": {
