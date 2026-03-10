@@ -58,6 +58,9 @@
         "types/input.ts",
         "types/output.ts",
         "useCase.ts",
+        "userMcpPromptMetadata.ts",
+        "userMcpResourceMetadata.ts",
+        "userMcpToolMetadata.ts",
         "utilities.ts",
         "vectorDatabase.ts"
     ]
