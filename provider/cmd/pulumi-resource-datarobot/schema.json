@@ -76,6 +76,10 @@
   "types": {
     "datarobot:index/ApplicationSourceFromTemplateResources:ApplicationSourceFromTemplateResources": {
       "properties": {
+        "healthEndpointPath": {
+          "type": "string",
+          "description": "Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `service_web_requests_on_root_path`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.\n"
+        },
         "replicas": {
           "type": "integer",
           "description": "The number of replicas for the Application Source. Computed by API if not specified.\n"
@@ -97,6 +101,7 @@
       "language": {
         "nodejs": {
           "requiredOutputs": [
+            "healthEndpointPath",
             "replicas",
             "resourceLabel",
             "serviceWebRequestsOnRootPath",
@@ -129,6 +134,10 @@
     },
     "datarobot:index/ApplicationSourceResources:ApplicationSourceResources": {
       "properties": {
+        "healthEndpointPath": {
+          "type": "string",
+          "description": "Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `service_web_requests_on_root_path`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.\n"
+        },
         "replicas": {
           "type": "integer",
           "description": "The number of replicas for the Application Source. Computed by API if not specified.\n"
@@ -150,6 +159,7 @@
       "language": {
         "nodejs": {
           "requiredOutputs": [
+            "healthEndpointPath",
             "replicas",
             "resourceLabel",
             "serviceWebRequestsOnRootPath",
@@ -467,6 +477,10 @@
     },
     "datarobot:index/CustomApplicationFromEnvironmentResources:CustomApplicationFromEnvironmentResources": {
       "properties": {
+        "healthEndpointPath": {
+          "type": "string",
+          "description": "Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `service_web_requests_on_root_path`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.\n"
+        },
         "replicas": {
           "type": "integer",
           "description": "The number of replicas for the Custom Application. Computed by API if not specified.\n"
@@ -488,6 +502,10 @@
     },
     "datarobot:index/CustomApplicationResources:CustomApplicationResources": {
       "properties": {
+        "healthEndpointPath": {
+          "type": "string",
+          "description": "Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `service_web_requests_on_root_path`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.\n"
+        },
         "replicas": {
           "type": "integer",
           "description": "The number of replicas for the Custom Application. Computed by API if not specified.\n"
