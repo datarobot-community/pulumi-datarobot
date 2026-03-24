@@ -14,6 +14,8 @@ import (
 var _ = internal.GetEnvOrDefault
 
 type ApplicationSourceFromTemplateResources struct {
+	// Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `serviceWebRequestsOnRootPath`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
+	HealthEndpointPath *string `pulumi:"healthEndpointPath"`
 	// The number of replicas for the Application Source. Computed by API if not specified.
 	Replicas *int `pulumi:"replicas"`
 	// The resource label for the Application Source (e.g., 'cpu.small', 'cpu.medium'). Computed by API if not specified.
@@ -36,6 +38,8 @@ type ApplicationSourceFromTemplateResourcesInput interface {
 }
 
 type ApplicationSourceFromTemplateResourcesArgs struct {
+	// Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `serviceWebRequestsOnRootPath`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
+	HealthEndpointPath pulumi.StringPtrInput `pulumi:"healthEndpointPath"`
 	// The number of replicas for the Application Source. Computed by API if not specified.
 	Replicas pulumi.IntPtrInput `pulumi:"replicas"`
 	// The resource label for the Application Source (e.g., 'cpu.small', 'cpu.medium'). Computed by API if not specified.
@@ -123,6 +127,11 @@ func (o ApplicationSourceFromTemplateResourcesOutput) ToApplicationSourceFromTem
 	}).(ApplicationSourceFromTemplateResourcesPtrOutput)
 }
 
+// Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `serviceWebRequestsOnRootPath`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
+func (o ApplicationSourceFromTemplateResourcesOutput) HealthEndpointPath() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ApplicationSourceFromTemplateResources) *string { return v.HealthEndpointPath }).(pulumi.StringPtrOutput)
+}
+
 // The number of replicas for the Application Source. Computed by API if not specified.
 func (o ApplicationSourceFromTemplateResourcesOutput) Replicas() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ApplicationSourceFromTemplateResources) *int { return v.Replicas }).(pulumi.IntPtrOutput)
@@ -165,6 +174,16 @@ func (o ApplicationSourceFromTemplateResourcesPtrOutput) Elem() ApplicationSourc
 		var ret ApplicationSourceFromTemplateResources
 		return ret
 	}).(ApplicationSourceFromTemplateResourcesOutput)
+}
+
+// Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `serviceWebRequestsOnRootPath`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
+func (o ApplicationSourceFromTemplateResourcesPtrOutput) HealthEndpointPath() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ApplicationSourceFromTemplateResources) *string {
+		if v == nil {
+			return nil
+		}
+		return v.HealthEndpointPath
+	}).(pulumi.StringPtrOutput)
 }
 
 // The number of replicas for the Application Source. Computed by API if not specified.
@@ -323,6 +342,8 @@ func (o ApplicationSourceFromTemplateRuntimeParameterValueArrayOutput) Index(i p
 }
 
 type ApplicationSourceResources struct {
+	// Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `serviceWebRequestsOnRootPath`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
+	HealthEndpointPath *string `pulumi:"healthEndpointPath"`
 	// The number of replicas for the Application Source. Computed by API if not specified.
 	Replicas *int `pulumi:"replicas"`
 	// The resource label for the Application Source (e.g., 'cpu.small', 'cpu.medium'). Computed by API if not specified.
@@ -345,6 +366,8 @@ type ApplicationSourceResourcesInput interface {
 }
 
 type ApplicationSourceResourcesArgs struct {
+	// Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `serviceWebRequestsOnRootPath`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
+	HealthEndpointPath pulumi.StringPtrInput `pulumi:"healthEndpointPath"`
 	// The number of replicas for the Application Source. Computed by API if not specified.
 	Replicas pulumi.IntPtrInput `pulumi:"replicas"`
 	// The resource label for the Application Source (e.g., 'cpu.small', 'cpu.medium'). Computed by API if not specified.
@@ -432,6 +455,11 @@ func (o ApplicationSourceResourcesOutput) ToApplicationSourceResourcesPtrOutputW
 	}).(ApplicationSourceResourcesPtrOutput)
 }
 
+// Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `serviceWebRequestsOnRootPath`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
+func (o ApplicationSourceResourcesOutput) HealthEndpointPath() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ApplicationSourceResources) *string { return v.HealthEndpointPath }).(pulumi.StringPtrOutput)
+}
+
 // The number of replicas for the Application Source. Computed by API if not specified.
 func (o ApplicationSourceResourcesOutput) Replicas() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ApplicationSourceResources) *int { return v.Replicas }).(pulumi.IntPtrOutput)
@@ -474,6 +502,16 @@ func (o ApplicationSourceResourcesPtrOutput) Elem() ApplicationSourceResourcesOu
 		var ret ApplicationSourceResources
 		return ret
 	}).(ApplicationSourceResourcesOutput)
+}
+
+// Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `serviceWebRequestsOnRootPath`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
+func (o ApplicationSourceResourcesPtrOutput) HealthEndpointPath() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ApplicationSourceResources) *string {
+		if v == nil {
+			return nil
+		}
+		return v.HealthEndpointPath
+	}).(pulumi.StringPtrOutput)
 }
 
 // The number of replicas for the Application Source. Computed by API if not specified.
@@ -2255,6 +2293,8 @@ func (o BatchPredictionJobDefinitionTimeseriesSettingsPtrOutput) Type() pulumi.S
 }
 
 type CustomApplicationFromEnvironmentResources struct {
+	// Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `serviceWebRequestsOnRootPath`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
+	HealthEndpointPath *string `pulumi:"healthEndpointPath"`
 	// The number of replicas for the Custom Application. Computed by API if not specified.
 	Replicas *int `pulumi:"replicas"`
 	// The resource label for the Custom Application (e.g., 'cpu.small', 'cpu.medium'). Computed by API if not specified.
@@ -2277,6 +2317,8 @@ type CustomApplicationFromEnvironmentResourcesInput interface {
 }
 
 type CustomApplicationFromEnvironmentResourcesArgs struct {
+	// Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `serviceWebRequestsOnRootPath`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
+	HealthEndpointPath pulumi.StringPtrInput `pulumi:"healthEndpointPath"`
 	// The number of replicas for the Custom Application. Computed by API if not specified.
 	Replicas pulumi.IntPtrInput `pulumi:"replicas"`
 	// The resource label for the Custom Application (e.g., 'cpu.small', 'cpu.medium'). Computed by API if not specified.
@@ -2364,6 +2406,11 @@ func (o CustomApplicationFromEnvironmentResourcesOutput) ToCustomApplicationFrom
 	}).(CustomApplicationFromEnvironmentResourcesPtrOutput)
 }
 
+// Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `serviceWebRequestsOnRootPath`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
+func (o CustomApplicationFromEnvironmentResourcesOutput) HealthEndpointPath() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CustomApplicationFromEnvironmentResources) *string { return v.HealthEndpointPath }).(pulumi.StringPtrOutput)
+}
+
 // The number of replicas for the Custom Application. Computed by API if not specified.
 func (o CustomApplicationFromEnvironmentResourcesOutput) Replicas() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v CustomApplicationFromEnvironmentResources) *int { return v.Replicas }).(pulumi.IntPtrOutput)
@@ -2408,6 +2455,16 @@ func (o CustomApplicationFromEnvironmentResourcesPtrOutput) Elem() CustomApplica
 	}).(CustomApplicationFromEnvironmentResourcesOutput)
 }
 
+// Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `serviceWebRequestsOnRootPath`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
+func (o CustomApplicationFromEnvironmentResourcesPtrOutput) HealthEndpointPath() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CustomApplicationFromEnvironmentResources) *string {
+		if v == nil {
+			return nil
+		}
+		return v.HealthEndpointPath
+	}).(pulumi.StringPtrOutput)
+}
+
 // The number of replicas for the Custom Application. Computed by API if not specified.
 func (o CustomApplicationFromEnvironmentResourcesPtrOutput) Replicas() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *CustomApplicationFromEnvironmentResources) *int {
@@ -2449,6 +2506,8 @@ func (o CustomApplicationFromEnvironmentResourcesPtrOutput) SessionAffinity() pu
 }
 
 type CustomApplicationResources struct {
+	// Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `serviceWebRequestsOnRootPath`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
+	HealthEndpointPath *string `pulumi:"healthEndpointPath"`
 	// The number of replicas for the Custom Application. Computed by API if not specified.
 	Replicas *int `pulumi:"replicas"`
 	// The resource label for the Custom Application (e.g., 'cpu.small', 'cpu.medium'). Computed by API if not specified.
@@ -2471,6 +2530,8 @@ type CustomApplicationResourcesInput interface {
 }
 
 type CustomApplicationResourcesArgs struct {
+	// Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `serviceWebRequestsOnRootPath`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
+	HealthEndpointPath pulumi.StringPtrInput `pulumi:"healthEndpointPath"`
 	// The number of replicas for the Custom Application. Computed by API if not specified.
 	Replicas pulumi.IntPtrInput `pulumi:"replicas"`
 	// The resource label for the Custom Application (e.g., 'cpu.small', 'cpu.medium'). Computed by API if not specified.
@@ -2558,6 +2619,11 @@ func (o CustomApplicationResourcesOutput) ToCustomApplicationResourcesPtrOutputW
 	}).(CustomApplicationResourcesPtrOutput)
 }
 
+// Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `serviceWebRequestsOnRootPath`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
+func (o CustomApplicationResourcesOutput) HealthEndpointPath() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CustomApplicationResources) *string { return v.HealthEndpointPath }).(pulumi.StringPtrOutput)
+}
+
 // The number of replicas for the Custom Application. Computed by API if not specified.
 func (o CustomApplicationResourcesOutput) Replicas() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v CustomApplicationResources) *int { return v.Replicas }).(pulumi.IntPtrOutput)
@@ -2600,6 +2666,16 @@ func (o CustomApplicationResourcesPtrOutput) Elem() CustomApplicationResourcesOu
 		var ret CustomApplicationResources
 		return ret
 	}).(CustomApplicationResourcesOutput)
+}
+
+// Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `serviceWebRequestsOnRootPath`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
+func (o CustomApplicationResourcesPtrOutput) HealthEndpointPath() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CustomApplicationResources) *string {
+		if v == nil {
+			return nil
+		}
+		return v.HealthEndpointPath
+	}).(pulumi.StringPtrOutput)
 }
 
 // The number of replicas for the Custom Application. Computed by API if not specified.

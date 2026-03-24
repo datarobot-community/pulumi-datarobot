@@ -102,7 +102,9 @@ class ApplicationSourceFromTemplateResources(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
-        if key == "resourceLabel":
+        if key == "healthEndpointPath":
+            suggest = "health_endpoint_path"
+        elif key == "resourceLabel":
             suggest = "resource_label"
         elif key == "serviceWebRequestsOnRootPath":
             suggest = "service_web_requests_on_root_path"
@@ -121,16 +123,20 @@ class ApplicationSourceFromTemplateResources(dict):
         return super().get(key, default)
 
     def __init__(__self__, *,
+                 health_endpoint_path: Optional[builtins.str] = None,
                  replicas: Optional[builtins.int] = None,
                  resource_label: Optional[builtins.str] = None,
                  service_web_requests_on_root_path: Optional[builtins.bool] = None,
                  session_affinity: Optional[builtins.bool] = None):
         """
+        :param builtins.str health_endpoint_path: Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `service_web_requests_on_root_path`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
         :param builtins.int replicas: The number of replicas for the Application Source. Computed by API if not specified.
         :param builtins.str resource_label: The resource label for the Application Source (e.g., 'cpu.small', 'cpu.medium'). Computed by API if not specified.
         :param builtins.bool service_web_requests_on_root_path: Whether to service web requests on the root path for the Application Source. Computed by API if not specified.
         :param builtins.bool session_affinity: Whether session affinity is enabled for the Application Source. Computed by API if not specified.
         """
+        if health_endpoint_path is not None:
+            pulumi.set(__self__, "health_endpoint_path", health_endpoint_path)
         if replicas is not None:
             pulumi.set(__self__, "replicas", replicas)
         if resource_label is not None:
@@ -139,6 +145,14 @@ class ApplicationSourceFromTemplateResources(dict):
             pulumi.set(__self__, "service_web_requests_on_root_path", service_web_requests_on_root_path)
         if session_affinity is not None:
             pulumi.set(__self__, "session_affinity", session_affinity)
+
+    @property
+    @pulumi.getter(name="healthEndpointPath")
+    def health_endpoint_path(self) -> Optional[builtins.str]:
+        """
+        Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `service_web_requests_on_root_path`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
+        """
+        return pulumi.get(self, "health_endpoint_path")
 
     @property
     @pulumi.getter
@@ -218,7 +232,9 @@ class ApplicationSourceResources(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
-        if key == "resourceLabel":
+        if key == "healthEndpointPath":
+            suggest = "health_endpoint_path"
+        elif key == "resourceLabel":
             suggest = "resource_label"
         elif key == "serviceWebRequestsOnRootPath":
             suggest = "service_web_requests_on_root_path"
@@ -237,16 +253,20 @@ class ApplicationSourceResources(dict):
         return super().get(key, default)
 
     def __init__(__self__, *,
+                 health_endpoint_path: Optional[builtins.str] = None,
                  replicas: Optional[builtins.int] = None,
                  resource_label: Optional[builtins.str] = None,
                  service_web_requests_on_root_path: Optional[builtins.bool] = None,
                  session_affinity: Optional[builtins.bool] = None):
         """
+        :param builtins.str health_endpoint_path: Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `service_web_requests_on_root_path`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
         :param builtins.int replicas: The number of replicas for the Application Source. Computed by API if not specified.
         :param builtins.str resource_label: The resource label for the Application Source (e.g., 'cpu.small', 'cpu.medium'). Computed by API if not specified.
         :param builtins.bool service_web_requests_on_root_path: Whether to service web requests on the root path for the Application Source. Computed by API if not specified.
         :param builtins.bool session_affinity: Whether session affinity is enabled for the Application Source. Computed by API if not specified.
         """
+        if health_endpoint_path is not None:
+            pulumi.set(__self__, "health_endpoint_path", health_endpoint_path)
         if replicas is not None:
             pulumi.set(__self__, "replicas", replicas)
         if resource_label is not None:
@@ -255,6 +275,14 @@ class ApplicationSourceResources(dict):
             pulumi.set(__self__, "service_web_requests_on_root_path", service_web_requests_on_root_path)
         if session_affinity is not None:
             pulumi.set(__self__, "session_affinity", session_affinity)
+
+    @property
+    @pulumi.getter(name="healthEndpointPath")
+    def health_endpoint_path(self) -> Optional[builtins.str]:
+        """
+        Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `service_web_requests_on_root_path`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
+        """
+        return pulumi.get(self, "health_endpoint_path")
 
     @property
     @pulumi.getter
@@ -1032,7 +1060,9 @@ class CustomApplicationFromEnvironmentResources(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
-        if key == "resourceLabel":
+        if key == "healthEndpointPath":
+            suggest = "health_endpoint_path"
+        elif key == "resourceLabel":
             suggest = "resource_label"
         elif key == "serviceWebRequestsOnRootPath":
             suggest = "service_web_requests_on_root_path"
@@ -1051,16 +1081,20 @@ class CustomApplicationFromEnvironmentResources(dict):
         return super().get(key, default)
 
     def __init__(__self__, *,
+                 health_endpoint_path: Optional[builtins.str] = None,
                  replicas: Optional[builtins.int] = None,
                  resource_label: Optional[builtins.str] = None,
                  service_web_requests_on_root_path: Optional[builtins.bool] = None,
                  session_affinity: Optional[builtins.bool] = None):
         """
+        :param builtins.str health_endpoint_path: Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `service_web_requests_on_root_path`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
         :param builtins.int replicas: The number of replicas for the Custom Application. Computed by API if not specified.
         :param builtins.str resource_label: The resource label for the Custom Application (e.g., 'cpu.small', 'cpu.medium'). Computed by API if not specified.
         :param builtins.bool service_web_requests_on_root_path: Whether to service web requests on the root path for the Custom Application. Computed by API if not specified.
         :param builtins.bool session_affinity: Whether session affinity is enabled for the Custom Application. Computed by API if not specified.
         """
+        if health_endpoint_path is not None:
+            pulumi.set(__self__, "health_endpoint_path", health_endpoint_path)
         if replicas is not None:
             pulumi.set(__self__, "replicas", replicas)
         if resource_label is not None:
@@ -1069,6 +1103,14 @@ class CustomApplicationFromEnvironmentResources(dict):
             pulumi.set(__self__, "service_web_requests_on_root_path", service_web_requests_on_root_path)
         if session_affinity is not None:
             pulumi.set(__self__, "session_affinity", session_affinity)
+
+    @property
+    @pulumi.getter(name="healthEndpointPath")
+    def health_endpoint_path(self) -> Optional[builtins.str]:
+        """
+        Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `service_web_requests_on_root_path`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
+        """
+        return pulumi.get(self, "health_endpoint_path")
 
     @property
     @pulumi.getter
@@ -1108,7 +1150,9 @@ class CustomApplicationResources(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
-        if key == "resourceLabel":
+        if key == "healthEndpointPath":
+            suggest = "health_endpoint_path"
+        elif key == "resourceLabel":
             suggest = "resource_label"
         elif key == "serviceWebRequestsOnRootPath":
             suggest = "service_web_requests_on_root_path"
@@ -1127,16 +1171,20 @@ class CustomApplicationResources(dict):
         return super().get(key, default)
 
     def __init__(__self__, *,
+                 health_endpoint_path: Optional[builtins.str] = None,
                  replicas: Optional[builtins.int] = None,
                  resource_label: Optional[builtins.str] = None,
                  service_web_requests_on_root_path: Optional[builtins.bool] = None,
                  session_affinity: Optional[builtins.bool] = None):
         """
+        :param builtins.str health_endpoint_path: Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `service_web_requests_on_root_path`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
         :param builtins.int replicas: The number of replicas for the Custom Application. Computed by API if not specified.
         :param builtins.str resource_label: The resource label for the Custom Application (e.g., 'cpu.small', 'cpu.medium'). Computed by API if not specified.
         :param builtins.bool service_web_requests_on_root_path: Whether to service web requests on the root path for the Custom Application. Computed by API if not specified.
         :param builtins.bool session_affinity: Whether session affinity is enabled for the Custom Application. Computed by API if not specified.
         """
+        if health_endpoint_path is not None:
+            pulumi.set(__self__, "health_endpoint_path", health_endpoint_path)
         if replicas is not None:
             pulumi.set(__self__, "replicas", replicas)
         if resource_label is not None:
@@ -1145,6 +1193,14 @@ class CustomApplicationResources(dict):
             pulumi.set(__self__, "service_web_requests_on_root_path", service_web_requests_on_root_path)
         if session_affinity is not None:
             pulumi.set(__self__, "session_affinity", session_affinity)
+
+    @property
+    @pulumi.getter(name="healthEndpointPath")
+    def health_endpoint_path(self) -> Optional[builtins.str]:
+        """
+        Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `service_web_requests_on_root_path`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
+        """
+        return pulumi.get(self, "health_endpoint_path")
 
     @property
     @pulumi.getter
