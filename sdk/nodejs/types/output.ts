@@ -7,6 +7,10 @@ import * as outputs from "../types/output";
 
 export interface ApplicationSourceFromTemplateResources {
     /**
+     * Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `serviceWebRequestsOnRootPath`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
+     */
+    healthEndpointPath: string;
+    /**
      * The number of replicas for the Application Source. Computed by API if not specified.
      */
     replicas: number;
@@ -40,6 +44,10 @@ export interface ApplicationSourceFromTemplateRuntimeParameterValue {
 }
 
 export interface ApplicationSourceResources {
+    /**
+     * Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `serviceWebRequestsOnRootPath`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
+     */
+    healthEndpointPath: string;
     /**
      * The number of replicas for the Application Source. Computed by API if not specified.
      */
@@ -276,6 +284,10 @@ export interface BatchPredictionJobDefinitionTimeseriesSettings {
 
 export interface CustomApplicationFromEnvironmentResources {
     /**
+     * Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `serviceWebRequestsOnRootPath`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
+     */
+    healthEndpointPath?: string;
+    /**
      * The number of replicas for the Custom Application. Computed by API if not specified.
      */
     replicas?: number;
@@ -294,6 +306,10 @@ export interface CustomApplicationFromEnvironmentResources {
 }
 
 export interface CustomApplicationResources {
+    /**
+     * Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `serviceWebRequestsOnRootPath`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
+     */
+    healthEndpointPath?: string;
     /**
      * The number of replicas for the Custom Application. Computed by API if not specified.
      */

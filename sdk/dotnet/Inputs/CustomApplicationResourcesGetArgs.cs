@@ -14,6 +14,12 @@ namespace DataRobotPulumi.Datarobot.Inputs
     public sealed class CustomApplicationResourcesGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `service_web_requests_on_root_path`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
+        /// </summary>
+        [Input("healthEndpointPath")]
+        public Input<string>? HealthEndpointPath { get; set; }
+
+        /// <summary>
         /// The number of replicas for the Custom Application. Computed by API if not specified.
         /// </summary>
         [Input("replicas")]

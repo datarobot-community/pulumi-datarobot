@@ -15,6 +15,10 @@ namespace DataRobotPulumi.Datarobot.Outputs
     public sealed class ApplicationSourceFromTemplateResources
     {
         /// <summary>
+        /// Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `service_web_requests_on_root_path`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
+        /// </summary>
+        public readonly string? HealthEndpointPath;
+        /// <summary>
         /// The number of replicas for the Application Source. Computed by API if not specified.
         /// </summary>
         public readonly int? Replicas;
@@ -33,6 +37,8 @@ namespace DataRobotPulumi.Datarobot.Outputs
 
         [OutputConstructor]
         private ApplicationSourceFromTemplateResources(
+            string? healthEndpointPath,
+
             int? replicas,
 
             string? resourceLabel,
@@ -41,6 +47,7 @@ namespace DataRobotPulumi.Datarobot.Outputs
 
             bool? sessionAffinity)
         {
+            HealthEndpointPath = healthEndpointPath;
             Replicas = replicas;
             ResourceLabel = resourceLabel;
             ServiceWebRequestsOnRootPath = serviceWebRequestsOnRootPath;
