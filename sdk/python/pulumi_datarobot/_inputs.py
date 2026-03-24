@@ -22,6 +22,8 @@ __all__ = [
     'ApplicationSourceFromTemplateRuntimeParameterValueArgsDict',
     'ApplicationSourceResourcesArgs',
     'ApplicationSourceResourcesArgsDict',
+    'ApplicationSourceRuntimeParameterArgs',
+    'ApplicationSourceRuntimeParameterArgsDict',
     'ApplicationSourceRuntimeParameterValueArgs',
     'ApplicationSourceRuntimeParameterValueArgsDict',
     'BatchPredictionJobDefinitionCsvSettingsArgs',
@@ -40,6 +42,8 @@ __all__ = [
     'CustomApplicationFromEnvironmentResourcesArgsDict',
     'CustomApplicationResourcesArgs',
     'CustomApplicationResourcesArgsDict',
+    'CustomJobRuntimeParameterArgs',
+    'CustomJobRuntimeParameterArgsDict',
     'CustomJobRuntimeParameterValueArgs',
     'CustomJobRuntimeParameterValueArgsDict',
     'CustomJobScheduleArgs',
@@ -78,6 +82,8 @@ __all__ = [
     'CustomModelGuardConfigurationNemoInfoArgsDict',
     'CustomModelOverallModerationConfigurationArgs',
     'CustomModelOverallModerationConfigurationArgsDict',
+    'CustomModelRuntimeParameterArgs',
+    'CustomModelRuntimeParameterArgsDict',
     'CustomModelRuntimeParameterValueArgs',
     'CustomModelRuntimeParameterValueArgsDict',
     'CustomModelSourceRemoteRepositoryArgs',
@@ -172,6 +178,10 @@ MYPY = False
 
 if not MYPY:
     class ApplicationSourceFromTemplateResourcesArgsDict(TypedDict):
+        health_endpoint_path: NotRequired[pulumi.Input[builtins.str]]
+        """
+        Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `service_web_requests_on_root_path`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
+        """
         replicas: NotRequired[pulumi.Input[builtins.int]]
         """
         The number of replicas for the Application Source. Computed by API if not specified.
@@ -194,16 +204,20 @@ elif False:
 @pulumi.input_type
 class ApplicationSourceFromTemplateResourcesArgs:
     def __init__(__self__, *,
+                 health_endpoint_path: Optional[pulumi.Input[builtins.str]] = None,
                  replicas: Optional[pulumi.Input[builtins.int]] = None,
                  resource_label: Optional[pulumi.Input[builtins.str]] = None,
                  service_web_requests_on_root_path: Optional[pulumi.Input[builtins.bool]] = None,
                  session_affinity: Optional[pulumi.Input[builtins.bool]] = None):
         """
+        :param pulumi.Input[builtins.str] health_endpoint_path: Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `service_web_requests_on_root_path`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
         :param pulumi.Input[builtins.int] replicas: The number of replicas for the Application Source. Computed by API if not specified.
         :param pulumi.Input[builtins.str] resource_label: The resource label for the Application Source (e.g., 'cpu.small', 'cpu.medium'). Computed by API if not specified.
         :param pulumi.Input[builtins.bool] service_web_requests_on_root_path: Whether to service web requests on the root path for the Application Source. Computed by API if not specified.
         :param pulumi.Input[builtins.bool] session_affinity: Whether session affinity is enabled for the Application Source. Computed by API if not specified.
         """
+        if health_endpoint_path is not None:
+            pulumi.set(__self__, "health_endpoint_path", health_endpoint_path)
         if replicas is not None:
             pulumi.set(__self__, "replicas", replicas)
         if resource_label is not None:
@@ -212,6 +226,18 @@ class ApplicationSourceFromTemplateResourcesArgs:
             pulumi.set(__self__, "service_web_requests_on_root_path", service_web_requests_on_root_path)
         if session_affinity is not None:
             pulumi.set(__self__, "session_affinity", session_affinity)
+
+    @property
+    @pulumi.getter(name="healthEndpointPath")
+    def health_endpoint_path(self) -> Optional[pulumi.Input[builtins.str]]:
+        """
+        Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `service_web_requests_on_root_path`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
+        """
+        return pulumi.get(self, "health_endpoint_path")
+
+    @health_endpoint_path.setter
+    def health_endpoint_path(self, value: Optional[pulumi.Input[builtins.str]]):
+        pulumi.set(self, "health_endpoint_path", value)
 
     @property
     @pulumi.getter
@@ -333,6 +359,10 @@ class ApplicationSourceFromTemplateRuntimeParameterValueArgs:
 
 if not MYPY:
     class ApplicationSourceResourcesArgsDict(TypedDict):
+        health_endpoint_path: NotRequired[pulumi.Input[builtins.str]]
+        """
+        Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `service_web_requests_on_root_path`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
+        """
         replicas: NotRequired[pulumi.Input[builtins.int]]
         """
         The number of replicas for the Application Source. Computed by API if not specified.
@@ -355,16 +385,20 @@ elif False:
 @pulumi.input_type
 class ApplicationSourceResourcesArgs:
     def __init__(__self__, *,
+                 health_endpoint_path: Optional[pulumi.Input[builtins.str]] = None,
                  replicas: Optional[pulumi.Input[builtins.int]] = None,
                  resource_label: Optional[pulumi.Input[builtins.str]] = None,
                  service_web_requests_on_root_path: Optional[pulumi.Input[builtins.bool]] = None,
                  session_affinity: Optional[pulumi.Input[builtins.bool]] = None):
         """
+        :param pulumi.Input[builtins.str] health_endpoint_path: Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `service_web_requests_on_root_path`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
         :param pulumi.Input[builtins.int] replicas: The number of replicas for the Application Source. Computed by API if not specified.
         :param pulumi.Input[builtins.str] resource_label: The resource label for the Application Source (e.g., 'cpu.small', 'cpu.medium'). Computed by API if not specified.
         :param pulumi.Input[builtins.bool] service_web_requests_on_root_path: Whether to service web requests on the root path for the Application Source. Computed by API if not specified.
         :param pulumi.Input[builtins.bool] session_affinity: Whether session affinity is enabled for the Application Source. Computed by API if not specified.
         """
+        if health_endpoint_path is not None:
+            pulumi.set(__self__, "health_endpoint_path", health_endpoint_path)
         if replicas is not None:
             pulumi.set(__self__, "replicas", replicas)
         if resource_label is not None:
@@ -373,6 +407,18 @@ class ApplicationSourceResourcesArgs:
             pulumi.set(__self__, "service_web_requests_on_root_path", service_web_requests_on_root_path)
         if session_affinity is not None:
             pulumi.set(__self__, "session_affinity", session_affinity)
+
+    @property
+    @pulumi.getter(name="healthEndpointPath")
+    def health_endpoint_path(self) -> Optional[pulumi.Input[builtins.str]]:
+        """
+        Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `service_web_requests_on_root_path`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
+        """
+        return pulumi.get(self, "health_endpoint_path")
+
+    @health_endpoint_path.setter
+    def health_endpoint_path(self, value: Optional[pulumi.Input[builtins.str]]):
+        pulumi.set(self, "health_endpoint_path", value)
 
     @property
     @pulumi.getter
@@ -421,6 +467,75 @@ class ApplicationSourceResourcesArgs:
     @session_affinity.setter
     def session_affinity(self, value: Optional[pulumi.Input[builtins.bool]]):
         pulumi.set(self, "session_affinity", value)
+
+
+if not MYPY:
+    class ApplicationSourceRuntimeParameterArgsDict(TypedDict):
+        key: pulumi.Input[builtins.str]
+        """
+        The name of the runtime parameter.
+        """
+        type: pulumi.Input[builtins.str]
+        """
+        The type of the runtime parameter.
+        """
+        value: pulumi.Input[builtins.str]
+        """
+        The value of the runtime parameter (type conversion is handled internally).
+        """
+elif False:
+    ApplicationSourceRuntimeParameterArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class ApplicationSourceRuntimeParameterArgs:
+    def __init__(__self__, *,
+                 key: pulumi.Input[builtins.str],
+                 type: pulumi.Input[builtins.str],
+                 value: pulumi.Input[builtins.str]):
+        """
+        :param pulumi.Input[builtins.str] key: The name of the runtime parameter.
+        :param pulumi.Input[builtins.str] type: The type of the runtime parameter.
+        :param pulumi.Input[builtins.str] value: The value of the runtime parameter (type conversion is handled internally).
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "type", type)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> pulumi.Input[builtins.str]:
+        """
+        The name of the runtime parameter.
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: pulumi.Input[builtins.str]):
+        pulumi.set(self, "key", value)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[builtins.str]:
+        """
+        The type of the runtime parameter.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[builtins.str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> pulumi.Input[builtins.str]:
+        """
+        The value of the runtime parameter (type conversion is handled internally).
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: pulumi.Input[builtins.str]):
+        pulumi.set(self, "value", value)
 
 
 if not MYPY:
@@ -1399,6 +1514,10 @@ class BatchPredictionJobDefinitionTimeseriesSettingsArgs:
 
 if not MYPY:
     class CustomApplicationFromEnvironmentResourcesArgsDict(TypedDict):
+        health_endpoint_path: NotRequired[pulumi.Input[builtins.str]]
+        """
+        Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `service_web_requests_on_root_path`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
+        """
         replicas: NotRequired[pulumi.Input[builtins.int]]
         """
         The number of replicas for the Custom Application. Computed by API if not specified.
@@ -1421,16 +1540,20 @@ elif False:
 @pulumi.input_type
 class CustomApplicationFromEnvironmentResourcesArgs:
     def __init__(__self__, *,
+                 health_endpoint_path: Optional[pulumi.Input[builtins.str]] = None,
                  replicas: Optional[pulumi.Input[builtins.int]] = None,
                  resource_label: Optional[pulumi.Input[builtins.str]] = None,
                  service_web_requests_on_root_path: Optional[pulumi.Input[builtins.bool]] = None,
                  session_affinity: Optional[pulumi.Input[builtins.bool]] = None):
         """
+        :param pulumi.Input[builtins.str] health_endpoint_path: Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `service_web_requests_on_root_path`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
         :param pulumi.Input[builtins.int] replicas: The number of replicas for the Custom Application. Computed by API if not specified.
         :param pulumi.Input[builtins.str] resource_label: The resource label for the Custom Application (e.g., 'cpu.small', 'cpu.medium'). Computed by API if not specified.
         :param pulumi.Input[builtins.bool] service_web_requests_on_root_path: Whether to service web requests on the root path for the Custom Application. Computed by API if not specified.
         :param pulumi.Input[builtins.bool] session_affinity: Whether session affinity is enabled for the Custom Application. Computed by API if not specified.
         """
+        if health_endpoint_path is not None:
+            pulumi.set(__self__, "health_endpoint_path", health_endpoint_path)
         if replicas is not None:
             pulumi.set(__self__, "replicas", replicas)
         if resource_label is not None:
@@ -1439,6 +1562,18 @@ class CustomApplicationFromEnvironmentResourcesArgs:
             pulumi.set(__self__, "service_web_requests_on_root_path", service_web_requests_on_root_path)
         if session_affinity is not None:
             pulumi.set(__self__, "session_affinity", session_affinity)
+
+    @property
+    @pulumi.getter(name="healthEndpointPath")
+    def health_endpoint_path(self) -> Optional[pulumi.Input[builtins.str]]:
+        """
+        Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `service_web_requests_on_root_path`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
+        """
+        return pulumi.get(self, "health_endpoint_path")
+
+    @health_endpoint_path.setter
+    def health_endpoint_path(self, value: Optional[pulumi.Input[builtins.str]]):
+        pulumi.set(self, "health_endpoint_path", value)
 
     @property
     @pulumi.getter
@@ -1491,6 +1626,10 @@ class CustomApplicationFromEnvironmentResourcesArgs:
 
 if not MYPY:
     class CustomApplicationResourcesArgsDict(TypedDict):
+        health_endpoint_path: NotRequired[pulumi.Input[builtins.str]]
+        """
+        Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `service_web_requests_on_root_path`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
+        """
         replicas: NotRequired[pulumi.Input[builtins.int]]
         """
         The number of replicas for the Custom Application. Computed by API if not specified.
@@ -1513,16 +1652,20 @@ elif False:
 @pulumi.input_type
 class CustomApplicationResourcesArgs:
     def __init__(__self__, *,
+                 health_endpoint_path: Optional[pulumi.Input[builtins.str]] = None,
                  replicas: Optional[pulumi.Input[builtins.int]] = None,
                  resource_label: Optional[pulumi.Input[builtins.str]] = None,
                  service_web_requests_on_root_path: Optional[pulumi.Input[builtins.bool]] = None,
                  session_affinity: Optional[pulumi.Input[builtins.bool]] = None):
         """
+        :param pulumi.Input[builtins.str] health_endpoint_path: Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `service_web_requests_on_root_path`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
         :param pulumi.Input[builtins.int] replicas: The number of replicas for the Custom Application. Computed by API if not specified.
         :param pulumi.Input[builtins.str] resource_label: The resource label for the Custom Application (e.g., 'cpu.small', 'cpu.medium'). Computed by API if not specified.
         :param pulumi.Input[builtins.bool] service_web_requests_on_root_path: Whether to service web requests on the root path for the Custom Application. Computed by API if not specified.
         :param pulumi.Input[builtins.bool] session_affinity: Whether session affinity is enabled for the Custom Application. Computed by API if not specified.
         """
+        if health_endpoint_path is not None:
+            pulumi.set(__self__, "health_endpoint_path", health_endpoint_path)
         if replicas is not None:
             pulumi.set(__self__, "replicas", replicas)
         if resource_label is not None:
@@ -1531,6 +1674,18 @@ class CustomApplicationResourcesArgs:
             pulumi.set(__self__, "service_web_requests_on_root_path", service_web_requests_on_root_path)
         if session_affinity is not None:
             pulumi.set(__self__, "session_affinity", session_affinity)
+
+    @property
+    @pulumi.getter(name="healthEndpointPath")
+    def health_endpoint_path(self) -> Optional[pulumi.Input[builtins.str]]:
+        """
+        Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `service_web_requests_on_root_path`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
+        """
+        return pulumi.get(self, "health_endpoint_path")
+
+    @health_endpoint_path.setter
+    def health_endpoint_path(self, value: Optional[pulumi.Input[builtins.str]]):
+        pulumi.set(self, "health_endpoint_path", value)
 
     @property
     @pulumi.getter
@@ -1579,6 +1734,75 @@ class CustomApplicationResourcesArgs:
     @session_affinity.setter
     def session_affinity(self, value: Optional[pulumi.Input[builtins.bool]]):
         pulumi.set(self, "session_affinity", value)
+
+
+if not MYPY:
+    class CustomJobRuntimeParameterArgsDict(TypedDict):
+        key: pulumi.Input[builtins.str]
+        """
+        The name of the runtime parameter.
+        """
+        type: pulumi.Input[builtins.str]
+        """
+        The type of the runtime parameter.
+        """
+        value: pulumi.Input[builtins.str]
+        """
+        The value of the runtime parameter (type conversion is handled internally).
+        """
+elif False:
+    CustomJobRuntimeParameterArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class CustomJobRuntimeParameterArgs:
+    def __init__(__self__, *,
+                 key: pulumi.Input[builtins.str],
+                 type: pulumi.Input[builtins.str],
+                 value: pulumi.Input[builtins.str]):
+        """
+        :param pulumi.Input[builtins.str] key: The name of the runtime parameter.
+        :param pulumi.Input[builtins.str] type: The type of the runtime parameter.
+        :param pulumi.Input[builtins.str] value: The value of the runtime parameter (type conversion is handled internally).
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "type", type)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> pulumi.Input[builtins.str]:
+        """
+        The name of the runtime parameter.
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: pulumi.Input[builtins.str]):
+        pulumi.set(self, "key", value)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[builtins.str]:
+        """
+        The type of the runtime parameter.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[builtins.str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> pulumi.Input[builtins.str]:
+        """
+        The value of the runtime parameter (type conversion is handled internally).
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: pulumi.Input[builtins.str]):
+        pulumi.set(self, "value", value)
 
 
 if not MYPY:
@@ -2936,6 +3160,75 @@ class CustomModelOverallModerationConfigurationArgs:
     @timeout_sec.setter
     def timeout_sec(self, value: Optional[pulumi.Input[builtins.int]]):
         pulumi.set(self, "timeout_sec", value)
+
+
+if not MYPY:
+    class CustomModelRuntimeParameterArgsDict(TypedDict):
+        key: pulumi.Input[builtins.str]
+        """
+        The name of the runtime parameter.
+        """
+        type: pulumi.Input[builtins.str]
+        """
+        The type of the runtime parameter.
+        """
+        value: pulumi.Input[builtins.str]
+        """
+        The value of the runtime parameter (type conversion is handled internally).
+        """
+elif False:
+    CustomModelRuntimeParameterArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class CustomModelRuntimeParameterArgs:
+    def __init__(__self__, *,
+                 key: pulumi.Input[builtins.str],
+                 type: pulumi.Input[builtins.str],
+                 value: pulumi.Input[builtins.str]):
+        """
+        :param pulumi.Input[builtins.str] key: The name of the runtime parameter.
+        :param pulumi.Input[builtins.str] type: The type of the runtime parameter.
+        :param pulumi.Input[builtins.str] value: The value of the runtime parameter (type conversion is handled internally).
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "type", type)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> pulumi.Input[builtins.str]:
+        """
+        The name of the runtime parameter.
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: pulumi.Input[builtins.str]):
+        pulumi.set(self, "key", value)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[builtins.str]:
+        """
+        The type of the runtime parameter.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[builtins.str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> pulumi.Input[builtins.str]:
+        """
+        The value of the runtime parameter (type conversion is handled internally).
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: pulumi.Input[builtins.str]):
+        pulumi.set(self, "value", value)
 
 
 if not MYPY:

@@ -7,6 +7,10 @@ import * as outputs from "../types/output";
 
 export interface ApplicationSourceFromTemplateResources {
     /**
+     * Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `serviceWebRequestsOnRootPath`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
+     */
+    healthEndpointPath: string;
+    /**
      * The number of replicas for the Application Source. Computed by API if not specified.
      */
     replicas: number;
@@ -41,6 +45,10 @@ export interface ApplicationSourceFromTemplateRuntimeParameterValue {
 
 export interface ApplicationSourceResources {
     /**
+     * Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `serviceWebRequestsOnRootPath`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
+     */
+    healthEndpointPath: string;
+    /**
      * The number of replicas for the Application Source. Computed by API if not specified.
      */
     replicas: number;
@@ -56,6 +64,21 @@ export interface ApplicationSourceResources {
      * Whether session affinity is enabled for the Application Source. Computed by API if not specified.
      */
     sessionAffinity: boolean;
+}
+
+export interface ApplicationSourceRuntimeParameter {
+    /**
+     * The name of the runtime parameter.
+     */
+    key: string;
+    /**
+     * The type of the runtime parameter.
+     */
+    type: string;
+    /**
+     * The value of the runtime parameter (type conversion is handled internally).
+     */
+    value: string;
 }
 
 export interface ApplicationSourceRuntimeParameterValue {
@@ -261,6 +284,10 @@ export interface BatchPredictionJobDefinitionTimeseriesSettings {
 
 export interface CustomApplicationFromEnvironmentResources {
     /**
+     * Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `serviceWebRequestsOnRootPath`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
+     */
+    healthEndpointPath?: string;
+    /**
      * The number of replicas for the Custom Application. Computed by API if not specified.
      */
     replicas?: number;
@@ -280,6 +307,10 @@ export interface CustomApplicationFromEnvironmentResources {
 
 export interface CustomApplicationResources {
     /**
+     * Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `serviceWebRequestsOnRootPath`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
+     */
+    healthEndpointPath?: string;
+    /**
      * The number of replicas for the Custom Application. Computed by API if not specified.
      */
     replicas?: number;
@@ -295,6 +326,21 @@ export interface CustomApplicationResources {
      * Whether session affinity is enabled for the Custom Application. Computed by API if not specified.
      */
     sessionAffinity?: boolean;
+}
+
+export interface CustomJobRuntimeParameter {
+    /**
+     * The name of the runtime parameter.
+     */
+    key: string;
+    /**
+     * The type of the runtime parameter.
+     */
+    type: string;
+    /**
+     * The value of the runtime parameter (type conversion is handled internally).
+     */
+    value: string;
 }
 
 export interface CustomJobRuntimeParameterValue {
@@ -584,6 +630,21 @@ export interface CustomModelOverallModerationConfiguration {
      * The timeout in seconds of the overall moderation configuration.
      */
     timeoutSec: number;
+}
+
+export interface CustomModelRuntimeParameter {
+    /**
+     * The name of the runtime parameter.
+     */
+    key: string;
+    /**
+     * The type of the runtime parameter.
+     */
+    type: string;
+    /**
+     * The value of the runtime parameter (type conversion is handled internally).
+     */
+    value: string;
 }
 
 export interface CustomModelRuntimeParameterValue {

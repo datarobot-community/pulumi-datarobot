@@ -45,6 +45,9 @@ from .registered_model import *
 from .registered_model_from_leaderboard import *
 from .remote_repository import *
 from .use_case import *
+from .user_mcp_prompt_metadata import *
+from .user_mcp_resource_metadata import *
+from .user_mcp_tool_metadata import *
 from .vector_database import *
 from ._inputs import *
 from . import outputs
@@ -345,6 +348,30 @@ _utilities.register(
   "fqn": "pulumi_datarobot",
   "classes": {
    "datarobot:index/useCase:UseCase": "UseCase"
+  }
+ },
+ {
+  "pkg": "datarobot",
+  "mod": "index/userMcpPromptMetadata",
+  "fqn": "pulumi_datarobot",
+  "classes": {
+   "datarobot:index/userMcpPromptMetadata:UserMcpPromptMetadata": "UserMcpPromptMetadata"
+  }
+ },
+ {
+  "pkg": "datarobot",
+  "mod": "index/userMcpResourceMetadata",
+  "fqn": "pulumi_datarobot",
+  "classes": {
+   "datarobot:index/userMcpResourceMetadata:UserMcpResourceMetadata": "UserMcpResourceMetadata"
+  }
+ },
+ {
+  "pkg": "datarobot",
+  "mod": "index/userMcpToolMetadata",
+  "fqn": "pulumi_datarobot",
+  "classes": {
+   "datarobot:index/userMcpToolMetadata:UserMcpToolMetadata": "UserMcpToolMetadata"
   }
  },
  {

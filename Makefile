@@ -10,11 +10,41 @@ VERSION_PATH     := ${PROVIDER_PATH}/pkg/version.Version
 
 TFGEN           := pulumi-tfgen-${PACK}
 PROVIDER        := pulumi-resource-${PACK}
-# Override version to avoid +dirty suffix during development
-# VERSION         := $(shell pulumictl get version | sed 's/+dirty//')
-# Use a specific version for development
-VERSION         := $(shell git describe --tags --exact-match 2>/dev/null || git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0-dev")
-VERSION_DOTNET  := $(shell echo $(VERSION) | sed 's/^v//')
+
+# Version computation:
+# - If on exact tag: use the tag (release build)
+# - Otherwise: compute next patch version with -dev suffix for development
+#
+# This ensures local dev builds are always "newer" than the last release
+# but "older" than the next release, following semver pre-release semantics.
+EXACT_TAG       := $(shell git describe --tags --exact-match 2>/dev/null)
+LATEST_TAG      := $(shell git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
+
+# Parse version components from latest tag (strips 'v' prefix)
+VERSION_MAJOR   := $(shell echo $(LATEST_TAG) | sed 's/^v//' | cut -d. -f1)
+VERSION_MINOR   := $(shell echo $(LATEST_TAG) | sed 's/^v//' | cut -d. -f2)
+VERSION_PATCH   := $(shell echo $(LATEST_TAG) | sed 's/^v//' | cut -d. -f3)
+NEXT_PATCH      := $(shell echo $$(($(VERSION_PATCH) + 1)))
+
+# VERSION: used for provider binary and general display
+# - If on exact tag: use the tag (release build)
+# - Otherwise: use next patch version (no suffix to avoid semver/PEP440 conversion issues)
+ifdef EXACT_TAG
+  VERSION       := $(EXACT_TAG)
+else
+  VERSION       := v$(VERSION_MAJOR).$(VERSION_MINOR).$(NEXT_PATCH)
+endif
+
+# SDK-specific versions (strip 'v' prefix)
+ifdef EXACT_TAG
+  VERSION_PYTHON  := $(shell echo $(EXACT_TAG) | sed 's/^v//')
+  VERSION_NODEJS  := $(shell echo $(EXACT_TAG) | sed 's/^v//')
+  VERSION_DOTNET  := $(shell echo $(EXACT_TAG) | sed 's/^v//')
+else
+  VERSION_PYTHON  := $(VERSION_MAJOR).$(VERSION_MINOR).$(NEXT_PATCH)
+  VERSION_NODEJS  := $(VERSION_MAJOR).$(VERSION_MINOR).$(NEXT_PATCH)
+  VERSION_DOTNET  := $(VERSION_MAJOR).$(VERSION_MINOR).$(NEXT_PATCH)
+endif
 
 TESTPARALLELISM := 4
 
@@ -78,7 +108,7 @@ build_nodejs:: install_plugins tfgen # build the node sdk
 	yarn install && \
 	yarn run tsc && \
 	cp ../../README.md ../../LICENSE package.json yarn.lock ./bin/ && \
-		sed -i.bak -e "s/\$${VERSION}/$(VERSION)/g" ./bin/package.json
+		sed -i.bak -e "s/\$${VERSION}/$(VERSION_NODEJS)/g" ./bin/package.json
 
 build_python:: install_plugins tfgen # build the python sdk
 	$(WORKING_DIR)/bin/$(TFGEN) python --overlays provider/overlays/python --out sdk/python/
@@ -90,7 +120,7 @@ build_python:: install_plugins tfgen # build the python sdk
 	cd sdk/python/ && \
 				python3 setup.py clean --all 2>/dev/null && \
 				rm -rf ./bin/ ../python.bin/ && cp -R . ../python.bin && mv ../python.bin ./bin && \
-				sed -i.bak -e 's/^VERSION = .*/VERSION = "$(VERSION)"/g' -e 's/^PLUGIN_VERSION = .*/PLUGIN_VERSION = "$(VERSION)"/g' ./bin/setup.py && \
+				sed -i.bak -e 's/^VERSION = .*/VERSION = "$(VERSION_PYTHON)"/g' -e 's/^PLUGIN_VERSION = .*/PLUGIN_VERSION = "$(VERSION)"/g' ./bin/setup.py && \
 				rm ./bin/setup.py.bak && \
 				if [[ "$$TEST_PYPI_MODE" == "1" ]]; then \
 					echo "Applying Test PyPI transformations..."; \
@@ -158,7 +188,7 @@ install_dotnet_sdk::
 	find . -name '*.nupkg' -print -exec cp -p {} ${WORKING_DIR}/nuget \;
 
 install_python_sdk::
-	pip3 install $(WORKING_DIR)/sdk/python
+	pip3 install $(WORKING_DIR)/sdk/python/bin
     # if the command fails, you may need to add --break-system-packages
     # in order to override pip's default behavior of preventing conflicts with system package managers.
 
@@ -221,7 +251,7 @@ build_sdks_windows:: # build SDKs using native binaries since Windows binaries w
 		templates/README.nodejs.md > sdk/nodejs/README.md && \
 	cd sdk/nodejs/ && yarn install && yarn run tsc && \
 	cp ../../README.md ../../LICENSE package.json yarn.lock ./bin/ && \
-	sed -i.bak -e "s/\$${VERSION}/$(VERSION)/g" ./bin/package.json || echo "Node.js SDK generation completed"
+	sed -i.bak -e "s/\$${VERSION}/$(VERSION_NODEJS)/g" ./bin/package.json || echo "Node.js SDK generation completed"
 	@# Python SDK
 	$(WORKING_DIR)/bin/$(TFGEN)-native python --overlays provider/overlays/python --out sdk/python/ && \
 	sed -e "s/{{VERSION}}/$(VERSION)/g" \
@@ -230,7 +260,7 @@ build_sdks_windows:: # build SDKs using native binaries since Windows binaries w
 		templates/README.python.md > sdk/python/README.md && \
 	cd sdk/python/ && python3 setup.py clean --all 2>/dev/null && \
 	rm -rf ./bin/ ../python.bin/ && cp -R . ../python.bin && mv ../python.bin ./bin && \
-	sed -i.bak -e 's/^VERSION = .*/VERSION = "$(VERSION)"/g' -e 's/^PLUGIN_VERSION = .*/PLUGIN_VERSION = "$(VERSION)"/g' ./bin/setup.py && \
+	sed -i.bak -e 's/^VERSION = .*/VERSION = "$(VERSION_PYTHON)"/g' -e 's/^PLUGIN_VERSION = .*/PLUGIN_VERSION = "$(VERSION)"/g' ./bin/setup.py && \
 	rm ./bin/setup.py.bak && cd ./bin && python3 setup.py build sdist || echo "Python SDK generation completed"
 	@# Go SDK
 	$(WORKING_DIR)/bin/$(TFGEN)-native go --overlays provider/overlays/go --out sdk/go/ && \
@@ -300,4 +330,3 @@ build_local_provider:: # Build local binaries using local terraform provider for
 	@echo "Binaries available in bin/:"
 	@echo "  - $(WORKING_DIR)/bin/${TFGEN}"
 	@echo "  - $(WORKING_DIR)/bin/${PROVIDER}"
-

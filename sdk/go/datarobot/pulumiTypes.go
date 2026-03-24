@@ -14,6 +14,8 @@ import (
 var _ = internal.GetEnvOrDefault
 
 type ApplicationSourceFromTemplateResources struct {
+	// Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `serviceWebRequestsOnRootPath`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
+	HealthEndpointPath *string `pulumi:"healthEndpointPath"`
 	// The number of replicas for the Application Source. Computed by API if not specified.
 	Replicas *int `pulumi:"replicas"`
 	// The resource label for the Application Source (e.g., 'cpu.small', 'cpu.medium'). Computed by API if not specified.
@@ -36,6 +38,8 @@ type ApplicationSourceFromTemplateResourcesInput interface {
 }
 
 type ApplicationSourceFromTemplateResourcesArgs struct {
+	// Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `serviceWebRequestsOnRootPath`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
+	HealthEndpointPath pulumi.StringPtrInput `pulumi:"healthEndpointPath"`
 	// The number of replicas for the Application Source. Computed by API if not specified.
 	Replicas pulumi.IntPtrInput `pulumi:"replicas"`
 	// The resource label for the Application Source (e.g., 'cpu.small', 'cpu.medium'). Computed by API if not specified.
@@ -123,6 +127,11 @@ func (o ApplicationSourceFromTemplateResourcesOutput) ToApplicationSourceFromTem
 	}).(ApplicationSourceFromTemplateResourcesPtrOutput)
 }
 
+// Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `serviceWebRequestsOnRootPath`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
+func (o ApplicationSourceFromTemplateResourcesOutput) HealthEndpointPath() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ApplicationSourceFromTemplateResources) *string { return v.HealthEndpointPath }).(pulumi.StringPtrOutput)
+}
+
 // The number of replicas for the Application Source. Computed by API if not specified.
 func (o ApplicationSourceFromTemplateResourcesOutput) Replicas() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ApplicationSourceFromTemplateResources) *int { return v.Replicas }).(pulumi.IntPtrOutput)
@@ -165,6 +174,16 @@ func (o ApplicationSourceFromTemplateResourcesPtrOutput) Elem() ApplicationSourc
 		var ret ApplicationSourceFromTemplateResources
 		return ret
 	}).(ApplicationSourceFromTemplateResourcesOutput)
+}
+
+// Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `serviceWebRequestsOnRootPath`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
+func (o ApplicationSourceFromTemplateResourcesPtrOutput) HealthEndpointPath() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ApplicationSourceFromTemplateResources) *string {
+		if v == nil {
+			return nil
+		}
+		return v.HealthEndpointPath
+	}).(pulumi.StringPtrOutput)
 }
 
 // The number of replicas for the Application Source. Computed by API if not specified.
@@ -323,6 +342,8 @@ func (o ApplicationSourceFromTemplateRuntimeParameterValueArrayOutput) Index(i p
 }
 
 type ApplicationSourceResources struct {
+	// Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `serviceWebRequestsOnRootPath`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
+	HealthEndpointPath *string `pulumi:"healthEndpointPath"`
 	// The number of replicas for the Application Source. Computed by API if not specified.
 	Replicas *int `pulumi:"replicas"`
 	// The resource label for the Application Source (e.g., 'cpu.small', 'cpu.medium'). Computed by API if not specified.
@@ -345,6 +366,8 @@ type ApplicationSourceResourcesInput interface {
 }
 
 type ApplicationSourceResourcesArgs struct {
+	// Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `serviceWebRequestsOnRootPath`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
+	HealthEndpointPath pulumi.StringPtrInput `pulumi:"healthEndpointPath"`
 	// The number of replicas for the Application Source. Computed by API if not specified.
 	Replicas pulumi.IntPtrInput `pulumi:"replicas"`
 	// The resource label for the Application Source (e.g., 'cpu.small', 'cpu.medium'). Computed by API if not specified.
@@ -432,6 +455,11 @@ func (o ApplicationSourceResourcesOutput) ToApplicationSourceResourcesPtrOutputW
 	}).(ApplicationSourceResourcesPtrOutput)
 }
 
+// Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `serviceWebRequestsOnRootPath`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
+func (o ApplicationSourceResourcesOutput) HealthEndpointPath() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ApplicationSourceResources) *string { return v.HealthEndpointPath }).(pulumi.StringPtrOutput)
+}
+
 // The number of replicas for the Application Source. Computed by API if not specified.
 func (o ApplicationSourceResourcesOutput) Replicas() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ApplicationSourceResources) *int { return v.Replicas }).(pulumi.IntPtrOutput)
@@ -476,6 +504,16 @@ func (o ApplicationSourceResourcesPtrOutput) Elem() ApplicationSourceResourcesOu
 	}).(ApplicationSourceResourcesOutput)
 }
 
+// Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `serviceWebRequestsOnRootPath`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
+func (o ApplicationSourceResourcesPtrOutput) HealthEndpointPath() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ApplicationSourceResources) *string {
+		if v == nil {
+			return nil
+		}
+		return v.HealthEndpointPath
+	}).(pulumi.StringPtrOutput)
+}
+
 // The number of replicas for the Application Source. Computed by API if not specified.
 func (o ApplicationSourceResourcesPtrOutput) Replicas() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ApplicationSourceResources) *int {
@@ -514,6 +552,121 @@ func (o ApplicationSourceResourcesPtrOutput) SessionAffinity() pulumi.BoolPtrOut
 		}
 		return v.SessionAffinity
 	}).(pulumi.BoolPtrOutput)
+}
+
+type ApplicationSourceRuntimeParameter struct {
+	// The name of the runtime parameter.
+	Key string `pulumi:"key"`
+	// The type of the runtime parameter.
+	Type string `pulumi:"type"`
+	// The value of the runtime parameter (type conversion is handled internally).
+	Value string `pulumi:"value"`
+}
+
+// ApplicationSourceRuntimeParameterInput is an input type that accepts ApplicationSourceRuntimeParameterArgs and ApplicationSourceRuntimeParameterOutput values.
+// You can construct a concrete instance of `ApplicationSourceRuntimeParameterInput` via:
+//
+//	ApplicationSourceRuntimeParameterArgs{...}
+type ApplicationSourceRuntimeParameterInput interface {
+	pulumi.Input
+
+	ToApplicationSourceRuntimeParameterOutput() ApplicationSourceRuntimeParameterOutput
+	ToApplicationSourceRuntimeParameterOutputWithContext(context.Context) ApplicationSourceRuntimeParameterOutput
+}
+
+type ApplicationSourceRuntimeParameterArgs struct {
+	// The name of the runtime parameter.
+	Key pulumi.StringInput `pulumi:"key"`
+	// The type of the runtime parameter.
+	Type pulumi.StringInput `pulumi:"type"`
+	// The value of the runtime parameter (type conversion is handled internally).
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (ApplicationSourceRuntimeParameterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ApplicationSourceRuntimeParameter)(nil)).Elem()
+}
+
+func (i ApplicationSourceRuntimeParameterArgs) ToApplicationSourceRuntimeParameterOutput() ApplicationSourceRuntimeParameterOutput {
+	return i.ToApplicationSourceRuntimeParameterOutputWithContext(context.Background())
+}
+
+func (i ApplicationSourceRuntimeParameterArgs) ToApplicationSourceRuntimeParameterOutputWithContext(ctx context.Context) ApplicationSourceRuntimeParameterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ApplicationSourceRuntimeParameterOutput)
+}
+
+// ApplicationSourceRuntimeParameterArrayInput is an input type that accepts ApplicationSourceRuntimeParameterArray and ApplicationSourceRuntimeParameterArrayOutput values.
+// You can construct a concrete instance of `ApplicationSourceRuntimeParameterArrayInput` via:
+//
+//	ApplicationSourceRuntimeParameterArray{ ApplicationSourceRuntimeParameterArgs{...} }
+type ApplicationSourceRuntimeParameterArrayInput interface {
+	pulumi.Input
+
+	ToApplicationSourceRuntimeParameterArrayOutput() ApplicationSourceRuntimeParameterArrayOutput
+	ToApplicationSourceRuntimeParameterArrayOutputWithContext(context.Context) ApplicationSourceRuntimeParameterArrayOutput
+}
+
+type ApplicationSourceRuntimeParameterArray []ApplicationSourceRuntimeParameterInput
+
+func (ApplicationSourceRuntimeParameterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ApplicationSourceRuntimeParameter)(nil)).Elem()
+}
+
+func (i ApplicationSourceRuntimeParameterArray) ToApplicationSourceRuntimeParameterArrayOutput() ApplicationSourceRuntimeParameterArrayOutput {
+	return i.ToApplicationSourceRuntimeParameterArrayOutputWithContext(context.Background())
+}
+
+func (i ApplicationSourceRuntimeParameterArray) ToApplicationSourceRuntimeParameterArrayOutputWithContext(ctx context.Context) ApplicationSourceRuntimeParameterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ApplicationSourceRuntimeParameterArrayOutput)
+}
+
+type ApplicationSourceRuntimeParameterOutput struct{ *pulumi.OutputState }
+
+func (ApplicationSourceRuntimeParameterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ApplicationSourceRuntimeParameter)(nil)).Elem()
+}
+
+func (o ApplicationSourceRuntimeParameterOutput) ToApplicationSourceRuntimeParameterOutput() ApplicationSourceRuntimeParameterOutput {
+	return o
+}
+
+func (o ApplicationSourceRuntimeParameterOutput) ToApplicationSourceRuntimeParameterOutputWithContext(ctx context.Context) ApplicationSourceRuntimeParameterOutput {
+	return o
+}
+
+// The name of the runtime parameter.
+func (o ApplicationSourceRuntimeParameterOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v ApplicationSourceRuntimeParameter) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// The type of the runtime parameter.
+func (o ApplicationSourceRuntimeParameterOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v ApplicationSourceRuntimeParameter) string { return v.Type }).(pulumi.StringOutput)
+}
+
+// The value of the runtime parameter (type conversion is handled internally).
+func (o ApplicationSourceRuntimeParameterOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v ApplicationSourceRuntimeParameter) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type ApplicationSourceRuntimeParameterArrayOutput struct{ *pulumi.OutputState }
+
+func (ApplicationSourceRuntimeParameterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ApplicationSourceRuntimeParameter)(nil)).Elem()
+}
+
+func (o ApplicationSourceRuntimeParameterArrayOutput) ToApplicationSourceRuntimeParameterArrayOutput() ApplicationSourceRuntimeParameterArrayOutput {
+	return o
+}
+
+func (o ApplicationSourceRuntimeParameterArrayOutput) ToApplicationSourceRuntimeParameterArrayOutputWithContext(ctx context.Context) ApplicationSourceRuntimeParameterArrayOutput {
+	return o
+}
+
+func (o ApplicationSourceRuntimeParameterArrayOutput) Index(i pulumi.IntInput) ApplicationSourceRuntimeParameterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ApplicationSourceRuntimeParameter {
+		return vs[0].([]ApplicationSourceRuntimeParameter)[vs[1].(int)]
+	}).(ApplicationSourceRuntimeParameterOutput)
 }
 
 type ApplicationSourceRuntimeParameterValue struct {
@@ -2140,6 +2293,8 @@ func (o BatchPredictionJobDefinitionTimeseriesSettingsPtrOutput) Type() pulumi.S
 }
 
 type CustomApplicationFromEnvironmentResources struct {
+	// Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `serviceWebRequestsOnRootPath`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
+	HealthEndpointPath *string `pulumi:"healthEndpointPath"`
 	// The number of replicas for the Custom Application. Computed by API if not specified.
 	Replicas *int `pulumi:"replicas"`
 	// The resource label for the Custom Application (e.g., 'cpu.small', 'cpu.medium'). Computed by API if not specified.
@@ -2162,6 +2317,8 @@ type CustomApplicationFromEnvironmentResourcesInput interface {
 }
 
 type CustomApplicationFromEnvironmentResourcesArgs struct {
+	// Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `serviceWebRequestsOnRootPath`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
+	HealthEndpointPath pulumi.StringPtrInput `pulumi:"healthEndpointPath"`
 	// The number of replicas for the Custom Application. Computed by API if not specified.
 	Replicas pulumi.IntPtrInput `pulumi:"replicas"`
 	// The resource label for the Custom Application (e.g., 'cpu.small', 'cpu.medium'). Computed by API if not specified.
@@ -2249,6 +2406,11 @@ func (o CustomApplicationFromEnvironmentResourcesOutput) ToCustomApplicationFrom
 	}).(CustomApplicationFromEnvironmentResourcesPtrOutput)
 }
 
+// Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `serviceWebRequestsOnRootPath`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
+func (o CustomApplicationFromEnvironmentResourcesOutput) HealthEndpointPath() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CustomApplicationFromEnvironmentResources) *string { return v.HealthEndpointPath }).(pulumi.StringPtrOutput)
+}
+
 // The number of replicas for the Custom Application. Computed by API if not specified.
 func (o CustomApplicationFromEnvironmentResourcesOutput) Replicas() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v CustomApplicationFromEnvironmentResources) *int { return v.Replicas }).(pulumi.IntPtrOutput)
@@ -2293,6 +2455,16 @@ func (o CustomApplicationFromEnvironmentResourcesPtrOutput) Elem() CustomApplica
 	}).(CustomApplicationFromEnvironmentResourcesOutput)
 }
 
+// Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `serviceWebRequestsOnRootPath`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
+func (o CustomApplicationFromEnvironmentResourcesPtrOutput) HealthEndpointPath() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CustomApplicationFromEnvironmentResources) *string {
+		if v == nil {
+			return nil
+		}
+		return v.HealthEndpointPath
+	}).(pulumi.StringPtrOutput)
+}
+
 // The number of replicas for the Custom Application. Computed by API if not specified.
 func (o CustomApplicationFromEnvironmentResourcesPtrOutput) Replicas() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *CustomApplicationFromEnvironmentResources) *int {
@@ -2334,6 +2506,8 @@ func (o CustomApplicationFromEnvironmentResourcesPtrOutput) SessionAffinity() pu
 }
 
 type CustomApplicationResources struct {
+	// Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `serviceWebRequestsOnRootPath`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
+	HealthEndpointPath *string `pulumi:"healthEndpointPath"`
 	// The number of replicas for the Custom Application. Computed by API if not specified.
 	Replicas *int `pulumi:"replicas"`
 	// The resource label for the Custom Application (e.g., 'cpu.small', 'cpu.medium'). Computed by API if not specified.
@@ -2356,6 +2530,8 @@ type CustomApplicationResourcesInput interface {
 }
 
 type CustomApplicationResourcesArgs struct {
+	// Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `serviceWebRequestsOnRootPath`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
+	HealthEndpointPath pulumi.StringPtrInput `pulumi:"healthEndpointPath"`
 	// The number of replicas for the Custom Application. Computed by API if not specified.
 	Replicas pulumi.IntPtrInput `pulumi:"replicas"`
 	// The resource label for the Custom Application (e.g., 'cpu.small', 'cpu.medium'). Computed by API if not specified.
@@ -2443,6 +2619,11 @@ func (o CustomApplicationResourcesOutput) ToCustomApplicationResourcesPtrOutputW
 	}).(CustomApplicationResourcesPtrOutput)
 }
 
+// Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `serviceWebRequestsOnRootPath`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
+func (o CustomApplicationResourcesOutput) HealthEndpointPath() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CustomApplicationResources) *string { return v.HealthEndpointPath }).(pulumi.StringPtrOutput)
+}
+
 // The number of replicas for the Custom Application. Computed by API if not specified.
 func (o CustomApplicationResourcesOutput) Replicas() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v CustomApplicationResources) *int { return v.Replicas }).(pulumi.IntPtrOutput)
@@ -2487,6 +2668,16 @@ func (o CustomApplicationResourcesPtrOutput) Elem() CustomApplicationResourcesOu
 	}).(CustomApplicationResourcesOutput)
 }
 
+// Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `serviceWebRequestsOnRootPath`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.
+func (o CustomApplicationResourcesPtrOutput) HealthEndpointPath() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CustomApplicationResources) *string {
+		if v == nil {
+			return nil
+		}
+		return v.HealthEndpointPath
+	}).(pulumi.StringPtrOutput)
+}
+
 // The number of replicas for the Custom Application. Computed by API if not specified.
 func (o CustomApplicationResourcesPtrOutput) Replicas() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *CustomApplicationResources) *int {
@@ -2525,6 +2716,121 @@ func (o CustomApplicationResourcesPtrOutput) SessionAffinity() pulumi.BoolPtrOut
 		}
 		return v.SessionAffinity
 	}).(pulumi.BoolPtrOutput)
+}
+
+type CustomJobRuntimeParameter struct {
+	// The name of the runtime parameter.
+	Key string `pulumi:"key"`
+	// The type of the runtime parameter.
+	Type string `pulumi:"type"`
+	// The value of the runtime parameter (type conversion is handled internally).
+	Value string `pulumi:"value"`
+}
+
+// CustomJobRuntimeParameterInput is an input type that accepts CustomJobRuntimeParameterArgs and CustomJobRuntimeParameterOutput values.
+// You can construct a concrete instance of `CustomJobRuntimeParameterInput` via:
+//
+//	CustomJobRuntimeParameterArgs{...}
+type CustomJobRuntimeParameterInput interface {
+	pulumi.Input
+
+	ToCustomJobRuntimeParameterOutput() CustomJobRuntimeParameterOutput
+	ToCustomJobRuntimeParameterOutputWithContext(context.Context) CustomJobRuntimeParameterOutput
+}
+
+type CustomJobRuntimeParameterArgs struct {
+	// The name of the runtime parameter.
+	Key pulumi.StringInput `pulumi:"key"`
+	// The type of the runtime parameter.
+	Type pulumi.StringInput `pulumi:"type"`
+	// The value of the runtime parameter (type conversion is handled internally).
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (CustomJobRuntimeParameterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomJobRuntimeParameter)(nil)).Elem()
+}
+
+func (i CustomJobRuntimeParameterArgs) ToCustomJobRuntimeParameterOutput() CustomJobRuntimeParameterOutput {
+	return i.ToCustomJobRuntimeParameterOutputWithContext(context.Background())
+}
+
+func (i CustomJobRuntimeParameterArgs) ToCustomJobRuntimeParameterOutputWithContext(ctx context.Context) CustomJobRuntimeParameterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomJobRuntimeParameterOutput)
+}
+
+// CustomJobRuntimeParameterArrayInput is an input type that accepts CustomJobRuntimeParameterArray and CustomJobRuntimeParameterArrayOutput values.
+// You can construct a concrete instance of `CustomJobRuntimeParameterArrayInput` via:
+//
+//	CustomJobRuntimeParameterArray{ CustomJobRuntimeParameterArgs{...} }
+type CustomJobRuntimeParameterArrayInput interface {
+	pulumi.Input
+
+	ToCustomJobRuntimeParameterArrayOutput() CustomJobRuntimeParameterArrayOutput
+	ToCustomJobRuntimeParameterArrayOutputWithContext(context.Context) CustomJobRuntimeParameterArrayOutput
+}
+
+type CustomJobRuntimeParameterArray []CustomJobRuntimeParameterInput
+
+func (CustomJobRuntimeParameterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CustomJobRuntimeParameter)(nil)).Elem()
+}
+
+func (i CustomJobRuntimeParameterArray) ToCustomJobRuntimeParameterArrayOutput() CustomJobRuntimeParameterArrayOutput {
+	return i.ToCustomJobRuntimeParameterArrayOutputWithContext(context.Background())
+}
+
+func (i CustomJobRuntimeParameterArray) ToCustomJobRuntimeParameterArrayOutputWithContext(ctx context.Context) CustomJobRuntimeParameterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomJobRuntimeParameterArrayOutput)
+}
+
+type CustomJobRuntimeParameterOutput struct{ *pulumi.OutputState }
+
+func (CustomJobRuntimeParameterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomJobRuntimeParameter)(nil)).Elem()
+}
+
+func (o CustomJobRuntimeParameterOutput) ToCustomJobRuntimeParameterOutput() CustomJobRuntimeParameterOutput {
+	return o
+}
+
+func (o CustomJobRuntimeParameterOutput) ToCustomJobRuntimeParameterOutputWithContext(ctx context.Context) CustomJobRuntimeParameterOutput {
+	return o
+}
+
+// The name of the runtime parameter.
+func (o CustomJobRuntimeParameterOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v CustomJobRuntimeParameter) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// The type of the runtime parameter.
+func (o CustomJobRuntimeParameterOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v CustomJobRuntimeParameter) string { return v.Type }).(pulumi.StringOutput)
+}
+
+// The value of the runtime parameter (type conversion is handled internally).
+func (o CustomJobRuntimeParameterOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v CustomJobRuntimeParameter) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type CustomJobRuntimeParameterArrayOutput struct{ *pulumi.OutputState }
+
+func (CustomJobRuntimeParameterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CustomJobRuntimeParameter)(nil)).Elem()
+}
+
+func (o CustomJobRuntimeParameterArrayOutput) ToCustomJobRuntimeParameterArrayOutput() CustomJobRuntimeParameterArrayOutput {
+	return o
+}
+
+func (o CustomJobRuntimeParameterArrayOutput) ToCustomJobRuntimeParameterArrayOutputWithContext(ctx context.Context) CustomJobRuntimeParameterArrayOutput {
+	return o
+}
+
+func (o CustomJobRuntimeParameterArrayOutput) Index(i pulumi.IntInput) CustomJobRuntimeParameterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CustomJobRuntimeParameter {
+		return vs[0].([]CustomJobRuntimeParameter)[vs[1].(int)]
+	}).(CustomJobRuntimeParameterOutput)
 }
 
 type CustomJobRuntimeParameterValue struct {
@@ -5428,6 +5734,121 @@ func (o CustomModelOverallModerationConfigurationPtrOutput) TimeoutSec() pulumi.
 		}
 		return v.TimeoutSec
 	}).(pulumi.IntPtrOutput)
+}
+
+type CustomModelRuntimeParameter struct {
+	// The name of the runtime parameter.
+	Key string `pulumi:"key"`
+	// The type of the runtime parameter.
+	Type string `pulumi:"type"`
+	// The value of the runtime parameter (type conversion is handled internally).
+	Value string `pulumi:"value"`
+}
+
+// CustomModelRuntimeParameterInput is an input type that accepts CustomModelRuntimeParameterArgs and CustomModelRuntimeParameterOutput values.
+// You can construct a concrete instance of `CustomModelRuntimeParameterInput` via:
+//
+//	CustomModelRuntimeParameterArgs{...}
+type CustomModelRuntimeParameterInput interface {
+	pulumi.Input
+
+	ToCustomModelRuntimeParameterOutput() CustomModelRuntimeParameterOutput
+	ToCustomModelRuntimeParameterOutputWithContext(context.Context) CustomModelRuntimeParameterOutput
+}
+
+type CustomModelRuntimeParameterArgs struct {
+	// The name of the runtime parameter.
+	Key pulumi.StringInput `pulumi:"key"`
+	// The type of the runtime parameter.
+	Type pulumi.StringInput `pulumi:"type"`
+	// The value of the runtime parameter (type conversion is handled internally).
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (CustomModelRuntimeParameterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomModelRuntimeParameter)(nil)).Elem()
+}
+
+func (i CustomModelRuntimeParameterArgs) ToCustomModelRuntimeParameterOutput() CustomModelRuntimeParameterOutput {
+	return i.ToCustomModelRuntimeParameterOutputWithContext(context.Background())
+}
+
+func (i CustomModelRuntimeParameterArgs) ToCustomModelRuntimeParameterOutputWithContext(ctx context.Context) CustomModelRuntimeParameterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomModelRuntimeParameterOutput)
+}
+
+// CustomModelRuntimeParameterArrayInput is an input type that accepts CustomModelRuntimeParameterArray and CustomModelRuntimeParameterArrayOutput values.
+// You can construct a concrete instance of `CustomModelRuntimeParameterArrayInput` via:
+//
+//	CustomModelRuntimeParameterArray{ CustomModelRuntimeParameterArgs{...} }
+type CustomModelRuntimeParameterArrayInput interface {
+	pulumi.Input
+
+	ToCustomModelRuntimeParameterArrayOutput() CustomModelRuntimeParameterArrayOutput
+	ToCustomModelRuntimeParameterArrayOutputWithContext(context.Context) CustomModelRuntimeParameterArrayOutput
+}
+
+type CustomModelRuntimeParameterArray []CustomModelRuntimeParameterInput
+
+func (CustomModelRuntimeParameterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CustomModelRuntimeParameter)(nil)).Elem()
+}
+
+func (i CustomModelRuntimeParameterArray) ToCustomModelRuntimeParameterArrayOutput() CustomModelRuntimeParameterArrayOutput {
+	return i.ToCustomModelRuntimeParameterArrayOutputWithContext(context.Background())
+}
+
+func (i CustomModelRuntimeParameterArray) ToCustomModelRuntimeParameterArrayOutputWithContext(ctx context.Context) CustomModelRuntimeParameterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CustomModelRuntimeParameterArrayOutput)
+}
+
+type CustomModelRuntimeParameterOutput struct{ *pulumi.OutputState }
+
+func (CustomModelRuntimeParameterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CustomModelRuntimeParameter)(nil)).Elem()
+}
+
+func (o CustomModelRuntimeParameterOutput) ToCustomModelRuntimeParameterOutput() CustomModelRuntimeParameterOutput {
+	return o
+}
+
+func (o CustomModelRuntimeParameterOutput) ToCustomModelRuntimeParameterOutputWithContext(ctx context.Context) CustomModelRuntimeParameterOutput {
+	return o
+}
+
+// The name of the runtime parameter.
+func (o CustomModelRuntimeParameterOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v CustomModelRuntimeParameter) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// The type of the runtime parameter.
+func (o CustomModelRuntimeParameterOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v CustomModelRuntimeParameter) string { return v.Type }).(pulumi.StringOutput)
+}
+
+// The value of the runtime parameter (type conversion is handled internally).
+func (o CustomModelRuntimeParameterOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v CustomModelRuntimeParameter) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type CustomModelRuntimeParameterArrayOutput struct{ *pulumi.OutputState }
+
+func (CustomModelRuntimeParameterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CustomModelRuntimeParameter)(nil)).Elem()
+}
+
+func (o CustomModelRuntimeParameterArrayOutput) ToCustomModelRuntimeParameterArrayOutput() CustomModelRuntimeParameterArrayOutput {
+	return o
+}
+
+func (o CustomModelRuntimeParameterArrayOutput) ToCustomModelRuntimeParameterArrayOutputWithContext(ctx context.Context) CustomModelRuntimeParameterArrayOutput {
+	return o
+}
+
+func (o CustomModelRuntimeParameterArrayOutput) Index(i pulumi.IntInput) CustomModelRuntimeParameterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CustomModelRuntimeParameter {
+		return vs[0].([]CustomModelRuntimeParameter)[vs[1].(int)]
+	}).(CustomModelRuntimeParameterOutput)
 }
 
 type CustomModelRuntimeParameterValue struct {
@@ -12926,6 +13347,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ApplicationSourceFromTemplateRuntimeParameterValueArrayInput)(nil)).Elem(), ApplicationSourceFromTemplateRuntimeParameterValueArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ApplicationSourceResourcesInput)(nil)).Elem(), ApplicationSourceResourcesArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ApplicationSourceResourcesPtrInput)(nil)).Elem(), ApplicationSourceResourcesArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ApplicationSourceRuntimeParameterInput)(nil)).Elem(), ApplicationSourceRuntimeParameterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ApplicationSourceRuntimeParameterArrayInput)(nil)).Elem(), ApplicationSourceRuntimeParameterArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ApplicationSourceRuntimeParameterValueInput)(nil)).Elem(), ApplicationSourceRuntimeParameterValueArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ApplicationSourceRuntimeParameterValueArrayInput)(nil)).Elem(), ApplicationSourceRuntimeParameterValueArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BatchPredictionJobDefinitionCsvSettingsInput)(nil)).Elem(), BatchPredictionJobDefinitionCsvSettingsArgs{})
@@ -12944,6 +13367,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomApplicationFromEnvironmentResourcesPtrInput)(nil)).Elem(), CustomApplicationFromEnvironmentResourcesArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomApplicationResourcesInput)(nil)).Elem(), CustomApplicationResourcesArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomApplicationResourcesPtrInput)(nil)).Elem(), CustomApplicationResourcesArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomJobRuntimeParameterInput)(nil)).Elem(), CustomJobRuntimeParameterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomJobRuntimeParameterArrayInput)(nil)).Elem(), CustomJobRuntimeParameterArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomJobRuntimeParameterValueInput)(nil)).Elem(), CustomJobRuntimeParameterValueArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomJobRuntimeParameterValueArrayInput)(nil)).Elem(), CustomJobRuntimeParameterValueArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomJobScheduleInput)(nil)).Elem(), CustomJobScheduleArgs{})
@@ -12981,6 +13406,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelGuardConfigurationNemoInfoPtrInput)(nil)).Elem(), CustomModelGuardConfigurationNemoInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelOverallModerationConfigurationInput)(nil)).Elem(), CustomModelOverallModerationConfigurationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelOverallModerationConfigurationPtrInput)(nil)).Elem(), CustomModelOverallModerationConfigurationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelRuntimeParameterInput)(nil)).Elem(), CustomModelRuntimeParameterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelRuntimeParameterArrayInput)(nil)).Elem(), CustomModelRuntimeParameterArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelRuntimeParameterValueInput)(nil)).Elem(), CustomModelRuntimeParameterValueArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelRuntimeParameterValueArrayInput)(nil)).Elem(), CustomModelRuntimeParameterValueArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*CustomModelSourceRemoteRepositoryInput)(nil)).Elem(), CustomModelSourceRemoteRepositoryArgs{})
@@ -13075,6 +13502,8 @@ func init() {
 	pulumi.RegisterOutputType(ApplicationSourceFromTemplateRuntimeParameterValueArrayOutput{})
 	pulumi.RegisterOutputType(ApplicationSourceResourcesOutput{})
 	pulumi.RegisterOutputType(ApplicationSourceResourcesPtrOutput{})
+	pulumi.RegisterOutputType(ApplicationSourceRuntimeParameterOutput{})
+	pulumi.RegisterOutputType(ApplicationSourceRuntimeParameterArrayOutput{})
 	pulumi.RegisterOutputType(ApplicationSourceRuntimeParameterValueOutput{})
 	pulumi.RegisterOutputType(ApplicationSourceRuntimeParameterValueArrayOutput{})
 	pulumi.RegisterOutputType(BatchPredictionJobDefinitionCsvSettingsOutput{})
@@ -13093,6 +13522,8 @@ func init() {
 	pulumi.RegisterOutputType(CustomApplicationFromEnvironmentResourcesPtrOutput{})
 	pulumi.RegisterOutputType(CustomApplicationResourcesOutput{})
 	pulumi.RegisterOutputType(CustomApplicationResourcesPtrOutput{})
+	pulumi.RegisterOutputType(CustomJobRuntimeParameterOutput{})
+	pulumi.RegisterOutputType(CustomJobRuntimeParameterArrayOutput{})
 	pulumi.RegisterOutputType(CustomJobRuntimeParameterValueOutput{})
 	pulumi.RegisterOutputType(CustomJobRuntimeParameterValueArrayOutput{})
 	pulumi.RegisterOutputType(CustomJobScheduleOutput{})
@@ -13130,6 +13561,8 @@ func init() {
 	pulumi.RegisterOutputType(CustomModelGuardConfigurationNemoInfoPtrOutput{})
 	pulumi.RegisterOutputType(CustomModelOverallModerationConfigurationOutput{})
 	pulumi.RegisterOutputType(CustomModelOverallModerationConfigurationPtrOutput{})
+	pulumi.RegisterOutputType(CustomModelRuntimeParameterOutput{})
+	pulumi.RegisterOutputType(CustomModelRuntimeParameterArrayOutput{})
 	pulumi.RegisterOutputType(CustomModelRuntimeParameterValueOutput{})
 	pulumi.RegisterOutputType(CustomModelRuntimeParameterValueArrayOutput{})
 	pulumi.RegisterOutputType(CustomModelSourceRemoteRepositoryOutput{})

@@ -29,7 +29,8 @@ class ApplicationSourceArgs:
                  name: Optional[pulumi.Input[builtins.str]] = None,
                  required_key_scope_level: Optional[pulumi.Input[builtins.str]] = None,
                  resources: Optional[pulumi.Input['ApplicationSourceResourcesArgs']] = None,
-                 runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input['ApplicationSourceRuntimeParameterValueArgs']]]] = None):
+                 runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input['ApplicationSourceRuntimeParameterValueArgs']]]] = None,
+                 runtime_parameters: Optional[pulumi.Input[Sequence[pulumi.Input['ApplicationSourceRuntimeParameterArgs']]]] = None):
         """
         The set of arguments for constructing a ApplicationSource resource.
         :param pulumi.Input[builtins.str] base_environment_id: The ID of the base environment for the Application Source.
@@ -39,7 +40,7 @@ class ApplicationSourceArgs:
         :param pulumi.Input[builtins.str] name: The name of the Application Source.
         :param pulumi.Input[builtins.str] required_key_scope_level: The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.
         :param pulumi.Input['ApplicationSourceResourcesArgs'] resources: The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.
-        :param pulumi.Input[Sequence[pulumi.Input['ApplicationSourceRuntimeParameterValueArgs']]] runtime_parameter_values: The runtime parameter values for the Application Source.
+        :param pulumi.Input[Sequence[pulumi.Input['ApplicationSourceRuntimeParameterArgs']]] runtime_parameters: The runtime parameters for the Application Source version. Use instead of `runtime_parameter_values`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.
         """
         if base_environment_id is not None:
             pulumi.set(__self__, "base_environment_id", base_environment_id)
@@ -56,7 +57,12 @@ class ApplicationSourceArgs:
         if resources is not None:
             pulumi.set(__self__, "resources", resources)
         if runtime_parameter_values is not None:
+            warnings.warn("""The runtime parameter values for the Application Source. Deprecated: use `runtime_parameters` instead.""", DeprecationWarning)
+            pulumi.log.warn("""runtime_parameter_values is deprecated: The runtime parameter values for the Application Source. Deprecated: use `runtime_parameters` instead.""")
+        if runtime_parameter_values is not None:
             pulumi.set(__self__, "runtime_parameter_values", runtime_parameter_values)
+        if runtime_parameters is not None:
+            pulumi.set(__self__, "runtime_parameters", runtime_parameters)
 
     @property
     @pulumi.getter(name="baseEnvironmentId")
@@ -144,15 +150,25 @@ class ApplicationSourceArgs:
 
     @property
     @pulumi.getter(name="runtimeParameterValues")
+    @_utilities.deprecated("""The runtime parameter values for the Application Source. Deprecated: use `runtime_parameters` instead.""")
     def runtime_parameter_values(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ApplicationSourceRuntimeParameterValueArgs']]]]:
-        """
-        The runtime parameter values for the Application Source.
-        """
         return pulumi.get(self, "runtime_parameter_values")
 
     @runtime_parameter_values.setter
     def runtime_parameter_values(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ApplicationSourceRuntimeParameterValueArgs']]]]):
         pulumi.set(self, "runtime_parameter_values", value)
+
+    @property
+    @pulumi.getter(name="runtimeParameters")
+    def runtime_parameters(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ApplicationSourceRuntimeParameterArgs']]]]:
+        """
+        The runtime parameters for the Application Source version. Use instead of `runtime_parameter_values`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.
+        """
+        return pulumi.get(self, "runtime_parameters")
+
+    @runtime_parameters.setter
+    def runtime_parameters(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ApplicationSourceRuntimeParameterArgs']]]]):
+        pulumi.set(self, "runtime_parameters", value)
 
 
 @pulumi.input_type
@@ -168,6 +184,7 @@ class _ApplicationSourceState:
                  required_key_scope_level: Optional[pulumi.Input[builtins.str]] = None,
                  resources: Optional[pulumi.Input['ApplicationSourceResourcesArgs']] = None,
                  runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input['ApplicationSourceRuntimeParameterValueArgs']]]] = None,
+                 runtime_parameters: Optional[pulumi.Input[Sequence[pulumi.Input['ApplicationSourceRuntimeParameterArgs']]]] = None,
                  version_id: Optional[pulumi.Input[builtins.str]] = None):
         """
         Input properties used for looking up and filtering ApplicationSource resources.
@@ -180,7 +197,7 @@ class _ApplicationSourceState:
         :param pulumi.Input[builtins.str] name: The name of the Application Source.
         :param pulumi.Input[builtins.str] required_key_scope_level: The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.
         :param pulumi.Input['ApplicationSourceResourcesArgs'] resources: The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.
-        :param pulumi.Input[Sequence[pulumi.Input['ApplicationSourceRuntimeParameterValueArgs']]] runtime_parameter_values: The runtime parameter values for the Application Source.
+        :param pulumi.Input[Sequence[pulumi.Input['ApplicationSourceRuntimeParameterArgs']]] runtime_parameters: The runtime parameters for the Application Source version. Use instead of `runtime_parameter_values`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.
         :param pulumi.Input[builtins.str] version_id: The version ID of the Application Source.
         """
         if base_environment_id is not None:
@@ -202,7 +219,12 @@ class _ApplicationSourceState:
         if resources is not None:
             pulumi.set(__self__, "resources", resources)
         if runtime_parameter_values is not None:
+            warnings.warn("""The runtime parameter values for the Application Source. Deprecated: use `runtime_parameters` instead.""", DeprecationWarning)
+            pulumi.log.warn("""runtime_parameter_values is deprecated: The runtime parameter values for the Application Source. Deprecated: use `runtime_parameters` instead.""")
+        if runtime_parameter_values is not None:
             pulumi.set(__self__, "runtime_parameter_values", runtime_parameter_values)
+        if runtime_parameters is not None:
+            pulumi.set(__self__, "runtime_parameters", runtime_parameters)
         if version_id is not None:
             pulumi.set(__self__, "version_id", version_id)
 
@@ -316,15 +338,25 @@ class _ApplicationSourceState:
 
     @property
     @pulumi.getter(name="runtimeParameterValues")
+    @_utilities.deprecated("""The runtime parameter values for the Application Source. Deprecated: use `runtime_parameters` instead.""")
     def runtime_parameter_values(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ApplicationSourceRuntimeParameterValueArgs']]]]:
-        """
-        The runtime parameter values for the Application Source.
-        """
         return pulumi.get(self, "runtime_parameter_values")
 
     @runtime_parameter_values.setter
     def runtime_parameter_values(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ApplicationSourceRuntimeParameterValueArgs']]]]):
         pulumi.set(self, "runtime_parameter_values", value)
+
+    @property
+    @pulumi.getter(name="runtimeParameters")
+    def runtime_parameters(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ApplicationSourceRuntimeParameterArgs']]]]:
+        """
+        The runtime parameters for the Application Source version. Use instead of `runtime_parameter_values`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.
+        """
+        return pulumi.get(self, "runtime_parameters")
+
+    @runtime_parameters.setter
+    def runtime_parameters(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ApplicationSourceRuntimeParameterArgs']]]]):
+        pulumi.set(self, "runtime_parameters", value)
 
     @property
     @pulumi.getter(name="versionId")
@@ -352,6 +384,7 @@ class ApplicationSource(pulumi.CustomResource):
                  required_key_scope_level: Optional[pulumi.Input[builtins.str]] = None,
                  resources: Optional[pulumi.Input[Union['ApplicationSourceResourcesArgs', 'ApplicationSourceResourcesArgsDict']]] = None,
                  runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input[Union['ApplicationSourceRuntimeParameterValueArgs', 'ApplicationSourceRuntimeParameterValueArgsDict']]]]] = None,
+                 runtime_parameters: Optional[pulumi.Input[Sequence[pulumi.Input[Union['ApplicationSourceRuntimeParameterArgs', 'ApplicationSourceRuntimeParameterArgsDict']]]]] = None,
                  __props__=None):
         """
         Application Source
@@ -365,7 +398,7 @@ class ApplicationSource(pulumi.CustomResource):
         :param pulumi.Input[builtins.str] name: The name of the Application Source.
         :param pulumi.Input[builtins.str] required_key_scope_level: The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.
         :param pulumi.Input[Union['ApplicationSourceResourcesArgs', 'ApplicationSourceResourcesArgsDict']] resources: The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['ApplicationSourceRuntimeParameterValueArgs', 'ApplicationSourceRuntimeParameterValueArgsDict']]]] runtime_parameter_values: The runtime parameter values for the Application Source.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['ApplicationSourceRuntimeParameterArgs', 'ApplicationSourceRuntimeParameterArgsDict']]]] runtime_parameters: The runtime parameters for the Application Source version. Use instead of `runtime_parameter_values`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.
         """
         ...
     @overload
@@ -399,6 +432,7 @@ class ApplicationSource(pulumi.CustomResource):
                  required_key_scope_level: Optional[pulumi.Input[builtins.str]] = None,
                  resources: Optional[pulumi.Input[Union['ApplicationSourceResourcesArgs', 'ApplicationSourceResourcesArgsDict']]] = None,
                  runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input[Union['ApplicationSourceRuntimeParameterValueArgs', 'ApplicationSourceRuntimeParameterValueArgsDict']]]]] = None,
+                 runtime_parameters: Optional[pulumi.Input[Sequence[pulumi.Input[Union['ApplicationSourceRuntimeParameterArgs', 'ApplicationSourceRuntimeParameterArgsDict']]]]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -416,6 +450,7 @@ class ApplicationSource(pulumi.CustomResource):
             __props__.__dict__["required_key_scope_level"] = required_key_scope_level
             __props__.__dict__["resources"] = resources
             __props__.__dict__["runtime_parameter_values"] = runtime_parameter_values
+            __props__.__dict__["runtime_parameters"] = runtime_parameters
             __props__.__dict__["files_hashes"] = None
             __props__.__dict__["folder_path_hash"] = None
             __props__.__dict__["version_id"] = None
@@ -439,6 +474,7 @@ class ApplicationSource(pulumi.CustomResource):
             required_key_scope_level: Optional[pulumi.Input[builtins.str]] = None,
             resources: Optional[pulumi.Input[Union['ApplicationSourceResourcesArgs', 'ApplicationSourceResourcesArgsDict']]] = None,
             runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input[Union['ApplicationSourceRuntimeParameterValueArgs', 'ApplicationSourceRuntimeParameterValueArgsDict']]]]] = None,
+            runtime_parameters: Optional[pulumi.Input[Sequence[pulumi.Input[Union['ApplicationSourceRuntimeParameterArgs', 'ApplicationSourceRuntimeParameterArgsDict']]]]] = None,
             version_id: Optional[pulumi.Input[builtins.str]] = None) -> 'ApplicationSource':
         """
         Get an existing ApplicationSource resource's state with the given name, id, and optional extra
@@ -456,7 +492,7 @@ class ApplicationSource(pulumi.CustomResource):
         :param pulumi.Input[builtins.str] name: The name of the Application Source.
         :param pulumi.Input[builtins.str] required_key_scope_level: The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.
         :param pulumi.Input[Union['ApplicationSourceResourcesArgs', 'ApplicationSourceResourcesArgsDict']] resources: The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['ApplicationSourceRuntimeParameterValueArgs', 'ApplicationSourceRuntimeParameterValueArgsDict']]]] runtime_parameter_values: The runtime parameter values for the Application Source.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['ApplicationSourceRuntimeParameterArgs', 'ApplicationSourceRuntimeParameterArgsDict']]]] runtime_parameters: The runtime parameters for the Application Source version. Use instead of `runtime_parameter_values`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.
         :param pulumi.Input[builtins.str] version_id: The version ID of the Application Source.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -473,6 +509,7 @@ class ApplicationSource(pulumi.CustomResource):
         __props__.__dict__["required_key_scope_level"] = required_key_scope_level
         __props__.__dict__["resources"] = resources
         __props__.__dict__["runtime_parameter_values"] = runtime_parameter_values
+        __props__.__dict__["runtime_parameters"] = runtime_parameters
         __props__.__dict__["version_id"] = version_id
         return ApplicationSource(resource_name, opts=opts, __props__=__props__)
 
@@ -550,11 +587,17 @@ class ApplicationSource(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="runtimeParameterValues")
+    @_utilities.deprecated("""The runtime parameter values for the Application Source. Deprecated: use `runtime_parameters` instead.""")
     def runtime_parameter_values(self) -> pulumi.Output[Sequence['outputs.ApplicationSourceRuntimeParameterValue']]:
-        """
-        The runtime parameter values for the Application Source.
-        """
         return pulumi.get(self, "runtime_parameter_values")
+
+    @property
+    @pulumi.getter(name="runtimeParameters")
+    def runtime_parameters(self) -> pulumi.Output[Optional[Sequence['outputs.ApplicationSourceRuntimeParameter']]]:
+        """
+        The runtime parameters for the Application Source version. Use instead of `runtime_parameter_values`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.
+        """
+        return pulumi.get(self, "runtime_parameters")
 
     @property
     @pulumi.getter(name="versionId")

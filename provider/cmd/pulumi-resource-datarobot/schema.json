@@ -76,6 +76,10 @@
   "types": {
     "datarobot:index/ApplicationSourceFromTemplateResources:ApplicationSourceFromTemplateResources": {
       "properties": {
+        "healthEndpointPath": {
+          "type": "string",
+          "description": "Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `service_web_requests_on_root_path`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.\n"
+        },
         "replicas": {
           "type": "integer",
           "description": "The number of replicas for the Application Source. Computed by API if not specified.\n"
@@ -97,6 +101,7 @@
       "language": {
         "nodejs": {
           "requiredOutputs": [
+            "healthEndpointPath",
             "replicas",
             "resourceLabel",
             "serviceWebRequestsOnRootPath",
@@ -129,6 +134,10 @@
     },
     "datarobot:index/ApplicationSourceResources:ApplicationSourceResources": {
       "properties": {
+        "healthEndpointPath": {
+          "type": "string",
+          "description": "Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `service_web_requests_on_root_path`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.\n"
+        },
         "replicas": {
           "type": "integer",
           "description": "The number of replicas for the Application Source. Computed by API if not specified.\n"
@@ -150,6 +159,7 @@
       "language": {
         "nodejs": {
           "requiredOutputs": [
+            "healthEndpointPath",
             "replicas",
             "resourceLabel",
             "serviceWebRequestsOnRootPath",
@@ -157,6 +167,28 @@
           ]
         }
       }
+    },
+    "datarobot:index/ApplicationSourceRuntimeParameter:ApplicationSourceRuntimeParameter": {
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The name of the runtime parameter.\n"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the runtime parameter.\n"
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the runtime parameter (type conversion is handled internally).\n"
+        }
+      },
+      "type": "object",
+      "required": [
+        "key",
+        "type",
+        "value"
+      ]
     },
     "datarobot:index/ApplicationSourceRuntimeParameterValue:ApplicationSourceRuntimeParameterValue": {
       "properties": {
@@ -445,6 +477,10 @@
     },
     "datarobot:index/CustomApplicationFromEnvironmentResources:CustomApplicationFromEnvironmentResources": {
       "properties": {
+        "healthEndpointPath": {
+          "type": "string",
+          "description": "Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `service_web_requests_on_root_path`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.\n"
+        },
         "replicas": {
           "type": "integer",
           "description": "The number of replicas for the Custom Application. Computed by API if not specified.\n"
@@ -466,6 +502,10 @@
     },
     "datarobot:index/CustomApplicationResources:CustomApplicationResources": {
       "properties": {
+        "healthEndpointPath": {
+          "type": "string",
+          "description": "Path used by the Kubernetes liveness and readiness probes. When set, takes precedence over the path derived from `service_web_requests_on_root_path`. Use this to expose a dedicated health endpoint (e.g. `/healthz`) instead of probing the root path.\n"
+        },
         "replicas": {
           "type": "integer",
           "description": "The number of replicas for the Custom Application. Computed by API if not specified.\n"
@@ -484,6 +524,28 @@
         }
       },
       "type": "object"
+    },
+    "datarobot:index/CustomJobRuntimeParameter:CustomJobRuntimeParameter": {
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The name of the runtime parameter.\n"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the runtime parameter.\n"
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the runtime parameter (type conversion is handled internally).\n"
+        }
+      },
+      "type": "object",
+      "required": [
+        "key",
+        "type",
+        "value"
+      ]
     },
     "datarobot:index/CustomJobRuntimeParameterValue:CustomJobRuntimeParameterValue": {
       "properties": {
@@ -910,6 +972,28 @@
           ]
         }
       }
+    },
+    "datarobot:index/CustomModelRuntimeParameter:CustomModelRuntimeParameter": {
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The name of the runtime parameter.\n"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the runtime parameter.\n"
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the runtime parameter (type conversion is handled internally).\n"
+        }
+      },
+      "type": "object",
+      "required": [
+        "key",
+        "type",
+        "value"
+      ]
     },
     "datarobot:index/CustomModelRuntimeParameterValue:CustomModelRuntimeParameterValue": {
       "properties": {
@@ -2189,7 +2273,14 @@
           "items": {
             "$ref": "#/types/datarobot:index/ApplicationSourceRuntimeParameterValue:ApplicationSourceRuntimeParameterValue"
           },
-          "description": "The runtime parameter values for the Application Source.\n"
+          "deprecationMessage": "The runtime parameter values for the Application Source. Deprecated: use `runtime_parameters` instead."
+        },
+        "runtimeParameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/types/datarobot:index/ApplicationSourceRuntimeParameter:ApplicationSourceRuntimeParameter"
+          },
+          "description": "The runtime parameters for the Application Source version. Use instead of `runtime_parameter_values`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.\n"
         },
         "versionId": {
           "type": "string",
@@ -2241,7 +2332,14 @@
           "items": {
             "$ref": "#/types/datarobot:index/ApplicationSourceRuntimeParameterValue:ApplicationSourceRuntimeParameterValue"
           },
-          "description": "The runtime parameter values for the Application Source.\n"
+          "deprecationMessage": "The runtime parameter values for the Application Source. Deprecated: use `runtime_parameters` instead."
+        },
+        "runtimeParameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/types/datarobot:index/ApplicationSourceRuntimeParameter:ApplicationSourceRuntimeParameter"
+          },
+          "description": "The runtime parameters for the Application Source version. Use instead of `runtime_parameter_values`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.\n"
         }
       },
       "stateInputs": {
@@ -2291,7 +2389,14 @@
             "items": {
               "$ref": "#/types/datarobot:index/ApplicationSourceRuntimeParameterValue:ApplicationSourceRuntimeParameterValue"
             },
-            "description": "The runtime parameter values for the Application Source.\n"
+            "deprecationMessage": "The runtime parameter values for the Application Source. Deprecated: use `runtime_parameters` instead."
+          },
+          "runtimeParameters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/types/datarobot:index/ApplicationSourceRuntimeParameter:ApplicationSourceRuntimeParameter"
+            },
+            "description": "The runtime parameters for the Application Source version. Use instead of `runtime_parameter_values`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.\n"
           },
           "versionId": {
             "type": "string",
@@ -3079,7 +3184,7 @@
         },
         "requiredKeyScopeLevel": {
           "type": "string",
-          "description": "The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.\n"
+          "description": "The API key scope level required for requests to this custom application. Can be set to 'viewer', 'user', or 'admin'.\n"
         },
         "resources": {
           "$ref": "#/types/datarobot:index/CustomApplicationResources:CustomApplicationResources",
@@ -3106,7 +3211,6 @@
         "applicationUrl",
         "externalAccessEnabled",
         "name",
-        "requiredKeyScopeLevel",
         "resources",
         "sourceId",
         "sourceVersionId"
@@ -3133,7 +3237,7 @@
         },
         "requiredKeyScopeLevel": {
           "type": "string",
-          "description": "The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.\n"
+          "description": "The API key scope level required for requests to this custom application. Can be set to 'viewer', 'user', or 'admin'.\n"
         },
         "resources": {
           "$ref": "#/types/datarobot:index/CustomApplicationResources:CustomApplicationResources",
@@ -3182,7 +3286,7 @@
           },
           "requiredKeyScopeLevel": {
             "type": "string",
-            "description": "The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.\n"
+            "description": "The API key scope level required for requests to this custom application. Can be set to 'viewer', 'user', or 'admin'.\n"
           },
           "resources": {
             "$ref": "#/types/datarobot:index/CustomApplicationResources:CustomApplicationResources",
@@ -3405,7 +3509,14 @@
           "items": {
             "$ref": "#/types/datarobot:index/CustomJobRuntimeParameterValue:CustomJobRuntimeParameterValue"
           },
-          "description": "Additional parameters to be injected into a Job at runtime.\n"
+          "deprecationMessage": "Additional parameters to be injected into a Job at runtime. Deprecated: use `runtime_parameters` instead."
+        },
+        "runtimeParameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/types/datarobot:index/CustomJobRuntimeParameter:CustomJobRuntimeParameter"
+          },
+          "description": "The runtime parameters for the Custom Job. Use instead of `runtime_parameter_values`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.\n"
         },
         "schedule": {
           "$ref": "#/types/datarobot:index/CustomJobSchedule:CustomJobSchedule",
@@ -3469,7 +3580,14 @@
           "items": {
             "$ref": "#/types/datarobot:index/CustomJobRuntimeParameterValue:CustomJobRuntimeParameterValue"
           },
-          "description": "Additional parameters to be injected into a Job at runtime.\n"
+          "deprecationMessage": "Additional parameters to be injected into a Job at runtime. Deprecated: use `runtime_parameters` instead."
+        },
+        "runtimeParameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/types/datarobot:index/CustomJobRuntimeParameter:CustomJobRuntimeParameter"
+          },
+          "description": "The runtime parameters for the Custom Job. Use instead of `runtime_parameter_values`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.\n"
         },
         "schedule": {
           "$ref": "#/types/datarobot:index/CustomJobSchedule:CustomJobSchedule",
@@ -3535,7 +3653,14 @@
             "items": {
               "$ref": "#/types/datarobot:index/CustomJobRuntimeParameterValue:CustomJobRuntimeParameterValue"
             },
-            "description": "Additional parameters to be injected into a Job at runtime.\n"
+            "deprecationMessage": "Additional parameters to be injected into a Job at runtime. Deprecated: use `runtime_parameters` instead."
+          },
+          "runtimeParameters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/types/datarobot:index/CustomJobRuntimeParameter:CustomJobRuntimeParameter"
+            },
+            "description": "The runtime parameters for the Custom Job. Use instead of `runtime_parameter_values`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.\n"
           },
           "schedule": {
             "$ref": "#/types/datarobot:index/CustomJobSchedule:CustomJobSchedule",
@@ -4229,7 +4354,14 @@
           "items": {
             "$ref": "#/types/datarobot:index/CustomModelRuntimeParameterValue:CustomModelRuntimeParameterValue"
           },
-          "description": "The runtime parameter values for the Custom Model.\n"
+          "deprecationMessage": "The runtime parameter values for the Custom Model. Deprecated: use `runtime_parameters` instead."
+        },
+        "runtimeParameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/types/datarobot:index/CustomModelRuntimeParameter:CustomModelRuntimeParameter"
+          },
+          "description": "The runtime parameters for the Custom Model version. Use instead of `runtime_parameter_values`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.\n"
         },
         "sourceLlmBlueprintId": {
           "type": "string",
@@ -4395,7 +4527,14 @@
           "items": {
             "$ref": "#/types/datarobot:index/CustomModelRuntimeParameterValue:CustomModelRuntimeParameterValue"
           },
-          "description": "The runtime parameter values for the Custom Model.\n"
+          "deprecationMessage": "The runtime parameter values for the Custom Model. Deprecated: use `runtime_parameters` instead."
+        },
+        "runtimeParameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/types/datarobot:index/CustomModelRuntimeParameter:CustomModelRuntimeParameter"
+          },
+          "description": "The runtime parameters for the Custom Model version. Use instead of `runtime_parameter_values`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.\n"
         },
         "sourceLlmBlueprintId": {
           "type": "string",
@@ -4544,7 +4683,14 @@
             "items": {
               "$ref": "#/types/datarobot:index/CustomModelRuntimeParameterValue:CustomModelRuntimeParameterValue"
             },
-            "description": "The runtime parameter values for the Custom Model.\n"
+            "deprecationMessage": "The runtime parameter values for the Custom Model. Deprecated: use `runtime_parameters` instead."
+          },
+          "runtimeParameters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/types/datarobot:index/CustomModelRuntimeParameter:CustomModelRuntimeParameter"
+            },
+            "description": "The runtime parameters for the Custom Model version. Use instead of `runtime_parameter_values`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.\n"
           },
           "sourceLlmBlueprintId": {
             "type": "string",
@@ -7127,6 +7273,275 @@
           "name": {
             "type": "string",
             "description": "The name of the Use Case.\n"
+          }
+        },
+        "type": "object"
+      }
+    },
+    "datarobot:index/userMcpPromptMetadata:UserMcpPromptMetadata": {
+      "description": "User MCP prompt metadata. This resource creates a prompt metadata entry for a given MCP server version using the User MCP public API.\n\n## Example Usage\n\n<!--Start PulumiCodeChooser -->\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@datarobot/pulumi-datarobot\";\n\nconst example = new datarobot.UserMcpPromptMetadata(\"example\", {\n    type: \"userPrompt\",\n    mcpServerVersionId: \"69a761e40746897942318e2f\",\n});\nexport const exampleId = example.id;\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample = datarobot.UserMcpPromptMetadata(\"example\",\n    type=\"userPrompt\",\n    mcp_server_version_id=\"69a761e40746897942318e2f\")\npulumi.export(\"exampleId\", example.id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = DataRobotPulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() => \n{\n    var example = new Datarobot.UserMcpPromptMetadata(\"example\", new()\n    {\n        Type = \"userPrompt\",\n        McpServerVersionId = \"69a761e40746897942318e2f\",\n    });\n\n    return new Dictionary<string, object?>\n    {\n        [\"exampleId\"] = example.Id,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texample, err := datarobot.NewUserMcpPromptMetadata(ctx, \"example\", &datarobot.UserMcpPromptMetadataArgs{\n\t\t\tType:               pulumi.String(\"userPrompt\"),\n\t\t\tMcpServerVersionId: pulumi.String(\"69a761e40746897942318e2f\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"exampleId\", example.ID())\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.UserMcpPromptMetadata;\nimport com.pulumi.datarobot.UserMcpPromptMetadataArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new UserMcpPromptMetadata(\"example\", UserMcpPromptMetadataArgs.builder()\n            .type(\"userPrompt\")\n            .mcpServerVersionId(\"69a761e40746897942318e2f\")\n            .build());\n\n        ctx.export(\"exampleId\", example.id());\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: datarobot:UserMcpPromptMetadata\n    properties:\n      type: userPrompt\n      mcpServerVersionId: 69a761e40746897942318e2f\noutputs:\n  exampleId: ${example.id}\n```\n<!--End PulumiCodeChooser -->\n",
+      "properties": {
+        "createdAt": {
+          "type": "string",
+          "description": "When the MCP prompt is created.\n"
+        },
+        "mcpServerVersionId": {
+          "type": "string",
+          "description": "The ID of the MCP server version this prompt belongs to.\n"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the MCP prompt.\n"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the MCP prompt.\n"
+        },
+        "userId": {
+          "type": "string",
+          "description": "The id of the user who created the MCP prompt.\n"
+        },
+        "userName": {
+          "type": "string",
+          "description": "The name of the user who created the MCP prompt\n"
+        }
+      },
+      "required": [
+        "createdAt",
+        "mcpServerVersionId",
+        "name",
+        "type",
+        "userId",
+        "userName"
+      ],
+      "inputProperties": {
+        "mcpServerVersionId": {
+          "type": "string",
+          "description": "The ID of the MCP server version this prompt belongs to.\n"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the MCP prompt.\n"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the MCP prompt.\n"
+        }
+      },
+      "requiredInputs": [
+        "mcpServerVersionId",
+        "type"
+      ],
+      "stateInputs": {
+        "description": "Input properties used for looking up and filtering UserMcpPromptMetadata resources.\n",
+        "properties": {
+          "createdAt": {
+            "type": "string",
+            "description": "When the MCP prompt is created.\n"
+          },
+          "mcpServerVersionId": {
+            "type": "string",
+            "description": "The ID of the MCP server version this prompt belongs to.\n"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the MCP prompt.\n"
+          },
+          "type": {
+            "type": "string",
+            "description": "The type of the MCP prompt.\n"
+          },
+          "userId": {
+            "type": "string",
+            "description": "The id of the user who created the MCP prompt.\n"
+          },
+          "userName": {
+            "type": "string",
+            "description": "The name of the user who created the MCP prompt\n"
+          }
+        },
+        "type": "object"
+      }
+    },
+    "datarobot:index/userMcpResourceMetadata:UserMcpResourceMetadata": {
+      "description": "User MCP resource metadata. This resource creates a resource metadata entry for a given MCP server version using the User MCP public API.\n\n## Example Usage\n\n<!--Start PulumiCodeChooser -->\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@datarobot/pulumi-datarobot\";\n\nconst example = new datarobot.UserMcpResourceMetadata(\"example\", {\n    type: \"userResce\",\n    mcpServerVersionId: \"69a761e40746897942318e2f\",\n    uri: \"uri://example_uri\",\n});\nexport const exampleId = example.id;\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample = datarobot.UserMcpResourceMetadata(\"example\",\n    type=\"userResce\",\n    mcp_server_version_id=\"69a761e40746897942318e2f\",\n    uri=\"uri://example_uri\")\npulumi.export(\"exampleId\", example.id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = DataRobotPulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() => \n{\n    var example = new Datarobot.UserMcpResourceMetadata(\"example\", new()\n    {\n        Type = \"userResce\",\n        McpServerVersionId = \"69a761e40746897942318e2f\",\n        Uri = \"uri://example_uri\",\n    });\n\n    return new Dictionary<string, object?>\n    {\n        [\"exampleId\"] = example.Id,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texample, err := datarobot.NewUserMcpResourceMetadata(ctx, \"example\", &datarobot.UserMcpResourceMetadataArgs{\n\t\t\tType:               pulumi.String(\"userResce\"),\n\t\t\tMcpServerVersionId: pulumi.String(\"69a761e40746897942318e2f\"),\n\t\t\tUri:                pulumi.String(\"uri://example_uri\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"exampleId\", example.ID())\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.UserMcpResourceMetadata;\nimport com.pulumi.datarobot.UserMcpResourceMetadataArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new UserMcpResourceMetadata(\"example\", UserMcpResourceMetadataArgs.builder()\n            .type(\"userResce\")\n            .mcpServerVersionId(\"69a761e40746897942318e2f\")\n            .uri(\"uri://example_uri\")\n            .build());\n\n        ctx.export(\"exampleId\", example.id());\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: datarobot:UserMcpResourceMetadata\n    properties:\n      type: userResce\n      mcpServerVersionId: 69a761e40746897942318e2f\n      uri: uri://example_uri\noutputs:\n  exampleId: ${example.id}\n```\n<!--End PulumiCodeChooser -->\n",
+      "properties": {
+        "createdAt": {
+          "type": "string",
+          "description": "When the MCP resource is created.\n"
+        },
+        "mcpServerVersionId": {
+          "type": "string",
+          "description": "The ID of the MCP server version this resource belongs to.\n"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the MCP resource.\n"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the MCP resource.\n"
+        },
+        "uri": {
+          "type": "string",
+          "description": "The URI of the MCP resource.\n"
+        },
+        "userId": {
+          "type": "string",
+          "description": "The id of the user who created the MCP resource.\n"
+        },
+        "userName": {
+          "type": "string",
+          "description": "The name of the user who created the MCP resource\n"
+        }
+      },
+      "required": [
+        "createdAt",
+        "mcpServerVersionId",
+        "name",
+        "type",
+        "uri",
+        "userId",
+        "userName"
+      ],
+      "inputProperties": {
+        "mcpServerVersionId": {
+          "type": "string",
+          "description": "The ID of the MCP server version this resource belongs to.\n"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the MCP resource.\n"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the MCP resource.\n"
+        },
+        "uri": {
+          "type": "string",
+          "description": "The URI of the MCP resource.\n"
+        }
+      },
+      "requiredInputs": [
+        "mcpServerVersionId",
+        "type",
+        "uri"
+      ],
+      "stateInputs": {
+        "description": "Input properties used for looking up and filtering UserMcpResourceMetadata resources.\n",
+        "properties": {
+          "createdAt": {
+            "type": "string",
+            "description": "When the MCP resource is created.\n"
+          },
+          "mcpServerVersionId": {
+            "type": "string",
+            "description": "The ID of the MCP server version this resource belongs to.\n"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the MCP resource.\n"
+          },
+          "type": {
+            "type": "string",
+            "description": "The type of the MCP resource.\n"
+          },
+          "uri": {
+            "type": "string",
+            "description": "The URI of the MCP resource.\n"
+          },
+          "userId": {
+            "type": "string",
+            "description": "The id of the user who created the MCP resource.\n"
+          },
+          "userName": {
+            "type": "string",
+            "description": "The name of the user who created the MCP resource\n"
+          }
+        },
+        "type": "object"
+      }
+    },
+    "datarobot:index/userMcpToolMetadata:UserMcpToolMetadata": {
+      "description": "User MCP tool metadata. This resource creates a tool metadata entry for a given MCP server version using the User MCP public API.\n\n## Example Usage\n\n<!--Start PulumiCodeChooser -->\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@datarobot/pulumi-datarobot\";\n\nconst example = new datarobot.UserMcpToolMetadata(\"example\", {\n    type: \"userTool\",\n    mcpServerVersionId: \"69a761e40746897942318e2f\",\n});\nexport const exampleId = example.id;\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample = datarobot.UserMcpToolMetadata(\"example\",\n    type=\"userTool\",\n    mcp_server_version_id=\"69a761e40746897942318e2f\")\npulumi.export(\"exampleId\", example.id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = DataRobotPulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() => \n{\n    var example = new Datarobot.UserMcpToolMetadata(\"example\", new()\n    {\n        Type = \"userTool\",\n        McpServerVersionId = \"69a761e40746897942318e2f\",\n    });\n\n    return new Dictionary<string, object?>\n    {\n        [\"exampleId\"] = example.Id,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texample, err := datarobot.NewUserMcpToolMetadata(ctx, \"example\", &datarobot.UserMcpToolMetadataArgs{\n\t\t\tType:               pulumi.String(\"userTool\"),\n\t\t\tMcpServerVersionId: pulumi.String(\"69a761e40746897942318e2f\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"exampleId\", example.ID())\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.UserMcpToolMetadata;\nimport com.pulumi.datarobot.UserMcpToolMetadataArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new UserMcpToolMetadata(\"example\", UserMcpToolMetadataArgs.builder()\n            .type(\"userTool\")\n            .mcpServerVersionId(\"69a761e40746897942318e2f\")\n            .build());\n\n        ctx.export(\"exampleId\", example.id());\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: datarobot:UserMcpToolMetadata\n    properties:\n      type: userTool\n      mcpServerVersionId: 69a761e40746897942318e2f\noutputs:\n  exampleId: ${example.id}\n```\n<!--End PulumiCodeChooser -->\n",
+      "properties": {
+        "createdAt": {
+          "type": "string",
+          "description": "When the MCP tool is created.\n"
+        },
+        "mcpServerVersionId": {
+          "type": "string",
+          "description": "The ID of the MCP server version this tool belongs to.\n"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the MCP tool.\n"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the MCP tool.\n"
+        },
+        "userId": {
+          "type": "string",
+          "description": "The id of the user who created the MCP tool.\n"
+        },
+        "userName": {
+          "type": "string",
+          "description": "The name of the user who created the MCP tool\n"
+        }
+      },
+      "required": [
+        "createdAt",
+        "mcpServerVersionId",
+        "name",
+        "type",
+        "userId",
+        "userName"
+      ],
+      "inputProperties": {
+        "mcpServerVersionId": {
+          "type": "string",
+          "description": "The ID of the MCP server version this tool belongs to.\n"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the MCP tool.\n"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the MCP tool.\n"
+        }
+      },
+      "requiredInputs": [
+        "mcpServerVersionId",
+        "type"
+      ],
+      "stateInputs": {
+        "description": "Input properties used for looking up and filtering UserMcpToolMetadata resources.\n",
+        "properties": {
+          "createdAt": {
+            "type": "string",
+            "description": "When the MCP tool is created.\n"
+          },
+          "mcpServerVersionId": {
+            "type": "string",
+            "description": "The ID of the MCP server version this tool belongs to.\n"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the MCP tool.\n"
+          },
+          "type": {
+            "type": "string",
+            "description": "The type of the MCP tool.\n"
+          },
+          "userId": {
+            "type": "string",
+            "description": "The id of the user who created the MCP tool.\n"
+          },
+          "userName": {
+            "type": "string",
+            "description": "The name of the user who created the MCP tool\n"
           }
         },
         "type": "object"
