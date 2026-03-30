@@ -90,7 +90,7 @@ jobs:
 
       - name: Release with GoReleaser
         if: ${{ github.event.inputs.USE_EXISTING_RELEASE != 'true' }}
-        uses: goreleaser/goreleaser-action@v2
+        uses: goreleaser/goreleaser-action@v7
         with:
           args: release --clean
           version: latest
