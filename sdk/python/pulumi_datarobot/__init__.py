@@ -34,6 +34,7 @@ from .get_execution_environment import *
 from .get_global_model import *
 from .google_cloud_credential import *
 from .llm_blueprint import *
+from .memory_space import *
 from .notebook import *
 from .notification_channel import *
 from .notification_policy import *
@@ -268,6 +269,14 @@ _utilities.register(
   "fqn": "pulumi_datarobot",
   "classes": {
    "datarobot:index/llmBlueprint:LlmBlueprint": "LlmBlueprint"
+  }
+ },
+ {
+  "pkg": "datarobot",
+  "mod": "index/memorySpace",
+  "fqn": "pulumi_datarobot",
+  "classes": {
+   "datarobot:index/memorySpace:MemorySpace": "MemorySpace"
   }
  },
  {

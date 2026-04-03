@@ -145,6 +145,11 @@ export type LlmBlueprint = import("./llmBlueprint").LlmBlueprint;
 export const LlmBlueprint: typeof import("./llmBlueprint").LlmBlueprint = null as any;
 utilities.lazyLoad(exports, ["LlmBlueprint"], () => require("./llmBlueprint"));
 
+export { MemorySpaceArgs, MemorySpaceState } from "./memorySpace";
+export type MemorySpace = import("./memorySpace").MemorySpace;
+export const MemorySpace: typeof import("./memorySpace").MemorySpace = null as any;
+utilities.lazyLoad(exports, ["MemorySpace"], () => require("./memorySpace"));
+
 export { NotebookArgs, NotebookState } from "./notebook";
 export type Notebook = import("./notebook").Notebook;
 export const Notebook: typeof import("./notebook").Notebook = null as any;
@@ -286,6 +291,8 @@ const _module = {
                 return new GoogleCloudCredential(name, <any>undefined, { urn })
             case "datarobot:index/llmBlueprint:LlmBlueprint":
                 return new LlmBlueprint(name, <any>undefined, { urn })
+            case "datarobot:index/memorySpace:MemorySpace":
+                return new MemorySpace(name, <any>undefined, { urn })
             case "datarobot:index/notebook:Notebook":
                 return new Notebook(name, <any>undefined, { urn })
             case "datarobot:index/notificationChannel:NotificationChannel":
@@ -345,6 +352,7 @@ pulumi.runtime.registerResourceModule("datarobot", "index/deploymentRetrainingPo
 pulumi.runtime.registerResourceModule("datarobot", "index/executionEnvironment", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/googleCloudCredential", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/llmBlueprint", _module)
+pulumi.runtime.registerResourceModule("datarobot", "index/memorySpace", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/notebook", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/notificationChannel", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/notificationPolicy", _module)
