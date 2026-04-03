@@ -44,6 +44,7 @@
         "googleCloudCredential.ts",
         "index.ts",
         "llmBlueprint.ts",
+        "memorySpace.ts",
         "notebook.ts",
         "notificationChannel.ts",
         "notificationPolicy.ts",

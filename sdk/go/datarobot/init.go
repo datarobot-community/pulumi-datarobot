@@ -73,6 +73,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &GoogleCloudCredential{}
 	case "datarobot:index/llmBlueprint:LlmBlueprint":
 		r = &LlmBlueprint{}
+	case "datarobot:index/memorySpace:MemorySpace":
+		r = &MemorySpace{}
 	case "datarobot:index/notebook:Notebook":
 		r = &Notebook{}
 	case "datarobot:index/notificationChannel:NotificationChannel":
@@ -260,6 +262,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"datarobot",
 		"index/llmBlueprint",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"datarobot",
+		"index/memorySpace",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
