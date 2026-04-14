@@ -32,7 +32,6 @@ class CustomJobArgs:
                  name: Optional[pulumi.Input[builtins.str]] = None,
                  resource_bundle_id: Optional[pulumi.Input[builtins.str]] = None,
                  runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input['CustomJobRuntimeParameterValueArgs']]]] = None,
-                 runtime_parameters: Optional[pulumi.Input[Sequence[pulumi.Input['CustomJobRuntimeParameterArgs']]]] = None,
                  schedule: Optional[pulumi.Input['CustomJobScheduleArgs']] = None,
                  schedule_id: Optional[pulumi.Input[builtins.str]] = None):
         """
@@ -46,7 +45,7 @@ class CustomJobArgs:
         :param pulumi.Input[builtins.str] job_type: The type of the Custom Job.
         :param pulumi.Input[builtins.str] name: The name of the Custom Job.
         :param pulumi.Input[builtins.str] resource_bundle_id: A single identifier that represents a bundle of resources: Memory, CPU, GPU, etc.
-        :param pulumi.Input[Sequence[pulumi.Input['CustomJobRuntimeParameterArgs']]] runtime_parameters: The runtime parameters for the Custom Job. Use instead of `runtime_parameter_values`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.
+        :param pulumi.Input[Sequence[pulumi.Input['CustomJobRuntimeParameterValueArgs']]] runtime_parameter_values: The runtime parameters for the Custom Job.
         :param pulumi.Input['CustomJobScheduleArgs'] schedule: The schedule configuration for the custom job.
         :param pulumi.Input[builtins.str] schedule_id: The ID of the schedule associated with the custom job.
         """
@@ -69,12 +68,7 @@ class CustomJobArgs:
         if resource_bundle_id is not None:
             pulumi.set(__self__, "resource_bundle_id", resource_bundle_id)
         if runtime_parameter_values is not None:
-            warnings.warn("""Additional parameters to be injected into a Job at runtime. Deprecated: use `runtime_parameters` instead.""", DeprecationWarning)
-            pulumi.log.warn("""runtime_parameter_values is deprecated: Additional parameters to be injected into a Job at runtime. Deprecated: use `runtime_parameters` instead.""")
-        if runtime_parameter_values is not None:
             pulumi.set(__self__, "runtime_parameter_values", runtime_parameter_values)
-        if runtime_parameters is not None:
-            pulumi.set(__self__, "runtime_parameters", runtime_parameters)
         if schedule is not None:
             pulumi.set(__self__, "schedule", schedule)
         if schedule_id is not None:
@@ -190,25 +184,15 @@ class CustomJobArgs:
 
     @property
     @pulumi.getter(name="runtimeParameterValues")
-    @_utilities.deprecated("""Additional parameters to be injected into a Job at runtime. Deprecated: use `runtime_parameters` instead.""")
     def runtime_parameter_values(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CustomJobRuntimeParameterValueArgs']]]]:
+        """
+        The runtime parameters for the Custom Job.
+        """
         return pulumi.get(self, "runtime_parameter_values")
 
     @runtime_parameter_values.setter
     def runtime_parameter_values(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CustomJobRuntimeParameterValueArgs']]]]):
         pulumi.set(self, "runtime_parameter_values", value)
-
-    @property
-    @pulumi.getter(name="runtimeParameters")
-    def runtime_parameters(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CustomJobRuntimeParameterArgs']]]]:
-        """
-        The runtime parameters for the Custom Job. Use instead of `runtime_parameter_values`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.
-        """
-        return pulumi.get(self, "runtime_parameters")
-
-    @runtime_parameters.setter
-    def runtime_parameters(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CustomJobRuntimeParameterArgs']]]]):
-        pulumi.set(self, "runtime_parameters", value)
 
     @property
     @pulumi.getter
@@ -250,7 +234,6 @@ class _CustomJobState:
                  name: Optional[pulumi.Input[builtins.str]] = None,
                  resource_bundle_id: Optional[pulumi.Input[builtins.str]] = None,
                  runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input['CustomJobRuntimeParameterValueArgs']]]] = None,
-                 runtime_parameters: Optional[pulumi.Input[Sequence[pulumi.Input['CustomJobRuntimeParameterArgs']]]] = None,
                  schedule: Optional[pulumi.Input['CustomJobScheduleArgs']] = None,
                  schedule_id: Optional[pulumi.Input[builtins.str]] = None):
         """
@@ -266,7 +249,7 @@ class _CustomJobState:
         :param pulumi.Input[builtins.str] job_type: The type of the Custom Job.
         :param pulumi.Input[builtins.str] name: The name of the Custom Job.
         :param pulumi.Input[builtins.str] resource_bundle_id: A single identifier that represents a bundle of resources: Memory, CPU, GPU, etc.
-        :param pulumi.Input[Sequence[pulumi.Input['CustomJobRuntimeParameterArgs']]] runtime_parameters: The runtime parameters for the Custom Job. Use instead of `runtime_parameter_values`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.
+        :param pulumi.Input[Sequence[pulumi.Input['CustomJobRuntimeParameterValueArgs']]] runtime_parameter_values: The runtime parameters for the Custom Job.
         :param pulumi.Input['CustomJobScheduleArgs'] schedule: The schedule configuration for the custom job.
         :param pulumi.Input[builtins.str] schedule_id: The ID of the schedule associated with the custom job.
         """
@@ -293,12 +276,7 @@ class _CustomJobState:
         if resource_bundle_id is not None:
             pulumi.set(__self__, "resource_bundle_id", resource_bundle_id)
         if runtime_parameter_values is not None:
-            warnings.warn("""Additional parameters to be injected into a Job at runtime. Deprecated: use `runtime_parameters` instead.""", DeprecationWarning)
-            pulumi.log.warn("""runtime_parameter_values is deprecated: Additional parameters to be injected into a Job at runtime. Deprecated: use `runtime_parameters` instead.""")
-        if runtime_parameter_values is not None:
             pulumi.set(__self__, "runtime_parameter_values", runtime_parameter_values)
-        if runtime_parameters is not None:
-            pulumi.set(__self__, "runtime_parameters", runtime_parameters)
         if schedule is not None:
             pulumi.set(__self__, "schedule", schedule)
         if schedule_id is not None:
@@ -438,25 +416,15 @@ class _CustomJobState:
 
     @property
     @pulumi.getter(name="runtimeParameterValues")
-    @_utilities.deprecated("""Additional parameters to be injected into a Job at runtime. Deprecated: use `runtime_parameters` instead.""")
     def runtime_parameter_values(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CustomJobRuntimeParameterValueArgs']]]]:
+        """
+        The runtime parameters for the Custom Job.
+        """
         return pulumi.get(self, "runtime_parameter_values")
 
     @runtime_parameter_values.setter
     def runtime_parameter_values(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CustomJobRuntimeParameterValueArgs']]]]):
         pulumi.set(self, "runtime_parameter_values", value)
-
-    @property
-    @pulumi.getter(name="runtimeParameters")
-    def runtime_parameters(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CustomJobRuntimeParameterArgs']]]]:
-        """
-        The runtime parameters for the Custom Job. Use instead of `runtime_parameter_values`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.
-        """
-        return pulumi.get(self, "runtime_parameters")
-
-    @runtime_parameters.setter
-    def runtime_parameters(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CustomJobRuntimeParameterArgs']]]]):
-        pulumi.set(self, "runtime_parameters", value)
 
     @property
     @pulumi.getter
@@ -498,7 +466,6 @@ class CustomJob(pulumi.CustomResource):
                  name: Optional[pulumi.Input[builtins.str]] = None,
                  resource_bundle_id: Optional[pulumi.Input[builtins.str]] = None,
                  runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input[Union['CustomJobRuntimeParameterValueArgs', 'CustomJobRuntimeParameterValueArgsDict']]]]] = None,
-                 runtime_parameters: Optional[pulumi.Input[Sequence[pulumi.Input[Union['CustomJobRuntimeParameterArgs', 'CustomJobRuntimeParameterArgsDict']]]]] = None,
                  schedule: Optional[pulumi.Input[Union['CustomJobScheduleArgs', 'CustomJobScheduleArgsDict']]] = None,
                  schedule_id: Optional[pulumi.Input[builtins.str]] = None,
                  __props__=None):
@@ -516,7 +483,7 @@ class CustomJob(pulumi.CustomResource):
         :param pulumi.Input[builtins.str] job_type: The type of the Custom Job.
         :param pulumi.Input[builtins.str] name: The name of the Custom Job.
         :param pulumi.Input[builtins.str] resource_bundle_id: A single identifier that represents a bundle of resources: Memory, CPU, GPU, etc.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['CustomJobRuntimeParameterArgs', 'CustomJobRuntimeParameterArgsDict']]]] runtime_parameters: The runtime parameters for the Custom Job. Use instead of `runtime_parameter_values`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['CustomJobRuntimeParameterValueArgs', 'CustomJobRuntimeParameterValueArgsDict']]]] runtime_parameter_values: The runtime parameters for the Custom Job.
         :param pulumi.Input[Union['CustomJobScheduleArgs', 'CustomJobScheduleArgsDict']] schedule: The schedule configuration for the custom job.
         :param pulumi.Input[builtins.str] schedule_id: The ID of the schedule associated with the custom job.
         """
@@ -554,7 +521,6 @@ class CustomJob(pulumi.CustomResource):
                  name: Optional[pulumi.Input[builtins.str]] = None,
                  resource_bundle_id: Optional[pulumi.Input[builtins.str]] = None,
                  runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input[Union['CustomJobRuntimeParameterValueArgs', 'CustomJobRuntimeParameterValueArgsDict']]]]] = None,
-                 runtime_parameters: Optional[pulumi.Input[Sequence[pulumi.Input[Union['CustomJobRuntimeParameterArgs', 'CustomJobRuntimeParameterArgsDict']]]]] = None,
                  schedule: Optional[pulumi.Input[Union['CustomJobScheduleArgs', 'CustomJobScheduleArgsDict']]] = None,
                  schedule_id: Optional[pulumi.Input[builtins.str]] = None,
                  __props__=None):
@@ -576,7 +542,6 @@ class CustomJob(pulumi.CustomResource):
             __props__.__dict__["name"] = name
             __props__.__dict__["resource_bundle_id"] = resource_bundle_id
             __props__.__dict__["runtime_parameter_values"] = runtime_parameter_values
-            __props__.__dict__["runtime_parameters"] = runtime_parameters
             __props__.__dict__["schedule"] = schedule
             __props__.__dict__["schedule_id"] = schedule_id
             __props__.__dict__["files_hashes"] = None
@@ -603,7 +568,6 @@ class CustomJob(pulumi.CustomResource):
             name: Optional[pulumi.Input[builtins.str]] = None,
             resource_bundle_id: Optional[pulumi.Input[builtins.str]] = None,
             runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input[Union['CustomJobRuntimeParameterValueArgs', 'CustomJobRuntimeParameterValueArgsDict']]]]] = None,
-            runtime_parameters: Optional[pulumi.Input[Sequence[pulumi.Input[Union['CustomJobRuntimeParameterArgs', 'CustomJobRuntimeParameterArgsDict']]]]] = None,
             schedule: Optional[pulumi.Input[Union['CustomJobScheduleArgs', 'CustomJobScheduleArgsDict']]] = None,
             schedule_id: Optional[pulumi.Input[builtins.str]] = None) -> 'CustomJob':
         """
@@ -624,7 +588,7 @@ class CustomJob(pulumi.CustomResource):
         :param pulumi.Input[builtins.str] job_type: The type of the Custom Job.
         :param pulumi.Input[builtins.str] name: The name of the Custom Job.
         :param pulumi.Input[builtins.str] resource_bundle_id: A single identifier that represents a bundle of resources: Memory, CPU, GPU, etc.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['CustomJobRuntimeParameterArgs', 'CustomJobRuntimeParameterArgsDict']]]] runtime_parameters: The runtime parameters for the Custom Job. Use instead of `runtime_parameter_values`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['CustomJobRuntimeParameterValueArgs', 'CustomJobRuntimeParameterValueArgsDict']]]] runtime_parameter_values: The runtime parameters for the Custom Job.
         :param pulumi.Input[Union['CustomJobScheduleArgs', 'CustomJobScheduleArgsDict']] schedule: The schedule configuration for the custom job.
         :param pulumi.Input[builtins.str] schedule_id: The ID of the schedule associated with the custom job.
         """
@@ -644,7 +608,6 @@ class CustomJob(pulumi.CustomResource):
         __props__.__dict__["name"] = name
         __props__.__dict__["resource_bundle_id"] = resource_bundle_id
         __props__.__dict__["runtime_parameter_values"] = runtime_parameter_values
-        __props__.__dict__["runtime_parameters"] = runtime_parameters
         __props__.__dict__["schedule"] = schedule
         __props__.__dict__["schedule_id"] = schedule_id
         return CustomJob(resource_name, opts=opts, __props__=__props__)
@@ -739,17 +702,11 @@ class CustomJob(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="runtimeParameterValues")
-    @_utilities.deprecated("""Additional parameters to be injected into a Job at runtime. Deprecated: use `runtime_parameters` instead.""")
-    def runtime_parameter_values(self) -> pulumi.Output[Sequence['outputs.CustomJobRuntimeParameterValue']]:
+    def runtime_parameter_values(self) -> pulumi.Output[Optional[Sequence['outputs.CustomJobRuntimeParameterValue']]]:
+        """
+        The runtime parameters for the Custom Job.
+        """
         return pulumi.get(self, "runtime_parameter_values")
-
-    @property
-    @pulumi.getter(name="runtimeParameters")
-    def runtime_parameters(self) -> pulumi.Output[Optional[Sequence['outputs.CustomJobRuntimeParameter']]]:
-        """
-        The runtime parameters for the Custom Job. Use instead of `runtime_parameter_values`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.
-        """
-        return pulumi.get(self, "runtime_parameters")
 
     @property
     @pulumi.getter

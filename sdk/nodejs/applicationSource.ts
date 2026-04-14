@@ -73,14 +73,7 @@ export class ApplicationSource extends pulumi.CustomResource {
      * The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.
      */
     public readonly resources!: pulumi.Output<outputs.ApplicationSourceResources>;
-    /**
-     * @deprecated The runtime parameter values for the Application Source. Deprecated: use `runtimeParameters` instead.
-     */
     public readonly runtimeParameterValues!: pulumi.Output<outputs.ApplicationSourceRuntimeParameterValue[]>;
-    /**
-     * The runtime parameters for the Application Source version. Use instead of `runtimeParameterValues`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.
-     */
-    public readonly runtimeParameters!: pulumi.Output<outputs.ApplicationSourceRuntimeParameter[] | undefined>;
     /**
      * The version ID of the Application Source.
      */
@@ -109,7 +102,6 @@ export class ApplicationSource extends pulumi.CustomResource {
             resourceInputs["requiredKeyScopeLevel"] = state ? state.requiredKeyScopeLevel : undefined;
             resourceInputs["resources"] = state ? state.resources : undefined;
             resourceInputs["runtimeParameterValues"] = state ? state.runtimeParameterValues : undefined;
-            resourceInputs["runtimeParameters"] = state ? state.runtimeParameters : undefined;
             resourceInputs["versionId"] = state ? state.versionId : undefined;
         } else {
             const args = argsOrState as ApplicationSourceArgs | undefined;
@@ -121,7 +113,6 @@ export class ApplicationSource extends pulumi.CustomResource {
             resourceInputs["requiredKeyScopeLevel"] = args ? args.requiredKeyScopeLevel : undefined;
             resourceInputs["resources"] = args ? args.resources : undefined;
             resourceInputs["runtimeParameterValues"] = args ? args.runtimeParameterValues : undefined;
-            resourceInputs["runtimeParameters"] = args ? args.runtimeParameters : undefined;
             resourceInputs["filesHashes"] = undefined /*out*/;
             resourceInputs["folderPathHash"] = undefined /*out*/;
             resourceInputs["versionId"] = undefined /*out*/;
@@ -171,14 +162,7 @@ export interface ApplicationSourceState {
      * The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.
      */
     resources?: pulumi.Input<inputs.ApplicationSourceResources>;
-    /**
-     * @deprecated The runtime parameter values for the Application Source. Deprecated: use `runtimeParameters` instead.
-     */
     runtimeParameterValues?: pulumi.Input<pulumi.Input<inputs.ApplicationSourceRuntimeParameterValue>[]>;
-    /**
-     * The runtime parameters for the Application Source version. Use instead of `runtimeParameterValues`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.
-     */
-    runtimeParameters?: pulumi.Input<pulumi.Input<inputs.ApplicationSourceRuntimeParameter>[]>;
     /**
      * The version ID of the Application Source.
      */
@@ -217,12 +201,5 @@ export interface ApplicationSourceArgs {
      * The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.
      */
     resources?: pulumi.Input<inputs.ApplicationSourceResources>;
-    /**
-     * @deprecated The runtime parameter values for the Application Source. Deprecated: use `runtimeParameters` instead.
-     */
     runtimeParameterValues?: pulumi.Input<pulumi.Input<inputs.ApplicationSourceRuntimeParameterValue>[]>;
-    /**
-     * The runtime parameters for the Application Source version. Use instead of `runtimeParameterValues`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.
-     */
-    runtimeParameters?: pulumi.Input<pulumi.Input<inputs.ApplicationSourceRuntimeParameter>[]>;
 }

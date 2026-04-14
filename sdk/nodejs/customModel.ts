@@ -194,13 +194,9 @@ export class CustomModel extends pulumi.CustomResource {
      */
     public readonly resourceBundleId!: pulumi.Output<string | undefined>;
     /**
-     * @deprecated The runtime parameter values for the Custom Model. Deprecated: use `runtimeParameters` instead.
+     * The runtime parameter values for the Custom Model.
      */
-    public readonly runtimeParameterValues!: pulumi.Output<outputs.CustomModelRuntimeParameterValue[]>;
-    /**
-     * The runtime parameters for the Custom Model version. Use instead of `runtimeParameterValues`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.
-     */
-    public readonly runtimeParameters!: pulumi.Output<outputs.CustomModelRuntimeParameter[] | undefined>;
+    public readonly runtimeParameterValues!: pulumi.Output<outputs.CustomModelRuntimeParameterValue[] | undefined>;
     /**
      * The ID of the source LLM Blueprint for the Custom Model.
      */
@@ -282,7 +278,6 @@ export class CustomModel extends pulumi.CustomResource {
             resourceInputs["replicas"] = state ? state.replicas : undefined;
             resourceInputs["resourceBundleId"] = state ? state.resourceBundleId : undefined;
             resourceInputs["runtimeParameterValues"] = state ? state.runtimeParameterValues : undefined;
-            resourceInputs["runtimeParameters"] = state ? state.runtimeParameters : undefined;
             resourceInputs["sourceLlmBlueprintId"] = state ? state.sourceLlmBlueprintId : undefined;
             resourceInputs["sourceRemoteRepositories"] = state ? state.sourceRemoteRepositories : undefined;
             resourceInputs["tags"] = state ? state.tags : undefined;
@@ -316,7 +311,6 @@ export class CustomModel extends pulumi.CustomResource {
             resourceInputs["replicas"] = args ? args.replicas : undefined;
             resourceInputs["resourceBundleId"] = args ? args.resourceBundleId : undefined;
             resourceInputs["runtimeParameterValues"] = args ? args.runtimeParameterValues : undefined;
-            resourceInputs["runtimeParameters"] = args ? args.runtimeParameters : undefined;
             resourceInputs["sourceLlmBlueprintId"] = args ? args.sourceLlmBlueprintId : undefined;
             resourceInputs["sourceRemoteRepositories"] = args ? args.sourceRemoteRepositories : undefined;
             resourceInputs["tags"] = args ? args.tags : undefined;
@@ -430,13 +424,9 @@ export interface CustomModelState {
      */
     resourceBundleId?: pulumi.Input<string>;
     /**
-     * @deprecated The runtime parameter values for the Custom Model. Deprecated: use `runtimeParameters` instead.
+     * The runtime parameter values for the Custom Model.
      */
     runtimeParameterValues?: pulumi.Input<pulumi.Input<inputs.CustomModelRuntimeParameterValue>[]>;
-    /**
-     * The runtime parameters for the Custom Model version. Use instead of `runtimeParameterValues`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.
-     */
-    runtimeParameters?: pulumi.Input<pulumi.Input<inputs.CustomModelRuntimeParameter>[]>;
     /**
      * The ID of the source LLM Blueprint for the Custom Model.
      */
@@ -564,13 +554,9 @@ export interface CustomModelArgs {
      */
     resourceBundleId?: pulumi.Input<string>;
     /**
-     * @deprecated The runtime parameter values for the Custom Model. Deprecated: use `runtimeParameters` instead.
+     * The runtime parameter values for the Custom Model.
      */
     runtimeParameterValues?: pulumi.Input<pulumi.Input<inputs.CustomModelRuntimeParameterValue>[]>;
-    /**
-     * The runtime parameters for the Custom Model version. Use instead of `runtimeParameterValues`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.
-     */
-    runtimeParameters?: pulumi.Input<pulumi.Input<inputs.CustomModelRuntimeParameter>[]>;
     /**
      * The ID of the source LLM Blueprint for the Custom Model.
      */

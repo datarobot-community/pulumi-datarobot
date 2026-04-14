@@ -37,10 +37,8 @@ type CustomJob struct {
 	Name pulumi.StringOutput `pulumi:"name"`
 	// A single identifier that represents a bundle of resources: Memory, CPU, GPU, etc.
 	ResourceBundleId pulumi.StringPtrOutput `pulumi:"resourceBundleId"`
-	// Deprecated: Additional parameters to be injected into a Job at runtime. Deprecated: use `runtimeParameters` instead.
+	// The runtime parameters for the Custom Job.
 	RuntimeParameterValues CustomJobRuntimeParameterValueArrayOutput `pulumi:"runtimeParameterValues"`
-	// The runtime parameters for the Custom Job. Use instead of `runtimeParameterValues`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.
-	RuntimeParameters CustomJobRuntimeParameterArrayOutput `pulumi:"runtimeParameters"`
 	// The schedule configuration for the custom job.
 	Schedule CustomJobSchedulePtrOutput `pulumi:"schedule"`
 	// The ID of the schedule associated with the custom job.
@@ -99,10 +97,8 @@ type customJobState struct {
 	Name *string `pulumi:"name"`
 	// A single identifier that represents a bundle of resources: Memory, CPU, GPU, etc.
 	ResourceBundleId *string `pulumi:"resourceBundleId"`
-	// Deprecated: Additional parameters to be injected into a Job at runtime. Deprecated: use `runtimeParameters` instead.
+	// The runtime parameters for the Custom Job.
 	RuntimeParameterValues []CustomJobRuntimeParameterValue `pulumi:"runtimeParameterValues"`
-	// The runtime parameters for the Custom Job. Use instead of `runtimeParameterValues`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.
-	RuntimeParameters []CustomJobRuntimeParameter `pulumi:"runtimeParameters"`
 	// The schedule configuration for the custom job.
 	Schedule *CustomJobSchedule `pulumi:"schedule"`
 	// The ID of the schedule associated with the custom job.
@@ -132,10 +128,8 @@ type CustomJobState struct {
 	Name pulumi.StringPtrInput
 	// A single identifier that represents a bundle of resources: Memory, CPU, GPU, etc.
 	ResourceBundleId pulumi.StringPtrInput
-	// Deprecated: Additional parameters to be injected into a Job at runtime. Deprecated: use `runtimeParameters` instead.
+	// The runtime parameters for the Custom Job.
 	RuntimeParameterValues CustomJobRuntimeParameterValueArrayInput
-	// The runtime parameters for the Custom Job. Use instead of `runtimeParameterValues`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.
-	RuntimeParameters CustomJobRuntimeParameterArrayInput
 	// The schedule configuration for the custom job.
 	Schedule CustomJobSchedulePtrInput
 	// The ID of the schedule associated with the custom job.
@@ -165,10 +159,8 @@ type customJobArgs struct {
 	Name *string `pulumi:"name"`
 	// A single identifier that represents a bundle of resources: Memory, CPU, GPU, etc.
 	ResourceBundleId *string `pulumi:"resourceBundleId"`
-	// Deprecated: Additional parameters to be injected into a Job at runtime. Deprecated: use `runtimeParameters` instead.
+	// The runtime parameters for the Custom Job.
 	RuntimeParameterValues []CustomJobRuntimeParameterValue `pulumi:"runtimeParameterValues"`
-	// The runtime parameters for the Custom Job. Use instead of `runtimeParameterValues`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.
-	RuntimeParameters []CustomJobRuntimeParameter `pulumi:"runtimeParameters"`
 	// The schedule configuration for the custom job.
 	Schedule *CustomJobSchedule `pulumi:"schedule"`
 	// The ID of the schedule associated with the custom job.
@@ -195,10 +187,8 @@ type CustomJobArgs struct {
 	Name pulumi.StringPtrInput
 	// A single identifier that represents a bundle of resources: Memory, CPU, GPU, etc.
 	ResourceBundleId pulumi.StringPtrInput
-	// Deprecated: Additional parameters to be injected into a Job at runtime. Deprecated: use `runtimeParameters` instead.
+	// The runtime parameters for the Custom Job.
 	RuntimeParameterValues CustomJobRuntimeParameterValueArrayInput
-	// The runtime parameters for the Custom Job. Use instead of `runtimeParameterValues`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.
-	RuntimeParameters CustomJobRuntimeParameterArrayInput
 	// The schedule configuration for the custom job.
 	Schedule CustomJobSchedulePtrInput
 	// The ID of the schedule associated with the custom job.
@@ -347,14 +337,9 @@ func (o CustomJobOutput) ResourceBundleId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *CustomJob) pulumi.StringPtrOutput { return v.ResourceBundleId }).(pulumi.StringPtrOutput)
 }
 
-// Deprecated: Additional parameters to be injected into a Job at runtime. Deprecated: use `runtimeParameters` instead.
+// The runtime parameters for the Custom Job.
 func (o CustomJobOutput) RuntimeParameterValues() CustomJobRuntimeParameterValueArrayOutput {
 	return o.ApplyT(func(v *CustomJob) CustomJobRuntimeParameterValueArrayOutput { return v.RuntimeParameterValues }).(CustomJobRuntimeParameterValueArrayOutput)
-}
-
-// The runtime parameters for the Custom Job. Use instead of `runtimeParameterValues`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.
-func (o CustomJobOutput) RuntimeParameters() CustomJobRuntimeParameterArrayOutput {
-	return o.ApplyT(func(v *CustomJob) CustomJobRuntimeParameterArrayOutput { return v.RuntimeParameters }).(CustomJobRuntimeParameterArrayOutput)
 }
 
 // The schedule configuration for the custom job.

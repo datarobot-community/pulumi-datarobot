@@ -101,10 +101,8 @@ type CustomModel struct {
 	Replicas pulumi.IntOutput `pulumi:"replicas"`
 	// A single identifier that represents a bundle of resources: Memory, CPU, GPU, etc.
 	ResourceBundleId pulumi.StringPtrOutput `pulumi:"resourceBundleId"`
-	// Deprecated: The runtime parameter values for the Custom Model. Deprecated: use `runtimeParameters` instead.
+	// The runtime parameter values for the Custom Model.
 	RuntimeParameterValues CustomModelRuntimeParameterValueArrayOutput `pulumi:"runtimeParameterValues"`
-	// The runtime parameters for the Custom Model version. Use instead of `runtimeParameterValues`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.
-	RuntimeParameters CustomModelRuntimeParameterArrayOutput `pulumi:"runtimeParameters"`
 	// The ID of the source LLM Blueprint for the Custom Model.
 	SourceLlmBlueprintId pulumi.StringPtrOutput `pulumi:"sourceLlmBlueprintId"`
 	// The source remote repositories for the Custom Model.
@@ -203,10 +201,8 @@ type customModelState struct {
 	Replicas *int `pulumi:"replicas"`
 	// A single identifier that represents a bundle of resources: Memory, CPU, GPU, etc.
 	ResourceBundleId *string `pulumi:"resourceBundleId"`
-	// Deprecated: The runtime parameter values for the Custom Model. Deprecated: use `runtimeParameters` instead.
+	// The runtime parameter values for the Custom Model.
 	RuntimeParameterValues []CustomModelRuntimeParameterValue `pulumi:"runtimeParameterValues"`
-	// The runtime parameters for the Custom Model version. Use instead of `runtimeParameterValues`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.
-	RuntimeParameters []CustomModelRuntimeParameter `pulumi:"runtimeParameters"`
 	// The ID of the source LLM Blueprint for the Custom Model.
 	SourceLlmBlueprintId *string `pulumi:"sourceLlmBlueprintId"`
 	// The source remote repositories for the Custom Model.
@@ -276,10 +272,8 @@ type CustomModelState struct {
 	Replicas pulumi.IntPtrInput
 	// A single identifier that represents a bundle of resources: Memory, CPU, GPU, etc.
 	ResourceBundleId pulumi.StringPtrInput
-	// Deprecated: The runtime parameter values for the Custom Model. Deprecated: use `runtimeParameters` instead.
+	// The runtime parameter values for the Custom Model.
 	RuntimeParameterValues CustomModelRuntimeParameterValueArrayInput
-	// The runtime parameters for the Custom Model version. Use instead of `runtimeParameterValues`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.
-	RuntimeParameters CustomModelRuntimeParameterArrayInput
 	// The ID of the source LLM Blueprint for the Custom Model.
 	SourceLlmBlueprintId pulumi.StringPtrInput
 	// The source remote repositories for the Custom Model.
@@ -347,10 +341,8 @@ type customModelArgs struct {
 	Replicas *int `pulumi:"replicas"`
 	// A single identifier that represents a bundle of resources: Memory, CPU, GPU, etc.
 	ResourceBundleId *string `pulumi:"resourceBundleId"`
-	// Deprecated: The runtime parameter values for the Custom Model. Deprecated: use `runtimeParameters` instead.
+	// The runtime parameter values for the Custom Model.
 	RuntimeParameterValues []CustomModelRuntimeParameterValue `pulumi:"runtimeParameterValues"`
-	// The runtime parameters for the Custom Model version. Use instead of `runtimeParameterValues`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.
-	RuntimeParameters []CustomModelRuntimeParameter `pulumi:"runtimeParameters"`
 	// The ID of the source LLM Blueprint for the Custom Model.
 	SourceLlmBlueprintId *string `pulumi:"sourceLlmBlueprintId"`
 	// The source remote repositories for the Custom Model.
@@ -409,10 +401,8 @@ type CustomModelArgs struct {
 	Replicas pulumi.IntPtrInput
 	// A single identifier that represents a bundle of resources: Memory, CPU, GPU, etc.
 	ResourceBundleId pulumi.StringPtrInput
-	// Deprecated: The runtime parameter values for the Custom Model. Deprecated: use `runtimeParameters` instead.
+	// The runtime parameter values for the Custom Model.
 	RuntimeParameterValues CustomModelRuntimeParameterValueArrayInput
-	// The runtime parameters for the Custom Model version. Use instead of `runtimeParameterValues`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.
-	RuntimeParameters CustomModelRuntimeParameterArrayInput
 	// The ID of the source LLM Blueprint for the Custom Model.
 	SourceLlmBlueprintId pulumi.StringPtrInput
 	// The source remote repositories for the Custom Model.
@@ -630,14 +620,9 @@ func (o CustomModelOutput) ResourceBundleId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *CustomModel) pulumi.StringPtrOutput { return v.ResourceBundleId }).(pulumi.StringPtrOutput)
 }
 
-// Deprecated: The runtime parameter values for the Custom Model. Deprecated: use `runtimeParameters` instead.
+// The runtime parameter values for the Custom Model.
 func (o CustomModelOutput) RuntimeParameterValues() CustomModelRuntimeParameterValueArrayOutput {
 	return o.ApplyT(func(v *CustomModel) CustomModelRuntimeParameterValueArrayOutput { return v.RuntimeParameterValues }).(CustomModelRuntimeParameterValueArrayOutput)
-}
-
-// The runtime parameters for the Custom Model version. Use instead of `runtimeParameterValues`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.
-func (o CustomModelOutput) RuntimeParameters() CustomModelRuntimeParameterArrayOutput {
-	return o.ApplyT(func(v *CustomModel) CustomModelRuntimeParameterArrayOutput { return v.RuntimeParameters }).(CustomModelRuntimeParameterArrayOutput)
 }
 
 // The ID of the source LLM Blueprint for the Custom Model.

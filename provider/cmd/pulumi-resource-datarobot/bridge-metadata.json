@@ -15,9 +15,6 @@
                     },
                     "runtime_parameter_values": {
                         "maxItemsOne": false
-                    },
-                    "runtime_parameters": {
-                        "maxItemsOne": false
                     }
                 }
             },
@@ -112,9 +109,6 @@
                     "runtime_parameter_values": {
                         "maxItemsOne": false
                     },
-                    "runtime_parameters": {
-                        "maxItemsOne": false
-                    },
                     "schedule": {
                         "fields": {
                             "day_of_month": {
@@ -197,9 +191,6 @@
                         }
                     },
                     "runtime_parameter_values": {
-                        "maxItemsOne": false
-                    },
-                    "runtime_parameters": {
                         "maxItemsOne": false
                     },
                     "source_remote_repositories": {
