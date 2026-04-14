@@ -42,7 +42,6 @@ class CustomModelArgs:
                  replicas: Optional[pulumi.Input[builtins.int]] = None,
                  resource_bundle_id: Optional[pulumi.Input[builtins.str]] = None,
                  runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input['CustomModelRuntimeParameterValueArgs']]]] = None,
-                 runtime_parameters: Optional[pulumi.Input[Sequence[pulumi.Input['CustomModelRuntimeParameterArgs']]]] = None,
                  source_llm_blueprint_id: Optional[pulumi.Input[builtins.str]] = None,
                  source_remote_repositories: Optional[pulumi.Input[Sequence[pulumi.Input['CustomModelSourceRemoteRepositoryArgs']]]] = None,
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input['CustomModelTagArgs']]]] = None,
@@ -72,7 +71,7 @@ class CustomModelArgs:
         :param pulumi.Input[builtins.float] prediction_threshold: The prediction threshold of the Custom Model.
         :param pulumi.Input[builtins.int] replicas: The replicas for the Custom Model.
         :param pulumi.Input[builtins.str] resource_bundle_id: A single identifier that represents a bundle of resources: Memory, CPU, GPU, etc.
-        :param pulumi.Input[Sequence[pulumi.Input['CustomModelRuntimeParameterArgs']]] runtime_parameters: The runtime parameters for the Custom Model version. Use instead of `runtime_parameter_values`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.
+        :param pulumi.Input[Sequence[pulumi.Input['CustomModelRuntimeParameterValueArgs']]] runtime_parameter_values: The runtime parameter values for the Custom Model.
         :param pulumi.Input[builtins.str] source_llm_blueprint_id: The ID of the source LLM Blueprint for the Custom Model.
         :param pulumi.Input[Sequence[pulumi.Input['CustomModelSourceRemoteRepositoryArgs']]] source_remote_repositories: The source remote repositories for the Custom Model.
         :param pulumi.Input[Sequence[pulumi.Input['CustomModelTagArgs']]] tags: The list of tags to assign to the Custom Model.
@@ -121,12 +120,7 @@ class CustomModelArgs:
         if resource_bundle_id is not None:
             pulumi.set(__self__, "resource_bundle_id", resource_bundle_id)
         if runtime_parameter_values is not None:
-            warnings.warn("""The runtime parameter values for the Custom Model. Deprecated: use `runtime_parameters` instead.""", DeprecationWarning)
-            pulumi.log.warn("""runtime_parameter_values is deprecated: The runtime parameter values for the Custom Model. Deprecated: use `runtime_parameters` instead.""")
-        if runtime_parameter_values is not None:
             pulumi.set(__self__, "runtime_parameter_values", runtime_parameter_values)
-        if runtime_parameters is not None:
-            pulumi.set(__self__, "runtime_parameters", runtime_parameters)
         if source_llm_blueprint_id is not None:
             pulumi.set(__self__, "source_llm_blueprint_id", source_llm_blueprint_id)
         if source_remote_repositories is not None:
@@ -374,25 +368,15 @@ class CustomModelArgs:
 
     @property
     @pulumi.getter(name="runtimeParameterValues")
-    @_utilities.deprecated("""The runtime parameter values for the Custom Model. Deprecated: use `runtime_parameters` instead.""")
     def runtime_parameter_values(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CustomModelRuntimeParameterValueArgs']]]]:
+        """
+        The runtime parameter values for the Custom Model.
+        """
         return pulumi.get(self, "runtime_parameter_values")
 
     @runtime_parameter_values.setter
     def runtime_parameter_values(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CustomModelRuntimeParameterValueArgs']]]]):
         pulumi.set(self, "runtime_parameter_values", value)
-
-    @property
-    @pulumi.getter(name="runtimeParameters")
-    def runtime_parameters(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CustomModelRuntimeParameterArgs']]]]:
-        """
-        The runtime parameters for the Custom Model version. Use instead of `runtime_parameter_values`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.
-        """
-        return pulumi.get(self, "runtime_parameters")
-
-    @runtime_parameters.setter
-    def runtime_parameters(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CustomModelRuntimeParameterArgs']]]]):
-        pulumi.set(self, "runtime_parameters", value)
 
     @property
     @pulumi.getter(name="sourceLlmBlueprintId")
@@ -517,7 +501,6 @@ class _CustomModelState:
                  replicas: Optional[pulumi.Input[builtins.int]] = None,
                  resource_bundle_id: Optional[pulumi.Input[builtins.str]] = None,
                  runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input['CustomModelRuntimeParameterValueArgs']]]] = None,
-                 runtime_parameters: Optional[pulumi.Input[Sequence[pulumi.Input['CustomModelRuntimeParameterArgs']]]] = None,
                  source_llm_blueprint_id: Optional[pulumi.Input[builtins.str]] = None,
                  source_remote_repositories: Optional[pulumi.Input[Sequence[pulumi.Input['CustomModelSourceRemoteRepositoryArgs']]]] = None,
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input['CustomModelTagArgs']]]] = None,
@@ -553,7 +536,7 @@ class _CustomModelState:
         :param pulumi.Input[builtins.float] prediction_threshold: The prediction threshold of the Custom Model.
         :param pulumi.Input[builtins.int] replicas: The replicas for the Custom Model.
         :param pulumi.Input[builtins.str] resource_bundle_id: A single identifier that represents a bundle of resources: Memory, CPU, GPU, etc.
-        :param pulumi.Input[Sequence[pulumi.Input['CustomModelRuntimeParameterArgs']]] runtime_parameters: The runtime parameters for the Custom Model version. Use instead of `runtime_parameter_values`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.
+        :param pulumi.Input[Sequence[pulumi.Input['CustomModelRuntimeParameterValueArgs']]] runtime_parameter_values: The runtime parameter values for the Custom Model.
         :param pulumi.Input[builtins.str] source_llm_blueprint_id: The ID of the source LLM Blueprint for the Custom Model.
         :param pulumi.Input[Sequence[pulumi.Input['CustomModelSourceRemoteRepositoryArgs']]] source_remote_repositories: The source remote repositories for the Custom Model.
         :param pulumi.Input[Sequence[pulumi.Input['CustomModelTagArgs']]] tags: The list of tags to assign to the Custom Model.
@@ -611,12 +594,7 @@ class _CustomModelState:
         if resource_bundle_id is not None:
             pulumi.set(__self__, "resource_bundle_id", resource_bundle_id)
         if runtime_parameter_values is not None:
-            warnings.warn("""The runtime parameter values for the Custom Model. Deprecated: use `runtime_parameters` instead.""", DeprecationWarning)
-            pulumi.log.warn("""runtime_parameter_values is deprecated: The runtime parameter values for the Custom Model. Deprecated: use `runtime_parameters` instead.""")
-        if runtime_parameter_values is not None:
             pulumi.set(__self__, "runtime_parameter_values", runtime_parameter_values)
-        if runtime_parameters is not None:
-            pulumi.set(__self__, "runtime_parameters", runtime_parameters)
         if source_llm_blueprint_id is not None:
             pulumi.set(__self__, "source_llm_blueprint_id", source_llm_blueprint_id)
         if source_remote_repositories is not None:
@@ -906,25 +884,15 @@ class _CustomModelState:
 
     @property
     @pulumi.getter(name="runtimeParameterValues")
-    @_utilities.deprecated("""The runtime parameter values for the Custom Model. Deprecated: use `runtime_parameters` instead.""")
     def runtime_parameter_values(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CustomModelRuntimeParameterValueArgs']]]]:
+        """
+        The runtime parameter values for the Custom Model.
+        """
         return pulumi.get(self, "runtime_parameter_values")
 
     @runtime_parameter_values.setter
     def runtime_parameter_values(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CustomModelRuntimeParameterValueArgs']]]]):
         pulumi.set(self, "runtime_parameter_values", value)
-
-    @property
-    @pulumi.getter(name="runtimeParameters")
-    def runtime_parameters(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['CustomModelRuntimeParameterArgs']]]]:
-        """
-        The runtime parameters for the Custom Model version. Use instead of `runtime_parameter_values`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.
-        """
-        return pulumi.get(self, "runtime_parameters")
-
-    @runtime_parameters.setter
-    def runtime_parameters(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['CustomModelRuntimeParameterArgs']]]]):
-        pulumi.set(self, "runtime_parameters", value)
 
     @property
     @pulumi.getter(name="sourceLlmBlueprintId")
@@ -1084,7 +1052,6 @@ class CustomModel(pulumi.CustomResource):
                  replicas: Optional[pulumi.Input[builtins.int]] = None,
                  resource_bundle_id: Optional[pulumi.Input[builtins.str]] = None,
                  runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input[Union['CustomModelRuntimeParameterValueArgs', 'CustomModelRuntimeParameterValueArgsDict']]]]] = None,
-                 runtime_parameters: Optional[pulumi.Input[Sequence[pulumi.Input[Union['CustomModelRuntimeParameterArgs', 'CustomModelRuntimeParameterArgsDict']]]]] = None,
                  source_llm_blueprint_id: Optional[pulumi.Input[builtins.str]] = None,
                  source_remote_repositories: Optional[pulumi.Input[Sequence[pulumi.Input[Union['CustomModelSourceRemoteRepositoryArgs', 'CustomModelSourceRemoteRepositoryArgsDict']]]]] = None,
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input[Union['CustomModelTagArgs', 'CustomModelTagArgsDict']]]]] = None,
@@ -1184,7 +1151,7 @@ class CustomModel(pulumi.CustomResource):
         :param pulumi.Input[builtins.float] prediction_threshold: The prediction threshold of the Custom Model.
         :param pulumi.Input[builtins.int] replicas: The replicas for the Custom Model.
         :param pulumi.Input[builtins.str] resource_bundle_id: A single identifier that represents a bundle of resources: Memory, CPU, GPU, etc.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['CustomModelRuntimeParameterArgs', 'CustomModelRuntimeParameterArgsDict']]]] runtime_parameters: The runtime parameters for the Custom Model version. Use instead of `runtime_parameter_values`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['CustomModelRuntimeParameterValueArgs', 'CustomModelRuntimeParameterValueArgsDict']]]] runtime_parameter_values: The runtime parameter values for the Custom Model.
         :param pulumi.Input[builtins.str] source_llm_blueprint_id: The ID of the source LLM Blueprint for the Custom Model.
         :param pulumi.Input[Sequence[pulumi.Input[Union['CustomModelSourceRemoteRepositoryArgs', 'CustomModelSourceRemoteRepositoryArgsDict']]]] source_remote_repositories: The source remote repositories for the Custom Model.
         :param pulumi.Input[Sequence[pulumi.Input[Union['CustomModelTagArgs', 'CustomModelTagArgsDict']]]] tags: The list of tags to assign to the Custom Model.
@@ -1304,7 +1271,6 @@ class CustomModel(pulumi.CustomResource):
                  replicas: Optional[pulumi.Input[builtins.int]] = None,
                  resource_bundle_id: Optional[pulumi.Input[builtins.str]] = None,
                  runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input[Union['CustomModelRuntimeParameterValueArgs', 'CustomModelRuntimeParameterValueArgsDict']]]]] = None,
-                 runtime_parameters: Optional[pulumi.Input[Sequence[pulumi.Input[Union['CustomModelRuntimeParameterArgs', 'CustomModelRuntimeParameterArgsDict']]]]] = None,
                  source_llm_blueprint_id: Optional[pulumi.Input[builtins.str]] = None,
                  source_remote_repositories: Optional[pulumi.Input[Sequence[pulumi.Input[Union['CustomModelSourceRemoteRepositoryArgs', 'CustomModelSourceRemoteRepositoryArgsDict']]]]] = None,
                  tags: Optional[pulumi.Input[Sequence[pulumi.Input[Union['CustomModelTagArgs', 'CustomModelTagArgsDict']]]]] = None,
@@ -1342,7 +1308,6 @@ class CustomModel(pulumi.CustomResource):
             __props__.__dict__["replicas"] = replicas
             __props__.__dict__["resource_bundle_id"] = resource_bundle_id
             __props__.__dict__["runtime_parameter_values"] = runtime_parameter_values
-            __props__.__dict__["runtime_parameters"] = runtime_parameters
             __props__.__dict__["source_llm_blueprint_id"] = source_llm_blueprint_id
             __props__.__dict__["source_remote_repositories"] = source_remote_repositories
             __props__.__dict__["tags"] = tags
@@ -1390,7 +1355,6 @@ class CustomModel(pulumi.CustomResource):
             replicas: Optional[pulumi.Input[builtins.int]] = None,
             resource_bundle_id: Optional[pulumi.Input[builtins.str]] = None,
             runtime_parameter_values: Optional[pulumi.Input[Sequence[pulumi.Input[Union['CustomModelRuntimeParameterValueArgs', 'CustomModelRuntimeParameterValueArgsDict']]]]] = None,
-            runtime_parameters: Optional[pulumi.Input[Sequence[pulumi.Input[Union['CustomModelRuntimeParameterArgs', 'CustomModelRuntimeParameterArgsDict']]]]] = None,
             source_llm_blueprint_id: Optional[pulumi.Input[builtins.str]] = None,
             source_remote_repositories: Optional[pulumi.Input[Sequence[pulumi.Input[Union['CustomModelSourceRemoteRepositoryArgs', 'CustomModelSourceRemoteRepositoryArgsDict']]]]] = None,
             tags: Optional[pulumi.Input[Sequence[pulumi.Input[Union['CustomModelTagArgs', 'CustomModelTagArgsDict']]]]] = None,
@@ -1431,7 +1395,7 @@ class CustomModel(pulumi.CustomResource):
         :param pulumi.Input[builtins.float] prediction_threshold: The prediction threshold of the Custom Model.
         :param pulumi.Input[builtins.int] replicas: The replicas for the Custom Model.
         :param pulumi.Input[builtins.str] resource_bundle_id: A single identifier that represents a bundle of resources: Memory, CPU, GPU, etc.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['CustomModelRuntimeParameterArgs', 'CustomModelRuntimeParameterArgsDict']]]] runtime_parameters: The runtime parameters for the Custom Model version. Use instead of `runtime_parameter_values`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['CustomModelRuntimeParameterValueArgs', 'CustomModelRuntimeParameterValueArgsDict']]]] runtime_parameter_values: The runtime parameter values for the Custom Model.
         :param pulumi.Input[builtins.str] source_llm_blueprint_id: The ID of the source LLM Blueprint for the Custom Model.
         :param pulumi.Input[Sequence[pulumi.Input[Union['CustomModelSourceRemoteRepositoryArgs', 'CustomModelSourceRemoteRepositoryArgsDict']]]] source_remote_repositories: The source remote repositories for the Custom Model.
         :param pulumi.Input[Sequence[pulumi.Input[Union['CustomModelTagArgs', 'CustomModelTagArgsDict']]]] tags: The list of tags to assign to the Custom Model.
@@ -1471,7 +1435,6 @@ class CustomModel(pulumi.CustomResource):
         __props__.__dict__["replicas"] = replicas
         __props__.__dict__["resource_bundle_id"] = resource_bundle_id
         __props__.__dict__["runtime_parameter_values"] = runtime_parameter_values
-        __props__.__dict__["runtime_parameters"] = runtime_parameters
         __props__.__dict__["source_llm_blueprint_id"] = source_llm_blueprint_id
         __props__.__dict__["source_remote_repositories"] = source_remote_repositories
         __props__.__dict__["tags"] = tags
@@ -1663,17 +1626,11 @@ class CustomModel(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="runtimeParameterValues")
-    @_utilities.deprecated("""The runtime parameter values for the Custom Model. Deprecated: use `runtime_parameters` instead.""")
-    def runtime_parameter_values(self) -> pulumi.Output[Sequence['outputs.CustomModelRuntimeParameterValue']]:
+    def runtime_parameter_values(self) -> pulumi.Output[Optional[Sequence['outputs.CustomModelRuntimeParameterValue']]]:
+        """
+        The runtime parameter values for the Custom Model.
+        """
         return pulumi.get(self, "runtime_parameter_values")
-
-    @property
-    @pulumi.getter(name="runtimeParameters")
-    def runtime_parameters(self) -> pulumi.Output[Optional[Sequence['outputs.CustomModelRuntimeParameter']]]:
-        """
-        The runtime parameters for the Custom Model version. Use instead of `runtime_parameter_values`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.
-        """
-        return pulumi.get(self, "runtime_parameters")
 
     @property
     @pulumi.getter(name="sourceLlmBlueprintId")

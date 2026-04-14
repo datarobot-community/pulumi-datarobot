@@ -82,14 +82,11 @@ namespace DataRobotPulumi.Datarobot
         [Output("resourceBundleId")]
         public Output<string?> ResourceBundleId { get; private set; } = null!;
 
+        /// <summary>
+        /// The runtime parameters for the Custom Job.
+        /// </summary>
         [Output("runtimeParameterValues")]
         public Output<ImmutableArray<Outputs.CustomJobRuntimeParameterValue>> RuntimeParameterValues { get; private set; } = null!;
-
-        /// <summary>
-        /// The runtime parameters for the Custom Job. Use instead of `runtime_parameter_values`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.
-        /// </summary>
-        [Output("runtimeParameters")]
-        public Output<ImmutableArray<Outputs.CustomJobRuntimeParameter>> RuntimeParameters { get; private set; } = null!;
 
         /// <summary>
         /// The schedule configuration for the custom job.
@@ -206,23 +203,14 @@ namespace DataRobotPulumi.Datarobot
 
         [Input("runtimeParameterValues")]
         private InputList<Inputs.CustomJobRuntimeParameterValueArgs>? _runtimeParameterValues;
-        [Obsolete(@"Additional parameters to be injected into a Job at runtime. Deprecated: use `runtime_parameters` instead.")]
+
+        /// <summary>
+        /// The runtime parameters for the Custom Job.
+        /// </summary>
         public InputList<Inputs.CustomJobRuntimeParameterValueArgs> RuntimeParameterValues
         {
             get => _runtimeParameterValues ?? (_runtimeParameterValues = new InputList<Inputs.CustomJobRuntimeParameterValueArgs>());
             set => _runtimeParameterValues = value;
-        }
-
-        [Input("runtimeParameters")]
-        private InputList<Inputs.CustomJobRuntimeParameterArgs>? _runtimeParameters;
-
-        /// <summary>
-        /// The runtime parameters for the Custom Job. Use instead of `runtime_parameter_values`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.
-        /// </summary>
-        public InputList<Inputs.CustomJobRuntimeParameterArgs> RuntimeParameters
-        {
-            get => _runtimeParameters ?? (_runtimeParameters = new InputList<Inputs.CustomJobRuntimeParameterArgs>());
-            set => _runtimeParameters = value;
         }
 
         /// <summary>
@@ -319,23 +307,14 @@ namespace DataRobotPulumi.Datarobot
 
         [Input("runtimeParameterValues")]
         private InputList<Inputs.CustomJobRuntimeParameterValueGetArgs>? _runtimeParameterValues;
-        [Obsolete(@"Additional parameters to be injected into a Job at runtime. Deprecated: use `runtime_parameters` instead.")]
+
+        /// <summary>
+        /// The runtime parameters for the Custom Job.
+        /// </summary>
         public InputList<Inputs.CustomJobRuntimeParameterValueGetArgs> RuntimeParameterValues
         {
             get => _runtimeParameterValues ?? (_runtimeParameterValues = new InputList<Inputs.CustomJobRuntimeParameterValueGetArgs>());
             set => _runtimeParameterValues = value;
-        }
-
-        [Input("runtimeParameters")]
-        private InputList<Inputs.CustomJobRuntimeParameterGetArgs>? _runtimeParameters;
-
-        /// <summary>
-        /// The runtime parameters for the Custom Job. Use instead of `runtime_parameter_values`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.
-        /// </summary>
-        public InputList<Inputs.CustomJobRuntimeParameterGetArgs> RuntimeParameters
-        {
-            get => _runtimeParameters ?? (_runtimeParameters = new InputList<Inputs.CustomJobRuntimeParameterGetArgs>());
-            set => _runtimeParameters = value;
         }
 
         /// <summary>

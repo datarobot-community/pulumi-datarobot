@@ -32,11 +32,8 @@ type ApplicationSource struct {
 	// The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.
 	RequiredKeyScopeLevel pulumi.StringOutput `pulumi:"requiredKeyScopeLevel"`
 	// The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.
-	Resources ApplicationSourceResourcesOutput `pulumi:"resources"`
-	// Deprecated: The runtime parameter values for the Application Source. Deprecated: use `runtimeParameters` instead.
+	Resources              ApplicationSourceResourcesOutput                  `pulumi:"resources"`
 	RuntimeParameterValues ApplicationSourceRuntimeParameterValueArrayOutput `pulumi:"runtimeParameterValues"`
-	// The runtime parameters for the Application Source version. Use instead of `runtimeParameterValues`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.
-	RuntimeParameters ApplicationSourceRuntimeParameterArrayOutput `pulumi:"runtimeParameters"`
 	// The version ID of the Application Source.
 	VersionId pulumi.StringOutput `pulumi:"versionId"`
 }
@@ -88,11 +85,8 @@ type applicationSourceState struct {
 	// The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.
 	RequiredKeyScopeLevel *string `pulumi:"requiredKeyScopeLevel"`
 	// The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.
-	Resources *ApplicationSourceResources `pulumi:"resources"`
-	// Deprecated: The runtime parameter values for the Application Source. Deprecated: use `runtimeParameters` instead.
+	Resources              *ApplicationSourceResources              `pulumi:"resources"`
 	RuntimeParameterValues []ApplicationSourceRuntimeParameterValue `pulumi:"runtimeParameterValues"`
-	// The runtime parameters for the Application Source version. Use instead of `runtimeParameterValues`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.
-	RuntimeParameters []ApplicationSourceRuntimeParameter `pulumi:"runtimeParameters"`
 	// The version ID of the Application Source.
 	VersionId *string `pulumi:"versionId"`
 }
@@ -115,11 +109,8 @@ type ApplicationSourceState struct {
 	// The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.
 	RequiredKeyScopeLevel pulumi.StringPtrInput
 	// The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.
-	Resources ApplicationSourceResourcesPtrInput
-	// Deprecated: The runtime parameter values for the Application Source. Deprecated: use `runtimeParameters` instead.
+	Resources              ApplicationSourceResourcesPtrInput
 	RuntimeParameterValues ApplicationSourceRuntimeParameterValueArrayInput
-	// The runtime parameters for the Application Source version. Use instead of `runtimeParameterValues`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.
-	RuntimeParameters ApplicationSourceRuntimeParameterArrayInput
 	// The version ID of the Application Source.
 	VersionId pulumi.StringPtrInput
 }
@@ -142,11 +133,8 @@ type applicationSourceArgs struct {
 	// The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.
 	RequiredKeyScopeLevel *string `pulumi:"requiredKeyScopeLevel"`
 	// The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.
-	Resources *ApplicationSourceResources `pulumi:"resources"`
-	// Deprecated: The runtime parameter values for the Application Source. Deprecated: use `runtimeParameters` instead.
+	Resources              *ApplicationSourceResources              `pulumi:"resources"`
 	RuntimeParameterValues []ApplicationSourceRuntimeParameterValue `pulumi:"runtimeParameterValues"`
-	// The runtime parameters for the Application Source version. Use instead of `runtimeParameterValues`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.
-	RuntimeParameters []ApplicationSourceRuntimeParameter `pulumi:"runtimeParameters"`
 }
 
 // The set of arguments for constructing a ApplicationSource resource.
@@ -164,11 +152,8 @@ type ApplicationSourceArgs struct {
 	// The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.
 	RequiredKeyScopeLevel pulumi.StringPtrInput
 	// The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.
-	Resources ApplicationSourceResourcesPtrInput
-	// Deprecated: The runtime parameter values for the Application Source. Deprecated: use `runtimeParameters` instead.
+	Resources              ApplicationSourceResourcesPtrInput
 	RuntimeParameterValues ApplicationSourceRuntimeParameterValueArrayInput
-	// The runtime parameters for the Application Source version. Use instead of `runtimeParameterValues`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.
-	RuntimeParameters ApplicationSourceRuntimeParameterArrayInput
 }
 
 func (ApplicationSourceArgs) ElementType() reflect.Type {
@@ -303,16 +288,10 @@ func (o ApplicationSourceOutput) Resources() ApplicationSourceResourcesOutput {
 	return o.ApplyT(func(v *ApplicationSource) ApplicationSourceResourcesOutput { return v.Resources }).(ApplicationSourceResourcesOutput)
 }
 
-// Deprecated: The runtime parameter values for the Application Source. Deprecated: use `runtimeParameters` instead.
 func (o ApplicationSourceOutput) RuntimeParameterValues() ApplicationSourceRuntimeParameterValueArrayOutput {
 	return o.ApplyT(func(v *ApplicationSource) ApplicationSourceRuntimeParameterValueArrayOutput {
 		return v.RuntimeParameterValues
 	}).(ApplicationSourceRuntimeParameterValueArrayOutput)
-}
-
-// The runtime parameters for the Application Source version. Use instead of `runtimeParameterValues`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.
-func (o ApplicationSourceOutput) RuntimeParameters() ApplicationSourceRuntimeParameterArrayOutput {
-	return o.ApplyT(func(v *ApplicationSource) ApplicationSourceRuntimeParameterArrayOutput { return v.RuntimeParameters }).(ApplicationSourceRuntimeParameterArrayOutput)
 }
 
 // The version ID of the Application Source.

@@ -66,21 +66,6 @@ export interface ApplicationSourceResources {
     sessionAffinity: boolean;
 }
 
-export interface ApplicationSourceRuntimeParameter {
-    /**
-     * The name of the runtime parameter.
-     */
-    key: string;
-    /**
-     * The type of the runtime parameter.
-     */
-    type: string;
-    /**
-     * The value of the runtime parameter (type conversion is handled internally).
-     */
-    value: string;
-}
-
 export interface ApplicationSourceRuntimeParameterValue {
     /**
      * The name of the runtime parameter.
@@ -326,21 +311,6 @@ export interface CustomApplicationResources {
      * Whether session affinity is enabled for the Custom Application. Computed by API if not specified.
      */
     sessionAffinity?: boolean;
-}
-
-export interface CustomJobRuntimeParameter {
-    /**
-     * The name of the runtime parameter.
-     */
-    key: string;
-    /**
-     * The type of the runtime parameter.
-     */
-    type: string;
-    /**
-     * The value of the runtime parameter (type conversion is handled internally).
-     */
-    value: string;
 }
 
 export interface CustomJobRuntimeParameterValue {
@@ -630,21 +600,6 @@ export interface CustomModelOverallModerationConfiguration {
      * The timeout in seconds of the overall moderation configuration.
      */
     timeoutSec: number;
-}
-
-export interface CustomModelRuntimeParameter {
-    /**
-     * The name of the runtime parameter.
-     */
-    key: string;
-    /**
-     * The type of the runtime parameter.
-     */
-    type: string;
-    /**
-     * The value of the runtime parameter (type conversion is handled internally).
-     */
-    value: string;
 }
 
 export interface CustomModelRuntimeParameterValue {

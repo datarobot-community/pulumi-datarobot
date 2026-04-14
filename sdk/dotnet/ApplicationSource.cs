@@ -74,12 +74,6 @@ namespace DataRobotPulumi.Datarobot
         public Output<ImmutableArray<Outputs.ApplicationSourceRuntimeParameterValue>> RuntimeParameterValues { get; private set; } = null!;
 
         /// <summary>
-        /// The runtime parameters for the Application Source version. Use instead of `runtime_parameter_values`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.
-        /// </summary>
-        [Output("runtimeParameters")]
-        public Output<ImmutableArray<Outputs.ApplicationSourceRuntimeParameter>> RuntimeParameters { get; private set; } = null!;
-
-        /// <summary>
         /// The version ID of the Application Source.
         /// </summary>
         [Output("versionId")]
@@ -176,23 +170,10 @@ namespace DataRobotPulumi.Datarobot
 
         [Input("runtimeParameterValues")]
         private InputList<Inputs.ApplicationSourceRuntimeParameterValueArgs>? _runtimeParameterValues;
-        [Obsolete(@"The runtime parameter values for the Application Source. Deprecated: use `runtime_parameters` instead.")]
         public InputList<Inputs.ApplicationSourceRuntimeParameterValueArgs> RuntimeParameterValues
         {
             get => _runtimeParameterValues ?? (_runtimeParameterValues = new InputList<Inputs.ApplicationSourceRuntimeParameterValueArgs>());
             set => _runtimeParameterValues = value;
-        }
-
-        [Input("runtimeParameters")]
-        private InputList<Inputs.ApplicationSourceRuntimeParameterArgs>? _runtimeParameters;
-
-        /// <summary>
-        /// The runtime parameters for the Application Source version. Use instead of `runtime_parameter_values`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.
-        /// </summary>
-        public InputList<Inputs.ApplicationSourceRuntimeParameterArgs> RuntimeParameters
-        {
-            get => _runtimeParameters ?? (_runtimeParameters = new InputList<Inputs.ApplicationSourceRuntimeParameterArgs>());
-            set => _runtimeParameters = value;
         }
 
         public ApplicationSourceArgs()
@@ -265,23 +246,10 @@ namespace DataRobotPulumi.Datarobot
 
         [Input("runtimeParameterValues")]
         private InputList<Inputs.ApplicationSourceRuntimeParameterValueGetArgs>? _runtimeParameterValues;
-        [Obsolete(@"The runtime parameter values for the Application Source. Deprecated: use `runtime_parameters` instead.")]
         public InputList<Inputs.ApplicationSourceRuntimeParameterValueGetArgs> RuntimeParameterValues
         {
             get => _runtimeParameterValues ?? (_runtimeParameterValues = new InputList<Inputs.ApplicationSourceRuntimeParameterValueGetArgs>());
             set => _runtimeParameterValues = value;
-        }
-
-        [Input("runtimeParameters")]
-        private InputList<Inputs.ApplicationSourceRuntimeParameterGetArgs>? _runtimeParameters;
-
-        /// <summary>
-        /// The runtime parameters for the Application Source version. Use instead of `runtime_parameter_values`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.
-        /// </summary>
-        public InputList<Inputs.ApplicationSourceRuntimeParameterGetArgs> RuntimeParameters
-        {
-            get => _runtimeParameters ?? (_runtimeParameters = new InputList<Inputs.ApplicationSourceRuntimeParameterGetArgs>());
-            set => _runtimeParameters = value;
         }
 
         /// <summary>
