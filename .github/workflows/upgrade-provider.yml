@@ -88,22 +88,39 @@ jobs:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         echo "Detecting upgrade provider PR branch (post action)..."
-        # Narrow search: open PRs authored by github-actions[bot] containing 'Upgrade provider'
-        PR_JSON=$(gh pr list --state open --author github-actions[bot] --search "Upgrade terraform-provider-datarobot" --json number,headRefName,title,updatedAt --limit 20 | jq -r 'sort_by(.updatedAt) | reverse | .[0]')
-        if [[ -z "$PR_JSON" || "$PR_JSON" == "null" ]]; then
-          echo "No matching upgrade provider PR found."
-          echo "pr_branch=" >> $GITHUB_OUTPUT
+
+        # First, try to detect from git state — the action may have left us on the created branch
+        CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "")
+        DEFAULT_BRANCH=$(git remote show origin | awk '/HEAD branch/ {print $NF}')
+        if [[ -n "$CURRENT_BRANCH" && "$CURRENT_BRANCH" != "$DEFAULT_BRANCH" && "$CURRENT_BRANCH" != "HEAD" ]]; then
+          echo "Detected current branch: $CURRENT_BRANCH (using as PR branch)"
+          echo "pr_branch=$CURRENT_BRANCH" >> $GITHUB_OUTPUT
           exit 0
         fi
-        PR_BRANCH=$(echo "$PR_JSON" | jq -r '.headRefName')
-        PR_TITLE=$(echo "$PR_JSON" | jq -r '.title')
-        echo "Found PR: $PR_TITLE (branch: $PR_BRANCH)"
-        echo "pr_branch=$PR_BRANCH" >> $GITHUB_OUTPUT
+
+        # Fall back to searching via GitHub API with retries to handle propagation delay
+        for ATTEMPT in 1 2 3 4 5; do
+          echo "Attempt $ATTEMPT: searching for upgrade provider PR..."
+          PR_JSON=$(gh pr list --state open --author github-actions[bot] --search "Upgrade terraform-provider-datarobot" --json number,headRefName,title,updatedAt --limit 20 | jq -r 'sort_by(.updatedAt) | reverse | .[0]')
+          if [[ -n "$PR_JSON" && "$PR_JSON" != "null" ]]; then
+            PR_BRANCH=$(echo "$PR_JSON" | jq -r '.headRefName')
+            PR_TITLE=$(echo "$PR_JSON" | jq -r '.title')
+            echo "Found PR: $PR_TITLE (branch: $PR_BRANCH)"
+            echo "pr_branch=$PR_BRANCH" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          echo "No PR found yet, waiting 15 s before retry..."
+          sleep 15
+        done
+
+        echo "No matching upgrade provider PR found after retries."
+        echo "pr_branch=" >> $GITHUB_OUTPUT
 
   generate_readmes:
     name: generate-readmes
     runs-on: ubuntu-latest
     needs: upgrade_provider
+    if: needs.upgrade_provider.outputs.pr_branch != ''
     permissions:
       contents: write
       pull-requests: write
