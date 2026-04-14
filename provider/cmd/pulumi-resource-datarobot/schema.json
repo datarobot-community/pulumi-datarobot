@@ -168,28 +168,6 @@
         }
       }
     },
-    "datarobot:index/ApplicationSourceRuntimeParameter:ApplicationSourceRuntimeParameter": {
-      "properties": {
-        "key": {
-          "type": "string",
-          "description": "The name of the runtime parameter.\n"
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the runtime parameter.\n"
-        },
-        "value": {
-          "type": "string",
-          "description": "The value of the runtime parameter (type conversion is handled internally).\n"
-        }
-      },
-      "type": "object",
-      "required": [
-        "key",
-        "type",
-        "value"
-      ]
-    },
     "datarobot:index/ApplicationSourceRuntimeParameterValue:ApplicationSourceRuntimeParameterValue": {
       "properties": {
         "key": {
@@ -524,28 +502,6 @@
         }
       },
       "type": "object"
-    },
-    "datarobot:index/CustomJobRuntimeParameter:CustomJobRuntimeParameter": {
-      "properties": {
-        "key": {
-          "type": "string",
-          "description": "The name of the runtime parameter.\n"
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the runtime parameter.\n"
-        },
-        "value": {
-          "type": "string",
-          "description": "The value of the runtime parameter (type conversion is handled internally).\n"
-        }
-      },
-      "type": "object",
-      "required": [
-        "key",
-        "type",
-        "value"
-      ]
     },
     "datarobot:index/CustomJobRuntimeParameterValue:CustomJobRuntimeParameterValue": {
       "properties": {
@@ -972,28 +928,6 @@
           ]
         }
       }
-    },
-    "datarobot:index/CustomModelRuntimeParameter:CustomModelRuntimeParameter": {
-      "properties": {
-        "key": {
-          "type": "string",
-          "description": "The name of the runtime parameter.\n"
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the runtime parameter.\n"
-        },
-        "value": {
-          "type": "string",
-          "description": "The value of the runtime parameter (type conversion is handled internally).\n"
-        }
-      },
-      "type": "object",
-      "required": [
-        "key",
-        "type",
-        "value"
-      ]
     },
     "datarobot:index/CustomModelRuntimeParameterValue:CustomModelRuntimeParameterValue": {
       "properties": {
@@ -2272,15 +2206,7 @@
           "type": "array",
           "items": {
             "$ref": "#/types/datarobot:index/ApplicationSourceRuntimeParameterValue:ApplicationSourceRuntimeParameterValue"
-          },
-          "deprecationMessage": "The runtime parameter values for the Application Source. Deprecated: use `runtime_parameters` instead."
-        },
-        "runtimeParameters": {
-          "type": "array",
-          "items": {
-            "$ref": "#/types/datarobot:index/ApplicationSourceRuntimeParameter:ApplicationSourceRuntimeParameter"
-          },
-          "description": "The runtime parameters for the Application Source version. Use instead of `runtime_parameter_values`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.\n"
+          }
         },
         "versionId": {
           "type": "string",
@@ -2331,15 +2257,7 @@
           "type": "array",
           "items": {
             "$ref": "#/types/datarobot:index/ApplicationSourceRuntimeParameterValue:ApplicationSourceRuntimeParameterValue"
-          },
-          "deprecationMessage": "The runtime parameter values for the Application Source. Deprecated: use `runtime_parameters` instead."
-        },
-        "runtimeParameters": {
-          "type": "array",
-          "items": {
-            "$ref": "#/types/datarobot:index/ApplicationSourceRuntimeParameter:ApplicationSourceRuntimeParameter"
-          },
-          "description": "The runtime parameters for the Application Source version. Use instead of `runtime_parameter_values`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.\n"
+          }
         }
       },
       "stateInputs": {
@@ -2388,15 +2306,7 @@
             "type": "array",
             "items": {
               "$ref": "#/types/datarobot:index/ApplicationSourceRuntimeParameterValue:ApplicationSourceRuntimeParameterValue"
-            },
-            "deprecationMessage": "The runtime parameter values for the Application Source. Deprecated: use `runtime_parameters` instead."
-          },
-          "runtimeParameters": {
-            "type": "array",
-            "items": {
-              "$ref": "#/types/datarobot:index/ApplicationSourceRuntimeParameter:ApplicationSourceRuntimeParameter"
-            },
-            "description": "The runtime parameters for the Application Source version. Use instead of `runtime_parameter_values`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.\n"
+            }
           },
           "versionId": {
             "type": "string",
@@ -3509,14 +3419,7 @@
           "items": {
             "$ref": "#/types/datarobot:index/CustomJobRuntimeParameterValue:CustomJobRuntimeParameterValue"
           },
-          "deprecationMessage": "Additional parameters to be injected into a Job at runtime. Deprecated: use `runtime_parameters` instead."
-        },
-        "runtimeParameters": {
-          "type": "array",
-          "items": {
-            "$ref": "#/types/datarobot:index/CustomJobRuntimeParameter:CustomJobRuntimeParameter"
-          },
-          "description": "The runtime parameters for the Custom Job. Use instead of `runtime_parameter_values`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.\n"
+          "description": "The runtime parameters for the Custom Job.\n"
         },
         "schedule": {
           "$ref": "#/types/datarobot:index/CustomJobSchedule:CustomJobSchedule",
@@ -3535,7 +3438,6 @@
         "folderPathHash",
         "jobType",
         "name",
-        "runtimeParameterValues",
         "scheduleId"
       ],
       "inputProperties": {
@@ -3580,14 +3482,7 @@
           "items": {
             "$ref": "#/types/datarobot:index/CustomJobRuntimeParameterValue:CustomJobRuntimeParameterValue"
           },
-          "deprecationMessage": "Additional parameters to be injected into a Job at runtime. Deprecated: use `runtime_parameters` instead."
-        },
-        "runtimeParameters": {
-          "type": "array",
-          "items": {
-            "$ref": "#/types/datarobot:index/CustomJobRuntimeParameter:CustomJobRuntimeParameter"
-          },
-          "description": "The runtime parameters for the Custom Job. Use instead of `runtime_parameter_values`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.\n"
+          "description": "The runtime parameters for the Custom Job.\n"
         },
         "schedule": {
           "$ref": "#/types/datarobot:index/CustomJobSchedule:CustomJobSchedule",
@@ -3653,14 +3548,7 @@
             "items": {
               "$ref": "#/types/datarobot:index/CustomJobRuntimeParameterValue:CustomJobRuntimeParameterValue"
             },
-            "deprecationMessage": "Additional parameters to be injected into a Job at runtime. Deprecated: use `runtime_parameters` instead."
-          },
-          "runtimeParameters": {
-            "type": "array",
-            "items": {
-              "$ref": "#/types/datarobot:index/CustomJobRuntimeParameter:CustomJobRuntimeParameter"
-            },
-            "description": "The runtime parameters for the Custom Job. Use instead of `runtime_parameter_values`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.\n"
+            "description": "The runtime parameters for the Custom Job.\n"
           },
           "schedule": {
             "$ref": "#/types/datarobot:index/CustomJobSchedule:CustomJobSchedule",
@@ -4354,14 +4242,7 @@
           "items": {
             "$ref": "#/types/datarobot:index/CustomModelRuntimeParameterValue:CustomModelRuntimeParameterValue"
           },
-          "deprecationMessage": "The runtime parameter values for the Custom Model. Deprecated: use `runtime_parameters` instead."
-        },
-        "runtimeParameters": {
-          "type": "array",
-          "items": {
-            "$ref": "#/types/datarobot:index/CustomModelRuntimeParameter:CustomModelRuntimeParameter"
-          },
-          "description": "The runtime parameters for the Custom Model version. Use instead of `runtime_parameter_values`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.\n"
+          "description": "The runtime parameter values for the Custom Model.\n"
         },
         "sourceLlmBlueprintId": {
           "type": "string",
@@ -4432,7 +4313,6 @@
         "positiveClassLabel",
         "predictionThreshold",
         "replicas",
-        "runtimeParameterValues",
         "targetName",
         "targetType",
         "trainingDatasetName",
@@ -4527,14 +4407,7 @@
           "items": {
             "$ref": "#/types/datarobot:index/CustomModelRuntimeParameterValue:CustomModelRuntimeParameterValue"
           },
-          "deprecationMessage": "The runtime parameter values for the Custom Model. Deprecated: use `runtime_parameters` instead."
-        },
-        "runtimeParameters": {
-          "type": "array",
-          "items": {
-            "$ref": "#/types/datarobot:index/CustomModelRuntimeParameter:CustomModelRuntimeParameter"
-          },
-          "description": "The runtime parameters for the Custom Model version. Use instead of `runtime_parameter_values`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.\n"
+          "description": "The runtime parameter values for the Custom Model.\n"
         },
         "sourceLlmBlueprintId": {
           "type": "string",
@@ -4683,14 +4556,7 @@
             "items": {
               "$ref": "#/types/datarobot:index/CustomModelRuntimeParameterValue:CustomModelRuntimeParameterValue"
             },
-            "deprecationMessage": "The runtime parameter values for the Custom Model. Deprecated: use `runtime_parameters` instead."
-          },
-          "runtimeParameters": {
-            "type": "array",
-            "items": {
-              "$ref": "#/types/datarobot:index/CustomModelRuntimeParameter:CustomModelRuntimeParameter"
-            },
-            "description": "The runtime parameters for the Custom Model version. Use instead of `runtime_parameter_values`. Requires the RUNTIME*PARAMETERS*IMPROVEMENTS feature on the DataRobot API.\n"
+            "description": "The runtime parameter values for the Custom Model.\n"
           },
           "sourceLlmBlueprintId": {
             "type": "string",
