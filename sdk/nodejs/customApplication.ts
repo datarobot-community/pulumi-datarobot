@@ -52,7 +52,7 @@ export class CustomApplication extends pulumi.CustomResource {
     /**
      * The list of external email addresses that have access to the Custom Application.
      */
-    public readonly externalAccessRecipients!: pulumi.Output<string[] | undefined>;
+    public readonly externalAccessRecipients!: pulumi.Output<string[]>;
     /**
      * The name of the Custom Application.
      */

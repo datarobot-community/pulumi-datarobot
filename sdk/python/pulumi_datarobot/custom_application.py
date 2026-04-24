@@ -483,7 +483,7 @@ class CustomApplication(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="externalAccessRecipients")
-    def external_access_recipients(self) -> pulumi.Output[Optional[Sequence[builtins.str]]]:
+    def external_access_recipients(self) -> pulumi.Output[Sequence[builtins.str]]:
         """
         The list of external email addresses that have access to the Custom Application.
         """

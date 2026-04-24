@@ -92,7 +92,7 @@ export class QaApplication extends pulumi.CustomResource {
     /**
      * The list of external email addresses that have access to the Q&A Application.
      */
-    public readonly externalAccessRecipients!: pulumi.Output<string[] | undefined>;
+    public readonly externalAccessRecipients!: pulumi.Output<string[]>;
     /**
      * The name of the Q&A Application.
      */
