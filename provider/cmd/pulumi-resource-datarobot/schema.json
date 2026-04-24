@@ -3120,6 +3120,7 @@
         "allowAutoStopping",
         "applicationUrl",
         "externalAccessEnabled",
+        "externalAccessRecipients",
         "name",
         "resources",
         "sourceId",
@@ -3273,6 +3274,7 @@
         "environmentId",
         "environmentVersionId",
         "externalAccessEnabled",
+        "externalAccessRecipients",
         "name",
         "resources"
       ],
@@ -6682,6 +6684,7 @@
         "applicationUrl",
         "deploymentId",
         "externalAccessEnabled",
+        "externalAccessRecipients",
         "name",
         "sourceId",
         "sourceVersionId"
