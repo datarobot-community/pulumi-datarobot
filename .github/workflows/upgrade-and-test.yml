@@ -134,7 +134,7 @@ jobs:
 
       - name: Publish to Test PyPI (rebuilt artifacts)
         if: env.TEST_PYPI_TOKEN != ''
-        uses: pypa/gh-action-pypi-publish@ab69e431e9c9f48a3310be0a56527c679f56e04d # v1.12.4
+        uses: pypa/gh-action-pypi-publish@cef221092ed1bacb1cc03d23a2d87d1d172e277b # v1.12.4
         with:
           user: ${{ env.PYPI_USERNAME }}
           password: ${{ env.TEST_PYPI_TOKEN }}
