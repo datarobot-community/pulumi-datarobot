@@ -17,6 +17,7 @@
         "appOauth.ts",
         "applicationSource.ts",
         "applicationSourceFromTemplate.ts",
+        "artifact.ts",
         "awsCredential.ts",
         "azureCredential.ts",
         "basicCredential.ts",
@@ -63,6 +64,7 @@
         "userMcpResourceMetadata.ts",
         "userMcpToolMetadata.ts",
         "utilities.ts",
-        "vectorDatabase.ts"
+        "vectorDatabase.ts",
+        "workload.ts"
     ]
 }

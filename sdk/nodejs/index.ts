@@ -25,6 +25,11 @@ export type ApplicationSourceFromTemplate = import("./applicationSourceFromTempl
 export const ApplicationSourceFromTemplate: typeof import("./applicationSourceFromTemplate").ApplicationSourceFromTemplate = null as any;
 utilities.lazyLoad(exports, ["ApplicationSourceFromTemplate"], () => require("./applicationSourceFromTemplate"));
 
+export { ArtifactArgs, ArtifactState } from "./artifact";
+export type Artifact = import("./artifact").Artifact;
+export const Artifact: typeof import("./artifact").Artifact = null as any;
+utilities.lazyLoad(exports, ["Artifact"], () => require("./artifact"));
+
 export { AwsCredentialArgs, AwsCredentialState } from "./awsCredential";
 export type AwsCredential = import("./awsCredential").AwsCredential;
 export const AwsCredential: typeof import("./awsCredential").AwsCredential = null as any;
@@ -225,6 +230,11 @@ export type VectorDatabase = import("./vectorDatabase").VectorDatabase;
 export const VectorDatabase: typeof import("./vectorDatabase").VectorDatabase = null as any;
 utilities.lazyLoad(exports, ["VectorDatabase"], () => require("./vectorDatabase"));
 
+export { WorkloadArgs, WorkloadState } from "./workload";
+export type Workload = import("./workload").Workload;
+export const Workload: typeof import("./workload").Workload = null as any;
+utilities.lazyLoad(exports, ["Workload"], () => require("./workload"));
+
 
 // Export sub-modules:
 import * as config from "./config";
@@ -247,6 +257,8 @@ const _module = {
                 return new ApplicationSource(name, <any>undefined, { urn })
             case "datarobot:index/applicationSourceFromTemplate:ApplicationSourceFromTemplate":
                 return new ApplicationSourceFromTemplate(name, <any>undefined, { urn })
+            case "datarobot:index/artifact:Artifact":
+                return new Artifact(name, <any>undefined, { urn })
             case "datarobot:index/awsCredential:AwsCredential":
                 return new AwsCredential(name, <any>undefined, { urn })
             case "datarobot:index/azureCredential:AzureCredential":
@@ -321,6 +333,8 @@ const _module = {
                 return new UserMcpToolMetadata(name, <any>undefined, { urn })
             case "datarobot:index/vectorDatabase:VectorDatabase":
                 return new VectorDatabase(name, <any>undefined, { urn })
+            case "datarobot:index/workload:Workload":
+                return new Workload(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
@@ -330,6 +344,7 @@ pulumi.runtime.registerResourceModule("datarobot", "index/apiTokenCredential", _
 pulumi.runtime.registerResourceModule("datarobot", "index/appOauth", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/applicationSource", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/applicationSourceFromTemplate", _module)
+pulumi.runtime.registerResourceModule("datarobot", "index/artifact", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/awsCredential", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/azureCredential", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/basicCredential", _module)
@@ -367,6 +382,7 @@ pulumi.runtime.registerResourceModule("datarobot", "index/userMcpPromptMetadata"
 pulumi.runtime.registerResourceModule("datarobot", "index/userMcpResourceMetadata", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/userMcpToolMetadata", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/vectorDatabase", _module)
+pulumi.runtime.registerResourceModule("datarobot", "index/workload", _module)
 pulumi.runtime.registerResourcePackage("datarobot", {
     version: utilities.getVersion(),
     constructProvider: (name: string, type: string, urn: string): pulumi.ProviderResource => {

@@ -10,6 +10,7 @@ from .api_token_credential import *
 from .app_oauth import *
 from .application_source import *
 from .application_source_from_template import *
+from .artifact import *
 from .aws_credential import *
 from .azure_credential import *
 from .basic_credential import *
@@ -50,6 +51,7 @@ from .user_mcp_prompt_metadata import *
 from .user_mcp_resource_metadata import *
 from .user_mcp_tool_metadata import *
 from .vector_database import *
+from .workload import *
 from ._inputs import *
 from . import outputs
 
@@ -93,6 +95,14 @@ _utilities.register(
   "fqn": "pulumi_datarobot",
   "classes": {
    "datarobot:index/applicationSourceFromTemplate:ApplicationSourceFromTemplate": "ApplicationSourceFromTemplate"
+  }
+ },
+ {
+  "pkg": "datarobot",
+  "mod": "index/artifact",
+  "fqn": "pulumi_datarobot",
+  "classes": {
+   "datarobot:index/artifact:Artifact": "Artifact"
   }
  },
  {
@@ -389,6 +399,14 @@ _utilities.register(
   "fqn": "pulumi_datarobot",
   "classes": {
    "datarobot:index/vectorDatabase:VectorDatabase": "VectorDatabase"
+  }
+ },
+ {
+  "pkg": "datarobot",
+  "mod": "index/workload",
+  "fqn": "pulumi_datarobot",
+  "classes": {
+   "datarobot:index/workload:Workload": "Workload"
   }
  }
 ]

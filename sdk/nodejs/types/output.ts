@@ -81,6 +81,202 @@ export interface ApplicationSourceRuntimeParameterValue {
     value: string;
 }
 
+export interface ArtifactSpec {
+    /**
+     * List of container groups.
+     */
+    containerGroups: outputs.ArtifactSpecContainerGroup[];
+}
+
+export interface ArtifactSpecContainerGroup {
+    /**
+     * List of containers in this group.
+     */
+    containers: outputs.ArtifactSpecContainerGroupContainer[];
+}
+
+export interface ArtifactSpecContainerGroupContainer {
+    /**
+     * Description of the container.
+     */
+    description?: string;
+    /**
+     * Container entrypoint.
+     */
+    entrypoints?: string[];
+    /**
+     * Environment variables for the container.
+     */
+    environmentVars?: outputs.ArtifactSpecContainerGroupContainerEnvironmentVar[];
+    /**
+     * Docker image URI.
+     */
+    imageUri: string;
+    /**
+     * Container liveness check configuration.
+     */
+    livenessProbe?: outputs.ArtifactSpecContainerGroupContainerLivenessProbe;
+    /**
+     * Name of the container.
+     */
+    name: string;
+    /**
+     * Container access port (1024-65535). Required for primary containers; omit for non-primary.
+     */
+    port: number;
+    /**
+     * Whether this is the primary container.
+     */
+    primary: boolean;
+    /**
+     * Container readiness check configuration.
+     */
+    readinessProbe?: outputs.ArtifactSpecContainerGroupContainerReadinessProbe;
+    /**
+     * Resource requirements for the container.
+     */
+    resourceRequest: outputs.ArtifactSpecContainerGroupContainerResourceRequest;
+    /**
+     * Container startup check configuration.
+     */
+    startupProbe?: outputs.ArtifactSpecContainerGroupContainerStartupProbe;
+}
+
+export interface ArtifactSpecContainerGroupContainerEnvironmentVar {
+    /**
+     * Name of the environment variable.
+     */
+    name: string;
+    /**
+     * Value of the environment variable.
+     */
+    value: string;
+}
+
+export interface ArtifactSpecContainerGroupContainerLivenessProbe {
+    /**
+     * Minimum consecutive failures for the probe to be considered failed.
+     */
+    failureThreshold: number;
+    /**
+     * Host name to connect to, defaults to the pod IP.
+     */
+    host: string;
+    /**
+     * Number of seconds to wait before the first probe is executed.
+     */
+    initialDelaySeconds: number;
+    /**
+     * URL path to query for health check.
+     */
+    path: string;
+    /**
+     * How often (in seconds) to perform the probe.
+     */
+    periodSeconds: number;
+    /**
+     * Port number to access on the container.
+     */
+    port: number;
+    /**
+     * Scheme to use for connecting to the host (HTTP or HTTPS).
+     */
+    scheme: string;
+    /**
+     * Number of seconds after which the probe times out.
+     */
+    timeoutSeconds: number;
+}
+
+export interface ArtifactSpecContainerGroupContainerReadinessProbe {
+    /**
+     * Minimum consecutive failures for the probe to be considered failed.
+     */
+    failureThreshold: number;
+    /**
+     * Host name to connect to, defaults to the pod IP.
+     */
+    host: string;
+    /**
+     * Number of seconds to wait before the first probe is executed.
+     */
+    initialDelaySeconds: number;
+    /**
+     * URL path to query for health check.
+     */
+    path: string;
+    /**
+     * How often (in seconds) to perform the probe.
+     */
+    periodSeconds: number;
+    /**
+     * Port number to access on the container.
+     */
+    port: number;
+    /**
+     * Scheme to use for connecting to the host (HTTP or HTTPS).
+     */
+    scheme: string;
+    /**
+     * Number of seconds after which the probe times out.
+     */
+    timeoutSeconds: number;
+}
+
+export interface ArtifactSpecContainerGroupContainerResourceRequest {
+    /**
+     * Number of CPU cores required.
+     */
+    cpu: number;
+    /**
+     * Number of GPUs required.
+     */
+    gpu?: number;
+    /**
+     * GPU type required (e.g., NVIDIA-A100).
+     */
+    gpuType?: string;
+    /**
+     * Memory required in bytes.
+     */
+    memory: number;
+}
+
+export interface ArtifactSpecContainerGroupContainerStartupProbe {
+    /**
+     * Minimum consecutive failures for the probe to be considered failed.
+     */
+    failureThreshold: number;
+    /**
+     * Host name to connect to, defaults to the pod IP.
+     */
+    host: string;
+    /**
+     * Number of seconds to wait before the first probe is executed.
+     */
+    initialDelaySeconds: number;
+    /**
+     * URL path to query for health check.
+     */
+    path: string;
+    /**
+     * How often (in seconds) to perform the probe.
+     */
+    periodSeconds: number;
+    /**
+     * Port number to access on the container.
+     */
+    port: number;
+    /**
+     * Scheme to use for connecting to the host (HTTP or HTTPS).
+     */
+    scheme: string;
+    /**
+     * Number of seconds after which the probe times out.
+     */
+    timeoutSeconds: number;
+}
+
 export interface BatchPredictionJobDefinitionCsvSettings {
     /**
      * Fields are delimited by this character. Use the string tab to denote TSV (TAB separated values). Must be either a one-character string or the string tab.
@@ -1328,5 +1524,61 @@ export interface VectorDatabaseChunkingParameters {
      * The separators used to split the data.
      */
     separators: string[];
+}
+
+export interface WorkloadRuntime {
+    /**
+     * Autoscaling configuration. When set, takes precedence over replica_count.
+     */
+    autoscaling?: outputs.WorkloadRuntimeAutoscaling;
+    /**
+     * Number of replicas to run. Cannot be used together with `autoscaling`. Omitting this field retains the current value. Set to `0` to explicitly clear it (e.g. when switching to autoscaling).
+     */
+    replicaCount: number;
+    /**
+     * Resource bundles assigned to the Workload. When empty the server infers an appropriate bundle.
+     */
+    resources?: outputs.WorkloadRuntimeResource[];
+}
+
+export interface WorkloadRuntimeAutoscaling {
+    /**
+     * Whether autoscaling is enabled. Defaults to true.
+     */
+    enabled: boolean;
+    /**
+     * Scaling policies that define when and how to scale.
+     */
+    policies: outputs.WorkloadRuntimeAutoscalingPolicy[];
+}
+
+export interface WorkloadRuntimeAutoscalingPolicy {
+    /**
+     * Maximum number of replicas.
+     */
+    maxCount: number;
+    /**
+     * Minimum number of replicas.
+     */
+    minCount: number;
+    /**
+     * Policy priority when multiple policies are defined.
+     */
+    priority: number;
+    /**
+     * Metric used for scaling decisions: `cpuAverageUtilization`, `httpRequestsConcurrency`, `gpuCacheUtilization`, or `gpuRequestQueueDepth`.
+     */
+    scalingMetric: string;
+    /**
+     * Target value for the scaling metric.
+     */
+    target: number;
+}
+
+export interface WorkloadRuntimeResource {
+    /**
+     * ID of the resource bundle (e.g. `cpu.nano`).
+     */
+    resourceBundleId: string;
 }
 

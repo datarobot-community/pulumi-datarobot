@@ -669,6 +669,1432 @@ func (o ApplicationSourceRuntimeParameterValueArrayOutput) Index(i pulumi.IntInp
 	}).(ApplicationSourceRuntimeParameterValueOutput)
 }
 
+type ArtifactSpec struct {
+	// List of container groups.
+	ContainerGroups []ArtifactSpecContainerGroup `pulumi:"containerGroups"`
+}
+
+// ArtifactSpecInput is an input type that accepts ArtifactSpecArgs and ArtifactSpecOutput values.
+// You can construct a concrete instance of `ArtifactSpecInput` via:
+//
+//	ArtifactSpecArgs{...}
+type ArtifactSpecInput interface {
+	pulumi.Input
+
+	ToArtifactSpecOutput() ArtifactSpecOutput
+	ToArtifactSpecOutputWithContext(context.Context) ArtifactSpecOutput
+}
+
+type ArtifactSpecArgs struct {
+	// List of container groups.
+	ContainerGroups ArtifactSpecContainerGroupArrayInput `pulumi:"containerGroups"`
+}
+
+func (ArtifactSpecArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ArtifactSpec)(nil)).Elem()
+}
+
+func (i ArtifactSpecArgs) ToArtifactSpecOutput() ArtifactSpecOutput {
+	return i.ToArtifactSpecOutputWithContext(context.Background())
+}
+
+func (i ArtifactSpecArgs) ToArtifactSpecOutputWithContext(ctx context.Context) ArtifactSpecOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ArtifactSpecOutput)
+}
+
+func (i ArtifactSpecArgs) ToArtifactSpecPtrOutput() ArtifactSpecPtrOutput {
+	return i.ToArtifactSpecPtrOutputWithContext(context.Background())
+}
+
+func (i ArtifactSpecArgs) ToArtifactSpecPtrOutputWithContext(ctx context.Context) ArtifactSpecPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ArtifactSpecOutput).ToArtifactSpecPtrOutputWithContext(ctx)
+}
+
+// ArtifactSpecPtrInput is an input type that accepts ArtifactSpecArgs, ArtifactSpecPtr and ArtifactSpecPtrOutput values.
+// You can construct a concrete instance of `ArtifactSpecPtrInput` via:
+//
+//	        ArtifactSpecArgs{...}
+//
+//	or:
+//
+//	        nil
+type ArtifactSpecPtrInput interface {
+	pulumi.Input
+
+	ToArtifactSpecPtrOutput() ArtifactSpecPtrOutput
+	ToArtifactSpecPtrOutputWithContext(context.Context) ArtifactSpecPtrOutput
+}
+
+type artifactSpecPtrType ArtifactSpecArgs
+
+func ArtifactSpecPtr(v *ArtifactSpecArgs) ArtifactSpecPtrInput {
+	return (*artifactSpecPtrType)(v)
+}
+
+func (*artifactSpecPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ArtifactSpec)(nil)).Elem()
+}
+
+func (i *artifactSpecPtrType) ToArtifactSpecPtrOutput() ArtifactSpecPtrOutput {
+	return i.ToArtifactSpecPtrOutputWithContext(context.Background())
+}
+
+func (i *artifactSpecPtrType) ToArtifactSpecPtrOutputWithContext(ctx context.Context) ArtifactSpecPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ArtifactSpecPtrOutput)
+}
+
+type ArtifactSpecOutput struct{ *pulumi.OutputState }
+
+func (ArtifactSpecOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ArtifactSpec)(nil)).Elem()
+}
+
+func (o ArtifactSpecOutput) ToArtifactSpecOutput() ArtifactSpecOutput {
+	return o
+}
+
+func (o ArtifactSpecOutput) ToArtifactSpecOutputWithContext(ctx context.Context) ArtifactSpecOutput {
+	return o
+}
+
+func (o ArtifactSpecOutput) ToArtifactSpecPtrOutput() ArtifactSpecPtrOutput {
+	return o.ToArtifactSpecPtrOutputWithContext(context.Background())
+}
+
+func (o ArtifactSpecOutput) ToArtifactSpecPtrOutputWithContext(ctx context.Context) ArtifactSpecPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ArtifactSpec) *ArtifactSpec {
+		return &v
+	}).(ArtifactSpecPtrOutput)
+}
+
+// List of container groups.
+func (o ArtifactSpecOutput) ContainerGroups() ArtifactSpecContainerGroupArrayOutput {
+	return o.ApplyT(func(v ArtifactSpec) []ArtifactSpecContainerGroup { return v.ContainerGroups }).(ArtifactSpecContainerGroupArrayOutput)
+}
+
+type ArtifactSpecPtrOutput struct{ *pulumi.OutputState }
+
+func (ArtifactSpecPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ArtifactSpec)(nil)).Elem()
+}
+
+func (o ArtifactSpecPtrOutput) ToArtifactSpecPtrOutput() ArtifactSpecPtrOutput {
+	return o
+}
+
+func (o ArtifactSpecPtrOutput) ToArtifactSpecPtrOutputWithContext(ctx context.Context) ArtifactSpecPtrOutput {
+	return o
+}
+
+func (o ArtifactSpecPtrOutput) Elem() ArtifactSpecOutput {
+	return o.ApplyT(func(v *ArtifactSpec) ArtifactSpec {
+		if v != nil {
+			return *v
+		}
+		var ret ArtifactSpec
+		return ret
+	}).(ArtifactSpecOutput)
+}
+
+// List of container groups.
+func (o ArtifactSpecPtrOutput) ContainerGroups() ArtifactSpecContainerGroupArrayOutput {
+	return o.ApplyT(func(v *ArtifactSpec) []ArtifactSpecContainerGroup {
+		if v == nil {
+			return nil
+		}
+		return v.ContainerGroups
+	}).(ArtifactSpecContainerGroupArrayOutput)
+}
+
+type ArtifactSpecContainerGroup struct {
+	// List of containers in this group.
+	Containers []ArtifactSpecContainerGroupContainer `pulumi:"containers"`
+}
+
+// ArtifactSpecContainerGroupInput is an input type that accepts ArtifactSpecContainerGroupArgs and ArtifactSpecContainerGroupOutput values.
+// You can construct a concrete instance of `ArtifactSpecContainerGroupInput` via:
+//
+//	ArtifactSpecContainerGroupArgs{...}
+type ArtifactSpecContainerGroupInput interface {
+	pulumi.Input
+
+	ToArtifactSpecContainerGroupOutput() ArtifactSpecContainerGroupOutput
+	ToArtifactSpecContainerGroupOutputWithContext(context.Context) ArtifactSpecContainerGroupOutput
+}
+
+type ArtifactSpecContainerGroupArgs struct {
+	// List of containers in this group.
+	Containers ArtifactSpecContainerGroupContainerArrayInput `pulumi:"containers"`
+}
+
+func (ArtifactSpecContainerGroupArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ArtifactSpecContainerGroup)(nil)).Elem()
+}
+
+func (i ArtifactSpecContainerGroupArgs) ToArtifactSpecContainerGroupOutput() ArtifactSpecContainerGroupOutput {
+	return i.ToArtifactSpecContainerGroupOutputWithContext(context.Background())
+}
+
+func (i ArtifactSpecContainerGroupArgs) ToArtifactSpecContainerGroupOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ArtifactSpecContainerGroupOutput)
+}
+
+// ArtifactSpecContainerGroupArrayInput is an input type that accepts ArtifactSpecContainerGroupArray and ArtifactSpecContainerGroupArrayOutput values.
+// You can construct a concrete instance of `ArtifactSpecContainerGroupArrayInput` via:
+//
+//	ArtifactSpecContainerGroupArray{ ArtifactSpecContainerGroupArgs{...} }
+type ArtifactSpecContainerGroupArrayInput interface {
+	pulumi.Input
+
+	ToArtifactSpecContainerGroupArrayOutput() ArtifactSpecContainerGroupArrayOutput
+	ToArtifactSpecContainerGroupArrayOutputWithContext(context.Context) ArtifactSpecContainerGroupArrayOutput
+}
+
+type ArtifactSpecContainerGroupArray []ArtifactSpecContainerGroupInput
+
+func (ArtifactSpecContainerGroupArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ArtifactSpecContainerGroup)(nil)).Elem()
+}
+
+func (i ArtifactSpecContainerGroupArray) ToArtifactSpecContainerGroupArrayOutput() ArtifactSpecContainerGroupArrayOutput {
+	return i.ToArtifactSpecContainerGroupArrayOutputWithContext(context.Background())
+}
+
+func (i ArtifactSpecContainerGroupArray) ToArtifactSpecContainerGroupArrayOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ArtifactSpecContainerGroupArrayOutput)
+}
+
+type ArtifactSpecContainerGroupOutput struct{ *pulumi.OutputState }
+
+func (ArtifactSpecContainerGroupOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ArtifactSpecContainerGroup)(nil)).Elem()
+}
+
+func (o ArtifactSpecContainerGroupOutput) ToArtifactSpecContainerGroupOutput() ArtifactSpecContainerGroupOutput {
+	return o
+}
+
+func (o ArtifactSpecContainerGroupOutput) ToArtifactSpecContainerGroupOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupOutput {
+	return o
+}
+
+// List of containers in this group.
+func (o ArtifactSpecContainerGroupOutput) Containers() ArtifactSpecContainerGroupContainerArrayOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroup) []ArtifactSpecContainerGroupContainer { return v.Containers }).(ArtifactSpecContainerGroupContainerArrayOutput)
+}
+
+type ArtifactSpecContainerGroupArrayOutput struct{ *pulumi.OutputState }
+
+func (ArtifactSpecContainerGroupArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ArtifactSpecContainerGroup)(nil)).Elem()
+}
+
+func (o ArtifactSpecContainerGroupArrayOutput) ToArtifactSpecContainerGroupArrayOutput() ArtifactSpecContainerGroupArrayOutput {
+	return o
+}
+
+func (o ArtifactSpecContainerGroupArrayOutput) ToArtifactSpecContainerGroupArrayOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupArrayOutput {
+	return o
+}
+
+func (o ArtifactSpecContainerGroupArrayOutput) Index(i pulumi.IntInput) ArtifactSpecContainerGroupOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ArtifactSpecContainerGroup {
+		return vs[0].([]ArtifactSpecContainerGroup)[vs[1].(int)]
+	}).(ArtifactSpecContainerGroupOutput)
+}
+
+type ArtifactSpecContainerGroupContainer struct {
+	// Description of the container.
+	Description *string `pulumi:"description"`
+	// Container entrypoint.
+	Entrypoints []string `pulumi:"entrypoints"`
+	// Environment variables for the container.
+	EnvironmentVars []ArtifactSpecContainerGroupContainerEnvironmentVar `pulumi:"environmentVars"`
+	// Docker image URI.
+	ImageUri string `pulumi:"imageUri"`
+	// Container liveness check configuration.
+	LivenessProbe *ArtifactSpecContainerGroupContainerLivenessProbe `pulumi:"livenessProbe"`
+	// Name of the container.
+	Name *string `pulumi:"name"`
+	// Container access port (1024-65535). Required for primary containers; omit for non-primary.
+	Port *int `pulumi:"port"`
+	// Whether this is the primary container.
+	Primary *bool `pulumi:"primary"`
+	// Container readiness check configuration.
+	ReadinessProbe *ArtifactSpecContainerGroupContainerReadinessProbe `pulumi:"readinessProbe"`
+	// Resource requirements for the container.
+	ResourceRequest ArtifactSpecContainerGroupContainerResourceRequest `pulumi:"resourceRequest"`
+	// Container startup check configuration.
+	StartupProbe *ArtifactSpecContainerGroupContainerStartupProbe `pulumi:"startupProbe"`
+}
+
+// ArtifactSpecContainerGroupContainerInput is an input type that accepts ArtifactSpecContainerGroupContainerArgs and ArtifactSpecContainerGroupContainerOutput values.
+// You can construct a concrete instance of `ArtifactSpecContainerGroupContainerInput` via:
+//
+//	ArtifactSpecContainerGroupContainerArgs{...}
+type ArtifactSpecContainerGroupContainerInput interface {
+	pulumi.Input
+
+	ToArtifactSpecContainerGroupContainerOutput() ArtifactSpecContainerGroupContainerOutput
+	ToArtifactSpecContainerGroupContainerOutputWithContext(context.Context) ArtifactSpecContainerGroupContainerOutput
+}
+
+type ArtifactSpecContainerGroupContainerArgs struct {
+	// Description of the container.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	// Container entrypoint.
+	Entrypoints pulumi.StringArrayInput `pulumi:"entrypoints"`
+	// Environment variables for the container.
+	EnvironmentVars ArtifactSpecContainerGroupContainerEnvironmentVarArrayInput `pulumi:"environmentVars"`
+	// Docker image URI.
+	ImageUri pulumi.StringInput `pulumi:"imageUri"`
+	// Container liveness check configuration.
+	LivenessProbe ArtifactSpecContainerGroupContainerLivenessProbePtrInput `pulumi:"livenessProbe"`
+	// Name of the container.
+	Name pulumi.StringPtrInput `pulumi:"name"`
+	// Container access port (1024-65535). Required for primary containers; omit for non-primary.
+	Port pulumi.IntPtrInput `pulumi:"port"`
+	// Whether this is the primary container.
+	Primary pulumi.BoolPtrInput `pulumi:"primary"`
+	// Container readiness check configuration.
+	ReadinessProbe ArtifactSpecContainerGroupContainerReadinessProbePtrInput `pulumi:"readinessProbe"`
+	// Resource requirements for the container.
+	ResourceRequest ArtifactSpecContainerGroupContainerResourceRequestInput `pulumi:"resourceRequest"`
+	// Container startup check configuration.
+	StartupProbe ArtifactSpecContainerGroupContainerStartupProbePtrInput `pulumi:"startupProbe"`
+}
+
+func (ArtifactSpecContainerGroupContainerArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ArtifactSpecContainerGroupContainer)(nil)).Elem()
+}
+
+func (i ArtifactSpecContainerGroupContainerArgs) ToArtifactSpecContainerGroupContainerOutput() ArtifactSpecContainerGroupContainerOutput {
+	return i.ToArtifactSpecContainerGroupContainerOutputWithContext(context.Background())
+}
+
+func (i ArtifactSpecContainerGroupContainerArgs) ToArtifactSpecContainerGroupContainerOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupContainerOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ArtifactSpecContainerGroupContainerOutput)
+}
+
+// ArtifactSpecContainerGroupContainerArrayInput is an input type that accepts ArtifactSpecContainerGroupContainerArray and ArtifactSpecContainerGroupContainerArrayOutput values.
+// You can construct a concrete instance of `ArtifactSpecContainerGroupContainerArrayInput` via:
+//
+//	ArtifactSpecContainerGroupContainerArray{ ArtifactSpecContainerGroupContainerArgs{...} }
+type ArtifactSpecContainerGroupContainerArrayInput interface {
+	pulumi.Input
+
+	ToArtifactSpecContainerGroupContainerArrayOutput() ArtifactSpecContainerGroupContainerArrayOutput
+	ToArtifactSpecContainerGroupContainerArrayOutputWithContext(context.Context) ArtifactSpecContainerGroupContainerArrayOutput
+}
+
+type ArtifactSpecContainerGroupContainerArray []ArtifactSpecContainerGroupContainerInput
+
+func (ArtifactSpecContainerGroupContainerArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ArtifactSpecContainerGroupContainer)(nil)).Elem()
+}
+
+func (i ArtifactSpecContainerGroupContainerArray) ToArtifactSpecContainerGroupContainerArrayOutput() ArtifactSpecContainerGroupContainerArrayOutput {
+	return i.ToArtifactSpecContainerGroupContainerArrayOutputWithContext(context.Background())
+}
+
+func (i ArtifactSpecContainerGroupContainerArray) ToArtifactSpecContainerGroupContainerArrayOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupContainerArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ArtifactSpecContainerGroupContainerArrayOutput)
+}
+
+type ArtifactSpecContainerGroupContainerOutput struct{ *pulumi.OutputState }
+
+func (ArtifactSpecContainerGroupContainerOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ArtifactSpecContainerGroupContainer)(nil)).Elem()
+}
+
+func (o ArtifactSpecContainerGroupContainerOutput) ToArtifactSpecContainerGroupContainerOutput() ArtifactSpecContainerGroupContainerOutput {
+	return o
+}
+
+func (o ArtifactSpecContainerGroupContainerOutput) ToArtifactSpecContainerGroupContainerOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupContainerOutput {
+	return o
+}
+
+// Description of the container.
+func (o ArtifactSpecContainerGroupContainerOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainer) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// Container entrypoint.
+func (o ArtifactSpecContainerGroupContainerOutput) Entrypoints() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainer) []string { return v.Entrypoints }).(pulumi.StringArrayOutput)
+}
+
+// Environment variables for the container.
+func (o ArtifactSpecContainerGroupContainerOutput) EnvironmentVars() ArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainer) []ArtifactSpecContainerGroupContainerEnvironmentVar {
+		return v.EnvironmentVars
+	}).(ArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput)
+}
+
+// Docker image URI.
+func (o ArtifactSpecContainerGroupContainerOutput) ImageUri() pulumi.StringOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainer) string { return v.ImageUri }).(pulumi.StringOutput)
+}
+
+// Container liveness check configuration.
+func (o ArtifactSpecContainerGroupContainerOutput) LivenessProbe() ArtifactSpecContainerGroupContainerLivenessProbePtrOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainer) *ArtifactSpecContainerGroupContainerLivenessProbe {
+		return v.LivenessProbe
+	}).(ArtifactSpecContainerGroupContainerLivenessProbePtrOutput)
+}
+
+// Name of the container.
+func (o ArtifactSpecContainerGroupContainerOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainer) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+// Container access port (1024-65535). Required for primary containers; omit for non-primary.
+func (o ArtifactSpecContainerGroupContainerOutput) Port() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainer) *int { return v.Port }).(pulumi.IntPtrOutput)
+}
+
+// Whether this is the primary container.
+func (o ArtifactSpecContainerGroupContainerOutput) Primary() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainer) *bool { return v.Primary }).(pulumi.BoolPtrOutput)
+}
+
+// Container readiness check configuration.
+func (o ArtifactSpecContainerGroupContainerOutput) ReadinessProbe() ArtifactSpecContainerGroupContainerReadinessProbePtrOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainer) *ArtifactSpecContainerGroupContainerReadinessProbe {
+		return v.ReadinessProbe
+	}).(ArtifactSpecContainerGroupContainerReadinessProbePtrOutput)
+}
+
+// Resource requirements for the container.
+func (o ArtifactSpecContainerGroupContainerOutput) ResourceRequest() ArtifactSpecContainerGroupContainerResourceRequestOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainer) ArtifactSpecContainerGroupContainerResourceRequest {
+		return v.ResourceRequest
+	}).(ArtifactSpecContainerGroupContainerResourceRequestOutput)
+}
+
+// Container startup check configuration.
+func (o ArtifactSpecContainerGroupContainerOutput) StartupProbe() ArtifactSpecContainerGroupContainerStartupProbePtrOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainer) *ArtifactSpecContainerGroupContainerStartupProbe {
+		return v.StartupProbe
+	}).(ArtifactSpecContainerGroupContainerStartupProbePtrOutput)
+}
+
+type ArtifactSpecContainerGroupContainerArrayOutput struct{ *pulumi.OutputState }
+
+func (ArtifactSpecContainerGroupContainerArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ArtifactSpecContainerGroupContainer)(nil)).Elem()
+}
+
+func (o ArtifactSpecContainerGroupContainerArrayOutput) ToArtifactSpecContainerGroupContainerArrayOutput() ArtifactSpecContainerGroupContainerArrayOutput {
+	return o
+}
+
+func (o ArtifactSpecContainerGroupContainerArrayOutput) ToArtifactSpecContainerGroupContainerArrayOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupContainerArrayOutput {
+	return o
+}
+
+func (o ArtifactSpecContainerGroupContainerArrayOutput) Index(i pulumi.IntInput) ArtifactSpecContainerGroupContainerOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ArtifactSpecContainerGroupContainer {
+		return vs[0].([]ArtifactSpecContainerGroupContainer)[vs[1].(int)]
+	}).(ArtifactSpecContainerGroupContainerOutput)
+}
+
+type ArtifactSpecContainerGroupContainerEnvironmentVar struct {
+	// Name of the environment variable.
+	Name string `pulumi:"name"`
+	// Value of the environment variable.
+	Value string `pulumi:"value"`
+}
+
+// ArtifactSpecContainerGroupContainerEnvironmentVarInput is an input type that accepts ArtifactSpecContainerGroupContainerEnvironmentVarArgs and ArtifactSpecContainerGroupContainerEnvironmentVarOutput values.
+// You can construct a concrete instance of `ArtifactSpecContainerGroupContainerEnvironmentVarInput` via:
+//
+//	ArtifactSpecContainerGroupContainerEnvironmentVarArgs{...}
+type ArtifactSpecContainerGroupContainerEnvironmentVarInput interface {
+	pulumi.Input
+
+	ToArtifactSpecContainerGroupContainerEnvironmentVarOutput() ArtifactSpecContainerGroupContainerEnvironmentVarOutput
+	ToArtifactSpecContainerGroupContainerEnvironmentVarOutputWithContext(context.Context) ArtifactSpecContainerGroupContainerEnvironmentVarOutput
+}
+
+type ArtifactSpecContainerGroupContainerEnvironmentVarArgs struct {
+	// Name of the environment variable.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Value of the environment variable.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (ArtifactSpecContainerGroupContainerEnvironmentVarArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ArtifactSpecContainerGroupContainerEnvironmentVar)(nil)).Elem()
+}
+
+func (i ArtifactSpecContainerGroupContainerEnvironmentVarArgs) ToArtifactSpecContainerGroupContainerEnvironmentVarOutput() ArtifactSpecContainerGroupContainerEnvironmentVarOutput {
+	return i.ToArtifactSpecContainerGroupContainerEnvironmentVarOutputWithContext(context.Background())
+}
+
+func (i ArtifactSpecContainerGroupContainerEnvironmentVarArgs) ToArtifactSpecContainerGroupContainerEnvironmentVarOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupContainerEnvironmentVarOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ArtifactSpecContainerGroupContainerEnvironmentVarOutput)
+}
+
+// ArtifactSpecContainerGroupContainerEnvironmentVarArrayInput is an input type that accepts ArtifactSpecContainerGroupContainerEnvironmentVarArray and ArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput values.
+// You can construct a concrete instance of `ArtifactSpecContainerGroupContainerEnvironmentVarArrayInput` via:
+//
+//	ArtifactSpecContainerGroupContainerEnvironmentVarArray{ ArtifactSpecContainerGroupContainerEnvironmentVarArgs{...} }
+type ArtifactSpecContainerGroupContainerEnvironmentVarArrayInput interface {
+	pulumi.Input
+
+	ToArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput() ArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput
+	ToArtifactSpecContainerGroupContainerEnvironmentVarArrayOutputWithContext(context.Context) ArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput
+}
+
+type ArtifactSpecContainerGroupContainerEnvironmentVarArray []ArtifactSpecContainerGroupContainerEnvironmentVarInput
+
+func (ArtifactSpecContainerGroupContainerEnvironmentVarArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ArtifactSpecContainerGroupContainerEnvironmentVar)(nil)).Elem()
+}
+
+func (i ArtifactSpecContainerGroupContainerEnvironmentVarArray) ToArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput() ArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput {
+	return i.ToArtifactSpecContainerGroupContainerEnvironmentVarArrayOutputWithContext(context.Background())
+}
+
+func (i ArtifactSpecContainerGroupContainerEnvironmentVarArray) ToArtifactSpecContainerGroupContainerEnvironmentVarArrayOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput)
+}
+
+type ArtifactSpecContainerGroupContainerEnvironmentVarOutput struct{ *pulumi.OutputState }
+
+func (ArtifactSpecContainerGroupContainerEnvironmentVarOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ArtifactSpecContainerGroupContainerEnvironmentVar)(nil)).Elem()
+}
+
+func (o ArtifactSpecContainerGroupContainerEnvironmentVarOutput) ToArtifactSpecContainerGroupContainerEnvironmentVarOutput() ArtifactSpecContainerGroupContainerEnvironmentVarOutput {
+	return o
+}
+
+func (o ArtifactSpecContainerGroupContainerEnvironmentVarOutput) ToArtifactSpecContainerGroupContainerEnvironmentVarOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupContainerEnvironmentVarOutput {
+	return o
+}
+
+// Name of the environment variable.
+func (o ArtifactSpecContainerGroupContainerEnvironmentVarOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerEnvironmentVar) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Value of the environment variable.
+func (o ArtifactSpecContainerGroupContainerEnvironmentVarOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerEnvironmentVar) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type ArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput struct{ *pulumi.OutputState }
+
+func (ArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ArtifactSpecContainerGroupContainerEnvironmentVar)(nil)).Elem()
+}
+
+func (o ArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput) ToArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput() ArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput {
+	return o
+}
+
+func (o ArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput) ToArtifactSpecContainerGroupContainerEnvironmentVarArrayOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput {
+	return o
+}
+
+func (o ArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput) Index(i pulumi.IntInput) ArtifactSpecContainerGroupContainerEnvironmentVarOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ArtifactSpecContainerGroupContainerEnvironmentVar {
+		return vs[0].([]ArtifactSpecContainerGroupContainerEnvironmentVar)[vs[1].(int)]
+	}).(ArtifactSpecContainerGroupContainerEnvironmentVarOutput)
+}
+
+type ArtifactSpecContainerGroupContainerLivenessProbe struct {
+	// Minimum consecutive failures for the probe to be considered failed.
+	FailureThreshold *int `pulumi:"failureThreshold"`
+	// Host name to connect to, defaults to the pod IP.
+	Host *string `pulumi:"host"`
+	// Number of seconds to wait before the first probe is executed.
+	InitialDelaySeconds *int `pulumi:"initialDelaySeconds"`
+	// URL path to query for health check.
+	Path string `pulumi:"path"`
+	// How often (in seconds) to perform the probe.
+	PeriodSeconds *int `pulumi:"periodSeconds"`
+	// Port number to access on the container.
+	Port *int `pulumi:"port"`
+	// Scheme to use for connecting to the host (HTTP or HTTPS).
+	Scheme *string `pulumi:"scheme"`
+	// Number of seconds after which the probe times out.
+	TimeoutSeconds *int `pulumi:"timeoutSeconds"`
+}
+
+// ArtifactSpecContainerGroupContainerLivenessProbeInput is an input type that accepts ArtifactSpecContainerGroupContainerLivenessProbeArgs and ArtifactSpecContainerGroupContainerLivenessProbeOutput values.
+// You can construct a concrete instance of `ArtifactSpecContainerGroupContainerLivenessProbeInput` via:
+//
+//	ArtifactSpecContainerGroupContainerLivenessProbeArgs{...}
+type ArtifactSpecContainerGroupContainerLivenessProbeInput interface {
+	pulumi.Input
+
+	ToArtifactSpecContainerGroupContainerLivenessProbeOutput() ArtifactSpecContainerGroupContainerLivenessProbeOutput
+	ToArtifactSpecContainerGroupContainerLivenessProbeOutputWithContext(context.Context) ArtifactSpecContainerGroupContainerLivenessProbeOutput
+}
+
+type ArtifactSpecContainerGroupContainerLivenessProbeArgs struct {
+	// Minimum consecutive failures for the probe to be considered failed.
+	FailureThreshold pulumi.IntPtrInput `pulumi:"failureThreshold"`
+	// Host name to connect to, defaults to the pod IP.
+	Host pulumi.StringPtrInput `pulumi:"host"`
+	// Number of seconds to wait before the first probe is executed.
+	InitialDelaySeconds pulumi.IntPtrInput `pulumi:"initialDelaySeconds"`
+	// URL path to query for health check.
+	Path pulumi.StringInput `pulumi:"path"`
+	// How often (in seconds) to perform the probe.
+	PeriodSeconds pulumi.IntPtrInput `pulumi:"periodSeconds"`
+	// Port number to access on the container.
+	Port pulumi.IntPtrInput `pulumi:"port"`
+	// Scheme to use for connecting to the host (HTTP or HTTPS).
+	Scheme pulumi.StringPtrInput `pulumi:"scheme"`
+	// Number of seconds after which the probe times out.
+	TimeoutSeconds pulumi.IntPtrInput `pulumi:"timeoutSeconds"`
+}
+
+func (ArtifactSpecContainerGroupContainerLivenessProbeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ArtifactSpecContainerGroupContainerLivenessProbe)(nil)).Elem()
+}
+
+func (i ArtifactSpecContainerGroupContainerLivenessProbeArgs) ToArtifactSpecContainerGroupContainerLivenessProbeOutput() ArtifactSpecContainerGroupContainerLivenessProbeOutput {
+	return i.ToArtifactSpecContainerGroupContainerLivenessProbeOutputWithContext(context.Background())
+}
+
+func (i ArtifactSpecContainerGroupContainerLivenessProbeArgs) ToArtifactSpecContainerGroupContainerLivenessProbeOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupContainerLivenessProbeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ArtifactSpecContainerGroupContainerLivenessProbeOutput)
+}
+
+func (i ArtifactSpecContainerGroupContainerLivenessProbeArgs) ToArtifactSpecContainerGroupContainerLivenessProbePtrOutput() ArtifactSpecContainerGroupContainerLivenessProbePtrOutput {
+	return i.ToArtifactSpecContainerGroupContainerLivenessProbePtrOutputWithContext(context.Background())
+}
+
+func (i ArtifactSpecContainerGroupContainerLivenessProbeArgs) ToArtifactSpecContainerGroupContainerLivenessProbePtrOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupContainerLivenessProbePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ArtifactSpecContainerGroupContainerLivenessProbeOutput).ToArtifactSpecContainerGroupContainerLivenessProbePtrOutputWithContext(ctx)
+}
+
+// ArtifactSpecContainerGroupContainerLivenessProbePtrInput is an input type that accepts ArtifactSpecContainerGroupContainerLivenessProbeArgs, ArtifactSpecContainerGroupContainerLivenessProbePtr and ArtifactSpecContainerGroupContainerLivenessProbePtrOutput values.
+// You can construct a concrete instance of `ArtifactSpecContainerGroupContainerLivenessProbePtrInput` via:
+//
+//	        ArtifactSpecContainerGroupContainerLivenessProbeArgs{...}
+//
+//	or:
+//
+//	        nil
+type ArtifactSpecContainerGroupContainerLivenessProbePtrInput interface {
+	pulumi.Input
+
+	ToArtifactSpecContainerGroupContainerLivenessProbePtrOutput() ArtifactSpecContainerGroupContainerLivenessProbePtrOutput
+	ToArtifactSpecContainerGroupContainerLivenessProbePtrOutputWithContext(context.Context) ArtifactSpecContainerGroupContainerLivenessProbePtrOutput
+}
+
+type artifactSpecContainerGroupContainerLivenessProbePtrType ArtifactSpecContainerGroupContainerLivenessProbeArgs
+
+func ArtifactSpecContainerGroupContainerLivenessProbePtr(v *ArtifactSpecContainerGroupContainerLivenessProbeArgs) ArtifactSpecContainerGroupContainerLivenessProbePtrInput {
+	return (*artifactSpecContainerGroupContainerLivenessProbePtrType)(v)
+}
+
+func (*artifactSpecContainerGroupContainerLivenessProbePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ArtifactSpecContainerGroupContainerLivenessProbe)(nil)).Elem()
+}
+
+func (i *artifactSpecContainerGroupContainerLivenessProbePtrType) ToArtifactSpecContainerGroupContainerLivenessProbePtrOutput() ArtifactSpecContainerGroupContainerLivenessProbePtrOutput {
+	return i.ToArtifactSpecContainerGroupContainerLivenessProbePtrOutputWithContext(context.Background())
+}
+
+func (i *artifactSpecContainerGroupContainerLivenessProbePtrType) ToArtifactSpecContainerGroupContainerLivenessProbePtrOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupContainerLivenessProbePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ArtifactSpecContainerGroupContainerLivenessProbePtrOutput)
+}
+
+type ArtifactSpecContainerGroupContainerLivenessProbeOutput struct{ *pulumi.OutputState }
+
+func (ArtifactSpecContainerGroupContainerLivenessProbeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ArtifactSpecContainerGroupContainerLivenessProbe)(nil)).Elem()
+}
+
+func (o ArtifactSpecContainerGroupContainerLivenessProbeOutput) ToArtifactSpecContainerGroupContainerLivenessProbeOutput() ArtifactSpecContainerGroupContainerLivenessProbeOutput {
+	return o
+}
+
+func (o ArtifactSpecContainerGroupContainerLivenessProbeOutput) ToArtifactSpecContainerGroupContainerLivenessProbeOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupContainerLivenessProbeOutput {
+	return o
+}
+
+func (o ArtifactSpecContainerGroupContainerLivenessProbeOutput) ToArtifactSpecContainerGroupContainerLivenessProbePtrOutput() ArtifactSpecContainerGroupContainerLivenessProbePtrOutput {
+	return o.ToArtifactSpecContainerGroupContainerLivenessProbePtrOutputWithContext(context.Background())
+}
+
+func (o ArtifactSpecContainerGroupContainerLivenessProbeOutput) ToArtifactSpecContainerGroupContainerLivenessProbePtrOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupContainerLivenessProbePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ArtifactSpecContainerGroupContainerLivenessProbe) *ArtifactSpecContainerGroupContainerLivenessProbe {
+		return &v
+	}).(ArtifactSpecContainerGroupContainerLivenessProbePtrOutput)
+}
+
+// Minimum consecutive failures for the probe to be considered failed.
+func (o ArtifactSpecContainerGroupContainerLivenessProbeOutput) FailureThreshold() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerLivenessProbe) *int { return v.FailureThreshold }).(pulumi.IntPtrOutput)
+}
+
+// Host name to connect to, defaults to the pod IP.
+func (o ArtifactSpecContainerGroupContainerLivenessProbeOutput) Host() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerLivenessProbe) *string { return v.Host }).(pulumi.StringPtrOutput)
+}
+
+// Number of seconds to wait before the first probe is executed.
+func (o ArtifactSpecContainerGroupContainerLivenessProbeOutput) InitialDelaySeconds() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerLivenessProbe) *int { return v.InitialDelaySeconds }).(pulumi.IntPtrOutput)
+}
+
+// URL path to query for health check.
+func (o ArtifactSpecContainerGroupContainerLivenessProbeOutput) Path() pulumi.StringOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerLivenessProbe) string { return v.Path }).(pulumi.StringOutput)
+}
+
+// How often (in seconds) to perform the probe.
+func (o ArtifactSpecContainerGroupContainerLivenessProbeOutput) PeriodSeconds() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerLivenessProbe) *int { return v.PeriodSeconds }).(pulumi.IntPtrOutput)
+}
+
+// Port number to access on the container.
+func (o ArtifactSpecContainerGroupContainerLivenessProbeOutput) Port() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerLivenessProbe) *int { return v.Port }).(pulumi.IntPtrOutput)
+}
+
+// Scheme to use for connecting to the host (HTTP or HTTPS).
+func (o ArtifactSpecContainerGroupContainerLivenessProbeOutput) Scheme() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerLivenessProbe) *string { return v.Scheme }).(pulumi.StringPtrOutput)
+}
+
+// Number of seconds after which the probe times out.
+func (o ArtifactSpecContainerGroupContainerLivenessProbeOutput) TimeoutSeconds() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerLivenessProbe) *int { return v.TimeoutSeconds }).(pulumi.IntPtrOutput)
+}
+
+type ArtifactSpecContainerGroupContainerLivenessProbePtrOutput struct{ *pulumi.OutputState }
+
+func (ArtifactSpecContainerGroupContainerLivenessProbePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ArtifactSpecContainerGroupContainerLivenessProbe)(nil)).Elem()
+}
+
+func (o ArtifactSpecContainerGroupContainerLivenessProbePtrOutput) ToArtifactSpecContainerGroupContainerLivenessProbePtrOutput() ArtifactSpecContainerGroupContainerLivenessProbePtrOutput {
+	return o
+}
+
+func (o ArtifactSpecContainerGroupContainerLivenessProbePtrOutput) ToArtifactSpecContainerGroupContainerLivenessProbePtrOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupContainerLivenessProbePtrOutput {
+	return o
+}
+
+func (o ArtifactSpecContainerGroupContainerLivenessProbePtrOutput) Elem() ArtifactSpecContainerGroupContainerLivenessProbeOutput {
+	return o.ApplyT(func(v *ArtifactSpecContainerGroupContainerLivenessProbe) ArtifactSpecContainerGroupContainerLivenessProbe {
+		if v != nil {
+			return *v
+		}
+		var ret ArtifactSpecContainerGroupContainerLivenessProbe
+		return ret
+	}).(ArtifactSpecContainerGroupContainerLivenessProbeOutput)
+}
+
+// Minimum consecutive failures for the probe to be considered failed.
+func (o ArtifactSpecContainerGroupContainerLivenessProbePtrOutput) FailureThreshold() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ArtifactSpecContainerGroupContainerLivenessProbe) *int {
+		if v == nil {
+			return nil
+		}
+		return v.FailureThreshold
+	}).(pulumi.IntPtrOutput)
+}
+
+// Host name to connect to, defaults to the pod IP.
+func (o ArtifactSpecContainerGroupContainerLivenessProbePtrOutput) Host() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ArtifactSpecContainerGroupContainerLivenessProbe) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Host
+	}).(pulumi.StringPtrOutput)
+}
+
+// Number of seconds to wait before the first probe is executed.
+func (o ArtifactSpecContainerGroupContainerLivenessProbePtrOutput) InitialDelaySeconds() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ArtifactSpecContainerGroupContainerLivenessProbe) *int {
+		if v == nil {
+			return nil
+		}
+		return v.InitialDelaySeconds
+	}).(pulumi.IntPtrOutput)
+}
+
+// URL path to query for health check.
+func (o ArtifactSpecContainerGroupContainerLivenessProbePtrOutput) Path() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ArtifactSpecContainerGroupContainerLivenessProbe) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Path
+	}).(pulumi.StringPtrOutput)
+}
+
+// How often (in seconds) to perform the probe.
+func (o ArtifactSpecContainerGroupContainerLivenessProbePtrOutput) PeriodSeconds() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ArtifactSpecContainerGroupContainerLivenessProbe) *int {
+		if v == nil {
+			return nil
+		}
+		return v.PeriodSeconds
+	}).(pulumi.IntPtrOutput)
+}
+
+// Port number to access on the container.
+func (o ArtifactSpecContainerGroupContainerLivenessProbePtrOutput) Port() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ArtifactSpecContainerGroupContainerLivenessProbe) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Port
+	}).(pulumi.IntPtrOutput)
+}
+
+// Scheme to use for connecting to the host (HTTP or HTTPS).
+func (o ArtifactSpecContainerGroupContainerLivenessProbePtrOutput) Scheme() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ArtifactSpecContainerGroupContainerLivenessProbe) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Scheme
+	}).(pulumi.StringPtrOutput)
+}
+
+// Number of seconds after which the probe times out.
+func (o ArtifactSpecContainerGroupContainerLivenessProbePtrOutput) TimeoutSeconds() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ArtifactSpecContainerGroupContainerLivenessProbe) *int {
+		if v == nil {
+			return nil
+		}
+		return v.TimeoutSeconds
+	}).(pulumi.IntPtrOutput)
+}
+
+type ArtifactSpecContainerGroupContainerReadinessProbe struct {
+	// Minimum consecutive failures for the probe to be considered failed.
+	FailureThreshold *int `pulumi:"failureThreshold"`
+	// Host name to connect to, defaults to the pod IP.
+	Host *string `pulumi:"host"`
+	// Number of seconds to wait before the first probe is executed.
+	InitialDelaySeconds *int `pulumi:"initialDelaySeconds"`
+	// URL path to query for health check.
+	Path string `pulumi:"path"`
+	// How often (in seconds) to perform the probe.
+	PeriodSeconds *int `pulumi:"periodSeconds"`
+	// Port number to access on the container.
+	Port *int `pulumi:"port"`
+	// Scheme to use for connecting to the host (HTTP or HTTPS).
+	Scheme *string `pulumi:"scheme"`
+	// Number of seconds after which the probe times out.
+	TimeoutSeconds *int `pulumi:"timeoutSeconds"`
+}
+
+// ArtifactSpecContainerGroupContainerReadinessProbeInput is an input type that accepts ArtifactSpecContainerGroupContainerReadinessProbeArgs and ArtifactSpecContainerGroupContainerReadinessProbeOutput values.
+// You can construct a concrete instance of `ArtifactSpecContainerGroupContainerReadinessProbeInput` via:
+//
+//	ArtifactSpecContainerGroupContainerReadinessProbeArgs{...}
+type ArtifactSpecContainerGroupContainerReadinessProbeInput interface {
+	pulumi.Input
+
+	ToArtifactSpecContainerGroupContainerReadinessProbeOutput() ArtifactSpecContainerGroupContainerReadinessProbeOutput
+	ToArtifactSpecContainerGroupContainerReadinessProbeOutputWithContext(context.Context) ArtifactSpecContainerGroupContainerReadinessProbeOutput
+}
+
+type ArtifactSpecContainerGroupContainerReadinessProbeArgs struct {
+	// Minimum consecutive failures for the probe to be considered failed.
+	FailureThreshold pulumi.IntPtrInput `pulumi:"failureThreshold"`
+	// Host name to connect to, defaults to the pod IP.
+	Host pulumi.StringPtrInput `pulumi:"host"`
+	// Number of seconds to wait before the first probe is executed.
+	InitialDelaySeconds pulumi.IntPtrInput `pulumi:"initialDelaySeconds"`
+	// URL path to query for health check.
+	Path pulumi.StringInput `pulumi:"path"`
+	// How often (in seconds) to perform the probe.
+	PeriodSeconds pulumi.IntPtrInput `pulumi:"periodSeconds"`
+	// Port number to access on the container.
+	Port pulumi.IntPtrInput `pulumi:"port"`
+	// Scheme to use for connecting to the host (HTTP or HTTPS).
+	Scheme pulumi.StringPtrInput `pulumi:"scheme"`
+	// Number of seconds after which the probe times out.
+	TimeoutSeconds pulumi.IntPtrInput `pulumi:"timeoutSeconds"`
+}
+
+func (ArtifactSpecContainerGroupContainerReadinessProbeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ArtifactSpecContainerGroupContainerReadinessProbe)(nil)).Elem()
+}
+
+func (i ArtifactSpecContainerGroupContainerReadinessProbeArgs) ToArtifactSpecContainerGroupContainerReadinessProbeOutput() ArtifactSpecContainerGroupContainerReadinessProbeOutput {
+	return i.ToArtifactSpecContainerGroupContainerReadinessProbeOutputWithContext(context.Background())
+}
+
+func (i ArtifactSpecContainerGroupContainerReadinessProbeArgs) ToArtifactSpecContainerGroupContainerReadinessProbeOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupContainerReadinessProbeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ArtifactSpecContainerGroupContainerReadinessProbeOutput)
+}
+
+func (i ArtifactSpecContainerGroupContainerReadinessProbeArgs) ToArtifactSpecContainerGroupContainerReadinessProbePtrOutput() ArtifactSpecContainerGroupContainerReadinessProbePtrOutput {
+	return i.ToArtifactSpecContainerGroupContainerReadinessProbePtrOutputWithContext(context.Background())
+}
+
+func (i ArtifactSpecContainerGroupContainerReadinessProbeArgs) ToArtifactSpecContainerGroupContainerReadinessProbePtrOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupContainerReadinessProbePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ArtifactSpecContainerGroupContainerReadinessProbeOutput).ToArtifactSpecContainerGroupContainerReadinessProbePtrOutputWithContext(ctx)
+}
+
+// ArtifactSpecContainerGroupContainerReadinessProbePtrInput is an input type that accepts ArtifactSpecContainerGroupContainerReadinessProbeArgs, ArtifactSpecContainerGroupContainerReadinessProbePtr and ArtifactSpecContainerGroupContainerReadinessProbePtrOutput values.
+// You can construct a concrete instance of `ArtifactSpecContainerGroupContainerReadinessProbePtrInput` via:
+//
+//	        ArtifactSpecContainerGroupContainerReadinessProbeArgs{...}
+//
+//	or:
+//
+//	        nil
+type ArtifactSpecContainerGroupContainerReadinessProbePtrInput interface {
+	pulumi.Input
+
+	ToArtifactSpecContainerGroupContainerReadinessProbePtrOutput() ArtifactSpecContainerGroupContainerReadinessProbePtrOutput
+	ToArtifactSpecContainerGroupContainerReadinessProbePtrOutputWithContext(context.Context) ArtifactSpecContainerGroupContainerReadinessProbePtrOutput
+}
+
+type artifactSpecContainerGroupContainerReadinessProbePtrType ArtifactSpecContainerGroupContainerReadinessProbeArgs
+
+func ArtifactSpecContainerGroupContainerReadinessProbePtr(v *ArtifactSpecContainerGroupContainerReadinessProbeArgs) ArtifactSpecContainerGroupContainerReadinessProbePtrInput {
+	return (*artifactSpecContainerGroupContainerReadinessProbePtrType)(v)
+}
+
+func (*artifactSpecContainerGroupContainerReadinessProbePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ArtifactSpecContainerGroupContainerReadinessProbe)(nil)).Elem()
+}
+
+func (i *artifactSpecContainerGroupContainerReadinessProbePtrType) ToArtifactSpecContainerGroupContainerReadinessProbePtrOutput() ArtifactSpecContainerGroupContainerReadinessProbePtrOutput {
+	return i.ToArtifactSpecContainerGroupContainerReadinessProbePtrOutputWithContext(context.Background())
+}
+
+func (i *artifactSpecContainerGroupContainerReadinessProbePtrType) ToArtifactSpecContainerGroupContainerReadinessProbePtrOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupContainerReadinessProbePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ArtifactSpecContainerGroupContainerReadinessProbePtrOutput)
+}
+
+type ArtifactSpecContainerGroupContainerReadinessProbeOutput struct{ *pulumi.OutputState }
+
+func (ArtifactSpecContainerGroupContainerReadinessProbeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ArtifactSpecContainerGroupContainerReadinessProbe)(nil)).Elem()
+}
+
+func (o ArtifactSpecContainerGroupContainerReadinessProbeOutput) ToArtifactSpecContainerGroupContainerReadinessProbeOutput() ArtifactSpecContainerGroupContainerReadinessProbeOutput {
+	return o
+}
+
+func (o ArtifactSpecContainerGroupContainerReadinessProbeOutput) ToArtifactSpecContainerGroupContainerReadinessProbeOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupContainerReadinessProbeOutput {
+	return o
+}
+
+func (o ArtifactSpecContainerGroupContainerReadinessProbeOutput) ToArtifactSpecContainerGroupContainerReadinessProbePtrOutput() ArtifactSpecContainerGroupContainerReadinessProbePtrOutput {
+	return o.ToArtifactSpecContainerGroupContainerReadinessProbePtrOutputWithContext(context.Background())
+}
+
+func (o ArtifactSpecContainerGroupContainerReadinessProbeOutput) ToArtifactSpecContainerGroupContainerReadinessProbePtrOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupContainerReadinessProbePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ArtifactSpecContainerGroupContainerReadinessProbe) *ArtifactSpecContainerGroupContainerReadinessProbe {
+		return &v
+	}).(ArtifactSpecContainerGroupContainerReadinessProbePtrOutput)
+}
+
+// Minimum consecutive failures for the probe to be considered failed.
+func (o ArtifactSpecContainerGroupContainerReadinessProbeOutput) FailureThreshold() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerReadinessProbe) *int { return v.FailureThreshold }).(pulumi.IntPtrOutput)
+}
+
+// Host name to connect to, defaults to the pod IP.
+func (o ArtifactSpecContainerGroupContainerReadinessProbeOutput) Host() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerReadinessProbe) *string { return v.Host }).(pulumi.StringPtrOutput)
+}
+
+// Number of seconds to wait before the first probe is executed.
+func (o ArtifactSpecContainerGroupContainerReadinessProbeOutput) InitialDelaySeconds() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerReadinessProbe) *int { return v.InitialDelaySeconds }).(pulumi.IntPtrOutput)
+}
+
+// URL path to query for health check.
+func (o ArtifactSpecContainerGroupContainerReadinessProbeOutput) Path() pulumi.StringOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerReadinessProbe) string { return v.Path }).(pulumi.StringOutput)
+}
+
+// How often (in seconds) to perform the probe.
+func (o ArtifactSpecContainerGroupContainerReadinessProbeOutput) PeriodSeconds() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerReadinessProbe) *int { return v.PeriodSeconds }).(pulumi.IntPtrOutput)
+}
+
+// Port number to access on the container.
+func (o ArtifactSpecContainerGroupContainerReadinessProbeOutput) Port() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerReadinessProbe) *int { return v.Port }).(pulumi.IntPtrOutput)
+}
+
+// Scheme to use for connecting to the host (HTTP or HTTPS).
+func (o ArtifactSpecContainerGroupContainerReadinessProbeOutput) Scheme() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerReadinessProbe) *string { return v.Scheme }).(pulumi.StringPtrOutput)
+}
+
+// Number of seconds after which the probe times out.
+func (o ArtifactSpecContainerGroupContainerReadinessProbeOutput) TimeoutSeconds() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerReadinessProbe) *int { return v.TimeoutSeconds }).(pulumi.IntPtrOutput)
+}
+
+type ArtifactSpecContainerGroupContainerReadinessProbePtrOutput struct{ *pulumi.OutputState }
+
+func (ArtifactSpecContainerGroupContainerReadinessProbePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ArtifactSpecContainerGroupContainerReadinessProbe)(nil)).Elem()
+}
+
+func (o ArtifactSpecContainerGroupContainerReadinessProbePtrOutput) ToArtifactSpecContainerGroupContainerReadinessProbePtrOutput() ArtifactSpecContainerGroupContainerReadinessProbePtrOutput {
+	return o
+}
+
+func (o ArtifactSpecContainerGroupContainerReadinessProbePtrOutput) ToArtifactSpecContainerGroupContainerReadinessProbePtrOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupContainerReadinessProbePtrOutput {
+	return o
+}
+
+func (o ArtifactSpecContainerGroupContainerReadinessProbePtrOutput) Elem() ArtifactSpecContainerGroupContainerReadinessProbeOutput {
+	return o.ApplyT(func(v *ArtifactSpecContainerGroupContainerReadinessProbe) ArtifactSpecContainerGroupContainerReadinessProbe {
+		if v != nil {
+			return *v
+		}
+		var ret ArtifactSpecContainerGroupContainerReadinessProbe
+		return ret
+	}).(ArtifactSpecContainerGroupContainerReadinessProbeOutput)
+}
+
+// Minimum consecutive failures for the probe to be considered failed.
+func (o ArtifactSpecContainerGroupContainerReadinessProbePtrOutput) FailureThreshold() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ArtifactSpecContainerGroupContainerReadinessProbe) *int {
+		if v == nil {
+			return nil
+		}
+		return v.FailureThreshold
+	}).(pulumi.IntPtrOutput)
+}
+
+// Host name to connect to, defaults to the pod IP.
+func (o ArtifactSpecContainerGroupContainerReadinessProbePtrOutput) Host() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ArtifactSpecContainerGroupContainerReadinessProbe) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Host
+	}).(pulumi.StringPtrOutput)
+}
+
+// Number of seconds to wait before the first probe is executed.
+func (o ArtifactSpecContainerGroupContainerReadinessProbePtrOutput) InitialDelaySeconds() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ArtifactSpecContainerGroupContainerReadinessProbe) *int {
+		if v == nil {
+			return nil
+		}
+		return v.InitialDelaySeconds
+	}).(pulumi.IntPtrOutput)
+}
+
+// URL path to query for health check.
+func (o ArtifactSpecContainerGroupContainerReadinessProbePtrOutput) Path() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ArtifactSpecContainerGroupContainerReadinessProbe) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Path
+	}).(pulumi.StringPtrOutput)
+}
+
+// How often (in seconds) to perform the probe.
+func (o ArtifactSpecContainerGroupContainerReadinessProbePtrOutput) PeriodSeconds() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ArtifactSpecContainerGroupContainerReadinessProbe) *int {
+		if v == nil {
+			return nil
+		}
+		return v.PeriodSeconds
+	}).(pulumi.IntPtrOutput)
+}
+
+// Port number to access on the container.
+func (o ArtifactSpecContainerGroupContainerReadinessProbePtrOutput) Port() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ArtifactSpecContainerGroupContainerReadinessProbe) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Port
+	}).(pulumi.IntPtrOutput)
+}
+
+// Scheme to use for connecting to the host (HTTP or HTTPS).
+func (o ArtifactSpecContainerGroupContainerReadinessProbePtrOutput) Scheme() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ArtifactSpecContainerGroupContainerReadinessProbe) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Scheme
+	}).(pulumi.StringPtrOutput)
+}
+
+// Number of seconds after which the probe times out.
+func (o ArtifactSpecContainerGroupContainerReadinessProbePtrOutput) TimeoutSeconds() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ArtifactSpecContainerGroupContainerReadinessProbe) *int {
+		if v == nil {
+			return nil
+		}
+		return v.TimeoutSeconds
+	}).(pulumi.IntPtrOutput)
+}
+
+type ArtifactSpecContainerGroupContainerResourceRequest struct {
+	// Number of CPU cores required.
+	Cpu int `pulumi:"cpu"`
+	// Number of GPUs required.
+	Gpu *int `pulumi:"gpu"`
+	// GPU type required (e.g., NVIDIA-A100).
+	GpuType *string `pulumi:"gpuType"`
+	// Memory required in bytes.
+	Memory int `pulumi:"memory"`
+}
+
+// ArtifactSpecContainerGroupContainerResourceRequestInput is an input type that accepts ArtifactSpecContainerGroupContainerResourceRequestArgs and ArtifactSpecContainerGroupContainerResourceRequestOutput values.
+// You can construct a concrete instance of `ArtifactSpecContainerGroupContainerResourceRequestInput` via:
+//
+//	ArtifactSpecContainerGroupContainerResourceRequestArgs{...}
+type ArtifactSpecContainerGroupContainerResourceRequestInput interface {
+	pulumi.Input
+
+	ToArtifactSpecContainerGroupContainerResourceRequestOutput() ArtifactSpecContainerGroupContainerResourceRequestOutput
+	ToArtifactSpecContainerGroupContainerResourceRequestOutputWithContext(context.Context) ArtifactSpecContainerGroupContainerResourceRequestOutput
+}
+
+type ArtifactSpecContainerGroupContainerResourceRequestArgs struct {
+	// Number of CPU cores required.
+	Cpu pulumi.IntInput `pulumi:"cpu"`
+	// Number of GPUs required.
+	Gpu pulumi.IntPtrInput `pulumi:"gpu"`
+	// GPU type required (e.g., NVIDIA-A100).
+	GpuType pulumi.StringPtrInput `pulumi:"gpuType"`
+	// Memory required in bytes.
+	Memory pulumi.IntInput `pulumi:"memory"`
+}
+
+func (ArtifactSpecContainerGroupContainerResourceRequestArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ArtifactSpecContainerGroupContainerResourceRequest)(nil)).Elem()
+}
+
+func (i ArtifactSpecContainerGroupContainerResourceRequestArgs) ToArtifactSpecContainerGroupContainerResourceRequestOutput() ArtifactSpecContainerGroupContainerResourceRequestOutput {
+	return i.ToArtifactSpecContainerGroupContainerResourceRequestOutputWithContext(context.Background())
+}
+
+func (i ArtifactSpecContainerGroupContainerResourceRequestArgs) ToArtifactSpecContainerGroupContainerResourceRequestOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupContainerResourceRequestOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ArtifactSpecContainerGroupContainerResourceRequestOutput)
+}
+
+type ArtifactSpecContainerGroupContainerResourceRequestOutput struct{ *pulumi.OutputState }
+
+func (ArtifactSpecContainerGroupContainerResourceRequestOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ArtifactSpecContainerGroupContainerResourceRequest)(nil)).Elem()
+}
+
+func (o ArtifactSpecContainerGroupContainerResourceRequestOutput) ToArtifactSpecContainerGroupContainerResourceRequestOutput() ArtifactSpecContainerGroupContainerResourceRequestOutput {
+	return o
+}
+
+func (o ArtifactSpecContainerGroupContainerResourceRequestOutput) ToArtifactSpecContainerGroupContainerResourceRequestOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupContainerResourceRequestOutput {
+	return o
+}
+
+// Number of CPU cores required.
+func (o ArtifactSpecContainerGroupContainerResourceRequestOutput) Cpu() pulumi.IntOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerResourceRequest) int { return v.Cpu }).(pulumi.IntOutput)
+}
+
+// Number of GPUs required.
+func (o ArtifactSpecContainerGroupContainerResourceRequestOutput) Gpu() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerResourceRequest) *int { return v.Gpu }).(pulumi.IntPtrOutput)
+}
+
+// GPU type required (e.g., NVIDIA-A100).
+func (o ArtifactSpecContainerGroupContainerResourceRequestOutput) GpuType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerResourceRequest) *string { return v.GpuType }).(pulumi.StringPtrOutput)
+}
+
+// Memory required in bytes.
+func (o ArtifactSpecContainerGroupContainerResourceRequestOutput) Memory() pulumi.IntOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerResourceRequest) int { return v.Memory }).(pulumi.IntOutput)
+}
+
+type ArtifactSpecContainerGroupContainerStartupProbe struct {
+	// Minimum consecutive failures for the probe to be considered failed.
+	FailureThreshold *int `pulumi:"failureThreshold"`
+	// Host name to connect to, defaults to the pod IP.
+	Host *string `pulumi:"host"`
+	// Number of seconds to wait before the first probe is executed.
+	InitialDelaySeconds *int `pulumi:"initialDelaySeconds"`
+	// URL path to query for health check.
+	Path string `pulumi:"path"`
+	// How often (in seconds) to perform the probe.
+	PeriodSeconds *int `pulumi:"periodSeconds"`
+	// Port number to access on the container.
+	Port *int `pulumi:"port"`
+	// Scheme to use for connecting to the host (HTTP or HTTPS).
+	Scheme *string `pulumi:"scheme"`
+	// Number of seconds after which the probe times out.
+	TimeoutSeconds *int `pulumi:"timeoutSeconds"`
+}
+
+// ArtifactSpecContainerGroupContainerStartupProbeInput is an input type that accepts ArtifactSpecContainerGroupContainerStartupProbeArgs and ArtifactSpecContainerGroupContainerStartupProbeOutput values.
+// You can construct a concrete instance of `ArtifactSpecContainerGroupContainerStartupProbeInput` via:
+//
+//	ArtifactSpecContainerGroupContainerStartupProbeArgs{...}
+type ArtifactSpecContainerGroupContainerStartupProbeInput interface {
+	pulumi.Input
+
+	ToArtifactSpecContainerGroupContainerStartupProbeOutput() ArtifactSpecContainerGroupContainerStartupProbeOutput
+	ToArtifactSpecContainerGroupContainerStartupProbeOutputWithContext(context.Context) ArtifactSpecContainerGroupContainerStartupProbeOutput
+}
+
+type ArtifactSpecContainerGroupContainerStartupProbeArgs struct {
+	// Minimum consecutive failures for the probe to be considered failed.
+	FailureThreshold pulumi.IntPtrInput `pulumi:"failureThreshold"`
+	// Host name to connect to, defaults to the pod IP.
+	Host pulumi.StringPtrInput `pulumi:"host"`
+	// Number of seconds to wait before the first probe is executed.
+	InitialDelaySeconds pulumi.IntPtrInput `pulumi:"initialDelaySeconds"`
+	// URL path to query for health check.
+	Path pulumi.StringInput `pulumi:"path"`
+	// How often (in seconds) to perform the probe.
+	PeriodSeconds pulumi.IntPtrInput `pulumi:"periodSeconds"`
+	// Port number to access on the container.
+	Port pulumi.IntPtrInput `pulumi:"port"`
+	// Scheme to use for connecting to the host (HTTP or HTTPS).
+	Scheme pulumi.StringPtrInput `pulumi:"scheme"`
+	// Number of seconds after which the probe times out.
+	TimeoutSeconds pulumi.IntPtrInput `pulumi:"timeoutSeconds"`
+}
+
+func (ArtifactSpecContainerGroupContainerStartupProbeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ArtifactSpecContainerGroupContainerStartupProbe)(nil)).Elem()
+}
+
+func (i ArtifactSpecContainerGroupContainerStartupProbeArgs) ToArtifactSpecContainerGroupContainerStartupProbeOutput() ArtifactSpecContainerGroupContainerStartupProbeOutput {
+	return i.ToArtifactSpecContainerGroupContainerStartupProbeOutputWithContext(context.Background())
+}
+
+func (i ArtifactSpecContainerGroupContainerStartupProbeArgs) ToArtifactSpecContainerGroupContainerStartupProbeOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupContainerStartupProbeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ArtifactSpecContainerGroupContainerStartupProbeOutput)
+}
+
+func (i ArtifactSpecContainerGroupContainerStartupProbeArgs) ToArtifactSpecContainerGroupContainerStartupProbePtrOutput() ArtifactSpecContainerGroupContainerStartupProbePtrOutput {
+	return i.ToArtifactSpecContainerGroupContainerStartupProbePtrOutputWithContext(context.Background())
+}
+
+func (i ArtifactSpecContainerGroupContainerStartupProbeArgs) ToArtifactSpecContainerGroupContainerStartupProbePtrOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupContainerStartupProbePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ArtifactSpecContainerGroupContainerStartupProbeOutput).ToArtifactSpecContainerGroupContainerStartupProbePtrOutputWithContext(ctx)
+}
+
+// ArtifactSpecContainerGroupContainerStartupProbePtrInput is an input type that accepts ArtifactSpecContainerGroupContainerStartupProbeArgs, ArtifactSpecContainerGroupContainerStartupProbePtr and ArtifactSpecContainerGroupContainerStartupProbePtrOutput values.
+// You can construct a concrete instance of `ArtifactSpecContainerGroupContainerStartupProbePtrInput` via:
+//
+//	        ArtifactSpecContainerGroupContainerStartupProbeArgs{...}
+//
+//	or:
+//
+//	        nil
+type ArtifactSpecContainerGroupContainerStartupProbePtrInput interface {
+	pulumi.Input
+
+	ToArtifactSpecContainerGroupContainerStartupProbePtrOutput() ArtifactSpecContainerGroupContainerStartupProbePtrOutput
+	ToArtifactSpecContainerGroupContainerStartupProbePtrOutputWithContext(context.Context) ArtifactSpecContainerGroupContainerStartupProbePtrOutput
+}
+
+type artifactSpecContainerGroupContainerStartupProbePtrType ArtifactSpecContainerGroupContainerStartupProbeArgs
+
+func ArtifactSpecContainerGroupContainerStartupProbePtr(v *ArtifactSpecContainerGroupContainerStartupProbeArgs) ArtifactSpecContainerGroupContainerStartupProbePtrInput {
+	return (*artifactSpecContainerGroupContainerStartupProbePtrType)(v)
+}
+
+func (*artifactSpecContainerGroupContainerStartupProbePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ArtifactSpecContainerGroupContainerStartupProbe)(nil)).Elem()
+}
+
+func (i *artifactSpecContainerGroupContainerStartupProbePtrType) ToArtifactSpecContainerGroupContainerStartupProbePtrOutput() ArtifactSpecContainerGroupContainerStartupProbePtrOutput {
+	return i.ToArtifactSpecContainerGroupContainerStartupProbePtrOutputWithContext(context.Background())
+}
+
+func (i *artifactSpecContainerGroupContainerStartupProbePtrType) ToArtifactSpecContainerGroupContainerStartupProbePtrOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupContainerStartupProbePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ArtifactSpecContainerGroupContainerStartupProbePtrOutput)
+}
+
+type ArtifactSpecContainerGroupContainerStartupProbeOutput struct{ *pulumi.OutputState }
+
+func (ArtifactSpecContainerGroupContainerStartupProbeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ArtifactSpecContainerGroupContainerStartupProbe)(nil)).Elem()
+}
+
+func (o ArtifactSpecContainerGroupContainerStartupProbeOutput) ToArtifactSpecContainerGroupContainerStartupProbeOutput() ArtifactSpecContainerGroupContainerStartupProbeOutput {
+	return o
+}
+
+func (o ArtifactSpecContainerGroupContainerStartupProbeOutput) ToArtifactSpecContainerGroupContainerStartupProbeOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupContainerStartupProbeOutput {
+	return o
+}
+
+func (o ArtifactSpecContainerGroupContainerStartupProbeOutput) ToArtifactSpecContainerGroupContainerStartupProbePtrOutput() ArtifactSpecContainerGroupContainerStartupProbePtrOutput {
+	return o.ToArtifactSpecContainerGroupContainerStartupProbePtrOutputWithContext(context.Background())
+}
+
+func (o ArtifactSpecContainerGroupContainerStartupProbeOutput) ToArtifactSpecContainerGroupContainerStartupProbePtrOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupContainerStartupProbePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ArtifactSpecContainerGroupContainerStartupProbe) *ArtifactSpecContainerGroupContainerStartupProbe {
+		return &v
+	}).(ArtifactSpecContainerGroupContainerStartupProbePtrOutput)
+}
+
+// Minimum consecutive failures for the probe to be considered failed.
+func (o ArtifactSpecContainerGroupContainerStartupProbeOutput) FailureThreshold() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerStartupProbe) *int { return v.FailureThreshold }).(pulumi.IntPtrOutput)
+}
+
+// Host name to connect to, defaults to the pod IP.
+func (o ArtifactSpecContainerGroupContainerStartupProbeOutput) Host() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerStartupProbe) *string { return v.Host }).(pulumi.StringPtrOutput)
+}
+
+// Number of seconds to wait before the first probe is executed.
+func (o ArtifactSpecContainerGroupContainerStartupProbeOutput) InitialDelaySeconds() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerStartupProbe) *int { return v.InitialDelaySeconds }).(pulumi.IntPtrOutput)
+}
+
+// URL path to query for health check.
+func (o ArtifactSpecContainerGroupContainerStartupProbeOutput) Path() pulumi.StringOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerStartupProbe) string { return v.Path }).(pulumi.StringOutput)
+}
+
+// How often (in seconds) to perform the probe.
+func (o ArtifactSpecContainerGroupContainerStartupProbeOutput) PeriodSeconds() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerStartupProbe) *int { return v.PeriodSeconds }).(pulumi.IntPtrOutput)
+}
+
+// Port number to access on the container.
+func (o ArtifactSpecContainerGroupContainerStartupProbeOutput) Port() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerStartupProbe) *int { return v.Port }).(pulumi.IntPtrOutput)
+}
+
+// Scheme to use for connecting to the host (HTTP or HTTPS).
+func (o ArtifactSpecContainerGroupContainerStartupProbeOutput) Scheme() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerStartupProbe) *string { return v.Scheme }).(pulumi.StringPtrOutput)
+}
+
+// Number of seconds after which the probe times out.
+func (o ArtifactSpecContainerGroupContainerStartupProbeOutput) TimeoutSeconds() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerStartupProbe) *int { return v.TimeoutSeconds }).(pulumi.IntPtrOutput)
+}
+
+type ArtifactSpecContainerGroupContainerStartupProbePtrOutput struct{ *pulumi.OutputState }
+
+func (ArtifactSpecContainerGroupContainerStartupProbePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ArtifactSpecContainerGroupContainerStartupProbe)(nil)).Elem()
+}
+
+func (o ArtifactSpecContainerGroupContainerStartupProbePtrOutput) ToArtifactSpecContainerGroupContainerStartupProbePtrOutput() ArtifactSpecContainerGroupContainerStartupProbePtrOutput {
+	return o
+}
+
+func (o ArtifactSpecContainerGroupContainerStartupProbePtrOutput) ToArtifactSpecContainerGroupContainerStartupProbePtrOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupContainerStartupProbePtrOutput {
+	return o
+}
+
+func (o ArtifactSpecContainerGroupContainerStartupProbePtrOutput) Elem() ArtifactSpecContainerGroupContainerStartupProbeOutput {
+	return o.ApplyT(func(v *ArtifactSpecContainerGroupContainerStartupProbe) ArtifactSpecContainerGroupContainerStartupProbe {
+		if v != nil {
+			return *v
+		}
+		var ret ArtifactSpecContainerGroupContainerStartupProbe
+		return ret
+	}).(ArtifactSpecContainerGroupContainerStartupProbeOutput)
+}
+
+// Minimum consecutive failures for the probe to be considered failed.
+func (o ArtifactSpecContainerGroupContainerStartupProbePtrOutput) FailureThreshold() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ArtifactSpecContainerGroupContainerStartupProbe) *int {
+		if v == nil {
+			return nil
+		}
+		return v.FailureThreshold
+	}).(pulumi.IntPtrOutput)
+}
+
+// Host name to connect to, defaults to the pod IP.
+func (o ArtifactSpecContainerGroupContainerStartupProbePtrOutput) Host() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ArtifactSpecContainerGroupContainerStartupProbe) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Host
+	}).(pulumi.StringPtrOutput)
+}
+
+// Number of seconds to wait before the first probe is executed.
+func (o ArtifactSpecContainerGroupContainerStartupProbePtrOutput) InitialDelaySeconds() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ArtifactSpecContainerGroupContainerStartupProbe) *int {
+		if v == nil {
+			return nil
+		}
+		return v.InitialDelaySeconds
+	}).(pulumi.IntPtrOutput)
+}
+
+// URL path to query for health check.
+func (o ArtifactSpecContainerGroupContainerStartupProbePtrOutput) Path() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ArtifactSpecContainerGroupContainerStartupProbe) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Path
+	}).(pulumi.StringPtrOutput)
+}
+
+// How often (in seconds) to perform the probe.
+func (o ArtifactSpecContainerGroupContainerStartupProbePtrOutput) PeriodSeconds() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ArtifactSpecContainerGroupContainerStartupProbe) *int {
+		if v == nil {
+			return nil
+		}
+		return v.PeriodSeconds
+	}).(pulumi.IntPtrOutput)
+}
+
+// Port number to access on the container.
+func (o ArtifactSpecContainerGroupContainerStartupProbePtrOutput) Port() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ArtifactSpecContainerGroupContainerStartupProbe) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Port
+	}).(pulumi.IntPtrOutput)
+}
+
+// Scheme to use for connecting to the host (HTTP or HTTPS).
+func (o ArtifactSpecContainerGroupContainerStartupProbePtrOutput) Scheme() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ArtifactSpecContainerGroupContainerStartupProbe) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Scheme
+	}).(pulumi.StringPtrOutput)
+}
+
+// Number of seconds after which the probe times out.
+func (o ArtifactSpecContainerGroupContainerStartupProbePtrOutput) TimeoutSeconds() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ArtifactSpecContainerGroupContainerStartupProbe) *int {
+		if v == nil {
+			return nil
+		}
+		return v.TimeoutSeconds
+	}).(pulumi.IntPtrOutput)
+}
+
 type BatchPredictionJobDefinitionCsvSettings struct {
 	// Fields are delimited by this character. Use the string tab to denote TSV (TAB separated values). Must be either a one-character string or the string tab.
 	Delimiter *string `pulumi:"delimiter"`
@@ -12995,6 +14421,567 @@ func (o VectorDatabaseChunkingParametersPtrOutput) Separators() pulumi.StringArr
 	}).(pulumi.StringArrayOutput)
 }
 
+type WorkloadRuntime struct {
+	// Autoscaling configuration. When set, takes precedence over replica_count.
+	Autoscaling *WorkloadRuntimeAutoscaling `pulumi:"autoscaling"`
+	// Number of replicas to run. Cannot be used together with `autoscaling`. Omitting this field retains the current value. Set to `0` to explicitly clear it (e.g. when switching to autoscaling).
+	ReplicaCount *int `pulumi:"replicaCount"`
+	// Resource bundles assigned to the Workload. When empty the server infers an appropriate bundle.
+	Resources []WorkloadRuntimeResource `pulumi:"resources"`
+}
+
+// WorkloadRuntimeInput is an input type that accepts WorkloadRuntimeArgs and WorkloadRuntimeOutput values.
+// You can construct a concrete instance of `WorkloadRuntimeInput` via:
+//
+//	WorkloadRuntimeArgs{...}
+type WorkloadRuntimeInput interface {
+	pulumi.Input
+
+	ToWorkloadRuntimeOutput() WorkloadRuntimeOutput
+	ToWorkloadRuntimeOutputWithContext(context.Context) WorkloadRuntimeOutput
+}
+
+type WorkloadRuntimeArgs struct {
+	// Autoscaling configuration. When set, takes precedence over replica_count.
+	Autoscaling WorkloadRuntimeAutoscalingPtrInput `pulumi:"autoscaling"`
+	// Number of replicas to run. Cannot be used together with `autoscaling`. Omitting this field retains the current value. Set to `0` to explicitly clear it (e.g. when switching to autoscaling).
+	ReplicaCount pulumi.IntPtrInput `pulumi:"replicaCount"`
+	// Resource bundles assigned to the Workload. When empty the server infers an appropriate bundle.
+	Resources WorkloadRuntimeResourceArrayInput `pulumi:"resources"`
+}
+
+func (WorkloadRuntimeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*WorkloadRuntime)(nil)).Elem()
+}
+
+func (i WorkloadRuntimeArgs) ToWorkloadRuntimeOutput() WorkloadRuntimeOutput {
+	return i.ToWorkloadRuntimeOutputWithContext(context.Background())
+}
+
+func (i WorkloadRuntimeArgs) ToWorkloadRuntimeOutputWithContext(ctx context.Context) WorkloadRuntimeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WorkloadRuntimeOutput)
+}
+
+func (i WorkloadRuntimeArgs) ToWorkloadRuntimePtrOutput() WorkloadRuntimePtrOutput {
+	return i.ToWorkloadRuntimePtrOutputWithContext(context.Background())
+}
+
+func (i WorkloadRuntimeArgs) ToWorkloadRuntimePtrOutputWithContext(ctx context.Context) WorkloadRuntimePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WorkloadRuntimeOutput).ToWorkloadRuntimePtrOutputWithContext(ctx)
+}
+
+// WorkloadRuntimePtrInput is an input type that accepts WorkloadRuntimeArgs, WorkloadRuntimePtr and WorkloadRuntimePtrOutput values.
+// You can construct a concrete instance of `WorkloadRuntimePtrInput` via:
+//
+//	        WorkloadRuntimeArgs{...}
+//
+//	or:
+//
+//	        nil
+type WorkloadRuntimePtrInput interface {
+	pulumi.Input
+
+	ToWorkloadRuntimePtrOutput() WorkloadRuntimePtrOutput
+	ToWorkloadRuntimePtrOutputWithContext(context.Context) WorkloadRuntimePtrOutput
+}
+
+type workloadRuntimePtrType WorkloadRuntimeArgs
+
+func WorkloadRuntimePtr(v *WorkloadRuntimeArgs) WorkloadRuntimePtrInput {
+	return (*workloadRuntimePtrType)(v)
+}
+
+func (*workloadRuntimePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**WorkloadRuntime)(nil)).Elem()
+}
+
+func (i *workloadRuntimePtrType) ToWorkloadRuntimePtrOutput() WorkloadRuntimePtrOutput {
+	return i.ToWorkloadRuntimePtrOutputWithContext(context.Background())
+}
+
+func (i *workloadRuntimePtrType) ToWorkloadRuntimePtrOutputWithContext(ctx context.Context) WorkloadRuntimePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WorkloadRuntimePtrOutput)
+}
+
+type WorkloadRuntimeOutput struct{ *pulumi.OutputState }
+
+func (WorkloadRuntimeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*WorkloadRuntime)(nil)).Elem()
+}
+
+func (o WorkloadRuntimeOutput) ToWorkloadRuntimeOutput() WorkloadRuntimeOutput {
+	return o
+}
+
+func (o WorkloadRuntimeOutput) ToWorkloadRuntimeOutputWithContext(ctx context.Context) WorkloadRuntimeOutput {
+	return o
+}
+
+func (o WorkloadRuntimeOutput) ToWorkloadRuntimePtrOutput() WorkloadRuntimePtrOutput {
+	return o.ToWorkloadRuntimePtrOutputWithContext(context.Background())
+}
+
+func (o WorkloadRuntimeOutput) ToWorkloadRuntimePtrOutputWithContext(ctx context.Context) WorkloadRuntimePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v WorkloadRuntime) *WorkloadRuntime {
+		return &v
+	}).(WorkloadRuntimePtrOutput)
+}
+
+// Autoscaling configuration. When set, takes precedence over replica_count.
+func (o WorkloadRuntimeOutput) Autoscaling() WorkloadRuntimeAutoscalingPtrOutput {
+	return o.ApplyT(func(v WorkloadRuntime) *WorkloadRuntimeAutoscaling { return v.Autoscaling }).(WorkloadRuntimeAutoscalingPtrOutput)
+}
+
+// Number of replicas to run. Cannot be used together with `autoscaling`. Omitting this field retains the current value. Set to `0` to explicitly clear it (e.g. when switching to autoscaling).
+func (o WorkloadRuntimeOutput) ReplicaCount() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v WorkloadRuntime) *int { return v.ReplicaCount }).(pulumi.IntPtrOutput)
+}
+
+// Resource bundles assigned to the Workload. When empty the server infers an appropriate bundle.
+func (o WorkloadRuntimeOutput) Resources() WorkloadRuntimeResourceArrayOutput {
+	return o.ApplyT(func(v WorkloadRuntime) []WorkloadRuntimeResource { return v.Resources }).(WorkloadRuntimeResourceArrayOutput)
+}
+
+type WorkloadRuntimePtrOutput struct{ *pulumi.OutputState }
+
+func (WorkloadRuntimePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**WorkloadRuntime)(nil)).Elem()
+}
+
+func (o WorkloadRuntimePtrOutput) ToWorkloadRuntimePtrOutput() WorkloadRuntimePtrOutput {
+	return o
+}
+
+func (o WorkloadRuntimePtrOutput) ToWorkloadRuntimePtrOutputWithContext(ctx context.Context) WorkloadRuntimePtrOutput {
+	return o
+}
+
+func (o WorkloadRuntimePtrOutput) Elem() WorkloadRuntimeOutput {
+	return o.ApplyT(func(v *WorkloadRuntime) WorkloadRuntime {
+		if v != nil {
+			return *v
+		}
+		var ret WorkloadRuntime
+		return ret
+	}).(WorkloadRuntimeOutput)
+}
+
+// Autoscaling configuration. When set, takes precedence over replica_count.
+func (o WorkloadRuntimePtrOutput) Autoscaling() WorkloadRuntimeAutoscalingPtrOutput {
+	return o.ApplyT(func(v *WorkloadRuntime) *WorkloadRuntimeAutoscaling {
+		if v == nil {
+			return nil
+		}
+		return v.Autoscaling
+	}).(WorkloadRuntimeAutoscalingPtrOutput)
+}
+
+// Number of replicas to run. Cannot be used together with `autoscaling`. Omitting this field retains the current value. Set to `0` to explicitly clear it (e.g. when switching to autoscaling).
+func (o WorkloadRuntimePtrOutput) ReplicaCount() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *WorkloadRuntime) *int {
+		if v == nil {
+			return nil
+		}
+		return v.ReplicaCount
+	}).(pulumi.IntPtrOutput)
+}
+
+// Resource bundles assigned to the Workload. When empty the server infers an appropriate bundle.
+func (o WorkloadRuntimePtrOutput) Resources() WorkloadRuntimeResourceArrayOutput {
+	return o.ApplyT(func(v *WorkloadRuntime) []WorkloadRuntimeResource {
+		if v == nil {
+			return nil
+		}
+		return v.Resources
+	}).(WorkloadRuntimeResourceArrayOutput)
+}
+
+type WorkloadRuntimeAutoscaling struct {
+	// Whether autoscaling is enabled. Defaults to true.
+	Enabled *bool `pulumi:"enabled"`
+	// Scaling policies that define when and how to scale.
+	Policies []WorkloadRuntimeAutoscalingPolicy `pulumi:"policies"`
+}
+
+// WorkloadRuntimeAutoscalingInput is an input type that accepts WorkloadRuntimeAutoscalingArgs and WorkloadRuntimeAutoscalingOutput values.
+// You can construct a concrete instance of `WorkloadRuntimeAutoscalingInput` via:
+//
+//	WorkloadRuntimeAutoscalingArgs{...}
+type WorkloadRuntimeAutoscalingInput interface {
+	pulumi.Input
+
+	ToWorkloadRuntimeAutoscalingOutput() WorkloadRuntimeAutoscalingOutput
+	ToWorkloadRuntimeAutoscalingOutputWithContext(context.Context) WorkloadRuntimeAutoscalingOutput
+}
+
+type WorkloadRuntimeAutoscalingArgs struct {
+	// Whether autoscaling is enabled. Defaults to true.
+	Enabled pulumi.BoolPtrInput `pulumi:"enabled"`
+	// Scaling policies that define when and how to scale.
+	Policies WorkloadRuntimeAutoscalingPolicyArrayInput `pulumi:"policies"`
+}
+
+func (WorkloadRuntimeAutoscalingArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*WorkloadRuntimeAutoscaling)(nil)).Elem()
+}
+
+func (i WorkloadRuntimeAutoscalingArgs) ToWorkloadRuntimeAutoscalingOutput() WorkloadRuntimeAutoscalingOutput {
+	return i.ToWorkloadRuntimeAutoscalingOutputWithContext(context.Background())
+}
+
+func (i WorkloadRuntimeAutoscalingArgs) ToWorkloadRuntimeAutoscalingOutputWithContext(ctx context.Context) WorkloadRuntimeAutoscalingOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WorkloadRuntimeAutoscalingOutput)
+}
+
+func (i WorkloadRuntimeAutoscalingArgs) ToWorkloadRuntimeAutoscalingPtrOutput() WorkloadRuntimeAutoscalingPtrOutput {
+	return i.ToWorkloadRuntimeAutoscalingPtrOutputWithContext(context.Background())
+}
+
+func (i WorkloadRuntimeAutoscalingArgs) ToWorkloadRuntimeAutoscalingPtrOutputWithContext(ctx context.Context) WorkloadRuntimeAutoscalingPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WorkloadRuntimeAutoscalingOutput).ToWorkloadRuntimeAutoscalingPtrOutputWithContext(ctx)
+}
+
+// WorkloadRuntimeAutoscalingPtrInput is an input type that accepts WorkloadRuntimeAutoscalingArgs, WorkloadRuntimeAutoscalingPtr and WorkloadRuntimeAutoscalingPtrOutput values.
+// You can construct a concrete instance of `WorkloadRuntimeAutoscalingPtrInput` via:
+//
+//	        WorkloadRuntimeAutoscalingArgs{...}
+//
+//	or:
+//
+//	        nil
+type WorkloadRuntimeAutoscalingPtrInput interface {
+	pulumi.Input
+
+	ToWorkloadRuntimeAutoscalingPtrOutput() WorkloadRuntimeAutoscalingPtrOutput
+	ToWorkloadRuntimeAutoscalingPtrOutputWithContext(context.Context) WorkloadRuntimeAutoscalingPtrOutput
+}
+
+type workloadRuntimeAutoscalingPtrType WorkloadRuntimeAutoscalingArgs
+
+func WorkloadRuntimeAutoscalingPtr(v *WorkloadRuntimeAutoscalingArgs) WorkloadRuntimeAutoscalingPtrInput {
+	return (*workloadRuntimeAutoscalingPtrType)(v)
+}
+
+func (*workloadRuntimeAutoscalingPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**WorkloadRuntimeAutoscaling)(nil)).Elem()
+}
+
+func (i *workloadRuntimeAutoscalingPtrType) ToWorkloadRuntimeAutoscalingPtrOutput() WorkloadRuntimeAutoscalingPtrOutput {
+	return i.ToWorkloadRuntimeAutoscalingPtrOutputWithContext(context.Background())
+}
+
+func (i *workloadRuntimeAutoscalingPtrType) ToWorkloadRuntimeAutoscalingPtrOutputWithContext(ctx context.Context) WorkloadRuntimeAutoscalingPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WorkloadRuntimeAutoscalingPtrOutput)
+}
+
+type WorkloadRuntimeAutoscalingOutput struct{ *pulumi.OutputState }
+
+func (WorkloadRuntimeAutoscalingOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*WorkloadRuntimeAutoscaling)(nil)).Elem()
+}
+
+func (o WorkloadRuntimeAutoscalingOutput) ToWorkloadRuntimeAutoscalingOutput() WorkloadRuntimeAutoscalingOutput {
+	return o
+}
+
+func (o WorkloadRuntimeAutoscalingOutput) ToWorkloadRuntimeAutoscalingOutputWithContext(ctx context.Context) WorkloadRuntimeAutoscalingOutput {
+	return o
+}
+
+func (o WorkloadRuntimeAutoscalingOutput) ToWorkloadRuntimeAutoscalingPtrOutput() WorkloadRuntimeAutoscalingPtrOutput {
+	return o.ToWorkloadRuntimeAutoscalingPtrOutputWithContext(context.Background())
+}
+
+func (o WorkloadRuntimeAutoscalingOutput) ToWorkloadRuntimeAutoscalingPtrOutputWithContext(ctx context.Context) WorkloadRuntimeAutoscalingPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v WorkloadRuntimeAutoscaling) *WorkloadRuntimeAutoscaling {
+		return &v
+	}).(WorkloadRuntimeAutoscalingPtrOutput)
+}
+
+// Whether autoscaling is enabled. Defaults to true.
+func (o WorkloadRuntimeAutoscalingOutput) Enabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v WorkloadRuntimeAutoscaling) *bool { return v.Enabled }).(pulumi.BoolPtrOutput)
+}
+
+// Scaling policies that define when and how to scale.
+func (o WorkloadRuntimeAutoscalingOutput) Policies() WorkloadRuntimeAutoscalingPolicyArrayOutput {
+	return o.ApplyT(func(v WorkloadRuntimeAutoscaling) []WorkloadRuntimeAutoscalingPolicy { return v.Policies }).(WorkloadRuntimeAutoscalingPolicyArrayOutput)
+}
+
+type WorkloadRuntimeAutoscalingPtrOutput struct{ *pulumi.OutputState }
+
+func (WorkloadRuntimeAutoscalingPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**WorkloadRuntimeAutoscaling)(nil)).Elem()
+}
+
+func (o WorkloadRuntimeAutoscalingPtrOutput) ToWorkloadRuntimeAutoscalingPtrOutput() WorkloadRuntimeAutoscalingPtrOutput {
+	return o
+}
+
+func (o WorkloadRuntimeAutoscalingPtrOutput) ToWorkloadRuntimeAutoscalingPtrOutputWithContext(ctx context.Context) WorkloadRuntimeAutoscalingPtrOutput {
+	return o
+}
+
+func (o WorkloadRuntimeAutoscalingPtrOutput) Elem() WorkloadRuntimeAutoscalingOutput {
+	return o.ApplyT(func(v *WorkloadRuntimeAutoscaling) WorkloadRuntimeAutoscaling {
+		if v != nil {
+			return *v
+		}
+		var ret WorkloadRuntimeAutoscaling
+		return ret
+	}).(WorkloadRuntimeAutoscalingOutput)
+}
+
+// Whether autoscaling is enabled. Defaults to true.
+func (o WorkloadRuntimeAutoscalingPtrOutput) Enabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *WorkloadRuntimeAutoscaling) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.Enabled
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Scaling policies that define when and how to scale.
+func (o WorkloadRuntimeAutoscalingPtrOutput) Policies() WorkloadRuntimeAutoscalingPolicyArrayOutput {
+	return o.ApplyT(func(v *WorkloadRuntimeAutoscaling) []WorkloadRuntimeAutoscalingPolicy {
+		if v == nil {
+			return nil
+		}
+		return v.Policies
+	}).(WorkloadRuntimeAutoscalingPolicyArrayOutput)
+}
+
+type WorkloadRuntimeAutoscalingPolicy struct {
+	// Maximum number of replicas.
+	MaxCount int `pulumi:"maxCount"`
+	// Minimum number of replicas.
+	MinCount int `pulumi:"minCount"`
+	// Policy priority when multiple policies are defined.
+	Priority *int `pulumi:"priority"`
+	// Metric used for scaling decisions: `cpuAverageUtilization`, `httpRequestsConcurrency`, `gpuCacheUtilization`, or `gpuRequestQueueDepth`.
+	ScalingMetric string `pulumi:"scalingMetric"`
+	// Target value for the scaling metric.
+	Target float64 `pulumi:"target"`
+}
+
+// WorkloadRuntimeAutoscalingPolicyInput is an input type that accepts WorkloadRuntimeAutoscalingPolicyArgs and WorkloadRuntimeAutoscalingPolicyOutput values.
+// You can construct a concrete instance of `WorkloadRuntimeAutoscalingPolicyInput` via:
+//
+//	WorkloadRuntimeAutoscalingPolicyArgs{...}
+type WorkloadRuntimeAutoscalingPolicyInput interface {
+	pulumi.Input
+
+	ToWorkloadRuntimeAutoscalingPolicyOutput() WorkloadRuntimeAutoscalingPolicyOutput
+	ToWorkloadRuntimeAutoscalingPolicyOutputWithContext(context.Context) WorkloadRuntimeAutoscalingPolicyOutput
+}
+
+type WorkloadRuntimeAutoscalingPolicyArgs struct {
+	// Maximum number of replicas.
+	MaxCount pulumi.IntInput `pulumi:"maxCount"`
+	// Minimum number of replicas.
+	MinCount pulumi.IntInput `pulumi:"minCount"`
+	// Policy priority when multiple policies are defined.
+	Priority pulumi.IntPtrInput `pulumi:"priority"`
+	// Metric used for scaling decisions: `cpuAverageUtilization`, `httpRequestsConcurrency`, `gpuCacheUtilization`, or `gpuRequestQueueDepth`.
+	ScalingMetric pulumi.StringInput `pulumi:"scalingMetric"`
+	// Target value for the scaling metric.
+	Target pulumi.Float64Input `pulumi:"target"`
+}
+
+func (WorkloadRuntimeAutoscalingPolicyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*WorkloadRuntimeAutoscalingPolicy)(nil)).Elem()
+}
+
+func (i WorkloadRuntimeAutoscalingPolicyArgs) ToWorkloadRuntimeAutoscalingPolicyOutput() WorkloadRuntimeAutoscalingPolicyOutput {
+	return i.ToWorkloadRuntimeAutoscalingPolicyOutputWithContext(context.Background())
+}
+
+func (i WorkloadRuntimeAutoscalingPolicyArgs) ToWorkloadRuntimeAutoscalingPolicyOutputWithContext(ctx context.Context) WorkloadRuntimeAutoscalingPolicyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WorkloadRuntimeAutoscalingPolicyOutput)
+}
+
+// WorkloadRuntimeAutoscalingPolicyArrayInput is an input type that accepts WorkloadRuntimeAutoscalingPolicyArray and WorkloadRuntimeAutoscalingPolicyArrayOutput values.
+// You can construct a concrete instance of `WorkloadRuntimeAutoscalingPolicyArrayInput` via:
+//
+//	WorkloadRuntimeAutoscalingPolicyArray{ WorkloadRuntimeAutoscalingPolicyArgs{...} }
+type WorkloadRuntimeAutoscalingPolicyArrayInput interface {
+	pulumi.Input
+
+	ToWorkloadRuntimeAutoscalingPolicyArrayOutput() WorkloadRuntimeAutoscalingPolicyArrayOutput
+	ToWorkloadRuntimeAutoscalingPolicyArrayOutputWithContext(context.Context) WorkloadRuntimeAutoscalingPolicyArrayOutput
+}
+
+type WorkloadRuntimeAutoscalingPolicyArray []WorkloadRuntimeAutoscalingPolicyInput
+
+func (WorkloadRuntimeAutoscalingPolicyArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]WorkloadRuntimeAutoscalingPolicy)(nil)).Elem()
+}
+
+func (i WorkloadRuntimeAutoscalingPolicyArray) ToWorkloadRuntimeAutoscalingPolicyArrayOutput() WorkloadRuntimeAutoscalingPolicyArrayOutput {
+	return i.ToWorkloadRuntimeAutoscalingPolicyArrayOutputWithContext(context.Background())
+}
+
+func (i WorkloadRuntimeAutoscalingPolicyArray) ToWorkloadRuntimeAutoscalingPolicyArrayOutputWithContext(ctx context.Context) WorkloadRuntimeAutoscalingPolicyArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WorkloadRuntimeAutoscalingPolicyArrayOutput)
+}
+
+type WorkloadRuntimeAutoscalingPolicyOutput struct{ *pulumi.OutputState }
+
+func (WorkloadRuntimeAutoscalingPolicyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*WorkloadRuntimeAutoscalingPolicy)(nil)).Elem()
+}
+
+func (o WorkloadRuntimeAutoscalingPolicyOutput) ToWorkloadRuntimeAutoscalingPolicyOutput() WorkloadRuntimeAutoscalingPolicyOutput {
+	return o
+}
+
+func (o WorkloadRuntimeAutoscalingPolicyOutput) ToWorkloadRuntimeAutoscalingPolicyOutputWithContext(ctx context.Context) WorkloadRuntimeAutoscalingPolicyOutput {
+	return o
+}
+
+// Maximum number of replicas.
+func (o WorkloadRuntimeAutoscalingPolicyOutput) MaxCount() pulumi.IntOutput {
+	return o.ApplyT(func(v WorkloadRuntimeAutoscalingPolicy) int { return v.MaxCount }).(pulumi.IntOutput)
+}
+
+// Minimum number of replicas.
+func (o WorkloadRuntimeAutoscalingPolicyOutput) MinCount() pulumi.IntOutput {
+	return o.ApplyT(func(v WorkloadRuntimeAutoscalingPolicy) int { return v.MinCount }).(pulumi.IntOutput)
+}
+
+// Policy priority when multiple policies are defined.
+func (o WorkloadRuntimeAutoscalingPolicyOutput) Priority() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v WorkloadRuntimeAutoscalingPolicy) *int { return v.Priority }).(pulumi.IntPtrOutput)
+}
+
+// Metric used for scaling decisions: `cpuAverageUtilization`, `httpRequestsConcurrency`, `gpuCacheUtilization`, or `gpuRequestQueueDepth`.
+func (o WorkloadRuntimeAutoscalingPolicyOutput) ScalingMetric() pulumi.StringOutput {
+	return o.ApplyT(func(v WorkloadRuntimeAutoscalingPolicy) string { return v.ScalingMetric }).(pulumi.StringOutput)
+}
+
+// Target value for the scaling metric.
+func (o WorkloadRuntimeAutoscalingPolicyOutput) Target() pulumi.Float64Output {
+	return o.ApplyT(func(v WorkloadRuntimeAutoscalingPolicy) float64 { return v.Target }).(pulumi.Float64Output)
+}
+
+type WorkloadRuntimeAutoscalingPolicyArrayOutput struct{ *pulumi.OutputState }
+
+func (WorkloadRuntimeAutoscalingPolicyArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]WorkloadRuntimeAutoscalingPolicy)(nil)).Elem()
+}
+
+func (o WorkloadRuntimeAutoscalingPolicyArrayOutput) ToWorkloadRuntimeAutoscalingPolicyArrayOutput() WorkloadRuntimeAutoscalingPolicyArrayOutput {
+	return o
+}
+
+func (o WorkloadRuntimeAutoscalingPolicyArrayOutput) ToWorkloadRuntimeAutoscalingPolicyArrayOutputWithContext(ctx context.Context) WorkloadRuntimeAutoscalingPolicyArrayOutput {
+	return o
+}
+
+func (o WorkloadRuntimeAutoscalingPolicyArrayOutput) Index(i pulumi.IntInput) WorkloadRuntimeAutoscalingPolicyOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) WorkloadRuntimeAutoscalingPolicy {
+		return vs[0].([]WorkloadRuntimeAutoscalingPolicy)[vs[1].(int)]
+	}).(WorkloadRuntimeAutoscalingPolicyOutput)
+}
+
+type WorkloadRuntimeResource struct {
+	// ID of the resource bundle (e.g. `cpu.nano`).
+	ResourceBundleId string `pulumi:"resourceBundleId"`
+}
+
+// WorkloadRuntimeResourceInput is an input type that accepts WorkloadRuntimeResourceArgs and WorkloadRuntimeResourceOutput values.
+// You can construct a concrete instance of `WorkloadRuntimeResourceInput` via:
+//
+//	WorkloadRuntimeResourceArgs{...}
+type WorkloadRuntimeResourceInput interface {
+	pulumi.Input
+
+	ToWorkloadRuntimeResourceOutput() WorkloadRuntimeResourceOutput
+	ToWorkloadRuntimeResourceOutputWithContext(context.Context) WorkloadRuntimeResourceOutput
+}
+
+type WorkloadRuntimeResourceArgs struct {
+	// ID of the resource bundle (e.g. `cpu.nano`).
+	ResourceBundleId pulumi.StringInput `pulumi:"resourceBundleId"`
+}
+
+func (WorkloadRuntimeResourceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*WorkloadRuntimeResource)(nil)).Elem()
+}
+
+func (i WorkloadRuntimeResourceArgs) ToWorkloadRuntimeResourceOutput() WorkloadRuntimeResourceOutput {
+	return i.ToWorkloadRuntimeResourceOutputWithContext(context.Background())
+}
+
+func (i WorkloadRuntimeResourceArgs) ToWorkloadRuntimeResourceOutputWithContext(ctx context.Context) WorkloadRuntimeResourceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WorkloadRuntimeResourceOutput)
+}
+
+// WorkloadRuntimeResourceArrayInput is an input type that accepts WorkloadRuntimeResourceArray and WorkloadRuntimeResourceArrayOutput values.
+// You can construct a concrete instance of `WorkloadRuntimeResourceArrayInput` via:
+//
+//	WorkloadRuntimeResourceArray{ WorkloadRuntimeResourceArgs{...} }
+type WorkloadRuntimeResourceArrayInput interface {
+	pulumi.Input
+
+	ToWorkloadRuntimeResourceArrayOutput() WorkloadRuntimeResourceArrayOutput
+	ToWorkloadRuntimeResourceArrayOutputWithContext(context.Context) WorkloadRuntimeResourceArrayOutput
+}
+
+type WorkloadRuntimeResourceArray []WorkloadRuntimeResourceInput
+
+func (WorkloadRuntimeResourceArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]WorkloadRuntimeResource)(nil)).Elem()
+}
+
+func (i WorkloadRuntimeResourceArray) ToWorkloadRuntimeResourceArrayOutput() WorkloadRuntimeResourceArrayOutput {
+	return i.ToWorkloadRuntimeResourceArrayOutputWithContext(context.Background())
+}
+
+func (i WorkloadRuntimeResourceArray) ToWorkloadRuntimeResourceArrayOutputWithContext(ctx context.Context) WorkloadRuntimeResourceArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WorkloadRuntimeResourceArrayOutput)
+}
+
+type WorkloadRuntimeResourceOutput struct{ *pulumi.OutputState }
+
+func (WorkloadRuntimeResourceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*WorkloadRuntimeResource)(nil)).Elem()
+}
+
+func (o WorkloadRuntimeResourceOutput) ToWorkloadRuntimeResourceOutput() WorkloadRuntimeResourceOutput {
+	return o
+}
+
+func (o WorkloadRuntimeResourceOutput) ToWorkloadRuntimeResourceOutputWithContext(ctx context.Context) WorkloadRuntimeResourceOutput {
+	return o
+}
+
+// ID of the resource bundle (e.g. `cpu.nano`).
+func (o WorkloadRuntimeResourceOutput) ResourceBundleId() pulumi.StringOutput {
+	return o.ApplyT(func(v WorkloadRuntimeResource) string { return v.ResourceBundleId }).(pulumi.StringOutput)
+}
+
+type WorkloadRuntimeResourceArrayOutput struct{ *pulumi.OutputState }
+
+func (WorkloadRuntimeResourceArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]WorkloadRuntimeResource)(nil)).Elem()
+}
+
+func (o WorkloadRuntimeResourceArrayOutput) ToWorkloadRuntimeResourceArrayOutput() WorkloadRuntimeResourceArrayOutput {
+	return o
+}
+
+func (o WorkloadRuntimeResourceArrayOutput) ToWorkloadRuntimeResourceArrayOutputWithContext(ctx context.Context) WorkloadRuntimeResourceArrayOutput {
+	return o
+}
+
+func (o WorkloadRuntimeResourceArrayOutput) Index(i pulumi.IntInput) WorkloadRuntimeResourceOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) WorkloadRuntimeResource {
+		return vs[0].([]WorkloadRuntimeResource)[vs[1].(int)]
+	}).(WorkloadRuntimeResourceOutput)
+}
+
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ApplicationSourceFromTemplateResourcesInput)(nil)).Elem(), ApplicationSourceFromTemplateResourcesArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ApplicationSourceFromTemplateResourcesPtrInput)(nil)).Elem(), ApplicationSourceFromTemplateResourcesArgs{})
@@ -13004,6 +14991,21 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ApplicationSourceResourcesPtrInput)(nil)).Elem(), ApplicationSourceResourcesArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ApplicationSourceRuntimeParameterValueInput)(nil)).Elem(), ApplicationSourceRuntimeParameterValueArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ApplicationSourceRuntimeParameterValueArrayInput)(nil)).Elem(), ApplicationSourceRuntimeParameterValueArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ArtifactSpecInput)(nil)).Elem(), ArtifactSpecArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ArtifactSpecPtrInput)(nil)).Elem(), ArtifactSpecArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ArtifactSpecContainerGroupInput)(nil)).Elem(), ArtifactSpecContainerGroupArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ArtifactSpecContainerGroupArrayInput)(nil)).Elem(), ArtifactSpecContainerGroupArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ArtifactSpecContainerGroupContainerInput)(nil)).Elem(), ArtifactSpecContainerGroupContainerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ArtifactSpecContainerGroupContainerArrayInput)(nil)).Elem(), ArtifactSpecContainerGroupContainerArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ArtifactSpecContainerGroupContainerEnvironmentVarInput)(nil)).Elem(), ArtifactSpecContainerGroupContainerEnvironmentVarArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ArtifactSpecContainerGroupContainerEnvironmentVarArrayInput)(nil)).Elem(), ArtifactSpecContainerGroupContainerEnvironmentVarArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ArtifactSpecContainerGroupContainerLivenessProbeInput)(nil)).Elem(), ArtifactSpecContainerGroupContainerLivenessProbeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ArtifactSpecContainerGroupContainerLivenessProbePtrInput)(nil)).Elem(), ArtifactSpecContainerGroupContainerLivenessProbeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ArtifactSpecContainerGroupContainerReadinessProbeInput)(nil)).Elem(), ArtifactSpecContainerGroupContainerReadinessProbeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ArtifactSpecContainerGroupContainerReadinessProbePtrInput)(nil)).Elem(), ArtifactSpecContainerGroupContainerReadinessProbeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ArtifactSpecContainerGroupContainerResourceRequestInput)(nil)).Elem(), ArtifactSpecContainerGroupContainerResourceRequestArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ArtifactSpecContainerGroupContainerStartupProbeInput)(nil)).Elem(), ArtifactSpecContainerGroupContainerStartupProbeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ArtifactSpecContainerGroupContainerStartupProbePtrInput)(nil)).Elem(), ArtifactSpecContainerGroupContainerStartupProbeArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BatchPredictionJobDefinitionCsvSettingsInput)(nil)).Elem(), BatchPredictionJobDefinitionCsvSettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BatchPredictionJobDefinitionCsvSettingsPtrInput)(nil)).Elem(), BatchPredictionJobDefinitionCsvSettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BatchPredictionJobDefinitionIntakeSettingsInput)(nil)).Elem(), BatchPredictionJobDefinitionIntakeSettingsArgs{})
@@ -13145,6 +15147,14 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*RegisteredModelTagArrayInput)(nil)).Elem(), RegisteredModelTagArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*VectorDatabaseChunkingParametersInput)(nil)).Elem(), VectorDatabaseChunkingParametersArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*VectorDatabaseChunkingParametersPtrInput)(nil)).Elem(), VectorDatabaseChunkingParametersArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WorkloadRuntimeInput)(nil)).Elem(), WorkloadRuntimeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WorkloadRuntimePtrInput)(nil)).Elem(), WorkloadRuntimeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WorkloadRuntimeAutoscalingInput)(nil)).Elem(), WorkloadRuntimeAutoscalingArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WorkloadRuntimeAutoscalingPtrInput)(nil)).Elem(), WorkloadRuntimeAutoscalingArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WorkloadRuntimeAutoscalingPolicyInput)(nil)).Elem(), WorkloadRuntimeAutoscalingPolicyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WorkloadRuntimeAutoscalingPolicyArrayInput)(nil)).Elem(), WorkloadRuntimeAutoscalingPolicyArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WorkloadRuntimeResourceInput)(nil)).Elem(), WorkloadRuntimeResourceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WorkloadRuntimeResourceArrayInput)(nil)).Elem(), WorkloadRuntimeResourceArray{})
 	pulumi.RegisterOutputType(ApplicationSourceFromTemplateResourcesOutput{})
 	pulumi.RegisterOutputType(ApplicationSourceFromTemplateResourcesPtrOutput{})
 	pulumi.RegisterOutputType(ApplicationSourceFromTemplateRuntimeParameterValueOutput{})
@@ -13153,6 +15163,21 @@ func init() {
 	pulumi.RegisterOutputType(ApplicationSourceResourcesPtrOutput{})
 	pulumi.RegisterOutputType(ApplicationSourceRuntimeParameterValueOutput{})
 	pulumi.RegisterOutputType(ApplicationSourceRuntimeParameterValueArrayOutput{})
+	pulumi.RegisterOutputType(ArtifactSpecOutput{})
+	pulumi.RegisterOutputType(ArtifactSpecPtrOutput{})
+	pulumi.RegisterOutputType(ArtifactSpecContainerGroupOutput{})
+	pulumi.RegisterOutputType(ArtifactSpecContainerGroupArrayOutput{})
+	pulumi.RegisterOutputType(ArtifactSpecContainerGroupContainerOutput{})
+	pulumi.RegisterOutputType(ArtifactSpecContainerGroupContainerArrayOutput{})
+	pulumi.RegisterOutputType(ArtifactSpecContainerGroupContainerEnvironmentVarOutput{})
+	pulumi.RegisterOutputType(ArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput{})
+	pulumi.RegisterOutputType(ArtifactSpecContainerGroupContainerLivenessProbeOutput{})
+	pulumi.RegisterOutputType(ArtifactSpecContainerGroupContainerLivenessProbePtrOutput{})
+	pulumi.RegisterOutputType(ArtifactSpecContainerGroupContainerReadinessProbeOutput{})
+	pulumi.RegisterOutputType(ArtifactSpecContainerGroupContainerReadinessProbePtrOutput{})
+	pulumi.RegisterOutputType(ArtifactSpecContainerGroupContainerResourceRequestOutput{})
+	pulumi.RegisterOutputType(ArtifactSpecContainerGroupContainerStartupProbeOutput{})
+	pulumi.RegisterOutputType(ArtifactSpecContainerGroupContainerStartupProbePtrOutput{})
 	pulumi.RegisterOutputType(BatchPredictionJobDefinitionCsvSettingsOutput{})
 	pulumi.RegisterOutputType(BatchPredictionJobDefinitionCsvSettingsPtrOutput{})
 	pulumi.RegisterOutputType(BatchPredictionJobDefinitionIntakeSettingsOutput{})
@@ -13294,4 +15319,12 @@ func init() {
 	pulumi.RegisterOutputType(RegisteredModelTagArrayOutput{})
 	pulumi.RegisterOutputType(VectorDatabaseChunkingParametersOutput{})
 	pulumi.RegisterOutputType(VectorDatabaseChunkingParametersPtrOutput{})
+	pulumi.RegisterOutputType(WorkloadRuntimeOutput{})
+	pulumi.RegisterOutputType(WorkloadRuntimePtrOutput{})
+	pulumi.RegisterOutputType(WorkloadRuntimeAutoscalingOutput{})
+	pulumi.RegisterOutputType(WorkloadRuntimeAutoscalingPtrOutput{})
+	pulumi.RegisterOutputType(WorkloadRuntimeAutoscalingPolicyOutput{})
+	pulumi.RegisterOutputType(WorkloadRuntimeAutoscalingPolicyArrayOutput{})
+	pulumi.RegisterOutputType(WorkloadRuntimeResourceOutput{})
+	pulumi.RegisterOutputType(WorkloadRuntimeResourceArrayOutput{})
 }
