@@ -21,6 +21,14 @@ __all__ = [
     'ApplicationSourceFromTemplateRuntimeParameterValue',
     'ApplicationSourceResources',
     'ApplicationSourceRuntimeParameterValue',
+    'ArtifactSpec',
+    'ArtifactSpecContainerGroup',
+    'ArtifactSpecContainerGroupContainer',
+    'ArtifactSpecContainerGroupContainerEnvironmentVar',
+    'ArtifactSpecContainerGroupContainerLivenessProbe',
+    'ArtifactSpecContainerGroupContainerReadinessProbe',
+    'ArtifactSpecContainerGroupContainerResourceRequest',
+    'ArtifactSpecContainerGroupContainerStartupProbe',
     'BatchPredictionJobDefinitionCsvSettings',
     'BatchPredictionJobDefinitionIntakeSettings',
     'BatchPredictionJobDefinitionOutputSettings',
@@ -92,6 +100,10 @@ __all__ = [
     'NotificationChannelDrEntity',
     'RegisteredModelTag',
     'VectorDatabaseChunkingParameters',
+    'WorkloadRuntime',
+    'WorkloadRuntimeAutoscaling',
+    'WorkloadRuntimeAutoscalingPolicy',
+    'WorkloadRuntimeResource',
 ]
 
 @pulumi.output_type
@@ -352,6 +364,697 @@ class ApplicationSourceRuntimeParameterValue(dict):
         The value of the runtime parameter (type conversion is handled internally).
         """
         return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class ArtifactSpec(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "containerGroups":
+            suggest = "container_groups"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ArtifactSpec. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ArtifactSpec.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ArtifactSpec.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 container_groups: Sequence['outputs.ArtifactSpecContainerGroup']):
+        """
+        :param Sequence['ArtifactSpecContainerGroupArgs'] container_groups: List of container groups.
+        """
+        pulumi.set(__self__, "container_groups", container_groups)
+
+    @property
+    @pulumi.getter(name="containerGroups")
+    def container_groups(self) -> Sequence['outputs.ArtifactSpecContainerGroup']:
+        """
+        List of container groups.
+        """
+        return pulumi.get(self, "container_groups")
+
+
+@pulumi.output_type
+class ArtifactSpecContainerGroup(dict):
+    def __init__(__self__, *,
+                 containers: Sequence['outputs.ArtifactSpecContainerGroupContainer']):
+        """
+        :param Sequence['ArtifactSpecContainerGroupContainerArgs'] containers: List of containers in this group.
+        """
+        pulumi.set(__self__, "containers", containers)
+
+    @property
+    @pulumi.getter
+    def containers(self) -> Sequence['outputs.ArtifactSpecContainerGroupContainer']:
+        """
+        List of containers in this group.
+        """
+        return pulumi.get(self, "containers")
+
+
+@pulumi.output_type
+class ArtifactSpecContainerGroupContainer(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "imageUri":
+            suggest = "image_uri"
+        elif key == "resourceRequest":
+            suggest = "resource_request"
+        elif key == "environmentVars":
+            suggest = "environment_vars"
+        elif key == "livenessProbe":
+            suggest = "liveness_probe"
+        elif key == "readinessProbe":
+            suggest = "readiness_probe"
+        elif key == "startupProbe":
+            suggest = "startup_probe"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ArtifactSpecContainerGroupContainer. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ArtifactSpecContainerGroupContainer.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ArtifactSpecContainerGroupContainer.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 image_uri: builtins.str,
+                 resource_request: 'outputs.ArtifactSpecContainerGroupContainerResourceRequest',
+                 description: Optional[builtins.str] = None,
+                 entrypoints: Optional[Sequence[builtins.str]] = None,
+                 environment_vars: Optional[Sequence['outputs.ArtifactSpecContainerGroupContainerEnvironmentVar']] = None,
+                 liveness_probe: Optional['outputs.ArtifactSpecContainerGroupContainerLivenessProbe'] = None,
+                 name: Optional[builtins.str] = None,
+                 port: Optional[builtins.int] = None,
+                 primary: Optional[builtins.bool] = None,
+                 readiness_probe: Optional['outputs.ArtifactSpecContainerGroupContainerReadinessProbe'] = None,
+                 startup_probe: Optional['outputs.ArtifactSpecContainerGroupContainerStartupProbe'] = None):
+        """
+        :param builtins.str image_uri: Docker image URI.
+        :param 'ArtifactSpecContainerGroupContainerResourceRequestArgs' resource_request: Resource requirements for the container.
+        :param builtins.str description: Description of the container.
+        :param Sequence[builtins.str] entrypoints: Container entrypoint.
+        :param Sequence['ArtifactSpecContainerGroupContainerEnvironmentVarArgs'] environment_vars: Environment variables for the container.
+        :param 'ArtifactSpecContainerGroupContainerLivenessProbeArgs' liveness_probe: Container liveness check configuration.
+        :param builtins.str name: Name of the container.
+        :param builtins.int port: Container access port (1024-65535). Required for primary containers; omit for non-primary.
+        :param builtins.bool primary: Whether this is the primary container.
+        :param 'ArtifactSpecContainerGroupContainerReadinessProbeArgs' readiness_probe: Container readiness check configuration.
+        :param 'ArtifactSpecContainerGroupContainerStartupProbeArgs' startup_probe: Container startup check configuration.
+        """
+        pulumi.set(__self__, "image_uri", image_uri)
+        pulumi.set(__self__, "resource_request", resource_request)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if entrypoints is not None:
+            pulumi.set(__self__, "entrypoints", entrypoints)
+        if environment_vars is not None:
+            pulumi.set(__self__, "environment_vars", environment_vars)
+        if liveness_probe is not None:
+            pulumi.set(__self__, "liveness_probe", liveness_probe)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if port is not None:
+            pulumi.set(__self__, "port", port)
+        if primary is not None:
+            pulumi.set(__self__, "primary", primary)
+        if readiness_probe is not None:
+            pulumi.set(__self__, "readiness_probe", readiness_probe)
+        if startup_probe is not None:
+            pulumi.set(__self__, "startup_probe", startup_probe)
+
+    @property
+    @pulumi.getter(name="imageUri")
+    def image_uri(self) -> builtins.str:
+        """
+        Docker image URI.
+        """
+        return pulumi.get(self, "image_uri")
+
+    @property
+    @pulumi.getter(name="resourceRequest")
+    def resource_request(self) -> 'outputs.ArtifactSpecContainerGroupContainerResourceRequest':
+        """
+        Resource requirements for the container.
+        """
+        return pulumi.get(self, "resource_request")
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[builtins.str]:
+        """
+        Description of the container.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter
+    def entrypoints(self) -> Optional[Sequence[builtins.str]]:
+        """
+        Container entrypoint.
+        """
+        return pulumi.get(self, "entrypoints")
+
+    @property
+    @pulumi.getter(name="environmentVars")
+    def environment_vars(self) -> Optional[Sequence['outputs.ArtifactSpecContainerGroupContainerEnvironmentVar']]:
+        """
+        Environment variables for the container.
+        """
+        return pulumi.get(self, "environment_vars")
+
+    @property
+    @pulumi.getter(name="livenessProbe")
+    def liveness_probe(self) -> Optional['outputs.ArtifactSpecContainerGroupContainerLivenessProbe']:
+        """
+        Container liveness check configuration.
+        """
+        return pulumi.get(self, "liveness_probe")
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[builtins.str]:
+        """
+        Name of the container.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def port(self) -> Optional[builtins.int]:
+        """
+        Container access port (1024-65535). Required for primary containers; omit for non-primary.
+        """
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter
+    def primary(self) -> Optional[builtins.bool]:
+        """
+        Whether this is the primary container.
+        """
+        return pulumi.get(self, "primary")
+
+    @property
+    @pulumi.getter(name="readinessProbe")
+    def readiness_probe(self) -> Optional['outputs.ArtifactSpecContainerGroupContainerReadinessProbe']:
+        """
+        Container readiness check configuration.
+        """
+        return pulumi.get(self, "readiness_probe")
+
+    @property
+    @pulumi.getter(name="startupProbe")
+    def startup_probe(self) -> Optional['outputs.ArtifactSpecContainerGroupContainerStartupProbe']:
+        """
+        Container startup check configuration.
+        """
+        return pulumi.get(self, "startup_probe")
+
+
+@pulumi.output_type
+class ArtifactSpecContainerGroupContainerEnvironmentVar(dict):
+    def __init__(__self__, *,
+                 name: builtins.str,
+                 value: builtins.str):
+        """
+        :param builtins.str name: Name of the environment variable.
+        :param builtins.str value: Value of the environment variable.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> builtins.str:
+        """
+        Name of the environment variable.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def value(self) -> builtins.str:
+        """
+        Value of the environment variable.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class ArtifactSpecContainerGroupContainerLivenessProbe(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "failureThreshold":
+            suggest = "failure_threshold"
+        elif key == "initialDelaySeconds":
+            suggest = "initial_delay_seconds"
+        elif key == "periodSeconds":
+            suggest = "period_seconds"
+        elif key == "timeoutSeconds":
+            suggest = "timeout_seconds"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ArtifactSpecContainerGroupContainerLivenessProbe. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ArtifactSpecContainerGroupContainerLivenessProbe.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ArtifactSpecContainerGroupContainerLivenessProbe.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 path: builtins.str,
+                 failure_threshold: Optional[builtins.int] = None,
+                 host: Optional[builtins.str] = None,
+                 initial_delay_seconds: Optional[builtins.int] = None,
+                 period_seconds: Optional[builtins.int] = None,
+                 port: Optional[builtins.int] = None,
+                 scheme: Optional[builtins.str] = None,
+                 timeout_seconds: Optional[builtins.int] = None):
+        """
+        :param builtins.str path: URL path to query for health check.
+        :param builtins.int failure_threshold: Minimum consecutive failures for the probe to be considered failed.
+        :param builtins.str host: Host name to connect to, defaults to the pod IP.
+        :param builtins.int initial_delay_seconds: Number of seconds to wait before the first probe is executed.
+        :param builtins.int period_seconds: How often (in seconds) to perform the probe.
+        :param builtins.int port: Port number to access on the container.
+        :param builtins.str scheme: Scheme to use for connecting to the host (HTTP or HTTPS).
+        :param builtins.int timeout_seconds: Number of seconds after which the probe times out.
+        """
+        pulumi.set(__self__, "path", path)
+        if failure_threshold is not None:
+            pulumi.set(__self__, "failure_threshold", failure_threshold)
+        if host is not None:
+            pulumi.set(__self__, "host", host)
+        if initial_delay_seconds is not None:
+            pulumi.set(__self__, "initial_delay_seconds", initial_delay_seconds)
+        if period_seconds is not None:
+            pulumi.set(__self__, "period_seconds", period_seconds)
+        if port is not None:
+            pulumi.set(__self__, "port", port)
+        if scheme is not None:
+            pulumi.set(__self__, "scheme", scheme)
+        if timeout_seconds is not None:
+            pulumi.set(__self__, "timeout_seconds", timeout_seconds)
+
+    @property
+    @pulumi.getter
+    def path(self) -> builtins.str:
+        """
+        URL path to query for health check.
+        """
+        return pulumi.get(self, "path")
+
+    @property
+    @pulumi.getter(name="failureThreshold")
+    def failure_threshold(self) -> Optional[builtins.int]:
+        """
+        Minimum consecutive failures for the probe to be considered failed.
+        """
+        return pulumi.get(self, "failure_threshold")
+
+    @property
+    @pulumi.getter
+    def host(self) -> Optional[builtins.str]:
+        """
+        Host name to connect to, defaults to the pod IP.
+        """
+        return pulumi.get(self, "host")
+
+    @property
+    @pulumi.getter(name="initialDelaySeconds")
+    def initial_delay_seconds(self) -> Optional[builtins.int]:
+        """
+        Number of seconds to wait before the first probe is executed.
+        """
+        return pulumi.get(self, "initial_delay_seconds")
+
+    @property
+    @pulumi.getter(name="periodSeconds")
+    def period_seconds(self) -> Optional[builtins.int]:
+        """
+        How often (in seconds) to perform the probe.
+        """
+        return pulumi.get(self, "period_seconds")
+
+    @property
+    @pulumi.getter
+    def port(self) -> Optional[builtins.int]:
+        """
+        Port number to access on the container.
+        """
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter
+    def scheme(self) -> Optional[builtins.str]:
+        """
+        Scheme to use for connecting to the host (HTTP or HTTPS).
+        """
+        return pulumi.get(self, "scheme")
+
+    @property
+    @pulumi.getter(name="timeoutSeconds")
+    def timeout_seconds(self) -> Optional[builtins.int]:
+        """
+        Number of seconds after which the probe times out.
+        """
+        return pulumi.get(self, "timeout_seconds")
+
+
+@pulumi.output_type
+class ArtifactSpecContainerGroupContainerReadinessProbe(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "failureThreshold":
+            suggest = "failure_threshold"
+        elif key == "initialDelaySeconds":
+            suggest = "initial_delay_seconds"
+        elif key == "periodSeconds":
+            suggest = "period_seconds"
+        elif key == "timeoutSeconds":
+            suggest = "timeout_seconds"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ArtifactSpecContainerGroupContainerReadinessProbe. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ArtifactSpecContainerGroupContainerReadinessProbe.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ArtifactSpecContainerGroupContainerReadinessProbe.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 path: builtins.str,
+                 failure_threshold: Optional[builtins.int] = None,
+                 host: Optional[builtins.str] = None,
+                 initial_delay_seconds: Optional[builtins.int] = None,
+                 period_seconds: Optional[builtins.int] = None,
+                 port: Optional[builtins.int] = None,
+                 scheme: Optional[builtins.str] = None,
+                 timeout_seconds: Optional[builtins.int] = None):
+        """
+        :param builtins.str path: URL path to query for health check.
+        :param builtins.int failure_threshold: Minimum consecutive failures for the probe to be considered failed.
+        :param builtins.str host: Host name to connect to, defaults to the pod IP.
+        :param builtins.int initial_delay_seconds: Number of seconds to wait before the first probe is executed.
+        :param builtins.int period_seconds: How often (in seconds) to perform the probe.
+        :param builtins.int port: Port number to access on the container.
+        :param builtins.str scheme: Scheme to use for connecting to the host (HTTP or HTTPS).
+        :param builtins.int timeout_seconds: Number of seconds after which the probe times out.
+        """
+        pulumi.set(__self__, "path", path)
+        if failure_threshold is not None:
+            pulumi.set(__self__, "failure_threshold", failure_threshold)
+        if host is not None:
+            pulumi.set(__self__, "host", host)
+        if initial_delay_seconds is not None:
+            pulumi.set(__self__, "initial_delay_seconds", initial_delay_seconds)
+        if period_seconds is not None:
+            pulumi.set(__self__, "period_seconds", period_seconds)
+        if port is not None:
+            pulumi.set(__self__, "port", port)
+        if scheme is not None:
+            pulumi.set(__self__, "scheme", scheme)
+        if timeout_seconds is not None:
+            pulumi.set(__self__, "timeout_seconds", timeout_seconds)
+
+    @property
+    @pulumi.getter
+    def path(self) -> builtins.str:
+        """
+        URL path to query for health check.
+        """
+        return pulumi.get(self, "path")
+
+    @property
+    @pulumi.getter(name="failureThreshold")
+    def failure_threshold(self) -> Optional[builtins.int]:
+        """
+        Minimum consecutive failures for the probe to be considered failed.
+        """
+        return pulumi.get(self, "failure_threshold")
+
+    @property
+    @pulumi.getter
+    def host(self) -> Optional[builtins.str]:
+        """
+        Host name to connect to, defaults to the pod IP.
+        """
+        return pulumi.get(self, "host")
+
+    @property
+    @pulumi.getter(name="initialDelaySeconds")
+    def initial_delay_seconds(self) -> Optional[builtins.int]:
+        """
+        Number of seconds to wait before the first probe is executed.
+        """
+        return pulumi.get(self, "initial_delay_seconds")
+
+    @property
+    @pulumi.getter(name="periodSeconds")
+    def period_seconds(self) -> Optional[builtins.int]:
+        """
+        How often (in seconds) to perform the probe.
+        """
+        return pulumi.get(self, "period_seconds")
+
+    @property
+    @pulumi.getter
+    def port(self) -> Optional[builtins.int]:
+        """
+        Port number to access on the container.
+        """
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter
+    def scheme(self) -> Optional[builtins.str]:
+        """
+        Scheme to use for connecting to the host (HTTP or HTTPS).
+        """
+        return pulumi.get(self, "scheme")
+
+    @property
+    @pulumi.getter(name="timeoutSeconds")
+    def timeout_seconds(self) -> Optional[builtins.int]:
+        """
+        Number of seconds after which the probe times out.
+        """
+        return pulumi.get(self, "timeout_seconds")
+
+
+@pulumi.output_type
+class ArtifactSpecContainerGroupContainerResourceRequest(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "gpuType":
+            suggest = "gpu_type"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ArtifactSpecContainerGroupContainerResourceRequest. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ArtifactSpecContainerGroupContainerResourceRequest.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ArtifactSpecContainerGroupContainerResourceRequest.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 cpu: builtins.int,
+                 memory: builtins.int,
+                 gpu: Optional[builtins.int] = None,
+                 gpu_type: Optional[builtins.str] = None):
+        """
+        :param builtins.int cpu: Number of CPU cores required.
+        :param builtins.int memory: Memory required in bytes.
+        :param builtins.int gpu: Number of GPUs required.
+        :param builtins.str gpu_type: GPU type required (e.g., NVIDIA-A100).
+        """
+        pulumi.set(__self__, "cpu", cpu)
+        pulumi.set(__self__, "memory", memory)
+        if gpu is not None:
+            pulumi.set(__self__, "gpu", gpu)
+        if gpu_type is not None:
+            pulumi.set(__self__, "gpu_type", gpu_type)
+
+    @property
+    @pulumi.getter
+    def cpu(self) -> builtins.int:
+        """
+        Number of CPU cores required.
+        """
+        return pulumi.get(self, "cpu")
+
+    @property
+    @pulumi.getter
+    def memory(self) -> builtins.int:
+        """
+        Memory required in bytes.
+        """
+        return pulumi.get(self, "memory")
+
+    @property
+    @pulumi.getter
+    def gpu(self) -> Optional[builtins.int]:
+        """
+        Number of GPUs required.
+        """
+        return pulumi.get(self, "gpu")
+
+    @property
+    @pulumi.getter(name="gpuType")
+    def gpu_type(self) -> Optional[builtins.str]:
+        """
+        GPU type required (e.g., NVIDIA-A100).
+        """
+        return pulumi.get(self, "gpu_type")
+
+
+@pulumi.output_type
+class ArtifactSpecContainerGroupContainerStartupProbe(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "failureThreshold":
+            suggest = "failure_threshold"
+        elif key == "initialDelaySeconds":
+            suggest = "initial_delay_seconds"
+        elif key == "periodSeconds":
+            suggest = "period_seconds"
+        elif key == "timeoutSeconds":
+            suggest = "timeout_seconds"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ArtifactSpecContainerGroupContainerStartupProbe. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ArtifactSpecContainerGroupContainerStartupProbe.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ArtifactSpecContainerGroupContainerStartupProbe.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 path: builtins.str,
+                 failure_threshold: Optional[builtins.int] = None,
+                 host: Optional[builtins.str] = None,
+                 initial_delay_seconds: Optional[builtins.int] = None,
+                 period_seconds: Optional[builtins.int] = None,
+                 port: Optional[builtins.int] = None,
+                 scheme: Optional[builtins.str] = None,
+                 timeout_seconds: Optional[builtins.int] = None):
+        """
+        :param builtins.str path: URL path to query for health check.
+        :param builtins.int failure_threshold: Minimum consecutive failures for the probe to be considered failed.
+        :param builtins.str host: Host name to connect to, defaults to the pod IP.
+        :param builtins.int initial_delay_seconds: Number of seconds to wait before the first probe is executed.
+        :param builtins.int period_seconds: How often (in seconds) to perform the probe.
+        :param builtins.int port: Port number to access on the container.
+        :param builtins.str scheme: Scheme to use for connecting to the host (HTTP or HTTPS).
+        :param builtins.int timeout_seconds: Number of seconds after which the probe times out.
+        """
+        pulumi.set(__self__, "path", path)
+        if failure_threshold is not None:
+            pulumi.set(__self__, "failure_threshold", failure_threshold)
+        if host is not None:
+            pulumi.set(__self__, "host", host)
+        if initial_delay_seconds is not None:
+            pulumi.set(__self__, "initial_delay_seconds", initial_delay_seconds)
+        if period_seconds is not None:
+            pulumi.set(__self__, "period_seconds", period_seconds)
+        if port is not None:
+            pulumi.set(__self__, "port", port)
+        if scheme is not None:
+            pulumi.set(__self__, "scheme", scheme)
+        if timeout_seconds is not None:
+            pulumi.set(__self__, "timeout_seconds", timeout_seconds)
+
+    @property
+    @pulumi.getter
+    def path(self) -> builtins.str:
+        """
+        URL path to query for health check.
+        """
+        return pulumi.get(self, "path")
+
+    @property
+    @pulumi.getter(name="failureThreshold")
+    def failure_threshold(self) -> Optional[builtins.int]:
+        """
+        Minimum consecutive failures for the probe to be considered failed.
+        """
+        return pulumi.get(self, "failure_threshold")
+
+    @property
+    @pulumi.getter
+    def host(self) -> Optional[builtins.str]:
+        """
+        Host name to connect to, defaults to the pod IP.
+        """
+        return pulumi.get(self, "host")
+
+    @property
+    @pulumi.getter(name="initialDelaySeconds")
+    def initial_delay_seconds(self) -> Optional[builtins.int]:
+        """
+        Number of seconds to wait before the first probe is executed.
+        """
+        return pulumi.get(self, "initial_delay_seconds")
+
+    @property
+    @pulumi.getter(name="periodSeconds")
+    def period_seconds(self) -> Optional[builtins.int]:
+        """
+        How often (in seconds) to perform the probe.
+        """
+        return pulumi.get(self, "period_seconds")
+
+    @property
+    @pulumi.getter
+    def port(self) -> Optional[builtins.int]:
+        """
+        Port number to access on the container.
+        """
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter
+    def scheme(self) -> Optional[builtins.str]:
+        """
+        Scheme to use for connecting to the host (HTTP or HTTPS).
+        """
+        return pulumi.get(self, "scheme")
+
+    @property
+    @pulumi.getter(name="timeoutSeconds")
+    def timeout_seconds(self) -> Optional[builtins.int]:
+        """
+        Number of seconds after which the probe times out.
+        """
+        return pulumi.get(self, "timeout_seconds")
 
 
 @pulumi.output_type
@@ -4959,5 +5662,214 @@ class VectorDatabaseChunkingParameters(dict):
         The separators used to split the data.
         """
         return pulumi.get(self, "separators")
+
+
+@pulumi.output_type
+class WorkloadRuntime(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "replicaCount":
+            suggest = "replica_count"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in WorkloadRuntime. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        WorkloadRuntime.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        WorkloadRuntime.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 autoscaling: Optional['outputs.WorkloadRuntimeAutoscaling'] = None,
+                 replica_count: Optional[builtins.int] = None,
+                 resources: Optional[Sequence['outputs.WorkloadRuntimeResource']] = None):
+        """
+        :param 'WorkloadRuntimeAutoscalingArgs' autoscaling: Autoscaling configuration. When set, takes precedence over replica_count.
+        :param builtins.int replica_count: Number of replicas to run. Cannot be used together with `autoscaling`. Omitting this field retains the current value. Set to `0` to explicitly clear it (e.g. when switching to autoscaling).
+        :param Sequence['WorkloadRuntimeResourceArgs'] resources: Resource bundles assigned to the Workload. When empty the server infers an appropriate bundle.
+        """
+        if autoscaling is not None:
+            pulumi.set(__self__, "autoscaling", autoscaling)
+        if replica_count is not None:
+            pulumi.set(__self__, "replica_count", replica_count)
+        if resources is not None:
+            pulumi.set(__self__, "resources", resources)
+
+    @property
+    @pulumi.getter
+    def autoscaling(self) -> Optional['outputs.WorkloadRuntimeAutoscaling']:
+        """
+        Autoscaling configuration. When set, takes precedence over replica_count.
+        """
+        return pulumi.get(self, "autoscaling")
+
+    @property
+    @pulumi.getter(name="replicaCount")
+    def replica_count(self) -> Optional[builtins.int]:
+        """
+        Number of replicas to run. Cannot be used together with `autoscaling`. Omitting this field retains the current value. Set to `0` to explicitly clear it (e.g. when switching to autoscaling).
+        """
+        return pulumi.get(self, "replica_count")
+
+    @property
+    @pulumi.getter
+    def resources(self) -> Optional[Sequence['outputs.WorkloadRuntimeResource']]:
+        """
+        Resource bundles assigned to the Workload. When empty the server infers an appropriate bundle.
+        """
+        return pulumi.get(self, "resources")
+
+
+@pulumi.output_type
+class WorkloadRuntimeAutoscaling(dict):
+    def __init__(__self__, *,
+                 policies: Sequence['outputs.WorkloadRuntimeAutoscalingPolicy'],
+                 enabled: Optional[builtins.bool] = None):
+        """
+        :param Sequence['WorkloadRuntimeAutoscalingPolicyArgs'] policies: Scaling policies that define when and how to scale.
+        :param builtins.bool enabled: Whether autoscaling is enabled. Defaults to true.
+        """
+        pulumi.set(__self__, "policies", policies)
+        if enabled is not None:
+            pulumi.set(__self__, "enabled", enabled)
+
+    @property
+    @pulumi.getter
+    def policies(self) -> Sequence['outputs.WorkloadRuntimeAutoscalingPolicy']:
+        """
+        Scaling policies that define when and how to scale.
+        """
+        return pulumi.get(self, "policies")
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> Optional[builtins.bool]:
+        """
+        Whether autoscaling is enabled. Defaults to true.
+        """
+        return pulumi.get(self, "enabled")
+
+
+@pulumi.output_type
+class WorkloadRuntimeAutoscalingPolicy(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "maxCount":
+            suggest = "max_count"
+        elif key == "minCount":
+            suggest = "min_count"
+        elif key == "scalingMetric":
+            suggest = "scaling_metric"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in WorkloadRuntimeAutoscalingPolicy. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        WorkloadRuntimeAutoscalingPolicy.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        WorkloadRuntimeAutoscalingPolicy.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 max_count: builtins.int,
+                 min_count: builtins.int,
+                 scaling_metric: builtins.str,
+                 target: builtins.float,
+                 priority: Optional[builtins.int] = None):
+        """
+        :param builtins.int max_count: Maximum number of replicas.
+        :param builtins.int min_count: Minimum number of replicas.
+        :param builtins.str scaling_metric: Metric used for scaling decisions: `cpuAverageUtilization`, `httpRequestsConcurrency`, `gpuCacheUtilization`, or `gpuRequestQueueDepth`.
+        :param builtins.float target: Target value for the scaling metric.
+        :param builtins.int priority: Policy priority when multiple policies are defined.
+        """
+        pulumi.set(__self__, "max_count", max_count)
+        pulumi.set(__self__, "min_count", min_count)
+        pulumi.set(__self__, "scaling_metric", scaling_metric)
+        pulumi.set(__self__, "target", target)
+        if priority is not None:
+            pulumi.set(__self__, "priority", priority)
+
+    @property
+    @pulumi.getter(name="maxCount")
+    def max_count(self) -> builtins.int:
+        """
+        Maximum number of replicas.
+        """
+        return pulumi.get(self, "max_count")
+
+    @property
+    @pulumi.getter(name="minCount")
+    def min_count(self) -> builtins.int:
+        """
+        Minimum number of replicas.
+        """
+        return pulumi.get(self, "min_count")
+
+    @property
+    @pulumi.getter(name="scalingMetric")
+    def scaling_metric(self) -> builtins.str:
+        """
+        Metric used for scaling decisions: `cpuAverageUtilization`, `httpRequestsConcurrency`, `gpuCacheUtilization`, or `gpuRequestQueueDepth`.
+        """
+        return pulumi.get(self, "scaling_metric")
+
+    @property
+    @pulumi.getter
+    def target(self) -> builtins.float:
+        """
+        Target value for the scaling metric.
+        """
+        return pulumi.get(self, "target")
+
+    @property
+    @pulumi.getter
+    def priority(self) -> Optional[builtins.int]:
+        """
+        Policy priority when multiple policies are defined.
+        """
+        return pulumi.get(self, "priority")
+
+
+@pulumi.output_type
+class WorkloadRuntimeResource(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "resourceBundleId":
+            suggest = "resource_bundle_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in WorkloadRuntimeResource. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        WorkloadRuntimeResource.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        WorkloadRuntimeResource.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 resource_bundle_id: builtins.str):
+        """
+        :param builtins.str resource_bundle_id: ID of the resource bundle (e.g. `cpu.nano`).
+        """
+        pulumi.set(__self__, "resource_bundle_id", resource_bundle_id)
+
+    @property
+    @pulumi.getter(name="resourceBundleId")
+    def resource_bundle_id(self) -> builtins.str:
+        """
+        ID of the resource bundle (e.g. `cpu.nano`).
+        """
+        return pulumi.get(self, "resource_bundle_id")
 
 

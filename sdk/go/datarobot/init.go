@@ -29,6 +29,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &ApplicationSource{}
 	case "datarobot:index/applicationSourceFromTemplate:ApplicationSourceFromTemplate":
 		r = &ApplicationSourceFromTemplate{}
+	case "datarobot:index/artifact:Artifact":
+		r = &Artifact{}
 	case "datarobot:index/awsCredential:AwsCredential":
 		r = &AwsCredential{}
 	case "datarobot:index/azureCredential:AzureCredential":
@@ -103,6 +105,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &UserMcpToolMetadata{}
 	case "datarobot:index/vectorDatabase:VectorDatabase":
 		r = &VectorDatabase{}
+	case "datarobot:index/workload:Workload":
+		r = &Workload{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -152,6 +156,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"datarobot",
 		"index/applicationSourceFromTemplate",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"datarobot",
+		"index/artifact",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -337,6 +346,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"datarobot",
 		"index/vectorDatabase",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"datarobot",
+		"index/workload",
 		&module{version},
 	)
 	pulumi.RegisterResourcePackage(

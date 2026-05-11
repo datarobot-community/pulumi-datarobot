@@ -190,6 +190,310 @@
         "value"
       ]
     },
+    "datarobot:index/ArtifactSpec:ArtifactSpec": {
+      "properties": {
+        "containerGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/types/datarobot:index/ArtifactSpecContainerGroup:ArtifactSpecContainerGroup"
+          },
+          "description": "List of container groups.\n"
+        }
+      },
+      "type": "object",
+      "required": [
+        "containerGroups"
+      ]
+    },
+    "datarobot:index/ArtifactSpecContainerGroup:ArtifactSpecContainerGroup": {
+      "properties": {
+        "containers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/types/datarobot:index/ArtifactSpecContainerGroupContainer:ArtifactSpecContainerGroupContainer"
+          },
+          "description": "List of containers in this group.\n"
+        }
+      },
+      "type": "object",
+      "required": [
+        "containers"
+      ]
+    },
+    "datarobot:index/ArtifactSpecContainerGroupContainer:ArtifactSpecContainerGroupContainer": {
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of the container.\n"
+        },
+        "entrypoints": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Container entrypoint.\n"
+        },
+        "environmentVars": {
+          "type": "array",
+          "items": {
+            "$ref": "#/types/datarobot:index/ArtifactSpecContainerGroupContainerEnvironmentVar:ArtifactSpecContainerGroupContainerEnvironmentVar"
+          },
+          "description": "Environment variables for the container.\n"
+        },
+        "imageUri": {
+          "type": "string",
+          "description": "Docker image URI.\n"
+        },
+        "livenessProbe": {
+          "$ref": "#/types/datarobot:index/ArtifactSpecContainerGroupContainerLivenessProbe:ArtifactSpecContainerGroupContainerLivenessProbe",
+          "description": "Container liveness check configuration.\n"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the container.\n"
+        },
+        "port": {
+          "type": "integer",
+          "description": "Container access port (1024-65535). Required for primary containers; omit for non-primary.\n"
+        },
+        "primary": {
+          "type": "boolean",
+          "description": "Whether this is the primary container.\n"
+        },
+        "readinessProbe": {
+          "$ref": "#/types/datarobot:index/ArtifactSpecContainerGroupContainerReadinessProbe:ArtifactSpecContainerGroupContainerReadinessProbe",
+          "description": "Container readiness check configuration.\n"
+        },
+        "resourceRequest": {
+          "$ref": "#/types/datarobot:index/ArtifactSpecContainerGroupContainerResourceRequest:ArtifactSpecContainerGroupContainerResourceRequest",
+          "description": "Resource requirements for the container.\n"
+        },
+        "startupProbe": {
+          "$ref": "#/types/datarobot:index/ArtifactSpecContainerGroupContainerStartupProbe:ArtifactSpecContainerGroupContainerStartupProbe",
+          "description": "Container startup check configuration.\n"
+        }
+      },
+      "type": "object",
+      "required": [
+        "imageUri",
+        "resourceRequest"
+      ],
+      "language": {
+        "nodejs": {
+          "requiredOutputs": [
+            "imageUri",
+            "name",
+            "port",
+            "primary",
+            "resourceRequest"
+          ]
+        }
+      }
+    },
+    "datarobot:index/ArtifactSpecContainerGroupContainerEnvironmentVar:ArtifactSpecContainerGroupContainerEnvironmentVar": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the environment variable.\n"
+        },
+        "value": {
+          "type": "string",
+          "description": "Value of the environment variable.\n"
+        }
+      },
+      "type": "object",
+      "required": [
+        "name",
+        "value"
+      ]
+    },
+    "datarobot:index/ArtifactSpecContainerGroupContainerLivenessProbe:ArtifactSpecContainerGroupContainerLivenessProbe": {
+      "properties": {
+        "failureThreshold": {
+          "type": "integer",
+          "description": "Minimum consecutive failures for the probe to be considered failed.\n"
+        },
+        "host": {
+          "type": "string",
+          "description": "Host name to connect to, defaults to the pod IP.\n"
+        },
+        "initialDelaySeconds": {
+          "type": "integer",
+          "description": "Number of seconds to wait before the first probe is executed.\n"
+        },
+        "path": {
+          "type": "string",
+          "description": "URL path to query for health check.\n"
+        },
+        "periodSeconds": {
+          "type": "integer",
+          "description": "How often (in seconds) to perform the probe.\n"
+        },
+        "port": {
+          "type": "integer",
+          "description": "Port number to access on the container.\n"
+        },
+        "scheme": {
+          "type": "string",
+          "description": "Scheme to use for connecting to the host (HTTP or HTTPS).\n"
+        },
+        "timeoutSeconds": {
+          "type": "integer",
+          "description": "Number of seconds after which the probe times out.\n"
+        }
+      },
+      "type": "object",
+      "required": [
+        "path"
+      ],
+      "language": {
+        "nodejs": {
+          "requiredOutputs": [
+            "failureThreshold",
+            "host",
+            "initialDelaySeconds",
+            "path",
+            "periodSeconds",
+            "port",
+            "scheme",
+            "timeoutSeconds"
+          ]
+        }
+      }
+    },
+    "datarobot:index/ArtifactSpecContainerGroupContainerReadinessProbe:ArtifactSpecContainerGroupContainerReadinessProbe": {
+      "properties": {
+        "failureThreshold": {
+          "type": "integer",
+          "description": "Minimum consecutive failures for the probe to be considered failed.\n"
+        },
+        "host": {
+          "type": "string",
+          "description": "Host name to connect to, defaults to the pod IP.\n"
+        },
+        "initialDelaySeconds": {
+          "type": "integer",
+          "description": "Number of seconds to wait before the first probe is executed.\n"
+        },
+        "path": {
+          "type": "string",
+          "description": "URL path to query for health check.\n"
+        },
+        "periodSeconds": {
+          "type": "integer",
+          "description": "How often (in seconds) to perform the probe.\n"
+        },
+        "port": {
+          "type": "integer",
+          "description": "Port number to access on the container.\n"
+        },
+        "scheme": {
+          "type": "string",
+          "description": "Scheme to use for connecting to the host (HTTP or HTTPS).\n"
+        },
+        "timeoutSeconds": {
+          "type": "integer",
+          "description": "Number of seconds after which the probe times out.\n"
+        }
+      },
+      "type": "object",
+      "required": [
+        "path"
+      ],
+      "language": {
+        "nodejs": {
+          "requiredOutputs": [
+            "failureThreshold",
+            "host",
+            "initialDelaySeconds",
+            "path",
+            "periodSeconds",
+            "port",
+            "scheme",
+            "timeoutSeconds"
+          ]
+        }
+      }
+    },
+    "datarobot:index/ArtifactSpecContainerGroupContainerResourceRequest:ArtifactSpecContainerGroupContainerResourceRequest": {
+      "properties": {
+        "cpu": {
+          "type": "integer",
+          "description": "Number of CPU cores required.\n"
+        },
+        "gpu": {
+          "type": "integer",
+          "description": "Number of GPUs required.\n"
+        },
+        "gpuType": {
+          "type": "string",
+          "description": "GPU type required (e.g., NVIDIA-A100).\n"
+        },
+        "memory": {
+          "type": "integer",
+          "description": "Memory required in bytes.\n"
+        }
+      },
+      "type": "object",
+      "required": [
+        "cpu",
+        "memory"
+      ]
+    },
+    "datarobot:index/ArtifactSpecContainerGroupContainerStartupProbe:ArtifactSpecContainerGroupContainerStartupProbe": {
+      "properties": {
+        "failureThreshold": {
+          "type": "integer",
+          "description": "Minimum consecutive failures for the probe to be considered failed.\n"
+        },
+        "host": {
+          "type": "string",
+          "description": "Host name to connect to, defaults to the pod IP.\n"
+        },
+        "initialDelaySeconds": {
+          "type": "integer",
+          "description": "Number of seconds to wait before the first probe is executed.\n"
+        },
+        "path": {
+          "type": "string",
+          "description": "URL path to query for health check.\n"
+        },
+        "periodSeconds": {
+          "type": "integer",
+          "description": "How often (in seconds) to perform the probe.\n"
+        },
+        "port": {
+          "type": "integer",
+          "description": "Port number to access on the container.\n"
+        },
+        "scheme": {
+          "type": "string",
+          "description": "Scheme to use for connecting to the host (HTTP or HTTPS).\n"
+        },
+        "timeoutSeconds": {
+          "type": "integer",
+          "description": "Number of seconds after which the probe times out.\n"
+        }
+      },
+      "type": "object",
+      "required": [
+        "path"
+      ],
+      "language": {
+        "nodejs": {
+          "requiredOutputs": [
+            "failureThreshold",
+            "host",
+            "initialDelaySeconds",
+            "path",
+            "periodSeconds",
+            "port",
+            "scheme",
+            "timeoutSeconds"
+          ]
+        }
+      }
+    },
     "datarobot:index/BatchPredictionJobDefinitionCsvSettings:BatchPredictionJobDefinitionCsvSettings": {
       "properties": {
         "delimiter": {
@@ -1956,6 +2260,114 @@
           ]
         }
       }
+    },
+    "datarobot:index/WorkloadRuntime:WorkloadRuntime": {
+      "properties": {
+        "autoscaling": {
+          "$ref": "#/types/datarobot:index/WorkloadRuntimeAutoscaling:WorkloadRuntimeAutoscaling",
+          "description": "Autoscaling configuration. When set, takes precedence over replica_count.\n"
+        },
+        "replicaCount": {
+          "type": "integer",
+          "description": "Number of replicas to run. Cannot be used together with `autoscaling`. Omitting this field retains the current value. Set to `0` to explicitly clear it (e.g. when switching to autoscaling).\n"
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/types/datarobot:index/WorkloadRuntimeResource:WorkloadRuntimeResource"
+          },
+          "description": "Resource bundles assigned to the Workload. When empty the server infers an appropriate bundle.\n"
+        }
+      },
+      "type": "object",
+      "language": {
+        "nodejs": {
+          "requiredOutputs": [
+            "replicaCount"
+          ]
+        }
+      }
+    },
+    "datarobot:index/WorkloadRuntimeAutoscaling:WorkloadRuntimeAutoscaling": {
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether autoscaling is enabled. Defaults to true.\n"
+        },
+        "policies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/types/datarobot:index/WorkloadRuntimeAutoscalingPolicy:WorkloadRuntimeAutoscalingPolicy"
+          },
+          "description": "Scaling policies that define when and how to scale.\n"
+        }
+      },
+      "type": "object",
+      "required": [
+        "policies"
+      ],
+      "language": {
+        "nodejs": {
+          "requiredOutputs": [
+            "enabled",
+            "policies"
+          ]
+        }
+      }
+    },
+    "datarobot:index/WorkloadRuntimeAutoscalingPolicy:WorkloadRuntimeAutoscalingPolicy": {
+      "properties": {
+        "maxCount": {
+          "type": "integer",
+          "description": "Maximum number of replicas.\n"
+        },
+        "minCount": {
+          "type": "integer",
+          "description": "Minimum number of replicas.\n"
+        },
+        "priority": {
+          "type": "integer",
+          "description": "Policy priority when multiple policies are defined.\n"
+        },
+        "scalingMetric": {
+          "type": "string",
+          "description": "Metric used for scaling decisions: `cpuAverageUtilization`, `httpRequestsConcurrency`, `gpuCacheUtilization`, or `gpuRequestQueueDepth`.\n"
+        },
+        "target": {
+          "type": "number",
+          "description": "Target value for the scaling metric.\n"
+        }
+      },
+      "type": "object",
+      "required": [
+        "maxCount",
+        "minCount",
+        "scalingMetric",
+        "target"
+      ],
+      "language": {
+        "nodejs": {
+          "requiredOutputs": [
+            "maxCount",
+            "minCount",
+            "priority",
+            "scalingMetric",
+            "target"
+          ]
+        }
+      }
+    },
+    "datarobot:index/WorkloadRuntimeResource:WorkloadRuntimeResource": {
+      "properties": {
+        "resourceBundleId": {
+          "type": "string",
+          "description": "ID of the resource bundle (e.g. `cpu.nano`).\n"
+        }
+      },
+      "type": "object",
+      "required": [
+        "resourceBundleId"
+      ]
     }
   },
   "provider": {
@@ -2473,6 +2885,97 @@
           "versionId": {
             "type": "string",
             "description": "The version ID of the Application Source.\n"
+          }
+        },
+        "type": "object"
+      }
+    },
+    "datarobot:index/artifact:Artifact": {
+      "description": "Artifact definition for the Workload API. Artifacts define container images and runtime configuration for workloads.\n",
+      "properties": {
+        "artifactId": {
+          "type": "string",
+          "description": "The current artifact ID. Updated on every create or update that produces a new artifact version. Reference this field from dependent resources such as Workload.\n"
+        },
+        "artifactRepositoryId": {
+          "type": "string",
+          "description": "ID of the artifact repository for versioning. Computed on first create if not provided; subsequent updates create new versions in the same repository.\n"
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the Artifact.\n"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the Artifact.\n"
+        },
+        "spec": {
+          "$ref": "#/types/datarobot:index/ArtifactSpec:ArtifactSpec",
+          "description": "The artifact specification containing container group definitions.\n"
+        },
+        "type": {
+          "type": "string",
+          "description": "The artifact type: `service` or `nim`. Defaults to `service`.\n"
+        }
+      },
+      "required": [
+        "artifactId",
+        "artifactRepositoryId",
+        "name",
+        "spec",
+        "type"
+      ],
+      "inputProperties": {
+        "artifactRepositoryId": {
+          "type": "string",
+          "description": "ID of the artifact repository for versioning. Computed on first create if not provided; subsequent updates create new versions in the same repository.\n"
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the Artifact.\n"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the Artifact.\n"
+        },
+        "spec": {
+          "$ref": "#/types/datarobot:index/ArtifactSpec:ArtifactSpec",
+          "description": "The artifact specification containing container group definitions.\n"
+        },
+        "type": {
+          "type": "string",
+          "description": "The artifact type: `service` or `nim`. Defaults to `service`.\n"
+        }
+      },
+      "requiredInputs": [
+        "spec"
+      ],
+      "stateInputs": {
+        "description": "Input properties used for looking up and filtering Artifact resources.\n",
+        "properties": {
+          "artifactId": {
+            "type": "string",
+            "description": "The current artifact ID. Updated on every create or update that produces a new artifact version. Reference this field from dependent resources such as Workload.\n"
+          },
+          "artifactRepositoryId": {
+            "type": "string",
+            "description": "ID of the artifact repository for versioning. Computed on first create if not provided; subsequent updates create new versions in the same repository.\n"
+          },
+          "description": {
+            "type": "string",
+            "description": "The description of the Artifact.\n"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the Artifact.\n"
+          },
+          "spec": {
+            "$ref": "#/types/datarobot:index/ArtifactSpec:ArtifactSpec",
+            "description": "The artifact specification containing container group definitions.\n"
+          },
+          "type": {
+            "type": "string",
+            "description": "The artifact type: `service` or `nim`. Defaults to `service`.\n"
           }
         },
         "type": "object"
@@ -7516,6 +8019,107 @@
           "version": {
             "type": "integer",
             "description": "The version of the VectorDatabase.\n"
+          }
+        },
+        "type": "object"
+      }
+    },
+    "datarobot:index/workload:Workload": {
+      "description": "A Workload runs a containerized artifact in the cluster and exposes an inference endpoint.\n\nSeveral attributes (including `runtime` and `artifact_id`) trigger replacement when changed. To avoid downtime during replacements, it is recommended to set `create_before_destroy` in the resource lifecycle:\n\n<!--Start PulumiCodeChooser -->\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\n```\n```python\nimport pulumi\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\n\nreturn await Deployment.RunAsync(() => \n{\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n    }\n}\n```\n```yaml\n{}\n```\n<!--End PulumiCodeChooser -->\n",
+      "properties": {
+        "artifactId": {
+          "type": "string",
+          "description": "ID of the Artifact version to deploy. When using `datarobot.Artifact`, reference `datarobot_artifact.<name>.artifact_id` (not `.id`). Changing this value forces a new Workload to be created.\n"
+        },
+        "description": {
+          "type": "string",
+          "description": "A human-readable description of the Workload.\n"
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "The inference endpoint URL for the Workload.\n"
+        },
+        "importance": {
+          "type": "string",
+          "description": "Priority level for the Workload: `critical`, `high`, `moderate`, or `low`. Defaults to `low`.\n"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the Workload.\n"
+        },
+        "runtime": {
+          "$ref": "#/types/datarobot:index/WorkloadRuntime:WorkloadRuntime",
+          "description": "Runtime configuration for the Workload.\n"
+        },
+        "status": {
+          "type": "string",
+          "description": "Current status of the Workload: `unknown`, `submitted`, `initializing`, `running`, `stopping`, `stopped`, or `errored`.\n"
+        }
+      },
+      "required": [
+        "artifactId",
+        "endpoint",
+        "importance",
+        "name",
+        "runtime",
+        "status"
+      ],
+      "inputProperties": {
+        "artifactId": {
+          "type": "string",
+          "description": "ID of the Artifact version to deploy. When using `datarobot.Artifact`, reference `datarobot_artifact.<name>.artifact_id` (not `.id`). Changing this value forces a new Workload to be created.\n"
+        },
+        "description": {
+          "type": "string",
+          "description": "A human-readable description of the Workload.\n"
+        },
+        "importance": {
+          "type": "string",
+          "description": "Priority level for the Workload: `critical`, `high`, `moderate`, or `low`. Defaults to `low`.\n"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the Workload.\n"
+        },
+        "runtime": {
+          "$ref": "#/types/datarobot:index/WorkloadRuntime:WorkloadRuntime",
+          "description": "Runtime configuration for the Workload.\n"
+        }
+      },
+      "requiredInputs": [
+        "artifactId",
+        "runtime"
+      ],
+      "stateInputs": {
+        "description": "Input properties used for looking up and filtering Workload resources.\n",
+        "properties": {
+          "artifactId": {
+            "type": "string",
+            "description": "ID of the Artifact version to deploy. When using `datarobot.Artifact`, reference `datarobot_artifact.<name>.artifact_id` (not `.id`). Changing this value forces a new Workload to be created.\n"
+          },
+          "description": {
+            "type": "string",
+            "description": "A human-readable description of the Workload.\n"
+          },
+          "endpoint": {
+            "type": "string",
+            "description": "The inference endpoint URL for the Workload.\n"
+          },
+          "importance": {
+            "type": "string",
+            "description": "Priority level for the Workload: `critical`, `high`, `moderate`, or `low`. Defaults to `low`.\n"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the Workload.\n"
+          },
+          "runtime": {
+            "$ref": "#/types/datarobot:index/WorkloadRuntime:WorkloadRuntime",
+            "description": "Runtime configuration for the Workload.\n"
+          },
+          "status": {
+            "type": "string",
+            "description": "Current status of the Workload: `unknown`, `submitted`, `initializing`, `running`, `stopping`, `stopped`, or `errored`.\n"
           }
         },
         "type": "object"

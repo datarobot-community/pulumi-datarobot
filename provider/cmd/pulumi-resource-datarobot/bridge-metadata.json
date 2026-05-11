@@ -29,6 +29,35 @@
                     }
                 }
             },
+            "datarobot_artifact": {
+                "current": "datarobot:index/artifact:Artifact",
+                "fields": {
+                    "spec": {
+                        "fields": {
+                            "container_groups": {
+                                "maxItemsOne": false,
+                                "elem": {
+                                    "fields": {
+                                        "containers": {
+                                            "maxItemsOne": false,
+                                            "elem": {
+                                                "fields": {
+                                                    "entrypoint": {
+                                                        "maxItemsOne": false
+                                                    },
+                                                    "environment_vars": {
+                                                        "maxItemsOne": false
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
             "datarobot_aws_credential": {
                 "current": "datarobot:index/awsCredential:AwsCredential"
             },
@@ -473,6 +502,25 @@
                     "chunking_parameters": {
                         "fields": {
                             "separators": {
+                                "maxItemsOne": false
+                            }
+                        }
+                    }
+                }
+            },
+            "datarobot_workload": {
+                "current": "datarobot:index/workload:Workload",
+                "fields": {
+                    "runtime": {
+                        "fields": {
+                            "autoscaling": {
+                                "fields": {
+                                    "policies": {
+                                        "maxItemsOne": false
+                                    }
+                                }
+                            },
+                            "resources": {
                                 "maxItemsOne": false
                             }
                         }
