@@ -164,9 +164,9 @@ dotnet restore --packages packages --source packages
 Download the plugin binary from the [releases page](https://github.com/datarobot-community/pulumi-datarobot/releases):
 
 ```bash
-# Replace v0.10.35 with your version, e.g., v0.10.14
-pulumi plugin install resource datarobot v0.10.35 --server \
-  https://github.com/datarobot-community/pulumi-datarobot/releases/v0.10.35/
+# Replace v0.10.36 with your version, e.g., v0.10.14
+pulumi plugin install resource datarobot v0.10.36 --server \
+  https://github.com/datarobot-community/pulumi-datarobot/releases/v0.10.36/
 ```
 
 ### 4. Skip update checks
@@ -314,7 +314,7 @@ Example `.csproj` file:
 
   <ItemGroup>
     <PackageReference Include="Pulumi" Version="3.88.1" />
-    <PackageReference Include="DataRobotPulumi.Datarobot" Version="v0.10.35" />
+    <PackageReference Include="DataRobotPulumi.Datarobot" Version="v0.10.36" />
   </ItemGroup>
 
 </Project>
@@ -360,4 +360,4 @@ public class DataRobotStackTests
 
 ## Version
 
-Package version: v0.10.35
+Package version: v0.10.36
