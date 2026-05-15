@@ -191,6 +191,14 @@ func Provider() tfbridge.ProviderInfo {
 					return "", nil
 				},
 			},
+			"datarobot_artifact": {
+				ComputeID: func(_ context.Context, state resource.PropertyMap) (resource.ID, error) {
+					if idProp, ok := state["id"]; ok && idProp.IsString() {
+						return resource.ID(idProp.StringValue()), nil
+					}
+					return "", nil
+				},
+			},
 		},
 	}
 
