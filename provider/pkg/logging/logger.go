@@ -20,18 +20,26 @@ const (
 	LevelError
 )
 
+const (
+	LevelStringDebug   = "DEBUG"
+	LevelStringInfo    = "INFO"
+	LevelStringWarn    = "WARN"
+	LevelStringError   = "ERROR"
+	LevelStringUnknown = "UNKNOWN"
+)
+
 func (l Level) String() string {
 	switch l {
 	case LevelDebug:
-		return "DEBUG"
+		return LevelStringDebug
 	case LevelInfo:
-		return "INFO"
+		return LevelStringInfo
 	case LevelWarn:
-		return "WARN"
+		return LevelStringWarn
 	case LevelError:
-		return "ERROR"
+		return LevelStringError
 	default:
-		return "UNKNOWN"
+		return LevelStringUnknown
 	}
 }
 
@@ -109,11 +117,11 @@ func Default() *Logger {
 
 func getLogLevelFromEnv() Level {
 	switch os.Getenv("PULUMI_LOG_LEVEL") {
-	case "debug", "DEBUG":
+	case "debug", LevelStringDebug:
 		return LevelDebug
-	case "warn", "WARN":
+	case "warn", LevelStringWarn:
 		return LevelWarn
-	case "error", "ERROR":
+	case "error", LevelStringError:
 		return LevelError
 	default:
 		return LevelInfo
