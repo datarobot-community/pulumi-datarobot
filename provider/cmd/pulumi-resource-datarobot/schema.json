@@ -264,10 +264,6 @@
           "$ref": "#/types/datarobot:index/ArtifactSpecContainerGroupContainerReadinessProbe:ArtifactSpecContainerGroupContainerReadinessProbe",
           "description": "Container readiness check configuration.\n"
         },
-        "resourceRequest": {
-          "$ref": "#/types/datarobot:index/ArtifactSpecContainerGroupContainerResourceRequest:ArtifactSpecContainerGroupContainerResourceRequest",
-          "description": "Resource requirements for the container.\n"
-        },
         "startupProbe": {
           "$ref": "#/types/datarobot:index/ArtifactSpecContainerGroupContainerStartupProbe:ArtifactSpecContainerGroupContainerStartupProbe",
           "description": "Container startup check configuration.\n"
@@ -275,8 +271,7 @@
       },
       "type": "object",
       "required": [
-        "imageUri",
-        "resourceRequest"
+        "imageUri"
       ],
       "language": {
         "nodejs": {
@@ -284,8 +279,7 @@
             "imageUri",
             "name",
             "port",
-            "primary",
-            "resourceRequest"
+            "primary"
           ]
         }
       }
@@ -414,31 +408,6 @@
           ]
         }
       }
-    },
-    "datarobot:index/ArtifactSpecContainerGroupContainerResourceRequest:ArtifactSpecContainerGroupContainerResourceRequest": {
-      "properties": {
-        "cpu": {
-          "type": "integer",
-          "description": "Number of CPU cores required.\n"
-        },
-        "gpu": {
-          "type": "integer",
-          "description": "Number of GPUs required.\n"
-        },
-        "gpuType": {
-          "type": "string",
-          "description": "GPU type required (e.g., NVIDIA-A100).\n"
-        },
-        "memory": {
-          "type": "integer",
-          "description": "Memory required in bytes.\n"
-        }
-      },
-      "type": "object",
-      "required": [
-        "cpu",
-        "memory"
-      ]
     },
     "datarobot:index/ArtifactSpecContainerGroupContainerStartupProbe:ArtifactSpecContainerGroupContainerStartupProbe": {
       "properties": {
@@ -2263,32 +2232,61 @@
     },
     "datarobot:index/WorkloadRuntime:WorkloadRuntime": {
       "properties": {
+        "containerGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/types/datarobot:index/WorkloadRuntimeContainerGroup:WorkloadRuntimeContainerGroup"
+          },
+          "description": "Per-group runtime configuration.\n"
+        }
+      },
+      "type": "object"
+    },
+    "datarobot:index/WorkloadRuntimeContainerGroup:WorkloadRuntimeContainerGroup": {
+      "properties": {
         "autoscaling": {
-          "$ref": "#/types/datarobot:index/WorkloadRuntimeAutoscaling:WorkloadRuntimeAutoscaling",
-          "description": "Autoscaling configuration. When set, takes precedence over replica_count.\n"
+          "$ref": "#/types/datarobot:index/WorkloadRuntimeContainerGroupAutoscaling:WorkloadRuntimeContainerGroupAutoscaling",
+          "description": "Autoscaling configuration. When set, takes precedence over `replica_count`.\n"
+        },
+        "bundleSelectionPolicy": {
+          "type": "string",
+          "description": "How to select among `resource_bundles`. Defaults to `availability`.\n"
+        },
+        "containers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/types/datarobot:index/WorkloadRuntimeContainerGroupContainer:WorkloadRuntimeContainerGroupContainer"
+          },
+          "description": "Per-container resource allocation overrides.\n"
+        },
+        "name": {
+          "type": "string",
+          "description": "Container group name (server-assigned, always `default`).\n"
         },
         "replicaCount": {
           "type": "integer",
-          "description": "Number of replicas to run. Cannot be used together with `autoscaling`. Omitting this field retains the current value. Set to `0` to explicitly clear it (e.g. when switching to autoscaling).\n"
+          "description": "Number of replicas. Cannot be set alongside `autoscaling.enabled=true`. Set to `0` to explicitly clear it.\n"
         },
-        "resources": {
+        "resourceBundles": {
           "type": "array",
           "items": {
-            "$ref": "#/types/datarobot:index/WorkloadRuntimeResource:WorkloadRuntimeResource"
+            "type": "string"
           },
-          "description": "Resource bundles assigned to the Workload. When empty the server infers an appropriate bundle.\n"
+          "description": "Ordered list of resource bundle IDs. One is selected at scheduling time.\n"
         }
       },
       "type": "object",
       "language": {
         "nodejs": {
           "requiredOutputs": [
+            "bundleSelectionPolicy",
+            "name",
             "replicaCount"
           ]
         }
       }
     },
-    "datarobot:index/WorkloadRuntimeAutoscaling:WorkloadRuntimeAutoscaling": {
+    "datarobot:index/WorkloadRuntimeContainerGroupAutoscaling:WorkloadRuntimeContainerGroupAutoscaling": {
       "properties": {
         "enabled": {
           "type": "boolean",
@@ -2297,7 +2295,7 @@
         "policies": {
           "type": "array",
           "items": {
-            "$ref": "#/types/datarobot:index/WorkloadRuntimeAutoscalingPolicy:WorkloadRuntimeAutoscalingPolicy"
+            "$ref": "#/types/datarobot:index/WorkloadRuntimeContainerGroupAutoscalingPolicy:WorkloadRuntimeContainerGroupAutoscalingPolicy"
           },
           "description": "Scaling policies that define when and how to scale.\n"
         }
@@ -2315,7 +2313,7 @@
         }
       }
     },
-    "datarobot:index/WorkloadRuntimeAutoscalingPolicy:WorkloadRuntimeAutoscalingPolicy": {
+    "datarobot:index/WorkloadRuntimeContainerGroupAutoscalingPolicy:WorkloadRuntimeContainerGroupAutoscalingPolicy": {
       "properties": {
         "maxCount": {
           "type": "integer",
@@ -2357,17 +2355,42 @@
         }
       }
     },
-    "datarobot:index/WorkloadRuntimeResource:WorkloadRuntimeResource": {
+    "datarobot:index/WorkloadRuntimeContainerGroupContainer:WorkloadRuntimeContainerGroupContainer": {
       "properties": {
-        "resourceBundleId": {
+        "name": {
           "type": "string",
-          "description": "ID of the resource bundle (e.g. `cpu.nano`).\n"
+          "description": "Container name. Must match a container declared in the artifact group.\n"
+        },
+        "resourceAllocation": {
+          "$ref": "#/types/datarobot:index/WorkloadRuntimeContainerGroupContainerResourceAllocation:WorkloadRuntimeContainerGroupContainerResourceAllocation",
+          "description": "Resource allocation for this container.\n"
         }
       },
       "type": "object",
       "required": [
-        "resourceBundleId"
+        "name"
       ]
+    },
+    "datarobot:index/WorkloadRuntimeContainerGroupContainerResourceAllocation:WorkloadRuntimeContainerGroupContainerResourceAllocation": {
+      "properties": {
+        "cpu": {
+          "type": "number",
+          "description": "CPU cores allocated to this container.\n"
+        },
+        "gpu": {
+          "type": "number",
+          "description": "GPUs allocated to this container.\n"
+        },
+        "gpuMemory": {
+          "type": "integer",
+          "description": "GPU VRAM allocated in bytes.\n"
+        },
+        "memory": {
+          "type": "integer",
+          "description": "RAM allocated in bytes.\n"
+        }
+      },
+      "type": "object"
     }
   },
   "provider": {

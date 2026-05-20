@@ -513,15 +513,25 @@
                 "fields": {
                     "runtime": {
                         "fields": {
-                            "autoscaling": {
-                                "fields": {
-                                    "policies": {
-                                        "maxItemsOne": false
+                            "container_groups": {
+                                "maxItemsOne": false,
+                                "elem": {
+                                    "fields": {
+                                        "autoscaling": {
+                                            "fields": {
+                                                "policies": {
+                                                    "maxItemsOne": false
+                                                }
+                                            }
+                                        },
+                                        "containers": {
+                                            "maxItemsOne": false
+                                        },
+                                        "resource_bundles": {
+                                            "maxItemsOne": false
+                                        }
                                     }
                                 }
-                            },
-                            "resources": {
-                                "maxItemsOne": false
                             }
                         }
                     }
