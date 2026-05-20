@@ -133,10 +133,6 @@ export interface ArtifactSpecContainerGroupContainer {
      */
     readinessProbe?: outputs.ArtifactSpecContainerGroupContainerReadinessProbe;
     /**
-     * Resource requirements for the container.
-     */
-    resourceRequest: outputs.ArtifactSpecContainerGroupContainerResourceRequest;
-    /**
      * Container startup check configuration.
      */
     startupProbe?: outputs.ArtifactSpecContainerGroupContainerStartupProbe;
@@ -221,25 +217,6 @@ export interface ArtifactSpecContainerGroupContainerReadinessProbe {
      * Number of seconds after which the probe times out.
      */
     timeoutSeconds: number;
-}
-
-export interface ArtifactSpecContainerGroupContainerResourceRequest {
-    /**
-     * Number of CPU cores required.
-     */
-    cpu: number;
-    /**
-     * Number of GPUs required.
-     */
-    gpu?: number;
-    /**
-     * GPU type required (e.g., NVIDIA-A100).
-     */
-    gpuType?: string;
-    /**
-     * Memory required in bytes.
-     */
-    memory: number;
 }
 
 export interface ArtifactSpecContainerGroupContainerStartupProbe {
@@ -1528,20 +1505,39 @@ export interface VectorDatabaseChunkingParameters {
 
 export interface WorkloadRuntime {
     /**
-     * Autoscaling configuration. When set, takes precedence over replica_count.
+     * Per-group runtime configuration.
      */
-    autoscaling?: outputs.WorkloadRuntimeAutoscaling;
+    containerGroups?: outputs.WorkloadRuntimeContainerGroup[];
+}
+
+export interface WorkloadRuntimeContainerGroup {
     /**
-     * Number of replicas to run. Cannot be used together with `autoscaling`. Omitting this field retains the current value. Set to `0` to explicitly clear it (e.g. when switching to autoscaling).
+     * Autoscaling configuration. When set, takes precedence over `replicaCount`.
+     */
+    autoscaling?: outputs.WorkloadRuntimeContainerGroupAutoscaling;
+    /**
+     * How to select among `resourceBundles`. Defaults to `availability`.
+     */
+    bundleSelectionPolicy: string;
+    /**
+     * Per-container resource allocation overrides.
+     */
+    containers?: outputs.WorkloadRuntimeContainerGroupContainer[];
+    /**
+     * Container group name (server-assigned, always `default`).
+     */
+    name: string;
+    /**
+     * Number of replicas. Cannot be set alongside `autoscaling.enabled=true`. Set to `0` to explicitly clear it.
      */
     replicaCount: number;
     /**
-     * Resource bundles assigned to the Workload. When empty the server infers an appropriate bundle.
+     * Ordered list of resource bundle IDs. One is selected at scheduling time.
      */
-    resources?: outputs.WorkloadRuntimeResource[];
+    resourceBundles?: string[];
 }
 
-export interface WorkloadRuntimeAutoscaling {
+export interface WorkloadRuntimeContainerGroupAutoscaling {
     /**
      * Whether autoscaling is enabled. Defaults to true.
      */
@@ -1549,10 +1545,10 @@ export interface WorkloadRuntimeAutoscaling {
     /**
      * Scaling policies that define when and how to scale.
      */
-    policies: outputs.WorkloadRuntimeAutoscalingPolicy[];
+    policies: outputs.WorkloadRuntimeContainerGroupAutoscalingPolicy[];
 }
 
-export interface WorkloadRuntimeAutoscalingPolicy {
+export interface WorkloadRuntimeContainerGroupAutoscalingPolicy {
     /**
      * Maximum number of replicas.
      */
@@ -1575,10 +1571,33 @@ export interface WorkloadRuntimeAutoscalingPolicy {
     target: number;
 }
 
-export interface WorkloadRuntimeResource {
+export interface WorkloadRuntimeContainerGroupContainer {
     /**
-     * ID of the resource bundle (e.g. `cpu.nano`).
+     * Container name. Must match a container declared in the artifact group.
      */
-    resourceBundleId: string;
+    name: string;
+    /**
+     * Resource allocation for this container.
+     */
+    resourceAllocation?: outputs.WorkloadRuntimeContainerGroupContainerResourceAllocation;
+}
+
+export interface WorkloadRuntimeContainerGroupContainerResourceAllocation {
+    /**
+     * CPU cores allocated to this container.
+     */
+    cpu?: number;
+    /**
+     * GPUs allocated to this container.
+     */
+    gpu?: number;
+    /**
+     * GPU VRAM allocated in bytes.
+     */
+    gpuMemory?: number;
+    /**
+     * RAM allocated in bytes.
+     */
+    memory?: number;
 }
 
