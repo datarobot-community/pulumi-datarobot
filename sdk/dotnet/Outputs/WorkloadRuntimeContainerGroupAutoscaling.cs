@@ -12,7 +12,7 @@ namespace DataRobotPulumi.Datarobot.Outputs
 {
 
     [OutputType]
-    public sealed class WorkloadRuntimeAutoscaling
+    public sealed class WorkloadRuntimeContainerGroupAutoscaling
     {
         /// <summary>
         /// Whether autoscaling is enabled. Defaults to true.
@@ -21,13 +21,13 @@ namespace DataRobotPulumi.Datarobot.Outputs
         /// <summary>
         /// Scaling policies that define when and how to scale.
         /// </summary>
-        public readonly ImmutableArray<Outputs.WorkloadRuntimeAutoscalingPolicy> Policies;
+        public readonly ImmutableArray<Outputs.WorkloadRuntimeContainerGroupAutoscalingPolicy> Policies;
 
         [OutputConstructor]
-        private WorkloadRuntimeAutoscaling(
+        private WorkloadRuntimeContainerGroupAutoscaling(
             bool? enabled,
 
-            ImmutableArray<Outputs.WorkloadRuntimeAutoscalingPolicy> policies)
+            ImmutableArray<Outputs.WorkloadRuntimeContainerGroupAutoscalingPolicy> policies)
         {
             Enabled = enabled;
             Policies = policies;

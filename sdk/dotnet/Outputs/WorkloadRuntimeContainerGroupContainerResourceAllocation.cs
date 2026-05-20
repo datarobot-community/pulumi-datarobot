@@ -12,38 +12,38 @@ namespace DataRobotPulumi.Datarobot.Outputs
 {
 
     [OutputType]
-    public sealed class ArtifactSpecContainerGroupContainerResourceRequest
+    public sealed class WorkloadRuntimeContainerGroupContainerResourceAllocation
     {
         /// <summary>
-        /// Number of CPU cores required.
+        /// CPU cores allocated to this container.
         /// </summary>
-        public readonly int Cpu;
+        public readonly double? Cpu;
         /// <summary>
-        /// Number of GPUs required.
+        /// GPUs allocated to this container.
         /// </summary>
-        public readonly int? Gpu;
+        public readonly double? Gpu;
         /// <summary>
-        /// GPU type required (e.g., NVIDIA-A100).
+        /// GPU VRAM allocated in bytes.
         /// </summary>
-        public readonly string? GpuType;
+        public readonly int? GpuMemory;
         /// <summary>
-        /// Memory required in bytes.
+        /// RAM allocated in bytes.
         /// </summary>
-        public readonly int Memory;
+        public readonly int? Memory;
 
         [OutputConstructor]
-        private ArtifactSpecContainerGroupContainerResourceRequest(
-            int cpu,
+        private WorkloadRuntimeContainerGroupContainerResourceAllocation(
+            double? cpu,
 
-            int? gpu,
+            double? gpu,
 
-            string? gpuType,
+            int? gpuMemory,
 
-            int memory)
+            int? memory)
         {
             Cpu = cpu;
             Gpu = gpu;
-            GpuType = gpuType;
+            GpuMemory = gpuMemory;
             Memory = memory;
         }
     }

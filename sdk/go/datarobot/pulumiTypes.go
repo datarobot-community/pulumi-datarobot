@@ -922,8 +922,6 @@ type ArtifactSpecContainerGroupContainer struct {
 	Primary *bool `pulumi:"primary"`
 	// Container readiness check configuration.
 	ReadinessProbe *ArtifactSpecContainerGroupContainerReadinessProbe `pulumi:"readinessProbe"`
-	// Resource requirements for the container.
-	ResourceRequest ArtifactSpecContainerGroupContainerResourceRequest `pulumi:"resourceRequest"`
 	// Container startup check configuration.
 	StartupProbe *ArtifactSpecContainerGroupContainerStartupProbe `pulumi:"startupProbe"`
 }
@@ -958,8 +956,6 @@ type ArtifactSpecContainerGroupContainerArgs struct {
 	Primary pulumi.BoolPtrInput `pulumi:"primary"`
 	// Container readiness check configuration.
 	ReadinessProbe ArtifactSpecContainerGroupContainerReadinessProbePtrInput `pulumi:"readinessProbe"`
-	// Resource requirements for the container.
-	ResourceRequest ArtifactSpecContainerGroupContainerResourceRequestInput `pulumi:"resourceRequest"`
 	// Container startup check configuration.
 	StartupProbe ArtifactSpecContainerGroupContainerStartupProbePtrInput `pulumi:"startupProbe"`
 }
@@ -1064,13 +1060,6 @@ func (o ArtifactSpecContainerGroupContainerOutput) ReadinessProbe() ArtifactSpec
 	return o.ApplyT(func(v ArtifactSpecContainerGroupContainer) *ArtifactSpecContainerGroupContainerReadinessProbe {
 		return v.ReadinessProbe
 	}).(ArtifactSpecContainerGroupContainerReadinessProbePtrOutput)
-}
-
-// Resource requirements for the container.
-func (o ArtifactSpecContainerGroupContainerOutput) ResourceRequest() ArtifactSpecContainerGroupContainerResourceRequestOutput {
-	return o.ApplyT(func(v ArtifactSpecContainerGroupContainer) ArtifactSpecContainerGroupContainerResourceRequest {
-		return v.ResourceRequest
-	}).(ArtifactSpecContainerGroupContainerResourceRequestOutput)
 }
 
 // Container startup check configuration.
@@ -1744,85 +1733,6 @@ func (o ArtifactSpecContainerGroupContainerReadinessProbePtrOutput) TimeoutSecon
 		}
 		return v.TimeoutSeconds
 	}).(pulumi.IntPtrOutput)
-}
-
-type ArtifactSpecContainerGroupContainerResourceRequest struct {
-	// Number of CPU cores required.
-	Cpu int `pulumi:"cpu"`
-	// Number of GPUs required.
-	Gpu *int `pulumi:"gpu"`
-	// GPU type required (e.g., NVIDIA-A100).
-	GpuType *string `pulumi:"gpuType"`
-	// Memory required in bytes.
-	Memory int `pulumi:"memory"`
-}
-
-// ArtifactSpecContainerGroupContainerResourceRequestInput is an input type that accepts ArtifactSpecContainerGroupContainerResourceRequestArgs and ArtifactSpecContainerGroupContainerResourceRequestOutput values.
-// You can construct a concrete instance of `ArtifactSpecContainerGroupContainerResourceRequestInput` via:
-//
-//	ArtifactSpecContainerGroupContainerResourceRequestArgs{...}
-type ArtifactSpecContainerGroupContainerResourceRequestInput interface {
-	pulumi.Input
-
-	ToArtifactSpecContainerGroupContainerResourceRequestOutput() ArtifactSpecContainerGroupContainerResourceRequestOutput
-	ToArtifactSpecContainerGroupContainerResourceRequestOutputWithContext(context.Context) ArtifactSpecContainerGroupContainerResourceRequestOutput
-}
-
-type ArtifactSpecContainerGroupContainerResourceRequestArgs struct {
-	// Number of CPU cores required.
-	Cpu pulumi.IntInput `pulumi:"cpu"`
-	// Number of GPUs required.
-	Gpu pulumi.IntPtrInput `pulumi:"gpu"`
-	// GPU type required (e.g., NVIDIA-A100).
-	GpuType pulumi.StringPtrInput `pulumi:"gpuType"`
-	// Memory required in bytes.
-	Memory pulumi.IntInput `pulumi:"memory"`
-}
-
-func (ArtifactSpecContainerGroupContainerResourceRequestArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*ArtifactSpecContainerGroupContainerResourceRequest)(nil)).Elem()
-}
-
-func (i ArtifactSpecContainerGroupContainerResourceRequestArgs) ToArtifactSpecContainerGroupContainerResourceRequestOutput() ArtifactSpecContainerGroupContainerResourceRequestOutput {
-	return i.ToArtifactSpecContainerGroupContainerResourceRequestOutputWithContext(context.Background())
-}
-
-func (i ArtifactSpecContainerGroupContainerResourceRequestArgs) ToArtifactSpecContainerGroupContainerResourceRequestOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupContainerResourceRequestOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(ArtifactSpecContainerGroupContainerResourceRequestOutput)
-}
-
-type ArtifactSpecContainerGroupContainerResourceRequestOutput struct{ *pulumi.OutputState }
-
-func (ArtifactSpecContainerGroupContainerResourceRequestOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*ArtifactSpecContainerGroupContainerResourceRequest)(nil)).Elem()
-}
-
-func (o ArtifactSpecContainerGroupContainerResourceRequestOutput) ToArtifactSpecContainerGroupContainerResourceRequestOutput() ArtifactSpecContainerGroupContainerResourceRequestOutput {
-	return o
-}
-
-func (o ArtifactSpecContainerGroupContainerResourceRequestOutput) ToArtifactSpecContainerGroupContainerResourceRequestOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupContainerResourceRequestOutput {
-	return o
-}
-
-// Number of CPU cores required.
-func (o ArtifactSpecContainerGroupContainerResourceRequestOutput) Cpu() pulumi.IntOutput {
-	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerResourceRequest) int { return v.Cpu }).(pulumi.IntOutput)
-}
-
-// Number of GPUs required.
-func (o ArtifactSpecContainerGroupContainerResourceRequestOutput) Gpu() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerResourceRequest) *int { return v.Gpu }).(pulumi.IntPtrOutput)
-}
-
-// GPU type required (e.g., NVIDIA-A100).
-func (o ArtifactSpecContainerGroupContainerResourceRequestOutput) GpuType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerResourceRequest) *string { return v.GpuType }).(pulumi.StringPtrOutput)
-}
-
-// Memory required in bytes.
-func (o ArtifactSpecContainerGroupContainerResourceRequestOutput) Memory() pulumi.IntOutput {
-	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerResourceRequest) int { return v.Memory }).(pulumi.IntOutput)
 }
 
 type ArtifactSpecContainerGroupContainerStartupProbe struct {
@@ -14422,12 +14332,8 @@ func (o VectorDatabaseChunkingParametersPtrOutput) Separators() pulumi.StringArr
 }
 
 type WorkloadRuntime struct {
-	// Autoscaling configuration. When set, takes precedence over replica_count.
-	Autoscaling *WorkloadRuntimeAutoscaling `pulumi:"autoscaling"`
-	// Number of replicas to run. Cannot be used together with `autoscaling`. Omitting this field retains the current value. Set to `0` to explicitly clear it (e.g. when switching to autoscaling).
-	ReplicaCount *int `pulumi:"replicaCount"`
-	// Resource bundles assigned to the Workload. When empty the server infers an appropriate bundle.
-	Resources []WorkloadRuntimeResource `pulumi:"resources"`
+	// Per-group runtime configuration.
+	ContainerGroups []WorkloadRuntimeContainerGroup `pulumi:"containerGroups"`
 }
 
 // WorkloadRuntimeInput is an input type that accepts WorkloadRuntimeArgs and WorkloadRuntimeOutput values.
@@ -14442,12 +14348,8 @@ type WorkloadRuntimeInput interface {
 }
 
 type WorkloadRuntimeArgs struct {
-	// Autoscaling configuration. When set, takes precedence over replica_count.
-	Autoscaling WorkloadRuntimeAutoscalingPtrInput `pulumi:"autoscaling"`
-	// Number of replicas to run. Cannot be used together with `autoscaling`. Omitting this field retains the current value. Set to `0` to explicitly clear it (e.g. when switching to autoscaling).
-	ReplicaCount pulumi.IntPtrInput `pulumi:"replicaCount"`
-	// Resource bundles assigned to the Workload. When empty the server infers an appropriate bundle.
-	Resources WorkloadRuntimeResourceArrayInput `pulumi:"resources"`
+	// Per-group runtime configuration.
+	ContainerGroups WorkloadRuntimeContainerGroupArrayInput `pulumi:"containerGroups"`
 }
 
 func (WorkloadRuntimeArgs) ElementType() reflect.Type {
@@ -14527,19 +14429,9 @@ func (o WorkloadRuntimeOutput) ToWorkloadRuntimePtrOutputWithContext(ctx context
 	}).(WorkloadRuntimePtrOutput)
 }
 
-// Autoscaling configuration. When set, takes precedence over replica_count.
-func (o WorkloadRuntimeOutput) Autoscaling() WorkloadRuntimeAutoscalingPtrOutput {
-	return o.ApplyT(func(v WorkloadRuntime) *WorkloadRuntimeAutoscaling { return v.Autoscaling }).(WorkloadRuntimeAutoscalingPtrOutput)
-}
-
-// Number of replicas to run. Cannot be used together with `autoscaling`. Omitting this field retains the current value. Set to `0` to explicitly clear it (e.g. when switching to autoscaling).
-func (o WorkloadRuntimeOutput) ReplicaCount() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v WorkloadRuntime) *int { return v.ReplicaCount }).(pulumi.IntPtrOutput)
-}
-
-// Resource bundles assigned to the Workload. When empty the server infers an appropriate bundle.
-func (o WorkloadRuntimeOutput) Resources() WorkloadRuntimeResourceArrayOutput {
-	return o.ApplyT(func(v WorkloadRuntime) []WorkloadRuntimeResource { return v.Resources }).(WorkloadRuntimeResourceArrayOutput)
+// Per-group runtime configuration.
+func (o WorkloadRuntimeOutput) ContainerGroups() WorkloadRuntimeContainerGroupArrayOutput {
+	return o.ApplyT(func(v WorkloadRuntime) []WorkloadRuntimeContainerGroup { return v.ContainerGroups }).(WorkloadRuntimeContainerGroupArrayOutput)
 }
 
 type WorkloadRuntimePtrOutput struct{ *pulumi.OutputState }
@@ -14566,175 +14458,299 @@ func (o WorkloadRuntimePtrOutput) Elem() WorkloadRuntimeOutput {
 	}).(WorkloadRuntimeOutput)
 }
 
-// Autoscaling configuration. When set, takes precedence over replica_count.
-func (o WorkloadRuntimePtrOutput) Autoscaling() WorkloadRuntimeAutoscalingPtrOutput {
-	return o.ApplyT(func(v *WorkloadRuntime) *WorkloadRuntimeAutoscaling {
+// Per-group runtime configuration.
+func (o WorkloadRuntimePtrOutput) ContainerGroups() WorkloadRuntimeContainerGroupArrayOutput {
+	return o.ApplyT(func(v *WorkloadRuntime) []WorkloadRuntimeContainerGroup {
 		if v == nil {
 			return nil
 		}
-		return v.Autoscaling
-	}).(WorkloadRuntimeAutoscalingPtrOutput)
+		return v.ContainerGroups
+	}).(WorkloadRuntimeContainerGroupArrayOutput)
 }
 
-// Number of replicas to run. Cannot be used together with `autoscaling`. Omitting this field retains the current value. Set to `0` to explicitly clear it (e.g. when switching to autoscaling).
-func (o WorkloadRuntimePtrOutput) ReplicaCount() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *WorkloadRuntime) *int {
-		if v == nil {
-			return nil
-		}
-		return v.ReplicaCount
-	}).(pulumi.IntPtrOutput)
+type WorkloadRuntimeContainerGroup struct {
+	// Autoscaling configuration. When set, takes precedence over `replicaCount`.
+	Autoscaling *WorkloadRuntimeContainerGroupAutoscaling `pulumi:"autoscaling"`
+	// How to select among `resourceBundles`. Defaults to `availability`.
+	BundleSelectionPolicy *string `pulumi:"bundleSelectionPolicy"`
+	// Per-container resource allocation overrides.
+	Containers []WorkloadRuntimeContainerGroupContainer `pulumi:"containers"`
+	// Container group name (server-assigned, always `default`).
+	Name *string `pulumi:"name"`
+	// Number of replicas. Cannot be set alongside `autoscaling.enabled=true`. Set to `0` to explicitly clear it.
+	ReplicaCount *int `pulumi:"replicaCount"`
+	// Ordered list of resource bundle IDs. One is selected at scheduling time.
+	ResourceBundles []string `pulumi:"resourceBundles"`
 }
 
-// Resource bundles assigned to the Workload. When empty the server infers an appropriate bundle.
-func (o WorkloadRuntimePtrOutput) Resources() WorkloadRuntimeResourceArrayOutput {
-	return o.ApplyT(func(v *WorkloadRuntime) []WorkloadRuntimeResource {
-		if v == nil {
-			return nil
-		}
-		return v.Resources
-	}).(WorkloadRuntimeResourceArrayOutput)
+// WorkloadRuntimeContainerGroupInput is an input type that accepts WorkloadRuntimeContainerGroupArgs and WorkloadRuntimeContainerGroupOutput values.
+// You can construct a concrete instance of `WorkloadRuntimeContainerGroupInput` via:
+//
+//	WorkloadRuntimeContainerGroupArgs{...}
+type WorkloadRuntimeContainerGroupInput interface {
+	pulumi.Input
+
+	ToWorkloadRuntimeContainerGroupOutput() WorkloadRuntimeContainerGroupOutput
+	ToWorkloadRuntimeContainerGroupOutputWithContext(context.Context) WorkloadRuntimeContainerGroupOutput
 }
 
-type WorkloadRuntimeAutoscaling struct {
+type WorkloadRuntimeContainerGroupArgs struct {
+	// Autoscaling configuration. When set, takes precedence over `replicaCount`.
+	Autoscaling WorkloadRuntimeContainerGroupAutoscalingPtrInput `pulumi:"autoscaling"`
+	// How to select among `resourceBundles`. Defaults to `availability`.
+	BundleSelectionPolicy pulumi.StringPtrInput `pulumi:"bundleSelectionPolicy"`
+	// Per-container resource allocation overrides.
+	Containers WorkloadRuntimeContainerGroupContainerArrayInput `pulumi:"containers"`
+	// Container group name (server-assigned, always `default`).
+	Name pulumi.StringPtrInput `pulumi:"name"`
+	// Number of replicas. Cannot be set alongside `autoscaling.enabled=true`. Set to `0` to explicitly clear it.
+	ReplicaCount pulumi.IntPtrInput `pulumi:"replicaCount"`
+	// Ordered list of resource bundle IDs. One is selected at scheduling time.
+	ResourceBundles pulumi.StringArrayInput `pulumi:"resourceBundles"`
+}
+
+func (WorkloadRuntimeContainerGroupArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*WorkloadRuntimeContainerGroup)(nil)).Elem()
+}
+
+func (i WorkloadRuntimeContainerGroupArgs) ToWorkloadRuntimeContainerGroupOutput() WorkloadRuntimeContainerGroupOutput {
+	return i.ToWorkloadRuntimeContainerGroupOutputWithContext(context.Background())
+}
+
+func (i WorkloadRuntimeContainerGroupArgs) ToWorkloadRuntimeContainerGroupOutputWithContext(ctx context.Context) WorkloadRuntimeContainerGroupOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WorkloadRuntimeContainerGroupOutput)
+}
+
+// WorkloadRuntimeContainerGroupArrayInput is an input type that accepts WorkloadRuntimeContainerGroupArray and WorkloadRuntimeContainerGroupArrayOutput values.
+// You can construct a concrete instance of `WorkloadRuntimeContainerGroupArrayInput` via:
+//
+//	WorkloadRuntimeContainerGroupArray{ WorkloadRuntimeContainerGroupArgs{...} }
+type WorkloadRuntimeContainerGroupArrayInput interface {
+	pulumi.Input
+
+	ToWorkloadRuntimeContainerGroupArrayOutput() WorkloadRuntimeContainerGroupArrayOutput
+	ToWorkloadRuntimeContainerGroupArrayOutputWithContext(context.Context) WorkloadRuntimeContainerGroupArrayOutput
+}
+
+type WorkloadRuntimeContainerGroupArray []WorkloadRuntimeContainerGroupInput
+
+func (WorkloadRuntimeContainerGroupArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]WorkloadRuntimeContainerGroup)(nil)).Elem()
+}
+
+func (i WorkloadRuntimeContainerGroupArray) ToWorkloadRuntimeContainerGroupArrayOutput() WorkloadRuntimeContainerGroupArrayOutput {
+	return i.ToWorkloadRuntimeContainerGroupArrayOutputWithContext(context.Background())
+}
+
+func (i WorkloadRuntimeContainerGroupArray) ToWorkloadRuntimeContainerGroupArrayOutputWithContext(ctx context.Context) WorkloadRuntimeContainerGroupArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WorkloadRuntimeContainerGroupArrayOutput)
+}
+
+type WorkloadRuntimeContainerGroupOutput struct{ *pulumi.OutputState }
+
+func (WorkloadRuntimeContainerGroupOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*WorkloadRuntimeContainerGroup)(nil)).Elem()
+}
+
+func (o WorkloadRuntimeContainerGroupOutput) ToWorkloadRuntimeContainerGroupOutput() WorkloadRuntimeContainerGroupOutput {
+	return o
+}
+
+func (o WorkloadRuntimeContainerGroupOutput) ToWorkloadRuntimeContainerGroupOutputWithContext(ctx context.Context) WorkloadRuntimeContainerGroupOutput {
+	return o
+}
+
+// Autoscaling configuration. When set, takes precedence over `replicaCount`.
+func (o WorkloadRuntimeContainerGroupOutput) Autoscaling() WorkloadRuntimeContainerGroupAutoscalingPtrOutput {
+	return o.ApplyT(func(v WorkloadRuntimeContainerGroup) *WorkloadRuntimeContainerGroupAutoscaling { return v.Autoscaling }).(WorkloadRuntimeContainerGroupAutoscalingPtrOutput)
+}
+
+// How to select among `resourceBundles`. Defaults to `availability`.
+func (o WorkloadRuntimeContainerGroupOutput) BundleSelectionPolicy() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v WorkloadRuntimeContainerGroup) *string { return v.BundleSelectionPolicy }).(pulumi.StringPtrOutput)
+}
+
+// Per-container resource allocation overrides.
+func (o WorkloadRuntimeContainerGroupOutput) Containers() WorkloadRuntimeContainerGroupContainerArrayOutput {
+	return o.ApplyT(func(v WorkloadRuntimeContainerGroup) []WorkloadRuntimeContainerGroupContainer { return v.Containers }).(WorkloadRuntimeContainerGroupContainerArrayOutput)
+}
+
+// Container group name (server-assigned, always `default`).
+func (o WorkloadRuntimeContainerGroupOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v WorkloadRuntimeContainerGroup) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+// Number of replicas. Cannot be set alongside `autoscaling.enabled=true`. Set to `0` to explicitly clear it.
+func (o WorkloadRuntimeContainerGroupOutput) ReplicaCount() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v WorkloadRuntimeContainerGroup) *int { return v.ReplicaCount }).(pulumi.IntPtrOutput)
+}
+
+// Ordered list of resource bundle IDs. One is selected at scheduling time.
+func (o WorkloadRuntimeContainerGroupOutput) ResourceBundles() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v WorkloadRuntimeContainerGroup) []string { return v.ResourceBundles }).(pulumi.StringArrayOutput)
+}
+
+type WorkloadRuntimeContainerGroupArrayOutput struct{ *pulumi.OutputState }
+
+func (WorkloadRuntimeContainerGroupArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]WorkloadRuntimeContainerGroup)(nil)).Elem()
+}
+
+func (o WorkloadRuntimeContainerGroupArrayOutput) ToWorkloadRuntimeContainerGroupArrayOutput() WorkloadRuntimeContainerGroupArrayOutput {
+	return o
+}
+
+func (o WorkloadRuntimeContainerGroupArrayOutput) ToWorkloadRuntimeContainerGroupArrayOutputWithContext(ctx context.Context) WorkloadRuntimeContainerGroupArrayOutput {
+	return o
+}
+
+func (o WorkloadRuntimeContainerGroupArrayOutput) Index(i pulumi.IntInput) WorkloadRuntimeContainerGroupOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) WorkloadRuntimeContainerGroup {
+		return vs[0].([]WorkloadRuntimeContainerGroup)[vs[1].(int)]
+	}).(WorkloadRuntimeContainerGroupOutput)
+}
+
+type WorkloadRuntimeContainerGroupAutoscaling struct {
 	// Whether autoscaling is enabled. Defaults to true.
 	Enabled *bool `pulumi:"enabled"`
 	// Scaling policies that define when and how to scale.
-	Policies []WorkloadRuntimeAutoscalingPolicy `pulumi:"policies"`
+	Policies []WorkloadRuntimeContainerGroupAutoscalingPolicy `pulumi:"policies"`
 }
 
-// WorkloadRuntimeAutoscalingInput is an input type that accepts WorkloadRuntimeAutoscalingArgs and WorkloadRuntimeAutoscalingOutput values.
-// You can construct a concrete instance of `WorkloadRuntimeAutoscalingInput` via:
+// WorkloadRuntimeContainerGroupAutoscalingInput is an input type that accepts WorkloadRuntimeContainerGroupAutoscalingArgs and WorkloadRuntimeContainerGroupAutoscalingOutput values.
+// You can construct a concrete instance of `WorkloadRuntimeContainerGroupAutoscalingInput` via:
 //
-//	WorkloadRuntimeAutoscalingArgs{...}
-type WorkloadRuntimeAutoscalingInput interface {
+//	WorkloadRuntimeContainerGroupAutoscalingArgs{...}
+type WorkloadRuntimeContainerGroupAutoscalingInput interface {
 	pulumi.Input
 
-	ToWorkloadRuntimeAutoscalingOutput() WorkloadRuntimeAutoscalingOutput
-	ToWorkloadRuntimeAutoscalingOutputWithContext(context.Context) WorkloadRuntimeAutoscalingOutput
+	ToWorkloadRuntimeContainerGroupAutoscalingOutput() WorkloadRuntimeContainerGroupAutoscalingOutput
+	ToWorkloadRuntimeContainerGroupAutoscalingOutputWithContext(context.Context) WorkloadRuntimeContainerGroupAutoscalingOutput
 }
 
-type WorkloadRuntimeAutoscalingArgs struct {
+type WorkloadRuntimeContainerGroupAutoscalingArgs struct {
 	// Whether autoscaling is enabled. Defaults to true.
 	Enabled pulumi.BoolPtrInput `pulumi:"enabled"`
 	// Scaling policies that define when and how to scale.
-	Policies WorkloadRuntimeAutoscalingPolicyArrayInput `pulumi:"policies"`
+	Policies WorkloadRuntimeContainerGroupAutoscalingPolicyArrayInput `pulumi:"policies"`
 }
 
-func (WorkloadRuntimeAutoscalingArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*WorkloadRuntimeAutoscaling)(nil)).Elem()
+func (WorkloadRuntimeContainerGroupAutoscalingArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*WorkloadRuntimeContainerGroupAutoscaling)(nil)).Elem()
 }
 
-func (i WorkloadRuntimeAutoscalingArgs) ToWorkloadRuntimeAutoscalingOutput() WorkloadRuntimeAutoscalingOutput {
-	return i.ToWorkloadRuntimeAutoscalingOutputWithContext(context.Background())
+func (i WorkloadRuntimeContainerGroupAutoscalingArgs) ToWorkloadRuntimeContainerGroupAutoscalingOutput() WorkloadRuntimeContainerGroupAutoscalingOutput {
+	return i.ToWorkloadRuntimeContainerGroupAutoscalingOutputWithContext(context.Background())
 }
 
-func (i WorkloadRuntimeAutoscalingArgs) ToWorkloadRuntimeAutoscalingOutputWithContext(ctx context.Context) WorkloadRuntimeAutoscalingOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(WorkloadRuntimeAutoscalingOutput)
+func (i WorkloadRuntimeContainerGroupAutoscalingArgs) ToWorkloadRuntimeContainerGroupAutoscalingOutputWithContext(ctx context.Context) WorkloadRuntimeContainerGroupAutoscalingOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WorkloadRuntimeContainerGroupAutoscalingOutput)
 }
 
-func (i WorkloadRuntimeAutoscalingArgs) ToWorkloadRuntimeAutoscalingPtrOutput() WorkloadRuntimeAutoscalingPtrOutput {
-	return i.ToWorkloadRuntimeAutoscalingPtrOutputWithContext(context.Background())
+func (i WorkloadRuntimeContainerGroupAutoscalingArgs) ToWorkloadRuntimeContainerGroupAutoscalingPtrOutput() WorkloadRuntimeContainerGroupAutoscalingPtrOutput {
+	return i.ToWorkloadRuntimeContainerGroupAutoscalingPtrOutputWithContext(context.Background())
 }
 
-func (i WorkloadRuntimeAutoscalingArgs) ToWorkloadRuntimeAutoscalingPtrOutputWithContext(ctx context.Context) WorkloadRuntimeAutoscalingPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(WorkloadRuntimeAutoscalingOutput).ToWorkloadRuntimeAutoscalingPtrOutputWithContext(ctx)
+func (i WorkloadRuntimeContainerGroupAutoscalingArgs) ToWorkloadRuntimeContainerGroupAutoscalingPtrOutputWithContext(ctx context.Context) WorkloadRuntimeContainerGroupAutoscalingPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WorkloadRuntimeContainerGroupAutoscalingOutput).ToWorkloadRuntimeContainerGroupAutoscalingPtrOutputWithContext(ctx)
 }
 
-// WorkloadRuntimeAutoscalingPtrInput is an input type that accepts WorkloadRuntimeAutoscalingArgs, WorkloadRuntimeAutoscalingPtr and WorkloadRuntimeAutoscalingPtrOutput values.
-// You can construct a concrete instance of `WorkloadRuntimeAutoscalingPtrInput` via:
+// WorkloadRuntimeContainerGroupAutoscalingPtrInput is an input type that accepts WorkloadRuntimeContainerGroupAutoscalingArgs, WorkloadRuntimeContainerGroupAutoscalingPtr and WorkloadRuntimeContainerGroupAutoscalingPtrOutput values.
+// You can construct a concrete instance of `WorkloadRuntimeContainerGroupAutoscalingPtrInput` via:
 //
-//	        WorkloadRuntimeAutoscalingArgs{...}
+//	        WorkloadRuntimeContainerGroupAutoscalingArgs{...}
 //
 //	or:
 //
 //	        nil
-type WorkloadRuntimeAutoscalingPtrInput interface {
+type WorkloadRuntimeContainerGroupAutoscalingPtrInput interface {
 	pulumi.Input
 
-	ToWorkloadRuntimeAutoscalingPtrOutput() WorkloadRuntimeAutoscalingPtrOutput
-	ToWorkloadRuntimeAutoscalingPtrOutputWithContext(context.Context) WorkloadRuntimeAutoscalingPtrOutput
+	ToWorkloadRuntimeContainerGroupAutoscalingPtrOutput() WorkloadRuntimeContainerGroupAutoscalingPtrOutput
+	ToWorkloadRuntimeContainerGroupAutoscalingPtrOutputWithContext(context.Context) WorkloadRuntimeContainerGroupAutoscalingPtrOutput
 }
 
-type workloadRuntimeAutoscalingPtrType WorkloadRuntimeAutoscalingArgs
+type workloadRuntimeContainerGroupAutoscalingPtrType WorkloadRuntimeContainerGroupAutoscalingArgs
 
-func WorkloadRuntimeAutoscalingPtr(v *WorkloadRuntimeAutoscalingArgs) WorkloadRuntimeAutoscalingPtrInput {
-	return (*workloadRuntimeAutoscalingPtrType)(v)
+func WorkloadRuntimeContainerGroupAutoscalingPtr(v *WorkloadRuntimeContainerGroupAutoscalingArgs) WorkloadRuntimeContainerGroupAutoscalingPtrInput {
+	return (*workloadRuntimeContainerGroupAutoscalingPtrType)(v)
 }
 
-func (*workloadRuntimeAutoscalingPtrType) ElementType() reflect.Type {
-	return reflect.TypeOf((**WorkloadRuntimeAutoscaling)(nil)).Elem()
+func (*workloadRuntimeContainerGroupAutoscalingPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**WorkloadRuntimeContainerGroupAutoscaling)(nil)).Elem()
 }
 
-func (i *workloadRuntimeAutoscalingPtrType) ToWorkloadRuntimeAutoscalingPtrOutput() WorkloadRuntimeAutoscalingPtrOutput {
-	return i.ToWorkloadRuntimeAutoscalingPtrOutputWithContext(context.Background())
+func (i *workloadRuntimeContainerGroupAutoscalingPtrType) ToWorkloadRuntimeContainerGroupAutoscalingPtrOutput() WorkloadRuntimeContainerGroupAutoscalingPtrOutput {
+	return i.ToWorkloadRuntimeContainerGroupAutoscalingPtrOutputWithContext(context.Background())
 }
 
-func (i *workloadRuntimeAutoscalingPtrType) ToWorkloadRuntimeAutoscalingPtrOutputWithContext(ctx context.Context) WorkloadRuntimeAutoscalingPtrOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(WorkloadRuntimeAutoscalingPtrOutput)
+func (i *workloadRuntimeContainerGroupAutoscalingPtrType) ToWorkloadRuntimeContainerGroupAutoscalingPtrOutputWithContext(ctx context.Context) WorkloadRuntimeContainerGroupAutoscalingPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WorkloadRuntimeContainerGroupAutoscalingPtrOutput)
 }
 
-type WorkloadRuntimeAutoscalingOutput struct{ *pulumi.OutputState }
+type WorkloadRuntimeContainerGroupAutoscalingOutput struct{ *pulumi.OutputState }
 
-func (WorkloadRuntimeAutoscalingOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*WorkloadRuntimeAutoscaling)(nil)).Elem()
+func (WorkloadRuntimeContainerGroupAutoscalingOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*WorkloadRuntimeContainerGroupAutoscaling)(nil)).Elem()
 }
 
-func (o WorkloadRuntimeAutoscalingOutput) ToWorkloadRuntimeAutoscalingOutput() WorkloadRuntimeAutoscalingOutput {
+func (o WorkloadRuntimeContainerGroupAutoscalingOutput) ToWorkloadRuntimeContainerGroupAutoscalingOutput() WorkloadRuntimeContainerGroupAutoscalingOutput {
 	return o
 }
 
-func (o WorkloadRuntimeAutoscalingOutput) ToWorkloadRuntimeAutoscalingOutputWithContext(ctx context.Context) WorkloadRuntimeAutoscalingOutput {
+func (o WorkloadRuntimeContainerGroupAutoscalingOutput) ToWorkloadRuntimeContainerGroupAutoscalingOutputWithContext(ctx context.Context) WorkloadRuntimeContainerGroupAutoscalingOutput {
 	return o
 }
 
-func (o WorkloadRuntimeAutoscalingOutput) ToWorkloadRuntimeAutoscalingPtrOutput() WorkloadRuntimeAutoscalingPtrOutput {
-	return o.ToWorkloadRuntimeAutoscalingPtrOutputWithContext(context.Background())
+func (o WorkloadRuntimeContainerGroupAutoscalingOutput) ToWorkloadRuntimeContainerGroupAutoscalingPtrOutput() WorkloadRuntimeContainerGroupAutoscalingPtrOutput {
+	return o.ToWorkloadRuntimeContainerGroupAutoscalingPtrOutputWithContext(context.Background())
 }
 
-func (o WorkloadRuntimeAutoscalingOutput) ToWorkloadRuntimeAutoscalingPtrOutputWithContext(ctx context.Context) WorkloadRuntimeAutoscalingPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v WorkloadRuntimeAutoscaling) *WorkloadRuntimeAutoscaling {
+func (o WorkloadRuntimeContainerGroupAutoscalingOutput) ToWorkloadRuntimeContainerGroupAutoscalingPtrOutputWithContext(ctx context.Context) WorkloadRuntimeContainerGroupAutoscalingPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v WorkloadRuntimeContainerGroupAutoscaling) *WorkloadRuntimeContainerGroupAutoscaling {
 		return &v
-	}).(WorkloadRuntimeAutoscalingPtrOutput)
+	}).(WorkloadRuntimeContainerGroupAutoscalingPtrOutput)
 }
 
 // Whether autoscaling is enabled. Defaults to true.
-func (o WorkloadRuntimeAutoscalingOutput) Enabled() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v WorkloadRuntimeAutoscaling) *bool { return v.Enabled }).(pulumi.BoolPtrOutput)
+func (o WorkloadRuntimeContainerGroupAutoscalingOutput) Enabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v WorkloadRuntimeContainerGroupAutoscaling) *bool { return v.Enabled }).(pulumi.BoolPtrOutput)
 }
 
 // Scaling policies that define when and how to scale.
-func (o WorkloadRuntimeAutoscalingOutput) Policies() WorkloadRuntimeAutoscalingPolicyArrayOutput {
-	return o.ApplyT(func(v WorkloadRuntimeAutoscaling) []WorkloadRuntimeAutoscalingPolicy { return v.Policies }).(WorkloadRuntimeAutoscalingPolicyArrayOutput)
+func (o WorkloadRuntimeContainerGroupAutoscalingOutput) Policies() WorkloadRuntimeContainerGroupAutoscalingPolicyArrayOutput {
+	return o.ApplyT(func(v WorkloadRuntimeContainerGroupAutoscaling) []WorkloadRuntimeContainerGroupAutoscalingPolicy {
+		return v.Policies
+	}).(WorkloadRuntimeContainerGroupAutoscalingPolicyArrayOutput)
 }
 
-type WorkloadRuntimeAutoscalingPtrOutput struct{ *pulumi.OutputState }
+type WorkloadRuntimeContainerGroupAutoscalingPtrOutput struct{ *pulumi.OutputState }
 
-func (WorkloadRuntimeAutoscalingPtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**WorkloadRuntimeAutoscaling)(nil)).Elem()
+func (WorkloadRuntimeContainerGroupAutoscalingPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**WorkloadRuntimeContainerGroupAutoscaling)(nil)).Elem()
 }
 
-func (o WorkloadRuntimeAutoscalingPtrOutput) ToWorkloadRuntimeAutoscalingPtrOutput() WorkloadRuntimeAutoscalingPtrOutput {
+func (o WorkloadRuntimeContainerGroupAutoscalingPtrOutput) ToWorkloadRuntimeContainerGroupAutoscalingPtrOutput() WorkloadRuntimeContainerGroupAutoscalingPtrOutput {
 	return o
 }
 
-func (o WorkloadRuntimeAutoscalingPtrOutput) ToWorkloadRuntimeAutoscalingPtrOutputWithContext(ctx context.Context) WorkloadRuntimeAutoscalingPtrOutput {
+func (o WorkloadRuntimeContainerGroupAutoscalingPtrOutput) ToWorkloadRuntimeContainerGroupAutoscalingPtrOutputWithContext(ctx context.Context) WorkloadRuntimeContainerGroupAutoscalingPtrOutput {
 	return o
 }
 
-func (o WorkloadRuntimeAutoscalingPtrOutput) Elem() WorkloadRuntimeAutoscalingOutput {
-	return o.ApplyT(func(v *WorkloadRuntimeAutoscaling) WorkloadRuntimeAutoscaling {
+func (o WorkloadRuntimeContainerGroupAutoscalingPtrOutput) Elem() WorkloadRuntimeContainerGroupAutoscalingOutput {
+	return o.ApplyT(func(v *WorkloadRuntimeContainerGroupAutoscaling) WorkloadRuntimeContainerGroupAutoscaling {
 		if v != nil {
 			return *v
 		}
-		var ret WorkloadRuntimeAutoscaling
+		var ret WorkloadRuntimeContainerGroupAutoscaling
 		return ret
-	}).(WorkloadRuntimeAutoscalingOutput)
+	}).(WorkloadRuntimeContainerGroupAutoscalingOutput)
 }
 
 // Whether autoscaling is enabled. Defaults to true.
-func (o WorkloadRuntimeAutoscalingPtrOutput) Enabled() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v *WorkloadRuntimeAutoscaling) *bool {
+func (o WorkloadRuntimeContainerGroupAutoscalingPtrOutput) Enabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *WorkloadRuntimeContainerGroupAutoscaling) *bool {
 		if v == nil {
 			return nil
 		}
@@ -14743,16 +14759,16 @@ func (o WorkloadRuntimeAutoscalingPtrOutput) Enabled() pulumi.BoolPtrOutput {
 }
 
 // Scaling policies that define when and how to scale.
-func (o WorkloadRuntimeAutoscalingPtrOutput) Policies() WorkloadRuntimeAutoscalingPolicyArrayOutput {
-	return o.ApplyT(func(v *WorkloadRuntimeAutoscaling) []WorkloadRuntimeAutoscalingPolicy {
+func (o WorkloadRuntimeContainerGroupAutoscalingPtrOutput) Policies() WorkloadRuntimeContainerGroupAutoscalingPolicyArrayOutput {
+	return o.ApplyT(func(v *WorkloadRuntimeContainerGroupAutoscaling) []WorkloadRuntimeContainerGroupAutoscalingPolicy {
 		if v == nil {
 			return nil
 		}
 		return v.Policies
-	}).(WorkloadRuntimeAutoscalingPolicyArrayOutput)
+	}).(WorkloadRuntimeContainerGroupAutoscalingPolicyArrayOutput)
 }
 
-type WorkloadRuntimeAutoscalingPolicy struct {
+type WorkloadRuntimeContainerGroupAutoscalingPolicy struct {
 	// Maximum number of replicas.
 	MaxCount int `pulumi:"maxCount"`
 	// Minimum number of replicas.
@@ -14765,18 +14781,18 @@ type WorkloadRuntimeAutoscalingPolicy struct {
 	Target float64 `pulumi:"target"`
 }
 
-// WorkloadRuntimeAutoscalingPolicyInput is an input type that accepts WorkloadRuntimeAutoscalingPolicyArgs and WorkloadRuntimeAutoscalingPolicyOutput values.
-// You can construct a concrete instance of `WorkloadRuntimeAutoscalingPolicyInput` via:
+// WorkloadRuntimeContainerGroupAutoscalingPolicyInput is an input type that accepts WorkloadRuntimeContainerGroupAutoscalingPolicyArgs and WorkloadRuntimeContainerGroupAutoscalingPolicyOutput values.
+// You can construct a concrete instance of `WorkloadRuntimeContainerGroupAutoscalingPolicyInput` via:
 //
-//	WorkloadRuntimeAutoscalingPolicyArgs{...}
-type WorkloadRuntimeAutoscalingPolicyInput interface {
+//	WorkloadRuntimeContainerGroupAutoscalingPolicyArgs{...}
+type WorkloadRuntimeContainerGroupAutoscalingPolicyInput interface {
 	pulumi.Input
 
-	ToWorkloadRuntimeAutoscalingPolicyOutput() WorkloadRuntimeAutoscalingPolicyOutput
-	ToWorkloadRuntimeAutoscalingPolicyOutputWithContext(context.Context) WorkloadRuntimeAutoscalingPolicyOutput
+	ToWorkloadRuntimeContainerGroupAutoscalingPolicyOutput() WorkloadRuntimeContainerGroupAutoscalingPolicyOutput
+	ToWorkloadRuntimeContainerGroupAutoscalingPolicyOutputWithContext(context.Context) WorkloadRuntimeContainerGroupAutoscalingPolicyOutput
 }
 
-type WorkloadRuntimeAutoscalingPolicyArgs struct {
+type WorkloadRuntimeContainerGroupAutoscalingPolicyArgs struct {
 	// Maximum number of replicas.
 	MaxCount pulumi.IntInput `pulumi:"maxCount"`
 	// Minimum number of replicas.
@@ -14789,197 +14805,402 @@ type WorkloadRuntimeAutoscalingPolicyArgs struct {
 	Target pulumi.Float64Input `pulumi:"target"`
 }
 
-func (WorkloadRuntimeAutoscalingPolicyArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*WorkloadRuntimeAutoscalingPolicy)(nil)).Elem()
+func (WorkloadRuntimeContainerGroupAutoscalingPolicyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*WorkloadRuntimeContainerGroupAutoscalingPolicy)(nil)).Elem()
 }
 
-func (i WorkloadRuntimeAutoscalingPolicyArgs) ToWorkloadRuntimeAutoscalingPolicyOutput() WorkloadRuntimeAutoscalingPolicyOutput {
-	return i.ToWorkloadRuntimeAutoscalingPolicyOutputWithContext(context.Background())
+func (i WorkloadRuntimeContainerGroupAutoscalingPolicyArgs) ToWorkloadRuntimeContainerGroupAutoscalingPolicyOutput() WorkloadRuntimeContainerGroupAutoscalingPolicyOutput {
+	return i.ToWorkloadRuntimeContainerGroupAutoscalingPolicyOutputWithContext(context.Background())
 }
 
-func (i WorkloadRuntimeAutoscalingPolicyArgs) ToWorkloadRuntimeAutoscalingPolicyOutputWithContext(ctx context.Context) WorkloadRuntimeAutoscalingPolicyOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(WorkloadRuntimeAutoscalingPolicyOutput)
+func (i WorkloadRuntimeContainerGroupAutoscalingPolicyArgs) ToWorkloadRuntimeContainerGroupAutoscalingPolicyOutputWithContext(ctx context.Context) WorkloadRuntimeContainerGroupAutoscalingPolicyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WorkloadRuntimeContainerGroupAutoscalingPolicyOutput)
 }
 
-// WorkloadRuntimeAutoscalingPolicyArrayInput is an input type that accepts WorkloadRuntimeAutoscalingPolicyArray and WorkloadRuntimeAutoscalingPolicyArrayOutput values.
-// You can construct a concrete instance of `WorkloadRuntimeAutoscalingPolicyArrayInput` via:
+// WorkloadRuntimeContainerGroupAutoscalingPolicyArrayInput is an input type that accepts WorkloadRuntimeContainerGroupAutoscalingPolicyArray and WorkloadRuntimeContainerGroupAutoscalingPolicyArrayOutput values.
+// You can construct a concrete instance of `WorkloadRuntimeContainerGroupAutoscalingPolicyArrayInput` via:
 //
-//	WorkloadRuntimeAutoscalingPolicyArray{ WorkloadRuntimeAutoscalingPolicyArgs{...} }
-type WorkloadRuntimeAutoscalingPolicyArrayInput interface {
+//	WorkloadRuntimeContainerGroupAutoscalingPolicyArray{ WorkloadRuntimeContainerGroupAutoscalingPolicyArgs{...} }
+type WorkloadRuntimeContainerGroupAutoscalingPolicyArrayInput interface {
 	pulumi.Input
 
-	ToWorkloadRuntimeAutoscalingPolicyArrayOutput() WorkloadRuntimeAutoscalingPolicyArrayOutput
-	ToWorkloadRuntimeAutoscalingPolicyArrayOutputWithContext(context.Context) WorkloadRuntimeAutoscalingPolicyArrayOutput
+	ToWorkloadRuntimeContainerGroupAutoscalingPolicyArrayOutput() WorkloadRuntimeContainerGroupAutoscalingPolicyArrayOutput
+	ToWorkloadRuntimeContainerGroupAutoscalingPolicyArrayOutputWithContext(context.Context) WorkloadRuntimeContainerGroupAutoscalingPolicyArrayOutput
 }
 
-type WorkloadRuntimeAutoscalingPolicyArray []WorkloadRuntimeAutoscalingPolicyInput
+type WorkloadRuntimeContainerGroupAutoscalingPolicyArray []WorkloadRuntimeContainerGroupAutoscalingPolicyInput
 
-func (WorkloadRuntimeAutoscalingPolicyArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]WorkloadRuntimeAutoscalingPolicy)(nil)).Elem()
+func (WorkloadRuntimeContainerGroupAutoscalingPolicyArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]WorkloadRuntimeContainerGroupAutoscalingPolicy)(nil)).Elem()
 }
 
-func (i WorkloadRuntimeAutoscalingPolicyArray) ToWorkloadRuntimeAutoscalingPolicyArrayOutput() WorkloadRuntimeAutoscalingPolicyArrayOutput {
-	return i.ToWorkloadRuntimeAutoscalingPolicyArrayOutputWithContext(context.Background())
+func (i WorkloadRuntimeContainerGroupAutoscalingPolicyArray) ToWorkloadRuntimeContainerGroupAutoscalingPolicyArrayOutput() WorkloadRuntimeContainerGroupAutoscalingPolicyArrayOutput {
+	return i.ToWorkloadRuntimeContainerGroupAutoscalingPolicyArrayOutputWithContext(context.Background())
 }
 
-func (i WorkloadRuntimeAutoscalingPolicyArray) ToWorkloadRuntimeAutoscalingPolicyArrayOutputWithContext(ctx context.Context) WorkloadRuntimeAutoscalingPolicyArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(WorkloadRuntimeAutoscalingPolicyArrayOutput)
+func (i WorkloadRuntimeContainerGroupAutoscalingPolicyArray) ToWorkloadRuntimeContainerGroupAutoscalingPolicyArrayOutputWithContext(ctx context.Context) WorkloadRuntimeContainerGroupAutoscalingPolicyArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WorkloadRuntimeContainerGroupAutoscalingPolicyArrayOutput)
 }
 
-type WorkloadRuntimeAutoscalingPolicyOutput struct{ *pulumi.OutputState }
+type WorkloadRuntimeContainerGroupAutoscalingPolicyOutput struct{ *pulumi.OutputState }
 
-func (WorkloadRuntimeAutoscalingPolicyOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*WorkloadRuntimeAutoscalingPolicy)(nil)).Elem()
+func (WorkloadRuntimeContainerGroupAutoscalingPolicyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*WorkloadRuntimeContainerGroupAutoscalingPolicy)(nil)).Elem()
 }
 
-func (o WorkloadRuntimeAutoscalingPolicyOutput) ToWorkloadRuntimeAutoscalingPolicyOutput() WorkloadRuntimeAutoscalingPolicyOutput {
+func (o WorkloadRuntimeContainerGroupAutoscalingPolicyOutput) ToWorkloadRuntimeContainerGroupAutoscalingPolicyOutput() WorkloadRuntimeContainerGroupAutoscalingPolicyOutput {
 	return o
 }
 
-func (o WorkloadRuntimeAutoscalingPolicyOutput) ToWorkloadRuntimeAutoscalingPolicyOutputWithContext(ctx context.Context) WorkloadRuntimeAutoscalingPolicyOutput {
+func (o WorkloadRuntimeContainerGroupAutoscalingPolicyOutput) ToWorkloadRuntimeContainerGroupAutoscalingPolicyOutputWithContext(ctx context.Context) WorkloadRuntimeContainerGroupAutoscalingPolicyOutput {
 	return o
 }
 
 // Maximum number of replicas.
-func (o WorkloadRuntimeAutoscalingPolicyOutput) MaxCount() pulumi.IntOutput {
-	return o.ApplyT(func(v WorkloadRuntimeAutoscalingPolicy) int { return v.MaxCount }).(pulumi.IntOutput)
+func (o WorkloadRuntimeContainerGroupAutoscalingPolicyOutput) MaxCount() pulumi.IntOutput {
+	return o.ApplyT(func(v WorkloadRuntimeContainerGroupAutoscalingPolicy) int { return v.MaxCount }).(pulumi.IntOutput)
 }
 
 // Minimum number of replicas.
-func (o WorkloadRuntimeAutoscalingPolicyOutput) MinCount() pulumi.IntOutput {
-	return o.ApplyT(func(v WorkloadRuntimeAutoscalingPolicy) int { return v.MinCount }).(pulumi.IntOutput)
+func (o WorkloadRuntimeContainerGroupAutoscalingPolicyOutput) MinCount() pulumi.IntOutput {
+	return o.ApplyT(func(v WorkloadRuntimeContainerGroupAutoscalingPolicy) int { return v.MinCount }).(pulumi.IntOutput)
 }
 
 // Policy priority when multiple policies are defined.
-func (o WorkloadRuntimeAutoscalingPolicyOutput) Priority() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v WorkloadRuntimeAutoscalingPolicy) *int { return v.Priority }).(pulumi.IntPtrOutput)
+func (o WorkloadRuntimeContainerGroupAutoscalingPolicyOutput) Priority() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v WorkloadRuntimeContainerGroupAutoscalingPolicy) *int { return v.Priority }).(pulumi.IntPtrOutput)
 }
 
 // Metric used for scaling decisions: `cpuAverageUtilization`, `httpRequestsConcurrency`, `gpuCacheUtilization`, or `gpuRequestQueueDepth`.
-func (o WorkloadRuntimeAutoscalingPolicyOutput) ScalingMetric() pulumi.StringOutput {
-	return o.ApplyT(func(v WorkloadRuntimeAutoscalingPolicy) string { return v.ScalingMetric }).(pulumi.StringOutput)
+func (o WorkloadRuntimeContainerGroupAutoscalingPolicyOutput) ScalingMetric() pulumi.StringOutput {
+	return o.ApplyT(func(v WorkloadRuntimeContainerGroupAutoscalingPolicy) string { return v.ScalingMetric }).(pulumi.StringOutput)
 }
 
 // Target value for the scaling metric.
-func (o WorkloadRuntimeAutoscalingPolicyOutput) Target() pulumi.Float64Output {
-	return o.ApplyT(func(v WorkloadRuntimeAutoscalingPolicy) float64 { return v.Target }).(pulumi.Float64Output)
+func (o WorkloadRuntimeContainerGroupAutoscalingPolicyOutput) Target() pulumi.Float64Output {
+	return o.ApplyT(func(v WorkloadRuntimeContainerGroupAutoscalingPolicy) float64 { return v.Target }).(pulumi.Float64Output)
 }
 
-type WorkloadRuntimeAutoscalingPolicyArrayOutput struct{ *pulumi.OutputState }
+type WorkloadRuntimeContainerGroupAutoscalingPolicyArrayOutput struct{ *pulumi.OutputState }
 
-func (WorkloadRuntimeAutoscalingPolicyArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]WorkloadRuntimeAutoscalingPolicy)(nil)).Elem()
+func (WorkloadRuntimeContainerGroupAutoscalingPolicyArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]WorkloadRuntimeContainerGroupAutoscalingPolicy)(nil)).Elem()
 }
 
-func (o WorkloadRuntimeAutoscalingPolicyArrayOutput) ToWorkloadRuntimeAutoscalingPolicyArrayOutput() WorkloadRuntimeAutoscalingPolicyArrayOutput {
+func (o WorkloadRuntimeContainerGroupAutoscalingPolicyArrayOutput) ToWorkloadRuntimeContainerGroupAutoscalingPolicyArrayOutput() WorkloadRuntimeContainerGroupAutoscalingPolicyArrayOutput {
 	return o
 }
 
-func (o WorkloadRuntimeAutoscalingPolicyArrayOutput) ToWorkloadRuntimeAutoscalingPolicyArrayOutputWithContext(ctx context.Context) WorkloadRuntimeAutoscalingPolicyArrayOutput {
+func (o WorkloadRuntimeContainerGroupAutoscalingPolicyArrayOutput) ToWorkloadRuntimeContainerGroupAutoscalingPolicyArrayOutputWithContext(ctx context.Context) WorkloadRuntimeContainerGroupAutoscalingPolicyArrayOutput {
 	return o
 }
 
-func (o WorkloadRuntimeAutoscalingPolicyArrayOutput) Index(i pulumi.IntInput) WorkloadRuntimeAutoscalingPolicyOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) WorkloadRuntimeAutoscalingPolicy {
-		return vs[0].([]WorkloadRuntimeAutoscalingPolicy)[vs[1].(int)]
-	}).(WorkloadRuntimeAutoscalingPolicyOutput)
+func (o WorkloadRuntimeContainerGroupAutoscalingPolicyArrayOutput) Index(i pulumi.IntInput) WorkloadRuntimeContainerGroupAutoscalingPolicyOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) WorkloadRuntimeContainerGroupAutoscalingPolicy {
+		return vs[0].([]WorkloadRuntimeContainerGroupAutoscalingPolicy)[vs[1].(int)]
+	}).(WorkloadRuntimeContainerGroupAutoscalingPolicyOutput)
 }
 
-type WorkloadRuntimeResource struct {
-	// ID of the resource bundle (e.g. `cpu.nano`).
-	ResourceBundleId string `pulumi:"resourceBundleId"`
+type WorkloadRuntimeContainerGroupContainer struct {
+	// Container name. Must match a container declared in the artifact group.
+	Name string `pulumi:"name"`
+	// Resource allocation for this container.
+	ResourceAllocation *WorkloadRuntimeContainerGroupContainerResourceAllocation `pulumi:"resourceAllocation"`
 }
 
-// WorkloadRuntimeResourceInput is an input type that accepts WorkloadRuntimeResourceArgs and WorkloadRuntimeResourceOutput values.
-// You can construct a concrete instance of `WorkloadRuntimeResourceInput` via:
+// WorkloadRuntimeContainerGroupContainerInput is an input type that accepts WorkloadRuntimeContainerGroupContainerArgs and WorkloadRuntimeContainerGroupContainerOutput values.
+// You can construct a concrete instance of `WorkloadRuntimeContainerGroupContainerInput` via:
 //
-//	WorkloadRuntimeResourceArgs{...}
-type WorkloadRuntimeResourceInput interface {
+//	WorkloadRuntimeContainerGroupContainerArgs{...}
+type WorkloadRuntimeContainerGroupContainerInput interface {
 	pulumi.Input
 
-	ToWorkloadRuntimeResourceOutput() WorkloadRuntimeResourceOutput
-	ToWorkloadRuntimeResourceOutputWithContext(context.Context) WorkloadRuntimeResourceOutput
+	ToWorkloadRuntimeContainerGroupContainerOutput() WorkloadRuntimeContainerGroupContainerOutput
+	ToWorkloadRuntimeContainerGroupContainerOutputWithContext(context.Context) WorkloadRuntimeContainerGroupContainerOutput
 }
 
-type WorkloadRuntimeResourceArgs struct {
-	// ID of the resource bundle (e.g. `cpu.nano`).
-	ResourceBundleId pulumi.StringInput `pulumi:"resourceBundleId"`
+type WorkloadRuntimeContainerGroupContainerArgs struct {
+	// Container name. Must match a container declared in the artifact group.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Resource allocation for this container.
+	ResourceAllocation WorkloadRuntimeContainerGroupContainerResourceAllocationPtrInput `pulumi:"resourceAllocation"`
 }
 
-func (WorkloadRuntimeResourceArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*WorkloadRuntimeResource)(nil)).Elem()
+func (WorkloadRuntimeContainerGroupContainerArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*WorkloadRuntimeContainerGroupContainer)(nil)).Elem()
 }
 
-func (i WorkloadRuntimeResourceArgs) ToWorkloadRuntimeResourceOutput() WorkloadRuntimeResourceOutput {
-	return i.ToWorkloadRuntimeResourceOutputWithContext(context.Background())
+func (i WorkloadRuntimeContainerGroupContainerArgs) ToWorkloadRuntimeContainerGroupContainerOutput() WorkloadRuntimeContainerGroupContainerOutput {
+	return i.ToWorkloadRuntimeContainerGroupContainerOutputWithContext(context.Background())
 }
 
-func (i WorkloadRuntimeResourceArgs) ToWorkloadRuntimeResourceOutputWithContext(ctx context.Context) WorkloadRuntimeResourceOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(WorkloadRuntimeResourceOutput)
+func (i WorkloadRuntimeContainerGroupContainerArgs) ToWorkloadRuntimeContainerGroupContainerOutputWithContext(ctx context.Context) WorkloadRuntimeContainerGroupContainerOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WorkloadRuntimeContainerGroupContainerOutput)
 }
 
-// WorkloadRuntimeResourceArrayInput is an input type that accepts WorkloadRuntimeResourceArray and WorkloadRuntimeResourceArrayOutput values.
-// You can construct a concrete instance of `WorkloadRuntimeResourceArrayInput` via:
+// WorkloadRuntimeContainerGroupContainerArrayInput is an input type that accepts WorkloadRuntimeContainerGroupContainerArray and WorkloadRuntimeContainerGroupContainerArrayOutput values.
+// You can construct a concrete instance of `WorkloadRuntimeContainerGroupContainerArrayInput` via:
 //
-//	WorkloadRuntimeResourceArray{ WorkloadRuntimeResourceArgs{...} }
-type WorkloadRuntimeResourceArrayInput interface {
+//	WorkloadRuntimeContainerGroupContainerArray{ WorkloadRuntimeContainerGroupContainerArgs{...} }
+type WorkloadRuntimeContainerGroupContainerArrayInput interface {
 	pulumi.Input
 
-	ToWorkloadRuntimeResourceArrayOutput() WorkloadRuntimeResourceArrayOutput
-	ToWorkloadRuntimeResourceArrayOutputWithContext(context.Context) WorkloadRuntimeResourceArrayOutput
+	ToWorkloadRuntimeContainerGroupContainerArrayOutput() WorkloadRuntimeContainerGroupContainerArrayOutput
+	ToWorkloadRuntimeContainerGroupContainerArrayOutputWithContext(context.Context) WorkloadRuntimeContainerGroupContainerArrayOutput
 }
 
-type WorkloadRuntimeResourceArray []WorkloadRuntimeResourceInput
+type WorkloadRuntimeContainerGroupContainerArray []WorkloadRuntimeContainerGroupContainerInput
 
-func (WorkloadRuntimeResourceArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]WorkloadRuntimeResource)(nil)).Elem()
+func (WorkloadRuntimeContainerGroupContainerArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]WorkloadRuntimeContainerGroupContainer)(nil)).Elem()
 }
 
-func (i WorkloadRuntimeResourceArray) ToWorkloadRuntimeResourceArrayOutput() WorkloadRuntimeResourceArrayOutput {
-	return i.ToWorkloadRuntimeResourceArrayOutputWithContext(context.Background())
+func (i WorkloadRuntimeContainerGroupContainerArray) ToWorkloadRuntimeContainerGroupContainerArrayOutput() WorkloadRuntimeContainerGroupContainerArrayOutput {
+	return i.ToWorkloadRuntimeContainerGroupContainerArrayOutputWithContext(context.Background())
 }
 
-func (i WorkloadRuntimeResourceArray) ToWorkloadRuntimeResourceArrayOutputWithContext(ctx context.Context) WorkloadRuntimeResourceArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(WorkloadRuntimeResourceArrayOutput)
+func (i WorkloadRuntimeContainerGroupContainerArray) ToWorkloadRuntimeContainerGroupContainerArrayOutputWithContext(ctx context.Context) WorkloadRuntimeContainerGroupContainerArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WorkloadRuntimeContainerGroupContainerArrayOutput)
 }
 
-type WorkloadRuntimeResourceOutput struct{ *pulumi.OutputState }
+type WorkloadRuntimeContainerGroupContainerOutput struct{ *pulumi.OutputState }
 
-func (WorkloadRuntimeResourceOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*WorkloadRuntimeResource)(nil)).Elem()
+func (WorkloadRuntimeContainerGroupContainerOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*WorkloadRuntimeContainerGroupContainer)(nil)).Elem()
 }
 
-func (o WorkloadRuntimeResourceOutput) ToWorkloadRuntimeResourceOutput() WorkloadRuntimeResourceOutput {
+func (o WorkloadRuntimeContainerGroupContainerOutput) ToWorkloadRuntimeContainerGroupContainerOutput() WorkloadRuntimeContainerGroupContainerOutput {
 	return o
 }
 
-func (o WorkloadRuntimeResourceOutput) ToWorkloadRuntimeResourceOutputWithContext(ctx context.Context) WorkloadRuntimeResourceOutput {
+func (o WorkloadRuntimeContainerGroupContainerOutput) ToWorkloadRuntimeContainerGroupContainerOutputWithContext(ctx context.Context) WorkloadRuntimeContainerGroupContainerOutput {
 	return o
 }
 
-// ID of the resource bundle (e.g. `cpu.nano`).
-func (o WorkloadRuntimeResourceOutput) ResourceBundleId() pulumi.StringOutput {
-	return o.ApplyT(func(v WorkloadRuntimeResource) string { return v.ResourceBundleId }).(pulumi.StringOutput)
+// Container name. Must match a container declared in the artifact group.
+func (o WorkloadRuntimeContainerGroupContainerOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v WorkloadRuntimeContainerGroupContainer) string { return v.Name }).(pulumi.StringOutput)
 }
 
-type WorkloadRuntimeResourceArrayOutput struct{ *pulumi.OutputState }
-
-func (WorkloadRuntimeResourceArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]WorkloadRuntimeResource)(nil)).Elem()
+// Resource allocation for this container.
+func (o WorkloadRuntimeContainerGroupContainerOutput) ResourceAllocation() WorkloadRuntimeContainerGroupContainerResourceAllocationPtrOutput {
+	return o.ApplyT(func(v WorkloadRuntimeContainerGroupContainer) *WorkloadRuntimeContainerGroupContainerResourceAllocation {
+		return v.ResourceAllocation
+	}).(WorkloadRuntimeContainerGroupContainerResourceAllocationPtrOutput)
 }
 
-func (o WorkloadRuntimeResourceArrayOutput) ToWorkloadRuntimeResourceArrayOutput() WorkloadRuntimeResourceArrayOutput {
+type WorkloadRuntimeContainerGroupContainerArrayOutput struct{ *pulumi.OutputState }
+
+func (WorkloadRuntimeContainerGroupContainerArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]WorkloadRuntimeContainerGroupContainer)(nil)).Elem()
+}
+
+func (o WorkloadRuntimeContainerGroupContainerArrayOutput) ToWorkloadRuntimeContainerGroupContainerArrayOutput() WorkloadRuntimeContainerGroupContainerArrayOutput {
 	return o
 }
 
-func (o WorkloadRuntimeResourceArrayOutput) ToWorkloadRuntimeResourceArrayOutputWithContext(ctx context.Context) WorkloadRuntimeResourceArrayOutput {
+func (o WorkloadRuntimeContainerGroupContainerArrayOutput) ToWorkloadRuntimeContainerGroupContainerArrayOutputWithContext(ctx context.Context) WorkloadRuntimeContainerGroupContainerArrayOutput {
 	return o
 }
 
-func (o WorkloadRuntimeResourceArrayOutput) Index(i pulumi.IntInput) WorkloadRuntimeResourceOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) WorkloadRuntimeResource {
-		return vs[0].([]WorkloadRuntimeResource)[vs[1].(int)]
-	}).(WorkloadRuntimeResourceOutput)
+func (o WorkloadRuntimeContainerGroupContainerArrayOutput) Index(i pulumi.IntInput) WorkloadRuntimeContainerGroupContainerOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) WorkloadRuntimeContainerGroupContainer {
+		return vs[0].([]WorkloadRuntimeContainerGroupContainer)[vs[1].(int)]
+	}).(WorkloadRuntimeContainerGroupContainerOutput)
+}
+
+type WorkloadRuntimeContainerGroupContainerResourceAllocation struct {
+	// CPU cores allocated to this container.
+	Cpu *float64 `pulumi:"cpu"`
+	// GPUs allocated to this container.
+	Gpu *float64 `pulumi:"gpu"`
+	// GPU VRAM allocated in bytes.
+	GpuMemory *int `pulumi:"gpuMemory"`
+	// RAM allocated in bytes.
+	Memory *int `pulumi:"memory"`
+}
+
+// WorkloadRuntimeContainerGroupContainerResourceAllocationInput is an input type that accepts WorkloadRuntimeContainerGroupContainerResourceAllocationArgs and WorkloadRuntimeContainerGroupContainerResourceAllocationOutput values.
+// You can construct a concrete instance of `WorkloadRuntimeContainerGroupContainerResourceAllocationInput` via:
+//
+//	WorkloadRuntimeContainerGroupContainerResourceAllocationArgs{...}
+type WorkloadRuntimeContainerGroupContainerResourceAllocationInput interface {
+	pulumi.Input
+
+	ToWorkloadRuntimeContainerGroupContainerResourceAllocationOutput() WorkloadRuntimeContainerGroupContainerResourceAllocationOutput
+	ToWorkloadRuntimeContainerGroupContainerResourceAllocationOutputWithContext(context.Context) WorkloadRuntimeContainerGroupContainerResourceAllocationOutput
+}
+
+type WorkloadRuntimeContainerGroupContainerResourceAllocationArgs struct {
+	// CPU cores allocated to this container.
+	Cpu pulumi.Float64PtrInput `pulumi:"cpu"`
+	// GPUs allocated to this container.
+	Gpu pulumi.Float64PtrInput `pulumi:"gpu"`
+	// GPU VRAM allocated in bytes.
+	GpuMemory pulumi.IntPtrInput `pulumi:"gpuMemory"`
+	// RAM allocated in bytes.
+	Memory pulumi.IntPtrInput `pulumi:"memory"`
+}
+
+func (WorkloadRuntimeContainerGroupContainerResourceAllocationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*WorkloadRuntimeContainerGroupContainerResourceAllocation)(nil)).Elem()
+}
+
+func (i WorkloadRuntimeContainerGroupContainerResourceAllocationArgs) ToWorkloadRuntimeContainerGroupContainerResourceAllocationOutput() WorkloadRuntimeContainerGroupContainerResourceAllocationOutput {
+	return i.ToWorkloadRuntimeContainerGroupContainerResourceAllocationOutputWithContext(context.Background())
+}
+
+func (i WorkloadRuntimeContainerGroupContainerResourceAllocationArgs) ToWorkloadRuntimeContainerGroupContainerResourceAllocationOutputWithContext(ctx context.Context) WorkloadRuntimeContainerGroupContainerResourceAllocationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WorkloadRuntimeContainerGroupContainerResourceAllocationOutput)
+}
+
+func (i WorkloadRuntimeContainerGroupContainerResourceAllocationArgs) ToWorkloadRuntimeContainerGroupContainerResourceAllocationPtrOutput() WorkloadRuntimeContainerGroupContainerResourceAllocationPtrOutput {
+	return i.ToWorkloadRuntimeContainerGroupContainerResourceAllocationPtrOutputWithContext(context.Background())
+}
+
+func (i WorkloadRuntimeContainerGroupContainerResourceAllocationArgs) ToWorkloadRuntimeContainerGroupContainerResourceAllocationPtrOutputWithContext(ctx context.Context) WorkloadRuntimeContainerGroupContainerResourceAllocationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WorkloadRuntimeContainerGroupContainerResourceAllocationOutput).ToWorkloadRuntimeContainerGroupContainerResourceAllocationPtrOutputWithContext(ctx)
+}
+
+// WorkloadRuntimeContainerGroupContainerResourceAllocationPtrInput is an input type that accepts WorkloadRuntimeContainerGroupContainerResourceAllocationArgs, WorkloadRuntimeContainerGroupContainerResourceAllocationPtr and WorkloadRuntimeContainerGroupContainerResourceAllocationPtrOutput values.
+// You can construct a concrete instance of `WorkloadRuntimeContainerGroupContainerResourceAllocationPtrInput` via:
+//
+//	        WorkloadRuntimeContainerGroupContainerResourceAllocationArgs{...}
+//
+//	or:
+//
+//	        nil
+type WorkloadRuntimeContainerGroupContainerResourceAllocationPtrInput interface {
+	pulumi.Input
+
+	ToWorkloadRuntimeContainerGroupContainerResourceAllocationPtrOutput() WorkloadRuntimeContainerGroupContainerResourceAllocationPtrOutput
+	ToWorkloadRuntimeContainerGroupContainerResourceAllocationPtrOutputWithContext(context.Context) WorkloadRuntimeContainerGroupContainerResourceAllocationPtrOutput
+}
+
+type workloadRuntimeContainerGroupContainerResourceAllocationPtrType WorkloadRuntimeContainerGroupContainerResourceAllocationArgs
+
+func WorkloadRuntimeContainerGroupContainerResourceAllocationPtr(v *WorkloadRuntimeContainerGroupContainerResourceAllocationArgs) WorkloadRuntimeContainerGroupContainerResourceAllocationPtrInput {
+	return (*workloadRuntimeContainerGroupContainerResourceAllocationPtrType)(v)
+}
+
+func (*workloadRuntimeContainerGroupContainerResourceAllocationPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**WorkloadRuntimeContainerGroupContainerResourceAllocation)(nil)).Elem()
+}
+
+func (i *workloadRuntimeContainerGroupContainerResourceAllocationPtrType) ToWorkloadRuntimeContainerGroupContainerResourceAllocationPtrOutput() WorkloadRuntimeContainerGroupContainerResourceAllocationPtrOutput {
+	return i.ToWorkloadRuntimeContainerGroupContainerResourceAllocationPtrOutputWithContext(context.Background())
+}
+
+func (i *workloadRuntimeContainerGroupContainerResourceAllocationPtrType) ToWorkloadRuntimeContainerGroupContainerResourceAllocationPtrOutputWithContext(ctx context.Context) WorkloadRuntimeContainerGroupContainerResourceAllocationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WorkloadRuntimeContainerGroupContainerResourceAllocationPtrOutput)
+}
+
+type WorkloadRuntimeContainerGroupContainerResourceAllocationOutput struct{ *pulumi.OutputState }
+
+func (WorkloadRuntimeContainerGroupContainerResourceAllocationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*WorkloadRuntimeContainerGroupContainerResourceAllocation)(nil)).Elem()
+}
+
+func (o WorkloadRuntimeContainerGroupContainerResourceAllocationOutput) ToWorkloadRuntimeContainerGroupContainerResourceAllocationOutput() WorkloadRuntimeContainerGroupContainerResourceAllocationOutput {
+	return o
+}
+
+func (o WorkloadRuntimeContainerGroupContainerResourceAllocationOutput) ToWorkloadRuntimeContainerGroupContainerResourceAllocationOutputWithContext(ctx context.Context) WorkloadRuntimeContainerGroupContainerResourceAllocationOutput {
+	return o
+}
+
+func (o WorkloadRuntimeContainerGroupContainerResourceAllocationOutput) ToWorkloadRuntimeContainerGroupContainerResourceAllocationPtrOutput() WorkloadRuntimeContainerGroupContainerResourceAllocationPtrOutput {
+	return o.ToWorkloadRuntimeContainerGroupContainerResourceAllocationPtrOutputWithContext(context.Background())
+}
+
+func (o WorkloadRuntimeContainerGroupContainerResourceAllocationOutput) ToWorkloadRuntimeContainerGroupContainerResourceAllocationPtrOutputWithContext(ctx context.Context) WorkloadRuntimeContainerGroupContainerResourceAllocationPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v WorkloadRuntimeContainerGroupContainerResourceAllocation) *WorkloadRuntimeContainerGroupContainerResourceAllocation {
+		return &v
+	}).(WorkloadRuntimeContainerGroupContainerResourceAllocationPtrOutput)
+}
+
+// CPU cores allocated to this container.
+func (o WorkloadRuntimeContainerGroupContainerResourceAllocationOutput) Cpu() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v WorkloadRuntimeContainerGroupContainerResourceAllocation) *float64 { return v.Cpu }).(pulumi.Float64PtrOutput)
+}
+
+// GPUs allocated to this container.
+func (o WorkloadRuntimeContainerGroupContainerResourceAllocationOutput) Gpu() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v WorkloadRuntimeContainerGroupContainerResourceAllocation) *float64 { return v.Gpu }).(pulumi.Float64PtrOutput)
+}
+
+// GPU VRAM allocated in bytes.
+func (o WorkloadRuntimeContainerGroupContainerResourceAllocationOutput) GpuMemory() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v WorkloadRuntimeContainerGroupContainerResourceAllocation) *int { return v.GpuMemory }).(pulumi.IntPtrOutput)
+}
+
+// RAM allocated in bytes.
+func (o WorkloadRuntimeContainerGroupContainerResourceAllocationOutput) Memory() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v WorkloadRuntimeContainerGroupContainerResourceAllocation) *int { return v.Memory }).(pulumi.IntPtrOutput)
+}
+
+type WorkloadRuntimeContainerGroupContainerResourceAllocationPtrOutput struct{ *pulumi.OutputState }
+
+func (WorkloadRuntimeContainerGroupContainerResourceAllocationPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**WorkloadRuntimeContainerGroupContainerResourceAllocation)(nil)).Elem()
+}
+
+func (o WorkloadRuntimeContainerGroupContainerResourceAllocationPtrOutput) ToWorkloadRuntimeContainerGroupContainerResourceAllocationPtrOutput() WorkloadRuntimeContainerGroupContainerResourceAllocationPtrOutput {
+	return o
+}
+
+func (o WorkloadRuntimeContainerGroupContainerResourceAllocationPtrOutput) ToWorkloadRuntimeContainerGroupContainerResourceAllocationPtrOutputWithContext(ctx context.Context) WorkloadRuntimeContainerGroupContainerResourceAllocationPtrOutput {
+	return o
+}
+
+func (o WorkloadRuntimeContainerGroupContainerResourceAllocationPtrOutput) Elem() WorkloadRuntimeContainerGroupContainerResourceAllocationOutput {
+	return o.ApplyT(func(v *WorkloadRuntimeContainerGroupContainerResourceAllocation) WorkloadRuntimeContainerGroupContainerResourceAllocation {
+		if v != nil {
+			return *v
+		}
+		var ret WorkloadRuntimeContainerGroupContainerResourceAllocation
+		return ret
+	}).(WorkloadRuntimeContainerGroupContainerResourceAllocationOutput)
+}
+
+// CPU cores allocated to this container.
+func (o WorkloadRuntimeContainerGroupContainerResourceAllocationPtrOutput) Cpu() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v *WorkloadRuntimeContainerGroupContainerResourceAllocation) *float64 {
+		if v == nil {
+			return nil
+		}
+		return v.Cpu
+	}).(pulumi.Float64PtrOutput)
+}
+
+// GPUs allocated to this container.
+func (o WorkloadRuntimeContainerGroupContainerResourceAllocationPtrOutput) Gpu() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v *WorkloadRuntimeContainerGroupContainerResourceAllocation) *float64 {
+		if v == nil {
+			return nil
+		}
+		return v.Gpu
+	}).(pulumi.Float64PtrOutput)
+}
+
+// GPU VRAM allocated in bytes.
+func (o WorkloadRuntimeContainerGroupContainerResourceAllocationPtrOutput) GpuMemory() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *WorkloadRuntimeContainerGroupContainerResourceAllocation) *int {
+		if v == nil {
+			return nil
+		}
+		return v.GpuMemory
+	}).(pulumi.IntPtrOutput)
+}
+
+// RAM allocated in bytes.
+func (o WorkloadRuntimeContainerGroupContainerResourceAllocationPtrOutput) Memory() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *WorkloadRuntimeContainerGroupContainerResourceAllocation) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Memory
+	}).(pulumi.IntPtrOutput)
 }
 
 func init() {
@@ -15003,7 +15224,6 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ArtifactSpecContainerGroupContainerLivenessProbePtrInput)(nil)).Elem(), ArtifactSpecContainerGroupContainerLivenessProbeArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ArtifactSpecContainerGroupContainerReadinessProbeInput)(nil)).Elem(), ArtifactSpecContainerGroupContainerReadinessProbeArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ArtifactSpecContainerGroupContainerReadinessProbePtrInput)(nil)).Elem(), ArtifactSpecContainerGroupContainerReadinessProbeArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*ArtifactSpecContainerGroupContainerResourceRequestInput)(nil)).Elem(), ArtifactSpecContainerGroupContainerResourceRequestArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ArtifactSpecContainerGroupContainerStartupProbeInput)(nil)).Elem(), ArtifactSpecContainerGroupContainerStartupProbeArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ArtifactSpecContainerGroupContainerStartupProbePtrInput)(nil)).Elem(), ArtifactSpecContainerGroupContainerStartupProbeArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BatchPredictionJobDefinitionCsvSettingsInput)(nil)).Elem(), BatchPredictionJobDefinitionCsvSettingsArgs{})
@@ -15149,12 +15369,16 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*VectorDatabaseChunkingParametersPtrInput)(nil)).Elem(), VectorDatabaseChunkingParametersArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*WorkloadRuntimeInput)(nil)).Elem(), WorkloadRuntimeArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*WorkloadRuntimePtrInput)(nil)).Elem(), WorkloadRuntimeArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*WorkloadRuntimeAutoscalingInput)(nil)).Elem(), WorkloadRuntimeAutoscalingArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*WorkloadRuntimeAutoscalingPtrInput)(nil)).Elem(), WorkloadRuntimeAutoscalingArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*WorkloadRuntimeAutoscalingPolicyInput)(nil)).Elem(), WorkloadRuntimeAutoscalingPolicyArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*WorkloadRuntimeAutoscalingPolicyArrayInput)(nil)).Elem(), WorkloadRuntimeAutoscalingPolicyArray{})
-	pulumi.RegisterInputType(reflect.TypeOf((*WorkloadRuntimeResourceInput)(nil)).Elem(), WorkloadRuntimeResourceArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*WorkloadRuntimeResourceArrayInput)(nil)).Elem(), WorkloadRuntimeResourceArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WorkloadRuntimeContainerGroupInput)(nil)).Elem(), WorkloadRuntimeContainerGroupArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WorkloadRuntimeContainerGroupArrayInput)(nil)).Elem(), WorkloadRuntimeContainerGroupArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WorkloadRuntimeContainerGroupAutoscalingInput)(nil)).Elem(), WorkloadRuntimeContainerGroupAutoscalingArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WorkloadRuntimeContainerGroupAutoscalingPtrInput)(nil)).Elem(), WorkloadRuntimeContainerGroupAutoscalingArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WorkloadRuntimeContainerGroupAutoscalingPolicyInput)(nil)).Elem(), WorkloadRuntimeContainerGroupAutoscalingPolicyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WorkloadRuntimeContainerGroupAutoscalingPolicyArrayInput)(nil)).Elem(), WorkloadRuntimeContainerGroupAutoscalingPolicyArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WorkloadRuntimeContainerGroupContainerInput)(nil)).Elem(), WorkloadRuntimeContainerGroupContainerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WorkloadRuntimeContainerGroupContainerArrayInput)(nil)).Elem(), WorkloadRuntimeContainerGroupContainerArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WorkloadRuntimeContainerGroupContainerResourceAllocationInput)(nil)).Elem(), WorkloadRuntimeContainerGroupContainerResourceAllocationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WorkloadRuntimeContainerGroupContainerResourceAllocationPtrInput)(nil)).Elem(), WorkloadRuntimeContainerGroupContainerResourceAllocationArgs{})
 	pulumi.RegisterOutputType(ApplicationSourceFromTemplateResourcesOutput{})
 	pulumi.RegisterOutputType(ApplicationSourceFromTemplateResourcesPtrOutput{})
 	pulumi.RegisterOutputType(ApplicationSourceFromTemplateRuntimeParameterValueOutput{})
@@ -15175,7 +15399,6 @@ func init() {
 	pulumi.RegisterOutputType(ArtifactSpecContainerGroupContainerLivenessProbePtrOutput{})
 	pulumi.RegisterOutputType(ArtifactSpecContainerGroupContainerReadinessProbeOutput{})
 	pulumi.RegisterOutputType(ArtifactSpecContainerGroupContainerReadinessProbePtrOutput{})
-	pulumi.RegisterOutputType(ArtifactSpecContainerGroupContainerResourceRequestOutput{})
 	pulumi.RegisterOutputType(ArtifactSpecContainerGroupContainerStartupProbeOutput{})
 	pulumi.RegisterOutputType(ArtifactSpecContainerGroupContainerStartupProbePtrOutput{})
 	pulumi.RegisterOutputType(BatchPredictionJobDefinitionCsvSettingsOutput{})
@@ -15321,10 +15544,14 @@ func init() {
 	pulumi.RegisterOutputType(VectorDatabaseChunkingParametersPtrOutput{})
 	pulumi.RegisterOutputType(WorkloadRuntimeOutput{})
 	pulumi.RegisterOutputType(WorkloadRuntimePtrOutput{})
-	pulumi.RegisterOutputType(WorkloadRuntimeAutoscalingOutput{})
-	pulumi.RegisterOutputType(WorkloadRuntimeAutoscalingPtrOutput{})
-	pulumi.RegisterOutputType(WorkloadRuntimeAutoscalingPolicyOutput{})
-	pulumi.RegisterOutputType(WorkloadRuntimeAutoscalingPolicyArrayOutput{})
-	pulumi.RegisterOutputType(WorkloadRuntimeResourceOutput{})
-	pulumi.RegisterOutputType(WorkloadRuntimeResourceArrayOutput{})
+	pulumi.RegisterOutputType(WorkloadRuntimeContainerGroupOutput{})
+	pulumi.RegisterOutputType(WorkloadRuntimeContainerGroupArrayOutput{})
+	pulumi.RegisterOutputType(WorkloadRuntimeContainerGroupAutoscalingOutput{})
+	pulumi.RegisterOutputType(WorkloadRuntimeContainerGroupAutoscalingPtrOutput{})
+	pulumi.RegisterOutputType(WorkloadRuntimeContainerGroupAutoscalingPolicyOutput{})
+	pulumi.RegisterOutputType(WorkloadRuntimeContainerGroupAutoscalingPolicyArrayOutput{})
+	pulumi.RegisterOutputType(WorkloadRuntimeContainerGroupContainerOutput{})
+	pulumi.RegisterOutputType(WorkloadRuntimeContainerGroupContainerArrayOutput{})
+	pulumi.RegisterOutputType(WorkloadRuntimeContainerGroupContainerResourceAllocationOutput{})
+	pulumi.RegisterOutputType(WorkloadRuntimeContainerGroupContainerResourceAllocationPtrOutput{})
 }
