@@ -51,10 +51,6 @@ namespace DataRobotPulumi.Datarobot.Outputs
         /// </summary>
         public readonly Outputs.ArtifactSpecContainerGroupContainerReadinessProbe? ReadinessProbe;
         /// <summary>
-        /// Resource requirements for the container.
-        /// </summary>
-        public readonly Outputs.ArtifactSpecContainerGroupContainerResourceRequest ResourceRequest;
-        /// <summary>
         /// Container startup check configuration.
         /// </summary>
         public readonly Outputs.ArtifactSpecContainerGroupContainerStartupProbe? StartupProbe;
@@ -79,8 +75,6 @@ namespace DataRobotPulumi.Datarobot.Outputs
 
             Outputs.ArtifactSpecContainerGroupContainerReadinessProbe? readinessProbe,
 
-            Outputs.ArtifactSpecContainerGroupContainerResourceRequest resourceRequest,
-
             Outputs.ArtifactSpecContainerGroupContainerStartupProbe? startupProbe)
         {
             Description = description;
@@ -92,7 +86,6 @@ namespace DataRobotPulumi.Datarobot.Outputs
             Port = port;
             Primary = primary;
             ReadinessProbe = readinessProbe;
-            ResourceRequest = resourceRequest;
             StartupProbe = startupProbe;
         }
     }

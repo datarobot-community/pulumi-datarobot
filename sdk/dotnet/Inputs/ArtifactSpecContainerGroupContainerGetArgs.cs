@@ -80,12 +80,6 @@ namespace DataRobotPulumi.Datarobot.Inputs
         public Input<Inputs.ArtifactSpecContainerGroupContainerReadinessProbeGetArgs>? ReadinessProbe { get; set; }
 
         /// <summary>
-        /// Resource requirements for the container.
-        /// </summary>
-        [Input("resourceRequest", required: true)]
-        public Input<Inputs.ArtifactSpecContainerGroupContainerResourceRequestGetArgs> ResourceRequest { get; set; } = null!;
-
-        /// <summary>
         /// Container startup check configuration.
         /// </summary>
         [Input("startupProbe")]

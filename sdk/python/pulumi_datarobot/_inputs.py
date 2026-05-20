@@ -36,8 +36,6 @@ __all__ = [
     'ArtifactSpecContainerGroupContainerLivenessProbeArgsDict',
     'ArtifactSpecContainerGroupContainerReadinessProbeArgs',
     'ArtifactSpecContainerGroupContainerReadinessProbeArgsDict',
-    'ArtifactSpecContainerGroupContainerResourceRequestArgs',
-    'ArtifactSpecContainerGroupContainerResourceRequestArgsDict',
     'ArtifactSpecContainerGroupContainerStartupProbeArgs',
     'ArtifactSpecContainerGroupContainerStartupProbeArgsDict',
     'BatchPredictionJobDefinitionCsvSettingsArgs',
@@ -184,12 +182,16 @@ __all__ = [
     'VectorDatabaseChunkingParametersArgsDict',
     'WorkloadRuntimeArgs',
     'WorkloadRuntimeArgsDict',
-    'WorkloadRuntimeAutoscalingArgs',
-    'WorkloadRuntimeAutoscalingArgsDict',
-    'WorkloadRuntimeAutoscalingPolicyArgs',
-    'WorkloadRuntimeAutoscalingPolicyArgsDict',
-    'WorkloadRuntimeResourceArgs',
-    'WorkloadRuntimeResourceArgsDict',
+    'WorkloadRuntimeContainerGroupArgs',
+    'WorkloadRuntimeContainerGroupArgsDict',
+    'WorkloadRuntimeContainerGroupAutoscalingArgs',
+    'WorkloadRuntimeContainerGroupAutoscalingArgsDict',
+    'WorkloadRuntimeContainerGroupAutoscalingPolicyArgs',
+    'WorkloadRuntimeContainerGroupAutoscalingPolicyArgsDict',
+    'WorkloadRuntimeContainerGroupContainerArgs',
+    'WorkloadRuntimeContainerGroupContainerArgsDict',
+    'WorkloadRuntimeContainerGroupContainerResourceAllocationArgs',
+    'WorkloadRuntimeContainerGroupContainerResourceAllocationArgsDict',
 ]
 
 MYPY = False
@@ -624,10 +626,6 @@ if not MYPY:
         """
         Docker image URI.
         """
-        resource_request: pulumi.Input['ArtifactSpecContainerGroupContainerResourceRequestArgsDict']
-        """
-        Resource requirements for the container.
-        """
         description: NotRequired[pulumi.Input[builtins.str]]
         """
         Description of the container.
@@ -671,7 +669,6 @@ elif False:
 class ArtifactSpecContainerGroupContainerArgs:
     def __init__(__self__, *,
                  image_uri: pulumi.Input[builtins.str],
-                 resource_request: pulumi.Input['ArtifactSpecContainerGroupContainerResourceRequestArgs'],
                  description: Optional[pulumi.Input[builtins.str]] = None,
                  entrypoints: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.str]]]] = None,
                  environment_vars: Optional[pulumi.Input[Sequence[pulumi.Input['ArtifactSpecContainerGroupContainerEnvironmentVarArgs']]]] = None,
@@ -683,7 +680,6 @@ class ArtifactSpecContainerGroupContainerArgs:
                  startup_probe: Optional[pulumi.Input['ArtifactSpecContainerGroupContainerStartupProbeArgs']] = None):
         """
         :param pulumi.Input[builtins.str] image_uri: Docker image URI.
-        :param pulumi.Input['ArtifactSpecContainerGroupContainerResourceRequestArgs'] resource_request: Resource requirements for the container.
         :param pulumi.Input[builtins.str] description: Description of the container.
         :param pulumi.Input[Sequence[pulumi.Input[builtins.str]]] entrypoints: Container entrypoint.
         :param pulumi.Input[Sequence[pulumi.Input['ArtifactSpecContainerGroupContainerEnvironmentVarArgs']]] environment_vars: Environment variables for the container.
@@ -695,7 +691,6 @@ class ArtifactSpecContainerGroupContainerArgs:
         :param pulumi.Input['ArtifactSpecContainerGroupContainerStartupProbeArgs'] startup_probe: Container startup check configuration.
         """
         pulumi.set(__self__, "image_uri", image_uri)
-        pulumi.set(__self__, "resource_request", resource_request)
         if description is not None:
             pulumi.set(__self__, "description", description)
         if entrypoints is not None:
@@ -726,18 +721,6 @@ class ArtifactSpecContainerGroupContainerArgs:
     @image_uri.setter
     def image_uri(self, value: pulumi.Input[builtins.str]):
         pulumi.set(self, "image_uri", value)
-
-    @property
-    @pulumi.getter(name="resourceRequest")
-    def resource_request(self) -> pulumi.Input['ArtifactSpecContainerGroupContainerResourceRequestArgs']:
-        """
-        Resource requirements for the container.
-        """
-        return pulumi.get(self, "resource_request")
-
-    @resource_request.setter
-    def resource_request(self, value: pulumi.Input['ArtifactSpecContainerGroupContainerResourceRequestArgs']):
-        pulumi.set(self, "resource_request", value)
 
     @property
     @pulumi.getter
@@ -1238,96 +1221,6 @@ class ArtifactSpecContainerGroupContainerReadinessProbeArgs:
     @timeout_seconds.setter
     def timeout_seconds(self, value: Optional[pulumi.Input[builtins.int]]):
         pulumi.set(self, "timeout_seconds", value)
-
-
-if not MYPY:
-    class ArtifactSpecContainerGroupContainerResourceRequestArgsDict(TypedDict):
-        cpu: pulumi.Input[builtins.int]
-        """
-        Number of CPU cores required.
-        """
-        memory: pulumi.Input[builtins.int]
-        """
-        Memory required in bytes.
-        """
-        gpu: NotRequired[pulumi.Input[builtins.int]]
-        """
-        Number of GPUs required.
-        """
-        gpu_type: NotRequired[pulumi.Input[builtins.str]]
-        """
-        GPU type required (e.g., NVIDIA-A100).
-        """
-elif False:
-    ArtifactSpecContainerGroupContainerResourceRequestArgsDict: TypeAlias = Mapping[str, Any]
-
-@pulumi.input_type
-class ArtifactSpecContainerGroupContainerResourceRequestArgs:
-    def __init__(__self__, *,
-                 cpu: pulumi.Input[builtins.int],
-                 memory: pulumi.Input[builtins.int],
-                 gpu: Optional[pulumi.Input[builtins.int]] = None,
-                 gpu_type: Optional[pulumi.Input[builtins.str]] = None):
-        """
-        :param pulumi.Input[builtins.int] cpu: Number of CPU cores required.
-        :param pulumi.Input[builtins.int] memory: Memory required in bytes.
-        :param pulumi.Input[builtins.int] gpu: Number of GPUs required.
-        :param pulumi.Input[builtins.str] gpu_type: GPU type required (e.g., NVIDIA-A100).
-        """
-        pulumi.set(__self__, "cpu", cpu)
-        pulumi.set(__self__, "memory", memory)
-        if gpu is not None:
-            pulumi.set(__self__, "gpu", gpu)
-        if gpu_type is not None:
-            pulumi.set(__self__, "gpu_type", gpu_type)
-
-    @property
-    @pulumi.getter
-    def cpu(self) -> pulumi.Input[builtins.int]:
-        """
-        Number of CPU cores required.
-        """
-        return pulumi.get(self, "cpu")
-
-    @cpu.setter
-    def cpu(self, value: pulumi.Input[builtins.int]):
-        pulumi.set(self, "cpu", value)
-
-    @property
-    @pulumi.getter
-    def memory(self) -> pulumi.Input[builtins.int]:
-        """
-        Memory required in bytes.
-        """
-        return pulumi.get(self, "memory")
-
-    @memory.setter
-    def memory(self, value: pulumi.Input[builtins.int]):
-        pulumi.set(self, "memory", value)
-
-    @property
-    @pulumi.getter
-    def gpu(self) -> Optional[pulumi.Input[builtins.int]]:
-        """
-        Number of GPUs required.
-        """
-        return pulumi.get(self, "gpu")
-
-    @gpu.setter
-    def gpu(self, value: Optional[pulumi.Input[builtins.int]]):
-        pulumi.set(self, "gpu", value)
-
-    @property
-    @pulumi.getter(name="gpuType")
-    def gpu_type(self) -> Optional[pulumi.Input[builtins.str]]:
-        """
-        GPU type required (e.g., NVIDIA-A100).
-        """
-        return pulumi.get(self, "gpu_type")
-
-    @gpu_type.setter
-    def gpu_type(self, value: Optional[pulumi.Input[builtins.str]]):
-        pulumi.set(self, "gpu_type", value)
 
 
 if not MYPY:
@@ -7445,17 +7338,9 @@ class VectorDatabaseChunkingParametersArgs:
 
 if not MYPY:
     class WorkloadRuntimeArgsDict(TypedDict):
-        autoscaling: NotRequired[pulumi.Input['WorkloadRuntimeAutoscalingArgsDict']]
+        container_groups: NotRequired[pulumi.Input[Sequence[pulumi.Input['WorkloadRuntimeContainerGroupArgsDict']]]]
         """
-        Autoscaling configuration. When set, takes precedence over replica_count.
-        """
-        replica_count: NotRequired[pulumi.Input[builtins.int]]
-        """
-        Number of replicas to run. Cannot be used together with `autoscaling`. Omitting this field retains the current value. Set to `0` to explicitly clear it (e.g. when switching to autoscaling).
-        """
-        resources: NotRequired[pulumi.Input[Sequence[pulumi.Input['WorkloadRuntimeResourceArgsDict']]]]
-        """
-        Resource bundles assigned to the Workload. When empty the server infers an appropriate bundle.
+        Per-group runtime configuration.
         """
 elif False:
     WorkloadRuntimeArgsDict: TypeAlias = Mapping[str, Any]
@@ -7463,38 +7348,138 @@ elif False:
 @pulumi.input_type
 class WorkloadRuntimeArgs:
     def __init__(__self__, *,
-                 autoscaling: Optional[pulumi.Input['WorkloadRuntimeAutoscalingArgs']] = None,
-                 replica_count: Optional[pulumi.Input[builtins.int]] = None,
-                 resources: Optional[pulumi.Input[Sequence[pulumi.Input['WorkloadRuntimeResourceArgs']]]] = None):
+                 container_groups: Optional[pulumi.Input[Sequence[pulumi.Input['WorkloadRuntimeContainerGroupArgs']]]] = None):
         """
-        :param pulumi.Input['WorkloadRuntimeAutoscalingArgs'] autoscaling: Autoscaling configuration. When set, takes precedence over replica_count.
-        :param pulumi.Input[builtins.int] replica_count: Number of replicas to run. Cannot be used together with `autoscaling`. Omitting this field retains the current value. Set to `0` to explicitly clear it (e.g. when switching to autoscaling).
-        :param pulumi.Input[Sequence[pulumi.Input['WorkloadRuntimeResourceArgs']]] resources: Resource bundles assigned to the Workload. When empty the server infers an appropriate bundle.
+        :param pulumi.Input[Sequence[pulumi.Input['WorkloadRuntimeContainerGroupArgs']]] container_groups: Per-group runtime configuration.
+        """
+        if container_groups is not None:
+            pulumi.set(__self__, "container_groups", container_groups)
+
+    @property
+    @pulumi.getter(name="containerGroups")
+    def container_groups(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['WorkloadRuntimeContainerGroupArgs']]]]:
+        """
+        Per-group runtime configuration.
+        """
+        return pulumi.get(self, "container_groups")
+
+    @container_groups.setter
+    def container_groups(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['WorkloadRuntimeContainerGroupArgs']]]]):
+        pulumi.set(self, "container_groups", value)
+
+
+if not MYPY:
+    class WorkloadRuntimeContainerGroupArgsDict(TypedDict):
+        autoscaling: NotRequired[pulumi.Input['WorkloadRuntimeContainerGroupAutoscalingArgsDict']]
+        """
+        Autoscaling configuration. When set, takes precedence over `replica_count`.
+        """
+        bundle_selection_policy: NotRequired[pulumi.Input[builtins.str]]
+        """
+        How to select among `resource_bundles`. Defaults to `availability`.
+        """
+        containers: NotRequired[pulumi.Input[Sequence[pulumi.Input['WorkloadRuntimeContainerGroupContainerArgsDict']]]]
+        """
+        Per-container resource allocation overrides.
+        """
+        name: NotRequired[pulumi.Input[builtins.str]]
+        """
+        Container group name (server-assigned, always `default`).
+        """
+        replica_count: NotRequired[pulumi.Input[builtins.int]]
+        """
+        Number of replicas. Cannot be set alongside `autoscaling.enabled=true`. Set to `0` to explicitly clear it.
+        """
+        resource_bundles: NotRequired[pulumi.Input[Sequence[pulumi.Input[builtins.str]]]]
+        """
+        Ordered list of resource bundle IDs. One is selected at scheduling time.
+        """
+elif False:
+    WorkloadRuntimeContainerGroupArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class WorkloadRuntimeContainerGroupArgs:
+    def __init__(__self__, *,
+                 autoscaling: Optional[pulumi.Input['WorkloadRuntimeContainerGroupAutoscalingArgs']] = None,
+                 bundle_selection_policy: Optional[pulumi.Input[builtins.str]] = None,
+                 containers: Optional[pulumi.Input[Sequence[pulumi.Input['WorkloadRuntimeContainerGroupContainerArgs']]]] = None,
+                 name: Optional[pulumi.Input[builtins.str]] = None,
+                 replica_count: Optional[pulumi.Input[builtins.int]] = None,
+                 resource_bundles: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.str]]]] = None):
+        """
+        :param pulumi.Input['WorkloadRuntimeContainerGroupAutoscalingArgs'] autoscaling: Autoscaling configuration. When set, takes precedence over `replica_count`.
+        :param pulumi.Input[builtins.str] bundle_selection_policy: How to select among `resource_bundles`. Defaults to `availability`.
+        :param pulumi.Input[Sequence[pulumi.Input['WorkloadRuntimeContainerGroupContainerArgs']]] containers: Per-container resource allocation overrides.
+        :param pulumi.Input[builtins.str] name: Container group name (server-assigned, always `default`).
+        :param pulumi.Input[builtins.int] replica_count: Number of replicas. Cannot be set alongside `autoscaling.enabled=true`. Set to `0` to explicitly clear it.
+        :param pulumi.Input[Sequence[pulumi.Input[builtins.str]]] resource_bundles: Ordered list of resource bundle IDs. One is selected at scheduling time.
         """
         if autoscaling is not None:
             pulumi.set(__self__, "autoscaling", autoscaling)
+        if bundle_selection_policy is not None:
+            pulumi.set(__self__, "bundle_selection_policy", bundle_selection_policy)
+        if containers is not None:
+            pulumi.set(__self__, "containers", containers)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
         if replica_count is not None:
             pulumi.set(__self__, "replica_count", replica_count)
-        if resources is not None:
-            pulumi.set(__self__, "resources", resources)
+        if resource_bundles is not None:
+            pulumi.set(__self__, "resource_bundles", resource_bundles)
 
     @property
     @pulumi.getter
-    def autoscaling(self) -> Optional[pulumi.Input['WorkloadRuntimeAutoscalingArgs']]:
+    def autoscaling(self) -> Optional[pulumi.Input['WorkloadRuntimeContainerGroupAutoscalingArgs']]:
         """
-        Autoscaling configuration. When set, takes precedence over replica_count.
+        Autoscaling configuration. When set, takes precedence over `replica_count`.
         """
         return pulumi.get(self, "autoscaling")
 
     @autoscaling.setter
-    def autoscaling(self, value: Optional[pulumi.Input['WorkloadRuntimeAutoscalingArgs']]):
+    def autoscaling(self, value: Optional[pulumi.Input['WorkloadRuntimeContainerGroupAutoscalingArgs']]):
         pulumi.set(self, "autoscaling", value)
+
+    @property
+    @pulumi.getter(name="bundleSelectionPolicy")
+    def bundle_selection_policy(self) -> Optional[pulumi.Input[builtins.str]]:
+        """
+        How to select among `resource_bundles`. Defaults to `availability`.
+        """
+        return pulumi.get(self, "bundle_selection_policy")
+
+    @bundle_selection_policy.setter
+    def bundle_selection_policy(self, value: Optional[pulumi.Input[builtins.str]]):
+        pulumi.set(self, "bundle_selection_policy", value)
+
+    @property
+    @pulumi.getter
+    def containers(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['WorkloadRuntimeContainerGroupContainerArgs']]]]:
+        """
+        Per-container resource allocation overrides.
+        """
+        return pulumi.get(self, "containers")
+
+    @containers.setter
+    def containers(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['WorkloadRuntimeContainerGroupContainerArgs']]]]):
+        pulumi.set(self, "containers", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[builtins.str]]:
+        """
+        Container group name (server-assigned, always `default`).
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[builtins.str]]):
+        pulumi.set(self, "name", value)
 
     @property
     @pulumi.getter(name="replicaCount")
     def replica_count(self) -> Optional[pulumi.Input[builtins.int]]:
         """
-        Number of replicas to run. Cannot be used together with `autoscaling`. Omitting this field retains the current value. Set to `0` to explicitly clear it (e.g. when switching to autoscaling).
+        Number of replicas. Cannot be set alongside `autoscaling.enabled=true`. Set to `0` to explicitly clear it.
         """
         return pulumi.get(self, "replica_count")
 
@@ -7503,21 +7488,21 @@ class WorkloadRuntimeArgs:
         pulumi.set(self, "replica_count", value)
 
     @property
-    @pulumi.getter
-    def resources(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['WorkloadRuntimeResourceArgs']]]]:
+    @pulumi.getter(name="resourceBundles")
+    def resource_bundles(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[builtins.str]]]]:
         """
-        Resource bundles assigned to the Workload. When empty the server infers an appropriate bundle.
+        Ordered list of resource bundle IDs. One is selected at scheduling time.
         """
-        return pulumi.get(self, "resources")
+        return pulumi.get(self, "resource_bundles")
 
-    @resources.setter
-    def resources(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['WorkloadRuntimeResourceArgs']]]]):
-        pulumi.set(self, "resources", value)
+    @resource_bundles.setter
+    def resource_bundles(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.str]]]]):
+        pulumi.set(self, "resource_bundles", value)
 
 
 if not MYPY:
-    class WorkloadRuntimeAutoscalingArgsDict(TypedDict):
-        policies: pulumi.Input[Sequence[pulumi.Input['WorkloadRuntimeAutoscalingPolicyArgsDict']]]
+    class WorkloadRuntimeContainerGroupAutoscalingArgsDict(TypedDict):
+        policies: pulumi.Input[Sequence[pulumi.Input['WorkloadRuntimeContainerGroupAutoscalingPolicyArgsDict']]]
         """
         Scaling policies that define when and how to scale.
         """
@@ -7526,15 +7511,15 @@ if not MYPY:
         Whether autoscaling is enabled. Defaults to true.
         """
 elif False:
-    WorkloadRuntimeAutoscalingArgsDict: TypeAlias = Mapping[str, Any]
+    WorkloadRuntimeContainerGroupAutoscalingArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
-class WorkloadRuntimeAutoscalingArgs:
+class WorkloadRuntimeContainerGroupAutoscalingArgs:
     def __init__(__self__, *,
-                 policies: pulumi.Input[Sequence[pulumi.Input['WorkloadRuntimeAutoscalingPolicyArgs']]],
+                 policies: pulumi.Input[Sequence[pulumi.Input['WorkloadRuntimeContainerGroupAutoscalingPolicyArgs']]],
                  enabled: Optional[pulumi.Input[builtins.bool]] = None):
         """
-        :param pulumi.Input[Sequence[pulumi.Input['WorkloadRuntimeAutoscalingPolicyArgs']]] policies: Scaling policies that define when and how to scale.
+        :param pulumi.Input[Sequence[pulumi.Input['WorkloadRuntimeContainerGroupAutoscalingPolicyArgs']]] policies: Scaling policies that define when and how to scale.
         :param pulumi.Input[builtins.bool] enabled: Whether autoscaling is enabled. Defaults to true.
         """
         pulumi.set(__self__, "policies", policies)
@@ -7543,14 +7528,14 @@ class WorkloadRuntimeAutoscalingArgs:
 
     @property
     @pulumi.getter
-    def policies(self) -> pulumi.Input[Sequence[pulumi.Input['WorkloadRuntimeAutoscalingPolicyArgs']]]:
+    def policies(self) -> pulumi.Input[Sequence[pulumi.Input['WorkloadRuntimeContainerGroupAutoscalingPolicyArgs']]]:
         """
         Scaling policies that define when and how to scale.
         """
         return pulumi.get(self, "policies")
 
     @policies.setter
-    def policies(self, value: pulumi.Input[Sequence[pulumi.Input['WorkloadRuntimeAutoscalingPolicyArgs']]]):
+    def policies(self, value: pulumi.Input[Sequence[pulumi.Input['WorkloadRuntimeContainerGroupAutoscalingPolicyArgs']]]):
         pulumi.set(self, "policies", value)
 
     @property
@@ -7567,7 +7552,7 @@ class WorkloadRuntimeAutoscalingArgs:
 
 
 if not MYPY:
-    class WorkloadRuntimeAutoscalingPolicyArgsDict(TypedDict):
+    class WorkloadRuntimeContainerGroupAutoscalingPolicyArgsDict(TypedDict):
         max_count: pulumi.Input[builtins.int]
         """
         Maximum number of replicas.
@@ -7589,10 +7574,10 @@ if not MYPY:
         Policy priority when multiple policies are defined.
         """
 elif False:
-    WorkloadRuntimeAutoscalingPolicyArgsDict: TypeAlias = Mapping[str, Any]
+    WorkloadRuntimeContainerGroupAutoscalingPolicyArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
-class WorkloadRuntimeAutoscalingPolicyArgs:
+class WorkloadRuntimeContainerGroupAutoscalingPolicyArgs:
     def __init__(__self__, *,
                  max_count: pulumi.Input[builtins.int],
                  min_count: pulumi.Input[builtins.int],
@@ -7675,33 +7660,145 @@ class WorkloadRuntimeAutoscalingPolicyArgs:
 
 
 if not MYPY:
-    class WorkloadRuntimeResourceArgsDict(TypedDict):
-        resource_bundle_id: pulumi.Input[builtins.str]
+    class WorkloadRuntimeContainerGroupContainerArgsDict(TypedDict):
+        name: pulumi.Input[builtins.str]
         """
-        ID of the resource bundle (e.g. `cpu.nano`).
+        Container name. Must match a container declared in the artifact group.
+        """
+        resource_allocation: NotRequired[pulumi.Input['WorkloadRuntimeContainerGroupContainerResourceAllocationArgsDict']]
+        """
+        Resource allocation for this container.
         """
 elif False:
-    WorkloadRuntimeResourceArgsDict: TypeAlias = Mapping[str, Any]
+    WorkloadRuntimeContainerGroupContainerArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
-class WorkloadRuntimeResourceArgs:
+class WorkloadRuntimeContainerGroupContainerArgs:
     def __init__(__self__, *,
-                 resource_bundle_id: pulumi.Input[builtins.str]):
+                 name: pulumi.Input[builtins.str],
+                 resource_allocation: Optional[pulumi.Input['WorkloadRuntimeContainerGroupContainerResourceAllocationArgs']] = None):
         """
-        :param pulumi.Input[builtins.str] resource_bundle_id: ID of the resource bundle (e.g. `cpu.nano`).
+        :param pulumi.Input[builtins.str] name: Container name. Must match a container declared in the artifact group.
+        :param pulumi.Input['WorkloadRuntimeContainerGroupContainerResourceAllocationArgs'] resource_allocation: Resource allocation for this container.
         """
-        pulumi.set(__self__, "resource_bundle_id", resource_bundle_id)
+        pulumi.set(__self__, "name", name)
+        if resource_allocation is not None:
+            pulumi.set(__self__, "resource_allocation", resource_allocation)
 
     @property
-    @pulumi.getter(name="resourceBundleId")
-    def resource_bundle_id(self) -> pulumi.Input[builtins.str]:
+    @pulumi.getter
+    def name(self) -> pulumi.Input[builtins.str]:
         """
-        ID of the resource bundle (e.g. `cpu.nano`).
+        Container name. Must match a container declared in the artifact group.
         """
-        return pulumi.get(self, "resource_bundle_id")
+        return pulumi.get(self, "name")
 
-    @resource_bundle_id.setter
-    def resource_bundle_id(self, value: pulumi.Input[builtins.str]):
-        pulumi.set(self, "resource_bundle_id", value)
+    @name.setter
+    def name(self, value: pulumi.Input[builtins.str]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter(name="resourceAllocation")
+    def resource_allocation(self) -> Optional[pulumi.Input['WorkloadRuntimeContainerGroupContainerResourceAllocationArgs']]:
+        """
+        Resource allocation for this container.
+        """
+        return pulumi.get(self, "resource_allocation")
+
+    @resource_allocation.setter
+    def resource_allocation(self, value: Optional[pulumi.Input['WorkloadRuntimeContainerGroupContainerResourceAllocationArgs']]):
+        pulumi.set(self, "resource_allocation", value)
+
+
+if not MYPY:
+    class WorkloadRuntimeContainerGroupContainerResourceAllocationArgsDict(TypedDict):
+        cpu: NotRequired[pulumi.Input[builtins.float]]
+        """
+        CPU cores allocated to this container.
+        """
+        gpu: NotRequired[pulumi.Input[builtins.float]]
+        """
+        GPUs allocated to this container.
+        """
+        gpu_memory: NotRequired[pulumi.Input[builtins.int]]
+        """
+        GPU VRAM allocated in bytes.
+        """
+        memory: NotRequired[pulumi.Input[builtins.int]]
+        """
+        RAM allocated in bytes.
+        """
+elif False:
+    WorkloadRuntimeContainerGroupContainerResourceAllocationArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class WorkloadRuntimeContainerGroupContainerResourceAllocationArgs:
+    def __init__(__self__, *,
+                 cpu: Optional[pulumi.Input[builtins.float]] = None,
+                 gpu: Optional[pulumi.Input[builtins.float]] = None,
+                 gpu_memory: Optional[pulumi.Input[builtins.int]] = None,
+                 memory: Optional[pulumi.Input[builtins.int]] = None):
+        """
+        :param pulumi.Input[builtins.float] cpu: CPU cores allocated to this container.
+        :param pulumi.Input[builtins.float] gpu: GPUs allocated to this container.
+        :param pulumi.Input[builtins.int] gpu_memory: GPU VRAM allocated in bytes.
+        :param pulumi.Input[builtins.int] memory: RAM allocated in bytes.
+        """
+        if cpu is not None:
+            pulumi.set(__self__, "cpu", cpu)
+        if gpu is not None:
+            pulumi.set(__self__, "gpu", gpu)
+        if gpu_memory is not None:
+            pulumi.set(__self__, "gpu_memory", gpu_memory)
+        if memory is not None:
+            pulumi.set(__self__, "memory", memory)
+
+    @property
+    @pulumi.getter
+    def cpu(self) -> Optional[pulumi.Input[builtins.float]]:
+        """
+        CPU cores allocated to this container.
+        """
+        return pulumi.get(self, "cpu")
+
+    @cpu.setter
+    def cpu(self, value: Optional[pulumi.Input[builtins.float]]):
+        pulumi.set(self, "cpu", value)
+
+    @property
+    @pulumi.getter
+    def gpu(self) -> Optional[pulumi.Input[builtins.float]]:
+        """
+        GPUs allocated to this container.
+        """
+        return pulumi.get(self, "gpu")
+
+    @gpu.setter
+    def gpu(self, value: Optional[pulumi.Input[builtins.float]]):
+        pulumi.set(self, "gpu", value)
+
+    @property
+    @pulumi.getter(name="gpuMemory")
+    def gpu_memory(self) -> Optional[pulumi.Input[builtins.int]]:
+        """
+        GPU VRAM allocated in bytes.
+        """
+        return pulumi.get(self, "gpu_memory")
+
+    @gpu_memory.setter
+    def gpu_memory(self, value: Optional[pulumi.Input[builtins.int]]):
+        pulumi.set(self, "gpu_memory", value)
+
+    @property
+    @pulumi.getter
+    def memory(self) -> Optional[pulumi.Input[builtins.int]]:
+        """
+        RAM allocated in bytes.
+        """
+        return pulumi.get(self, "memory")
+
+    @memory.setter
+    def memory(self, value: Optional[pulumi.Input[builtins.int]]):
+        pulumi.set(self, "memory", value)
 
 

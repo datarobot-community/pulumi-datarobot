@@ -13,28 +13,16 @@ namespace DataRobotPulumi.Datarobot.Inputs
 
     public sealed class WorkloadRuntimeGetArgs : global::Pulumi.ResourceArgs
     {
-        /// <summary>
-        /// Autoscaling configuration. When set, takes precedence over replica_count.
-        /// </summary>
-        [Input("autoscaling")]
-        public Input<Inputs.WorkloadRuntimeAutoscalingGetArgs>? Autoscaling { get; set; }
+        [Input("containerGroups")]
+        private InputList<Inputs.WorkloadRuntimeContainerGroupGetArgs>? _containerGroups;
 
         /// <summary>
-        /// Number of replicas to run. Cannot be used together with `autoscaling`. Omitting this field retains the current value. Set to `0` to explicitly clear it (e.g. when switching to autoscaling).
+        /// Per-group runtime configuration.
         /// </summary>
-        [Input("replicaCount")]
-        public Input<int>? ReplicaCount { get; set; }
-
-        [Input("resources")]
-        private InputList<Inputs.WorkloadRuntimeResourceGetArgs>? _resources;
-
-        /// <summary>
-        /// Resource bundles assigned to the Workload. When empty the server infers an appropriate bundle.
-        /// </summary>
-        public InputList<Inputs.WorkloadRuntimeResourceGetArgs> Resources
+        public InputList<Inputs.WorkloadRuntimeContainerGroupGetArgs> ContainerGroups
         {
-            get => _resources ?? (_resources = new InputList<Inputs.WorkloadRuntimeResourceGetArgs>());
-            set => _resources = value;
+            get => _containerGroups ?? (_containerGroups = new InputList<Inputs.WorkloadRuntimeContainerGroupGetArgs>());
+            set => _containerGroups = value;
         }
 
         public WorkloadRuntimeGetArgs()

@@ -8,44 +8,50 @@ using System.Threading.Tasks;
 using Pulumi.Serialization;
 using Pulumi;
 
-namespace DataRobotPulumi.Datarobot.Inputs
+namespace DataRobotPulumi.Datarobot.Outputs
 {
 
-    public sealed class WorkloadRuntimeAutoscalingPolicyArgs : global::Pulumi.ResourceArgs
+    [OutputType]
+    public sealed class WorkloadRuntimeContainerGroupAutoscalingPolicy
     {
         /// <summary>
         /// Maximum number of replicas.
         /// </summary>
-        [Input("maxCount", required: true)]
-        public Input<int> MaxCount { get; set; } = null!;
-
+        public readonly int MaxCount;
         /// <summary>
         /// Minimum number of replicas.
         /// </summary>
-        [Input("minCount", required: true)]
-        public Input<int> MinCount { get; set; } = null!;
-
+        public readonly int MinCount;
         /// <summary>
         /// Policy priority when multiple policies are defined.
         /// </summary>
-        [Input("priority")]
-        public Input<int>? Priority { get; set; }
-
+        public readonly int? Priority;
         /// <summary>
         /// Metric used for scaling decisions: `cpuAverageUtilization`, `httpRequestsConcurrency`, `gpuCacheUtilization`, or `gpuRequestQueueDepth`.
         /// </summary>
-        [Input("scalingMetric", required: true)]
-        public Input<string> ScalingMetric { get; set; } = null!;
-
+        public readonly string ScalingMetric;
         /// <summary>
         /// Target value for the scaling metric.
         /// </summary>
-        [Input("target", required: true)]
-        public Input<double> Target { get; set; } = null!;
+        public readonly double Target;
 
-        public WorkloadRuntimeAutoscalingPolicyArgs()
+        [OutputConstructor]
+        private WorkloadRuntimeContainerGroupAutoscalingPolicy(
+            int maxCount,
+
+            int minCount,
+
+            int? priority,
+
+            string scalingMetric,
+
+            double target)
         {
+            MaxCount = maxCount;
+            MinCount = minCount;
+            Priority = priority;
+            ScalingMetric = scalingMetric;
+            Target = target;
         }
-        public static new WorkloadRuntimeAutoscalingPolicyArgs Empty => new WorkloadRuntimeAutoscalingPolicyArgs();
     }
 }

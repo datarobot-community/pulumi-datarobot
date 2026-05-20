@@ -11,7 +11,7 @@ using Pulumi;
 namespace DataRobotPulumi.Datarobot.Inputs
 {
 
-    public sealed class WorkloadRuntimeAutoscalingGetArgs : global::Pulumi.ResourceArgs
+    public sealed class WorkloadRuntimeContainerGroupAutoscalingArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether autoscaling is enabled. Defaults to true.
@@ -20,20 +20,20 @@ namespace DataRobotPulumi.Datarobot.Inputs
         public Input<bool>? Enabled { get; set; }
 
         [Input("policies", required: true)]
-        private InputList<Inputs.WorkloadRuntimeAutoscalingPolicyGetArgs>? _policies;
+        private InputList<Inputs.WorkloadRuntimeContainerGroupAutoscalingPolicyArgs>? _policies;
 
         /// <summary>
         /// Scaling policies that define when and how to scale.
         /// </summary>
-        public InputList<Inputs.WorkloadRuntimeAutoscalingPolicyGetArgs> Policies
+        public InputList<Inputs.WorkloadRuntimeContainerGroupAutoscalingPolicyArgs> Policies
         {
-            get => _policies ?? (_policies = new InputList<Inputs.WorkloadRuntimeAutoscalingPolicyGetArgs>());
+            get => _policies ?? (_policies = new InputList<Inputs.WorkloadRuntimeContainerGroupAutoscalingPolicyArgs>());
             set => _policies = value;
         }
 
-        public WorkloadRuntimeAutoscalingGetArgs()
+        public WorkloadRuntimeContainerGroupAutoscalingArgs()
         {
         }
-        public static new WorkloadRuntimeAutoscalingGetArgs Empty => new WorkloadRuntimeAutoscalingGetArgs();
+        public static new WorkloadRuntimeContainerGroupAutoscalingArgs Empty => new WorkloadRuntimeContainerGroupAutoscalingArgs();
     }
 }

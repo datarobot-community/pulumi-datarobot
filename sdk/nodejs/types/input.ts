@@ -133,10 +133,6 @@ export interface ArtifactSpecContainerGroupContainer {
      */
     readinessProbe?: pulumi.Input<inputs.ArtifactSpecContainerGroupContainerReadinessProbe>;
     /**
-     * Resource requirements for the container.
-     */
-    resourceRequest: pulumi.Input<inputs.ArtifactSpecContainerGroupContainerResourceRequest>;
-    /**
      * Container startup check configuration.
      */
     startupProbe?: pulumi.Input<inputs.ArtifactSpecContainerGroupContainerStartupProbe>;
@@ -221,25 +217,6 @@ export interface ArtifactSpecContainerGroupContainerReadinessProbe {
      * Number of seconds after which the probe times out.
      */
     timeoutSeconds?: pulumi.Input<number>;
-}
-
-export interface ArtifactSpecContainerGroupContainerResourceRequest {
-    /**
-     * Number of CPU cores required.
-     */
-    cpu: pulumi.Input<number>;
-    /**
-     * Number of GPUs required.
-     */
-    gpu?: pulumi.Input<number>;
-    /**
-     * GPU type required (e.g., NVIDIA-A100).
-     */
-    gpuType?: pulumi.Input<string>;
-    /**
-     * Memory required in bytes.
-     */
-    memory: pulumi.Input<number>;
 }
 
 export interface ArtifactSpecContainerGroupContainerStartupProbe {
@@ -1528,20 +1505,39 @@ export interface VectorDatabaseChunkingParameters {
 
 export interface WorkloadRuntime {
     /**
-     * Autoscaling configuration. When set, takes precedence over replica_count.
+     * Per-group runtime configuration.
      */
-    autoscaling?: pulumi.Input<inputs.WorkloadRuntimeAutoscaling>;
+    containerGroups?: pulumi.Input<pulumi.Input<inputs.WorkloadRuntimeContainerGroup>[]>;
+}
+
+export interface WorkloadRuntimeContainerGroup {
     /**
-     * Number of replicas to run. Cannot be used together with `autoscaling`. Omitting this field retains the current value. Set to `0` to explicitly clear it (e.g. when switching to autoscaling).
+     * Autoscaling configuration. When set, takes precedence over `replicaCount`.
+     */
+    autoscaling?: pulumi.Input<inputs.WorkloadRuntimeContainerGroupAutoscaling>;
+    /**
+     * How to select among `resourceBundles`. Defaults to `availability`.
+     */
+    bundleSelectionPolicy?: pulumi.Input<string>;
+    /**
+     * Per-container resource allocation overrides.
+     */
+    containers?: pulumi.Input<pulumi.Input<inputs.WorkloadRuntimeContainerGroupContainer>[]>;
+    /**
+     * Container group name (server-assigned, always `default`).
+     */
+    name?: pulumi.Input<string>;
+    /**
+     * Number of replicas. Cannot be set alongside `autoscaling.enabled=true`. Set to `0` to explicitly clear it.
      */
     replicaCount?: pulumi.Input<number>;
     /**
-     * Resource bundles assigned to the Workload. When empty the server infers an appropriate bundle.
+     * Ordered list of resource bundle IDs. One is selected at scheduling time.
      */
-    resources?: pulumi.Input<pulumi.Input<inputs.WorkloadRuntimeResource>[]>;
+    resourceBundles?: pulumi.Input<pulumi.Input<string>[]>;
 }
 
-export interface WorkloadRuntimeAutoscaling {
+export interface WorkloadRuntimeContainerGroupAutoscaling {
     /**
      * Whether autoscaling is enabled. Defaults to true.
      */
@@ -1549,10 +1545,10 @@ export interface WorkloadRuntimeAutoscaling {
     /**
      * Scaling policies that define when and how to scale.
      */
-    policies: pulumi.Input<pulumi.Input<inputs.WorkloadRuntimeAutoscalingPolicy>[]>;
+    policies: pulumi.Input<pulumi.Input<inputs.WorkloadRuntimeContainerGroupAutoscalingPolicy>[]>;
 }
 
-export interface WorkloadRuntimeAutoscalingPolicy {
+export interface WorkloadRuntimeContainerGroupAutoscalingPolicy {
     /**
      * Maximum number of replicas.
      */
@@ -1575,9 +1571,32 @@ export interface WorkloadRuntimeAutoscalingPolicy {
     target: pulumi.Input<number>;
 }
 
-export interface WorkloadRuntimeResource {
+export interface WorkloadRuntimeContainerGroupContainer {
     /**
-     * ID of the resource bundle (e.g. `cpu.nano`).
+     * Container name. Must match a container declared in the artifact group.
      */
-    resourceBundleId: pulumi.Input<string>;
+    name: pulumi.Input<string>;
+    /**
+     * Resource allocation for this container.
+     */
+    resourceAllocation?: pulumi.Input<inputs.WorkloadRuntimeContainerGroupContainerResourceAllocation>;
+}
+
+export interface WorkloadRuntimeContainerGroupContainerResourceAllocation {
+    /**
+     * CPU cores allocated to this container.
+     */
+    cpu?: pulumi.Input<number>;
+    /**
+     * GPUs allocated to this container.
+     */
+    gpu?: pulumi.Input<number>;
+    /**
+     * GPU VRAM allocated in bytes.
+     */
+    gpuMemory?: pulumi.Input<number>;
+    /**
+     * RAM allocated in bytes.
+     */
+    memory?: pulumi.Input<number>;
 }
