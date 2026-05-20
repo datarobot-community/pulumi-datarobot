@@ -11,7 +11,7 @@ using Pulumi;
 namespace DataRobotPulumi.Datarobot.Inputs
 {
 
-    public sealed class WorkloadRuntimeAutoscalingPolicyGetArgs : global::Pulumi.ResourceArgs
+    public sealed class WorkloadRuntimeContainerGroupAutoscalingPolicyGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Maximum number of replicas.
@@ -43,9 +43,9 @@ namespace DataRobotPulumi.Datarobot.Inputs
         [Input("target", required: true)]
         public Input<double> Target { get; set; } = null!;
 
-        public WorkloadRuntimeAutoscalingPolicyGetArgs()
+        public WorkloadRuntimeContainerGroupAutoscalingPolicyGetArgs()
         {
         }
-        public static new WorkloadRuntimeAutoscalingPolicyGetArgs Empty => new WorkloadRuntimeAutoscalingPolicyGetArgs();
+        public static new WorkloadRuntimeContainerGroupAutoscalingPolicyGetArgs Empty => new WorkloadRuntimeContainerGroupAutoscalingPolicyGetArgs();
     }
 }

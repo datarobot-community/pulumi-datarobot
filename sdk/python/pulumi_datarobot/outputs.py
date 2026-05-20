@@ -27,7 +27,6 @@ __all__ = [
     'ArtifactSpecContainerGroupContainerEnvironmentVar',
     'ArtifactSpecContainerGroupContainerLivenessProbe',
     'ArtifactSpecContainerGroupContainerReadinessProbe',
-    'ArtifactSpecContainerGroupContainerResourceRequest',
     'ArtifactSpecContainerGroupContainerStartupProbe',
     'BatchPredictionJobDefinitionCsvSettings',
     'BatchPredictionJobDefinitionIntakeSettings',
@@ -101,9 +100,11 @@ __all__ = [
     'RegisteredModelTag',
     'VectorDatabaseChunkingParameters',
     'WorkloadRuntime',
-    'WorkloadRuntimeAutoscaling',
-    'WorkloadRuntimeAutoscalingPolicy',
-    'WorkloadRuntimeResource',
+    'WorkloadRuntimeContainerGroup',
+    'WorkloadRuntimeContainerGroupAutoscaling',
+    'WorkloadRuntimeContainerGroupAutoscalingPolicy',
+    'WorkloadRuntimeContainerGroupContainer',
+    'WorkloadRuntimeContainerGroupContainerResourceAllocation',
 ]
 
 @pulumi.output_type
@@ -426,8 +427,6 @@ class ArtifactSpecContainerGroupContainer(dict):
         suggest = None
         if key == "imageUri":
             suggest = "image_uri"
-        elif key == "resourceRequest":
-            suggest = "resource_request"
         elif key == "environmentVars":
             suggest = "environment_vars"
         elif key == "livenessProbe":
@@ -450,7 +449,6 @@ class ArtifactSpecContainerGroupContainer(dict):
 
     def __init__(__self__, *,
                  image_uri: builtins.str,
-                 resource_request: 'outputs.ArtifactSpecContainerGroupContainerResourceRequest',
                  description: Optional[builtins.str] = None,
                  entrypoints: Optional[Sequence[builtins.str]] = None,
                  environment_vars: Optional[Sequence['outputs.ArtifactSpecContainerGroupContainerEnvironmentVar']] = None,
@@ -462,7 +460,6 @@ class ArtifactSpecContainerGroupContainer(dict):
                  startup_probe: Optional['outputs.ArtifactSpecContainerGroupContainerStartupProbe'] = None):
         """
         :param builtins.str image_uri: Docker image URI.
-        :param 'ArtifactSpecContainerGroupContainerResourceRequestArgs' resource_request: Resource requirements for the container.
         :param builtins.str description: Description of the container.
         :param Sequence[builtins.str] entrypoints: Container entrypoint.
         :param Sequence['ArtifactSpecContainerGroupContainerEnvironmentVarArgs'] environment_vars: Environment variables for the container.
@@ -474,7 +471,6 @@ class ArtifactSpecContainerGroupContainer(dict):
         :param 'ArtifactSpecContainerGroupContainerStartupProbeArgs' startup_probe: Container startup check configuration.
         """
         pulumi.set(__self__, "image_uri", image_uri)
-        pulumi.set(__self__, "resource_request", resource_request)
         if description is not None:
             pulumi.set(__self__, "description", description)
         if entrypoints is not None:
@@ -501,14 +497,6 @@ class ArtifactSpecContainerGroupContainer(dict):
         Docker image URI.
         """
         return pulumi.get(self, "image_uri")
-
-    @property
-    @pulumi.getter(name="resourceRequest")
-    def resource_request(self) -> 'outputs.ArtifactSpecContainerGroupContainerResourceRequest':
-        """
-        Resource requirements for the container.
-        """
-        return pulumi.get(self, "resource_request")
 
     @property
     @pulumi.getter
@@ -860,76 +848,6 @@ class ArtifactSpecContainerGroupContainerReadinessProbe(dict):
         Number of seconds after which the probe times out.
         """
         return pulumi.get(self, "timeout_seconds")
-
-
-@pulumi.output_type
-class ArtifactSpecContainerGroupContainerResourceRequest(dict):
-    @staticmethod
-    def __key_warning(key: str):
-        suggest = None
-        if key == "gpuType":
-            suggest = "gpu_type"
-
-        if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in ArtifactSpecContainerGroupContainerResourceRequest. Access the value via the '{suggest}' property getter instead.")
-
-    def __getitem__(self, key: str) -> Any:
-        ArtifactSpecContainerGroupContainerResourceRequest.__key_warning(key)
-        return super().__getitem__(key)
-
-    def get(self, key: str, default = None) -> Any:
-        ArtifactSpecContainerGroupContainerResourceRequest.__key_warning(key)
-        return super().get(key, default)
-
-    def __init__(__self__, *,
-                 cpu: builtins.int,
-                 memory: builtins.int,
-                 gpu: Optional[builtins.int] = None,
-                 gpu_type: Optional[builtins.str] = None):
-        """
-        :param builtins.int cpu: Number of CPU cores required.
-        :param builtins.int memory: Memory required in bytes.
-        :param builtins.int gpu: Number of GPUs required.
-        :param builtins.str gpu_type: GPU type required (e.g., NVIDIA-A100).
-        """
-        pulumi.set(__self__, "cpu", cpu)
-        pulumi.set(__self__, "memory", memory)
-        if gpu is not None:
-            pulumi.set(__self__, "gpu", gpu)
-        if gpu_type is not None:
-            pulumi.set(__self__, "gpu_type", gpu_type)
-
-    @property
-    @pulumi.getter
-    def cpu(self) -> builtins.int:
-        """
-        Number of CPU cores required.
-        """
-        return pulumi.get(self, "cpu")
-
-    @property
-    @pulumi.getter
-    def memory(self) -> builtins.int:
-        """
-        Memory required in bytes.
-        """
-        return pulumi.get(self, "memory")
-
-    @property
-    @pulumi.getter
-    def gpu(self) -> Optional[builtins.int]:
-        """
-        Number of GPUs required.
-        """
-        return pulumi.get(self, "gpu")
-
-    @property
-    @pulumi.getter(name="gpuType")
-    def gpu_type(self) -> Optional[builtins.str]:
-        """
-        GPU type required (e.g., NVIDIA-A100).
-        """
-        return pulumi.get(self, "gpu_type")
 
 
 @pulumi.output_type
@@ -5669,8 +5587,8 @@ class WorkloadRuntime(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
-        if key == "replicaCount":
-            suggest = "replica_count"
+        if key == "containerGroups":
+            suggest = "container_groups"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in WorkloadRuntime. Access the value via the '{suggest}' property getter instead.")
@@ -5684,53 +5602,129 @@ class WorkloadRuntime(dict):
         return super().get(key, default)
 
     def __init__(__self__, *,
-                 autoscaling: Optional['outputs.WorkloadRuntimeAutoscaling'] = None,
-                 replica_count: Optional[builtins.int] = None,
-                 resources: Optional[Sequence['outputs.WorkloadRuntimeResource']] = None):
+                 container_groups: Optional[Sequence['outputs.WorkloadRuntimeContainerGroup']] = None):
         """
-        :param 'WorkloadRuntimeAutoscalingArgs' autoscaling: Autoscaling configuration. When set, takes precedence over replica_count.
-        :param builtins.int replica_count: Number of replicas to run. Cannot be used together with `autoscaling`. Omitting this field retains the current value. Set to `0` to explicitly clear it (e.g. when switching to autoscaling).
-        :param Sequence['WorkloadRuntimeResourceArgs'] resources: Resource bundles assigned to the Workload. When empty the server infers an appropriate bundle.
+        :param Sequence['WorkloadRuntimeContainerGroupArgs'] container_groups: Per-group runtime configuration.
+        """
+        if container_groups is not None:
+            pulumi.set(__self__, "container_groups", container_groups)
+
+    @property
+    @pulumi.getter(name="containerGroups")
+    def container_groups(self) -> Optional[Sequence['outputs.WorkloadRuntimeContainerGroup']]:
+        """
+        Per-group runtime configuration.
+        """
+        return pulumi.get(self, "container_groups")
+
+
+@pulumi.output_type
+class WorkloadRuntimeContainerGroup(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "bundleSelectionPolicy":
+            suggest = "bundle_selection_policy"
+        elif key == "replicaCount":
+            suggest = "replica_count"
+        elif key == "resourceBundles":
+            suggest = "resource_bundles"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in WorkloadRuntimeContainerGroup. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        WorkloadRuntimeContainerGroup.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        WorkloadRuntimeContainerGroup.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 autoscaling: Optional['outputs.WorkloadRuntimeContainerGroupAutoscaling'] = None,
+                 bundle_selection_policy: Optional[builtins.str] = None,
+                 containers: Optional[Sequence['outputs.WorkloadRuntimeContainerGroupContainer']] = None,
+                 name: Optional[builtins.str] = None,
+                 replica_count: Optional[builtins.int] = None,
+                 resource_bundles: Optional[Sequence[builtins.str]] = None):
+        """
+        :param 'WorkloadRuntimeContainerGroupAutoscalingArgs' autoscaling: Autoscaling configuration. When set, takes precedence over `replica_count`.
+        :param builtins.str bundle_selection_policy: How to select among `resource_bundles`. Defaults to `availability`.
+        :param Sequence['WorkloadRuntimeContainerGroupContainerArgs'] containers: Per-container resource allocation overrides.
+        :param builtins.str name: Container group name (server-assigned, always `default`).
+        :param builtins.int replica_count: Number of replicas. Cannot be set alongside `autoscaling.enabled=true`. Set to `0` to explicitly clear it.
+        :param Sequence[builtins.str] resource_bundles: Ordered list of resource bundle IDs. One is selected at scheduling time.
         """
         if autoscaling is not None:
             pulumi.set(__self__, "autoscaling", autoscaling)
+        if bundle_selection_policy is not None:
+            pulumi.set(__self__, "bundle_selection_policy", bundle_selection_policy)
+        if containers is not None:
+            pulumi.set(__self__, "containers", containers)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
         if replica_count is not None:
             pulumi.set(__self__, "replica_count", replica_count)
-        if resources is not None:
-            pulumi.set(__self__, "resources", resources)
+        if resource_bundles is not None:
+            pulumi.set(__self__, "resource_bundles", resource_bundles)
 
     @property
     @pulumi.getter
-    def autoscaling(self) -> Optional['outputs.WorkloadRuntimeAutoscaling']:
+    def autoscaling(self) -> Optional['outputs.WorkloadRuntimeContainerGroupAutoscaling']:
         """
-        Autoscaling configuration. When set, takes precedence over replica_count.
+        Autoscaling configuration. When set, takes precedence over `replica_count`.
         """
         return pulumi.get(self, "autoscaling")
+
+    @property
+    @pulumi.getter(name="bundleSelectionPolicy")
+    def bundle_selection_policy(self) -> Optional[builtins.str]:
+        """
+        How to select among `resource_bundles`. Defaults to `availability`.
+        """
+        return pulumi.get(self, "bundle_selection_policy")
+
+    @property
+    @pulumi.getter
+    def containers(self) -> Optional[Sequence['outputs.WorkloadRuntimeContainerGroupContainer']]:
+        """
+        Per-container resource allocation overrides.
+        """
+        return pulumi.get(self, "containers")
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[builtins.str]:
+        """
+        Container group name (server-assigned, always `default`).
+        """
+        return pulumi.get(self, "name")
 
     @property
     @pulumi.getter(name="replicaCount")
     def replica_count(self) -> Optional[builtins.int]:
         """
-        Number of replicas to run. Cannot be used together with `autoscaling`. Omitting this field retains the current value. Set to `0` to explicitly clear it (e.g. when switching to autoscaling).
+        Number of replicas. Cannot be set alongside `autoscaling.enabled=true`. Set to `0` to explicitly clear it.
         """
         return pulumi.get(self, "replica_count")
 
     @property
-    @pulumi.getter
-    def resources(self) -> Optional[Sequence['outputs.WorkloadRuntimeResource']]:
+    @pulumi.getter(name="resourceBundles")
+    def resource_bundles(self) -> Optional[Sequence[builtins.str]]:
         """
-        Resource bundles assigned to the Workload. When empty the server infers an appropriate bundle.
+        Ordered list of resource bundle IDs. One is selected at scheduling time.
         """
-        return pulumi.get(self, "resources")
+        return pulumi.get(self, "resource_bundles")
 
 
 @pulumi.output_type
-class WorkloadRuntimeAutoscaling(dict):
+class WorkloadRuntimeContainerGroupAutoscaling(dict):
     def __init__(__self__, *,
-                 policies: Sequence['outputs.WorkloadRuntimeAutoscalingPolicy'],
+                 policies: Sequence['outputs.WorkloadRuntimeContainerGroupAutoscalingPolicy'],
                  enabled: Optional[builtins.bool] = None):
         """
-        :param Sequence['WorkloadRuntimeAutoscalingPolicyArgs'] policies: Scaling policies that define when and how to scale.
+        :param Sequence['WorkloadRuntimeContainerGroupAutoscalingPolicyArgs'] policies: Scaling policies that define when and how to scale.
         :param builtins.bool enabled: Whether autoscaling is enabled. Defaults to true.
         """
         pulumi.set(__self__, "policies", policies)
@@ -5739,7 +5733,7 @@ class WorkloadRuntimeAutoscaling(dict):
 
     @property
     @pulumi.getter
-    def policies(self) -> Sequence['outputs.WorkloadRuntimeAutoscalingPolicy']:
+    def policies(self) -> Sequence['outputs.WorkloadRuntimeContainerGroupAutoscalingPolicy']:
         """
         Scaling policies that define when and how to scale.
         """
@@ -5755,7 +5749,7 @@ class WorkloadRuntimeAutoscaling(dict):
 
 
 @pulumi.output_type
-class WorkloadRuntimeAutoscalingPolicy(dict):
+class WorkloadRuntimeContainerGroupAutoscalingPolicy(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
@@ -5767,14 +5761,14 @@ class WorkloadRuntimeAutoscalingPolicy(dict):
             suggest = "scaling_metric"
 
         if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in WorkloadRuntimeAutoscalingPolicy. Access the value via the '{suggest}' property getter instead.")
+            pulumi.log.warn(f"Key '{key}' not found in WorkloadRuntimeContainerGroupAutoscalingPolicy. Access the value via the '{suggest}' property getter instead.")
 
     def __getitem__(self, key: str) -> Any:
-        WorkloadRuntimeAutoscalingPolicy.__key_warning(key)
+        WorkloadRuntimeContainerGroupAutoscalingPolicy.__key_warning(key)
         return super().__getitem__(key)
 
     def get(self, key: str, default = None) -> Any:
-        WorkloadRuntimeAutoscalingPolicy.__key_warning(key)
+        WorkloadRuntimeContainerGroupAutoscalingPolicy.__key_warning(key)
         return super().get(key, default)
 
     def __init__(__self__, *,
@@ -5839,37 +5833,121 @@ class WorkloadRuntimeAutoscalingPolicy(dict):
 
 
 @pulumi.output_type
-class WorkloadRuntimeResource(dict):
+class WorkloadRuntimeContainerGroupContainer(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
-        if key == "resourceBundleId":
-            suggest = "resource_bundle_id"
+        if key == "resourceAllocation":
+            suggest = "resource_allocation"
 
         if suggest:
-            pulumi.log.warn(f"Key '{key}' not found in WorkloadRuntimeResource. Access the value via the '{suggest}' property getter instead.")
+            pulumi.log.warn(f"Key '{key}' not found in WorkloadRuntimeContainerGroupContainer. Access the value via the '{suggest}' property getter instead.")
 
     def __getitem__(self, key: str) -> Any:
-        WorkloadRuntimeResource.__key_warning(key)
+        WorkloadRuntimeContainerGroupContainer.__key_warning(key)
         return super().__getitem__(key)
 
     def get(self, key: str, default = None) -> Any:
-        WorkloadRuntimeResource.__key_warning(key)
+        WorkloadRuntimeContainerGroupContainer.__key_warning(key)
         return super().get(key, default)
 
     def __init__(__self__, *,
-                 resource_bundle_id: builtins.str):
+                 name: builtins.str,
+                 resource_allocation: Optional['outputs.WorkloadRuntimeContainerGroupContainerResourceAllocation'] = None):
         """
-        :param builtins.str resource_bundle_id: ID of the resource bundle (e.g. `cpu.nano`).
+        :param builtins.str name: Container name. Must match a container declared in the artifact group.
+        :param 'WorkloadRuntimeContainerGroupContainerResourceAllocationArgs' resource_allocation: Resource allocation for this container.
         """
-        pulumi.set(__self__, "resource_bundle_id", resource_bundle_id)
+        pulumi.set(__self__, "name", name)
+        if resource_allocation is not None:
+            pulumi.set(__self__, "resource_allocation", resource_allocation)
 
     @property
-    @pulumi.getter(name="resourceBundleId")
-    def resource_bundle_id(self) -> builtins.str:
+    @pulumi.getter
+    def name(self) -> builtins.str:
         """
-        ID of the resource bundle (e.g. `cpu.nano`).
+        Container name. Must match a container declared in the artifact group.
         """
-        return pulumi.get(self, "resource_bundle_id")
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="resourceAllocation")
+    def resource_allocation(self) -> Optional['outputs.WorkloadRuntimeContainerGroupContainerResourceAllocation']:
+        """
+        Resource allocation for this container.
+        """
+        return pulumi.get(self, "resource_allocation")
+
+
+@pulumi.output_type
+class WorkloadRuntimeContainerGroupContainerResourceAllocation(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "gpuMemory":
+            suggest = "gpu_memory"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in WorkloadRuntimeContainerGroupContainerResourceAllocation. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        WorkloadRuntimeContainerGroupContainerResourceAllocation.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        WorkloadRuntimeContainerGroupContainerResourceAllocation.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 cpu: Optional[builtins.float] = None,
+                 gpu: Optional[builtins.float] = None,
+                 gpu_memory: Optional[builtins.int] = None,
+                 memory: Optional[builtins.int] = None):
+        """
+        :param builtins.float cpu: CPU cores allocated to this container.
+        :param builtins.float gpu: GPUs allocated to this container.
+        :param builtins.int gpu_memory: GPU VRAM allocated in bytes.
+        :param builtins.int memory: RAM allocated in bytes.
+        """
+        if cpu is not None:
+            pulumi.set(__self__, "cpu", cpu)
+        if gpu is not None:
+            pulumi.set(__self__, "gpu", gpu)
+        if gpu_memory is not None:
+            pulumi.set(__self__, "gpu_memory", gpu_memory)
+        if memory is not None:
+            pulumi.set(__self__, "memory", memory)
+
+    @property
+    @pulumi.getter
+    def cpu(self) -> Optional[builtins.float]:
+        """
+        CPU cores allocated to this container.
+        """
+        return pulumi.get(self, "cpu")
+
+    @property
+    @pulumi.getter
+    def gpu(self) -> Optional[builtins.float]:
+        """
+        GPUs allocated to this container.
+        """
+        return pulumi.get(self, "gpu")
+
+    @property
+    @pulumi.getter(name="gpuMemory")
+    def gpu_memory(self) -> Optional[builtins.int]:
+        """
+        GPU VRAM allocated in bytes.
+        """
+        return pulumi.get(self, "gpu_memory")
+
+    @property
+    @pulumi.getter
+    def memory(self) -> Optional[builtins.int]:
+        """
+        RAM allocated in bytes.
+        """
+        return pulumi.get(self, "memory")
 
 

@@ -45,8 +45,8 @@ func TestLoggerJSONMode(t *testing.T) {
 		t.Fatalf("failed to parse JSON output: %v", err)
 	}
 
-	if entry.Level != "INFO" {
-		t.Errorf("expected level=INFO, got level=%s", entry.Level)
+	if entry.Level != LevelStringInfo {
+		t.Errorf("expected level=%s, got level=%s", LevelStringInfo, entry.Level)
 	}
 	if entry.Message != "test message" {
 		t.Errorf("expected message='test message', got message='%s'", entry.Message)
@@ -76,11 +76,11 @@ func TestLevelString(t *testing.T) {
 		level    Level
 		expected string
 	}{
-		{LevelDebug, "DEBUG"},
-		{LevelInfo, "INFO"},
-		{LevelWarn, "WARN"},
-		{LevelError, "ERROR"},
-		{Level(99), "UNKNOWN"},
+		{LevelDebug, LevelStringDebug},
+		{LevelInfo, LevelStringInfo},
+		{LevelWarn, LevelStringWarn},
+		{LevelError, LevelStringError},
+		{Level(99), LevelStringUnknown},
 	}
 
 	for _, tt := range tests {

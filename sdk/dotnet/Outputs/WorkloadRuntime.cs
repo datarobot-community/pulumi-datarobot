@@ -15,29 +15,14 @@ namespace DataRobotPulumi.Datarobot.Outputs
     public sealed class WorkloadRuntime
     {
         /// <summary>
-        /// Autoscaling configuration. When set, takes precedence over replica_count.
+        /// Per-group runtime configuration.
         /// </summary>
-        public readonly Outputs.WorkloadRuntimeAutoscaling? Autoscaling;
-        /// <summary>
-        /// Number of replicas to run. Cannot be used together with `autoscaling`. Omitting this field retains the current value. Set to `0` to explicitly clear it (e.g. when switching to autoscaling).
-        /// </summary>
-        public readonly int? ReplicaCount;
-        /// <summary>
-        /// Resource bundles assigned to the Workload. When empty the server infers an appropriate bundle.
-        /// </summary>
-        public readonly ImmutableArray<Outputs.WorkloadRuntimeResource> Resources;
+        public readonly ImmutableArray<Outputs.WorkloadRuntimeContainerGroup> ContainerGroups;
 
         [OutputConstructor]
-        private WorkloadRuntime(
-            Outputs.WorkloadRuntimeAutoscaling? autoscaling,
-
-            int? replicaCount,
-
-            ImmutableArray<Outputs.WorkloadRuntimeResource> resources)
+        private WorkloadRuntime(ImmutableArray<Outputs.WorkloadRuntimeContainerGroup> containerGroups)
         {
-            Autoscaling = autoscaling;
-            ReplicaCount = replicaCount;
-            Resources = resources;
+            ContainerGroups = containerGroups;
         }
     }
 }
