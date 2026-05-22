@@ -140,13 +140,25 @@ export interface ArtifactSpecContainerGroupContainer {
 
 export interface ArtifactSpecContainerGroupContainerEnvironmentVar {
     /**
+     * DataRobot credential ID. Required when source is "dr-credential".
+     */
+    credentialId?: pulumi.Input<string>;
+    /**
+     * Key within the credential. Required when source is "dr-credential".
+     */
+    key?: pulumi.Input<string>;
+    /**
      * Name of the environment variable.
      */
     name: pulumi.Input<string>;
     /**
-     * Value of the environment variable.
+     * Source type: "string" for plain text values, "dr-credential" for DataRobot credentials. Defaults to "string".
      */
-    value: pulumi.Input<string>;
+    source?: pulumi.Input<string>;
+    /**
+     * Value of the environment variable. Required when source is "string".
+     */
+    value?: pulumi.Input<string>;
 }
 
 export interface ArtifactSpecContainerGroupContainerLivenessProbe {

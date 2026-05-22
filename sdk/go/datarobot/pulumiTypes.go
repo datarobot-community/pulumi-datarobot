@@ -1090,10 +1090,16 @@ func (o ArtifactSpecContainerGroupContainerArrayOutput) Index(i pulumi.IntInput)
 }
 
 type ArtifactSpecContainerGroupContainerEnvironmentVar struct {
+	// DataRobot credential ID. Required when source is "dr-credential".
+	CredentialId *string `pulumi:"credentialId"`
+	// Key within the credential. Required when source is "dr-credential".
+	Key *string `pulumi:"key"`
 	// Name of the environment variable.
 	Name string `pulumi:"name"`
-	// Value of the environment variable.
-	Value string `pulumi:"value"`
+	// Source type: "string" for plain text values, "dr-credential" for DataRobot credentials. Defaults to "string".
+	Source *string `pulumi:"source"`
+	// Value of the environment variable. Required when source is "string".
+	Value *string `pulumi:"value"`
 }
 
 // ArtifactSpecContainerGroupContainerEnvironmentVarInput is an input type that accepts ArtifactSpecContainerGroupContainerEnvironmentVarArgs and ArtifactSpecContainerGroupContainerEnvironmentVarOutput values.
@@ -1108,10 +1114,16 @@ type ArtifactSpecContainerGroupContainerEnvironmentVarInput interface {
 }
 
 type ArtifactSpecContainerGroupContainerEnvironmentVarArgs struct {
+	// DataRobot credential ID. Required when source is "dr-credential".
+	CredentialId pulumi.StringPtrInput `pulumi:"credentialId"`
+	// Key within the credential. Required when source is "dr-credential".
+	Key pulumi.StringPtrInput `pulumi:"key"`
 	// Name of the environment variable.
 	Name pulumi.StringInput `pulumi:"name"`
-	// Value of the environment variable.
-	Value pulumi.StringInput `pulumi:"value"`
+	// Source type: "string" for plain text values, "dr-credential" for DataRobot credentials. Defaults to "string".
+	Source pulumi.StringPtrInput `pulumi:"source"`
+	// Value of the environment variable. Required when source is "string".
+	Value pulumi.StringPtrInput `pulumi:"value"`
 }
 
 func (ArtifactSpecContainerGroupContainerEnvironmentVarArgs) ElementType() reflect.Type {
@@ -1165,14 +1177,29 @@ func (o ArtifactSpecContainerGroupContainerEnvironmentVarOutput) ToArtifactSpecC
 	return o
 }
 
+// DataRobot credential ID. Required when source is "dr-credential".
+func (o ArtifactSpecContainerGroupContainerEnvironmentVarOutput) CredentialId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerEnvironmentVar) *string { return v.CredentialId }).(pulumi.StringPtrOutput)
+}
+
+// Key within the credential. Required when source is "dr-credential".
+func (o ArtifactSpecContainerGroupContainerEnvironmentVarOutput) Key() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerEnvironmentVar) *string { return v.Key }).(pulumi.StringPtrOutput)
+}
+
 // Name of the environment variable.
 func (o ArtifactSpecContainerGroupContainerEnvironmentVarOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerEnvironmentVar) string { return v.Name }).(pulumi.StringOutput)
 }
 
-// Value of the environment variable.
-func (o ArtifactSpecContainerGroupContainerEnvironmentVarOutput) Value() pulumi.StringOutput {
-	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerEnvironmentVar) string { return v.Value }).(pulumi.StringOutput)
+// Source type: "string" for plain text values, "dr-credential" for DataRobot credentials. Defaults to "string".
+func (o ArtifactSpecContainerGroupContainerEnvironmentVarOutput) Source() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerEnvironmentVar) *string { return v.Source }).(pulumi.StringPtrOutput)
+}
+
+// Value of the environment variable. Required when source is "string".
+func (o ArtifactSpecContainerGroupContainerEnvironmentVarOutput) Value() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerEnvironmentVar) *string { return v.Value }).(pulumi.StringPtrOutput)
 }
 
 type ArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput struct{ *pulumi.OutputState }

@@ -286,20 +286,39 @@
     },
     "datarobot:index/ArtifactSpecContainerGroupContainerEnvironmentVar:ArtifactSpecContainerGroupContainerEnvironmentVar": {
       "properties": {
+        "credentialId": {
+          "type": "string",
+          "description": "DataRobot credential ID. Required when source is \"dr-credential\".\n"
+        },
+        "key": {
+          "type": "string",
+          "description": "Key within the credential. Required when source is \"dr-credential\".\n"
+        },
         "name": {
           "type": "string",
           "description": "Name of the environment variable.\n"
         },
+        "source": {
+          "type": "string",
+          "description": "Source type: \"string\" for plain text values, \"dr-credential\" for DataRobot credentials. Defaults to \"string\".\n"
+        },
         "value": {
           "type": "string",
-          "description": "Value of the environment variable.\n"
+          "description": "Value of the environment variable. Required when source is \"string\".\n"
         }
       },
       "type": "object",
       "required": [
-        "name",
-        "value"
-      ]
+        "name"
+      ],
+      "language": {
+        "nodejs": {
+          "requiredOutputs": [
+            "name",
+            "source"
+          ]
+        }
+      }
     },
     "datarobot:index/ArtifactSpecContainerGroupContainerLivenessProbe:ArtifactSpecContainerGroupContainerLivenessProbe": {
       "properties": {

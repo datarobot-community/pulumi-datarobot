@@ -14,16 +14,34 @@ namespace DataRobotPulumi.Datarobot.Inputs
     public sealed class ArtifactSpecContainerGroupContainerEnvironmentVarGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// DataRobot credential ID. Required when source is "dr-credential".
+        /// </summary>
+        [Input("credentialId")]
+        public Input<string>? CredentialId { get; set; }
+
+        /// <summary>
+        /// Key within the credential. Required when source is "dr-credential".
+        /// </summary>
+        [Input("key")]
+        public Input<string>? Key { get; set; }
+
+        /// <summary>
         /// Name of the environment variable.
         /// </summary>
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
 
         /// <summary>
-        /// Value of the environment variable.
+        /// Source type: "string" for plain text values, "dr-credential" for DataRobot credentials. Defaults to "string".
         /// </summary>
-        [Input("value", required: true)]
-        public Input<string> Value { get; set; } = null!;
+        [Input("source")]
+        public Input<string>? Source { get; set; }
+
+        /// <summary>
+        /// Value of the environment variable. Required when source is "string".
+        /// </summary>
+        [Input("value")]
+        public Input<string>? Value { get; set; }
 
         public ArtifactSpecContainerGroupContainerEnvironmentVarGetArgs()
         {

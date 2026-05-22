@@ -573,15 +573,45 @@ class ArtifactSpecContainerGroupContainer(dict):
 
 @pulumi.output_type
 class ArtifactSpecContainerGroupContainerEnvironmentVar(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "credentialId":
+            suggest = "credential_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ArtifactSpecContainerGroupContainerEnvironmentVar. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ArtifactSpecContainerGroupContainerEnvironmentVar.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ArtifactSpecContainerGroupContainerEnvironmentVar.__key_warning(key)
+        return super().get(key, default)
+
     def __init__(__self__, *,
                  name: builtins.str,
-                 value: builtins.str):
+                 credential_id: Optional[builtins.str] = None,
+                 key: Optional[builtins.str] = None,
+                 source: Optional[builtins.str] = None,
+                 value: Optional[builtins.str] = None):
         """
         :param builtins.str name: Name of the environment variable.
-        :param builtins.str value: Value of the environment variable.
+        :param builtins.str credential_id: DataRobot credential ID. Required when source is "dr-credential".
+        :param builtins.str key: Key within the credential. Required when source is "dr-credential".
+        :param builtins.str source: Source type: "string" for plain text values, "dr-credential" for DataRobot credentials. Defaults to "string".
+        :param builtins.str value: Value of the environment variable. Required when source is "string".
         """
         pulumi.set(__self__, "name", name)
-        pulumi.set(__self__, "value", value)
+        if credential_id is not None:
+            pulumi.set(__self__, "credential_id", credential_id)
+        if key is not None:
+            pulumi.set(__self__, "key", key)
+        if source is not None:
+            pulumi.set(__self__, "source", source)
+        if value is not None:
+            pulumi.set(__self__, "value", value)
 
     @property
     @pulumi.getter
@@ -592,10 +622,34 @@ class ArtifactSpecContainerGroupContainerEnvironmentVar(dict):
         return pulumi.get(self, "name")
 
     @property
-    @pulumi.getter
-    def value(self) -> builtins.str:
+    @pulumi.getter(name="credentialId")
+    def credential_id(self) -> Optional[builtins.str]:
         """
-        Value of the environment variable.
+        DataRobot credential ID. Required when source is "dr-credential".
+        """
+        return pulumi.get(self, "credential_id")
+
+    @property
+    @pulumi.getter
+    def key(self) -> Optional[builtins.str]:
+        """
+        Key within the credential. Required when source is "dr-credential".
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def source(self) -> Optional[builtins.str]:
+        """
+        Source type: "string" for plain text values, "dr-credential" for DataRobot credentials. Defaults to "string".
+        """
+        return pulumi.get(self, "source")
+
+    @property
+    @pulumi.getter
+    def value(self) -> Optional[builtins.str]:
+        """
+        Value of the environment variable. Required when source is "string".
         """
         return pulumi.get(self, "value")
 
