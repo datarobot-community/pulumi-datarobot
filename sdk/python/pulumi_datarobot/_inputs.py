@@ -837,9 +837,21 @@ if not MYPY:
         """
         Name of the environment variable.
         """
-        value: pulumi.Input[builtins.str]
+        credential_id: NotRequired[pulumi.Input[builtins.str]]
         """
-        Value of the environment variable.
+        DataRobot credential ID. Required when source is "dr-credential".
+        """
+        key: NotRequired[pulumi.Input[builtins.str]]
+        """
+        Key within the credential. Required when source is "dr-credential".
+        """
+        source: NotRequired[pulumi.Input[builtins.str]]
+        """
+        Source type: "string" for plain text values, "dr-credential" for DataRobot credentials. Defaults to "string".
+        """
+        value: NotRequired[pulumi.Input[builtins.str]]
+        """
+        Value of the environment variable. Required when source is "string".
         """
 elif False:
     ArtifactSpecContainerGroupContainerEnvironmentVarArgsDict: TypeAlias = Mapping[str, Any]
@@ -848,13 +860,26 @@ elif False:
 class ArtifactSpecContainerGroupContainerEnvironmentVarArgs:
     def __init__(__self__, *,
                  name: pulumi.Input[builtins.str],
-                 value: pulumi.Input[builtins.str]):
+                 credential_id: Optional[pulumi.Input[builtins.str]] = None,
+                 key: Optional[pulumi.Input[builtins.str]] = None,
+                 source: Optional[pulumi.Input[builtins.str]] = None,
+                 value: Optional[pulumi.Input[builtins.str]] = None):
         """
         :param pulumi.Input[builtins.str] name: Name of the environment variable.
-        :param pulumi.Input[builtins.str] value: Value of the environment variable.
+        :param pulumi.Input[builtins.str] credential_id: DataRobot credential ID. Required when source is "dr-credential".
+        :param pulumi.Input[builtins.str] key: Key within the credential. Required when source is "dr-credential".
+        :param pulumi.Input[builtins.str] source: Source type: "string" for plain text values, "dr-credential" for DataRobot credentials. Defaults to "string".
+        :param pulumi.Input[builtins.str] value: Value of the environment variable. Required when source is "string".
         """
         pulumi.set(__self__, "name", name)
-        pulumi.set(__self__, "value", value)
+        if credential_id is not None:
+            pulumi.set(__self__, "credential_id", credential_id)
+        if key is not None:
+            pulumi.set(__self__, "key", key)
+        if source is not None:
+            pulumi.set(__self__, "source", source)
+        if value is not None:
+            pulumi.set(__self__, "value", value)
 
     @property
     @pulumi.getter
@@ -869,15 +894,51 @@ class ArtifactSpecContainerGroupContainerEnvironmentVarArgs:
         pulumi.set(self, "name", value)
 
     @property
-    @pulumi.getter
-    def value(self) -> pulumi.Input[builtins.str]:
+    @pulumi.getter(name="credentialId")
+    def credential_id(self) -> Optional[pulumi.Input[builtins.str]]:
         """
-        Value of the environment variable.
+        DataRobot credential ID. Required when source is "dr-credential".
+        """
+        return pulumi.get(self, "credential_id")
+
+    @credential_id.setter
+    def credential_id(self, value: Optional[pulumi.Input[builtins.str]]):
+        pulumi.set(self, "credential_id", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> Optional[pulumi.Input[builtins.str]]:
+        """
+        Key within the credential. Required when source is "dr-credential".
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: Optional[pulumi.Input[builtins.str]]):
+        pulumi.set(self, "key", value)
+
+    @property
+    @pulumi.getter
+    def source(self) -> Optional[pulumi.Input[builtins.str]]:
+        """
+        Source type: "string" for plain text values, "dr-credential" for DataRobot credentials. Defaults to "string".
+        """
+        return pulumi.get(self, "source")
+
+    @source.setter
+    def source(self, value: Optional[pulumi.Input[builtins.str]]):
+        pulumi.set(self, "source", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> Optional[pulumi.Input[builtins.str]]:
+        """
+        Value of the environment variable. Required when source is "string".
         """
         return pulumi.get(self, "value")
 
     @value.setter
-    def value(self, value: pulumi.Input[builtins.str]):
+    def value(self, value: Optional[pulumi.Input[builtins.str]]):
         pulumi.set(self, "value", value)
 
 

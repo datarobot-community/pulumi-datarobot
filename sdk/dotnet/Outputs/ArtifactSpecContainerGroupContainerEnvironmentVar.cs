@@ -15,21 +15,42 @@ namespace DataRobotPulumi.Datarobot.Outputs
     public sealed class ArtifactSpecContainerGroupContainerEnvironmentVar
     {
         /// <summary>
+        /// DataRobot credential ID. Required when source is "dr-credential".
+        /// </summary>
+        public readonly string? CredentialId;
+        /// <summary>
+        /// Key within the credential. Required when source is "dr-credential".
+        /// </summary>
+        public readonly string? Key;
+        /// <summary>
         /// Name of the environment variable.
         /// </summary>
         public readonly string Name;
         /// <summary>
-        /// Value of the environment variable.
+        /// Source type: "string" for plain text values, "dr-credential" for DataRobot credentials. Defaults to "string".
         /// </summary>
-        public readonly string Value;
+        public readonly string? Source;
+        /// <summary>
+        /// Value of the environment variable. Required when source is "string".
+        /// </summary>
+        public readonly string? Value;
 
         [OutputConstructor]
         private ArtifactSpecContainerGroupContainerEnvironmentVar(
+            string? credentialId,
+
+            string? key,
+
             string name,
 
-            string value)
+            string? source,
+
+            string? value)
         {
+            CredentialId = credentialId;
+            Key = key;
             Name = name;
+            Source = source;
             Value = value;
         }
     }

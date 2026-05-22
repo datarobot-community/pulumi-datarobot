@@ -140,13 +140,25 @@ export interface ArtifactSpecContainerGroupContainer {
 
 export interface ArtifactSpecContainerGroupContainerEnvironmentVar {
     /**
+     * DataRobot credential ID. Required when source is "dr-credential".
+     */
+    credentialId?: string;
+    /**
+     * Key within the credential. Required when source is "dr-credential".
+     */
+    key?: string;
+    /**
      * Name of the environment variable.
      */
     name: string;
     /**
-     * Value of the environment variable.
+     * Source type: "string" for plain text values, "dr-credential" for DataRobot credentials. Defaults to "string".
      */
-    value: string;
+    source: string;
+    /**
+     * Value of the environment variable. Required when source is "string".
+     */
+    value?: string;
 }
 
 export interface ArtifactSpecContainerGroupContainerLivenessProbe {
