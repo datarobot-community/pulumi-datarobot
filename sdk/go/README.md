@@ -115,9 +115,9 @@ go build -mod=vendor
 Download the plugin binary from the [releases page](https://github.com/datarobot-community/pulumi-datarobot/releases):
 
 ```bash
-# Replace v0.10.38 with your version, e.g., v0.10.14
-pulumi plugin install resource datarobot v0.10.38 --server \
-  https://github.com/datarobot-community/pulumi-datarobot/releases/v0.10.38/
+# Replace v0.10.39 with your version, e.g., v0.10.14
+pulumi plugin install resource datarobot v0.10.39 --server \
+  https://github.com/datarobot-community/pulumi-datarobot/releases/v0.10.39/
 ```
 
 ### 4. Skip update checks
@@ -257,7 +257,7 @@ go 1.21
 
 require (
     github.com/pulumi/pulumi/sdk/v3 v3.88.1
-    github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot vv0.10.38
+    github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot vv0.10.39
 )
 ```
 
@@ -272,4 +272,4 @@ require (
 
 ## Version
 
-Package version: v0.10.38
+Package version: v0.10.39
