@@ -1,8 +1,8 @@
 module github.com/datarobot-community/pulumi-datarobot/examples
 
-go 1.24.0
+go 1.26.4
 
-toolchain go1.24.1
+toolchain go1.26.4
 
 require github.com/pulumi/pulumi/pkg/v3 v3.160.0
 

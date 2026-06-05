@@ -1,8 +1,8 @@
 module github.com/datarobot-community/pulumi-datarobot/sdk
 
-go 1.24.0
+go 1.26.4
 
-toolchain go1.24.1
+toolchain go1.26.4
 
 require (
 	github.com/blang/semver v3.5.1+incompatible
