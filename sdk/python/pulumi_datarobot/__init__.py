@@ -22,6 +22,7 @@ from .custom_metric import *
 from .custom_metric_from_job import *
 from .custom_metric_job import *
 from .custom_model import *
+from .custom_model_from_vector_database import *
 from .custom_model_llm_validation import *
 from .dataset_from_datasource import *
 from .dataset_from_file import *
@@ -43,6 +44,7 @@ from .playground import *
 from .prediction_environment import *
 from .provider import *
 from .qa_application import *
+from .quota import *
 from .registered_model import *
 from .registered_model_from_leaderboard import *
 from .remote_repository import *
@@ -195,6 +197,14 @@ _utilities.register(
  },
  {
   "pkg": "datarobot",
+  "mod": "index/customModelFromVectorDatabase",
+  "fqn": "pulumi_datarobot",
+  "classes": {
+   "datarobot:index/customModelFromVectorDatabase:CustomModelFromVectorDatabase": "CustomModelFromVectorDatabase"
+  }
+ },
+ {
+  "pkg": "datarobot",
   "mod": "index/customModelLlmValidation",
   "fqn": "pulumi_datarobot",
   "classes": {
@@ -335,6 +345,14 @@ _utilities.register(
   "fqn": "pulumi_datarobot",
   "classes": {
    "datarobot:index/qaApplication:QaApplication": "QaApplication"
+  }
+ },
+ {
+  "pkg": "datarobot",
+  "mod": "index/quota",
+  "fqn": "pulumi_datarobot",
+  "classes": {
+   "datarobot:index/quota:Quota": "Quota"
   }
  },
  {

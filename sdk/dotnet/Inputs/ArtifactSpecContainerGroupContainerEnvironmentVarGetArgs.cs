@@ -16,8 +16,8 @@ namespace DataRobotPulumi.Datarobot.Inputs
         /// <summary>
         /// DataRobot credential ID. Required when source is "dr-credential".
         /// </summary>
-        [Input("credentialId")]
-        public Input<string>? CredentialId { get; set; }
+        [Input("drCredentialId")]
+        public Input<string>? DrCredentialId { get; set; }
 
         /// <summary>
         /// Key within the credential. Required when source is "dr-credential".

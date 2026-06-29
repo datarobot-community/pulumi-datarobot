@@ -27,6 +27,10 @@ namespace DataRobotPulumi.Datarobot.Outputs
         /// </summary>
         public readonly string? ChunkingMethod;
         /// <summary>
+        /// Whether DataRobot treats each row of the dataset as a finished chunk (custom chunking) instead of running the built-in chunker. Use this when the dataset is already pre-chunked. Defaults to false.
+        /// </summary>
+        public readonly bool? CustomChunking;
+        /// <summary>
         /// The id of the Embedding Model.
         /// </summary>
         public readonly string? EmbeddingModel;
@@ -47,6 +51,8 @@ namespace DataRobotPulumi.Datarobot.Outputs
 
             string? chunkingMethod,
 
+            bool? customChunking,
+
             string? embeddingModel,
 
             bool? isSeparatorRegex,
@@ -56,6 +62,7 @@ namespace DataRobotPulumi.Datarobot.Outputs
             ChunkOverlapPercentage = chunkOverlapPercentage;
             ChunkSize = chunkSize;
             ChunkingMethod = chunkingMethod;
+            CustomChunking = customChunking;
             EmbeddingModel = embeddingModel;
             IsSeparatorRegex = isSeparatorRegex;
             Separators = separators;

@@ -1091,7 +1091,7 @@ func (o ArtifactSpecContainerGroupContainerArrayOutput) Index(i pulumi.IntInput)
 
 type ArtifactSpecContainerGroupContainerEnvironmentVar struct {
 	// DataRobot credential ID. Required when source is "dr-credential".
-	CredentialId *string `pulumi:"credentialId"`
+	DrCredentialId *string `pulumi:"drCredentialId"`
 	// Key within the credential. Required when source is "dr-credential".
 	Key *string `pulumi:"key"`
 	// Name of the environment variable.
@@ -1115,7 +1115,7 @@ type ArtifactSpecContainerGroupContainerEnvironmentVarInput interface {
 
 type ArtifactSpecContainerGroupContainerEnvironmentVarArgs struct {
 	// DataRobot credential ID. Required when source is "dr-credential".
-	CredentialId pulumi.StringPtrInput `pulumi:"credentialId"`
+	DrCredentialId pulumi.StringPtrInput `pulumi:"drCredentialId"`
 	// Key within the credential. Required when source is "dr-credential".
 	Key pulumi.StringPtrInput `pulumi:"key"`
 	// Name of the environment variable.
@@ -1178,8 +1178,8 @@ func (o ArtifactSpecContainerGroupContainerEnvironmentVarOutput) ToArtifactSpecC
 }
 
 // DataRobot credential ID. Required when source is "dr-credential".
-func (o ArtifactSpecContainerGroupContainerEnvironmentVarOutput) CredentialId() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerEnvironmentVar) *string { return v.CredentialId }).(pulumi.StringPtrOutput)
+func (o ArtifactSpecContainerGroupContainerEnvironmentVarOutput) DrCredentialId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerEnvironmentVar) *string { return v.DrCredentialId }).(pulumi.StringPtrOutput)
 }
 
 // Key within the credential. Required when source is "dr-credential".
@@ -14020,6 +14020,121 @@ func (o NotificationChannelDrEntityArrayOutput) Index(i pulumi.IntInput) Notific
 	}).(NotificationChannelDrEntityOutput)
 }
 
+type QuotaDefaultRule struct {
+	// The maximum allowed for `rule` within `window`.
+	Limit int `pulumi:"limit"`
+	// The metric the rule limits, e.g. `requests` or `token`.
+	Rule string `pulumi:"rule"`
+	// The time window the limit applies to: `min`, `hour`, or `day`.
+	Window string `pulumi:"window"`
+}
+
+// QuotaDefaultRuleInput is an input type that accepts QuotaDefaultRuleArgs and QuotaDefaultRuleOutput values.
+// You can construct a concrete instance of `QuotaDefaultRuleInput` via:
+//
+//	QuotaDefaultRuleArgs{...}
+type QuotaDefaultRuleInput interface {
+	pulumi.Input
+
+	ToQuotaDefaultRuleOutput() QuotaDefaultRuleOutput
+	ToQuotaDefaultRuleOutputWithContext(context.Context) QuotaDefaultRuleOutput
+}
+
+type QuotaDefaultRuleArgs struct {
+	// The maximum allowed for `rule` within `window`.
+	Limit pulumi.IntInput `pulumi:"limit"`
+	// The metric the rule limits, e.g. `requests` or `token`.
+	Rule pulumi.StringInput `pulumi:"rule"`
+	// The time window the limit applies to: `min`, `hour`, or `day`.
+	Window pulumi.StringInput `pulumi:"window"`
+}
+
+func (QuotaDefaultRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*QuotaDefaultRule)(nil)).Elem()
+}
+
+func (i QuotaDefaultRuleArgs) ToQuotaDefaultRuleOutput() QuotaDefaultRuleOutput {
+	return i.ToQuotaDefaultRuleOutputWithContext(context.Background())
+}
+
+func (i QuotaDefaultRuleArgs) ToQuotaDefaultRuleOutputWithContext(ctx context.Context) QuotaDefaultRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(QuotaDefaultRuleOutput)
+}
+
+// QuotaDefaultRuleArrayInput is an input type that accepts QuotaDefaultRuleArray and QuotaDefaultRuleArrayOutput values.
+// You can construct a concrete instance of `QuotaDefaultRuleArrayInput` via:
+//
+//	QuotaDefaultRuleArray{ QuotaDefaultRuleArgs{...} }
+type QuotaDefaultRuleArrayInput interface {
+	pulumi.Input
+
+	ToQuotaDefaultRuleArrayOutput() QuotaDefaultRuleArrayOutput
+	ToQuotaDefaultRuleArrayOutputWithContext(context.Context) QuotaDefaultRuleArrayOutput
+}
+
+type QuotaDefaultRuleArray []QuotaDefaultRuleInput
+
+func (QuotaDefaultRuleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]QuotaDefaultRule)(nil)).Elem()
+}
+
+func (i QuotaDefaultRuleArray) ToQuotaDefaultRuleArrayOutput() QuotaDefaultRuleArrayOutput {
+	return i.ToQuotaDefaultRuleArrayOutputWithContext(context.Background())
+}
+
+func (i QuotaDefaultRuleArray) ToQuotaDefaultRuleArrayOutputWithContext(ctx context.Context) QuotaDefaultRuleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(QuotaDefaultRuleArrayOutput)
+}
+
+type QuotaDefaultRuleOutput struct{ *pulumi.OutputState }
+
+func (QuotaDefaultRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*QuotaDefaultRule)(nil)).Elem()
+}
+
+func (o QuotaDefaultRuleOutput) ToQuotaDefaultRuleOutput() QuotaDefaultRuleOutput {
+	return o
+}
+
+func (o QuotaDefaultRuleOutput) ToQuotaDefaultRuleOutputWithContext(ctx context.Context) QuotaDefaultRuleOutput {
+	return o
+}
+
+// The maximum allowed for `rule` within `window`.
+func (o QuotaDefaultRuleOutput) Limit() pulumi.IntOutput {
+	return o.ApplyT(func(v QuotaDefaultRule) int { return v.Limit }).(pulumi.IntOutput)
+}
+
+// The metric the rule limits, e.g. `requests` or `token`.
+func (o QuotaDefaultRuleOutput) Rule() pulumi.StringOutput {
+	return o.ApplyT(func(v QuotaDefaultRule) string { return v.Rule }).(pulumi.StringOutput)
+}
+
+// The time window the limit applies to: `min`, `hour`, or `day`.
+func (o QuotaDefaultRuleOutput) Window() pulumi.StringOutput {
+	return o.ApplyT(func(v QuotaDefaultRule) string { return v.Window }).(pulumi.StringOutput)
+}
+
+type QuotaDefaultRuleArrayOutput struct{ *pulumi.OutputState }
+
+func (QuotaDefaultRuleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]QuotaDefaultRule)(nil)).Elem()
+}
+
+func (o QuotaDefaultRuleArrayOutput) ToQuotaDefaultRuleArrayOutput() QuotaDefaultRuleArrayOutput {
+	return o
+}
+
+func (o QuotaDefaultRuleArrayOutput) ToQuotaDefaultRuleArrayOutputWithContext(ctx context.Context) QuotaDefaultRuleArrayOutput {
+	return o
+}
+
+func (o QuotaDefaultRuleArrayOutput) Index(i pulumi.IntInput) QuotaDefaultRuleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) QuotaDefaultRule {
+		return vs[0].([]QuotaDefaultRule)[vs[1].(int)]
+	}).(QuotaDefaultRuleOutput)
+}
+
 type RegisteredModelTag struct {
 	// The name of the tag.
 	Name string `pulumi:"name"`
@@ -14133,6 +14248,8 @@ type VectorDatabaseChunkingParameters struct {
 	ChunkSize *int `pulumi:"chunkSize"`
 	// The method used to chunk the data.
 	ChunkingMethod *string `pulumi:"chunkingMethod"`
+	// Whether DataRobot treats each row of the dataset as a finished chunk (custom chunking) instead of running the built-in chunker. Use this when the dataset is already pre-chunked. Defaults to false.
+	CustomChunking *bool `pulumi:"customChunking"`
 	// The id of the Embedding Model.
 	EmbeddingModel *string `pulumi:"embeddingModel"`
 	// Whether the separator is a regex.
@@ -14159,6 +14276,8 @@ type VectorDatabaseChunkingParametersArgs struct {
 	ChunkSize pulumi.IntPtrInput `pulumi:"chunkSize"`
 	// The method used to chunk the data.
 	ChunkingMethod pulumi.StringPtrInput `pulumi:"chunkingMethod"`
+	// Whether DataRobot treats each row of the dataset as a finished chunk (custom chunking) instead of running the built-in chunker. Use this when the dataset is already pre-chunked. Defaults to false.
+	CustomChunking pulumi.BoolPtrInput `pulumi:"customChunking"`
 	// The id of the Embedding Model.
 	EmbeddingModel pulumi.StringPtrInput `pulumi:"embeddingModel"`
 	// Whether the separator is a regex.
@@ -14259,6 +14378,11 @@ func (o VectorDatabaseChunkingParametersOutput) ChunkingMethod() pulumi.StringPt
 	return o.ApplyT(func(v VectorDatabaseChunkingParameters) *string { return v.ChunkingMethod }).(pulumi.StringPtrOutput)
 }
 
+// Whether DataRobot treats each row of the dataset as a finished chunk (custom chunking) instead of running the built-in chunker. Use this when the dataset is already pre-chunked. Defaults to false.
+func (o VectorDatabaseChunkingParametersOutput) CustomChunking() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v VectorDatabaseChunkingParameters) *bool { return v.CustomChunking }).(pulumi.BoolPtrOutput)
+}
+
 // The id of the Embedding Model.
 func (o VectorDatabaseChunkingParametersOutput) EmbeddingModel() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v VectorDatabaseChunkingParameters) *string { return v.EmbeddingModel }).(pulumi.StringPtrOutput)
@@ -14326,6 +14450,16 @@ func (o VectorDatabaseChunkingParametersPtrOutput) ChunkingMethod() pulumi.Strin
 		}
 		return v.ChunkingMethod
 	}).(pulumi.StringPtrOutput)
+}
+
+// Whether DataRobot treats each row of the dataset as a finished chunk (custom chunking) instead of running the built-in chunker. Use this when the dataset is already pre-chunked. Defaults to false.
+func (o VectorDatabaseChunkingParametersPtrOutput) CustomChunking() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *VectorDatabaseChunkingParameters) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.CustomChunking
+	}).(pulumi.BoolPtrOutput)
 }
 
 // The id of the Embedding Model.
@@ -15041,10 +15175,10 @@ type WorkloadRuntimeContainerGroupContainerResourceAllocation struct {
 	Cpu *float64 `pulumi:"cpu"`
 	// GPUs allocated to this container.
 	Gpu *float64 `pulumi:"gpu"`
-	// GPU VRAM allocated in bytes.
-	GpuMemory *int `pulumi:"gpuMemory"`
-	// RAM allocated in bytes.
-	Memory *int `pulumi:"memory"`
+	// GPU VRAM allocated. Accepts human-readable strings (e.g. `"15GB"`, `"512MB"`, `"4096Mi"`) or raw byte integers. 1000-based suffixes: KB, MB, GB, TB. 1024-based suffixes: Ki/KiB, Mi/MiB, Gi/GiB.
+	GpuMemory *string `pulumi:"gpuMemory"`
+	// RAM allocated. Accepts human-readable strings (e.g. `"8GB"`, `"512MB"`, `"4096Mi"`) or raw byte integers. 1000-based suffixes: KB, MB, GB, TB. 1024-based suffixes: Ki/KiB, Mi/MiB, Gi/GiB.
+	Memory *string `pulumi:"memory"`
 }
 
 // WorkloadRuntimeContainerGroupContainerResourceAllocationInput is an input type that accepts WorkloadRuntimeContainerGroupContainerResourceAllocationArgs and WorkloadRuntimeContainerGroupContainerResourceAllocationOutput values.
@@ -15063,10 +15197,10 @@ type WorkloadRuntimeContainerGroupContainerResourceAllocationArgs struct {
 	Cpu pulumi.Float64PtrInput `pulumi:"cpu"`
 	// GPUs allocated to this container.
 	Gpu pulumi.Float64PtrInput `pulumi:"gpu"`
-	// GPU VRAM allocated in bytes.
-	GpuMemory pulumi.IntPtrInput `pulumi:"gpuMemory"`
-	// RAM allocated in bytes.
-	Memory pulumi.IntPtrInput `pulumi:"memory"`
+	// GPU VRAM allocated. Accepts human-readable strings (e.g. `"15GB"`, `"512MB"`, `"4096Mi"`) or raw byte integers. 1000-based suffixes: KB, MB, GB, TB. 1024-based suffixes: Ki/KiB, Mi/MiB, Gi/GiB.
+	GpuMemory pulumi.StringPtrInput `pulumi:"gpuMemory"`
+	// RAM allocated. Accepts human-readable strings (e.g. `"8GB"`, `"512MB"`, `"4096Mi"`) or raw byte integers. 1000-based suffixes: KB, MB, GB, TB. 1024-based suffixes: Ki/KiB, Mi/MiB, Gi/GiB.
+	Memory pulumi.StringPtrInput `pulumi:"memory"`
 }
 
 func (WorkloadRuntimeContainerGroupContainerResourceAllocationArgs) ElementType() reflect.Type {
@@ -15156,14 +15290,14 @@ func (o WorkloadRuntimeContainerGroupContainerResourceAllocationOutput) Gpu() pu
 	return o.ApplyT(func(v WorkloadRuntimeContainerGroupContainerResourceAllocation) *float64 { return v.Gpu }).(pulumi.Float64PtrOutput)
 }
 
-// GPU VRAM allocated in bytes.
-func (o WorkloadRuntimeContainerGroupContainerResourceAllocationOutput) GpuMemory() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v WorkloadRuntimeContainerGroupContainerResourceAllocation) *int { return v.GpuMemory }).(pulumi.IntPtrOutput)
+// GPU VRAM allocated. Accepts human-readable strings (e.g. `"15GB"`, `"512MB"`, `"4096Mi"`) or raw byte integers. 1000-based suffixes: KB, MB, GB, TB. 1024-based suffixes: Ki/KiB, Mi/MiB, Gi/GiB.
+func (o WorkloadRuntimeContainerGroupContainerResourceAllocationOutput) GpuMemory() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v WorkloadRuntimeContainerGroupContainerResourceAllocation) *string { return v.GpuMemory }).(pulumi.StringPtrOutput)
 }
 
-// RAM allocated in bytes.
-func (o WorkloadRuntimeContainerGroupContainerResourceAllocationOutput) Memory() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v WorkloadRuntimeContainerGroupContainerResourceAllocation) *int { return v.Memory }).(pulumi.IntPtrOutput)
+// RAM allocated. Accepts human-readable strings (e.g. `"8GB"`, `"512MB"`, `"4096Mi"`) or raw byte integers. 1000-based suffixes: KB, MB, GB, TB. 1024-based suffixes: Ki/KiB, Mi/MiB, Gi/GiB.
+func (o WorkloadRuntimeContainerGroupContainerResourceAllocationOutput) Memory() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v WorkloadRuntimeContainerGroupContainerResourceAllocation) *string { return v.Memory }).(pulumi.StringPtrOutput)
 }
 
 type WorkloadRuntimeContainerGroupContainerResourceAllocationPtrOutput struct{ *pulumi.OutputState }
@@ -15210,24 +15344,24 @@ func (o WorkloadRuntimeContainerGroupContainerResourceAllocationPtrOutput) Gpu()
 	}).(pulumi.Float64PtrOutput)
 }
 
-// GPU VRAM allocated in bytes.
-func (o WorkloadRuntimeContainerGroupContainerResourceAllocationPtrOutput) GpuMemory() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *WorkloadRuntimeContainerGroupContainerResourceAllocation) *int {
+// GPU VRAM allocated. Accepts human-readable strings (e.g. `"15GB"`, `"512MB"`, `"4096Mi"`) or raw byte integers. 1000-based suffixes: KB, MB, GB, TB. 1024-based suffixes: Ki/KiB, Mi/MiB, Gi/GiB.
+func (o WorkloadRuntimeContainerGroupContainerResourceAllocationPtrOutput) GpuMemory() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WorkloadRuntimeContainerGroupContainerResourceAllocation) *string {
 		if v == nil {
 			return nil
 		}
 		return v.GpuMemory
-	}).(pulumi.IntPtrOutput)
+	}).(pulumi.StringPtrOutput)
 }
 
-// RAM allocated in bytes.
-func (o WorkloadRuntimeContainerGroupContainerResourceAllocationPtrOutput) Memory() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *WorkloadRuntimeContainerGroupContainerResourceAllocation) *int {
+// RAM allocated. Accepts human-readable strings (e.g. `"8GB"`, `"512MB"`, `"4096Mi"`) or raw byte integers. 1000-based suffixes: KB, MB, GB, TB. 1024-based suffixes: Ki/KiB, Mi/MiB, Gi/GiB.
+func (o WorkloadRuntimeContainerGroupContainerResourceAllocationPtrOutput) Memory() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WorkloadRuntimeContainerGroupContainerResourceAllocation) *string {
 		if v == nil {
 			return nil
 		}
 		return v.Memory
-	}).(pulumi.IntPtrOutput)
+	}).(pulumi.StringPtrOutput)
 }
 
 func init() {
@@ -15390,6 +15524,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*NotificationChannelCustomHeaderArrayInput)(nil)).Elem(), NotificationChannelCustomHeaderArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NotificationChannelDrEntityInput)(nil)).Elem(), NotificationChannelDrEntityArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NotificationChannelDrEntityArrayInput)(nil)).Elem(), NotificationChannelDrEntityArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*QuotaDefaultRuleInput)(nil)).Elem(), QuotaDefaultRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*QuotaDefaultRuleArrayInput)(nil)).Elem(), QuotaDefaultRuleArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*RegisteredModelTagInput)(nil)).Elem(), RegisteredModelTagArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*RegisteredModelTagArrayInput)(nil)).Elem(), RegisteredModelTagArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*VectorDatabaseChunkingParametersInput)(nil)).Elem(), VectorDatabaseChunkingParametersArgs{})
@@ -15565,6 +15701,8 @@ func init() {
 	pulumi.RegisterOutputType(NotificationChannelCustomHeaderArrayOutput{})
 	pulumi.RegisterOutputType(NotificationChannelDrEntityOutput{})
 	pulumi.RegisterOutputType(NotificationChannelDrEntityArrayOutput{})
+	pulumi.RegisterOutputType(QuotaDefaultRuleOutput{})
+	pulumi.RegisterOutputType(QuotaDefaultRuleArrayOutput{})
 	pulumi.RegisterOutputType(RegisteredModelTagOutput{})
 	pulumi.RegisterOutputType(RegisteredModelTagArrayOutput{})
 	pulumi.RegisterOutputType(VectorDatabaseChunkingParametersOutput{})

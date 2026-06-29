@@ -26,16 +26,16 @@ namespace DataRobotPulumi.Datarobot.Inputs
         public Input<double>? Gpu { get; set; }
 
         /// <summary>
-        /// GPU VRAM allocated in bytes.
+        /// GPU VRAM allocated. Accepts human-readable strings (e.g. `"15GB"`, `"512MB"`, `"4096Mi"`) or raw byte integers. 1000-based suffixes: KB, MB, GB, TB. 1024-based suffixes: Ki/KiB, Mi/MiB, Gi/GiB.
         /// </summary>
         [Input("gpuMemory")]
-        public Input<int>? GpuMemory { get; set; }
+        public Input<string>? GpuMemory { get; set; }
 
         /// <summary>
-        /// RAM allocated in bytes.
+        /// RAM allocated. Accepts human-readable strings (e.g. `"8GB"`, `"512MB"`, `"4096Mi"`) or raw byte integers. 1000-based suffixes: KB, MB, GB, TB. 1024-based suffixes: Ki/KiB, Mi/MiB, Gi/GiB.
         /// </summary>
         [Input("memory")]
-        public Input<int>? Memory { get; set; }
+        public Input<string>? Memory { get; set; }
 
         public WorkloadRuntimeContainerGroupContainerResourceAllocationArgs()
         {

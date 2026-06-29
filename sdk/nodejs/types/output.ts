@@ -142,7 +142,7 @@ export interface ArtifactSpecContainerGroupContainerEnvironmentVar {
     /**
      * DataRobot credential ID. Required when source is "dr-credential".
      */
-    credentialId?: string;
+    drCredentialId?: string;
     /**
      * Key within the credential. Required when source is "dr-credential".
      */
@@ -1477,6 +1477,21 @@ export interface NotificationChannelDrEntity {
     name: string;
 }
 
+export interface QuotaDefaultRule {
+    /**
+     * The maximum allowed for `rule` within `window`.
+     */
+    limit: number;
+    /**
+     * The metric the rule limits, e.g. `requests` or `token`.
+     */
+    rule: string;
+    /**
+     * The time window the limit applies to: `min`, `hour`, or `day`.
+     */
+    window: string;
+}
+
 export interface RegisteredModelTag {
     /**
      * The name of the tag.
@@ -1501,6 +1516,10 @@ export interface VectorDatabaseChunkingParameters {
      * The method used to chunk the data.
      */
     chunkingMethod: string;
+    /**
+     * Whether DataRobot treats each row of the dataset as a finished chunk (custom chunking) instead of running the built-in chunker. Use this when the dataset is already pre-chunked. Defaults to false.
+     */
+    customChunking: boolean;
     /**
      * The id of the Embedding Model.
      */
@@ -1604,12 +1623,12 @@ export interface WorkloadRuntimeContainerGroupContainerResourceAllocation {
      */
     gpu?: number;
     /**
-     * GPU VRAM allocated in bytes.
+     * GPU VRAM allocated. Accepts human-readable strings (e.g. `"15GB"`, `"512MB"`, `"4096Mi"`) or raw byte integers. 1000-based suffixes: KB, MB, GB, TB. 1024-based suffixes: Ki/KiB, Mi/MiB, Gi/GiB.
      */
-    gpuMemory?: number;
+    gpuMemory?: string;
     /**
-     * RAM allocated in bytes.
+     * RAM allocated. Accepts human-readable strings (e.g. `"8GB"`, `"512MB"`, `"4096Mi"`) or raw byte integers. 1000-based suffixes: KB, MB, GB, TB. 1024-based suffixes: Ki/KiB, Mi/MiB, Gi/GiB.
      */
-    memory?: number;
+    memory?: string;
 }
 
