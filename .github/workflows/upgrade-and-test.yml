@@ -3,9 +3,9 @@ on:
   workflow_dispatch:
     inputs:
       target_bridge_version:
-        description: 'Pulumi TF Bridge target version (e.g. v3.106.0)'
+        description: 'Pulumi TF Bridge target version (e.g. v3.130.0)'
         required: false
-        default: 'v3.106.0'
+        default: 'v3.130.0'
         type: string
       test_version_suffix:
         description: 'Suffix for test version (e.g. test, rc1)'
