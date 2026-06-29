@@ -53,6 +53,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &CustomMetricJob{}
 	case "datarobot:index/customModel:CustomModel":
 		r = &CustomModel{}
+	case "datarobot:index/customModelFromVectorDatabase:CustomModelFromVectorDatabase":
+		r = &CustomModelFromVectorDatabase{}
 	case "datarobot:index/customModelLlmValidation:CustomModelLlmValidation":
 		r = &CustomModelLlmValidation{}
 	case "datarobot:index/datasetFromDatasource:DatasetFromDatasource":
@@ -89,6 +91,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &PredictionEnvironment{}
 	case "datarobot:index/qaApplication:QaApplication":
 		r = &QaApplication{}
+	case "datarobot:index/quota:Quota":
+		r = &Quota{}
 	case "datarobot:index/registeredModel:RegisteredModel":
 		r = &RegisteredModel{}
 	case "datarobot:index/registeredModelFromLeaderboard:RegisteredModelFromLeaderboard":
@@ -220,6 +224,11 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"datarobot",
+		"index/customModelFromVectorDatabase",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"datarobot",
 		"index/customModelLlmValidation",
 		&module{version},
 	)
@@ -306,6 +315,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"datarobot",
 		"index/qaApplication",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"datarobot",
+		"index/quota",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

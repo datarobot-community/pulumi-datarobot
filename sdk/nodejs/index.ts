@@ -85,6 +85,11 @@ export type CustomModel = import("./customModel").CustomModel;
 export const CustomModel: typeof import("./customModel").CustomModel = null as any;
 utilities.lazyLoad(exports, ["CustomModel"], () => require("./customModel"));
 
+export { CustomModelFromVectorDatabaseArgs, CustomModelFromVectorDatabaseState } from "./customModelFromVectorDatabase";
+export type CustomModelFromVectorDatabase = import("./customModelFromVectorDatabase").CustomModelFromVectorDatabase;
+export const CustomModelFromVectorDatabase: typeof import("./customModelFromVectorDatabase").CustomModelFromVectorDatabase = null as any;
+utilities.lazyLoad(exports, ["CustomModelFromVectorDatabase"], () => require("./customModelFromVectorDatabase"));
+
 export { CustomModelLlmValidationArgs, CustomModelLlmValidationState } from "./customModelLlmValidation";
 export type CustomModelLlmValidation = import("./customModelLlmValidation").CustomModelLlmValidation;
 export const CustomModelLlmValidation: typeof import("./customModelLlmValidation").CustomModelLlmValidation = null as any;
@@ -190,6 +195,11 @@ export type QaApplication = import("./qaApplication").QaApplication;
 export const QaApplication: typeof import("./qaApplication").QaApplication = null as any;
 utilities.lazyLoad(exports, ["QaApplication"], () => require("./qaApplication"));
 
+export { QuotaArgs, QuotaState } from "./quota";
+export type Quota = import("./quota").Quota;
+export const Quota: typeof import("./quota").Quota = null as any;
+utilities.lazyLoad(exports, ["Quota"], () => require("./quota"));
+
 export { RegisteredModelArgs, RegisteredModelState } from "./registeredModel";
 export type RegisteredModel = import("./registeredModel").RegisteredModel;
 export const RegisteredModel: typeof import("./registeredModel").RegisteredModel = null as any;
@@ -281,6 +291,8 @@ const _module = {
                 return new CustomMetricJob(name, <any>undefined, { urn })
             case "datarobot:index/customModel:CustomModel":
                 return new CustomModel(name, <any>undefined, { urn })
+            case "datarobot:index/customModelFromVectorDatabase:CustomModelFromVectorDatabase":
+                return new CustomModelFromVectorDatabase(name, <any>undefined, { urn })
             case "datarobot:index/customModelLlmValidation:CustomModelLlmValidation":
                 return new CustomModelLlmValidation(name, <any>undefined, { urn })
             case "datarobot:index/datasetFromDatasource:DatasetFromDatasource":
@@ -317,6 +329,8 @@ const _module = {
                 return new PredictionEnvironment(name, <any>undefined, { urn })
             case "datarobot:index/qaApplication:QaApplication":
                 return new QaApplication(name, <any>undefined, { urn })
+            case "datarobot:index/quota:Quota":
+                return new Quota(name, <any>undefined, { urn })
             case "datarobot:index/registeredModel:RegisteredModel":
                 return new RegisteredModel(name, <any>undefined, { urn })
             case "datarobot:index/registeredModelFromLeaderboard:RegisteredModelFromLeaderboard":
@@ -356,6 +370,7 @@ pulumi.runtime.registerResourceModule("datarobot", "index/customMetric", _module
 pulumi.runtime.registerResourceModule("datarobot", "index/customMetricFromJob", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/customMetricJob", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/customModel", _module)
+pulumi.runtime.registerResourceModule("datarobot", "index/customModelFromVectorDatabase", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/customModelLlmValidation", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/datasetFromDatasource", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/datasetFromFile", _module)
@@ -374,6 +389,7 @@ pulumi.runtime.registerResourceModule("datarobot", "index/notificationPolicy", _
 pulumi.runtime.registerResourceModule("datarobot", "index/playground", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/predictionEnvironment", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/qaApplication", _module)
+pulumi.runtime.registerResourceModule("datarobot", "index/quota", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/registeredModel", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/registeredModelFromLeaderboard", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/remoteRepository", _module)

@@ -176,6 +176,8 @@ __all__ = [
     'NotificationChannelCustomHeaderArgsDict',
     'NotificationChannelDrEntityArgs',
     'NotificationChannelDrEntityArgsDict',
+    'QuotaDefaultRuleArgs',
+    'QuotaDefaultRuleArgsDict',
     'RegisteredModelTagArgs',
     'RegisteredModelTagArgsDict',
     'VectorDatabaseChunkingParametersArgs',
@@ -837,7 +839,7 @@ if not MYPY:
         """
         Name of the environment variable.
         """
-        credential_id: NotRequired[pulumi.Input[builtins.str]]
+        dr_credential_id: NotRequired[pulumi.Input[builtins.str]]
         """
         DataRobot credential ID. Required when source is "dr-credential".
         """
@@ -860,20 +862,20 @@ elif False:
 class ArtifactSpecContainerGroupContainerEnvironmentVarArgs:
     def __init__(__self__, *,
                  name: pulumi.Input[builtins.str],
-                 credential_id: Optional[pulumi.Input[builtins.str]] = None,
+                 dr_credential_id: Optional[pulumi.Input[builtins.str]] = None,
                  key: Optional[pulumi.Input[builtins.str]] = None,
                  source: Optional[pulumi.Input[builtins.str]] = None,
                  value: Optional[pulumi.Input[builtins.str]] = None):
         """
         :param pulumi.Input[builtins.str] name: Name of the environment variable.
-        :param pulumi.Input[builtins.str] credential_id: DataRobot credential ID. Required when source is "dr-credential".
+        :param pulumi.Input[builtins.str] dr_credential_id: DataRobot credential ID. Required when source is "dr-credential".
         :param pulumi.Input[builtins.str] key: Key within the credential. Required when source is "dr-credential".
         :param pulumi.Input[builtins.str] source: Source type: "string" for plain text values, "dr-credential" for DataRobot credentials. Defaults to "string".
         :param pulumi.Input[builtins.str] value: Value of the environment variable. Required when source is "string".
         """
         pulumi.set(__self__, "name", name)
-        if credential_id is not None:
-            pulumi.set(__self__, "credential_id", credential_id)
+        if dr_credential_id is not None:
+            pulumi.set(__self__, "dr_credential_id", dr_credential_id)
         if key is not None:
             pulumi.set(__self__, "key", key)
         if source is not None:
@@ -894,16 +896,16 @@ class ArtifactSpecContainerGroupContainerEnvironmentVarArgs:
         pulumi.set(self, "name", value)
 
     @property
-    @pulumi.getter(name="credentialId")
-    def credential_id(self) -> Optional[pulumi.Input[builtins.str]]:
+    @pulumi.getter(name="drCredentialId")
+    def dr_credential_id(self) -> Optional[pulumi.Input[builtins.str]]:
         """
         DataRobot credential ID. Required when source is "dr-credential".
         """
-        return pulumi.get(self, "credential_id")
+        return pulumi.get(self, "dr_credential_id")
 
-    @credential_id.setter
-    def credential_id(self, value: Optional[pulumi.Input[builtins.str]]):
-        pulumi.set(self, "credential_id", value)
+    @dr_credential_id.setter
+    def dr_credential_id(self, value: Optional[pulumi.Input[builtins.str]]):
+        pulumi.set(self, "dr_credential_id", value)
 
     @property
     @pulumi.getter
@@ -7216,6 +7218,75 @@ class NotificationChannelDrEntityArgs:
 
 
 if not MYPY:
+    class QuotaDefaultRuleArgsDict(TypedDict):
+        limit: pulumi.Input[builtins.int]
+        """
+        The maximum allowed for `rule` within `window`.
+        """
+        rule: pulumi.Input[builtins.str]
+        """
+        The metric the rule limits, e.g. `requests` or `token`.
+        """
+        window: pulumi.Input[builtins.str]
+        """
+        The time window the limit applies to: `min`, `hour`, or `day`.
+        """
+elif False:
+    QuotaDefaultRuleArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class QuotaDefaultRuleArgs:
+    def __init__(__self__, *,
+                 limit: pulumi.Input[builtins.int],
+                 rule: pulumi.Input[builtins.str],
+                 window: pulumi.Input[builtins.str]):
+        """
+        :param pulumi.Input[builtins.int] limit: The maximum allowed for `rule` within `window`.
+        :param pulumi.Input[builtins.str] rule: The metric the rule limits, e.g. `requests` or `token`.
+        :param pulumi.Input[builtins.str] window: The time window the limit applies to: `min`, `hour`, or `day`.
+        """
+        pulumi.set(__self__, "limit", limit)
+        pulumi.set(__self__, "rule", rule)
+        pulumi.set(__self__, "window", window)
+
+    @property
+    @pulumi.getter
+    def limit(self) -> pulumi.Input[builtins.int]:
+        """
+        The maximum allowed for `rule` within `window`.
+        """
+        return pulumi.get(self, "limit")
+
+    @limit.setter
+    def limit(self, value: pulumi.Input[builtins.int]):
+        pulumi.set(self, "limit", value)
+
+    @property
+    @pulumi.getter
+    def rule(self) -> pulumi.Input[builtins.str]:
+        """
+        The metric the rule limits, e.g. `requests` or `token`.
+        """
+        return pulumi.get(self, "rule")
+
+    @rule.setter
+    def rule(self, value: pulumi.Input[builtins.str]):
+        pulumi.set(self, "rule", value)
+
+    @property
+    @pulumi.getter
+    def window(self) -> pulumi.Input[builtins.str]:
+        """
+        The time window the limit applies to: `min`, `hour`, or `day`.
+        """
+        return pulumi.get(self, "window")
+
+    @window.setter
+    def window(self, value: pulumi.Input[builtins.str]):
+        pulumi.set(self, "window", value)
+
+
+if not MYPY:
     class RegisteredModelTagArgsDict(TypedDict):
         name: pulumi.Input[builtins.str]
         """
@@ -7279,6 +7350,10 @@ if not MYPY:
         """
         The method used to chunk the data.
         """
+        custom_chunking: NotRequired[pulumi.Input[builtins.bool]]
+        """
+        Whether DataRobot treats each row of the dataset as a finished chunk (custom chunking) instead of running the built-in chunker. Use this when the dataset is already pre-chunked. Defaults to false.
+        """
         embedding_model: NotRequired[pulumi.Input[builtins.str]]
         """
         The id of the Embedding Model.
@@ -7300,6 +7375,7 @@ class VectorDatabaseChunkingParametersArgs:
                  chunk_overlap_percentage: Optional[pulumi.Input[builtins.int]] = None,
                  chunk_size: Optional[pulumi.Input[builtins.int]] = None,
                  chunking_method: Optional[pulumi.Input[builtins.str]] = None,
+                 custom_chunking: Optional[pulumi.Input[builtins.bool]] = None,
                  embedding_model: Optional[pulumi.Input[builtins.str]] = None,
                  is_separator_regex: Optional[pulumi.Input[builtins.bool]] = None,
                  separators: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.str]]]] = None):
@@ -7307,6 +7383,7 @@ class VectorDatabaseChunkingParametersArgs:
         :param pulumi.Input[builtins.int] chunk_overlap_percentage: The percentage of overlap between chunks.
         :param pulumi.Input[builtins.int] chunk_size: The size of the chunks.
         :param pulumi.Input[builtins.str] chunking_method: The method used to chunk the data.
+        :param pulumi.Input[builtins.bool] custom_chunking: Whether DataRobot treats each row of the dataset as a finished chunk (custom chunking) instead of running the built-in chunker. Use this when the dataset is already pre-chunked. Defaults to false.
         :param pulumi.Input[builtins.str] embedding_model: The id of the Embedding Model.
         :param pulumi.Input[builtins.bool] is_separator_regex: Whether the separator is a regex.
         :param pulumi.Input[Sequence[pulumi.Input[builtins.str]]] separators: The separators used to split the data.
@@ -7317,6 +7394,8 @@ class VectorDatabaseChunkingParametersArgs:
             pulumi.set(__self__, "chunk_size", chunk_size)
         if chunking_method is not None:
             pulumi.set(__self__, "chunking_method", chunking_method)
+        if custom_chunking is not None:
+            pulumi.set(__self__, "custom_chunking", custom_chunking)
         if embedding_model is not None:
             pulumi.set(__self__, "embedding_model", embedding_model)
         if is_separator_regex is not None:
@@ -7359,6 +7438,18 @@ class VectorDatabaseChunkingParametersArgs:
     @chunking_method.setter
     def chunking_method(self, value: Optional[pulumi.Input[builtins.str]]):
         pulumi.set(self, "chunking_method", value)
+
+    @property
+    @pulumi.getter(name="customChunking")
+    def custom_chunking(self) -> Optional[pulumi.Input[builtins.bool]]:
+        """
+        Whether DataRobot treats each row of the dataset as a finished chunk (custom chunking) instead of running the built-in chunker. Use this when the dataset is already pre-chunked. Defaults to false.
+        """
+        return pulumi.get(self, "custom_chunking")
+
+    @custom_chunking.setter
+    def custom_chunking(self, value: Optional[pulumi.Input[builtins.bool]]):
+        pulumi.set(self, "custom_chunking", value)
 
     @property
     @pulumi.getter(name="embeddingModel")
@@ -7781,13 +7872,13 @@ if not MYPY:
         """
         GPUs allocated to this container.
         """
-        gpu_memory: NotRequired[pulumi.Input[builtins.int]]
+        gpu_memory: NotRequired[pulumi.Input[builtins.str]]
         """
-        GPU VRAM allocated in bytes.
+        GPU VRAM allocated. Accepts human-readable strings (e.g. `"15GB"`, `"512MB"`, `"4096Mi"`) or raw byte integers. 1000-based suffixes: KB, MB, GB, TB. 1024-based suffixes: Ki/KiB, Mi/MiB, Gi/GiB.
         """
-        memory: NotRequired[pulumi.Input[builtins.int]]
+        memory: NotRequired[pulumi.Input[builtins.str]]
         """
-        RAM allocated in bytes.
+        RAM allocated. Accepts human-readable strings (e.g. `"8GB"`, `"512MB"`, `"4096Mi"`) or raw byte integers. 1000-based suffixes: KB, MB, GB, TB. 1024-based suffixes: Ki/KiB, Mi/MiB, Gi/GiB.
         """
 elif False:
     WorkloadRuntimeContainerGroupContainerResourceAllocationArgsDict: TypeAlias = Mapping[str, Any]
@@ -7797,13 +7888,13 @@ class WorkloadRuntimeContainerGroupContainerResourceAllocationArgs:
     def __init__(__self__, *,
                  cpu: Optional[pulumi.Input[builtins.float]] = None,
                  gpu: Optional[pulumi.Input[builtins.float]] = None,
-                 gpu_memory: Optional[pulumi.Input[builtins.int]] = None,
-                 memory: Optional[pulumi.Input[builtins.int]] = None):
+                 gpu_memory: Optional[pulumi.Input[builtins.str]] = None,
+                 memory: Optional[pulumi.Input[builtins.str]] = None):
         """
         :param pulumi.Input[builtins.float] cpu: CPU cores allocated to this container.
         :param pulumi.Input[builtins.float] gpu: GPUs allocated to this container.
-        :param pulumi.Input[builtins.int] gpu_memory: GPU VRAM allocated in bytes.
-        :param pulumi.Input[builtins.int] memory: RAM allocated in bytes.
+        :param pulumi.Input[builtins.str] gpu_memory: GPU VRAM allocated. Accepts human-readable strings (e.g. `"15GB"`, `"512MB"`, `"4096Mi"`) or raw byte integers. 1000-based suffixes: KB, MB, GB, TB. 1024-based suffixes: Ki/KiB, Mi/MiB, Gi/GiB.
+        :param pulumi.Input[builtins.str] memory: RAM allocated. Accepts human-readable strings (e.g. `"8GB"`, `"512MB"`, `"4096Mi"`) or raw byte integers. 1000-based suffixes: KB, MB, GB, TB. 1024-based suffixes: Ki/KiB, Mi/MiB, Gi/GiB.
         """
         if cpu is not None:
             pulumi.set(__self__, "cpu", cpu)
@@ -7840,26 +7931,26 @@ class WorkloadRuntimeContainerGroupContainerResourceAllocationArgs:
 
     @property
     @pulumi.getter(name="gpuMemory")
-    def gpu_memory(self) -> Optional[pulumi.Input[builtins.int]]:
+    def gpu_memory(self) -> Optional[pulumi.Input[builtins.str]]:
         """
-        GPU VRAM allocated in bytes.
+        GPU VRAM allocated. Accepts human-readable strings (e.g. `"15GB"`, `"512MB"`, `"4096Mi"`) or raw byte integers. 1000-based suffixes: KB, MB, GB, TB. 1024-based suffixes: Ki/KiB, Mi/MiB, Gi/GiB.
         """
         return pulumi.get(self, "gpu_memory")
 
     @gpu_memory.setter
-    def gpu_memory(self, value: Optional[pulumi.Input[builtins.int]]):
+    def gpu_memory(self, value: Optional[pulumi.Input[builtins.str]]):
         pulumi.set(self, "gpu_memory", value)
 
     @property
     @pulumi.getter
-    def memory(self) -> Optional[pulumi.Input[builtins.int]]:
+    def memory(self) -> Optional[pulumi.Input[builtins.str]]:
         """
-        RAM allocated in bytes.
+        RAM allocated. Accepts human-readable strings (e.g. `"8GB"`, `"512MB"`, `"4096Mi"`) or raw byte integers. 1000-based suffixes: KB, MB, GB, TB. 1024-based suffixes: Ki/KiB, Mi/MiB, Gi/GiB.
         """
         return pulumi.get(self, "memory")
 
     @memory.setter
-    def memory(self, value: Optional[pulumi.Input[builtins.int]]):
+    def memory(self, value: Optional[pulumi.Input[builtins.str]]):
         pulumi.set(self, "memory", value)
 
 

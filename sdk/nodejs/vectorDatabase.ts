@@ -29,7 +29,7 @@ import * as utilities from "./utilities";
  * //   chunk_overlap_percentage = 0
  * //   chunk_size               = 512
  * //   chunking_method          = "recursive"
- * //   embedding_model          = "jinaai/jina-embedding-t-en-v1"
+ * //   embedding_model          = "intfloat/e5-large-v2"
  * //   separators               = ["\n", " "]
  * // }
  * export const exampleId = exampleVectorDatabase.id;

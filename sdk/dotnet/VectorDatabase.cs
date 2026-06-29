@@ -48,7 +48,7 @@ namespace DataRobotPulumi.Datarobot
     ///     //   chunk_overlap_percentage = 0
     ///     //   chunk_size               = 512
     ///     //   chunking_method          = "recursive"
-    ///     //   embedding_model          = "jinaai/jina-embedding-t-en-v1"
+    ///     //   embedding_model          = "intfloat/e5-large-v2"
     ///     //   separators               = ["\n", " "]
     ///     // }
     ///     return new Dictionary&lt;string, object?&gt;

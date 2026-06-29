@@ -32,6 +32,12 @@ namespace DataRobotPulumi.Datarobot.Inputs
         public Input<string>? ChunkingMethod { get; set; }
 
         /// <summary>
+        /// Whether DataRobot treats each row of the dataset as a finished chunk (custom chunking) instead of running the built-in chunker. Use this when the dataset is already pre-chunked. Defaults to false.
+        /// </summary>
+        [Input("customChunking")]
+        public Input<bool>? CustomChunking { get; set; }
+
+        /// <summary>
         /// The id of the Embedding Model.
         /// </summary>
         [Input("embeddingModel")]

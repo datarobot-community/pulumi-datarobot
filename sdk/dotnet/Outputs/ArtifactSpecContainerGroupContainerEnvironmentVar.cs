@@ -17,7 +17,7 @@ namespace DataRobotPulumi.Datarobot.Outputs
         /// <summary>
         /// DataRobot credential ID. Required when source is "dr-credential".
         /// </summary>
-        public readonly string? CredentialId;
+        public readonly string? DrCredentialId;
         /// <summary>
         /// Key within the credential. Required when source is "dr-credential".
         /// </summary>
@@ -37,7 +37,7 @@ namespace DataRobotPulumi.Datarobot.Outputs
 
         [OutputConstructor]
         private ArtifactSpecContainerGroupContainerEnvironmentVar(
-            string? credentialId,
+            string? drCredentialId,
 
             string? key,
 
@@ -47,7 +47,7 @@ namespace DataRobotPulumi.Datarobot.Outputs
 
             string? value)
         {
-            CredentialId = credentialId;
+            DrCredentialId = drCredentialId;
             Key = key;
             Name = name;
             Source = source;

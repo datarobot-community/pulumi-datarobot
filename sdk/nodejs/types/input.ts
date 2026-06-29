@@ -142,7 +142,7 @@ export interface ArtifactSpecContainerGroupContainerEnvironmentVar {
     /**
      * DataRobot credential ID. Required when source is "dr-credential".
      */
-    credentialId?: pulumi.Input<string>;
+    drCredentialId?: pulumi.Input<string>;
     /**
      * Key within the credential. Required when source is "dr-credential".
      */
@@ -1477,6 +1477,21 @@ export interface NotificationChannelDrEntity {
     name: pulumi.Input<string>;
 }
 
+export interface QuotaDefaultRule {
+    /**
+     * The maximum allowed for `rule` within `window`.
+     */
+    limit: pulumi.Input<number>;
+    /**
+     * The metric the rule limits, e.g. `requests` or `token`.
+     */
+    rule: pulumi.Input<string>;
+    /**
+     * The time window the limit applies to: `min`, `hour`, or `day`.
+     */
+    window: pulumi.Input<string>;
+}
+
 export interface RegisteredModelTag {
     /**
      * The name of the tag.
@@ -1501,6 +1516,10 @@ export interface VectorDatabaseChunkingParameters {
      * The method used to chunk the data.
      */
     chunkingMethod?: pulumi.Input<string>;
+    /**
+     * Whether DataRobot treats each row of the dataset as a finished chunk (custom chunking) instead of running the built-in chunker. Use this when the dataset is already pre-chunked. Defaults to false.
+     */
+    customChunking?: pulumi.Input<boolean>;
     /**
      * The id of the Embedding Model.
      */
@@ -1604,11 +1623,11 @@ export interface WorkloadRuntimeContainerGroupContainerResourceAllocation {
      */
     gpu?: pulumi.Input<number>;
     /**
-     * GPU VRAM allocated in bytes.
+     * GPU VRAM allocated. Accepts human-readable strings (e.g. `"15GB"`, `"512MB"`, `"4096Mi"`) or raw byte integers. 1000-based suffixes: KB, MB, GB, TB. 1024-based suffixes: Ki/KiB, Mi/MiB, Gi/GiB.
      */
-    gpuMemory?: pulumi.Input<number>;
+    gpuMemory?: pulumi.Input<string>;
     /**
-     * RAM allocated in bytes.
+     * RAM allocated. Accepts human-readable strings (e.g. `"8GB"`, `"512MB"`, `"4096Mi"`) or raw byte integers. 1000-based suffixes: KB, MB, GB, TB. 1024-based suffixes: Ki/KiB, Mi/MiB, Gi/GiB.
      */
-    memory?: pulumi.Input<number>;
+    memory?: pulumi.Input<string>;
 }

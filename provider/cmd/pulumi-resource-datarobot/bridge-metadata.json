@@ -240,6 +240,9 @@
                     }
                 }
             },
+            "datarobot_custom_model_from_vector_database": {
+                "current": "datarobot:index/customModelFromVectorDatabase:CustomModelFromVectorDatabase"
+            },
             "datarobot_custom_model_llm_validation": {
                 "current": "datarobot:index/customModelLlmValidation:CustomModelLlmValidation"
             },
@@ -458,6 +461,14 @@
                 "current": "datarobot:index/qaApplication:QaApplication",
                 "fields": {
                     "external_access_recipients": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "datarobot_quota": {
+                "current": "datarobot:index/quota:Quota",
+                "fields": {
+                    "default_rules": {
                         "maxItemsOne": false
                     }
                 }
