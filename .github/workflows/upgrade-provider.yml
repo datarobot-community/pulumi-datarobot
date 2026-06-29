@@ -32,7 +32,7 @@ jobs:
     - name: Call upgrade provider action
       uses: pulumi/pulumi-upgrade-provider-action@v0.0.19
       with:
-        target-bridge-version: 'v3.106.0'
+        target-bridge-version: 'v3.130.0'
     - name: Fetch upstream Terraform provider latest release
       id: upstream
       env:
