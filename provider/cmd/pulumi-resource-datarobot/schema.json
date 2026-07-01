@@ -6697,23 +6697,59 @@
     "datarobot:index/memorySpace:MemorySpace": {
       "description": "Memory Space is a DataRobot concept that serves as a logical container for Chat Histories (Sessions) and persistent Memories. Feature should be enabled before use with `ENABLE_AGENTIC_MEMORY_API` flag.\n\n## Example Usage\n\n<!--Start PulumiCodeChooser -->\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@datarobot/pulumi-datarobot\";\n\nconst example = new datarobot.MemorySpace(\"example\", {description: \"My workspace memories\"});\nexport const datarobotMemorySpaceId = example.id;\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample = datarobot.MemorySpace(\"example\", description=\"My workspace memories\")\npulumi.export(\"datarobotMemorySpaceId\", example.id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = DataRobotPulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() => \n{\n    var example = new Datarobot.MemorySpace(\"example\", new()\n    {\n        Description = \"My workspace memories\",\n    });\n\n    return new Dictionary<string, object?>\n    {\n        [\"datarobotMemorySpaceId\"] = example.Id,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texample, err := datarobot.NewMemorySpace(ctx, \"example\", &datarobot.MemorySpaceArgs{\n\t\t\tDescription: pulumi.String(\"My workspace memories\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"datarobotMemorySpaceId\", example.ID())\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.MemorySpace;\nimport com.pulumi.datarobot.MemorySpaceArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new MemorySpace(\"example\", MemorySpaceArgs.builder()\n            .description(\"My workspace memories\")\n            .build());\n\n        ctx.export(\"datarobotMemorySpaceId\", example.id());\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: datarobot:MemorySpace\n    properties:\n      description: My workspace memories\noutputs:\n  datarobotMemorySpaceId: ${example.id}\n```\n<!--End PulumiCodeChooser -->\n",
       "properties": {
+        "customInstructions": {
+          "type": "string",
+          "description": "Custom prompt instructions for fact extraction (maximum 10,000 characters). `None` means the default memory extraction prompt is used.\n"
+        },
         "description": {
           "type": "string",
-          "description": "The description of the Memory Space.\n"
+          "description": "A human-readable description.\n"
+        },
+        "llmBaseUrl": {
+          "type": "string",
+          "description": "The chat API URL used for memory extraction. The memory service uses the DataRobot LLM gateway by default; set this only when the default does not work — for example, in air-gapped environments or when the required LLM model is not provided by the gateway and cannot be added.\n"
+        },
+        "llmModelName": {
+          "type": "string",
+          "description": "An LLM model name associated with the memory space (maximum 200 characters). Non-reasoning models are recommended. Reasoning-capable models are significantly slower for fact extraction without producing meaningfully better results.\n"
         }
       },
       "inputProperties": {
+        "customInstructions": {
+          "type": "string",
+          "description": "Custom prompt instructions for fact extraction (maximum 10,000 characters). `None` means the default memory extraction prompt is used.\n"
+        },
         "description": {
           "type": "string",
-          "description": "The description of the Memory Space.\n"
+          "description": "A human-readable description.\n"
+        },
+        "llmBaseUrl": {
+          "type": "string",
+          "description": "The chat API URL used for memory extraction. The memory service uses the DataRobot LLM gateway by default; set this only when the default does not work — for example, in air-gapped environments or when the required LLM model is not provided by the gateway and cannot be added.\n"
+        },
+        "llmModelName": {
+          "type": "string",
+          "description": "An LLM model name associated with the memory space (maximum 200 characters). Non-reasoning models are recommended. Reasoning-capable models are significantly slower for fact extraction without producing meaningfully better results.\n"
         }
       },
       "stateInputs": {
         "description": "Input properties used for looking up and filtering MemorySpace resources.\n",
         "properties": {
+          "customInstructions": {
+            "type": "string",
+            "description": "Custom prompt instructions for fact extraction (maximum 10,000 characters). `None` means the default memory extraction prompt is used.\n"
+          },
           "description": {
             "type": "string",
-            "description": "The description of the Memory Space.\n"
+            "description": "A human-readable description.\n"
+          },
+          "llmBaseUrl": {
+            "type": "string",
+            "description": "The chat API URL used for memory extraction. The memory service uses the DataRobot LLM gateway by default; set this only when the default does not work — for example, in air-gapped environments or when the required LLM model is not provided by the gateway and cannot be added.\n"
+          },
+          "llmModelName": {
+            "type": "string",
+            "description": "An LLM model name associated with the memory space (maximum 200 characters). Non-reasoning models are recommended. Reasoning-capable models are significantly slower for fact extraction without producing meaningfully better results.\n"
           }
         },
         "type": "object"
