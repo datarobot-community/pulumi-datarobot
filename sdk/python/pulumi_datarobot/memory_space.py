@@ -20,49 +20,145 @@ __all__ = ['MemorySpaceArgs', 'MemorySpace']
 @pulumi.input_type
 class MemorySpaceArgs:
     def __init__(__self__, *,
-                 description: Optional[pulumi.Input[builtins.str]] = None):
+                 custom_instructions: Optional[pulumi.Input[builtins.str]] = None,
+                 description: Optional[pulumi.Input[builtins.str]] = None,
+                 llm_base_url: Optional[pulumi.Input[builtins.str]] = None,
+                 llm_model_name: Optional[pulumi.Input[builtins.str]] = None):
         """
         The set of arguments for constructing a MemorySpace resource.
-        :param pulumi.Input[builtins.str] description: The description of the Memory Space.
+        :param pulumi.Input[builtins.str] custom_instructions: Custom prompt instructions for fact extraction (maximum 10,000 characters). `None` means the default memory extraction prompt is used.
+        :param pulumi.Input[builtins.str] description: A human-readable description.
+        :param pulumi.Input[builtins.str] llm_base_url: The chat API URL used for memory extraction. The memory service uses the DataRobot LLM gateway by default; set this only when the default does not work — for example, in air-gapped environments or when the required LLM model is not provided by the gateway and cannot be added.
+        :param pulumi.Input[builtins.str] llm_model_name: An LLM model name associated with the memory space (maximum 200 characters). Non-reasoning models are recommended. Reasoning-capable models are significantly slower for fact extraction without producing meaningfully better results.
         """
+        if custom_instructions is not None:
+            pulumi.set(__self__, "custom_instructions", custom_instructions)
         if description is not None:
             pulumi.set(__self__, "description", description)
+        if llm_base_url is not None:
+            pulumi.set(__self__, "llm_base_url", llm_base_url)
+        if llm_model_name is not None:
+            pulumi.set(__self__, "llm_model_name", llm_model_name)
+
+    @property
+    @pulumi.getter(name="customInstructions")
+    def custom_instructions(self) -> Optional[pulumi.Input[builtins.str]]:
+        """
+        Custom prompt instructions for fact extraction (maximum 10,000 characters). `None` means the default memory extraction prompt is used.
+        """
+        return pulumi.get(self, "custom_instructions")
+
+    @custom_instructions.setter
+    def custom_instructions(self, value: Optional[pulumi.Input[builtins.str]]):
+        pulumi.set(self, "custom_instructions", value)
 
     @property
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[builtins.str]]:
         """
-        The description of the Memory Space.
+        A human-readable description.
         """
         return pulumi.get(self, "description")
 
     @description.setter
     def description(self, value: Optional[pulumi.Input[builtins.str]]):
         pulumi.set(self, "description", value)
+
+    @property
+    @pulumi.getter(name="llmBaseUrl")
+    def llm_base_url(self) -> Optional[pulumi.Input[builtins.str]]:
+        """
+        The chat API URL used for memory extraction. The memory service uses the DataRobot LLM gateway by default; set this only when the default does not work — for example, in air-gapped environments or when the required LLM model is not provided by the gateway and cannot be added.
+        """
+        return pulumi.get(self, "llm_base_url")
+
+    @llm_base_url.setter
+    def llm_base_url(self, value: Optional[pulumi.Input[builtins.str]]):
+        pulumi.set(self, "llm_base_url", value)
+
+    @property
+    @pulumi.getter(name="llmModelName")
+    def llm_model_name(self) -> Optional[pulumi.Input[builtins.str]]:
+        """
+        An LLM model name associated with the memory space (maximum 200 characters). Non-reasoning models are recommended. Reasoning-capable models are significantly slower for fact extraction without producing meaningfully better results.
+        """
+        return pulumi.get(self, "llm_model_name")
+
+    @llm_model_name.setter
+    def llm_model_name(self, value: Optional[pulumi.Input[builtins.str]]):
+        pulumi.set(self, "llm_model_name", value)
 
 
 @pulumi.input_type
 class _MemorySpaceState:
     def __init__(__self__, *,
-                 description: Optional[pulumi.Input[builtins.str]] = None):
+                 custom_instructions: Optional[pulumi.Input[builtins.str]] = None,
+                 description: Optional[pulumi.Input[builtins.str]] = None,
+                 llm_base_url: Optional[pulumi.Input[builtins.str]] = None,
+                 llm_model_name: Optional[pulumi.Input[builtins.str]] = None):
         """
         Input properties used for looking up and filtering MemorySpace resources.
-        :param pulumi.Input[builtins.str] description: The description of the Memory Space.
+        :param pulumi.Input[builtins.str] custom_instructions: Custom prompt instructions for fact extraction (maximum 10,000 characters). `None` means the default memory extraction prompt is used.
+        :param pulumi.Input[builtins.str] description: A human-readable description.
+        :param pulumi.Input[builtins.str] llm_base_url: The chat API URL used for memory extraction. The memory service uses the DataRobot LLM gateway by default; set this only when the default does not work — for example, in air-gapped environments or when the required LLM model is not provided by the gateway and cannot be added.
+        :param pulumi.Input[builtins.str] llm_model_name: An LLM model name associated with the memory space (maximum 200 characters). Non-reasoning models are recommended. Reasoning-capable models are significantly slower for fact extraction without producing meaningfully better results.
         """
+        if custom_instructions is not None:
+            pulumi.set(__self__, "custom_instructions", custom_instructions)
         if description is not None:
             pulumi.set(__self__, "description", description)
+        if llm_base_url is not None:
+            pulumi.set(__self__, "llm_base_url", llm_base_url)
+        if llm_model_name is not None:
+            pulumi.set(__self__, "llm_model_name", llm_model_name)
+
+    @property
+    @pulumi.getter(name="customInstructions")
+    def custom_instructions(self) -> Optional[pulumi.Input[builtins.str]]:
+        """
+        Custom prompt instructions for fact extraction (maximum 10,000 characters). `None` means the default memory extraction prompt is used.
+        """
+        return pulumi.get(self, "custom_instructions")
+
+    @custom_instructions.setter
+    def custom_instructions(self, value: Optional[pulumi.Input[builtins.str]]):
+        pulumi.set(self, "custom_instructions", value)
 
     @property
     @pulumi.getter
     def description(self) -> Optional[pulumi.Input[builtins.str]]:
         """
-        The description of the Memory Space.
+        A human-readable description.
         """
         return pulumi.get(self, "description")
 
     @description.setter
     def description(self, value: Optional[pulumi.Input[builtins.str]]):
         pulumi.set(self, "description", value)
+
+    @property
+    @pulumi.getter(name="llmBaseUrl")
+    def llm_base_url(self) -> Optional[pulumi.Input[builtins.str]]:
+        """
+        The chat API URL used for memory extraction. The memory service uses the DataRobot LLM gateway by default; set this only when the default does not work — for example, in air-gapped environments or when the required LLM model is not provided by the gateway and cannot be added.
+        """
+        return pulumi.get(self, "llm_base_url")
+
+    @llm_base_url.setter
+    def llm_base_url(self, value: Optional[pulumi.Input[builtins.str]]):
+        pulumi.set(self, "llm_base_url", value)
+
+    @property
+    @pulumi.getter(name="llmModelName")
+    def llm_model_name(self) -> Optional[pulumi.Input[builtins.str]]:
+        """
+        An LLM model name associated with the memory space (maximum 200 characters). Non-reasoning models are recommended. Reasoning-capable models are significantly slower for fact extraction without producing meaningfully better results.
+        """
+        return pulumi.get(self, "llm_model_name")
+
+    @llm_model_name.setter
+    def llm_model_name(self, value: Optional[pulumi.Input[builtins.str]]):
+        pulumi.set(self, "llm_model_name", value)
 
 
 class MemorySpace(pulumi.CustomResource):
@@ -70,7 +166,10 @@ class MemorySpace(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 custom_instructions: Optional[pulumi.Input[builtins.str]] = None,
                  description: Optional[pulumi.Input[builtins.str]] = None,
+                 llm_base_url: Optional[pulumi.Input[builtins.str]] = None,
+                 llm_model_name: Optional[pulumi.Input[builtins.str]] = None,
                  __props__=None):
         """
         Memory Space is a DataRobot concept that serves as a logical container for Chat Histories (Sessions) and persistent Memories. Feature should be enabled before use with `ENABLE_AGENTIC_MEMORY_API` flag.
@@ -87,7 +186,10 @@ class MemorySpace(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[builtins.str] description: The description of the Memory Space.
+        :param pulumi.Input[builtins.str] custom_instructions: Custom prompt instructions for fact extraction (maximum 10,000 characters). `None` means the default memory extraction prompt is used.
+        :param pulumi.Input[builtins.str] description: A human-readable description.
+        :param pulumi.Input[builtins.str] llm_base_url: The chat API URL used for memory extraction. The memory service uses the DataRobot LLM gateway by default; set this only when the default does not work — for example, in air-gapped environments or when the required LLM model is not provided by the gateway and cannot be added.
+        :param pulumi.Input[builtins.str] llm_model_name: An LLM model name associated with the memory space (maximum 200 characters). Non-reasoning models are recommended. Reasoning-capable models are significantly slower for fact extraction without producing meaningfully better results.
         """
         ...
     @overload
@@ -123,7 +225,10 @@ class MemorySpace(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 custom_instructions: Optional[pulumi.Input[builtins.str]] = None,
                  description: Optional[pulumi.Input[builtins.str]] = None,
+                 llm_base_url: Optional[pulumi.Input[builtins.str]] = None,
+                 llm_model_name: Optional[pulumi.Input[builtins.str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -133,7 +238,10 @@ class MemorySpace(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = MemorySpaceArgs.__new__(MemorySpaceArgs)
 
+            __props__.__dict__["custom_instructions"] = custom_instructions
             __props__.__dict__["description"] = description
+            __props__.__dict__["llm_base_url"] = llm_base_url
+            __props__.__dict__["llm_model_name"] = llm_model_name
         super(MemorySpace, __self__).__init__(
             'datarobot:index/memorySpace:MemorySpace',
             resource_name,
@@ -144,7 +252,10 @@ class MemorySpace(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            description: Optional[pulumi.Input[builtins.str]] = None) -> 'MemorySpace':
+            custom_instructions: Optional[pulumi.Input[builtins.str]] = None,
+            description: Optional[pulumi.Input[builtins.str]] = None,
+            llm_base_url: Optional[pulumi.Input[builtins.str]] = None,
+            llm_model_name: Optional[pulumi.Input[builtins.str]] = None) -> 'MemorySpace':
         """
         Get an existing MemorySpace resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -152,20 +263,50 @@ class MemorySpace(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[builtins.str] description: The description of the Memory Space.
+        :param pulumi.Input[builtins.str] custom_instructions: Custom prompt instructions for fact extraction (maximum 10,000 characters). `None` means the default memory extraction prompt is used.
+        :param pulumi.Input[builtins.str] description: A human-readable description.
+        :param pulumi.Input[builtins.str] llm_base_url: The chat API URL used for memory extraction. The memory service uses the DataRobot LLM gateway by default; set this only when the default does not work — for example, in air-gapped environments or when the required LLM model is not provided by the gateway and cannot be added.
+        :param pulumi.Input[builtins.str] llm_model_name: An LLM model name associated with the memory space (maximum 200 characters). Non-reasoning models are recommended. Reasoning-capable models are significantly slower for fact extraction without producing meaningfully better results.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = _MemorySpaceState.__new__(_MemorySpaceState)
 
+        __props__.__dict__["custom_instructions"] = custom_instructions
         __props__.__dict__["description"] = description
+        __props__.__dict__["llm_base_url"] = llm_base_url
+        __props__.__dict__["llm_model_name"] = llm_model_name
         return MemorySpace(resource_name, opts=opts, __props__=__props__)
+
+    @property
+    @pulumi.getter(name="customInstructions")
+    def custom_instructions(self) -> pulumi.Output[Optional[builtins.str]]:
+        """
+        Custom prompt instructions for fact extraction (maximum 10,000 characters). `None` means the default memory extraction prompt is used.
+        """
+        return pulumi.get(self, "custom_instructions")
 
     @property
     @pulumi.getter
     def description(self) -> pulumi.Output[Optional[builtins.str]]:
         """
-        The description of the Memory Space.
+        A human-readable description.
         """
         return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter(name="llmBaseUrl")
+    def llm_base_url(self) -> pulumi.Output[Optional[builtins.str]]:
+        """
+        The chat API URL used for memory extraction. The memory service uses the DataRobot LLM gateway by default; set this only when the default does not work — for example, in air-gapped environments or when the required LLM model is not provided by the gateway and cannot be added.
+        """
+        return pulumi.get(self, "llm_base_url")
+
+    @property
+    @pulumi.getter(name="llmModelName")
+    def llm_model_name(self) -> pulumi.Output[Optional[builtins.str]]:
+        """
+        An LLM model name associated with the memory space (maximum 200 characters). Non-reasoning models are recommended. Reasoning-capable models are significantly slower for fact extraction without producing meaningfully better results.
+        """
+        return pulumi.get(self, "llm_model_name")
 

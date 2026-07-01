@@ -39,10 +39,28 @@ namespace DataRobotPulumi.Datarobot
     public partial class MemorySpace : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// The description of the Memory Space.
+        /// Custom prompt instructions for fact extraction (maximum 10,000 characters). `None` means the default memory extraction prompt is used.
+        /// </summary>
+        [Output("customInstructions")]
+        public Output<string?> CustomInstructions { get; private set; } = null!;
+
+        /// <summary>
+        /// A human-readable description.
         /// </summary>
         [Output("description")]
         public Output<string?> Description { get; private set; } = null!;
+
+        /// <summary>
+        /// The chat API URL used for memory extraction. The memory service uses the DataRobot LLM gateway by default; set this only when the default does not work — for example, in air-gapped environments or when the required LLM model is not provided by the gateway and cannot be added.
+        /// </summary>
+        [Output("llmBaseUrl")]
+        public Output<string?> LlmBaseUrl { get; private set; } = null!;
+
+        /// <summary>
+        /// An LLM model name associated with the memory space (maximum 200 characters). Non-reasoning models are recommended. Reasoning-capable models are significantly slower for fact extraction without producing meaningfully better results.
+        /// </summary>
+        [Output("llmModelName")]
+        public Output<string?> LlmModelName { get; private set; } = null!;
 
 
         /// <summary>
@@ -92,10 +110,28 @@ namespace DataRobotPulumi.Datarobot
     public sealed class MemorySpaceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The description of the Memory Space.
+        /// Custom prompt instructions for fact extraction (maximum 10,000 characters). `None` means the default memory extraction prompt is used.
+        /// </summary>
+        [Input("customInstructions")]
+        public Input<string>? CustomInstructions { get; set; }
+
+        /// <summary>
+        /// A human-readable description.
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
+
+        /// <summary>
+        /// The chat API URL used for memory extraction. The memory service uses the DataRobot LLM gateway by default; set this only when the default does not work — for example, in air-gapped environments or when the required LLM model is not provided by the gateway and cannot be added.
+        /// </summary>
+        [Input("llmBaseUrl")]
+        public Input<string>? LlmBaseUrl { get; set; }
+
+        /// <summary>
+        /// An LLM model name associated with the memory space (maximum 200 characters). Non-reasoning models are recommended. Reasoning-capable models are significantly slower for fact extraction without producing meaningfully better results.
+        /// </summary>
+        [Input("llmModelName")]
+        public Input<string>? LlmModelName { get; set; }
 
         public MemorySpaceArgs()
         {
@@ -106,10 +142,28 @@ namespace DataRobotPulumi.Datarobot
     public sealed class MemorySpaceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The description of the Memory Space.
+        /// Custom prompt instructions for fact extraction (maximum 10,000 characters). `None` means the default memory extraction prompt is used.
+        /// </summary>
+        [Input("customInstructions")]
+        public Input<string>? CustomInstructions { get; set; }
+
+        /// <summary>
+        /// A human-readable description.
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
+
+        /// <summary>
+        /// The chat API URL used for memory extraction. The memory service uses the DataRobot LLM gateway by default; set this only when the default does not work — for example, in air-gapped environments or when the required LLM model is not provided by the gateway and cannot be added.
+        /// </summary>
+        [Input("llmBaseUrl")]
+        public Input<string>? LlmBaseUrl { get; set; }
+
+        /// <summary>
+        /// An LLM model name associated with the memory space (maximum 200 characters). Non-reasoning models are recommended. Reasoning-capable models are significantly slower for fact extraction without producing meaningfully better results.
+        /// </summary>
+        [Input("llmModelName")]
+        public Input<string>? LlmModelName { get; set; }
 
         public MemorySpaceState()
         {
