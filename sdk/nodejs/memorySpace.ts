@@ -46,9 +46,21 @@ export class MemorySpace extends pulumi.CustomResource {
     }
 
     /**
-     * The description of the Memory Space.
+     * Custom prompt instructions for fact extraction (maximum 10,000 characters). `None` means the default memory extraction prompt is used.
+     */
+    public readonly customInstructions!: pulumi.Output<string | undefined>;
+    /**
+     * A human-readable description.
      */
     public readonly description!: pulumi.Output<string | undefined>;
+    /**
+     * The chat API URL used for memory extraction. The memory service uses the DataRobot LLM gateway by default; set this only when the default does not work — for example, in air-gapped environments or when the required LLM model is not provided by the gateway and cannot be added.
+     */
+    public readonly llmBaseUrl!: pulumi.Output<string | undefined>;
+    /**
+     * An LLM model name associated with the memory space (maximum 200 characters). Non-reasoning models are recommended. Reasoning-capable models are significantly slower for fact extraction without producing meaningfully better results.
+     */
+    public readonly llmModelName!: pulumi.Output<string | undefined>;
 
     /**
      * Create a MemorySpace resource with the given unique name, arguments, and options.
@@ -63,10 +75,16 @@ export class MemorySpace extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as MemorySpaceState | undefined;
+            resourceInputs["customInstructions"] = state ? state.customInstructions : undefined;
             resourceInputs["description"] = state ? state.description : undefined;
+            resourceInputs["llmBaseUrl"] = state ? state.llmBaseUrl : undefined;
+            resourceInputs["llmModelName"] = state ? state.llmModelName : undefined;
         } else {
             const args = argsOrState as MemorySpaceArgs | undefined;
+            resourceInputs["customInstructions"] = args ? args.customInstructions : undefined;
             resourceInputs["description"] = args ? args.description : undefined;
+            resourceInputs["llmBaseUrl"] = args ? args.llmBaseUrl : undefined;
+            resourceInputs["llmModelName"] = args ? args.llmModelName : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(MemorySpace.__pulumiType, name, resourceInputs, opts);
@@ -78,9 +96,21 @@ export class MemorySpace extends pulumi.CustomResource {
  */
 export interface MemorySpaceState {
     /**
-     * The description of the Memory Space.
+     * Custom prompt instructions for fact extraction (maximum 10,000 characters). `None` means the default memory extraction prompt is used.
+     */
+    customInstructions?: pulumi.Input<string>;
+    /**
+     * A human-readable description.
      */
     description?: pulumi.Input<string>;
+    /**
+     * The chat API URL used for memory extraction. The memory service uses the DataRobot LLM gateway by default; set this only when the default does not work — for example, in air-gapped environments or when the required LLM model is not provided by the gateway and cannot be added.
+     */
+    llmBaseUrl?: pulumi.Input<string>;
+    /**
+     * An LLM model name associated with the memory space (maximum 200 characters). Non-reasoning models are recommended. Reasoning-capable models are significantly slower for fact extraction without producing meaningfully better results.
+     */
+    llmModelName?: pulumi.Input<string>;
 }
 
 /**
@@ -88,7 +118,19 @@ export interface MemorySpaceState {
  */
 export interface MemorySpaceArgs {
     /**
-     * The description of the Memory Space.
+     * Custom prompt instructions for fact extraction (maximum 10,000 characters). `None` means the default memory extraction prompt is used.
+     */
+    customInstructions?: pulumi.Input<string>;
+    /**
+     * A human-readable description.
      */
     description?: pulumi.Input<string>;
+    /**
+     * The chat API URL used for memory extraction. The memory service uses the DataRobot LLM gateway by default; set this only when the default does not work — for example, in air-gapped environments or when the required LLM model is not provided by the gateway and cannot be added.
+     */
+    llmBaseUrl?: pulumi.Input<string>;
+    /**
+     * An LLM model name associated with the memory space (maximum 200 characters). Non-reasoning models are recommended. Reasoning-capable models are significantly slower for fact extraction without producing meaningfully better results.
+     */
+    llmModelName?: pulumi.Input<string>;
 }
