@@ -12,13 +12,14 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Artifact definition for the Workload API. Artifacts define container images and runtime configuration for workloads.
 type Artifact struct {
 	pulumi.CustomResourceState
 
-	// The current artifact ID. Updated on every create or update that produces a new artifact version. Reference this field from dependent resources such as Workload.
+	// The current artifact ID. Updated on every create or update that produces a new artifact version. Reference this field
+	// from dependent resources such as Workload.
 	ArtifactId pulumi.StringOutput `pulumi:"artifactId"`
-	// ID of the artifact repository for versioning. Computed on first create if not provided; subsequent updates create new versions in the same repository.
+	// ID of the artifact repository for versioning. Computed on first create if not provided; subsequent updates create new
+	// versions in the same repository.
 	ArtifactRepositoryId pulumi.StringOutput `pulumi:"artifactRepositoryId"`
 	// The description of the Artifact.
 	Description pulumi.StringPtrOutput `pulumi:"description"`
@@ -26,6 +27,10 @@ type Artifact struct {
 	Name pulumi.StringOutput `pulumi:"name"`
 	// The artifact specification containing container group definitions.
 	Spec ArtifactSpecOutput `pulumi:"spec"`
+	// Artifact lifecycle status: `draft` (the artifact in the backend becomes mutable - specific artifact is modified
+	// in-place) or `locked` (the artifact in the backend is immutable; every spec change creates a new version of it).
+	// Defaults to `locked`. Locking a draft artifact is one-way.
+	Status pulumi.StringOutput `pulumi:"status"`
 	// The artifact type: `service` or `nim`. Defaults to `service`.
 	Type pulumi.StringOutput `pulumi:"type"`
 }
@@ -63,9 +68,11 @@ func GetArtifact(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Artifact resources.
 type artifactState struct {
-	// The current artifact ID. Updated on every create or update that produces a new artifact version. Reference this field from dependent resources such as Workload.
+	// The current artifact ID. Updated on every create or update that produces a new artifact version. Reference this field
+	// from dependent resources such as Workload.
 	ArtifactId *string `pulumi:"artifactId"`
-	// ID of the artifact repository for versioning. Computed on first create if not provided; subsequent updates create new versions in the same repository.
+	// ID of the artifact repository for versioning. Computed on first create if not provided; subsequent updates create new
+	// versions in the same repository.
 	ArtifactRepositoryId *string `pulumi:"artifactRepositoryId"`
 	// The description of the Artifact.
 	Description *string `pulumi:"description"`
@@ -73,14 +80,20 @@ type artifactState struct {
 	Name *string `pulumi:"name"`
 	// The artifact specification containing container group definitions.
 	Spec *ArtifactSpec `pulumi:"spec"`
+	// Artifact lifecycle status: `draft` (the artifact in the backend becomes mutable - specific artifact is modified
+	// in-place) or `locked` (the artifact in the backend is immutable; every spec change creates a new version of it).
+	// Defaults to `locked`. Locking a draft artifact is one-way.
+	Status *string `pulumi:"status"`
 	// The artifact type: `service` or `nim`. Defaults to `service`.
 	Type *string `pulumi:"type"`
 }
 
 type ArtifactState struct {
-	// The current artifact ID. Updated on every create or update that produces a new artifact version. Reference this field from dependent resources such as Workload.
+	// The current artifact ID. Updated on every create or update that produces a new artifact version. Reference this field
+	// from dependent resources such as Workload.
 	ArtifactId pulumi.StringPtrInput
-	// ID of the artifact repository for versioning. Computed on first create if not provided; subsequent updates create new versions in the same repository.
+	// ID of the artifact repository for versioning. Computed on first create if not provided; subsequent updates create new
+	// versions in the same repository.
 	ArtifactRepositoryId pulumi.StringPtrInput
 	// The description of the Artifact.
 	Description pulumi.StringPtrInput
@@ -88,6 +101,10 @@ type ArtifactState struct {
 	Name pulumi.StringPtrInput
 	// The artifact specification containing container group definitions.
 	Spec ArtifactSpecPtrInput
+	// Artifact lifecycle status: `draft` (the artifact in the backend becomes mutable - specific artifact is modified
+	// in-place) or `locked` (the artifact in the backend is immutable; every spec change creates a new version of it).
+	// Defaults to `locked`. Locking a draft artifact is one-way.
+	Status pulumi.StringPtrInput
 	// The artifact type: `service` or `nim`. Defaults to `service`.
 	Type pulumi.StringPtrInput
 }
@@ -97,7 +114,8 @@ func (ArtifactState) ElementType() reflect.Type {
 }
 
 type artifactArgs struct {
-	// ID of the artifact repository for versioning. Computed on first create if not provided; subsequent updates create new versions in the same repository.
+	// ID of the artifact repository for versioning. Computed on first create if not provided; subsequent updates create new
+	// versions in the same repository.
 	ArtifactRepositoryId *string `pulumi:"artifactRepositoryId"`
 	// The description of the Artifact.
 	Description *string `pulumi:"description"`
@@ -105,13 +123,18 @@ type artifactArgs struct {
 	Name *string `pulumi:"name"`
 	// The artifact specification containing container group definitions.
 	Spec ArtifactSpec `pulumi:"spec"`
+	// Artifact lifecycle status: `draft` (the artifact in the backend becomes mutable - specific artifact is modified
+	// in-place) or `locked` (the artifact in the backend is immutable; every spec change creates a new version of it).
+	// Defaults to `locked`. Locking a draft artifact is one-way.
+	Status *string `pulumi:"status"`
 	// The artifact type: `service` or `nim`. Defaults to `service`.
 	Type *string `pulumi:"type"`
 }
 
 // The set of arguments for constructing a Artifact resource.
 type ArtifactArgs struct {
-	// ID of the artifact repository for versioning. Computed on first create if not provided; subsequent updates create new versions in the same repository.
+	// ID of the artifact repository for versioning. Computed on first create if not provided; subsequent updates create new
+	// versions in the same repository.
 	ArtifactRepositoryId pulumi.StringPtrInput
 	// The description of the Artifact.
 	Description pulumi.StringPtrInput
@@ -119,6 +142,10 @@ type ArtifactArgs struct {
 	Name pulumi.StringPtrInput
 	// The artifact specification containing container group definitions.
 	Spec ArtifactSpecInput
+	// Artifact lifecycle status: `draft` (the artifact in the backend becomes mutable - specific artifact is modified
+	// in-place) or `locked` (the artifact in the backend is immutable; every spec change creates a new version of it).
+	// Defaults to `locked`. Locking a draft artifact is one-way.
+	Status pulumi.StringPtrInput
 	// The artifact type: `service` or `nim`. Defaults to `service`.
 	Type pulumi.StringPtrInput
 }
@@ -210,12 +237,14 @@ func (o ArtifactOutput) ToArtifactOutputWithContext(ctx context.Context) Artifac
 	return o
 }
 
-// The current artifact ID. Updated on every create or update that produces a new artifact version. Reference this field from dependent resources such as Workload.
+// The current artifact ID. Updated on every create or update that produces a new artifact version. Reference this field
+// from dependent resources such as Workload.
 func (o ArtifactOutput) ArtifactId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Artifact) pulumi.StringOutput { return v.ArtifactId }).(pulumi.StringOutput)
 }
 
-// ID of the artifact repository for versioning. Computed on first create if not provided; subsequent updates create new versions in the same repository.
+// ID of the artifact repository for versioning. Computed on first create if not provided; subsequent updates create new
+// versions in the same repository.
 func (o ArtifactOutput) ArtifactRepositoryId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Artifact) pulumi.StringOutput { return v.ArtifactRepositoryId }).(pulumi.StringOutput)
 }
@@ -233,6 +262,13 @@ func (o ArtifactOutput) Name() pulumi.StringOutput {
 // The artifact specification containing container group definitions.
 func (o ArtifactOutput) Spec() ArtifactSpecOutput {
 	return o.ApplyT(func(v *Artifact) ArtifactSpecOutput { return v.Spec }).(ArtifactSpecOutput)
+}
+
+// Artifact lifecycle status: `draft` (the artifact in the backend becomes mutable - specific artifact is modified
+// in-place) or `locked` (the artifact in the backend is immutable; every spec change creates a new version of it).
+// Defaults to `locked`. Locking a draft artifact is one-way.
+func (o ArtifactOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v *Artifact) pulumi.StringOutput { return v.Status }).(pulumi.StringOutput)
 }
 
 // The artifact type: `service` or `nim`. Defaults to `service`.
