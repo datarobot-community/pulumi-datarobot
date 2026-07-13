@@ -135,6 +135,16 @@ export type ExecutionEnvironment = import("./executionEnvironment").ExecutionEnv
 export const ExecutionEnvironment: typeof import("./executionEnvironment").ExecutionEnvironment = null as any;
 utilities.lazyLoad(exports, ["ExecutionEnvironment"], () => require("./executionEnvironment"));
 
+export { GetArtifactArgs, GetArtifactResult, GetArtifactOutputArgs } from "./getArtifact";
+export const getArtifact: typeof import("./getArtifact").getArtifact = null as any;
+export const getArtifactOutput: typeof import("./getArtifact").getArtifactOutput = null as any;
+utilities.lazyLoad(exports, ["getArtifact","getArtifactOutput"], () => require("./getArtifact"));
+
+export { GetArtifactsArgs, GetArtifactsResult, GetArtifactsOutputArgs } from "./getArtifacts";
+export const getArtifacts: typeof import("./getArtifacts").getArtifacts = null as any;
+export const getArtifactsOutput: typeof import("./getArtifacts").getArtifactsOutput = null as any;
+utilities.lazyLoad(exports, ["getArtifacts","getArtifactsOutput"], () => require("./getArtifacts"));
+
 export { GetExecutionEnvironmentArgs, GetExecutionEnvironmentResult, GetExecutionEnvironmentOutputArgs } from "./getExecutionEnvironment";
 export const getExecutionEnvironment: typeof import("./getExecutionEnvironment").getExecutionEnvironment = null as any;
 export const getExecutionEnvironmentOutput: typeof import("./getExecutionEnvironment").getExecutionEnvironmentOutput = null as any;

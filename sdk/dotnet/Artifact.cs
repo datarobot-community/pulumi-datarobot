@@ -10,19 +10,20 @@ using Pulumi;
 
 namespace DataRobotPulumi.Datarobot
 {
+    /// <summary>
+    /// Artifact definition for the Workload API. Artifacts define container images and runtime configuration for workloads.
+    /// </summary>
     [DatarobotResourceType("datarobot:index/artifact:Artifact")]
     public partial class Artifact : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// The current artifact ID. Updated on every create or update that produces a new artifact version. Reference this field
-        /// from dependent resources such as Workload.
+        /// The current artifact ID. Updated on every create or update that produces a new artifact version. Reference this field from dependent resources such as Workload.
         /// </summary>
         [Output("artifactId")]
         public Output<string> ArtifactId { get; private set; } = null!;
 
         /// <summary>
-        /// ID of the artifact repository for versioning. Computed on first create if not provided; subsequent updates create new
-        /// versions in the same repository.
+        /// ID of the artifact repository for versioning. Computed on first create if not provided; subsequent updates create new versions in the same repository.
         /// </summary>
         [Output("artifactRepositoryId")]
         public Output<string> ArtifactRepositoryId { get; private set; } = null!;
@@ -46,9 +47,7 @@ namespace DataRobotPulumi.Datarobot
         public Output<Outputs.ArtifactSpec> Spec { get; private set; } = null!;
 
         /// <summary>
-        /// Artifact lifecycle status: `draft` (the artifact in the backend becomes mutable - specific artifact is modified
-        /// in-place) or `locked` (the artifact in the backend is immutable; every spec change creates a new version of it).
-        /// Defaults to `locked`. Locking a draft artifact is one-way.
+        /// Artifact lifecycle status: `draft` (the artifact in the backend becomes mutable - specific artifact is modified in-place) or `locked` (the artifact in the backend is immutable; every spec change creates a new version of it). Defaults to `locked`. Locking a draft artifact is one-way.
         /// </summary>
         [Output("status")]
         public Output<string> Status { get; private set; } = null!;
@@ -107,8 +106,7 @@ namespace DataRobotPulumi.Datarobot
     public sealed class ArtifactArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// ID of the artifact repository for versioning. Computed on first create if not provided; subsequent updates create new
-        /// versions in the same repository.
+        /// ID of the artifact repository for versioning. Computed on first create if not provided; subsequent updates create new versions in the same repository.
         /// </summary>
         [Input("artifactRepositoryId")]
         public Input<string>? ArtifactRepositoryId { get; set; }
@@ -132,9 +130,7 @@ namespace DataRobotPulumi.Datarobot
         public Input<Inputs.ArtifactSpecArgs> Spec { get; set; } = null!;
 
         /// <summary>
-        /// Artifact lifecycle status: `draft` (the artifact in the backend becomes mutable - specific artifact is modified
-        /// in-place) or `locked` (the artifact in the backend is immutable; every spec change creates a new version of it).
-        /// Defaults to `locked`. Locking a draft artifact is one-way.
+        /// Artifact lifecycle status: `draft` (the artifact in the backend becomes mutable - specific artifact is modified in-place) or `locked` (the artifact in the backend is immutable; every spec change creates a new version of it). Defaults to `locked`. Locking a draft artifact is one-way.
         /// </summary>
         [Input("status")]
         public Input<string>? Status { get; set; }
@@ -154,15 +150,13 @@ namespace DataRobotPulumi.Datarobot
     public sealed class ArtifactState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The current artifact ID. Updated on every create or update that produces a new artifact version. Reference this field
-        /// from dependent resources such as Workload.
+        /// The current artifact ID. Updated on every create or update that produces a new artifact version. Reference this field from dependent resources such as Workload.
         /// </summary>
         [Input("artifactId")]
         public Input<string>? ArtifactId { get; set; }
 
         /// <summary>
-        /// ID of the artifact repository for versioning. Computed on first create if not provided; subsequent updates create new
-        /// versions in the same repository.
+        /// ID of the artifact repository for versioning. Computed on first create if not provided; subsequent updates create new versions in the same repository.
         /// </summary>
         [Input("artifactRepositoryId")]
         public Input<string>? ArtifactRepositoryId { get; set; }
@@ -186,9 +180,7 @@ namespace DataRobotPulumi.Datarobot
         public Input<Inputs.ArtifactSpecGetArgs>? Spec { get; set; }
 
         /// <summary>
-        /// Artifact lifecycle status: `draft` (the artifact in the backend becomes mutable - specific artifact is modified
-        /// in-place) or `locked` (the artifact in the backend is immutable; every spec change creates a new version of it).
-        /// Defaults to `locked`. Locking a draft artifact is one-way.
+        /// Artifact lifecycle status: `draft` (the artifact in the backend becomes mutable - specific artifact is modified in-place) or `locked` (the artifact in the backend is immutable; every spec change creates a new version of it). Defaults to `locked`. Locking a draft artifact is one-way.
         /// </summary>
         [Input("status")]
         public Input<string>? Status { get; set; }
