@@ -1406,6 +1406,809 @@ export interface DeploymentSegmentAnalysisSettings {
     enabled: boolean;
 }
 
+export interface GetArtifactCreator {
+    /**
+     * User email address.
+     */
+    email: string;
+    /**
+     * User's full name.
+     */
+    fullName: string;
+    /**
+     * User ID.
+     */
+    id: string;
+    /**
+     * User's gravatar hash.
+     */
+    userhash: string;
+    /**
+     * Username.
+     */
+    username: string;
+}
+
+export interface GetArtifactSpec {
+    /**
+     * List of container groups.
+     */
+    containerGroups: outputs.GetArtifactSpecContainerGroup[];
+    /**
+     * NIM model weight storage configuration.
+     */
+    storage: outputs.GetArtifactSpecStorage;
+    /**
+     * ID of the template used to create this NIM artifact.
+     */
+    templateId: string;
+}
+
+export interface GetArtifactSpecContainerGroup {
+    /**
+     * List of containers in this group.
+     */
+    containers: outputs.GetArtifactSpecContainerGroupContainer[];
+    /**
+     * Name of the container group.
+     */
+    name: string;
+}
+
+export interface GetArtifactSpecContainerGroupContainer {
+    /**
+     * Server-set image build metadata.
+     */
+    build: outputs.GetArtifactSpecContainerGroupContainerBuild;
+    /**
+     * Description of the container.
+     */
+    description: string;
+    /**
+     * Container entrypoint.
+     */
+    entrypoints: string[];
+    /**
+     * Environment variables for the container.
+     */
+    environmentVars: outputs.GetArtifactSpecContainerGroupContainerEnvironmentVar[];
+    /**
+     * Configuration for server-side image builds from source code.
+     */
+    imageBuildConfig: outputs.GetArtifactSpecContainerGroupContainerImageBuildConfig;
+    /**
+     * Docker image URI.
+     */
+    imageUri: string;
+    /**
+     * Container liveness check configuration.
+     */
+    livenessProbe: outputs.GetArtifactSpecContainerGroupContainerLivenessProbe;
+    /**
+     * Name of the container.
+     */
+    name: string;
+    /**
+     * Container access port (1024-65535).
+     */
+    port: number;
+    /**
+     * Whether this is the primary container.
+     */
+    primary: boolean;
+    /**
+     * Container readiness check configuration.
+     */
+    readinessProbe: outputs.GetArtifactSpecContainerGroupContainerReadinessProbe;
+    /**
+     * Container security context.
+     */
+    securityContext: outputs.GetArtifactSpecContainerGroupContainerSecurityContext;
+    /**
+     * Container startup check configuration.
+     */
+    startupProbe: outputs.GetArtifactSpecContainerGroupContainerStartupProbe;
+}
+
+export interface GetArtifactSpecContainerGroupContainerBuild {
+    /**
+     * Artifact image build ID.
+     */
+    artifactImageBuildId: string;
+    /**
+     * Build creation timestamp (UTC).
+     */
+    createdAt: string;
+    /**
+     * Image build status at submit time.
+     */
+    status: string;
+}
+
+export interface GetArtifactSpecContainerGroupContainerEnvironmentVar {
+    /**
+     * DataRobot credential ID when source is "dr-credential".
+     */
+    drCredentialId: string;
+    /**
+     * Key within the credential when source is "dr-credential".
+     */
+    key: string;
+    /**
+     * Name of the environment variable.
+     */
+    name: string;
+    /**
+     * Source type: "string" for plain text values, "dr-credential" for DataRobot credentials.
+     */
+    source: string;
+    /**
+     * Value of the environment variable when source is "string".
+     */
+    value: string;
+}
+
+export interface GetArtifactSpecContainerGroupContainerImageBuildConfig {
+    /**
+     * Reference to source code in the DataRobot catalog.
+     */
+    codeRef: outputs.GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRef;
+    /**
+     * Dockerfile configuration for image builds.
+     */
+    dockerfile: outputs.GetArtifactSpecContainerGroupContainerImageBuildConfigDockerfile;
+}
+
+export interface GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRef {
+    /**
+     * DataRobot catalog reference.
+     */
+    datarobot: outputs.GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobot;
+    /**
+     * Code provider.
+     */
+    provider: string;
+    /**
+     * Code reference type.
+     */
+    type: string;
+}
+
+export interface GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobot {
+    /**
+     * Catalog ID.
+     */
+    catalogId: string;
+    /**
+     * Catalog version ID.
+     */
+    catalogVersionId: string;
+}
+
+export interface GetArtifactSpecContainerGroupContainerImageBuildConfigDockerfile {
+    /**
+     * Entrypoint when source is `generated`.
+     */
+    entrypoints: string[];
+    /**
+     * Execution environment ID when source is `generated`.
+     */
+    executionEnvironmentId: string;
+    /**
+     * Execution environment version ID when source is `generated`.
+     */
+    executionEnvironmentVersionId: string;
+    /**
+     * Relative path to the Dockerfile when source is `provided`.
+     */
+    path: string;
+    /**
+     * Dockerfile source: `provided` or `generated`.
+     */
+    source: string;
+}
+
+export interface GetArtifactSpecContainerGroupContainerLivenessProbe {
+    /**
+     * Minimum consecutive failures for the probe to be considered failed.
+     */
+    failureThreshold: number;
+    /**
+     * Host name to connect to, defaults to the pod IP.
+     */
+    host: string;
+    /**
+     * Number of seconds to wait before the first probe is executed.
+     */
+    initialDelaySeconds: number;
+    /**
+     * URL path to query for health check.
+     */
+    path: string;
+    /**
+     * How often (in seconds) to perform the probe.
+     */
+    periodSeconds: number;
+    /**
+     * Port number to access on the container.
+     */
+    port: number;
+    /**
+     * Scheme to use for connecting to the host (HTTP or HTTPS).
+     */
+    scheme: string;
+    /**
+     * Number of seconds after which the probe times out.
+     */
+    timeoutSeconds: number;
+}
+
+export interface GetArtifactSpecContainerGroupContainerReadinessProbe {
+    /**
+     * Minimum consecutive failures for the probe to be considered failed.
+     */
+    failureThreshold: number;
+    /**
+     * Host name to connect to, defaults to the pod IP.
+     */
+    host: string;
+    /**
+     * Number of seconds to wait before the first probe is executed.
+     */
+    initialDelaySeconds: number;
+    /**
+     * URL path to query for health check.
+     */
+    path: string;
+    /**
+     * How often (in seconds) to perform the probe.
+     */
+    periodSeconds: number;
+    /**
+     * Port number to access on the container.
+     */
+    port: number;
+    /**
+     * Scheme to use for connecting to the host (HTTP or HTTPS).
+     */
+    scheme: string;
+    /**
+     * Number of seconds after which the probe times out.
+     */
+    timeoutSeconds: number;
+}
+
+export interface GetArtifactSpecContainerGroupContainerSecurityContext {
+    /**
+     * Whether a process can gain more privileges than its parent.
+     */
+    allowPrivilegeEscalation: boolean;
+    /**
+     * Linux capabilities to add or drop.
+     */
+    capabilities: outputs.GetArtifactSpecContainerGroupContainerSecurityContextCapabilities;
+    /**
+     * Whether the root filesystem is read-only.
+     */
+    readOnlyRootFilesystem: boolean;
+    /**
+     * Seccomp profile for the container.
+     */
+    seccompProfile: outputs.GetArtifactSpecContainerGroupContainerSecurityContextSeccompProfile;
+}
+
+export interface GetArtifactSpecContainerGroupContainerSecurityContextCapabilities {
+    /**
+     * Capabilities to add.
+     */
+    adds: string[];
+    /**
+     * Capabilities to drop.
+     */
+    drops: string[];
+}
+
+export interface GetArtifactSpecContainerGroupContainerSecurityContextSeccompProfile {
+    /**
+     * Path to a seccomp profile on the node when type is Localhost.
+     */
+    localhostProfile: string;
+    /**
+     * Seccomp profile type.
+     */
+    type: string;
+}
+
+export interface GetArtifactSpecContainerGroupContainerStartupProbe {
+    /**
+     * Minimum consecutive failures for the probe to be considered failed.
+     */
+    failureThreshold: number;
+    /**
+     * Host name to connect to, defaults to the pod IP.
+     */
+    host: string;
+    /**
+     * Number of seconds to wait before the first probe is executed.
+     */
+    initialDelaySeconds: number;
+    /**
+     * URL path to query for health check.
+     */
+    path: string;
+    /**
+     * How often (in seconds) to perform the probe.
+     */
+    periodSeconds: number;
+    /**
+     * Port number to access on the container.
+     */
+    port: number;
+    /**
+     * Scheme to use for connecting to the host (HTTP or HTTPS).
+     */
+    scheme: string;
+    /**
+     * Number of seconds after which the probe times out.
+     */
+    timeoutSeconds: number;
+}
+
+export interface GetArtifactSpecStorage {
+    /**
+     * Storage mode: `dedicatedPvc` or `nimCache`.
+     */
+    mode: string;
+    /**
+     * PVC size for dedicated storage (e.g. `150Gi`).
+     */
+    pvcSize: string;
+}
+
+export interface GetArtifactTag {
+    /**
+     * Tag ID.
+     */
+    id: string;
+    /**
+     * Tag name.
+     */
+    name: string;
+    /**
+     * Tag value.
+     */
+    value: string;
+}
+
+export interface GetArtifactsArtifact {
+    /**
+     * The artifact version ID.
+     */
+    artifactId: string;
+    /**
+     * ID of the artifact repository for versioning.
+     */
+    artifactRepositoryId: string;
+    /**
+     * Timestamp of when the artifact was created.
+     */
+    createdAt: string;
+    /**
+     * User who created the artifact.
+     */
+    creator: outputs.GetArtifactsArtifactCreator;
+    /**
+     * The description of the Artifact.
+     */
+    description: string;
+    /**
+     * The name of the Artifact.
+     */
+    name: string;
+    /**
+     * Effective repository-level permissions for the authenticated user.
+     */
+    permissions: string[];
+    /**
+     * The artifact specification containing container group definitions.
+     */
+    spec: outputs.GetArtifactsArtifactSpec;
+    /**
+     * Artifact status: `draft` or `locked`.
+     */
+    status: string;
+    /**
+     * Tags associated with this artifact.
+     */
+    tags: outputs.GetArtifactsArtifactTag[];
+    /**
+     * The artifact type: `service` or `nim`.
+     */
+    type: string;
+    /**
+     * Timestamp of when the artifact was last updated.
+     */
+    updatedAt: string;
+    /**
+     * Version number of the artifact. Set only for locked artifacts.
+     */
+    version: number;
+}
+
+export interface GetArtifactsArtifactCreator {
+    /**
+     * User email address.
+     */
+    email: string;
+    /**
+     * User's full name.
+     */
+    fullName: string;
+    /**
+     * User ID.
+     */
+    id: string;
+    /**
+     * User's gravatar hash.
+     */
+    userhash: string;
+    /**
+     * Username.
+     */
+    username: string;
+}
+
+export interface GetArtifactsArtifactSpec {
+    /**
+     * List of container groups.
+     */
+    containerGroups: outputs.GetArtifactsArtifactSpecContainerGroup[];
+    /**
+     * NIM model weight storage configuration.
+     */
+    storage: outputs.GetArtifactsArtifactSpecStorage;
+    /**
+     * ID of the template used to create this NIM artifact.
+     */
+    templateId: string;
+}
+
+export interface GetArtifactsArtifactSpecContainerGroup {
+    /**
+     * List of containers in this group.
+     */
+    containers: outputs.GetArtifactsArtifactSpecContainerGroupContainer[];
+    /**
+     * Name of the container group.
+     */
+    name: string;
+}
+
+export interface GetArtifactsArtifactSpecContainerGroupContainer {
+    /**
+     * Server-set image build metadata.
+     */
+    build: outputs.GetArtifactsArtifactSpecContainerGroupContainerBuild;
+    /**
+     * Description of the container.
+     */
+    description: string;
+    /**
+     * Container entrypoint.
+     */
+    entrypoints: string[];
+    /**
+     * Environment variables for the container.
+     */
+    environmentVars: outputs.GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVar[];
+    /**
+     * Configuration for server-side image builds from source code.
+     */
+    imageBuildConfig: outputs.GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfig;
+    /**
+     * Docker image URI.
+     */
+    imageUri: string;
+    /**
+     * Container liveness check configuration.
+     */
+    livenessProbe: outputs.GetArtifactsArtifactSpecContainerGroupContainerLivenessProbe;
+    /**
+     * Name of the container.
+     */
+    name: string;
+    /**
+     * Container access port (1024-65535).
+     */
+    port: number;
+    /**
+     * Whether this is the primary container.
+     */
+    primary: boolean;
+    /**
+     * Container readiness check configuration.
+     */
+    readinessProbe: outputs.GetArtifactsArtifactSpecContainerGroupContainerReadinessProbe;
+    /**
+     * Container security context.
+     */
+    securityContext: outputs.GetArtifactsArtifactSpecContainerGroupContainerSecurityContext;
+    /**
+     * Container startup check configuration.
+     */
+    startupProbe: outputs.GetArtifactsArtifactSpecContainerGroupContainerStartupProbe;
+}
+
+export interface GetArtifactsArtifactSpecContainerGroupContainerBuild {
+    /**
+     * Artifact image build ID.
+     */
+    artifactImageBuildId: string;
+    /**
+     * Build creation timestamp (UTC).
+     */
+    createdAt: string;
+    /**
+     * Image build status at submit time.
+     */
+    status: string;
+}
+
+export interface GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVar {
+    /**
+     * DataRobot credential ID when source is "dr-credential".
+     */
+    drCredentialId: string;
+    /**
+     * Key within the credential when source is "dr-credential".
+     */
+    key: string;
+    /**
+     * Name of the environment variable.
+     */
+    name: string;
+    /**
+     * Source type: "string" for plain text values, "dr-credential" for DataRobot credentials.
+     */
+    source: string;
+    /**
+     * Value of the environment variable when source is "string".
+     */
+    value: string;
+}
+
+export interface GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfig {
+    /**
+     * Reference to source code in the DataRobot catalog.
+     */
+    codeRef: outputs.GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRef;
+    /**
+     * Dockerfile configuration for image builds.
+     */
+    dockerfile: outputs.GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfile;
+}
+
+export interface GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRef {
+    /**
+     * DataRobot catalog reference.
+     */
+    datarobot: outputs.GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobot;
+    /**
+     * Code provider.
+     */
+    provider: string;
+    /**
+     * Code reference type.
+     */
+    type: string;
+}
+
+export interface GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobot {
+    /**
+     * Catalog ID.
+     */
+    catalogId: string;
+    /**
+     * Catalog version ID.
+     */
+    catalogVersionId: string;
+}
+
+export interface GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfile {
+    /**
+     * Entrypoint when source is `generated`.
+     */
+    entrypoints: string[];
+    /**
+     * Execution environment ID when source is `generated`.
+     */
+    executionEnvironmentId: string;
+    /**
+     * Execution environment version ID when source is `generated`.
+     */
+    executionEnvironmentVersionId: string;
+    /**
+     * Relative path to the Dockerfile when source is `provided`.
+     */
+    path: string;
+    /**
+     * Dockerfile source: `provided` or `generated`.
+     */
+    source: string;
+}
+
+export interface GetArtifactsArtifactSpecContainerGroupContainerLivenessProbe {
+    /**
+     * Minimum consecutive failures for the probe to be considered failed.
+     */
+    failureThreshold: number;
+    /**
+     * Host name to connect to, defaults to the pod IP.
+     */
+    host: string;
+    /**
+     * Number of seconds to wait before the first probe is executed.
+     */
+    initialDelaySeconds: number;
+    /**
+     * URL path to query for health check.
+     */
+    path: string;
+    /**
+     * How often (in seconds) to perform the probe.
+     */
+    periodSeconds: number;
+    /**
+     * Port number to access on the container.
+     */
+    port: number;
+    /**
+     * Scheme to use for connecting to the host (HTTP or HTTPS).
+     */
+    scheme: string;
+    /**
+     * Number of seconds after which the probe times out.
+     */
+    timeoutSeconds: number;
+}
+
+export interface GetArtifactsArtifactSpecContainerGroupContainerReadinessProbe {
+    /**
+     * Minimum consecutive failures for the probe to be considered failed.
+     */
+    failureThreshold: number;
+    /**
+     * Host name to connect to, defaults to the pod IP.
+     */
+    host: string;
+    /**
+     * Number of seconds to wait before the first probe is executed.
+     */
+    initialDelaySeconds: number;
+    /**
+     * URL path to query for health check.
+     */
+    path: string;
+    /**
+     * How often (in seconds) to perform the probe.
+     */
+    periodSeconds: number;
+    /**
+     * Port number to access on the container.
+     */
+    port: number;
+    /**
+     * Scheme to use for connecting to the host (HTTP or HTTPS).
+     */
+    scheme: string;
+    /**
+     * Number of seconds after which the probe times out.
+     */
+    timeoutSeconds: number;
+}
+
+export interface GetArtifactsArtifactSpecContainerGroupContainerSecurityContext {
+    /**
+     * Whether a process can gain more privileges than its parent.
+     */
+    allowPrivilegeEscalation: boolean;
+    /**
+     * Linux capabilities to add or drop.
+     */
+    capabilities: outputs.GetArtifactsArtifactSpecContainerGroupContainerSecurityContextCapabilities;
+    /**
+     * Whether the root filesystem is read-only.
+     */
+    readOnlyRootFilesystem: boolean;
+    /**
+     * Seccomp profile for the container.
+     */
+    seccompProfile: outputs.GetArtifactsArtifactSpecContainerGroupContainerSecurityContextSeccompProfile;
+}
+
+export interface GetArtifactsArtifactSpecContainerGroupContainerSecurityContextCapabilities {
+    /**
+     * Capabilities to add.
+     */
+    adds: string[];
+    /**
+     * Capabilities to drop.
+     */
+    drops: string[];
+}
+
+export interface GetArtifactsArtifactSpecContainerGroupContainerSecurityContextSeccompProfile {
+    /**
+     * Path to a seccomp profile on the node when type is Localhost.
+     */
+    localhostProfile: string;
+    /**
+     * Seccomp profile type.
+     */
+    type: string;
+}
+
+export interface GetArtifactsArtifactSpecContainerGroupContainerStartupProbe {
+    /**
+     * Minimum consecutive failures for the probe to be considered failed.
+     */
+    failureThreshold: number;
+    /**
+     * Host name to connect to, defaults to the pod IP.
+     */
+    host: string;
+    /**
+     * Number of seconds to wait before the first probe is executed.
+     */
+    initialDelaySeconds: number;
+    /**
+     * URL path to query for health check.
+     */
+    path: string;
+    /**
+     * How often (in seconds) to perform the probe.
+     */
+    periodSeconds: number;
+    /**
+     * Port number to access on the container.
+     */
+    port: number;
+    /**
+     * Scheme to use for connecting to the host (HTTP or HTTPS).
+     */
+    scheme: string;
+    /**
+     * Number of seconds after which the probe times out.
+     */
+    timeoutSeconds: number;
+}
+
+export interface GetArtifactsArtifactSpecStorage {
+    /**
+     * Storage mode: `dedicatedPvc` or `nimCache`.
+     */
+    mode: string;
+    /**
+     * PVC size for dedicated storage (e.g. `150Gi`).
+     */
+    pvcSize: string;
+}
+
+export interface GetArtifactsArtifactTag {
+    /**
+     * Tag ID.
+     */
+    id: string;
+    /**
+     * Tag name.
+     */
+    name: string;
+    /**
+     * Tag value.
+     */
+    value: string;
+}
+
 export interface LlmBlueprintCustomModelLlmSettings {
     /**
      * The external LLM's context size, in tokens. This value is only used for pruning documents supplied to the LLM when a vector database is associated with the LLM blueprint. It does not affect the external LLM's actual context size in any way and is not supplied to the LLM.

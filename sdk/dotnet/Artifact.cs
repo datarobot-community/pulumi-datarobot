@@ -47,6 +47,12 @@ namespace DataRobotPulumi.Datarobot
         public Output<Outputs.ArtifactSpec> Spec { get; private set; } = null!;
 
         /// <summary>
+        /// Artifact lifecycle status: `draft` (the artifact in the backend becomes mutable - specific artifact is modified in-place) or `locked` (the artifact in the backend is immutable; every spec change creates a new version of it). Defaults to `locked`. Locking a draft artifact is one-way.
+        /// </summary>
+        [Output("status")]
+        public Output<string> Status { get; private set; } = null!;
+
+        /// <summary>
         /// The artifact type: `service` or `nim`. Defaults to `service`.
         /// </summary>
         [Output("type")]
@@ -124,6 +130,12 @@ namespace DataRobotPulumi.Datarobot
         public Input<Inputs.ArtifactSpecArgs> Spec { get; set; } = null!;
 
         /// <summary>
+        /// Artifact lifecycle status: `draft` (the artifact in the backend becomes mutable - specific artifact is modified in-place) or `locked` (the artifact in the backend is immutable; every spec change creates a new version of it). Defaults to `locked`. Locking a draft artifact is one-way.
+        /// </summary>
+        [Input("status")]
+        public Input<string>? Status { get; set; }
+
+        /// <summary>
         /// The artifact type: `service` or `nim`. Defaults to `service`.
         /// </summary>
         [Input("type")]
@@ -166,6 +178,12 @@ namespace DataRobotPulumi.Datarobot
         /// </summary>
         [Input("spec")]
         public Input<Inputs.ArtifactSpecGetArgs>? Spec { get; set; }
+
+        /// <summary>
+        /// Artifact lifecycle status: `draft` (the artifact in the backend becomes mutable - specific artifact is modified in-place) or `locked` (the artifact in the backend is immutable; every spec change creates a new version of it). Defaults to `locked`. Locking a draft artifact is one-way.
+        /// </summary>
+        [Input("status")]
+        public Input<string>? Status { get; set; }
 
         /// <summary>
         /// The artifact type: `service` or `nim`. Defaults to `service`.
