@@ -550,6 +550,133 @@
             }
         },
         "datasources": {
+            "datarobot_artifact": {
+                "current": "datarobot:index/getArtifact:getArtifact",
+                "fields": {
+                    "permissions": {
+                        "maxItemsOne": false
+                    },
+                    "spec": {
+                        "fields": {
+                            "container_groups": {
+                                "maxItemsOne": false,
+                                "elem": {
+                                    "fields": {
+                                        "containers": {
+                                            "maxItemsOne": false,
+                                            "elem": {
+                                                "fields": {
+                                                    "entrypoint": {
+                                                        "maxItemsOne": false
+                                                    },
+                                                    "environment_vars": {
+                                                        "maxItemsOne": false
+                                                    },
+                                                    "image_build_config": {
+                                                        "fields": {
+                                                            "dockerfile": {
+                                                                "fields": {
+                                                                    "entrypoint": {
+                                                                        "maxItemsOne": false
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    },
+                                                    "security_context": {
+                                                        "fields": {
+                                                            "capabilities": {
+                                                                "fields": {
+                                                                    "add": {
+                                                                        "maxItemsOne": false
+                                                                    },
+                                                                    "drop": {
+                                                                        "maxItemsOne": false
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "tags": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "datarobot_artifacts": {
+                "current": "datarobot:index/getArtifacts:getArtifacts",
+                "fields": {
+                    "artifacts": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "permissions": {
+                                    "maxItemsOne": false
+                                },
+                                "spec": {
+                                    "fields": {
+                                        "container_groups": {
+                                            "maxItemsOne": false,
+                                            "elem": {
+                                                "fields": {
+                                                    "containers": {
+                                                        "maxItemsOne": false,
+                                                        "elem": {
+                                                            "fields": {
+                                                                "entrypoint": {
+                                                                    "maxItemsOne": false
+                                                                },
+                                                                "environment_vars": {
+                                                                    "maxItemsOne": false
+                                                                },
+                                                                "image_build_config": {
+                                                                    "fields": {
+                                                                        "dockerfile": {
+                                                                            "fields": {
+                                                                                "entrypoint": {
+                                                                                    "maxItemsOne": false
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                },
+                                                                "security_context": {
+                                                                    "fields": {
+                                                                        "capabilities": {
+                                                                            "fields": {
+                                                                                "add": {
+                                                                                    "maxItemsOne": false
+                                                                                },
+                                                                                "drop": {
+                                                                                    "maxItemsOne": false
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "tags": {
+                                    "maxItemsOne": false
+                                }
+                            }
+                        }
+                    }
+                }
+            },
             "datarobot_execution_environment": {
                 "current": "datarobot:index/getExecutionEnvironment:getExecutionEnvironment"
             },
