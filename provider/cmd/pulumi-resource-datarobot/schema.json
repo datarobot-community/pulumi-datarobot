@@ -2437,6 +2437,1363 @@
         }
       },
       "type": "object"
+    },
+    "datarobot:index/getArtifactCreator:getArtifactCreator": {
+      "properties": {
+        "email": {
+          "type": "string",
+          "description": "User email address.\n"
+        },
+        "fullName": {
+          "type": "string",
+          "description": "User's full name.\n"
+        },
+        "id": {
+          "type": "string",
+          "description": "User ID.\n"
+        },
+        "userhash": {
+          "type": "string",
+          "description": "User's gravatar hash.\n"
+        },
+        "username": {
+          "type": "string",
+          "description": "Username.\n"
+        }
+      },
+      "type": "object",
+      "required": [
+        "email",
+        "fullName",
+        "id",
+        "userhash",
+        "username"
+      ],
+      "language": {
+        "nodejs": {
+          "requiredInputs": []
+        }
+      }
+    },
+    "datarobot:index/getArtifactSpec:getArtifactSpec": {
+      "properties": {
+        "containerGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/types/datarobot:index/getArtifactSpecContainerGroup:getArtifactSpecContainerGroup"
+          },
+          "description": "List of container groups.\n"
+        },
+        "storage": {
+          "$ref": "#/types/datarobot:index/getArtifactSpecStorage:getArtifactSpecStorage",
+          "description": "NIM model weight storage configuration.\n"
+        },
+        "templateId": {
+          "type": "string",
+          "description": "ID of the template used to create this NIM artifact.\n"
+        }
+      },
+      "type": "object",
+      "required": [
+        "containerGroups",
+        "storage",
+        "templateId"
+      ],
+      "language": {
+        "nodejs": {
+          "requiredInputs": []
+        }
+      }
+    },
+    "datarobot:index/getArtifactSpecContainerGroup:getArtifactSpecContainerGroup": {
+      "properties": {
+        "containers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/types/datarobot:index/getArtifactSpecContainerGroupContainer:getArtifactSpecContainerGroupContainer"
+          },
+          "description": "List of containers in this group.\n"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the container group.\n"
+        }
+      },
+      "type": "object",
+      "required": [
+        "containers",
+        "name"
+      ],
+      "language": {
+        "nodejs": {
+          "requiredInputs": []
+        }
+      }
+    },
+    "datarobot:index/getArtifactSpecContainerGroupContainer:getArtifactSpecContainerGroupContainer": {
+      "properties": {
+        "build": {
+          "$ref": "#/types/datarobot:index/getArtifactSpecContainerGroupContainerBuild:getArtifactSpecContainerGroupContainerBuild",
+          "description": "Server-set image build metadata.\n"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the container.\n"
+        },
+        "entrypoints": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Container entrypoint.\n"
+        },
+        "environmentVars": {
+          "type": "array",
+          "items": {
+            "$ref": "#/types/datarobot:index/getArtifactSpecContainerGroupContainerEnvironmentVar:getArtifactSpecContainerGroupContainerEnvironmentVar"
+          },
+          "description": "Environment variables for the container.\n"
+        },
+        "imageBuildConfig": {
+          "$ref": "#/types/datarobot:index/getArtifactSpecContainerGroupContainerImageBuildConfig:getArtifactSpecContainerGroupContainerImageBuildConfig",
+          "description": "Configuration for server-side image builds from source code.\n"
+        },
+        "imageUri": {
+          "type": "string",
+          "description": "Docker image URI.\n"
+        },
+        "livenessProbe": {
+          "$ref": "#/types/datarobot:index/getArtifactSpecContainerGroupContainerLivenessProbe:getArtifactSpecContainerGroupContainerLivenessProbe",
+          "description": "Container liveness check configuration.\n"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the container.\n"
+        },
+        "port": {
+          "type": "integer",
+          "description": "Container access port (1024-65535).\n"
+        },
+        "primary": {
+          "type": "boolean",
+          "description": "Whether this is the primary container.\n"
+        },
+        "readinessProbe": {
+          "$ref": "#/types/datarobot:index/getArtifactSpecContainerGroupContainerReadinessProbe:getArtifactSpecContainerGroupContainerReadinessProbe",
+          "description": "Container readiness check configuration.\n"
+        },
+        "securityContext": {
+          "$ref": "#/types/datarobot:index/getArtifactSpecContainerGroupContainerSecurityContext:getArtifactSpecContainerGroupContainerSecurityContext",
+          "description": "Container security context.\n"
+        },
+        "startupProbe": {
+          "$ref": "#/types/datarobot:index/getArtifactSpecContainerGroupContainerStartupProbe:getArtifactSpecContainerGroupContainerStartupProbe",
+          "description": "Container startup check configuration.\n"
+        }
+      },
+      "type": "object",
+      "required": [
+        "build",
+        "description",
+        "entrypoints",
+        "environmentVars",
+        "imageBuildConfig",
+        "imageUri",
+        "livenessProbe",
+        "name",
+        "port",
+        "primary",
+        "readinessProbe",
+        "securityContext",
+        "startupProbe"
+      ],
+      "language": {
+        "nodejs": {
+          "requiredInputs": []
+        }
+      }
+    },
+    "datarobot:index/getArtifactSpecContainerGroupContainerBuild:getArtifactSpecContainerGroupContainerBuild": {
+      "properties": {
+        "artifactImageBuildId": {
+          "type": "string",
+          "description": "Artifact image build ID.\n"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Build creation timestamp (UTC).\n"
+        },
+        "status": {
+          "type": "string",
+          "description": "Image build status at submit time.\n"
+        }
+      },
+      "type": "object",
+      "required": [
+        "artifactImageBuildId",
+        "createdAt",
+        "status"
+      ],
+      "language": {
+        "nodejs": {
+          "requiredInputs": []
+        }
+      }
+    },
+    "datarobot:index/getArtifactSpecContainerGroupContainerEnvironmentVar:getArtifactSpecContainerGroupContainerEnvironmentVar": {
+      "properties": {
+        "drCredentialId": {
+          "type": "string",
+          "description": "DataRobot credential ID when source is \"dr-credential\".\n"
+        },
+        "key": {
+          "type": "string",
+          "description": "Key within the credential when source is \"dr-credential\".\n"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the environment variable.\n"
+        },
+        "source": {
+          "type": "string",
+          "description": "Source type: \"string\" for plain text values, \"dr-credential\" for DataRobot credentials.\n"
+        },
+        "value": {
+          "type": "string",
+          "description": "Value of the environment variable when source is \"string\".\n"
+        }
+      },
+      "type": "object",
+      "required": [
+        "drCredentialId",
+        "key",
+        "name",
+        "source",
+        "value"
+      ],
+      "language": {
+        "nodejs": {
+          "requiredInputs": []
+        }
+      }
+    },
+    "datarobot:index/getArtifactSpecContainerGroupContainerImageBuildConfig:getArtifactSpecContainerGroupContainerImageBuildConfig": {
+      "properties": {
+        "codeRef": {
+          "$ref": "#/types/datarobot:index/getArtifactSpecContainerGroupContainerImageBuildConfigCodeRef:getArtifactSpecContainerGroupContainerImageBuildConfigCodeRef",
+          "description": "Reference to source code in the DataRobot catalog.\n"
+        },
+        "dockerfile": {
+          "$ref": "#/types/datarobot:index/getArtifactSpecContainerGroupContainerImageBuildConfigDockerfile:getArtifactSpecContainerGroupContainerImageBuildConfigDockerfile",
+          "description": "Dockerfile configuration for image builds.\n"
+        }
+      },
+      "type": "object",
+      "required": [
+        "codeRef",
+        "dockerfile"
+      ],
+      "language": {
+        "nodejs": {
+          "requiredInputs": []
+        }
+      }
+    },
+    "datarobot:index/getArtifactSpecContainerGroupContainerImageBuildConfigCodeRef:getArtifactSpecContainerGroupContainerImageBuildConfigCodeRef": {
+      "properties": {
+        "datarobot": {
+          "$ref": "#/types/datarobot:index/getArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobot:getArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobot",
+          "description": "DataRobot catalog reference.\n"
+        },
+        "provider": {
+          "type": "string",
+          "description": "Code provider.\n"
+        },
+        "type": {
+          "type": "string",
+          "description": "Code reference type.\n"
+        }
+      },
+      "type": "object",
+      "required": [
+        "datarobot",
+        "provider",
+        "type"
+      ],
+      "language": {
+        "nodejs": {
+          "requiredInputs": []
+        }
+      }
+    },
+    "datarobot:index/getArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobot:getArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobot": {
+      "properties": {
+        "catalogId": {
+          "type": "string",
+          "description": "Catalog ID.\n"
+        },
+        "catalogVersionId": {
+          "type": "string",
+          "description": "Catalog version ID.\n"
+        }
+      },
+      "type": "object",
+      "required": [
+        "catalogId",
+        "catalogVersionId"
+      ],
+      "language": {
+        "nodejs": {
+          "requiredInputs": []
+        }
+      }
+    },
+    "datarobot:index/getArtifactSpecContainerGroupContainerImageBuildConfigDockerfile:getArtifactSpecContainerGroupContainerImageBuildConfigDockerfile": {
+      "properties": {
+        "entrypoints": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Entrypoint when source is `generated`.\n"
+        },
+        "executionEnvironmentId": {
+          "type": "string",
+          "description": "Execution environment ID when source is `generated`.\n"
+        },
+        "executionEnvironmentVersionId": {
+          "type": "string",
+          "description": "Execution environment version ID when source is `generated`.\n"
+        },
+        "path": {
+          "type": "string",
+          "description": "Relative path to the Dockerfile when source is `provided`.\n"
+        },
+        "source": {
+          "type": "string",
+          "description": "Dockerfile source: `provided` or `generated`.\n"
+        }
+      },
+      "type": "object",
+      "required": [
+        "entrypoints",
+        "executionEnvironmentId",
+        "executionEnvironmentVersionId",
+        "path",
+        "source"
+      ],
+      "language": {
+        "nodejs": {
+          "requiredInputs": []
+        }
+      }
+    },
+    "datarobot:index/getArtifactSpecContainerGroupContainerLivenessProbe:getArtifactSpecContainerGroupContainerLivenessProbe": {
+      "properties": {
+        "failureThreshold": {
+          "type": "integer",
+          "description": "Minimum consecutive failures for the probe to be considered failed.\n"
+        },
+        "host": {
+          "type": "string",
+          "description": "Host name to connect to, defaults to the pod IP.\n"
+        },
+        "initialDelaySeconds": {
+          "type": "integer",
+          "description": "Number of seconds to wait before the first probe is executed.\n"
+        },
+        "path": {
+          "type": "string",
+          "description": "URL path to query for health check.\n"
+        },
+        "periodSeconds": {
+          "type": "integer",
+          "description": "How often (in seconds) to perform the probe.\n"
+        },
+        "port": {
+          "type": "integer",
+          "description": "Port number to access on the container.\n"
+        },
+        "scheme": {
+          "type": "string",
+          "description": "Scheme to use for connecting to the host (HTTP or HTTPS).\n"
+        },
+        "timeoutSeconds": {
+          "type": "integer",
+          "description": "Number of seconds after which the probe times out.\n"
+        }
+      },
+      "type": "object",
+      "required": [
+        "failureThreshold",
+        "host",
+        "initialDelaySeconds",
+        "path",
+        "periodSeconds",
+        "port",
+        "scheme",
+        "timeoutSeconds"
+      ],
+      "language": {
+        "nodejs": {
+          "requiredInputs": []
+        }
+      }
+    },
+    "datarobot:index/getArtifactSpecContainerGroupContainerReadinessProbe:getArtifactSpecContainerGroupContainerReadinessProbe": {
+      "properties": {
+        "failureThreshold": {
+          "type": "integer",
+          "description": "Minimum consecutive failures for the probe to be considered failed.\n"
+        },
+        "host": {
+          "type": "string",
+          "description": "Host name to connect to, defaults to the pod IP.\n"
+        },
+        "initialDelaySeconds": {
+          "type": "integer",
+          "description": "Number of seconds to wait before the first probe is executed.\n"
+        },
+        "path": {
+          "type": "string",
+          "description": "URL path to query for health check.\n"
+        },
+        "periodSeconds": {
+          "type": "integer",
+          "description": "How often (in seconds) to perform the probe.\n"
+        },
+        "port": {
+          "type": "integer",
+          "description": "Port number to access on the container.\n"
+        },
+        "scheme": {
+          "type": "string",
+          "description": "Scheme to use for connecting to the host (HTTP or HTTPS).\n"
+        },
+        "timeoutSeconds": {
+          "type": "integer",
+          "description": "Number of seconds after which the probe times out.\n"
+        }
+      },
+      "type": "object",
+      "required": [
+        "failureThreshold",
+        "host",
+        "initialDelaySeconds",
+        "path",
+        "periodSeconds",
+        "port",
+        "scheme",
+        "timeoutSeconds"
+      ],
+      "language": {
+        "nodejs": {
+          "requiredInputs": []
+        }
+      }
+    },
+    "datarobot:index/getArtifactSpecContainerGroupContainerSecurityContext:getArtifactSpecContainerGroupContainerSecurityContext": {
+      "properties": {
+        "allowPrivilegeEscalation": {
+          "type": "boolean",
+          "description": "Whether a process can gain more privileges than its parent.\n"
+        },
+        "capabilities": {
+          "$ref": "#/types/datarobot:index/getArtifactSpecContainerGroupContainerSecurityContextCapabilities:getArtifactSpecContainerGroupContainerSecurityContextCapabilities",
+          "description": "Linux capabilities to add or drop.\n"
+        },
+        "readOnlyRootFilesystem": {
+          "type": "boolean",
+          "description": "Whether the root filesystem is read-only.\n"
+        },
+        "seccompProfile": {
+          "$ref": "#/types/datarobot:index/getArtifactSpecContainerGroupContainerSecurityContextSeccompProfile:getArtifactSpecContainerGroupContainerSecurityContextSeccompProfile",
+          "description": "Seccomp profile for the container.\n"
+        }
+      },
+      "type": "object",
+      "required": [
+        "allowPrivilegeEscalation",
+        "capabilities",
+        "readOnlyRootFilesystem",
+        "seccompProfile"
+      ],
+      "language": {
+        "nodejs": {
+          "requiredInputs": []
+        }
+      }
+    },
+    "datarobot:index/getArtifactSpecContainerGroupContainerSecurityContextCapabilities:getArtifactSpecContainerGroupContainerSecurityContextCapabilities": {
+      "properties": {
+        "adds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Capabilities to add.\n"
+        },
+        "drops": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Capabilities to drop.\n"
+        }
+      },
+      "type": "object",
+      "required": [
+        "adds",
+        "drops"
+      ],
+      "language": {
+        "nodejs": {
+          "requiredInputs": []
+        }
+      }
+    },
+    "datarobot:index/getArtifactSpecContainerGroupContainerSecurityContextSeccompProfile:getArtifactSpecContainerGroupContainerSecurityContextSeccompProfile": {
+      "properties": {
+        "localhostProfile": {
+          "type": "string",
+          "description": "Path to a seccomp profile on the node when type is Localhost.\n"
+        },
+        "type": {
+          "type": "string",
+          "description": "Seccomp profile type.\n"
+        }
+      },
+      "type": "object",
+      "required": [
+        "localhostProfile",
+        "type"
+      ],
+      "language": {
+        "nodejs": {
+          "requiredInputs": []
+        }
+      }
+    },
+    "datarobot:index/getArtifactSpecContainerGroupContainerStartupProbe:getArtifactSpecContainerGroupContainerStartupProbe": {
+      "properties": {
+        "failureThreshold": {
+          "type": "integer",
+          "description": "Minimum consecutive failures for the probe to be considered failed.\n"
+        },
+        "host": {
+          "type": "string",
+          "description": "Host name to connect to, defaults to the pod IP.\n"
+        },
+        "initialDelaySeconds": {
+          "type": "integer",
+          "description": "Number of seconds to wait before the first probe is executed.\n"
+        },
+        "path": {
+          "type": "string",
+          "description": "URL path to query for health check.\n"
+        },
+        "periodSeconds": {
+          "type": "integer",
+          "description": "How often (in seconds) to perform the probe.\n"
+        },
+        "port": {
+          "type": "integer",
+          "description": "Port number to access on the container.\n"
+        },
+        "scheme": {
+          "type": "string",
+          "description": "Scheme to use for connecting to the host (HTTP or HTTPS).\n"
+        },
+        "timeoutSeconds": {
+          "type": "integer",
+          "description": "Number of seconds after which the probe times out.\n"
+        }
+      },
+      "type": "object",
+      "required": [
+        "failureThreshold",
+        "host",
+        "initialDelaySeconds",
+        "path",
+        "periodSeconds",
+        "port",
+        "scheme",
+        "timeoutSeconds"
+      ],
+      "language": {
+        "nodejs": {
+          "requiredInputs": []
+        }
+      }
+    },
+    "datarobot:index/getArtifactSpecStorage:getArtifactSpecStorage": {
+      "properties": {
+        "mode": {
+          "type": "string",
+          "description": "Storage mode: `dedicatedPvc` or `nimCache`.\n"
+        },
+        "pvcSize": {
+          "type": "string",
+          "description": "PVC size for dedicated storage (e.g. `150Gi`).\n"
+        }
+      },
+      "type": "object",
+      "required": [
+        "mode",
+        "pvcSize"
+      ],
+      "language": {
+        "nodejs": {
+          "requiredInputs": []
+        }
+      }
+    },
+    "datarobot:index/getArtifactTag:getArtifactTag": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Tag ID.\n"
+        },
+        "name": {
+          "type": "string",
+          "description": "Tag name.\n"
+        },
+        "value": {
+          "type": "string",
+          "description": "Tag value.\n"
+        }
+      },
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "value"
+      ],
+      "language": {
+        "nodejs": {
+          "requiredInputs": []
+        }
+      }
+    },
+    "datarobot:index/getArtifactsArtifact:getArtifactsArtifact": {
+      "properties": {
+        "artifactId": {
+          "type": "string",
+          "description": "The artifact version ID.\n"
+        },
+        "artifactRepositoryId": {
+          "type": "string",
+          "description": "ID of the artifact repository for versioning.\n"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Timestamp of when the artifact was created.\n"
+        },
+        "creator": {
+          "$ref": "#/types/datarobot:index/getArtifactsArtifactCreator:getArtifactsArtifactCreator",
+          "description": "User who created the artifact.\n"
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the Artifact.\n"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the Artifact.\n"
+        },
+        "permissions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Effective repository-level permissions for the authenticated user.\n"
+        },
+        "spec": {
+          "$ref": "#/types/datarobot:index/getArtifactsArtifactSpec:getArtifactsArtifactSpec",
+          "description": "The artifact specification containing container group definitions.\n"
+        },
+        "status": {
+          "type": "string",
+          "description": "Artifact status: `draft` or `locked`.\n"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/types/datarobot:index/getArtifactsArtifactTag:getArtifactsArtifactTag"
+          },
+          "description": "Tags associated with this artifact.\n"
+        },
+        "type": {
+          "type": "string",
+          "description": "The artifact type: `service` or `nim`.\n"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Timestamp of when the artifact was last updated.\n"
+        },
+        "version": {
+          "type": "integer",
+          "description": "Version number of the artifact. Set only for locked artifacts.\n"
+        }
+      },
+      "type": "object",
+      "required": [
+        "artifactId",
+        "artifactRepositoryId",
+        "createdAt",
+        "creator",
+        "description",
+        "name",
+        "permissions",
+        "spec",
+        "status",
+        "tags",
+        "type",
+        "updatedAt",
+        "version"
+      ],
+      "language": {
+        "nodejs": {
+          "requiredInputs": []
+        }
+      }
+    },
+    "datarobot:index/getArtifactsArtifactCreator:getArtifactsArtifactCreator": {
+      "properties": {
+        "email": {
+          "type": "string",
+          "description": "User email address.\n"
+        },
+        "fullName": {
+          "type": "string",
+          "description": "User's full name.\n"
+        },
+        "id": {
+          "type": "string",
+          "description": "User ID.\n"
+        },
+        "userhash": {
+          "type": "string",
+          "description": "User's gravatar hash.\n"
+        },
+        "username": {
+          "type": "string",
+          "description": "Username.\n"
+        }
+      },
+      "type": "object",
+      "required": [
+        "email",
+        "fullName",
+        "id",
+        "userhash",
+        "username"
+      ],
+      "language": {
+        "nodejs": {
+          "requiredInputs": []
+        }
+      }
+    },
+    "datarobot:index/getArtifactsArtifactSpec:getArtifactsArtifactSpec": {
+      "properties": {
+        "containerGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/types/datarobot:index/getArtifactsArtifactSpecContainerGroup:getArtifactsArtifactSpecContainerGroup"
+          },
+          "description": "List of container groups.\n"
+        },
+        "storage": {
+          "$ref": "#/types/datarobot:index/getArtifactsArtifactSpecStorage:getArtifactsArtifactSpecStorage",
+          "description": "NIM model weight storage configuration.\n"
+        },
+        "templateId": {
+          "type": "string",
+          "description": "ID of the template used to create this NIM artifact.\n"
+        }
+      },
+      "type": "object",
+      "required": [
+        "containerGroups",
+        "storage",
+        "templateId"
+      ],
+      "language": {
+        "nodejs": {
+          "requiredInputs": []
+        }
+      }
+    },
+    "datarobot:index/getArtifactsArtifactSpecContainerGroup:getArtifactsArtifactSpecContainerGroup": {
+      "properties": {
+        "containers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/types/datarobot:index/getArtifactsArtifactSpecContainerGroupContainer:getArtifactsArtifactSpecContainerGroupContainer"
+          },
+          "description": "List of containers in this group.\n"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the container group.\n"
+        }
+      },
+      "type": "object",
+      "required": [
+        "containers",
+        "name"
+      ],
+      "language": {
+        "nodejs": {
+          "requiredInputs": []
+        }
+      }
+    },
+    "datarobot:index/getArtifactsArtifactSpecContainerGroupContainer:getArtifactsArtifactSpecContainerGroupContainer": {
+      "properties": {
+        "build": {
+          "$ref": "#/types/datarobot:index/getArtifactsArtifactSpecContainerGroupContainerBuild:getArtifactsArtifactSpecContainerGroupContainerBuild",
+          "description": "Server-set image build metadata.\n"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the container.\n"
+        },
+        "entrypoints": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Container entrypoint.\n"
+        },
+        "environmentVars": {
+          "type": "array",
+          "items": {
+            "$ref": "#/types/datarobot:index/getArtifactsArtifactSpecContainerGroupContainerEnvironmentVar:getArtifactsArtifactSpecContainerGroupContainerEnvironmentVar"
+          },
+          "description": "Environment variables for the container.\n"
+        },
+        "imageBuildConfig": {
+          "$ref": "#/types/datarobot:index/getArtifactsArtifactSpecContainerGroupContainerImageBuildConfig:getArtifactsArtifactSpecContainerGroupContainerImageBuildConfig",
+          "description": "Configuration for server-side image builds from source code.\n"
+        },
+        "imageUri": {
+          "type": "string",
+          "description": "Docker image URI.\n"
+        },
+        "livenessProbe": {
+          "$ref": "#/types/datarobot:index/getArtifactsArtifactSpecContainerGroupContainerLivenessProbe:getArtifactsArtifactSpecContainerGroupContainerLivenessProbe",
+          "description": "Container liveness check configuration.\n"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the container.\n"
+        },
+        "port": {
+          "type": "integer",
+          "description": "Container access port (1024-65535).\n"
+        },
+        "primary": {
+          "type": "boolean",
+          "description": "Whether this is the primary container.\n"
+        },
+        "readinessProbe": {
+          "$ref": "#/types/datarobot:index/getArtifactsArtifactSpecContainerGroupContainerReadinessProbe:getArtifactsArtifactSpecContainerGroupContainerReadinessProbe",
+          "description": "Container readiness check configuration.\n"
+        },
+        "securityContext": {
+          "$ref": "#/types/datarobot:index/getArtifactsArtifactSpecContainerGroupContainerSecurityContext:getArtifactsArtifactSpecContainerGroupContainerSecurityContext",
+          "description": "Container security context.\n"
+        },
+        "startupProbe": {
+          "$ref": "#/types/datarobot:index/getArtifactsArtifactSpecContainerGroupContainerStartupProbe:getArtifactsArtifactSpecContainerGroupContainerStartupProbe",
+          "description": "Container startup check configuration.\n"
+        }
+      },
+      "type": "object",
+      "required": [
+        "build",
+        "description",
+        "entrypoints",
+        "environmentVars",
+        "imageBuildConfig",
+        "imageUri",
+        "livenessProbe",
+        "name",
+        "port",
+        "primary",
+        "readinessProbe",
+        "securityContext",
+        "startupProbe"
+      ],
+      "language": {
+        "nodejs": {
+          "requiredInputs": []
+        }
+      }
+    },
+    "datarobot:index/getArtifactsArtifactSpecContainerGroupContainerBuild:getArtifactsArtifactSpecContainerGroupContainerBuild": {
+      "properties": {
+        "artifactImageBuildId": {
+          "type": "string",
+          "description": "Artifact image build ID.\n"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Build creation timestamp (UTC).\n"
+        },
+        "status": {
+          "type": "string",
+          "description": "Image build status at submit time.\n"
+        }
+      },
+      "type": "object",
+      "required": [
+        "artifactImageBuildId",
+        "createdAt",
+        "status"
+      ],
+      "language": {
+        "nodejs": {
+          "requiredInputs": []
+        }
+      }
+    },
+    "datarobot:index/getArtifactsArtifactSpecContainerGroupContainerEnvironmentVar:getArtifactsArtifactSpecContainerGroupContainerEnvironmentVar": {
+      "properties": {
+        "drCredentialId": {
+          "type": "string",
+          "description": "DataRobot credential ID when source is \"dr-credential\".\n"
+        },
+        "key": {
+          "type": "string",
+          "description": "Key within the credential when source is \"dr-credential\".\n"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the environment variable.\n"
+        },
+        "source": {
+          "type": "string",
+          "description": "Source type: \"string\" for plain text values, \"dr-credential\" for DataRobot credentials.\n"
+        },
+        "value": {
+          "type": "string",
+          "description": "Value of the environment variable when source is \"string\".\n"
+        }
+      },
+      "type": "object",
+      "required": [
+        "drCredentialId",
+        "key",
+        "name",
+        "source",
+        "value"
+      ],
+      "language": {
+        "nodejs": {
+          "requiredInputs": []
+        }
+      }
+    },
+    "datarobot:index/getArtifactsArtifactSpecContainerGroupContainerImageBuildConfig:getArtifactsArtifactSpecContainerGroupContainerImageBuildConfig": {
+      "properties": {
+        "codeRef": {
+          "$ref": "#/types/datarobot:index/getArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRef:getArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRef",
+          "description": "Reference to source code in the DataRobot catalog.\n"
+        },
+        "dockerfile": {
+          "$ref": "#/types/datarobot:index/getArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfile:getArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfile",
+          "description": "Dockerfile configuration for image builds.\n"
+        }
+      },
+      "type": "object",
+      "required": [
+        "codeRef",
+        "dockerfile"
+      ],
+      "language": {
+        "nodejs": {
+          "requiredInputs": []
+        }
+      }
+    },
+    "datarobot:index/getArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRef:getArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRef": {
+      "properties": {
+        "datarobot": {
+          "$ref": "#/types/datarobot:index/getArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobot:getArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobot",
+          "description": "DataRobot catalog reference.\n"
+        },
+        "provider": {
+          "type": "string",
+          "description": "Code provider.\n"
+        },
+        "type": {
+          "type": "string",
+          "description": "Code reference type.\n"
+        }
+      },
+      "type": "object",
+      "required": [
+        "datarobot",
+        "provider",
+        "type"
+      ],
+      "language": {
+        "nodejs": {
+          "requiredInputs": []
+        }
+      }
+    },
+    "datarobot:index/getArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobot:getArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobot": {
+      "properties": {
+        "catalogId": {
+          "type": "string",
+          "description": "Catalog ID.\n"
+        },
+        "catalogVersionId": {
+          "type": "string",
+          "description": "Catalog version ID.\n"
+        }
+      },
+      "type": "object",
+      "required": [
+        "catalogId",
+        "catalogVersionId"
+      ],
+      "language": {
+        "nodejs": {
+          "requiredInputs": []
+        }
+      }
+    },
+    "datarobot:index/getArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfile:getArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfile": {
+      "properties": {
+        "entrypoints": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Entrypoint when source is `generated`.\n"
+        },
+        "executionEnvironmentId": {
+          "type": "string",
+          "description": "Execution environment ID when source is `generated`.\n"
+        },
+        "executionEnvironmentVersionId": {
+          "type": "string",
+          "description": "Execution environment version ID when source is `generated`.\n"
+        },
+        "path": {
+          "type": "string",
+          "description": "Relative path to the Dockerfile when source is `provided`.\n"
+        },
+        "source": {
+          "type": "string",
+          "description": "Dockerfile source: `provided` or `generated`.\n"
+        }
+      },
+      "type": "object",
+      "required": [
+        "entrypoints",
+        "executionEnvironmentId",
+        "executionEnvironmentVersionId",
+        "path",
+        "source"
+      ],
+      "language": {
+        "nodejs": {
+          "requiredInputs": []
+        }
+      }
+    },
+    "datarobot:index/getArtifactsArtifactSpecContainerGroupContainerLivenessProbe:getArtifactsArtifactSpecContainerGroupContainerLivenessProbe": {
+      "properties": {
+        "failureThreshold": {
+          "type": "integer",
+          "description": "Minimum consecutive failures for the probe to be considered failed.\n"
+        },
+        "host": {
+          "type": "string",
+          "description": "Host name to connect to, defaults to the pod IP.\n"
+        },
+        "initialDelaySeconds": {
+          "type": "integer",
+          "description": "Number of seconds to wait before the first probe is executed.\n"
+        },
+        "path": {
+          "type": "string",
+          "description": "URL path to query for health check.\n"
+        },
+        "periodSeconds": {
+          "type": "integer",
+          "description": "How often (in seconds) to perform the probe.\n"
+        },
+        "port": {
+          "type": "integer",
+          "description": "Port number to access on the container.\n"
+        },
+        "scheme": {
+          "type": "string",
+          "description": "Scheme to use for connecting to the host (HTTP or HTTPS).\n"
+        },
+        "timeoutSeconds": {
+          "type": "integer",
+          "description": "Number of seconds after which the probe times out.\n"
+        }
+      },
+      "type": "object",
+      "required": [
+        "failureThreshold",
+        "host",
+        "initialDelaySeconds",
+        "path",
+        "periodSeconds",
+        "port",
+        "scheme",
+        "timeoutSeconds"
+      ],
+      "language": {
+        "nodejs": {
+          "requiredInputs": []
+        }
+      }
+    },
+    "datarobot:index/getArtifactsArtifactSpecContainerGroupContainerReadinessProbe:getArtifactsArtifactSpecContainerGroupContainerReadinessProbe": {
+      "properties": {
+        "failureThreshold": {
+          "type": "integer",
+          "description": "Minimum consecutive failures for the probe to be considered failed.\n"
+        },
+        "host": {
+          "type": "string",
+          "description": "Host name to connect to, defaults to the pod IP.\n"
+        },
+        "initialDelaySeconds": {
+          "type": "integer",
+          "description": "Number of seconds to wait before the first probe is executed.\n"
+        },
+        "path": {
+          "type": "string",
+          "description": "URL path to query for health check.\n"
+        },
+        "periodSeconds": {
+          "type": "integer",
+          "description": "How often (in seconds) to perform the probe.\n"
+        },
+        "port": {
+          "type": "integer",
+          "description": "Port number to access on the container.\n"
+        },
+        "scheme": {
+          "type": "string",
+          "description": "Scheme to use for connecting to the host (HTTP or HTTPS).\n"
+        },
+        "timeoutSeconds": {
+          "type": "integer",
+          "description": "Number of seconds after which the probe times out.\n"
+        }
+      },
+      "type": "object",
+      "required": [
+        "failureThreshold",
+        "host",
+        "initialDelaySeconds",
+        "path",
+        "periodSeconds",
+        "port",
+        "scheme",
+        "timeoutSeconds"
+      ],
+      "language": {
+        "nodejs": {
+          "requiredInputs": []
+        }
+      }
+    },
+    "datarobot:index/getArtifactsArtifactSpecContainerGroupContainerSecurityContext:getArtifactsArtifactSpecContainerGroupContainerSecurityContext": {
+      "properties": {
+        "allowPrivilegeEscalation": {
+          "type": "boolean",
+          "description": "Whether a process can gain more privileges than its parent.\n"
+        },
+        "capabilities": {
+          "$ref": "#/types/datarobot:index/getArtifactsArtifactSpecContainerGroupContainerSecurityContextCapabilities:getArtifactsArtifactSpecContainerGroupContainerSecurityContextCapabilities",
+          "description": "Linux capabilities to add or drop.\n"
+        },
+        "readOnlyRootFilesystem": {
+          "type": "boolean",
+          "description": "Whether the root filesystem is read-only.\n"
+        },
+        "seccompProfile": {
+          "$ref": "#/types/datarobot:index/getArtifactsArtifactSpecContainerGroupContainerSecurityContextSeccompProfile:getArtifactsArtifactSpecContainerGroupContainerSecurityContextSeccompProfile",
+          "description": "Seccomp profile for the container.\n"
+        }
+      },
+      "type": "object",
+      "required": [
+        "allowPrivilegeEscalation",
+        "capabilities",
+        "readOnlyRootFilesystem",
+        "seccompProfile"
+      ],
+      "language": {
+        "nodejs": {
+          "requiredInputs": []
+        }
+      }
+    },
+    "datarobot:index/getArtifactsArtifactSpecContainerGroupContainerSecurityContextCapabilities:getArtifactsArtifactSpecContainerGroupContainerSecurityContextCapabilities": {
+      "properties": {
+        "adds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Capabilities to add.\n"
+        },
+        "drops": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Capabilities to drop.\n"
+        }
+      },
+      "type": "object",
+      "required": [
+        "adds",
+        "drops"
+      ],
+      "language": {
+        "nodejs": {
+          "requiredInputs": []
+        }
+      }
+    },
+    "datarobot:index/getArtifactsArtifactSpecContainerGroupContainerSecurityContextSeccompProfile:getArtifactsArtifactSpecContainerGroupContainerSecurityContextSeccompProfile": {
+      "properties": {
+        "localhostProfile": {
+          "type": "string",
+          "description": "Path to a seccomp profile on the node when type is Localhost.\n"
+        },
+        "type": {
+          "type": "string",
+          "description": "Seccomp profile type.\n"
+        }
+      },
+      "type": "object",
+      "required": [
+        "localhostProfile",
+        "type"
+      ],
+      "language": {
+        "nodejs": {
+          "requiredInputs": []
+        }
+      }
+    },
+    "datarobot:index/getArtifactsArtifactSpecContainerGroupContainerStartupProbe:getArtifactsArtifactSpecContainerGroupContainerStartupProbe": {
+      "properties": {
+        "failureThreshold": {
+          "type": "integer",
+          "description": "Minimum consecutive failures for the probe to be considered failed.\n"
+        },
+        "host": {
+          "type": "string",
+          "description": "Host name to connect to, defaults to the pod IP.\n"
+        },
+        "initialDelaySeconds": {
+          "type": "integer",
+          "description": "Number of seconds to wait before the first probe is executed.\n"
+        },
+        "path": {
+          "type": "string",
+          "description": "URL path to query for health check.\n"
+        },
+        "periodSeconds": {
+          "type": "integer",
+          "description": "How often (in seconds) to perform the probe.\n"
+        },
+        "port": {
+          "type": "integer",
+          "description": "Port number to access on the container.\n"
+        },
+        "scheme": {
+          "type": "string",
+          "description": "Scheme to use for connecting to the host (HTTP or HTTPS).\n"
+        },
+        "timeoutSeconds": {
+          "type": "integer",
+          "description": "Number of seconds after which the probe times out.\n"
+        }
+      },
+      "type": "object",
+      "required": [
+        "failureThreshold",
+        "host",
+        "initialDelaySeconds",
+        "path",
+        "periodSeconds",
+        "port",
+        "scheme",
+        "timeoutSeconds"
+      ],
+      "language": {
+        "nodejs": {
+          "requiredInputs": []
+        }
+      }
+    },
+    "datarobot:index/getArtifactsArtifactSpecStorage:getArtifactsArtifactSpecStorage": {
+      "properties": {
+        "mode": {
+          "type": "string",
+          "description": "Storage mode: `dedicatedPvc` or `nimCache`.\n"
+        },
+        "pvcSize": {
+          "type": "string",
+          "description": "PVC size for dedicated storage (e.g. `150Gi`).\n"
+        }
+      },
+      "type": "object",
+      "required": [
+        "mode",
+        "pvcSize"
+      ],
+      "language": {
+        "nodejs": {
+          "requiredInputs": []
+        }
+      }
+    },
+    "datarobot:index/getArtifactsArtifactTag:getArtifactsArtifactTag": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Tag ID.\n"
+        },
+        "name": {
+          "type": "string",
+          "description": "Tag name.\n"
+        },
+        "value": {
+          "type": "string",
+          "description": "Tag value.\n"
+        }
+      },
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "value"
+      ],
+      "language": {
+        "nodejs": {
+          "requiredInputs": []
+        }
+      }
     }
   },
   "provider": {
@@ -2960,7 +4317,7 @@
       }
     },
     "datarobot:index/artifact:Artifact": {
-      "description": "Artifact definition for the Workload API. Artifacts define container images and runtime configuration for workloads.\n",
+      "description": "Artifact definition for the Workload API. Artifacts define container images and runtime configuration for workloads.\n\n## Example Usage\n\n<!--Start PulumiCodeChooser -->\n```yaml\nresources:\n  example:\n    type: datarobot:Artifact\n    properties:\n      description: Artifact for a containerized workload\n      status: draft # optional: \"draft\" (mutable) or \"locked\" (default)\n      spec:\n        container_groups:\n          - containers:\n              - imageUri: nginx:latest\n                primary: true\n                port: 8080\noutputs:\n  exampleArtifactId: ${example.artifactId}\n```\n<!--End PulumiCodeChooser -->\n",
       "properties": {
         "artifactId": {
           "type": "string",
@@ -2982,6 +4339,10 @@
           "$ref": "#/types/datarobot:index/ArtifactSpec:ArtifactSpec",
           "description": "The artifact specification containing container group definitions.\n"
         },
+        "status": {
+          "type": "string",
+          "description": "Artifact lifecycle status: `draft` (the current artifact version is mutable; spec changes are applied in-place and `artifact_id` stays the same) or `locked` (artifact versions are immutable; spec changes create a new version with a new `artifact_id` in the same `artifact_repository_id`). Defaults to `locked`. Locking a draft artifact is one-way. Changing `status` from `locked` to `draft` creates a new draft artifact (the Workload API cannot unlock in place).\n"
+        },
         "type": {
           "type": "string",
           "description": "The artifact type: `service` or `nim`. Defaults to `service`.\n"
@@ -2992,6 +4353,7 @@
         "artifactRepositoryId",
         "name",
         "spec",
+        "status",
         "type"
       ],
       "inputProperties": {
@@ -3010,6 +4372,10 @@
         "spec": {
           "$ref": "#/types/datarobot:index/ArtifactSpec:ArtifactSpec",
           "description": "The artifact specification containing container group definitions.\n"
+        },
+        "status": {
+          "type": "string",
+          "description": "Artifact lifecycle status: `draft` (the current artifact version is mutable; spec changes are applied in-place and `artifact_id` stays the same) or `locked` (artifact versions are immutable; spec changes create a new version with a new `artifact_id` in the same `artifact_repository_id`). Defaults to `locked`. Locking a draft artifact is one-way. Changing `status` from `locked` to `draft` creates a new draft artifact (the Workload API cannot unlock in place).\n"
         },
         "type": {
           "type": "string",
@@ -3041,6 +4407,10 @@
           "spec": {
             "$ref": "#/types/datarobot:index/ArtifactSpec:ArtifactSpec",
             "description": "The artifact specification containing container group definitions.\n"
+          },
+          "status": {
+            "type": "string",
+            "description": "Artifact lifecycle status: `draft` (the current artifact version is mutable; spec changes are applied in-place and `artifact_id` stays the same) or `locked` (artifact versions are immutable; spec changes create a new version with a new `artifact_id` in the same `artifact_repository_id`). Defaults to `locked`. Locking a draft artifact is one-way. Changing `status` from `locked` to `draft` creates a new draft artifact (the Workload API cannot unlock in place).\n"
           },
           "type": {
             "type": "string",
@@ -8417,6 +9787,152 @@
     }
   },
   "functions": {
+    "datarobot:index/getArtifact:getArtifact": {
+      "description": "Look up an existing Workload API artifact by ID. Returns the full artifact definition including spec, status, creator, tags, and permissions.\n\n## Example Usage\n\n<!--Start PulumiCodeChooser -->\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@pulumi/datarobot\";\n\nconst existing = datarobot.getArtifact({\n    artifactId: _var.artifact_id,\n});\nexport const artifactName = existing.then(existing => existing.name);\nexport const artifactStatus = existing.then(existing => existing.status);\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexisting = datarobot.get_artifact(artifact_id=var[\"artifact_id\"])\npulumi.export(\"artifactName\", existing.name)\npulumi.export(\"artifactStatus\", existing.status)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = Pulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() => \n{\n    var existing = Datarobot.GetArtifact.Invoke(new()\n    {\n        ArtifactId = @var.Artifact_id,\n    });\n\n    return new Dictionary<string, object?>\n    {\n        [\"artifactName\"] = existing.Apply(getArtifactResult => getArtifactResult.Name),\n        [\"artifactStatus\"] = existing.Apply(getArtifactResult => getArtifactResult.Status),\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texisting, err := datarobot.LookupArtifact(ctx, &datarobot.LookupArtifactArgs{\n\t\t\tArtifactId: _var.Artifact_id,\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"artifactName\", existing.Name)\n\t\tctx.Export(\"artifactStatus\", existing.Status)\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.DatarobotFunctions;\nimport com.pulumi.datarobot.inputs.GetArtifactArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var existing = DatarobotFunctions.getArtifact(GetArtifactArgs.builder()\n            .artifactId(var_.artifact_id())\n            .build());\n\n        ctx.export(\"artifactName\", existing.name());\n        ctx.export(\"artifactStatus\", existing.status());\n    }\n}\n```\n```yaml\nvariables:\n  existing:\n    fn::invoke:\n      function: datarobot:getArtifact\n      arguments:\n        artifactId: ${var.artifact_id}\noutputs:\n  artifactName: ${existing.name}\n  artifactStatus: ${existing.status}\n```\n<!--End PulumiCodeChooser -->\n",
+      "inputs": {
+        "description": "A collection of arguments for invoking getArtifact.\n",
+        "properties": {
+          "artifactId": {
+            "type": "string",
+            "description": "The artifact version ID to look up.\n"
+          }
+        },
+        "type": "object",
+        "required": [
+          "artifactId"
+        ]
+      },
+      "outputs": {
+        "description": "A collection of values returned by getArtifact.\n",
+        "properties": {
+          "artifactId": {
+            "type": "string",
+            "description": "The artifact version ID to look up.\n"
+          },
+          "artifactRepositoryId": {
+            "type": "string",
+            "description": "ID of the artifact repository for versioning.\n"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "Timestamp of when the artifact was created.\n"
+          },
+          "creator": {
+            "$ref": "#/types/datarobot:index/getArtifactCreator:getArtifactCreator",
+            "description": "User who created the artifact.\n"
+          },
+          "description": {
+            "type": "string",
+            "description": "The description of the Artifact.\n"
+          },
+          "id": {
+            "type": "string",
+            "description": "The provider-assigned unique ID for this managed resource.\n"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the Artifact.\n"
+          },
+          "permissions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Effective repository-level permissions for the authenticated user.\n"
+          },
+          "spec": {
+            "$ref": "#/types/datarobot:index/getArtifactSpec:getArtifactSpec",
+            "description": "The artifact specification containing container group definitions.\n"
+          },
+          "status": {
+            "type": "string",
+            "description": "Artifact status: `draft` or `locked`.\n"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "$ref": "#/types/datarobot:index/getArtifactTag:getArtifactTag"
+            },
+            "description": "Tags associated with this artifact.\n"
+          },
+          "type": {
+            "type": "string",
+            "description": "The artifact type: `service` or `nim`.\n"
+          },
+          "updatedAt": {
+            "type": "string",
+            "description": "Timestamp of when the artifact was last updated.\n"
+          },
+          "version": {
+            "type": "integer",
+            "description": "Version number of the artifact. Set only for locked artifacts.\n"
+          }
+        },
+        "type": "object",
+        "required": [
+          "artifactId",
+          "artifactRepositoryId",
+          "createdAt",
+          "creator",
+          "description",
+          "name",
+          "permissions",
+          "spec",
+          "status",
+          "tags",
+          "type",
+          "updatedAt",
+          "version",
+          "id"
+        ]
+      }
+    },
+    "datarobot:index/getArtifacts:getArtifacts": {
+      "description": "List Workload API artifacts with optional status filter and result limit. Each entry mirrors the full artifact API response, including spec.\n\n## Example Usage\n\n<!--Start PulumiCodeChooser -->\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@pulumi/datarobot\";\n\nconst all = datarobot.getArtifacts({});\nexport const artifactCount = all.then(all => all.artifacts).length;\nexport const artifactNames = all.then(all => .map(a => (a.name)));\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nall = datarobot.get_artifacts()\npulumi.export(\"artifactCount\", len(all.artifacts))\npulumi.export(\"artifactNames\", [a.name for a in all.artifacts])\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = Pulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() => \n{\n    var all = Datarobot.GetArtifacts.Invoke();\n\n    return new Dictionary<string, object?>\n    {\n        [\"artifactCount\"] = all.Apply(getArtifactsResult => getArtifactsResult.Artifacts).Length,\n        [\"artifactNames\"] = .Select(a => \n        {\n            return a.Name;\n        }).ToList(),\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\tall, err := datarobot.GetArtifacts(ctx, &datarobot.GetArtifactsArgs{}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"artifactCount\", pulumi.Int(len(all.Artifacts)))\n\t\tctx.Export(\"artifactNames\", pulumi.StringArray(\"TODO: For expression\"))\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.DatarobotFunctions;\nimport com.pulumi.datarobot.inputs.GetArtifactsArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var all = DatarobotFunctions.getArtifacts(GetArtifactsArgs.builder()\n            .build());\n\n        ctx.export(\"artifactCount\", all.artifacts().length());\n        ctx.export(\"artifactNames\", \"TODO: ForExpression\");\n    }\n}\n```\n<!--End PulumiCodeChooser -->\n",
+      "inputs": {
+        "description": "A collection of arguments for invoking getArtifacts.\n",
+        "properties": {
+          "limit": {
+            "type": "integer",
+            "description": "Maximum number of artifacts to return. When omitted, all matching artifacts are returned (paginated in pages of 100).\n"
+          },
+          "status": {
+            "type": "string",
+            "description": "Filter artifacts by status: `draft` or `locked`.\n"
+          }
+        },
+        "type": "object"
+      },
+      "outputs": {
+        "description": "A collection of values returned by getArtifacts.\n",
+        "properties": {
+          "artifacts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/types/datarobot:index/getArtifactsArtifact:getArtifactsArtifact"
+            },
+            "description": "Artifacts matching the filter.\n"
+          },
+          "id": {
+            "type": "string",
+            "description": "The provider-assigned unique ID for this managed resource.\n"
+          },
+          "limit": {
+            "type": "integer",
+            "description": "Maximum number of artifacts to return. When omitted, all matching artifacts are returned (paginated in pages of 100).\n"
+          },
+          "status": {
+            "type": "string",
+            "description": "Filter artifacts by status: `draft` or `locked`.\n"
+          }
+        },
+        "type": "object",
+        "required": [
+          "artifacts",
+          "id"
+        ]
+      }
+    },
     "datarobot:index/getExecutionEnvironment:getExecutionEnvironment": {
       "description": "Execution Environment\n\n## Example Usage\n\n<!--Start PulumiCodeChooser -->\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@pulumi/datarobot\";\n\nconst lookupByName = datarobot.getExecutionEnvironment({\n    name: \"[DataRobot] Python 3.12\",\n});\nconst lookupByIdAndVersionId = datarobot.getExecutionEnvironment({\n    id: \"67a554bbfbef3a4ce2ab6700\",\n    versionId: \"68e53eb0b995c5121a0b583b\",\n});\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nlookup_by_name = datarobot.get_execution_environment(name=\"[DataRobot] Python 3.12\")\nlookup_by_id_and_version_id = datarobot.get_execution_environment(id=\"67a554bbfbef3a4ce2ab6700\",\n    version_id=\"68e53eb0b995c5121a0b583b\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = Pulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() => \n{\n    var lookupByName = Datarobot.GetExecutionEnvironment.Invoke(new()\n    {\n        Name = \"[DataRobot] Python 3.12\",\n    });\n\n    var lookupByIdAndVersionId = Datarobot.GetExecutionEnvironment.Invoke(new()\n    {\n        Id = \"67a554bbfbef3a4ce2ab6700\",\n        VersionId = \"68e53eb0b995c5121a0b583b\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := datarobot.LookupExecutionEnvironment(ctx, &datarobot.LookupExecutionEnvironmentArgs{\n\t\t\tName: pulumi.StringRef(\"[DataRobot] Python 3.12\"),\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\t_, err = datarobot.LookupExecutionEnvironment(ctx, &datarobot.LookupExecutionEnvironmentArgs{\n\t\t\tId:        pulumi.StringRef(\"67a554bbfbef3a4ce2ab6700\"),\n\t\t\tVersionId: pulumi.StringRef(\"68e53eb0b995c5121a0b583b\"),\n\t\t}, nil)\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.DatarobotFunctions;\nimport com.pulumi.datarobot.inputs.GetExecutionEnvironmentArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        final var lookupByName = DatarobotFunctions.getExecutionEnvironment(GetExecutionEnvironmentArgs.builder()\n            .name(\"[DataRobot] Python 3.12\")\n            .build());\n\n        final var lookupByIdAndVersionId = DatarobotFunctions.getExecutionEnvironment(GetExecutionEnvironmentArgs.builder()\n            .id(\"67a554bbfbef3a4ce2ab6700\")\n            .versionId(\"68e53eb0b995c5121a0b583b\")\n            .build());\n\n    }\n}\n```\n```yaml\nvariables:\n  lookupByName:\n    fn::invoke:\n      function: datarobot:getExecutionEnvironment\n      arguments:\n        name: '[DataRobot] Python 3.12'\n  lookupByIdAndVersionId:\n    fn::invoke:\n      function: datarobot:getExecutionEnvironment\n      arguments:\n        id: 67a554bbfbef3a4ce2ab6700\n        versionId: 68e53eb0b995c5121a0b583b\n```\n<!--End PulumiCodeChooser -->\n",
       "inputs": {
