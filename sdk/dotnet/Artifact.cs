@@ -47,6 +47,12 @@ namespace DataRobotPulumi.Datarobot
         public Output<Outputs.ArtifactSpec> Spec { get; private set; } = null!;
 
         /// <summary>
+        /// Artifact lifecycle status: `draft` (the current artifact version is mutable; spec changes are applied in-place and `artifact_id` stays the same) or `locked` (artifact versions are immutable; spec changes create a new version with a new `artifact_id` in the same `artifact_repository_id`). Defaults to `locked`. Locking a draft artifact is one-way. Changing `status` from `locked` to `draft` creates a new draft artifact (the Workload API cannot unlock in place).
+        /// </summary>
+        [Output("status")]
+        public Output<string> Status { get; private set; } = null!;
+
+        /// <summary>
         /// The artifact type: `service` or `nim`. Defaults to `service`.
         /// </summary>
         [Output("type")]
@@ -124,6 +130,12 @@ namespace DataRobotPulumi.Datarobot
         public Input<Inputs.ArtifactSpecArgs> Spec { get; set; } = null!;
 
         /// <summary>
+        /// Artifact lifecycle status: `draft` (the current artifact version is mutable; spec changes are applied in-place and `artifact_id` stays the same) or `locked` (artifact versions are immutable; spec changes create a new version with a new `artifact_id` in the same `artifact_repository_id`). Defaults to `locked`. Locking a draft artifact is one-way. Changing `status` from `locked` to `draft` creates a new draft artifact (the Workload API cannot unlock in place).
+        /// </summary>
+        [Input("status")]
+        public Input<string>? Status { get; set; }
+
+        /// <summary>
         /// The artifact type: `service` or `nim`. Defaults to `service`.
         /// </summary>
         [Input("type")]
@@ -166,6 +178,12 @@ namespace DataRobotPulumi.Datarobot
         /// </summary>
         [Input("spec")]
         public Input<Inputs.ArtifactSpecGetArgs>? Spec { get; set; }
+
+        /// <summary>
+        /// Artifact lifecycle status: `draft` (the current artifact version is mutable; spec changes are applied in-place and `artifact_id` stays the same) or `locked` (artifact versions are immutable; spec changes create a new version with a new `artifact_id` in the same `artifact_repository_id`). Defaults to `locked`. Locking a draft artifact is one-way. Changing `status` from `locked` to `draft` creates a new draft artifact (the Workload API cannot unlock in place).
+        /// </summary>
+        [Input("status")]
+        public Input<string>? Status { get; set; }
 
         /// <summary>
         /// The artifact type: `service` or `nim`. Defaults to `service`.

@@ -26,6 +26,7 @@ class ArtifactArgs:
                  artifact_repository_id: Optional[pulumi.Input[builtins.str]] = None,
                  description: Optional[pulumi.Input[builtins.str]] = None,
                  name: Optional[pulumi.Input[builtins.str]] = None,
+                 status: Optional[pulumi.Input[builtins.str]] = None,
                  type: Optional[pulumi.Input[builtins.str]] = None):
         """
         The set of arguments for constructing a Artifact resource.
@@ -33,6 +34,7 @@ class ArtifactArgs:
         :param pulumi.Input[builtins.str] artifact_repository_id: ID of the artifact repository for versioning. Computed on first create if not provided; subsequent updates create new versions in the same repository.
         :param pulumi.Input[builtins.str] description: The description of the Artifact.
         :param pulumi.Input[builtins.str] name: The name of the Artifact.
+        :param pulumi.Input[builtins.str] status: Artifact lifecycle status: `draft` (the current artifact version is mutable; spec changes are applied in-place and `artifact_id` stays the same) or `locked` (artifact versions are immutable; spec changes create a new version with a new `artifact_id` in the same `artifact_repository_id`). Defaults to `locked`. Locking a draft artifact is one-way. Changing `status` from `locked` to `draft` creates a new draft artifact (the Workload API cannot unlock in place).
         :param pulumi.Input[builtins.str] type: The artifact type: `service` or `nim`. Defaults to `service`.
         """
         pulumi.set(__self__, "spec", spec)
@@ -42,6 +44,8 @@ class ArtifactArgs:
             pulumi.set(__self__, "description", description)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if status is not None:
+            pulumi.set(__self__, "status", status)
         if type is not None:
             pulumi.set(__self__, "type", type)
 
@@ -95,6 +99,18 @@ class ArtifactArgs:
 
     @property
     @pulumi.getter
+    def status(self) -> Optional[pulumi.Input[builtins.str]]:
+        """
+        Artifact lifecycle status: `draft` (the current artifact version is mutable; spec changes are applied in-place and `artifact_id` stays the same) or `locked` (artifact versions are immutable; spec changes create a new version with a new `artifact_id` in the same `artifact_repository_id`). Defaults to `locked`. Locking a draft artifact is one-way. Changing `status` from `locked` to `draft` creates a new draft artifact (the Workload API cannot unlock in place).
+        """
+        return pulumi.get(self, "status")
+
+    @status.setter
+    def status(self, value: Optional[pulumi.Input[builtins.str]]):
+        pulumi.set(self, "status", value)
+
+    @property
+    @pulumi.getter
     def type(self) -> Optional[pulumi.Input[builtins.str]]:
         """
         The artifact type: `service` or `nim`. Defaults to `service`.
@@ -114,6 +130,7 @@ class _ArtifactState:
                  description: Optional[pulumi.Input[builtins.str]] = None,
                  name: Optional[pulumi.Input[builtins.str]] = None,
                  spec: Optional[pulumi.Input['ArtifactSpecArgs']] = None,
+                 status: Optional[pulumi.Input[builtins.str]] = None,
                  type: Optional[pulumi.Input[builtins.str]] = None):
         """
         Input properties used for looking up and filtering Artifact resources.
@@ -122,6 +139,7 @@ class _ArtifactState:
         :param pulumi.Input[builtins.str] description: The description of the Artifact.
         :param pulumi.Input[builtins.str] name: The name of the Artifact.
         :param pulumi.Input['ArtifactSpecArgs'] spec: The artifact specification containing container group definitions.
+        :param pulumi.Input[builtins.str] status: Artifact lifecycle status: `draft` (the current artifact version is mutable; spec changes are applied in-place and `artifact_id` stays the same) or `locked` (artifact versions are immutable; spec changes create a new version with a new `artifact_id` in the same `artifact_repository_id`). Defaults to `locked`. Locking a draft artifact is one-way. Changing `status` from `locked` to `draft` creates a new draft artifact (the Workload API cannot unlock in place).
         :param pulumi.Input[builtins.str] type: The artifact type: `service` or `nim`. Defaults to `service`.
         """
         if artifact_id is not None:
@@ -134,6 +152,8 @@ class _ArtifactState:
             pulumi.set(__self__, "name", name)
         if spec is not None:
             pulumi.set(__self__, "spec", spec)
+        if status is not None:
+            pulumi.set(__self__, "status", status)
         if type is not None:
             pulumi.set(__self__, "type", type)
 
@@ -199,6 +219,18 @@ class _ArtifactState:
 
     @property
     @pulumi.getter
+    def status(self) -> Optional[pulumi.Input[builtins.str]]:
+        """
+        Artifact lifecycle status: `draft` (the current artifact version is mutable; spec changes are applied in-place and `artifact_id` stays the same) or `locked` (artifact versions are immutable; spec changes create a new version with a new `artifact_id` in the same `artifact_repository_id`). Defaults to `locked`. Locking a draft artifact is one-way. Changing `status` from `locked` to `draft` creates a new draft artifact (the Workload API cannot unlock in place).
+        """
+        return pulumi.get(self, "status")
+
+    @status.setter
+    def status(self, value: Optional[pulumi.Input[builtins.str]]):
+        pulumi.set(self, "status", value)
+
+    @property
+    @pulumi.getter
     def type(self) -> Optional[pulumi.Input[builtins.str]]:
         """
         The artifact type: `service` or `nim`. Defaults to `service`.
@@ -219,6 +251,7 @@ class Artifact(pulumi.CustomResource):
                  description: Optional[pulumi.Input[builtins.str]] = None,
                  name: Optional[pulumi.Input[builtins.str]] = None,
                  spec: Optional[pulumi.Input[Union['ArtifactSpecArgs', 'ArtifactSpecArgsDict']]] = None,
+                 status: Optional[pulumi.Input[builtins.str]] = None,
                  type: Optional[pulumi.Input[builtins.str]] = None,
                  __props__=None):
         """
@@ -230,6 +263,7 @@ class Artifact(pulumi.CustomResource):
         :param pulumi.Input[builtins.str] description: The description of the Artifact.
         :param pulumi.Input[builtins.str] name: The name of the Artifact.
         :param pulumi.Input[Union['ArtifactSpecArgs', 'ArtifactSpecArgsDict']] spec: The artifact specification containing container group definitions.
+        :param pulumi.Input[builtins.str] status: Artifact lifecycle status: `draft` (the current artifact version is mutable; spec changes are applied in-place and `artifact_id` stays the same) or `locked` (artifact versions are immutable; spec changes create a new version with a new `artifact_id` in the same `artifact_repository_id`). Defaults to `locked`. Locking a draft artifact is one-way. Changing `status` from `locked` to `draft` creates a new draft artifact (the Workload API cannot unlock in place).
         :param pulumi.Input[builtins.str] type: The artifact type: `service` or `nim`. Defaults to `service`.
         """
         ...
@@ -260,6 +294,7 @@ class Artifact(pulumi.CustomResource):
                  description: Optional[pulumi.Input[builtins.str]] = None,
                  name: Optional[pulumi.Input[builtins.str]] = None,
                  spec: Optional[pulumi.Input[Union['ArtifactSpecArgs', 'ArtifactSpecArgsDict']]] = None,
+                 status: Optional[pulumi.Input[builtins.str]] = None,
                  type: Optional[pulumi.Input[builtins.str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
@@ -276,6 +311,7 @@ class Artifact(pulumi.CustomResource):
             if spec is None and not opts.urn:
                 raise TypeError("Missing required property 'spec'")
             __props__.__dict__["spec"] = spec
+            __props__.__dict__["status"] = status
             __props__.__dict__["type"] = type
             __props__.__dict__["artifact_id"] = None
         super(Artifact, __self__).__init__(
@@ -293,6 +329,7 @@ class Artifact(pulumi.CustomResource):
             description: Optional[pulumi.Input[builtins.str]] = None,
             name: Optional[pulumi.Input[builtins.str]] = None,
             spec: Optional[pulumi.Input[Union['ArtifactSpecArgs', 'ArtifactSpecArgsDict']]] = None,
+            status: Optional[pulumi.Input[builtins.str]] = None,
             type: Optional[pulumi.Input[builtins.str]] = None) -> 'Artifact':
         """
         Get an existing Artifact resource's state with the given name, id, and optional extra
@@ -306,6 +343,7 @@ class Artifact(pulumi.CustomResource):
         :param pulumi.Input[builtins.str] description: The description of the Artifact.
         :param pulumi.Input[builtins.str] name: The name of the Artifact.
         :param pulumi.Input[Union['ArtifactSpecArgs', 'ArtifactSpecArgsDict']] spec: The artifact specification containing container group definitions.
+        :param pulumi.Input[builtins.str] status: Artifact lifecycle status: `draft` (the current artifact version is mutable; spec changes are applied in-place and `artifact_id` stays the same) or `locked` (artifact versions are immutable; spec changes create a new version with a new `artifact_id` in the same `artifact_repository_id`). Defaults to `locked`. Locking a draft artifact is one-way. Changing `status` from `locked` to `draft` creates a new draft artifact (the Workload API cannot unlock in place).
         :param pulumi.Input[builtins.str] type: The artifact type: `service` or `nim`. Defaults to `service`.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -317,6 +355,7 @@ class Artifact(pulumi.CustomResource):
         __props__.__dict__["description"] = description
         __props__.__dict__["name"] = name
         __props__.__dict__["spec"] = spec
+        __props__.__dict__["status"] = status
         __props__.__dict__["type"] = type
         return Artifact(resource_name, opts=opts, __props__=__props__)
 
@@ -359,6 +398,14 @@ class Artifact(pulumi.CustomResource):
         The artifact specification containing container group definitions.
         """
         return pulumi.get(self, "spec")
+
+    @property
+    @pulumi.getter
+    def status(self) -> pulumi.Output[builtins.str]:
+        """
+        Artifact lifecycle status: `draft` (the current artifact version is mutable; spec changes are applied in-place and `artifact_id` stays the same) or `locked` (artifact versions are immutable; spec changes create a new version with a new `artifact_id` in the same `artifact_repository_id`). Defaults to `locked`. Locking a draft artifact is one-way. Changing `status` from `locked` to `draft` creates a new draft artifact (the Workload API cannot unlock in place).
+        """
+        return pulumi.get(self, "status")
 
     @property
     @pulumi.getter

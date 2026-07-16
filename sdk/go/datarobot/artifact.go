@@ -26,6 +26,8 @@ type Artifact struct {
 	Name pulumi.StringOutput `pulumi:"name"`
 	// The artifact specification containing container group definitions.
 	Spec ArtifactSpecOutput `pulumi:"spec"`
+	// Artifact lifecycle status: `draft` (the current artifact version is mutable; spec changes are applied in-place and `artifactId` stays the same) or `locked` (artifact versions are immutable; spec changes create a new version with a new `artifactId` in the same `artifactRepositoryId`). Defaults to `locked`. Locking a draft artifact is one-way. Changing `status` from `locked` to `draft` creates a new draft artifact (the Workload API cannot unlock in place).
+	Status pulumi.StringOutput `pulumi:"status"`
 	// The artifact type: `service` or `nim`. Defaults to `service`.
 	Type pulumi.StringOutput `pulumi:"type"`
 }
@@ -73,6 +75,8 @@ type artifactState struct {
 	Name *string `pulumi:"name"`
 	// The artifact specification containing container group definitions.
 	Spec *ArtifactSpec `pulumi:"spec"`
+	// Artifact lifecycle status: `draft` (the current artifact version is mutable; spec changes are applied in-place and `artifactId` stays the same) or `locked` (artifact versions are immutable; spec changes create a new version with a new `artifactId` in the same `artifactRepositoryId`). Defaults to `locked`. Locking a draft artifact is one-way. Changing `status` from `locked` to `draft` creates a new draft artifact (the Workload API cannot unlock in place).
+	Status *string `pulumi:"status"`
 	// The artifact type: `service` or `nim`. Defaults to `service`.
 	Type *string `pulumi:"type"`
 }
@@ -88,6 +92,8 @@ type ArtifactState struct {
 	Name pulumi.StringPtrInput
 	// The artifact specification containing container group definitions.
 	Spec ArtifactSpecPtrInput
+	// Artifact lifecycle status: `draft` (the current artifact version is mutable; spec changes are applied in-place and `artifactId` stays the same) or `locked` (artifact versions are immutable; spec changes create a new version with a new `artifactId` in the same `artifactRepositoryId`). Defaults to `locked`. Locking a draft artifact is one-way. Changing `status` from `locked` to `draft` creates a new draft artifact (the Workload API cannot unlock in place).
+	Status pulumi.StringPtrInput
 	// The artifact type: `service` or `nim`. Defaults to `service`.
 	Type pulumi.StringPtrInput
 }
@@ -105,6 +111,8 @@ type artifactArgs struct {
 	Name *string `pulumi:"name"`
 	// The artifact specification containing container group definitions.
 	Spec ArtifactSpec `pulumi:"spec"`
+	// Artifact lifecycle status: `draft` (the current artifact version is mutable; spec changes are applied in-place and `artifactId` stays the same) or `locked` (artifact versions are immutable; spec changes create a new version with a new `artifactId` in the same `artifactRepositoryId`). Defaults to `locked`. Locking a draft artifact is one-way. Changing `status` from `locked` to `draft` creates a new draft artifact (the Workload API cannot unlock in place).
+	Status *string `pulumi:"status"`
 	// The artifact type: `service` or `nim`. Defaults to `service`.
 	Type *string `pulumi:"type"`
 }
@@ -119,6 +127,8 @@ type ArtifactArgs struct {
 	Name pulumi.StringPtrInput
 	// The artifact specification containing container group definitions.
 	Spec ArtifactSpecInput
+	// Artifact lifecycle status: `draft` (the current artifact version is mutable; spec changes are applied in-place and `artifactId` stays the same) or `locked` (artifact versions are immutable; spec changes create a new version with a new `artifactId` in the same `artifactRepositoryId`). Defaults to `locked`. Locking a draft artifact is one-way. Changing `status` from `locked` to `draft` creates a new draft artifact (the Workload API cannot unlock in place).
+	Status pulumi.StringPtrInput
 	// The artifact type: `service` or `nim`. Defaults to `service`.
 	Type pulumi.StringPtrInput
 }
@@ -233,6 +243,11 @@ func (o ArtifactOutput) Name() pulumi.StringOutput {
 // The artifact specification containing container group definitions.
 func (o ArtifactOutput) Spec() ArtifactSpecOutput {
 	return o.ApplyT(func(v *Artifact) ArtifactSpecOutput { return v.Spec }).(ArtifactSpecOutput)
+}
+
+// Artifact lifecycle status: `draft` (the current artifact version is mutable; spec changes are applied in-place and `artifactId` stays the same) or `locked` (artifact versions are immutable; spec changes create a new version with a new `artifactId` in the same `artifactRepositoryId`). Defaults to `locked`. Locking a draft artifact is one-way. Changing `status` from `locked` to `draft` creates a new draft artifact (the Workload API cannot unlock in place).
+func (o ArtifactOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v *Artifact) pulumi.StringOutput { return v.Status }).(pulumi.StringOutput)
 }
 
 // The artifact type: `service` or `nim`. Defaults to `service`.
