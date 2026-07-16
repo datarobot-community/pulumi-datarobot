@@ -107,7 +107,7 @@ jobs:
         if: ${{ github.event.inputs.SDK_LANGUAGE == 'nodejs' && env.PUBLISH_NPM == 'true' }}
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           registry-url: 'https://registry.npmjs.org'
 
       - name: Ensure npm 11.5.1 or later
