@@ -58,6 +58,10 @@ export class Artifact extends pulumi.CustomResource {
      */
     public readonly spec!: pulumi.Output<outputs.ArtifactSpec>;
     /**
+     * Artifact lifecycle status: `draft` (the current artifact version is mutable; spec changes are applied in-place and `artifactId` stays the same) or `locked` (artifact versions are immutable; spec changes create a new version with a new `artifactId` in the same `artifactRepositoryId`). Defaults to `locked`. Locking a draft artifact is one-way. Changing `status` from `locked` to `draft` creates a new draft artifact (the Workload API cannot unlock in place).
+     */
+    public readonly status!: pulumi.Output<string>;
+    /**
      * The artifact type: `service` or `nim`. Defaults to `service`.
      */
     public readonly type!: pulumi.Output<string>;
@@ -80,6 +84,7 @@ export class Artifact extends pulumi.CustomResource {
             resourceInputs["description"] = state ? state.description : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["spec"] = state ? state.spec : undefined;
+            resourceInputs["status"] = state ? state.status : undefined;
             resourceInputs["type"] = state ? state.type : undefined;
         } else {
             const args = argsOrState as ArtifactArgs | undefined;
@@ -90,6 +95,7 @@ export class Artifact extends pulumi.CustomResource {
             resourceInputs["description"] = args ? args.description : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["spec"] = args ? args.spec : undefined;
+            resourceInputs["status"] = args ? args.status : undefined;
             resourceInputs["type"] = args ? args.type : undefined;
             resourceInputs["artifactId"] = undefined /*out*/;
         }
@@ -123,6 +129,10 @@ export interface ArtifactState {
      */
     spec?: pulumi.Input<inputs.ArtifactSpec>;
     /**
+     * Artifact lifecycle status: `draft` (the current artifact version is mutable; spec changes are applied in-place and `artifactId` stays the same) or `locked` (artifact versions are immutable; spec changes create a new version with a new `artifactId` in the same `artifactRepositoryId`). Defaults to `locked`. Locking a draft artifact is one-way. Changing `status` from `locked` to `draft` creates a new draft artifact (the Workload API cannot unlock in place).
+     */
+    status?: pulumi.Input<string>;
+    /**
      * The artifact type: `service` or `nim`. Defaults to `service`.
      */
     type?: pulumi.Input<string>;
@@ -148,6 +158,10 @@ export interface ArtifactArgs {
      * The artifact specification containing container group definitions.
      */
     spec: pulumi.Input<inputs.ArtifactSpec>;
+    /**
+     * Artifact lifecycle status: `draft` (the current artifact version is mutable; spec changes are applied in-place and `artifactId` stays the same) or `locked` (artifact versions are immutable; spec changes create a new version with a new `artifactId` in the same `artifactRepositoryId`). Defaults to `locked`. Locking a draft artifact is one-way. Changing `status` from `locked` to `draft` creates a new draft artifact (the Workload API cannot unlock in place).
+     */
+    status?: pulumi.Input<string>;
     /**
      * The artifact type: `service` or `nim`. Defaults to `service`.
      */

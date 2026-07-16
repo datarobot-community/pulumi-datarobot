@@ -32,6 +32,8 @@ from .datastore import *
 from .deployment import *
 from .deployment_retraining_policy import *
 from .execution_environment import *
+from .get_artifact import *
+from .get_artifacts import *
 from .get_execution_environment import *
 from .get_global_model import *
 from .google_cloud_credential import *

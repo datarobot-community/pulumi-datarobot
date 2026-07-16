@@ -15364,6 +15364,3651 @@ func (o WorkloadRuntimeContainerGroupContainerResourceAllocationPtrOutput) Memor
 	}).(pulumi.StringPtrOutput)
 }
 
+type GetArtifactCreator struct {
+	// User email address.
+	Email string `pulumi:"email"`
+	// User's full name.
+	FullName string `pulumi:"fullName"`
+	// User ID.
+	Id string `pulumi:"id"`
+	// User's gravatar hash.
+	Userhash string `pulumi:"userhash"`
+	// Username.
+	Username string `pulumi:"username"`
+}
+
+// GetArtifactCreatorInput is an input type that accepts GetArtifactCreatorArgs and GetArtifactCreatorOutput values.
+// You can construct a concrete instance of `GetArtifactCreatorInput` via:
+//
+//	GetArtifactCreatorArgs{...}
+type GetArtifactCreatorInput interface {
+	pulumi.Input
+
+	ToGetArtifactCreatorOutput() GetArtifactCreatorOutput
+	ToGetArtifactCreatorOutputWithContext(context.Context) GetArtifactCreatorOutput
+}
+
+type GetArtifactCreatorArgs struct {
+	// User email address.
+	Email pulumi.StringInput `pulumi:"email"`
+	// User's full name.
+	FullName pulumi.StringInput `pulumi:"fullName"`
+	// User ID.
+	Id pulumi.StringInput `pulumi:"id"`
+	// User's gravatar hash.
+	Userhash pulumi.StringInput `pulumi:"userhash"`
+	// Username.
+	Username pulumi.StringInput `pulumi:"username"`
+}
+
+func (GetArtifactCreatorArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactCreator)(nil)).Elem()
+}
+
+func (i GetArtifactCreatorArgs) ToGetArtifactCreatorOutput() GetArtifactCreatorOutput {
+	return i.ToGetArtifactCreatorOutputWithContext(context.Background())
+}
+
+func (i GetArtifactCreatorArgs) ToGetArtifactCreatorOutputWithContext(ctx context.Context) GetArtifactCreatorOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetArtifactCreatorOutput)
+}
+
+type GetArtifactCreatorOutput struct{ *pulumi.OutputState }
+
+func (GetArtifactCreatorOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactCreator)(nil)).Elem()
+}
+
+func (o GetArtifactCreatorOutput) ToGetArtifactCreatorOutput() GetArtifactCreatorOutput {
+	return o
+}
+
+func (o GetArtifactCreatorOutput) ToGetArtifactCreatorOutputWithContext(ctx context.Context) GetArtifactCreatorOutput {
+	return o
+}
+
+// User email address.
+func (o GetArtifactCreatorOutput) Email() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactCreator) string { return v.Email }).(pulumi.StringOutput)
+}
+
+// User's full name.
+func (o GetArtifactCreatorOutput) FullName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactCreator) string { return v.FullName }).(pulumi.StringOutput)
+}
+
+// User ID.
+func (o GetArtifactCreatorOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactCreator) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// User's gravatar hash.
+func (o GetArtifactCreatorOutput) Userhash() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactCreator) string { return v.Userhash }).(pulumi.StringOutput)
+}
+
+// Username.
+func (o GetArtifactCreatorOutput) Username() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactCreator) string { return v.Username }).(pulumi.StringOutput)
+}
+
+type GetArtifactSpec struct {
+	// List of container groups.
+	ContainerGroups []GetArtifactSpecContainerGroup `pulumi:"containerGroups"`
+	// NIM model weight storage configuration.
+	Storage GetArtifactSpecStorage `pulumi:"storage"`
+	// ID of the template used to create this NIM artifact.
+	TemplateId string `pulumi:"templateId"`
+}
+
+// GetArtifactSpecInput is an input type that accepts GetArtifactSpecArgs and GetArtifactSpecOutput values.
+// You can construct a concrete instance of `GetArtifactSpecInput` via:
+//
+//	GetArtifactSpecArgs{...}
+type GetArtifactSpecInput interface {
+	pulumi.Input
+
+	ToGetArtifactSpecOutput() GetArtifactSpecOutput
+	ToGetArtifactSpecOutputWithContext(context.Context) GetArtifactSpecOutput
+}
+
+type GetArtifactSpecArgs struct {
+	// List of container groups.
+	ContainerGroups GetArtifactSpecContainerGroupArrayInput `pulumi:"containerGroups"`
+	// NIM model weight storage configuration.
+	Storage GetArtifactSpecStorageInput `pulumi:"storage"`
+	// ID of the template used to create this NIM artifact.
+	TemplateId pulumi.StringInput `pulumi:"templateId"`
+}
+
+func (GetArtifactSpecArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactSpec)(nil)).Elem()
+}
+
+func (i GetArtifactSpecArgs) ToGetArtifactSpecOutput() GetArtifactSpecOutput {
+	return i.ToGetArtifactSpecOutputWithContext(context.Background())
+}
+
+func (i GetArtifactSpecArgs) ToGetArtifactSpecOutputWithContext(ctx context.Context) GetArtifactSpecOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetArtifactSpecOutput)
+}
+
+type GetArtifactSpecOutput struct{ *pulumi.OutputState }
+
+func (GetArtifactSpecOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactSpec)(nil)).Elem()
+}
+
+func (o GetArtifactSpecOutput) ToGetArtifactSpecOutput() GetArtifactSpecOutput {
+	return o
+}
+
+func (o GetArtifactSpecOutput) ToGetArtifactSpecOutputWithContext(ctx context.Context) GetArtifactSpecOutput {
+	return o
+}
+
+// List of container groups.
+func (o GetArtifactSpecOutput) ContainerGroups() GetArtifactSpecContainerGroupArrayOutput {
+	return o.ApplyT(func(v GetArtifactSpec) []GetArtifactSpecContainerGroup { return v.ContainerGroups }).(GetArtifactSpecContainerGroupArrayOutput)
+}
+
+// NIM model weight storage configuration.
+func (o GetArtifactSpecOutput) Storage() GetArtifactSpecStorageOutput {
+	return o.ApplyT(func(v GetArtifactSpec) GetArtifactSpecStorage { return v.Storage }).(GetArtifactSpecStorageOutput)
+}
+
+// ID of the template used to create this NIM artifact.
+func (o GetArtifactSpecOutput) TemplateId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactSpec) string { return v.TemplateId }).(pulumi.StringOutput)
+}
+
+type GetArtifactSpecContainerGroup struct {
+	// List of containers in this group.
+	Containers []GetArtifactSpecContainerGroupContainer `pulumi:"containers"`
+	// Name of the container group.
+	Name string `pulumi:"name"`
+}
+
+// GetArtifactSpecContainerGroupInput is an input type that accepts GetArtifactSpecContainerGroupArgs and GetArtifactSpecContainerGroupOutput values.
+// You can construct a concrete instance of `GetArtifactSpecContainerGroupInput` via:
+//
+//	GetArtifactSpecContainerGroupArgs{...}
+type GetArtifactSpecContainerGroupInput interface {
+	pulumi.Input
+
+	ToGetArtifactSpecContainerGroupOutput() GetArtifactSpecContainerGroupOutput
+	ToGetArtifactSpecContainerGroupOutputWithContext(context.Context) GetArtifactSpecContainerGroupOutput
+}
+
+type GetArtifactSpecContainerGroupArgs struct {
+	// List of containers in this group.
+	Containers GetArtifactSpecContainerGroupContainerArrayInput `pulumi:"containers"`
+	// Name of the container group.
+	Name pulumi.StringInput `pulumi:"name"`
+}
+
+func (GetArtifactSpecContainerGroupArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactSpecContainerGroup)(nil)).Elem()
+}
+
+func (i GetArtifactSpecContainerGroupArgs) ToGetArtifactSpecContainerGroupOutput() GetArtifactSpecContainerGroupOutput {
+	return i.ToGetArtifactSpecContainerGroupOutputWithContext(context.Background())
+}
+
+func (i GetArtifactSpecContainerGroupArgs) ToGetArtifactSpecContainerGroupOutputWithContext(ctx context.Context) GetArtifactSpecContainerGroupOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetArtifactSpecContainerGroupOutput)
+}
+
+// GetArtifactSpecContainerGroupArrayInput is an input type that accepts GetArtifactSpecContainerGroupArray and GetArtifactSpecContainerGroupArrayOutput values.
+// You can construct a concrete instance of `GetArtifactSpecContainerGroupArrayInput` via:
+//
+//	GetArtifactSpecContainerGroupArray{ GetArtifactSpecContainerGroupArgs{...} }
+type GetArtifactSpecContainerGroupArrayInput interface {
+	pulumi.Input
+
+	ToGetArtifactSpecContainerGroupArrayOutput() GetArtifactSpecContainerGroupArrayOutput
+	ToGetArtifactSpecContainerGroupArrayOutputWithContext(context.Context) GetArtifactSpecContainerGroupArrayOutput
+}
+
+type GetArtifactSpecContainerGroupArray []GetArtifactSpecContainerGroupInput
+
+func (GetArtifactSpecContainerGroupArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetArtifactSpecContainerGroup)(nil)).Elem()
+}
+
+func (i GetArtifactSpecContainerGroupArray) ToGetArtifactSpecContainerGroupArrayOutput() GetArtifactSpecContainerGroupArrayOutput {
+	return i.ToGetArtifactSpecContainerGroupArrayOutputWithContext(context.Background())
+}
+
+func (i GetArtifactSpecContainerGroupArray) ToGetArtifactSpecContainerGroupArrayOutputWithContext(ctx context.Context) GetArtifactSpecContainerGroupArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetArtifactSpecContainerGroupArrayOutput)
+}
+
+type GetArtifactSpecContainerGroupOutput struct{ *pulumi.OutputState }
+
+func (GetArtifactSpecContainerGroupOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactSpecContainerGroup)(nil)).Elem()
+}
+
+func (o GetArtifactSpecContainerGroupOutput) ToGetArtifactSpecContainerGroupOutput() GetArtifactSpecContainerGroupOutput {
+	return o
+}
+
+func (o GetArtifactSpecContainerGroupOutput) ToGetArtifactSpecContainerGroupOutputWithContext(ctx context.Context) GetArtifactSpecContainerGroupOutput {
+	return o
+}
+
+// List of containers in this group.
+func (o GetArtifactSpecContainerGroupOutput) Containers() GetArtifactSpecContainerGroupContainerArrayOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroup) []GetArtifactSpecContainerGroupContainer { return v.Containers }).(GetArtifactSpecContainerGroupContainerArrayOutput)
+}
+
+// Name of the container group.
+func (o GetArtifactSpecContainerGroupOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroup) string { return v.Name }).(pulumi.StringOutput)
+}
+
+type GetArtifactSpecContainerGroupArrayOutput struct{ *pulumi.OutputState }
+
+func (GetArtifactSpecContainerGroupArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetArtifactSpecContainerGroup)(nil)).Elem()
+}
+
+func (o GetArtifactSpecContainerGroupArrayOutput) ToGetArtifactSpecContainerGroupArrayOutput() GetArtifactSpecContainerGroupArrayOutput {
+	return o
+}
+
+func (o GetArtifactSpecContainerGroupArrayOutput) ToGetArtifactSpecContainerGroupArrayOutputWithContext(ctx context.Context) GetArtifactSpecContainerGroupArrayOutput {
+	return o
+}
+
+func (o GetArtifactSpecContainerGroupArrayOutput) Index(i pulumi.IntInput) GetArtifactSpecContainerGroupOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetArtifactSpecContainerGroup {
+		return vs[0].([]GetArtifactSpecContainerGroup)[vs[1].(int)]
+	}).(GetArtifactSpecContainerGroupOutput)
+}
+
+type GetArtifactSpecContainerGroupContainer struct {
+	// Server-set image build metadata.
+	Build GetArtifactSpecContainerGroupContainerBuild `pulumi:"build"`
+	// Description of the container.
+	Description string `pulumi:"description"`
+	// Container entrypoint.
+	Entrypoints []string `pulumi:"entrypoints"`
+	// Environment variables for the container.
+	EnvironmentVars []GetArtifactSpecContainerGroupContainerEnvironmentVar `pulumi:"environmentVars"`
+	// Configuration for server-side image builds from source code.
+	ImageBuildConfig GetArtifactSpecContainerGroupContainerImageBuildConfig `pulumi:"imageBuildConfig"`
+	// Docker image URI.
+	ImageUri string `pulumi:"imageUri"`
+	// Container liveness check configuration.
+	LivenessProbe GetArtifactSpecContainerGroupContainerLivenessProbe `pulumi:"livenessProbe"`
+	// Name of the container.
+	Name string `pulumi:"name"`
+	// Container access port (1024-65535).
+	Port int `pulumi:"port"`
+	// Whether this is the primary container.
+	Primary bool `pulumi:"primary"`
+	// Container readiness check configuration.
+	ReadinessProbe GetArtifactSpecContainerGroupContainerReadinessProbe `pulumi:"readinessProbe"`
+	// Container security context.
+	SecurityContext GetArtifactSpecContainerGroupContainerSecurityContext `pulumi:"securityContext"`
+	// Container startup check configuration.
+	StartupProbe GetArtifactSpecContainerGroupContainerStartupProbe `pulumi:"startupProbe"`
+}
+
+// GetArtifactSpecContainerGroupContainerInput is an input type that accepts GetArtifactSpecContainerGroupContainerArgs and GetArtifactSpecContainerGroupContainerOutput values.
+// You can construct a concrete instance of `GetArtifactSpecContainerGroupContainerInput` via:
+//
+//	GetArtifactSpecContainerGroupContainerArgs{...}
+type GetArtifactSpecContainerGroupContainerInput interface {
+	pulumi.Input
+
+	ToGetArtifactSpecContainerGroupContainerOutput() GetArtifactSpecContainerGroupContainerOutput
+	ToGetArtifactSpecContainerGroupContainerOutputWithContext(context.Context) GetArtifactSpecContainerGroupContainerOutput
+}
+
+type GetArtifactSpecContainerGroupContainerArgs struct {
+	// Server-set image build metadata.
+	Build GetArtifactSpecContainerGroupContainerBuildInput `pulumi:"build"`
+	// Description of the container.
+	Description pulumi.StringInput `pulumi:"description"`
+	// Container entrypoint.
+	Entrypoints pulumi.StringArrayInput `pulumi:"entrypoints"`
+	// Environment variables for the container.
+	EnvironmentVars GetArtifactSpecContainerGroupContainerEnvironmentVarArrayInput `pulumi:"environmentVars"`
+	// Configuration for server-side image builds from source code.
+	ImageBuildConfig GetArtifactSpecContainerGroupContainerImageBuildConfigInput `pulumi:"imageBuildConfig"`
+	// Docker image URI.
+	ImageUri pulumi.StringInput `pulumi:"imageUri"`
+	// Container liveness check configuration.
+	LivenessProbe GetArtifactSpecContainerGroupContainerLivenessProbeInput `pulumi:"livenessProbe"`
+	// Name of the container.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Container access port (1024-65535).
+	Port pulumi.IntInput `pulumi:"port"`
+	// Whether this is the primary container.
+	Primary pulumi.BoolInput `pulumi:"primary"`
+	// Container readiness check configuration.
+	ReadinessProbe GetArtifactSpecContainerGroupContainerReadinessProbeInput `pulumi:"readinessProbe"`
+	// Container security context.
+	SecurityContext GetArtifactSpecContainerGroupContainerSecurityContextInput `pulumi:"securityContext"`
+	// Container startup check configuration.
+	StartupProbe GetArtifactSpecContainerGroupContainerStartupProbeInput `pulumi:"startupProbe"`
+}
+
+func (GetArtifactSpecContainerGroupContainerArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactSpecContainerGroupContainer)(nil)).Elem()
+}
+
+func (i GetArtifactSpecContainerGroupContainerArgs) ToGetArtifactSpecContainerGroupContainerOutput() GetArtifactSpecContainerGroupContainerOutput {
+	return i.ToGetArtifactSpecContainerGroupContainerOutputWithContext(context.Background())
+}
+
+func (i GetArtifactSpecContainerGroupContainerArgs) ToGetArtifactSpecContainerGroupContainerOutputWithContext(ctx context.Context) GetArtifactSpecContainerGroupContainerOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetArtifactSpecContainerGroupContainerOutput)
+}
+
+// GetArtifactSpecContainerGroupContainerArrayInput is an input type that accepts GetArtifactSpecContainerGroupContainerArray and GetArtifactSpecContainerGroupContainerArrayOutput values.
+// You can construct a concrete instance of `GetArtifactSpecContainerGroupContainerArrayInput` via:
+//
+//	GetArtifactSpecContainerGroupContainerArray{ GetArtifactSpecContainerGroupContainerArgs{...} }
+type GetArtifactSpecContainerGroupContainerArrayInput interface {
+	pulumi.Input
+
+	ToGetArtifactSpecContainerGroupContainerArrayOutput() GetArtifactSpecContainerGroupContainerArrayOutput
+	ToGetArtifactSpecContainerGroupContainerArrayOutputWithContext(context.Context) GetArtifactSpecContainerGroupContainerArrayOutput
+}
+
+type GetArtifactSpecContainerGroupContainerArray []GetArtifactSpecContainerGroupContainerInput
+
+func (GetArtifactSpecContainerGroupContainerArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetArtifactSpecContainerGroupContainer)(nil)).Elem()
+}
+
+func (i GetArtifactSpecContainerGroupContainerArray) ToGetArtifactSpecContainerGroupContainerArrayOutput() GetArtifactSpecContainerGroupContainerArrayOutput {
+	return i.ToGetArtifactSpecContainerGroupContainerArrayOutputWithContext(context.Background())
+}
+
+func (i GetArtifactSpecContainerGroupContainerArray) ToGetArtifactSpecContainerGroupContainerArrayOutputWithContext(ctx context.Context) GetArtifactSpecContainerGroupContainerArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetArtifactSpecContainerGroupContainerArrayOutput)
+}
+
+type GetArtifactSpecContainerGroupContainerOutput struct{ *pulumi.OutputState }
+
+func (GetArtifactSpecContainerGroupContainerOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactSpecContainerGroupContainer)(nil)).Elem()
+}
+
+func (o GetArtifactSpecContainerGroupContainerOutput) ToGetArtifactSpecContainerGroupContainerOutput() GetArtifactSpecContainerGroupContainerOutput {
+	return o
+}
+
+func (o GetArtifactSpecContainerGroupContainerOutput) ToGetArtifactSpecContainerGroupContainerOutputWithContext(ctx context.Context) GetArtifactSpecContainerGroupContainerOutput {
+	return o
+}
+
+// Server-set image build metadata.
+func (o GetArtifactSpecContainerGroupContainerOutput) Build() GetArtifactSpecContainerGroupContainerBuildOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainer) GetArtifactSpecContainerGroupContainerBuild {
+		return v.Build
+	}).(GetArtifactSpecContainerGroupContainerBuildOutput)
+}
+
+// Description of the container.
+func (o GetArtifactSpecContainerGroupContainerOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainer) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// Container entrypoint.
+func (o GetArtifactSpecContainerGroupContainerOutput) Entrypoints() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainer) []string { return v.Entrypoints }).(pulumi.StringArrayOutput)
+}
+
+// Environment variables for the container.
+func (o GetArtifactSpecContainerGroupContainerOutput) EnvironmentVars() GetArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainer) []GetArtifactSpecContainerGroupContainerEnvironmentVar {
+		return v.EnvironmentVars
+	}).(GetArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput)
+}
+
+// Configuration for server-side image builds from source code.
+func (o GetArtifactSpecContainerGroupContainerOutput) ImageBuildConfig() GetArtifactSpecContainerGroupContainerImageBuildConfigOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainer) GetArtifactSpecContainerGroupContainerImageBuildConfig {
+		return v.ImageBuildConfig
+	}).(GetArtifactSpecContainerGroupContainerImageBuildConfigOutput)
+}
+
+// Docker image URI.
+func (o GetArtifactSpecContainerGroupContainerOutput) ImageUri() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainer) string { return v.ImageUri }).(pulumi.StringOutput)
+}
+
+// Container liveness check configuration.
+func (o GetArtifactSpecContainerGroupContainerOutput) LivenessProbe() GetArtifactSpecContainerGroupContainerLivenessProbeOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainer) GetArtifactSpecContainerGroupContainerLivenessProbe {
+		return v.LivenessProbe
+	}).(GetArtifactSpecContainerGroupContainerLivenessProbeOutput)
+}
+
+// Name of the container.
+func (o GetArtifactSpecContainerGroupContainerOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainer) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Container access port (1024-65535).
+func (o GetArtifactSpecContainerGroupContainerOutput) Port() pulumi.IntOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainer) int { return v.Port }).(pulumi.IntOutput)
+}
+
+// Whether this is the primary container.
+func (o GetArtifactSpecContainerGroupContainerOutput) Primary() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainer) bool { return v.Primary }).(pulumi.BoolOutput)
+}
+
+// Container readiness check configuration.
+func (o GetArtifactSpecContainerGroupContainerOutput) ReadinessProbe() GetArtifactSpecContainerGroupContainerReadinessProbeOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainer) GetArtifactSpecContainerGroupContainerReadinessProbe {
+		return v.ReadinessProbe
+	}).(GetArtifactSpecContainerGroupContainerReadinessProbeOutput)
+}
+
+// Container security context.
+func (o GetArtifactSpecContainerGroupContainerOutput) SecurityContext() GetArtifactSpecContainerGroupContainerSecurityContextOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainer) GetArtifactSpecContainerGroupContainerSecurityContext {
+		return v.SecurityContext
+	}).(GetArtifactSpecContainerGroupContainerSecurityContextOutput)
+}
+
+// Container startup check configuration.
+func (o GetArtifactSpecContainerGroupContainerOutput) StartupProbe() GetArtifactSpecContainerGroupContainerStartupProbeOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainer) GetArtifactSpecContainerGroupContainerStartupProbe {
+		return v.StartupProbe
+	}).(GetArtifactSpecContainerGroupContainerStartupProbeOutput)
+}
+
+type GetArtifactSpecContainerGroupContainerArrayOutput struct{ *pulumi.OutputState }
+
+func (GetArtifactSpecContainerGroupContainerArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetArtifactSpecContainerGroupContainer)(nil)).Elem()
+}
+
+func (o GetArtifactSpecContainerGroupContainerArrayOutput) ToGetArtifactSpecContainerGroupContainerArrayOutput() GetArtifactSpecContainerGroupContainerArrayOutput {
+	return o
+}
+
+func (o GetArtifactSpecContainerGroupContainerArrayOutput) ToGetArtifactSpecContainerGroupContainerArrayOutputWithContext(ctx context.Context) GetArtifactSpecContainerGroupContainerArrayOutput {
+	return o
+}
+
+func (o GetArtifactSpecContainerGroupContainerArrayOutput) Index(i pulumi.IntInput) GetArtifactSpecContainerGroupContainerOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetArtifactSpecContainerGroupContainer {
+		return vs[0].([]GetArtifactSpecContainerGroupContainer)[vs[1].(int)]
+	}).(GetArtifactSpecContainerGroupContainerOutput)
+}
+
+type GetArtifactSpecContainerGroupContainerBuild struct {
+	// Artifact image build ID.
+	ArtifactImageBuildId string `pulumi:"artifactImageBuildId"`
+	// Build creation timestamp (UTC).
+	CreatedAt string `pulumi:"createdAt"`
+	// Image build status at submit time.
+	Status string `pulumi:"status"`
+}
+
+// GetArtifactSpecContainerGroupContainerBuildInput is an input type that accepts GetArtifactSpecContainerGroupContainerBuildArgs and GetArtifactSpecContainerGroupContainerBuildOutput values.
+// You can construct a concrete instance of `GetArtifactSpecContainerGroupContainerBuildInput` via:
+//
+//	GetArtifactSpecContainerGroupContainerBuildArgs{...}
+type GetArtifactSpecContainerGroupContainerBuildInput interface {
+	pulumi.Input
+
+	ToGetArtifactSpecContainerGroupContainerBuildOutput() GetArtifactSpecContainerGroupContainerBuildOutput
+	ToGetArtifactSpecContainerGroupContainerBuildOutputWithContext(context.Context) GetArtifactSpecContainerGroupContainerBuildOutput
+}
+
+type GetArtifactSpecContainerGroupContainerBuildArgs struct {
+	// Artifact image build ID.
+	ArtifactImageBuildId pulumi.StringInput `pulumi:"artifactImageBuildId"`
+	// Build creation timestamp (UTC).
+	CreatedAt pulumi.StringInput `pulumi:"createdAt"`
+	// Image build status at submit time.
+	Status pulumi.StringInput `pulumi:"status"`
+}
+
+func (GetArtifactSpecContainerGroupContainerBuildArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactSpecContainerGroupContainerBuild)(nil)).Elem()
+}
+
+func (i GetArtifactSpecContainerGroupContainerBuildArgs) ToGetArtifactSpecContainerGroupContainerBuildOutput() GetArtifactSpecContainerGroupContainerBuildOutput {
+	return i.ToGetArtifactSpecContainerGroupContainerBuildOutputWithContext(context.Background())
+}
+
+func (i GetArtifactSpecContainerGroupContainerBuildArgs) ToGetArtifactSpecContainerGroupContainerBuildOutputWithContext(ctx context.Context) GetArtifactSpecContainerGroupContainerBuildOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetArtifactSpecContainerGroupContainerBuildOutput)
+}
+
+type GetArtifactSpecContainerGroupContainerBuildOutput struct{ *pulumi.OutputState }
+
+func (GetArtifactSpecContainerGroupContainerBuildOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactSpecContainerGroupContainerBuild)(nil)).Elem()
+}
+
+func (o GetArtifactSpecContainerGroupContainerBuildOutput) ToGetArtifactSpecContainerGroupContainerBuildOutput() GetArtifactSpecContainerGroupContainerBuildOutput {
+	return o
+}
+
+func (o GetArtifactSpecContainerGroupContainerBuildOutput) ToGetArtifactSpecContainerGroupContainerBuildOutputWithContext(ctx context.Context) GetArtifactSpecContainerGroupContainerBuildOutput {
+	return o
+}
+
+// Artifact image build ID.
+func (o GetArtifactSpecContainerGroupContainerBuildOutput) ArtifactImageBuildId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerBuild) string { return v.ArtifactImageBuildId }).(pulumi.StringOutput)
+}
+
+// Build creation timestamp (UTC).
+func (o GetArtifactSpecContainerGroupContainerBuildOutput) CreatedAt() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerBuild) string { return v.CreatedAt }).(pulumi.StringOutput)
+}
+
+// Image build status at submit time.
+func (o GetArtifactSpecContainerGroupContainerBuildOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerBuild) string { return v.Status }).(pulumi.StringOutput)
+}
+
+type GetArtifactSpecContainerGroupContainerEnvironmentVar struct {
+	// DataRobot credential ID when source is "dr-credential".
+	DrCredentialId string `pulumi:"drCredentialId"`
+	// Key within the credential when source is "dr-credential".
+	Key string `pulumi:"key"`
+	// Name of the environment variable.
+	Name string `pulumi:"name"`
+	// Source type: "string" for plain text values, "dr-credential" for DataRobot credentials.
+	Source string `pulumi:"source"`
+	// Value of the environment variable when source is "string".
+	Value string `pulumi:"value"`
+}
+
+// GetArtifactSpecContainerGroupContainerEnvironmentVarInput is an input type that accepts GetArtifactSpecContainerGroupContainerEnvironmentVarArgs and GetArtifactSpecContainerGroupContainerEnvironmentVarOutput values.
+// You can construct a concrete instance of `GetArtifactSpecContainerGroupContainerEnvironmentVarInput` via:
+//
+//	GetArtifactSpecContainerGroupContainerEnvironmentVarArgs{...}
+type GetArtifactSpecContainerGroupContainerEnvironmentVarInput interface {
+	pulumi.Input
+
+	ToGetArtifactSpecContainerGroupContainerEnvironmentVarOutput() GetArtifactSpecContainerGroupContainerEnvironmentVarOutput
+	ToGetArtifactSpecContainerGroupContainerEnvironmentVarOutputWithContext(context.Context) GetArtifactSpecContainerGroupContainerEnvironmentVarOutput
+}
+
+type GetArtifactSpecContainerGroupContainerEnvironmentVarArgs struct {
+	// DataRobot credential ID when source is "dr-credential".
+	DrCredentialId pulumi.StringInput `pulumi:"drCredentialId"`
+	// Key within the credential when source is "dr-credential".
+	Key pulumi.StringInput `pulumi:"key"`
+	// Name of the environment variable.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Source type: "string" for plain text values, "dr-credential" for DataRobot credentials.
+	Source pulumi.StringInput `pulumi:"source"`
+	// Value of the environment variable when source is "string".
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (GetArtifactSpecContainerGroupContainerEnvironmentVarArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactSpecContainerGroupContainerEnvironmentVar)(nil)).Elem()
+}
+
+func (i GetArtifactSpecContainerGroupContainerEnvironmentVarArgs) ToGetArtifactSpecContainerGroupContainerEnvironmentVarOutput() GetArtifactSpecContainerGroupContainerEnvironmentVarOutput {
+	return i.ToGetArtifactSpecContainerGroupContainerEnvironmentVarOutputWithContext(context.Background())
+}
+
+func (i GetArtifactSpecContainerGroupContainerEnvironmentVarArgs) ToGetArtifactSpecContainerGroupContainerEnvironmentVarOutputWithContext(ctx context.Context) GetArtifactSpecContainerGroupContainerEnvironmentVarOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetArtifactSpecContainerGroupContainerEnvironmentVarOutput)
+}
+
+// GetArtifactSpecContainerGroupContainerEnvironmentVarArrayInput is an input type that accepts GetArtifactSpecContainerGroupContainerEnvironmentVarArray and GetArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput values.
+// You can construct a concrete instance of `GetArtifactSpecContainerGroupContainerEnvironmentVarArrayInput` via:
+//
+//	GetArtifactSpecContainerGroupContainerEnvironmentVarArray{ GetArtifactSpecContainerGroupContainerEnvironmentVarArgs{...} }
+type GetArtifactSpecContainerGroupContainerEnvironmentVarArrayInput interface {
+	pulumi.Input
+
+	ToGetArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput() GetArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput
+	ToGetArtifactSpecContainerGroupContainerEnvironmentVarArrayOutputWithContext(context.Context) GetArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput
+}
+
+type GetArtifactSpecContainerGroupContainerEnvironmentVarArray []GetArtifactSpecContainerGroupContainerEnvironmentVarInput
+
+func (GetArtifactSpecContainerGroupContainerEnvironmentVarArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetArtifactSpecContainerGroupContainerEnvironmentVar)(nil)).Elem()
+}
+
+func (i GetArtifactSpecContainerGroupContainerEnvironmentVarArray) ToGetArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput() GetArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput {
+	return i.ToGetArtifactSpecContainerGroupContainerEnvironmentVarArrayOutputWithContext(context.Background())
+}
+
+func (i GetArtifactSpecContainerGroupContainerEnvironmentVarArray) ToGetArtifactSpecContainerGroupContainerEnvironmentVarArrayOutputWithContext(ctx context.Context) GetArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput)
+}
+
+type GetArtifactSpecContainerGroupContainerEnvironmentVarOutput struct{ *pulumi.OutputState }
+
+func (GetArtifactSpecContainerGroupContainerEnvironmentVarOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactSpecContainerGroupContainerEnvironmentVar)(nil)).Elem()
+}
+
+func (o GetArtifactSpecContainerGroupContainerEnvironmentVarOutput) ToGetArtifactSpecContainerGroupContainerEnvironmentVarOutput() GetArtifactSpecContainerGroupContainerEnvironmentVarOutput {
+	return o
+}
+
+func (o GetArtifactSpecContainerGroupContainerEnvironmentVarOutput) ToGetArtifactSpecContainerGroupContainerEnvironmentVarOutputWithContext(ctx context.Context) GetArtifactSpecContainerGroupContainerEnvironmentVarOutput {
+	return o
+}
+
+// DataRobot credential ID when source is "dr-credential".
+func (o GetArtifactSpecContainerGroupContainerEnvironmentVarOutput) DrCredentialId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerEnvironmentVar) string { return v.DrCredentialId }).(pulumi.StringOutput)
+}
+
+// Key within the credential when source is "dr-credential".
+func (o GetArtifactSpecContainerGroupContainerEnvironmentVarOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerEnvironmentVar) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// Name of the environment variable.
+func (o GetArtifactSpecContainerGroupContainerEnvironmentVarOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerEnvironmentVar) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Source type: "string" for plain text values, "dr-credential" for DataRobot credentials.
+func (o GetArtifactSpecContainerGroupContainerEnvironmentVarOutput) Source() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerEnvironmentVar) string { return v.Source }).(pulumi.StringOutput)
+}
+
+// Value of the environment variable when source is "string".
+func (o GetArtifactSpecContainerGroupContainerEnvironmentVarOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerEnvironmentVar) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type GetArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput struct{ *pulumi.OutputState }
+
+func (GetArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetArtifactSpecContainerGroupContainerEnvironmentVar)(nil)).Elem()
+}
+
+func (o GetArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput) ToGetArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput() GetArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput {
+	return o
+}
+
+func (o GetArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput) ToGetArtifactSpecContainerGroupContainerEnvironmentVarArrayOutputWithContext(ctx context.Context) GetArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput {
+	return o
+}
+
+func (o GetArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput) Index(i pulumi.IntInput) GetArtifactSpecContainerGroupContainerEnvironmentVarOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetArtifactSpecContainerGroupContainerEnvironmentVar {
+		return vs[0].([]GetArtifactSpecContainerGroupContainerEnvironmentVar)[vs[1].(int)]
+	}).(GetArtifactSpecContainerGroupContainerEnvironmentVarOutput)
+}
+
+type GetArtifactSpecContainerGroupContainerImageBuildConfig struct {
+	// Reference to source code in the DataRobot catalog.
+	CodeRef GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRef `pulumi:"codeRef"`
+	// Dockerfile configuration for image builds.
+	Dockerfile GetArtifactSpecContainerGroupContainerImageBuildConfigDockerfile `pulumi:"dockerfile"`
+}
+
+// GetArtifactSpecContainerGroupContainerImageBuildConfigInput is an input type that accepts GetArtifactSpecContainerGroupContainerImageBuildConfigArgs and GetArtifactSpecContainerGroupContainerImageBuildConfigOutput values.
+// You can construct a concrete instance of `GetArtifactSpecContainerGroupContainerImageBuildConfigInput` via:
+//
+//	GetArtifactSpecContainerGroupContainerImageBuildConfigArgs{...}
+type GetArtifactSpecContainerGroupContainerImageBuildConfigInput interface {
+	pulumi.Input
+
+	ToGetArtifactSpecContainerGroupContainerImageBuildConfigOutput() GetArtifactSpecContainerGroupContainerImageBuildConfigOutput
+	ToGetArtifactSpecContainerGroupContainerImageBuildConfigOutputWithContext(context.Context) GetArtifactSpecContainerGroupContainerImageBuildConfigOutput
+}
+
+type GetArtifactSpecContainerGroupContainerImageBuildConfigArgs struct {
+	// Reference to source code in the DataRobot catalog.
+	CodeRef GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefInput `pulumi:"codeRef"`
+	// Dockerfile configuration for image builds.
+	Dockerfile GetArtifactSpecContainerGroupContainerImageBuildConfigDockerfileInput `pulumi:"dockerfile"`
+}
+
+func (GetArtifactSpecContainerGroupContainerImageBuildConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactSpecContainerGroupContainerImageBuildConfig)(nil)).Elem()
+}
+
+func (i GetArtifactSpecContainerGroupContainerImageBuildConfigArgs) ToGetArtifactSpecContainerGroupContainerImageBuildConfigOutput() GetArtifactSpecContainerGroupContainerImageBuildConfigOutput {
+	return i.ToGetArtifactSpecContainerGroupContainerImageBuildConfigOutputWithContext(context.Background())
+}
+
+func (i GetArtifactSpecContainerGroupContainerImageBuildConfigArgs) ToGetArtifactSpecContainerGroupContainerImageBuildConfigOutputWithContext(ctx context.Context) GetArtifactSpecContainerGroupContainerImageBuildConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetArtifactSpecContainerGroupContainerImageBuildConfigOutput)
+}
+
+type GetArtifactSpecContainerGroupContainerImageBuildConfigOutput struct{ *pulumi.OutputState }
+
+func (GetArtifactSpecContainerGroupContainerImageBuildConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactSpecContainerGroupContainerImageBuildConfig)(nil)).Elem()
+}
+
+func (o GetArtifactSpecContainerGroupContainerImageBuildConfigOutput) ToGetArtifactSpecContainerGroupContainerImageBuildConfigOutput() GetArtifactSpecContainerGroupContainerImageBuildConfigOutput {
+	return o
+}
+
+func (o GetArtifactSpecContainerGroupContainerImageBuildConfigOutput) ToGetArtifactSpecContainerGroupContainerImageBuildConfigOutputWithContext(ctx context.Context) GetArtifactSpecContainerGroupContainerImageBuildConfigOutput {
+	return o
+}
+
+// Reference to source code in the DataRobot catalog.
+func (o GetArtifactSpecContainerGroupContainerImageBuildConfigOutput) CodeRef() GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerImageBuildConfig) GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRef {
+		return v.CodeRef
+	}).(GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput)
+}
+
+// Dockerfile configuration for image builds.
+func (o GetArtifactSpecContainerGroupContainerImageBuildConfigOutput) Dockerfile() GetArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerImageBuildConfig) GetArtifactSpecContainerGroupContainerImageBuildConfigDockerfile {
+		return v.Dockerfile
+	}).(GetArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput)
+}
+
+type GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRef struct {
+	// DataRobot catalog reference.
+	Datarobot GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobot `pulumi:"datarobot"`
+	// Code provider.
+	Provider string `pulumi:"provider"`
+	// Code reference type.
+	Type string `pulumi:"type"`
+}
+
+// GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefInput is an input type that accepts GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefArgs and GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput values.
+// You can construct a concrete instance of `GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefInput` via:
+//
+//	GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefArgs{...}
+type GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefInput interface {
+	pulumi.Input
+
+	ToGetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput() GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput
+	ToGetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutputWithContext(context.Context) GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput
+}
+
+type GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefArgs struct {
+	// DataRobot catalog reference.
+	Datarobot GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotInput `pulumi:"datarobot"`
+	// Code provider.
+	Provider pulumi.StringInput `pulumi:"provider"`
+	// Code reference type.
+	Type pulumi.StringInput `pulumi:"type"`
+}
+
+func (GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRef)(nil)).Elem()
+}
+
+func (i GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefArgs) ToGetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput() GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput {
+	return i.ToGetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutputWithContext(context.Background())
+}
+
+func (i GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefArgs) ToGetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutputWithContext(ctx context.Context) GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput)
+}
+
+type GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput struct{ *pulumi.OutputState }
+
+func (GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRef)(nil)).Elem()
+}
+
+func (o GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput) ToGetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput() GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput {
+	return o
+}
+
+func (o GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput) ToGetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutputWithContext(ctx context.Context) GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput {
+	return o
+}
+
+// DataRobot catalog reference.
+func (o GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput) Datarobot() GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRef) GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobot {
+		return v.Datarobot
+	}).(GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotOutput)
+}
+
+// Code provider.
+func (o GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput) Provider() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRef) string { return v.Provider }).(pulumi.StringOutput)
+}
+
+// Code reference type.
+func (o GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRef) string { return v.Type }).(pulumi.StringOutput)
+}
+
+type GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobot struct {
+	// Catalog ID.
+	CatalogId string `pulumi:"catalogId"`
+	// Catalog version ID.
+	CatalogVersionId string `pulumi:"catalogVersionId"`
+}
+
+// GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotInput is an input type that accepts GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotArgs and GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotOutput values.
+// You can construct a concrete instance of `GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotInput` via:
+//
+//	GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotArgs{...}
+type GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotInput interface {
+	pulumi.Input
+
+	ToGetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotOutput() GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotOutput
+	ToGetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotOutputWithContext(context.Context) GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotOutput
+}
+
+type GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotArgs struct {
+	// Catalog ID.
+	CatalogId pulumi.StringInput `pulumi:"catalogId"`
+	// Catalog version ID.
+	CatalogVersionId pulumi.StringInput `pulumi:"catalogVersionId"`
+}
+
+func (GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobot)(nil)).Elem()
+}
+
+func (i GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotArgs) ToGetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotOutput() GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotOutput {
+	return i.ToGetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotOutputWithContext(context.Background())
+}
+
+func (i GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotArgs) ToGetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotOutputWithContext(ctx context.Context) GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotOutput)
+}
+
+type GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotOutput struct{ *pulumi.OutputState }
+
+func (GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobot)(nil)).Elem()
+}
+
+func (o GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotOutput) ToGetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotOutput() GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotOutput {
+	return o
+}
+
+func (o GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotOutput) ToGetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotOutputWithContext(ctx context.Context) GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotOutput {
+	return o
+}
+
+// Catalog ID.
+func (o GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotOutput) CatalogId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobot) string {
+		return v.CatalogId
+	}).(pulumi.StringOutput)
+}
+
+// Catalog version ID.
+func (o GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotOutput) CatalogVersionId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobot) string {
+		return v.CatalogVersionId
+	}).(pulumi.StringOutput)
+}
+
+type GetArtifactSpecContainerGroupContainerImageBuildConfigDockerfile struct {
+	// Entrypoint when source is `generated`.
+	Entrypoints []string `pulumi:"entrypoints"`
+	// Execution environment ID when source is `generated`.
+	ExecutionEnvironmentId string `pulumi:"executionEnvironmentId"`
+	// Execution environment version ID when source is `generated`.
+	ExecutionEnvironmentVersionId string `pulumi:"executionEnvironmentVersionId"`
+	// Relative path to the Dockerfile when source is `provided`.
+	Path string `pulumi:"path"`
+	// Dockerfile source: `provided` or `generated`.
+	Source string `pulumi:"source"`
+}
+
+// GetArtifactSpecContainerGroupContainerImageBuildConfigDockerfileInput is an input type that accepts GetArtifactSpecContainerGroupContainerImageBuildConfigDockerfileArgs and GetArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput values.
+// You can construct a concrete instance of `GetArtifactSpecContainerGroupContainerImageBuildConfigDockerfileInput` via:
+//
+//	GetArtifactSpecContainerGroupContainerImageBuildConfigDockerfileArgs{...}
+type GetArtifactSpecContainerGroupContainerImageBuildConfigDockerfileInput interface {
+	pulumi.Input
+
+	ToGetArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput() GetArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput
+	ToGetArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutputWithContext(context.Context) GetArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput
+}
+
+type GetArtifactSpecContainerGroupContainerImageBuildConfigDockerfileArgs struct {
+	// Entrypoint when source is `generated`.
+	Entrypoints pulumi.StringArrayInput `pulumi:"entrypoints"`
+	// Execution environment ID when source is `generated`.
+	ExecutionEnvironmentId pulumi.StringInput `pulumi:"executionEnvironmentId"`
+	// Execution environment version ID when source is `generated`.
+	ExecutionEnvironmentVersionId pulumi.StringInput `pulumi:"executionEnvironmentVersionId"`
+	// Relative path to the Dockerfile when source is `provided`.
+	Path pulumi.StringInput `pulumi:"path"`
+	// Dockerfile source: `provided` or `generated`.
+	Source pulumi.StringInput `pulumi:"source"`
+}
+
+func (GetArtifactSpecContainerGroupContainerImageBuildConfigDockerfileArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactSpecContainerGroupContainerImageBuildConfigDockerfile)(nil)).Elem()
+}
+
+func (i GetArtifactSpecContainerGroupContainerImageBuildConfigDockerfileArgs) ToGetArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput() GetArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput {
+	return i.ToGetArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutputWithContext(context.Background())
+}
+
+func (i GetArtifactSpecContainerGroupContainerImageBuildConfigDockerfileArgs) ToGetArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutputWithContext(ctx context.Context) GetArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput)
+}
+
+type GetArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput struct{ *pulumi.OutputState }
+
+func (GetArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactSpecContainerGroupContainerImageBuildConfigDockerfile)(nil)).Elem()
+}
+
+func (o GetArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput) ToGetArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput() GetArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput {
+	return o
+}
+
+func (o GetArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput) ToGetArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutputWithContext(ctx context.Context) GetArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput {
+	return o
+}
+
+// Entrypoint when source is `generated`.
+func (o GetArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput) Entrypoints() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerImageBuildConfigDockerfile) []string {
+		return v.Entrypoints
+	}).(pulumi.StringArrayOutput)
+}
+
+// Execution environment ID when source is `generated`.
+func (o GetArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput) ExecutionEnvironmentId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerImageBuildConfigDockerfile) string {
+		return v.ExecutionEnvironmentId
+	}).(pulumi.StringOutput)
+}
+
+// Execution environment version ID when source is `generated`.
+func (o GetArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput) ExecutionEnvironmentVersionId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerImageBuildConfigDockerfile) string {
+		return v.ExecutionEnvironmentVersionId
+	}).(pulumi.StringOutput)
+}
+
+// Relative path to the Dockerfile when source is `provided`.
+func (o GetArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput) Path() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerImageBuildConfigDockerfile) string { return v.Path }).(pulumi.StringOutput)
+}
+
+// Dockerfile source: `provided` or `generated`.
+func (o GetArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput) Source() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerImageBuildConfigDockerfile) string { return v.Source }).(pulumi.StringOutput)
+}
+
+type GetArtifactSpecContainerGroupContainerLivenessProbe struct {
+	// Minimum consecutive failures for the probe to be considered failed.
+	FailureThreshold int `pulumi:"failureThreshold"`
+	// Host name to connect to, defaults to the pod IP.
+	Host string `pulumi:"host"`
+	// Number of seconds to wait before the first probe is executed.
+	InitialDelaySeconds int `pulumi:"initialDelaySeconds"`
+	// URL path to query for health check.
+	Path string `pulumi:"path"`
+	// How often (in seconds) to perform the probe.
+	PeriodSeconds int `pulumi:"periodSeconds"`
+	// Port number to access on the container.
+	Port int `pulumi:"port"`
+	// Scheme to use for connecting to the host (HTTP or HTTPS).
+	Scheme string `pulumi:"scheme"`
+	// Number of seconds after which the probe times out.
+	TimeoutSeconds int `pulumi:"timeoutSeconds"`
+}
+
+// GetArtifactSpecContainerGroupContainerLivenessProbeInput is an input type that accepts GetArtifactSpecContainerGroupContainerLivenessProbeArgs and GetArtifactSpecContainerGroupContainerLivenessProbeOutput values.
+// You can construct a concrete instance of `GetArtifactSpecContainerGroupContainerLivenessProbeInput` via:
+//
+//	GetArtifactSpecContainerGroupContainerLivenessProbeArgs{...}
+type GetArtifactSpecContainerGroupContainerLivenessProbeInput interface {
+	pulumi.Input
+
+	ToGetArtifactSpecContainerGroupContainerLivenessProbeOutput() GetArtifactSpecContainerGroupContainerLivenessProbeOutput
+	ToGetArtifactSpecContainerGroupContainerLivenessProbeOutputWithContext(context.Context) GetArtifactSpecContainerGroupContainerLivenessProbeOutput
+}
+
+type GetArtifactSpecContainerGroupContainerLivenessProbeArgs struct {
+	// Minimum consecutive failures for the probe to be considered failed.
+	FailureThreshold pulumi.IntInput `pulumi:"failureThreshold"`
+	// Host name to connect to, defaults to the pod IP.
+	Host pulumi.StringInput `pulumi:"host"`
+	// Number of seconds to wait before the first probe is executed.
+	InitialDelaySeconds pulumi.IntInput `pulumi:"initialDelaySeconds"`
+	// URL path to query for health check.
+	Path pulumi.StringInput `pulumi:"path"`
+	// How often (in seconds) to perform the probe.
+	PeriodSeconds pulumi.IntInput `pulumi:"periodSeconds"`
+	// Port number to access on the container.
+	Port pulumi.IntInput `pulumi:"port"`
+	// Scheme to use for connecting to the host (HTTP or HTTPS).
+	Scheme pulumi.StringInput `pulumi:"scheme"`
+	// Number of seconds after which the probe times out.
+	TimeoutSeconds pulumi.IntInput `pulumi:"timeoutSeconds"`
+}
+
+func (GetArtifactSpecContainerGroupContainerLivenessProbeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactSpecContainerGroupContainerLivenessProbe)(nil)).Elem()
+}
+
+func (i GetArtifactSpecContainerGroupContainerLivenessProbeArgs) ToGetArtifactSpecContainerGroupContainerLivenessProbeOutput() GetArtifactSpecContainerGroupContainerLivenessProbeOutput {
+	return i.ToGetArtifactSpecContainerGroupContainerLivenessProbeOutputWithContext(context.Background())
+}
+
+func (i GetArtifactSpecContainerGroupContainerLivenessProbeArgs) ToGetArtifactSpecContainerGroupContainerLivenessProbeOutputWithContext(ctx context.Context) GetArtifactSpecContainerGroupContainerLivenessProbeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetArtifactSpecContainerGroupContainerLivenessProbeOutput)
+}
+
+type GetArtifactSpecContainerGroupContainerLivenessProbeOutput struct{ *pulumi.OutputState }
+
+func (GetArtifactSpecContainerGroupContainerLivenessProbeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactSpecContainerGroupContainerLivenessProbe)(nil)).Elem()
+}
+
+func (o GetArtifactSpecContainerGroupContainerLivenessProbeOutput) ToGetArtifactSpecContainerGroupContainerLivenessProbeOutput() GetArtifactSpecContainerGroupContainerLivenessProbeOutput {
+	return o
+}
+
+func (o GetArtifactSpecContainerGroupContainerLivenessProbeOutput) ToGetArtifactSpecContainerGroupContainerLivenessProbeOutputWithContext(ctx context.Context) GetArtifactSpecContainerGroupContainerLivenessProbeOutput {
+	return o
+}
+
+// Minimum consecutive failures for the probe to be considered failed.
+func (o GetArtifactSpecContainerGroupContainerLivenessProbeOutput) FailureThreshold() pulumi.IntOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerLivenessProbe) int { return v.FailureThreshold }).(pulumi.IntOutput)
+}
+
+// Host name to connect to, defaults to the pod IP.
+func (o GetArtifactSpecContainerGroupContainerLivenessProbeOutput) Host() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerLivenessProbe) string { return v.Host }).(pulumi.StringOutput)
+}
+
+// Number of seconds to wait before the first probe is executed.
+func (o GetArtifactSpecContainerGroupContainerLivenessProbeOutput) InitialDelaySeconds() pulumi.IntOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerLivenessProbe) int { return v.InitialDelaySeconds }).(pulumi.IntOutput)
+}
+
+// URL path to query for health check.
+func (o GetArtifactSpecContainerGroupContainerLivenessProbeOutput) Path() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerLivenessProbe) string { return v.Path }).(pulumi.StringOutput)
+}
+
+// How often (in seconds) to perform the probe.
+func (o GetArtifactSpecContainerGroupContainerLivenessProbeOutput) PeriodSeconds() pulumi.IntOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerLivenessProbe) int { return v.PeriodSeconds }).(pulumi.IntOutput)
+}
+
+// Port number to access on the container.
+func (o GetArtifactSpecContainerGroupContainerLivenessProbeOutput) Port() pulumi.IntOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerLivenessProbe) int { return v.Port }).(pulumi.IntOutput)
+}
+
+// Scheme to use for connecting to the host (HTTP or HTTPS).
+func (o GetArtifactSpecContainerGroupContainerLivenessProbeOutput) Scheme() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerLivenessProbe) string { return v.Scheme }).(pulumi.StringOutput)
+}
+
+// Number of seconds after which the probe times out.
+func (o GetArtifactSpecContainerGroupContainerLivenessProbeOutput) TimeoutSeconds() pulumi.IntOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerLivenessProbe) int { return v.TimeoutSeconds }).(pulumi.IntOutput)
+}
+
+type GetArtifactSpecContainerGroupContainerReadinessProbe struct {
+	// Minimum consecutive failures for the probe to be considered failed.
+	FailureThreshold int `pulumi:"failureThreshold"`
+	// Host name to connect to, defaults to the pod IP.
+	Host string `pulumi:"host"`
+	// Number of seconds to wait before the first probe is executed.
+	InitialDelaySeconds int `pulumi:"initialDelaySeconds"`
+	// URL path to query for health check.
+	Path string `pulumi:"path"`
+	// How often (in seconds) to perform the probe.
+	PeriodSeconds int `pulumi:"periodSeconds"`
+	// Port number to access on the container.
+	Port int `pulumi:"port"`
+	// Scheme to use for connecting to the host (HTTP or HTTPS).
+	Scheme string `pulumi:"scheme"`
+	// Number of seconds after which the probe times out.
+	TimeoutSeconds int `pulumi:"timeoutSeconds"`
+}
+
+// GetArtifactSpecContainerGroupContainerReadinessProbeInput is an input type that accepts GetArtifactSpecContainerGroupContainerReadinessProbeArgs and GetArtifactSpecContainerGroupContainerReadinessProbeOutput values.
+// You can construct a concrete instance of `GetArtifactSpecContainerGroupContainerReadinessProbeInput` via:
+//
+//	GetArtifactSpecContainerGroupContainerReadinessProbeArgs{...}
+type GetArtifactSpecContainerGroupContainerReadinessProbeInput interface {
+	pulumi.Input
+
+	ToGetArtifactSpecContainerGroupContainerReadinessProbeOutput() GetArtifactSpecContainerGroupContainerReadinessProbeOutput
+	ToGetArtifactSpecContainerGroupContainerReadinessProbeOutputWithContext(context.Context) GetArtifactSpecContainerGroupContainerReadinessProbeOutput
+}
+
+type GetArtifactSpecContainerGroupContainerReadinessProbeArgs struct {
+	// Minimum consecutive failures for the probe to be considered failed.
+	FailureThreshold pulumi.IntInput `pulumi:"failureThreshold"`
+	// Host name to connect to, defaults to the pod IP.
+	Host pulumi.StringInput `pulumi:"host"`
+	// Number of seconds to wait before the first probe is executed.
+	InitialDelaySeconds pulumi.IntInput `pulumi:"initialDelaySeconds"`
+	// URL path to query for health check.
+	Path pulumi.StringInput `pulumi:"path"`
+	// How often (in seconds) to perform the probe.
+	PeriodSeconds pulumi.IntInput `pulumi:"periodSeconds"`
+	// Port number to access on the container.
+	Port pulumi.IntInput `pulumi:"port"`
+	// Scheme to use for connecting to the host (HTTP or HTTPS).
+	Scheme pulumi.StringInput `pulumi:"scheme"`
+	// Number of seconds after which the probe times out.
+	TimeoutSeconds pulumi.IntInput `pulumi:"timeoutSeconds"`
+}
+
+func (GetArtifactSpecContainerGroupContainerReadinessProbeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactSpecContainerGroupContainerReadinessProbe)(nil)).Elem()
+}
+
+func (i GetArtifactSpecContainerGroupContainerReadinessProbeArgs) ToGetArtifactSpecContainerGroupContainerReadinessProbeOutput() GetArtifactSpecContainerGroupContainerReadinessProbeOutput {
+	return i.ToGetArtifactSpecContainerGroupContainerReadinessProbeOutputWithContext(context.Background())
+}
+
+func (i GetArtifactSpecContainerGroupContainerReadinessProbeArgs) ToGetArtifactSpecContainerGroupContainerReadinessProbeOutputWithContext(ctx context.Context) GetArtifactSpecContainerGroupContainerReadinessProbeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetArtifactSpecContainerGroupContainerReadinessProbeOutput)
+}
+
+type GetArtifactSpecContainerGroupContainerReadinessProbeOutput struct{ *pulumi.OutputState }
+
+func (GetArtifactSpecContainerGroupContainerReadinessProbeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactSpecContainerGroupContainerReadinessProbe)(nil)).Elem()
+}
+
+func (o GetArtifactSpecContainerGroupContainerReadinessProbeOutput) ToGetArtifactSpecContainerGroupContainerReadinessProbeOutput() GetArtifactSpecContainerGroupContainerReadinessProbeOutput {
+	return o
+}
+
+func (o GetArtifactSpecContainerGroupContainerReadinessProbeOutput) ToGetArtifactSpecContainerGroupContainerReadinessProbeOutputWithContext(ctx context.Context) GetArtifactSpecContainerGroupContainerReadinessProbeOutput {
+	return o
+}
+
+// Minimum consecutive failures for the probe to be considered failed.
+func (o GetArtifactSpecContainerGroupContainerReadinessProbeOutput) FailureThreshold() pulumi.IntOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerReadinessProbe) int { return v.FailureThreshold }).(pulumi.IntOutput)
+}
+
+// Host name to connect to, defaults to the pod IP.
+func (o GetArtifactSpecContainerGroupContainerReadinessProbeOutput) Host() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerReadinessProbe) string { return v.Host }).(pulumi.StringOutput)
+}
+
+// Number of seconds to wait before the first probe is executed.
+func (o GetArtifactSpecContainerGroupContainerReadinessProbeOutput) InitialDelaySeconds() pulumi.IntOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerReadinessProbe) int { return v.InitialDelaySeconds }).(pulumi.IntOutput)
+}
+
+// URL path to query for health check.
+func (o GetArtifactSpecContainerGroupContainerReadinessProbeOutput) Path() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerReadinessProbe) string { return v.Path }).(pulumi.StringOutput)
+}
+
+// How often (in seconds) to perform the probe.
+func (o GetArtifactSpecContainerGroupContainerReadinessProbeOutput) PeriodSeconds() pulumi.IntOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerReadinessProbe) int { return v.PeriodSeconds }).(pulumi.IntOutput)
+}
+
+// Port number to access on the container.
+func (o GetArtifactSpecContainerGroupContainerReadinessProbeOutput) Port() pulumi.IntOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerReadinessProbe) int { return v.Port }).(pulumi.IntOutput)
+}
+
+// Scheme to use for connecting to the host (HTTP or HTTPS).
+func (o GetArtifactSpecContainerGroupContainerReadinessProbeOutput) Scheme() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerReadinessProbe) string { return v.Scheme }).(pulumi.StringOutput)
+}
+
+// Number of seconds after which the probe times out.
+func (o GetArtifactSpecContainerGroupContainerReadinessProbeOutput) TimeoutSeconds() pulumi.IntOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerReadinessProbe) int { return v.TimeoutSeconds }).(pulumi.IntOutput)
+}
+
+type GetArtifactSpecContainerGroupContainerSecurityContext struct {
+	// Whether a process can gain more privileges than its parent.
+	AllowPrivilegeEscalation bool `pulumi:"allowPrivilegeEscalation"`
+	// Linux capabilities to add or drop.
+	Capabilities GetArtifactSpecContainerGroupContainerSecurityContextCapabilities `pulumi:"capabilities"`
+	// Whether the root filesystem is read-only.
+	ReadOnlyRootFilesystem bool `pulumi:"readOnlyRootFilesystem"`
+	// Seccomp profile for the container.
+	SeccompProfile GetArtifactSpecContainerGroupContainerSecurityContextSeccompProfile `pulumi:"seccompProfile"`
+}
+
+// GetArtifactSpecContainerGroupContainerSecurityContextInput is an input type that accepts GetArtifactSpecContainerGroupContainerSecurityContextArgs and GetArtifactSpecContainerGroupContainerSecurityContextOutput values.
+// You can construct a concrete instance of `GetArtifactSpecContainerGroupContainerSecurityContextInput` via:
+//
+//	GetArtifactSpecContainerGroupContainerSecurityContextArgs{...}
+type GetArtifactSpecContainerGroupContainerSecurityContextInput interface {
+	pulumi.Input
+
+	ToGetArtifactSpecContainerGroupContainerSecurityContextOutput() GetArtifactSpecContainerGroupContainerSecurityContextOutput
+	ToGetArtifactSpecContainerGroupContainerSecurityContextOutputWithContext(context.Context) GetArtifactSpecContainerGroupContainerSecurityContextOutput
+}
+
+type GetArtifactSpecContainerGroupContainerSecurityContextArgs struct {
+	// Whether a process can gain more privileges than its parent.
+	AllowPrivilegeEscalation pulumi.BoolInput `pulumi:"allowPrivilegeEscalation"`
+	// Linux capabilities to add or drop.
+	Capabilities GetArtifactSpecContainerGroupContainerSecurityContextCapabilitiesInput `pulumi:"capabilities"`
+	// Whether the root filesystem is read-only.
+	ReadOnlyRootFilesystem pulumi.BoolInput `pulumi:"readOnlyRootFilesystem"`
+	// Seccomp profile for the container.
+	SeccompProfile GetArtifactSpecContainerGroupContainerSecurityContextSeccompProfileInput `pulumi:"seccompProfile"`
+}
+
+func (GetArtifactSpecContainerGroupContainerSecurityContextArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactSpecContainerGroupContainerSecurityContext)(nil)).Elem()
+}
+
+func (i GetArtifactSpecContainerGroupContainerSecurityContextArgs) ToGetArtifactSpecContainerGroupContainerSecurityContextOutput() GetArtifactSpecContainerGroupContainerSecurityContextOutput {
+	return i.ToGetArtifactSpecContainerGroupContainerSecurityContextOutputWithContext(context.Background())
+}
+
+func (i GetArtifactSpecContainerGroupContainerSecurityContextArgs) ToGetArtifactSpecContainerGroupContainerSecurityContextOutputWithContext(ctx context.Context) GetArtifactSpecContainerGroupContainerSecurityContextOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetArtifactSpecContainerGroupContainerSecurityContextOutput)
+}
+
+type GetArtifactSpecContainerGroupContainerSecurityContextOutput struct{ *pulumi.OutputState }
+
+func (GetArtifactSpecContainerGroupContainerSecurityContextOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactSpecContainerGroupContainerSecurityContext)(nil)).Elem()
+}
+
+func (o GetArtifactSpecContainerGroupContainerSecurityContextOutput) ToGetArtifactSpecContainerGroupContainerSecurityContextOutput() GetArtifactSpecContainerGroupContainerSecurityContextOutput {
+	return o
+}
+
+func (o GetArtifactSpecContainerGroupContainerSecurityContextOutput) ToGetArtifactSpecContainerGroupContainerSecurityContextOutputWithContext(ctx context.Context) GetArtifactSpecContainerGroupContainerSecurityContextOutput {
+	return o
+}
+
+// Whether a process can gain more privileges than its parent.
+func (o GetArtifactSpecContainerGroupContainerSecurityContextOutput) AllowPrivilegeEscalation() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerSecurityContext) bool { return v.AllowPrivilegeEscalation }).(pulumi.BoolOutput)
+}
+
+// Linux capabilities to add or drop.
+func (o GetArtifactSpecContainerGroupContainerSecurityContextOutput) Capabilities() GetArtifactSpecContainerGroupContainerSecurityContextCapabilitiesOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerSecurityContext) GetArtifactSpecContainerGroupContainerSecurityContextCapabilities {
+		return v.Capabilities
+	}).(GetArtifactSpecContainerGroupContainerSecurityContextCapabilitiesOutput)
+}
+
+// Whether the root filesystem is read-only.
+func (o GetArtifactSpecContainerGroupContainerSecurityContextOutput) ReadOnlyRootFilesystem() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerSecurityContext) bool { return v.ReadOnlyRootFilesystem }).(pulumi.BoolOutput)
+}
+
+// Seccomp profile for the container.
+func (o GetArtifactSpecContainerGroupContainerSecurityContextOutput) SeccompProfile() GetArtifactSpecContainerGroupContainerSecurityContextSeccompProfileOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerSecurityContext) GetArtifactSpecContainerGroupContainerSecurityContextSeccompProfile {
+		return v.SeccompProfile
+	}).(GetArtifactSpecContainerGroupContainerSecurityContextSeccompProfileOutput)
+}
+
+type GetArtifactSpecContainerGroupContainerSecurityContextCapabilities struct {
+	// Capabilities to add.
+	Adds []string `pulumi:"adds"`
+	// Capabilities to drop.
+	Drops []string `pulumi:"drops"`
+}
+
+// GetArtifactSpecContainerGroupContainerSecurityContextCapabilitiesInput is an input type that accepts GetArtifactSpecContainerGroupContainerSecurityContextCapabilitiesArgs and GetArtifactSpecContainerGroupContainerSecurityContextCapabilitiesOutput values.
+// You can construct a concrete instance of `GetArtifactSpecContainerGroupContainerSecurityContextCapabilitiesInput` via:
+//
+//	GetArtifactSpecContainerGroupContainerSecurityContextCapabilitiesArgs{...}
+type GetArtifactSpecContainerGroupContainerSecurityContextCapabilitiesInput interface {
+	pulumi.Input
+
+	ToGetArtifactSpecContainerGroupContainerSecurityContextCapabilitiesOutput() GetArtifactSpecContainerGroupContainerSecurityContextCapabilitiesOutput
+	ToGetArtifactSpecContainerGroupContainerSecurityContextCapabilitiesOutputWithContext(context.Context) GetArtifactSpecContainerGroupContainerSecurityContextCapabilitiesOutput
+}
+
+type GetArtifactSpecContainerGroupContainerSecurityContextCapabilitiesArgs struct {
+	// Capabilities to add.
+	Adds pulumi.StringArrayInput `pulumi:"adds"`
+	// Capabilities to drop.
+	Drops pulumi.StringArrayInput `pulumi:"drops"`
+}
+
+func (GetArtifactSpecContainerGroupContainerSecurityContextCapabilitiesArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactSpecContainerGroupContainerSecurityContextCapabilities)(nil)).Elem()
+}
+
+func (i GetArtifactSpecContainerGroupContainerSecurityContextCapabilitiesArgs) ToGetArtifactSpecContainerGroupContainerSecurityContextCapabilitiesOutput() GetArtifactSpecContainerGroupContainerSecurityContextCapabilitiesOutput {
+	return i.ToGetArtifactSpecContainerGroupContainerSecurityContextCapabilitiesOutputWithContext(context.Background())
+}
+
+func (i GetArtifactSpecContainerGroupContainerSecurityContextCapabilitiesArgs) ToGetArtifactSpecContainerGroupContainerSecurityContextCapabilitiesOutputWithContext(ctx context.Context) GetArtifactSpecContainerGroupContainerSecurityContextCapabilitiesOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetArtifactSpecContainerGroupContainerSecurityContextCapabilitiesOutput)
+}
+
+type GetArtifactSpecContainerGroupContainerSecurityContextCapabilitiesOutput struct{ *pulumi.OutputState }
+
+func (GetArtifactSpecContainerGroupContainerSecurityContextCapabilitiesOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactSpecContainerGroupContainerSecurityContextCapabilities)(nil)).Elem()
+}
+
+func (o GetArtifactSpecContainerGroupContainerSecurityContextCapabilitiesOutput) ToGetArtifactSpecContainerGroupContainerSecurityContextCapabilitiesOutput() GetArtifactSpecContainerGroupContainerSecurityContextCapabilitiesOutput {
+	return o
+}
+
+func (o GetArtifactSpecContainerGroupContainerSecurityContextCapabilitiesOutput) ToGetArtifactSpecContainerGroupContainerSecurityContextCapabilitiesOutputWithContext(ctx context.Context) GetArtifactSpecContainerGroupContainerSecurityContextCapabilitiesOutput {
+	return o
+}
+
+// Capabilities to add.
+func (o GetArtifactSpecContainerGroupContainerSecurityContextCapabilitiesOutput) Adds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerSecurityContextCapabilities) []string { return v.Adds }).(pulumi.StringArrayOutput)
+}
+
+// Capabilities to drop.
+func (o GetArtifactSpecContainerGroupContainerSecurityContextCapabilitiesOutput) Drops() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerSecurityContextCapabilities) []string { return v.Drops }).(pulumi.StringArrayOutput)
+}
+
+type GetArtifactSpecContainerGroupContainerSecurityContextSeccompProfile struct {
+	// Path to a seccomp profile on the node when type is Localhost.
+	LocalhostProfile string `pulumi:"localhostProfile"`
+	// Seccomp profile type.
+	Type string `pulumi:"type"`
+}
+
+// GetArtifactSpecContainerGroupContainerSecurityContextSeccompProfileInput is an input type that accepts GetArtifactSpecContainerGroupContainerSecurityContextSeccompProfileArgs and GetArtifactSpecContainerGroupContainerSecurityContextSeccompProfileOutput values.
+// You can construct a concrete instance of `GetArtifactSpecContainerGroupContainerSecurityContextSeccompProfileInput` via:
+//
+//	GetArtifactSpecContainerGroupContainerSecurityContextSeccompProfileArgs{...}
+type GetArtifactSpecContainerGroupContainerSecurityContextSeccompProfileInput interface {
+	pulumi.Input
+
+	ToGetArtifactSpecContainerGroupContainerSecurityContextSeccompProfileOutput() GetArtifactSpecContainerGroupContainerSecurityContextSeccompProfileOutput
+	ToGetArtifactSpecContainerGroupContainerSecurityContextSeccompProfileOutputWithContext(context.Context) GetArtifactSpecContainerGroupContainerSecurityContextSeccompProfileOutput
+}
+
+type GetArtifactSpecContainerGroupContainerSecurityContextSeccompProfileArgs struct {
+	// Path to a seccomp profile on the node when type is Localhost.
+	LocalhostProfile pulumi.StringInput `pulumi:"localhostProfile"`
+	// Seccomp profile type.
+	Type pulumi.StringInput `pulumi:"type"`
+}
+
+func (GetArtifactSpecContainerGroupContainerSecurityContextSeccompProfileArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactSpecContainerGroupContainerSecurityContextSeccompProfile)(nil)).Elem()
+}
+
+func (i GetArtifactSpecContainerGroupContainerSecurityContextSeccompProfileArgs) ToGetArtifactSpecContainerGroupContainerSecurityContextSeccompProfileOutput() GetArtifactSpecContainerGroupContainerSecurityContextSeccompProfileOutput {
+	return i.ToGetArtifactSpecContainerGroupContainerSecurityContextSeccompProfileOutputWithContext(context.Background())
+}
+
+func (i GetArtifactSpecContainerGroupContainerSecurityContextSeccompProfileArgs) ToGetArtifactSpecContainerGroupContainerSecurityContextSeccompProfileOutputWithContext(ctx context.Context) GetArtifactSpecContainerGroupContainerSecurityContextSeccompProfileOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetArtifactSpecContainerGroupContainerSecurityContextSeccompProfileOutput)
+}
+
+type GetArtifactSpecContainerGroupContainerSecurityContextSeccompProfileOutput struct{ *pulumi.OutputState }
+
+func (GetArtifactSpecContainerGroupContainerSecurityContextSeccompProfileOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactSpecContainerGroupContainerSecurityContextSeccompProfile)(nil)).Elem()
+}
+
+func (o GetArtifactSpecContainerGroupContainerSecurityContextSeccompProfileOutput) ToGetArtifactSpecContainerGroupContainerSecurityContextSeccompProfileOutput() GetArtifactSpecContainerGroupContainerSecurityContextSeccompProfileOutput {
+	return o
+}
+
+func (o GetArtifactSpecContainerGroupContainerSecurityContextSeccompProfileOutput) ToGetArtifactSpecContainerGroupContainerSecurityContextSeccompProfileOutputWithContext(ctx context.Context) GetArtifactSpecContainerGroupContainerSecurityContextSeccompProfileOutput {
+	return o
+}
+
+// Path to a seccomp profile on the node when type is Localhost.
+func (o GetArtifactSpecContainerGroupContainerSecurityContextSeccompProfileOutput) LocalhostProfile() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerSecurityContextSeccompProfile) string {
+		return v.LocalhostProfile
+	}).(pulumi.StringOutput)
+}
+
+// Seccomp profile type.
+func (o GetArtifactSpecContainerGroupContainerSecurityContextSeccompProfileOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerSecurityContextSeccompProfile) string { return v.Type }).(pulumi.StringOutput)
+}
+
+type GetArtifactSpecContainerGroupContainerStartupProbe struct {
+	// Minimum consecutive failures for the probe to be considered failed.
+	FailureThreshold int `pulumi:"failureThreshold"`
+	// Host name to connect to, defaults to the pod IP.
+	Host string `pulumi:"host"`
+	// Number of seconds to wait before the first probe is executed.
+	InitialDelaySeconds int `pulumi:"initialDelaySeconds"`
+	// URL path to query for health check.
+	Path string `pulumi:"path"`
+	// How often (in seconds) to perform the probe.
+	PeriodSeconds int `pulumi:"periodSeconds"`
+	// Port number to access on the container.
+	Port int `pulumi:"port"`
+	// Scheme to use for connecting to the host (HTTP or HTTPS).
+	Scheme string `pulumi:"scheme"`
+	// Number of seconds after which the probe times out.
+	TimeoutSeconds int `pulumi:"timeoutSeconds"`
+}
+
+// GetArtifactSpecContainerGroupContainerStartupProbeInput is an input type that accepts GetArtifactSpecContainerGroupContainerStartupProbeArgs and GetArtifactSpecContainerGroupContainerStartupProbeOutput values.
+// You can construct a concrete instance of `GetArtifactSpecContainerGroupContainerStartupProbeInput` via:
+//
+//	GetArtifactSpecContainerGroupContainerStartupProbeArgs{...}
+type GetArtifactSpecContainerGroupContainerStartupProbeInput interface {
+	pulumi.Input
+
+	ToGetArtifactSpecContainerGroupContainerStartupProbeOutput() GetArtifactSpecContainerGroupContainerStartupProbeOutput
+	ToGetArtifactSpecContainerGroupContainerStartupProbeOutputWithContext(context.Context) GetArtifactSpecContainerGroupContainerStartupProbeOutput
+}
+
+type GetArtifactSpecContainerGroupContainerStartupProbeArgs struct {
+	// Minimum consecutive failures for the probe to be considered failed.
+	FailureThreshold pulumi.IntInput `pulumi:"failureThreshold"`
+	// Host name to connect to, defaults to the pod IP.
+	Host pulumi.StringInput `pulumi:"host"`
+	// Number of seconds to wait before the first probe is executed.
+	InitialDelaySeconds pulumi.IntInput `pulumi:"initialDelaySeconds"`
+	// URL path to query for health check.
+	Path pulumi.StringInput `pulumi:"path"`
+	// How often (in seconds) to perform the probe.
+	PeriodSeconds pulumi.IntInput `pulumi:"periodSeconds"`
+	// Port number to access on the container.
+	Port pulumi.IntInput `pulumi:"port"`
+	// Scheme to use for connecting to the host (HTTP or HTTPS).
+	Scheme pulumi.StringInput `pulumi:"scheme"`
+	// Number of seconds after which the probe times out.
+	TimeoutSeconds pulumi.IntInput `pulumi:"timeoutSeconds"`
+}
+
+func (GetArtifactSpecContainerGroupContainerStartupProbeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactSpecContainerGroupContainerStartupProbe)(nil)).Elem()
+}
+
+func (i GetArtifactSpecContainerGroupContainerStartupProbeArgs) ToGetArtifactSpecContainerGroupContainerStartupProbeOutput() GetArtifactSpecContainerGroupContainerStartupProbeOutput {
+	return i.ToGetArtifactSpecContainerGroupContainerStartupProbeOutputWithContext(context.Background())
+}
+
+func (i GetArtifactSpecContainerGroupContainerStartupProbeArgs) ToGetArtifactSpecContainerGroupContainerStartupProbeOutputWithContext(ctx context.Context) GetArtifactSpecContainerGroupContainerStartupProbeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetArtifactSpecContainerGroupContainerStartupProbeOutput)
+}
+
+type GetArtifactSpecContainerGroupContainerStartupProbeOutput struct{ *pulumi.OutputState }
+
+func (GetArtifactSpecContainerGroupContainerStartupProbeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactSpecContainerGroupContainerStartupProbe)(nil)).Elem()
+}
+
+func (o GetArtifactSpecContainerGroupContainerStartupProbeOutput) ToGetArtifactSpecContainerGroupContainerStartupProbeOutput() GetArtifactSpecContainerGroupContainerStartupProbeOutput {
+	return o
+}
+
+func (o GetArtifactSpecContainerGroupContainerStartupProbeOutput) ToGetArtifactSpecContainerGroupContainerStartupProbeOutputWithContext(ctx context.Context) GetArtifactSpecContainerGroupContainerStartupProbeOutput {
+	return o
+}
+
+// Minimum consecutive failures for the probe to be considered failed.
+func (o GetArtifactSpecContainerGroupContainerStartupProbeOutput) FailureThreshold() pulumi.IntOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerStartupProbe) int { return v.FailureThreshold }).(pulumi.IntOutput)
+}
+
+// Host name to connect to, defaults to the pod IP.
+func (o GetArtifactSpecContainerGroupContainerStartupProbeOutput) Host() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerStartupProbe) string { return v.Host }).(pulumi.StringOutput)
+}
+
+// Number of seconds to wait before the first probe is executed.
+func (o GetArtifactSpecContainerGroupContainerStartupProbeOutput) InitialDelaySeconds() pulumi.IntOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerStartupProbe) int { return v.InitialDelaySeconds }).(pulumi.IntOutput)
+}
+
+// URL path to query for health check.
+func (o GetArtifactSpecContainerGroupContainerStartupProbeOutput) Path() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerStartupProbe) string { return v.Path }).(pulumi.StringOutput)
+}
+
+// How often (in seconds) to perform the probe.
+func (o GetArtifactSpecContainerGroupContainerStartupProbeOutput) PeriodSeconds() pulumi.IntOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerStartupProbe) int { return v.PeriodSeconds }).(pulumi.IntOutput)
+}
+
+// Port number to access on the container.
+func (o GetArtifactSpecContainerGroupContainerStartupProbeOutput) Port() pulumi.IntOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerStartupProbe) int { return v.Port }).(pulumi.IntOutput)
+}
+
+// Scheme to use for connecting to the host (HTTP or HTTPS).
+func (o GetArtifactSpecContainerGroupContainerStartupProbeOutput) Scheme() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerStartupProbe) string { return v.Scheme }).(pulumi.StringOutput)
+}
+
+// Number of seconds after which the probe times out.
+func (o GetArtifactSpecContainerGroupContainerStartupProbeOutput) TimeoutSeconds() pulumi.IntOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerStartupProbe) int { return v.TimeoutSeconds }).(pulumi.IntOutput)
+}
+
+type GetArtifactSpecStorage struct {
+	// Storage mode: `dedicatedPvc` or `nimCache`.
+	Mode string `pulumi:"mode"`
+	// PVC size for dedicated storage (e.g. `150Gi`).
+	PvcSize string `pulumi:"pvcSize"`
+}
+
+// GetArtifactSpecStorageInput is an input type that accepts GetArtifactSpecStorageArgs and GetArtifactSpecStorageOutput values.
+// You can construct a concrete instance of `GetArtifactSpecStorageInput` via:
+//
+//	GetArtifactSpecStorageArgs{...}
+type GetArtifactSpecStorageInput interface {
+	pulumi.Input
+
+	ToGetArtifactSpecStorageOutput() GetArtifactSpecStorageOutput
+	ToGetArtifactSpecStorageOutputWithContext(context.Context) GetArtifactSpecStorageOutput
+}
+
+type GetArtifactSpecStorageArgs struct {
+	// Storage mode: `dedicatedPvc` or `nimCache`.
+	Mode pulumi.StringInput `pulumi:"mode"`
+	// PVC size for dedicated storage (e.g. `150Gi`).
+	PvcSize pulumi.StringInput `pulumi:"pvcSize"`
+}
+
+func (GetArtifactSpecStorageArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactSpecStorage)(nil)).Elem()
+}
+
+func (i GetArtifactSpecStorageArgs) ToGetArtifactSpecStorageOutput() GetArtifactSpecStorageOutput {
+	return i.ToGetArtifactSpecStorageOutputWithContext(context.Background())
+}
+
+func (i GetArtifactSpecStorageArgs) ToGetArtifactSpecStorageOutputWithContext(ctx context.Context) GetArtifactSpecStorageOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetArtifactSpecStorageOutput)
+}
+
+type GetArtifactSpecStorageOutput struct{ *pulumi.OutputState }
+
+func (GetArtifactSpecStorageOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactSpecStorage)(nil)).Elem()
+}
+
+func (o GetArtifactSpecStorageOutput) ToGetArtifactSpecStorageOutput() GetArtifactSpecStorageOutput {
+	return o
+}
+
+func (o GetArtifactSpecStorageOutput) ToGetArtifactSpecStorageOutputWithContext(ctx context.Context) GetArtifactSpecStorageOutput {
+	return o
+}
+
+// Storage mode: `dedicatedPvc` or `nimCache`.
+func (o GetArtifactSpecStorageOutput) Mode() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactSpecStorage) string { return v.Mode }).(pulumi.StringOutput)
+}
+
+// PVC size for dedicated storage (e.g. `150Gi`).
+func (o GetArtifactSpecStorageOutput) PvcSize() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactSpecStorage) string { return v.PvcSize }).(pulumi.StringOutput)
+}
+
+type GetArtifactTag struct {
+	// Tag ID.
+	Id string `pulumi:"id"`
+	// Tag name.
+	Name string `pulumi:"name"`
+	// Tag value.
+	Value string `pulumi:"value"`
+}
+
+// GetArtifactTagInput is an input type that accepts GetArtifactTagArgs and GetArtifactTagOutput values.
+// You can construct a concrete instance of `GetArtifactTagInput` via:
+//
+//	GetArtifactTagArgs{...}
+type GetArtifactTagInput interface {
+	pulumi.Input
+
+	ToGetArtifactTagOutput() GetArtifactTagOutput
+	ToGetArtifactTagOutputWithContext(context.Context) GetArtifactTagOutput
+}
+
+type GetArtifactTagArgs struct {
+	// Tag ID.
+	Id pulumi.StringInput `pulumi:"id"`
+	// Tag name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Tag value.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (GetArtifactTagArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactTag)(nil)).Elem()
+}
+
+func (i GetArtifactTagArgs) ToGetArtifactTagOutput() GetArtifactTagOutput {
+	return i.ToGetArtifactTagOutputWithContext(context.Background())
+}
+
+func (i GetArtifactTagArgs) ToGetArtifactTagOutputWithContext(ctx context.Context) GetArtifactTagOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetArtifactTagOutput)
+}
+
+// GetArtifactTagArrayInput is an input type that accepts GetArtifactTagArray and GetArtifactTagArrayOutput values.
+// You can construct a concrete instance of `GetArtifactTagArrayInput` via:
+//
+//	GetArtifactTagArray{ GetArtifactTagArgs{...} }
+type GetArtifactTagArrayInput interface {
+	pulumi.Input
+
+	ToGetArtifactTagArrayOutput() GetArtifactTagArrayOutput
+	ToGetArtifactTagArrayOutputWithContext(context.Context) GetArtifactTagArrayOutput
+}
+
+type GetArtifactTagArray []GetArtifactTagInput
+
+func (GetArtifactTagArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetArtifactTag)(nil)).Elem()
+}
+
+func (i GetArtifactTagArray) ToGetArtifactTagArrayOutput() GetArtifactTagArrayOutput {
+	return i.ToGetArtifactTagArrayOutputWithContext(context.Background())
+}
+
+func (i GetArtifactTagArray) ToGetArtifactTagArrayOutputWithContext(ctx context.Context) GetArtifactTagArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetArtifactTagArrayOutput)
+}
+
+type GetArtifactTagOutput struct{ *pulumi.OutputState }
+
+func (GetArtifactTagOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactTag)(nil)).Elem()
+}
+
+func (o GetArtifactTagOutput) ToGetArtifactTagOutput() GetArtifactTagOutput {
+	return o
+}
+
+func (o GetArtifactTagOutput) ToGetArtifactTagOutputWithContext(ctx context.Context) GetArtifactTagOutput {
+	return o
+}
+
+// Tag ID.
+func (o GetArtifactTagOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactTag) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// Tag name.
+func (o GetArtifactTagOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactTag) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Tag value.
+func (o GetArtifactTagOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactTag) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type GetArtifactTagArrayOutput struct{ *pulumi.OutputState }
+
+func (GetArtifactTagArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetArtifactTag)(nil)).Elem()
+}
+
+func (o GetArtifactTagArrayOutput) ToGetArtifactTagArrayOutput() GetArtifactTagArrayOutput {
+	return o
+}
+
+func (o GetArtifactTagArrayOutput) ToGetArtifactTagArrayOutputWithContext(ctx context.Context) GetArtifactTagArrayOutput {
+	return o
+}
+
+func (o GetArtifactTagArrayOutput) Index(i pulumi.IntInput) GetArtifactTagOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetArtifactTag {
+		return vs[0].([]GetArtifactTag)[vs[1].(int)]
+	}).(GetArtifactTagOutput)
+}
+
+type GetArtifactsArtifact struct {
+	// The artifact version ID.
+	ArtifactId string `pulumi:"artifactId"`
+	// ID of the artifact repository for versioning.
+	ArtifactRepositoryId string `pulumi:"artifactRepositoryId"`
+	// Timestamp of when the artifact was created.
+	CreatedAt string `pulumi:"createdAt"`
+	// User who created the artifact.
+	Creator GetArtifactsArtifactCreator `pulumi:"creator"`
+	// The description of the Artifact.
+	Description string `pulumi:"description"`
+	// The name of the Artifact.
+	Name string `pulumi:"name"`
+	// Effective repository-level permissions for the authenticated user.
+	Permissions []string `pulumi:"permissions"`
+	// The artifact specification containing container group definitions.
+	Spec GetArtifactsArtifactSpec `pulumi:"spec"`
+	// Artifact status: `draft` or `locked`.
+	Status string `pulumi:"status"`
+	// Tags associated with this artifact.
+	Tags []GetArtifactsArtifactTag `pulumi:"tags"`
+	// The artifact type: `service` or `nim`.
+	Type string `pulumi:"type"`
+	// Timestamp of when the artifact was last updated.
+	UpdatedAt string `pulumi:"updatedAt"`
+	// Version number of the artifact. Set only for locked artifacts.
+	Version int `pulumi:"version"`
+}
+
+// GetArtifactsArtifactInput is an input type that accepts GetArtifactsArtifactArgs and GetArtifactsArtifactOutput values.
+// You can construct a concrete instance of `GetArtifactsArtifactInput` via:
+//
+//	GetArtifactsArtifactArgs{...}
+type GetArtifactsArtifactInput interface {
+	pulumi.Input
+
+	ToGetArtifactsArtifactOutput() GetArtifactsArtifactOutput
+	ToGetArtifactsArtifactOutputWithContext(context.Context) GetArtifactsArtifactOutput
+}
+
+type GetArtifactsArtifactArgs struct {
+	// The artifact version ID.
+	ArtifactId pulumi.StringInput `pulumi:"artifactId"`
+	// ID of the artifact repository for versioning.
+	ArtifactRepositoryId pulumi.StringInput `pulumi:"artifactRepositoryId"`
+	// Timestamp of when the artifact was created.
+	CreatedAt pulumi.StringInput `pulumi:"createdAt"`
+	// User who created the artifact.
+	Creator GetArtifactsArtifactCreatorInput `pulumi:"creator"`
+	// The description of the Artifact.
+	Description pulumi.StringInput `pulumi:"description"`
+	// The name of the Artifact.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Effective repository-level permissions for the authenticated user.
+	Permissions pulumi.StringArrayInput `pulumi:"permissions"`
+	// The artifact specification containing container group definitions.
+	Spec GetArtifactsArtifactSpecInput `pulumi:"spec"`
+	// Artifact status: `draft` or `locked`.
+	Status pulumi.StringInput `pulumi:"status"`
+	// Tags associated with this artifact.
+	Tags GetArtifactsArtifactTagArrayInput `pulumi:"tags"`
+	// The artifact type: `service` or `nim`.
+	Type pulumi.StringInput `pulumi:"type"`
+	// Timestamp of when the artifact was last updated.
+	UpdatedAt pulumi.StringInput `pulumi:"updatedAt"`
+	// Version number of the artifact. Set only for locked artifacts.
+	Version pulumi.IntInput `pulumi:"version"`
+}
+
+func (GetArtifactsArtifactArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactsArtifact)(nil)).Elem()
+}
+
+func (i GetArtifactsArtifactArgs) ToGetArtifactsArtifactOutput() GetArtifactsArtifactOutput {
+	return i.ToGetArtifactsArtifactOutputWithContext(context.Background())
+}
+
+func (i GetArtifactsArtifactArgs) ToGetArtifactsArtifactOutputWithContext(ctx context.Context) GetArtifactsArtifactOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetArtifactsArtifactOutput)
+}
+
+// GetArtifactsArtifactArrayInput is an input type that accepts GetArtifactsArtifactArray and GetArtifactsArtifactArrayOutput values.
+// You can construct a concrete instance of `GetArtifactsArtifactArrayInput` via:
+//
+//	GetArtifactsArtifactArray{ GetArtifactsArtifactArgs{...} }
+type GetArtifactsArtifactArrayInput interface {
+	pulumi.Input
+
+	ToGetArtifactsArtifactArrayOutput() GetArtifactsArtifactArrayOutput
+	ToGetArtifactsArtifactArrayOutputWithContext(context.Context) GetArtifactsArtifactArrayOutput
+}
+
+type GetArtifactsArtifactArray []GetArtifactsArtifactInput
+
+func (GetArtifactsArtifactArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetArtifactsArtifact)(nil)).Elem()
+}
+
+func (i GetArtifactsArtifactArray) ToGetArtifactsArtifactArrayOutput() GetArtifactsArtifactArrayOutput {
+	return i.ToGetArtifactsArtifactArrayOutputWithContext(context.Background())
+}
+
+func (i GetArtifactsArtifactArray) ToGetArtifactsArtifactArrayOutputWithContext(ctx context.Context) GetArtifactsArtifactArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetArtifactsArtifactArrayOutput)
+}
+
+type GetArtifactsArtifactOutput struct{ *pulumi.OutputState }
+
+func (GetArtifactsArtifactOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactsArtifact)(nil)).Elem()
+}
+
+func (o GetArtifactsArtifactOutput) ToGetArtifactsArtifactOutput() GetArtifactsArtifactOutput {
+	return o
+}
+
+func (o GetArtifactsArtifactOutput) ToGetArtifactsArtifactOutputWithContext(ctx context.Context) GetArtifactsArtifactOutput {
+	return o
+}
+
+// The artifact version ID.
+func (o GetArtifactsArtifactOutput) ArtifactId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactsArtifact) string { return v.ArtifactId }).(pulumi.StringOutput)
+}
+
+// ID of the artifact repository for versioning.
+func (o GetArtifactsArtifactOutput) ArtifactRepositoryId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactsArtifact) string { return v.ArtifactRepositoryId }).(pulumi.StringOutput)
+}
+
+// Timestamp of when the artifact was created.
+func (o GetArtifactsArtifactOutput) CreatedAt() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactsArtifact) string { return v.CreatedAt }).(pulumi.StringOutput)
+}
+
+// User who created the artifact.
+func (o GetArtifactsArtifactOutput) Creator() GetArtifactsArtifactCreatorOutput {
+	return o.ApplyT(func(v GetArtifactsArtifact) GetArtifactsArtifactCreator { return v.Creator }).(GetArtifactsArtifactCreatorOutput)
+}
+
+// The description of the Artifact.
+func (o GetArtifactsArtifactOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactsArtifact) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// The name of the Artifact.
+func (o GetArtifactsArtifactOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactsArtifact) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Effective repository-level permissions for the authenticated user.
+func (o GetArtifactsArtifactOutput) Permissions() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetArtifactsArtifact) []string { return v.Permissions }).(pulumi.StringArrayOutput)
+}
+
+// The artifact specification containing container group definitions.
+func (o GetArtifactsArtifactOutput) Spec() GetArtifactsArtifactSpecOutput {
+	return o.ApplyT(func(v GetArtifactsArtifact) GetArtifactsArtifactSpec { return v.Spec }).(GetArtifactsArtifactSpecOutput)
+}
+
+// Artifact status: `draft` or `locked`.
+func (o GetArtifactsArtifactOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactsArtifact) string { return v.Status }).(pulumi.StringOutput)
+}
+
+// Tags associated with this artifact.
+func (o GetArtifactsArtifactOutput) Tags() GetArtifactsArtifactTagArrayOutput {
+	return o.ApplyT(func(v GetArtifactsArtifact) []GetArtifactsArtifactTag { return v.Tags }).(GetArtifactsArtifactTagArrayOutput)
+}
+
+// The artifact type: `service` or `nim`.
+func (o GetArtifactsArtifactOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactsArtifact) string { return v.Type }).(pulumi.StringOutput)
+}
+
+// Timestamp of when the artifact was last updated.
+func (o GetArtifactsArtifactOutput) UpdatedAt() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactsArtifact) string { return v.UpdatedAt }).(pulumi.StringOutput)
+}
+
+// Version number of the artifact. Set only for locked artifacts.
+func (o GetArtifactsArtifactOutput) Version() pulumi.IntOutput {
+	return o.ApplyT(func(v GetArtifactsArtifact) int { return v.Version }).(pulumi.IntOutput)
+}
+
+type GetArtifactsArtifactArrayOutput struct{ *pulumi.OutputState }
+
+func (GetArtifactsArtifactArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetArtifactsArtifact)(nil)).Elem()
+}
+
+func (o GetArtifactsArtifactArrayOutput) ToGetArtifactsArtifactArrayOutput() GetArtifactsArtifactArrayOutput {
+	return o
+}
+
+func (o GetArtifactsArtifactArrayOutput) ToGetArtifactsArtifactArrayOutputWithContext(ctx context.Context) GetArtifactsArtifactArrayOutput {
+	return o
+}
+
+func (o GetArtifactsArtifactArrayOutput) Index(i pulumi.IntInput) GetArtifactsArtifactOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetArtifactsArtifact {
+		return vs[0].([]GetArtifactsArtifact)[vs[1].(int)]
+	}).(GetArtifactsArtifactOutput)
+}
+
+type GetArtifactsArtifactCreator struct {
+	// User email address.
+	Email string `pulumi:"email"`
+	// User's full name.
+	FullName string `pulumi:"fullName"`
+	// User ID.
+	Id string `pulumi:"id"`
+	// User's gravatar hash.
+	Userhash string `pulumi:"userhash"`
+	// Username.
+	Username string `pulumi:"username"`
+}
+
+// GetArtifactsArtifactCreatorInput is an input type that accepts GetArtifactsArtifactCreatorArgs and GetArtifactsArtifactCreatorOutput values.
+// You can construct a concrete instance of `GetArtifactsArtifactCreatorInput` via:
+//
+//	GetArtifactsArtifactCreatorArgs{...}
+type GetArtifactsArtifactCreatorInput interface {
+	pulumi.Input
+
+	ToGetArtifactsArtifactCreatorOutput() GetArtifactsArtifactCreatorOutput
+	ToGetArtifactsArtifactCreatorOutputWithContext(context.Context) GetArtifactsArtifactCreatorOutput
+}
+
+type GetArtifactsArtifactCreatorArgs struct {
+	// User email address.
+	Email pulumi.StringInput `pulumi:"email"`
+	// User's full name.
+	FullName pulumi.StringInput `pulumi:"fullName"`
+	// User ID.
+	Id pulumi.StringInput `pulumi:"id"`
+	// User's gravatar hash.
+	Userhash pulumi.StringInput `pulumi:"userhash"`
+	// Username.
+	Username pulumi.StringInput `pulumi:"username"`
+}
+
+func (GetArtifactsArtifactCreatorArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactsArtifactCreator)(nil)).Elem()
+}
+
+func (i GetArtifactsArtifactCreatorArgs) ToGetArtifactsArtifactCreatorOutput() GetArtifactsArtifactCreatorOutput {
+	return i.ToGetArtifactsArtifactCreatorOutputWithContext(context.Background())
+}
+
+func (i GetArtifactsArtifactCreatorArgs) ToGetArtifactsArtifactCreatorOutputWithContext(ctx context.Context) GetArtifactsArtifactCreatorOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetArtifactsArtifactCreatorOutput)
+}
+
+type GetArtifactsArtifactCreatorOutput struct{ *pulumi.OutputState }
+
+func (GetArtifactsArtifactCreatorOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactsArtifactCreator)(nil)).Elem()
+}
+
+func (o GetArtifactsArtifactCreatorOutput) ToGetArtifactsArtifactCreatorOutput() GetArtifactsArtifactCreatorOutput {
+	return o
+}
+
+func (o GetArtifactsArtifactCreatorOutput) ToGetArtifactsArtifactCreatorOutputWithContext(ctx context.Context) GetArtifactsArtifactCreatorOutput {
+	return o
+}
+
+// User email address.
+func (o GetArtifactsArtifactCreatorOutput) Email() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactCreator) string { return v.Email }).(pulumi.StringOutput)
+}
+
+// User's full name.
+func (o GetArtifactsArtifactCreatorOutput) FullName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactCreator) string { return v.FullName }).(pulumi.StringOutput)
+}
+
+// User ID.
+func (o GetArtifactsArtifactCreatorOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactCreator) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// User's gravatar hash.
+func (o GetArtifactsArtifactCreatorOutput) Userhash() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactCreator) string { return v.Userhash }).(pulumi.StringOutput)
+}
+
+// Username.
+func (o GetArtifactsArtifactCreatorOutput) Username() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactCreator) string { return v.Username }).(pulumi.StringOutput)
+}
+
+type GetArtifactsArtifactSpec struct {
+	// List of container groups.
+	ContainerGroups []GetArtifactsArtifactSpecContainerGroup `pulumi:"containerGroups"`
+	// NIM model weight storage configuration.
+	Storage GetArtifactsArtifactSpecStorage `pulumi:"storage"`
+	// ID of the template used to create this NIM artifact.
+	TemplateId string `pulumi:"templateId"`
+}
+
+// GetArtifactsArtifactSpecInput is an input type that accepts GetArtifactsArtifactSpecArgs and GetArtifactsArtifactSpecOutput values.
+// You can construct a concrete instance of `GetArtifactsArtifactSpecInput` via:
+//
+//	GetArtifactsArtifactSpecArgs{...}
+type GetArtifactsArtifactSpecInput interface {
+	pulumi.Input
+
+	ToGetArtifactsArtifactSpecOutput() GetArtifactsArtifactSpecOutput
+	ToGetArtifactsArtifactSpecOutputWithContext(context.Context) GetArtifactsArtifactSpecOutput
+}
+
+type GetArtifactsArtifactSpecArgs struct {
+	// List of container groups.
+	ContainerGroups GetArtifactsArtifactSpecContainerGroupArrayInput `pulumi:"containerGroups"`
+	// NIM model weight storage configuration.
+	Storage GetArtifactsArtifactSpecStorageInput `pulumi:"storage"`
+	// ID of the template used to create this NIM artifact.
+	TemplateId pulumi.StringInput `pulumi:"templateId"`
+}
+
+func (GetArtifactsArtifactSpecArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactsArtifactSpec)(nil)).Elem()
+}
+
+func (i GetArtifactsArtifactSpecArgs) ToGetArtifactsArtifactSpecOutput() GetArtifactsArtifactSpecOutput {
+	return i.ToGetArtifactsArtifactSpecOutputWithContext(context.Background())
+}
+
+func (i GetArtifactsArtifactSpecArgs) ToGetArtifactsArtifactSpecOutputWithContext(ctx context.Context) GetArtifactsArtifactSpecOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetArtifactsArtifactSpecOutput)
+}
+
+type GetArtifactsArtifactSpecOutput struct{ *pulumi.OutputState }
+
+func (GetArtifactsArtifactSpecOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactsArtifactSpec)(nil)).Elem()
+}
+
+func (o GetArtifactsArtifactSpecOutput) ToGetArtifactsArtifactSpecOutput() GetArtifactsArtifactSpecOutput {
+	return o
+}
+
+func (o GetArtifactsArtifactSpecOutput) ToGetArtifactsArtifactSpecOutputWithContext(ctx context.Context) GetArtifactsArtifactSpecOutput {
+	return o
+}
+
+// List of container groups.
+func (o GetArtifactsArtifactSpecOutput) ContainerGroups() GetArtifactsArtifactSpecContainerGroupArrayOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpec) []GetArtifactsArtifactSpecContainerGroup { return v.ContainerGroups }).(GetArtifactsArtifactSpecContainerGroupArrayOutput)
+}
+
+// NIM model weight storage configuration.
+func (o GetArtifactsArtifactSpecOutput) Storage() GetArtifactsArtifactSpecStorageOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpec) GetArtifactsArtifactSpecStorage { return v.Storage }).(GetArtifactsArtifactSpecStorageOutput)
+}
+
+// ID of the template used to create this NIM artifact.
+func (o GetArtifactsArtifactSpecOutput) TemplateId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpec) string { return v.TemplateId }).(pulumi.StringOutput)
+}
+
+type GetArtifactsArtifactSpecContainerGroup struct {
+	// List of containers in this group.
+	Containers []GetArtifactsArtifactSpecContainerGroupContainer `pulumi:"containers"`
+	// Name of the container group.
+	Name string `pulumi:"name"`
+}
+
+// GetArtifactsArtifactSpecContainerGroupInput is an input type that accepts GetArtifactsArtifactSpecContainerGroupArgs and GetArtifactsArtifactSpecContainerGroupOutput values.
+// You can construct a concrete instance of `GetArtifactsArtifactSpecContainerGroupInput` via:
+//
+//	GetArtifactsArtifactSpecContainerGroupArgs{...}
+type GetArtifactsArtifactSpecContainerGroupInput interface {
+	pulumi.Input
+
+	ToGetArtifactsArtifactSpecContainerGroupOutput() GetArtifactsArtifactSpecContainerGroupOutput
+	ToGetArtifactsArtifactSpecContainerGroupOutputWithContext(context.Context) GetArtifactsArtifactSpecContainerGroupOutput
+}
+
+type GetArtifactsArtifactSpecContainerGroupArgs struct {
+	// List of containers in this group.
+	Containers GetArtifactsArtifactSpecContainerGroupContainerArrayInput `pulumi:"containers"`
+	// Name of the container group.
+	Name pulumi.StringInput `pulumi:"name"`
+}
+
+func (GetArtifactsArtifactSpecContainerGroupArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactsArtifactSpecContainerGroup)(nil)).Elem()
+}
+
+func (i GetArtifactsArtifactSpecContainerGroupArgs) ToGetArtifactsArtifactSpecContainerGroupOutput() GetArtifactsArtifactSpecContainerGroupOutput {
+	return i.ToGetArtifactsArtifactSpecContainerGroupOutputWithContext(context.Background())
+}
+
+func (i GetArtifactsArtifactSpecContainerGroupArgs) ToGetArtifactsArtifactSpecContainerGroupOutputWithContext(ctx context.Context) GetArtifactsArtifactSpecContainerGroupOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetArtifactsArtifactSpecContainerGroupOutput)
+}
+
+// GetArtifactsArtifactSpecContainerGroupArrayInput is an input type that accepts GetArtifactsArtifactSpecContainerGroupArray and GetArtifactsArtifactSpecContainerGroupArrayOutput values.
+// You can construct a concrete instance of `GetArtifactsArtifactSpecContainerGroupArrayInput` via:
+//
+//	GetArtifactsArtifactSpecContainerGroupArray{ GetArtifactsArtifactSpecContainerGroupArgs{...} }
+type GetArtifactsArtifactSpecContainerGroupArrayInput interface {
+	pulumi.Input
+
+	ToGetArtifactsArtifactSpecContainerGroupArrayOutput() GetArtifactsArtifactSpecContainerGroupArrayOutput
+	ToGetArtifactsArtifactSpecContainerGroupArrayOutputWithContext(context.Context) GetArtifactsArtifactSpecContainerGroupArrayOutput
+}
+
+type GetArtifactsArtifactSpecContainerGroupArray []GetArtifactsArtifactSpecContainerGroupInput
+
+func (GetArtifactsArtifactSpecContainerGroupArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetArtifactsArtifactSpecContainerGroup)(nil)).Elem()
+}
+
+func (i GetArtifactsArtifactSpecContainerGroupArray) ToGetArtifactsArtifactSpecContainerGroupArrayOutput() GetArtifactsArtifactSpecContainerGroupArrayOutput {
+	return i.ToGetArtifactsArtifactSpecContainerGroupArrayOutputWithContext(context.Background())
+}
+
+func (i GetArtifactsArtifactSpecContainerGroupArray) ToGetArtifactsArtifactSpecContainerGroupArrayOutputWithContext(ctx context.Context) GetArtifactsArtifactSpecContainerGroupArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetArtifactsArtifactSpecContainerGroupArrayOutput)
+}
+
+type GetArtifactsArtifactSpecContainerGroupOutput struct{ *pulumi.OutputState }
+
+func (GetArtifactsArtifactSpecContainerGroupOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactsArtifactSpecContainerGroup)(nil)).Elem()
+}
+
+func (o GetArtifactsArtifactSpecContainerGroupOutput) ToGetArtifactsArtifactSpecContainerGroupOutput() GetArtifactsArtifactSpecContainerGroupOutput {
+	return o
+}
+
+func (o GetArtifactsArtifactSpecContainerGroupOutput) ToGetArtifactsArtifactSpecContainerGroupOutputWithContext(ctx context.Context) GetArtifactsArtifactSpecContainerGroupOutput {
+	return o
+}
+
+// List of containers in this group.
+func (o GetArtifactsArtifactSpecContainerGroupOutput) Containers() GetArtifactsArtifactSpecContainerGroupContainerArrayOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroup) []GetArtifactsArtifactSpecContainerGroupContainer {
+		return v.Containers
+	}).(GetArtifactsArtifactSpecContainerGroupContainerArrayOutput)
+}
+
+// Name of the container group.
+func (o GetArtifactsArtifactSpecContainerGroupOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroup) string { return v.Name }).(pulumi.StringOutput)
+}
+
+type GetArtifactsArtifactSpecContainerGroupArrayOutput struct{ *pulumi.OutputState }
+
+func (GetArtifactsArtifactSpecContainerGroupArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetArtifactsArtifactSpecContainerGroup)(nil)).Elem()
+}
+
+func (o GetArtifactsArtifactSpecContainerGroupArrayOutput) ToGetArtifactsArtifactSpecContainerGroupArrayOutput() GetArtifactsArtifactSpecContainerGroupArrayOutput {
+	return o
+}
+
+func (o GetArtifactsArtifactSpecContainerGroupArrayOutput) ToGetArtifactsArtifactSpecContainerGroupArrayOutputWithContext(ctx context.Context) GetArtifactsArtifactSpecContainerGroupArrayOutput {
+	return o
+}
+
+func (o GetArtifactsArtifactSpecContainerGroupArrayOutput) Index(i pulumi.IntInput) GetArtifactsArtifactSpecContainerGroupOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetArtifactsArtifactSpecContainerGroup {
+		return vs[0].([]GetArtifactsArtifactSpecContainerGroup)[vs[1].(int)]
+	}).(GetArtifactsArtifactSpecContainerGroupOutput)
+}
+
+type GetArtifactsArtifactSpecContainerGroupContainer struct {
+	// Server-set image build metadata.
+	Build GetArtifactsArtifactSpecContainerGroupContainerBuild `pulumi:"build"`
+	// Description of the container.
+	Description string `pulumi:"description"`
+	// Container entrypoint.
+	Entrypoints []string `pulumi:"entrypoints"`
+	// Environment variables for the container.
+	EnvironmentVars []GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVar `pulumi:"environmentVars"`
+	// Configuration for server-side image builds from source code.
+	ImageBuildConfig GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfig `pulumi:"imageBuildConfig"`
+	// Docker image URI.
+	ImageUri string `pulumi:"imageUri"`
+	// Container liveness check configuration.
+	LivenessProbe GetArtifactsArtifactSpecContainerGroupContainerLivenessProbe `pulumi:"livenessProbe"`
+	// Name of the container.
+	Name string `pulumi:"name"`
+	// Container access port (1024-65535).
+	Port int `pulumi:"port"`
+	// Whether this is the primary container.
+	Primary bool `pulumi:"primary"`
+	// Container readiness check configuration.
+	ReadinessProbe GetArtifactsArtifactSpecContainerGroupContainerReadinessProbe `pulumi:"readinessProbe"`
+	// Container security context.
+	SecurityContext GetArtifactsArtifactSpecContainerGroupContainerSecurityContext `pulumi:"securityContext"`
+	// Container startup check configuration.
+	StartupProbe GetArtifactsArtifactSpecContainerGroupContainerStartupProbe `pulumi:"startupProbe"`
+}
+
+// GetArtifactsArtifactSpecContainerGroupContainerInput is an input type that accepts GetArtifactsArtifactSpecContainerGroupContainerArgs and GetArtifactsArtifactSpecContainerGroupContainerOutput values.
+// You can construct a concrete instance of `GetArtifactsArtifactSpecContainerGroupContainerInput` via:
+//
+//	GetArtifactsArtifactSpecContainerGroupContainerArgs{...}
+type GetArtifactsArtifactSpecContainerGroupContainerInput interface {
+	pulumi.Input
+
+	ToGetArtifactsArtifactSpecContainerGroupContainerOutput() GetArtifactsArtifactSpecContainerGroupContainerOutput
+	ToGetArtifactsArtifactSpecContainerGroupContainerOutputWithContext(context.Context) GetArtifactsArtifactSpecContainerGroupContainerOutput
+}
+
+type GetArtifactsArtifactSpecContainerGroupContainerArgs struct {
+	// Server-set image build metadata.
+	Build GetArtifactsArtifactSpecContainerGroupContainerBuildInput `pulumi:"build"`
+	// Description of the container.
+	Description pulumi.StringInput `pulumi:"description"`
+	// Container entrypoint.
+	Entrypoints pulumi.StringArrayInput `pulumi:"entrypoints"`
+	// Environment variables for the container.
+	EnvironmentVars GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarArrayInput `pulumi:"environmentVars"`
+	// Configuration for server-side image builds from source code.
+	ImageBuildConfig GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigInput `pulumi:"imageBuildConfig"`
+	// Docker image URI.
+	ImageUri pulumi.StringInput `pulumi:"imageUri"`
+	// Container liveness check configuration.
+	LivenessProbe GetArtifactsArtifactSpecContainerGroupContainerLivenessProbeInput `pulumi:"livenessProbe"`
+	// Name of the container.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Container access port (1024-65535).
+	Port pulumi.IntInput `pulumi:"port"`
+	// Whether this is the primary container.
+	Primary pulumi.BoolInput `pulumi:"primary"`
+	// Container readiness check configuration.
+	ReadinessProbe GetArtifactsArtifactSpecContainerGroupContainerReadinessProbeInput `pulumi:"readinessProbe"`
+	// Container security context.
+	SecurityContext GetArtifactsArtifactSpecContainerGroupContainerSecurityContextInput `pulumi:"securityContext"`
+	// Container startup check configuration.
+	StartupProbe GetArtifactsArtifactSpecContainerGroupContainerStartupProbeInput `pulumi:"startupProbe"`
+}
+
+func (GetArtifactsArtifactSpecContainerGroupContainerArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactsArtifactSpecContainerGroupContainer)(nil)).Elem()
+}
+
+func (i GetArtifactsArtifactSpecContainerGroupContainerArgs) ToGetArtifactsArtifactSpecContainerGroupContainerOutput() GetArtifactsArtifactSpecContainerGroupContainerOutput {
+	return i.ToGetArtifactsArtifactSpecContainerGroupContainerOutputWithContext(context.Background())
+}
+
+func (i GetArtifactsArtifactSpecContainerGroupContainerArgs) ToGetArtifactsArtifactSpecContainerGroupContainerOutputWithContext(ctx context.Context) GetArtifactsArtifactSpecContainerGroupContainerOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetArtifactsArtifactSpecContainerGroupContainerOutput)
+}
+
+// GetArtifactsArtifactSpecContainerGroupContainerArrayInput is an input type that accepts GetArtifactsArtifactSpecContainerGroupContainerArray and GetArtifactsArtifactSpecContainerGroupContainerArrayOutput values.
+// You can construct a concrete instance of `GetArtifactsArtifactSpecContainerGroupContainerArrayInput` via:
+//
+//	GetArtifactsArtifactSpecContainerGroupContainerArray{ GetArtifactsArtifactSpecContainerGroupContainerArgs{...} }
+type GetArtifactsArtifactSpecContainerGroupContainerArrayInput interface {
+	pulumi.Input
+
+	ToGetArtifactsArtifactSpecContainerGroupContainerArrayOutput() GetArtifactsArtifactSpecContainerGroupContainerArrayOutput
+	ToGetArtifactsArtifactSpecContainerGroupContainerArrayOutputWithContext(context.Context) GetArtifactsArtifactSpecContainerGroupContainerArrayOutput
+}
+
+type GetArtifactsArtifactSpecContainerGroupContainerArray []GetArtifactsArtifactSpecContainerGroupContainerInput
+
+func (GetArtifactsArtifactSpecContainerGroupContainerArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetArtifactsArtifactSpecContainerGroupContainer)(nil)).Elem()
+}
+
+func (i GetArtifactsArtifactSpecContainerGroupContainerArray) ToGetArtifactsArtifactSpecContainerGroupContainerArrayOutput() GetArtifactsArtifactSpecContainerGroupContainerArrayOutput {
+	return i.ToGetArtifactsArtifactSpecContainerGroupContainerArrayOutputWithContext(context.Background())
+}
+
+func (i GetArtifactsArtifactSpecContainerGroupContainerArray) ToGetArtifactsArtifactSpecContainerGroupContainerArrayOutputWithContext(ctx context.Context) GetArtifactsArtifactSpecContainerGroupContainerArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetArtifactsArtifactSpecContainerGroupContainerArrayOutput)
+}
+
+type GetArtifactsArtifactSpecContainerGroupContainerOutput struct{ *pulumi.OutputState }
+
+func (GetArtifactsArtifactSpecContainerGroupContainerOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactsArtifactSpecContainerGroupContainer)(nil)).Elem()
+}
+
+func (o GetArtifactsArtifactSpecContainerGroupContainerOutput) ToGetArtifactsArtifactSpecContainerGroupContainerOutput() GetArtifactsArtifactSpecContainerGroupContainerOutput {
+	return o
+}
+
+func (o GetArtifactsArtifactSpecContainerGroupContainerOutput) ToGetArtifactsArtifactSpecContainerGroupContainerOutputWithContext(ctx context.Context) GetArtifactsArtifactSpecContainerGroupContainerOutput {
+	return o
+}
+
+// Server-set image build metadata.
+func (o GetArtifactsArtifactSpecContainerGroupContainerOutput) Build() GetArtifactsArtifactSpecContainerGroupContainerBuildOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainer) GetArtifactsArtifactSpecContainerGroupContainerBuild {
+		return v.Build
+	}).(GetArtifactsArtifactSpecContainerGroupContainerBuildOutput)
+}
+
+// Description of the container.
+func (o GetArtifactsArtifactSpecContainerGroupContainerOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainer) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// Container entrypoint.
+func (o GetArtifactsArtifactSpecContainerGroupContainerOutput) Entrypoints() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainer) []string { return v.Entrypoints }).(pulumi.StringArrayOutput)
+}
+
+// Environment variables for the container.
+func (o GetArtifactsArtifactSpecContainerGroupContainerOutput) EnvironmentVars() GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainer) []GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVar {
+		return v.EnvironmentVars
+	}).(GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput)
+}
+
+// Configuration for server-side image builds from source code.
+func (o GetArtifactsArtifactSpecContainerGroupContainerOutput) ImageBuildConfig() GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainer) GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfig {
+		return v.ImageBuildConfig
+	}).(GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigOutput)
+}
+
+// Docker image URI.
+func (o GetArtifactsArtifactSpecContainerGroupContainerOutput) ImageUri() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainer) string { return v.ImageUri }).(pulumi.StringOutput)
+}
+
+// Container liveness check configuration.
+func (o GetArtifactsArtifactSpecContainerGroupContainerOutput) LivenessProbe() GetArtifactsArtifactSpecContainerGroupContainerLivenessProbeOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainer) GetArtifactsArtifactSpecContainerGroupContainerLivenessProbe {
+		return v.LivenessProbe
+	}).(GetArtifactsArtifactSpecContainerGroupContainerLivenessProbeOutput)
+}
+
+// Name of the container.
+func (o GetArtifactsArtifactSpecContainerGroupContainerOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainer) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Container access port (1024-65535).
+func (o GetArtifactsArtifactSpecContainerGroupContainerOutput) Port() pulumi.IntOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainer) int { return v.Port }).(pulumi.IntOutput)
+}
+
+// Whether this is the primary container.
+func (o GetArtifactsArtifactSpecContainerGroupContainerOutput) Primary() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainer) bool { return v.Primary }).(pulumi.BoolOutput)
+}
+
+// Container readiness check configuration.
+func (o GetArtifactsArtifactSpecContainerGroupContainerOutput) ReadinessProbe() GetArtifactsArtifactSpecContainerGroupContainerReadinessProbeOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainer) GetArtifactsArtifactSpecContainerGroupContainerReadinessProbe {
+		return v.ReadinessProbe
+	}).(GetArtifactsArtifactSpecContainerGroupContainerReadinessProbeOutput)
+}
+
+// Container security context.
+func (o GetArtifactsArtifactSpecContainerGroupContainerOutput) SecurityContext() GetArtifactsArtifactSpecContainerGroupContainerSecurityContextOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainer) GetArtifactsArtifactSpecContainerGroupContainerSecurityContext {
+		return v.SecurityContext
+	}).(GetArtifactsArtifactSpecContainerGroupContainerSecurityContextOutput)
+}
+
+// Container startup check configuration.
+func (o GetArtifactsArtifactSpecContainerGroupContainerOutput) StartupProbe() GetArtifactsArtifactSpecContainerGroupContainerStartupProbeOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainer) GetArtifactsArtifactSpecContainerGroupContainerStartupProbe {
+		return v.StartupProbe
+	}).(GetArtifactsArtifactSpecContainerGroupContainerStartupProbeOutput)
+}
+
+type GetArtifactsArtifactSpecContainerGroupContainerArrayOutput struct{ *pulumi.OutputState }
+
+func (GetArtifactsArtifactSpecContainerGroupContainerArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetArtifactsArtifactSpecContainerGroupContainer)(nil)).Elem()
+}
+
+func (o GetArtifactsArtifactSpecContainerGroupContainerArrayOutput) ToGetArtifactsArtifactSpecContainerGroupContainerArrayOutput() GetArtifactsArtifactSpecContainerGroupContainerArrayOutput {
+	return o
+}
+
+func (o GetArtifactsArtifactSpecContainerGroupContainerArrayOutput) ToGetArtifactsArtifactSpecContainerGroupContainerArrayOutputWithContext(ctx context.Context) GetArtifactsArtifactSpecContainerGroupContainerArrayOutput {
+	return o
+}
+
+func (o GetArtifactsArtifactSpecContainerGroupContainerArrayOutput) Index(i pulumi.IntInput) GetArtifactsArtifactSpecContainerGroupContainerOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetArtifactsArtifactSpecContainerGroupContainer {
+		return vs[0].([]GetArtifactsArtifactSpecContainerGroupContainer)[vs[1].(int)]
+	}).(GetArtifactsArtifactSpecContainerGroupContainerOutput)
+}
+
+type GetArtifactsArtifactSpecContainerGroupContainerBuild struct {
+	// Artifact image build ID.
+	ArtifactImageBuildId string `pulumi:"artifactImageBuildId"`
+	// Build creation timestamp (UTC).
+	CreatedAt string `pulumi:"createdAt"`
+	// Image build status at submit time.
+	Status string `pulumi:"status"`
+}
+
+// GetArtifactsArtifactSpecContainerGroupContainerBuildInput is an input type that accepts GetArtifactsArtifactSpecContainerGroupContainerBuildArgs and GetArtifactsArtifactSpecContainerGroupContainerBuildOutput values.
+// You can construct a concrete instance of `GetArtifactsArtifactSpecContainerGroupContainerBuildInput` via:
+//
+//	GetArtifactsArtifactSpecContainerGroupContainerBuildArgs{...}
+type GetArtifactsArtifactSpecContainerGroupContainerBuildInput interface {
+	pulumi.Input
+
+	ToGetArtifactsArtifactSpecContainerGroupContainerBuildOutput() GetArtifactsArtifactSpecContainerGroupContainerBuildOutput
+	ToGetArtifactsArtifactSpecContainerGroupContainerBuildOutputWithContext(context.Context) GetArtifactsArtifactSpecContainerGroupContainerBuildOutput
+}
+
+type GetArtifactsArtifactSpecContainerGroupContainerBuildArgs struct {
+	// Artifact image build ID.
+	ArtifactImageBuildId pulumi.StringInput `pulumi:"artifactImageBuildId"`
+	// Build creation timestamp (UTC).
+	CreatedAt pulumi.StringInput `pulumi:"createdAt"`
+	// Image build status at submit time.
+	Status pulumi.StringInput `pulumi:"status"`
+}
+
+func (GetArtifactsArtifactSpecContainerGroupContainerBuildArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactsArtifactSpecContainerGroupContainerBuild)(nil)).Elem()
+}
+
+func (i GetArtifactsArtifactSpecContainerGroupContainerBuildArgs) ToGetArtifactsArtifactSpecContainerGroupContainerBuildOutput() GetArtifactsArtifactSpecContainerGroupContainerBuildOutput {
+	return i.ToGetArtifactsArtifactSpecContainerGroupContainerBuildOutputWithContext(context.Background())
+}
+
+func (i GetArtifactsArtifactSpecContainerGroupContainerBuildArgs) ToGetArtifactsArtifactSpecContainerGroupContainerBuildOutputWithContext(ctx context.Context) GetArtifactsArtifactSpecContainerGroupContainerBuildOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetArtifactsArtifactSpecContainerGroupContainerBuildOutput)
+}
+
+type GetArtifactsArtifactSpecContainerGroupContainerBuildOutput struct{ *pulumi.OutputState }
+
+func (GetArtifactsArtifactSpecContainerGroupContainerBuildOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactsArtifactSpecContainerGroupContainerBuild)(nil)).Elem()
+}
+
+func (o GetArtifactsArtifactSpecContainerGroupContainerBuildOutput) ToGetArtifactsArtifactSpecContainerGroupContainerBuildOutput() GetArtifactsArtifactSpecContainerGroupContainerBuildOutput {
+	return o
+}
+
+func (o GetArtifactsArtifactSpecContainerGroupContainerBuildOutput) ToGetArtifactsArtifactSpecContainerGroupContainerBuildOutputWithContext(ctx context.Context) GetArtifactsArtifactSpecContainerGroupContainerBuildOutput {
+	return o
+}
+
+// Artifact image build ID.
+func (o GetArtifactsArtifactSpecContainerGroupContainerBuildOutput) ArtifactImageBuildId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerBuild) string { return v.ArtifactImageBuildId }).(pulumi.StringOutput)
+}
+
+// Build creation timestamp (UTC).
+func (o GetArtifactsArtifactSpecContainerGroupContainerBuildOutput) CreatedAt() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerBuild) string { return v.CreatedAt }).(pulumi.StringOutput)
+}
+
+// Image build status at submit time.
+func (o GetArtifactsArtifactSpecContainerGroupContainerBuildOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerBuild) string { return v.Status }).(pulumi.StringOutput)
+}
+
+type GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVar struct {
+	// DataRobot credential ID when source is "dr-credential".
+	DrCredentialId string `pulumi:"drCredentialId"`
+	// Key within the credential when source is "dr-credential".
+	Key string `pulumi:"key"`
+	// Name of the environment variable.
+	Name string `pulumi:"name"`
+	// Source type: "string" for plain text values, "dr-credential" for DataRobot credentials.
+	Source string `pulumi:"source"`
+	// Value of the environment variable when source is "string".
+	Value string `pulumi:"value"`
+}
+
+// GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarInput is an input type that accepts GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarArgs and GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarOutput values.
+// You can construct a concrete instance of `GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarInput` via:
+//
+//	GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarArgs{...}
+type GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarInput interface {
+	pulumi.Input
+
+	ToGetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarOutput() GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarOutput
+	ToGetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarOutputWithContext(context.Context) GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarOutput
+}
+
+type GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarArgs struct {
+	// DataRobot credential ID when source is "dr-credential".
+	DrCredentialId pulumi.StringInput `pulumi:"drCredentialId"`
+	// Key within the credential when source is "dr-credential".
+	Key pulumi.StringInput `pulumi:"key"`
+	// Name of the environment variable.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Source type: "string" for plain text values, "dr-credential" for DataRobot credentials.
+	Source pulumi.StringInput `pulumi:"source"`
+	// Value of the environment variable when source is "string".
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVar)(nil)).Elem()
+}
+
+func (i GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarArgs) ToGetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarOutput() GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarOutput {
+	return i.ToGetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarOutputWithContext(context.Background())
+}
+
+func (i GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarArgs) ToGetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarOutputWithContext(ctx context.Context) GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarOutput)
+}
+
+// GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarArrayInput is an input type that accepts GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarArray and GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput values.
+// You can construct a concrete instance of `GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarArrayInput` via:
+//
+//	GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarArray{ GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarArgs{...} }
+type GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarArrayInput interface {
+	pulumi.Input
+
+	ToGetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput() GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput
+	ToGetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarArrayOutputWithContext(context.Context) GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput
+}
+
+type GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarArray []GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarInput
+
+func (GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVar)(nil)).Elem()
+}
+
+func (i GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarArray) ToGetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput() GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput {
+	return i.ToGetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarArrayOutputWithContext(context.Background())
+}
+
+func (i GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarArray) ToGetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarArrayOutputWithContext(ctx context.Context) GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput)
+}
+
+type GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarOutput struct{ *pulumi.OutputState }
+
+func (GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVar)(nil)).Elem()
+}
+
+func (o GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarOutput) ToGetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarOutput() GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarOutput {
+	return o
+}
+
+func (o GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarOutput) ToGetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarOutputWithContext(ctx context.Context) GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarOutput {
+	return o
+}
+
+// DataRobot credential ID when source is "dr-credential".
+func (o GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarOutput) DrCredentialId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVar) string { return v.DrCredentialId }).(pulumi.StringOutput)
+}
+
+// Key within the credential when source is "dr-credential".
+func (o GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVar) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// Name of the environment variable.
+func (o GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVar) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Source type: "string" for plain text values, "dr-credential" for DataRobot credentials.
+func (o GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarOutput) Source() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVar) string { return v.Source }).(pulumi.StringOutput)
+}
+
+// Value of the environment variable when source is "string".
+func (o GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVar) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput struct{ *pulumi.OutputState }
+
+func (GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVar)(nil)).Elem()
+}
+
+func (o GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput) ToGetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput() GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput {
+	return o
+}
+
+func (o GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput) ToGetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarArrayOutputWithContext(ctx context.Context) GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput {
+	return o
+}
+
+func (o GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput) Index(i pulumi.IntInput) GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVar {
+		return vs[0].([]GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVar)[vs[1].(int)]
+	}).(GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarOutput)
+}
+
+type GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfig struct {
+	// Reference to source code in the DataRobot catalog.
+	CodeRef GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRef `pulumi:"codeRef"`
+	// Dockerfile configuration for image builds.
+	Dockerfile GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfile `pulumi:"dockerfile"`
+}
+
+// GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigInput is an input type that accepts GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigArgs and GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigOutput values.
+// You can construct a concrete instance of `GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigInput` via:
+//
+//	GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigArgs{...}
+type GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigInput interface {
+	pulumi.Input
+
+	ToGetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigOutput() GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigOutput
+	ToGetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigOutputWithContext(context.Context) GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigOutput
+}
+
+type GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigArgs struct {
+	// Reference to source code in the DataRobot catalog.
+	CodeRef GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefInput `pulumi:"codeRef"`
+	// Dockerfile configuration for image builds.
+	Dockerfile GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfileInput `pulumi:"dockerfile"`
+}
+
+func (GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfig)(nil)).Elem()
+}
+
+func (i GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigArgs) ToGetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigOutput() GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigOutput {
+	return i.ToGetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigOutputWithContext(context.Background())
+}
+
+func (i GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigArgs) ToGetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigOutputWithContext(ctx context.Context) GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigOutput)
+}
+
+type GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigOutput struct{ *pulumi.OutputState }
+
+func (GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfig)(nil)).Elem()
+}
+
+func (o GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigOutput) ToGetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigOutput() GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigOutput {
+	return o
+}
+
+func (o GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigOutput) ToGetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigOutputWithContext(ctx context.Context) GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigOutput {
+	return o
+}
+
+// Reference to source code in the DataRobot catalog.
+func (o GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigOutput) CodeRef() GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfig) GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRef {
+		return v.CodeRef
+	}).(GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput)
+}
+
+// Dockerfile configuration for image builds.
+func (o GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigOutput) Dockerfile() GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfig) GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfile {
+		return v.Dockerfile
+	}).(GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput)
+}
+
+type GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRef struct {
+	// DataRobot catalog reference.
+	Datarobot GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobot `pulumi:"datarobot"`
+	// Code provider.
+	Provider string `pulumi:"provider"`
+	// Code reference type.
+	Type string `pulumi:"type"`
+}
+
+// GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefInput is an input type that accepts GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefArgs and GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput values.
+// You can construct a concrete instance of `GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefInput` via:
+//
+//	GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefArgs{...}
+type GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefInput interface {
+	pulumi.Input
+
+	ToGetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput() GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput
+	ToGetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutputWithContext(context.Context) GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput
+}
+
+type GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefArgs struct {
+	// DataRobot catalog reference.
+	Datarobot GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotInput `pulumi:"datarobot"`
+	// Code provider.
+	Provider pulumi.StringInput `pulumi:"provider"`
+	// Code reference type.
+	Type pulumi.StringInput `pulumi:"type"`
+}
+
+func (GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRef)(nil)).Elem()
+}
+
+func (i GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefArgs) ToGetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput() GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput {
+	return i.ToGetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutputWithContext(context.Background())
+}
+
+func (i GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefArgs) ToGetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutputWithContext(ctx context.Context) GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput)
+}
+
+type GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput struct{ *pulumi.OutputState }
+
+func (GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRef)(nil)).Elem()
+}
+
+func (o GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput) ToGetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput() GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput {
+	return o
+}
+
+func (o GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput) ToGetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutputWithContext(ctx context.Context) GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput {
+	return o
+}
+
+// DataRobot catalog reference.
+func (o GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput) Datarobot() GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRef) GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobot {
+		return v.Datarobot
+	}).(GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotOutput)
+}
+
+// Code provider.
+func (o GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput) Provider() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRef) string {
+		return v.Provider
+	}).(pulumi.StringOutput)
+}
+
+// Code reference type.
+func (o GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRef) string { return v.Type }).(pulumi.StringOutput)
+}
+
+type GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobot struct {
+	// Catalog ID.
+	CatalogId string `pulumi:"catalogId"`
+	// Catalog version ID.
+	CatalogVersionId string `pulumi:"catalogVersionId"`
+}
+
+// GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotInput is an input type that accepts GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotArgs and GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotOutput values.
+// You can construct a concrete instance of `GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotInput` via:
+//
+//	GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotArgs{...}
+type GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotInput interface {
+	pulumi.Input
+
+	ToGetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotOutput() GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotOutput
+	ToGetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotOutputWithContext(context.Context) GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotOutput
+}
+
+type GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotArgs struct {
+	// Catalog ID.
+	CatalogId pulumi.StringInput `pulumi:"catalogId"`
+	// Catalog version ID.
+	CatalogVersionId pulumi.StringInput `pulumi:"catalogVersionId"`
+}
+
+func (GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobot)(nil)).Elem()
+}
+
+func (i GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotArgs) ToGetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotOutput() GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotOutput {
+	return i.ToGetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotOutputWithContext(context.Background())
+}
+
+func (i GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotArgs) ToGetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotOutputWithContext(ctx context.Context) GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotOutput)
+}
+
+type GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotOutput struct{ *pulumi.OutputState }
+
+func (GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobot)(nil)).Elem()
+}
+
+func (o GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotOutput) ToGetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotOutput() GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotOutput {
+	return o
+}
+
+func (o GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotOutput) ToGetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotOutputWithContext(ctx context.Context) GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotOutput {
+	return o
+}
+
+// Catalog ID.
+func (o GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotOutput) CatalogId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobot) string {
+		return v.CatalogId
+	}).(pulumi.StringOutput)
+}
+
+// Catalog version ID.
+func (o GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotOutput) CatalogVersionId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobot) string {
+		return v.CatalogVersionId
+	}).(pulumi.StringOutput)
+}
+
+type GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfile struct {
+	// Entrypoint when source is `generated`.
+	Entrypoints []string `pulumi:"entrypoints"`
+	// Execution environment ID when source is `generated`.
+	ExecutionEnvironmentId string `pulumi:"executionEnvironmentId"`
+	// Execution environment version ID when source is `generated`.
+	ExecutionEnvironmentVersionId string `pulumi:"executionEnvironmentVersionId"`
+	// Relative path to the Dockerfile when source is `provided`.
+	Path string `pulumi:"path"`
+	// Dockerfile source: `provided` or `generated`.
+	Source string `pulumi:"source"`
+}
+
+// GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfileInput is an input type that accepts GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfileArgs and GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput values.
+// You can construct a concrete instance of `GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfileInput` via:
+//
+//	GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfileArgs{...}
+type GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfileInput interface {
+	pulumi.Input
+
+	ToGetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput() GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput
+	ToGetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutputWithContext(context.Context) GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput
+}
+
+type GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfileArgs struct {
+	// Entrypoint when source is `generated`.
+	Entrypoints pulumi.StringArrayInput `pulumi:"entrypoints"`
+	// Execution environment ID when source is `generated`.
+	ExecutionEnvironmentId pulumi.StringInput `pulumi:"executionEnvironmentId"`
+	// Execution environment version ID when source is `generated`.
+	ExecutionEnvironmentVersionId pulumi.StringInput `pulumi:"executionEnvironmentVersionId"`
+	// Relative path to the Dockerfile when source is `provided`.
+	Path pulumi.StringInput `pulumi:"path"`
+	// Dockerfile source: `provided` or `generated`.
+	Source pulumi.StringInput `pulumi:"source"`
+}
+
+func (GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfileArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfile)(nil)).Elem()
+}
+
+func (i GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfileArgs) ToGetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput() GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput {
+	return i.ToGetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutputWithContext(context.Background())
+}
+
+func (i GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfileArgs) ToGetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutputWithContext(ctx context.Context) GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput)
+}
+
+type GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput struct{ *pulumi.OutputState }
+
+func (GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfile)(nil)).Elem()
+}
+
+func (o GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput) ToGetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput() GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput {
+	return o
+}
+
+func (o GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput) ToGetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutputWithContext(ctx context.Context) GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput {
+	return o
+}
+
+// Entrypoint when source is `generated`.
+func (o GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput) Entrypoints() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfile) []string {
+		return v.Entrypoints
+	}).(pulumi.StringArrayOutput)
+}
+
+// Execution environment ID when source is `generated`.
+func (o GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput) ExecutionEnvironmentId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfile) string {
+		return v.ExecutionEnvironmentId
+	}).(pulumi.StringOutput)
+}
+
+// Execution environment version ID when source is `generated`.
+func (o GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput) ExecutionEnvironmentVersionId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfile) string {
+		return v.ExecutionEnvironmentVersionId
+	}).(pulumi.StringOutput)
+}
+
+// Relative path to the Dockerfile when source is `provided`.
+func (o GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput) Path() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfile) string {
+		return v.Path
+	}).(pulumi.StringOutput)
+}
+
+// Dockerfile source: `provided` or `generated`.
+func (o GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput) Source() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfile) string {
+		return v.Source
+	}).(pulumi.StringOutput)
+}
+
+type GetArtifactsArtifactSpecContainerGroupContainerLivenessProbe struct {
+	// Minimum consecutive failures for the probe to be considered failed.
+	FailureThreshold int `pulumi:"failureThreshold"`
+	// Host name to connect to, defaults to the pod IP.
+	Host string `pulumi:"host"`
+	// Number of seconds to wait before the first probe is executed.
+	InitialDelaySeconds int `pulumi:"initialDelaySeconds"`
+	// URL path to query for health check.
+	Path string `pulumi:"path"`
+	// How often (in seconds) to perform the probe.
+	PeriodSeconds int `pulumi:"periodSeconds"`
+	// Port number to access on the container.
+	Port int `pulumi:"port"`
+	// Scheme to use for connecting to the host (HTTP or HTTPS).
+	Scheme string `pulumi:"scheme"`
+	// Number of seconds after which the probe times out.
+	TimeoutSeconds int `pulumi:"timeoutSeconds"`
+}
+
+// GetArtifactsArtifactSpecContainerGroupContainerLivenessProbeInput is an input type that accepts GetArtifactsArtifactSpecContainerGroupContainerLivenessProbeArgs and GetArtifactsArtifactSpecContainerGroupContainerLivenessProbeOutput values.
+// You can construct a concrete instance of `GetArtifactsArtifactSpecContainerGroupContainerLivenessProbeInput` via:
+//
+//	GetArtifactsArtifactSpecContainerGroupContainerLivenessProbeArgs{...}
+type GetArtifactsArtifactSpecContainerGroupContainerLivenessProbeInput interface {
+	pulumi.Input
+
+	ToGetArtifactsArtifactSpecContainerGroupContainerLivenessProbeOutput() GetArtifactsArtifactSpecContainerGroupContainerLivenessProbeOutput
+	ToGetArtifactsArtifactSpecContainerGroupContainerLivenessProbeOutputWithContext(context.Context) GetArtifactsArtifactSpecContainerGroupContainerLivenessProbeOutput
+}
+
+type GetArtifactsArtifactSpecContainerGroupContainerLivenessProbeArgs struct {
+	// Minimum consecutive failures for the probe to be considered failed.
+	FailureThreshold pulumi.IntInput `pulumi:"failureThreshold"`
+	// Host name to connect to, defaults to the pod IP.
+	Host pulumi.StringInput `pulumi:"host"`
+	// Number of seconds to wait before the first probe is executed.
+	InitialDelaySeconds pulumi.IntInput `pulumi:"initialDelaySeconds"`
+	// URL path to query for health check.
+	Path pulumi.StringInput `pulumi:"path"`
+	// How often (in seconds) to perform the probe.
+	PeriodSeconds pulumi.IntInput `pulumi:"periodSeconds"`
+	// Port number to access on the container.
+	Port pulumi.IntInput `pulumi:"port"`
+	// Scheme to use for connecting to the host (HTTP or HTTPS).
+	Scheme pulumi.StringInput `pulumi:"scheme"`
+	// Number of seconds after which the probe times out.
+	TimeoutSeconds pulumi.IntInput `pulumi:"timeoutSeconds"`
+}
+
+func (GetArtifactsArtifactSpecContainerGroupContainerLivenessProbeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactsArtifactSpecContainerGroupContainerLivenessProbe)(nil)).Elem()
+}
+
+func (i GetArtifactsArtifactSpecContainerGroupContainerLivenessProbeArgs) ToGetArtifactsArtifactSpecContainerGroupContainerLivenessProbeOutput() GetArtifactsArtifactSpecContainerGroupContainerLivenessProbeOutput {
+	return i.ToGetArtifactsArtifactSpecContainerGroupContainerLivenessProbeOutputWithContext(context.Background())
+}
+
+func (i GetArtifactsArtifactSpecContainerGroupContainerLivenessProbeArgs) ToGetArtifactsArtifactSpecContainerGroupContainerLivenessProbeOutputWithContext(ctx context.Context) GetArtifactsArtifactSpecContainerGroupContainerLivenessProbeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetArtifactsArtifactSpecContainerGroupContainerLivenessProbeOutput)
+}
+
+type GetArtifactsArtifactSpecContainerGroupContainerLivenessProbeOutput struct{ *pulumi.OutputState }
+
+func (GetArtifactsArtifactSpecContainerGroupContainerLivenessProbeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactsArtifactSpecContainerGroupContainerLivenessProbe)(nil)).Elem()
+}
+
+func (o GetArtifactsArtifactSpecContainerGroupContainerLivenessProbeOutput) ToGetArtifactsArtifactSpecContainerGroupContainerLivenessProbeOutput() GetArtifactsArtifactSpecContainerGroupContainerLivenessProbeOutput {
+	return o
+}
+
+func (o GetArtifactsArtifactSpecContainerGroupContainerLivenessProbeOutput) ToGetArtifactsArtifactSpecContainerGroupContainerLivenessProbeOutputWithContext(ctx context.Context) GetArtifactsArtifactSpecContainerGroupContainerLivenessProbeOutput {
+	return o
+}
+
+// Minimum consecutive failures for the probe to be considered failed.
+func (o GetArtifactsArtifactSpecContainerGroupContainerLivenessProbeOutput) FailureThreshold() pulumi.IntOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerLivenessProbe) int { return v.FailureThreshold }).(pulumi.IntOutput)
+}
+
+// Host name to connect to, defaults to the pod IP.
+func (o GetArtifactsArtifactSpecContainerGroupContainerLivenessProbeOutput) Host() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerLivenessProbe) string { return v.Host }).(pulumi.StringOutput)
+}
+
+// Number of seconds to wait before the first probe is executed.
+func (o GetArtifactsArtifactSpecContainerGroupContainerLivenessProbeOutput) InitialDelaySeconds() pulumi.IntOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerLivenessProbe) int { return v.InitialDelaySeconds }).(pulumi.IntOutput)
+}
+
+// URL path to query for health check.
+func (o GetArtifactsArtifactSpecContainerGroupContainerLivenessProbeOutput) Path() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerLivenessProbe) string { return v.Path }).(pulumi.StringOutput)
+}
+
+// How often (in seconds) to perform the probe.
+func (o GetArtifactsArtifactSpecContainerGroupContainerLivenessProbeOutput) PeriodSeconds() pulumi.IntOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerLivenessProbe) int { return v.PeriodSeconds }).(pulumi.IntOutput)
+}
+
+// Port number to access on the container.
+func (o GetArtifactsArtifactSpecContainerGroupContainerLivenessProbeOutput) Port() pulumi.IntOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerLivenessProbe) int { return v.Port }).(pulumi.IntOutput)
+}
+
+// Scheme to use for connecting to the host (HTTP or HTTPS).
+func (o GetArtifactsArtifactSpecContainerGroupContainerLivenessProbeOutput) Scheme() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerLivenessProbe) string { return v.Scheme }).(pulumi.StringOutput)
+}
+
+// Number of seconds after which the probe times out.
+func (o GetArtifactsArtifactSpecContainerGroupContainerLivenessProbeOutput) TimeoutSeconds() pulumi.IntOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerLivenessProbe) int { return v.TimeoutSeconds }).(pulumi.IntOutput)
+}
+
+type GetArtifactsArtifactSpecContainerGroupContainerReadinessProbe struct {
+	// Minimum consecutive failures for the probe to be considered failed.
+	FailureThreshold int `pulumi:"failureThreshold"`
+	// Host name to connect to, defaults to the pod IP.
+	Host string `pulumi:"host"`
+	// Number of seconds to wait before the first probe is executed.
+	InitialDelaySeconds int `pulumi:"initialDelaySeconds"`
+	// URL path to query for health check.
+	Path string `pulumi:"path"`
+	// How often (in seconds) to perform the probe.
+	PeriodSeconds int `pulumi:"periodSeconds"`
+	// Port number to access on the container.
+	Port int `pulumi:"port"`
+	// Scheme to use for connecting to the host (HTTP or HTTPS).
+	Scheme string `pulumi:"scheme"`
+	// Number of seconds after which the probe times out.
+	TimeoutSeconds int `pulumi:"timeoutSeconds"`
+}
+
+// GetArtifactsArtifactSpecContainerGroupContainerReadinessProbeInput is an input type that accepts GetArtifactsArtifactSpecContainerGroupContainerReadinessProbeArgs and GetArtifactsArtifactSpecContainerGroupContainerReadinessProbeOutput values.
+// You can construct a concrete instance of `GetArtifactsArtifactSpecContainerGroupContainerReadinessProbeInput` via:
+//
+//	GetArtifactsArtifactSpecContainerGroupContainerReadinessProbeArgs{...}
+type GetArtifactsArtifactSpecContainerGroupContainerReadinessProbeInput interface {
+	pulumi.Input
+
+	ToGetArtifactsArtifactSpecContainerGroupContainerReadinessProbeOutput() GetArtifactsArtifactSpecContainerGroupContainerReadinessProbeOutput
+	ToGetArtifactsArtifactSpecContainerGroupContainerReadinessProbeOutputWithContext(context.Context) GetArtifactsArtifactSpecContainerGroupContainerReadinessProbeOutput
+}
+
+type GetArtifactsArtifactSpecContainerGroupContainerReadinessProbeArgs struct {
+	// Minimum consecutive failures for the probe to be considered failed.
+	FailureThreshold pulumi.IntInput `pulumi:"failureThreshold"`
+	// Host name to connect to, defaults to the pod IP.
+	Host pulumi.StringInput `pulumi:"host"`
+	// Number of seconds to wait before the first probe is executed.
+	InitialDelaySeconds pulumi.IntInput `pulumi:"initialDelaySeconds"`
+	// URL path to query for health check.
+	Path pulumi.StringInput `pulumi:"path"`
+	// How often (in seconds) to perform the probe.
+	PeriodSeconds pulumi.IntInput `pulumi:"periodSeconds"`
+	// Port number to access on the container.
+	Port pulumi.IntInput `pulumi:"port"`
+	// Scheme to use for connecting to the host (HTTP or HTTPS).
+	Scheme pulumi.StringInput `pulumi:"scheme"`
+	// Number of seconds after which the probe times out.
+	TimeoutSeconds pulumi.IntInput `pulumi:"timeoutSeconds"`
+}
+
+func (GetArtifactsArtifactSpecContainerGroupContainerReadinessProbeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactsArtifactSpecContainerGroupContainerReadinessProbe)(nil)).Elem()
+}
+
+func (i GetArtifactsArtifactSpecContainerGroupContainerReadinessProbeArgs) ToGetArtifactsArtifactSpecContainerGroupContainerReadinessProbeOutput() GetArtifactsArtifactSpecContainerGroupContainerReadinessProbeOutput {
+	return i.ToGetArtifactsArtifactSpecContainerGroupContainerReadinessProbeOutputWithContext(context.Background())
+}
+
+func (i GetArtifactsArtifactSpecContainerGroupContainerReadinessProbeArgs) ToGetArtifactsArtifactSpecContainerGroupContainerReadinessProbeOutputWithContext(ctx context.Context) GetArtifactsArtifactSpecContainerGroupContainerReadinessProbeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetArtifactsArtifactSpecContainerGroupContainerReadinessProbeOutput)
+}
+
+type GetArtifactsArtifactSpecContainerGroupContainerReadinessProbeOutput struct{ *pulumi.OutputState }
+
+func (GetArtifactsArtifactSpecContainerGroupContainerReadinessProbeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactsArtifactSpecContainerGroupContainerReadinessProbe)(nil)).Elem()
+}
+
+func (o GetArtifactsArtifactSpecContainerGroupContainerReadinessProbeOutput) ToGetArtifactsArtifactSpecContainerGroupContainerReadinessProbeOutput() GetArtifactsArtifactSpecContainerGroupContainerReadinessProbeOutput {
+	return o
+}
+
+func (o GetArtifactsArtifactSpecContainerGroupContainerReadinessProbeOutput) ToGetArtifactsArtifactSpecContainerGroupContainerReadinessProbeOutputWithContext(ctx context.Context) GetArtifactsArtifactSpecContainerGroupContainerReadinessProbeOutput {
+	return o
+}
+
+// Minimum consecutive failures for the probe to be considered failed.
+func (o GetArtifactsArtifactSpecContainerGroupContainerReadinessProbeOutput) FailureThreshold() pulumi.IntOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerReadinessProbe) int { return v.FailureThreshold }).(pulumi.IntOutput)
+}
+
+// Host name to connect to, defaults to the pod IP.
+func (o GetArtifactsArtifactSpecContainerGroupContainerReadinessProbeOutput) Host() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerReadinessProbe) string { return v.Host }).(pulumi.StringOutput)
+}
+
+// Number of seconds to wait before the first probe is executed.
+func (o GetArtifactsArtifactSpecContainerGroupContainerReadinessProbeOutput) InitialDelaySeconds() pulumi.IntOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerReadinessProbe) int {
+		return v.InitialDelaySeconds
+	}).(pulumi.IntOutput)
+}
+
+// URL path to query for health check.
+func (o GetArtifactsArtifactSpecContainerGroupContainerReadinessProbeOutput) Path() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerReadinessProbe) string { return v.Path }).(pulumi.StringOutput)
+}
+
+// How often (in seconds) to perform the probe.
+func (o GetArtifactsArtifactSpecContainerGroupContainerReadinessProbeOutput) PeriodSeconds() pulumi.IntOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerReadinessProbe) int { return v.PeriodSeconds }).(pulumi.IntOutput)
+}
+
+// Port number to access on the container.
+func (o GetArtifactsArtifactSpecContainerGroupContainerReadinessProbeOutput) Port() pulumi.IntOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerReadinessProbe) int { return v.Port }).(pulumi.IntOutput)
+}
+
+// Scheme to use for connecting to the host (HTTP or HTTPS).
+func (o GetArtifactsArtifactSpecContainerGroupContainerReadinessProbeOutput) Scheme() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerReadinessProbe) string { return v.Scheme }).(pulumi.StringOutput)
+}
+
+// Number of seconds after which the probe times out.
+func (o GetArtifactsArtifactSpecContainerGroupContainerReadinessProbeOutput) TimeoutSeconds() pulumi.IntOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerReadinessProbe) int { return v.TimeoutSeconds }).(pulumi.IntOutput)
+}
+
+type GetArtifactsArtifactSpecContainerGroupContainerSecurityContext struct {
+	// Whether a process can gain more privileges than its parent.
+	AllowPrivilegeEscalation bool `pulumi:"allowPrivilegeEscalation"`
+	// Linux capabilities to add or drop.
+	Capabilities GetArtifactsArtifactSpecContainerGroupContainerSecurityContextCapabilities `pulumi:"capabilities"`
+	// Whether the root filesystem is read-only.
+	ReadOnlyRootFilesystem bool `pulumi:"readOnlyRootFilesystem"`
+	// Seccomp profile for the container.
+	SeccompProfile GetArtifactsArtifactSpecContainerGroupContainerSecurityContextSeccompProfile `pulumi:"seccompProfile"`
+}
+
+// GetArtifactsArtifactSpecContainerGroupContainerSecurityContextInput is an input type that accepts GetArtifactsArtifactSpecContainerGroupContainerSecurityContextArgs and GetArtifactsArtifactSpecContainerGroupContainerSecurityContextOutput values.
+// You can construct a concrete instance of `GetArtifactsArtifactSpecContainerGroupContainerSecurityContextInput` via:
+//
+//	GetArtifactsArtifactSpecContainerGroupContainerSecurityContextArgs{...}
+type GetArtifactsArtifactSpecContainerGroupContainerSecurityContextInput interface {
+	pulumi.Input
+
+	ToGetArtifactsArtifactSpecContainerGroupContainerSecurityContextOutput() GetArtifactsArtifactSpecContainerGroupContainerSecurityContextOutput
+	ToGetArtifactsArtifactSpecContainerGroupContainerSecurityContextOutputWithContext(context.Context) GetArtifactsArtifactSpecContainerGroupContainerSecurityContextOutput
+}
+
+type GetArtifactsArtifactSpecContainerGroupContainerSecurityContextArgs struct {
+	// Whether a process can gain more privileges than its parent.
+	AllowPrivilegeEscalation pulumi.BoolInput `pulumi:"allowPrivilegeEscalation"`
+	// Linux capabilities to add or drop.
+	Capabilities GetArtifactsArtifactSpecContainerGroupContainerSecurityContextCapabilitiesInput `pulumi:"capabilities"`
+	// Whether the root filesystem is read-only.
+	ReadOnlyRootFilesystem pulumi.BoolInput `pulumi:"readOnlyRootFilesystem"`
+	// Seccomp profile for the container.
+	SeccompProfile GetArtifactsArtifactSpecContainerGroupContainerSecurityContextSeccompProfileInput `pulumi:"seccompProfile"`
+}
+
+func (GetArtifactsArtifactSpecContainerGroupContainerSecurityContextArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactsArtifactSpecContainerGroupContainerSecurityContext)(nil)).Elem()
+}
+
+func (i GetArtifactsArtifactSpecContainerGroupContainerSecurityContextArgs) ToGetArtifactsArtifactSpecContainerGroupContainerSecurityContextOutput() GetArtifactsArtifactSpecContainerGroupContainerSecurityContextOutput {
+	return i.ToGetArtifactsArtifactSpecContainerGroupContainerSecurityContextOutputWithContext(context.Background())
+}
+
+func (i GetArtifactsArtifactSpecContainerGroupContainerSecurityContextArgs) ToGetArtifactsArtifactSpecContainerGroupContainerSecurityContextOutputWithContext(ctx context.Context) GetArtifactsArtifactSpecContainerGroupContainerSecurityContextOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetArtifactsArtifactSpecContainerGroupContainerSecurityContextOutput)
+}
+
+type GetArtifactsArtifactSpecContainerGroupContainerSecurityContextOutput struct{ *pulumi.OutputState }
+
+func (GetArtifactsArtifactSpecContainerGroupContainerSecurityContextOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactsArtifactSpecContainerGroupContainerSecurityContext)(nil)).Elem()
+}
+
+func (o GetArtifactsArtifactSpecContainerGroupContainerSecurityContextOutput) ToGetArtifactsArtifactSpecContainerGroupContainerSecurityContextOutput() GetArtifactsArtifactSpecContainerGroupContainerSecurityContextOutput {
+	return o
+}
+
+func (o GetArtifactsArtifactSpecContainerGroupContainerSecurityContextOutput) ToGetArtifactsArtifactSpecContainerGroupContainerSecurityContextOutputWithContext(ctx context.Context) GetArtifactsArtifactSpecContainerGroupContainerSecurityContextOutput {
+	return o
+}
+
+// Whether a process can gain more privileges than its parent.
+func (o GetArtifactsArtifactSpecContainerGroupContainerSecurityContextOutput) AllowPrivilegeEscalation() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerSecurityContext) bool {
+		return v.AllowPrivilegeEscalation
+	}).(pulumi.BoolOutput)
+}
+
+// Linux capabilities to add or drop.
+func (o GetArtifactsArtifactSpecContainerGroupContainerSecurityContextOutput) Capabilities() GetArtifactsArtifactSpecContainerGroupContainerSecurityContextCapabilitiesOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerSecurityContext) GetArtifactsArtifactSpecContainerGroupContainerSecurityContextCapabilities {
+		return v.Capabilities
+	}).(GetArtifactsArtifactSpecContainerGroupContainerSecurityContextCapabilitiesOutput)
+}
+
+// Whether the root filesystem is read-only.
+func (o GetArtifactsArtifactSpecContainerGroupContainerSecurityContextOutput) ReadOnlyRootFilesystem() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerSecurityContext) bool {
+		return v.ReadOnlyRootFilesystem
+	}).(pulumi.BoolOutput)
+}
+
+// Seccomp profile for the container.
+func (o GetArtifactsArtifactSpecContainerGroupContainerSecurityContextOutput) SeccompProfile() GetArtifactsArtifactSpecContainerGroupContainerSecurityContextSeccompProfileOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerSecurityContext) GetArtifactsArtifactSpecContainerGroupContainerSecurityContextSeccompProfile {
+		return v.SeccompProfile
+	}).(GetArtifactsArtifactSpecContainerGroupContainerSecurityContextSeccompProfileOutput)
+}
+
+type GetArtifactsArtifactSpecContainerGroupContainerSecurityContextCapabilities struct {
+	// Capabilities to add.
+	Adds []string `pulumi:"adds"`
+	// Capabilities to drop.
+	Drops []string `pulumi:"drops"`
+}
+
+// GetArtifactsArtifactSpecContainerGroupContainerSecurityContextCapabilitiesInput is an input type that accepts GetArtifactsArtifactSpecContainerGroupContainerSecurityContextCapabilitiesArgs and GetArtifactsArtifactSpecContainerGroupContainerSecurityContextCapabilitiesOutput values.
+// You can construct a concrete instance of `GetArtifactsArtifactSpecContainerGroupContainerSecurityContextCapabilitiesInput` via:
+//
+//	GetArtifactsArtifactSpecContainerGroupContainerSecurityContextCapabilitiesArgs{...}
+type GetArtifactsArtifactSpecContainerGroupContainerSecurityContextCapabilitiesInput interface {
+	pulumi.Input
+
+	ToGetArtifactsArtifactSpecContainerGroupContainerSecurityContextCapabilitiesOutput() GetArtifactsArtifactSpecContainerGroupContainerSecurityContextCapabilitiesOutput
+	ToGetArtifactsArtifactSpecContainerGroupContainerSecurityContextCapabilitiesOutputWithContext(context.Context) GetArtifactsArtifactSpecContainerGroupContainerSecurityContextCapabilitiesOutput
+}
+
+type GetArtifactsArtifactSpecContainerGroupContainerSecurityContextCapabilitiesArgs struct {
+	// Capabilities to add.
+	Adds pulumi.StringArrayInput `pulumi:"adds"`
+	// Capabilities to drop.
+	Drops pulumi.StringArrayInput `pulumi:"drops"`
+}
+
+func (GetArtifactsArtifactSpecContainerGroupContainerSecurityContextCapabilitiesArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactsArtifactSpecContainerGroupContainerSecurityContextCapabilities)(nil)).Elem()
+}
+
+func (i GetArtifactsArtifactSpecContainerGroupContainerSecurityContextCapabilitiesArgs) ToGetArtifactsArtifactSpecContainerGroupContainerSecurityContextCapabilitiesOutput() GetArtifactsArtifactSpecContainerGroupContainerSecurityContextCapabilitiesOutput {
+	return i.ToGetArtifactsArtifactSpecContainerGroupContainerSecurityContextCapabilitiesOutputWithContext(context.Background())
+}
+
+func (i GetArtifactsArtifactSpecContainerGroupContainerSecurityContextCapabilitiesArgs) ToGetArtifactsArtifactSpecContainerGroupContainerSecurityContextCapabilitiesOutputWithContext(ctx context.Context) GetArtifactsArtifactSpecContainerGroupContainerSecurityContextCapabilitiesOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetArtifactsArtifactSpecContainerGroupContainerSecurityContextCapabilitiesOutput)
+}
+
+type GetArtifactsArtifactSpecContainerGroupContainerSecurityContextCapabilitiesOutput struct{ *pulumi.OutputState }
+
+func (GetArtifactsArtifactSpecContainerGroupContainerSecurityContextCapabilitiesOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactsArtifactSpecContainerGroupContainerSecurityContextCapabilities)(nil)).Elem()
+}
+
+func (o GetArtifactsArtifactSpecContainerGroupContainerSecurityContextCapabilitiesOutput) ToGetArtifactsArtifactSpecContainerGroupContainerSecurityContextCapabilitiesOutput() GetArtifactsArtifactSpecContainerGroupContainerSecurityContextCapabilitiesOutput {
+	return o
+}
+
+func (o GetArtifactsArtifactSpecContainerGroupContainerSecurityContextCapabilitiesOutput) ToGetArtifactsArtifactSpecContainerGroupContainerSecurityContextCapabilitiesOutputWithContext(ctx context.Context) GetArtifactsArtifactSpecContainerGroupContainerSecurityContextCapabilitiesOutput {
+	return o
+}
+
+// Capabilities to add.
+func (o GetArtifactsArtifactSpecContainerGroupContainerSecurityContextCapabilitiesOutput) Adds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerSecurityContextCapabilities) []string {
+		return v.Adds
+	}).(pulumi.StringArrayOutput)
+}
+
+// Capabilities to drop.
+func (o GetArtifactsArtifactSpecContainerGroupContainerSecurityContextCapabilitiesOutput) Drops() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerSecurityContextCapabilities) []string {
+		return v.Drops
+	}).(pulumi.StringArrayOutput)
+}
+
+type GetArtifactsArtifactSpecContainerGroupContainerSecurityContextSeccompProfile struct {
+	// Path to a seccomp profile on the node when type is Localhost.
+	LocalhostProfile string `pulumi:"localhostProfile"`
+	// Seccomp profile type.
+	Type string `pulumi:"type"`
+}
+
+// GetArtifactsArtifactSpecContainerGroupContainerSecurityContextSeccompProfileInput is an input type that accepts GetArtifactsArtifactSpecContainerGroupContainerSecurityContextSeccompProfileArgs and GetArtifactsArtifactSpecContainerGroupContainerSecurityContextSeccompProfileOutput values.
+// You can construct a concrete instance of `GetArtifactsArtifactSpecContainerGroupContainerSecurityContextSeccompProfileInput` via:
+//
+//	GetArtifactsArtifactSpecContainerGroupContainerSecurityContextSeccompProfileArgs{...}
+type GetArtifactsArtifactSpecContainerGroupContainerSecurityContextSeccompProfileInput interface {
+	pulumi.Input
+
+	ToGetArtifactsArtifactSpecContainerGroupContainerSecurityContextSeccompProfileOutput() GetArtifactsArtifactSpecContainerGroupContainerSecurityContextSeccompProfileOutput
+	ToGetArtifactsArtifactSpecContainerGroupContainerSecurityContextSeccompProfileOutputWithContext(context.Context) GetArtifactsArtifactSpecContainerGroupContainerSecurityContextSeccompProfileOutput
+}
+
+type GetArtifactsArtifactSpecContainerGroupContainerSecurityContextSeccompProfileArgs struct {
+	// Path to a seccomp profile on the node when type is Localhost.
+	LocalhostProfile pulumi.StringInput `pulumi:"localhostProfile"`
+	// Seccomp profile type.
+	Type pulumi.StringInput `pulumi:"type"`
+}
+
+func (GetArtifactsArtifactSpecContainerGroupContainerSecurityContextSeccompProfileArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactsArtifactSpecContainerGroupContainerSecurityContextSeccompProfile)(nil)).Elem()
+}
+
+func (i GetArtifactsArtifactSpecContainerGroupContainerSecurityContextSeccompProfileArgs) ToGetArtifactsArtifactSpecContainerGroupContainerSecurityContextSeccompProfileOutput() GetArtifactsArtifactSpecContainerGroupContainerSecurityContextSeccompProfileOutput {
+	return i.ToGetArtifactsArtifactSpecContainerGroupContainerSecurityContextSeccompProfileOutputWithContext(context.Background())
+}
+
+func (i GetArtifactsArtifactSpecContainerGroupContainerSecurityContextSeccompProfileArgs) ToGetArtifactsArtifactSpecContainerGroupContainerSecurityContextSeccompProfileOutputWithContext(ctx context.Context) GetArtifactsArtifactSpecContainerGroupContainerSecurityContextSeccompProfileOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetArtifactsArtifactSpecContainerGroupContainerSecurityContextSeccompProfileOutput)
+}
+
+type GetArtifactsArtifactSpecContainerGroupContainerSecurityContextSeccompProfileOutput struct{ *pulumi.OutputState }
+
+func (GetArtifactsArtifactSpecContainerGroupContainerSecurityContextSeccompProfileOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactsArtifactSpecContainerGroupContainerSecurityContextSeccompProfile)(nil)).Elem()
+}
+
+func (o GetArtifactsArtifactSpecContainerGroupContainerSecurityContextSeccompProfileOutput) ToGetArtifactsArtifactSpecContainerGroupContainerSecurityContextSeccompProfileOutput() GetArtifactsArtifactSpecContainerGroupContainerSecurityContextSeccompProfileOutput {
+	return o
+}
+
+func (o GetArtifactsArtifactSpecContainerGroupContainerSecurityContextSeccompProfileOutput) ToGetArtifactsArtifactSpecContainerGroupContainerSecurityContextSeccompProfileOutputWithContext(ctx context.Context) GetArtifactsArtifactSpecContainerGroupContainerSecurityContextSeccompProfileOutput {
+	return o
+}
+
+// Path to a seccomp profile on the node when type is Localhost.
+func (o GetArtifactsArtifactSpecContainerGroupContainerSecurityContextSeccompProfileOutput) LocalhostProfile() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerSecurityContextSeccompProfile) string {
+		return v.LocalhostProfile
+	}).(pulumi.StringOutput)
+}
+
+// Seccomp profile type.
+func (o GetArtifactsArtifactSpecContainerGroupContainerSecurityContextSeccompProfileOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerSecurityContextSeccompProfile) string {
+		return v.Type
+	}).(pulumi.StringOutput)
+}
+
+type GetArtifactsArtifactSpecContainerGroupContainerStartupProbe struct {
+	// Minimum consecutive failures for the probe to be considered failed.
+	FailureThreshold int `pulumi:"failureThreshold"`
+	// Host name to connect to, defaults to the pod IP.
+	Host string `pulumi:"host"`
+	// Number of seconds to wait before the first probe is executed.
+	InitialDelaySeconds int `pulumi:"initialDelaySeconds"`
+	// URL path to query for health check.
+	Path string `pulumi:"path"`
+	// How often (in seconds) to perform the probe.
+	PeriodSeconds int `pulumi:"periodSeconds"`
+	// Port number to access on the container.
+	Port int `pulumi:"port"`
+	// Scheme to use for connecting to the host (HTTP or HTTPS).
+	Scheme string `pulumi:"scheme"`
+	// Number of seconds after which the probe times out.
+	TimeoutSeconds int `pulumi:"timeoutSeconds"`
+}
+
+// GetArtifactsArtifactSpecContainerGroupContainerStartupProbeInput is an input type that accepts GetArtifactsArtifactSpecContainerGroupContainerStartupProbeArgs and GetArtifactsArtifactSpecContainerGroupContainerStartupProbeOutput values.
+// You can construct a concrete instance of `GetArtifactsArtifactSpecContainerGroupContainerStartupProbeInput` via:
+//
+//	GetArtifactsArtifactSpecContainerGroupContainerStartupProbeArgs{...}
+type GetArtifactsArtifactSpecContainerGroupContainerStartupProbeInput interface {
+	pulumi.Input
+
+	ToGetArtifactsArtifactSpecContainerGroupContainerStartupProbeOutput() GetArtifactsArtifactSpecContainerGroupContainerStartupProbeOutput
+	ToGetArtifactsArtifactSpecContainerGroupContainerStartupProbeOutputWithContext(context.Context) GetArtifactsArtifactSpecContainerGroupContainerStartupProbeOutput
+}
+
+type GetArtifactsArtifactSpecContainerGroupContainerStartupProbeArgs struct {
+	// Minimum consecutive failures for the probe to be considered failed.
+	FailureThreshold pulumi.IntInput `pulumi:"failureThreshold"`
+	// Host name to connect to, defaults to the pod IP.
+	Host pulumi.StringInput `pulumi:"host"`
+	// Number of seconds to wait before the first probe is executed.
+	InitialDelaySeconds pulumi.IntInput `pulumi:"initialDelaySeconds"`
+	// URL path to query for health check.
+	Path pulumi.StringInput `pulumi:"path"`
+	// How often (in seconds) to perform the probe.
+	PeriodSeconds pulumi.IntInput `pulumi:"periodSeconds"`
+	// Port number to access on the container.
+	Port pulumi.IntInput `pulumi:"port"`
+	// Scheme to use for connecting to the host (HTTP or HTTPS).
+	Scheme pulumi.StringInput `pulumi:"scheme"`
+	// Number of seconds after which the probe times out.
+	TimeoutSeconds pulumi.IntInput `pulumi:"timeoutSeconds"`
+}
+
+func (GetArtifactsArtifactSpecContainerGroupContainerStartupProbeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactsArtifactSpecContainerGroupContainerStartupProbe)(nil)).Elem()
+}
+
+func (i GetArtifactsArtifactSpecContainerGroupContainerStartupProbeArgs) ToGetArtifactsArtifactSpecContainerGroupContainerStartupProbeOutput() GetArtifactsArtifactSpecContainerGroupContainerStartupProbeOutput {
+	return i.ToGetArtifactsArtifactSpecContainerGroupContainerStartupProbeOutputWithContext(context.Background())
+}
+
+func (i GetArtifactsArtifactSpecContainerGroupContainerStartupProbeArgs) ToGetArtifactsArtifactSpecContainerGroupContainerStartupProbeOutputWithContext(ctx context.Context) GetArtifactsArtifactSpecContainerGroupContainerStartupProbeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetArtifactsArtifactSpecContainerGroupContainerStartupProbeOutput)
+}
+
+type GetArtifactsArtifactSpecContainerGroupContainerStartupProbeOutput struct{ *pulumi.OutputState }
+
+func (GetArtifactsArtifactSpecContainerGroupContainerStartupProbeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactsArtifactSpecContainerGroupContainerStartupProbe)(nil)).Elem()
+}
+
+func (o GetArtifactsArtifactSpecContainerGroupContainerStartupProbeOutput) ToGetArtifactsArtifactSpecContainerGroupContainerStartupProbeOutput() GetArtifactsArtifactSpecContainerGroupContainerStartupProbeOutput {
+	return o
+}
+
+func (o GetArtifactsArtifactSpecContainerGroupContainerStartupProbeOutput) ToGetArtifactsArtifactSpecContainerGroupContainerStartupProbeOutputWithContext(ctx context.Context) GetArtifactsArtifactSpecContainerGroupContainerStartupProbeOutput {
+	return o
+}
+
+// Minimum consecutive failures for the probe to be considered failed.
+func (o GetArtifactsArtifactSpecContainerGroupContainerStartupProbeOutput) FailureThreshold() pulumi.IntOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerStartupProbe) int { return v.FailureThreshold }).(pulumi.IntOutput)
+}
+
+// Host name to connect to, defaults to the pod IP.
+func (o GetArtifactsArtifactSpecContainerGroupContainerStartupProbeOutput) Host() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerStartupProbe) string { return v.Host }).(pulumi.StringOutput)
+}
+
+// Number of seconds to wait before the first probe is executed.
+func (o GetArtifactsArtifactSpecContainerGroupContainerStartupProbeOutput) InitialDelaySeconds() pulumi.IntOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerStartupProbe) int { return v.InitialDelaySeconds }).(pulumi.IntOutput)
+}
+
+// URL path to query for health check.
+func (o GetArtifactsArtifactSpecContainerGroupContainerStartupProbeOutput) Path() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerStartupProbe) string { return v.Path }).(pulumi.StringOutput)
+}
+
+// How often (in seconds) to perform the probe.
+func (o GetArtifactsArtifactSpecContainerGroupContainerStartupProbeOutput) PeriodSeconds() pulumi.IntOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerStartupProbe) int { return v.PeriodSeconds }).(pulumi.IntOutput)
+}
+
+// Port number to access on the container.
+func (o GetArtifactsArtifactSpecContainerGroupContainerStartupProbeOutput) Port() pulumi.IntOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerStartupProbe) int { return v.Port }).(pulumi.IntOutput)
+}
+
+// Scheme to use for connecting to the host (HTTP or HTTPS).
+func (o GetArtifactsArtifactSpecContainerGroupContainerStartupProbeOutput) Scheme() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerStartupProbe) string { return v.Scheme }).(pulumi.StringOutput)
+}
+
+// Number of seconds after which the probe times out.
+func (o GetArtifactsArtifactSpecContainerGroupContainerStartupProbeOutput) TimeoutSeconds() pulumi.IntOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerStartupProbe) int { return v.TimeoutSeconds }).(pulumi.IntOutput)
+}
+
+type GetArtifactsArtifactSpecStorage struct {
+	// Storage mode: `dedicatedPvc` or `nimCache`.
+	Mode string `pulumi:"mode"`
+	// PVC size for dedicated storage (e.g. `150Gi`).
+	PvcSize string `pulumi:"pvcSize"`
+}
+
+// GetArtifactsArtifactSpecStorageInput is an input type that accepts GetArtifactsArtifactSpecStorageArgs and GetArtifactsArtifactSpecStorageOutput values.
+// You can construct a concrete instance of `GetArtifactsArtifactSpecStorageInput` via:
+//
+//	GetArtifactsArtifactSpecStorageArgs{...}
+type GetArtifactsArtifactSpecStorageInput interface {
+	pulumi.Input
+
+	ToGetArtifactsArtifactSpecStorageOutput() GetArtifactsArtifactSpecStorageOutput
+	ToGetArtifactsArtifactSpecStorageOutputWithContext(context.Context) GetArtifactsArtifactSpecStorageOutput
+}
+
+type GetArtifactsArtifactSpecStorageArgs struct {
+	// Storage mode: `dedicatedPvc` or `nimCache`.
+	Mode pulumi.StringInput `pulumi:"mode"`
+	// PVC size for dedicated storage (e.g. `150Gi`).
+	PvcSize pulumi.StringInput `pulumi:"pvcSize"`
+}
+
+func (GetArtifactsArtifactSpecStorageArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactsArtifactSpecStorage)(nil)).Elem()
+}
+
+func (i GetArtifactsArtifactSpecStorageArgs) ToGetArtifactsArtifactSpecStorageOutput() GetArtifactsArtifactSpecStorageOutput {
+	return i.ToGetArtifactsArtifactSpecStorageOutputWithContext(context.Background())
+}
+
+func (i GetArtifactsArtifactSpecStorageArgs) ToGetArtifactsArtifactSpecStorageOutputWithContext(ctx context.Context) GetArtifactsArtifactSpecStorageOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetArtifactsArtifactSpecStorageOutput)
+}
+
+type GetArtifactsArtifactSpecStorageOutput struct{ *pulumi.OutputState }
+
+func (GetArtifactsArtifactSpecStorageOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactsArtifactSpecStorage)(nil)).Elem()
+}
+
+func (o GetArtifactsArtifactSpecStorageOutput) ToGetArtifactsArtifactSpecStorageOutput() GetArtifactsArtifactSpecStorageOutput {
+	return o
+}
+
+func (o GetArtifactsArtifactSpecStorageOutput) ToGetArtifactsArtifactSpecStorageOutputWithContext(ctx context.Context) GetArtifactsArtifactSpecStorageOutput {
+	return o
+}
+
+// Storage mode: `dedicatedPvc` or `nimCache`.
+func (o GetArtifactsArtifactSpecStorageOutput) Mode() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecStorage) string { return v.Mode }).(pulumi.StringOutput)
+}
+
+// PVC size for dedicated storage (e.g. `150Gi`).
+func (o GetArtifactsArtifactSpecStorageOutput) PvcSize() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecStorage) string { return v.PvcSize }).(pulumi.StringOutput)
+}
+
+type GetArtifactsArtifactTag struct {
+	// Tag ID.
+	Id string `pulumi:"id"`
+	// Tag name.
+	Name string `pulumi:"name"`
+	// Tag value.
+	Value string `pulumi:"value"`
+}
+
+// GetArtifactsArtifactTagInput is an input type that accepts GetArtifactsArtifactTagArgs and GetArtifactsArtifactTagOutput values.
+// You can construct a concrete instance of `GetArtifactsArtifactTagInput` via:
+//
+//	GetArtifactsArtifactTagArgs{...}
+type GetArtifactsArtifactTagInput interface {
+	pulumi.Input
+
+	ToGetArtifactsArtifactTagOutput() GetArtifactsArtifactTagOutput
+	ToGetArtifactsArtifactTagOutputWithContext(context.Context) GetArtifactsArtifactTagOutput
+}
+
+type GetArtifactsArtifactTagArgs struct {
+	// Tag ID.
+	Id pulumi.StringInput `pulumi:"id"`
+	// Tag name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Tag value.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (GetArtifactsArtifactTagArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactsArtifactTag)(nil)).Elem()
+}
+
+func (i GetArtifactsArtifactTagArgs) ToGetArtifactsArtifactTagOutput() GetArtifactsArtifactTagOutput {
+	return i.ToGetArtifactsArtifactTagOutputWithContext(context.Background())
+}
+
+func (i GetArtifactsArtifactTagArgs) ToGetArtifactsArtifactTagOutputWithContext(ctx context.Context) GetArtifactsArtifactTagOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetArtifactsArtifactTagOutput)
+}
+
+// GetArtifactsArtifactTagArrayInput is an input type that accepts GetArtifactsArtifactTagArray and GetArtifactsArtifactTagArrayOutput values.
+// You can construct a concrete instance of `GetArtifactsArtifactTagArrayInput` via:
+//
+//	GetArtifactsArtifactTagArray{ GetArtifactsArtifactTagArgs{...} }
+type GetArtifactsArtifactTagArrayInput interface {
+	pulumi.Input
+
+	ToGetArtifactsArtifactTagArrayOutput() GetArtifactsArtifactTagArrayOutput
+	ToGetArtifactsArtifactTagArrayOutputWithContext(context.Context) GetArtifactsArtifactTagArrayOutput
+}
+
+type GetArtifactsArtifactTagArray []GetArtifactsArtifactTagInput
+
+func (GetArtifactsArtifactTagArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetArtifactsArtifactTag)(nil)).Elem()
+}
+
+func (i GetArtifactsArtifactTagArray) ToGetArtifactsArtifactTagArrayOutput() GetArtifactsArtifactTagArrayOutput {
+	return i.ToGetArtifactsArtifactTagArrayOutputWithContext(context.Background())
+}
+
+func (i GetArtifactsArtifactTagArray) ToGetArtifactsArtifactTagArrayOutputWithContext(ctx context.Context) GetArtifactsArtifactTagArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetArtifactsArtifactTagArrayOutput)
+}
+
+type GetArtifactsArtifactTagOutput struct{ *pulumi.OutputState }
+
+func (GetArtifactsArtifactTagOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactsArtifactTag)(nil)).Elem()
+}
+
+func (o GetArtifactsArtifactTagOutput) ToGetArtifactsArtifactTagOutput() GetArtifactsArtifactTagOutput {
+	return o
+}
+
+func (o GetArtifactsArtifactTagOutput) ToGetArtifactsArtifactTagOutputWithContext(ctx context.Context) GetArtifactsArtifactTagOutput {
+	return o
+}
+
+// Tag ID.
+func (o GetArtifactsArtifactTagOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactTag) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// Tag name.
+func (o GetArtifactsArtifactTagOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactTag) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Tag value.
+func (o GetArtifactsArtifactTagOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactTag) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type GetArtifactsArtifactTagArrayOutput struct{ *pulumi.OutputState }
+
+func (GetArtifactsArtifactTagArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetArtifactsArtifactTag)(nil)).Elem()
+}
+
+func (o GetArtifactsArtifactTagArrayOutput) ToGetArtifactsArtifactTagArrayOutput() GetArtifactsArtifactTagArrayOutput {
+	return o
+}
+
+func (o GetArtifactsArtifactTagArrayOutput) ToGetArtifactsArtifactTagArrayOutputWithContext(ctx context.Context) GetArtifactsArtifactTagArrayOutput {
+	return o
+}
+
+func (o GetArtifactsArtifactTagArrayOutput) Index(i pulumi.IntInput) GetArtifactsArtifactTagOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetArtifactsArtifactTag {
+		return vs[0].([]GetArtifactsArtifactTag)[vs[1].(int)]
+	}).(GetArtifactsArtifactTagOutput)
+}
+
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ApplicationSourceFromTemplateResourcesInput)(nil)).Elem(), ApplicationSourceFromTemplateResourcesArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ApplicationSourceFromTemplateResourcesPtrInput)(nil)).Elem(), ApplicationSourceFromTemplateResourcesArgs{})
@@ -15542,6 +19187,52 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*WorkloadRuntimeContainerGroupContainerArrayInput)(nil)).Elem(), WorkloadRuntimeContainerGroupContainerArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*WorkloadRuntimeContainerGroupContainerResourceAllocationInput)(nil)).Elem(), WorkloadRuntimeContainerGroupContainerResourceAllocationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*WorkloadRuntimeContainerGroupContainerResourceAllocationPtrInput)(nil)).Elem(), WorkloadRuntimeContainerGroupContainerResourceAllocationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactCreatorInput)(nil)).Elem(), GetArtifactCreatorArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactSpecInput)(nil)).Elem(), GetArtifactSpecArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactSpecContainerGroupInput)(nil)).Elem(), GetArtifactSpecContainerGroupArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactSpecContainerGroupArrayInput)(nil)).Elem(), GetArtifactSpecContainerGroupArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactSpecContainerGroupContainerInput)(nil)).Elem(), GetArtifactSpecContainerGroupContainerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactSpecContainerGroupContainerArrayInput)(nil)).Elem(), GetArtifactSpecContainerGroupContainerArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactSpecContainerGroupContainerBuildInput)(nil)).Elem(), GetArtifactSpecContainerGroupContainerBuildArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactSpecContainerGroupContainerEnvironmentVarInput)(nil)).Elem(), GetArtifactSpecContainerGroupContainerEnvironmentVarArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactSpecContainerGroupContainerEnvironmentVarArrayInput)(nil)).Elem(), GetArtifactSpecContainerGroupContainerEnvironmentVarArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactSpecContainerGroupContainerImageBuildConfigInput)(nil)).Elem(), GetArtifactSpecContainerGroupContainerImageBuildConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefInput)(nil)).Elem(), GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotInput)(nil)).Elem(), GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactSpecContainerGroupContainerImageBuildConfigDockerfileInput)(nil)).Elem(), GetArtifactSpecContainerGroupContainerImageBuildConfigDockerfileArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactSpecContainerGroupContainerLivenessProbeInput)(nil)).Elem(), GetArtifactSpecContainerGroupContainerLivenessProbeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactSpecContainerGroupContainerReadinessProbeInput)(nil)).Elem(), GetArtifactSpecContainerGroupContainerReadinessProbeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactSpecContainerGroupContainerSecurityContextInput)(nil)).Elem(), GetArtifactSpecContainerGroupContainerSecurityContextArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactSpecContainerGroupContainerSecurityContextCapabilitiesInput)(nil)).Elem(), GetArtifactSpecContainerGroupContainerSecurityContextCapabilitiesArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactSpecContainerGroupContainerSecurityContextSeccompProfileInput)(nil)).Elem(), GetArtifactSpecContainerGroupContainerSecurityContextSeccompProfileArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactSpecContainerGroupContainerStartupProbeInput)(nil)).Elem(), GetArtifactSpecContainerGroupContainerStartupProbeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactSpecStorageInput)(nil)).Elem(), GetArtifactSpecStorageArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactTagInput)(nil)).Elem(), GetArtifactTagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactTagArrayInput)(nil)).Elem(), GetArtifactTagArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactsArtifactInput)(nil)).Elem(), GetArtifactsArtifactArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactsArtifactArrayInput)(nil)).Elem(), GetArtifactsArtifactArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactsArtifactCreatorInput)(nil)).Elem(), GetArtifactsArtifactCreatorArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactsArtifactSpecInput)(nil)).Elem(), GetArtifactsArtifactSpecArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactsArtifactSpecContainerGroupInput)(nil)).Elem(), GetArtifactsArtifactSpecContainerGroupArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactsArtifactSpecContainerGroupArrayInput)(nil)).Elem(), GetArtifactsArtifactSpecContainerGroupArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactsArtifactSpecContainerGroupContainerInput)(nil)).Elem(), GetArtifactsArtifactSpecContainerGroupContainerArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactsArtifactSpecContainerGroupContainerArrayInput)(nil)).Elem(), GetArtifactsArtifactSpecContainerGroupContainerArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactsArtifactSpecContainerGroupContainerBuildInput)(nil)).Elem(), GetArtifactsArtifactSpecContainerGroupContainerBuildArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarInput)(nil)).Elem(), GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarArrayInput)(nil)).Elem(), GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigInput)(nil)).Elem(), GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefInput)(nil)).Elem(), GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotInput)(nil)).Elem(), GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfileInput)(nil)).Elem(), GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfileArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactsArtifactSpecContainerGroupContainerLivenessProbeInput)(nil)).Elem(), GetArtifactsArtifactSpecContainerGroupContainerLivenessProbeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactsArtifactSpecContainerGroupContainerReadinessProbeInput)(nil)).Elem(), GetArtifactsArtifactSpecContainerGroupContainerReadinessProbeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactsArtifactSpecContainerGroupContainerSecurityContextInput)(nil)).Elem(), GetArtifactsArtifactSpecContainerGroupContainerSecurityContextArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactsArtifactSpecContainerGroupContainerSecurityContextCapabilitiesInput)(nil)).Elem(), GetArtifactsArtifactSpecContainerGroupContainerSecurityContextCapabilitiesArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactsArtifactSpecContainerGroupContainerSecurityContextSeccompProfileInput)(nil)).Elem(), GetArtifactsArtifactSpecContainerGroupContainerSecurityContextSeccompProfileArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactsArtifactSpecContainerGroupContainerStartupProbeInput)(nil)).Elem(), GetArtifactsArtifactSpecContainerGroupContainerStartupProbeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactsArtifactSpecStorageInput)(nil)).Elem(), GetArtifactsArtifactSpecStorageArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactsArtifactTagInput)(nil)).Elem(), GetArtifactsArtifactTagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactsArtifactTagArrayInput)(nil)).Elem(), GetArtifactsArtifactTagArray{})
 	pulumi.RegisterOutputType(ApplicationSourceFromTemplateResourcesOutput{})
 	pulumi.RegisterOutputType(ApplicationSourceFromTemplateResourcesPtrOutput{})
 	pulumi.RegisterOutputType(ApplicationSourceFromTemplateRuntimeParameterValueOutput{})
@@ -15719,4 +19410,50 @@ func init() {
 	pulumi.RegisterOutputType(WorkloadRuntimeContainerGroupContainerArrayOutput{})
 	pulumi.RegisterOutputType(WorkloadRuntimeContainerGroupContainerResourceAllocationOutput{})
 	pulumi.RegisterOutputType(WorkloadRuntimeContainerGroupContainerResourceAllocationPtrOutput{})
+	pulumi.RegisterOutputType(GetArtifactCreatorOutput{})
+	pulumi.RegisterOutputType(GetArtifactSpecOutput{})
+	pulumi.RegisterOutputType(GetArtifactSpecContainerGroupOutput{})
+	pulumi.RegisterOutputType(GetArtifactSpecContainerGroupArrayOutput{})
+	pulumi.RegisterOutputType(GetArtifactSpecContainerGroupContainerOutput{})
+	pulumi.RegisterOutputType(GetArtifactSpecContainerGroupContainerArrayOutput{})
+	pulumi.RegisterOutputType(GetArtifactSpecContainerGroupContainerBuildOutput{})
+	pulumi.RegisterOutputType(GetArtifactSpecContainerGroupContainerEnvironmentVarOutput{})
+	pulumi.RegisterOutputType(GetArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput{})
+	pulumi.RegisterOutputType(GetArtifactSpecContainerGroupContainerImageBuildConfigOutput{})
+	pulumi.RegisterOutputType(GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput{})
+	pulumi.RegisterOutputType(GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotOutput{})
+	pulumi.RegisterOutputType(GetArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput{})
+	pulumi.RegisterOutputType(GetArtifactSpecContainerGroupContainerLivenessProbeOutput{})
+	pulumi.RegisterOutputType(GetArtifactSpecContainerGroupContainerReadinessProbeOutput{})
+	pulumi.RegisterOutputType(GetArtifactSpecContainerGroupContainerSecurityContextOutput{})
+	pulumi.RegisterOutputType(GetArtifactSpecContainerGroupContainerSecurityContextCapabilitiesOutput{})
+	pulumi.RegisterOutputType(GetArtifactSpecContainerGroupContainerSecurityContextSeccompProfileOutput{})
+	pulumi.RegisterOutputType(GetArtifactSpecContainerGroupContainerStartupProbeOutput{})
+	pulumi.RegisterOutputType(GetArtifactSpecStorageOutput{})
+	pulumi.RegisterOutputType(GetArtifactTagOutput{})
+	pulumi.RegisterOutputType(GetArtifactTagArrayOutput{})
+	pulumi.RegisterOutputType(GetArtifactsArtifactOutput{})
+	pulumi.RegisterOutputType(GetArtifactsArtifactArrayOutput{})
+	pulumi.RegisterOutputType(GetArtifactsArtifactCreatorOutput{})
+	pulumi.RegisterOutputType(GetArtifactsArtifactSpecOutput{})
+	pulumi.RegisterOutputType(GetArtifactsArtifactSpecContainerGroupOutput{})
+	pulumi.RegisterOutputType(GetArtifactsArtifactSpecContainerGroupArrayOutput{})
+	pulumi.RegisterOutputType(GetArtifactsArtifactSpecContainerGroupContainerOutput{})
+	pulumi.RegisterOutputType(GetArtifactsArtifactSpecContainerGroupContainerArrayOutput{})
+	pulumi.RegisterOutputType(GetArtifactsArtifactSpecContainerGroupContainerBuildOutput{})
+	pulumi.RegisterOutputType(GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarOutput{})
+	pulumi.RegisterOutputType(GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput{})
+	pulumi.RegisterOutputType(GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigOutput{})
+	pulumi.RegisterOutputType(GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput{})
+	pulumi.RegisterOutputType(GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotOutput{})
+	pulumi.RegisterOutputType(GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput{})
+	pulumi.RegisterOutputType(GetArtifactsArtifactSpecContainerGroupContainerLivenessProbeOutput{})
+	pulumi.RegisterOutputType(GetArtifactsArtifactSpecContainerGroupContainerReadinessProbeOutput{})
+	pulumi.RegisterOutputType(GetArtifactsArtifactSpecContainerGroupContainerSecurityContextOutput{})
+	pulumi.RegisterOutputType(GetArtifactsArtifactSpecContainerGroupContainerSecurityContextCapabilitiesOutput{})
+	pulumi.RegisterOutputType(GetArtifactsArtifactSpecContainerGroupContainerSecurityContextSeccompProfileOutput{})
+	pulumi.RegisterOutputType(GetArtifactsArtifactSpecContainerGroupContainerStartupProbeOutput{})
+	pulumi.RegisterOutputType(GetArtifactsArtifactSpecStorageOutput{})
+	pulumi.RegisterOutputType(GetArtifactsArtifactTagOutput{})
+	pulumi.RegisterOutputType(GetArtifactsArtifactTagArrayOutput{})
 }

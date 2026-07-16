@@ -106,6 +106,43 @@ __all__ = [
     'WorkloadRuntimeContainerGroupAutoscalingPolicy',
     'WorkloadRuntimeContainerGroupContainer',
     'WorkloadRuntimeContainerGroupContainerResourceAllocation',
+    'GetArtifactCreatorResult',
+    'GetArtifactSpecResult',
+    'GetArtifactSpecContainerGroupResult',
+    'GetArtifactSpecContainerGroupContainerResult',
+    'GetArtifactSpecContainerGroupContainerBuildResult',
+    'GetArtifactSpecContainerGroupContainerEnvironmentVarResult',
+    'GetArtifactSpecContainerGroupContainerImageBuildConfigResult',
+    'GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefResult',
+    'GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotResult',
+    'GetArtifactSpecContainerGroupContainerImageBuildConfigDockerfileResult',
+    'GetArtifactSpecContainerGroupContainerLivenessProbeResult',
+    'GetArtifactSpecContainerGroupContainerReadinessProbeResult',
+    'GetArtifactSpecContainerGroupContainerSecurityContextResult',
+    'GetArtifactSpecContainerGroupContainerSecurityContextCapabilitiesResult',
+    'GetArtifactSpecContainerGroupContainerSecurityContextSeccompProfileResult',
+    'GetArtifactSpecContainerGroupContainerStartupProbeResult',
+    'GetArtifactSpecStorageResult',
+    'GetArtifactTagResult',
+    'GetArtifactsArtifactResult',
+    'GetArtifactsArtifactCreatorResult',
+    'GetArtifactsArtifactSpecResult',
+    'GetArtifactsArtifactSpecContainerGroupResult',
+    'GetArtifactsArtifactSpecContainerGroupContainerResult',
+    'GetArtifactsArtifactSpecContainerGroupContainerBuildResult',
+    'GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarResult',
+    'GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigResult',
+    'GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefResult',
+    'GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotResult',
+    'GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfileResult',
+    'GetArtifactsArtifactSpecContainerGroupContainerLivenessProbeResult',
+    'GetArtifactsArtifactSpecContainerGroupContainerReadinessProbeResult',
+    'GetArtifactsArtifactSpecContainerGroupContainerSecurityContextResult',
+    'GetArtifactsArtifactSpecContainerGroupContainerSecurityContextCapabilitiesResult',
+    'GetArtifactsArtifactSpecContainerGroupContainerSecurityContextSeccompProfileResult',
+    'GetArtifactsArtifactSpecContainerGroupContainerStartupProbeResult',
+    'GetArtifactsArtifactSpecStorageResult',
+    'GetArtifactsArtifactTagResult',
 ]
 
 @pulumi.output_type
@@ -6058,5 +6095,2167 @@ class WorkloadRuntimeContainerGroupContainerResourceAllocation(dict):
         RAM allocated. Accepts human-readable strings (e.g. `"8GB"`, `"512MB"`, `"4096Mi"`) or raw byte integers. 1000-based suffixes: KB, MB, GB, TB. 1024-based suffixes: Ki/KiB, Mi/MiB, Gi/GiB.
         """
         return pulumi.get(self, "memory")
+
+
+@pulumi.output_type
+class GetArtifactCreatorResult(dict):
+    def __init__(__self__, *,
+                 email: builtins.str,
+                 full_name: builtins.str,
+                 id: builtins.str,
+                 userhash: builtins.str,
+                 username: builtins.str):
+        """
+        :param builtins.str email: User email address.
+        :param builtins.str full_name: User's full name.
+        :param builtins.str id: User ID.
+        :param builtins.str userhash: User's gravatar hash.
+        :param builtins.str username: Username.
+        """
+        pulumi.set(__self__, "email", email)
+        pulumi.set(__self__, "full_name", full_name)
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "userhash", userhash)
+        pulumi.set(__self__, "username", username)
+
+    @property
+    @pulumi.getter
+    def email(self) -> builtins.str:
+        """
+        User email address.
+        """
+        return pulumi.get(self, "email")
+
+    @property
+    @pulumi.getter(name="fullName")
+    def full_name(self) -> builtins.str:
+        """
+        User's full name.
+        """
+        return pulumi.get(self, "full_name")
+
+    @property
+    @pulumi.getter
+    def id(self) -> builtins.str:
+        """
+        User ID.
+        """
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter
+    def userhash(self) -> builtins.str:
+        """
+        User's gravatar hash.
+        """
+        return pulumi.get(self, "userhash")
+
+    @property
+    @pulumi.getter
+    def username(self) -> builtins.str:
+        """
+        Username.
+        """
+        return pulumi.get(self, "username")
+
+
+@pulumi.output_type
+class GetArtifactSpecResult(dict):
+    def __init__(__self__, *,
+                 container_groups: Sequence['outputs.GetArtifactSpecContainerGroupResult'],
+                 storage: 'outputs.GetArtifactSpecStorageResult',
+                 template_id: builtins.str):
+        """
+        :param Sequence['GetArtifactSpecContainerGroupArgs'] container_groups: List of container groups.
+        :param 'GetArtifactSpecStorageArgs' storage: NIM model weight storage configuration.
+        :param builtins.str template_id: ID of the template used to create this NIM artifact.
+        """
+        pulumi.set(__self__, "container_groups", container_groups)
+        pulumi.set(__self__, "storage", storage)
+        pulumi.set(__self__, "template_id", template_id)
+
+    @property
+    @pulumi.getter(name="containerGroups")
+    def container_groups(self) -> Sequence['outputs.GetArtifactSpecContainerGroupResult']:
+        """
+        List of container groups.
+        """
+        return pulumi.get(self, "container_groups")
+
+    @property
+    @pulumi.getter
+    def storage(self) -> 'outputs.GetArtifactSpecStorageResult':
+        """
+        NIM model weight storage configuration.
+        """
+        return pulumi.get(self, "storage")
+
+    @property
+    @pulumi.getter(name="templateId")
+    def template_id(self) -> builtins.str:
+        """
+        ID of the template used to create this NIM artifact.
+        """
+        return pulumi.get(self, "template_id")
+
+
+@pulumi.output_type
+class GetArtifactSpecContainerGroupResult(dict):
+    def __init__(__self__, *,
+                 containers: Sequence['outputs.GetArtifactSpecContainerGroupContainerResult'],
+                 name: builtins.str):
+        """
+        :param Sequence['GetArtifactSpecContainerGroupContainerArgs'] containers: List of containers in this group.
+        :param builtins.str name: Name of the container group.
+        """
+        pulumi.set(__self__, "containers", containers)
+        pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def containers(self) -> Sequence['outputs.GetArtifactSpecContainerGroupContainerResult']:
+        """
+        List of containers in this group.
+        """
+        return pulumi.get(self, "containers")
+
+    @property
+    @pulumi.getter
+    def name(self) -> builtins.str:
+        """
+        Name of the container group.
+        """
+        return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class GetArtifactSpecContainerGroupContainerResult(dict):
+    def __init__(__self__, *,
+                 build: 'outputs.GetArtifactSpecContainerGroupContainerBuildResult',
+                 description: builtins.str,
+                 entrypoints: Sequence[builtins.str],
+                 environment_vars: Sequence['outputs.GetArtifactSpecContainerGroupContainerEnvironmentVarResult'],
+                 image_build_config: 'outputs.GetArtifactSpecContainerGroupContainerImageBuildConfigResult',
+                 image_uri: builtins.str,
+                 liveness_probe: 'outputs.GetArtifactSpecContainerGroupContainerLivenessProbeResult',
+                 name: builtins.str,
+                 port: builtins.int,
+                 primary: builtins.bool,
+                 readiness_probe: 'outputs.GetArtifactSpecContainerGroupContainerReadinessProbeResult',
+                 security_context: 'outputs.GetArtifactSpecContainerGroupContainerSecurityContextResult',
+                 startup_probe: 'outputs.GetArtifactSpecContainerGroupContainerStartupProbeResult'):
+        """
+        :param 'GetArtifactSpecContainerGroupContainerBuildArgs' build: Server-set image build metadata.
+        :param builtins.str description: Description of the container.
+        :param Sequence[builtins.str] entrypoints: Container entrypoint.
+        :param Sequence['GetArtifactSpecContainerGroupContainerEnvironmentVarArgs'] environment_vars: Environment variables for the container.
+        :param 'GetArtifactSpecContainerGroupContainerImageBuildConfigArgs' image_build_config: Configuration for server-side image builds from source code.
+        :param builtins.str image_uri: Docker image URI.
+        :param 'GetArtifactSpecContainerGroupContainerLivenessProbeArgs' liveness_probe: Container liveness check configuration.
+        :param builtins.str name: Name of the container.
+        :param builtins.int port: Container access port (1024-65535).
+        :param builtins.bool primary: Whether this is the primary container.
+        :param 'GetArtifactSpecContainerGroupContainerReadinessProbeArgs' readiness_probe: Container readiness check configuration.
+        :param 'GetArtifactSpecContainerGroupContainerSecurityContextArgs' security_context: Container security context.
+        :param 'GetArtifactSpecContainerGroupContainerStartupProbeArgs' startup_probe: Container startup check configuration.
+        """
+        pulumi.set(__self__, "build", build)
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "entrypoints", entrypoints)
+        pulumi.set(__self__, "environment_vars", environment_vars)
+        pulumi.set(__self__, "image_build_config", image_build_config)
+        pulumi.set(__self__, "image_uri", image_uri)
+        pulumi.set(__self__, "liveness_probe", liveness_probe)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "port", port)
+        pulumi.set(__self__, "primary", primary)
+        pulumi.set(__self__, "readiness_probe", readiness_probe)
+        pulumi.set(__self__, "security_context", security_context)
+        pulumi.set(__self__, "startup_probe", startup_probe)
+
+    @property
+    @pulumi.getter
+    def build(self) -> 'outputs.GetArtifactSpecContainerGroupContainerBuildResult':
+        """
+        Server-set image build metadata.
+        """
+        return pulumi.get(self, "build")
+
+    @property
+    @pulumi.getter
+    def description(self) -> builtins.str:
+        """
+        Description of the container.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter
+    def entrypoints(self) -> Sequence[builtins.str]:
+        """
+        Container entrypoint.
+        """
+        return pulumi.get(self, "entrypoints")
+
+    @property
+    @pulumi.getter(name="environmentVars")
+    def environment_vars(self) -> Sequence['outputs.GetArtifactSpecContainerGroupContainerEnvironmentVarResult']:
+        """
+        Environment variables for the container.
+        """
+        return pulumi.get(self, "environment_vars")
+
+    @property
+    @pulumi.getter(name="imageBuildConfig")
+    def image_build_config(self) -> 'outputs.GetArtifactSpecContainerGroupContainerImageBuildConfigResult':
+        """
+        Configuration for server-side image builds from source code.
+        """
+        return pulumi.get(self, "image_build_config")
+
+    @property
+    @pulumi.getter(name="imageUri")
+    def image_uri(self) -> builtins.str:
+        """
+        Docker image URI.
+        """
+        return pulumi.get(self, "image_uri")
+
+    @property
+    @pulumi.getter(name="livenessProbe")
+    def liveness_probe(self) -> 'outputs.GetArtifactSpecContainerGroupContainerLivenessProbeResult':
+        """
+        Container liveness check configuration.
+        """
+        return pulumi.get(self, "liveness_probe")
+
+    @property
+    @pulumi.getter
+    def name(self) -> builtins.str:
+        """
+        Name of the container.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def port(self) -> builtins.int:
+        """
+        Container access port (1024-65535).
+        """
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter
+    def primary(self) -> builtins.bool:
+        """
+        Whether this is the primary container.
+        """
+        return pulumi.get(self, "primary")
+
+    @property
+    @pulumi.getter(name="readinessProbe")
+    def readiness_probe(self) -> 'outputs.GetArtifactSpecContainerGroupContainerReadinessProbeResult':
+        """
+        Container readiness check configuration.
+        """
+        return pulumi.get(self, "readiness_probe")
+
+    @property
+    @pulumi.getter(name="securityContext")
+    def security_context(self) -> 'outputs.GetArtifactSpecContainerGroupContainerSecurityContextResult':
+        """
+        Container security context.
+        """
+        return pulumi.get(self, "security_context")
+
+    @property
+    @pulumi.getter(name="startupProbe")
+    def startup_probe(self) -> 'outputs.GetArtifactSpecContainerGroupContainerStartupProbeResult':
+        """
+        Container startup check configuration.
+        """
+        return pulumi.get(self, "startup_probe")
+
+
+@pulumi.output_type
+class GetArtifactSpecContainerGroupContainerBuildResult(dict):
+    def __init__(__self__, *,
+                 artifact_image_build_id: builtins.str,
+                 created_at: builtins.str,
+                 status: builtins.str):
+        """
+        :param builtins.str artifact_image_build_id: Artifact image build ID.
+        :param builtins.str created_at: Build creation timestamp (UTC).
+        :param builtins.str status: Image build status at submit time.
+        """
+        pulumi.set(__self__, "artifact_image_build_id", artifact_image_build_id)
+        pulumi.set(__self__, "created_at", created_at)
+        pulumi.set(__self__, "status", status)
+
+    @property
+    @pulumi.getter(name="artifactImageBuildId")
+    def artifact_image_build_id(self) -> builtins.str:
+        """
+        Artifact image build ID.
+        """
+        return pulumi.get(self, "artifact_image_build_id")
+
+    @property
+    @pulumi.getter(name="createdAt")
+    def created_at(self) -> builtins.str:
+        """
+        Build creation timestamp (UTC).
+        """
+        return pulumi.get(self, "created_at")
+
+    @property
+    @pulumi.getter
+    def status(self) -> builtins.str:
+        """
+        Image build status at submit time.
+        """
+        return pulumi.get(self, "status")
+
+
+@pulumi.output_type
+class GetArtifactSpecContainerGroupContainerEnvironmentVarResult(dict):
+    def __init__(__self__, *,
+                 dr_credential_id: builtins.str,
+                 key: builtins.str,
+                 name: builtins.str,
+                 source: builtins.str,
+                 value: builtins.str):
+        """
+        :param builtins.str dr_credential_id: DataRobot credential ID when source is "dr-credential".
+        :param builtins.str key: Key within the credential when source is "dr-credential".
+        :param builtins.str name: Name of the environment variable.
+        :param builtins.str source: Source type: "string" for plain text values, "dr-credential" for DataRobot credentials.
+        :param builtins.str value: Value of the environment variable when source is "string".
+        """
+        pulumi.set(__self__, "dr_credential_id", dr_credential_id)
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "source", source)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter(name="drCredentialId")
+    def dr_credential_id(self) -> builtins.str:
+        """
+        DataRobot credential ID when source is "dr-credential".
+        """
+        return pulumi.get(self, "dr_credential_id")
+
+    @property
+    @pulumi.getter
+    def key(self) -> builtins.str:
+        """
+        Key within the credential when source is "dr-credential".
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def name(self) -> builtins.str:
+        """
+        Name of the environment variable.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def source(self) -> builtins.str:
+        """
+        Source type: "string" for plain text values, "dr-credential" for DataRobot credentials.
+        """
+        return pulumi.get(self, "source")
+
+    @property
+    @pulumi.getter
+    def value(self) -> builtins.str:
+        """
+        Value of the environment variable when source is "string".
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class GetArtifactSpecContainerGroupContainerImageBuildConfigResult(dict):
+    def __init__(__self__, *,
+                 code_ref: 'outputs.GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefResult',
+                 dockerfile: 'outputs.GetArtifactSpecContainerGroupContainerImageBuildConfigDockerfileResult'):
+        """
+        :param 'GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefArgs' code_ref: Reference to source code in the DataRobot catalog.
+        :param 'GetArtifactSpecContainerGroupContainerImageBuildConfigDockerfileArgs' dockerfile: Dockerfile configuration for image builds.
+        """
+        pulumi.set(__self__, "code_ref", code_ref)
+        pulumi.set(__self__, "dockerfile", dockerfile)
+
+    @property
+    @pulumi.getter(name="codeRef")
+    def code_ref(self) -> 'outputs.GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefResult':
+        """
+        Reference to source code in the DataRobot catalog.
+        """
+        return pulumi.get(self, "code_ref")
+
+    @property
+    @pulumi.getter
+    def dockerfile(self) -> 'outputs.GetArtifactSpecContainerGroupContainerImageBuildConfigDockerfileResult':
+        """
+        Dockerfile configuration for image builds.
+        """
+        return pulumi.get(self, "dockerfile")
+
+
+@pulumi.output_type
+class GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefResult(dict):
+    def __init__(__self__, *,
+                 datarobot: 'outputs.GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotResult',
+                 provider: builtins.str,
+                 type: builtins.str):
+        """
+        :param 'GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotArgs' datarobot: DataRobot catalog reference.
+        :param builtins.str provider: Code provider.
+        :param builtins.str type: Code reference type.
+        """
+        pulumi.set(__self__, "datarobot", datarobot)
+        pulumi.set(__self__, "provider", provider)
+        pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter
+    def datarobot(self) -> 'outputs.GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotResult':
+        """
+        DataRobot catalog reference.
+        """
+        return pulumi.get(self, "datarobot")
+
+    @property
+    @pulumi.getter
+    def provider(self) -> builtins.str:
+        """
+        Code provider.
+        """
+        return pulumi.get(self, "provider")
+
+    @property
+    @pulumi.getter
+    def type(self) -> builtins.str:
+        """
+        Code reference type.
+        """
+        return pulumi.get(self, "type")
+
+
+@pulumi.output_type
+class GetArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotResult(dict):
+    def __init__(__self__, *,
+                 catalog_id: builtins.str,
+                 catalog_version_id: builtins.str):
+        """
+        :param builtins.str catalog_id: Catalog ID.
+        :param builtins.str catalog_version_id: Catalog version ID.
+        """
+        pulumi.set(__self__, "catalog_id", catalog_id)
+        pulumi.set(__self__, "catalog_version_id", catalog_version_id)
+
+    @property
+    @pulumi.getter(name="catalogId")
+    def catalog_id(self) -> builtins.str:
+        """
+        Catalog ID.
+        """
+        return pulumi.get(self, "catalog_id")
+
+    @property
+    @pulumi.getter(name="catalogVersionId")
+    def catalog_version_id(self) -> builtins.str:
+        """
+        Catalog version ID.
+        """
+        return pulumi.get(self, "catalog_version_id")
+
+
+@pulumi.output_type
+class GetArtifactSpecContainerGroupContainerImageBuildConfigDockerfileResult(dict):
+    def __init__(__self__, *,
+                 entrypoints: Sequence[builtins.str],
+                 execution_environment_id: builtins.str,
+                 execution_environment_version_id: builtins.str,
+                 path: builtins.str,
+                 source: builtins.str):
+        """
+        :param Sequence[builtins.str] entrypoints: Entrypoint when source is `generated`.
+        :param builtins.str execution_environment_id: Execution environment ID when source is `generated`.
+        :param builtins.str execution_environment_version_id: Execution environment version ID when source is `generated`.
+        :param builtins.str path: Relative path to the Dockerfile when source is `provided`.
+        :param builtins.str source: Dockerfile source: `provided` or `generated`.
+        """
+        pulumi.set(__self__, "entrypoints", entrypoints)
+        pulumi.set(__self__, "execution_environment_id", execution_environment_id)
+        pulumi.set(__self__, "execution_environment_version_id", execution_environment_version_id)
+        pulumi.set(__self__, "path", path)
+        pulumi.set(__self__, "source", source)
+
+    @property
+    @pulumi.getter
+    def entrypoints(self) -> Sequence[builtins.str]:
+        """
+        Entrypoint when source is `generated`.
+        """
+        return pulumi.get(self, "entrypoints")
+
+    @property
+    @pulumi.getter(name="executionEnvironmentId")
+    def execution_environment_id(self) -> builtins.str:
+        """
+        Execution environment ID when source is `generated`.
+        """
+        return pulumi.get(self, "execution_environment_id")
+
+    @property
+    @pulumi.getter(name="executionEnvironmentVersionId")
+    def execution_environment_version_id(self) -> builtins.str:
+        """
+        Execution environment version ID when source is `generated`.
+        """
+        return pulumi.get(self, "execution_environment_version_id")
+
+    @property
+    @pulumi.getter
+    def path(self) -> builtins.str:
+        """
+        Relative path to the Dockerfile when source is `provided`.
+        """
+        return pulumi.get(self, "path")
+
+    @property
+    @pulumi.getter
+    def source(self) -> builtins.str:
+        """
+        Dockerfile source: `provided` or `generated`.
+        """
+        return pulumi.get(self, "source")
+
+
+@pulumi.output_type
+class GetArtifactSpecContainerGroupContainerLivenessProbeResult(dict):
+    def __init__(__self__, *,
+                 failure_threshold: builtins.int,
+                 host: builtins.str,
+                 initial_delay_seconds: builtins.int,
+                 path: builtins.str,
+                 period_seconds: builtins.int,
+                 port: builtins.int,
+                 scheme: builtins.str,
+                 timeout_seconds: builtins.int):
+        """
+        :param builtins.int failure_threshold: Minimum consecutive failures for the probe to be considered failed.
+        :param builtins.str host: Host name to connect to, defaults to the pod IP.
+        :param builtins.int initial_delay_seconds: Number of seconds to wait before the first probe is executed.
+        :param builtins.str path: URL path to query for health check.
+        :param builtins.int period_seconds: How often (in seconds) to perform the probe.
+        :param builtins.int port: Port number to access on the container.
+        :param builtins.str scheme: Scheme to use for connecting to the host (HTTP or HTTPS).
+        :param builtins.int timeout_seconds: Number of seconds after which the probe times out.
+        """
+        pulumi.set(__self__, "failure_threshold", failure_threshold)
+        pulumi.set(__self__, "host", host)
+        pulumi.set(__self__, "initial_delay_seconds", initial_delay_seconds)
+        pulumi.set(__self__, "path", path)
+        pulumi.set(__self__, "period_seconds", period_seconds)
+        pulumi.set(__self__, "port", port)
+        pulumi.set(__self__, "scheme", scheme)
+        pulumi.set(__self__, "timeout_seconds", timeout_seconds)
+
+    @property
+    @pulumi.getter(name="failureThreshold")
+    def failure_threshold(self) -> builtins.int:
+        """
+        Minimum consecutive failures for the probe to be considered failed.
+        """
+        return pulumi.get(self, "failure_threshold")
+
+    @property
+    @pulumi.getter
+    def host(self) -> builtins.str:
+        """
+        Host name to connect to, defaults to the pod IP.
+        """
+        return pulumi.get(self, "host")
+
+    @property
+    @pulumi.getter(name="initialDelaySeconds")
+    def initial_delay_seconds(self) -> builtins.int:
+        """
+        Number of seconds to wait before the first probe is executed.
+        """
+        return pulumi.get(self, "initial_delay_seconds")
+
+    @property
+    @pulumi.getter
+    def path(self) -> builtins.str:
+        """
+        URL path to query for health check.
+        """
+        return pulumi.get(self, "path")
+
+    @property
+    @pulumi.getter(name="periodSeconds")
+    def period_seconds(self) -> builtins.int:
+        """
+        How often (in seconds) to perform the probe.
+        """
+        return pulumi.get(self, "period_seconds")
+
+    @property
+    @pulumi.getter
+    def port(self) -> builtins.int:
+        """
+        Port number to access on the container.
+        """
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter
+    def scheme(self) -> builtins.str:
+        """
+        Scheme to use for connecting to the host (HTTP or HTTPS).
+        """
+        return pulumi.get(self, "scheme")
+
+    @property
+    @pulumi.getter(name="timeoutSeconds")
+    def timeout_seconds(self) -> builtins.int:
+        """
+        Number of seconds after which the probe times out.
+        """
+        return pulumi.get(self, "timeout_seconds")
+
+
+@pulumi.output_type
+class GetArtifactSpecContainerGroupContainerReadinessProbeResult(dict):
+    def __init__(__self__, *,
+                 failure_threshold: builtins.int,
+                 host: builtins.str,
+                 initial_delay_seconds: builtins.int,
+                 path: builtins.str,
+                 period_seconds: builtins.int,
+                 port: builtins.int,
+                 scheme: builtins.str,
+                 timeout_seconds: builtins.int):
+        """
+        :param builtins.int failure_threshold: Minimum consecutive failures for the probe to be considered failed.
+        :param builtins.str host: Host name to connect to, defaults to the pod IP.
+        :param builtins.int initial_delay_seconds: Number of seconds to wait before the first probe is executed.
+        :param builtins.str path: URL path to query for health check.
+        :param builtins.int period_seconds: How often (in seconds) to perform the probe.
+        :param builtins.int port: Port number to access on the container.
+        :param builtins.str scheme: Scheme to use for connecting to the host (HTTP or HTTPS).
+        :param builtins.int timeout_seconds: Number of seconds after which the probe times out.
+        """
+        pulumi.set(__self__, "failure_threshold", failure_threshold)
+        pulumi.set(__self__, "host", host)
+        pulumi.set(__self__, "initial_delay_seconds", initial_delay_seconds)
+        pulumi.set(__self__, "path", path)
+        pulumi.set(__self__, "period_seconds", period_seconds)
+        pulumi.set(__self__, "port", port)
+        pulumi.set(__self__, "scheme", scheme)
+        pulumi.set(__self__, "timeout_seconds", timeout_seconds)
+
+    @property
+    @pulumi.getter(name="failureThreshold")
+    def failure_threshold(self) -> builtins.int:
+        """
+        Minimum consecutive failures for the probe to be considered failed.
+        """
+        return pulumi.get(self, "failure_threshold")
+
+    @property
+    @pulumi.getter
+    def host(self) -> builtins.str:
+        """
+        Host name to connect to, defaults to the pod IP.
+        """
+        return pulumi.get(self, "host")
+
+    @property
+    @pulumi.getter(name="initialDelaySeconds")
+    def initial_delay_seconds(self) -> builtins.int:
+        """
+        Number of seconds to wait before the first probe is executed.
+        """
+        return pulumi.get(self, "initial_delay_seconds")
+
+    @property
+    @pulumi.getter
+    def path(self) -> builtins.str:
+        """
+        URL path to query for health check.
+        """
+        return pulumi.get(self, "path")
+
+    @property
+    @pulumi.getter(name="periodSeconds")
+    def period_seconds(self) -> builtins.int:
+        """
+        How often (in seconds) to perform the probe.
+        """
+        return pulumi.get(self, "period_seconds")
+
+    @property
+    @pulumi.getter
+    def port(self) -> builtins.int:
+        """
+        Port number to access on the container.
+        """
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter
+    def scheme(self) -> builtins.str:
+        """
+        Scheme to use for connecting to the host (HTTP or HTTPS).
+        """
+        return pulumi.get(self, "scheme")
+
+    @property
+    @pulumi.getter(name="timeoutSeconds")
+    def timeout_seconds(self) -> builtins.int:
+        """
+        Number of seconds after which the probe times out.
+        """
+        return pulumi.get(self, "timeout_seconds")
+
+
+@pulumi.output_type
+class GetArtifactSpecContainerGroupContainerSecurityContextResult(dict):
+    def __init__(__self__, *,
+                 allow_privilege_escalation: builtins.bool,
+                 capabilities: 'outputs.GetArtifactSpecContainerGroupContainerSecurityContextCapabilitiesResult',
+                 read_only_root_filesystem: builtins.bool,
+                 seccomp_profile: 'outputs.GetArtifactSpecContainerGroupContainerSecurityContextSeccompProfileResult'):
+        """
+        :param builtins.bool allow_privilege_escalation: Whether a process can gain more privileges than its parent.
+        :param 'GetArtifactSpecContainerGroupContainerSecurityContextCapabilitiesArgs' capabilities: Linux capabilities to add or drop.
+        :param builtins.bool read_only_root_filesystem: Whether the root filesystem is read-only.
+        :param 'GetArtifactSpecContainerGroupContainerSecurityContextSeccompProfileArgs' seccomp_profile: Seccomp profile for the container.
+        """
+        pulumi.set(__self__, "allow_privilege_escalation", allow_privilege_escalation)
+        pulumi.set(__self__, "capabilities", capabilities)
+        pulumi.set(__self__, "read_only_root_filesystem", read_only_root_filesystem)
+        pulumi.set(__self__, "seccomp_profile", seccomp_profile)
+
+    @property
+    @pulumi.getter(name="allowPrivilegeEscalation")
+    def allow_privilege_escalation(self) -> builtins.bool:
+        """
+        Whether a process can gain more privileges than its parent.
+        """
+        return pulumi.get(self, "allow_privilege_escalation")
+
+    @property
+    @pulumi.getter
+    def capabilities(self) -> 'outputs.GetArtifactSpecContainerGroupContainerSecurityContextCapabilitiesResult':
+        """
+        Linux capabilities to add or drop.
+        """
+        return pulumi.get(self, "capabilities")
+
+    @property
+    @pulumi.getter(name="readOnlyRootFilesystem")
+    def read_only_root_filesystem(self) -> builtins.bool:
+        """
+        Whether the root filesystem is read-only.
+        """
+        return pulumi.get(self, "read_only_root_filesystem")
+
+    @property
+    @pulumi.getter(name="seccompProfile")
+    def seccomp_profile(self) -> 'outputs.GetArtifactSpecContainerGroupContainerSecurityContextSeccompProfileResult':
+        """
+        Seccomp profile for the container.
+        """
+        return pulumi.get(self, "seccomp_profile")
+
+
+@pulumi.output_type
+class GetArtifactSpecContainerGroupContainerSecurityContextCapabilitiesResult(dict):
+    def __init__(__self__, *,
+                 adds: Sequence[builtins.str],
+                 drops: Sequence[builtins.str]):
+        """
+        :param Sequence[builtins.str] adds: Capabilities to add.
+        :param Sequence[builtins.str] drops: Capabilities to drop.
+        """
+        pulumi.set(__self__, "adds", adds)
+        pulumi.set(__self__, "drops", drops)
+
+    @property
+    @pulumi.getter
+    def adds(self) -> Sequence[builtins.str]:
+        """
+        Capabilities to add.
+        """
+        return pulumi.get(self, "adds")
+
+    @property
+    @pulumi.getter
+    def drops(self) -> Sequence[builtins.str]:
+        """
+        Capabilities to drop.
+        """
+        return pulumi.get(self, "drops")
+
+
+@pulumi.output_type
+class GetArtifactSpecContainerGroupContainerSecurityContextSeccompProfileResult(dict):
+    def __init__(__self__, *,
+                 localhost_profile: builtins.str,
+                 type: builtins.str):
+        """
+        :param builtins.str localhost_profile: Path to a seccomp profile on the node when type is Localhost.
+        :param builtins.str type: Seccomp profile type.
+        """
+        pulumi.set(__self__, "localhost_profile", localhost_profile)
+        pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter(name="localhostProfile")
+    def localhost_profile(self) -> builtins.str:
+        """
+        Path to a seccomp profile on the node when type is Localhost.
+        """
+        return pulumi.get(self, "localhost_profile")
+
+    @property
+    @pulumi.getter
+    def type(self) -> builtins.str:
+        """
+        Seccomp profile type.
+        """
+        return pulumi.get(self, "type")
+
+
+@pulumi.output_type
+class GetArtifactSpecContainerGroupContainerStartupProbeResult(dict):
+    def __init__(__self__, *,
+                 failure_threshold: builtins.int,
+                 host: builtins.str,
+                 initial_delay_seconds: builtins.int,
+                 path: builtins.str,
+                 period_seconds: builtins.int,
+                 port: builtins.int,
+                 scheme: builtins.str,
+                 timeout_seconds: builtins.int):
+        """
+        :param builtins.int failure_threshold: Minimum consecutive failures for the probe to be considered failed.
+        :param builtins.str host: Host name to connect to, defaults to the pod IP.
+        :param builtins.int initial_delay_seconds: Number of seconds to wait before the first probe is executed.
+        :param builtins.str path: URL path to query for health check.
+        :param builtins.int period_seconds: How often (in seconds) to perform the probe.
+        :param builtins.int port: Port number to access on the container.
+        :param builtins.str scheme: Scheme to use for connecting to the host (HTTP or HTTPS).
+        :param builtins.int timeout_seconds: Number of seconds after which the probe times out.
+        """
+        pulumi.set(__self__, "failure_threshold", failure_threshold)
+        pulumi.set(__self__, "host", host)
+        pulumi.set(__self__, "initial_delay_seconds", initial_delay_seconds)
+        pulumi.set(__self__, "path", path)
+        pulumi.set(__self__, "period_seconds", period_seconds)
+        pulumi.set(__self__, "port", port)
+        pulumi.set(__self__, "scheme", scheme)
+        pulumi.set(__self__, "timeout_seconds", timeout_seconds)
+
+    @property
+    @pulumi.getter(name="failureThreshold")
+    def failure_threshold(self) -> builtins.int:
+        """
+        Minimum consecutive failures for the probe to be considered failed.
+        """
+        return pulumi.get(self, "failure_threshold")
+
+    @property
+    @pulumi.getter
+    def host(self) -> builtins.str:
+        """
+        Host name to connect to, defaults to the pod IP.
+        """
+        return pulumi.get(self, "host")
+
+    @property
+    @pulumi.getter(name="initialDelaySeconds")
+    def initial_delay_seconds(self) -> builtins.int:
+        """
+        Number of seconds to wait before the first probe is executed.
+        """
+        return pulumi.get(self, "initial_delay_seconds")
+
+    @property
+    @pulumi.getter
+    def path(self) -> builtins.str:
+        """
+        URL path to query for health check.
+        """
+        return pulumi.get(self, "path")
+
+    @property
+    @pulumi.getter(name="periodSeconds")
+    def period_seconds(self) -> builtins.int:
+        """
+        How often (in seconds) to perform the probe.
+        """
+        return pulumi.get(self, "period_seconds")
+
+    @property
+    @pulumi.getter
+    def port(self) -> builtins.int:
+        """
+        Port number to access on the container.
+        """
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter
+    def scheme(self) -> builtins.str:
+        """
+        Scheme to use for connecting to the host (HTTP or HTTPS).
+        """
+        return pulumi.get(self, "scheme")
+
+    @property
+    @pulumi.getter(name="timeoutSeconds")
+    def timeout_seconds(self) -> builtins.int:
+        """
+        Number of seconds after which the probe times out.
+        """
+        return pulumi.get(self, "timeout_seconds")
+
+
+@pulumi.output_type
+class GetArtifactSpecStorageResult(dict):
+    def __init__(__self__, *,
+                 mode: builtins.str,
+                 pvc_size: builtins.str):
+        """
+        :param builtins.str mode: Storage mode: `dedicatedPvc` or `nimCache`.
+        :param builtins.str pvc_size: PVC size for dedicated storage (e.g. `150Gi`).
+        """
+        pulumi.set(__self__, "mode", mode)
+        pulumi.set(__self__, "pvc_size", pvc_size)
+
+    @property
+    @pulumi.getter
+    def mode(self) -> builtins.str:
+        """
+        Storage mode: `dedicatedPvc` or `nimCache`.
+        """
+        return pulumi.get(self, "mode")
+
+    @property
+    @pulumi.getter(name="pvcSize")
+    def pvc_size(self) -> builtins.str:
+        """
+        PVC size for dedicated storage (e.g. `150Gi`).
+        """
+        return pulumi.get(self, "pvc_size")
+
+
+@pulumi.output_type
+class GetArtifactTagResult(dict):
+    def __init__(__self__, *,
+                 id: builtins.str,
+                 name: builtins.str,
+                 value: builtins.str):
+        """
+        :param builtins.str id: Tag ID.
+        :param builtins.str name: Tag name.
+        :param builtins.str value: Tag value.
+        """
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def id(self) -> builtins.str:
+        """
+        Tag ID.
+        """
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter
+    def name(self) -> builtins.str:
+        """
+        Tag name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def value(self) -> builtins.str:
+        """
+        Tag value.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class GetArtifactsArtifactResult(dict):
+    def __init__(__self__, *,
+                 artifact_id: builtins.str,
+                 artifact_repository_id: builtins.str,
+                 created_at: builtins.str,
+                 creator: 'outputs.GetArtifactsArtifactCreatorResult',
+                 description: builtins.str,
+                 name: builtins.str,
+                 permissions: Sequence[builtins.str],
+                 spec: 'outputs.GetArtifactsArtifactSpecResult',
+                 status: builtins.str,
+                 tags: Sequence['outputs.GetArtifactsArtifactTagResult'],
+                 type: builtins.str,
+                 updated_at: builtins.str,
+                 version: builtins.int):
+        """
+        :param builtins.str artifact_id: The artifact version ID.
+        :param builtins.str artifact_repository_id: ID of the artifact repository for versioning.
+        :param builtins.str created_at: Timestamp of when the artifact was created.
+        :param 'GetArtifactsArtifactCreatorArgs' creator: User who created the artifact.
+        :param builtins.str description: The description of the Artifact.
+        :param builtins.str name: The name of the Artifact.
+        :param Sequence[builtins.str] permissions: Effective repository-level permissions for the authenticated user.
+        :param 'GetArtifactsArtifactSpecArgs' spec: The artifact specification containing container group definitions.
+        :param builtins.str status: Artifact status: `draft` or `locked`.
+        :param Sequence['GetArtifactsArtifactTagArgs'] tags: Tags associated with this artifact.
+        :param builtins.str type: The artifact type: `service` or `nim`.
+        :param builtins.str updated_at: Timestamp of when the artifact was last updated.
+        :param builtins.int version: Version number of the artifact. Set only for locked artifacts.
+        """
+        pulumi.set(__self__, "artifact_id", artifact_id)
+        pulumi.set(__self__, "artifact_repository_id", artifact_repository_id)
+        pulumi.set(__self__, "created_at", created_at)
+        pulumi.set(__self__, "creator", creator)
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "permissions", permissions)
+        pulumi.set(__self__, "spec", spec)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "tags", tags)
+        pulumi.set(__self__, "type", type)
+        pulumi.set(__self__, "updated_at", updated_at)
+        pulumi.set(__self__, "version", version)
+
+    @property
+    @pulumi.getter(name="artifactId")
+    def artifact_id(self) -> builtins.str:
+        """
+        The artifact version ID.
+        """
+        return pulumi.get(self, "artifact_id")
+
+    @property
+    @pulumi.getter(name="artifactRepositoryId")
+    def artifact_repository_id(self) -> builtins.str:
+        """
+        ID of the artifact repository for versioning.
+        """
+        return pulumi.get(self, "artifact_repository_id")
+
+    @property
+    @pulumi.getter(name="createdAt")
+    def created_at(self) -> builtins.str:
+        """
+        Timestamp of when the artifact was created.
+        """
+        return pulumi.get(self, "created_at")
+
+    @property
+    @pulumi.getter
+    def creator(self) -> 'outputs.GetArtifactsArtifactCreatorResult':
+        """
+        User who created the artifact.
+        """
+        return pulumi.get(self, "creator")
+
+    @property
+    @pulumi.getter
+    def description(self) -> builtins.str:
+        """
+        The description of the Artifact.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter
+    def name(self) -> builtins.str:
+        """
+        The name of the Artifact.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def permissions(self) -> Sequence[builtins.str]:
+        """
+        Effective repository-level permissions for the authenticated user.
+        """
+        return pulumi.get(self, "permissions")
+
+    @property
+    @pulumi.getter
+    def spec(self) -> 'outputs.GetArtifactsArtifactSpecResult':
+        """
+        The artifact specification containing container group definitions.
+        """
+        return pulumi.get(self, "spec")
+
+    @property
+    @pulumi.getter
+    def status(self) -> builtins.str:
+        """
+        Artifact status: `draft` or `locked`.
+        """
+        return pulumi.get(self, "status")
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Sequence['outputs.GetArtifactsArtifactTagResult']:
+        """
+        Tags associated with this artifact.
+        """
+        return pulumi.get(self, "tags")
+
+    @property
+    @pulumi.getter
+    def type(self) -> builtins.str:
+        """
+        The artifact type: `service` or `nim`.
+        """
+        return pulumi.get(self, "type")
+
+    @property
+    @pulumi.getter(name="updatedAt")
+    def updated_at(self) -> builtins.str:
+        """
+        Timestamp of when the artifact was last updated.
+        """
+        return pulumi.get(self, "updated_at")
+
+    @property
+    @pulumi.getter
+    def version(self) -> builtins.int:
+        """
+        Version number of the artifact. Set only for locked artifacts.
+        """
+        return pulumi.get(self, "version")
+
+
+@pulumi.output_type
+class GetArtifactsArtifactCreatorResult(dict):
+    def __init__(__self__, *,
+                 email: builtins.str,
+                 full_name: builtins.str,
+                 id: builtins.str,
+                 userhash: builtins.str,
+                 username: builtins.str):
+        """
+        :param builtins.str email: User email address.
+        :param builtins.str full_name: User's full name.
+        :param builtins.str id: User ID.
+        :param builtins.str userhash: User's gravatar hash.
+        :param builtins.str username: Username.
+        """
+        pulumi.set(__self__, "email", email)
+        pulumi.set(__self__, "full_name", full_name)
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "userhash", userhash)
+        pulumi.set(__self__, "username", username)
+
+    @property
+    @pulumi.getter
+    def email(self) -> builtins.str:
+        """
+        User email address.
+        """
+        return pulumi.get(self, "email")
+
+    @property
+    @pulumi.getter(name="fullName")
+    def full_name(self) -> builtins.str:
+        """
+        User's full name.
+        """
+        return pulumi.get(self, "full_name")
+
+    @property
+    @pulumi.getter
+    def id(self) -> builtins.str:
+        """
+        User ID.
+        """
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter
+    def userhash(self) -> builtins.str:
+        """
+        User's gravatar hash.
+        """
+        return pulumi.get(self, "userhash")
+
+    @property
+    @pulumi.getter
+    def username(self) -> builtins.str:
+        """
+        Username.
+        """
+        return pulumi.get(self, "username")
+
+
+@pulumi.output_type
+class GetArtifactsArtifactSpecResult(dict):
+    def __init__(__self__, *,
+                 container_groups: Sequence['outputs.GetArtifactsArtifactSpecContainerGroupResult'],
+                 storage: 'outputs.GetArtifactsArtifactSpecStorageResult',
+                 template_id: builtins.str):
+        """
+        :param Sequence['GetArtifactsArtifactSpecContainerGroupArgs'] container_groups: List of container groups.
+        :param 'GetArtifactsArtifactSpecStorageArgs' storage: NIM model weight storage configuration.
+        :param builtins.str template_id: ID of the template used to create this NIM artifact.
+        """
+        pulumi.set(__self__, "container_groups", container_groups)
+        pulumi.set(__self__, "storage", storage)
+        pulumi.set(__self__, "template_id", template_id)
+
+    @property
+    @pulumi.getter(name="containerGroups")
+    def container_groups(self) -> Sequence['outputs.GetArtifactsArtifactSpecContainerGroupResult']:
+        """
+        List of container groups.
+        """
+        return pulumi.get(self, "container_groups")
+
+    @property
+    @pulumi.getter
+    def storage(self) -> 'outputs.GetArtifactsArtifactSpecStorageResult':
+        """
+        NIM model weight storage configuration.
+        """
+        return pulumi.get(self, "storage")
+
+    @property
+    @pulumi.getter(name="templateId")
+    def template_id(self) -> builtins.str:
+        """
+        ID of the template used to create this NIM artifact.
+        """
+        return pulumi.get(self, "template_id")
+
+
+@pulumi.output_type
+class GetArtifactsArtifactSpecContainerGroupResult(dict):
+    def __init__(__self__, *,
+                 containers: Sequence['outputs.GetArtifactsArtifactSpecContainerGroupContainerResult'],
+                 name: builtins.str):
+        """
+        :param Sequence['GetArtifactsArtifactSpecContainerGroupContainerArgs'] containers: List of containers in this group.
+        :param builtins.str name: Name of the container group.
+        """
+        pulumi.set(__self__, "containers", containers)
+        pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def containers(self) -> Sequence['outputs.GetArtifactsArtifactSpecContainerGroupContainerResult']:
+        """
+        List of containers in this group.
+        """
+        return pulumi.get(self, "containers")
+
+    @property
+    @pulumi.getter
+    def name(self) -> builtins.str:
+        """
+        Name of the container group.
+        """
+        return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class GetArtifactsArtifactSpecContainerGroupContainerResult(dict):
+    def __init__(__self__, *,
+                 build: 'outputs.GetArtifactsArtifactSpecContainerGroupContainerBuildResult',
+                 description: builtins.str,
+                 entrypoints: Sequence[builtins.str],
+                 environment_vars: Sequence['outputs.GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarResult'],
+                 image_build_config: 'outputs.GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigResult',
+                 image_uri: builtins.str,
+                 liveness_probe: 'outputs.GetArtifactsArtifactSpecContainerGroupContainerLivenessProbeResult',
+                 name: builtins.str,
+                 port: builtins.int,
+                 primary: builtins.bool,
+                 readiness_probe: 'outputs.GetArtifactsArtifactSpecContainerGroupContainerReadinessProbeResult',
+                 security_context: 'outputs.GetArtifactsArtifactSpecContainerGroupContainerSecurityContextResult',
+                 startup_probe: 'outputs.GetArtifactsArtifactSpecContainerGroupContainerStartupProbeResult'):
+        """
+        :param 'GetArtifactsArtifactSpecContainerGroupContainerBuildArgs' build: Server-set image build metadata.
+        :param builtins.str description: Description of the container.
+        :param Sequence[builtins.str] entrypoints: Container entrypoint.
+        :param Sequence['GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarArgs'] environment_vars: Environment variables for the container.
+        :param 'GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigArgs' image_build_config: Configuration for server-side image builds from source code.
+        :param builtins.str image_uri: Docker image URI.
+        :param 'GetArtifactsArtifactSpecContainerGroupContainerLivenessProbeArgs' liveness_probe: Container liveness check configuration.
+        :param builtins.str name: Name of the container.
+        :param builtins.int port: Container access port (1024-65535).
+        :param builtins.bool primary: Whether this is the primary container.
+        :param 'GetArtifactsArtifactSpecContainerGroupContainerReadinessProbeArgs' readiness_probe: Container readiness check configuration.
+        :param 'GetArtifactsArtifactSpecContainerGroupContainerSecurityContextArgs' security_context: Container security context.
+        :param 'GetArtifactsArtifactSpecContainerGroupContainerStartupProbeArgs' startup_probe: Container startup check configuration.
+        """
+        pulumi.set(__self__, "build", build)
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "entrypoints", entrypoints)
+        pulumi.set(__self__, "environment_vars", environment_vars)
+        pulumi.set(__self__, "image_build_config", image_build_config)
+        pulumi.set(__self__, "image_uri", image_uri)
+        pulumi.set(__self__, "liveness_probe", liveness_probe)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "port", port)
+        pulumi.set(__self__, "primary", primary)
+        pulumi.set(__self__, "readiness_probe", readiness_probe)
+        pulumi.set(__self__, "security_context", security_context)
+        pulumi.set(__self__, "startup_probe", startup_probe)
+
+    @property
+    @pulumi.getter
+    def build(self) -> 'outputs.GetArtifactsArtifactSpecContainerGroupContainerBuildResult':
+        """
+        Server-set image build metadata.
+        """
+        return pulumi.get(self, "build")
+
+    @property
+    @pulumi.getter
+    def description(self) -> builtins.str:
+        """
+        Description of the container.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter
+    def entrypoints(self) -> Sequence[builtins.str]:
+        """
+        Container entrypoint.
+        """
+        return pulumi.get(self, "entrypoints")
+
+    @property
+    @pulumi.getter(name="environmentVars")
+    def environment_vars(self) -> Sequence['outputs.GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarResult']:
+        """
+        Environment variables for the container.
+        """
+        return pulumi.get(self, "environment_vars")
+
+    @property
+    @pulumi.getter(name="imageBuildConfig")
+    def image_build_config(self) -> 'outputs.GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigResult':
+        """
+        Configuration for server-side image builds from source code.
+        """
+        return pulumi.get(self, "image_build_config")
+
+    @property
+    @pulumi.getter(name="imageUri")
+    def image_uri(self) -> builtins.str:
+        """
+        Docker image URI.
+        """
+        return pulumi.get(self, "image_uri")
+
+    @property
+    @pulumi.getter(name="livenessProbe")
+    def liveness_probe(self) -> 'outputs.GetArtifactsArtifactSpecContainerGroupContainerLivenessProbeResult':
+        """
+        Container liveness check configuration.
+        """
+        return pulumi.get(self, "liveness_probe")
+
+    @property
+    @pulumi.getter
+    def name(self) -> builtins.str:
+        """
+        Name of the container.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def port(self) -> builtins.int:
+        """
+        Container access port (1024-65535).
+        """
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter
+    def primary(self) -> builtins.bool:
+        """
+        Whether this is the primary container.
+        """
+        return pulumi.get(self, "primary")
+
+    @property
+    @pulumi.getter(name="readinessProbe")
+    def readiness_probe(self) -> 'outputs.GetArtifactsArtifactSpecContainerGroupContainerReadinessProbeResult':
+        """
+        Container readiness check configuration.
+        """
+        return pulumi.get(self, "readiness_probe")
+
+    @property
+    @pulumi.getter(name="securityContext")
+    def security_context(self) -> 'outputs.GetArtifactsArtifactSpecContainerGroupContainerSecurityContextResult':
+        """
+        Container security context.
+        """
+        return pulumi.get(self, "security_context")
+
+    @property
+    @pulumi.getter(name="startupProbe")
+    def startup_probe(self) -> 'outputs.GetArtifactsArtifactSpecContainerGroupContainerStartupProbeResult':
+        """
+        Container startup check configuration.
+        """
+        return pulumi.get(self, "startup_probe")
+
+
+@pulumi.output_type
+class GetArtifactsArtifactSpecContainerGroupContainerBuildResult(dict):
+    def __init__(__self__, *,
+                 artifact_image_build_id: builtins.str,
+                 created_at: builtins.str,
+                 status: builtins.str):
+        """
+        :param builtins.str artifact_image_build_id: Artifact image build ID.
+        :param builtins.str created_at: Build creation timestamp (UTC).
+        :param builtins.str status: Image build status at submit time.
+        """
+        pulumi.set(__self__, "artifact_image_build_id", artifact_image_build_id)
+        pulumi.set(__self__, "created_at", created_at)
+        pulumi.set(__self__, "status", status)
+
+    @property
+    @pulumi.getter(name="artifactImageBuildId")
+    def artifact_image_build_id(self) -> builtins.str:
+        """
+        Artifact image build ID.
+        """
+        return pulumi.get(self, "artifact_image_build_id")
+
+    @property
+    @pulumi.getter(name="createdAt")
+    def created_at(self) -> builtins.str:
+        """
+        Build creation timestamp (UTC).
+        """
+        return pulumi.get(self, "created_at")
+
+    @property
+    @pulumi.getter
+    def status(self) -> builtins.str:
+        """
+        Image build status at submit time.
+        """
+        return pulumi.get(self, "status")
+
+
+@pulumi.output_type
+class GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarResult(dict):
+    def __init__(__self__, *,
+                 dr_credential_id: builtins.str,
+                 key: builtins.str,
+                 name: builtins.str,
+                 source: builtins.str,
+                 value: builtins.str):
+        """
+        :param builtins.str dr_credential_id: DataRobot credential ID when source is "dr-credential".
+        :param builtins.str key: Key within the credential when source is "dr-credential".
+        :param builtins.str name: Name of the environment variable.
+        :param builtins.str source: Source type: "string" for plain text values, "dr-credential" for DataRobot credentials.
+        :param builtins.str value: Value of the environment variable when source is "string".
+        """
+        pulumi.set(__self__, "dr_credential_id", dr_credential_id)
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "source", source)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter(name="drCredentialId")
+    def dr_credential_id(self) -> builtins.str:
+        """
+        DataRobot credential ID when source is "dr-credential".
+        """
+        return pulumi.get(self, "dr_credential_id")
+
+    @property
+    @pulumi.getter
+    def key(self) -> builtins.str:
+        """
+        Key within the credential when source is "dr-credential".
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def name(self) -> builtins.str:
+        """
+        Name of the environment variable.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def source(self) -> builtins.str:
+        """
+        Source type: "string" for plain text values, "dr-credential" for DataRobot credentials.
+        """
+        return pulumi.get(self, "source")
+
+    @property
+    @pulumi.getter
+    def value(self) -> builtins.str:
+        """
+        Value of the environment variable when source is "string".
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigResult(dict):
+    def __init__(__self__, *,
+                 code_ref: 'outputs.GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefResult',
+                 dockerfile: 'outputs.GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfileResult'):
+        """
+        :param 'GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefArgs' code_ref: Reference to source code in the DataRobot catalog.
+        :param 'GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfileArgs' dockerfile: Dockerfile configuration for image builds.
+        """
+        pulumi.set(__self__, "code_ref", code_ref)
+        pulumi.set(__self__, "dockerfile", dockerfile)
+
+    @property
+    @pulumi.getter(name="codeRef")
+    def code_ref(self) -> 'outputs.GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefResult':
+        """
+        Reference to source code in the DataRobot catalog.
+        """
+        return pulumi.get(self, "code_ref")
+
+    @property
+    @pulumi.getter
+    def dockerfile(self) -> 'outputs.GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfileResult':
+        """
+        Dockerfile configuration for image builds.
+        """
+        return pulumi.get(self, "dockerfile")
+
+
+@pulumi.output_type
+class GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefResult(dict):
+    def __init__(__self__, *,
+                 datarobot: 'outputs.GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotResult',
+                 provider: builtins.str,
+                 type: builtins.str):
+        """
+        :param 'GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotArgs' datarobot: DataRobot catalog reference.
+        :param builtins.str provider: Code provider.
+        :param builtins.str type: Code reference type.
+        """
+        pulumi.set(__self__, "datarobot", datarobot)
+        pulumi.set(__self__, "provider", provider)
+        pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter
+    def datarobot(self) -> 'outputs.GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotResult':
+        """
+        DataRobot catalog reference.
+        """
+        return pulumi.get(self, "datarobot")
+
+    @property
+    @pulumi.getter
+    def provider(self) -> builtins.str:
+        """
+        Code provider.
+        """
+        return pulumi.get(self, "provider")
+
+    @property
+    @pulumi.getter
+    def type(self) -> builtins.str:
+        """
+        Code reference type.
+        """
+        return pulumi.get(self, "type")
+
+
+@pulumi.output_type
+class GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigCodeRefDatarobotResult(dict):
+    def __init__(__self__, *,
+                 catalog_id: builtins.str,
+                 catalog_version_id: builtins.str):
+        """
+        :param builtins.str catalog_id: Catalog ID.
+        :param builtins.str catalog_version_id: Catalog version ID.
+        """
+        pulumi.set(__self__, "catalog_id", catalog_id)
+        pulumi.set(__self__, "catalog_version_id", catalog_version_id)
+
+    @property
+    @pulumi.getter(name="catalogId")
+    def catalog_id(self) -> builtins.str:
+        """
+        Catalog ID.
+        """
+        return pulumi.get(self, "catalog_id")
+
+    @property
+    @pulumi.getter(name="catalogVersionId")
+    def catalog_version_id(self) -> builtins.str:
+        """
+        Catalog version ID.
+        """
+        return pulumi.get(self, "catalog_version_id")
+
+
+@pulumi.output_type
+class GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfileResult(dict):
+    def __init__(__self__, *,
+                 entrypoints: Sequence[builtins.str],
+                 execution_environment_id: builtins.str,
+                 execution_environment_version_id: builtins.str,
+                 path: builtins.str,
+                 source: builtins.str):
+        """
+        :param Sequence[builtins.str] entrypoints: Entrypoint when source is `generated`.
+        :param builtins.str execution_environment_id: Execution environment ID when source is `generated`.
+        :param builtins.str execution_environment_version_id: Execution environment version ID when source is `generated`.
+        :param builtins.str path: Relative path to the Dockerfile when source is `provided`.
+        :param builtins.str source: Dockerfile source: `provided` or `generated`.
+        """
+        pulumi.set(__self__, "entrypoints", entrypoints)
+        pulumi.set(__self__, "execution_environment_id", execution_environment_id)
+        pulumi.set(__self__, "execution_environment_version_id", execution_environment_version_id)
+        pulumi.set(__self__, "path", path)
+        pulumi.set(__self__, "source", source)
+
+    @property
+    @pulumi.getter
+    def entrypoints(self) -> Sequence[builtins.str]:
+        """
+        Entrypoint when source is `generated`.
+        """
+        return pulumi.get(self, "entrypoints")
+
+    @property
+    @pulumi.getter(name="executionEnvironmentId")
+    def execution_environment_id(self) -> builtins.str:
+        """
+        Execution environment ID when source is `generated`.
+        """
+        return pulumi.get(self, "execution_environment_id")
+
+    @property
+    @pulumi.getter(name="executionEnvironmentVersionId")
+    def execution_environment_version_id(self) -> builtins.str:
+        """
+        Execution environment version ID when source is `generated`.
+        """
+        return pulumi.get(self, "execution_environment_version_id")
+
+    @property
+    @pulumi.getter
+    def path(self) -> builtins.str:
+        """
+        Relative path to the Dockerfile when source is `provided`.
+        """
+        return pulumi.get(self, "path")
+
+    @property
+    @pulumi.getter
+    def source(self) -> builtins.str:
+        """
+        Dockerfile source: `provided` or `generated`.
+        """
+        return pulumi.get(self, "source")
+
+
+@pulumi.output_type
+class GetArtifactsArtifactSpecContainerGroupContainerLivenessProbeResult(dict):
+    def __init__(__self__, *,
+                 failure_threshold: builtins.int,
+                 host: builtins.str,
+                 initial_delay_seconds: builtins.int,
+                 path: builtins.str,
+                 period_seconds: builtins.int,
+                 port: builtins.int,
+                 scheme: builtins.str,
+                 timeout_seconds: builtins.int):
+        """
+        :param builtins.int failure_threshold: Minimum consecutive failures for the probe to be considered failed.
+        :param builtins.str host: Host name to connect to, defaults to the pod IP.
+        :param builtins.int initial_delay_seconds: Number of seconds to wait before the first probe is executed.
+        :param builtins.str path: URL path to query for health check.
+        :param builtins.int period_seconds: How often (in seconds) to perform the probe.
+        :param builtins.int port: Port number to access on the container.
+        :param builtins.str scheme: Scheme to use for connecting to the host (HTTP or HTTPS).
+        :param builtins.int timeout_seconds: Number of seconds after which the probe times out.
+        """
+        pulumi.set(__self__, "failure_threshold", failure_threshold)
+        pulumi.set(__self__, "host", host)
+        pulumi.set(__self__, "initial_delay_seconds", initial_delay_seconds)
+        pulumi.set(__self__, "path", path)
+        pulumi.set(__self__, "period_seconds", period_seconds)
+        pulumi.set(__self__, "port", port)
+        pulumi.set(__self__, "scheme", scheme)
+        pulumi.set(__self__, "timeout_seconds", timeout_seconds)
+
+    @property
+    @pulumi.getter(name="failureThreshold")
+    def failure_threshold(self) -> builtins.int:
+        """
+        Minimum consecutive failures for the probe to be considered failed.
+        """
+        return pulumi.get(self, "failure_threshold")
+
+    @property
+    @pulumi.getter
+    def host(self) -> builtins.str:
+        """
+        Host name to connect to, defaults to the pod IP.
+        """
+        return pulumi.get(self, "host")
+
+    @property
+    @pulumi.getter(name="initialDelaySeconds")
+    def initial_delay_seconds(self) -> builtins.int:
+        """
+        Number of seconds to wait before the first probe is executed.
+        """
+        return pulumi.get(self, "initial_delay_seconds")
+
+    @property
+    @pulumi.getter
+    def path(self) -> builtins.str:
+        """
+        URL path to query for health check.
+        """
+        return pulumi.get(self, "path")
+
+    @property
+    @pulumi.getter(name="periodSeconds")
+    def period_seconds(self) -> builtins.int:
+        """
+        How often (in seconds) to perform the probe.
+        """
+        return pulumi.get(self, "period_seconds")
+
+    @property
+    @pulumi.getter
+    def port(self) -> builtins.int:
+        """
+        Port number to access on the container.
+        """
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter
+    def scheme(self) -> builtins.str:
+        """
+        Scheme to use for connecting to the host (HTTP or HTTPS).
+        """
+        return pulumi.get(self, "scheme")
+
+    @property
+    @pulumi.getter(name="timeoutSeconds")
+    def timeout_seconds(self) -> builtins.int:
+        """
+        Number of seconds after which the probe times out.
+        """
+        return pulumi.get(self, "timeout_seconds")
+
+
+@pulumi.output_type
+class GetArtifactsArtifactSpecContainerGroupContainerReadinessProbeResult(dict):
+    def __init__(__self__, *,
+                 failure_threshold: builtins.int,
+                 host: builtins.str,
+                 initial_delay_seconds: builtins.int,
+                 path: builtins.str,
+                 period_seconds: builtins.int,
+                 port: builtins.int,
+                 scheme: builtins.str,
+                 timeout_seconds: builtins.int):
+        """
+        :param builtins.int failure_threshold: Minimum consecutive failures for the probe to be considered failed.
+        :param builtins.str host: Host name to connect to, defaults to the pod IP.
+        :param builtins.int initial_delay_seconds: Number of seconds to wait before the first probe is executed.
+        :param builtins.str path: URL path to query for health check.
+        :param builtins.int period_seconds: How often (in seconds) to perform the probe.
+        :param builtins.int port: Port number to access on the container.
+        :param builtins.str scheme: Scheme to use for connecting to the host (HTTP or HTTPS).
+        :param builtins.int timeout_seconds: Number of seconds after which the probe times out.
+        """
+        pulumi.set(__self__, "failure_threshold", failure_threshold)
+        pulumi.set(__self__, "host", host)
+        pulumi.set(__self__, "initial_delay_seconds", initial_delay_seconds)
+        pulumi.set(__self__, "path", path)
+        pulumi.set(__self__, "period_seconds", period_seconds)
+        pulumi.set(__self__, "port", port)
+        pulumi.set(__self__, "scheme", scheme)
+        pulumi.set(__self__, "timeout_seconds", timeout_seconds)
+
+    @property
+    @pulumi.getter(name="failureThreshold")
+    def failure_threshold(self) -> builtins.int:
+        """
+        Minimum consecutive failures for the probe to be considered failed.
+        """
+        return pulumi.get(self, "failure_threshold")
+
+    @property
+    @pulumi.getter
+    def host(self) -> builtins.str:
+        """
+        Host name to connect to, defaults to the pod IP.
+        """
+        return pulumi.get(self, "host")
+
+    @property
+    @pulumi.getter(name="initialDelaySeconds")
+    def initial_delay_seconds(self) -> builtins.int:
+        """
+        Number of seconds to wait before the first probe is executed.
+        """
+        return pulumi.get(self, "initial_delay_seconds")
+
+    @property
+    @pulumi.getter
+    def path(self) -> builtins.str:
+        """
+        URL path to query for health check.
+        """
+        return pulumi.get(self, "path")
+
+    @property
+    @pulumi.getter(name="periodSeconds")
+    def period_seconds(self) -> builtins.int:
+        """
+        How often (in seconds) to perform the probe.
+        """
+        return pulumi.get(self, "period_seconds")
+
+    @property
+    @pulumi.getter
+    def port(self) -> builtins.int:
+        """
+        Port number to access on the container.
+        """
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter
+    def scheme(self) -> builtins.str:
+        """
+        Scheme to use for connecting to the host (HTTP or HTTPS).
+        """
+        return pulumi.get(self, "scheme")
+
+    @property
+    @pulumi.getter(name="timeoutSeconds")
+    def timeout_seconds(self) -> builtins.int:
+        """
+        Number of seconds after which the probe times out.
+        """
+        return pulumi.get(self, "timeout_seconds")
+
+
+@pulumi.output_type
+class GetArtifactsArtifactSpecContainerGroupContainerSecurityContextResult(dict):
+    def __init__(__self__, *,
+                 allow_privilege_escalation: builtins.bool,
+                 capabilities: 'outputs.GetArtifactsArtifactSpecContainerGroupContainerSecurityContextCapabilitiesResult',
+                 read_only_root_filesystem: builtins.bool,
+                 seccomp_profile: 'outputs.GetArtifactsArtifactSpecContainerGroupContainerSecurityContextSeccompProfileResult'):
+        """
+        :param builtins.bool allow_privilege_escalation: Whether a process can gain more privileges than its parent.
+        :param 'GetArtifactsArtifactSpecContainerGroupContainerSecurityContextCapabilitiesArgs' capabilities: Linux capabilities to add or drop.
+        :param builtins.bool read_only_root_filesystem: Whether the root filesystem is read-only.
+        :param 'GetArtifactsArtifactSpecContainerGroupContainerSecurityContextSeccompProfileArgs' seccomp_profile: Seccomp profile for the container.
+        """
+        pulumi.set(__self__, "allow_privilege_escalation", allow_privilege_escalation)
+        pulumi.set(__self__, "capabilities", capabilities)
+        pulumi.set(__self__, "read_only_root_filesystem", read_only_root_filesystem)
+        pulumi.set(__self__, "seccomp_profile", seccomp_profile)
+
+    @property
+    @pulumi.getter(name="allowPrivilegeEscalation")
+    def allow_privilege_escalation(self) -> builtins.bool:
+        """
+        Whether a process can gain more privileges than its parent.
+        """
+        return pulumi.get(self, "allow_privilege_escalation")
+
+    @property
+    @pulumi.getter
+    def capabilities(self) -> 'outputs.GetArtifactsArtifactSpecContainerGroupContainerSecurityContextCapabilitiesResult':
+        """
+        Linux capabilities to add or drop.
+        """
+        return pulumi.get(self, "capabilities")
+
+    @property
+    @pulumi.getter(name="readOnlyRootFilesystem")
+    def read_only_root_filesystem(self) -> builtins.bool:
+        """
+        Whether the root filesystem is read-only.
+        """
+        return pulumi.get(self, "read_only_root_filesystem")
+
+    @property
+    @pulumi.getter(name="seccompProfile")
+    def seccomp_profile(self) -> 'outputs.GetArtifactsArtifactSpecContainerGroupContainerSecurityContextSeccompProfileResult':
+        """
+        Seccomp profile for the container.
+        """
+        return pulumi.get(self, "seccomp_profile")
+
+
+@pulumi.output_type
+class GetArtifactsArtifactSpecContainerGroupContainerSecurityContextCapabilitiesResult(dict):
+    def __init__(__self__, *,
+                 adds: Sequence[builtins.str],
+                 drops: Sequence[builtins.str]):
+        """
+        :param Sequence[builtins.str] adds: Capabilities to add.
+        :param Sequence[builtins.str] drops: Capabilities to drop.
+        """
+        pulumi.set(__self__, "adds", adds)
+        pulumi.set(__self__, "drops", drops)
+
+    @property
+    @pulumi.getter
+    def adds(self) -> Sequence[builtins.str]:
+        """
+        Capabilities to add.
+        """
+        return pulumi.get(self, "adds")
+
+    @property
+    @pulumi.getter
+    def drops(self) -> Sequence[builtins.str]:
+        """
+        Capabilities to drop.
+        """
+        return pulumi.get(self, "drops")
+
+
+@pulumi.output_type
+class GetArtifactsArtifactSpecContainerGroupContainerSecurityContextSeccompProfileResult(dict):
+    def __init__(__self__, *,
+                 localhost_profile: builtins.str,
+                 type: builtins.str):
+        """
+        :param builtins.str localhost_profile: Path to a seccomp profile on the node when type is Localhost.
+        :param builtins.str type: Seccomp profile type.
+        """
+        pulumi.set(__self__, "localhost_profile", localhost_profile)
+        pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter(name="localhostProfile")
+    def localhost_profile(self) -> builtins.str:
+        """
+        Path to a seccomp profile on the node when type is Localhost.
+        """
+        return pulumi.get(self, "localhost_profile")
+
+    @property
+    @pulumi.getter
+    def type(self) -> builtins.str:
+        """
+        Seccomp profile type.
+        """
+        return pulumi.get(self, "type")
+
+
+@pulumi.output_type
+class GetArtifactsArtifactSpecContainerGroupContainerStartupProbeResult(dict):
+    def __init__(__self__, *,
+                 failure_threshold: builtins.int,
+                 host: builtins.str,
+                 initial_delay_seconds: builtins.int,
+                 path: builtins.str,
+                 period_seconds: builtins.int,
+                 port: builtins.int,
+                 scheme: builtins.str,
+                 timeout_seconds: builtins.int):
+        """
+        :param builtins.int failure_threshold: Minimum consecutive failures for the probe to be considered failed.
+        :param builtins.str host: Host name to connect to, defaults to the pod IP.
+        :param builtins.int initial_delay_seconds: Number of seconds to wait before the first probe is executed.
+        :param builtins.str path: URL path to query for health check.
+        :param builtins.int period_seconds: How often (in seconds) to perform the probe.
+        :param builtins.int port: Port number to access on the container.
+        :param builtins.str scheme: Scheme to use for connecting to the host (HTTP or HTTPS).
+        :param builtins.int timeout_seconds: Number of seconds after which the probe times out.
+        """
+        pulumi.set(__self__, "failure_threshold", failure_threshold)
+        pulumi.set(__self__, "host", host)
+        pulumi.set(__self__, "initial_delay_seconds", initial_delay_seconds)
+        pulumi.set(__self__, "path", path)
+        pulumi.set(__self__, "period_seconds", period_seconds)
+        pulumi.set(__self__, "port", port)
+        pulumi.set(__self__, "scheme", scheme)
+        pulumi.set(__self__, "timeout_seconds", timeout_seconds)
+
+    @property
+    @pulumi.getter(name="failureThreshold")
+    def failure_threshold(self) -> builtins.int:
+        """
+        Minimum consecutive failures for the probe to be considered failed.
+        """
+        return pulumi.get(self, "failure_threshold")
+
+    @property
+    @pulumi.getter
+    def host(self) -> builtins.str:
+        """
+        Host name to connect to, defaults to the pod IP.
+        """
+        return pulumi.get(self, "host")
+
+    @property
+    @pulumi.getter(name="initialDelaySeconds")
+    def initial_delay_seconds(self) -> builtins.int:
+        """
+        Number of seconds to wait before the first probe is executed.
+        """
+        return pulumi.get(self, "initial_delay_seconds")
+
+    @property
+    @pulumi.getter
+    def path(self) -> builtins.str:
+        """
+        URL path to query for health check.
+        """
+        return pulumi.get(self, "path")
+
+    @property
+    @pulumi.getter(name="periodSeconds")
+    def period_seconds(self) -> builtins.int:
+        """
+        How often (in seconds) to perform the probe.
+        """
+        return pulumi.get(self, "period_seconds")
+
+    @property
+    @pulumi.getter
+    def port(self) -> builtins.int:
+        """
+        Port number to access on the container.
+        """
+        return pulumi.get(self, "port")
+
+    @property
+    @pulumi.getter
+    def scheme(self) -> builtins.str:
+        """
+        Scheme to use for connecting to the host (HTTP or HTTPS).
+        """
+        return pulumi.get(self, "scheme")
+
+    @property
+    @pulumi.getter(name="timeoutSeconds")
+    def timeout_seconds(self) -> builtins.int:
+        """
+        Number of seconds after which the probe times out.
+        """
+        return pulumi.get(self, "timeout_seconds")
+
+
+@pulumi.output_type
+class GetArtifactsArtifactSpecStorageResult(dict):
+    def __init__(__self__, *,
+                 mode: builtins.str,
+                 pvc_size: builtins.str):
+        """
+        :param builtins.str mode: Storage mode: `dedicatedPvc` or `nimCache`.
+        :param builtins.str pvc_size: PVC size for dedicated storage (e.g. `150Gi`).
+        """
+        pulumi.set(__self__, "mode", mode)
+        pulumi.set(__self__, "pvc_size", pvc_size)
+
+    @property
+    @pulumi.getter
+    def mode(self) -> builtins.str:
+        """
+        Storage mode: `dedicatedPvc` or `nimCache`.
+        """
+        return pulumi.get(self, "mode")
+
+    @property
+    @pulumi.getter(name="pvcSize")
+    def pvc_size(self) -> builtins.str:
+        """
+        PVC size for dedicated storage (e.g. `150Gi`).
+        """
+        return pulumi.get(self, "pvc_size")
+
+
+@pulumi.output_type
+class GetArtifactsArtifactTagResult(dict):
+    def __init__(__self__, *,
+                 id: builtins.str,
+                 name: builtins.str,
+                 value: builtins.str):
+        """
+        :param builtins.str id: Tag ID.
+        :param builtins.str name: Tag name.
+        :param builtins.str value: Tag value.
+        """
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def id(self) -> builtins.str:
+        """
+        Tag ID.
+        """
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter
+    def name(self) -> builtins.str:
+        """
+        Tag name.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def value(self) -> builtins.str:
+        """
+        Tag value.
+        """
+        return pulumi.get(self, "value")
 
 

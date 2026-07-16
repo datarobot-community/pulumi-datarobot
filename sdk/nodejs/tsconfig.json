@@ -41,6 +41,8 @@
         "deployment.ts",
         "deploymentRetrainingPolicy.ts",
         "executionEnvironment.ts",
+        "getArtifact.ts",
+        "getArtifacts.ts",
         "getExecutionEnvironment.ts",
         "getGlobalModel.ts",
         "googleCloudCredential.ts",
