@@ -25,6 +25,9 @@ __all__ = [
     'ArtifactSpecContainerGroup',
     'ArtifactSpecContainerGroupContainer',
     'ArtifactSpecContainerGroupContainerEnvironmentVar',
+    'ArtifactSpecContainerGroupContainerImageBuildConfig',
+    'ArtifactSpecContainerGroupContainerImageBuildConfigCodeRef',
+    'ArtifactSpecContainerGroupContainerImageBuildConfigDockerfile',
     'ArtifactSpecContainerGroupContainerLivenessProbe',
     'ArtifactSpecContainerGroupContainerReadinessProbe',
     'ArtifactSpecContainerGroupContainerStartupProbe',
@@ -463,10 +466,12 @@ class ArtifactSpecContainerGroupContainer(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
-        if key == "imageUri":
-            suggest = "image_uri"
-        elif key == "environmentVars":
+        if key == "environmentVars":
             suggest = "environment_vars"
+        elif key == "imageBuildConfig":
+            suggest = "image_build_config"
+        elif key == "imageUri":
+            suggest = "image_uri"
         elif key == "livenessProbe":
             suggest = "liveness_probe"
         elif key == "readinessProbe":
@@ -486,10 +491,11 @@ class ArtifactSpecContainerGroupContainer(dict):
         return super().get(key, default)
 
     def __init__(__self__, *,
-                 image_uri: builtins.str,
                  description: Optional[builtins.str] = None,
                  entrypoints: Optional[Sequence[builtins.str]] = None,
                  environment_vars: Optional[Sequence['outputs.ArtifactSpecContainerGroupContainerEnvironmentVar']] = None,
+                 image_build_config: Optional['outputs.ArtifactSpecContainerGroupContainerImageBuildConfig'] = None,
+                 image_uri: Optional[builtins.str] = None,
                  liveness_probe: Optional['outputs.ArtifactSpecContainerGroupContainerLivenessProbe'] = None,
                  name: Optional[builtins.str] = None,
                  port: Optional[builtins.int] = None,
@@ -497,10 +503,11 @@ class ArtifactSpecContainerGroupContainer(dict):
                  readiness_probe: Optional['outputs.ArtifactSpecContainerGroupContainerReadinessProbe'] = None,
                  startup_probe: Optional['outputs.ArtifactSpecContainerGroupContainerStartupProbe'] = None):
         """
-        :param builtins.str image_uri: Docker image URI.
         :param builtins.str description: Description of the container.
         :param Sequence[builtins.str] entrypoints: Container entrypoint.
         :param Sequence['ArtifactSpecContainerGroupContainerEnvironmentVarArgs'] environment_vars: Environment variables for the container.
+        :param 'ArtifactSpecContainerGroupContainerImageBuildConfigArgs' image_build_config: Configuration for server-side image builds from source code.
+        :param builtins.str image_uri: Docker image URI. Omit when using `image_build_config` on draft artifacts; required when status is `locked` and `image_build_config` is set.
         :param 'ArtifactSpecContainerGroupContainerLivenessProbeArgs' liveness_probe: Container liveness check configuration.
         :param builtins.str name: Name of the container.
         :param builtins.int port: Container access port (1024-65535). Required for primary containers; omit for non-primary.
@@ -508,13 +515,16 @@ class ArtifactSpecContainerGroupContainer(dict):
         :param 'ArtifactSpecContainerGroupContainerReadinessProbeArgs' readiness_probe: Container readiness check configuration.
         :param 'ArtifactSpecContainerGroupContainerStartupProbeArgs' startup_probe: Container startup check configuration.
         """
-        pulumi.set(__self__, "image_uri", image_uri)
         if description is not None:
             pulumi.set(__self__, "description", description)
         if entrypoints is not None:
             pulumi.set(__self__, "entrypoints", entrypoints)
         if environment_vars is not None:
             pulumi.set(__self__, "environment_vars", environment_vars)
+        if image_build_config is not None:
+            pulumi.set(__self__, "image_build_config", image_build_config)
+        if image_uri is not None:
+            pulumi.set(__self__, "image_uri", image_uri)
         if liveness_probe is not None:
             pulumi.set(__self__, "liveness_probe", liveness_probe)
         if name is not None:
@@ -527,14 +537,6 @@ class ArtifactSpecContainerGroupContainer(dict):
             pulumi.set(__self__, "readiness_probe", readiness_probe)
         if startup_probe is not None:
             pulumi.set(__self__, "startup_probe", startup_probe)
-
-    @property
-    @pulumi.getter(name="imageUri")
-    def image_uri(self) -> builtins.str:
-        """
-        Docker image URI.
-        """
-        return pulumi.get(self, "image_uri")
 
     @property
     @pulumi.getter
@@ -559,6 +561,22 @@ class ArtifactSpecContainerGroupContainer(dict):
         Environment variables for the container.
         """
         return pulumi.get(self, "environment_vars")
+
+    @property
+    @pulumi.getter(name="imageBuildConfig")
+    def image_build_config(self) -> Optional['outputs.ArtifactSpecContainerGroupContainerImageBuildConfig']:
+        """
+        Configuration for server-side image builds from source code.
+        """
+        return pulumi.get(self, "image_build_config")
+
+    @property
+    @pulumi.getter(name="imageUri")
+    def image_uri(self) -> Optional[builtins.str]:
+        """
+        Docker image URI. Omit when using `image_build_config` on draft artifacts; required when status is `locked` and `image_build_config` is set.
+        """
+        return pulumi.get(self, "image_uri")
 
     @property
     @pulumi.getter(name="livenessProbe")
@@ -629,35 +647,28 @@ class ArtifactSpecContainerGroupContainerEnvironmentVar(dict):
         return super().get(key, default)
 
     def __init__(__self__, *,
-                 name: builtins.str,
                  dr_credential_id: Optional[builtins.str] = None,
                  key: Optional[builtins.str] = None,
+                 name: Optional[builtins.str] = None,
                  source: Optional[builtins.str] = None,
                  value: Optional[builtins.str] = None):
         """
-        :param builtins.str name: Name of the environment variable.
         :param builtins.str dr_credential_id: DataRobot credential ID. Required when source is "dr-credential".
         :param builtins.str key: Key within the credential. Required when source is "dr-credential".
-        :param builtins.str source: Source type: "string" for plain text values, "dr-credential" for DataRobot credentials. Defaults to "string".
+        :param builtins.str name: Name of the environment variable. Required when source is "string" or "dr-credential". Optional for "api-key": when omitted, the platform injects the token as DATAROBOT*API*TOKEN.
+        :param builtins.str source: Source type: "string" for plain text values, "dr-credential" for DataRobot credentials, "api-key" for a platform-managed DataRobot API token. Defaults to "string".
         :param builtins.str value: Value of the environment variable. Required when source is "string".
         """
-        pulumi.set(__self__, "name", name)
         if dr_credential_id is not None:
             pulumi.set(__self__, "dr_credential_id", dr_credential_id)
         if key is not None:
             pulumi.set(__self__, "key", key)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
         if source is not None:
             pulumi.set(__self__, "source", source)
         if value is not None:
             pulumi.set(__self__, "value", value)
-
-    @property
-    @pulumi.getter
-    def name(self) -> builtins.str:
-        """
-        Name of the environment variable.
-        """
-        return pulumi.get(self, "name")
 
     @property
     @pulumi.getter(name="drCredentialId")
@@ -677,9 +688,17 @@ class ArtifactSpecContainerGroupContainerEnvironmentVar(dict):
 
     @property
     @pulumi.getter
+    def name(self) -> Optional[builtins.str]:
+        """
+        Name of the environment variable. Required when source is "string" or "dr-credential". Optional for "api-key": when omitted, the platform injects the token as DATAROBOT*API*TOKEN.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
     def source(self) -> Optional[builtins.str]:
         """
-        Source type: "string" for plain text values, "dr-credential" for DataRobot credentials. Defaults to "string".
+        Source type: "string" for plain text values, "dr-credential" for DataRobot credentials, "api-key" for a platform-managed DataRobot API token. Defaults to "string".
         """
         return pulumi.get(self, "source")
 
@@ -693,6 +712,188 @@ class ArtifactSpecContainerGroupContainerEnvironmentVar(dict):
 
 
 @pulumi.output_type
+class ArtifactSpecContainerGroupContainerImageBuildConfig(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "codeRef":
+            suggest = "code_ref"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ArtifactSpecContainerGroupContainerImageBuildConfig. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ArtifactSpecContainerGroupContainerImageBuildConfig.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ArtifactSpecContainerGroupContainerImageBuildConfig.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 code_ref: Optional['outputs.ArtifactSpecContainerGroupContainerImageBuildConfigCodeRef'] = None,
+                 dockerfile: Optional['outputs.ArtifactSpecContainerGroupContainerImageBuildConfigDockerfile'] = None):
+        """
+        :param 'ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefArgs' code_ref: Reference to source code in the DataRobot catalog. Optional at create; required before image build or lock.
+        :param 'ArtifactSpecContainerGroupContainerImageBuildConfigDockerfileArgs' dockerfile: How the Dockerfile is obtained for the image build. Defaults to using `./Dockerfile` from the source code.
+        """
+        if code_ref is not None:
+            pulumi.set(__self__, "code_ref", code_ref)
+        if dockerfile is not None:
+            pulumi.set(__self__, "dockerfile", dockerfile)
+
+    @property
+    @pulumi.getter(name="codeRef")
+    def code_ref(self) -> Optional['outputs.ArtifactSpecContainerGroupContainerImageBuildConfigCodeRef']:
+        """
+        Reference to source code in the DataRobot catalog. Optional at create; required before image build or lock.
+        """
+        return pulumi.get(self, "code_ref")
+
+    @property
+    @pulumi.getter
+    def dockerfile(self) -> Optional['outputs.ArtifactSpecContainerGroupContainerImageBuildConfigDockerfile']:
+        """
+        How the Dockerfile is obtained for the image build. Defaults to using `./Dockerfile` from the source code.
+        """
+        return pulumi.get(self, "dockerfile")
+
+
+@pulumi.output_type
+class ArtifactSpecContainerGroupContainerImageBuildConfigCodeRef(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "catalogId":
+            suggest = "catalog_id"
+        elif key == "catalogVersionId":
+            suggest = "catalog_version_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ArtifactSpecContainerGroupContainerImageBuildConfigCodeRef. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ArtifactSpecContainerGroupContainerImageBuildConfigCodeRef.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ArtifactSpecContainerGroupContainerImageBuildConfigCodeRef.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 catalog_id: builtins.str,
+                 catalog_version_id: builtins.str):
+        """
+        :param builtins.str catalog_id: Files API catalog ID (24-character hex).
+        :param builtins.str catalog_version_id: Files API catalog version ID (24-character hex).
+        """
+        pulumi.set(__self__, "catalog_id", catalog_id)
+        pulumi.set(__self__, "catalog_version_id", catalog_version_id)
+
+    @property
+    @pulumi.getter(name="catalogId")
+    def catalog_id(self) -> builtins.str:
+        """
+        Files API catalog ID (24-character hex).
+        """
+        return pulumi.get(self, "catalog_id")
+
+    @property
+    @pulumi.getter(name="catalogVersionId")
+    def catalog_version_id(self) -> builtins.str:
+        """
+        Files API catalog version ID (24-character hex).
+        """
+        return pulumi.get(self, "catalog_version_id")
+
+
+@pulumi.output_type
+class ArtifactSpecContainerGroupContainerImageBuildConfigDockerfile(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "executionEnvironmentId":
+            suggest = "execution_environment_id"
+        elif key == "executionEnvironmentVersionId":
+            suggest = "execution_environment_version_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ArtifactSpecContainerGroupContainerImageBuildConfigDockerfile. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ArtifactSpecContainerGroupContainerImageBuildConfigDockerfile.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ArtifactSpecContainerGroupContainerImageBuildConfigDockerfile.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 entrypoints: Optional[Sequence[builtins.str]] = None,
+                 execution_environment_id: Optional[builtins.str] = None,
+                 execution_environment_version_id: Optional[builtins.str] = None,
+                 path: Optional[builtins.str] = None,
+                 source: Optional[builtins.str] = None):
+        """
+        :param Sequence[builtins.str] entrypoints: Entrypoint baked into the generated Dockerfile CMD. Required when source is `generated`.
+        :param builtins.str execution_environment_id: Execution environment ID for the base Docker image. Required when source is `generated`.
+        :param builtins.str execution_environment_version_id: Execution environment version ID that pins the base image. Required when source is `generated`.
+        :param builtins.str path: Relative path to the Dockerfile in the source code. Used when source is `provided`. Defaults to `./Dockerfile`.
+        :param builtins.str source: How the Dockerfile is obtained: `provided` (from source code) or `generated` (from an execution environment). Defaults to `provided`.
+        """
+        if entrypoints is not None:
+            pulumi.set(__self__, "entrypoints", entrypoints)
+        if execution_environment_id is not None:
+            pulumi.set(__self__, "execution_environment_id", execution_environment_id)
+        if execution_environment_version_id is not None:
+            pulumi.set(__self__, "execution_environment_version_id", execution_environment_version_id)
+        if path is not None:
+            pulumi.set(__self__, "path", path)
+        if source is not None:
+            pulumi.set(__self__, "source", source)
+
+    @property
+    @pulumi.getter
+    def entrypoints(self) -> Optional[Sequence[builtins.str]]:
+        """
+        Entrypoint baked into the generated Dockerfile CMD. Required when source is `generated`.
+        """
+        return pulumi.get(self, "entrypoints")
+
+    @property
+    @pulumi.getter(name="executionEnvironmentId")
+    def execution_environment_id(self) -> Optional[builtins.str]:
+        """
+        Execution environment ID for the base Docker image. Required when source is `generated`.
+        """
+        return pulumi.get(self, "execution_environment_id")
+
+    @property
+    @pulumi.getter(name="executionEnvironmentVersionId")
+    def execution_environment_version_id(self) -> Optional[builtins.str]:
+        """
+        Execution environment version ID that pins the base image. Required when source is `generated`.
+        """
+        return pulumi.get(self, "execution_environment_version_id")
+
+    @property
+    @pulumi.getter
+    def path(self) -> Optional[builtins.str]:
+        """
+        Relative path to the Dockerfile in the source code. Used when source is `provided`. Defaults to `./Dockerfile`.
+        """
+        return pulumi.get(self, "path")
+
+    @property
+    @pulumi.getter
+    def source(self) -> Optional[builtins.str]:
+        """
+        How the Dockerfile is obtained: `provided` (from source code) or `generated` (from an execution environment). Defaults to `provided`.
+        """
+        return pulumi.get(self, "source")
+
+
+@pulumi.output_type
 class ArtifactSpecContainerGroupContainerLivenessProbe(dict):
     @staticmethod
     def __key_warning(key: str):
@@ -703,6 +904,8 @@ class ArtifactSpecContainerGroupContainerLivenessProbe(dict):
             suggest = "initial_delay_seconds"
         elif key == "periodSeconds":
             suggest = "period_seconds"
+        elif key == "successThreshold":
+            suggest = "success_threshold"
         elif key == "timeoutSeconds":
             suggest = "timeout_seconds"
 
@@ -725,6 +928,7 @@ class ArtifactSpecContainerGroupContainerLivenessProbe(dict):
                  period_seconds: Optional[builtins.int] = None,
                  port: Optional[builtins.int] = None,
                  scheme: Optional[builtins.str] = None,
+                 success_threshold: Optional[builtins.int] = None,
                  timeout_seconds: Optional[builtins.int] = None):
         """
         :param builtins.str path: URL path to query for health check.
@@ -734,6 +938,7 @@ class ArtifactSpecContainerGroupContainerLivenessProbe(dict):
         :param builtins.int period_seconds: How often (in seconds) to perform the probe.
         :param builtins.int port: Port number to access on the container.
         :param builtins.str scheme: Scheme to use for connecting to the host (HTTP or HTTPS).
+        :param builtins.int success_threshold: Minimum consecutive successes for the probe to be considered successful after having failed.
         :param builtins.int timeout_seconds: Number of seconds after which the probe times out.
         """
         pulumi.set(__self__, "path", path)
@@ -749,6 +954,8 @@ class ArtifactSpecContainerGroupContainerLivenessProbe(dict):
             pulumi.set(__self__, "port", port)
         if scheme is not None:
             pulumi.set(__self__, "scheme", scheme)
+        if success_threshold is not None:
+            pulumi.set(__self__, "success_threshold", success_threshold)
         if timeout_seconds is not None:
             pulumi.set(__self__, "timeout_seconds", timeout_seconds)
 
@@ -809,6 +1016,14 @@ class ArtifactSpecContainerGroupContainerLivenessProbe(dict):
         return pulumi.get(self, "scheme")
 
     @property
+    @pulumi.getter(name="successThreshold")
+    def success_threshold(self) -> Optional[builtins.int]:
+        """
+        Minimum consecutive successes for the probe to be considered successful after having failed.
+        """
+        return pulumi.get(self, "success_threshold")
+
+    @property
     @pulumi.getter(name="timeoutSeconds")
     def timeout_seconds(self) -> Optional[builtins.int]:
         """
@@ -828,6 +1043,8 @@ class ArtifactSpecContainerGroupContainerReadinessProbe(dict):
             suggest = "initial_delay_seconds"
         elif key == "periodSeconds":
             suggest = "period_seconds"
+        elif key == "successThreshold":
+            suggest = "success_threshold"
         elif key == "timeoutSeconds":
             suggest = "timeout_seconds"
 
@@ -850,6 +1067,7 @@ class ArtifactSpecContainerGroupContainerReadinessProbe(dict):
                  period_seconds: Optional[builtins.int] = None,
                  port: Optional[builtins.int] = None,
                  scheme: Optional[builtins.str] = None,
+                 success_threshold: Optional[builtins.int] = None,
                  timeout_seconds: Optional[builtins.int] = None):
         """
         :param builtins.str path: URL path to query for health check.
@@ -859,6 +1077,7 @@ class ArtifactSpecContainerGroupContainerReadinessProbe(dict):
         :param builtins.int period_seconds: How often (in seconds) to perform the probe.
         :param builtins.int port: Port number to access on the container.
         :param builtins.str scheme: Scheme to use for connecting to the host (HTTP or HTTPS).
+        :param builtins.int success_threshold: Minimum consecutive successes for the probe to be considered successful after having failed.
         :param builtins.int timeout_seconds: Number of seconds after which the probe times out.
         """
         pulumi.set(__self__, "path", path)
@@ -874,6 +1093,8 @@ class ArtifactSpecContainerGroupContainerReadinessProbe(dict):
             pulumi.set(__self__, "port", port)
         if scheme is not None:
             pulumi.set(__self__, "scheme", scheme)
+        if success_threshold is not None:
+            pulumi.set(__self__, "success_threshold", success_threshold)
         if timeout_seconds is not None:
             pulumi.set(__self__, "timeout_seconds", timeout_seconds)
 
@@ -934,6 +1155,14 @@ class ArtifactSpecContainerGroupContainerReadinessProbe(dict):
         return pulumi.get(self, "scheme")
 
     @property
+    @pulumi.getter(name="successThreshold")
+    def success_threshold(self) -> Optional[builtins.int]:
+        """
+        Minimum consecutive successes for the probe to be considered successful after having failed.
+        """
+        return pulumi.get(self, "success_threshold")
+
+    @property
     @pulumi.getter(name="timeoutSeconds")
     def timeout_seconds(self) -> Optional[builtins.int]:
         """
@@ -953,6 +1182,8 @@ class ArtifactSpecContainerGroupContainerStartupProbe(dict):
             suggest = "initial_delay_seconds"
         elif key == "periodSeconds":
             suggest = "period_seconds"
+        elif key == "successThreshold":
+            suggest = "success_threshold"
         elif key == "timeoutSeconds":
             suggest = "timeout_seconds"
 
@@ -975,6 +1206,7 @@ class ArtifactSpecContainerGroupContainerStartupProbe(dict):
                  period_seconds: Optional[builtins.int] = None,
                  port: Optional[builtins.int] = None,
                  scheme: Optional[builtins.str] = None,
+                 success_threshold: Optional[builtins.int] = None,
                  timeout_seconds: Optional[builtins.int] = None):
         """
         :param builtins.str path: URL path to query for health check.
@@ -984,6 +1216,7 @@ class ArtifactSpecContainerGroupContainerStartupProbe(dict):
         :param builtins.int period_seconds: How often (in seconds) to perform the probe.
         :param builtins.int port: Port number to access on the container.
         :param builtins.str scheme: Scheme to use for connecting to the host (HTTP or HTTPS).
+        :param builtins.int success_threshold: Minimum consecutive successes for the probe to be considered successful after having failed.
         :param builtins.int timeout_seconds: Number of seconds after which the probe times out.
         """
         pulumi.set(__self__, "path", path)
@@ -999,6 +1232,8 @@ class ArtifactSpecContainerGroupContainerStartupProbe(dict):
             pulumi.set(__self__, "port", port)
         if scheme is not None:
             pulumi.set(__self__, "scheme", scheme)
+        if success_threshold is not None:
+            pulumi.set(__self__, "success_threshold", success_threshold)
         if timeout_seconds is not None:
             pulumi.set(__self__, "timeout_seconds", timeout_seconds)
 
@@ -1057,6 +1292,14 @@ class ArtifactSpecContainerGroupContainerStartupProbe(dict):
         Scheme to use for connecting to the host (HTTP or HTTPS).
         """
         return pulumi.get(self, "scheme")
+
+    @property
+    @pulumi.getter(name="successThreshold")
+    def success_threshold(self) -> Optional[builtins.int]:
+        """
+        Minimum consecutive successes for the probe to be considered successful after having failed.
+        """
+        return pulumi.get(self, "success_threshold")
 
     @property
     @pulumi.getter(name="timeoutSeconds")
@@ -5866,16 +6109,43 @@ class WorkloadRuntimeContainerGroup(dict):
 
 @pulumi.output_type
 class WorkloadRuntimeContainerGroupAutoscaling(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "maxReplicaCount":
+            suggest = "max_replica_count"
+        elif key == "minReplicaCount":
+            suggest = "min_replica_count"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in WorkloadRuntimeContainerGroupAutoscaling. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        WorkloadRuntimeContainerGroupAutoscaling.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        WorkloadRuntimeContainerGroupAutoscaling.__key_warning(key)
+        return super().get(key, default)
+
     def __init__(__self__, *,
                  policies: Sequence['outputs.WorkloadRuntimeContainerGroupAutoscalingPolicy'],
-                 enabled: Optional[builtins.bool] = None):
+                 enabled: Optional[builtins.bool] = None,
+                 max_replica_count: Optional[builtins.int] = None,
+                 min_replica_count: Optional[builtins.int] = None):
         """
         :param Sequence['WorkloadRuntimeContainerGroupAutoscalingPolicyArgs'] policies: Scaling policies that define when and how to scale.
         :param builtins.bool enabled: Whether autoscaling is enabled. Defaults to true.
+        :param builtins.int max_replica_count: Maximum number of replicas. Defaults to `1`.
+        :param builtins.int min_replica_count: Minimum number of replicas. Set to `0` to allow scale-to-zero. Defaults to `0`.
         """
         pulumi.set(__self__, "policies", policies)
         if enabled is not None:
             pulumi.set(__self__, "enabled", enabled)
+        if max_replica_count is not None:
+            pulumi.set(__self__, "max_replica_count", max_replica_count)
+        if min_replica_count is not None:
+            pulumi.set(__self__, "min_replica_count", min_replica_count)
 
     @property
     @pulumi.getter
@@ -5893,17 +6163,29 @@ class WorkloadRuntimeContainerGroupAutoscaling(dict):
         """
         return pulumi.get(self, "enabled")
 
+    @property
+    @pulumi.getter(name="maxReplicaCount")
+    def max_replica_count(self) -> Optional[builtins.int]:
+        """
+        Maximum number of replicas. Defaults to `1`.
+        """
+        return pulumi.get(self, "max_replica_count")
+
+    @property
+    @pulumi.getter(name="minReplicaCount")
+    def min_replica_count(self) -> Optional[builtins.int]:
+        """
+        Minimum number of replicas. Set to `0` to allow scale-to-zero. Defaults to `0`.
+        """
+        return pulumi.get(self, "min_replica_count")
+
 
 @pulumi.output_type
 class WorkloadRuntimeContainerGroupAutoscalingPolicy(dict):
     @staticmethod
     def __key_warning(key: str):
         suggest = None
-        if key == "maxCount":
-            suggest = "max_count"
-        elif key == "minCount":
-            suggest = "min_count"
-        elif key == "scalingMetric":
+        if key == "scalingMetric":
             suggest = "scaling_metric"
 
         if suggest:
@@ -5918,46 +6200,20 @@ class WorkloadRuntimeContainerGroupAutoscalingPolicy(dict):
         return super().get(key, default)
 
     def __init__(__self__, *,
-                 max_count: builtins.int,
-                 min_count: builtins.int,
                  scaling_metric: builtins.str,
-                 target: builtins.float,
-                 priority: Optional[builtins.int] = None):
+                 target: builtins.float):
         """
-        :param builtins.int max_count: Maximum number of replicas.
-        :param builtins.int min_count: Minimum number of replicas.
-        :param builtins.str scaling_metric: Metric used for scaling decisions: `cpuAverageUtilization`, `httpRequestsConcurrency`, `gpuCacheUtilization`, or `gpuRequestQueueDepth`.
-        :param builtins.float target: Target value for the scaling metric.
-        :param builtins.int priority: Policy priority when multiple policies are defined.
+        :param builtins.str scaling_metric: Metric used for scaling decisions: `cpuAverageUtilization`, `httpRequestsConcurrency`, `gpuCacheUtilization`, or `gpuRequestQueueDepth`. Custom metric names (e.g. `vllm:kv_cache_usage_perc`) are supported for NIM artifacts only.
+        :param builtins.float target: Target value for the scaling metric. Must be non-negative.
         """
-        pulumi.set(__self__, "max_count", max_count)
-        pulumi.set(__self__, "min_count", min_count)
         pulumi.set(__self__, "scaling_metric", scaling_metric)
         pulumi.set(__self__, "target", target)
-        if priority is not None:
-            pulumi.set(__self__, "priority", priority)
-
-    @property
-    @pulumi.getter(name="maxCount")
-    def max_count(self) -> builtins.int:
-        """
-        Maximum number of replicas.
-        """
-        return pulumi.get(self, "max_count")
-
-    @property
-    @pulumi.getter(name="minCount")
-    def min_count(self) -> builtins.int:
-        """
-        Minimum number of replicas.
-        """
-        return pulumi.get(self, "min_count")
 
     @property
     @pulumi.getter(name="scalingMetric")
     def scaling_metric(self) -> builtins.str:
         """
-        Metric used for scaling decisions: `cpuAverageUtilization`, `httpRequestsConcurrency`, `gpuCacheUtilization`, or `gpuRequestQueueDepth`.
+        Metric used for scaling decisions: `cpuAverageUtilization`, `httpRequestsConcurrency`, `gpuCacheUtilization`, or `gpuRequestQueueDepth`. Custom metric names (e.g. `vllm:kv_cache_usage_perc`) are supported for NIM artifacts only.
         """
         return pulumi.get(self, "scaling_metric")
 
@@ -5965,17 +6221,9 @@ class WorkloadRuntimeContainerGroupAutoscalingPolicy(dict):
     @pulumi.getter
     def target(self) -> builtins.float:
         """
-        Target value for the scaling metric.
+        Target value for the scaling metric. Must be non-negative.
         """
         return pulumi.get(self, "target")
-
-    @property
-    @pulumi.getter
-    def priority(self) -> Optional[builtins.int]:
-        """
-        Policy priority when multiple policies are defined.
-        """
-        return pulumi.get(self, "priority")
 
 
 @pulumi.output_type
@@ -6429,8 +6677,8 @@ class GetArtifactSpecContainerGroupContainerEnvironmentVarResult(dict):
         """
         :param builtins.str dr_credential_id: DataRobot credential ID when source is "dr-credential".
         :param builtins.str key: Key within the credential when source is "dr-credential".
-        :param builtins.str name: Name of the environment variable.
-        :param builtins.str source: Source type: "string" for plain text values, "dr-credential" for DataRobot credentials.
+        :param builtins.str name: Name of the environment variable. May be absent for "api-key" entries, in which case the token is injected as DATAROBOT*API*TOKEN.
+        :param builtins.str source: Source type: "string" for plain text values, "dr-credential" for DataRobot credentials, "api-key" for a platform-managed DataRobot API token.
         :param builtins.str value: Value of the environment variable when source is "string".
         """
         pulumi.set(__self__, "dr_credential_id", dr_credential_id)
@@ -6459,7 +6707,7 @@ class GetArtifactSpecContainerGroupContainerEnvironmentVarResult(dict):
     @pulumi.getter
     def name(self) -> builtins.str:
         """
-        Name of the environment variable.
+        Name of the environment variable. May be absent for "api-key" entries, in which case the token is injected as DATAROBOT*API*TOKEN.
         """
         return pulumi.get(self, "name")
 
@@ -6467,7 +6715,7 @@ class GetArtifactSpecContainerGroupContainerEnvironmentVarResult(dict):
     @pulumi.getter
     def source(self) -> builtins.str:
         """
-        Source type: "string" for plain text values, "dr-credential" for DataRobot credentials.
+        Source type: "string" for plain text values, "dr-credential" for DataRobot credentials, "api-key" for a platform-managed DataRobot API token.
         """
         return pulumi.get(self, "source")
 
@@ -6650,6 +6898,7 @@ class GetArtifactSpecContainerGroupContainerLivenessProbeResult(dict):
                  period_seconds: builtins.int,
                  port: builtins.int,
                  scheme: builtins.str,
+                 success_threshold: builtins.int,
                  timeout_seconds: builtins.int):
         """
         :param builtins.int failure_threshold: Minimum consecutive failures for the probe to be considered failed.
@@ -6659,6 +6908,7 @@ class GetArtifactSpecContainerGroupContainerLivenessProbeResult(dict):
         :param builtins.int period_seconds: How often (in seconds) to perform the probe.
         :param builtins.int port: Port number to access on the container.
         :param builtins.str scheme: Scheme to use for connecting to the host (HTTP or HTTPS).
+        :param builtins.int success_threshold: Minimum consecutive successes for the probe to be considered successful after having failed.
         :param builtins.int timeout_seconds: Number of seconds after which the probe times out.
         """
         pulumi.set(__self__, "failure_threshold", failure_threshold)
@@ -6668,6 +6918,7 @@ class GetArtifactSpecContainerGroupContainerLivenessProbeResult(dict):
         pulumi.set(__self__, "period_seconds", period_seconds)
         pulumi.set(__self__, "port", port)
         pulumi.set(__self__, "scheme", scheme)
+        pulumi.set(__self__, "success_threshold", success_threshold)
         pulumi.set(__self__, "timeout_seconds", timeout_seconds)
 
     @property
@@ -6725,6 +6976,14 @@ class GetArtifactSpecContainerGroupContainerLivenessProbeResult(dict):
         Scheme to use for connecting to the host (HTTP or HTTPS).
         """
         return pulumi.get(self, "scheme")
+
+    @property
+    @pulumi.getter(name="successThreshold")
+    def success_threshold(self) -> builtins.int:
+        """
+        Minimum consecutive successes for the probe to be considered successful after having failed.
+        """
+        return pulumi.get(self, "success_threshold")
 
     @property
     @pulumi.getter(name="timeoutSeconds")
@@ -6745,6 +7004,7 @@ class GetArtifactSpecContainerGroupContainerReadinessProbeResult(dict):
                  period_seconds: builtins.int,
                  port: builtins.int,
                  scheme: builtins.str,
+                 success_threshold: builtins.int,
                  timeout_seconds: builtins.int):
         """
         :param builtins.int failure_threshold: Minimum consecutive failures for the probe to be considered failed.
@@ -6754,6 +7014,7 @@ class GetArtifactSpecContainerGroupContainerReadinessProbeResult(dict):
         :param builtins.int period_seconds: How often (in seconds) to perform the probe.
         :param builtins.int port: Port number to access on the container.
         :param builtins.str scheme: Scheme to use for connecting to the host (HTTP or HTTPS).
+        :param builtins.int success_threshold: Minimum consecutive successes for the probe to be considered successful after having failed.
         :param builtins.int timeout_seconds: Number of seconds after which the probe times out.
         """
         pulumi.set(__self__, "failure_threshold", failure_threshold)
@@ -6763,6 +7024,7 @@ class GetArtifactSpecContainerGroupContainerReadinessProbeResult(dict):
         pulumi.set(__self__, "period_seconds", period_seconds)
         pulumi.set(__self__, "port", port)
         pulumi.set(__self__, "scheme", scheme)
+        pulumi.set(__self__, "success_threshold", success_threshold)
         pulumi.set(__self__, "timeout_seconds", timeout_seconds)
 
     @property
@@ -6820,6 +7082,14 @@ class GetArtifactSpecContainerGroupContainerReadinessProbeResult(dict):
         Scheme to use for connecting to the host (HTTP or HTTPS).
         """
         return pulumi.get(self, "scheme")
+
+    @property
+    @pulumi.getter(name="successThreshold")
+    def success_threshold(self) -> builtins.int:
+        """
+        Minimum consecutive successes for the probe to be considered successful after having failed.
+        """
+        return pulumi.get(self, "success_threshold")
 
     @property
     @pulumi.getter(name="timeoutSeconds")
@@ -6949,6 +7219,7 @@ class GetArtifactSpecContainerGroupContainerStartupProbeResult(dict):
                  period_seconds: builtins.int,
                  port: builtins.int,
                  scheme: builtins.str,
+                 success_threshold: builtins.int,
                  timeout_seconds: builtins.int):
         """
         :param builtins.int failure_threshold: Minimum consecutive failures for the probe to be considered failed.
@@ -6958,6 +7229,7 @@ class GetArtifactSpecContainerGroupContainerStartupProbeResult(dict):
         :param builtins.int period_seconds: How often (in seconds) to perform the probe.
         :param builtins.int port: Port number to access on the container.
         :param builtins.str scheme: Scheme to use for connecting to the host (HTTP or HTTPS).
+        :param builtins.int success_threshold: Minimum consecutive successes for the probe to be considered successful after having failed.
         :param builtins.int timeout_seconds: Number of seconds after which the probe times out.
         """
         pulumi.set(__self__, "failure_threshold", failure_threshold)
@@ -6967,6 +7239,7 @@ class GetArtifactSpecContainerGroupContainerStartupProbeResult(dict):
         pulumi.set(__self__, "period_seconds", period_seconds)
         pulumi.set(__self__, "port", port)
         pulumi.set(__self__, "scheme", scheme)
+        pulumi.set(__self__, "success_threshold", success_threshold)
         pulumi.set(__self__, "timeout_seconds", timeout_seconds)
 
     @property
@@ -7024,6 +7297,14 @@ class GetArtifactSpecContainerGroupContainerStartupProbeResult(dict):
         Scheme to use for connecting to the host (HTTP or HTTPS).
         """
         return pulumi.get(self, "scheme")
+
+    @property
+    @pulumi.getter(name="successThreshold")
+    def success_threshold(self) -> builtins.int:
+        """
+        Minimum consecutive successes for the probe to be considered successful after having failed.
+        """
+        return pulumi.get(self, "success_threshold")
 
     @property
     @pulumi.getter(name="timeoutSeconds")
@@ -7585,8 +7866,8 @@ class GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarResult(dict):
         """
         :param builtins.str dr_credential_id: DataRobot credential ID when source is "dr-credential".
         :param builtins.str key: Key within the credential when source is "dr-credential".
-        :param builtins.str name: Name of the environment variable.
-        :param builtins.str source: Source type: "string" for plain text values, "dr-credential" for DataRobot credentials.
+        :param builtins.str name: Name of the environment variable. May be absent for "api-key" entries, in which case the token is injected as DATAROBOT*API*TOKEN.
+        :param builtins.str source: Source type: "string" for plain text values, "dr-credential" for DataRobot credentials, "api-key" for a platform-managed DataRobot API token.
         :param builtins.str value: Value of the environment variable when source is "string".
         """
         pulumi.set(__self__, "dr_credential_id", dr_credential_id)
@@ -7615,7 +7896,7 @@ class GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarResult(dict):
     @pulumi.getter
     def name(self) -> builtins.str:
         """
-        Name of the environment variable.
+        Name of the environment variable. May be absent for "api-key" entries, in which case the token is injected as DATAROBOT*API*TOKEN.
         """
         return pulumi.get(self, "name")
 
@@ -7623,7 +7904,7 @@ class GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarResult(dict):
     @pulumi.getter
     def source(self) -> builtins.str:
         """
-        Source type: "string" for plain text values, "dr-credential" for DataRobot credentials.
+        Source type: "string" for plain text values, "dr-credential" for DataRobot credentials, "api-key" for a platform-managed DataRobot API token.
         """
         return pulumi.get(self, "source")
 
@@ -7806,6 +8087,7 @@ class GetArtifactsArtifactSpecContainerGroupContainerLivenessProbeResult(dict):
                  period_seconds: builtins.int,
                  port: builtins.int,
                  scheme: builtins.str,
+                 success_threshold: builtins.int,
                  timeout_seconds: builtins.int):
         """
         :param builtins.int failure_threshold: Minimum consecutive failures for the probe to be considered failed.
@@ -7815,6 +8097,7 @@ class GetArtifactsArtifactSpecContainerGroupContainerLivenessProbeResult(dict):
         :param builtins.int period_seconds: How often (in seconds) to perform the probe.
         :param builtins.int port: Port number to access on the container.
         :param builtins.str scheme: Scheme to use for connecting to the host (HTTP or HTTPS).
+        :param builtins.int success_threshold: Minimum consecutive successes for the probe to be considered successful after having failed.
         :param builtins.int timeout_seconds: Number of seconds after which the probe times out.
         """
         pulumi.set(__self__, "failure_threshold", failure_threshold)
@@ -7824,6 +8107,7 @@ class GetArtifactsArtifactSpecContainerGroupContainerLivenessProbeResult(dict):
         pulumi.set(__self__, "period_seconds", period_seconds)
         pulumi.set(__self__, "port", port)
         pulumi.set(__self__, "scheme", scheme)
+        pulumi.set(__self__, "success_threshold", success_threshold)
         pulumi.set(__self__, "timeout_seconds", timeout_seconds)
 
     @property
@@ -7881,6 +8165,14 @@ class GetArtifactsArtifactSpecContainerGroupContainerLivenessProbeResult(dict):
         Scheme to use for connecting to the host (HTTP or HTTPS).
         """
         return pulumi.get(self, "scheme")
+
+    @property
+    @pulumi.getter(name="successThreshold")
+    def success_threshold(self) -> builtins.int:
+        """
+        Minimum consecutive successes for the probe to be considered successful after having failed.
+        """
+        return pulumi.get(self, "success_threshold")
 
     @property
     @pulumi.getter(name="timeoutSeconds")
@@ -7901,6 +8193,7 @@ class GetArtifactsArtifactSpecContainerGroupContainerReadinessProbeResult(dict):
                  period_seconds: builtins.int,
                  port: builtins.int,
                  scheme: builtins.str,
+                 success_threshold: builtins.int,
                  timeout_seconds: builtins.int):
         """
         :param builtins.int failure_threshold: Minimum consecutive failures for the probe to be considered failed.
@@ -7910,6 +8203,7 @@ class GetArtifactsArtifactSpecContainerGroupContainerReadinessProbeResult(dict):
         :param builtins.int period_seconds: How often (in seconds) to perform the probe.
         :param builtins.int port: Port number to access on the container.
         :param builtins.str scheme: Scheme to use for connecting to the host (HTTP or HTTPS).
+        :param builtins.int success_threshold: Minimum consecutive successes for the probe to be considered successful after having failed.
         :param builtins.int timeout_seconds: Number of seconds after which the probe times out.
         """
         pulumi.set(__self__, "failure_threshold", failure_threshold)
@@ -7919,6 +8213,7 @@ class GetArtifactsArtifactSpecContainerGroupContainerReadinessProbeResult(dict):
         pulumi.set(__self__, "period_seconds", period_seconds)
         pulumi.set(__self__, "port", port)
         pulumi.set(__self__, "scheme", scheme)
+        pulumi.set(__self__, "success_threshold", success_threshold)
         pulumi.set(__self__, "timeout_seconds", timeout_seconds)
 
     @property
@@ -7976,6 +8271,14 @@ class GetArtifactsArtifactSpecContainerGroupContainerReadinessProbeResult(dict):
         Scheme to use for connecting to the host (HTTP or HTTPS).
         """
         return pulumi.get(self, "scheme")
+
+    @property
+    @pulumi.getter(name="successThreshold")
+    def success_threshold(self) -> builtins.int:
+        """
+        Minimum consecutive successes for the probe to be considered successful after having failed.
+        """
+        return pulumi.get(self, "success_threshold")
 
     @property
     @pulumi.getter(name="timeoutSeconds")
@@ -8105,6 +8408,7 @@ class GetArtifactsArtifactSpecContainerGroupContainerStartupProbeResult(dict):
                  period_seconds: builtins.int,
                  port: builtins.int,
                  scheme: builtins.str,
+                 success_threshold: builtins.int,
                  timeout_seconds: builtins.int):
         """
         :param builtins.int failure_threshold: Minimum consecutive failures for the probe to be considered failed.
@@ -8114,6 +8418,7 @@ class GetArtifactsArtifactSpecContainerGroupContainerStartupProbeResult(dict):
         :param builtins.int period_seconds: How often (in seconds) to perform the probe.
         :param builtins.int port: Port number to access on the container.
         :param builtins.str scheme: Scheme to use for connecting to the host (HTTP or HTTPS).
+        :param builtins.int success_threshold: Minimum consecutive successes for the probe to be considered successful after having failed.
         :param builtins.int timeout_seconds: Number of seconds after which the probe times out.
         """
         pulumi.set(__self__, "failure_threshold", failure_threshold)
@@ -8123,6 +8428,7 @@ class GetArtifactsArtifactSpecContainerGroupContainerStartupProbeResult(dict):
         pulumi.set(__self__, "period_seconds", period_seconds)
         pulumi.set(__self__, "port", port)
         pulumi.set(__self__, "scheme", scheme)
+        pulumi.set(__self__, "success_threshold", success_threshold)
         pulumi.set(__self__, "timeout_seconds", timeout_seconds)
 
     @property
@@ -8180,6 +8486,14 @@ class GetArtifactsArtifactSpecContainerGroupContainerStartupProbeResult(dict):
         Scheme to use for connecting to the host (HTTP or HTTPS).
         """
         return pulumi.get(self, "scheme")
+
+    @property
+    @pulumi.getter(name="successThreshold")
+    def success_threshold(self) -> builtins.int:
+        """
+        Minimum consecutive successes for the probe to be considered successful after having failed.
+        """
+        return pulumi.get(self, "success_threshold")
 
     @property
     @pulumi.getter(name="timeoutSeconds")
