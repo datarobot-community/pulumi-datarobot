@@ -27,9 +27,13 @@ namespace DataRobotPulumi.Datarobot.Outputs
         /// </summary>
         public readonly ImmutableArray<Outputs.ArtifactSpecContainerGroupContainerEnvironmentVar> EnvironmentVars;
         /// <summary>
-        /// Docker image URI.
+        /// Configuration for server-side image builds from source code.
         /// </summary>
-        public readonly string ImageUri;
+        public readonly Outputs.ArtifactSpecContainerGroupContainerImageBuildConfig? ImageBuildConfig;
+        /// <summary>
+        /// Docker image URI. Omit when using `image_build_config` on draft artifacts; required when status is `locked` and `image_build_config` is set.
+        /// </summary>
+        public readonly string? ImageUri;
         /// <summary>
         /// Container liveness check configuration.
         /// </summary>
@@ -63,7 +67,9 @@ namespace DataRobotPulumi.Datarobot.Outputs
 
             ImmutableArray<Outputs.ArtifactSpecContainerGroupContainerEnvironmentVar> environmentVars,
 
-            string imageUri,
+            Outputs.ArtifactSpecContainerGroupContainerImageBuildConfig? imageBuildConfig,
+
+            string? imageUri,
 
             Outputs.ArtifactSpecContainerGroupContainerLivenessProbe? livenessProbe,
 
@@ -80,6 +86,7 @@ namespace DataRobotPulumi.Datarobot.Outputs
             Description = description;
             Entrypoints = entrypoints;
             EnvironmentVars = environmentVars;
+            ImageBuildConfig = imageBuildConfig;
             ImageUri = imageUri;
             LivenessProbe = livenessProbe;
             Name = name;

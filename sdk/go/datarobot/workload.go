@@ -14,28 +14,11 @@ import (
 
 // A Workload runs a containerized artifact in the cluster and exposes an inference endpoint.
 //
-// Several attributes (including `runtime` and `artifactId`) trigger replacement when changed. To avoid downtime during replacements, it is recommended to set `createBeforeDestroy` in the resource lifecycle:
-//
-// ```go
-// package main
-//
-// import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//
-// )
-//
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			return nil
-//		})
-//	}
-//
-// ```
+// Changes to `artifactId` or `runtime` trigger an in-place workload replacement via the Workload API. The workload ID and endpoint remain stable across artifact and runtime updates.
 type Workload struct {
 	pulumi.CustomResourceState
 
-	// ID of the Artifact version to deploy. When using `Artifact`, reference `datarobot_artifact.<name>.artifact_id` (not `.id`). Changing this value forces a new Workload to be created.
+	// ID of the Artifact version to deploy. When using `Artifact`, reference `datarobot_artifact.<name>.artifact_id` (not `.id`). Changing this value triggers an in-place workload replacement.
 	ArtifactId pulumi.StringOutput `pulumi:"artifactId"`
 	// A human-readable description of the Workload.
 	Description pulumi.StringPtrOutput `pulumi:"description"`
@@ -45,7 +28,7 @@ type Workload struct {
 	Importance pulumi.StringOutput `pulumi:"importance"`
 	// The name of the Workload.
 	Name pulumi.StringOutput `pulumi:"name"`
-	// Runtime configuration for the Workload.
+	// Runtime configuration for the Workload. Changes trigger an in-place workload replacement.
 	Runtime WorkloadRuntimeOutput `pulumi:"runtime"`
 	// Current status of the Workload: `unknown`, `submitted`, `initializing`, `running`, `stopping`, `stopped`, or `errored`.
 	Status pulumi.StringOutput `pulumi:"status"`
@@ -87,7 +70,7 @@ func GetWorkload(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Workload resources.
 type workloadState struct {
-	// ID of the Artifact version to deploy. When using `Artifact`, reference `datarobot_artifact.<name>.artifact_id` (not `.id`). Changing this value forces a new Workload to be created.
+	// ID of the Artifact version to deploy. When using `Artifact`, reference `datarobot_artifact.<name>.artifact_id` (not `.id`). Changing this value triggers an in-place workload replacement.
 	ArtifactId *string `pulumi:"artifactId"`
 	// A human-readable description of the Workload.
 	Description *string `pulumi:"description"`
@@ -97,14 +80,14 @@ type workloadState struct {
 	Importance *string `pulumi:"importance"`
 	// The name of the Workload.
 	Name *string `pulumi:"name"`
-	// Runtime configuration for the Workload.
+	// Runtime configuration for the Workload. Changes trigger an in-place workload replacement.
 	Runtime *WorkloadRuntime `pulumi:"runtime"`
 	// Current status of the Workload: `unknown`, `submitted`, `initializing`, `running`, `stopping`, `stopped`, or `errored`.
 	Status *string `pulumi:"status"`
 }
 
 type WorkloadState struct {
-	// ID of the Artifact version to deploy. When using `Artifact`, reference `datarobot_artifact.<name>.artifact_id` (not `.id`). Changing this value forces a new Workload to be created.
+	// ID of the Artifact version to deploy. When using `Artifact`, reference `datarobot_artifact.<name>.artifact_id` (not `.id`). Changing this value triggers an in-place workload replacement.
 	ArtifactId pulumi.StringPtrInput
 	// A human-readable description of the Workload.
 	Description pulumi.StringPtrInput
@@ -114,7 +97,7 @@ type WorkloadState struct {
 	Importance pulumi.StringPtrInput
 	// The name of the Workload.
 	Name pulumi.StringPtrInput
-	// Runtime configuration for the Workload.
+	// Runtime configuration for the Workload. Changes trigger an in-place workload replacement.
 	Runtime WorkloadRuntimePtrInput
 	// Current status of the Workload: `unknown`, `submitted`, `initializing`, `running`, `stopping`, `stopped`, or `errored`.
 	Status pulumi.StringPtrInput
@@ -125,7 +108,7 @@ func (WorkloadState) ElementType() reflect.Type {
 }
 
 type workloadArgs struct {
-	// ID of the Artifact version to deploy. When using `Artifact`, reference `datarobot_artifact.<name>.artifact_id` (not `.id`). Changing this value forces a new Workload to be created.
+	// ID of the Artifact version to deploy. When using `Artifact`, reference `datarobot_artifact.<name>.artifact_id` (not `.id`). Changing this value triggers an in-place workload replacement.
 	ArtifactId string `pulumi:"artifactId"`
 	// A human-readable description of the Workload.
 	Description *string `pulumi:"description"`
@@ -133,13 +116,13 @@ type workloadArgs struct {
 	Importance *string `pulumi:"importance"`
 	// The name of the Workload.
 	Name *string `pulumi:"name"`
-	// Runtime configuration for the Workload.
+	// Runtime configuration for the Workload. Changes trigger an in-place workload replacement.
 	Runtime WorkloadRuntime `pulumi:"runtime"`
 }
 
 // The set of arguments for constructing a Workload resource.
 type WorkloadArgs struct {
-	// ID of the Artifact version to deploy. When using `Artifact`, reference `datarobot_artifact.<name>.artifact_id` (not `.id`). Changing this value forces a new Workload to be created.
+	// ID of the Artifact version to deploy. When using `Artifact`, reference `datarobot_artifact.<name>.artifact_id` (not `.id`). Changing this value triggers an in-place workload replacement.
 	ArtifactId pulumi.StringInput
 	// A human-readable description of the Workload.
 	Description pulumi.StringPtrInput
@@ -147,7 +130,7 @@ type WorkloadArgs struct {
 	Importance pulumi.StringPtrInput
 	// The name of the Workload.
 	Name pulumi.StringPtrInput
-	// Runtime configuration for the Workload.
+	// Runtime configuration for the Workload. Changes trigger an in-place workload replacement.
 	Runtime WorkloadRuntimeInput
 }
 
@@ -238,7 +221,7 @@ func (o WorkloadOutput) ToWorkloadOutputWithContext(ctx context.Context) Workloa
 	return o
 }
 
-// ID of the Artifact version to deploy. When using `Artifact`, reference `datarobot_artifact.<name>.artifact_id` (not `.id`). Changing this value forces a new Workload to be created.
+// ID of the Artifact version to deploy. When using `Artifact`, reference `datarobot_artifact.<name>.artifact_id` (not `.id`). Changing this value triggers an in-place workload replacement.
 func (o WorkloadOutput) ArtifactId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Workload) pulumi.StringOutput { return v.ArtifactId }).(pulumi.StringOutput)
 }
@@ -263,7 +246,7 @@ func (o WorkloadOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *Workload) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// Runtime configuration for the Workload.
+// Runtime configuration for the Workload. Changes trigger an in-place workload replacement.
 func (o WorkloadOutput) Runtime() WorkloadRuntimeOutput {
 	return o.ApplyT(func(v *Workload) WorkloadRuntimeOutput { return v.Runtime }).(WorkloadRuntimeOutput)
 }

@@ -15,41 +15,20 @@ namespace DataRobotPulumi.Datarobot.Outputs
     public sealed class WorkloadRuntimeContainerGroupAutoscalingPolicy
     {
         /// <summary>
-        /// Maximum number of replicas.
-        /// </summary>
-        public readonly int MaxCount;
-        /// <summary>
-        /// Minimum number of replicas.
-        /// </summary>
-        public readonly int MinCount;
-        /// <summary>
-        /// Policy priority when multiple policies are defined.
-        /// </summary>
-        public readonly int? Priority;
-        /// <summary>
-        /// Metric used for scaling decisions: `cpuAverageUtilization`, `httpRequestsConcurrency`, `gpuCacheUtilization`, or `gpuRequestQueueDepth`.
+        /// Metric used for scaling decisions: `cpuAverageUtilization`, `httpRequestsConcurrency`, `gpuCacheUtilization`, or `gpuRequestQueueDepth`. Custom metric names (e.g. `vllm:kv_cache_usage_perc`) are supported for NIM artifacts only.
         /// </summary>
         public readonly string ScalingMetric;
         /// <summary>
-        /// Target value for the scaling metric.
+        /// Target value for the scaling metric. Must be non-negative.
         /// </summary>
         public readonly double Target;
 
         [OutputConstructor]
         private WorkloadRuntimeContainerGroupAutoscalingPolicy(
-            int maxCount,
-
-            int minCount,
-
-            int? priority,
-
             string scalingMetric,
 
             double target)
         {
-            MaxCount = maxCount;
-            MinCount = minCount;
-            Priority = priority;
             ScalingMetric = scalingMetric;
             Target = target;
         }

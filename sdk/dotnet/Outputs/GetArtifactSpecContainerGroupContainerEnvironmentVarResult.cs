@@ -23,11 +23,11 @@ namespace DataRobotPulumi.Datarobot.Outputs
         /// </summary>
         public readonly string Key;
         /// <summary>
-        /// Name of the environment variable.
+        /// Name of the environment variable. May be absent for "api-key" entries, in which case the token is injected as DATAROBOT*API*TOKEN.
         /// </summary>
         public readonly string Name;
         /// <summary>
-        /// Source type: "string" for plain text values, "dr-credential" for DataRobot credentials.
+        /// Source type: "string" for plain text values, "dr-credential" for DataRobot credentials, "api-key" for a platform-managed DataRobot API token.
         /// </summary>
         public readonly string Source;
         /// <summary>

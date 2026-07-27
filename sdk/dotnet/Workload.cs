@@ -13,23 +13,13 @@ namespace DataRobotPulumi.Datarobot
     /// <summary>
     /// A Workload runs a containerized artifact in the cluster and exposes an inference endpoint.
     /// 
-    /// Several attributes (including `runtime` and `artifact_id`) trigger replacement when changed. To avoid downtime during replacements, it is recommended to set `create_before_destroy` in the resource lifecycle:
-    /// 
-    /// ```csharp
-    /// using System.Collections.Generic;
-    /// using System.Linq;
-    /// using Pulumi;
-    /// 
-    /// return await Deployment.RunAsync(() =&gt; 
-    /// {
-    /// });
-    /// ```
+    /// Changes to `artifact_id` or `runtime` trigger an in-place workload replacement via the Workload API. The workload ID and endpoint remain stable across artifact and runtime updates.
     /// </summary>
     [DatarobotResourceType("datarobot:index/workload:Workload")]
     public partial class Workload : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// ID of the Artifact version to deploy. When using `datarobot.Artifact`, reference `datarobot_artifact.&lt;name&gt;.artifact_id` (not `.id`). Changing this value forces a new Workload to be created.
+        /// ID of the Artifact version to deploy. When using `datarobot.Artifact`, reference `datarobot_artifact.&lt;name&gt;.artifact_id` (not `.id`). Changing this value triggers an in-place workload replacement.
         /// </summary>
         [Output("artifactId")]
         public Output<string> ArtifactId { get; private set; } = null!;
@@ -59,7 +49,7 @@ namespace DataRobotPulumi.Datarobot
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// Runtime configuration for the Workload.
+        /// Runtime configuration for the Workload. Changes trigger an in-place workload replacement.
         /// </summary>
         [Output("runtime")]
         public Output<Outputs.WorkloadRuntime> Runtime { get; private set; } = null!;
@@ -118,7 +108,7 @@ namespace DataRobotPulumi.Datarobot
     public sealed class WorkloadArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// ID of the Artifact version to deploy. When using `datarobot.Artifact`, reference `datarobot_artifact.&lt;name&gt;.artifact_id` (not `.id`). Changing this value forces a new Workload to be created.
+        /// ID of the Artifact version to deploy. When using `datarobot.Artifact`, reference `datarobot_artifact.&lt;name&gt;.artifact_id` (not `.id`). Changing this value triggers an in-place workload replacement.
         /// </summary>
         [Input("artifactId", required: true)]
         public Input<string> ArtifactId { get; set; } = null!;
@@ -142,7 +132,7 @@ namespace DataRobotPulumi.Datarobot
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// Runtime configuration for the Workload.
+        /// Runtime configuration for the Workload. Changes trigger an in-place workload replacement.
         /// </summary>
         [Input("runtime", required: true)]
         public Input<Inputs.WorkloadRuntimeArgs> Runtime { get; set; } = null!;
@@ -156,7 +146,7 @@ namespace DataRobotPulumi.Datarobot
     public sealed class WorkloadState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// ID of the Artifact version to deploy. When using `datarobot.Artifact`, reference `datarobot_artifact.&lt;name&gt;.artifact_id` (not `.id`). Changing this value forces a new Workload to be created.
+        /// ID of the Artifact version to deploy. When using `datarobot.Artifact`, reference `datarobot_artifact.&lt;name&gt;.artifact_id` (not `.id`). Changing this value triggers an in-place workload replacement.
         /// </summary>
         [Input("artifactId")]
         public Input<string>? ArtifactId { get; set; }
@@ -186,7 +176,7 @@ namespace DataRobotPulumi.Datarobot
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// Runtime configuration for the Workload.
+        /// Runtime configuration for the Workload. Changes trigger an in-place workload replacement.
         /// </summary>
         [Input("runtime")]
         public Input<Inputs.WorkloadRuntimeGetArgs>? Runtime { get; set; }

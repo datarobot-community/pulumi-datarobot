@@ -109,9 +109,13 @@ export interface ArtifactSpecContainerGroupContainer {
      */
     environmentVars?: outputs.ArtifactSpecContainerGroupContainerEnvironmentVar[];
     /**
-     * Docker image URI.
+     * Configuration for server-side image builds from source code.
      */
-    imageUri: string;
+    imageBuildConfig?: outputs.ArtifactSpecContainerGroupContainerImageBuildConfig;
+    /**
+     * Docker image URI. Omit when using `imageBuildConfig` on draft artifacts; required when status is `locked` and `imageBuildConfig` is set.
+     */
+    imageUri?: string;
     /**
      * Container liveness check configuration.
      */
@@ -148,17 +152,62 @@ export interface ArtifactSpecContainerGroupContainerEnvironmentVar {
      */
     key?: string;
     /**
-     * Name of the environment variable.
+     * Name of the environment variable. Required when source is "string" or "dr-credential". Optional for "api-key": when omitted, the platform injects the token as DATAROBOT*API*TOKEN.
      */
-    name: string;
+    name?: string;
     /**
-     * Source type: "string" for plain text values, "dr-credential" for DataRobot credentials. Defaults to "string".
+     * Source type: "string" for plain text values, "dr-credential" for DataRobot credentials, "api-key" for a platform-managed DataRobot API token. Defaults to "string".
      */
     source: string;
     /**
      * Value of the environment variable. Required when source is "string".
      */
     value?: string;
+}
+
+export interface ArtifactSpecContainerGroupContainerImageBuildConfig {
+    /**
+     * Reference to source code in the DataRobot catalog. Optional at create; required before image build or lock.
+     */
+    codeRef?: outputs.ArtifactSpecContainerGroupContainerImageBuildConfigCodeRef;
+    /**
+     * How the Dockerfile is obtained for the image build. Defaults to using `./Dockerfile` from the source code.
+     */
+    dockerfile?: outputs.ArtifactSpecContainerGroupContainerImageBuildConfigDockerfile;
+}
+
+export interface ArtifactSpecContainerGroupContainerImageBuildConfigCodeRef {
+    /**
+     * Files API catalog ID (24-character hex).
+     */
+    catalogId: string;
+    /**
+     * Files API catalog version ID (24-character hex).
+     */
+    catalogVersionId: string;
+}
+
+export interface ArtifactSpecContainerGroupContainerImageBuildConfigDockerfile {
+    /**
+     * Entrypoint baked into the generated Dockerfile CMD. Required when source is `generated`.
+     */
+    entrypoints?: string[];
+    /**
+     * Execution environment ID for the base Docker image. Required when source is `generated`.
+     */
+    executionEnvironmentId?: string;
+    /**
+     * Execution environment version ID that pins the base image. Required when source is `generated`.
+     */
+    executionEnvironmentVersionId?: string;
+    /**
+     * Relative path to the Dockerfile in the source code. Used when source is `provided`. Defaults to `./Dockerfile`.
+     */
+    path: string;
+    /**
+     * How the Dockerfile is obtained: `provided` (from source code) or `generated` (from an execution environment). Defaults to `provided`.
+     */
+    source: string;
 }
 
 export interface ArtifactSpecContainerGroupContainerLivenessProbe {
@@ -190,6 +239,10 @@ export interface ArtifactSpecContainerGroupContainerLivenessProbe {
      * Scheme to use for connecting to the host (HTTP or HTTPS).
      */
     scheme: string;
+    /**
+     * Minimum consecutive successes for the probe to be considered successful after having failed.
+     */
+    successThreshold: number;
     /**
      * Number of seconds after which the probe times out.
      */
@@ -226,6 +279,10 @@ export interface ArtifactSpecContainerGroupContainerReadinessProbe {
      */
     scheme: string;
     /**
+     * Minimum consecutive successes for the probe to be considered successful after having failed.
+     */
+    successThreshold: number;
+    /**
      * Number of seconds after which the probe times out.
      */
     timeoutSeconds: number;
@@ -260,6 +317,10 @@ export interface ArtifactSpecContainerGroupContainerStartupProbe {
      * Scheme to use for connecting to the host (HTTP or HTTPS).
      */
     scheme: string;
+    /**
+     * Minimum consecutive successes for the probe to be considered successful after having failed.
+     */
+    successThreshold: number;
     /**
      * Number of seconds after which the probe times out.
      */
@@ -1535,11 +1596,11 @@ export interface GetArtifactSpecContainerGroupContainerEnvironmentVar {
      */
     key: string;
     /**
-     * Name of the environment variable.
+     * Name of the environment variable. May be absent for "api-key" entries, in which case the token is injected as DATAROBOT*API*TOKEN.
      */
     name: string;
     /**
-     * Source type: "string" for plain text values, "dr-credential" for DataRobot credentials.
+     * Source type: "string" for plain text values, "dr-credential" for DataRobot credentials, "api-key" for a platform-managed DataRobot API token.
      */
     source: string;
     /**
@@ -1638,6 +1699,10 @@ export interface GetArtifactSpecContainerGroupContainerLivenessProbe {
      */
     scheme: string;
     /**
+     * Minimum consecutive successes for the probe to be considered successful after having failed.
+     */
+    successThreshold: number;
+    /**
      * Number of seconds after which the probe times out.
      */
     timeoutSeconds: number;
@@ -1672,6 +1737,10 @@ export interface GetArtifactSpecContainerGroupContainerReadinessProbe {
      * Scheme to use for connecting to the host (HTTP or HTTPS).
      */
     scheme: string;
+    /**
+     * Minimum consecutive successes for the probe to be considered successful after having failed.
+     */
+    successThreshold: number;
     /**
      * Number of seconds after which the probe times out.
      */
@@ -1748,6 +1817,10 @@ export interface GetArtifactSpecContainerGroupContainerStartupProbe {
      * Scheme to use for connecting to the host (HTTP or HTTPS).
      */
     scheme: string;
+    /**
+     * Minimum consecutive successes for the probe to be considered successful after having failed.
+     */
+    successThreshold: number;
     /**
      * Number of seconds after which the probe times out.
      */
@@ -1964,11 +2037,11 @@ export interface GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVar {
      */
     key: string;
     /**
-     * Name of the environment variable.
+     * Name of the environment variable. May be absent for "api-key" entries, in which case the token is injected as DATAROBOT*API*TOKEN.
      */
     name: string;
     /**
-     * Source type: "string" for plain text values, "dr-credential" for DataRobot credentials.
+     * Source type: "string" for plain text values, "dr-credential" for DataRobot credentials, "api-key" for a platform-managed DataRobot API token.
      */
     source: string;
     /**
@@ -2067,6 +2140,10 @@ export interface GetArtifactsArtifactSpecContainerGroupContainerLivenessProbe {
      */
     scheme: string;
     /**
+     * Minimum consecutive successes for the probe to be considered successful after having failed.
+     */
+    successThreshold: number;
+    /**
      * Number of seconds after which the probe times out.
      */
     timeoutSeconds: number;
@@ -2101,6 +2178,10 @@ export interface GetArtifactsArtifactSpecContainerGroupContainerReadinessProbe {
      * Scheme to use for connecting to the host (HTTP or HTTPS).
      */
     scheme: string;
+    /**
+     * Minimum consecutive successes for the probe to be considered successful after having failed.
+     */
+    successThreshold: number;
     /**
      * Number of seconds after which the probe times out.
      */
@@ -2177,6 +2258,10 @@ export interface GetArtifactsArtifactSpecContainerGroupContainerStartupProbe {
      * Scheme to use for connecting to the host (HTTP or HTTPS).
      */
     scheme: string;
+    /**
+     * Minimum consecutive successes for the probe to be considered successful after having failed.
+     */
+    successThreshold: number;
     /**
      * Number of seconds after which the probe times out.
      */
@@ -2377,6 +2462,14 @@ export interface WorkloadRuntimeContainerGroupAutoscaling {
      */
     enabled: boolean;
     /**
+     * Maximum number of replicas. Defaults to `1`.
+     */
+    maxReplicaCount: number;
+    /**
+     * Minimum number of replicas. Set to `0` to allow scale-to-zero. Defaults to `0`.
+     */
+    minReplicaCount: number;
+    /**
      * Scaling policies that define when and how to scale.
      */
     policies: outputs.WorkloadRuntimeContainerGroupAutoscalingPolicy[];
@@ -2384,23 +2477,11 @@ export interface WorkloadRuntimeContainerGroupAutoscaling {
 
 export interface WorkloadRuntimeContainerGroupAutoscalingPolicy {
     /**
-     * Maximum number of replicas.
-     */
-    maxCount: number;
-    /**
-     * Minimum number of replicas.
-     */
-    minCount: number;
-    /**
-     * Policy priority when multiple policies are defined.
-     */
-    priority: number;
-    /**
-     * Metric used for scaling decisions: `cpuAverageUtilization`, `httpRequestsConcurrency`, `gpuCacheUtilization`, or `gpuRequestQueueDepth`.
+     * Metric used for scaling decisions: `cpuAverageUtilization`, `httpRequestsConcurrency`, `gpuCacheUtilization`, or `gpuRequestQueueDepth`. Custom metric names (e.g. `vllm:kv_cache_usage_perc`) are supported for NIM artifacts only.
      */
     scalingMetric: string;
     /**
-     * Target value for the scaling metric.
+     * Target value for the scaling metric. Must be non-negative.
      */
     target: number;
 }
