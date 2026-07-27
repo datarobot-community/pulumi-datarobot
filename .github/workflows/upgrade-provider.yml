@@ -23,6 +23,7 @@ jobs:
       issues: write
     outputs:
       pr_branch: ${{ steps.detect_pr.outputs.pr_branch }}
+      pr_number: ${{ steps.detect_pr.outputs.pr_number }}
       version: ${{ steps.version.outputs.version }}
     steps:
     - name: Install mise
@@ -88,36 +89,47 @@ jobs:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         echo "Detecting upgrade provider PR branch (post action)..."
+        PR_BRANCH=""
 
         # First, try to detect from git state — the action may have left us on the created branch
         CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "")
         DEFAULT_BRANCH=$(git remote show origin | awk '/HEAD branch/ {print $NF}')
         if [[ -n "$CURRENT_BRANCH" && "$CURRENT_BRANCH" != "$DEFAULT_BRANCH" && "$CURRENT_BRANCH" != "HEAD" ]]; then
           echo "Detected current branch: $CURRENT_BRANCH (using as PR branch)"
-          echo "pr_branch=$CURRENT_BRANCH" >> $GITHUB_OUTPUT
-          exit 0
+          PR_BRANCH="$CURRENT_BRANCH"
         fi
 
         # Fall back to searching via GitHub API with retries to handle propagation delay
-        for ATTEMPT in 1 2 3 4 5; do
-          echo "Attempt $ATTEMPT: searching for upgrade provider PR..."
-          PR_JSON=$(gh pr list --state open --author github-actions[bot] --search "Upgrade terraform-provider-datarobot" --json number,headRefName,title,updatedAt --limit 20 | jq -r 'sort_by(.updatedAt) | reverse | .[0]')
-          if [[ -n "$PR_JSON" && "$PR_JSON" != "null" ]]; then
-            PR_BRANCH=$(echo "$PR_JSON" | jq -r '.headRefName')
-            PR_TITLE=$(echo "$PR_JSON" | jq -r '.title')
-            echo "Found PR: $PR_TITLE (branch: $PR_BRANCH)"
-            echo "pr_branch=$PR_BRANCH" >> $GITHUB_OUTPUT
-            exit 0
-          fi
-          echo "No PR found yet, waiting 15 s before retry..."
-          sleep 15
-        done
+        if [[ -z "$PR_BRANCH" ]]; then
+          for ATTEMPT in 1 2 3 4 5; do
+            echo "Attempt $ATTEMPT: searching for upgrade provider PR..."
+            PR_JSON=$(gh pr list --state open --author github-actions[bot] --search "Upgrade terraform-provider-datarobot" --json number,headRefName,title,updatedAt --limit 20 | jq -r 'sort_by(.updatedAt) | reverse | .[0]')
+            if [[ -n "$PR_JSON" && "$PR_JSON" != "null" ]]; then
+              PR_BRANCH=$(echo "$PR_JSON" | jq -r '.headRefName')
+              PR_TITLE=$(echo "$PR_JSON" | jq -r '.title')
+              echo "Found PR: $PR_TITLE (branch: $PR_BRANCH)"
+              break
+            fi
+            echo "No PR found yet, waiting 15 s before retry..."
+            sleep 15
+          done
+        fi
 
-        echo "No matching upgrade provider PR found after retries."
-        echo "pr_branch=" >> $GITHUB_OUTPUT
+        if [[ -z "$PR_BRANCH" ]]; then
+          echo "No matching upgrade provider PR found after retries."
+          echo "pr_branch=" >> $GITHUB_OUTPUT
+          echo "pr_number=" >> $GITHUB_OUTPUT
+          exit 0
+        fi
 
-  generate_readmes:
-    name: generate-readmes
+        # The changelog comment needs the PR number, which branch detection above may not have found.
+        PR_NUMBER=$(gh pr list --state open --head "$PR_BRANCH" --json number --jq '.[0].number // empty' || echo "")
+        echo "PR branch: $PR_BRANCH (number: ${PR_NUMBER:-unknown})"
+        echo "pr_branch=$PR_BRANCH" >> $GITHUB_OUTPUT
+        echo "pr_number=$PR_NUMBER" >> $GITHUB_OUTPUT
+
+  generate_readmes_and_changelog:
+    name: generate-readmes-and-changelog
     runs-on: ubuntu-latest
     needs: upgrade_provider
     if: needs.upgrade_provider.outputs.pr_branch != ''
@@ -142,15 +154,70 @@ jobs:
           else
             echo "build-readme.sh not found, skipping README generation"
           fi
-      - name: Commit README changes (if any)
+      - name: Install schema-tools
+        uses: jaxxstorm/action-install-gh-release@25e24d2d23ae098373794ef1d6faecb48ee52da8 # v3.0.0
+        continue-on-error: true
+        with:
+          repo: pulumi/schema-tools
+      - name: Generate changelog entry
+        id: changelog
+        # Never block the README commit below on a changelog failure (e.g. a GitHub
+        # API hiccup); the step is annotated as failed and the upgrade still lands.
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ needs.upgrade_provider.outputs.version }}
         run: |
-          if ! git diff --quiet sdk/*/README.md; then
-            echo "README changes detected; committing..."
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add sdk/*/README.md
-            git commit -m "Update SDK READMEs after provider upgrade" || echo "Commit skipped"
-            git push origin HEAD
-          else
-            echo "No changes in SDK READMEs; nothing to commit."
+          set -euo pipefail
+          git fetch origin +refs/heads/main:refs/remotes/origin/main
+
+          # The upstream version is pinned only in provider/go.mod, so read it from
+          # there rather than parsing the bot's PR title.
+          upstream_version() {
+            git show "$1:provider/go.mod" | awk '/terraform-provider-datarobot v/ { print $2; exit }'
+          }
+          OLD_UPSTREAM="$(upstream_version origin/main)"
+          NEW_UPSTREAM="$(awk '/terraform-provider-datarobot v/ { print $2; exit }' provider/go.mod)"
+          echo "Upstream: ${OLD_UPSTREAM:-unknown} -> ${NEW_UPSTREAM:-unknown}"
+
+          if [[ -z "$NEW_UPSTREAM" ]]; then
+            echo "Could not read the upstream version from provider/go.mod; skipping changelog."
+            echo "generated=false" >> "$GITHUB_OUTPUT"
+            exit 0
           fi
+
+          {
+            ./scripts/upstream-changelog.sh "${OLD_UPSTREAM:-$NEW_UPSTREAM}" "$NEW_UPSTREAM"
+            echo
+            ./scripts/schema-diff.sh origin/main
+          } > /tmp/changelog-notes.md
+
+          ./scripts/changelog.sh insert "$VERSION" /tmp/changelog-notes.md
+          echo "generated=true" >> "$GITHUB_OUTPUT"
+      - name: Commit README and changelog changes (if any)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add sdk/*/README.md CHANGELOG.md 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "No README or changelog changes; nothing to commit."
+          else
+            echo "Changes detected; committing..."
+            git commit -m "Update SDK READMEs and changelog after provider upgrade"
+            git push origin HEAD
+          fi
+      - name: Post changelog on the PR
+        if: steps.changelog.outputs.generated == 'true' && needs.upgrade_provider.outputs.pr_number != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ needs.upgrade_provider.outputs.pr_number }}
+        run: |
+          # A sticky comment, not an edit to the PR body: the body belongs to the
+          # upgrade-provider tool and other bots already append to it.
+          {
+            echo "## What this upgrade changes"
+            echo
+            cat /tmp/changelog-notes.md
+          } > /tmp/pr-comment.md
+          gh pr comment "$PR_NUMBER" --body-file /tmp/pr-comment.md --edit-last --create-if-none \
+            || gh pr comment "$PR_NUMBER" --body-file /tmp/pr-comment.md
