@@ -116,6 +116,8 @@ build_nodejs:: install_plugins tfgen # build the node sdk
 
 build_python:: install_plugins tfgen # build the python sdk
 	$(WORKING_DIR)/bin/$(TFGEN) python --overlays provider/overlays/python --out sdk/python/
+	@# Fix relative imports in subdirectory files — bridge generates ./ instead of ../ for subdir files
+	@sed -i.bak 's|^from \. import _utilities|from .. import _utilities|g' sdk/python/pulumi_datarobot/config/*.py sdk/python/pulumi_datarobot/config/*.pyi && rm -f sdk/python/pulumi_datarobot/config/*.bak
 	@echo "Restoring Python-specific README..."
 	@sed -e "s/{{VERSION}}/$(VERSION)/g" \
 		-e "s|{{PACKAGE_NAME}}|pulumi-datarobot|g" \
