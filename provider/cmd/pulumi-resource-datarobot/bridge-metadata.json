@@ -47,6 +47,17 @@
                                                     },
                                                     "environment_vars": {
                                                         "maxItemsOne": false
+                                                    },
+                                                    "image_build_config": {
+                                                        "fields": {
+                                                            "dockerfile": {
+                                                                "fields": {
+                                                                    "entrypoint": {
+                                                                        "maxItemsOne": false
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
                                                     }
                                                 }
                                             }
