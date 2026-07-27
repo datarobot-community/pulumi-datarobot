@@ -44,10 +44,16 @@ namespace DataRobotPulumi.Datarobot.Inputs
         }
 
         /// <summary>
-        /// Docker image URI.
+        /// Configuration for server-side image builds from source code.
         /// </summary>
-        [Input("imageUri", required: true)]
-        public Input<string> ImageUri { get; set; } = null!;
+        [Input("imageBuildConfig")]
+        public Input<Inputs.ArtifactSpecContainerGroupContainerImageBuildConfigArgs>? ImageBuildConfig { get; set; }
+
+        /// <summary>
+        /// Docker image URI. Omit when using `image_build_config` on draft artifacts; required when status is `locked` and `image_build_config` is set.
+        /// </summary>
+        [Input("imageUri")]
+        public Input<string>? ImageUri { get; set; }
 
         /// <summary>
         /// Container liveness check configuration.

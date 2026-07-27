@@ -19,6 +19,18 @@ namespace DataRobotPulumi.Datarobot.Inputs
         [Input("enabled")]
         public Input<bool>? Enabled { get; set; }
 
+        /// <summary>
+        /// Maximum number of replicas. Defaults to `1`.
+        /// </summary>
+        [Input("maxReplicaCount")]
+        public Input<int>? MaxReplicaCount { get; set; }
+
+        /// <summary>
+        /// Minimum number of replicas. Set to `0` to allow scale-to-zero. Defaults to `0`.
+        /// </summary>
+        [Input("minReplicaCount")]
+        public Input<int>? MinReplicaCount { get; set; }
+
         [Input("policies", required: true)]
         private InputList<Inputs.WorkloadRuntimeContainerGroupAutoscalingPolicyGetArgs>? _policies;
 

@@ -9,11 +9,7 @@ import * as utilities from "./utilities";
 /**
  * A Workload runs a containerized artifact in the cluster and exposes an inference endpoint.
  *
- * Several attributes (including `runtime` and `artifactId`) trigger replacement when changed. To avoid downtime during replacements, it is recommended to set `createBeforeDestroy` in the resource lifecycle:
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * ```
+ * Changes to `artifactId` or `runtime` trigger an in-place workload replacement via the Workload API. The workload ID and endpoint remain stable across artifact and runtime updates.
  */
 export class Workload extends pulumi.CustomResource {
     /**
@@ -44,7 +40,7 @@ export class Workload extends pulumi.CustomResource {
     }
 
     /**
-     * ID of the Artifact version to deploy. When using `datarobot.Artifact`, reference `datarobot_artifact.<name>.artifact_id` (not `.id`). Changing this value forces a new Workload to be created.
+     * ID of the Artifact version to deploy. When using `datarobot.Artifact`, reference `datarobot_artifact.<name>.artifact_id` (not `.id`). Changing this value triggers an in-place workload replacement.
      */
     public readonly artifactId!: pulumi.Output<string>;
     /**
@@ -64,7 +60,7 @@ export class Workload extends pulumi.CustomResource {
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * Runtime configuration for the Workload.
+     * Runtime configuration for the Workload. Changes trigger an in-place workload replacement.
      */
     public readonly runtime!: pulumi.Output<outputs.WorkloadRuntime>;
     /**
@@ -118,7 +114,7 @@ export class Workload extends pulumi.CustomResource {
  */
 export interface WorkloadState {
     /**
-     * ID of the Artifact version to deploy. When using `datarobot.Artifact`, reference `datarobot_artifact.<name>.artifact_id` (not `.id`). Changing this value forces a new Workload to be created.
+     * ID of the Artifact version to deploy. When using `datarobot.Artifact`, reference `datarobot_artifact.<name>.artifact_id` (not `.id`). Changing this value triggers an in-place workload replacement.
      */
     artifactId?: pulumi.Input<string>;
     /**
@@ -138,7 +134,7 @@ export interface WorkloadState {
      */
     name?: pulumi.Input<string>;
     /**
-     * Runtime configuration for the Workload.
+     * Runtime configuration for the Workload. Changes trigger an in-place workload replacement.
      */
     runtime?: pulumi.Input<inputs.WorkloadRuntime>;
     /**
@@ -152,7 +148,7 @@ export interface WorkloadState {
  */
 export interface WorkloadArgs {
     /**
-     * ID of the Artifact version to deploy. When using `datarobot.Artifact`, reference `datarobot_artifact.<name>.artifact_id` (not `.id`). Changing this value forces a new Workload to be created.
+     * ID of the Artifact version to deploy. When using `datarobot.Artifact`, reference `datarobot_artifact.<name>.artifact_id` (not `.id`). Changing this value triggers an in-place workload replacement.
      */
     artifactId: pulumi.Input<string>;
     /**
@@ -168,7 +164,7 @@ export interface WorkloadArgs {
      */
     name?: pulumi.Input<string>;
     /**
-     * Runtime configuration for the Workload.
+     * Runtime configuration for the Workload. Changes trigger an in-place workload replacement.
      */
     runtime: pulumi.Input<inputs.WorkloadRuntime>;
 }

@@ -29,8 +29,8 @@ class WorkloadArgs:
                  name: Optional[pulumi.Input[builtins.str]] = None):
         """
         The set of arguments for constructing a Workload resource.
-        :param pulumi.Input[builtins.str] artifact_id: ID of the Artifact version to deploy. When using `Artifact`, reference `datarobot_artifact.<name>.artifact_id` (not `.id`). Changing this value forces a new Workload to be created.
-        :param pulumi.Input['WorkloadRuntimeArgs'] runtime: Runtime configuration for the Workload.
+        :param pulumi.Input[builtins.str] artifact_id: ID of the Artifact version to deploy. When using `Artifact`, reference `datarobot_artifact.<name>.artifact_id` (not `.id`). Changing this value triggers an in-place workload replacement.
+        :param pulumi.Input['WorkloadRuntimeArgs'] runtime: Runtime configuration for the Workload. Changes trigger an in-place workload replacement.
         :param pulumi.Input[builtins.str] description: A human-readable description of the Workload.
         :param pulumi.Input[builtins.str] importance: Priority level for the Workload: `critical`, `high`, `moderate`, or `low`. Defaults to `low`.
         :param pulumi.Input[builtins.str] name: The name of the Workload.
@@ -48,7 +48,7 @@ class WorkloadArgs:
     @pulumi.getter(name="artifactId")
     def artifact_id(self) -> pulumi.Input[builtins.str]:
         """
-        ID of the Artifact version to deploy. When using `Artifact`, reference `datarobot_artifact.<name>.artifact_id` (not `.id`). Changing this value forces a new Workload to be created.
+        ID of the Artifact version to deploy. When using `Artifact`, reference `datarobot_artifact.<name>.artifact_id` (not `.id`). Changing this value triggers an in-place workload replacement.
         """
         return pulumi.get(self, "artifact_id")
 
@@ -60,7 +60,7 @@ class WorkloadArgs:
     @pulumi.getter
     def runtime(self) -> pulumi.Input['WorkloadRuntimeArgs']:
         """
-        Runtime configuration for the Workload.
+        Runtime configuration for the Workload. Changes trigger an in-place workload replacement.
         """
         return pulumi.get(self, "runtime")
 
@@ -117,12 +117,12 @@ class _WorkloadState:
                  status: Optional[pulumi.Input[builtins.str]] = None):
         """
         Input properties used for looking up and filtering Workload resources.
-        :param pulumi.Input[builtins.str] artifact_id: ID of the Artifact version to deploy. When using `Artifact`, reference `datarobot_artifact.<name>.artifact_id` (not `.id`). Changing this value forces a new Workload to be created.
+        :param pulumi.Input[builtins.str] artifact_id: ID of the Artifact version to deploy. When using `Artifact`, reference `datarobot_artifact.<name>.artifact_id` (not `.id`). Changing this value triggers an in-place workload replacement.
         :param pulumi.Input[builtins.str] description: A human-readable description of the Workload.
         :param pulumi.Input[builtins.str] endpoint: The inference endpoint URL for the Workload.
         :param pulumi.Input[builtins.str] importance: Priority level for the Workload: `critical`, `high`, `moderate`, or `low`. Defaults to `low`.
         :param pulumi.Input[builtins.str] name: The name of the Workload.
-        :param pulumi.Input['WorkloadRuntimeArgs'] runtime: Runtime configuration for the Workload.
+        :param pulumi.Input['WorkloadRuntimeArgs'] runtime: Runtime configuration for the Workload. Changes trigger an in-place workload replacement.
         :param pulumi.Input[builtins.str] status: Current status of the Workload: `unknown`, `submitted`, `initializing`, `running`, `stopping`, `stopped`, or `errored`.
         """
         if artifact_id is not None:
@@ -144,7 +144,7 @@ class _WorkloadState:
     @pulumi.getter(name="artifactId")
     def artifact_id(self) -> Optional[pulumi.Input[builtins.str]]:
         """
-        ID of the Artifact version to deploy. When using `Artifact`, reference `datarobot_artifact.<name>.artifact_id` (not `.id`). Changing this value forces a new Workload to be created.
+        ID of the Artifact version to deploy. When using `Artifact`, reference `datarobot_artifact.<name>.artifact_id` (not `.id`). Changing this value triggers an in-place workload replacement.
         """
         return pulumi.get(self, "artifact_id")
 
@@ -204,7 +204,7 @@ class _WorkloadState:
     @pulumi.getter
     def runtime(self) -> Optional[pulumi.Input['WorkloadRuntimeArgs']]:
         """
-        Runtime configuration for the Workload.
+        Runtime configuration for the Workload. Changes trigger an in-place workload replacement.
         """
         return pulumi.get(self, "runtime")
 
@@ -239,19 +239,15 @@ class Workload(pulumi.CustomResource):
         """
         A Workload runs a containerized artifact in the cluster and exposes an inference endpoint.
 
-        Several attributes (including `runtime` and `artifact_id`) trigger replacement when changed. To avoid downtime during replacements, it is recommended to set `create_before_destroy` in the resource lifecycle:
-
-        ```python
-        import pulumi
-        ```
+        Changes to `artifact_id` or `runtime` trigger an in-place workload replacement via the Workload API. The workload ID and endpoint remain stable across artifact and runtime updates.
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[builtins.str] artifact_id: ID of the Artifact version to deploy. When using `Artifact`, reference `datarobot_artifact.<name>.artifact_id` (not `.id`). Changing this value forces a new Workload to be created.
+        :param pulumi.Input[builtins.str] artifact_id: ID of the Artifact version to deploy. When using `Artifact`, reference `datarobot_artifact.<name>.artifact_id` (not `.id`). Changing this value triggers an in-place workload replacement.
         :param pulumi.Input[builtins.str] description: A human-readable description of the Workload.
         :param pulumi.Input[builtins.str] importance: Priority level for the Workload: `critical`, `high`, `moderate`, or `low`. Defaults to `low`.
         :param pulumi.Input[builtins.str] name: The name of the Workload.
-        :param pulumi.Input[Union['WorkloadRuntimeArgs', 'WorkloadRuntimeArgsDict']] runtime: Runtime configuration for the Workload.
+        :param pulumi.Input[Union['WorkloadRuntimeArgs', 'WorkloadRuntimeArgsDict']] runtime: Runtime configuration for the Workload. Changes trigger an in-place workload replacement.
         """
         ...
     @overload
@@ -262,11 +258,7 @@ class Workload(pulumi.CustomResource):
         """
         A Workload runs a containerized artifact in the cluster and exposes an inference endpoint.
 
-        Several attributes (including `runtime` and `artifact_id`) trigger replacement when changed. To avoid downtime during replacements, it is recommended to set `create_before_destroy` in the resource lifecycle:
-
-        ```python
-        import pulumi
-        ```
+        Changes to `artifact_id` or `runtime` trigger an in-place workload replacement via the Workload API. The workload ID and endpoint remain stable across artifact and runtime updates.
 
         :param str resource_name: The name of the resource.
         :param WorkloadArgs args: The arguments to use to populate this resource's properties.
@@ -332,12 +324,12 @@ class Workload(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[builtins.str] artifact_id: ID of the Artifact version to deploy. When using `Artifact`, reference `datarobot_artifact.<name>.artifact_id` (not `.id`). Changing this value forces a new Workload to be created.
+        :param pulumi.Input[builtins.str] artifact_id: ID of the Artifact version to deploy. When using `Artifact`, reference `datarobot_artifact.<name>.artifact_id` (not `.id`). Changing this value triggers an in-place workload replacement.
         :param pulumi.Input[builtins.str] description: A human-readable description of the Workload.
         :param pulumi.Input[builtins.str] endpoint: The inference endpoint URL for the Workload.
         :param pulumi.Input[builtins.str] importance: Priority level for the Workload: `critical`, `high`, `moderate`, or `low`. Defaults to `low`.
         :param pulumi.Input[builtins.str] name: The name of the Workload.
-        :param pulumi.Input[Union['WorkloadRuntimeArgs', 'WorkloadRuntimeArgsDict']] runtime: Runtime configuration for the Workload.
+        :param pulumi.Input[Union['WorkloadRuntimeArgs', 'WorkloadRuntimeArgsDict']] runtime: Runtime configuration for the Workload. Changes trigger an in-place workload replacement.
         :param pulumi.Input[builtins.str] status: Current status of the Workload: `unknown`, `submitted`, `initializing`, `running`, `stopping`, `stopped`, or `errored`.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -357,7 +349,7 @@ class Workload(pulumi.CustomResource):
     @pulumi.getter(name="artifactId")
     def artifact_id(self) -> pulumi.Output[builtins.str]:
         """
-        ID of the Artifact version to deploy. When using `Artifact`, reference `datarobot_artifact.<name>.artifact_id` (not `.id`). Changing this value forces a new Workload to be created.
+        ID of the Artifact version to deploy. When using `Artifact`, reference `datarobot_artifact.<name>.artifact_id` (not `.id`). Changing this value triggers an in-place workload replacement.
         """
         return pulumi.get(self, "artifact_id")
 
@@ -397,7 +389,7 @@ class Workload(pulumi.CustomResource):
     @pulumi.getter
     def runtime(self) -> pulumi.Output['outputs.WorkloadRuntime']:
         """
-        Runtime configuration for the Workload.
+        Runtime configuration for the Workload. Changes trigger an in-place workload replacement.
         """
         return pulumi.get(self, "runtime")
 

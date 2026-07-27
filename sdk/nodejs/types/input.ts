@@ -109,9 +109,13 @@ export interface ArtifactSpecContainerGroupContainer {
      */
     environmentVars?: pulumi.Input<pulumi.Input<inputs.ArtifactSpecContainerGroupContainerEnvironmentVar>[]>;
     /**
-     * Docker image URI.
+     * Configuration for server-side image builds from source code.
      */
-    imageUri: pulumi.Input<string>;
+    imageBuildConfig?: pulumi.Input<inputs.ArtifactSpecContainerGroupContainerImageBuildConfig>;
+    /**
+     * Docker image URI. Omit when using `imageBuildConfig` on draft artifacts; required when status is `locked` and `imageBuildConfig` is set.
+     */
+    imageUri?: pulumi.Input<string>;
     /**
      * Container liveness check configuration.
      */
@@ -148,17 +152,62 @@ export interface ArtifactSpecContainerGroupContainerEnvironmentVar {
      */
     key?: pulumi.Input<string>;
     /**
-     * Name of the environment variable.
+     * Name of the environment variable. Required when source is "string" or "dr-credential". Optional for "api-key": when omitted, the platform injects the token as DATAROBOT*API*TOKEN.
      */
-    name: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
     /**
-     * Source type: "string" for plain text values, "dr-credential" for DataRobot credentials. Defaults to "string".
+     * Source type: "string" for plain text values, "dr-credential" for DataRobot credentials, "api-key" for a platform-managed DataRobot API token. Defaults to "string".
      */
     source?: pulumi.Input<string>;
     /**
      * Value of the environment variable. Required when source is "string".
      */
     value?: pulumi.Input<string>;
+}
+
+export interface ArtifactSpecContainerGroupContainerImageBuildConfig {
+    /**
+     * Reference to source code in the DataRobot catalog. Optional at create; required before image build or lock.
+     */
+    codeRef?: pulumi.Input<inputs.ArtifactSpecContainerGroupContainerImageBuildConfigCodeRef>;
+    /**
+     * How the Dockerfile is obtained for the image build. Defaults to using `./Dockerfile` from the source code.
+     */
+    dockerfile?: pulumi.Input<inputs.ArtifactSpecContainerGroupContainerImageBuildConfigDockerfile>;
+}
+
+export interface ArtifactSpecContainerGroupContainerImageBuildConfigCodeRef {
+    /**
+     * Files API catalog ID (24-character hex).
+     */
+    catalogId: pulumi.Input<string>;
+    /**
+     * Files API catalog version ID (24-character hex).
+     */
+    catalogVersionId: pulumi.Input<string>;
+}
+
+export interface ArtifactSpecContainerGroupContainerImageBuildConfigDockerfile {
+    /**
+     * Entrypoint baked into the generated Dockerfile CMD. Required when source is `generated`.
+     */
+    entrypoints?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Execution environment ID for the base Docker image. Required when source is `generated`.
+     */
+    executionEnvironmentId?: pulumi.Input<string>;
+    /**
+     * Execution environment version ID that pins the base image. Required when source is `generated`.
+     */
+    executionEnvironmentVersionId?: pulumi.Input<string>;
+    /**
+     * Relative path to the Dockerfile in the source code. Used when source is `provided`. Defaults to `./Dockerfile`.
+     */
+    path?: pulumi.Input<string>;
+    /**
+     * How the Dockerfile is obtained: `provided` (from source code) or `generated` (from an execution environment). Defaults to `provided`.
+     */
+    source?: pulumi.Input<string>;
 }
 
 export interface ArtifactSpecContainerGroupContainerLivenessProbe {
@@ -190,6 +239,10 @@ export interface ArtifactSpecContainerGroupContainerLivenessProbe {
      * Scheme to use for connecting to the host (HTTP or HTTPS).
      */
     scheme?: pulumi.Input<string>;
+    /**
+     * Minimum consecutive successes for the probe to be considered successful after having failed.
+     */
+    successThreshold?: pulumi.Input<number>;
     /**
      * Number of seconds after which the probe times out.
      */
@@ -226,6 +279,10 @@ export interface ArtifactSpecContainerGroupContainerReadinessProbe {
      */
     scheme?: pulumi.Input<string>;
     /**
+     * Minimum consecutive successes for the probe to be considered successful after having failed.
+     */
+    successThreshold?: pulumi.Input<number>;
+    /**
      * Number of seconds after which the probe times out.
      */
     timeoutSeconds?: pulumi.Input<number>;
@@ -260,6 +317,10 @@ export interface ArtifactSpecContainerGroupContainerStartupProbe {
      * Scheme to use for connecting to the host (HTTP or HTTPS).
      */
     scheme?: pulumi.Input<string>;
+    /**
+     * Minimum consecutive successes for the probe to be considered successful after having failed.
+     */
+    successThreshold?: pulumi.Input<number>;
     /**
      * Number of seconds after which the probe times out.
      */
@@ -1574,6 +1635,14 @@ export interface WorkloadRuntimeContainerGroupAutoscaling {
      */
     enabled?: pulumi.Input<boolean>;
     /**
+     * Maximum number of replicas. Defaults to `1`.
+     */
+    maxReplicaCount?: pulumi.Input<number>;
+    /**
+     * Minimum number of replicas. Set to `0` to allow scale-to-zero. Defaults to `0`.
+     */
+    minReplicaCount?: pulumi.Input<number>;
+    /**
      * Scaling policies that define when and how to scale.
      */
     policies: pulumi.Input<pulumi.Input<inputs.WorkloadRuntimeContainerGroupAutoscalingPolicy>[]>;
@@ -1581,23 +1650,11 @@ export interface WorkloadRuntimeContainerGroupAutoscaling {
 
 export interface WorkloadRuntimeContainerGroupAutoscalingPolicy {
     /**
-     * Maximum number of replicas.
-     */
-    maxCount: pulumi.Input<number>;
-    /**
-     * Minimum number of replicas.
-     */
-    minCount: pulumi.Input<number>;
-    /**
-     * Policy priority when multiple policies are defined.
-     */
-    priority?: pulumi.Input<number>;
-    /**
-     * Metric used for scaling decisions: `cpuAverageUtilization`, `httpRequestsConcurrency`, `gpuCacheUtilization`, or `gpuRequestQueueDepth`.
+     * Metric used for scaling decisions: `cpuAverageUtilization`, `httpRequestsConcurrency`, `gpuCacheUtilization`, or `gpuRequestQueueDepth`. Custom metric names (e.g. `vllm:kv_cache_usage_perc`) are supported for NIM artifacts only.
      */
     scalingMetric: pulumi.Input<string>;
     /**
-     * Target value for the scaling metric.
+     * Target value for the scaling metric. Must be non-negative.
      */
     target: pulumi.Input<number>;
 }

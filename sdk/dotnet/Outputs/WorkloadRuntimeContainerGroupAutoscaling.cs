@@ -19,6 +19,14 @@ namespace DataRobotPulumi.Datarobot.Outputs
         /// </summary>
         public readonly bool? Enabled;
         /// <summary>
+        /// Maximum number of replicas. Defaults to `1`.
+        /// </summary>
+        public readonly int? MaxReplicaCount;
+        /// <summary>
+        /// Minimum number of replicas. Set to `0` to allow scale-to-zero. Defaults to `0`.
+        /// </summary>
+        public readonly int? MinReplicaCount;
+        /// <summary>
         /// Scaling policies that define when and how to scale.
         /// </summary>
         public readonly ImmutableArray<Outputs.WorkloadRuntimeContainerGroupAutoscalingPolicy> Policies;
@@ -27,9 +35,15 @@ namespace DataRobotPulumi.Datarobot.Outputs
         private WorkloadRuntimeContainerGroupAutoscaling(
             bool? enabled,
 
+            int? maxReplicaCount,
+
+            int? minReplicaCount,
+
             ImmutableArray<Outputs.WorkloadRuntimeContainerGroupAutoscalingPolicy> policies)
         {
             Enabled = enabled;
+            MaxReplicaCount = maxReplicaCount;
+            MinReplicaCount = minReplicaCount;
             Policies = policies;
         }
     }
