@@ -94,10 +94,26 @@ jq -n --slurpfile old "$OLD_JSON" --slurpfile new "$NEW_JSON" -r '
   | (($newRes | length) + ($goneRes | length) + ($newFn | length) + ($goneFn | length)
      + ($changed | length) + ($newTypes | length) + ($goneTypes | length)
      + ($changedTypes | length)) as $total
+  # Anything disappearing from the surface can break user programs. Hoist it to the
+  # top: most of these live on nested types, which are otherwise collapsed away.
+  | [
+      ($goneRes[]   | "resource `\(.)` removed"),
+      ($goneFn[]    | "function `\(.)` removed"),
+      ($goneTypes[] | "type `\(.)` removed"),
+      ($changed[] | . as $r
+        | (($r.removedInputs[]  | "`\($r.token)`: removed input `\(.)`"),
+           ($r.removedOutputs[] | "`\($r.token)`: removed output `\(.)`"))),
+      ($changedTypes[] | . as $t
+        | ($t.removed[] | "`\($t.token)`: removed `\(.)`"))
+    ] as $breaking
   | if $total == 0 then
       "No change to the Pulumi schema surface."
     else
       [
+        (if ($breaking | length) > 0 then
+          "> [!WARNING]\n> **\($breaking | length) potentially breaking change(s)** — something present before is gone now.\n" +
+          ($breaking | map("> - " + .) | join("\n"))
+        else empty end),
         (if ($newRes | length) > 0 then
           "**New resources (\($newRes | length))**\n\n" + bullets($newRes) else empty end),
         (if ($goneRes | length) > 0 then

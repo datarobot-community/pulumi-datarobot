@@ -36,10 +36,33 @@ cmd_insert() {
   [[ -f "$notes_file" ]] || { log "ERROR: notes file $notes_file not found"; exit 1; }
   [[ -f "$CHANGELOG" ]] || { log "ERROR: $CHANGELOG not found"; exit 1; }
 
-  local stripped inserted
+  local stripped inserted preserved
   stripped="$(mktemp)"
   inserted="$(mktemp)"
-  trap 'rm -f "$stripped" "$inserted"' RETURN
+  preserved="$(mktemp)"
+  trap 'rm -f "$stripped" "$inserted" "$preserved"' RETURN
+
+  # "### Provider changes" is hand-written (repo-local changes that upstream knows
+  # nothing about), so carry it over instead of letting a regenerate drop it.
+  awk -v want="$version" '
+    /^## / {
+      insec = 0
+      if (match($0, /\[[^]]+\]/)) {
+        v = substr($0, RSTART + 1, RLENGTH - 2)
+        sub(/^v/, "", v)
+        if (v == want) { insec = 1 }
+      }
+      next
+    }
+    insec && /^### / { keep = ($0 == "### Provider changes") }
+    insec && keep { print }
+  ' "$CHANGELOG" | trim_blank_lines >"$preserved"
+
+  if [[ -s "$preserved" ]]; then
+    log "Preserving the existing '### Provider changes' block for v${version}"
+  else
+    preserved=""
+  fi
 
   # Remove any existing section for this version so re-running is idempotent.
   awk -v want="$version" '
@@ -56,10 +79,15 @@ cmd_insert() {
 
   # Splice the new section in above the newest released version, leaving
   # "## [Unreleased]" (and any hand-written entries under it) untouched.
-  awk -v hdr="## [$version] - $date" -v notes="$notes_file" '
+  awk -v hdr="## [$version] - $date" -v notes="$notes_file" -v preserved="$preserved" '
     function emit_section(   line) {
       print hdr
       print ""
+      if (preserved != "") {
+        while ((getline line < preserved) > 0) { print line }
+        close(preserved)
+        print ""
+      }
       while ((getline line < notes) > 0) { print line }
       close(notes)
       print ""
