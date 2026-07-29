@@ -75,7 +75,7 @@ prepare::
 		find ./ ! -path './.git/*' -type f -exec sed -i '' 's/[a]bc/${ORG}/g' {} \; &> /dev/null; \
 	fif
 
-.PHONY: development provider build_sdks build_nodejs build_dotnet build_go build_python cleanup
+.PHONY: development provider build_sdks build_nodejs build_dotnet build_go build_python cleanup schema_diff changelog
 
 development:: install_plugins provider lint_provider build_sdks install_sdks cleanup # Build the provider & SDKs for a development environment
 
@@ -88,6 +88,18 @@ tfgen:: install_plugins
 	$(WORKING_DIR)/bin/${TFGEN} schema --out provider/cmd/${PROVIDER}
 	@echo "Post-processing schema to add README configurations..."
 	@./scripts/post-process-schema.sh provider/cmd/${PROVIDER}/schema.json
+
+schema_diff:: # show what the pending schema.json changes do to the SDK surface
+	@./scripts/schema-diff.sh $(if $(BASE),$(BASE),origin/main)
+
+# VERSION defaults to the next patch (see above); override with e.g. VERSION=v0.10.44.
+changelog:: # write the CHANGELOG.md section for VERSION from upstream + schema diff
+	@OLD=$$(git show origin/main:provider/go.mod | awk '/terraform-provider-datarobot v/ { print $$2; exit }'); \
+	NEW=$$(awk '/terraform-provider-datarobot v/ { print $$2; exit }' provider/go.mod); \
+	NOTES=$$(mktemp); \
+	{ ./scripts/upstream-changelog.sh "$$OLD" "$$NEW"; echo; ./scripts/schema-diff.sh origin/main; } > "$$NOTES" && \
+	./scripts/changelog.sh insert "$(VERSION)" "$$NOTES"; \
+	rm -f "$$NOTES"
 
 provider:: tfgen install_plugins # build the provider binary
 	(cd provider && go build -o $(WORKING_DIR)/bin/${PROVIDER} -ldflags "-X ${PROJECT}/${VERSION_PATH}=${VERSION}" ${PROJECT}/${PROVIDER_PATH}/cmd/${PROVIDER})

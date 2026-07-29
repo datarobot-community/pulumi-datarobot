@@ -240,10 +240,33 @@ jobs:
     - name: Set PreRelease Version
       run: echo "GORELEASER_CURRENT_TAG=v$(pulumictl get version --language generic)" >> $GITHUB_ENV
 
+    - name: Build release notes from CHANGELOG.md
+      id: notes
+      env:
+        TAG: ${{ github.ref_name }}
+      run: |
+        # Prefer the changelog section written by the upgrade workflow. Falling back
+        # to GoReleaser's git-log changelog keeps releases working for tags that have
+        # no section (e.g. a manual workflow_dispatch run).
+        if ./scripts/changelog.sh extract "$TAG" > /tmp/release-notes-body.md; then
+          {
+            cat /tmp/release-notes-body.md
+            echo
+            echo "---"
+            echo
+            echo "Full changelog: [CHANGELOG.md](https://github.com/${GITHUB_REPOSITORY}/blob/${TAG}/CHANGELOG.md)"
+          } > /tmp/release-notes.md
+          echo "args=-p 3 release --clean --release-notes=/tmp/release-notes.md" >> "$GITHUB_OUTPUT"
+          echo "Using CHANGELOG.md section for $TAG as the release body."
+        else
+          echo "args=-p 3 release --clean" >> "$GITHUB_OUTPUT"
+          echo "No CHANGELOG.md section for $TAG; using GoReleaser's generated changelog."
+        fi
+
     - name: Run GoReleaser
       uses: goreleaser/goreleaser-action@v7
       with:
-        args: -p 3 release --clean
+        args: ${{ steps.notes.outputs.args }}
         version: latest
 
   publish_sdk:

@@ -44,13 +44,33 @@ confirmed it has picked up the correct Terraform provider version
 ([Sample
 PR](https://github.com/datarobot-community/pulumi-datarobot/pull/202)).
 
+The workflow also posts a **"What this upgrade changes"** comment on that PR and
+commits a matching section to [`CHANGELOG.md`](./CHANGELOG.md). Read both before
+approving — they are the review, in two halves:
+
+- *Upstream provider changes* — what the Terraform provider changed, from its own
+  changelog (or its commit log where an entry is missing).
+- *Pulumi SDK surface* — what the regenerated `schema.json` actually gained or lost.
+
+The two halves do not always agree, and the disagreement is the point: if upstream
+announces an attribute that never shows up in the schema diff, it did not reach our
+SDKs. Anything marked ⚠️ is a removal, i.e. a potential breaking change for users.
+
+You can reproduce either half locally:
+
+```bash
+make schema_diff                  # vs origin/main; BASE=<ref> to pick another baseline
+make changelog VERSION=v0.10.44   # rewrite that version's CHANGELOG.md section
+```
 
 After the merge, you are ready to release the new version. To do so,
 create a Release matching the same tag as the Terraform Release. In
 the sample, that is `v0.10.2`. After you do so, the
 [Release](https://github.com/datarobot-community/pulumi-datarobot/actions/workflows/release.yml)
 Action will pick it up and run go-releaser for all of our supported
-SDKs and attach them back to the release tag you created.
+SDKs and attach them back to the release tag you created. The release body is the
+`CHANGELOG.md` section for that tag; when a tag has no section, go-releaser falls
+back to its own commit-log changelog.
 
 
 ## Validating Locally Prior to Release
