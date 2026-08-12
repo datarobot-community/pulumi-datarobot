@@ -88,16 +88,28 @@ jobs:
               exit 1
           fi
 
+      - name: Build release notes from CHANGELOG.md
+        id: notes
+        if: ${{ github.event.inputs.USE_EXISTING_RELEASE != 'true' }}
+        env:
+          TAG: ${{ github.ref_name }}
+        run: |
+          if ./scripts/changelog.sh extract "$TAG" > /tmp/release-notes.md; then
+            echo "args=release --clean --release-notes=/tmp/release-notes.md" >> "$GITHUB_OUTPUT"
+          else
+            echo "args=release --clean" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Release with GoReleaser
         if: ${{ github.event.inputs.USE_EXISTING_RELEASE != 'true' }}
         uses: goreleaser/goreleaser-action@v7
         with:
-          args: release --clean
+          args: ${{ steps.notes.outputs.args }}
           version: latest
 
       - name: Publish Python SDK
         if: ${{ github.event.inputs.SDK_LANGUAGE == 'python' && env.PUBLISH_PYPI == 'true' }}
-        uses: pypa/gh-action-pypi-publish@v1.14.0
+        uses: pypa/gh-action-pypi-publish@v1.14.2
         with:
           user: ${{ env.PYPI_USERNAME }}
           password: ${{ env.PYPI_PASSWORD }}

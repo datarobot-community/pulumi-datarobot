@@ -63,6 +63,18 @@ make test_local_provider    # Full test with local terraform provider
 make cross_compile_windows  # Cross-compile for Windows
 ```
 
+### Changelog
+
+```bash
+make schema_diff                  # What pending schema.json changes do to the SDK surface
+make changelog VERSION=v0.10.44   # Write that version's CHANGELOG.md section
+```
+
+Backed by `scripts/upstream-changelog.sh` (upstream's changelog for a version range),
+`scripts/schema-diff.sh` (what reached the generated SDKs), and `scripts/changelog.sh`
+(insert/extract `CHANGELOG.md` sections). The upgrade workflow runs these automatically;
+the release workflow reuses the section as the GitHub Release body.
+
 ### Cleanup
 
 ```bash

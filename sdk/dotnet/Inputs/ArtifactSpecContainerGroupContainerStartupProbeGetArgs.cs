@@ -56,6 +56,12 @@ namespace DataRobotPulumi.Datarobot.Inputs
         public Input<string>? Scheme { get; set; }
 
         /// <summary>
+        /// Minimum consecutive successes for the probe to be considered successful after having failed.
+        /// </summary>
+        [Input("successThreshold")]
+        public Input<int>? SuccessThreshold { get; set; }
+
+        /// <summary>
         /// Number of seconds after which the probe times out.
         /// </summary>
         [Input("timeoutSeconds")]

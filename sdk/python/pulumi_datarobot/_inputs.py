@@ -32,6 +32,12 @@ __all__ = [
     'ArtifactSpecContainerGroupContainerArgsDict',
     'ArtifactSpecContainerGroupContainerEnvironmentVarArgs',
     'ArtifactSpecContainerGroupContainerEnvironmentVarArgsDict',
+    'ArtifactSpecContainerGroupContainerImageBuildConfigArgs',
+    'ArtifactSpecContainerGroupContainerImageBuildConfigArgsDict',
+    'ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefArgs',
+    'ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefArgsDict',
+    'ArtifactSpecContainerGroupContainerImageBuildConfigDockerfileArgs',
+    'ArtifactSpecContainerGroupContainerImageBuildConfigDockerfileArgsDict',
     'ArtifactSpecContainerGroupContainerLivenessProbeArgs',
     'ArtifactSpecContainerGroupContainerLivenessProbeArgsDict',
     'ArtifactSpecContainerGroupContainerReadinessProbeArgs',
@@ -624,10 +630,6 @@ class ArtifactSpecContainerGroupArgs:
 
 if not MYPY:
     class ArtifactSpecContainerGroupContainerArgsDict(TypedDict):
-        image_uri: pulumi.Input[builtins.str]
-        """
-        Docker image URI.
-        """
         description: NotRequired[pulumi.Input[builtins.str]]
         """
         Description of the container.
@@ -639,6 +641,14 @@ if not MYPY:
         environment_vars: NotRequired[pulumi.Input[Sequence[pulumi.Input['ArtifactSpecContainerGroupContainerEnvironmentVarArgsDict']]]]
         """
         Environment variables for the container.
+        """
+        image_build_config: NotRequired[pulumi.Input['ArtifactSpecContainerGroupContainerImageBuildConfigArgsDict']]
+        """
+        Configuration for server-side image builds from source code.
+        """
+        image_uri: NotRequired[pulumi.Input[builtins.str]]
+        """
+        Docker image URI. Omit when using `image_build_config` on draft artifacts; required when status is `locked` and `image_build_config` is set.
         """
         liveness_probe: NotRequired[pulumi.Input['ArtifactSpecContainerGroupContainerLivenessProbeArgsDict']]
         """
@@ -670,10 +680,11 @@ elif False:
 @pulumi.input_type
 class ArtifactSpecContainerGroupContainerArgs:
     def __init__(__self__, *,
-                 image_uri: pulumi.Input[builtins.str],
                  description: Optional[pulumi.Input[builtins.str]] = None,
                  entrypoints: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.str]]]] = None,
                  environment_vars: Optional[pulumi.Input[Sequence[pulumi.Input['ArtifactSpecContainerGroupContainerEnvironmentVarArgs']]]] = None,
+                 image_build_config: Optional[pulumi.Input['ArtifactSpecContainerGroupContainerImageBuildConfigArgs']] = None,
+                 image_uri: Optional[pulumi.Input[builtins.str]] = None,
                  liveness_probe: Optional[pulumi.Input['ArtifactSpecContainerGroupContainerLivenessProbeArgs']] = None,
                  name: Optional[pulumi.Input[builtins.str]] = None,
                  port: Optional[pulumi.Input[builtins.int]] = None,
@@ -681,10 +692,11 @@ class ArtifactSpecContainerGroupContainerArgs:
                  readiness_probe: Optional[pulumi.Input['ArtifactSpecContainerGroupContainerReadinessProbeArgs']] = None,
                  startup_probe: Optional[pulumi.Input['ArtifactSpecContainerGroupContainerStartupProbeArgs']] = None):
         """
-        :param pulumi.Input[builtins.str] image_uri: Docker image URI.
         :param pulumi.Input[builtins.str] description: Description of the container.
         :param pulumi.Input[Sequence[pulumi.Input[builtins.str]]] entrypoints: Container entrypoint.
         :param pulumi.Input[Sequence[pulumi.Input['ArtifactSpecContainerGroupContainerEnvironmentVarArgs']]] environment_vars: Environment variables for the container.
+        :param pulumi.Input['ArtifactSpecContainerGroupContainerImageBuildConfigArgs'] image_build_config: Configuration for server-side image builds from source code.
+        :param pulumi.Input[builtins.str] image_uri: Docker image URI. Omit when using `image_build_config` on draft artifacts; required when status is `locked` and `image_build_config` is set.
         :param pulumi.Input['ArtifactSpecContainerGroupContainerLivenessProbeArgs'] liveness_probe: Container liveness check configuration.
         :param pulumi.Input[builtins.str] name: Name of the container.
         :param pulumi.Input[builtins.int] port: Container access port (1024-65535). Required for primary containers; omit for non-primary.
@@ -692,13 +704,16 @@ class ArtifactSpecContainerGroupContainerArgs:
         :param pulumi.Input['ArtifactSpecContainerGroupContainerReadinessProbeArgs'] readiness_probe: Container readiness check configuration.
         :param pulumi.Input['ArtifactSpecContainerGroupContainerStartupProbeArgs'] startup_probe: Container startup check configuration.
         """
-        pulumi.set(__self__, "image_uri", image_uri)
         if description is not None:
             pulumi.set(__self__, "description", description)
         if entrypoints is not None:
             pulumi.set(__self__, "entrypoints", entrypoints)
         if environment_vars is not None:
             pulumi.set(__self__, "environment_vars", environment_vars)
+        if image_build_config is not None:
+            pulumi.set(__self__, "image_build_config", image_build_config)
+        if image_uri is not None:
+            pulumi.set(__self__, "image_uri", image_uri)
         if liveness_probe is not None:
             pulumi.set(__self__, "liveness_probe", liveness_probe)
         if name is not None:
@@ -711,18 +726,6 @@ class ArtifactSpecContainerGroupContainerArgs:
             pulumi.set(__self__, "readiness_probe", readiness_probe)
         if startup_probe is not None:
             pulumi.set(__self__, "startup_probe", startup_probe)
-
-    @property
-    @pulumi.getter(name="imageUri")
-    def image_uri(self) -> pulumi.Input[builtins.str]:
-        """
-        Docker image URI.
-        """
-        return pulumi.get(self, "image_uri")
-
-    @image_uri.setter
-    def image_uri(self, value: pulumi.Input[builtins.str]):
-        pulumi.set(self, "image_uri", value)
 
     @property
     @pulumi.getter
@@ -759,6 +762,30 @@ class ArtifactSpecContainerGroupContainerArgs:
     @environment_vars.setter
     def environment_vars(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ArtifactSpecContainerGroupContainerEnvironmentVarArgs']]]]):
         pulumi.set(self, "environment_vars", value)
+
+    @property
+    @pulumi.getter(name="imageBuildConfig")
+    def image_build_config(self) -> Optional[pulumi.Input['ArtifactSpecContainerGroupContainerImageBuildConfigArgs']]:
+        """
+        Configuration for server-side image builds from source code.
+        """
+        return pulumi.get(self, "image_build_config")
+
+    @image_build_config.setter
+    def image_build_config(self, value: Optional[pulumi.Input['ArtifactSpecContainerGroupContainerImageBuildConfigArgs']]):
+        pulumi.set(self, "image_build_config", value)
+
+    @property
+    @pulumi.getter(name="imageUri")
+    def image_uri(self) -> Optional[pulumi.Input[builtins.str]]:
+        """
+        Docker image URI. Omit when using `image_build_config` on draft artifacts; required when status is `locked` and `image_build_config` is set.
+        """
+        return pulumi.get(self, "image_uri")
+
+    @image_uri.setter
+    def image_uri(self, value: Optional[pulumi.Input[builtins.str]]):
+        pulumi.set(self, "image_uri", value)
 
     @property
     @pulumi.getter(name="livenessProbe")
@@ -835,10 +862,6 @@ class ArtifactSpecContainerGroupContainerArgs:
 
 if not MYPY:
     class ArtifactSpecContainerGroupContainerEnvironmentVarArgsDict(TypedDict):
-        name: pulumi.Input[builtins.str]
-        """
-        Name of the environment variable.
-        """
         dr_credential_id: NotRequired[pulumi.Input[builtins.str]]
         """
         DataRobot credential ID. Required when source is "dr-credential".
@@ -847,9 +870,13 @@ if not MYPY:
         """
         Key within the credential. Required when source is "dr-credential".
         """
+        name: NotRequired[pulumi.Input[builtins.str]]
+        """
+        Name of the environment variable. Required when source is "string" or "dr-credential". Optional for "api-key": when omitted, the platform injects the token as DATAROBOT*API*TOKEN.
+        """
         source: NotRequired[pulumi.Input[builtins.str]]
         """
-        Source type: "string" for plain text values, "dr-credential" for DataRobot credentials. Defaults to "string".
+        Source type: "string" for plain text values, "dr-credential" for DataRobot credentials, "api-key" for a platform-managed DataRobot API token. Defaults to "string".
         """
         value: NotRequired[pulumi.Input[builtins.str]]
         """
@@ -861,39 +888,28 @@ elif False:
 @pulumi.input_type
 class ArtifactSpecContainerGroupContainerEnvironmentVarArgs:
     def __init__(__self__, *,
-                 name: pulumi.Input[builtins.str],
                  dr_credential_id: Optional[pulumi.Input[builtins.str]] = None,
                  key: Optional[pulumi.Input[builtins.str]] = None,
+                 name: Optional[pulumi.Input[builtins.str]] = None,
                  source: Optional[pulumi.Input[builtins.str]] = None,
                  value: Optional[pulumi.Input[builtins.str]] = None):
         """
-        :param pulumi.Input[builtins.str] name: Name of the environment variable.
         :param pulumi.Input[builtins.str] dr_credential_id: DataRobot credential ID. Required when source is "dr-credential".
         :param pulumi.Input[builtins.str] key: Key within the credential. Required when source is "dr-credential".
-        :param pulumi.Input[builtins.str] source: Source type: "string" for plain text values, "dr-credential" for DataRobot credentials. Defaults to "string".
+        :param pulumi.Input[builtins.str] name: Name of the environment variable. Required when source is "string" or "dr-credential". Optional for "api-key": when omitted, the platform injects the token as DATAROBOT*API*TOKEN.
+        :param pulumi.Input[builtins.str] source: Source type: "string" for plain text values, "dr-credential" for DataRobot credentials, "api-key" for a platform-managed DataRobot API token. Defaults to "string".
         :param pulumi.Input[builtins.str] value: Value of the environment variable. Required when source is "string".
         """
-        pulumi.set(__self__, "name", name)
         if dr_credential_id is not None:
             pulumi.set(__self__, "dr_credential_id", dr_credential_id)
         if key is not None:
             pulumi.set(__self__, "key", key)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
         if source is not None:
             pulumi.set(__self__, "source", source)
         if value is not None:
             pulumi.set(__self__, "value", value)
-
-    @property
-    @pulumi.getter
-    def name(self) -> pulumi.Input[builtins.str]:
-        """
-        Name of the environment variable.
-        """
-        return pulumi.get(self, "name")
-
-    @name.setter
-    def name(self, value: pulumi.Input[builtins.str]):
-        pulumi.set(self, "name", value)
 
     @property
     @pulumi.getter(name="drCredentialId")
@@ -921,9 +937,21 @@ class ArtifactSpecContainerGroupContainerEnvironmentVarArgs:
 
     @property
     @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[builtins.str]]:
+        """
+        Name of the environment variable. Required when source is "string" or "dr-credential". Optional for "api-key": when omitted, the platform injects the token as DATAROBOT*API*TOKEN.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[builtins.str]]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
     def source(self) -> Optional[pulumi.Input[builtins.str]]:
         """
-        Source type: "string" for plain text values, "dr-credential" for DataRobot credentials. Defaults to "string".
+        Source type: "string" for plain text values, "dr-credential" for DataRobot credentials, "api-key" for a platform-managed DataRobot API token. Defaults to "string".
         """
         return pulumi.get(self, "source")
 
@@ -942,6 +970,220 @@ class ArtifactSpecContainerGroupContainerEnvironmentVarArgs:
     @value.setter
     def value(self, value: Optional[pulumi.Input[builtins.str]]):
         pulumi.set(self, "value", value)
+
+
+if not MYPY:
+    class ArtifactSpecContainerGroupContainerImageBuildConfigArgsDict(TypedDict):
+        code_ref: NotRequired[pulumi.Input['ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefArgsDict']]
+        """
+        Reference to source code in the DataRobot catalog. Optional at create; required before image build or lock.
+        """
+        dockerfile: NotRequired[pulumi.Input['ArtifactSpecContainerGroupContainerImageBuildConfigDockerfileArgsDict']]
+        """
+        How the Dockerfile is obtained for the image build. Defaults to using `./Dockerfile` from the source code.
+        """
+elif False:
+    ArtifactSpecContainerGroupContainerImageBuildConfigArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class ArtifactSpecContainerGroupContainerImageBuildConfigArgs:
+    def __init__(__self__, *,
+                 code_ref: Optional[pulumi.Input['ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefArgs']] = None,
+                 dockerfile: Optional[pulumi.Input['ArtifactSpecContainerGroupContainerImageBuildConfigDockerfileArgs']] = None):
+        """
+        :param pulumi.Input['ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefArgs'] code_ref: Reference to source code in the DataRobot catalog. Optional at create; required before image build or lock.
+        :param pulumi.Input['ArtifactSpecContainerGroupContainerImageBuildConfigDockerfileArgs'] dockerfile: How the Dockerfile is obtained for the image build. Defaults to using `./Dockerfile` from the source code.
+        """
+        if code_ref is not None:
+            pulumi.set(__self__, "code_ref", code_ref)
+        if dockerfile is not None:
+            pulumi.set(__self__, "dockerfile", dockerfile)
+
+    @property
+    @pulumi.getter(name="codeRef")
+    def code_ref(self) -> Optional[pulumi.Input['ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefArgs']]:
+        """
+        Reference to source code in the DataRobot catalog. Optional at create; required before image build or lock.
+        """
+        return pulumi.get(self, "code_ref")
+
+    @code_ref.setter
+    def code_ref(self, value: Optional[pulumi.Input['ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefArgs']]):
+        pulumi.set(self, "code_ref", value)
+
+    @property
+    @pulumi.getter
+    def dockerfile(self) -> Optional[pulumi.Input['ArtifactSpecContainerGroupContainerImageBuildConfigDockerfileArgs']]:
+        """
+        How the Dockerfile is obtained for the image build. Defaults to using `./Dockerfile` from the source code.
+        """
+        return pulumi.get(self, "dockerfile")
+
+    @dockerfile.setter
+    def dockerfile(self, value: Optional[pulumi.Input['ArtifactSpecContainerGroupContainerImageBuildConfigDockerfileArgs']]):
+        pulumi.set(self, "dockerfile", value)
+
+
+if not MYPY:
+    class ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefArgsDict(TypedDict):
+        catalog_id: pulumi.Input[builtins.str]
+        """
+        Files API catalog ID (24-character hex).
+        """
+        catalog_version_id: pulumi.Input[builtins.str]
+        """
+        Files API catalog version ID (24-character hex).
+        """
+elif False:
+    ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefArgs:
+    def __init__(__self__, *,
+                 catalog_id: pulumi.Input[builtins.str],
+                 catalog_version_id: pulumi.Input[builtins.str]):
+        """
+        :param pulumi.Input[builtins.str] catalog_id: Files API catalog ID (24-character hex).
+        :param pulumi.Input[builtins.str] catalog_version_id: Files API catalog version ID (24-character hex).
+        """
+        pulumi.set(__self__, "catalog_id", catalog_id)
+        pulumi.set(__self__, "catalog_version_id", catalog_version_id)
+
+    @property
+    @pulumi.getter(name="catalogId")
+    def catalog_id(self) -> pulumi.Input[builtins.str]:
+        """
+        Files API catalog ID (24-character hex).
+        """
+        return pulumi.get(self, "catalog_id")
+
+    @catalog_id.setter
+    def catalog_id(self, value: pulumi.Input[builtins.str]):
+        pulumi.set(self, "catalog_id", value)
+
+    @property
+    @pulumi.getter(name="catalogVersionId")
+    def catalog_version_id(self) -> pulumi.Input[builtins.str]:
+        """
+        Files API catalog version ID (24-character hex).
+        """
+        return pulumi.get(self, "catalog_version_id")
+
+    @catalog_version_id.setter
+    def catalog_version_id(self, value: pulumi.Input[builtins.str]):
+        pulumi.set(self, "catalog_version_id", value)
+
+
+if not MYPY:
+    class ArtifactSpecContainerGroupContainerImageBuildConfigDockerfileArgsDict(TypedDict):
+        entrypoints: NotRequired[pulumi.Input[Sequence[pulumi.Input[builtins.str]]]]
+        """
+        Entrypoint baked into the generated Dockerfile CMD. Required when source is `generated`.
+        """
+        execution_environment_id: NotRequired[pulumi.Input[builtins.str]]
+        """
+        Execution environment ID for the base Docker image. Required when source is `generated`.
+        """
+        execution_environment_version_id: NotRequired[pulumi.Input[builtins.str]]
+        """
+        Execution environment version ID that pins the base image. Required when source is `generated`.
+        """
+        path: NotRequired[pulumi.Input[builtins.str]]
+        """
+        Relative path to the Dockerfile in the source code. Used when source is `provided`. Defaults to `./Dockerfile`.
+        """
+        source: NotRequired[pulumi.Input[builtins.str]]
+        """
+        How the Dockerfile is obtained: `provided` (from source code) or `generated` (from an execution environment). Defaults to `provided`.
+        """
+elif False:
+    ArtifactSpecContainerGroupContainerImageBuildConfigDockerfileArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class ArtifactSpecContainerGroupContainerImageBuildConfigDockerfileArgs:
+    def __init__(__self__, *,
+                 entrypoints: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.str]]]] = None,
+                 execution_environment_id: Optional[pulumi.Input[builtins.str]] = None,
+                 execution_environment_version_id: Optional[pulumi.Input[builtins.str]] = None,
+                 path: Optional[pulumi.Input[builtins.str]] = None,
+                 source: Optional[pulumi.Input[builtins.str]] = None):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input[builtins.str]]] entrypoints: Entrypoint baked into the generated Dockerfile CMD. Required when source is `generated`.
+        :param pulumi.Input[builtins.str] execution_environment_id: Execution environment ID for the base Docker image. Required when source is `generated`.
+        :param pulumi.Input[builtins.str] execution_environment_version_id: Execution environment version ID that pins the base image. Required when source is `generated`.
+        :param pulumi.Input[builtins.str] path: Relative path to the Dockerfile in the source code. Used when source is `provided`. Defaults to `./Dockerfile`.
+        :param pulumi.Input[builtins.str] source: How the Dockerfile is obtained: `provided` (from source code) or `generated` (from an execution environment). Defaults to `provided`.
+        """
+        if entrypoints is not None:
+            pulumi.set(__self__, "entrypoints", entrypoints)
+        if execution_environment_id is not None:
+            pulumi.set(__self__, "execution_environment_id", execution_environment_id)
+        if execution_environment_version_id is not None:
+            pulumi.set(__self__, "execution_environment_version_id", execution_environment_version_id)
+        if path is not None:
+            pulumi.set(__self__, "path", path)
+        if source is not None:
+            pulumi.set(__self__, "source", source)
+
+    @property
+    @pulumi.getter
+    def entrypoints(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[builtins.str]]]]:
+        """
+        Entrypoint baked into the generated Dockerfile CMD. Required when source is `generated`.
+        """
+        return pulumi.get(self, "entrypoints")
+
+    @entrypoints.setter
+    def entrypoints(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[builtins.str]]]]):
+        pulumi.set(self, "entrypoints", value)
+
+    @property
+    @pulumi.getter(name="executionEnvironmentId")
+    def execution_environment_id(self) -> Optional[pulumi.Input[builtins.str]]:
+        """
+        Execution environment ID for the base Docker image. Required when source is `generated`.
+        """
+        return pulumi.get(self, "execution_environment_id")
+
+    @execution_environment_id.setter
+    def execution_environment_id(self, value: Optional[pulumi.Input[builtins.str]]):
+        pulumi.set(self, "execution_environment_id", value)
+
+    @property
+    @pulumi.getter(name="executionEnvironmentVersionId")
+    def execution_environment_version_id(self) -> Optional[pulumi.Input[builtins.str]]:
+        """
+        Execution environment version ID that pins the base image. Required when source is `generated`.
+        """
+        return pulumi.get(self, "execution_environment_version_id")
+
+    @execution_environment_version_id.setter
+    def execution_environment_version_id(self, value: Optional[pulumi.Input[builtins.str]]):
+        pulumi.set(self, "execution_environment_version_id", value)
+
+    @property
+    @pulumi.getter
+    def path(self) -> Optional[pulumi.Input[builtins.str]]:
+        """
+        Relative path to the Dockerfile in the source code. Used when source is `provided`. Defaults to `./Dockerfile`.
+        """
+        return pulumi.get(self, "path")
+
+    @path.setter
+    def path(self, value: Optional[pulumi.Input[builtins.str]]):
+        pulumi.set(self, "path", value)
+
+    @property
+    @pulumi.getter
+    def source(self) -> Optional[pulumi.Input[builtins.str]]:
+        """
+        How the Dockerfile is obtained: `provided` (from source code) or `generated` (from an execution environment). Defaults to `provided`.
+        """
+        return pulumi.get(self, "source")
+
+    @source.setter
+    def source(self, value: Optional[pulumi.Input[builtins.str]]):
+        pulumi.set(self, "source", value)
 
 
 if not MYPY:
@@ -974,6 +1216,10 @@ if not MYPY:
         """
         Scheme to use for connecting to the host (HTTP or HTTPS).
         """
+        success_threshold: NotRequired[pulumi.Input[builtins.int]]
+        """
+        Minimum consecutive successes for the probe to be considered successful after having failed.
+        """
         timeout_seconds: NotRequired[pulumi.Input[builtins.int]]
         """
         Number of seconds after which the probe times out.
@@ -991,6 +1237,7 @@ class ArtifactSpecContainerGroupContainerLivenessProbeArgs:
                  period_seconds: Optional[pulumi.Input[builtins.int]] = None,
                  port: Optional[pulumi.Input[builtins.int]] = None,
                  scheme: Optional[pulumi.Input[builtins.str]] = None,
+                 success_threshold: Optional[pulumi.Input[builtins.int]] = None,
                  timeout_seconds: Optional[pulumi.Input[builtins.int]] = None):
         """
         :param pulumi.Input[builtins.str] path: URL path to query for health check.
@@ -1000,6 +1247,7 @@ class ArtifactSpecContainerGroupContainerLivenessProbeArgs:
         :param pulumi.Input[builtins.int] period_seconds: How often (in seconds) to perform the probe.
         :param pulumi.Input[builtins.int] port: Port number to access on the container.
         :param pulumi.Input[builtins.str] scheme: Scheme to use for connecting to the host (HTTP or HTTPS).
+        :param pulumi.Input[builtins.int] success_threshold: Minimum consecutive successes for the probe to be considered successful after having failed.
         :param pulumi.Input[builtins.int] timeout_seconds: Number of seconds after which the probe times out.
         """
         pulumi.set(__self__, "path", path)
@@ -1015,6 +1263,8 @@ class ArtifactSpecContainerGroupContainerLivenessProbeArgs:
             pulumi.set(__self__, "port", port)
         if scheme is not None:
             pulumi.set(__self__, "scheme", scheme)
+        if success_threshold is not None:
+            pulumi.set(__self__, "success_threshold", success_threshold)
         if timeout_seconds is not None:
             pulumi.set(__self__, "timeout_seconds", timeout_seconds)
 
@@ -1101,6 +1351,18 @@ class ArtifactSpecContainerGroupContainerLivenessProbeArgs:
     @scheme.setter
     def scheme(self, value: Optional[pulumi.Input[builtins.str]]):
         pulumi.set(self, "scheme", value)
+
+    @property
+    @pulumi.getter(name="successThreshold")
+    def success_threshold(self) -> Optional[pulumi.Input[builtins.int]]:
+        """
+        Minimum consecutive successes for the probe to be considered successful after having failed.
+        """
+        return pulumi.get(self, "success_threshold")
+
+    @success_threshold.setter
+    def success_threshold(self, value: Optional[pulumi.Input[builtins.int]]):
+        pulumi.set(self, "success_threshold", value)
 
     @property
     @pulumi.getter(name="timeoutSeconds")
@@ -1145,6 +1407,10 @@ if not MYPY:
         """
         Scheme to use for connecting to the host (HTTP or HTTPS).
         """
+        success_threshold: NotRequired[pulumi.Input[builtins.int]]
+        """
+        Minimum consecutive successes for the probe to be considered successful after having failed.
+        """
         timeout_seconds: NotRequired[pulumi.Input[builtins.int]]
         """
         Number of seconds after which the probe times out.
@@ -1162,6 +1428,7 @@ class ArtifactSpecContainerGroupContainerReadinessProbeArgs:
                  period_seconds: Optional[pulumi.Input[builtins.int]] = None,
                  port: Optional[pulumi.Input[builtins.int]] = None,
                  scheme: Optional[pulumi.Input[builtins.str]] = None,
+                 success_threshold: Optional[pulumi.Input[builtins.int]] = None,
                  timeout_seconds: Optional[pulumi.Input[builtins.int]] = None):
         """
         :param pulumi.Input[builtins.str] path: URL path to query for health check.
@@ -1171,6 +1438,7 @@ class ArtifactSpecContainerGroupContainerReadinessProbeArgs:
         :param pulumi.Input[builtins.int] period_seconds: How often (in seconds) to perform the probe.
         :param pulumi.Input[builtins.int] port: Port number to access on the container.
         :param pulumi.Input[builtins.str] scheme: Scheme to use for connecting to the host (HTTP or HTTPS).
+        :param pulumi.Input[builtins.int] success_threshold: Minimum consecutive successes for the probe to be considered successful after having failed.
         :param pulumi.Input[builtins.int] timeout_seconds: Number of seconds after which the probe times out.
         """
         pulumi.set(__self__, "path", path)
@@ -1186,6 +1454,8 @@ class ArtifactSpecContainerGroupContainerReadinessProbeArgs:
             pulumi.set(__self__, "port", port)
         if scheme is not None:
             pulumi.set(__self__, "scheme", scheme)
+        if success_threshold is not None:
+            pulumi.set(__self__, "success_threshold", success_threshold)
         if timeout_seconds is not None:
             pulumi.set(__self__, "timeout_seconds", timeout_seconds)
 
@@ -1272,6 +1542,18 @@ class ArtifactSpecContainerGroupContainerReadinessProbeArgs:
     @scheme.setter
     def scheme(self, value: Optional[pulumi.Input[builtins.str]]):
         pulumi.set(self, "scheme", value)
+
+    @property
+    @pulumi.getter(name="successThreshold")
+    def success_threshold(self) -> Optional[pulumi.Input[builtins.int]]:
+        """
+        Minimum consecutive successes for the probe to be considered successful after having failed.
+        """
+        return pulumi.get(self, "success_threshold")
+
+    @success_threshold.setter
+    def success_threshold(self, value: Optional[pulumi.Input[builtins.int]]):
+        pulumi.set(self, "success_threshold", value)
 
     @property
     @pulumi.getter(name="timeoutSeconds")
@@ -1316,6 +1598,10 @@ if not MYPY:
         """
         Scheme to use for connecting to the host (HTTP or HTTPS).
         """
+        success_threshold: NotRequired[pulumi.Input[builtins.int]]
+        """
+        Minimum consecutive successes for the probe to be considered successful after having failed.
+        """
         timeout_seconds: NotRequired[pulumi.Input[builtins.int]]
         """
         Number of seconds after which the probe times out.
@@ -1333,6 +1619,7 @@ class ArtifactSpecContainerGroupContainerStartupProbeArgs:
                  period_seconds: Optional[pulumi.Input[builtins.int]] = None,
                  port: Optional[pulumi.Input[builtins.int]] = None,
                  scheme: Optional[pulumi.Input[builtins.str]] = None,
+                 success_threshold: Optional[pulumi.Input[builtins.int]] = None,
                  timeout_seconds: Optional[pulumi.Input[builtins.int]] = None):
         """
         :param pulumi.Input[builtins.str] path: URL path to query for health check.
@@ -1342,6 +1629,7 @@ class ArtifactSpecContainerGroupContainerStartupProbeArgs:
         :param pulumi.Input[builtins.int] period_seconds: How often (in seconds) to perform the probe.
         :param pulumi.Input[builtins.int] port: Port number to access on the container.
         :param pulumi.Input[builtins.str] scheme: Scheme to use for connecting to the host (HTTP or HTTPS).
+        :param pulumi.Input[builtins.int] success_threshold: Minimum consecutive successes for the probe to be considered successful after having failed.
         :param pulumi.Input[builtins.int] timeout_seconds: Number of seconds after which the probe times out.
         """
         pulumi.set(__self__, "path", path)
@@ -1357,6 +1645,8 @@ class ArtifactSpecContainerGroupContainerStartupProbeArgs:
             pulumi.set(__self__, "port", port)
         if scheme is not None:
             pulumi.set(__self__, "scheme", scheme)
+        if success_threshold is not None:
+            pulumi.set(__self__, "success_threshold", success_threshold)
         if timeout_seconds is not None:
             pulumi.set(__self__, "timeout_seconds", timeout_seconds)
 
@@ -1443,6 +1733,18 @@ class ArtifactSpecContainerGroupContainerStartupProbeArgs:
     @scheme.setter
     def scheme(self, value: Optional[pulumi.Input[builtins.str]]):
         pulumi.set(self, "scheme", value)
+
+    @property
+    @pulumi.getter(name="successThreshold")
+    def success_threshold(self) -> Optional[pulumi.Input[builtins.int]]:
+        """
+        Minimum consecutive successes for the probe to be considered successful after having failed.
+        """
+        return pulumi.get(self, "success_threshold")
+
+    @success_threshold.setter
+    def success_threshold(self, value: Optional[pulumi.Input[builtins.int]]):
+        pulumi.set(self, "success_threshold", value)
 
     @property
     @pulumi.getter(name="timeoutSeconds")
@@ -7662,6 +7964,14 @@ if not MYPY:
         """
         Whether autoscaling is enabled. Defaults to true.
         """
+        max_replica_count: NotRequired[pulumi.Input[builtins.int]]
+        """
+        Maximum number of replicas. Defaults to `1`.
+        """
+        min_replica_count: NotRequired[pulumi.Input[builtins.int]]
+        """
+        Minimum number of replicas. Set to `0` to allow scale-to-zero. Defaults to `0`.
+        """
 elif False:
     WorkloadRuntimeContainerGroupAutoscalingArgsDict: TypeAlias = Mapping[str, Any]
 
@@ -7669,14 +7979,22 @@ elif False:
 class WorkloadRuntimeContainerGroupAutoscalingArgs:
     def __init__(__self__, *,
                  policies: pulumi.Input[Sequence[pulumi.Input['WorkloadRuntimeContainerGroupAutoscalingPolicyArgs']]],
-                 enabled: Optional[pulumi.Input[builtins.bool]] = None):
+                 enabled: Optional[pulumi.Input[builtins.bool]] = None,
+                 max_replica_count: Optional[pulumi.Input[builtins.int]] = None,
+                 min_replica_count: Optional[pulumi.Input[builtins.int]] = None):
         """
         :param pulumi.Input[Sequence[pulumi.Input['WorkloadRuntimeContainerGroupAutoscalingPolicyArgs']]] policies: Scaling policies that define when and how to scale.
         :param pulumi.Input[builtins.bool] enabled: Whether autoscaling is enabled. Defaults to true.
+        :param pulumi.Input[builtins.int] max_replica_count: Maximum number of replicas. Defaults to `1`.
+        :param pulumi.Input[builtins.int] min_replica_count: Minimum number of replicas. Set to `0` to allow scale-to-zero. Defaults to `0`.
         """
         pulumi.set(__self__, "policies", policies)
         if enabled is not None:
             pulumi.set(__self__, "enabled", enabled)
+        if max_replica_count is not None:
+            pulumi.set(__self__, "max_replica_count", max_replica_count)
+        if min_replica_count is not None:
+            pulumi.set(__self__, "min_replica_count", min_replica_count)
 
     @property
     @pulumi.getter
@@ -7702,28 +8020,40 @@ class WorkloadRuntimeContainerGroupAutoscalingArgs:
     def enabled(self, value: Optional[pulumi.Input[builtins.bool]]):
         pulumi.set(self, "enabled", value)
 
+    @property
+    @pulumi.getter(name="maxReplicaCount")
+    def max_replica_count(self) -> Optional[pulumi.Input[builtins.int]]:
+        """
+        Maximum number of replicas. Defaults to `1`.
+        """
+        return pulumi.get(self, "max_replica_count")
+
+    @max_replica_count.setter
+    def max_replica_count(self, value: Optional[pulumi.Input[builtins.int]]):
+        pulumi.set(self, "max_replica_count", value)
+
+    @property
+    @pulumi.getter(name="minReplicaCount")
+    def min_replica_count(self) -> Optional[pulumi.Input[builtins.int]]:
+        """
+        Minimum number of replicas. Set to `0` to allow scale-to-zero. Defaults to `0`.
+        """
+        return pulumi.get(self, "min_replica_count")
+
+    @min_replica_count.setter
+    def min_replica_count(self, value: Optional[pulumi.Input[builtins.int]]):
+        pulumi.set(self, "min_replica_count", value)
+
 
 if not MYPY:
     class WorkloadRuntimeContainerGroupAutoscalingPolicyArgsDict(TypedDict):
-        max_count: pulumi.Input[builtins.int]
-        """
-        Maximum number of replicas.
-        """
-        min_count: pulumi.Input[builtins.int]
-        """
-        Minimum number of replicas.
-        """
         scaling_metric: pulumi.Input[builtins.str]
         """
-        Metric used for scaling decisions: `cpuAverageUtilization`, `httpRequestsConcurrency`, `gpuCacheUtilization`, or `gpuRequestQueueDepth`.
+        Metric used for scaling decisions: `cpuAverageUtilization`, `httpRequestsConcurrency`, `gpuCacheUtilization`, or `gpuRequestQueueDepth`. Custom metric names (e.g. `vllm:kv_cache_usage_perc`) are supported for NIM artifacts only.
         """
         target: pulumi.Input[builtins.float]
         """
-        Target value for the scaling metric.
-        """
-        priority: NotRequired[pulumi.Input[builtins.int]]
-        """
-        Policy priority when multiple policies are defined.
+        Target value for the scaling metric. Must be non-negative.
         """
 elif False:
     WorkloadRuntimeContainerGroupAutoscalingPolicyArgsDict: TypeAlias = Mapping[str, Any]
@@ -7731,54 +8061,20 @@ elif False:
 @pulumi.input_type
 class WorkloadRuntimeContainerGroupAutoscalingPolicyArgs:
     def __init__(__self__, *,
-                 max_count: pulumi.Input[builtins.int],
-                 min_count: pulumi.Input[builtins.int],
                  scaling_metric: pulumi.Input[builtins.str],
-                 target: pulumi.Input[builtins.float],
-                 priority: Optional[pulumi.Input[builtins.int]] = None):
+                 target: pulumi.Input[builtins.float]):
         """
-        :param pulumi.Input[builtins.int] max_count: Maximum number of replicas.
-        :param pulumi.Input[builtins.int] min_count: Minimum number of replicas.
-        :param pulumi.Input[builtins.str] scaling_metric: Metric used for scaling decisions: `cpuAverageUtilization`, `httpRequestsConcurrency`, `gpuCacheUtilization`, or `gpuRequestQueueDepth`.
-        :param pulumi.Input[builtins.float] target: Target value for the scaling metric.
-        :param pulumi.Input[builtins.int] priority: Policy priority when multiple policies are defined.
+        :param pulumi.Input[builtins.str] scaling_metric: Metric used for scaling decisions: `cpuAverageUtilization`, `httpRequestsConcurrency`, `gpuCacheUtilization`, or `gpuRequestQueueDepth`. Custom metric names (e.g. `vllm:kv_cache_usage_perc`) are supported for NIM artifacts only.
+        :param pulumi.Input[builtins.float] target: Target value for the scaling metric. Must be non-negative.
         """
-        pulumi.set(__self__, "max_count", max_count)
-        pulumi.set(__self__, "min_count", min_count)
         pulumi.set(__self__, "scaling_metric", scaling_metric)
         pulumi.set(__self__, "target", target)
-        if priority is not None:
-            pulumi.set(__self__, "priority", priority)
-
-    @property
-    @pulumi.getter(name="maxCount")
-    def max_count(self) -> pulumi.Input[builtins.int]:
-        """
-        Maximum number of replicas.
-        """
-        return pulumi.get(self, "max_count")
-
-    @max_count.setter
-    def max_count(self, value: pulumi.Input[builtins.int]):
-        pulumi.set(self, "max_count", value)
-
-    @property
-    @pulumi.getter(name="minCount")
-    def min_count(self) -> pulumi.Input[builtins.int]:
-        """
-        Minimum number of replicas.
-        """
-        return pulumi.get(self, "min_count")
-
-    @min_count.setter
-    def min_count(self, value: pulumi.Input[builtins.int]):
-        pulumi.set(self, "min_count", value)
 
     @property
     @pulumi.getter(name="scalingMetric")
     def scaling_metric(self) -> pulumi.Input[builtins.str]:
         """
-        Metric used for scaling decisions: `cpuAverageUtilization`, `httpRequestsConcurrency`, `gpuCacheUtilization`, or `gpuRequestQueueDepth`.
+        Metric used for scaling decisions: `cpuAverageUtilization`, `httpRequestsConcurrency`, `gpuCacheUtilization`, or `gpuRequestQueueDepth`. Custom metric names (e.g. `vllm:kv_cache_usage_perc`) are supported for NIM artifacts only.
         """
         return pulumi.get(self, "scaling_metric")
 
@@ -7790,25 +8086,13 @@ class WorkloadRuntimeContainerGroupAutoscalingPolicyArgs:
     @pulumi.getter
     def target(self) -> pulumi.Input[builtins.float]:
         """
-        Target value for the scaling metric.
+        Target value for the scaling metric. Must be non-negative.
         """
         return pulumi.get(self, "target")
 
     @target.setter
     def target(self, value: pulumi.Input[builtins.float]):
         pulumi.set(self, "target", value)
-
-    @property
-    @pulumi.getter
-    def priority(self) -> Optional[pulumi.Input[builtins.int]]:
-        """
-        Policy priority when multiple policies are defined.
-        """
-        return pulumi.get(self, "priority")
-
-    @priority.setter
-    def priority(self, value: Optional[pulumi.Input[builtins.int]]):
-        pulumi.set(self, "priority", value)
 
 
 if not MYPY:

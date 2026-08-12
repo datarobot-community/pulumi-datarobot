@@ -26,13 +26,13 @@ namespace DataRobotPulumi.Datarobot.Inputs
         public Input<string>? Key { get; set; }
 
         /// <summary>
-        /// Name of the environment variable.
+        /// Name of the environment variable. Required when source is "string" or "dr-credential". Optional for "api-key": when omitted, the platform injects the token as DATAROBOT*API*TOKEN.
         /// </summary>
-        [Input("name", required: true)]
-        public Input<string> Name { get; set; } = null!;
+        [Input("name")]
+        public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// Source type: "string" for plain text values, "dr-credential" for DataRobot credentials. Defaults to "string".
+        /// Source type: "string" for plain text values, "dr-credential" for DataRobot credentials, "api-key" for a platform-managed DataRobot API token. Defaults to "string".
         /// </summary>
         [Input("source")]
         public Input<string>? Source { get; set; }

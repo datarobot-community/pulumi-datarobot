@@ -910,8 +910,10 @@ type ArtifactSpecContainerGroupContainer struct {
 	Entrypoints []string `pulumi:"entrypoints"`
 	// Environment variables for the container.
 	EnvironmentVars []ArtifactSpecContainerGroupContainerEnvironmentVar `pulumi:"environmentVars"`
-	// Docker image URI.
-	ImageUri string `pulumi:"imageUri"`
+	// Configuration for server-side image builds from source code.
+	ImageBuildConfig *ArtifactSpecContainerGroupContainerImageBuildConfig `pulumi:"imageBuildConfig"`
+	// Docker image URI. Omit when using `imageBuildConfig` on draft artifacts; required when status is `locked` and `imageBuildConfig` is set.
+	ImageUri *string `pulumi:"imageUri"`
 	// Container liveness check configuration.
 	LivenessProbe *ArtifactSpecContainerGroupContainerLivenessProbe `pulumi:"livenessProbe"`
 	// Name of the container.
@@ -944,8 +946,10 @@ type ArtifactSpecContainerGroupContainerArgs struct {
 	Entrypoints pulumi.StringArrayInput `pulumi:"entrypoints"`
 	// Environment variables for the container.
 	EnvironmentVars ArtifactSpecContainerGroupContainerEnvironmentVarArrayInput `pulumi:"environmentVars"`
-	// Docker image URI.
-	ImageUri pulumi.StringInput `pulumi:"imageUri"`
+	// Configuration for server-side image builds from source code.
+	ImageBuildConfig ArtifactSpecContainerGroupContainerImageBuildConfigPtrInput `pulumi:"imageBuildConfig"`
+	// Docker image URI. Omit when using `imageBuildConfig` on draft artifacts; required when status is `locked` and `imageBuildConfig` is set.
+	ImageUri pulumi.StringPtrInput `pulumi:"imageUri"`
 	// Container liveness check configuration.
 	LivenessProbe ArtifactSpecContainerGroupContainerLivenessProbePtrInput `pulumi:"livenessProbe"`
 	// Name of the container.
@@ -1028,9 +1032,16 @@ func (o ArtifactSpecContainerGroupContainerOutput) EnvironmentVars() ArtifactSpe
 	}).(ArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput)
 }
 
-// Docker image URI.
-func (o ArtifactSpecContainerGroupContainerOutput) ImageUri() pulumi.StringOutput {
-	return o.ApplyT(func(v ArtifactSpecContainerGroupContainer) string { return v.ImageUri }).(pulumi.StringOutput)
+// Configuration for server-side image builds from source code.
+func (o ArtifactSpecContainerGroupContainerOutput) ImageBuildConfig() ArtifactSpecContainerGroupContainerImageBuildConfigPtrOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainer) *ArtifactSpecContainerGroupContainerImageBuildConfig {
+		return v.ImageBuildConfig
+	}).(ArtifactSpecContainerGroupContainerImageBuildConfigPtrOutput)
+}
+
+// Docker image URI. Omit when using `imageBuildConfig` on draft artifacts; required when status is `locked` and `imageBuildConfig` is set.
+func (o ArtifactSpecContainerGroupContainerOutput) ImageUri() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainer) *string { return v.ImageUri }).(pulumi.StringPtrOutput)
 }
 
 // Container liveness check configuration.
@@ -1094,9 +1105,9 @@ type ArtifactSpecContainerGroupContainerEnvironmentVar struct {
 	DrCredentialId *string `pulumi:"drCredentialId"`
 	// Key within the credential. Required when source is "dr-credential".
 	Key *string `pulumi:"key"`
-	// Name of the environment variable.
-	Name string `pulumi:"name"`
-	// Source type: "string" for plain text values, "dr-credential" for DataRobot credentials. Defaults to "string".
+	// Name of the environment variable. Required when source is "string" or "dr-credential". Optional for "api-key": when omitted, the platform injects the token as DATAROBOT*API*TOKEN.
+	Name *string `pulumi:"name"`
+	// Source type: "string" for plain text values, "dr-credential" for DataRobot credentials, "api-key" for a platform-managed DataRobot API token. Defaults to "string".
 	Source *string `pulumi:"source"`
 	// Value of the environment variable. Required when source is "string".
 	Value *string `pulumi:"value"`
@@ -1118,9 +1129,9 @@ type ArtifactSpecContainerGroupContainerEnvironmentVarArgs struct {
 	DrCredentialId pulumi.StringPtrInput `pulumi:"drCredentialId"`
 	// Key within the credential. Required when source is "dr-credential".
 	Key pulumi.StringPtrInput `pulumi:"key"`
-	// Name of the environment variable.
-	Name pulumi.StringInput `pulumi:"name"`
-	// Source type: "string" for plain text values, "dr-credential" for DataRobot credentials. Defaults to "string".
+	// Name of the environment variable. Required when source is "string" or "dr-credential". Optional for "api-key": when omitted, the platform injects the token as DATAROBOT*API*TOKEN.
+	Name pulumi.StringPtrInput `pulumi:"name"`
+	// Source type: "string" for plain text values, "dr-credential" for DataRobot credentials, "api-key" for a platform-managed DataRobot API token. Defaults to "string".
 	Source pulumi.StringPtrInput `pulumi:"source"`
 	// Value of the environment variable. Required when source is "string".
 	Value pulumi.StringPtrInput `pulumi:"value"`
@@ -1187,12 +1198,12 @@ func (o ArtifactSpecContainerGroupContainerEnvironmentVarOutput) Key() pulumi.St
 	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerEnvironmentVar) *string { return v.Key }).(pulumi.StringPtrOutput)
 }
 
-// Name of the environment variable.
-func (o ArtifactSpecContainerGroupContainerEnvironmentVarOutput) Name() pulumi.StringOutput {
-	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerEnvironmentVar) string { return v.Name }).(pulumi.StringOutput)
+// Name of the environment variable. Required when source is "string" or "dr-credential". Optional for "api-key": when omitted, the platform injects the token as DATAROBOT*API*TOKEN.
+func (o ArtifactSpecContainerGroupContainerEnvironmentVarOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerEnvironmentVar) *string { return v.Name }).(pulumi.StringPtrOutput)
 }
 
-// Source type: "string" for plain text values, "dr-credential" for DataRobot credentials. Defaults to "string".
+// Source type: "string" for plain text values, "dr-credential" for DataRobot credentials, "api-key" for a platform-managed DataRobot API token. Defaults to "string".
 func (o ArtifactSpecContainerGroupContainerEnvironmentVarOutput) Source() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerEnvironmentVar) *string { return v.Source }).(pulumi.StringPtrOutput)
 }
@@ -1222,6 +1233,539 @@ func (o ArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput) Index(i pu
 	}).(ArtifactSpecContainerGroupContainerEnvironmentVarOutput)
 }
 
+type ArtifactSpecContainerGroupContainerImageBuildConfig struct {
+	// Reference to source code in the DataRobot catalog. Optional at create; required before image build or lock.
+	CodeRef *ArtifactSpecContainerGroupContainerImageBuildConfigCodeRef `pulumi:"codeRef"`
+	// How the Dockerfile is obtained for the image build. Defaults to using `./Dockerfile` from the source code.
+	Dockerfile *ArtifactSpecContainerGroupContainerImageBuildConfigDockerfile `pulumi:"dockerfile"`
+}
+
+// ArtifactSpecContainerGroupContainerImageBuildConfigInput is an input type that accepts ArtifactSpecContainerGroupContainerImageBuildConfigArgs and ArtifactSpecContainerGroupContainerImageBuildConfigOutput values.
+// You can construct a concrete instance of `ArtifactSpecContainerGroupContainerImageBuildConfigInput` via:
+//
+//	ArtifactSpecContainerGroupContainerImageBuildConfigArgs{...}
+type ArtifactSpecContainerGroupContainerImageBuildConfigInput interface {
+	pulumi.Input
+
+	ToArtifactSpecContainerGroupContainerImageBuildConfigOutput() ArtifactSpecContainerGroupContainerImageBuildConfigOutput
+	ToArtifactSpecContainerGroupContainerImageBuildConfigOutputWithContext(context.Context) ArtifactSpecContainerGroupContainerImageBuildConfigOutput
+}
+
+type ArtifactSpecContainerGroupContainerImageBuildConfigArgs struct {
+	// Reference to source code in the DataRobot catalog. Optional at create; required before image build or lock.
+	CodeRef ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefPtrInput `pulumi:"codeRef"`
+	// How the Dockerfile is obtained for the image build. Defaults to using `./Dockerfile` from the source code.
+	Dockerfile ArtifactSpecContainerGroupContainerImageBuildConfigDockerfilePtrInput `pulumi:"dockerfile"`
+}
+
+func (ArtifactSpecContainerGroupContainerImageBuildConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ArtifactSpecContainerGroupContainerImageBuildConfig)(nil)).Elem()
+}
+
+func (i ArtifactSpecContainerGroupContainerImageBuildConfigArgs) ToArtifactSpecContainerGroupContainerImageBuildConfigOutput() ArtifactSpecContainerGroupContainerImageBuildConfigOutput {
+	return i.ToArtifactSpecContainerGroupContainerImageBuildConfigOutputWithContext(context.Background())
+}
+
+func (i ArtifactSpecContainerGroupContainerImageBuildConfigArgs) ToArtifactSpecContainerGroupContainerImageBuildConfigOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupContainerImageBuildConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ArtifactSpecContainerGroupContainerImageBuildConfigOutput)
+}
+
+func (i ArtifactSpecContainerGroupContainerImageBuildConfigArgs) ToArtifactSpecContainerGroupContainerImageBuildConfigPtrOutput() ArtifactSpecContainerGroupContainerImageBuildConfigPtrOutput {
+	return i.ToArtifactSpecContainerGroupContainerImageBuildConfigPtrOutputWithContext(context.Background())
+}
+
+func (i ArtifactSpecContainerGroupContainerImageBuildConfigArgs) ToArtifactSpecContainerGroupContainerImageBuildConfigPtrOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupContainerImageBuildConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ArtifactSpecContainerGroupContainerImageBuildConfigOutput).ToArtifactSpecContainerGroupContainerImageBuildConfigPtrOutputWithContext(ctx)
+}
+
+// ArtifactSpecContainerGroupContainerImageBuildConfigPtrInput is an input type that accepts ArtifactSpecContainerGroupContainerImageBuildConfigArgs, ArtifactSpecContainerGroupContainerImageBuildConfigPtr and ArtifactSpecContainerGroupContainerImageBuildConfigPtrOutput values.
+// You can construct a concrete instance of `ArtifactSpecContainerGroupContainerImageBuildConfigPtrInput` via:
+//
+//	        ArtifactSpecContainerGroupContainerImageBuildConfigArgs{...}
+//
+//	or:
+//
+//	        nil
+type ArtifactSpecContainerGroupContainerImageBuildConfigPtrInput interface {
+	pulumi.Input
+
+	ToArtifactSpecContainerGroupContainerImageBuildConfigPtrOutput() ArtifactSpecContainerGroupContainerImageBuildConfigPtrOutput
+	ToArtifactSpecContainerGroupContainerImageBuildConfigPtrOutputWithContext(context.Context) ArtifactSpecContainerGroupContainerImageBuildConfigPtrOutput
+}
+
+type artifactSpecContainerGroupContainerImageBuildConfigPtrType ArtifactSpecContainerGroupContainerImageBuildConfigArgs
+
+func ArtifactSpecContainerGroupContainerImageBuildConfigPtr(v *ArtifactSpecContainerGroupContainerImageBuildConfigArgs) ArtifactSpecContainerGroupContainerImageBuildConfigPtrInput {
+	return (*artifactSpecContainerGroupContainerImageBuildConfigPtrType)(v)
+}
+
+func (*artifactSpecContainerGroupContainerImageBuildConfigPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ArtifactSpecContainerGroupContainerImageBuildConfig)(nil)).Elem()
+}
+
+func (i *artifactSpecContainerGroupContainerImageBuildConfigPtrType) ToArtifactSpecContainerGroupContainerImageBuildConfigPtrOutput() ArtifactSpecContainerGroupContainerImageBuildConfigPtrOutput {
+	return i.ToArtifactSpecContainerGroupContainerImageBuildConfigPtrOutputWithContext(context.Background())
+}
+
+func (i *artifactSpecContainerGroupContainerImageBuildConfigPtrType) ToArtifactSpecContainerGroupContainerImageBuildConfigPtrOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupContainerImageBuildConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ArtifactSpecContainerGroupContainerImageBuildConfigPtrOutput)
+}
+
+type ArtifactSpecContainerGroupContainerImageBuildConfigOutput struct{ *pulumi.OutputState }
+
+func (ArtifactSpecContainerGroupContainerImageBuildConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ArtifactSpecContainerGroupContainerImageBuildConfig)(nil)).Elem()
+}
+
+func (o ArtifactSpecContainerGroupContainerImageBuildConfigOutput) ToArtifactSpecContainerGroupContainerImageBuildConfigOutput() ArtifactSpecContainerGroupContainerImageBuildConfigOutput {
+	return o
+}
+
+func (o ArtifactSpecContainerGroupContainerImageBuildConfigOutput) ToArtifactSpecContainerGroupContainerImageBuildConfigOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupContainerImageBuildConfigOutput {
+	return o
+}
+
+func (o ArtifactSpecContainerGroupContainerImageBuildConfigOutput) ToArtifactSpecContainerGroupContainerImageBuildConfigPtrOutput() ArtifactSpecContainerGroupContainerImageBuildConfigPtrOutput {
+	return o.ToArtifactSpecContainerGroupContainerImageBuildConfigPtrOutputWithContext(context.Background())
+}
+
+func (o ArtifactSpecContainerGroupContainerImageBuildConfigOutput) ToArtifactSpecContainerGroupContainerImageBuildConfigPtrOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupContainerImageBuildConfigPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ArtifactSpecContainerGroupContainerImageBuildConfig) *ArtifactSpecContainerGroupContainerImageBuildConfig {
+		return &v
+	}).(ArtifactSpecContainerGroupContainerImageBuildConfigPtrOutput)
+}
+
+// Reference to source code in the DataRobot catalog. Optional at create; required before image build or lock.
+func (o ArtifactSpecContainerGroupContainerImageBuildConfigOutput) CodeRef() ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefPtrOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerImageBuildConfig) *ArtifactSpecContainerGroupContainerImageBuildConfigCodeRef {
+		return v.CodeRef
+	}).(ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefPtrOutput)
+}
+
+// How the Dockerfile is obtained for the image build. Defaults to using `./Dockerfile` from the source code.
+func (o ArtifactSpecContainerGroupContainerImageBuildConfigOutput) Dockerfile() ArtifactSpecContainerGroupContainerImageBuildConfigDockerfilePtrOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerImageBuildConfig) *ArtifactSpecContainerGroupContainerImageBuildConfigDockerfile {
+		return v.Dockerfile
+	}).(ArtifactSpecContainerGroupContainerImageBuildConfigDockerfilePtrOutput)
+}
+
+type ArtifactSpecContainerGroupContainerImageBuildConfigPtrOutput struct{ *pulumi.OutputState }
+
+func (ArtifactSpecContainerGroupContainerImageBuildConfigPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ArtifactSpecContainerGroupContainerImageBuildConfig)(nil)).Elem()
+}
+
+func (o ArtifactSpecContainerGroupContainerImageBuildConfigPtrOutput) ToArtifactSpecContainerGroupContainerImageBuildConfigPtrOutput() ArtifactSpecContainerGroupContainerImageBuildConfigPtrOutput {
+	return o
+}
+
+func (o ArtifactSpecContainerGroupContainerImageBuildConfigPtrOutput) ToArtifactSpecContainerGroupContainerImageBuildConfigPtrOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupContainerImageBuildConfigPtrOutput {
+	return o
+}
+
+func (o ArtifactSpecContainerGroupContainerImageBuildConfigPtrOutput) Elem() ArtifactSpecContainerGroupContainerImageBuildConfigOutput {
+	return o.ApplyT(func(v *ArtifactSpecContainerGroupContainerImageBuildConfig) ArtifactSpecContainerGroupContainerImageBuildConfig {
+		if v != nil {
+			return *v
+		}
+		var ret ArtifactSpecContainerGroupContainerImageBuildConfig
+		return ret
+	}).(ArtifactSpecContainerGroupContainerImageBuildConfigOutput)
+}
+
+// Reference to source code in the DataRobot catalog. Optional at create; required before image build or lock.
+func (o ArtifactSpecContainerGroupContainerImageBuildConfigPtrOutput) CodeRef() ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefPtrOutput {
+	return o.ApplyT(func(v *ArtifactSpecContainerGroupContainerImageBuildConfig) *ArtifactSpecContainerGroupContainerImageBuildConfigCodeRef {
+		if v == nil {
+			return nil
+		}
+		return v.CodeRef
+	}).(ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefPtrOutput)
+}
+
+// How the Dockerfile is obtained for the image build. Defaults to using `./Dockerfile` from the source code.
+func (o ArtifactSpecContainerGroupContainerImageBuildConfigPtrOutput) Dockerfile() ArtifactSpecContainerGroupContainerImageBuildConfigDockerfilePtrOutput {
+	return o.ApplyT(func(v *ArtifactSpecContainerGroupContainerImageBuildConfig) *ArtifactSpecContainerGroupContainerImageBuildConfigDockerfile {
+		if v == nil {
+			return nil
+		}
+		return v.Dockerfile
+	}).(ArtifactSpecContainerGroupContainerImageBuildConfigDockerfilePtrOutput)
+}
+
+type ArtifactSpecContainerGroupContainerImageBuildConfigCodeRef struct {
+	// Files API catalog ID (24-character hex).
+	CatalogId string `pulumi:"catalogId"`
+	// Files API catalog version ID (24-character hex).
+	CatalogVersionId string `pulumi:"catalogVersionId"`
+}
+
+// ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefInput is an input type that accepts ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefArgs and ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput values.
+// You can construct a concrete instance of `ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefInput` via:
+//
+//	ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefArgs{...}
+type ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefInput interface {
+	pulumi.Input
+
+	ToArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput() ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput
+	ToArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutputWithContext(context.Context) ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput
+}
+
+type ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefArgs struct {
+	// Files API catalog ID (24-character hex).
+	CatalogId pulumi.StringInput `pulumi:"catalogId"`
+	// Files API catalog version ID (24-character hex).
+	CatalogVersionId pulumi.StringInput `pulumi:"catalogVersionId"`
+}
+
+func (ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ArtifactSpecContainerGroupContainerImageBuildConfigCodeRef)(nil)).Elem()
+}
+
+func (i ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefArgs) ToArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput() ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput {
+	return i.ToArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutputWithContext(context.Background())
+}
+
+func (i ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefArgs) ToArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput)
+}
+
+func (i ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefArgs) ToArtifactSpecContainerGroupContainerImageBuildConfigCodeRefPtrOutput() ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefPtrOutput {
+	return i.ToArtifactSpecContainerGroupContainerImageBuildConfigCodeRefPtrOutputWithContext(context.Background())
+}
+
+func (i ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefArgs) ToArtifactSpecContainerGroupContainerImageBuildConfigCodeRefPtrOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput).ToArtifactSpecContainerGroupContainerImageBuildConfigCodeRefPtrOutputWithContext(ctx)
+}
+
+// ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefPtrInput is an input type that accepts ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefArgs, ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefPtr and ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefPtrOutput values.
+// You can construct a concrete instance of `ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefPtrInput` via:
+//
+//	        ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefArgs{...}
+//
+//	or:
+//
+//	        nil
+type ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefPtrInput interface {
+	pulumi.Input
+
+	ToArtifactSpecContainerGroupContainerImageBuildConfigCodeRefPtrOutput() ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefPtrOutput
+	ToArtifactSpecContainerGroupContainerImageBuildConfigCodeRefPtrOutputWithContext(context.Context) ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefPtrOutput
+}
+
+type artifactSpecContainerGroupContainerImageBuildConfigCodeRefPtrType ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefArgs
+
+func ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefPtr(v *ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefArgs) ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefPtrInput {
+	return (*artifactSpecContainerGroupContainerImageBuildConfigCodeRefPtrType)(v)
+}
+
+func (*artifactSpecContainerGroupContainerImageBuildConfigCodeRefPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ArtifactSpecContainerGroupContainerImageBuildConfigCodeRef)(nil)).Elem()
+}
+
+func (i *artifactSpecContainerGroupContainerImageBuildConfigCodeRefPtrType) ToArtifactSpecContainerGroupContainerImageBuildConfigCodeRefPtrOutput() ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefPtrOutput {
+	return i.ToArtifactSpecContainerGroupContainerImageBuildConfigCodeRefPtrOutputWithContext(context.Background())
+}
+
+func (i *artifactSpecContainerGroupContainerImageBuildConfigCodeRefPtrType) ToArtifactSpecContainerGroupContainerImageBuildConfigCodeRefPtrOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefPtrOutput)
+}
+
+type ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput struct{ *pulumi.OutputState }
+
+func (ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ArtifactSpecContainerGroupContainerImageBuildConfigCodeRef)(nil)).Elem()
+}
+
+func (o ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput) ToArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput() ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput {
+	return o
+}
+
+func (o ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput) ToArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput {
+	return o
+}
+
+func (o ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput) ToArtifactSpecContainerGroupContainerImageBuildConfigCodeRefPtrOutput() ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefPtrOutput {
+	return o.ToArtifactSpecContainerGroupContainerImageBuildConfigCodeRefPtrOutputWithContext(context.Background())
+}
+
+func (o ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput) ToArtifactSpecContainerGroupContainerImageBuildConfigCodeRefPtrOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ArtifactSpecContainerGroupContainerImageBuildConfigCodeRef) *ArtifactSpecContainerGroupContainerImageBuildConfigCodeRef {
+		return &v
+	}).(ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefPtrOutput)
+}
+
+// Files API catalog ID (24-character hex).
+func (o ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput) CatalogId() pulumi.StringOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerImageBuildConfigCodeRef) string { return v.CatalogId }).(pulumi.StringOutput)
+}
+
+// Files API catalog version ID (24-character hex).
+func (o ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput) CatalogVersionId() pulumi.StringOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerImageBuildConfigCodeRef) string { return v.CatalogVersionId }).(pulumi.StringOutput)
+}
+
+type ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefPtrOutput struct{ *pulumi.OutputState }
+
+func (ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ArtifactSpecContainerGroupContainerImageBuildConfigCodeRef)(nil)).Elem()
+}
+
+func (o ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefPtrOutput) ToArtifactSpecContainerGroupContainerImageBuildConfigCodeRefPtrOutput() ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefPtrOutput {
+	return o
+}
+
+func (o ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefPtrOutput) ToArtifactSpecContainerGroupContainerImageBuildConfigCodeRefPtrOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefPtrOutput {
+	return o
+}
+
+func (o ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefPtrOutput) Elem() ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput {
+	return o.ApplyT(func(v *ArtifactSpecContainerGroupContainerImageBuildConfigCodeRef) ArtifactSpecContainerGroupContainerImageBuildConfigCodeRef {
+		if v != nil {
+			return *v
+		}
+		var ret ArtifactSpecContainerGroupContainerImageBuildConfigCodeRef
+		return ret
+	}).(ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput)
+}
+
+// Files API catalog ID (24-character hex).
+func (o ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefPtrOutput) CatalogId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ArtifactSpecContainerGroupContainerImageBuildConfigCodeRef) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.CatalogId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Files API catalog version ID (24-character hex).
+func (o ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefPtrOutput) CatalogVersionId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ArtifactSpecContainerGroupContainerImageBuildConfigCodeRef) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.CatalogVersionId
+	}).(pulumi.StringPtrOutput)
+}
+
+type ArtifactSpecContainerGroupContainerImageBuildConfigDockerfile struct {
+	// Entrypoint baked into the generated Dockerfile CMD. Required when source is `generated`.
+	Entrypoints []string `pulumi:"entrypoints"`
+	// Execution environment ID for the base Docker image. Required when source is `generated`.
+	ExecutionEnvironmentId *string `pulumi:"executionEnvironmentId"`
+	// Execution environment version ID that pins the base image. Required when source is `generated`.
+	ExecutionEnvironmentVersionId *string `pulumi:"executionEnvironmentVersionId"`
+	// Relative path to the Dockerfile in the source code. Used when source is `provided`. Defaults to `./Dockerfile`.
+	Path *string `pulumi:"path"`
+	// How the Dockerfile is obtained: `provided` (from source code) or `generated` (from an execution environment). Defaults to `provided`.
+	Source *string `pulumi:"source"`
+}
+
+// ArtifactSpecContainerGroupContainerImageBuildConfigDockerfileInput is an input type that accepts ArtifactSpecContainerGroupContainerImageBuildConfigDockerfileArgs and ArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput values.
+// You can construct a concrete instance of `ArtifactSpecContainerGroupContainerImageBuildConfigDockerfileInput` via:
+//
+//	ArtifactSpecContainerGroupContainerImageBuildConfigDockerfileArgs{...}
+type ArtifactSpecContainerGroupContainerImageBuildConfigDockerfileInput interface {
+	pulumi.Input
+
+	ToArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput() ArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput
+	ToArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutputWithContext(context.Context) ArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput
+}
+
+type ArtifactSpecContainerGroupContainerImageBuildConfigDockerfileArgs struct {
+	// Entrypoint baked into the generated Dockerfile CMD. Required when source is `generated`.
+	Entrypoints pulumi.StringArrayInput `pulumi:"entrypoints"`
+	// Execution environment ID for the base Docker image. Required when source is `generated`.
+	ExecutionEnvironmentId pulumi.StringPtrInput `pulumi:"executionEnvironmentId"`
+	// Execution environment version ID that pins the base image. Required when source is `generated`.
+	ExecutionEnvironmentVersionId pulumi.StringPtrInput `pulumi:"executionEnvironmentVersionId"`
+	// Relative path to the Dockerfile in the source code. Used when source is `provided`. Defaults to `./Dockerfile`.
+	Path pulumi.StringPtrInput `pulumi:"path"`
+	// How the Dockerfile is obtained: `provided` (from source code) or `generated` (from an execution environment). Defaults to `provided`.
+	Source pulumi.StringPtrInput `pulumi:"source"`
+}
+
+func (ArtifactSpecContainerGroupContainerImageBuildConfigDockerfileArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ArtifactSpecContainerGroupContainerImageBuildConfigDockerfile)(nil)).Elem()
+}
+
+func (i ArtifactSpecContainerGroupContainerImageBuildConfigDockerfileArgs) ToArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput() ArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput {
+	return i.ToArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutputWithContext(context.Background())
+}
+
+func (i ArtifactSpecContainerGroupContainerImageBuildConfigDockerfileArgs) ToArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput)
+}
+
+func (i ArtifactSpecContainerGroupContainerImageBuildConfigDockerfileArgs) ToArtifactSpecContainerGroupContainerImageBuildConfigDockerfilePtrOutput() ArtifactSpecContainerGroupContainerImageBuildConfigDockerfilePtrOutput {
+	return i.ToArtifactSpecContainerGroupContainerImageBuildConfigDockerfilePtrOutputWithContext(context.Background())
+}
+
+func (i ArtifactSpecContainerGroupContainerImageBuildConfigDockerfileArgs) ToArtifactSpecContainerGroupContainerImageBuildConfigDockerfilePtrOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupContainerImageBuildConfigDockerfilePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput).ToArtifactSpecContainerGroupContainerImageBuildConfigDockerfilePtrOutputWithContext(ctx)
+}
+
+// ArtifactSpecContainerGroupContainerImageBuildConfigDockerfilePtrInput is an input type that accepts ArtifactSpecContainerGroupContainerImageBuildConfigDockerfileArgs, ArtifactSpecContainerGroupContainerImageBuildConfigDockerfilePtr and ArtifactSpecContainerGroupContainerImageBuildConfigDockerfilePtrOutput values.
+// You can construct a concrete instance of `ArtifactSpecContainerGroupContainerImageBuildConfigDockerfilePtrInput` via:
+//
+//	        ArtifactSpecContainerGroupContainerImageBuildConfigDockerfileArgs{...}
+//
+//	or:
+//
+//	        nil
+type ArtifactSpecContainerGroupContainerImageBuildConfigDockerfilePtrInput interface {
+	pulumi.Input
+
+	ToArtifactSpecContainerGroupContainerImageBuildConfigDockerfilePtrOutput() ArtifactSpecContainerGroupContainerImageBuildConfigDockerfilePtrOutput
+	ToArtifactSpecContainerGroupContainerImageBuildConfigDockerfilePtrOutputWithContext(context.Context) ArtifactSpecContainerGroupContainerImageBuildConfigDockerfilePtrOutput
+}
+
+type artifactSpecContainerGroupContainerImageBuildConfigDockerfilePtrType ArtifactSpecContainerGroupContainerImageBuildConfigDockerfileArgs
+
+func ArtifactSpecContainerGroupContainerImageBuildConfigDockerfilePtr(v *ArtifactSpecContainerGroupContainerImageBuildConfigDockerfileArgs) ArtifactSpecContainerGroupContainerImageBuildConfigDockerfilePtrInput {
+	return (*artifactSpecContainerGroupContainerImageBuildConfigDockerfilePtrType)(v)
+}
+
+func (*artifactSpecContainerGroupContainerImageBuildConfigDockerfilePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ArtifactSpecContainerGroupContainerImageBuildConfigDockerfile)(nil)).Elem()
+}
+
+func (i *artifactSpecContainerGroupContainerImageBuildConfigDockerfilePtrType) ToArtifactSpecContainerGroupContainerImageBuildConfigDockerfilePtrOutput() ArtifactSpecContainerGroupContainerImageBuildConfigDockerfilePtrOutput {
+	return i.ToArtifactSpecContainerGroupContainerImageBuildConfigDockerfilePtrOutputWithContext(context.Background())
+}
+
+func (i *artifactSpecContainerGroupContainerImageBuildConfigDockerfilePtrType) ToArtifactSpecContainerGroupContainerImageBuildConfigDockerfilePtrOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupContainerImageBuildConfigDockerfilePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ArtifactSpecContainerGroupContainerImageBuildConfigDockerfilePtrOutput)
+}
+
+type ArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput struct{ *pulumi.OutputState }
+
+func (ArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ArtifactSpecContainerGroupContainerImageBuildConfigDockerfile)(nil)).Elem()
+}
+
+func (o ArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput) ToArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput() ArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput {
+	return o
+}
+
+func (o ArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput) ToArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput {
+	return o
+}
+
+func (o ArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput) ToArtifactSpecContainerGroupContainerImageBuildConfigDockerfilePtrOutput() ArtifactSpecContainerGroupContainerImageBuildConfigDockerfilePtrOutput {
+	return o.ToArtifactSpecContainerGroupContainerImageBuildConfigDockerfilePtrOutputWithContext(context.Background())
+}
+
+func (o ArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput) ToArtifactSpecContainerGroupContainerImageBuildConfigDockerfilePtrOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupContainerImageBuildConfigDockerfilePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ArtifactSpecContainerGroupContainerImageBuildConfigDockerfile) *ArtifactSpecContainerGroupContainerImageBuildConfigDockerfile {
+		return &v
+	}).(ArtifactSpecContainerGroupContainerImageBuildConfigDockerfilePtrOutput)
+}
+
+// Entrypoint baked into the generated Dockerfile CMD. Required when source is `generated`.
+func (o ArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput) Entrypoints() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerImageBuildConfigDockerfile) []string { return v.Entrypoints }).(pulumi.StringArrayOutput)
+}
+
+// Execution environment ID for the base Docker image. Required when source is `generated`.
+func (o ArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput) ExecutionEnvironmentId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerImageBuildConfigDockerfile) *string {
+		return v.ExecutionEnvironmentId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Execution environment version ID that pins the base image. Required when source is `generated`.
+func (o ArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput) ExecutionEnvironmentVersionId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerImageBuildConfigDockerfile) *string {
+		return v.ExecutionEnvironmentVersionId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Relative path to the Dockerfile in the source code. Used when source is `provided`. Defaults to `./Dockerfile`.
+func (o ArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput) Path() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerImageBuildConfigDockerfile) *string { return v.Path }).(pulumi.StringPtrOutput)
+}
+
+// How the Dockerfile is obtained: `provided` (from source code) or `generated` (from an execution environment). Defaults to `provided`.
+func (o ArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput) Source() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerImageBuildConfigDockerfile) *string { return v.Source }).(pulumi.StringPtrOutput)
+}
+
+type ArtifactSpecContainerGroupContainerImageBuildConfigDockerfilePtrOutput struct{ *pulumi.OutputState }
+
+func (ArtifactSpecContainerGroupContainerImageBuildConfigDockerfilePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ArtifactSpecContainerGroupContainerImageBuildConfigDockerfile)(nil)).Elem()
+}
+
+func (o ArtifactSpecContainerGroupContainerImageBuildConfigDockerfilePtrOutput) ToArtifactSpecContainerGroupContainerImageBuildConfigDockerfilePtrOutput() ArtifactSpecContainerGroupContainerImageBuildConfigDockerfilePtrOutput {
+	return o
+}
+
+func (o ArtifactSpecContainerGroupContainerImageBuildConfigDockerfilePtrOutput) ToArtifactSpecContainerGroupContainerImageBuildConfigDockerfilePtrOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupContainerImageBuildConfigDockerfilePtrOutput {
+	return o
+}
+
+func (o ArtifactSpecContainerGroupContainerImageBuildConfigDockerfilePtrOutput) Elem() ArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput {
+	return o.ApplyT(func(v *ArtifactSpecContainerGroupContainerImageBuildConfigDockerfile) ArtifactSpecContainerGroupContainerImageBuildConfigDockerfile {
+		if v != nil {
+			return *v
+		}
+		var ret ArtifactSpecContainerGroupContainerImageBuildConfigDockerfile
+		return ret
+	}).(ArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput)
+}
+
+// Entrypoint baked into the generated Dockerfile CMD. Required when source is `generated`.
+func (o ArtifactSpecContainerGroupContainerImageBuildConfigDockerfilePtrOutput) Entrypoints() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *ArtifactSpecContainerGroupContainerImageBuildConfigDockerfile) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Entrypoints
+	}).(pulumi.StringArrayOutput)
+}
+
+// Execution environment ID for the base Docker image. Required when source is `generated`.
+func (o ArtifactSpecContainerGroupContainerImageBuildConfigDockerfilePtrOutput) ExecutionEnvironmentId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ArtifactSpecContainerGroupContainerImageBuildConfigDockerfile) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ExecutionEnvironmentId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Execution environment version ID that pins the base image. Required when source is `generated`.
+func (o ArtifactSpecContainerGroupContainerImageBuildConfigDockerfilePtrOutput) ExecutionEnvironmentVersionId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ArtifactSpecContainerGroupContainerImageBuildConfigDockerfile) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ExecutionEnvironmentVersionId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Relative path to the Dockerfile in the source code. Used when source is `provided`. Defaults to `./Dockerfile`.
+func (o ArtifactSpecContainerGroupContainerImageBuildConfigDockerfilePtrOutput) Path() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ArtifactSpecContainerGroupContainerImageBuildConfigDockerfile) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Path
+	}).(pulumi.StringPtrOutput)
+}
+
+// How the Dockerfile is obtained: `provided` (from source code) or `generated` (from an execution environment). Defaults to `provided`.
+func (o ArtifactSpecContainerGroupContainerImageBuildConfigDockerfilePtrOutput) Source() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ArtifactSpecContainerGroupContainerImageBuildConfigDockerfile) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Source
+	}).(pulumi.StringPtrOutput)
+}
+
 type ArtifactSpecContainerGroupContainerLivenessProbe struct {
 	// Minimum consecutive failures for the probe to be considered failed.
 	FailureThreshold *int `pulumi:"failureThreshold"`
@@ -1237,6 +1781,8 @@ type ArtifactSpecContainerGroupContainerLivenessProbe struct {
 	Port *int `pulumi:"port"`
 	// Scheme to use for connecting to the host (HTTP or HTTPS).
 	Scheme *string `pulumi:"scheme"`
+	// Minimum consecutive successes for the probe to be considered successful after having failed.
+	SuccessThreshold *int `pulumi:"successThreshold"`
 	// Number of seconds after which the probe times out.
 	TimeoutSeconds *int `pulumi:"timeoutSeconds"`
 }
@@ -1267,6 +1813,8 @@ type ArtifactSpecContainerGroupContainerLivenessProbeArgs struct {
 	Port pulumi.IntPtrInput `pulumi:"port"`
 	// Scheme to use for connecting to the host (HTTP or HTTPS).
 	Scheme pulumi.StringPtrInput `pulumi:"scheme"`
+	// Minimum consecutive successes for the probe to be considered successful after having failed.
+	SuccessThreshold pulumi.IntPtrInput `pulumi:"successThreshold"`
 	// Number of seconds after which the probe times out.
 	TimeoutSeconds pulumi.IntPtrInput `pulumi:"timeoutSeconds"`
 }
@@ -1383,6 +1931,11 @@ func (o ArtifactSpecContainerGroupContainerLivenessProbeOutput) Scheme() pulumi.
 	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerLivenessProbe) *string { return v.Scheme }).(pulumi.StringPtrOutput)
 }
 
+// Minimum consecutive successes for the probe to be considered successful after having failed.
+func (o ArtifactSpecContainerGroupContainerLivenessProbeOutput) SuccessThreshold() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerLivenessProbe) *int { return v.SuccessThreshold }).(pulumi.IntPtrOutput)
+}
+
 // Number of seconds after which the probe times out.
 func (o ArtifactSpecContainerGroupContainerLivenessProbeOutput) TimeoutSeconds() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerLivenessProbe) *int { return v.TimeoutSeconds }).(pulumi.IntPtrOutput)
@@ -1482,6 +2035,16 @@ func (o ArtifactSpecContainerGroupContainerLivenessProbePtrOutput) Scheme() pulu
 	}).(pulumi.StringPtrOutput)
 }
 
+// Minimum consecutive successes for the probe to be considered successful after having failed.
+func (o ArtifactSpecContainerGroupContainerLivenessProbePtrOutput) SuccessThreshold() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ArtifactSpecContainerGroupContainerLivenessProbe) *int {
+		if v == nil {
+			return nil
+		}
+		return v.SuccessThreshold
+	}).(pulumi.IntPtrOutput)
+}
+
 // Number of seconds after which the probe times out.
 func (o ArtifactSpecContainerGroupContainerLivenessProbePtrOutput) TimeoutSeconds() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ArtifactSpecContainerGroupContainerLivenessProbe) *int {
@@ -1507,6 +2070,8 @@ type ArtifactSpecContainerGroupContainerReadinessProbe struct {
 	Port *int `pulumi:"port"`
 	// Scheme to use for connecting to the host (HTTP or HTTPS).
 	Scheme *string `pulumi:"scheme"`
+	// Minimum consecutive successes for the probe to be considered successful after having failed.
+	SuccessThreshold *int `pulumi:"successThreshold"`
 	// Number of seconds after which the probe times out.
 	TimeoutSeconds *int `pulumi:"timeoutSeconds"`
 }
@@ -1537,6 +2102,8 @@ type ArtifactSpecContainerGroupContainerReadinessProbeArgs struct {
 	Port pulumi.IntPtrInput `pulumi:"port"`
 	// Scheme to use for connecting to the host (HTTP or HTTPS).
 	Scheme pulumi.StringPtrInput `pulumi:"scheme"`
+	// Minimum consecutive successes for the probe to be considered successful after having failed.
+	SuccessThreshold pulumi.IntPtrInput `pulumi:"successThreshold"`
 	// Number of seconds after which the probe times out.
 	TimeoutSeconds pulumi.IntPtrInput `pulumi:"timeoutSeconds"`
 }
@@ -1653,6 +2220,11 @@ func (o ArtifactSpecContainerGroupContainerReadinessProbeOutput) Scheme() pulumi
 	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerReadinessProbe) *string { return v.Scheme }).(pulumi.StringPtrOutput)
 }
 
+// Minimum consecutive successes for the probe to be considered successful after having failed.
+func (o ArtifactSpecContainerGroupContainerReadinessProbeOutput) SuccessThreshold() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerReadinessProbe) *int { return v.SuccessThreshold }).(pulumi.IntPtrOutput)
+}
+
 // Number of seconds after which the probe times out.
 func (o ArtifactSpecContainerGroupContainerReadinessProbeOutput) TimeoutSeconds() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerReadinessProbe) *int { return v.TimeoutSeconds }).(pulumi.IntPtrOutput)
@@ -1752,6 +2324,16 @@ func (o ArtifactSpecContainerGroupContainerReadinessProbePtrOutput) Scheme() pul
 	}).(pulumi.StringPtrOutput)
 }
 
+// Minimum consecutive successes for the probe to be considered successful after having failed.
+func (o ArtifactSpecContainerGroupContainerReadinessProbePtrOutput) SuccessThreshold() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ArtifactSpecContainerGroupContainerReadinessProbe) *int {
+		if v == nil {
+			return nil
+		}
+		return v.SuccessThreshold
+	}).(pulumi.IntPtrOutput)
+}
+
 // Number of seconds after which the probe times out.
 func (o ArtifactSpecContainerGroupContainerReadinessProbePtrOutput) TimeoutSeconds() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ArtifactSpecContainerGroupContainerReadinessProbe) *int {
@@ -1777,6 +2359,8 @@ type ArtifactSpecContainerGroupContainerStartupProbe struct {
 	Port *int `pulumi:"port"`
 	// Scheme to use for connecting to the host (HTTP or HTTPS).
 	Scheme *string `pulumi:"scheme"`
+	// Minimum consecutive successes for the probe to be considered successful after having failed.
+	SuccessThreshold *int `pulumi:"successThreshold"`
 	// Number of seconds after which the probe times out.
 	TimeoutSeconds *int `pulumi:"timeoutSeconds"`
 }
@@ -1807,6 +2391,8 @@ type ArtifactSpecContainerGroupContainerStartupProbeArgs struct {
 	Port pulumi.IntPtrInput `pulumi:"port"`
 	// Scheme to use for connecting to the host (HTTP or HTTPS).
 	Scheme pulumi.StringPtrInput `pulumi:"scheme"`
+	// Minimum consecutive successes for the probe to be considered successful after having failed.
+	SuccessThreshold pulumi.IntPtrInput `pulumi:"successThreshold"`
 	// Number of seconds after which the probe times out.
 	TimeoutSeconds pulumi.IntPtrInput `pulumi:"timeoutSeconds"`
 }
@@ -1923,6 +2509,11 @@ func (o ArtifactSpecContainerGroupContainerStartupProbeOutput) Scheme() pulumi.S
 	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerStartupProbe) *string { return v.Scheme }).(pulumi.StringPtrOutput)
 }
 
+// Minimum consecutive successes for the probe to be considered successful after having failed.
+func (o ArtifactSpecContainerGroupContainerStartupProbeOutput) SuccessThreshold() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerStartupProbe) *int { return v.SuccessThreshold }).(pulumi.IntPtrOutput)
+}
+
 // Number of seconds after which the probe times out.
 func (o ArtifactSpecContainerGroupContainerStartupProbeOutput) TimeoutSeconds() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerStartupProbe) *int { return v.TimeoutSeconds }).(pulumi.IntPtrOutput)
@@ -2020,6 +2611,16 @@ func (o ArtifactSpecContainerGroupContainerStartupProbePtrOutput) Scheme() pulum
 		}
 		return v.Scheme
 	}).(pulumi.StringPtrOutput)
+}
+
+// Minimum consecutive successes for the probe to be considered successful after having failed.
+func (o ArtifactSpecContainerGroupContainerStartupProbePtrOutput) SuccessThreshold() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *ArtifactSpecContainerGroupContainerStartupProbe) *int {
+		if v == nil {
+			return nil
+		}
+		return v.SuccessThreshold
+	}).(pulumi.IntPtrOutput)
 }
 
 // Number of seconds after which the probe times out.
@@ -14774,6 +15375,10 @@ func (o WorkloadRuntimeContainerGroupArrayOutput) Index(i pulumi.IntInput) Workl
 type WorkloadRuntimeContainerGroupAutoscaling struct {
 	// Whether autoscaling is enabled. Defaults to true.
 	Enabled *bool `pulumi:"enabled"`
+	// Maximum number of replicas. Defaults to `1`.
+	MaxReplicaCount *int `pulumi:"maxReplicaCount"`
+	// Minimum number of replicas. Set to `0` to allow scale-to-zero. Defaults to `0`.
+	MinReplicaCount *int `pulumi:"minReplicaCount"`
 	// Scaling policies that define when and how to scale.
 	Policies []WorkloadRuntimeContainerGroupAutoscalingPolicy `pulumi:"policies"`
 }
@@ -14792,6 +15397,10 @@ type WorkloadRuntimeContainerGroupAutoscalingInput interface {
 type WorkloadRuntimeContainerGroupAutoscalingArgs struct {
 	// Whether autoscaling is enabled. Defaults to true.
 	Enabled pulumi.BoolPtrInput `pulumi:"enabled"`
+	// Maximum number of replicas. Defaults to `1`.
+	MaxReplicaCount pulumi.IntPtrInput `pulumi:"maxReplicaCount"`
+	// Minimum number of replicas. Set to `0` to allow scale-to-zero. Defaults to `0`.
+	MinReplicaCount pulumi.IntPtrInput `pulumi:"minReplicaCount"`
 	// Scaling policies that define when and how to scale.
 	Policies WorkloadRuntimeContainerGroupAutoscalingPolicyArrayInput `pulumi:"policies"`
 }
@@ -14878,6 +15487,16 @@ func (o WorkloadRuntimeContainerGroupAutoscalingOutput) Enabled() pulumi.BoolPtr
 	return o.ApplyT(func(v WorkloadRuntimeContainerGroupAutoscaling) *bool { return v.Enabled }).(pulumi.BoolPtrOutput)
 }
 
+// Maximum number of replicas. Defaults to `1`.
+func (o WorkloadRuntimeContainerGroupAutoscalingOutput) MaxReplicaCount() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v WorkloadRuntimeContainerGroupAutoscaling) *int { return v.MaxReplicaCount }).(pulumi.IntPtrOutput)
+}
+
+// Minimum number of replicas. Set to `0` to allow scale-to-zero. Defaults to `0`.
+func (o WorkloadRuntimeContainerGroupAutoscalingOutput) MinReplicaCount() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v WorkloadRuntimeContainerGroupAutoscaling) *int { return v.MinReplicaCount }).(pulumi.IntPtrOutput)
+}
+
 // Scaling policies that define when and how to scale.
 func (o WorkloadRuntimeContainerGroupAutoscalingOutput) Policies() WorkloadRuntimeContainerGroupAutoscalingPolicyArrayOutput {
 	return o.ApplyT(func(v WorkloadRuntimeContainerGroupAutoscaling) []WorkloadRuntimeContainerGroupAutoscalingPolicy {
@@ -14919,6 +15538,26 @@ func (o WorkloadRuntimeContainerGroupAutoscalingPtrOutput) Enabled() pulumi.Bool
 	}).(pulumi.BoolPtrOutput)
 }
 
+// Maximum number of replicas. Defaults to `1`.
+func (o WorkloadRuntimeContainerGroupAutoscalingPtrOutput) MaxReplicaCount() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *WorkloadRuntimeContainerGroupAutoscaling) *int {
+		if v == nil {
+			return nil
+		}
+		return v.MaxReplicaCount
+	}).(pulumi.IntPtrOutput)
+}
+
+// Minimum number of replicas. Set to `0` to allow scale-to-zero. Defaults to `0`.
+func (o WorkloadRuntimeContainerGroupAutoscalingPtrOutput) MinReplicaCount() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *WorkloadRuntimeContainerGroupAutoscaling) *int {
+		if v == nil {
+			return nil
+		}
+		return v.MinReplicaCount
+	}).(pulumi.IntPtrOutput)
+}
+
 // Scaling policies that define when and how to scale.
 func (o WorkloadRuntimeContainerGroupAutoscalingPtrOutput) Policies() WorkloadRuntimeContainerGroupAutoscalingPolicyArrayOutput {
 	return o.ApplyT(func(v *WorkloadRuntimeContainerGroupAutoscaling) []WorkloadRuntimeContainerGroupAutoscalingPolicy {
@@ -14930,15 +15569,9 @@ func (o WorkloadRuntimeContainerGroupAutoscalingPtrOutput) Policies() WorkloadRu
 }
 
 type WorkloadRuntimeContainerGroupAutoscalingPolicy struct {
-	// Maximum number of replicas.
-	MaxCount int `pulumi:"maxCount"`
-	// Minimum number of replicas.
-	MinCount int `pulumi:"minCount"`
-	// Policy priority when multiple policies are defined.
-	Priority *int `pulumi:"priority"`
-	// Metric used for scaling decisions: `cpuAverageUtilization`, `httpRequestsConcurrency`, `gpuCacheUtilization`, or `gpuRequestQueueDepth`.
+	// Metric used for scaling decisions: `cpuAverageUtilization`, `httpRequestsConcurrency`, `gpuCacheUtilization`, or `gpuRequestQueueDepth`. Custom metric names (e.g. `vllm:kv_cache_usage_perc`) are supported for NIM artifacts only.
 	ScalingMetric string `pulumi:"scalingMetric"`
-	// Target value for the scaling metric.
+	// Target value for the scaling metric. Must be non-negative.
 	Target float64 `pulumi:"target"`
 }
 
@@ -14954,15 +15587,9 @@ type WorkloadRuntimeContainerGroupAutoscalingPolicyInput interface {
 }
 
 type WorkloadRuntimeContainerGroupAutoscalingPolicyArgs struct {
-	// Maximum number of replicas.
-	MaxCount pulumi.IntInput `pulumi:"maxCount"`
-	// Minimum number of replicas.
-	MinCount pulumi.IntInput `pulumi:"minCount"`
-	// Policy priority when multiple policies are defined.
-	Priority pulumi.IntPtrInput `pulumi:"priority"`
-	// Metric used for scaling decisions: `cpuAverageUtilization`, `httpRequestsConcurrency`, `gpuCacheUtilization`, or `gpuRequestQueueDepth`.
+	// Metric used for scaling decisions: `cpuAverageUtilization`, `httpRequestsConcurrency`, `gpuCacheUtilization`, or `gpuRequestQueueDepth`. Custom metric names (e.g. `vllm:kv_cache_usage_perc`) are supported for NIM artifacts only.
 	ScalingMetric pulumi.StringInput `pulumi:"scalingMetric"`
-	// Target value for the scaling metric.
+	// Target value for the scaling metric. Must be non-negative.
 	Target pulumi.Float64Input `pulumi:"target"`
 }
 
@@ -15017,27 +15644,12 @@ func (o WorkloadRuntimeContainerGroupAutoscalingPolicyOutput) ToWorkloadRuntimeC
 	return o
 }
 
-// Maximum number of replicas.
-func (o WorkloadRuntimeContainerGroupAutoscalingPolicyOutput) MaxCount() pulumi.IntOutput {
-	return o.ApplyT(func(v WorkloadRuntimeContainerGroupAutoscalingPolicy) int { return v.MaxCount }).(pulumi.IntOutput)
-}
-
-// Minimum number of replicas.
-func (o WorkloadRuntimeContainerGroupAutoscalingPolicyOutput) MinCount() pulumi.IntOutput {
-	return o.ApplyT(func(v WorkloadRuntimeContainerGroupAutoscalingPolicy) int { return v.MinCount }).(pulumi.IntOutput)
-}
-
-// Policy priority when multiple policies are defined.
-func (o WorkloadRuntimeContainerGroupAutoscalingPolicyOutput) Priority() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v WorkloadRuntimeContainerGroupAutoscalingPolicy) *int { return v.Priority }).(pulumi.IntPtrOutput)
-}
-
-// Metric used for scaling decisions: `cpuAverageUtilization`, `httpRequestsConcurrency`, `gpuCacheUtilization`, or `gpuRequestQueueDepth`.
+// Metric used for scaling decisions: `cpuAverageUtilization`, `httpRequestsConcurrency`, `gpuCacheUtilization`, or `gpuRequestQueueDepth`. Custom metric names (e.g. `vllm:kv_cache_usage_perc`) are supported for NIM artifacts only.
 func (o WorkloadRuntimeContainerGroupAutoscalingPolicyOutput) ScalingMetric() pulumi.StringOutput {
 	return o.ApplyT(func(v WorkloadRuntimeContainerGroupAutoscalingPolicy) string { return v.ScalingMetric }).(pulumi.StringOutput)
 }
 
-// Target value for the scaling metric.
+// Target value for the scaling metric. Must be non-negative.
 func (o WorkloadRuntimeContainerGroupAutoscalingPolicyOutput) Target() pulumi.Float64Output {
 	return o.ApplyT(func(v WorkloadRuntimeContainerGroupAutoscalingPolicy) float64 { return v.Target }).(pulumi.Float64Output)
 }
@@ -15922,9 +16534,9 @@ type GetArtifactSpecContainerGroupContainerEnvironmentVar struct {
 	DrCredentialId string `pulumi:"drCredentialId"`
 	// Key within the credential when source is "dr-credential".
 	Key string `pulumi:"key"`
-	// Name of the environment variable.
+	// Name of the environment variable. May be absent for "api-key" entries, in which case the token is injected as DATAROBOT*API*TOKEN.
 	Name string `pulumi:"name"`
-	// Source type: "string" for plain text values, "dr-credential" for DataRobot credentials.
+	// Source type: "string" for plain text values, "dr-credential" for DataRobot credentials, "api-key" for a platform-managed DataRobot API token.
 	Source string `pulumi:"source"`
 	// Value of the environment variable when source is "string".
 	Value string `pulumi:"value"`
@@ -15946,9 +16558,9 @@ type GetArtifactSpecContainerGroupContainerEnvironmentVarArgs struct {
 	DrCredentialId pulumi.StringInput `pulumi:"drCredentialId"`
 	// Key within the credential when source is "dr-credential".
 	Key pulumi.StringInput `pulumi:"key"`
-	// Name of the environment variable.
+	// Name of the environment variable. May be absent for "api-key" entries, in which case the token is injected as DATAROBOT*API*TOKEN.
 	Name pulumi.StringInput `pulumi:"name"`
-	// Source type: "string" for plain text values, "dr-credential" for DataRobot credentials.
+	// Source type: "string" for plain text values, "dr-credential" for DataRobot credentials, "api-key" for a platform-managed DataRobot API token.
 	Source pulumi.StringInput `pulumi:"source"`
 	// Value of the environment variable when source is "string".
 	Value pulumi.StringInput `pulumi:"value"`
@@ -16015,12 +16627,12 @@ func (o GetArtifactSpecContainerGroupContainerEnvironmentVarOutput) Key() pulumi
 	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerEnvironmentVar) string { return v.Key }).(pulumi.StringOutput)
 }
 
-// Name of the environment variable.
+// Name of the environment variable. May be absent for "api-key" entries, in which case the token is injected as DATAROBOT*API*TOKEN.
 func (o GetArtifactSpecContainerGroupContainerEnvironmentVarOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerEnvironmentVar) string { return v.Name }).(pulumi.StringOutput)
 }
 
-// Source type: "string" for plain text values, "dr-credential" for DataRobot credentials.
+// Source type: "string" for plain text values, "dr-credential" for DataRobot credentials, "api-key" for a platform-managed DataRobot API token.
 func (o GetArtifactSpecContainerGroupContainerEnvironmentVarOutput) Source() pulumi.StringOutput {
 	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerEnvironmentVar) string { return v.Source }).(pulumi.StringOutput)
 }
@@ -16361,6 +16973,8 @@ type GetArtifactSpecContainerGroupContainerLivenessProbe struct {
 	Port int `pulumi:"port"`
 	// Scheme to use for connecting to the host (HTTP or HTTPS).
 	Scheme string `pulumi:"scheme"`
+	// Minimum consecutive successes for the probe to be considered successful after having failed.
+	SuccessThreshold int `pulumi:"successThreshold"`
 	// Number of seconds after which the probe times out.
 	TimeoutSeconds int `pulumi:"timeoutSeconds"`
 }
@@ -16391,6 +17005,8 @@ type GetArtifactSpecContainerGroupContainerLivenessProbeArgs struct {
 	Port pulumi.IntInput `pulumi:"port"`
 	// Scheme to use for connecting to the host (HTTP or HTTPS).
 	Scheme pulumi.StringInput `pulumi:"scheme"`
+	// Minimum consecutive successes for the probe to be considered successful after having failed.
+	SuccessThreshold pulumi.IntInput `pulumi:"successThreshold"`
 	// Number of seconds after which the probe times out.
 	TimeoutSeconds pulumi.IntInput `pulumi:"timeoutSeconds"`
 }
@@ -16456,6 +17072,11 @@ func (o GetArtifactSpecContainerGroupContainerLivenessProbeOutput) Scheme() pulu
 	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerLivenessProbe) string { return v.Scheme }).(pulumi.StringOutput)
 }
 
+// Minimum consecutive successes for the probe to be considered successful after having failed.
+func (o GetArtifactSpecContainerGroupContainerLivenessProbeOutput) SuccessThreshold() pulumi.IntOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerLivenessProbe) int { return v.SuccessThreshold }).(pulumi.IntOutput)
+}
+
 // Number of seconds after which the probe times out.
 func (o GetArtifactSpecContainerGroupContainerLivenessProbeOutput) TimeoutSeconds() pulumi.IntOutput {
 	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerLivenessProbe) int { return v.TimeoutSeconds }).(pulumi.IntOutput)
@@ -16476,6 +17097,8 @@ type GetArtifactSpecContainerGroupContainerReadinessProbe struct {
 	Port int `pulumi:"port"`
 	// Scheme to use for connecting to the host (HTTP or HTTPS).
 	Scheme string `pulumi:"scheme"`
+	// Minimum consecutive successes for the probe to be considered successful after having failed.
+	SuccessThreshold int `pulumi:"successThreshold"`
 	// Number of seconds after which the probe times out.
 	TimeoutSeconds int `pulumi:"timeoutSeconds"`
 }
@@ -16506,6 +17129,8 @@ type GetArtifactSpecContainerGroupContainerReadinessProbeArgs struct {
 	Port pulumi.IntInput `pulumi:"port"`
 	// Scheme to use for connecting to the host (HTTP or HTTPS).
 	Scheme pulumi.StringInput `pulumi:"scheme"`
+	// Minimum consecutive successes for the probe to be considered successful after having failed.
+	SuccessThreshold pulumi.IntInput `pulumi:"successThreshold"`
 	// Number of seconds after which the probe times out.
 	TimeoutSeconds pulumi.IntInput `pulumi:"timeoutSeconds"`
 }
@@ -16569,6 +17194,11 @@ func (o GetArtifactSpecContainerGroupContainerReadinessProbeOutput) Port() pulum
 // Scheme to use for connecting to the host (HTTP or HTTPS).
 func (o GetArtifactSpecContainerGroupContainerReadinessProbeOutput) Scheme() pulumi.StringOutput {
 	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerReadinessProbe) string { return v.Scheme }).(pulumi.StringOutput)
+}
+
+// Minimum consecutive successes for the probe to be considered successful after having failed.
+func (o GetArtifactSpecContainerGroupContainerReadinessProbeOutput) SuccessThreshold() pulumi.IntOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerReadinessProbe) int { return v.SuccessThreshold }).(pulumi.IntOutput)
 }
 
 // Number of seconds after which the probe times out.
@@ -16798,6 +17428,8 @@ type GetArtifactSpecContainerGroupContainerStartupProbe struct {
 	Port int `pulumi:"port"`
 	// Scheme to use for connecting to the host (HTTP or HTTPS).
 	Scheme string `pulumi:"scheme"`
+	// Minimum consecutive successes for the probe to be considered successful after having failed.
+	SuccessThreshold int `pulumi:"successThreshold"`
 	// Number of seconds after which the probe times out.
 	TimeoutSeconds int `pulumi:"timeoutSeconds"`
 }
@@ -16828,6 +17460,8 @@ type GetArtifactSpecContainerGroupContainerStartupProbeArgs struct {
 	Port pulumi.IntInput `pulumi:"port"`
 	// Scheme to use for connecting to the host (HTTP or HTTPS).
 	Scheme pulumi.StringInput `pulumi:"scheme"`
+	// Minimum consecutive successes for the probe to be considered successful after having failed.
+	SuccessThreshold pulumi.IntInput `pulumi:"successThreshold"`
 	// Number of seconds after which the probe times out.
 	TimeoutSeconds pulumi.IntInput `pulumi:"timeoutSeconds"`
 }
@@ -16891,6 +17525,11 @@ func (o GetArtifactSpecContainerGroupContainerStartupProbeOutput) Port() pulumi.
 // Scheme to use for connecting to the host (HTTP or HTTPS).
 func (o GetArtifactSpecContainerGroupContainerStartupProbeOutput) Scheme() pulumi.StringOutput {
 	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerStartupProbe) string { return v.Scheme }).(pulumi.StringOutput)
+}
+
+// Minimum consecutive successes for the probe to be considered successful after having failed.
+func (o GetArtifactSpecContainerGroupContainerStartupProbeOutput) SuccessThreshold() pulumi.IntOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerStartupProbe) int { return v.SuccessThreshold }).(pulumi.IntOutput)
 }
 
 // Number of seconds after which the probe times out.
@@ -17839,9 +18478,9 @@ type GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVar struct {
 	DrCredentialId string `pulumi:"drCredentialId"`
 	// Key within the credential when source is "dr-credential".
 	Key string `pulumi:"key"`
-	// Name of the environment variable.
+	// Name of the environment variable. May be absent for "api-key" entries, in which case the token is injected as DATAROBOT*API*TOKEN.
 	Name string `pulumi:"name"`
-	// Source type: "string" for plain text values, "dr-credential" for DataRobot credentials.
+	// Source type: "string" for plain text values, "dr-credential" for DataRobot credentials, "api-key" for a platform-managed DataRobot API token.
 	Source string `pulumi:"source"`
 	// Value of the environment variable when source is "string".
 	Value string `pulumi:"value"`
@@ -17863,9 +18502,9 @@ type GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarArgs struct {
 	DrCredentialId pulumi.StringInput `pulumi:"drCredentialId"`
 	// Key within the credential when source is "dr-credential".
 	Key pulumi.StringInput `pulumi:"key"`
-	// Name of the environment variable.
+	// Name of the environment variable. May be absent for "api-key" entries, in which case the token is injected as DATAROBOT*API*TOKEN.
 	Name pulumi.StringInput `pulumi:"name"`
-	// Source type: "string" for plain text values, "dr-credential" for DataRobot credentials.
+	// Source type: "string" for plain text values, "dr-credential" for DataRobot credentials, "api-key" for a platform-managed DataRobot API token.
 	Source pulumi.StringInput `pulumi:"source"`
 	// Value of the environment variable when source is "string".
 	Value pulumi.StringInput `pulumi:"value"`
@@ -17932,12 +18571,12 @@ func (o GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarOutput) Key
 	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVar) string { return v.Key }).(pulumi.StringOutput)
 }
 
-// Name of the environment variable.
+// Name of the environment variable. May be absent for "api-key" entries, in which case the token is injected as DATAROBOT*API*TOKEN.
 func (o GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVar) string { return v.Name }).(pulumi.StringOutput)
 }
 
-// Source type: "string" for plain text values, "dr-credential" for DataRobot credentials.
+// Source type: "string" for plain text values, "dr-credential" for DataRobot credentials, "api-key" for a platform-managed DataRobot API token.
 func (o GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarOutput) Source() pulumi.StringOutput {
 	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVar) string { return v.Source }).(pulumi.StringOutput)
 }
@@ -18284,6 +18923,8 @@ type GetArtifactsArtifactSpecContainerGroupContainerLivenessProbe struct {
 	Port int `pulumi:"port"`
 	// Scheme to use for connecting to the host (HTTP or HTTPS).
 	Scheme string `pulumi:"scheme"`
+	// Minimum consecutive successes for the probe to be considered successful after having failed.
+	SuccessThreshold int `pulumi:"successThreshold"`
 	// Number of seconds after which the probe times out.
 	TimeoutSeconds int `pulumi:"timeoutSeconds"`
 }
@@ -18314,6 +18955,8 @@ type GetArtifactsArtifactSpecContainerGroupContainerLivenessProbeArgs struct {
 	Port pulumi.IntInput `pulumi:"port"`
 	// Scheme to use for connecting to the host (HTTP or HTTPS).
 	Scheme pulumi.StringInput `pulumi:"scheme"`
+	// Minimum consecutive successes for the probe to be considered successful after having failed.
+	SuccessThreshold pulumi.IntInput `pulumi:"successThreshold"`
 	// Number of seconds after which the probe times out.
 	TimeoutSeconds pulumi.IntInput `pulumi:"timeoutSeconds"`
 }
@@ -18379,6 +19022,11 @@ func (o GetArtifactsArtifactSpecContainerGroupContainerLivenessProbeOutput) Sche
 	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerLivenessProbe) string { return v.Scheme }).(pulumi.StringOutput)
 }
 
+// Minimum consecutive successes for the probe to be considered successful after having failed.
+func (o GetArtifactsArtifactSpecContainerGroupContainerLivenessProbeOutput) SuccessThreshold() pulumi.IntOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerLivenessProbe) int { return v.SuccessThreshold }).(pulumi.IntOutput)
+}
+
 // Number of seconds after which the probe times out.
 func (o GetArtifactsArtifactSpecContainerGroupContainerLivenessProbeOutput) TimeoutSeconds() pulumi.IntOutput {
 	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerLivenessProbe) int { return v.TimeoutSeconds }).(pulumi.IntOutput)
@@ -18399,6 +19047,8 @@ type GetArtifactsArtifactSpecContainerGroupContainerReadinessProbe struct {
 	Port int `pulumi:"port"`
 	// Scheme to use for connecting to the host (HTTP or HTTPS).
 	Scheme string `pulumi:"scheme"`
+	// Minimum consecutive successes for the probe to be considered successful after having failed.
+	SuccessThreshold int `pulumi:"successThreshold"`
 	// Number of seconds after which the probe times out.
 	TimeoutSeconds int `pulumi:"timeoutSeconds"`
 }
@@ -18429,6 +19079,8 @@ type GetArtifactsArtifactSpecContainerGroupContainerReadinessProbeArgs struct {
 	Port pulumi.IntInput `pulumi:"port"`
 	// Scheme to use for connecting to the host (HTTP or HTTPS).
 	Scheme pulumi.StringInput `pulumi:"scheme"`
+	// Minimum consecutive successes for the probe to be considered successful after having failed.
+	SuccessThreshold pulumi.IntInput `pulumi:"successThreshold"`
 	// Number of seconds after which the probe times out.
 	TimeoutSeconds pulumi.IntInput `pulumi:"timeoutSeconds"`
 }
@@ -18494,6 +19146,11 @@ func (o GetArtifactsArtifactSpecContainerGroupContainerReadinessProbeOutput) Por
 // Scheme to use for connecting to the host (HTTP or HTTPS).
 func (o GetArtifactsArtifactSpecContainerGroupContainerReadinessProbeOutput) Scheme() pulumi.StringOutput {
 	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerReadinessProbe) string { return v.Scheme }).(pulumi.StringOutput)
+}
+
+// Minimum consecutive successes for the probe to be considered successful after having failed.
+func (o GetArtifactsArtifactSpecContainerGroupContainerReadinessProbeOutput) SuccessThreshold() pulumi.IntOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerReadinessProbe) int { return v.SuccessThreshold }).(pulumi.IntOutput)
 }
 
 // Number of seconds after which the probe times out.
@@ -18733,6 +19390,8 @@ type GetArtifactsArtifactSpecContainerGroupContainerStartupProbe struct {
 	Port int `pulumi:"port"`
 	// Scheme to use for connecting to the host (HTTP or HTTPS).
 	Scheme string `pulumi:"scheme"`
+	// Minimum consecutive successes for the probe to be considered successful after having failed.
+	SuccessThreshold int `pulumi:"successThreshold"`
 	// Number of seconds after which the probe times out.
 	TimeoutSeconds int `pulumi:"timeoutSeconds"`
 }
@@ -18763,6 +19422,8 @@ type GetArtifactsArtifactSpecContainerGroupContainerStartupProbeArgs struct {
 	Port pulumi.IntInput `pulumi:"port"`
 	// Scheme to use for connecting to the host (HTTP or HTTPS).
 	Scheme pulumi.StringInput `pulumi:"scheme"`
+	// Minimum consecutive successes for the probe to be considered successful after having failed.
+	SuccessThreshold pulumi.IntInput `pulumi:"successThreshold"`
 	// Number of seconds after which the probe times out.
 	TimeoutSeconds pulumi.IntInput `pulumi:"timeoutSeconds"`
 }
@@ -18826,6 +19487,11 @@ func (o GetArtifactsArtifactSpecContainerGroupContainerStartupProbeOutput) Port(
 // Scheme to use for connecting to the host (HTTP or HTTPS).
 func (o GetArtifactsArtifactSpecContainerGroupContainerStartupProbeOutput) Scheme() pulumi.StringOutput {
 	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerStartupProbe) string { return v.Scheme }).(pulumi.StringOutput)
+}
+
+// Minimum consecutive successes for the probe to be considered successful after having failed.
+func (o GetArtifactsArtifactSpecContainerGroupContainerStartupProbeOutput) SuccessThreshold() pulumi.IntOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerStartupProbe) int { return v.SuccessThreshold }).(pulumi.IntOutput)
 }
 
 // Number of seconds after which the probe times out.
@@ -19026,6 +19692,12 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ArtifactSpecContainerGroupContainerArrayInput)(nil)).Elem(), ArtifactSpecContainerGroupContainerArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ArtifactSpecContainerGroupContainerEnvironmentVarInput)(nil)).Elem(), ArtifactSpecContainerGroupContainerEnvironmentVarArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ArtifactSpecContainerGroupContainerEnvironmentVarArrayInput)(nil)).Elem(), ArtifactSpecContainerGroupContainerEnvironmentVarArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ArtifactSpecContainerGroupContainerImageBuildConfigInput)(nil)).Elem(), ArtifactSpecContainerGroupContainerImageBuildConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ArtifactSpecContainerGroupContainerImageBuildConfigPtrInput)(nil)).Elem(), ArtifactSpecContainerGroupContainerImageBuildConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefInput)(nil)).Elem(), ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefPtrInput)(nil)).Elem(), ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ArtifactSpecContainerGroupContainerImageBuildConfigDockerfileInput)(nil)).Elem(), ArtifactSpecContainerGroupContainerImageBuildConfigDockerfileArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ArtifactSpecContainerGroupContainerImageBuildConfigDockerfilePtrInput)(nil)).Elem(), ArtifactSpecContainerGroupContainerImageBuildConfigDockerfileArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ArtifactSpecContainerGroupContainerLivenessProbeInput)(nil)).Elem(), ArtifactSpecContainerGroupContainerLivenessProbeArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ArtifactSpecContainerGroupContainerLivenessProbePtrInput)(nil)).Elem(), ArtifactSpecContainerGroupContainerLivenessProbeArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ArtifactSpecContainerGroupContainerReadinessProbeInput)(nil)).Elem(), ArtifactSpecContainerGroupContainerReadinessProbeArgs{})
@@ -19249,6 +19921,12 @@ func init() {
 	pulumi.RegisterOutputType(ArtifactSpecContainerGroupContainerArrayOutput{})
 	pulumi.RegisterOutputType(ArtifactSpecContainerGroupContainerEnvironmentVarOutput{})
 	pulumi.RegisterOutputType(ArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput{})
+	pulumi.RegisterOutputType(ArtifactSpecContainerGroupContainerImageBuildConfigOutput{})
+	pulumi.RegisterOutputType(ArtifactSpecContainerGroupContainerImageBuildConfigPtrOutput{})
+	pulumi.RegisterOutputType(ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefOutput{})
+	pulumi.RegisterOutputType(ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefPtrOutput{})
+	pulumi.RegisterOutputType(ArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput{})
+	pulumi.RegisterOutputType(ArtifactSpecContainerGroupContainerImageBuildConfigDockerfilePtrOutput{})
 	pulumi.RegisterOutputType(ArtifactSpecContainerGroupContainerLivenessProbeOutput{})
 	pulumi.RegisterOutputType(ArtifactSpecContainerGroupContainerLivenessProbePtrOutput{})
 	pulumi.RegisterOutputType(ArtifactSpecContainerGroupContainerReadinessProbeOutput{})

@@ -13,13 +13,14 @@ You are a release engineer for the pulumi-datarobot provider. Your job is to cre
    - If the upstream terraform provider version is ahead, adopt that version.
    - Otherwise, increment the patch version (e.g., `v0.10.28` → `v0.10.29`).
    - If the user provides an explicit version, use that instead.
-5. **Show the plan**: Display the current version, upstream version, and proposed next version. Ask the user to confirm before proceeding.
-6. **Create and push the tag**:
+5. **Check the changelog**: Run `./scripts/changelog.sh extract <version>`. It should print the section the upgrade workflow wrote for this version — that text becomes the GitHub Release body. If it exits non-zero, the tag has no section and the release will fall back to a raw commit list; offer to generate one with `make changelog VERSION=<version>` first.
+6. **Show the plan**: Display the current version, upstream version, and proposed next version. Ask the user to confirm before proceeding.
+7. **Create and push the tag**:
    ```
    git tag -a <version> -m "Release <version>"
    git push origin <version>
    ```
-7. **Confirm**: Tell the user the tag was pushed and that the [Release workflow](.github/workflows/release.yml) will be triggered automatically by the `v*.*.*` tag pattern.
+8. **Confirm**: Tell the user the tag was pushed and that the [Release workflow](.github/workflows/release.yml) will be triggered automatically by the `v*.*.*` tag pattern.
 
 ## Constraints
 

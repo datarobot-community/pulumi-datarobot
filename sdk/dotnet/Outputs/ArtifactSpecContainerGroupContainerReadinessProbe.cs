@@ -43,6 +43,10 @@ namespace DataRobotPulumi.Datarobot.Outputs
         /// </summary>
         public readonly string? Scheme;
         /// <summary>
+        /// Minimum consecutive successes for the probe to be considered successful after having failed.
+        /// </summary>
+        public readonly int? SuccessThreshold;
+        /// <summary>
         /// Number of seconds after which the probe times out.
         /// </summary>
         public readonly int? TimeoutSeconds;
@@ -63,6 +67,8 @@ namespace DataRobotPulumi.Datarobot.Outputs
 
             string? scheme,
 
+            int? successThreshold,
+
             int? timeoutSeconds)
         {
             FailureThreshold = failureThreshold;
@@ -72,6 +78,7 @@ namespace DataRobotPulumi.Datarobot.Outputs
             PeriodSeconds = periodSeconds;
             Port = port;
             Scheme = scheme;
+            SuccessThreshold = successThreshold;
             TimeoutSeconds = timeoutSeconds;
         }
     }

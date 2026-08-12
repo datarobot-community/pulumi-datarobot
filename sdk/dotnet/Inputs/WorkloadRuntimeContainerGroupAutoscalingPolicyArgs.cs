@@ -14,31 +14,13 @@ namespace DataRobotPulumi.Datarobot.Inputs
     public sealed class WorkloadRuntimeContainerGroupAutoscalingPolicyArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Maximum number of replicas.
-        /// </summary>
-        [Input("maxCount", required: true)]
-        public Input<int> MaxCount { get; set; } = null!;
-
-        /// <summary>
-        /// Minimum number of replicas.
-        /// </summary>
-        [Input("minCount", required: true)]
-        public Input<int> MinCount { get; set; } = null!;
-
-        /// <summary>
-        /// Policy priority when multiple policies are defined.
-        /// </summary>
-        [Input("priority")]
-        public Input<int>? Priority { get; set; }
-
-        /// <summary>
-        /// Metric used for scaling decisions: `cpuAverageUtilization`, `httpRequestsConcurrency`, `gpuCacheUtilization`, or `gpuRequestQueueDepth`.
+        /// Metric used for scaling decisions: `cpuAverageUtilization`, `httpRequestsConcurrency`, `gpuCacheUtilization`, or `gpuRequestQueueDepth`. Custom metric names (e.g. `vllm:kv_cache_usage_perc`) are supported for NIM artifacts only.
         /// </summary>
         [Input("scalingMetric", required: true)]
         public Input<string> ScalingMetric { get; set; } = null!;
 
         /// <summary>
-        /// Target value for the scaling metric.
+        /// Target value for the scaling metric. Must be non-negative.
         /// </summary>
         [Input("target", required: true)]
         public Input<double> Target { get; set; } = null!;
