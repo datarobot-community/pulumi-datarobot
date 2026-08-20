@@ -9,67 +9,46 @@
 #   * a `version-updates` group for routine minor/patch bumps. Majors are left
 #     out on purpose so they arrive as individual, reviewable PRs.
 #
-# The generated SDKs (sdk/nodejs, sdk/python, sdk/dotnet, sdk/java) are
-# deliberately absent: their manifests are codegen output that `make build_sdks`
-# rewrites, so dependency PRs against them would not survive regeneration.
+# Deliberately not watched:
+#   * The generated SDKs (sdk/nodejs, sdk/python, sdk/dotnet, sdk/java) — their
+#     manifests are codegen output that `make build_sdks` rewrites, so
+#     dependency PRs against them would not survive regeneration.
+#   * examples/ — that tree is the integration-test harness (`cd examples &&
+#     go test -tags=all`, run against a live DataRobot account rather than in
+#     CI) plus sample programs, none of it shipped to users. Its dependencies
+#     are almost entirely transitive pulls from pulumi/pkg and @pulumi/pulumi,
+#     so the way to move them is bumping Pulumi, not a per-advisory PR against
+#     a lockfile no release consumes.
 version: 2
 updates:
-  # The provider, the generated Go SDK and the examples all vendor the Pulumi
-  # and Terraform toolchains, and all three show up in Dependabot alerts.
+  # provider/ is the provider itself; sdk/go.mod is the Go SDK that users
+  # import. Both ship, so both get watched.
   - package-ecosystem: "gomod"
     directories:
       - "/provider"
       - "/sdk"
-      - "/examples"
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 10
     labels:
       - "dependencies"
+    ignore:
+      # Upgraded by the "Upgrade provider" workflow via
+      # pulumi/pulumi-upgrade-provider-action, which also regenerates the SDKs,
+      # docs and CHANGELOG and picks the next provider version. A bare go.mod
+      # bump from Dependabot skips all of that.
+      - dependency-name: "github.com/datarobot-community/terraform-provider-datarobot"
+      # Pinned to v3.106.0 by `target-bridge-version` in
+      # .github/workflows/upgrade-provider.yml. Newer bridges have been
+      # reverted twice (#205, #213), and the next scheduled upgrade run would
+      # pull any Dependabot bump back down to the pin regardless.
+      - dependency-name: "github.com/pulumi/pulumi-terraform-bridge/v3"
     groups:
       gomod-security:
         applies-to: security-updates
         patterns:
           - "*"
       gomod-minor-patch:
-        applies-to: version-updates
-        update-types:
-          - "minor"
-          - "patch"
-
-  - package-ecosystem: "npm"
-    directory: "/examples/ts"
-    schedule:
-      interval: "weekly"
-    labels:
-      - "dependencies"
-    groups:
-      npm-security:
-        applies-to: security-updates
-        patterns:
-          - "*"
-      npm-minor-patch:
-        applies-to: version-updates
-        update-types:
-          - "minor"
-          - "patch"
-
-  # Only the parent directory is listed: the pip file fetcher also collects
-  # requirements files from immediate subdirectories, so it already covers
-  # examples/py/deployment_grading/requirements.txt. Listing that path as well
-  # would create a second update job opening duplicate PRs for the same file.
-  - package-ecosystem: "pip"
-    directory: "/examples/py"
-    schedule:
-      interval: "weekly"
-    labels:
-      - "dependencies"
-    groups:
-      pip-security:
-        applies-to: security-updates
-        patterns:
-          - "*"
-      pip-minor-patch:
         applies-to: version-updates
         update-types:
           - "minor"
