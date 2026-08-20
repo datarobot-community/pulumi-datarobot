@@ -37,6 +37,15 @@ updates:
       # pulumi/pulumi-upgrade-provider-action, which also regenerates the SDKs,
       # docs and CHANGELOG and picks the next provider version. A bare go.mod
       # bump from Dependabot skips all of that.
+      #
+      # There is also a hard blocker. The Go module proxy still serves a
+      # v1.0.0 for this module, cached from a tag upstream has since deleted;
+      # it resolves to commit 6e8b757 from 2024-10-19. Upstream actually
+      # releases v0.10.x, so v1.0.0 is the highest semver Dependabot can see:
+      # every bump it proposes (e.g. #356) rolls the provider ~22 months
+      # backwards while looking like an upgrade, and it can never offer a real
+      # v0.10.x again. The workflow reads GitHub's releases/latest instead, so
+      # it is unaffected.
       - dependency-name: "github.com/datarobot-community/terraform-provider-datarobot"
       # Not "never upgrade" — just not Dependabot's job. The version is set by
       # `target-bridge-version` in .github/workflows/upgrade-provider.yml, so
