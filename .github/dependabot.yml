@@ -38,10 +38,12 @@ updates:
       # docs and CHANGELOG and picks the next provider version. A bare go.mod
       # bump from Dependabot skips all of that.
       - dependency-name: "github.com/datarobot-community/terraform-provider-datarobot"
-      # Pinned to v3.106.0 by `target-bridge-version` in
-      # .github/workflows/upgrade-provider.yml. Newer bridges have been
-      # reverted twice (#205, #213), and the next scheduled upgrade run would
-      # pull any Dependabot bump back down to the pin regardless.
+      # Not "never upgrade" — just not Dependabot's job. The version is set by
+      # `target-bridge-version` in .github/workflows/upgrade-provider.yml, so
+      # the next scheduled run pulls any Dependabot bump back to the pin. The
+      # upgrade also needs a module-path move (pulumi/pulumi-java/pkg ->
+      # pulumi/pulumi-java) that Dependabot cannot make, or the tfgen build
+      # fails. #327 does it properly; that is where bridge upgrades belong.
       - dependency-name: "github.com/pulumi/pulumi-terraform-bridge/v3"
     groups:
       gomod-security:
