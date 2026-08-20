@@ -54,10 +54,12 @@ updates:
           - "minor"
           - "patch"
 
+  # Only the parent directory is listed: the pip file fetcher also collects
+  # requirements files from immediate subdirectories, so it already covers
+  # examples/py/deployment_grading/requirements.txt. Listing that path as well
+  # would create a second update job opening duplicate PRs for the same file.
   - package-ecosystem: "pip"
-    directories:
-      - "/examples/py"
-      - "/examples/py/deployment_grading"
+    directory: "/examples/py"
     schedule:
       interval: "weekly"
     labels:
