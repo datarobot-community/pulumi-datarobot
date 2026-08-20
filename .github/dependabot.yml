@@ -1,25 +1,93 @@
 # See GitHub's documentation for more information on this file:
-# https://docs.github.com/en/code-security/supply-chain-security/keeping-your-dependencies-updated-automatically/configuration-options-for-dependency-updates
+# https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot-yml-file
+#
+# Each ecosystem below declares two groups:
+#   * a `security-updates` group, so Dependabot bundles the fixes it opens in
+#     response to Dependabot alerts into a single PR instead of one PR per
+#     advisory. These are driven by alerts, not by `schedule`, and they ignore
+#     `open-pull-requests-limit`.
+#   * a `version-updates` group for routine minor/patch bumps. Majors are left
+#     out on purpose so they arrive as individual, reviewable PRs.
+#
+# The generated SDKs (sdk/nodejs, sdk/python, sdk/dotnet, sdk/java) are
+# deliberately absent: their manifests are codegen output that `make build_sdks`
+# rewrites, so dependency PRs against them would not survive regeneration.
 version: 2
 updates:
+  # The provider, the generated Go SDK and the examples all vendor the Pulumi
+  # and Terraform toolchains, and all three show up in Dependabot alerts.
   - package-ecosystem: "gomod"
-    directory: "/provider/"
+    directories:
+      - "/provider"
+      - "/sdk"
+      - "/examples"
     schedule:
       interval: "weekly"
-    groups: 
-      github-actions:
-        dependency-type: "production"
+    open-pull-requests-limit: 10
+    labels:
+      - "dependencies"
+    groups:
+      gomod-security:
+        applies-to: security-updates
+        patterns:
+          - "*"
+      gomod-minor-patch:
+        applies-to: version-updates
         update-types:
-        - "minor"
-        - "patch"
+          - "minor"
+          - "patch"
+
+  - package-ecosystem: "npm"
+    directory: "/examples/ts"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"
+    groups:
+      npm-security:
+        applies-to: security-updates
+        patterns:
+          - "*"
+      npm-minor-patch:
+        applies-to: version-updates
+        update-types:
+          - "minor"
+          - "patch"
+
+  # Only the parent directory is listed: the pip file fetcher also collects
+  # requirements files from immediate subdirectories, so it already covers
+  # examples/py/deployment_grading/requirements.txt. Listing that path as well
+  # would create a second update job opening duplicate PRs for the same file.
+  - package-ecosystem: "pip"
+    directory: "/examples/py"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"
+    groups:
+      pip-security:
+        applies-to: security-updates
+        patterns:
+          - "*"
+      pip-minor-patch:
+        applies-to: version-updates
+        update-types:
+          - "minor"
+          - "patch"
 
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "weekly"
-    groups: 
-      github-actions:
-        dependency-type: "production"
+    labels:
+      - "dependencies"
+    groups:
+      github-actions-security:
+        applies-to: security-updates
+        patterns:
+          - "*"
+      github-actions-minor-patch:
+        applies-to: version-updates
         update-types:
-        - "minor"
-        - "patch"
+          - "minor"
+          - "patch"
