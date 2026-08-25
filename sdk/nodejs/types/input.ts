@@ -81,6 +81,17 @@ export interface ApplicationSourceRuntimeParameterValue {
     value: pulumi.Input<string>;
 }
 
+export interface ArtifactSource {
+    /**
+     * Path to the local directory containing application source files to upload.
+     */
+    dir: pulumi.Input<string>;
+    /**
+     * SHA-256 fingerprint of `dir` contents, used to detect changes and skip re-upload when unchanged.
+     */
+    dirHash?: pulumi.Input<string>;
+}
+
 export interface ArtifactSpec {
     /**
      * List of container groups.
@@ -167,7 +178,7 @@ export interface ArtifactSpecContainerGroupContainerEnvironmentVar {
 
 export interface ArtifactSpecContainerGroupContainerImageBuildConfig {
     /**
-     * Reference to source code in the DataRobot catalog. Optional at create; required before image build or lock.
+     * Reference to source code in the DataRobot catalog. Optional at create; required before image build or lock. When `source` is set, the provider uploads `source.dir` and populates this block.
      */
     codeRef?: pulumi.Input<inputs.ArtifactSpecContainerGroupContainerImageBuildConfigCodeRef>;
     /**
@@ -1600,6 +1611,10 @@ export interface WorkloadRuntime {
      * Per-group runtime configuration.
      */
     containerGroups?: pulumi.Input<pulumi.Input<inputs.WorkloadRuntimeContainerGroup>[]>;
+    /**
+     * Replacement policy for in-place workload replacement (rolling strategy). Applied when `artifactId` changes or when replacement policy settings change. Runtime-only changes use `PATCH /workloads/{id}/settings`, which does not accept custom replacement timing (WAPI uses platform defaults).
+     */
+    replacementPolicy?: pulumi.Input<inputs.WorkloadRuntimeReplacementPolicy>;
 }
 
 export interface WorkloadRuntimeContainerGroup {
@@ -1687,4 +1702,15 @@ export interface WorkloadRuntimeContainerGroupContainerResourceAllocation {
      * RAM allocated. Accepts human-readable strings (e.g. `"8GB"`, `"512MB"`, `"4096Mi"`) or raw byte integers. 1000-based suffixes: KB, MB, GB, TB. 1024-based suffixes: Ki/KiB, Mi/MiB, Gi/GiB.
      */
     memory?: pulumi.Input<string>;
+}
+
+export interface WorkloadRuntimeReplacementPolicy {
+    /**
+     * Duration in minutes to keep the old version during replacement. Maps to WAPI `config.keepOldVersionMinutes`.
+     */
+    keepOldVersionMinutes?: pulumi.Input<number>;
+    /**
+     * Duration in minutes for the warmup phase during replacement. Maps to WAPI `config.warmupDurationMinutes`.
+     */
+    warmupMinutes?: pulumi.Input<number>;
 }

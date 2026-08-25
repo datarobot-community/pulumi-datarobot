@@ -24,6 +24,8 @@ type Artifact struct {
 	Description pulumi.StringPtrOutput `pulumi:"description"`
 	// The name of the Artifact.
 	Name pulumi.StringOutput `pulumi:"name"`
+	// Local source directory to upload to the DataRobot catalog and attach to the primary container's `image_build_config.code_ref`. On draft artifacts, uploads are applied in-place. On locked artifacts, source changes clone to a new draft version, upload, patch `codeRef`, and lock the new version.
+	Source ArtifactSourcePtrOutput `pulumi:"source"`
 	// The artifact specification containing container group definitions.
 	Spec ArtifactSpecOutput `pulumi:"spec"`
 	// Artifact lifecycle status: `draft` (the current artifact version is mutable; spec changes are applied in-place and `artifactId` stays the same) or `locked` (artifact versions are immutable; spec changes create a new version with a new `artifactId` in the same `artifactRepositoryId`). Defaults to `locked`. Locking a draft artifact is one-way. Changing `status` from `locked` to `draft` creates a new draft artifact (the Workload API cannot unlock in place).
@@ -73,6 +75,8 @@ type artifactState struct {
 	Description *string `pulumi:"description"`
 	// The name of the Artifact.
 	Name *string `pulumi:"name"`
+	// Local source directory to upload to the DataRobot catalog and attach to the primary container's `image_build_config.code_ref`. On draft artifacts, uploads are applied in-place. On locked artifacts, source changes clone to a new draft version, upload, patch `codeRef`, and lock the new version.
+	Source *ArtifactSource `pulumi:"source"`
 	// The artifact specification containing container group definitions.
 	Spec *ArtifactSpec `pulumi:"spec"`
 	// Artifact lifecycle status: `draft` (the current artifact version is mutable; spec changes are applied in-place and `artifactId` stays the same) or `locked` (artifact versions are immutable; spec changes create a new version with a new `artifactId` in the same `artifactRepositoryId`). Defaults to `locked`. Locking a draft artifact is one-way. Changing `status` from `locked` to `draft` creates a new draft artifact (the Workload API cannot unlock in place).
@@ -90,6 +94,8 @@ type ArtifactState struct {
 	Description pulumi.StringPtrInput
 	// The name of the Artifact.
 	Name pulumi.StringPtrInput
+	// Local source directory to upload to the DataRobot catalog and attach to the primary container's `image_build_config.code_ref`. On draft artifacts, uploads are applied in-place. On locked artifacts, source changes clone to a new draft version, upload, patch `codeRef`, and lock the new version.
+	Source ArtifactSourcePtrInput
 	// The artifact specification containing container group definitions.
 	Spec ArtifactSpecPtrInput
 	// Artifact lifecycle status: `draft` (the current artifact version is mutable; spec changes are applied in-place and `artifactId` stays the same) or `locked` (artifact versions are immutable; spec changes create a new version with a new `artifactId` in the same `artifactRepositoryId`). Defaults to `locked`. Locking a draft artifact is one-way. Changing `status` from `locked` to `draft` creates a new draft artifact (the Workload API cannot unlock in place).
@@ -109,6 +115,8 @@ type artifactArgs struct {
 	Description *string `pulumi:"description"`
 	// The name of the Artifact.
 	Name *string `pulumi:"name"`
+	// Local source directory to upload to the DataRobot catalog and attach to the primary container's `image_build_config.code_ref`. On draft artifacts, uploads are applied in-place. On locked artifacts, source changes clone to a new draft version, upload, patch `codeRef`, and lock the new version.
+	Source *ArtifactSource `pulumi:"source"`
 	// The artifact specification containing container group definitions.
 	Spec ArtifactSpec `pulumi:"spec"`
 	// Artifact lifecycle status: `draft` (the current artifact version is mutable; spec changes are applied in-place and `artifactId` stays the same) or `locked` (artifact versions are immutable; spec changes create a new version with a new `artifactId` in the same `artifactRepositoryId`). Defaults to `locked`. Locking a draft artifact is one-way. Changing `status` from `locked` to `draft` creates a new draft artifact (the Workload API cannot unlock in place).
@@ -125,6 +133,8 @@ type ArtifactArgs struct {
 	Description pulumi.StringPtrInput
 	// The name of the Artifact.
 	Name pulumi.StringPtrInput
+	// Local source directory to upload to the DataRobot catalog and attach to the primary container's `image_build_config.code_ref`. On draft artifacts, uploads are applied in-place. On locked artifacts, source changes clone to a new draft version, upload, patch `codeRef`, and lock the new version.
+	Source ArtifactSourcePtrInput
 	// The artifact specification containing container group definitions.
 	Spec ArtifactSpecInput
 	// Artifact lifecycle status: `draft` (the current artifact version is mutable; spec changes are applied in-place and `artifactId` stays the same) or `locked` (artifact versions are immutable; spec changes create a new version with a new `artifactId` in the same `artifactRepositoryId`). Defaults to `locked`. Locking a draft artifact is one-way. Changing `status` from `locked` to `draft` creates a new draft artifact (the Workload API cannot unlock in place).
@@ -238,6 +248,11 @@ func (o ArtifactOutput) Description() pulumi.StringPtrOutput {
 // The name of the Artifact.
 func (o ArtifactOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *Artifact) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
+}
+
+// Local source directory to upload to the DataRobot catalog and attach to the primary container's `image_build_config.code_ref`. On draft artifacts, uploads are applied in-place. On locked artifacts, source changes clone to a new draft version, upload, patch `codeRef`, and lock the new version.
+func (o ArtifactOutput) Source() ArtifactSourcePtrOutput {
+	return o.ApplyT(func(v *Artifact) ArtifactSourcePtrOutput { return v.Source }).(ArtifactSourcePtrOutput)
 }
 
 // The artifact specification containing container group definitions.

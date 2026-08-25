@@ -26,6 +26,7 @@ class ArtifactArgs:
                  artifact_repository_id: Optional[pulumi.Input[builtins.str]] = None,
                  description: Optional[pulumi.Input[builtins.str]] = None,
                  name: Optional[pulumi.Input[builtins.str]] = None,
+                 source: Optional[pulumi.Input['ArtifactSourceArgs']] = None,
                  status: Optional[pulumi.Input[builtins.str]] = None,
                  type: Optional[pulumi.Input[builtins.str]] = None):
         """
@@ -34,6 +35,7 @@ class ArtifactArgs:
         :param pulumi.Input[builtins.str] artifact_repository_id: ID of the artifact repository for versioning. Computed on first create if not provided; subsequent updates create new versions in the same repository.
         :param pulumi.Input[builtins.str] description: The description of the Artifact.
         :param pulumi.Input[builtins.str] name: The name of the Artifact.
+        :param pulumi.Input['ArtifactSourceArgs'] source: Local source directory to upload to the DataRobot catalog and attach to the primary container's `image_build_config.code_ref`. On draft artifacts, uploads are applied in-place. On locked artifacts, source changes clone to a new draft version, upload, patch `code_ref`, and lock the new version.
         :param pulumi.Input[builtins.str] status: Artifact lifecycle status: `draft` (the current artifact version is mutable; spec changes are applied in-place and `artifact_id` stays the same) or `locked` (artifact versions are immutable; spec changes create a new version with a new `artifact_id` in the same `artifact_repository_id`). Defaults to `locked`. Locking a draft artifact is one-way. Changing `status` from `locked` to `draft` creates a new draft artifact (the Workload API cannot unlock in place).
         :param pulumi.Input[builtins.str] type: The artifact type: `service` or `nim`. Defaults to `service`.
         """
@@ -44,6 +46,8 @@ class ArtifactArgs:
             pulumi.set(__self__, "description", description)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if source is not None:
+            pulumi.set(__self__, "source", source)
         if status is not None:
             pulumi.set(__self__, "status", status)
         if type is not None:
@@ -99,6 +103,18 @@ class ArtifactArgs:
 
     @property
     @pulumi.getter
+    def source(self) -> Optional[pulumi.Input['ArtifactSourceArgs']]:
+        """
+        Local source directory to upload to the DataRobot catalog and attach to the primary container's `image_build_config.code_ref`. On draft artifacts, uploads are applied in-place. On locked artifacts, source changes clone to a new draft version, upload, patch `code_ref`, and lock the new version.
+        """
+        return pulumi.get(self, "source")
+
+    @source.setter
+    def source(self, value: Optional[pulumi.Input['ArtifactSourceArgs']]):
+        pulumi.set(self, "source", value)
+
+    @property
+    @pulumi.getter
     def status(self) -> Optional[pulumi.Input[builtins.str]]:
         """
         Artifact lifecycle status: `draft` (the current artifact version is mutable; spec changes are applied in-place and `artifact_id` stays the same) or `locked` (artifact versions are immutable; spec changes create a new version with a new `artifact_id` in the same `artifact_repository_id`). Defaults to `locked`. Locking a draft artifact is one-way. Changing `status` from `locked` to `draft` creates a new draft artifact (the Workload API cannot unlock in place).
@@ -129,6 +145,7 @@ class _ArtifactState:
                  artifact_repository_id: Optional[pulumi.Input[builtins.str]] = None,
                  description: Optional[pulumi.Input[builtins.str]] = None,
                  name: Optional[pulumi.Input[builtins.str]] = None,
+                 source: Optional[pulumi.Input['ArtifactSourceArgs']] = None,
                  spec: Optional[pulumi.Input['ArtifactSpecArgs']] = None,
                  status: Optional[pulumi.Input[builtins.str]] = None,
                  type: Optional[pulumi.Input[builtins.str]] = None):
@@ -138,6 +155,7 @@ class _ArtifactState:
         :param pulumi.Input[builtins.str] artifact_repository_id: ID of the artifact repository for versioning. Computed on first create if not provided; subsequent updates create new versions in the same repository.
         :param pulumi.Input[builtins.str] description: The description of the Artifact.
         :param pulumi.Input[builtins.str] name: The name of the Artifact.
+        :param pulumi.Input['ArtifactSourceArgs'] source: Local source directory to upload to the DataRobot catalog and attach to the primary container's `image_build_config.code_ref`. On draft artifacts, uploads are applied in-place. On locked artifacts, source changes clone to a new draft version, upload, patch `code_ref`, and lock the new version.
         :param pulumi.Input['ArtifactSpecArgs'] spec: The artifact specification containing container group definitions.
         :param pulumi.Input[builtins.str] status: Artifact lifecycle status: `draft` (the current artifact version is mutable; spec changes are applied in-place and `artifact_id` stays the same) or `locked` (artifact versions are immutable; spec changes create a new version with a new `artifact_id` in the same `artifact_repository_id`). Defaults to `locked`. Locking a draft artifact is one-way. Changing `status` from `locked` to `draft` creates a new draft artifact (the Workload API cannot unlock in place).
         :param pulumi.Input[builtins.str] type: The artifact type: `service` or `nim`. Defaults to `service`.
@@ -150,6 +168,8 @@ class _ArtifactState:
             pulumi.set(__self__, "description", description)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if source is not None:
+            pulumi.set(__self__, "source", source)
         if spec is not None:
             pulumi.set(__self__, "spec", spec)
         if status is not None:
@@ -207,6 +227,18 @@ class _ArtifactState:
 
     @property
     @pulumi.getter
+    def source(self) -> Optional[pulumi.Input['ArtifactSourceArgs']]:
+        """
+        Local source directory to upload to the DataRobot catalog and attach to the primary container's `image_build_config.code_ref`. On draft artifacts, uploads are applied in-place. On locked artifacts, source changes clone to a new draft version, upload, patch `code_ref`, and lock the new version.
+        """
+        return pulumi.get(self, "source")
+
+    @source.setter
+    def source(self, value: Optional[pulumi.Input['ArtifactSourceArgs']]):
+        pulumi.set(self, "source", value)
+
+    @property
+    @pulumi.getter
     def spec(self) -> Optional[pulumi.Input['ArtifactSpecArgs']]:
         """
         The artifact specification containing container group definitions.
@@ -250,6 +282,7 @@ class Artifact(pulumi.CustomResource):
                  artifact_repository_id: Optional[pulumi.Input[builtins.str]] = None,
                  description: Optional[pulumi.Input[builtins.str]] = None,
                  name: Optional[pulumi.Input[builtins.str]] = None,
+                 source: Optional[pulumi.Input[Union['ArtifactSourceArgs', 'ArtifactSourceArgsDict']]] = None,
                  spec: Optional[pulumi.Input[Union['ArtifactSpecArgs', 'ArtifactSpecArgsDict']]] = None,
                  status: Optional[pulumi.Input[builtins.str]] = None,
                  type: Optional[pulumi.Input[builtins.str]] = None,
@@ -262,6 +295,7 @@ class Artifact(pulumi.CustomResource):
         :param pulumi.Input[builtins.str] artifact_repository_id: ID of the artifact repository for versioning. Computed on first create if not provided; subsequent updates create new versions in the same repository.
         :param pulumi.Input[builtins.str] description: The description of the Artifact.
         :param pulumi.Input[builtins.str] name: The name of the Artifact.
+        :param pulumi.Input[Union['ArtifactSourceArgs', 'ArtifactSourceArgsDict']] source: Local source directory to upload to the DataRobot catalog and attach to the primary container's `image_build_config.code_ref`. On draft artifacts, uploads are applied in-place. On locked artifacts, source changes clone to a new draft version, upload, patch `code_ref`, and lock the new version.
         :param pulumi.Input[Union['ArtifactSpecArgs', 'ArtifactSpecArgsDict']] spec: The artifact specification containing container group definitions.
         :param pulumi.Input[builtins.str] status: Artifact lifecycle status: `draft` (the current artifact version is mutable; spec changes are applied in-place and `artifact_id` stays the same) or `locked` (artifact versions are immutable; spec changes create a new version with a new `artifact_id` in the same `artifact_repository_id`). Defaults to `locked`. Locking a draft artifact is one-way. Changing `status` from `locked` to `draft` creates a new draft artifact (the Workload API cannot unlock in place).
         :param pulumi.Input[builtins.str] type: The artifact type: `service` or `nim`. Defaults to `service`.
@@ -293,6 +327,7 @@ class Artifact(pulumi.CustomResource):
                  artifact_repository_id: Optional[pulumi.Input[builtins.str]] = None,
                  description: Optional[pulumi.Input[builtins.str]] = None,
                  name: Optional[pulumi.Input[builtins.str]] = None,
+                 source: Optional[pulumi.Input[Union['ArtifactSourceArgs', 'ArtifactSourceArgsDict']]] = None,
                  spec: Optional[pulumi.Input[Union['ArtifactSpecArgs', 'ArtifactSpecArgsDict']]] = None,
                  status: Optional[pulumi.Input[builtins.str]] = None,
                  type: Optional[pulumi.Input[builtins.str]] = None,
@@ -308,6 +343,7 @@ class Artifact(pulumi.CustomResource):
             __props__.__dict__["artifact_repository_id"] = artifact_repository_id
             __props__.__dict__["description"] = description
             __props__.__dict__["name"] = name
+            __props__.__dict__["source"] = source
             if spec is None and not opts.urn:
                 raise TypeError("Missing required property 'spec'")
             __props__.__dict__["spec"] = spec
@@ -328,6 +364,7 @@ class Artifact(pulumi.CustomResource):
             artifact_repository_id: Optional[pulumi.Input[builtins.str]] = None,
             description: Optional[pulumi.Input[builtins.str]] = None,
             name: Optional[pulumi.Input[builtins.str]] = None,
+            source: Optional[pulumi.Input[Union['ArtifactSourceArgs', 'ArtifactSourceArgsDict']]] = None,
             spec: Optional[pulumi.Input[Union['ArtifactSpecArgs', 'ArtifactSpecArgsDict']]] = None,
             status: Optional[pulumi.Input[builtins.str]] = None,
             type: Optional[pulumi.Input[builtins.str]] = None) -> 'Artifact':
@@ -342,6 +379,7 @@ class Artifact(pulumi.CustomResource):
         :param pulumi.Input[builtins.str] artifact_repository_id: ID of the artifact repository for versioning. Computed on first create if not provided; subsequent updates create new versions in the same repository.
         :param pulumi.Input[builtins.str] description: The description of the Artifact.
         :param pulumi.Input[builtins.str] name: The name of the Artifact.
+        :param pulumi.Input[Union['ArtifactSourceArgs', 'ArtifactSourceArgsDict']] source: Local source directory to upload to the DataRobot catalog and attach to the primary container's `image_build_config.code_ref`. On draft artifacts, uploads are applied in-place. On locked artifacts, source changes clone to a new draft version, upload, patch `code_ref`, and lock the new version.
         :param pulumi.Input[Union['ArtifactSpecArgs', 'ArtifactSpecArgsDict']] spec: The artifact specification containing container group definitions.
         :param pulumi.Input[builtins.str] status: Artifact lifecycle status: `draft` (the current artifact version is mutable; spec changes are applied in-place and `artifact_id` stays the same) or `locked` (artifact versions are immutable; spec changes create a new version with a new `artifact_id` in the same `artifact_repository_id`). Defaults to `locked`. Locking a draft artifact is one-way. Changing `status` from `locked` to `draft` creates a new draft artifact (the Workload API cannot unlock in place).
         :param pulumi.Input[builtins.str] type: The artifact type: `service` or `nim`. Defaults to `service`.
@@ -354,6 +392,7 @@ class Artifact(pulumi.CustomResource):
         __props__.__dict__["artifact_repository_id"] = artifact_repository_id
         __props__.__dict__["description"] = description
         __props__.__dict__["name"] = name
+        __props__.__dict__["source"] = source
         __props__.__dict__["spec"] = spec
         __props__.__dict__["status"] = status
         __props__.__dict__["type"] = type
@@ -390,6 +429,14 @@ class Artifact(pulumi.CustomResource):
         The name of the Artifact.
         """
         return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def source(self) -> pulumi.Output[Optional['outputs.ArtifactSource']]:
+        """
+        Local source directory to upload to the DataRobot catalog and attach to the primary container's `image_build_config.code_ref`. On draft artifacts, uploads are applied in-place. On locked artifacts, source changes clone to a new draft version, upload, patch `code_ref`, and lock the new version.
+        """
+        return pulumi.get(self, "source")
 
     @property
     @pulumi.getter

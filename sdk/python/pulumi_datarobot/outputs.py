@@ -21,6 +21,7 @@ __all__ = [
     'ApplicationSourceFromTemplateRuntimeParameterValue',
     'ApplicationSourceResources',
     'ApplicationSourceRuntimeParameterValue',
+    'ArtifactSource',
     'ArtifactSpec',
     'ArtifactSpecContainerGroup',
     'ArtifactSpecContainerGroupContainer',
@@ -109,6 +110,7 @@ __all__ = [
     'WorkloadRuntimeContainerGroupAutoscalingPolicy',
     'WorkloadRuntimeContainerGroupContainer',
     'WorkloadRuntimeContainerGroupContainerResourceAllocation',
+    'WorkloadRuntimeReplacementPolicy',
     'GetArtifactCreatorResult',
     'GetArtifactSpecResult',
     'GetArtifactSpecContainerGroupResult',
@@ -406,6 +408,53 @@ class ApplicationSourceRuntimeParameterValue(dict):
         The value of the runtime parameter (type conversion is handled internally).
         """
         return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class ArtifactSource(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "dirHash":
+            suggest = "dir_hash"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in ArtifactSource. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        ArtifactSource.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        ArtifactSource.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 dir: builtins.str,
+                 dir_hash: Optional[builtins.str] = None):
+        """
+        :param builtins.str dir: Path to the local directory containing application source files to upload.
+        :param builtins.str dir_hash: SHA-256 fingerprint of `dir` contents, used to detect changes and skip re-upload when unchanged.
+        """
+        pulumi.set(__self__, "dir", dir)
+        if dir_hash is not None:
+            pulumi.set(__self__, "dir_hash", dir_hash)
+
+    @property
+    @pulumi.getter
+    def dir(self) -> builtins.str:
+        """
+        Path to the local directory containing application source files to upload.
+        """
+        return pulumi.get(self, "dir")
+
+    @property
+    @pulumi.getter(name="dirHash")
+    def dir_hash(self) -> Optional[builtins.str]:
+        """
+        SHA-256 fingerprint of `dir` contents, used to detect changes and skip re-upload when unchanged.
+        """
+        return pulumi.get(self, "dir_hash")
 
 
 @pulumi.output_type
@@ -734,7 +783,7 @@ class ArtifactSpecContainerGroupContainerImageBuildConfig(dict):
                  code_ref: Optional['outputs.ArtifactSpecContainerGroupContainerImageBuildConfigCodeRef'] = None,
                  dockerfile: Optional['outputs.ArtifactSpecContainerGroupContainerImageBuildConfigDockerfile'] = None):
         """
-        :param 'ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefArgs' code_ref: Reference to source code in the DataRobot catalog. Optional at create; required before image build or lock.
+        :param 'ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefArgs' code_ref: Reference to source code in the DataRobot catalog. Optional at create; required before image build or lock. When `source` is set, the provider uploads `source.dir` and populates this block.
         :param 'ArtifactSpecContainerGroupContainerImageBuildConfigDockerfileArgs' dockerfile: How the Dockerfile is obtained for the image build. Defaults to using `./Dockerfile` from the source code.
         """
         if code_ref is not None:
@@ -746,7 +795,7 @@ class ArtifactSpecContainerGroupContainerImageBuildConfig(dict):
     @pulumi.getter(name="codeRef")
     def code_ref(self) -> Optional['outputs.ArtifactSpecContainerGroupContainerImageBuildConfigCodeRef']:
         """
-        Reference to source code in the DataRobot catalog. Optional at create; required before image build or lock.
+        Reference to source code in the DataRobot catalog. Optional at create; required before image build or lock. When `source` is set, the provider uploads `source.dir` and populates this block.
         """
         return pulumi.get(self, "code_ref")
 
@@ -5978,6 +6027,8 @@ class WorkloadRuntime(dict):
         suggest = None
         if key == "containerGroups":
             suggest = "container_groups"
+        elif key == "replacementPolicy":
+            suggest = "replacement_policy"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in WorkloadRuntime. Access the value via the '{suggest}' property getter instead.")
@@ -5991,12 +6042,16 @@ class WorkloadRuntime(dict):
         return super().get(key, default)
 
     def __init__(__self__, *,
-                 container_groups: Optional[Sequence['outputs.WorkloadRuntimeContainerGroup']] = None):
+                 container_groups: Optional[Sequence['outputs.WorkloadRuntimeContainerGroup']] = None,
+                 replacement_policy: Optional['outputs.WorkloadRuntimeReplacementPolicy'] = None):
         """
         :param Sequence['WorkloadRuntimeContainerGroupArgs'] container_groups: Per-group runtime configuration.
+        :param 'WorkloadRuntimeReplacementPolicyArgs' replacement_policy: Replacement policy for in-place workload replacement (rolling strategy). Applied when `artifact_id` changes or when replacement policy settings change. Runtime-only changes use `PATCH /workloads/{id}/settings`, which does not accept custom replacement timing (WAPI uses platform defaults).
         """
         if container_groups is not None:
             pulumi.set(__self__, "container_groups", container_groups)
+        if replacement_policy is not None:
+            pulumi.set(__self__, "replacement_policy", replacement_policy)
 
     @property
     @pulumi.getter(name="containerGroups")
@@ -6005,6 +6060,14 @@ class WorkloadRuntime(dict):
         Per-group runtime configuration.
         """
         return pulumi.get(self, "container_groups")
+
+    @property
+    @pulumi.getter(name="replacementPolicy")
+    def replacement_policy(self) -> Optional['outputs.WorkloadRuntimeReplacementPolicy']:
+        """
+        Replacement policy for in-place workload replacement (rolling strategy). Applied when `artifact_id` changes or when replacement policy settings change. Runtime-only changes use `PATCH /workloads/{id}/settings`, which does not accept custom replacement timing (WAPI uses platform defaults).
+        """
+        return pulumi.get(self, "replacement_policy")
 
 
 @pulumi.output_type
@@ -6343,6 +6406,56 @@ class WorkloadRuntimeContainerGroupContainerResourceAllocation(dict):
         RAM allocated. Accepts human-readable strings (e.g. `"8GB"`, `"512MB"`, `"4096Mi"`) or raw byte integers. 1000-based suffixes: KB, MB, GB, TB. 1024-based suffixes: Ki/KiB, Mi/MiB, Gi/GiB.
         """
         return pulumi.get(self, "memory")
+
+
+@pulumi.output_type
+class WorkloadRuntimeReplacementPolicy(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "keepOldVersionMinutes":
+            suggest = "keep_old_version_minutes"
+        elif key == "warmupMinutes":
+            suggest = "warmup_minutes"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in WorkloadRuntimeReplacementPolicy. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        WorkloadRuntimeReplacementPolicy.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        WorkloadRuntimeReplacementPolicy.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 keep_old_version_minutes: Optional[builtins.int] = None,
+                 warmup_minutes: Optional[builtins.int] = None):
+        """
+        :param builtins.int keep_old_version_minutes: Duration in minutes to keep the old version during replacement. Maps to WAPI `config.keepOldVersionMinutes`.
+        :param builtins.int warmup_minutes: Duration in minutes for the warmup phase during replacement. Maps to WAPI `config.warmupDurationMinutes`.
+        """
+        if keep_old_version_minutes is not None:
+            pulumi.set(__self__, "keep_old_version_minutes", keep_old_version_minutes)
+        if warmup_minutes is not None:
+            pulumi.set(__self__, "warmup_minutes", warmup_minutes)
+
+    @property
+    @pulumi.getter(name="keepOldVersionMinutes")
+    def keep_old_version_minutes(self) -> Optional[builtins.int]:
+        """
+        Duration in minutes to keep the old version during replacement. Maps to WAPI `config.keepOldVersionMinutes`.
+        """
+        return pulumi.get(self, "keep_old_version_minutes")
+
+    @property
+    @pulumi.getter(name="warmupMinutes")
+    def warmup_minutes(self) -> Optional[builtins.int]:
+        """
+        Duration in minutes for the warmup phase during replacement. Maps to WAPI `config.warmupDurationMinutes`.
+        """
+        return pulumi.get(self, "warmup_minutes")
 
 
 @pulumi.output_type

@@ -25,6 +25,12 @@ namespace DataRobotPulumi.Datarobot.Inputs
             set => _containerGroups = value;
         }
 
+        /// <summary>
+        /// Replacement policy for in-place workload replacement (rolling strategy). Applied when `artifact_id` changes or when replacement policy settings change. Runtime-only changes use `PATCH /workloads/{id}/settings`, which does not accept custom replacement timing (WAPI uses platform defaults).
+        /// </summary>
+        [Input("replacementPolicy")]
+        public Input<Inputs.WorkloadRuntimeReplacementPolicyArgs>? ReplacementPolicy { get; set; }
+
         public WorkloadRuntimeArgs()
         {
         }

@@ -6,11 +6,6 @@ import * as inputs from "./types/input";
 import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
-/**
- * A Workload runs a containerized artifact in the cluster and exposes an inference endpoint.
- *
- * Changes to `artifactId` or `runtime` trigger an in-place workload replacement via the Workload API. The workload ID and endpoint remain stable across artifact and runtime updates.
- */
 export class Workload extends pulumi.CustomResource {
     /**
      * Get an existing Workload resource's state with the given name, ID, and optional extra

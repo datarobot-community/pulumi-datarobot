@@ -10,11 +10,6 @@ using Pulumi;
 
 namespace DataRobotPulumi.Datarobot
 {
-    /// <summary>
-    /// A Workload runs a containerized artifact in the cluster and exposes an inference endpoint.
-    /// 
-    /// Changes to `artifact_id` or `runtime` trigger an in-place workload replacement via the Workload API. The workload ID and endpoint remain stable across artifact and runtime updates.
-    /// </summary>
     [DatarobotResourceType("datarobot:index/workload:Workload")]
     public partial class Workload : global::Pulumi.CustomResource
     {
