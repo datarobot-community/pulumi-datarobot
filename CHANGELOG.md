@@ -31,6 +31,49 @@ Regenerating a section preserves that subsection.
   reached the generated SDKs; the same text is posted on the upgrade PR and reused as
   the GitHub Release body.
 
+### Changed
+
+- Upgraded `pulumi-terraform-bridge` from `v3.106.0` to `v3.137.0` (31 releases), and with
+  it `pulumi/pulumi` `v3.160.0` → `v3.256.0`. This unblocks SDK generation under Go 1.26:
+  the NodeJS and Python code generators emitted `./utilities` instead of `../utilities`
+  for files in subdirectories, because Go 1.26 changed `filepath.Rel(base, "")` and the
+  pinned generator relied on the old behaviour. Fixed upstream in
+  [pulumi/pulumi#21835](https://github.com/pulumi/pulumi/pull/21835).
+  - `github.com/pulumi/pulumi-java/pkg v1.8.0` is replaced by the root module
+    `github.com/pulumi/pulumi-java v1.34.0`; the `/pkg` submodule was discontinued and no
+    longer compiles against current `pulumi/pkg`.
+  - The `terraform-plugin-sdk/v2` replace directive moves to the current Pulumi fork,
+    `v2.0.0-20260318212141-5525259d096b`.
+  - `target-bridge-version` in `.github/workflows/upgrade-provider.yml` and
+    `.github/workflows/upgrade-and-test.yml` is bumped to `v3.137.0`, so the next
+    automated upstream upgrade does not re-pin the old bridge.
+- Generated documentation improves: examples now reference the real package names
+  (`@datarobot/pulumi-datarobot`, `DataRobotPulumi.Datarobot`) instead of the placeholder
+  `@pulumi/datarobot` / `Pulumi.Datarobot`, and resolve variables (`artifactId`) instead
+  of emitting `_var.artifact_id`. Literal values in 71 property descriptions now carry
+  per-language `<span pulumi-lang-*>` markup, which renders as the language-correct
+  spelling on the Pulumi registry but appears as raw markup in editor tooltips.
+
+### Removed
+
+- **Breaking.** The `id` output is gone from the `getArtifact` and `getArtifacts` data
+  sources. The bridge stopped synthesizing an `id` for Plugin Framework data sources
+  ([pulumi-terraform-bridge#3541](https://github.com/pulumi/pulumi-terraform-bridge/pull/3541),
+  v3.135.0), and this provider is bridged with `pfbridge`. The value was a provider-assigned
+  placeholder — documented as "The provider-assigned unique ID for this managed resource" —
+  never a DataRobot identifier, so nothing that used it was reading a real artifact ID. Use
+  `artifactId` on `getArtifact`, or the per-artifact fields of `getArtifacts`, instead.
+  Programs that referenced `.id` fail to compile in TypeScript, Go, and .NET, and raise
+  `AttributeError` in Python. `getExecutionEnvironment` and `getGlobalModel` are unaffected —
+  their `id` is a real upstream attribute. These two data sources shipped in v0.10.43, so the
+  exposure is one release cycle.
+
+### Fixed
+
+- Removed the `sed` post-processing in `build_nodejs` and `build_python` that rewrote
+  `./utilities` to `../utilities` in generated subdirectory files. The generator now emits
+  correct relative imports, so the workaround was a no-op.
+
 ## [0.10.46] - 2026-08-25
 
 ### Upstream provider changes
