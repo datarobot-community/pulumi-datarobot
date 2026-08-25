@@ -237,10 +237,7 @@ class Workload(pulumi.CustomResource):
                  runtime: Optional[pulumi.Input[Union['WorkloadRuntimeArgs', 'WorkloadRuntimeArgsDict']]] = None,
                  __props__=None):
         """
-        A Workload runs a containerized artifact in the cluster and exposes an inference endpoint.
-
-        Changes to `artifact_id` or `runtime` trigger an in-place workload replacement via the Workload API. The workload ID and endpoint remain stable across artifact and runtime updates.
-
+        Create a Workload resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[builtins.str] artifact_id: ID of the Artifact version to deploy. When using `Artifact`, reference `datarobot_artifact.<name>.artifact_id` (not `.id`). Changing this value triggers an in-place workload replacement.
@@ -256,10 +253,7 @@ class Workload(pulumi.CustomResource):
                  args: WorkloadArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        A Workload runs a containerized artifact in the cluster and exposes an inference endpoint.
-
-        Changes to `artifact_id` or `runtime` trigger an in-place workload replacement via the Workload API. The workload ID and endpoint remain stable across artifact and runtime updates.
-
+        Create a Workload resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param WorkloadArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.

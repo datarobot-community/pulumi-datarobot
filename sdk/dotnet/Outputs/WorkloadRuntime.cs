@@ -18,11 +18,19 @@ namespace DataRobotPulumi.Datarobot.Outputs
         /// Per-group runtime configuration.
         /// </summary>
         public readonly ImmutableArray<Outputs.WorkloadRuntimeContainerGroup> ContainerGroups;
+        /// <summary>
+        /// Replacement policy for in-place workload replacement (rolling strategy). Applied when `artifact_id` changes or when replacement policy settings change. Runtime-only changes use `PATCH /workloads/{id}/settings`, which does not accept custom replacement timing (WAPI uses platform defaults).
+        /// </summary>
+        public readonly Outputs.WorkloadRuntimeReplacementPolicy? ReplacementPolicy;
 
         [OutputConstructor]
-        private WorkloadRuntime(ImmutableArray<Outputs.WorkloadRuntimeContainerGroup> containerGroups)
+        private WorkloadRuntime(
+            ImmutableArray<Outputs.WorkloadRuntimeContainerGroup> containerGroups,
+
+            Outputs.WorkloadRuntimeReplacementPolicy? replacementPolicy)
         {
             ContainerGroups = containerGroups;
+            ReplacementPolicy = replacementPolicy;
         }
     }
 }

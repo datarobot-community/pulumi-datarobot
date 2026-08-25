@@ -54,6 +54,10 @@ export class Artifact extends pulumi.CustomResource {
      */
     public readonly name!: pulumi.Output<string>;
     /**
+     * Local source directory to upload to the DataRobot catalog and attach to the primary container's `image_build_config.code_ref`. On draft artifacts, uploads are applied in-place. On locked artifacts, source changes clone to a new draft version, upload, patch `codeRef`, and lock the new version.
+     */
+    public readonly source!: pulumi.Output<outputs.ArtifactSource | undefined>;
+    /**
      * The artifact specification containing container group definitions.
      */
     public readonly spec!: pulumi.Output<outputs.ArtifactSpec>;
@@ -83,6 +87,7 @@ export class Artifact extends pulumi.CustomResource {
             resourceInputs["artifactRepositoryId"] = state ? state.artifactRepositoryId : undefined;
             resourceInputs["description"] = state ? state.description : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
+            resourceInputs["source"] = state ? state.source : undefined;
             resourceInputs["spec"] = state ? state.spec : undefined;
             resourceInputs["status"] = state ? state.status : undefined;
             resourceInputs["type"] = state ? state.type : undefined;
@@ -94,6 +99,7 @@ export class Artifact extends pulumi.CustomResource {
             resourceInputs["artifactRepositoryId"] = args ? args.artifactRepositoryId : undefined;
             resourceInputs["description"] = args ? args.description : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
+            resourceInputs["source"] = args ? args.source : undefined;
             resourceInputs["spec"] = args ? args.spec : undefined;
             resourceInputs["status"] = args ? args.status : undefined;
             resourceInputs["type"] = args ? args.type : undefined;
@@ -125,6 +131,10 @@ export interface ArtifactState {
      */
     name?: pulumi.Input<string>;
     /**
+     * Local source directory to upload to the DataRobot catalog and attach to the primary container's `image_build_config.code_ref`. On draft artifacts, uploads are applied in-place. On locked artifacts, source changes clone to a new draft version, upload, patch `codeRef`, and lock the new version.
+     */
+    source?: pulumi.Input<inputs.ArtifactSource>;
+    /**
      * The artifact specification containing container group definitions.
      */
     spec?: pulumi.Input<inputs.ArtifactSpec>;
@@ -154,6 +164,10 @@ export interface ArtifactArgs {
      * The name of the Artifact.
      */
     name?: pulumi.Input<string>;
+    /**
+     * Local source directory to upload to the DataRobot catalog and attach to the primary container's `image_build_config.code_ref`. On draft artifacts, uploads are applied in-place. On locked artifacts, source changes clone to a new draft version, upload, patch `codeRef`, and lock the new version.
+     */
+    source?: pulumi.Input<inputs.ArtifactSource>;
     /**
      * The artifact specification containing container group definitions.
      */

@@ -15,7 +15,7 @@ namespace DataRobotPulumi.Datarobot.Outputs
     public sealed class ArtifactSpecContainerGroupContainerImageBuildConfig
     {
         /// <summary>
-        /// Reference to source code in the DataRobot catalog. Optional at create; required before image build or lock.
+        /// Reference to source code in the DataRobot catalog. Optional at create; required before image build or lock. When `source` is set, the provider uploads `source.dir` and populates this block.
         /// </summary>
         public readonly Outputs.ArtifactSpecContainerGroupContainerImageBuildConfigCodeRef? CodeRef;
         /// <summary>

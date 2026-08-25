@@ -11,7 +11,7 @@ using Pulumi;
 namespace DataRobotPulumi.Datarobot
 {
     /// <summary>
-    /// Memory Space is a DataRobot concept that serves as a logical container for Chat Histories (Sessions) and persistent Memories. Feature should be enabled before use with `ENABLE_AGENTIC_MEMORY_API` flag.
+    /// Memory Space is a DataRobot concept that serves as a logical container for Chat Histories (Sessions) and persistent Memories. Managing a Memory Space requires either the `ENABLE_AGENTIC_MEMORY_API` or the `ENABLE_GENAI_EXPERIMENTATION` feature flag. Reading and writing persistent Memories in a Memory Space still requires `ENABLE_AGENTIC_MEMORY_API`.
     /// 
     /// ## Example Usage
     /// 

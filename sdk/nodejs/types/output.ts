@@ -81,6 +81,17 @@ export interface ApplicationSourceRuntimeParameterValue {
     value: string;
 }
 
+export interface ArtifactSource {
+    /**
+     * Path to the local directory containing application source files to upload.
+     */
+    dir: string;
+    /**
+     * SHA-256 fingerprint of `dir` contents, used to detect changes and skip re-upload when unchanged.
+     */
+    dirHash: string;
+}
+
 export interface ArtifactSpec {
     /**
      * List of container groups.
@@ -167,9 +178,9 @@ export interface ArtifactSpecContainerGroupContainerEnvironmentVar {
 
 export interface ArtifactSpecContainerGroupContainerImageBuildConfig {
     /**
-     * Reference to source code in the DataRobot catalog. Optional at create; required before image build or lock.
+     * Reference to source code in the DataRobot catalog. Optional at create; required before image build or lock. When `source` is set, the provider uploads `source.dir` and populates this block.
      */
-    codeRef?: outputs.ArtifactSpecContainerGroupContainerImageBuildConfigCodeRef;
+    codeRef: outputs.ArtifactSpecContainerGroupContainerImageBuildConfigCodeRef;
     /**
      * How the Dockerfile is obtained for the image build. Defaults to using `./Dockerfile` from the source code.
      */
@@ -2427,6 +2438,10 @@ export interface WorkloadRuntime {
      * Per-group runtime configuration.
      */
     containerGroups?: outputs.WorkloadRuntimeContainerGroup[];
+    /**
+     * Replacement policy for in-place workload replacement (rolling strategy). Applied when `artifactId` changes or when replacement policy settings change. Runtime-only changes use `PATCH /workloads/{id}/settings`, which does not accept custom replacement timing (WAPI uses platform defaults).
+     */
+    replacementPolicy?: outputs.WorkloadRuntimeReplacementPolicy;
 }
 
 export interface WorkloadRuntimeContainerGroup {
@@ -2514,5 +2529,16 @@ export interface WorkloadRuntimeContainerGroupContainerResourceAllocation {
      * RAM allocated. Accepts human-readable strings (e.g. `"8GB"`, `"512MB"`, `"4096Mi"`) or raw byte integers. 1000-based suffixes: KB, MB, GB, TB. 1024-based suffixes: Ki/KiB, Mi/MiB, Gi/GiB.
      */
     memory?: string;
+}
+
+export interface WorkloadRuntimeReplacementPolicy {
+    /**
+     * Duration in minutes to keep the old version during replacement. Maps to WAPI `config.keepOldVersionMinutes`.
+     */
+    keepOldVersionMinutes?: number;
+    /**
+     * Duration in minutes for the warmup phase during replacement. Maps to WAPI `config.warmupDurationMinutes`.
+     */
+    warmupMinutes?: number;
 }
 

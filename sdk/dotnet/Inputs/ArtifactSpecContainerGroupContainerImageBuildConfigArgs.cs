@@ -14,7 +14,7 @@ namespace DataRobotPulumi.Datarobot.Inputs
     public sealed class ArtifactSpecContainerGroupContainerImageBuildConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Reference to source code in the DataRobot catalog. Optional at create; required before image build or lock.
+        /// Reference to source code in the DataRobot catalog. Optional at create; required before image build or lock. When `source` is set, the provider uploads `source.dir` and populates this block.
         /// </summary>
         [Input("codeRef")]
         public Input<Inputs.ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefArgs>? CodeRef { get; set; }

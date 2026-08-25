@@ -669,6 +669,162 @@ func (o ApplicationSourceRuntimeParameterValueArrayOutput) Index(i pulumi.IntInp
 	}).(ApplicationSourceRuntimeParameterValueOutput)
 }
 
+type ArtifactSource struct {
+	// Path to the local directory containing application source files to upload.
+	Dir string `pulumi:"dir"`
+	// SHA-256 fingerprint of `dir` contents, used to detect changes and skip re-upload when unchanged.
+	DirHash *string `pulumi:"dirHash"`
+}
+
+// ArtifactSourceInput is an input type that accepts ArtifactSourceArgs and ArtifactSourceOutput values.
+// You can construct a concrete instance of `ArtifactSourceInput` via:
+//
+//	ArtifactSourceArgs{...}
+type ArtifactSourceInput interface {
+	pulumi.Input
+
+	ToArtifactSourceOutput() ArtifactSourceOutput
+	ToArtifactSourceOutputWithContext(context.Context) ArtifactSourceOutput
+}
+
+type ArtifactSourceArgs struct {
+	// Path to the local directory containing application source files to upload.
+	Dir pulumi.StringInput `pulumi:"dir"`
+	// SHA-256 fingerprint of `dir` contents, used to detect changes and skip re-upload when unchanged.
+	DirHash pulumi.StringPtrInput `pulumi:"dirHash"`
+}
+
+func (ArtifactSourceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ArtifactSource)(nil)).Elem()
+}
+
+func (i ArtifactSourceArgs) ToArtifactSourceOutput() ArtifactSourceOutput {
+	return i.ToArtifactSourceOutputWithContext(context.Background())
+}
+
+func (i ArtifactSourceArgs) ToArtifactSourceOutputWithContext(ctx context.Context) ArtifactSourceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ArtifactSourceOutput)
+}
+
+func (i ArtifactSourceArgs) ToArtifactSourcePtrOutput() ArtifactSourcePtrOutput {
+	return i.ToArtifactSourcePtrOutputWithContext(context.Background())
+}
+
+func (i ArtifactSourceArgs) ToArtifactSourcePtrOutputWithContext(ctx context.Context) ArtifactSourcePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ArtifactSourceOutput).ToArtifactSourcePtrOutputWithContext(ctx)
+}
+
+// ArtifactSourcePtrInput is an input type that accepts ArtifactSourceArgs, ArtifactSourcePtr and ArtifactSourcePtrOutput values.
+// You can construct a concrete instance of `ArtifactSourcePtrInput` via:
+//
+//	        ArtifactSourceArgs{...}
+//
+//	or:
+//
+//	        nil
+type ArtifactSourcePtrInput interface {
+	pulumi.Input
+
+	ToArtifactSourcePtrOutput() ArtifactSourcePtrOutput
+	ToArtifactSourcePtrOutputWithContext(context.Context) ArtifactSourcePtrOutput
+}
+
+type artifactSourcePtrType ArtifactSourceArgs
+
+func ArtifactSourcePtr(v *ArtifactSourceArgs) ArtifactSourcePtrInput {
+	return (*artifactSourcePtrType)(v)
+}
+
+func (*artifactSourcePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ArtifactSource)(nil)).Elem()
+}
+
+func (i *artifactSourcePtrType) ToArtifactSourcePtrOutput() ArtifactSourcePtrOutput {
+	return i.ToArtifactSourcePtrOutputWithContext(context.Background())
+}
+
+func (i *artifactSourcePtrType) ToArtifactSourcePtrOutputWithContext(ctx context.Context) ArtifactSourcePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ArtifactSourcePtrOutput)
+}
+
+type ArtifactSourceOutput struct{ *pulumi.OutputState }
+
+func (ArtifactSourceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ArtifactSource)(nil)).Elem()
+}
+
+func (o ArtifactSourceOutput) ToArtifactSourceOutput() ArtifactSourceOutput {
+	return o
+}
+
+func (o ArtifactSourceOutput) ToArtifactSourceOutputWithContext(ctx context.Context) ArtifactSourceOutput {
+	return o
+}
+
+func (o ArtifactSourceOutput) ToArtifactSourcePtrOutput() ArtifactSourcePtrOutput {
+	return o.ToArtifactSourcePtrOutputWithContext(context.Background())
+}
+
+func (o ArtifactSourceOutput) ToArtifactSourcePtrOutputWithContext(ctx context.Context) ArtifactSourcePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ArtifactSource) *ArtifactSource {
+		return &v
+	}).(ArtifactSourcePtrOutput)
+}
+
+// Path to the local directory containing application source files to upload.
+func (o ArtifactSourceOutput) Dir() pulumi.StringOutput {
+	return o.ApplyT(func(v ArtifactSource) string { return v.Dir }).(pulumi.StringOutput)
+}
+
+// SHA-256 fingerprint of `dir` contents, used to detect changes and skip re-upload when unchanged.
+func (o ArtifactSourceOutput) DirHash() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ArtifactSource) *string { return v.DirHash }).(pulumi.StringPtrOutput)
+}
+
+type ArtifactSourcePtrOutput struct{ *pulumi.OutputState }
+
+func (ArtifactSourcePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ArtifactSource)(nil)).Elem()
+}
+
+func (o ArtifactSourcePtrOutput) ToArtifactSourcePtrOutput() ArtifactSourcePtrOutput {
+	return o
+}
+
+func (o ArtifactSourcePtrOutput) ToArtifactSourcePtrOutputWithContext(ctx context.Context) ArtifactSourcePtrOutput {
+	return o
+}
+
+func (o ArtifactSourcePtrOutput) Elem() ArtifactSourceOutput {
+	return o.ApplyT(func(v *ArtifactSource) ArtifactSource {
+		if v != nil {
+			return *v
+		}
+		var ret ArtifactSource
+		return ret
+	}).(ArtifactSourceOutput)
+}
+
+// Path to the local directory containing application source files to upload.
+func (o ArtifactSourcePtrOutput) Dir() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ArtifactSource) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Dir
+	}).(pulumi.StringPtrOutput)
+}
+
+// SHA-256 fingerprint of `dir` contents, used to detect changes and skip re-upload when unchanged.
+func (o ArtifactSourcePtrOutput) DirHash() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ArtifactSource) *string {
+		if v == nil {
+			return nil
+		}
+		return v.DirHash
+	}).(pulumi.StringPtrOutput)
+}
+
 type ArtifactSpec struct {
 	// List of container groups.
 	ContainerGroups []ArtifactSpecContainerGroup `pulumi:"containerGroups"`
@@ -1234,7 +1390,7 @@ func (o ArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput) Index(i pu
 }
 
 type ArtifactSpecContainerGroupContainerImageBuildConfig struct {
-	// Reference to source code in the DataRobot catalog. Optional at create; required before image build or lock.
+	// Reference to source code in the DataRobot catalog. Optional at create; required before image build or lock. When `source` is set, the provider uploads `source.dir` and populates this block.
 	CodeRef *ArtifactSpecContainerGroupContainerImageBuildConfigCodeRef `pulumi:"codeRef"`
 	// How the Dockerfile is obtained for the image build. Defaults to using `./Dockerfile` from the source code.
 	Dockerfile *ArtifactSpecContainerGroupContainerImageBuildConfigDockerfile `pulumi:"dockerfile"`
@@ -1252,7 +1408,7 @@ type ArtifactSpecContainerGroupContainerImageBuildConfigInput interface {
 }
 
 type ArtifactSpecContainerGroupContainerImageBuildConfigArgs struct {
-	// Reference to source code in the DataRobot catalog. Optional at create; required before image build or lock.
+	// Reference to source code in the DataRobot catalog. Optional at create; required before image build or lock. When `source` is set, the provider uploads `source.dir` and populates this block.
 	CodeRef ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefPtrInput `pulumi:"codeRef"`
 	// How the Dockerfile is obtained for the image build. Defaults to using `./Dockerfile` from the source code.
 	Dockerfile ArtifactSpecContainerGroupContainerImageBuildConfigDockerfilePtrInput `pulumi:"dockerfile"`
@@ -1335,7 +1491,7 @@ func (o ArtifactSpecContainerGroupContainerImageBuildConfigOutput) ToArtifactSpe
 	}).(ArtifactSpecContainerGroupContainerImageBuildConfigPtrOutput)
 }
 
-// Reference to source code in the DataRobot catalog. Optional at create; required before image build or lock.
+// Reference to source code in the DataRobot catalog. Optional at create; required before image build or lock. When `source` is set, the provider uploads `source.dir` and populates this block.
 func (o ArtifactSpecContainerGroupContainerImageBuildConfigOutput) CodeRef() ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefPtrOutput {
 	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerImageBuildConfig) *ArtifactSpecContainerGroupContainerImageBuildConfigCodeRef {
 		return v.CodeRef
@@ -1373,7 +1529,7 @@ func (o ArtifactSpecContainerGroupContainerImageBuildConfigPtrOutput) Elem() Art
 	}).(ArtifactSpecContainerGroupContainerImageBuildConfigOutput)
 }
 
-// Reference to source code in the DataRobot catalog. Optional at create; required before image build or lock.
+// Reference to source code in the DataRobot catalog. Optional at create; required before image build or lock. When `source` is set, the provider uploads `source.dir` and populates this block.
 func (o ArtifactSpecContainerGroupContainerImageBuildConfigPtrOutput) CodeRef() ArtifactSpecContainerGroupContainerImageBuildConfigCodeRefPtrOutput {
 	return o.ApplyT(func(v *ArtifactSpecContainerGroupContainerImageBuildConfig) *ArtifactSpecContainerGroupContainerImageBuildConfigCodeRef {
 		if v == nil {
@@ -15096,6 +15252,8 @@ func (o VectorDatabaseChunkingParametersPtrOutput) Separators() pulumi.StringArr
 type WorkloadRuntime struct {
 	// Per-group runtime configuration.
 	ContainerGroups []WorkloadRuntimeContainerGroup `pulumi:"containerGroups"`
+	// Replacement policy for in-place workload replacement (rolling strategy). Applied when `artifactId` changes or when replacement policy settings change. Runtime-only changes use `PATCH /workloads/{id}/settings`, which does not accept custom replacement timing (WAPI uses platform defaults).
+	ReplacementPolicy *WorkloadRuntimeReplacementPolicy `pulumi:"replacementPolicy"`
 }
 
 // WorkloadRuntimeInput is an input type that accepts WorkloadRuntimeArgs and WorkloadRuntimeOutput values.
@@ -15112,6 +15270,8 @@ type WorkloadRuntimeInput interface {
 type WorkloadRuntimeArgs struct {
 	// Per-group runtime configuration.
 	ContainerGroups WorkloadRuntimeContainerGroupArrayInput `pulumi:"containerGroups"`
+	// Replacement policy for in-place workload replacement (rolling strategy). Applied when `artifactId` changes or when replacement policy settings change. Runtime-only changes use `PATCH /workloads/{id}/settings`, which does not accept custom replacement timing (WAPI uses platform defaults).
+	ReplacementPolicy WorkloadRuntimeReplacementPolicyPtrInput `pulumi:"replacementPolicy"`
 }
 
 func (WorkloadRuntimeArgs) ElementType() reflect.Type {
@@ -15196,6 +15356,11 @@ func (o WorkloadRuntimeOutput) ContainerGroups() WorkloadRuntimeContainerGroupAr
 	return o.ApplyT(func(v WorkloadRuntime) []WorkloadRuntimeContainerGroup { return v.ContainerGroups }).(WorkloadRuntimeContainerGroupArrayOutput)
 }
 
+// Replacement policy for in-place workload replacement (rolling strategy). Applied when `artifactId` changes or when replacement policy settings change. Runtime-only changes use `PATCH /workloads/{id}/settings`, which does not accept custom replacement timing (WAPI uses platform defaults).
+func (o WorkloadRuntimeOutput) ReplacementPolicy() WorkloadRuntimeReplacementPolicyPtrOutput {
+	return o.ApplyT(func(v WorkloadRuntime) *WorkloadRuntimeReplacementPolicy { return v.ReplacementPolicy }).(WorkloadRuntimeReplacementPolicyPtrOutput)
+}
+
 type WorkloadRuntimePtrOutput struct{ *pulumi.OutputState }
 
 func (WorkloadRuntimePtrOutput) ElementType() reflect.Type {
@@ -15228,6 +15393,16 @@ func (o WorkloadRuntimePtrOutput) ContainerGroups() WorkloadRuntimeContainerGrou
 		}
 		return v.ContainerGroups
 	}).(WorkloadRuntimeContainerGroupArrayOutput)
+}
+
+// Replacement policy for in-place workload replacement (rolling strategy). Applied when `artifactId` changes or when replacement policy settings change. Runtime-only changes use `PATCH /workloads/{id}/settings`, which does not accept custom replacement timing (WAPI uses platform defaults).
+func (o WorkloadRuntimePtrOutput) ReplacementPolicy() WorkloadRuntimeReplacementPolicyPtrOutput {
+	return o.ApplyT(func(v *WorkloadRuntime) *WorkloadRuntimeReplacementPolicy {
+		if v == nil {
+			return nil
+		}
+		return v.ReplacementPolicy
+	}).(WorkloadRuntimeReplacementPolicyPtrOutput)
 }
 
 type WorkloadRuntimeContainerGroup struct {
@@ -15974,6 +16149,162 @@ func (o WorkloadRuntimeContainerGroupContainerResourceAllocationPtrOutput) Memor
 		}
 		return v.Memory
 	}).(pulumi.StringPtrOutput)
+}
+
+type WorkloadRuntimeReplacementPolicy struct {
+	// Duration in minutes to keep the old version during replacement. Maps to WAPI `config.keepOldVersionMinutes`.
+	KeepOldVersionMinutes *int `pulumi:"keepOldVersionMinutes"`
+	// Duration in minutes for the warmup phase during replacement. Maps to WAPI `config.warmupDurationMinutes`.
+	WarmupMinutes *int `pulumi:"warmupMinutes"`
+}
+
+// WorkloadRuntimeReplacementPolicyInput is an input type that accepts WorkloadRuntimeReplacementPolicyArgs and WorkloadRuntimeReplacementPolicyOutput values.
+// You can construct a concrete instance of `WorkloadRuntimeReplacementPolicyInput` via:
+//
+//	WorkloadRuntimeReplacementPolicyArgs{...}
+type WorkloadRuntimeReplacementPolicyInput interface {
+	pulumi.Input
+
+	ToWorkloadRuntimeReplacementPolicyOutput() WorkloadRuntimeReplacementPolicyOutput
+	ToWorkloadRuntimeReplacementPolicyOutputWithContext(context.Context) WorkloadRuntimeReplacementPolicyOutput
+}
+
+type WorkloadRuntimeReplacementPolicyArgs struct {
+	// Duration in minutes to keep the old version during replacement. Maps to WAPI `config.keepOldVersionMinutes`.
+	KeepOldVersionMinutes pulumi.IntPtrInput `pulumi:"keepOldVersionMinutes"`
+	// Duration in minutes for the warmup phase during replacement. Maps to WAPI `config.warmupDurationMinutes`.
+	WarmupMinutes pulumi.IntPtrInput `pulumi:"warmupMinutes"`
+}
+
+func (WorkloadRuntimeReplacementPolicyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*WorkloadRuntimeReplacementPolicy)(nil)).Elem()
+}
+
+func (i WorkloadRuntimeReplacementPolicyArgs) ToWorkloadRuntimeReplacementPolicyOutput() WorkloadRuntimeReplacementPolicyOutput {
+	return i.ToWorkloadRuntimeReplacementPolicyOutputWithContext(context.Background())
+}
+
+func (i WorkloadRuntimeReplacementPolicyArgs) ToWorkloadRuntimeReplacementPolicyOutputWithContext(ctx context.Context) WorkloadRuntimeReplacementPolicyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WorkloadRuntimeReplacementPolicyOutput)
+}
+
+func (i WorkloadRuntimeReplacementPolicyArgs) ToWorkloadRuntimeReplacementPolicyPtrOutput() WorkloadRuntimeReplacementPolicyPtrOutput {
+	return i.ToWorkloadRuntimeReplacementPolicyPtrOutputWithContext(context.Background())
+}
+
+func (i WorkloadRuntimeReplacementPolicyArgs) ToWorkloadRuntimeReplacementPolicyPtrOutputWithContext(ctx context.Context) WorkloadRuntimeReplacementPolicyPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WorkloadRuntimeReplacementPolicyOutput).ToWorkloadRuntimeReplacementPolicyPtrOutputWithContext(ctx)
+}
+
+// WorkloadRuntimeReplacementPolicyPtrInput is an input type that accepts WorkloadRuntimeReplacementPolicyArgs, WorkloadRuntimeReplacementPolicyPtr and WorkloadRuntimeReplacementPolicyPtrOutput values.
+// You can construct a concrete instance of `WorkloadRuntimeReplacementPolicyPtrInput` via:
+//
+//	        WorkloadRuntimeReplacementPolicyArgs{...}
+//
+//	or:
+//
+//	        nil
+type WorkloadRuntimeReplacementPolicyPtrInput interface {
+	pulumi.Input
+
+	ToWorkloadRuntimeReplacementPolicyPtrOutput() WorkloadRuntimeReplacementPolicyPtrOutput
+	ToWorkloadRuntimeReplacementPolicyPtrOutputWithContext(context.Context) WorkloadRuntimeReplacementPolicyPtrOutput
+}
+
+type workloadRuntimeReplacementPolicyPtrType WorkloadRuntimeReplacementPolicyArgs
+
+func WorkloadRuntimeReplacementPolicyPtr(v *WorkloadRuntimeReplacementPolicyArgs) WorkloadRuntimeReplacementPolicyPtrInput {
+	return (*workloadRuntimeReplacementPolicyPtrType)(v)
+}
+
+func (*workloadRuntimeReplacementPolicyPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**WorkloadRuntimeReplacementPolicy)(nil)).Elem()
+}
+
+func (i *workloadRuntimeReplacementPolicyPtrType) ToWorkloadRuntimeReplacementPolicyPtrOutput() WorkloadRuntimeReplacementPolicyPtrOutput {
+	return i.ToWorkloadRuntimeReplacementPolicyPtrOutputWithContext(context.Background())
+}
+
+func (i *workloadRuntimeReplacementPolicyPtrType) ToWorkloadRuntimeReplacementPolicyPtrOutputWithContext(ctx context.Context) WorkloadRuntimeReplacementPolicyPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WorkloadRuntimeReplacementPolicyPtrOutput)
+}
+
+type WorkloadRuntimeReplacementPolicyOutput struct{ *pulumi.OutputState }
+
+func (WorkloadRuntimeReplacementPolicyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*WorkloadRuntimeReplacementPolicy)(nil)).Elem()
+}
+
+func (o WorkloadRuntimeReplacementPolicyOutput) ToWorkloadRuntimeReplacementPolicyOutput() WorkloadRuntimeReplacementPolicyOutput {
+	return o
+}
+
+func (o WorkloadRuntimeReplacementPolicyOutput) ToWorkloadRuntimeReplacementPolicyOutputWithContext(ctx context.Context) WorkloadRuntimeReplacementPolicyOutput {
+	return o
+}
+
+func (o WorkloadRuntimeReplacementPolicyOutput) ToWorkloadRuntimeReplacementPolicyPtrOutput() WorkloadRuntimeReplacementPolicyPtrOutput {
+	return o.ToWorkloadRuntimeReplacementPolicyPtrOutputWithContext(context.Background())
+}
+
+func (o WorkloadRuntimeReplacementPolicyOutput) ToWorkloadRuntimeReplacementPolicyPtrOutputWithContext(ctx context.Context) WorkloadRuntimeReplacementPolicyPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v WorkloadRuntimeReplacementPolicy) *WorkloadRuntimeReplacementPolicy {
+		return &v
+	}).(WorkloadRuntimeReplacementPolicyPtrOutput)
+}
+
+// Duration in minutes to keep the old version during replacement. Maps to WAPI `config.keepOldVersionMinutes`.
+func (o WorkloadRuntimeReplacementPolicyOutput) KeepOldVersionMinutes() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v WorkloadRuntimeReplacementPolicy) *int { return v.KeepOldVersionMinutes }).(pulumi.IntPtrOutput)
+}
+
+// Duration in minutes for the warmup phase during replacement. Maps to WAPI `config.warmupDurationMinutes`.
+func (o WorkloadRuntimeReplacementPolicyOutput) WarmupMinutes() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v WorkloadRuntimeReplacementPolicy) *int { return v.WarmupMinutes }).(pulumi.IntPtrOutput)
+}
+
+type WorkloadRuntimeReplacementPolicyPtrOutput struct{ *pulumi.OutputState }
+
+func (WorkloadRuntimeReplacementPolicyPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**WorkloadRuntimeReplacementPolicy)(nil)).Elem()
+}
+
+func (o WorkloadRuntimeReplacementPolicyPtrOutput) ToWorkloadRuntimeReplacementPolicyPtrOutput() WorkloadRuntimeReplacementPolicyPtrOutput {
+	return o
+}
+
+func (o WorkloadRuntimeReplacementPolicyPtrOutput) ToWorkloadRuntimeReplacementPolicyPtrOutputWithContext(ctx context.Context) WorkloadRuntimeReplacementPolicyPtrOutput {
+	return o
+}
+
+func (o WorkloadRuntimeReplacementPolicyPtrOutput) Elem() WorkloadRuntimeReplacementPolicyOutput {
+	return o.ApplyT(func(v *WorkloadRuntimeReplacementPolicy) WorkloadRuntimeReplacementPolicy {
+		if v != nil {
+			return *v
+		}
+		var ret WorkloadRuntimeReplacementPolicy
+		return ret
+	}).(WorkloadRuntimeReplacementPolicyOutput)
+}
+
+// Duration in minutes to keep the old version during replacement. Maps to WAPI `config.keepOldVersionMinutes`.
+func (o WorkloadRuntimeReplacementPolicyPtrOutput) KeepOldVersionMinutes() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *WorkloadRuntimeReplacementPolicy) *int {
+		if v == nil {
+			return nil
+		}
+		return v.KeepOldVersionMinutes
+	}).(pulumi.IntPtrOutput)
+}
+
+// Duration in minutes for the warmup phase during replacement. Maps to WAPI `config.warmupDurationMinutes`.
+func (o WorkloadRuntimeReplacementPolicyPtrOutput) WarmupMinutes() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *WorkloadRuntimeReplacementPolicy) *int {
+		if v == nil {
+			return nil
+		}
+		return v.WarmupMinutes
+	}).(pulumi.IntPtrOutput)
 }
 
 type GetArtifactCreator struct {
@@ -19684,6 +20015,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ApplicationSourceResourcesPtrInput)(nil)).Elem(), ApplicationSourceResourcesArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ApplicationSourceRuntimeParameterValueInput)(nil)).Elem(), ApplicationSourceRuntimeParameterValueArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ApplicationSourceRuntimeParameterValueArrayInput)(nil)).Elem(), ApplicationSourceRuntimeParameterValueArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ArtifactSourceInput)(nil)).Elem(), ArtifactSourceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ArtifactSourcePtrInput)(nil)).Elem(), ArtifactSourceArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ArtifactSpecInput)(nil)).Elem(), ArtifactSpecArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ArtifactSpecPtrInput)(nil)).Elem(), ArtifactSpecArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ArtifactSpecContainerGroupInput)(nil)).Elem(), ArtifactSpecContainerGroupArgs{})
@@ -19859,6 +20192,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*WorkloadRuntimeContainerGroupContainerArrayInput)(nil)).Elem(), WorkloadRuntimeContainerGroupContainerArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*WorkloadRuntimeContainerGroupContainerResourceAllocationInput)(nil)).Elem(), WorkloadRuntimeContainerGroupContainerResourceAllocationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*WorkloadRuntimeContainerGroupContainerResourceAllocationPtrInput)(nil)).Elem(), WorkloadRuntimeContainerGroupContainerResourceAllocationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WorkloadRuntimeReplacementPolicyInput)(nil)).Elem(), WorkloadRuntimeReplacementPolicyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WorkloadRuntimeReplacementPolicyPtrInput)(nil)).Elem(), WorkloadRuntimeReplacementPolicyArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactCreatorInput)(nil)).Elem(), GetArtifactCreatorArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactSpecInput)(nil)).Elem(), GetArtifactSpecArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactSpecContainerGroupInput)(nil)).Elem(), GetArtifactSpecContainerGroupArgs{})
@@ -19913,6 +20248,8 @@ func init() {
 	pulumi.RegisterOutputType(ApplicationSourceResourcesPtrOutput{})
 	pulumi.RegisterOutputType(ApplicationSourceRuntimeParameterValueOutput{})
 	pulumi.RegisterOutputType(ApplicationSourceRuntimeParameterValueArrayOutput{})
+	pulumi.RegisterOutputType(ArtifactSourceOutput{})
+	pulumi.RegisterOutputType(ArtifactSourcePtrOutput{})
 	pulumi.RegisterOutputType(ArtifactSpecOutput{})
 	pulumi.RegisterOutputType(ArtifactSpecPtrOutput{})
 	pulumi.RegisterOutputType(ArtifactSpecContainerGroupOutput{})
@@ -20088,6 +20425,8 @@ func init() {
 	pulumi.RegisterOutputType(WorkloadRuntimeContainerGroupContainerArrayOutput{})
 	pulumi.RegisterOutputType(WorkloadRuntimeContainerGroupContainerResourceAllocationOutput{})
 	pulumi.RegisterOutputType(WorkloadRuntimeContainerGroupContainerResourceAllocationPtrOutput{})
+	pulumi.RegisterOutputType(WorkloadRuntimeReplacementPolicyOutput{})
+	pulumi.RegisterOutputType(WorkloadRuntimeReplacementPolicyPtrOutput{})
 	pulumi.RegisterOutputType(GetArtifactCreatorOutput{})
 	pulumi.RegisterOutputType(GetArtifactSpecOutput{})
 	pulumi.RegisterOutputType(GetArtifactSpecContainerGroupOutput{})

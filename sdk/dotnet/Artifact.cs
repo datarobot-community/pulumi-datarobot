@@ -41,6 +41,12 @@ namespace DataRobotPulumi.Datarobot
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
+        /// Local source directory to upload to the DataRobot catalog and attach to the primary container's `image_build_config.code_ref`. On draft artifacts, uploads are applied in-place. On locked artifacts, source changes clone to a new draft version, upload, patch `code_ref`, and lock the new version.
+        /// </summary>
+        [Output("source")]
+        public Output<Outputs.ArtifactSource?> Source { get; private set; } = null!;
+
+        /// <summary>
         /// The artifact specification containing container group definitions.
         /// </summary>
         [Output("spec")]
@@ -124,6 +130,12 @@ namespace DataRobotPulumi.Datarobot
         public Input<string>? Name { get; set; }
 
         /// <summary>
+        /// Local source directory to upload to the DataRobot catalog and attach to the primary container's `image_build_config.code_ref`. On draft artifacts, uploads are applied in-place. On locked artifacts, source changes clone to a new draft version, upload, patch `code_ref`, and lock the new version.
+        /// </summary>
+        [Input("source")]
+        public Input<Inputs.ArtifactSourceArgs>? Source { get; set; }
+
+        /// <summary>
         /// The artifact specification containing container group definitions.
         /// </summary>
         [Input("spec", required: true)]
@@ -172,6 +184,12 @@ namespace DataRobotPulumi.Datarobot
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
+
+        /// <summary>
+        /// Local source directory to upload to the DataRobot catalog and attach to the primary container's `image_build_config.code_ref`. On draft artifacts, uploads are applied in-place. On locked artifacts, source changes clone to a new draft version, upload, patch `code_ref`, and lock the new version.
+        /// </summary>
+        [Input("source")]
+        public Input<Inputs.ArtifactSourceGetArgs>? Source { get; set; }
 
         /// <summary>
         /// The artifact specification containing container group definitions.

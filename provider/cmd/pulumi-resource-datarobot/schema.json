@@ -190,6 +190,30 @@
         "value"
       ]
     },
+    "datarobot:index/ArtifactSource:ArtifactSource": {
+      "properties": {
+        "dir": {
+          "type": "string",
+          "description": "Path to the local directory containing application source files to upload.\n"
+        },
+        "dirHash": {
+          "type": "string",
+          "description": "SHA-256 fingerprint of `dir` contents, used to detect changes and skip re-upload when unchanged.\n"
+        }
+      },
+      "type": "object",
+      "required": [
+        "dir"
+      ],
+      "language": {
+        "nodejs": {
+          "requiredOutputs": [
+            "dir",
+            "dirHash"
+          ]
+        }
+      }
+    },
     "datarobot:index/ArtifactSpec:ArtifactSpec": {
       "properties": {
         "containerGroups": {
@@ -320,14 +344,21 @@
       "properties": {
         "codeRef": {
           "$ref": "#/types/datarobot:index/ArtifactSpecContainerGroupContainerImageBuildConfigCodeRef:ArtifactSpecContainerGroupContainerImageBuildConfigCodeRef",
-          "description": "Reference to source code in the DataRobot catalog. Optional at create; required before image build or lock.\n"
+          "description": "Reference to source code in the DataRobot catalog. Optional at create; required before image build or lock. When `source` is set, the provider uploads `source.dir` and populates this block.\n"
         },
         "dockerfile": {
           "$ref": "#/types/datarobot:index/ArtifactSpecContainerGroupContainerImageBuildConfigDockerfile:ArtifactSpecContainerGroupContainerImageBuildConfigDockerfile",
           "description": "How the Dockerfile is obtained for the image build. Defaults to using `./Dockerfile` from the source code.\n"
         }
       },
-      "type": "object"
+      "type": "object",
+      "language": {
+        "nodejs": {
+          "requiredOutputs": [
+            "codeRef"
+          ]
+        }
+      }
     },
     "datarobot:index/ArtifactSpecContainerGroupContainerImageBuildConfigCodeRef:ArtifactSpecContainerGroupContainerImageBuildConfigCodeRef": {
       "properties": {
@@ -2361,6 +2392,10 @@
             "$ref": "#/types/datarobot:index/WorkloadRuntimeContainerGroup:WorkloadRuntimeContainerGroup"
           },
           "description": "Per-group runtime configuration.\n"
+        },
+        "replacementPolicy": {
+          "$ref": "#/types/datarobot:index/WorkloadRuntimeReplacementPolicy:WorkloadRuntimeReplacementPolicy",
+          "description": "Replacement policy for in-place workload replacement (rolling strategy). Applied when `artifact_id` changes or when replacement policy settings change. Runtime-only changes use `PATCH /workloads/{id}/settings`, which does not accept custom replacement timing (WAPI uses platform defaults).\n"
         }
       },
       "type": "object"
@@ -2496,6 +2531,19 @@
         "memory": {
           "type": "string",
           "description": "RAM allocated. Accepts human-readable strings (e.g. `\"8GB\"`, `\"512MB\"`, `\"4096Mi\"`) or raw byte integers. 1000-based suffixes: KB, MB, GB, TB. 1024-based suffixes: Ki/KiB, Mi/MiB, Gi/GiB.\n"
+        }
+      },
+      "type": "object"
+    },
+    "datarobot:index/WorkloadRuntimeReplacementPolicy:WorkloadRuntimeReplacementPolicy": {
+      "properties": {
+        "keepOldVersionMinutes": {
+          "type": "integer",
+          "description": "Duration in minutes to keep the old version during replacement. Maps to WAPI `config.keepOldVersionMinutes`.\n"
+        },
+        "warmupMinutes": {
+          "type": "integer",
+          "description": "Duration in minutes for the warmup phase during replacement. Maps to WAPI `config.warmupDurationMinutes`.\n"
         }
       },
       "type": "object"
@@ -4409,7 +4457,7 @@
       }
     },
     "datarobot:index/artifact:Artifact": {
-      "description": "Artifact definition for the Workload API. Artifacts define container images and runtime configuration for workloads.\n\n## Example Usage\n\n<!--Start PulumiCodeChooser -->\n```yaml\nresources:\n  # Two common artifact shapes:\n  # - Prebuilt image: set image_uri (works with status = \"locked\" or \"draft\")\n  # - Build from source: set image_build_config on a draft artifact (omit image_uri until after build)\n  prebuilt:\n    type: datarobot:Artifact\n    properties:\n      description: Artifact with a prebuilt container image\n      status: locked # default; use \"draft\" for in-place updates\n      spec:\n        container_groups:\n          - containers:\n              - imageUri: nginx:latest\n                primary: true\n                port: 8080\n  fromSource:\n    type: datarobot:Artifact\n    properties:\n      description: Draft artifact with image build configuration (code-to-workload)\n      status: draft\n      spec:\n        container_groups:\n          - containers:\n              - name: primary\n                primary: true\n                port: 8080\n                imageBuildConfig:\n                  dockerfile:\n                    source: provided\n                    path: ./Dockerfile\noutputs:\n  prebuiltArtifactId: ${prebuilt.artifactId}\n  fromSourceArtifactId: ${fromSource.artifactId}\n```\n<!--End PulumiCodeChooser -->\n",
+      "description": "Artifact definition for the Workload API. Artifacts define container images and runtime configuration for workloads.\n\n## Example Usage\n\n<!--Start PulumiCodeChooser -->\n```yaml\nresources:\n  # Three common artifact shapes:\n  # - Prebuilt image: set image_uri (works with status = \"locked\" or \"draft\")\n  # - Build from source with local upload: set image_build_config and source { dir }\n  # - Build from source with existing catalog refs: set image_build_config.code_ref manually (no source block)\n  prebuilt:\n    type: datarobot:Artifact\n    properties:\n      description: Artifact with a prebuilt container image\n      status: locked # default; use \"draft\" for in-place updates\n      spec:\n        container_groups:\n          - containers:\n              - imageUri: nginx:latest\n                primary: true\n                port: 8080\n  # Create as draft so this example is copy-pasteable. After the image build\n  # populates image_uri, set status = \"locked\". Applying locked without image_uri\n  # is rejected by workload-api (422).\n  fromSource:\n    type: datarobot:Artifact\n    properties:\n      description: Draft artifact with local source upload (code-to-workload)\n      status: draft\n      source:\n        dir: ${path.module}/app\n      spec:\n        container_groups:\n          - containers:\n              - name: primary\n                primary: true\n                port: 8080\n                imageBuildConfig:\n                  dockerfile:\n                    source: provided\n                    path: ./Dockerfile\noutputs:\n  prebuiltArtifactId: ${prebuilt.artifactId}\n  fromSourceArtifactId: ${fromSource.artifactId}\n```\n<!--End PulumiCodeChooser -->\n",
       "properties": {
         "artifactId": {
           "type": "string",
@@ -4426,6 +4474,10 @@
         "name": {
           "type": "string",
           "description": "The name of the Artifact.\n"
+        },
+        "source": {
+          "$ref": "#/types/datarobot:index/ArtifactSource:ArtifactSource",
+          "description": "Local source directory to upload to the DataRobot catalog and attach to the primary container's `image_build_config.code_ref`. On draft artifacts, uploads are applied in-place. On locked artifacts, source changes clone to a new draft version, upload, patch `code_ref`, and lock the new version.\n"
         },
         "spec": {
           "$ref": "#/types/datarobot:index/ArtifactSpec:ArtifactSpec",
@@ -4461,6 +4513,10 @@
           "type": "string",
           "description": "The name of the Artifact.\n"
         },
+        "source": {
+          "$ref": "#/types/datarobot:index/ArtifactSource:ArtifactSource",
+          "description": "Local source directory to upload to the DataRobot catalog and attach to the primary container's `image_build_config.code_ref`. On draft artifacts, uploads are applied in-place. On locked artifacts, source changes clone to a new draft version, upload, patch `code_ref`, and lock the new version.\n"
+        },
         "spec": {
           "$ref": "#/types/datarobot:index/ArtifactSpec:ArtifactSpec",
           "description": "The artifact specification containing container group definitions.\n"
@@ -4495,6 +4551,10 @@
           "name": {
             "type": "string",
             "description": "The name of the Artifact.\n"
+          },
+          "source": {
+            "$ref": "#/types/datarobot:index/ArtifactSource:ArtifactSource",
+            "description": "Local source directory to upload to the DataRobot catalog and attach to the primary container's `image_build_config.code_ref`. On draft artifacts, uploads are applied in-place. On locked artifacts, source changes clone to a new draft version, upload, patch `code_ref`, and lock the new version.\n"
           },
           "spec": {
             "$ref": "#/types/datarobot:index/ArtifactSpec:ArtifactSpec",
@@ -8157,7 +8217,7 @@
       }
     },
     "datarobot:index/memorySpace:MemorySpace": {
-      "description": "Memory Space is a DataRobot concept that serves as a logical container for Chat Histories (Sessions) and persistent Memories. Feature should be enabled before use with `ENABLE_AGENTIC_MEMORY_API` flag.\n\n## Example Usage\n\n<!--Start PulumiCodeChooser -->\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@datarobot/pulumi-datarobot\";\n\nconst example = new datarobot.MemorySpace(\"example\", {description: \"My workspace memories\"});\nexport const datarobotMemorySpaceId = example.id;\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample = datarobot.MemorySpace(\"example\", description=\"My workspace memories\")\npulumi.export(\"datarobotMemorySpaceId\", example.id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = DataRobotPulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() => \n{\n    var example = new Datarobot.MemorySpace(\"example\", new()\n    {\n        Description = \"My workspace memories\",\n    });\n\n    return new Dictionary<string, object?>\n    {\n        [\"datarobotMemorySpaceId\"] = example.Id,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texample, err := datarobot.NewMemorySpace(ctx, \"example\", &datarobot.MemorySpaceArgs{\n\t\t\tDescription: pulumi.String(\"My workspace memories\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"datarobotMemorySpaceId\", example.ID())\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.MemorySpace;\nimport com.pulumi.datarobot.MemorySpaceArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new MemorySpace(\"example\", MemorySpaceArgs.builder()\n            .description(\"My workspace memories\")\n            .build());\n\n        ctx.export(\"datarobotMemorySpaceId\", example.id());\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: datarobot:MemorySpace\n    properties:\n      description: My workspace memories\noutputs:\n  datarobotMemorySpaceId: ${example.id}\n```\n<!--End PulumiCodeChooser -->\n",
+      "description": "Memory Space is a DataRobot concept that serves as a logical container for Chat Histories (Sessions) and persistent Memories. Managing a Memory Space requires either the `ENABLE_AGENTIC_MEMORY_API` or the `ENABLE_GENAI_EXPERIMENTATION` feature flag. Reading and writing persistent Memories in a Memory Space still requires `ENABLE_AGENTIC_MEMORY_API`.\n\n## Example Usage\n\n<!--Start PulumiCodeChooser -->\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as datarobot from \"@datarobot/pulumi-datarobot\";\n\nconst example = new datarobot.MemorySpace(\"example\", {description: \"My workspace memories\"});\nexport const datarobotMemorySpaceId = example.id;\n```\n```python\nimport pulumi\nimport pulumi_datarobot as datarobot\n\nexample = datarobot.MemorySpace(\"example\", description=\"My workspace memories\")\npulumi.export(\"datarobotMemorySpaceId\", example.id)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Datarobot = DataRobotPulumi.Datarobot;\n\nreturn await Deployment.RunAsync(() => \n{\n    var example = new Datarobot.MemorySpace(\"example\", new()\n    {\n        Description = \"My workspace memories\",\n    });\n\n    return new Dictionary<string, object?>\n    {\n        [\"datarobotMemorySpaceId\"] = example.Id,\n    };\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/datarobot-community/pulumi-datarobot/sdk/go/datarobot\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\texample, err := datarobot.NewMemorySpace(ctx, \"example\", &datarobot.MemorySpaceArgs{\n\t\t\tDescription: pulumi.String(\"My workspace memories\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tctx.Export(\"datarobotMemorySpaceId\", example.ID())\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.datarobot.MemorySpace;\nimport com.pulumi.datarobot.MemorySpaceArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new MemorySpace(\"example\", MemorySpaceArgs.builder()\n            .description(\"My workspace memories\")\n            .build());\n\n        ctx.export(\"datarobotMemorySpaceId\", example.id());\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: datarobot:MemorySpace\n    properties:\n      description: My workspace memories\noutputs:\n  datarobotMemorySpaceId: ${example.id}\n```\n<!--End PulumiCodeChooser -->\n",
       "properties": {
         "customInstructions": {
           "type": "string",
@@ -9777,7 +9837,6 @@
       }
     },
     "datarobot:index/workload:Workload": {
-      "description": "A Workload runs a containerized artifact in the cluster and exposes an inference endpoint.\n\nChanges to `artifact_id` or `runtime` trigger an in-place workload replacement via the Workload API. The workload ID and endpoint remain stable across artifact and runtime updates.\n",
       "properties": {
         "artifactId": {
           "type": "string",
