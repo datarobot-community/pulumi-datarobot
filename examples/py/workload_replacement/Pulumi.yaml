@@ -1,0 +1,7 @@
+name: workload-replacement
+runtime:
+  name: python
+  options:
+    toolchain: pip
+    virtualenv: venv
+description: Minimal example showing in-place Workload replacement when swapping Artifacts
