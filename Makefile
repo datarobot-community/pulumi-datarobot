@@ -111,10 +111,6 @@ generate_sdks build_sdks:: install_plugins provider # build all the sdks
 
 build_nodejs:: install_plugins tfgen # build the node sdk
 	$(WORKING_DIR)/bin/$(TFGEN) nodejs --overlays provider/overlays/nodejs --out sdk/nodejs/
-	@# Fix relative imports in subdirectory files — bridge generates ./ instead of ../ for subdir files
-	@sed -i.bak 's|from "\./utilities"|from "../utilities"|g' sdk/nodejs/config/vars.ts sdk/nodejs/types/index.ts && rm -f sdk/nodejs/config/vars.ts.bak sdk/nodejs/types/index.ts.bak
-	@sed -i.bak 's|from "\./types/input"|from "../types/input"|g' sdk/nodejs/types/input.ts sdk/nodejs/types/output.ts && rm -f sdk/nodejs/types/input.ts.bak sdk/nodejs/types/output.ts.bak
-	@sed -i.bak 's|from "\./types/output"|from "../types/output"|g' sdk/nodejs/types/input.ts sdk/nodejs/types/output.ts && rm -f sdk/nodejs/types/input.ts.bak sdk/nodejs/types/output.ts.bak
 	@echo "Restoring Node.js-specific README..."
 	@sed -e "s/{{VERSION}}/$(VERSION)/g" \
 		-e "s|{{PACKAGE_NAME}}|@datarobot/pulumi-datarobot|g" \
@@ -128,8 +124,6 @@ build_nodejs:: install_plugins tfgen # build the node sdk
 
 build_python:: install_plugins tfgen # build the python sdk
 	$(WORKING_DIR)/bin/$(TFGEN) python --overlays provider/overlays/python --out sdk/python/
-	@# Fix relative imports in subdirectory files — bridge generates ./ instead of ../ for subdir files
-	@sed -i.bak 's|^from \. import _utilities|from .. import _utilities|g' sdk/python/pulumi_datarobot/config/*.py sdk/python/pulumi_datarobot/config/*.pyi && rm -f sdk/python/pulumi_datarobot/config/*.bak
 	@echo "Restoring Python-specific README..."
 	@sed -e "s/{{VERSION}}/$(VERSION)/g" \
 		-e "s|{{PACKAGE_NAME}}|pulumi-datarobot|g" \
