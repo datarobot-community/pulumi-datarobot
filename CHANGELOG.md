@@ -24,14 +24,18 @@ Regenerating a section preserves that subsection.
 
 ## [Unreleased]
 
-### Added
+## [0.11.0] - 2026-09-01
+
+### Provider changes
+
+#### Added
 
 - `CHANGELOG.md` plus `scripts/upstream-changelog.sh`, `scripts/schema-diff.sh`, and
   `scripts/changelog.sh`. Upstream bumps now record what changed upstream and what
   reached the generated SDKs; the same text is posted on the upgrade PR and reused as
   the GitHub Release body.
 
-### Changed
+#### Changed
 
 - Upgraded `pulumi-terraform-bridge` from `v3.106.0` to `v3.137.0` (31 releases), and with
   it `pulumi/pulumi` `v3.160.0` → `v3.256.0`. This unblocks SDK generation under Go 1.26:
@@ -54,7 +58,7 @@ Regenerating a section preserves that subsection.
   per-language `<span pulumi-lang-*>` markup, which renders as the language-correct
   spelling on the Pulumi registry but appears as raw markup in editor tooltips.
 
-### Removed
+#### Removed
 
 - **Breaking.** The `id` output is gone from the `getArtifact` and `getArtifacts` data
   sources. The bridge stopped synthesizing an `id` for Plugin Framework data sources
@@ -68,13 +72,11 @@ Regenerating a section preserves that subsection.
   their `id` is a real upstream attribute. These two data sources shipped in v0.10.43, so the
   exposure is one release cycle.
 
-### Fixed
+#### Fixed
 
 - Removed the `sed` post-processing in `build_nodejs` and `build_python` that rewrote
   `./utilities` to `../utilities` in generated subdirectory files. The generator now emits
   correct relative imports, so the workaround was a no-op.
-
-## [0.11.0] - 2026-09-01
 
 ### Upstream provider changes
 
