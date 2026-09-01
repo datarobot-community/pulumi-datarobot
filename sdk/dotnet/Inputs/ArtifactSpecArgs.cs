@@ -13,6 +13,12 @@ namespace DataRobotPulumi.Datarobot.Inputs
 
     public sealed class ArtifactSpecArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Turns on agent-to-agent (A2A) card management and the A2A surface for this agent. Valid only when &lt;span pulumi-lang-nodejs="`type`" pulumi-lang-dotnet="`Type`" pulumi-lang-go="`type`" pulumi-lang-python="`type`" pulumi-lang-yaml="`type`" pulumi-lang-java="`type`" pulumi-lang-hcl="`type`"&gt;`type`&lt;/span&gt; is &lt;span pulumi-lang-nodejs="`agent`" pulumi-lang-dotnet="`Agent`" pulumi-lang-go="`agent`" pulumi-lang-python="`agent`" pulumi-lang-yaml="`agent`" pulumi-lang-java="`agent`" pulumi-lang-hcl="`agent`"&gt;`agent`&lt;/span&gt;. Defaults to off in the Workload API.
+        /// </summary>
+        [Input("a2aEnabled")]
+        public Input<bool>? A2aEnabled { get; set; }
+
         [Input("containerGroups", required: true)]
         private InputList<Inputs.ArtifactSpecContainerGroupArgs>? _containerGroups;
 

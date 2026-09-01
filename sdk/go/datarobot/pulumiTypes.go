@@ -672,8 +672,12 @@ func (o ApplicationSourceRuntimeParameterValueArrayOutput) Index(i pulumi.IntInp
 type ArtifactSource struct {
 	// Path to the local directory containing application source files to upload.
 	Dir string `pulumi:"dir"`
-	// SHA-256 fingerprint of <span pulumi-lang-nodejs="`dir`" pulumi-lang-dotnet="`Dir`" pulumi-lang-go="`dir`" pulumi-lang-python="`dir`" pulumi-lang-yaml="`dir`" pulumi-lang-java="`dir`" pulumi-lang-hcl="`dir`">`dir`</span> contents, used to detect changes and skip re-upload when unchanged.
+	// SHA-256 fingerprint of uploadable files under <span pulumi-lang-nodejs="`dir`" pulumi-lang-dotnet="`Dir`" pulumi-lang-go="`dir`" pulumi-lang-python="`dir`" pulumi-lang-yaml="`dir`" pulumi-lang-java="`dir`" pulumi-lang-hcl="`dir`">`dir`</span> after `.drignore` / system excludes. Used to detect changes and skip re-upload when unchanged. Files covered by a system exclude are never part of this hash.
 	DirHash *string `pulumi:"dirHash"`
+	// When <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> (default), if <span pulumi-lang-nodejs="`dir`" pulumi-lang-dotnet="`Dir`" pulumi-lang-go="`dir`" pulumi-lang-python="`dir`" pulumi-lang-yaml="`dir`" pulumi-lang-java="`dir`" pulumi-lang-hcl="`dir`">`dir`</span> has neither `.drignore` nor `.wapiignore`, the provider writes a default `.drignore` at the start of apply. Existing ignore files are never overwritten. Set to <span pulumi-lang-nodejs="`false`" pulumi-lang-dotnet="`False`" pulumi-lang-go="`false`" pulumi-lang-python="`false`" pulumi-lang-yaml="`false`" pulumi-lang-java="`false`" pulumi-lang-hcl="`false`">`false`</span> to skip autogeneration. System excludes always apply and cannot be re-enabled from `.drignore`: `.datarobot.yaml`, `.git`, `.gitignore`, `.wapi`, `.datarobot/workload`, and Terraform's own `.terraform`, `terraform.tfstate*` and `*.tfvars` files.
+	GenerateIgnore *bool `pulumi:"generateIgnore"`
+	// When <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> (default), after a source upload the provider triggers an image build and polls until it completes before proceeding (for example, before locking). When <span pulumi-lang-nodejs="`false`" pulumi-lang-dotnet="`False`" pulumi-lang-go="`false`" pulumi-lang-python="`false`" pulumi-lang-yaml="`false`" pulumi-lang-java="`false`" pulumi-lang-hcl="`false`">`false`</span>, the build is triggered but apply does not wait for <span pulumi-lang-nodejs="`imageUri`" pulumi-lang-dotnet="`ImageUri`" pulumi-lang-go="`imageUri`" pulumi-lang-python="`image_uri`" pulumi-lang-yaml="`imageUri`" pulumi-lang-java="`imageUri`" pulumi-lang-hcl="`image_uri`">`imageUri`</span> to be populated.
+	WaitForBuild *bool `pulumi:"waitForBuild"`
 }
 
 // ArtifactSourceInput is an input type that accepts ArtifactSourceArgs and ArtifactSourceOutput values.
@@ -690,8 +694,12 @@ type ArtifactSourceInput interface {
 type ArtifactSourceArgs struct {
 	// Path to the local directory containing application source files to upload.
 	Dir pulumi.StringInput `pulumi:"dir"`
-	// SHA-256 fingerprint of <span pulumi-lang-nodejs="`dir`" pulumi-lang-dotnet="`Dir`" pulumi-lang-go="`dir`" pulumi-lang-python="`dir`" pulumi-lang-yaml="`dir`" pulumi-lang-java="`dir`" pulumi-lang-hcl="`dir`">`dir`</span> contents, used to detect changes and skip re-upload when unchanged.
+	// SHA-256 fingerprint of uploadable files under <span pulumi-lang-nodejs="`dir`" pulumi-lang-dotnet="`Dir`" pulumi-lang-go="`dir`" pulumi-lang-python="`dir`" pulumi-lang-yaml="`dir`" pulumi-lang-java="`dir`" pulumi-lang-hcl="`dir`">`dir`</span> after `.drignore` / system excludes. Used to detect changes and skip re-upload when unchanged. Files covered by a system exclude are never part of this hash.
 	DirHash pulumi.StringPtrInput `pulumi:"dirHash"`
+	// When <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> (default), if <span pulumi-lang-nodejs="`dir`" pulumi-lang-dotnet="`Dir`" pulumi-lang-go="`dir`" pulumi-lang-python="`dir`" pulumi-lang-yaml="`dir`" pulumi-lang-java="`dir`" pulumi-lang-hcl="`dir`">`dir`</span> has neither `.drignore` nor `.wapiignore`, the provider writes a default `.drignore` at the start of apply. Existing ignore files are never overwritten. Set to <span pulumi-lang-nodejs="`false`" pulumi-lang-dotnet="`False`" pulumi-lang-go="`false`" pulumi-lang-python="`false`" pulumi-lang-yaml="`false`" pulumi-lang-java="`false`" pulumi-lang-hcl="`false`">`false`</span> to skip autogeneration. System excludes always apply and cannot be re-enabled from `.drignore`: `.datarobot.yaml`, `.git`, `.gitignore`, `.wapi`, `.datarobot/workload`, and Terraform's own `.terraform`, `terraform.tfstate*` and `*.tfvars` files.
+	GenerateIgnore pulumi.BoolPtrInput `pulumi:"generateIgnore"`
+	// When <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> (default), after a source upload the provider triggers an image build and polls until it completes before proceeding (for example, before locking). When <span pulumi-lang-nodejs="`false`" pulumi-lang-dotnet="`False`" pulumi-lang-go="`false`" pulumi-lang-python="`false`" pulumi-lang-yaml="`false`" pulumi-lang-java="`false`" pulumi-lang-hcl="`false`">`false`</span>, the build is triggered but apply does not wait for <span pulumi-lang-nodejs="`imageUri`" pulumi-lang-dotnet="`ImageUri`" pulumi-lang-go="`imageUri`" pulumi-lang-python="`image_uri`" pulumi-lang-yaml="`imageUri`" pulumi-lang-java="`imageUri`" pulumi-lang-hcl="`image_uri`">`imageUri`</span> to be populated.
+	WaitForBuild pulumi.BoolPtrInput `pulumi:"waitForBuild"`
 }
 
 func (ArtifactSourceArgs) ElementType() reflect.Type {
@@ -776,9 +784,19 @@ func (o ArtifactSourceOutput) Dir() pulumi.StringOutput {
 	return o.ApplyT(func(v ArtifactSource) string { return v.Dir }).(pulumi.StringOutput)
 }
 
-// SHA-256 fingerprint of <span pulumi-lang-nodejs="`dir`" pulumi-lang-dotnet="`Dir`" pulumi-lang-go="`dir`" pulumi-lang-python="`dir`" pulumi-lang-yaml="`dir`" pulumi-lang-java="`dir`" pulumi-lang-hcl="`dir`">`dir`</span> contents, used to detect changes and skip re-upload when unchanged.
+// SHA-256 fingerprint of uploadable files under <span pulumi-lang-nodejs="`dir`" pulumi-lang-dotnet="`Dir`" pulumi-lang-go="`dir`" pulumi-lang-python="`dir`" pulumi-lang-yaml="`dir`" pulumi-lang-java="`dir`" pulumi-lang-hcl="`dir`">`dir`</span> after `.drignore` / system excludes. Used to detect changes and skip re-upload when unchanged. Files covered by a system exclude are never part of this hash.
 func (o ArtifactSourceOutput) DirHash() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ArtifactSource) *string { return v.DirHash }).(pulumi.StringPtrOutput)
+}
+
+// When <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> (default), if <span pulumi-lang-nodejs="`dir`" pulumi-lang-dotnet="`Dir`" pulumi-lang-go="`dir`" pulumi-lang-python="`dir`" pulumi-lang-yaml="`dir`" pulumi-lang-java="`dir`" pulumi-lang-hcl="`dir`">`dir`</span> has neither `.drignore` nor `.wapiignore`, the provider writes a default `.drignore` at the start of apply. Existing ignore files are never overwritten. Set to <span pulumi-lang-nodejs="`false`" pulumi-lang-dotnet="`False`" pulumi-lang-go="`false`" pulumi-lang-python="`false`" pulumi-lang-yaml="`false`" pulumi-lang-java="`false`" pulumi-lang-hcl="`false`">`false`</span> to skip autogeneration. System excludes always apply and cannot be re-enabled from `.drignore`: `.datarobot.yaml`, `.git`, `.gitignore`, `.wapi`, `.datarobot/workload`, and Terraform's own `.terraform`, `terraform.tfstate*` and `*.tfvars` files.
+func (o ArtifactSourceOutput) GenerateIgnore() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ArtifactSource) *bool { return v.GenerateIgnore }).(pulumi.BoolPtrOutput)
+}
+
+// When <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> (default), after a source upload the provider triggers an image build and polls until it completes before proceeding (for example, before locking). When <span pulumi-lang-nodejs="`false`" pulumi-lang-dotnet="`False`" pulumi-lang-go="`false`" pulumi-lang-python="`false`" pulumi-lang-yaml="`false`" pulumi-lang-java="`false`" pulumi-lang-hcl="`false`">`false`</span>, the build is triggered but apply does not wait for <span pulumi-lang-nodejs="`imageUri`" pulumi-lang-dotnet="`ImageUri`" pulumi-lang-go="`imageUri`" pulumi-lang-python="`image_uri`" pulumi-lang-yaml="`imageUri`" pulumi-lang-java="`imageUri`" pulumi-lang-hcl="`image_uri`">`imageUri`</span> to be populated.
+func (o ArtifactSourceOutput) WaitForBuild() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ArtifactSource) *bool { return v.WaitForBuild }).(pulumi.BoolPtrOutput)
 }
 
 type ArtifactSourcePtrOutput struct{ *pulumi.OutputState }
@@ -815,7 +833,7 @@ func (o ArtifactSourcePtrOutput) Dir() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-// SHA-256 fingerprint of <span pulumi-lang-nodejs="`dir`" pulumi-lang-dotnet="`Dir`" pulumi-lang-go="`dir`" pulumi-lang-python="`dir`" pulumi-lang-yaml="`dir`" pulumi-lang-java="`dir`" pulumi-lang-hcl="`dir`">`dir`</span> contents, used to detect changes and skip re-upload when unchanged.
+// SHA-256 fingerprint of uploadable files under <span pulumi-lang-nodejs="`dir`" pulumi-lang-dotnet="`Dir`" pulumi-lang-go="`dir`" pulumi-lang-python="`dir`" pulumi-lang-yaml="`dir`" pulumi-lang-java="`dir`" pulumi-lang-hcl="`dir`">`dir`</span> after `.drignore` / system excludes. Used to detect changes and skip re-upload when unchanged. Files covered by a system exclude are never part of this hash.
 func (o ArtifactSourcePtrOutput) DirHash() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ArtifactSource) *string {
 		if v == nil {
@@ -825,7 +843,29 @@ func (o ArtifactSourcePtrOutput) DirHash() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// When <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> (default), if <span pulumi-lang-nodejs="`dir`" pulumi-lang-dotnet="`Dir`" pulumi-lang-go="`dir`" pulumi-lang-python="`dir`" pulumi-lang-yaml="`dir`" pulumi-lang-java="`dir`" pulumi-lang-hcl="`dir`">`dir`</span> has neither `.drignore` nor `.wapiignore`, the provider writes a default `.drignore` at the start of apply. Existing ignore files are never overwritten. Set to <span pulumi-lang-nodejs="`false`" pulumi-lang-dotnet="`False`" pulumi-lang-go="`false`" pulumi-lang-python="`false`" pulumi-lang-yaml="`false`" pulumi-lang-java="`false`" pulumi-lang-hcl="`false`">`false`</span> to skip autogeneration. System excludes always apply and cannot be re-enabled from `.drignore`: `.datarobot.yaml`, `.git`, `.gitignore`, `.wapi`, `.datarobot/workload`, and Terraform's own `.terraform`, `terraform.tfstate*` and `*.tfvars` files.
+func (o ArtifactSourcePtrOutput) GenerateIgnore() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ArtifactSource) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.GenerateIgnore
+	}).(pulumi.BoolPtrOutput)
+}
+
+// When <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> (default), after a source upload the provider triggers an image build and polls until it completes before proceeding (for example, before locking). When <span pulumi-lang-nodejs="`false`" pulumi-lang-dotnet="`False`" pulumi-lang-go="`false`" pulumi-lang-python="`false`" pulumi-lang-yaml="`false`" pulumi-lang-java="`false`" pulumi-lang-hcl="`false`">`false`</span>, the build is triggered but apply does not wait for <span pulumi-lang-nodejs="`imageUri`" pulumi-lang-dotnet="`ImageUri`" pulumi-lang-go="`imageUri`" pulumi-lang-python="`image_uri`" pulumi-lang-yaml="`imageUri`" pulumi-lang-java="`imageUri`" pulumi-lang-hcl="`image_uri`">`imageUri`</span> to be populated.
+func (o ArtifactSourcePtrOutput) WaitForBuild() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ArtifactSource) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.WaitForBuild
+	}).(pulumi.BoolPtrOutput)
+}
+
 type ArtifactSpec struct {
+	// Turns on agent-to-agent (A2A) card management and the A2A surface for this agent. Valid only when <span pulumi-lang-nodejs="`type`" pulumi-lang-dotnet="`Type`" pulumi-lang-go="`type`" pulumi-lang-python="`type`" pulumi-lang-yaml="`type`" pulumi-lang-java="`type`" pulumi-lang-hcl="`type`">`type`</span> is <span pulumi-lang-nodejs="`agent`" pulumi-lang-dotnet="`Agent`" pulumi-lang-go="`agent`" pulumi-lang-python="`agent`" pulumi-lang-yaml="`agent`" pulumi-lang-java="`agent`" pulumi-lang-hcl="`agent`">`agent`</span>. Defaults to off in the Workload API.
+	A2aEnabled *bool `pulumi:"a2aEnabled"`
 	// List of container groups.
 	ContainerGroups []ArtifactSpecContainerGroup `pulumi:"containerGroups"`
 }
@@ -842,6 +882,8 @@ type ArtifactSpecInput interface {
 }
 
 type ArtifactSpecArgs struct {
+	// Turns on agent-to-agent (A2A) card management and the A2A surface for this agent. Valid only when <span pulumi-lang-nodejs="`type`" pulumi-lang-dotnet="`Type`" pulumi-lang-go="`type`" pulumi-lang-python="`type`" pulumi-lang-yaml="`type`" pulumi-lang-java="`type`" pulumi-lang-hcl="`type`">`type`</span> is <span pulumi-lang-nodejs="`agent`" pulumi-lang-dotnet="`Agent`" pulumi-lang-go="`agent`" pulumi-lang-python="`agent`" pulumi-lang-yaml="`agent`" pulumi-lang-java="`agent`" pulumi-lang-hcl="`agent`">`agent`</span>. Defaults to off in the Workload API.
+	A2aEnabled pulumi.BoolPtrInput `pulumi:"a2aEnabled"`
 	// List of container groups.
 	ContainerGroups ArtifactSpecContainerGroupArrayInput `pulumi:"containerGroups"`
 }
@@ -923,6 +965,11 @@ func (o ArtifactSpecOutput) ToArtifactSpecPtrOutputWithContext(ctx context.Conte
 	}).(ArtifactSpecPtrOutput)
 }
 
+// Turns on agent-to-agent (A2A) card management and the A2A surface for this agent. Valid only when <span pulumi-lang-nodejs="`type`" pulumi-lang-dotnet="`Type`" pulumi-lang-go="`type`" pulumi-lang-python="`type`" pulumi-lang-yaml="`type`" pulumi-lang-java="`type`" pulumi-lang-hcl="`type`">`type`</span> is <span pulumi-lang-nodejs="`agent`" pulumi-lang-dotnet="`Agent`" pulumi-lang-go="`agent`" pulumi-lang-python="`agent`" pulumi-lang-yaml="`agent`" pulumi-lang-java="`agent`" pulumi-lang-hcl="`agent`">`agent`</span>. Defaults to off in the Workload API.
+func (o ArtifactSpecOutput) A2aEnabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ArtifactSpec) *bool { return v.A2aEnabled }).(pulumi.BoolPtrOutput)
+}
+
 // List of container groups.
 func (o ArtifactSpecOutput) ContainerGroups() ArtifactSpecContainerGroupArrayOutput {
 	return o.ApplyT(func(v ArtifactSpec) []ArtifactSpecContainerGroup { return v.ContainerGroups }).(ArtifactSpecContainerGroupArrayOutput)
@@ -950,6 +997,16 @@ func (o ArtifactSpecPtrOutput) Elem() ArtifactSpecOutput {
 		var ret ArtifactSpec
 		return ret
 	}).(ArtifactSpecOutput)
+}
+
+// Turns on agent-to-agent (A2A) card management and the A2A surface for this agent. Valid only when <span pulumi-lang-nodejs="`type`" pulumi-lang-dotnet="`Type`" pulumi-lang-go="`type`" pulumi-lang-python="`type`" pulumi-lang-yaml="`type`" pulumi-lang-java="`type`" pulumi-lang-hcl="`type`">`type`</span> is <span pulumi-lang-nodejs="`agent`" pulumi-lang-dotnet="`Agent`" pulumi-lang-go="`agent`" pulumi-lang-python="`agent`" pulumi-lang-yaml="`agent`" pulumi-lang-java="`agent`" pulumi-lang-hcl="`agent`">`agent`</span>. Defaults to off in the Workload API.
+func (o ArtifactSpecPtrOutput) A2aEnabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ArtifactSpec) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.A2aEnabled
+	}).(pulumi.BoolPtrOutput)
 }
 
 // List of container groups.
@@ -1060,6 +1117,8 @@ func (o ArtifactSpecContainerGroupArrayOutput) Index(i pulumi.IntInput) Artifact
 }
 
 type ArtifactSpecContainerGroupContainer struct {
+	// Server-set image build metadata.
+	Build *ArtifactSpecContainerGroupContainerBuild `pulumi:"build"`
 	// Description of the container.
 	Description *string `pulumi:"description"`
 	// Container entrypoint.
@@ -1068,7 +1127,7 @@ type ArtifactSpecContainerGroupContainer struct {
 	EnvironmentVars []ArtifactSpecContainerGroupContainerEnvironmentVar `pulumi:"environmentVars"`
 	// Configuration for server-side image builds from source code.
 	ImageBuildConfig *ArtifactSpecContainerGroupContainerImageBuildConfig `pulumi:"imageBuildConfig"`
-	// Docker image URI. Omit when using <span pulumi-lang-nodejs="`imageBuildConfig`" pulumi-lang-dotnet="`ImageBuildConfig`" pulumi-lang-go="`imageBuildConfig`" pulumi-lang-python="`image_build_config`" pulumi-lang-yaml="`imageBuildConfig`" pulumi-lang-java="`imageBuildConfig`" pulumi-lang-hcl="`image_build_config`">`imageBuildConfig`</span> on draft artifacts; required when status is <span pulumi-lang-nodejs="`locked`" pulumi-lang-dotnet="`Locked`" pulumi-lang-go="`locked`" pulumi-lang-python="`locked`" pulumi-lang-yaml="`locked`" pulumi-lang-java="`locked`" pulumi-lang-hcl="`locked`">`locked`</span> and <span pulumi-lang-nodejs="`imageBuildConfig`" pulumi-lang-dotnet="`ImageBuildConfig`" pulumi-lang-go="`imageBuildConfig`" pulumi-lang-python="`image_build_config`" pulumi-lang-yaml="`imageBuildConfig`" pulumi-lang-java="`imageBuildConfig`" pulumi-lang-hcl="`image_build_config`">`imageBuildConfig`</span> is set.
+	// Docker image URI. Populated by the provider after a completed image build when <span pulumi-lang-nodejs="`source`" pulumi-lang-dotnet="`Source`" pulumi-lang-go="`source`" pulumi-lang-python="`source`" pulumi-lang-yaml="`source`" pulumi-lang-java="`source`" pulumi-lang-hcl="`source`">`source`</span> and <span pulumi-lang-nodejs="`imageBuildConfig`" pulumi-lang-dotnet="`ImageBuildConfig`" pulumi-lang-go="`imageBuildConfig`" pulumi-lang-python="`image_build_config`" pulumi-lang-yaml="`imageBuildConfig`" pulumi-lang-java="`imageBuildConfig`" pulumi-lang-hcl="`image_build_config`">`imageBuildConfig`</span> are set. May be set explicitly when not using source-driven builds.
 	ImageUri *string `pulumi:"imageUri"`
 	// Container liveness check configuration.
 	LivenessProbe *ArtifactSpecContainerGroupContainerLivenessProbe `pulumi:"livenessProbe"`
@@ -1080,6 +1139,8 @@ type ArtifactSpecContainerGroupContainer struct {
 	Primary *bool `pulumi:"primary"`
 	// Container readiness check configuration.
 	ReadinessProbe *ArtifactSpecContainerGroupContainerReadinessProbe `pulumi:"readinessProbe"`
+	// Routes to expose publicly from this container. Primary containers only, at most 50. The workload root (`/`) is authenticated by default unless declared here with another policy. Route configuration is a cluster-level capability that is disabled by default: setting this on a cluster where it is not enabled fails with `Route configuration is disabled on this cluster`.
+	Routes []ArtifactSpecContainerGroupContainerRoute `pulumi:"routes"`
 	// Container startup check configuration.
 	StartupProbe *ArtifactSpecContainerGroupContainerStartupProbe `pulumi:"startupProbe"`
 }
@@ -1096,6 +1157,8 @@ type ArtifactSpecContainerGroupContainerInput interface {
 }
 
 type ArtifactSpecContainerGroupContainerArgs struct {
+	// Server-set image build metadata.
+	Build ArtifactSpecContainerGroupContainerBuildPtrInput `pulumi:"build"`
 	// Description of the container.
 	Description pulumi.StringPtrInput `pulumi:"description"`
 	// Container entrypoint.
@@ -1104,7 +1167,7 @@ type ArtifactSpecContainerGroupContainerArgs struct {
 	EnvironmentVars ArtifactSpecContainerGroupContainerEnvironmentVarArrayInput `pulumi:"environmentVars"`
 	// Configuration for server-side image builds from source code.
 	ImageBuildConfig ArtifactSpecContainerGroupContainerImageBuildConfigPtrInput `pulumi:"imageBuildConfig"`
-	// Docker image URI. Omit when using <span pulumi-lang-nodejs="`imageBuildConfig`" pulumi-lang-dotnet="`ImageBuildConfig`" pulumi-lang-go="`imageBuildConfig`" pulumi-lang-python="`image_build_config`" pulumi-lang-yaml="`imageBuildConfig`" pulumi-lang-java="`imageBuildConfig`" pulumi-lang-hcl="`image_build_config`">`imageBuildConfig`</span> on draft artifacts; required when status is <span pulumi-lang-nodejs="`locked`" pulumi-lang-dotnet="`Locked`" pulumi-lang-go="`locked`" pulumi-lang-python="`locked`" pulumi-lang-yaml="`locked`" pulumi-lang-java="`locked`" pulumi-lang-hcl="`locked`">`locked`</span> and <span pulumi-lang-nodejs="`imageBuildConfig`" pulumi-lang-dotnet="`ImageBuildConfig`" pulumi-lang-go="`imageBuildConfig`" pulumi-lang-python="`image_build_config`" pulumi-lang-yaml="`imageBuildConfig`" pulumi-lang-java="`imageBuildConfig`" pulumi-lang-hcl="`image_build_config`">`imageBuildConfig`</span> is set.
+	// Docker image URI. Populated by the provider after a completed image build when <span pulumi-lang-nodejs="`source`" pulumi-lang-dotnet="`Source`" pulumi-lang-go="`source`" pulumi-lang-python="`source`" pulumi-lang-yaml="`source`" pulumi-lang-java="`source`" pulumi-lang-hcl="`source`">`source`</span> and <span pulumi-lang-nodejs="`imageBuildConfig`" pulumi-lang-dotnet="`ImageBuildConfig`" pulumi-lang-go="`imageBuildConfig`" pulumi-lang-python="`image_build_config`" pulumi-lang-yaml="`imageBuildConfig`" pulumi-lang-java="`imageBuildConfig`" pulumi-lang-hcl="`image_build_config`">`imageBuildConfig`</span> are set. May be set explicitly when not using source-driven builds.
 	ImageUri pulumi.StringPtrInput `pulumi:"imageUri"`
 	// Container liveness check configuration.
 	LivenessProbe ArtifactSpecContainerGroupContainerLivenessProbePtrInput `pulumi:"livenessProbe"`
@@ -1116,6 +1179,8 @@ type ArtifactSpecContainerGroupContainerArgs struct {
 	Primary pulumi.BoolPtrInput `pulumi:"primary"`
 	// Container readiness check configuration.
 	ReadinessProbe ArtifactSpecContainerGroupContainerReadinessProbePtrInput `pulumi:"readinessProbe"`
+	// Routes to expose publicly from this container. Primary containers only, at most 50. The workload root (`/`) is authenticated by default unless declared here with another policy. Route configuration is a cluster-level capability that is disabled by default: setting this on a cluster where it is not enabled fails with `Route configuration is disabled on this cluster`.
+	Routes ArtifactSpecContainerGroupContainerRouteArrayInput `pulumi:"routes"`
 	// Container startup check configuration.
 	StartupProbe ArtifactSpecContainerGroupContainerStartupProbePtrInput `pulumi:"startupProbe"`
 }
@@ -1171,6 +1236,11 @@ func (o ArtifactSpecContainerGroupContainerOutput) ToArtifactSpecContainerGroupC
 	return o
 }
 
+// Server-set image build metadata.
+func (o ArtifactSpecContainerGroupContainerOutput) Build() ArtifactSpecContainerGroupContainerBuildPtrOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainer) *ArtifactSpecContainerGroupContainerBuild { return v.Build }).(ArtifactSpecContainerGroupContainerBuildPtrOutput)
+}
+
 // Description of the container.
 func (o ArtifactSpecContainerGroupContainerOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ArtifactSpecContainerGroupContainer) *string { return v.Description }).(pulumi.StringPtrOutput)
@@ -1195,7 +1265,7 @@ func (o ArtifactSpecContainerGroupContainerOutput) ImageBuildConfig() ArtifactSp
 	}).(ArtifactSpecContainerGroupContainerImageBuildConfigPtrOutput)
 }
 
-// Docker image URI. Omit when using <span pulumi-lang-nodejs="`imageBuildConfig`" pulumi-lang-dotnet="`ImageBuildConfig`" pulumi-lang-go="`imageBuildConfig`" pulumi-lang-python="`image_build_config`" pulumi-lang-yaml="`imageBuildConfig`" pulumi-lang-java="`imageBuildConfig`" pulumi-lang-hcl="`image_build_config`">`imageBuildConfig`</span> on draft artifacts; required when status is <span pulumi-lang-nodejs="`locked`" pulumi-lang-dotnet="`Locked`" pulumi-lang-go="`locked`" pulumi-lang-python="`locked`" pulumi-lang-yaml="`locked`" pulumi-lang-java="`locked`" pulumi-lang-hcl="`locked`">`locked`</span> and <span pulumi-lang-nodejs="`imageBuildConfig`" pulumi-lang-dotnet="`ImageBuildConfig`" pulumi-lang-go="`imageBuildConfig`" pulumi-lang-python="`image_build_config`" pulumi-lang-yaml="`imageBuildConfig`" pulumi-lang-java="`imageBuildConfig`" pulumi-lang-hcl="`image_build_config`">`imageBuildConfig`</span> is set.
+// Docker image URI. Populated by the provider after a completed image build when <span pulumi-lang-nodejs="`source`" pulumi-lang-dotnet="`Source`" pulumi-lang-go="`source`" pulumi-lang-python="`source`" pulumi-lang-yaml="`source`" pulumi-lang-java="`source`" pulumi-lang-hcl="`source`">`source`</span> and <span pulumi-lang-nodejs="`imageBuildConfig`" pulumi-lang-dotnet="`ImageBuildConfig`" pulumi-lang-go="`imageBuildConfig`" pulumi-lang-python="`image_build_config`" pulumi-lang-yaml="`imageBuildConfig`" pulumi-lang-java="`imageBuildConfig`" pulumi-lang-hcl="`image_build_config`">`imageBuildConfig`</span> are set. May be set explicitly when not using source-driven builds.
 func (o ArtifactSpecContainerGroupContainerOutput) ImageUri() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ArtifactSpecContainerGroupContainer) *string { return v.ImageUri }).(pulumi.StringPtrOutput)
 }
@@ -1229,6 +1299,13 @@ func (o ArtifactSpecContainerGroupContainerOutput) ReadinessProbe() ArtifactSpec
 	}).(ArtifactSpecContainerGroupContainerReadinessProbePtrOutput)
 }
 
+// Routes to expose publicly from this container. Primary containers only, at most 50. The workload root (`/`) is authenticated by default unless declared here with another policy. Route configuration is a cluster-level capability that is disabled by default: setting this on a cluster where it is not enabled fails with `Route configuration is disabled on this cluster`.
+func (o ArtifactSpecContainerGroupContainerOutput) Routes() ArtifactSpecContainerGroupContainerRouteArrayOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainer) []ArtifactSpecContainerGroupContainerRoute {
+		return v.Routes
+	}).(ArtifactSpecContainerGroupContainerRouteArrayOutput)
+}
+
 // Container startup check configuration.
 func (o ArtifactSpecContainerGroupContainerOutput) StartupProbe() ArtifactSpecContainerGroupContainerStartupProbePtrOutput {
 	return o.ApplyT(func(v ArtifactSpecContainerGroupContainer) *ArtifactSpecContainerGroupContainerStartupProbe {
@@ -1256,14 +1333,189 @@ func (o ArtifactSpecContainerGroupContainerArrayOutput) Index(i pulumi.IntInput)
 	}).(ArtifactSpecContainerGroupContainerOutput)
 }
 
+type ArtifactSpecContainerGroupContainerBuild struct {
+	// Artifact image build ID.
+	ArtifactImageBuildId *string `pulumi:"artifactImageBuildId"`
+	// Build creation timestamp (UTC).
+	CreatedAt *string `pulumi:"createdAt"`
+	// Image build status. With `source.wait_for_build` enabled (the default) this is the terminal status of the build the provider waited on; otherwise it is the status at submit time.
+	Status *string `pulumi:"status"`
+}
+
+// ArtifactSpecContainerGroupContainerBuildInput is an input type that accepts ArtifactSpecContainerGroupContainerBuildArgs and ArtifactSpecContainerGroupContainerBuildOutput values.
+// You can construct a concrete instance of `ArtifactSpecContainerGroupContainerBuildInput` via:
+//
+//	ArtifactSpecContainerGroupContainerBuildArgs{...}
+type ArtifactSpecContainerGroupContainerBuildInput interface {
+	pulumi.Input
+
+	ToArtifactSpecContainerGroupContainerBuildOutput() ArtifactSpecContainerGroupContainerBuildOutput
+	ToArtifactSpecContainerGroupContainerBuildOutputWithContext(context.Context) ArtifactSpecContainerGroupContainerBuildOutput
+}
+
+type ArtifactSpecContainerGroupContainerBuildArgs struct {
+	// Artifact image build ID.
+	ArtifactImageBuildId pulumi.StringPtrInput `pulumi:"artifactImageBuildId"`
+	// Build creation timestamp (UTC).
+	CreatedAt pulumi.StringPtrInput `pulumi:"createdAt"`
+	// Image build status. With `source.wait_for_build` enabled (the default) this is the terminal status of the build the provider waited on; otherwise it is the status at submit time.
+	Status pulumi.StringPtrInput `pulumi:"status"`
+}
+
+func (ArtifactSpecContainerGroupContainerBuildArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ArtifactSpecContainerGroupContainerBuild)(nil)).Elem()
+}
+
+func (i ArtifactSpecContainerGroupContainerBuildArgs) ToArtifactSpecContainerGroupContainerBuildOutput() ArtifactSpecContainerGroupContainerBuildOutput {
+	return i.ToArtifactSpecContainerGroupContainerBuildOutputWithContext(context.Background())
+}
+
+func (i ArtifactSpecContainerGroupContainerBuildArgs) ToArtifactSpecContainerGroupContainerBuildOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupContainerBuildOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ArtifactSpecContainerGroupContainerBuildOutput)
+}
+
+func (i ArtifactSpecContainerGroupContainerBuildArgs) ToArtifactSpecContainerGroupContainerBuildPtrOutput() ArtifactSpecContainerGroupContainerBuildPtrOutput {
+	return i.ToArtifactSpecContainerGroupContainerBuildPtrOutputWithContext(context.Background())
+}
+
+func (i ArtifactSpecContainerGroupContainerBuildArgs) ToArtifactSpecContainerGroupContainerBuildPtrOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupContainerBuildPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ArtifactSpecContainerGroupContainerBuildOutput).ToArtifactSpecContainerGroupContainerBuildPtrOutputWithContext(ctx)
+}
+
+// ArtifactSpecContainerGroupContainerBuildPtrInput is an input type that accepts ArtifactSpecContainerGroupContainerBuildArgs, ArtifactSpecContainerGroupContainerBuildPtr and ArtifactSpecContainerGroupContainerBuildPtrOutput values.
+// You can construct a concrete instance of `ArtifactSpecContainerGroupContainerBuildPtrInput` via:
+//
+//	        ArtifactSpecContainerGroupContainerBuildArgs{...}
+//
+//	or:
+//
+//	        nil
+type ArtifactSpecContainerGroupContainerBuildPtrInput interface {
+	pulumi.Input
+
+	ToArtifactSpecContainerGroupContainerBuildPtrOutput() ArtifactSpecContainerGroupContainerBuildPtrOutput
+	ToArtifactSpecContainerGroupContainerBuildPtrOutputWithContext(context.Context) ArtifactSpecContainerGroupContainerBuildPtrOutput
+}
+
+type artifactSpecContainerGroupContainerBuildPtrType ArtifactSpecContainerGroupContainerBuildArgs
+
+func ArtifactSpecContainerGroupContainerBuildPtr(v *ArtifactSpecContainerGroupContainerBuildArgs) ArtifactSpecContainerGroupContainerBuildPtrInput {
+	return (*artifactSpecContainerGroupContainerBuildPtrType)(v)
+}
+
+func (*artifactSpecContainerGroupContainerBuildPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**ArtifactSpecContainerGroupContainerBuild)(nil)).Elem()
+}
+
+func (i *artifactSpecContainerGroupContainerBuildPtrType) ToArtifactSpecContainerGroupContainerBuildPtrOutput() ArtifactSpecContainerGroupContainerBuildPtrOutput {
+	return i.ToArtifactSpecContainerGroupContainerBuildPtrOutputWithContext(context.Background())
+}
+
+func (i *artifactSpecContainerGroupContainerBuildPtrType) ToArtifactSpecContainerGroupContainerBuildPtrOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupContainerBuildPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ArtifactSpecContainerGroupContainerBuildPtrOutput)
+}
+
+type ArtifactSpecContainerGroupContainerBuildOutput struct{ *pulumi.OutputState }
+
+func (ArtifactSpecContainerGroupContainerBuildOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ArtifactSpecContainerGroupContainerBuild)(nil)).Elem()
+}
+
+func (o ArtifactSpecContainerGroupContainerBuildOutput) ToArtifactSpecContainerGroupContainerBuildOutput() ArtifactSpecContainerGroupContainerBuildOutput {
+	return o
+}
+
+func (o ArtifactSpecContainerGroupContainerBuildOutput) ToArtifactSpecContainerGroupContainerBuildOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupContainerBuildOutput {
+	return o
+}
+
+func (o ArtifactSpecContainerGroupContainerBuildOutput) ToArtifactSpecContainerGroupContainerBuildPtrOutput() ArtifactSpecContainerGroupContainerBuildPtrOutput {
+	return o.ToArtifactSpecContainerGroupContainerBuildPtrOutputWithContext(context.Background())
+}
+
+func (o ArtifactSpecContainerGroupContainerBuildOutput) ToArtifactSpecContainerGroupContainerBuildPtrOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupContainerBuildPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v ArtifactSpecContainerGroupContainerBuild) *ArtifactSpecContainerGroupContainerBuild {
+		return &v
+	}).(ArtifactSpecContainerGroupContainerBuildPtrOutput)
+}
+
+// Artifact image build ID.
+func (o ArtifactSpecContainerGroupContainerBuildOutput) ArtifactImageBuildId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerBuild) *string { return v.ArtifactImageBuildId }).(pulumi.StringPtrOutput)
+}
+
+// Build creation timestamp (UTC).
+func (o ArtifactSpecContainerGroupContainerBuildOutput) CreatedAt() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerBuild) *string { return v.CreatedAt }).(pulumi.StringPtrOutput)
+}
+
+// Image build status. With `source.wait_for_build` enabled (the default) this is the terminal status of the build the provider waited on; otherwise it is the status at submit time.
+func (o ArtifactSpecContainerGroupContainerBuildOutput) Status() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerBuild) *string { return v.Status }).(pulumi.StringPtrOutput)
+}
+
+type ArtifactSpecContainerGroupContainerBuildPtrOutput struct{ *pulumi.OutputState }
+
+func (ArtifactSpecContainerGroupContainerBuildPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**ArtifactSpecContainerGroupContainerBuild)(nil)).Elem()
+}
+
+func (o ArtifactSpecContainerGroupContainerBuildPtrOutput) ToArtifactSpecContainerGroupContainerBuildPtrOutput() ArtifactSpecContainerGroupContainerBuildPtrOutput {
+	return o
+}
+
+func (o ArtifactSpecContainerGroupContainerBuildPtrOutput) ToArtifactSpecContainerGroupContainerBuildPtrOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupContainerBuildPtrOutput {
+	return o
+}
+
+func (o ArtifactSpecContainerGroupContainerBuildPtrOutput) Elem() ArtifactSpecContainerGroupContainerBuildOutput {
+	return o.ApplyT(func(v *ArtifactSpecContainerGroupContainerBuild) ArtifactSpecContainerGroupContainerBuild {
+		if v != nil {
+			return *v
+		}
+		var ret ArtifactSpecContainerGroupContainerBuild
+		return ret
+	}).(ArtifactSpecContainerGroupContainerBuildOutput)
+}
+
+// Artifact image build ID.
+func (o ArtifactSpecContainerGroupContainerBuildPtrOutput) ArtifactImageBuildId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ArtifactSpecContainerGroupContainerBuild) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ArtifactImageBuildId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Build creation timestamp (UTC).
+func (o ArtifactSpecContainerGroupContainerBuildPtrOutput) CreatedAt() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ArtifactSpecContainerGroupContainerBuild) *string {
+		if v == nil {
+			return nil
+		}
+		return v.CreatedAt
+	}).(pulumi.StringPtrOutput)
+}
+
+// Image build status. With `source.wait_for_build` enabled (the default) this is the terminal status of the build the provider waited on; otherwise it is the status at submit time.
+func (o ArtifactSpecContainerGroupContainerBuildPtrOutput) Status() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ArtifactSpecContainerGroupContainerBuild) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Status
+	}).(pulumi.StringPtrOutput)
+}
+
 type ArtifactSpecContainerGroupContainerEnvironmentVar struct {
 	// DataRobot credential ID. Required when source is "dr-credential".
 	DrCredentialId *string `pulumi:"drCredentialId"`
 	// Key within the credential. Required when source is "dr-credential".
 	Key *string `pulumi:"key"`
-	// Name of the environment variable. Required when source is "string" or "dr-credential". Optional for "api-key": when omitted, the platform injects the token as DATAROBOT*API*TOKEN.
+	// Name of the environment variable. Required when source is "string" or "dr-credential". Optional for "api-key" (defaults to DATAROBOT*API*TOKEN).
 	Name *string `pulumi:"name"`
-	// Source type: "string" for plain text values, "dr-credential" for DataRobot credentials, "api-key" for a platform-managed DataRobot API token. Defaults to "string".
+	// Source type: "string" for plain text values, "dr-credential" for DataRobot credentials, or "api-key" for a platform-managed per-workload DataRobot API token. Defaults to "string".
 	Source *string `pulumi:"source"`
 	// Value of the environment variable. Required when source is "string".
 	Value *string `pulumi:"value"`
@@ -1285,9 +1537,9 @@ type ArtifactSpecContainerGroupContainerEnvironmentVarArgs struct {
 	DrCredentialId pulumi.StringPtrInput `pulumi:"drCredentialId"`
 	// Key within the credential. Required when source is "dr-credential".
 	Key pulumi.StringPtrInput `pulumi:"key"`
-	// Name of the environment variable. Required when source is "string" or "dr-credential". Optional for "api-key": when omitted, the platform injects the token as DATAROBOT*API*TOKEN.
+	// Name of the environment variable. Required when source is "string" or "dr-credential". Optional for "api-key" (defaults to DATAROBOT*API*TOKEN).
 	Name pulumi.StringPtrInput `pulumi:"name"`
-	// Source type: "string" for plain text values, "dr-credential" for DataRobot credentials, "api-key" for a platform-managed DataRobot API token. Defaults to "string".
+	// Source type: "string" for plain text values, "dr-credential" for DataRobot credentials, or "api-key" for a platform-managed per-workload DataRobot API token. Defaults to "string".
 	Source pulumi.StringPtrInput `pulumi:"source"`
 	// Value of the environment variable. Required when source is "string".
 	Value pulumi.StringPtrInput `pulumi:"value"`
@@ -1354,12 +1606,12 @@ func (o ArtifactSpecContainerGroupContainerEnvironmentVarOutput) Key() pulumi.St
 	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerEnvironmentVar) *string { return v.Key }).(pulumi.StringPtrOutput)
 }
 
-// Name of the environment variable. Required when source is "string" or "dr-credential". Optional for "api-key": when omitted, the platform injects the token as DATAROBOT*API*TOKEN.
+// Name of the environment variable. Required when source is "string" or "dr-credential". Optional for "api-key" (defaults to DATAROBOT*API*TOKEN).
 func (o ArtifactSpecContainerGroupContainerEnvironmentVarOutput) Name() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerEnvironmentVar) *string { return v.Name }).(pulumi.StringPtrOutput)
 }
 
-// Source type: "string" for plain text values, "dr-credential" for DataRobot credentials, "api-key" for a platform-managed DataRobot API token. Defaults to "string".
+// Source type: "string" for plain text values, "dr-credential" for DataRobot credentials, or "api-key" for a platform-managed per-workload DataRobot API token. Defaults to "string".
 func (o ArtifactSpecContainerGroupContainerEnvironmentVarOutput) Source() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerEnvironmentVar) *string { return v.Source }).(pulumi.StringPtrOutput)
 }
@@ -1712,7 +1964,7 @@ type ArtifactSpecContainerGroupContainerImageBuildConfigDockerfile struct {
 	ExecutionEnvironmentId *string `pulumi:"executionEnvironmentId"`
 	// Execution environment version ID that pins the base image. Required when source is <span pulumi-lang-nodejs="`generated`" pulumi-lang-dotnet="`Generated`" pulumi-lang-go="`generated`" pulumi-lang-python="`generated`" pulumi-lang-yaml="`generated`" pulumi-lang-java="`generated`" pulumi-lang-hcl="`generated`">`generated`</span>.
 	ExecutionEnvironmentVersionId *string `pulumi:"executionEnvironmentVersionId"`
-	// Relative path to the Dockerfile in the source code. Used when source is <span pulumi-lang-nodejs="`provided`" pulumi-lang-dotnet="`Provided`" pulumi-lang-go="`provided`" pulumi-lang-python="`provided`" pulumi-lang-yaml="`provided`" pulumi-lang-java="`provided`" pulumi-lang-hcl="`provided`">`provided`</span>. Defaults to `./Dockerfile`.
+	// Relative path to the Dockerfile in the source code. Used when source is <span pulumi-lang-nodejs="`provided`" pulumi-lang-dotnet="`Provided`" pulumi-lang-go="`provided`" pulumi-lang-python="`provided`" pulumi-lang-yaml="`provided`" pulumi-lang-java="`provided`" pulumi-lang-hcl="`provided`">`provided`</span>. Defaults to `./Dockerfile`. Null when source is <span pulumi-lang-nodejs="`generated`" pulumi-lang-dotnet="`Generated`" pulumi-lang-go="`generated`" pulumi-lang-python="`generated`" pulumi-lang-yaml="`generated`" pulumi-lang-java="`generated`" pulumi-lang-hcl="`generated`">`generated`</span>.
 	Path *string `pulumi:"path"`
 	// How the Dockerfile is obtained: <span pulumi-lang-nodejs="`provided`" pulumi-lang-dotnet="`Provided`" pulumi-lang-go="`provided`" pulumi-lang-python="`provided`" pulumi-lang-yaml="`provided`" pulumi-lang-java="`provided`" pulumi-lang-hcl="`provided`">`provided`</span> (from source code) or <span pulumi-lang-nodejs="`generated`" pulumi-lang-dotnet="`Generated`" pulumi-lang-go="`generated`" pulumi-lang-python="`generated`" pulumi-lang-yaml="`generated`" pulumi-lang-java="`generated`" pulumi-lang-hcl="`generated`">`generated`</span> (from an execution environment). Defaults to <span pulumi-lang-nodejs="`provided`" pulumi-lang-dotnet="`Provided`" pulumi-lang-go="`provided`" pulumi-lang-python="`provided`" pulumi-lang-yaml="`provided`" pulumi-lang-java="`provided`" pulumi-lang-hcl="`provided`">`provided`</span>.
 	Source *string `pulumi:"source"`
@@ -1736,7 +1988,7 @@ type ArtifactSpecContainerGroupContainerImageBuildConfigDockerfileArgs struct {
 	ExecutionEnvironmentId pulumi.StringPtrInput `pulumi:"executionEnvironmentId"`
 	// Execution environment version ID that pins the base image. Required when source is <span pulumi-lang-nodejs="`generated`" pulumi-lang-dotnet="`Generated`" pulumi-lang-go="`generated`" pulumi-lang-python="`generated`" pulumi-lang-yaml="`generated`" pulumi-lang-java="`generated`" pulumi-lang-hcl="`generated`">`generated`</span>.
 	ExecutionEnvironmentVersionId pulumi.StringPtrInput `pulumi:"executionEnvironmentVersionId"`
-	// Relative path to the Dockerfile in the source code. Used when source is <span pulumi-lang-nodejs="`provided`" pulumi-lang-dotnet="`Provided`" pulumi-lang-go="`provided`" pulumi-lang-python="`provided`" pulumi-lang-yaml="`provided`" pulumi-lang-java="`provided`" pulumi-lang-hcl="`provided`">`provided`</span>. Defaults to `./Dockerfile`.
+	// Relative path to the Dockerfile in the source code. Used when source is <span pulumi-lang-nodejs="`provided`" pulumi-lang-dotnet="`Provided`" pulumi-lang-go="`provided`" pulumi-lang-python="`provided`" pulumi-lang-yaml="`provided`" pulumi-lang-java="`provided`" pulumi-lang-hcl="`provided`">`provided`</span>. Defaults to `./Dockerfile`. Null when source is <span pulumi-lang-nodejs="`generated`" pulumi-lang-dotnet="`Generated`" pulumi-lang-go="`generated`" pulumi-lang-python="`generated`" pulumi-lang-yaml="`generated`" pulumi-lang-java="`generated`" pulumi-lang-hcl="`generated`">`generated`</span>.
 	Path pulumi.StringPtrInput `pulumi:"path"`
 	// How the Dockerfile is obtained: <span pulumi-lang-nodejs="`provided`" pulumi-lang-dotnet="`Provided`" pulumi-lang-go="`provided`" pulumi-lang-python="`provided`" pulumi-lang-yaml="`provided`" pulumi-lang-java="`provided`" pulumi-lang-hcl="`provided`">`provided`</span> (from source code) or <span pulumi-lang-nodejs="`generated`" pulumi-lang-dotnet="`Generated`" pulumi-lang-go="`generated`" pulumi-lang-python="`generated`" pulumi-lang-yaml="`generated`" pulumi-lang-java="`generated`" pulumi-lang-hcl="`generated`">`generated`</span> (from an execution environment). Defaults to <span pulumi-lang-nodejs="`provided`" pulumi-lang-dotnet="`Provided`" pulumi-lang-go="`provided`" pulumi-lang-python="`provided`" pulumi-lang-yaml="`provided`" pulumi-lang-java="`provided`" pulumi-lang-hcl="`provided`">`provided`</span>.
 	Source pulumi.StringPtrInput `pulumi:"source"`
@@ -1838,7 +2090,7 @@ func (o ArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput) Exe
 	}).(pulumi.StringPtrOutput)
 }
 
-// Relative path to the Dockerfile in the source code. Used when source is <span pulumi-lang-nodejs="`provided`" pulumi-lang-dotnet="`Provided`" pulumi-lang-go="`provided`" pulumi-lang-python="`provided`" pulumi-lang-yaml="`provided`" pulumi-lang-java="`provided`" pulumi-lang-hcl="`provided`">`provided`</span>. Defaults to `./Dockerfile`.
+// Relative path to the Dockerfile in the source code. Used when source is <span pulumi-lang-nodejs="`provided`" pulumi-lang-dotnet="`Provided`" pulumi-lang-go="`provided`" pulumi-lang-python="`provided`" pulumi-lang-yaml="`provided`" pulumi-lang-java="`provided`" pulumi-lang-hcl="`provided`">`provided`</span>. Defaults to `./Dockerfile`. Null when source is <span pulumi-lang-nodejs="`generated`" pulumi-lang-dotnet="`Generated`" pulumi-lang-go="`generated`" pulumi-lang-python="`generated`" pulumi-lang-yaml="`generated`" pulumi-lang-java="`generated`" pulumi-lang-hcl="`generated`">`generated`</span>.
 func (o ArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput) Path() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerImageBuildConfigDockerfile) *string { return v.Path }).(pulumi.StringPtrOutput)
 }
@@ -1902,7 +2154,7 @@ func (o ArtifactSpecContainerGroupContainerImageBuildConfigDockerfilePtrOutput) 
 	}).(pulumi.StringPtrOutput)
 }
 
-// Relative path to the Dockerfile in the source code. Used when source is <span pulumi-lang-nodejs="`provided`" pulumi-lang-dotnet="`Provided`" pulumi-lang-go="`provided`" pulumi-lang-python="`provided`" pulumi-lang-yaml="`provided`" pulumi-lang-java="`provided`" pulumi-lang-hcl="`provided`">`provided`</span>. Defaults to `./Dockerfile`.
+// Relative path to the Dockerfile in the source code. Used when source is <span pulumi-lang-nodejs="`provided`" pulumi-lang-dotnet="`Provided`" pulumi-lang-go="`provided`" pulumi-lang-python="`provided`" pulumi-lang-yaml="`provided`" pulumi-lang-java="`provided`" pulumi-lang-hcl="`provided`">`provided`</span>. Defaults to `./Dockerfile`. Null when source is <span pulumi-lang-nodejs="`generated`" pulumi-lang-dotnet="`Generated`" pulumi-lang-go="`generated`" pulumi-lang-python="`generated`" pulumi-lang-yaml="`generated`" pulumi-lang-java="`generated`" pulumi-lang-hcl="`generated`">`generated`</span>.
 func (o ArtifactSpecContainerGroupContainerImageBuildConfigDockerfilePtrOutput) Path() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ArtifactSpecContainerGroupContainerImageBuildConfigDockerfile) *string {
 		if v == nil {
@@ -2498,6 +2750,112 @@ func (o ArtifactSpecContainerGroupContainerReadinessProbePtrOutput) TimeoutSecon
 		}
 		return v.TimeoutSeconds
 	}).(pulumi.IntPtrOutput)
+}
+
+type ArtifactSpecContainerGroupContainerRoute struct {
+	// Authentication applied to this route: "required" rejects unauthenticated requests, "optional" authenticates when an Authorization header is present, "disabled" never attempts authentication.
+	Auth string `pulumi:"auth"`
+	// Route path relative to the workload root, excluding the URL prefix the workload is mounted on. Must start with `/` and be at most 1024 characters. Paths must be unique within a container.
+	Path string `pulumi:"path"`
+}
+
+// ArtifactSpecContainerGroupContainerRouteInput is an input type that accepts ArtifactSpecContainerGroupContainerRouteArgs and ArtifactSpecContainerGroupContainerRouteOutput values.
+// You can construct a concrete instance of `ArtifactSpecContainerGroupContainerRouteInput` via:
+//
+//	ArtifactSpecContainerGroupContainerRouteArgs{...}
+type ArtifactSpecContainerGroupContainerRouteInput interface {
+	pulumi.Input
+
+	ToArtifactSpecContainerGroupContainerRouteOutput() ArtifactSpecContainerGroupContainerRouteOutput
+	ToArtifactSpecContainerGroupContainerRouteOutputWithContext(context.Context) ArtifactSpecContainerGroupContainerRouteOutput
+}
+
+type ArtifactSpecContainerGroupContainerRouteArgs struct {
+	// Authentication applied to this route: "required" rejects unauthenticated requests, "optional" authenticates when an Authorization header is present, "disabled" never attempts authentication.
+	Auth pulumi.StringInput `pulumi:"auth"`
+	// Route path relative to the workload root, excluding the URL prefix the workload is mounted on. Must start with `/` and be at most 1024 characters. Paths must be unique within a container.
+	Path pulumi.StringInput `pulumi:"path"`
+}
+
+func (ArtifactSpecContainerGroupContainerRouteArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ArtifactSpecContainerGroupContainerRoute)(nil)).Elem()
+}
+
+func (i ArtifactSpecContainerGroupContainerRouteArgs) ToArtifactSpecContainerGroupContainerRouteOutput() ArtifactSpecContainerGroupContainerRouteOutput {
+	return i.ToArtifactSpecContainerGroupContainerRouteOutputWithContext(context.Background())
+}
+
+func (i ArtifactSpecContainerGroupContainerRouteArgs) ToArtifactSpecContainerGroupContainerRouteOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupContainerRouteOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ArtifactSpecContainerGroupContainerRouteOutput)
+}
+
+// ArtifactSpecContainerGroupContainerRouteArrayInput is an input type that accepts ArtifactSpecContainerGroupContainerRouteArray and ArtifactSpecContainerGroupContainerRouteArrayOutput values.
+// You can construct a concrete instance of `ArtifactSpecContainerGroupContainerRouteArrayInput` via:
+//
+//	ArtifactSpecContainerGroupContainerRouteArray{ ArtifactSpecContainerGroupContainerRouteArgs{...} }
+type ArtifactSpecContainerGroupContainerRouteArrayInput interface {
+	pulumi.Input
+
+	ToArtifactSpecContainerGroupContainerRouteArrayOutput() ArtifactSpecContainerGroupContainerRouteArrayOutput
+	ToArtifactSpecContainerGroupContainerRouteArrayOutputWithContext(context.Context) ArtifactSpecContainerGroupContainerRouteArrayOutput
+}
+
+type ArtifactSpecContainerGroupContainerRouteArray []ArtifactSpecContainerGroupContainerRouteInput
+
+func (ArtifactSpecContainerGroupContainerRouteArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ArtifactSpecContainerGroupContainerRoute)(nil)).Elem()
+}
+
+func (i ArtifactSpecContainerGroupContainerRouteArray) ToArtifactSpecContainerGroupContainerRouteArrayOutput() ArtifactSpecContainerGroupContainerRouteArrayOutput {
+	return i.ToArtifactSpecContainerGroupContainerRouteArrayOutputWithContext(context.Background())
+}
+
+func (i ArtifactSpecContainerGroupContainerRouteArray) ToArtifactSpecContainerGroupContainerRouteArrayOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupContainerRouteArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ArtifactSpecContainerGroupContainerRouteArrayOutput)
+}
+
+type ArtifactSpecContainerGroupContainerRouteOutput struct{ *pulumi.OutputState }
+
+func (ArtifactSpecContainerGroupContainerRouteOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ArtifactSpecContainerGroupContainerRoute)(nil)).Elem()
+}
+
+func (o ArtifactSpecContainerGroupContainerRouteOutput) ToArtifactSpecContainerGroupContainerRouteOutput() ArtifactSpecContainerGroupContainerRouteOutput {
+	return o
+}
+
+func (o ArtifactSpecContainerGroupContainerRouteOutput) ToArtifactSpecContainerGroupContainerRouteOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupContainerRouteOutput {
+	return o
+}
+
+// Authentication applied to this route: "required" rejects unauthenticated requests, "optional" authenticates when an Authorization header is present, "disabled" never attempts authentication.
+func (o ArtifactSpecContainerGroupContainerRouteOutput) Auth() pulumi.StringOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerRoute) string { return v.Auth }).(pulumi.StringOutput)
+}
+
+// Route path relative to the workload root, excluding the URL prefix the workload is mounted on. Must start with `/` and be at most 1024 characters. Paths must be unique within a container.
+func (o ArtifactSpecContainerGroupContainerRouteOutput) Path() pulumi.StringOutput {
+	return o.ApplyT(func(v ArtifactSpecContainerGroupContainerRoute) string { return v.Path }).(pulumi.StringOutput)
+}
+
+type ArtifactSpecContainerGroupContainerRouteArrayOutput struct{ *pulumi.OutputState }
+
+func (ArtifactSpecContainerGroupContainerRouteArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ArtifactSpecContainerGroupContainerRoute)(nil)).Elem()
+}
+
+func (o ArtifactSpecContainerGroupContainerRouteArrayOutput) ToArtifactSpecContainerGroupContainerRouteArrayOutput() ArtifactSpecContainerGroupContainerRouteArrayOutput {
+	return o
+}
+
+func (o ArtifactSpecContainerGroupContainerRouteArrayOutput) ToArtifactSpecContainerGroupContainerRouteArrayOutputWithContext(ctx context.Context) ArtifactSpecContainerGroupContainerRouteArrayOutput {
+	return o
+}
+
+func (o ArtifactSpecContainerGroupContainerRouteArrayOutput) Index(i pulumi.IntInput) ArtifactSpecContainerGroupContainerRouteOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ArtifactSpecContainerGroupContainerRoute {
+		return vs[0].([]ArtifactSpecContainerGroupContainerRoute)[vs[1].(int)]
+	}).(ArtifactSpecContainerGroupContainerRouteOutput)
 }
 
 type ArtifactSpecContainerGroupContainerStartupProbe struct {
@@ -16396,6 +16754,8 @@ func (o GetArtifactCreatorOutput) Username() pulumi.StringOutput {
 }
 
 type GetArtifactSpec struct {
+	// Whether A2A card management and the A2A surface are enabled. Set on <span pulumi-lang-nodejs="`agent`" pulumi-lang-dotnet="`Agent`" pulumi-lang-go="`agent`" pulumi-lang-python="`agent`" pulumi-lang-yaml="`agent`" pulumi-lang-java="`agent`" pulumi-lang-hcl="`agent`">`agent`</span> artifacts; omitted otherwise.
+	A2aEnabled bool `pulumi:"a2aEnabled"`
 	// List of container groups.
 	ContainerGroups []GetArtifactSpecContainerGroup `pulumi:"containerGroups"`
 	// NIM model weight storage configuration.
@@ -16416,6 +16776,8 @@ type GetArtifactSpecInput interface {
 }
 
 type GetArtifactSpecArgs struct {
+	// Whether A2A card management and the A2A surface are enabled. Set on <span pulumi-lang-nodejs="`agent`" pulumi-lang-dotnet="`Agent`" pulumi-lang-go="`agent`" pulumi-lang-python="`agent`" pulumi-lang-yaml="`agent`" pulumi-lang-java="`agent`" pulumi-lang-hcl="`agent`">`agent`</span> artifacts; omitted otherwise.
+	A2aEnabled pulumi.BoolInput `pulumi:"a2aEnabled"`
 	// List of container groups.
 	ContainerGroups GetArtifactSpecContainerGroupArrayInput `pulumi:"containerGroups"`
 	// NIM model weight storage configuration.
@@ -16448,6 +16810,11 @@ func (o GetArtifactSpecOutput) ToGetArtifactSpecOutput() GetArtifactSpecOutput {
 
 func (o GetArtifactSpecOutput) ToGetArtifactSpecOutputWithContext(ctx context.Context) GetArtifactSpecOutput {
 	return o
+}
+
+// Whether A2A card management and the A2A surface are enabled. Set on <span pulumi-lang-nodejs="`agent`" pulumi-lang-dotnet="`Agent`" pulumi-lang-go="`agent`" pulumi-lang-python="`agent`" pulumi-lang-yaml="`agent`" pulumi-lang-java="`agent`" pulumi-lang-hcl="`agent`">`agent`</span> artifacts; omitted otherwise.
+func (o GetArtifactSpecOutput) A2aEnabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetArtifactSpec) bool { return v.A2aEnabled }).(pulumi.BoolOutput)
 }
 
 // List of container groups.
@@ -16594,6 +16961,8 @@ type GetArtifactSpecContainerGroupContainer struct {
 	Primary bool `pulumi:"primary"`
 	// Container readiness check configuration.
 	ReadinessProbe GetArtifactSpecContainerGroupContainerReadinessProbe `pulumi:"readinessProbe"`
+	// Routes exposed publicly from this container.
+	Routes []GetArtifactSpecContainerGroupContainerRoute `pulumi:"routes"`
 	// Container security context.
 	SecurityContext GetArtifactSpecContainerGroupContainerSecurityContext `pulumi:"securityContext"`
 	// Container startup check configuration.
@@ -16634,6 +17003,8 @@ type GetArtifactSpecContainerGroupContainerArgs struct {
 	Primary pulumi.BoolInput `pulumi:"primary"`
 	// Container readiness check configuration.
 	ReadinessProbe GetArtifactSpecContainerGroupContainerReadinessProbeInput `pulumi:"readinessProbe"`
+	// Routes exposed publicly from this container.
+	Routes GetArtifactSpecContainerGroupContainerRouteArrayInput `pulumi:"routes"`
 	// Container security context.
 	SecurityContext GetArtifactSpecContainerGroupContainerSecurityContextInput `pulumi:"securityContext"`
 	// Container startup check configuration.
@@ -16756,6 +17127,13 @@ func (o GetArtifactSpecContainerGroupContainerOutput) ReadinessProbe() GetArtifa
 	}).(GetArtifactSpecContainerGroupContainerReadinessProbeOutput)
 }
 
+// Routes exposed publicly from this container.
+func (o GetArtifactSpecContainerGroupContainerOutput) Routes() GetArtifactSpecContainerGroupContainerRouteArrayOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainer) []GetArtifactSpecContainerGroupContainerRoute {
+		return v.Routes
+	}).(GetArtifactSpecContainerGroupContainerRouteArrayOutput)
+}
+
 // Container security context.
 func (o GetArtifactSpecContainerGroupContainerOutput) SecurityContext() GetArtifactSpecContainerGroupContainerSecurityContextOutput {
 	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainer) GetArtifactSpecContainerGroupContainerSecurityContext {
@@ -16795,7 +17173,7 @@ type GetArtifactSpecContainerGroupContainerBuild struct {
 	ArtifactImageBuildId string `pulumi:"artifactImageBuildId"`
 	// Build creation timestamp (UTC).
 	CreatedAt string `pulumi:"createdAt"`
-	// Image build status at submit time.
+	// Image build status. With `source.wait_for_build` enabled (the default) this is the terminal status of the build the provider waited on; otherwise it is the status at submit time.
 	Status string `pulumi:"status"`
 }
 
@@ -16815,7 +17193,7 @@ type GetArtifactSpecContainerGroupContainerBuildArgs struct {
 	ArtifactImageBuildId pulumi.StringInput `pulumi:"artifactImageBuildId"`
 	// Build creation timestamp (UTC).
 	CreatedAt pulumi.StringInput `pulumi:"createdAt"`
-	// Image build status at submit time.
+	// Image build status. With `source.wait_for_build` enabled (the default) this is the terminal status of the build the provider waited on; otherwise it is the status at submit time.
 	Status pulumi.StringInput `pulumi:"status"`
 }
 
@@ -16855,7 +17233,7 @@ func (o GetArtifactSpecContainerGroupContainerBuildOutput) CreatedAt() pulumi.St
 	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerBuild) string { return v.CreatedAt }).(pulumi.StringOutput)
 }
 
-// Image build status at submit time.
+// Image build status. With `source.wait_for_build` enabled (the default) this is the terminal status of the build the provider waited on; otherwise it is the status at submit time.
 func (o GetArtifactSpecContainerGroupContainerBuildOutput) Status() pulumi.StringOutput {
 	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerBuild) string { return v.Status }).(pulumi.StringOutput)
 }
@@ -16867,7 +17245,7 @@ type GetArtifactSpecContainerGroupContainerEnvironmentVar struct {
 	Key string `pulumi:"key"`
 	// Name of the environment variable. May be absent for "api-key" entries, in which case the token is injected as DATAROBOT*API*TOKEN.
 	Name string `pulumi:"name"`
-	// Source type: "string" for plain text values, "dr-credential" for DataRobot credentials, "api-key" for a platform-managed DataRobot API token.
+	// Source type: "string" for plain text values, "dr-credential" for DataRobot credentials, or "api-key" for a platform-managed per-workload DataRobot API token.
 	Source string `pulumi:"source"`
 	// Value of the environment variable when source is "string".
 	Value string `pulumi:"value"`
@@ -16891,7 +17269,7 @@ type GetArtifactSpecContainerGroupContainerEnvironmentVarArgs struct {
 	Key pulumi.StringInput `pulumi:"key"`
 	// Name of the environment variable. May be absent for "api-key" entries, in which case the token is injected as DATAROBOT*API*TOKEN.
 	Name pulumi.StringInput `pulumi:"name"`
-	// Source type: "string" for plain text values, "dr-credential" for DataRobot credentials, "api-key" for a platform-managed DataRobot API token.
+	// Source type: "string" for plain text values, "dr-credential" for DataRobot credentials, or "api-key" for a platform-managed per-workload DataRobot API token.
 	Source pulumi.StringInput `pulumi:"source"`
 	// Value of the environment variable when source is "string".
 	Value pulumi.StringInput `pulumi:"value"`
@@ -16963,7 +17341,7 @@ func (o GetArtifactSpecContainerGroupContainerEnvironmentVarOutput) Name() pulum
 	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerEnvironmentVar) string { return v.Name }).(pulumi.StringOutput)
 }
 
-// Source type: "string" for plain text values, "dr-credential" for DataRobot credentials, "api-key" for a platform-managed DataRobot API token.
+// Source type: "string" for plain text values, "dr-credential" for DataRobot credentials, or "api-key" for a platform-managed per-workload DataRobot API token.
 func (o GetArtifactSpecContainerGroupContainerEnvironmentVarOutput) Source() pulumi.StringOutput {
 	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerEnvironmentVar) string { return v.Source }).(pulumi.StringOutput)
 }
@@ -17537,6 +17915,112 @@ func (o GetArtifactSpecContainerGroupContainerReadinessProbeOutput) TimeoutSecon
 	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerReadinessProbe) int { return v.TimeoutSeconds }).(pulumi.IntOutput)
 }
 
+type GetArtifactSpecContainerGroupContainerRoute struct {
+	// Authentication applied to this route.
+	Auth string `pulumi:"auth"`
+	// Route path relative to the workload root.
+	Path string `pulumi:"path"`
+}
+
+// GetArtifactSpecContainerGroupContainerRouteInput is an input type that accepts GetArtifactSpecContainerGroupContainerRouteArgs and GetArtifactSpecContainerGroupContainerRouteOutput values.
+// You can construct a concrete instance of `GetArtifactSpecContainerGroupContainerRouteInput` via:
+//
+//	GetArtifactSpecContainerGroupContainerRouteArgs{...}
+type GetArtifactSpecContainerGroupContainerRouteInput interface {
+	pulumi.Input
+
+	ToGetArtifactSpecContainerGroupContainerRouteOutput() GetArtifactSpecContainerGroupContainerRouteOutput
+	ToGetArtifactSpecContainerGroupContainerRouteOutputWithContext(context.Context) GetArtifactSpecContainerGroupContainerRouteOutput
+}
+
+type GetArtifactSpecContainerGroupContainerRouteArgs struct {
+	// Authentication applied to this route.
+	Auth pulumi.StringInput `pulumi:"auth"`
+	// Route path relative to the workload root.
+	Path pulumi.StringInput `pulumi:"path"`
+}
+
+func (GetArtifactSpecContainerGroupContainerRouteArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactSpecContainerGroupContainerRoute)(nil)).Elem()
+}
+
+func (i GetArtifactSpecContainerGroupContainerRouteArgs) ToGetArtifactSpecContainerGroupContainerRouteOutput() GetArtifactSpecContainerGroupContainerRouteOutput {
+	return i.ToGetArtifactSpecContainerGroupContainerRouteOutputWithContext(context.Background())
+}
+
+func (i GetArtifactSpecContainerGroupContainerRouteArgs) ToGetArtifactSpecContainerGroupContainerRouteOutputWithContext(ctx context.Context) GetArtifactSpecContainerGroupContainerRouteOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetArtifactSpecContainerGroupContainerRouteOutput)
+}
+
+// GetArtifactSpecContainerGroupContainerRouteArrayInput is an input type that accepts GetArtifactSpecContainerGroupContainerRouteArray and GetArtifactSpecContainerGroupContainerRouteArrayOutput values.
+// You can construct a concrete instance of `GetArtifactSpecContainerGroupContainerRouteArrayInput` via:
+//
+//	GetArtifactSpecContainerGroupContainerRouteArray{ GetArtifactSpecContainerGroupContainerRouteArgs{...} }
+type GetArtifactSpecContainerGroupContainerRouteArrayInput interface {
+	pulumi.Input
+
+	ToGetArtifactSpecContainerGroupContainerRouteArrayOutput() GetArtifactSpecContainerGroupContainerRouteArrayOutput
+	ToGetArtifactSpecContainerGroupContainerRouteArrayOutputWithContext(context.Context) GetArtifactSpecContainerGroupContainerRouteArrayOutput
+}
+
+type GetArtifactSpecContainerGroupContainerRouteArray []GetArtifactSpecContainerGroupContainerRouteInput
+
+func (GetArtifactSpecContainerGroupContainerRouteArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetArtifactSpecContainerGroupContainerRoute)(nil)).Elem()
+}
+
+func (i GetArtifactSpecContainerGroupContainerRouteArray) ToGetArtifactSpecContainerGroupContainerRouteArrayOutput() GetArtifactSpecContainerGroupContainerRouteArrayOutput {
+	return i.ToGetArtifactSpecContainerGroupContainerRouteArrayOutputWithContext(context.Background())
+}
+
+func (i GetArtifactSpecContainerGroupContainerRouteArray) ToGetArtifactSpecContainerGroupContainerRouteArrayOutputWithContext(ctx context.Context) GetArtifactSpecContainerGroupContainerRouteArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetArtifactSpecContainerGroupContainerRouteArrayOutput)
+}
+
+type GetArtifactSpecContainerGroupContainerRouteOutput struct{ *pulumi.OutputState }
+
+func (GetArtifactSpecContainerGroupContainerRouteOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactSpecContainerGroupContainerRoute)(nil)).Elem()
+}
+
+func (o GetArtifactSpecContainerGroupContainerRouteOutput) ToGetArtifactSpecContainerGroupContainerRouteOutput() GetArtifactSpecContainerGroupContainerRouteOutput {
+	return o
+}
+
+func (o GetArtifactSpecContainerGroupContainerRouteOutput) ToGetArtifactSpecContainerGroupContainerRouteOutputWithContext(ctx context.Context) GetArtifactSpecContainerGroupContainerRouteOutput {
+	return o
+}
+
+// Authentication applied to this route.
+func (o GetArtifactSpecContainerGroupContainerRouteOutput) Auth() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerRoute) string { return v.Auth }).(pulumi.StringOutput)
+}
+
+// Route path relative to the workload root.
+func (o GetArtifactSpecContainerGroupContainerRouteOutput) Path() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactSpecContainerGroupContainerRoute) string { return v.Path }).(pulumi.StringOutput)
+}
+
+type GetArtifactSpecContainerGroupContainerRouteArrayOutput struct{ *pulumi.OutputState }
+
+func (GetArtifactSpecContainerGroupContainerRouteArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetArtifactSpecContainerGroupContainerRoute)(nil)).Elem()
+}
+
+func (o GetArtifactSpecContainerGroupContainerRouteArrayOutput) ToGetArtifactSpecContainerGroupContainerRouteArrayOutput() GetArtifactSpecContainerGroupContainerRouteArrayOutput {
+	return o
+}
+
+func (o GetArtifactSpecContainerGroupContainerRouteArrayOutput) ToGetArtifactSpecContainerGroupContainerRouteArrayOutputWithContext(ctx context.Context) GetArtifactSpecContainerGroupContainerRouteArrayOutput {
+	return o
+}
+
+func (o GetArtifactSpecContainerGroupContainerRouteArrayOutput) Index(i pulumi.IntInput) GetArtifactSpecContainerGroupContainerRouteOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetArtifactSpecContainerGroupContainerRoute {
+		return vs[0].([]GetArtifactSpecContainerGroupContainerRoute)[vs[1].(int)]
+	}).(GetArtifactSpecContainerGroupContainerRouteOutput)
+}
+
 type GetArtifactSpecContainerGroupContainerSecurityContext struct {
 	// Whether a process can gain more privileges than its parent.
 	AllowPrivilegeEscalation bool `pulumi:"allowPrivilegeEscalation"`
@@ -18065,7 +18549,7 @@ type GetArtifactsArtifact struct {
 	Status string `pulumi:"status"`
 	// Tags associated with this artifact.
 	Tags []GetArtifactsArtifactTag `pulumi:"tags"`
-	// The artifact type: <span pulumi-lang-nodejs="`service`" pulumi-lang-dotnet="`Service`" pulumi-lang-go="`service`" pulumi-lang-python="`service`" pulumi-lang-yaml="`service`" pulumi-lang-java="`service`" pulumi-lang-hcl="`service`">`service`</span> or <span pulumi-lang-nodejs="`nim`" pulumi-lang-dotnet="`Nim`" pulumi-lang-go="`nim`" pulumi-lang-python="`nim`" pulumi-lang-yaml="`nim`" pulumi-lang-java="`nim`" pulumi-lang-hcl="`nim`">`nim`</span>.
+	// The artifact type: <span pulumi-lang-nodejs="`service`" pulumi-lang-dotnet="`Service`" pulumi-lang-go="`service`" pulumi-lang-python="`service`" pulumi-lang-yaml="`service`" pulumi-lang-java="`service`" pulumi-lang-hcl="`service`">`service`</span>, <span pulumi-lang-nodejs="`nim`" pulumi-lang-dotnet="`Nim`" pulumi-lang-go="`nim`" pulumi-lang-python="`nim`" pulumi-lang-yaml="`nim`" pulumi-lang-java="`nim`" pulumi-lang-hcl="`nim`">`nim`</span>, <span pulumi-lang-nodejs="`agent`" pulumi-lang-dotnet="`Agent`" pulumi-lang-go="`agent`" pulumi-lang-python="`agent`" pulumi-lang-yaml="`agent`" pulumi-lang-java="`agent`" pulumi-lang-hcl="`agent`">`agent`</span>, or <span pulumi-lang-nodejs="`mcp`" pulumi-lang-dotnet="`Mcp`" pulumi-lang-go="`mcp`" pulumi-lang-python="`mcp`" pulumi-lang-yaml="`mcp`" pulumi-lang-java="`mcp`" pulumi-lang-hcl="`mcp`">`mcp`</span>.
 	Type string `pulumi:"type"`
 	// Timestamp of when the artifact was last updated.
 	UpdatedAt string `pulumi:"updatedAt"`
@@ -18105,7 +18589,7 @@ type GetArtifactsArtifactArgs struct {
 	Status pulumi.StringInput `pulumi:"status"`
 	// Tags associated with this artifact.
 	Tags GetArtifactsArtifactTagArrayInput `pulumi:"tags"`
-	// The artifact type: <span pulumi-lang-nodejs="`service`" pulumi-lang-dotnet="`Service`" pulumi-lang-go="`service`" pulumi-lang-python="`service`" pulumi-lang-yaml="`service`" pulumi-lang-java="`service`" pulumi-lang-hcl="`service`">`service`</span> or <span pulumi-lang-nodejs="`nim`" pulumi-lang-dotnet="`Nim`" pulumi-lang-go="`nim`" pulumi-lang-python="`nim`" pulumi-lang-yaml="`nim`" pulumi-lang-java="`nim`" pulumi-lang-hcl="`nim`">`nim`</span>.
+	// The artifact type: <span pulumi-lang-nodejs="`service`" pulumi-lang-dotnet="`Service`" pulumi-lang-go="`service`" pulumi-lang-python="`service`" pulumi-lang-yaml="`service`" pulumi-lang-java="`service`" pulumi-lang-hcl="`service`">`service`</span>, <span pulumi-lang-nodejs="`nim`" pulumi-lang-dotnet="`Nim`" pulumi-lang-go="`nim`" pulumi-lang-python="`nim`" pulumi-lang-yaml="`nim`" pulumi-lang-java="`nim`" pulumi-lang-hcl="`nim`">`nim`</span>, <span pulumi-lang-nodejs="`agent`" pulumi-lang-dotnet="`Agent`" pulumi-lang-go="`agent`" pulumi-lang-python="`agent`" pulumi-lang-yaml="`agent`" pulumi-lang-java="`agent`" pulumi-lang-hcl="`agent`">`agent`</span>, or <span pulumi-lang-nodejs="`mcp`" pulumi-lang-dotnet="`Mcp`" pulumi-lang-go="`mcp`" pulumi-lang-python="`mcp`" pulumi-lang-yaml="`mcp`" pulumi-lang-java="`mcp`" pulumi-lang-hcl="`mcp`">`mcp`</span>.
 	Type pulumi.StringInput `pulumi:"type"`
 	// Timestamp of when the artifact was last updated.
 	UpdatedAt pulumi.StringInput `pulumi:"updatedAt"`
@@ -18214,7 +18698,7 @@ func (o GetArtifactsArtifactOutput) Tags() GetArtifactsArtifactTagArrayOutput {
 	return o.ApplyT(func(v GetArtifactsArtifact) []GetArtifactsArtifactTag { return v.Tags }).(GetArtifactsArtifactTagArrayOutput)
 }
 
-// The artifact type: <span pulumi-lang-nodejs="`service`" pulumi-lang-dotnet="`Service`" pulumi-lang-go="`service`" pulumi-lang-python="`service`" pulumi-lang-yaml="`service`" pulumi-lang-java="`service`" pulumi-lang-hcl="`service`">`service`</span> or <span pulumi-lang-nodejs="`nim`" pulumi-lang-dotnet="`Nim`" pulumi-lang-go="`nim`" pulumi-lang-python="`nim`" pulumi-lang-yaml="`nim`" pulumi-lang-java="`nim`" pulumi-lang-hcl="`nim`">`nim`</span>.
+// The artifact type: <span pulumi-lang-nodejs="`service`" pulumi-lang-dotnet="`Service`" pulumi-lang-go="`service`" pulumi-lang-python="`service`" pulumi-lang-yaml="`service`" pulumi-lang-java="`service`" pulumi-lang-hcl="`service`">`service`</span>, <span pulumi-lang-nodejs="`nim`" pulumi-lang-dotnet="`Nim`" pulumi-lang-go="`nim`" pulumi-lang-python="`nim`" pulumi-lang-yaml="`nim`" pulumi-lang-java="`nim`" pulumi-lang-hcl="`nim`">`nim`</span>, <span pulumi-lang-nodejs="`agent`" pulumi-lang-dotnet="`Agent`" pulumi-lang-go="`agent`" pulumi-lang-python="`agent`" pulumi-lang-yaml="`agent`" pulumi-lang-java="`agent`" pulumi-lang-hcl="`agent`">`agent`</span>, or <span pulumi-lang-nodejs="`mcp`" pulumi-lang-dotnet="`Mcp`" pulumi-lang-go="`mcp`" pulumi-lang-python="`mcp`" pulumi-lang-yaml="`mcp`" pulumi-lang-java="`mcp`" pulumi-lang-hcl="`mcp`">`mcp`</span>.
 func (o GetArtifactsArtifactOutput) Type() pulumi.StringOutput {
 	return o.ApplyT(func(v GetArtifactsArtifact) string { return v.Type }).(pulumi.StringOutput)
 }
@@ -18338,6 +18822,8 @@ func (o GetArtifactsArtifactCreatorOutput) Username() pulumi.StringOutput {
 }
 
 type GetArtifactsArtifactSpec struct {
+	// Whether A2A card management and the A2A surface are enabled. Set on <span pulumi-lang-nodejs="`agent`" pulumi-lang-dotnet="`Agent`" pulumi-lang-go="`agent`" pulumi-lang-python="`agent`" pulumi-lang-yaml="`agent`" pulumi-lang-java="`agent`" pulumi-lang-hcl="`agent`">`agent`</span> artifacts; omitted otherwise.
+	A2aEnabled bool `pulumi:"a2aEnabled"`
 	// List of container groups.
 	ContainerGroups []GetArtifactsArtifactSpecContainerGroup `pulumi:"containerGroups"`
 	// NIM model weight storage configuration.
@@ -18358,6 +18844,8 @@ type GetArtifactsArtifactSpecInput interface {
 }
 
 type GetArtifactsArtifactSpecArgs struct {
+	// Whether A2A card management and the A2A surface are enabled. Set on <span pulumi-lang-nodejs="`agent`" pulumi-lang-dotnet="`Agent`" pulumi-lang-go="`agent`" pulumi-lang-python="`agent`" pulumi-lang-yaml="`agent`" pulumi-lang-java="`agent`" pulumi-lang-hcl="`agent`">`agent`</span> artifacts; omitted otherwise.
+	A2aEnabled pulumi.BoolInput `pulumi:"a2aEnabled"`
 	// List of container groups.
 	ContainerGroups GetArtifactsArtifactSpecContainerGroupArrayInput `pulumi:"containerGroups"`
 	// NIM model weight storage configuration.
@@ -18390,6 +18878,11 @@ func (o GetArtifactsArtifactSpecOutput) ToGetArtifactsArtifactSpecOutput() GetAr
 
 func (o GetArtifactsArtifactSpecOutput) ToGetArtifactsArtifactSpecOutputWithContext(ctx context.Context) GetArtifactsArtifactSpecOutput {
 	return o
+}
+
+// Whether A2A card management and the A2A surface are enabled. Set on <span pulumi-lang-nodejs="`agent`" pulumi-lang-dotnet="`Agent`" pulumi-lang-go="`agent`" pulumi-lang-python="`agent`" pulumi-lang-yaml="`agent`" pulumi-lang-java="`agent`" pulumi-lang-hcl="`agent`">`agent`</span> artifacts; omitted otherwise.
+func (o GetArtifactsArtifactSpecOutput) A2aEnabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpec) bool { return v.A2aEnabled }).(pulumi.BoolOutput)
 }
 
 // List of container groups.
@@ -18538,6 +19031,8 @@ type GetArtifactsArtifactSpecContainerGroupContainer struct {
 	Primary bool `pulumi:"primary"`
 	// Container readiness check configuration.
 	ReadinessProbe GetArtifactsArtifactSpecContainerGroupContainerReadinessProbe `pulumi:"readinessProbe"`
+	// Routes exposed publicly from this container.
+	Routes []GetArtifactsArtifactSpecContainerGroupContainerRoute `pulumi:"routes"`
 	// Container security context.
 	SecurityContext GetArtifactsArtifactSpecContainerGroupContainerSecurityContext `pulumi:"securityContext"`
 	// Container startup check configuration.
@@ -18578,6 +19073,8 @@ type GetArtifactsArtifactSpecContainerGroupContainerArgs struct {
 	Primary pulumi.BoolInput `pulumi:"primary"`
 	// Container readiness check configuration.
 	ReadinessProbe GetArtifactsArtifactSpecContainerGroupContainerReadinessProbeInput `pulumi:"readinessProbe"`
+	// Routes exposed publicly from this container.
+	Routes GetArtifactsArtifactSpecContainerGroupContainerRouteArrayInput `pulumi:"routes"`
 	// Container security context.
 	SecurityContext GetArtifactsArtifactSpecContainerGroupContainerSecurityContextInput `pulumi:"securityContext"`
 	// Container startup check configuration.
@@ -18700,6 +19197,13 @@ func (o GetArtifactsArtifactSpecContainerGroupContainerOutput) ReadinessProbe() 
 	}).(GetArtifactsArtifactSpecContainerGroupContainerReadinessProbeOutput)
 }
 
+// Routes exposed publicly from this container.
+func (o GetArtifactsArtifactSpecContainerGroupContainerOutput) Routes() GetArtifactsArtifactSpecContainerGroupContainerRouteArrayOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainer) []GetArtifactsArtifactSpecContainerGroupContainerRoute {
+		return v.Routes
+	}).(GetArtifactsArtifactSpecContainerGroupContainerRouteArrayOutput)
+}
+
 // Container security context.
 func (o GetArtifactsArtifactSpecContainerGroupContainerOutput) SecurityContext() GetArtifactsArtifactSpecContainerGroupContainerSecurityContextOutput {
 	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainer) GetArtifactsArtifactSpecContainerGroupContainerSecurityContext {
@@ -18739,7 +19243,7 @@ type GetArtifactsArtifactSpecContainerGroupContainerBuild struct {
 	ArtifactImageBuildId string `pulumi:"artifactImageBuildId"`
 	// Build creation timestamp (UTC).
 	CreatedAt string `pulumi:"createdAt"`
-	// Image build status at submit time.
+	// Image build status. With `source.wait_for_build` enabled (the default) this is the terminal status of the build the provider waited on; otherwise it is the status at submit time.
 	Status string `pulumi:"status"`
 }
 
@@ -18759,7 +19263,7 @@ type GetArtifactsArtifactSpecContainerGroupContainerBuildArgs struct {
 	ArtifactImageBuildId pulumi.StringInput `pulumi:"artifactImageBuildId"`
 	// Build creation timestamp (UTC).
 	CreatedAt pulumi.StringInput `pulumi:"createdAt"`
-	// Image build status at submit time.
+	// Image build status. With `source.wait_for_build` enabled (the default) this is the terminal status of the build the provider waited on; otherwise it is the status at submit time.
 	Status pulumi.StringInput `pulumi:"status"`
 }
 
@@ -18799,7 +19303,7 @@ func (o GetArtifactsArtifactSpecContainerGroupContainerBuildOutput) CreatedAt() 
 	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerBuild) string { return v.CreatedAt }).(pulumi.StringOutput)
 }
 
-// Image build status at submit time.
+// Image build status. With `source.wait_for_build` enabled (the default) this is the terminal status of the build the provider waited on; otherwise it is the status at submit time.
 func (o GetArtifactsArtifactSpecContainerGroupContainerBuildOutput) Status() pulumi.StringOutput {
 	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerBuild) string { return v.Status }).(pulumi.StringOutput)
 }
@@ -18811,7 +19315,7 @@ type GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVar struct {
 	Key string `pulumi:"key"`
 	// Name of the environment variable. May be absent for "api-key" entries, in which case the token is injected as DATAROBOT*API*TOKEN.
 	Name string `pulumi:"name"`
-	// Source type: "string" for plain text values, "dr-credential" for DataRobot credentials, "api-key" for a platform-managed DataRobot API token.
+	// Source type: "string" for plain text values, "dr-credential" for DataRobot credentials, or "api-key" for a platform-managed per-workload DataRobot API token.
 	Source string `pulumi:"source"`
 	// Value of the environment variable when source is "string".
 	Value string `pulumi:"value"`
@@ -18835,7 +19339,7 @@ type GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarArgs struct {
 	Key pulumi.StringInput `pulumi:"key"`
 	// Name of the environment variable. May be absent for "api-key" entries, in which case the token is injected as DATAROBOT*API*TOKEN.
 	Name pulumi.StringInput `pulumi:"name"`
-	// Source type: "string" for plain text values, "dr-credential" for DataRobot credentials, "api-key" for a platform-managed DataRobot API token.
+	// Source type: "string" for plain text values, "dr-credential" for DataRobot credentials, or "api-key" for a platform-managed per-workload DataRobot API token.
 	Source pulumi.StringInput `pulumi:"source"`
 	// Value of the environment variable when source is "string".
 	Value pulumi.StringInput `pulumi:"value"`
@@ -18907,7 +19411,7 @@ func (o GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarOutput) Nam
 	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVar) string { return v.Name }).(pulumi.StringOutput)
 }
 
-// Source type: "string" for plain text values, "dr-credential" for DataRobot credentials, "api-key" for a platform-managed DataRobot API token.
+// Source type: "string" for plain text values, "dr-credential" for DataRobot credentials, or "api-key" for a platform-managed per-workload DataRobot API token.
 func (o GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVarOutput) Source() pulumi.StringOutput {
 	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVar) string { return v.Source }).(pulumi.StringOutput)
 }
@@ -19489,6 +19993,112 @@ func (o GetArtifactsArtifactSpecContainerGroupContainerReadinessProbeOutput) Tim
 	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerReadinessProbe) int { return v.TimeoutSeconds }).(pulumi.IntOutput)
 }
 
+type GetArtifactsArtifactSpecContainerGroupContainerRoute struct {
+	// Authentication applied to this route.
+	Auth string `pulumi:"auth"`
+	// Route path relative to the workload root.
+	Path string `pulumi:"path"`
+}
+
+// GetArtifactsArtifactSpecContainerGroupContainerRouteInput is an input type that accepts GetArtifactsArtifactSpecContainerGroupContainerRouteArgs and GetArtifactsArtifactSpecContainerGroupContainerRouteOutput values.
+// You can construct a concrete instance of `GetArtifactsArtifactSpecContainerGroupContainerRouteInput` via:
+//
+//	GetArtifactsArtifactSpecContainerGroupContainerRouteArgs{...}
+type GetArtifactsArtifactSpecContainerGroupContainerRouteInput interface {
+	pulumi.Input
+
+	ToGetArtifactsArtifactSpecContainerGroupContainerRouteOutput() GetArtifactsArtifactSpecContainerGroupContainerRouteOutput
+	ToGetArtifactsArtifactSpecContainerGroupContainerRouteOutputWithContext(context.Context) GetArtifactsArtifactSpecContainerGroupContainerRouteOutput
+}
+
+type GetArtifactsArtifactSpecContainerGroupContainerRouteArgs struct {
+	// Authentication applied to this route.
+	Auth pulumi.StringInput `pulumi:"auth"`
+	// Route path relative to the workload root.
+	Path pulumi.StringInput `pulumi:"path"`
+}
+
+func (GetArtifactsArtifactSpecContainerGroupContainerRouteArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactsArtifactSpecContainerGroupContainerRoute)(nil)).Elem()
+}
+
+func (i GetArtifactsArtifactSpecContainerGroupContainerRouteArgs) ToGetArtifactsArtifactSpecContainerGroupContainerRouteOutput() GetArtifactsArtifactSpecContainerGroupContainerRouteOutput {
+	return i.ToGetArtifactsArtifactSpecContainerGroupContainerRouteOutputWithContext(context.Background())
+}
+
+func (i GetArtifactsArtifactSpecContainerGroupContainerRouteArgs) ToGetArtifactsArtifactSpecContainerGroupContainerRouteOutputWithContext(ctx context.Context) GetArtifactsArtifactSpecContainerGroupContainerRouteOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetArtifactsArtifactSpecContainerGroupContainerRouteOutput)
+}
+
+// GetArtifactsArtifactSpecContainerGroupContainerRouteArrayInput is an input type that accepts GetArtifactsArtifactSpecContainerGroupContainerRouteArray and GetArtifactsArtifactSpecContainerGroupContainerRouteArrayOutput values.
+// You can construct a concrete instance of `GetArtifactsArtifactSpecContainerGroupContainerRouteArrayInput` via:
+//
+//	GetArtifactsArtifactSpecContainerGroupContainerRouteArray{ GetArtifactsArtifactSpecContainerGroupContainerRouteArgs{...} }
+type GetArtifactsArtifactSpecContainerGroupContainerRouteArrayInput interface {
+	pulumi.Input
+
+	ToGetArtifactsArtifactSpecContainerGroupContainerRouteArrayOutput() GetArtifactsArtifactSpecContainerGroupContainerRouteArrayOutput
+	ToGetArtifactsArtifactSpecContainerGroupContainerRouteArrayOutputWithContext(context.Context) GetArtifactsArtifactSpecContainerGroupContainerRouteArrayOutput
+}
+
+type GetArtifactsArtifactSpecContainerGroupContainerRouteArray []GetArtifactsArtifactSpecContainerGroupContainerRouteInput
+
+func (GetArtifactsArtifactSpecContainerGroupContainerRouteArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetArtifactsArtifactSpecContainerGroupContainerRoute)(nil)).Elem()
+}
+
+func (i GetArtifactsArtifactSpecContainerGroupContainerRouteArray) ToGetArtifactsArtifactSpecContainerGroupContainerRouteArrayOutput() GetArtifactsArtifactSpecContainerGroupContainerRouteArrayOutput {
+	return i.ToGetArtifactsArtifactSpecContainerGroupContainerRouteArrayOutputWithContext(context.Background())
+}
+
+func (i GetArtifactsArtifactSpecContainerGroupContainerRouteArray) ToGetArtifactsArtifactSpecContainerGroupContainerRouteArrayOutputWithContext(ctx context.Context) GetArtifactsArtifactSpecContainerGroupContainerRouteArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetArtifactsArtifactSpecContainerGroupContainerRouteArrayOutput)
+}
+
+type GetArtifactsArtifactSpecContainerGroupContainerRouteOutput struct{ *pulumi.OutputState }
+
+func (GetArtifactsArtifactSpecContainerGroupContainerRouteOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetArtifactsArtifactSpecContainerGroupContainerRoute)(nil)).Elem()
+}
+
+func (o GetArtifactsArtifactSpecContainerGroupContainerRouteOutput) ToGetArtifactsArtifactSpecContainerGroupContainerRouteOutput() GetArtifactsArtifactSpecContainerGroupContainerRouteOutput {
+	return o
+}
+
+func (o GetArtifactsArtifactSpecContainerGroupContainerRouteOutput) ToGetArtifactsArtifactSpecContainerGroupContainerRouteOutputWithContext(ctx context.Context) GetArtifactsArtifactSpecContainerGroupContainerRouteOutput {
+	return o
+}
+
+// Authentication applied to this route.
+func (o GetArtifactsArtifactSpecContainerGroupContainerRouteOutput) Auth() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerRoute) string { return v.Auth }).(pulumi.StringOutput)
+}
+
+// Route path relative to the workload root.
+func (o GetArtifactsArtifactSpecContainerGroupContainerRouteOutput) Path() pulumi.StringOutput {
+	return o.ApplyT(func(v GetArtifactsArtifactSpecContainerGroupContainerRoute) string { return v.Path }).(pulumi.StringOutput)
+}
+
+type GetArtifactsArtifactSpecContainerGroupContainerRouteArrayOutput struct{ *pulumi.OutputState }
+
+func (GetArtifactsArtifactSpecContainerGroupContainerRouteArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetArtifactsArtifactSpecContainerGroupContainerRoute)(nil)).Elem()
+}
+
+func (o GetArtifactsArtifactSpecContainerGroupContainerRouteArrayOutput) ToGetArtifactsArtifactSpecContainerGroupContainerRouteArrayOutput() GetArtifactsArtifactSpecContainerGroupContainerRouteArrayOutput {
+	return o
+}
+
+func (o GetArtifactsArtifactSpecContainerGroupContainerRouteArrayOutput) ToGetArtifactsArtifactSpecContainerGroupContainerRouteArrayOutputWithContext(ctx context.Context) GetArtifactsArtifactSpecContainerGroupContainerRouteArrayOutput {
+	return o
+}
+
+func (o GetArtifactsArtifactSpecContainerGroupContainerRouteArrayOutput) Index(i pulumi.IntInput) GetArtifactsArtifactSpecContainerGroupContainerRouteOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetArtifactsArtifactSpecContainerGroupContainerRoute {
+		return vs[0].([]GetArtifactsArtifactSpecContainerGroupContainerRoute)[vs[1].(int)]
+	}).(GetArtifactsArtifactSpecContainerGroupContainerRouteOutput)
+}
+
 type GetArtifactsArtifactSpecContainerGroupContainerSecurityContext struct {
 	// Whether a process can gain more privileges than its parent.
 	AllowPrivilegeEscalation bool `pulumi:"allowPrivilegeEscalation"`
@@ -20023,6 +20633,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ArtifactSpecContainerGroupArrayInput)(nil)).Elem(), ArtifactSpecContainerGroupArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ArtifactSpecContainerGroupContainerInput)(nil)).Elem(), ArtifactSpecContainerGroupContainerArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ArtifactSpecContainerGroupContainerArrayInput)(nil)).Elem(), ArtifactSpecContainerGroupContainerArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ArtifactSpecContainerGroupContainerBuildInput)(nil)).Elem(), ArtifactSpecContainerGroupContainerBuildArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ArtifactSpecContainerGroupContainerBuildPtrInput)(nil)).Elem(), ArtifactSpecContainerGroupContainerBuildArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ArtifactSpecContainerGroupContainerEnvironmentVarInput)(nil)).Elem(), ArtifactSpecContainerGroupContainerEnvironmentVarArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ArtifactSpecContainerGroupContainerEnvironmentVarArrayInput)(nil)).Elem(), ArtifactSpecContainerGroupContainerEnvironmentVarArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ArtifactSpecContainerGroupContainerImageBuildConfigInput)(nil)).Elem(), ArtifactSpecContainerGroupContainerImageBuildConfigArgs{})
@@ -20035,6 +20647,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ArtifactSpecContainerGroupContainerLivenessProbePtrInput)(nil)).Elem(), ArtifactSpecContainerGroupContainerLivenessProbeArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ArtifactSpecContainerGroupContainerReadinessProbeInput)(nil)).Elem(), ArtifactSpecContainerGroupContainerReadinessProbeArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ArtifactSpecContainerGroupContainerReadinessProbePtrInput)(nil)).Elem(), ArtifactSpecContainerGroupContainerReadinessProbeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ArtifactSpecContainerGroupContainerRouteInput)(nil)).Elem(), ArtifactSpecContainerGroupContainerRouteArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ArtifactSpecContainerGroupContainerRouteArrayInput)(nil)).Elem(), ArtifactSpecContainerGroupContainerRouteArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ArtifactSpecContainerGroupContainerStartupProbeInput)(nil)).Elem(), ArtifactSpecContainerGroupContainerStartupProbeArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ArtifactSpecContainerGroupContainerStartupProbePtrInput)(nil)).Elem(), ArtifactSpecContainerGroupContainerStartupProbeArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BatchPredictionJobDefinitionCsvSettingsInput)(nil)).Elem(), BatchPredictionJobDefinitionCsvSettingsArgs{})
@@ -20209,6 +20823,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactSpecContainerGroupContainerImageBuildConfigDockerfileInput)(nil)).Elem(), GetArtifactSpecContainerGroupContainerImageBuildConfigDockerfileArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactSpecContainerGroupContainerLivenessProbeInput)(nil)).Elem(), GetArtifactSpecContainerGroupContainerLivenessProbeArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactSpecContainerGroupContainerReadinessProbeInput)(nil)).Elem(), GetArtifactSpecContainerGroupContainerReadinessProbeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactSpecContainerGroupContainerRouteInput)(nil)).Elem(), GetArtifactSpecContainerGroupContainerRouteArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactSpecContainerGroupContainerRouteArrayInput)(nil)).Elem(), GetArtifactSpecContainerGroupContainerRouteArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactSpecContainerGroupContainerSecurityContextInput)(nil)).Elem(), GetArtifactSpecContainerGroupContainerSecurityContextArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactSpecContainerGroupContainerSecurityContextCapabilitiesInput)(nil)).Elem(), GetArtifactSpecContainerGroupContainerSecurityContextCapabilitiesArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactSpecContainerGroupContainerSecurityContextSeccompProfileInput)(nil)).Elem(), GetArtifactSpecContainerGroupContainerSecurityContextSeccompProfileArgs{})
@@ -20233,6 +20849,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfileInput)(nil)).Elem(), GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfileArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactsArtifactSpecContainerGroupContainerLivenessProbeInput)(nil)).Elem(), GetArtifactsArtifactSpecContainerGroupContainerLivenessProbeArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactsArtifactSpecContainerGroupContainerReadinessProbeInput)(nil)).Elem(), GetArtifactsArtifactSpecContainerGroupContainerReadinessProbeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactsArtifactSpecContainerGroupContainerRouteInput)(nil)).Elem(), GetArtifactsArtifactSpecContainerGroupContainerRouteArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactsArtifactSpecContainerGroupContainerRouteArrayInput)(nil)).Elem(), GetArtifactsArtifactSpecContainerGroupContainerRouteArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactsArtifactSpecContainerGroupContainerSecurityContextInput)(nil)).Elem(), GetArtifactsArtifactSpecContainerGroupContainerSecurityContextArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactsArtifactSpecContainerGroupContainerSecurityContextCapabilitiesInput)(nil)).Elem(), GetArtifactsArtifactSpecContainerGroupContainerSecurityContextCapabilitiesArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactsArtifactSpecContainerGroupContainerSecurityContextSeccompProfileInput)(nil)).Elem(), GetArtifactsArtifactSpecContainerGroupContainerSecurityContextSeccompProfileArgs{})
@@ -20256,6 +20874,8 @@ func init() {
 	pulumi.RegisterOutputType(ArtifactSpecContainerGroupArrayOutput{})
 	pulumi.RegisterOutputType(ArtifactSpecContainerGroupContainerOutput{})
 	pulumi.RegisterOutputType(ArtifactSpecContainerGroupContainerArrayOutput{})
+	pulumi.RegisterOutputType(ArtifactSpecContainerGroupContainerBuildOutput{})
+	pulumi.RegisterOutputType(ArtifactSpecContainerGroupContainerBuildPtrOutput{})
 	pulumi.RegisterOutputType(ArtifactSpecContainerGroupContainerEnvironmentVarOutput{})
 	pulumi.RegisterOutputType(ArtifactSpecContainerGroupContainerEnvironmentVarArrayOutput{})
 	pulumi.RegisterOutputType(ArtifactSpecContainerGroupContainerImageBuildConfigOutput{})
@@ -20268,6 +20888,8 @@ func init() {
 	pulumi.RegisterOutputType(ArtifactSpecContainerGroupContainerLivenessProbePtrOutput{})
 	pulumi.RegisterOutputType(ArtifactSpecContainerGroupContainerReadinessProbeOutput{})
 	pulumi.RegisterOutputType(ArtifactSpecContainerGroupContainerReadinessProbePtrOutput{})
+	pulumi.RegisterOutputType(ArtifactSpecContainerGroupContainerRouteOutput{})
+	pulumi.RegisterOutputType(ArtifactSpecContainerGroupContainerRouteArrayOutput{})
 	pulumi.RegisterOutputType(ArtifactSpecContainerGroupContainerStartupProbeOutput{})
 	pulumi.RegisterOutputType(ArtifactSpecContainerGroupContainerStartupProbePtrOutput{})
 	pulumi.RegisterOutputType(BatchPredictionJobDefinitionCsvSettingsOutput{})
@@ -20442,6 +21064,8 @@ func init() {
 	pulumi.RegisterOutputType(GetArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput{})
 	pulumi.RegisterOutputType(GetArtifactSpecContainerGroupContainerLivenessProbeOutput{})
 	pulumi.RegisterOutputType(GetArtifactSpecContainerGroupContainerReadinessProbeOutput{})
+	pulumi.RegisterOutputType(GetArtifactSpecContainerGroupContainerRouteOutput{})
+	pulumi.RegisterOutputType(GetArtifactSpecContainerGroupContainerRouteArrayOutput{})
 	pulumi.RegisterOutputType(GetArtifactSpecContainerGroupContainerSecurityContextOutput{})
 	pulumi.RegisterOutputType(GetArtifactSpecContainerGroupContainerSecurityContextCapabilitiesOutput{})
 	pulumi.RegisterOutputType(GetArtifactSpecContainerGroupContainerSecurityContextSeccompProfileOutput{})
@@ -20466,6 +21090,8 @@ func init() {
 	pulumi.RegisterOutputType(GetArtifactsArtifactSpecContainerGroupContainerImageBuildConfigDockerfileOutput{})
 	pulumi.RegisterOutputType(GetArtifactsArtifactSpecContainerGroupContainerLivenessProbeOutput{})
 	pulumi.RegisterOutputType(GetArtifactsArtifactSpecContainerGroupContainerReadinessProbeOutput{})
+	pulumi.RegisterOutputType(GetArtifactsArtifactSpecContainerGroupContainerRouteOutput{})
+	pulumi.RegisterOutputType(GetArtifactsArtifactSpecContainerGroupContainerRouteArrayOutput{})
 	pulumi.RegisterOutputType(GetArtifactsArtifactSpecContainerGroupContainerSecurityContextOutput{})
 	pulumi.RegisterOutputType(GetArtifactsArtifactSpecContainerGroupContainerSecurityContextCapabilitiesOutput{})
 	pulumi.RegisterOutputType(GetArtifactsArtifactSpecContainerGroupContainerSecurityContextSeccompProfileOutput{})

@@ -483,7 +483,7 @@ namespace DataRobotPulumi.Datarobot
         /// </summary>
         public readonly ImmutableArray<Outputs.GetArtifactTagResult> Tags;
         /// <summary>
-        /// The artifact type: &lt;span pulumi-lang-nodejs="`service`" pulumi-lang-dotnet="`Service`" pulumi-lang-go="`service`" pulumi-lang-python="`service`" pulumi-lang-yaml="`service`" pulumi-lang-java="`service`" pulumi-lang-hcl="`service`"&gt;`service`&lt;/span&gt; or &lt;span pulumi-lang-nodejs="`nim`" pulumi-lang-dotnet="`Nim`" pulumi-lang-go="`nim`" pulumi-lang-python="`nim`" pulumi-lang-yaml="`nim`" pulumi-lang-java="`nim`" pulumi-lang-hcl="`nim`"&gt;`nim`&lt;/span&gt;.
+        /// The artifact type: &lt;span pulumi-lang-nodejs="`service`" pulumi-lang-dotnet="`Service`" pulumi-lang-go="`service`" pulumi-lang-python="`service`" pulumi-lang-yaml="`service`" pulumi-lang-java="`service`" pulumi-lang-hcl="`service`"&gt;`service`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`nim`" pulumi-lang-dotnet="`Nim`" pulumi-lang-go="`nim`" pulumi-lang-python="`nim`" pulumi-lang-yaml="`nim`" pulumi-lang-java="`nim`" pulumi-lang-hcl="`nim`"&gt;`nim`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`agent`" pulumi-lang-dotnet="`Agent`" pulumi-lang-go="`agent`" pulumi-lang-python="`agent`" pulumi-lang-yaml="`agent`" pulumi-lang-java="`agent`" pulumi-lang-hcl="`agent`"&gt;`agent`&lt;/span&gt;, or &lt;span pulumi-lang-nodejs="`mcp`" pulumi-lang-dotnet="`Mcp`" pulumi-lang-go="`mcp`" pulumi-lang-python="`mcp`" pulumi-lang-yaml="`mcp`" pulumi-lang-java="`mcp`" pulumi-lang-hcl="`mcp`"&gt;`mcp`&lt;/span&gt;.
         /// </summary>
         public readonly string Type;
         /// <summary>

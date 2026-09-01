@@ -37,6 +37,13 @@ namespace DataRobotPulumi.Datarobot
     /// 
     ///     var exampleCustomApplicationFromEnvironment = new Datarobot.CustomApplicationFromEnvironment("example", new()
     ///     {
+    ///         Resources = new Datarobot.Inputs.CustomApplicationFromEnvironmentResourcesArgs
+    ///         {
+    ///             Replicas = 1,
+    ///             ResourceLabel = "cpu.small",
+    ///             SessionAffinity = false,
+    ///             ServiceWebRequestsOnRootPath = true,
+    ///         },
     ///         Name = "example-custom-app-from-environment",
     ///         EnvironmentId = example.Id,
     ///         ExternalAccessEnabled = true,
@@ -45,13 +52,6 @@ namespace DataRobotPulumi.Datarobot
     ///             "recipient@example.com",
     ///         },
     ///         AllowAutoStopping = false,
-    ///         Resources = new Datarobot.Inputs.CustomApplicationFromEnvironmentResourcesArgs
-    ///         {
-    ///             Replicas = 1,
-    ///             ResourceLabel = "cpu.small",
-    ///             SessionAffinity = false,
-    ///             ServiceWebRequestsOnRootPath = true,
-    ///         },
     ///     });
     /// 
     ///     return new Dictionary&lt;string, object?&gt;

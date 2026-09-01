@@ -321,17 +321,17 @@ class CustomApplicationFromEnvironment(pulumi.CustomResource):
             docker_image="docker_image.tar",
             use_cases=["customApplication"])
         example_custom_application_from_environment = datarobot.CustomApplicationFromEnvironment("example",
-            name="example-custom-app-from-environment",
-            environment_id=example.id,
-            external_access_enabled=True,
-            external_access_recipients=["recipient@example.com"],
-            allow_auto_stopping=False,
             resources={
                 "replicas": 1,
                 "resource_label": "cpu.small",
                 "session_affinity": False,
                 "service_web_requests_on_root_path": True,
-            })
+            },
+            name="example-custom-app-from-environment",
+            environment_id=example.id,
+            external_access_enabled=True,
+            external_access_recipients=["recipient@example.com"],
+            allow_auto_stopping=False)
         pulumi.export("datarobotCustomApplicationId", example_custom_application_from_environment.id)
         pulumi.export("datarobotCustomApplicationUrl", example_custom_application_from_environment.application_url)
         pulumi.export("datarobotCustomApplicationResources", example_custom_application_from_environment.resources)
@@ -371,17 +371,17 @@ class CustomApplicationFromEnvironment(pulumi.CustomResource):
             docker_image="docker_image.tar",
             use_cases=["customApplication"])
         example_custom_application_from_environment = datarobot.CustomApplicationFromEnvironment("example",
-            name="example-custom-app-from-environment",
-            environment_id=example.id,
-            external_access_enabled=True,
-            external_access_recipients=["recipient@example.com"],
-            allow_auto_stopping=False,
             resources={
                 "replicas": 1,
                 "resource_label": "cpu.small",
                 "session_affinity": False,
                 "service_web_requests_on_root_path": True,
-            })
+            },
+            name="example-custom-app-from-environment",
+            environment_id=example.id,
+            external_access_enabled=True,
+            external_access_recipients=["recipient@example.com"],
+            allow_auto_stopping=False)
         pulumi.export("datarobotCustomApplicationId", example_custom_application_from_environment.id)
         pulumi.export("datarobotCustomApplicationUrl", example_custom_application_from_environment.application_url)
         pulumi.export("datarobotCustomApplicationResources", example_custom_application_from_environment.resources)

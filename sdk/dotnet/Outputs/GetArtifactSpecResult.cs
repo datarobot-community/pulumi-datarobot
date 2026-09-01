@@ -15,6 +15,10 @@ namespace DataRobotPulumi.Datarobot.Outputs
     public sealed class GetArtifactSpecResult
     {
         /// <summary>
+        /// Whether A2A card management and the A2A surface are enabled. Set on &lt;span pulumi-lang-nodejs="`agent`" pulumi-lang-dotnet="`Agent`" pulumi-lang-go="`agent`" pulumi-lang-python="`agent`" pulumi-lang-yaml="`agent`" pulumi-lang-java="`agent`" pulumi-lang-hcl="`agent`"&gt;`agent`&lt;/span&gt; artifacts; omitted otherwise.
+        /// </summary>
+        public readonly bool A2aEnabled;
+        /// <summary>
         /// List of container groups.
         /// </summary>
         public readonly ImmutableArray<Outputs.GetArtifactSpecContainerGroupResult> ContainerGroups;
@@ -29,12 +33,15 @@ namespace DataRobotPulumi.Datarobot.Outputs
 
         [OutputConstructor]
         private GetArtifactSpecResult(
+            bool a2aEnabled,
+
             ImmutableArray<Outputs.GetArtifactSpecContainerGroupResult> containerGroups,
 
             Outputs.GetArtifactSpecStorageResult storage,
 
             string templateId)
         {
+            A2aEnabled = a2aEnabled;
             ContainerGroups = containerGroups;
             Storage = storage;
             TemplateId = templateId;

@@ -82,12 +82,8 @@ type LookupExecutionEnvironmentResult struct {
 }
 
 func LookupExecutionEnvironmentOutput(ctx *pulumi.Context, args LookupExecutionEnvironmentOutputArgs, opts ...pulumi.InvokeOption) LookupExecutionEnvironmentResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (LookupExecutionEnvironmentResultOutput, error) {
-			args := v.(LookupExecutionEnvironmentArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("datarobot:index/getExecutionEnvironment:getExecutionEnvironment", args, LookupExecutionEnvironmentResultOutput{}, options).(LookupExecutionEnvironmentResultOutput), nil
-		}).(LookupExecutionEnvironmentResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("datarobot:index/getExecutionEnvironment:getExecutionEnvironment", args, LookupExecutionEnvironmentResultOutput{}, options).(LookupExecutionEnvironmentResultOutput)
 }
 
 // A collection of arguments for invoking getExecutionEnvironment.

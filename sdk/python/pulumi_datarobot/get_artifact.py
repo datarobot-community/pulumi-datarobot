@@ -152,7 +152,7 @@ class GetArtifactResult:
     @pulumi.getter
     def type(self) -> _builtins.str:
         """
-        The artifact type: <span pulumi-lang-nodejs="`service`" pulumi-lang-dotnet="`Service`" pulumi-lang-go="`service`" pulumi-lang-python="`service`" pulumi-lang-yaml="`service`" pulumi-lang-java="`service`" pulumi-lang-hcl="`service`">`service`</span> or <span pulumi-lang-nodejs="`nim`" pulumi-lang-dotnet="`Nim`" pulumi-lang-go="`nim`" pulumi-lang-python="`nim`" pulumi-lang-yaml="`nim`" pulumi-lang-java="`nim`" pulumi-lang-hcl="`nim`">`nim`</span>.
+        The artifact type: <span pulumi-lang-nodejs="`service`" pulumi-lang-dotnet="`Service`" pulumi-lang-go="`service`" pulumi-lang-python="`service`" pulumi-lang-yaml="`service`" pulumi-lang-java="`service`" pulumi-lang-hcl="`service`">`service`</span>, <span pulumi-lang-nodejs="`nim`" pulumi-lang-dotnet="`Nim`" pulumi-lang-go="`nim`" pulumi-lang-python="`nim`" pulumi-lang-yaml="`nim`" pulumi-lang-java="`nim`" pulumi-lang-hcl="`nim`">`nim`</span>, <span pulumi-lang-nodejs="`agent`" pulumi-lang-dotnet="`Agent`" pulumi-lang-go="`agent`" pulumi-lang-python="`agent`" pulumi-lang-yaml="`agent`" pulumi-lang-java="`agent`" pulumi-lang-hcl="`agent`">`agent`</span>, or <span pulumi-lang-nodejs="`mcp`" pulumi-lang-dotnet="`Mcp`" pulumi-lang-go="`mcp`" pulumi-lang-python="`mcp`" pulumi-lang-yaml="`mcp`" pulumi-lang-java="`mcp`" pulumi-lang-hcl="`mcp`">`mcp`</span>.
         """
         return pulumi.get(self, "type")
 

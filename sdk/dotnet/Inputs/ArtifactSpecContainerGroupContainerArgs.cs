@@ -14,6 +14,12 @@ namespace DataRobotPulumi.Datarobot.Inputs
     public sealed class ArtifactSpecContainerGroupContainerArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Server-set image build metadata.
+        /// </summary>
+        [Input("build")]
+        public Input<Inputs.ArtifactSpecContainerGroupContainerBuildArgs>? Build { get; set; }
+
+        /// <summary>
         /// Description of the container.
         /// </summary>
         [Input("description")]
@@ -50,7 +56,7 @@ namespace DataRobotPulumi.Datarobot.Inputs
         public Input<Inputs.ArtifactSpecContainerGroupContainerImageBuildConfigArgs>? ImageBuildConfig { get; set; }
 
         /// <summary>
-        /// Docker image URI. Omit when using &lt;span pulumi-lang-nodejs="`imageBuildConfig`" pulumi-lang-dotnet="`ImageBuildConfig`" pulumi-lang-go="`imageBuildConfig`" pulumi-lang-python="`image_build_config`" pulumi-lang-yaml="`imageBuildConfig`" pulumi-lang-java="`imageBuildConfig`" pulumi-lang-hcl="`image_build_config`"&gt;`imageBuildConfig`&lt;/span&gt; on draft artifacts; required when status is &lt;span pulumi-lang-nodejs="`locked`" pulumi-lang-dotnet="`Locked`" pulumi-lang-go="`locked`" pulumi-lang-python="`locked`" pulumi-lang-yaml="`locked`" pulumi-lang-java="`locked`" pulumi-lang-hcl="`locked`"&gt;`locked`&lt;/span&gt; and &lt;span pulumi-lang-nodejs="`imageBuildConfig`" pulumi-lang-dotnet="`ImageBuildConfig`" pulumi-lang-go="`imageBuildConfig`" pulumi-lang-python="`image_build_config`" pulumi-lang-yaml="`imageBuildConfig`" pulumi-lang-java="`imageBuildConfig`" pulumi-lang-hcl="`image_build_config`"&gt;`imageBuildConfig`&lt;/span&gt; is set.
+        /// Docker image URI. Populated by the provider after a completed image build when &lt;span pulumi-lang-nodejs="`source`" pulumi-lang-dotnet="`Source`" pulumi-lang-go="`source`" pulumi-lang-python="`source`" pulumi-lang-yaml="`source`" pulumi-lang-java="`source`" pulumi-lang-hcl="`source`"&gt;`source`&lt;/span&gt; and &lt;span pulumi-lang-nodejs="`imageBuildConfig`" pulumi-lang-dotnet="`ImageBuildConfig`" pulumi-lang-go="`imageBuildConfig`" pulumi-lang-python="`image_build_config`" pulumi-lang-yaml="`imageBuildConfig`" pulumi-lang-java="`imageBuildConfig`" pulumi-lang-hcl="`image_build_config`"&gt;`imageBuildConfig`&lt;/span&gt; are set. May be set explicitly when not using source-driven builds.
         /// </summary>
         [Input("imageUri")]
         public Input<string>? ImageUri { get; set; }
@@ -84,6 +90,18 @@ namespace DataRobotPulumi.Datarobot.Inputs
         /// </summary>
         [Input("readinessProbe")]
         public Input<Inputs.ArtifactSpecContainerGroupContainerReadinessProbeArgs>? ReadinessProbe { get; set; }
+
+        [Input("routes")]
+        private InputList<Inputs.ArtifactSpecContainerGroupContainerRouteArgs>? _routes;
+
+        /// <summary>
+        /// Routes to expose publicly from this container. Primary containers only, at most 50. The workload root (`/`) is authenticated by default unless declared here with another policy. Route configuration is a cluster-level capability that is disabled by default: setting this on a cluster where it is not enabled fails with `Route configuration is disabled on this cluster`.
+        /// </summary>
+        public InputList<Inputs.ArtifactSpecContainerGroupContainerRouteArgs> Routes
+        {
+            get => _routes ?? (_routes = new InputList<Inputs.ArtifactSpecContainerGroupContainerRouteArgs>());
+            set => _routes = value;
+        }
 
         /// <summary>
         /// Container startup check configuration.

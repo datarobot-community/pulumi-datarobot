@@ -38,7 +38,7 @@ namespace DataRobotPulumi.Datarobot.Inputs
         public Input<string>? ExecutionEnvironmentVersionId { get; set; }
 
         /// <summary>
-        /// Relative path to the Dockerfile in the source code. Used when source is &lt;span pulumi-lang-nodejs="`provided`" pulumi-lang-dotnet="`Provided`" pulumi-lang-go="`provided`" pulumi-lang-python="`provided`" pulumi-lang-yaml="`provided`" pulumi-lang-java="`provided`" pulumi-lang-hcl="`provided`"&gt;`provided`&lt;/span&gt;. Defaults to `./Dockerfile`.
+        /// Relative path to the Dockerfile in the source code. Used when source is &lt;span pulumi-lang-nodejs="`provided`" pulumi-lang-dotnet="`Provided`" pulumi-lang-go="`provided`" pulumi-lang-python="`provided`" pulumi-lang-yaml="`provided`" pulumi-lang-java="`provided`" pulumi-lang-hcl="`provided`"&gt;`provided`&lt;/span&gt;. Defaults to `./Dockerfile`. Null when source is &lt;span pulumi-lang-nodejs="`generated`" pulumi-lang-dotnet="`Generated`" pulumi-lang-go="`generated`" pulumi-lang-python="`generated`" pulumi-lang-yaml="`generated`" pulumi-lang-java="`generated`" pulumi-lang-hcl="`generated`"&gt;`generated`&lt;/span&gt;.
         /// </summary>
         [Input("path")]
         public Input<string>? Path { get; set; }

@@ -23,17 +23,17 @@ import * as utilities from "./utilities";
  *     useCases: ["customApplication"],
  * });
  * const exampleCustomApplicationFromEnvironment = new datarobot.CustomApplicationFromEnvironment("example", {
- *     name: "example-custom-app-from-environment",
- *     environmentId: example.id,
- *     externalAccessEnabled: true,
- *     externalAccessRecipients: ["recipient@example.com"],
- *     allowAutoStopping: false,
  *     resources: {
  *         replicas: 1,
  *         resourceLabel: "cpu.small",
  *         sessionAffinity: false,
  *         serviceWebRequestsOnRootPath: true,
  *     },
+ *     name: "example-custom-app-from-environment",
+ *     environmentId: example.id,
+ *     externalAccessEnabled: true,
+ *     externalAccessRecipients: ["recipient@example.com"],
+ *     allowAutoStopping: false,
  * });
  * export const datarobotCustomApplicationId = exampleCustomApplicationFromEnvironment.id;
  * export const datarobotCustomApplicationUrl = exampleCustomApplicationFromEnvironment.applicationUrl;

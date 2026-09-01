@@ -43,6 +43,12 @@ import (
 //				return err
 //			}
 //			exampleCustomApplication, err := datarobot.NewCustomApplication(ctx, "example", &datarobot.CustomApplicationArgs{
+//				Resources: &datarobot.CustomApplicationResourcesArgs{
+//					Replicas:                     pulumi.Int(2),
+//					ResourceLabel:                pulumi.String("cpu.medium"),
+//					SessionAffinity:              pulumi.Bool(true),
+//					ServiceWebRequestsOnRootPath: pulumi.Bool(false),
+//				},
 //				Name:                  pulumi.String("example-custom-application"),
 //				SourceVersionId:       example.VersionId,
 //				ExternalAccessEnabled: pulumi.Bool(true),
@@ -50,12 +56,6 @@ import (
 //					pulumi.String("recipient@example.com"),
 //				},
 //				AllowAutoStopping: pulumi.Bool(false),
-//				Resources: &datarobot.CustomApplicationResourcesArgs{
-//					Replicas:                     pulumi.Int(2),
-//					ResourceLabel:                pulumi.String("cpu.medium"),
-//					SessionAffinity:              pulumi.Bool(true),
-//					ServiceWebRequestsOnRootPath: pulumi.Bool(false),
-//				},
 //			})
 //			if err != nil {
 //				return err

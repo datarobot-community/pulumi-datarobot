@@ -21,17 +21,17 @@ import * as utilities from "./utilities";
  *     ["streamlit-app.py"],
  * ]});
  * const exampleCustomApplication = new datarobot.CustomApplication("example", {
- *     name: "example-custom-application",
- *     sourceVersionId: example.versionId,
- *     externalAccessEnabled: true,
- *     externalAccessRecipients: ["recipient@example.com"],
- *     allowAutoStopping: false,
  *     resources: {
  *         replicas: 2,
  *         resourceLabel: "cpu.medium",
  *         sessionAffinity: true,
  *         serviceWebRequestsOnRootPath: false,
  *     },
+ *     name: "example-custom-application",
+ *     sourceVersionId: example.versionId,
+ *     externalAccessEnabled: true,
+ *     externalAccessRecipients: ["recipient@example.com"],
+ *     allowAutoStopping: false,
  * });
  * export const datarobotCustomApplicationId = exampleCustomApplication.id;
  * export const datarobotCustomApplicationSourceId = exampleCustomApplication.sourceId;

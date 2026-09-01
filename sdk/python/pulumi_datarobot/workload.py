@@ -114,7 +114,8 @@ class _WorkloadState:
                  importance: pulumi.Input[Optional[_builtins.str]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  runtime: pulumi.Input[Optional['WorkloadRuntimeArgs']] = None,
-                 status: pulumi.Input[Optional[_builtins.str]] = None):
+                 status: pulumi.Input[Optional[_builtins.str]] = None,
+                 type: pulumi.Input[Optional[_builtins.str]] = None):
         """
         Input properties used for looking up and filtering Workload resources.
 
@@ -125,6 +126,7 @@ class _WorkloadState:
         :param pulumi.Input[_builtins.str] name: The name of the Workload.
         :param pulumi.Input['WorkloadRuntimeArgs'] runtime: Runtime configuration for the Workload. Changes trigger an in-place workload replacement.
         :param pulumi.Input[_builtins.str] status: Current status of the Workload: <span pulumi-lang-nodejs="`unknown`" pulumi-lang-dotnet="`Unknown`" pulumi-lang-go="`unknown`" pulumi-lang-python="`unknown`" pulumi-lang-yaml="`unknown`" pulumi-lang-java="`unknown`" pulumi-lang-hcl="`unknown`">`unknown`</span>, <span pulumi-lang-nodejs="`submitted`" pulumi-lang-dotnet="`Submitted`" pulumi-lang-go="`submitted`" pulumi-lang-python="`submitted`" pulumi-lang-yaml="`submitted`" pulumi-lang-java="`submitted`" pulumi-lang-hcl="`submitted`">`submitted`</span>, <span pulumi-lang-nodejs="`initializing`" pulumi-lang-dotnet="`Initializing`" pulumi-lang-go="`initializing`" pulumi-lang-python="`initializing`" pulumi-lang-yaml="`initializing`" pulumi-lang-java="`initializing`" pulumi-lang-hcl="`initializing`">`initializing`</span>, <span pulumi-lang-nodejs="`running`" pulumi-lang-dotnet="`Running`" pulumi-lang-go="`running`" pulumi-lang-python="`running`" pulumi-lang-yaml="`running`" pulumi-lang-java="`running`" pulumi-lang-hcl="`running`">`running`</span>, <span pulumi-lang-nodejs="`stopping`" pulumi-lang-dotnet="`Stopping`" pulumi-lang-go="`stopping`" pulumi-lang-python="`stopping`" pulumi-lang-yaml="`stopping`" pulumi-lang-java="`stopping`" pulumi-lang-hcl="`stopping`">`stopping`</span>, <span pulumi-lang-nodejs="`stopped`" pulumi-lang-dotnet="`Stopped`" pulumi-lang-go="`stopped`" pulumi-lang-python="`stopped`" pulumi-lang-yaml="`stopped`" pulumi-lang-java="`stopped`" pulumi-lang-hcl="`stopped`">`stopped`</span>, or <span pulumi-lang-nodejs="`errored`" pulumi-lang-dotnet="`Errored`" pulumi-lang-go="`errored`" pulumi-lang-python="`errored`" pulumi-lang-yaml="`errored`" pulumi-lang-java="`errored`" pulumi-lang-hcl="`errored`">`errored`</span>.
+        :param pulumi.Input[_builtins.str] type: Artifact type mirrored by this workload: <span pulumi-lang-nodejs="`service`" pulumi-lang-dotnet="`Service`" pulumi-lang-go="`service`" pulumi-lang-python="`service`" pulumi-lang-yaml="`service`" pulumi-lang-java="`service`" pulumi-lang-hcl="`service`">`service`</span>, <span pulumi-lang-nodejs="`nim`" pulumi-lang-dotnet="`Nim`" pulumi-lang-go="`nim`" pulumi-lang-python="`nim`" pulumi-lang-yaml="`nim`" pulumi-lang-java="`nim`" pulumi-lang-hcl="`nim`">`nim`</span>, <span pulumi-lang-nodejs="`agent`" pulumi-lang-dotnet="`Agent`" pulumi-lang-go="`agent`" pulumi-lang-python="`agent`" pulumi-lang-yaml="`agent`" pulumi-lang-java="`agent`" pulumi-lang-hcl="`agent`">`agent`</span>, or <span pulumi-lang-nodejs="`mcp`" pulumi-lang-dotnet="`Mcp`" pulumi-lang-go="`mcp`" pulumi-lang-python="`mcp`" pulumi-lang-yaml="`mcp`" pulumi-lang-java="`mcp`" pulumi-lang-hcl="`mcp`">`mcp`</span>. Set from the deployed artifact; not user-configurable.
         """
         if artifact_id is not None:
             pulumi.set(__self__, "artifact_id", artifact_id)
@@ -140,6 +142,8 @@ class _WorkloadState:
             pulumi.set(__self__, "runtime", runtime)
         if status is not None:
             pulumi.set(__self__, "status", status)
+        if type is not None:
+            pulumi.set(__self__, "type", type)
 
     @_builtins.property
     @pulumi.getter(name="artifactId")
@@ -225,6 +229,18 @@ class _WorkloadState:
     def status(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "status", value)
 
+    @_builtins.property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Artifact type mirrored by this workload: <span pulumi-lang-nodejs="`service`" pulumi-lang-dotnet="`Service`" pulumi-lang-go="`service`" pulumi-lang-python="`service`" pulumi-lang-yaml="`service`" pulumi-lang-java="`service`" pulumi-lang-hcl="`service`">`service`</span>, <span pulumi-lang-nodejs="`nim`" pulumi-lang-dotnet="`Nim`" pulumi-lang-go="`nim`" pulumi-lang-python="`nim`" pulumi-lang-yaml="`nim`" pulumi-lang-java="`nim`" pulumi-lang-hcl="`nim`">`nim`</span>, <span pulumi-lang-nodejs="`agent`" pulumi-lang-dotnet="`Agent`" pulumi-lang-go="`agent`" pulumi-lang-python="`agent`" pulumi-lang-yaml="`agent`" pulumi-lang-java="`agent`" pulumi-lang-hcl="`agent`">`agent`</span>, or <span pulumi-lang-nodejs="`mcp`" pulumi-lang-dotnet="`Mcp`" pulumi-lang-go="`mcp`" pulumi-lang-python="`mcp`" pulumi-lang-yaml="`mcp`" pulumi-lang-java="`mcp`" pulumi-lang-hcl="`mcp`">`mcp`</span>. Set from the deployed artifact; not user-configurable.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "type", value)
+
 
 @pulumi.type_token("datarobot:index/workload:Workload")
 class Workload(pulumi.CustomResource):
@@ -242,58 +258,6 @@ class Workload(pulumi.CustomResource):
         A Workload runs a containerized artifact in the cluster and exposes an inference endpoint.
 
         Changes to <span pulumi-lang-nodejs="`artifactId`" pulumi-lang-dotnet="`ArtifactId`" pulumi-lang-go="`artifactId`" pulumi-lang-python="`artifact_id`" pulumi-lang-yaml="`artifactId`" pulumi-lang-java="`artifactId`" pulumi-lang-hcl="`artifact_id`">`artifactId`</span> or <span pulumi-lang-nodejs="`runtime`" pulumi-lang-dotnet="`Runtime`" pulumi-lang-go="`runtime`" pulumi-lang-python="`runtime`" pulumi-lang-yaml="`runtime`" pulumi-lang-java="`runtime`" pulumi-lang-hcl="`runtime`">`runtime`</span> trigger an in-place workload replacement via the Workload API. The workload ID and endpoint remain stable across artifact and runtime updates.
-
-        ## Example Usage
-
-        <!--Start PulumiCodeChooser -->
-        ```python
-        import pulumi
-        import pulumi_datarobot as datarobot
-
-        example = datarobot.Artifact("example",
-            name="example-workload-artifact",
-            type="service",
-            spec={
-                "container_groups": [{
-                    "containers": [{
-                        "name": "main",
-                        "image_uri": "containous/whoami:latest",
-                        "port": 8080,
-                        "primary": True,
-                        "entrypoint": [
-                            "/whoami",
-                            "--port",
-                            "8080",
-                        ],
-                    }],
-                }],
-            })
-        example_workload = datarobot.Workload("example",
-            name="example-workload",
-            description="Example workload with in-place replacement",
-            artifact_id=example.artifact_id,
-            runtime={
-                "container_groups": [{
-                    "replica_count": 2,
-                    "resource_bundles": ["cpu.small"],
-                }],
-                "replacement_policy": {
-                    "warmup_minutes": 5,
-                    "keep_old_version_minutes": 10,
-                },
-            })
-        pulumi.export("datarobotWorkloadId", example_workload.id)
-        pulumi.export("datarobotWorkloadEndpoint", example_workload.endpoint)
-        ```
-        <!--End PulumiCodeChooser -->
-
-        ## In-place replacement
-
-        Changes to <span pulumi-lang-nodejs="`artifactId`" pulumi-lang-dotnet="`ArtifactId`" pulumi-lang-go="`artifactId`" pulumi-lang-python="`artifact_id`" pulumi-lang-yaml="`artifactId`" pulumi-lang-java="`artifactId`" pulumi-lang-hcl="`artifact_id`">`artifactId`</span> or <span pulumi-lang-nodejs="`runtime`" pulumi-lang-dotnet="`Runtime`" pulumi-lang-go="`runtime`" pulumi-lang-python="`runtime`" pulumi-lang-yaml="`runtime`" pulumi-lang-java="`runtime`" pulumi-lang-hcl="`runtime`">`runtime`</span> call the Workload API **replacement** endpoints during `Update`. Terraform does **not** destroy and recreate the workload. The workload <span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`">`id`</span> and <span pulumi-lang-nodejs="`endpoint`" pulumi-lang-dotnet="`Endpoint`" pulumi-lang-go="`endpoint`" pulumi-lang-python="`endpoint`" pulumi-lang-yaml="`endpoint`" pulumi-lang-java="`endpoint`" pulumi-lang-hcl="`endpoint`">`endpoint`</span> stay stable across artifact and runtime updates.
-
-        This differs from older provider behavior that used `RequiresReplace` (delete + create). You no longer need `lifecycle {<span pulumi-lang-nodejs=" createBeforeDestroy " pulumi-lang-dotnet=" CreateBeforeDestroy " pulumi-lang-go=" createBeforeDestroy " pulumi-lang-python=" create_before_destroy " pulumi-lang-yaml=" createBeforeDestroy " pulumi-lang-java=" createBeforeDestroy " pulumi-lang-hcl=" create_before_destroy "> createBeforeDestroy </span>= true }` workarounds that existed only to preserve endpoint URLs.
-
-        For a runnable end-to-end walkthrough, see `examples/workflows/workload_replacement`.
 
 
         :param str resource_name: The name of the resource.
@@ -314,58 +278,6 @@ class Workload(pulumi.CustomResource):
         A Workload runs a containerized artifact in the cluster and exposes an inference endpoint.
 
         Changes to <span pulumi-lang-nodejs="`artifactId`" pulumi-lang-dotnet="`ArtifactId`" pulumi-lang-go="`artifactId`" pulumi-lang-python="`artifact_id`" pulumi-lang-yaml="`artifactId`" pulumi-lang-java="`artifactId`" pulumi-lang-hcl="`artifact_id`">`artifactId`</span> or <span pulumi-lang-nodejs="`runtime`" pulumi-lang-dotnet="`Runtime`" pulumi-lang-go="`runtime`" pulumi-lang-python="`runtime`" pulumi-lang-yaml="`runtime`" pulumi-lang-java="`runtime`" pulumi-lang-hcl="`runtime`">`runtime`</span> trigger an in-place workload replacement via the Workload API. The workload ID and endpoint remain stable across artifact and runtime updates.
-
-        ## Example Usage
-
-        <!--Start PulumiCodeChooser -->
-        ```python
-        import pulumi
-        import pulumi_datarobot as datarobot
-
-        example = datarobot.Artifact("example",
-            name="example-workload-artifact",
-            type="service",
-            spec={
-                "container_groups": [{
-                    "containers": [{
-                        "name": "main",
-                        "image_uri": "containous/whoami:latest",
-                        "port": 8080,
-                        "primary": True,
-                        "entrypoint": [
-                            "/whoami",
-                            "--port",
-                            "8080",
-                        ],
-                    }],
-                }],
-            })
-        example_workload = datarobot.Workload("example",
-            name="example-workload",
-            description="Example workload with in-place replacement",
-            artifact_id=example.artifact_id,
-            runtime={
-                "container_groups": [{
-                    "replica_count": 2,
-                    "resource_bundles": ["cpu.small"],
-                }],
-                "replacement_policy": {
-                    "warmup_minutes": 5,
-                    "keep_old_version_minutes": 10,
-                },
-            })
-        pulumi.export("datarobotWorkloadId", example_workload.id)
-        pulumi.export("datarobotWorkloadEndpoint", example_workload.endpoint)
-        ```
-        <!--End PulumiCodeChooser -->
-
-        ## In-place replacement
-
-        Changes to <span pulumi-lang-nodejs="`artifactId`" pulumi-lang-dotnet="`ArtifactId`" pulumi-lang-go="`artifactId`" pulumi-lang-python="`artifact_id`" pulumi-lang-yaml="`artifactId`" pulumi-lang-java="`artifactId`" pulumi-lang-hcl="`artifact_id`">`artifactId`</span> or <span pulumi-lang-nodejs="`runtime`" pulumi-lang-dotnet="`Runtime`" pulumi-lang-go="`runtime`" pulumi-lang-python="`runtime`" pulumi-lang-yaml="`runtime`" pulumi-lang-java="`runtime`" pulumi-lang-hcl="`runtime`">`runtime`</span> call the Workload API **replacement** endpoints during `Update`. Terraform does **not** destroy and recreate the workload. The workload <span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`">`id`</span> and <span pulumi-lang-nodejs="`endpoint`" pulumi-lang-dotnet="`Endpoint`" pulumi-lang-go="`endpoint`" pulumi-lang-python="`endpoint`" pulumi-lang-yaml="`endpoint`" pulumi-lang-java="`endpoint`" pulumi-lang-hcl="`endpoint`">`endpoint`</span> stay stable across artifact and runtime updates.
-
-        This differs from older provider behavior that used `RequiresReplace` (delete + create). You no longer need `lifecycle {<span pulumi-lang-nodejs=" createBeforeDestroy " pulumi-lang-dotnet=" CreateBeforeDestroy " pulumi-lang-go=" createBeforeDestroy " pulumi-lang-python=" create_before_destroy " pulumi-lang-yaml=" createBeforeDestroy " pulumi-lang-java=" createBeforeDestroy " pulumi-lang-hcl=" create_before_destroy "> createBeforeDestroy </span>= true }` workarounds that existed only to preserve endpoint URLs.
-
-        For a runnable end-to-end walkthrough, see `examples/workflows/workload_replacement`.
 
 
         :param str resource_name: The name of the resource.
@@ -408,6 +320,7 @@ class Workload(pulumi.CustomResource):
             __props__.__dict__["runtime"] = runtime
             __props__.__dict__["endpoint"] = None
             __props__.__dict__["status"] = None
+            __props__.__dict__["type"] = None
         super(Workload, __self__).__init__(
             'datarobot:index/workload:Workload',
             resource_name,
@@ -424,7 +337,8 @@ class Workload(pulumi.CustomResource):
             importance: pulumi.Input[Optional[_builtins.str]] = None,
             name: pulumi.Input[Optional[_builtins.str]] = None,
             runtime: pulumi.Input[Optional[Union['WorkloadRuntimeArgs', 'WorkloadRuntimeArgsDict']]] = None,
-            status: pulumi.Input[Optional[_builtins.str]] = None) -> 'Workload':
+            status: pulumi.Input[Optional[_builtins.str]] = None,
+            type: pulumi.Input[Optional[_builtins.str]] = None) -> 'Workload':
         """
         Get an existing Workload resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -439,6 +353,7 @@ class Workload(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] name: The name of the Workload.
         :param pulumi.Input[Union['WorkloadRuntimeArgs', 'WorkloadRuntimeArgsDict']] runtime: Runtime configuration for the Workload. Changes trigger an in-place workload replacement.
         :param pulumi.Input[_builtins.str] status: Current status of the Workload: <span pulumi-lang-nodejs="`unknown`" pulumi-lang-dotnet="`Unknown`" pulumi-lang-go="`unknown`" pulumi-lang-python="`unknown`" pulumi-lang-yaml="`unknown`" pulumi-lang-java="`unknown`" pulumi-lang-hcl="`unknown`">`unknown`</span>, <span pulumi-lang-nodejs="`submitted`" pulumi-lang-dotnet="`Submitted`" pulumi-lang-go="`submitted`" pulumi-lang-python="`submitted`" pulumi-lang-yaml="`submitted`" pulumi-lang-java="`submitted`" pulumi-lang-hcl="`submitted`">`submitted`</span>, <span pulumi-lang-nodejs="`initializing`" pulumi-lang-dotnet="`Initializing`" pulumi-lang-go="`initializing`" pulumi-lang-python="`initializing`" pulumi-lang-yaml="`initializing`" pulumi-lang-java="`initializing`" pulumi-lang-hcl="`initializing`">`initializing`</span>, <span pulumi-lang-nodejs="`running`" pulumi-lang-dotnet="`Running`" pulumi-lang-go="`running`" pulumi-lang-python="`running`" pulumi-lang-yaml="`running`" pulumi-lang-java="`running`" pulumi-lang-hcl="`running`">`running`</span>, <span pulumi-lang-nodejs="`stopping`" pulumi-lang-dotnet="`Stopping`" pulumi-lang-go="`stopping`" pulumi-lang-python="`stopping`" pulumi-lang-yaml="`stopping`" pulumi-lang-java="`stopping`" pulumi-lang-hcl="`stopping`">`stopping`</span>, <span pulumi-lang-nodejs="`stopped`" pulumi-lang-dotnet="`Stopped`" pulumi-lang-go="`stopped`" pulumi-lang-python="`stopped`" pulumi-lang-yaml="`stopped`" pulumi-lang-java="`stopped`" pulumi-lang-hcl="`stopped`">`stopped`</span>, or <span pulumi-lang-nodejs="`errored`" pulumi-lang-dotnet="`Errored`" pulumi-lang-go="`errored`" pulumi-lang-python="`errored`" pulumi-lang-yaml="`errored`" pulumi-lang-java="`errored`" pulumi-lang-hcl="`errored`">`errored`</span>.
+        :param pulumi.Input[_builtins.str] type: Artifact type mirrored by this workload: <span pulumi-lang-nodejs="`service`" pulumi-lang-dotnet="`Service`" pulumi-lang-go="`service`" pulumi-lang-python="`service`" pulumi-lang-yaml="`service`" pulumi-lang-java="`service`" pulumi-lang-hcl="`service`">`service`</span>, <span pulumi-lang-nodejs="`nim`" pulumi-lang-dotnet="`Nim`" pulumi-lang-go="`nim`" pulumi-lang-python="`nim`" pulumi-lang-yaml="`nim`" pulumi-lang-java="`nim`" pulumi-lang-hcl="`nim`">`nim`</span>, <span pulumi-lang-nodejs="`agent`" pulumi-lang-dotnet="`Agent`" pulumi-lang-go="`agent`" pulumi-lang-python="`agent`" pulumi-lang-yaml="`agent`" pulumi-lang-java="`agent`" pulumi-lang-hcl="`agent`">`agent`</span>, or <span pulumi-lang-nodejs="`mcp`" pulumi-lang-dotnet="`Mcp`" pulumi-lang-go="`mcp`" pulumi-lang-python="`mcp`" pulumi-lang-yaml="`mcp`" pulumi-lang-java="`mcp`" pulumi-lang-hcl="`mcp`">`mcp`</span>. Set from the deployed artifact; not user-configurable.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -451,6 +366,7 @@ class Workload(pulumi.CustomResource):
         __props__.__dict__["name"] = name
         __props__.__dict__["runtime"] = runtime
         __props__.__dict__["status"] = status
+        __props__.__dict__["type"] = type
         return Workload(resource_name, opts=opts, __props__=__props__)
 
     @_builtins.property
@@ -508,4 +424,12 @@ class Workload(pulumi.CustomResource):
         Current status of the Workload: <span pulumi-lang-nodejs="`unknown`" pulumi-lang-dotnet="`Unknown`" pulumi-lang-go="`unknown`" pulumi-lang-python="`unknown`" pulumi-lang-yaml="`unknown`" pulumi-lang-java="`unknown`" pulumi-lang-hcl="`unknown`">`unknown`</span>, <span pulumi-lang-nodejs="`submitted`" pulumi-lang-dotnet="`Submitted`" pulumi-lang-go="`submitted`" pulumi-lang-python="`submitted`" pulumi-lang-yaml="`submitted`" pulumi-lang-java="`submitted`" pulumi-lang-hcl="`submitted`">`submitted`</span>, <span pulumi-lang-nodejs="`initializing`" pulumi-lang-dotnet="`Initializing`" pulumi-lang-go="`initializing`" pulumi-lang-python="`initializing`" pulumi-lang-yaml="`initializing`" pulumi-lang-java="`initializing`" pulumi-lang-hcl="`initializing`">`initializing`</span>, <span pulumi-lang-nodejs="`running`" pulumi-lang-dotnet="`Running`" pulumi-lang-go="`running`" pulumi-lang-python="`running`" pulumi-lang-yaml="`running`" pulumi-lang-java="`running`" pulumi-lang-hcl="`running`">`running`</span>, <span pulumi-lang-nodejs="`stopping`" pulumi-lang-dotnet="`Stopping`" pulumi-lang-go="`stopping`" pulumi-lang-python="`stopping`" pulumi-lang-yaml="`stopping`" pulumi-lang-java="`stopping`" pulumi-lang-hcl="`stopping`">`stopping`</span>, <span pulumi-lang-nodejs="`stopped`" pulumi-lang-dotnet="`Stopped`" pulumi-lang-go="`stopped`" pulumi-lang-python="`stopped`" pulumi-lang-yaml="`stopped`" pulumi-lang-java="`stopped`" pulumi-lang-hcl="`stopped`">`stopped`</span>, or <span pulumi-lang-nodejs="`errored`" pulumi-lang-dotnet="`Errored`" pulumi-lang-go="`errored`" pulumi-lang-python="`errored`" pulumi-lang-yaml="`errored`" pulumi-lang-java="`errored`" pulumi-lang-hcl="`errored`">`errored`</span>.
         """
         return pulumi.get(self, "status")
+
+    @_builtins.property
+    @pulumi.getter
+    def type(self) -> pulumi.Output[_builtins.str]:
+        """
+        Artifact type mirrored by this workload: <span pulumi-lang-nodejs="`service`" pulumi-lang-dotnet="`Service`" pulumi-lang-go="`service`" pulumi-lang-python="`service`" pulumi-lang-yaml="`service`" pulumi-lang-java="`service`" pulumi-lang-hcl="`service`">`service`</span>, <span pulumi-lang-nodejs="`nim`" pulumi-lang-dotnet="`Nim`" pulumi-lang-go="`nim`" pulumi-lang-python="`nim`" pulumi-lang-yaml="`nim`" pulumi-lang-java="`nim`" pulumi-lang-hcl="`nim`">`nim`</span>, <span pulumi-lang-nodejs="`agent`" pulumi-lang-dotnet="`Agent`" pulumi-lang-go="`agent`" pulumi-lang-python="`agent`" pulumi-lang-yaml="`agent`" pulumi-lang-java="`agent`" pulumi-lang-hcl="`agent`">`agent`</span>, or <span pulumi-lang-nodejs="`mcp`" pulumi-lang-dotnet="`Mcp`" pulumi-lang-go="`mcp`" pulumi-lang-python="`mcp`" pulumi-lang-yaml="`mcp`" pulumi-lang-java="`mcp`" pulumi-lang-hcl="`mcp`">`mcp`</span>. Set from the deployed artifact; not user-configurable.
+        """
+        return pulumi.get(self, "type")
 
