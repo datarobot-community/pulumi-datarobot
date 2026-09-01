@@ -14,91 +14,6 @@ namespace DataRobotPulumi.Datarobot
     /// A Workload runs a containerized artifact in the cluster and exposes an inference endpoint.
     /// 
     /// Changes to &lt;span pulumi-lang-nodejs="`artifactId`" pulumi-lang-dotnet="`ArtifactId`" pulumi-lang-go="`artifactId`" pulumi-lang-python="`artifact_id`" pulumi-lang-yaml="`artifactId`" pulumi-lang-java="`artifactId`" pulumi-lang-hcl="`artifact_id`"&gt;`artifactId`&lt;/span&gt; or &lt;span pulumi-lang-nodejs="`runtime`" pulumi-lang-dotnet="`Runtime`" pulumi-lang-go="`runtime`" pulumi-lang-python="`runtime`" pulumi-lang-yaml="`runtime`" pulumi-lang-java="`runtime`" pulumi-lang-hcl="`runtime`"&gt;`runtime`&lt;/span&gt; trigger an in-place workload replacement via the Workload API. The workload ID and endpoint remain stable across artifact and runtime updates.
-    /// 
-    /// ## Example Usage
-    /// 
-    /// &lt;!--Start PulumiCodeChooser --&gt;
-    /// ```csharp
-    /// using System.Collections.Generic;
-    /// using System.Linq;
-    /// using Pulumi;
-    /// using Datarobot = DataRobotPulumi.Datarobot;
-    /// 
-    /// return await Deployment.RunAsync(() =&gt; 
-    /// {
-    ///     var example = new Datarobot.Artifact("example", new()
-    ///     {
-    ///         Name = "example-workload-artifact",
-    ///         Type = "service",
-    ///         Spec = new Datarobot.Inputs.ArtifactSpecArgs
-    ///         {
-    ///             ContainerGroups = new[]
-    ///             {
-    ///                 new Datarobot.Inputs.ArtifactSpecContainerGroupArgs
-    ///                 {
-    ///                     Containers = new[]
-    ///                     {
-    ///                         new Datarobot.Inputs.ArtifactSpecContainerGroupContainerArgs
-    ///                         {
-    ///                             Name = "main",
-    ///                             ImageUri = "containous/whoami:latest",
-    ///                             Port = 8080,
-    ///                             Primary = true,
-    ///                             Entrypoint = new[]
-    ///                             {
-    ///                                 "/whoami",
-    ///                                 "--port",
-    ///                                 "8080",
-    ///                             },
-    ///                         },
-    ///                     },
-    ///                 },
-    ///             },
-    ///         },
-    ///     });
-    /// 
-    ///     var exampleWorkload = new Datarobot.Workload("example", new()
-    ///     {
-    ///         Name = "example-workload",
-    ///         Description = "Example workload with in-place replacement",
-    ///         ArtifactId = example.ArtifactId,
-    ///         Runtime = new Datarobot.Inputs.WorkloadRuntimeArgs
-    ///         {
-    ///             ContainerGroups = new[]
-    ///             {
-    ///                 new Datarobot.Inputs.WorkloadRuntimeContainerGroupArgs
-    ///                 {
-    ///                     ReplicaCount = 2,
-    ///                     ResourceBundles = new[]
-    ///                     {
-    ///                         "cpu.small",
-    ///                     },
-    ///                 },
-    ///             },
-    ///             ReplacementPolicy = new Datarobot.Inputs.WorkloadRuntimeReplacementPolicyArgs
-    ///             {
-    ///                 WarmupMinutes = 5,
-    ///                 KeepOldVersionMinutes = 10,
-    ///             },
-    ///         },
-    ///     });
-    /// 
-    ///     return new Dictionary&lt;string, object?&gt;
-    ///     {
-    ///         ["datarobotWorkloadId"] = exampleWorkload.Id,
-    ///         ["datarobotWorkloadEndpoint"] = exampleWorkload.Endpoint,
-    ///     };
-    /// });
-    /// ```
-    /// &lt;!--End PulumiCodeChooser --&gt;
-    /// 
-    /// ## In-place replacement
-    /// 
-    /// Changes to &lt;span pulumi-lang-nodejs="`artifactId`" pulumi-lang-dotnet="`ArtifactId`" pulumi-lang-go="`artifactId`" pulumi-lang-python="`artifact_id`" pulumi-lang-yaml="`artifactId`" pulumi-lang-java="`artifactId`" pulumi-lang-hcl="`artifact_id`"&gt;`artifactId`&lt;/span&gt; or &lt;span pulumi-lang-nodejs="`runtime`" pulumi-lang-dotnet="`Runtime`" pulumi-lang-go="`runtime`" pulumi-lang-python="`runtime`" pulumi-lang-yaml="`runtime`" pulumi-lang-java="`runtime`" pulumi-lang-hcl="`runtime`"&gt;`runtime`&lt;/span&gt; call the Workload API **replacement** endpoints during `Update`. Terraform does **not** destroy and recreate the workload. The workload &lt;span pulumi-lang-nodejs="`id`" pulumi-lang-dotnet="`Id`" pulumi-lang-go="`id`" pulumi-lang-python="`id`" pulumi-lang-yaml="`id`" pulumi-lang-java="`id`" pulumi-lang-hcl="`id`"&gt;`id`&lt;/span&gt; and &lt;span pulumi-lang-nodejs="`endpoint`" pulumi-lang-dotnet="`Endpoint`" pulumi-lang-go="`endpoint`" pulumi-lang-python="`endpoint`" pulumi-lang-yaml="`endpoint`" pulumi-lang-java="`endpoint`" pulumi-lang-hcl="`endpoint`"&gt;`endpoint`&lt;/span&gt; stay stable across artifact and runtime updates.
-    /// 
-    /// This differs from older provider behavior that used `RequiresReplace` (delete + create). You no longer need `lifecycle {&lt;span pulumi-lang-nodejs=" createBeforeDestroy " pulumi-lang-dotnet=" CreateBeforeDestroy " pulumi-lang-go=" createBeforeDestroy " pulumi-lang-python=" create_before_destroy " pulumi-lang-yaml=" createBeforeDestroy " pulumi-lang-java=" createBeforeDestroy " pulumi-lang-hcl=" create_before_destroy "&gt; createBeforeDestroy &lt;/span&gt;= true }` workarounds that existed only to preserve endpoint URLs.
-    /// 
-    /// For a runnable end-to-end walkthrough, see `examples/workflows/workload_replacement`.
     /// </summary>
     [DatarobotResourceType("datarobot:index/workload:Workload")]
     public partial class Workload : global::Pulumi.CustomResource
@@ -144,6 +59,12 @@ namespace DataRobotPulumi.Datarobot
         /// </summary>
         [Output("status")]
         public Output<string> Status { get; private set; } = null!;
+
+        /// <summary>
+        /// Artifact type mirrored by this workload: &lt;span pulumi-lang-nodejs="`service`" pulumi-lang-dotnet="`Service`" pulumi-lang-go="`service`" pulumi-lang-python="`service`" pulumi-lang-yaml="`service`" pulumi-lang-java="`service`" pulumi-lang-hcl="`service`"&gt;`service`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`nim`" pulumi-lang-dotnet="`Nim`" pulumi-lang-go="`nim`" pulumi-lang-python="`nim`" pulumi-lang-yaml="`nim`" pulumi-lang-java="`nim`" pulumi-lang-hcl="`nim`"&gt;`nim`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`agent`" pulumi-lang-dotnet="`Agent`" pulumi-lang-go="`agent`" pulumi-lang-python="`agent`" pulumi-lang-yaml="`agent`" pulumi-lang-java="`agent`" pulumi-lang-hcl="`agent`"&gt;`agent`&lt;/span&gt;, or &lt;span pulumi-lang-nodejs="`mcp`" pulumi-lang-dotnet="`Mcp`" pulumi-lang-go="`mcp`" pulumi-lang-python="`mcp`" pulumi-lang-yaml="`mcp`" pulumi-lang-java="`mcp`" pulumi-lang-hcl="`mcp`"&gt;`mcp`&lt;/span&gt;. Set from the deployed artifact; not user-configurable.
+        /// </summary>
+        [Output("type")]
+        public Output<string> Type { get; private set; } = null!;
 
 
         /// <summary>
@@ -271,6 +192,12 @@ namespace DataRobotPulumi.Datarobot
         /// </summary>
         [Input("status")]
         public Input<string>? Status { get; set; }
+
+        /// <summary>
+        /// Artifact type mirrored by this workload: &lt;span pulumi-lang-nodejs="`service`" pulumi-lang-dotnet="`Service`" pulumi-lang-go="`service`" pulumi-lang-python="`service`" pulumi-lang-yaml="`service`" pulumi-lang-java="`service`" pulumi-lang-hcl="`service`"&gt;`service`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`nim`" pulumi-lang-dotnet="`Nim`" pulumi-lang-go="`nim`" pulumi-lang-python="`nim`" pulumi-lang-yaml="`nim`" pulumi-lang-java="`nim`" pulumi-lang-hcl="`nim`"&gt;`nim`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`agent`" pulumi-lang-dotnet="`Agent`" pulumi-lang-go="`agent`" pulumi-lang-python="`agent`" pulumi-lang-yaml="`agent`" pulumi-lang-java="`agent`" pulumi-lang-hcl="`agent`"&gt;`agent`&lt;/span&gt;, or &lt;span pulumi-lang-nodejs="`mcp`" pulumi-lang-dotnet="`Mcp`" pulumi-lang-go="`mcp`" pulumi-lang-python="`mcp`" pulumi-lang-yaml="`mcp`" pulumi-lang-java="`mcp`" pulumi-lang-hcl="`mcp`"&gt;`mcp`&lt;/span&gt;. Set from the deployed artifact; not user-configurable.
+        /// </summary>
+        [Input("type")]
+        public Input<string>? Type { get; set; }
 
         public WorkloadState()
         {

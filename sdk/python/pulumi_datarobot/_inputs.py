@@ -31,6 +31,8 @@ __all__ = [
     'ArtifactSpecContainerGroupArgsDict',
     'ArtifactSpecContainerGroupContainerArgs',
     'ArtifactSpecContainerGroupContainerArgsDict',
+    'ArtifactSpecContainerGroupContainerBuildArgs',
+    'ArtifactSpecContainerGroupContainerBuildArgsDict',
     'ArtifactSpecContainerGroupContainerEnvironmentVarArgs',
     'ArtifactSpecContainerGroupContainerEnvironmentVarArgsDict',
     'ArtifactSpecContainerGroupContainerImageBuildConfigArgs',
@@ -43,6 +45,8 @@ __all__ = [
     'ArtifactSpecContainerGroupContainerLivenessProbeArgsDict',
     'ArtifactSpecContainerGroupContainerReadinessProbeArgs',
     'ArtifactSpecContainerGroupContainerReadinessProbeArgsDict',
+    'ArtifactSpecContainerGroupContainerRouteArgs',
+    'ArtifactSpecContainerGroupContainerRouteArgsDict',
     'ArtifactSpecContainerGroupContainerStartupProbeArgs',
     'ArtifactSpecContainerGroupContainerStartupProbeArgsDict',
     'BatchPredictionJobDefinitionCsvSettingsArgs',
@@ -562,21 +566,37 @@ class ArtifactSourceArgsDict(TypedDict):
     """
     dir_hash: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
-    SHA-256 fingerprint of <span pulumi-lang-nodejs="`dir`" pulumi-lang-dotnet="`Dir`" pulumi-lang-go="`dir`" pulumi-lang-python="`dir`" pulumi-lang-yaml="`dir`" pulumi-lang-java="`dir`" pulumi-lang-hcl="`dir`">`dir`</span> contents, used to detect changes and skip re-upload when unchanged.
+    SHA-256 fingerprint of uploadable files under <span pulumi-lang-nodejs="`dir`" pulumi-lang-dotnet="`Dir`" pulumi-lang-go="`dir`" pulumi-lang-python="`dir`" pulumi-lang-yaml="`dir`" pulumi-lang-java="`dir`" pulumi-lang-hcl="`dir`">`dir`</span> after `.drignore` / system excludes. Used to detect changes and skip re-upload when unchanged. Files covered by a system exclude are never part of this hash.
+    """
+    generate_ignore: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
+    """
+    When <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> (default), if <span pulumi-lang-nodejs="`dir`" pulumi-lang-dotnet="`Dir`" pulumi-lang-go="`dir`" pulumi-lang-python="`dir`" pulumi-lang-yaml="`dir`" pulumi-lang-java="`dir`" pulumi-lang-hcl="`dir`">`dir`</span> has neither `.drignore` nor `.wapiignore`, the provider writes a default `.drignore` at the start of apply. Existing ignore files are never overwritten. Set to <span pulumi-lang-nodejs="`false`" pulumi-lang-dotnet="`False`" pulumi-lang-go="`false`" pulumi-lang-python="`false`" pulumi-lang-yaml="`false`" pulumi-lang-java="`false`" pulumi-lang-hcl="`false`">`false`</span> to skip autogeneration. System excludes always apply and cannot be re-enabled from `.drignore`: `.datarobot.yaml`, `.git`, `.gitignore`, `.wapi`, `.datarobot/workload`, and Terraform's own `.terraform`, `terraform.tfstate*` and `*.tfvars` files.
+    """
+    wait_for_build: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
+    """
+    When <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> (default), after a source upload the provider triggers an image build and polls until it completes before proceeding (for example, before locking). When <span pulumi-lang-nodejs="`false`" pulumi-lang-dotnet="`False`" pulumi-lang-go="`false`" pulumi-lang-python="`false`" pulumi-lang-yaml="`false`" pulumi-lang-java="`false`" pulumi-lang-hcl="`false`">`false`</span>, the build is triggered but apply does not wait for <span pulumi-lang-nodejs="`imageUri`" pulumi-lang-dotnet="`ImageUri`" pulumi-lang-go="`imageUri`" pulumi-lang-python="`image_uri`" pulumi-lang-yaml="`imageUri`" pulumi-lang-java="`imageUri`" pulumi-lang-hcl="`image_uri`">`imageUri`</span> to be populated.
     """
 
 @pulumi.input_type
 class ArtifactSourceArgs:
     def __init__(__self__, *,
                  dir: pulumi.Input[_builtins.str],
-                 dir_hash: pulumi.Input[Optional[_builtins.str]] = None):
+                 dir_hash: pulumi.Input[Optional[_builtins.str]] = None,
+                 generate_ignore: pulumi.Input[Optional[_builtins.bool]] = None,
+                 wait_for_build: pulumi.Input[Optional[_builtins.bool]] = None):
         """
         :param pulumi.Input[_builtins.str] dir: Path to the local directory containing application source files to upload.
-        :param pulumi.Input[_builtins.str] dir_hash: SHA-256 fingerprint of <span pulumi-lang-nodejs="`dir`" pulumi-lang-dotnet="`Dir`" pulumi-lang-go="`dir`" pulumi-lang-python="`dir`" pulumi-lang-yaml="`dir`" pulumi-lang-java="`dir`" pulumi-lang-hcl="`dir`">`dir`</span> contents, used to detect changes and skip re-upload when unchanged.
+        :param pulumi.Input[_builtins.str] dir_hash: SHA-256 fingerprint of uploadable files under <span pulumi-lang-nodejs="`dir`" pulumi-lang-dotnet="`Dir`" pulumi-lang-go="`dir`" pulumi-lang-python="`dir`" pulumi-lang-yaml="`dir`" pulumi-lang-java="`dir`" pulumi-lang-hcl="`dir`">`dir`</span> after `.drignore` / system excludes. Used to detect changes and skip re-upload when unchanged. Files covered by a system exclude are never part of this hash.
+        :param pulumi.Input[_builtins.bool] generate_ignore: When <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> (default), if <span pulumi-lang-nodejs="`dir`" pulumi-lang-dotnet="`Dir`" pulumi-lang-go="`dir`" pulumi-lang-python="`dir`" pulumi-lang-yaml="`dir`" pulumi-lang-java="`dir`" pulumi-lang-hcl="`dir`">`dir`</span> has neither `.drignore` nor `.wapiignore`, the provider writes a default `.drignore` at the start of apply. Existing ignore files are never overwritten. Set to <span pulumi-lang-nodejs="`false`" pulumi-lang-dotnet="`False`" pulumi-lang-go="`false`" pulumi-lang-python="`false`" pulumi-lang-yaml="`false`" pulumi-lang-java="`false`" pulumi-lang-hcl="`false`">`false`</span> to skip autogeneration. System excludes always apply and cannot be re-enabled from `.drignore`: `.datarobot.yaml`, `.git`, `.gitignore`, `.wapi`, `.datarobot/workload`, and Terraform's own `.terraform`, `terraform.tfstate*` and `*.tfvars` files.
+        :param pulumi.Input[_builtins.bool] wait_for_build: When <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> (default), after a source upload the provider triggers an image build and polls until it completes before proceeding (for example, before locking). When <span pulumi-lang-nodejs="`false`" pulumi-lang-dotnet="`False`" pulumi-lang-go="`false`" pulumi-lang-python="`false`" pulumi-lang-yaml="`false`" pulumi-lang-java="`false`" pulumi-lang-hcl="`false`">`false`</span>, the build is triggered but apply does not wait for <span pulumi-lang-nodejs="`imageUri`" pulumi-lang-dotnet="`ImageUri`" pulumi-lang-go="`imageUri`" pulumi-lang-python="`image_uri`" pulumi-lang-yaml="`imageUri`" pulumi-lang-java="`imageUri`" pulumi-lang-hcl="`image_uri`">`imageUri`</span> to be populated.
         """
         pulumi.set(__self__, "dir", dir)
         if dir_hash is not None:
             pulumi.set(__self__, "dir_hash", dir_hash)
+        if generate_ignore is not None:
+            pulumi.set(__self__, "generate_ignore", generate_ignore)
+        if wait_for_build is not None:
+            pulumi.set(__self__, "wait_for_build", wait_for_build)
 
     @_builtins.property
     @pulumi.getter
@@ -594,7 +614,7 @@ class ArtifactSourceArgs:
     @pulumi.getter(name="dirHash")
     def dir_hash(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        SHA-256 fingerprint of <span pulumi-lang-nodejs="`dir`" pulumi-lang-dotnet="`Dir`" pulumi-lang-go="`dir`" pulumi-lang-python="`dir`" pulumi-lang-yaml="`dir`" pulumi-lang-java="`dir`" pulumi-lang-hcl="`dir`">`dir`</span> contents, used to detect changes and skip re-upload when unchanged.
+        SHA-256 fingerprint of uploadable files under <span pulumi-lang-nodejs="`dir`" pulumi-lang-dotnet="`Dir`" pulumi-lang-go="`dir`" pulumi-lang-python="`dir`" pulumi-lang-yaml="`dir`" pulumi-lang-java="`dir`" pulumi-lang-hcl="`dir`">`dir`</span> after `.drignore` / system excludes. Used to detect changes and skip re-upload when unchanged. Files covered by a system exclude are never part of this hash.
         """
         return pulumi.get(self, "dir_hash")
 
@@ -602,21 +622,53 @@ class ArtifactSourceArgs:
     def dir_hash(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "dir_hash", value)
 
+    @_builtins.property
+    @pulumi.getter(name="generateIgnore")
+    def generate_ignore(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        When <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> (default), if <span pulumi-lang-nodejs="`dir`" pulumi-lang-dotnet="`Dir`" pulumi-lang-go="`dir`" pulumi-lang-python="`dir`" pulumi-lang-yaml="`dir`" pulumi-lang-java="`dir`" pulumi-lang-hcl="`dir`">`dir`</span> has neither `.drignore` nor `.wapiignore`, the provider writes a default `.drignore` at the start of apply. Existing ignore files are never overwritten. Set to <span pulumi-lang-nodejs="`false`" pulumi-lang-dotnet="`False`" pulumi-lang-go="`false`" pulumi-lang-python="`false`" pulumi-lang-yaml="`false`" pulumi-lang-java="`false`" pulumi-lang-hcl="`false`">`false`</span> to skip autogeneration. System excludes always apply and cannot be re-enabled from `.drignore`: `.datarobot.yaml`, `.git`, `.gitignore`, `.wapi`, `.datarobot/workload`, and Terraform's own `.terraform`, `terraform.tfstate*` and `*.tfvars` files.
+        """
+        return pulumi.get(self, "generate_ignore")
+
+    @generate_ignore.setter
+    def generate_ignore(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "generate_ignore", value)
+
+    @_builtins.property
+    @pulumi.getter(name="waitForBuild")
+    def wait_for_build(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        When <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> (default), after a source upload the provider triggers an image build and polls until it completes before proceeding (for example, before locking). When <span pulumi-lang-nodejs="`false`" pulumi-lang-dotnet="`False`" pulumi-lang-go="`false`" pulumi-lang-python="`false`" pulumi-lang-yaml="`false`" pulumi-lang-java="`false`" pulumi-lang-hcl="`false`">`false`</span>, the build is triggered but apply does not wait for <span pulumi-lang-nodejs="`imageUri`" pulumi-lang-dotnet="`ImageUri`" pulumi-lang-go="`imageUri`" pulumi-lang-python="`image_uri`" pulumi-lang-yaml="`imageUri`" pulumi-lang-java="`imageUri`" pulumi-lang-hcl="`image_uri`">`imageUri`</span> to be populated.
+        """
+        return pulumi.get(self, "wait_for_build")
+
+    @wait_for_build.setter
+    def wait_for_build(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "wait_for_build", value)
+
 
 class ArtifactSpecArgsDict(TypedDict):
     container_groups: pulumi.Input[Sequence[pulumi.Input['ArtifactSpecContainerGroupArgsDict']]]
     """
     List of container groups.
     """
+    a2a_enabled: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
+    """
+    Turns on agent-to-agent (A2A) card management and the A2A surface for this agent. Valid only when <span pulumi-lang-nodejs="`type`" pulumi-lang-dotnet="`Type`" pulumi-lang-go="`type`" pulumi-lang-python="`type`" pulumi-lang-yaml="`type`" pulumi-lang-java="`type`" pulumi-lang-hcl="`type`">`type`</span> is <span pulumi-lang-nodejs="`agent`" pulumi-lang-dotnet="`Agent`" pulumi-lang-go="`agent`" pulumi-lang-python="`agent`" pulumi-lang-yaml="`agent`" pulumi-lang-java="`agent`" pulumi-lang-hcl="`agent`">`agent`</span>. Defaults to off in the Workload API.
+    """
 
 @pulumi.input_type
 class ArtifactSpecArgs:
     def __init__(__self__, *,
-                 container_groups: pulumi.Input[Sequence[pulumi.Input['ArtifactSpecContainerGroupArgs']]]):
+                 container_groups: pulumi.Input[Sequence[pulumi.Input['ArtifactSpecContainerGroupArgs']]],
+                 a2a_enabled: pulumi.Input[Optional[_builtins.bool]] = None):
         """
         :param pulumi.Input[Sequence[pulumi.Input['ArtifactSpecContainerGroupArgs']]] container_groups: List of container groups.
+        :param pulumi.Input[_builtins.bool] a2a_enabled: Turns on agent-to-agent (A2A) card management and the A2A surface for this agent. Valid only when <span pulumi-lang-nodejs="`type`" pulumi-lang-dotnet="`Type`" pulumi-lang-go="`type`" pulumi-lang-python="`type`" pulumi-lang-yaml="`type`" pulumi-lang-java="`type`" pulumi-lang-hcl="`type`">`type`</span> is <span pulumi-lang-nodejs="`agent`" pulumi-lang-dotnet="`Agent`" pulumi-lang-go="`agent`" pulumi-lang-python="`agent`" pulumi-lang-yaml="`agent`" pulumi-lang-java="`agent`" pulumi-lang-hcl="`agent`">`agent`</span>. Defaults to off in the Workload API.
         """
         pulumi.set(__self__, "container_groups", container_groups)
+        if a2a_enabled is not None:
+            pulumi.set(__self__, "a2a_enabled", a2a_enabled)
 
     @_builtins.property
     @pulumi.getter(name="containerGroups")
@@ -629,6 +681,18 @@ class ArtifactSpecArgs:
     @container_groups.setter
     def container_groups(self, value: pulumi.Input[Sequence[pulumi.Input['ArtifactSpecContainerGroupArgs']]]):
         pulumi.set(self, "container_groups", value)
+
+    @_builtins.property
+    @pulumi.getter(name="a2aEnabled")
+    def a2a_enabled(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Turns on agent-to-agent (A2A) card management and the A2A surface for this agent. Valid only when <span pulumi-lang-nodejs="`type`" pulumi-lang-dotnet="`Type`" pulumi-lang-go="`type`" pulumi-lang-python="`type`" pulumi-lang-yaml="`type`" pulumi-lang-java="`type`" pulumi-lang-hcl="`type`">`type`</span> is <span pulumi-lang-nodejs="`agent`" pulumi-lang-dotnet="`Agent`" pulumi-lang-go="`agent`" pulumi-lang-python="`agent`" pulumi-lang-yaml="`agent`" pulumi-lang-java="`agent`" pulumi-lang-hcl="`agent`">`agent`</span>. Defaults to off in the Workload API.
+        """
+        return pulumi.get(self, "a2a_enabled")
+
+    @a2a_enabled.setter
+    def a2a_enabled(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "a2a_enabled", value)
 
 
 class ArtifactSpecContainerGroupArgsDict(TypedDict):
@@ -660,6 +724,10 @@ class ArtifactSpecContainerGroupArgs:
 
 
 class ArtifactSpecContainerGroupContainerArgsDict(TypedDict):
+    build: NotRequired[pulumi.Input[Optional['ArtifactSpecContainerGroupContainerBuildArgsDict']]]
+    """
+    Server-set image build metadata.
+    """
     description: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
     Description of the container.
@@ -678,7 +746,7 @@ class ArtifactSpecContainerGroupContainerArgsDict(TypedDict):
     """
     image_uri: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
-    Docker image URI. Omit when using <span pulumi-lang-nodejs="`imageBuildConfig`" pulumi-lang-dotnet="`ImageBuildConfig`" pulumi-lang-go="`imageBuildConfig`" pulumi-lang-python="`image_build_config`" pulumi-lang-yaml="`imageBuildConfig`" pulumi-lang-java="`imageBuildConfig`" pulumi-lang-hcl="`image_build_config`">`imageBuildConfig`</span> on draft artifacts; required when status is <span pulumi-lang-nodejs="`locked`" pulumi-lang-dotnet="`Locked`" pulumi-lang-go="`locked`" pulumi-lang-python="`locked`" pulumi-lang-yaml="`locked`" pulumi-lang-java="`locked`" pulumi-lang-hcl="`locked`">`locked`</span> and <span pulumi-lang-nodejs="`imageBuildConfig`" pulumi-lang-dotnet="`ImageBuildConfig`" pulumi-lang-go="`imageBuildConfig`" pulumi-lang-python="`image_build_config`" pulumi-lang-yaml="`imageBuildConfig`" pulumi-lang-java="`imageBuildConfig`" pulumi-lang-hcl="`image_build_config`">`imageBuildConfig`</span> is set.
+    Docker image URI. Populated by the provider after a completed image build when <span pulumi-lang-nodejs="`source`" pulumi-lang-dotnet="`Source`" pulumi-lang-go="`source`" pulumi-lang-python="`source`" pulumi-lang-yaml="`source`" pulumi-lang-java="`source`" pulumi-lang-hcl="`source`">`source`</span> and <span pulumi-lang-nodejs="`imageBuildConfig`" pulumi-lang-dotnet="`ImageBuildConfig`" pulumi-lang-go="`imageBuildConfig`" pulumi-lang-python="`image_build_config`" pulumi-lang-yaml="`imageBuildConfig`" pulumi-lang-java="`imageBuildConfig`" pulumi-lang-hcl="`image_build_config`">`imageBuildConfig`</span> are set. May be set explicitly when not using source-driven builds.
     """
     liveness_probe: NotRequired[pulumi.Input[Optional['ArtifactSpecContainerGroupContainerLivenessProbeArgsDict']]]
     """
@@ -700,6 +768,10 @@ class ArtifactSpecContainerGroupContainerArgsDict(TypedDict):
     """
     Container readiness check configuration.
     """
+    routes: NotRequired[pulumi.Input[Optional[Sequence[pulumi.Input['ArtifactSpecContainerGroupContainerRouteArgsDict']]]]]
+    """
+    Routes to expose publicly from this container. Primary containers only, at most 50. The workload root (`/`) is authenticated by default unless declared here with another policy. Route configuration is a cluster-level capability that is disabled by default: setting this on a cluster where it is not enabled fails with `Route configuration is disabled on this cluster`.
+    """
     startup_probe: NotRequired[pulumi.Input[Optional['ArtifactSpecContainerGroupContainerStartupProbeArgsDict']]]
     """
     Container startup check configuration.
@@ -708,6 +780,7 @@ class ArtifactSpecContainerGroupContainerArgsDict(TypedDict):
 @pulumi.input_type
 class ArtifactSpecContainerGroupContainerArgs:
     def __init__(__self__, *,
+                 build: pulumi.Input[Optional['ArtifactSpecContainerGroupContainerBuildArgs']] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
                  entrypoints: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  environment_vars: pulumi.Input[Optional[Sequence[pulumi.Input['ArtifactSpecContainerGroupContainerEnvironmentVarArgs']]]] = None,
@@ -718,20 +791,25 @@ class ArtifactSpecContainerGroupContainerArgs:
                  port: pulumi.Input[Optional[_builtins.int]] = None,
                  primary: pulumi.Input[Optional[_builtins.bool]] = None,
                  readiness_probe: pulumi.Input[Optional['ArtifactSpecContainerGroupContainerReadinessProbeArgs']] = None,
+                 routes: pulumi.Input[Optional[Sequence[pulumi.Input['ArtifactSpecContainerGroupContainerRouteArgs']]]] = None,
                  startup_probe: pulumi.Input[Optional['ArtifactSpecContainerGroupContainerStartupProbeArgs']] = None):
         """
+        :param pulumi.Input['ArtifactSpecContainerGroupContainerBuildArgs'] build: Server-set image build metadata.
         :param pulumi.Input[_builtins.str] description: Description of the container.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] entrypoints: Container entrypoint.
         :param pulumi.Input[Sequence[pulumi.Input['ArtifactSpecContainerGroupContainerEnvironmentVarArgs']]] environment_vars: Environment variables for the container.
         :param pulumi.Input['ArtifactSpecContainerGroupContainerImageBuildConfigArgs'] image_build_config: Configuration for server-side image builds from source code.
-        :param pulumi.Input[_builtins.str] image_uri: Docker image URI. Omit when using <span pulumi-lang-nodejs="`imageBuildConfig`" pulumi-lang-dotnet="`ImageBuildConfig`" pulumi-lang-go="`imageBuildConfig`" pulumi-lang-python="`image_build_config`" pulumi-lang-yaml="`imageBuildConfig`" pulumi-lang-java="`imageBuildConfig`" pulumi-lang-hcl="`image_build_config`">`imageBuildConfig`</span> on draft artifacts; required when status is <span pulumi-lang-nodejs="`locked`" pulumi-lang-dotnet="`Locked`" pulumi-lang-go="`locked`" pulumi-lang-python="`locked`" pulumi-lang-yaml="`locked`" pulumi-lang-java="`locked`" pulumi-lang-hcl="`locked`">`locked`</span> and <span pulumi-lang-nodejs="`imageBuildConfig`" pulumi-lang-dotnet="`ImageBuildConfig`" pulumi-lang-go="`imageBuildConfig`" pulumi-lang-python="`image_build_config`" pulumi-lang-yaml="`imageBuildConfig`" pulumi-lang-java="`imageBuildConfig`" pulumi-lang-hcl="`image_build_config`">`imageBuildConfig`</span> is set.
+        :param pulumi.Input[_builtins.str] image_uri: Docker image URI. Populated by the provider after a completed image build when <span pulumi-lang-nodejs="`source`" pulumi-lang-dotnet="`Source`" pulumi-lang-go="`source`" pulumi-lang-python="`source`" pulumi-lang-yaml="`source`" pulumi-lang-java="`source`" pulumi-lang-hcl="`source`">`source`</span> and <span pulumi-lang-nodejs="`imageBuildConfig`" pulumi-lang-dotnet="`ImageBuildConfig`" pulumi-lang-go="`imageBuildConfig`" pulumi-lang-python="`image_build_config`" pulumi-lang-yaml="`imageBuildConfig`" pulumi-lang-java="`imageBuildConfig`" pulumi-lang-hcl="`image_build_config`">`imageBuildConfig`</span> are set. May be set explicitly when not using source-driven builds.
         :param pulumi.Input['ArtifactSpecContainerGroupContainerLivenessProbeArgs'] liveness_probe: Container liveness check configuration.
         :param pulumi.Input[_builtins.str] name: Name of the container.
         :param pulumi.Input[_builtins.int] port: Container access port (1024-65535). Required for primary containers; omit for non-primary.
         :param pulumi.Input[_builtins.bool] primary: Whether this is the primary container.
         :param pulumi.Input['ArtifactSpecContainerGroupContainerReadinessProbeArgs'] readiness_probe: Container readiness check configuration.
+        :param pulumi.Input[Sequence[pulumi.Input['ArtifactSpecContainerGroupContainerRouteArgs']]] routes: Routes to expose publicly from this container. Primary containers only, at most 50. The workload root (`/`) is authenticated by default unless declared here with another policy. Route configuration is a cluster-level capability that is disabled by default: setting this on a cluster where it is not enabled fails with `Route configuration is disabled on this cluster`.
         :param pulumi.Input['ArtifactSpecContainerGroupContainerStartupProbeArgs'] startup_probe: Container startup check configuration.
         """
+        if build is not None:
+            pulumi.set(__self__, "build", build)
         if description is not None:
             pulumi.set(__self__, "description", description)
         if entrypoints is not None:
@@ -752,8 +830,22 @@ class ArtifactSpecContainerGroupContainerArgs:
             pulumi.set(__self__, "primary", primary)
         if readiness_probe is not None:
             pulumi.set(__self__, "readiness_probe", readiness_probe)
+        if routes is not None:
+            pulumi.set(__self__, "routes", routes)
         if startup_probe is not None:
             pulumi.set(__self__, "startup_probe", startup_probe)
+
+    @_builtins.property
+    @pulumi.getter
+    def build(self) -> pulumi.Input[Optional['ArtifactSpecContainerGroupContainerBuildArgs']]:
+        """
+        Server-set image build metadata.
+        """
+        return pulumi.get(self, "build")
+
+    @build.setter
+    def build(self, value: pulumi.Input[Optional['ArtifactSpecContainerGroupContainerBuildArgs']]):
+        pulumi.set(self, "build", value)
 
     @_builtins.property
     @pulumi.getter
@@ -807,7 +899,7 @@ class ArtifactSpecContainerGroupContainerArgs:
     @pulumi.getter(name="imageUri")
     def image_uri(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        Docker image URI. Omit when using <span pulumi-lang-nodejs="`imageBuildConfig`" pulumi-lang-dotnet="`ImageBuildConfig`" pulumi-lang-go="`imageBuildConfig`" pulumi-lang-python="`image_build_config`" pulumi-lang-yaml="`imageBuildConfig`" pulumi-lang-java="`imageBuildConfig`" pulumi-lang-hcl="`image_build_config`">`imageBuildConfig`</span> on draft artifacts; required when status is <span pulumi-lang-nodejs="`locked`" pulumi-lang-dotnet="`Locked`" pulumi-lang-go="`locked`" pulumi-lang-python="`locked`" pulumi-lang-yaml="`locked`" pulumi-lang-java="`locked`" pulumi-lang-hcl="`locked`">`locked`</span> and <span pulumi-lang-nodejs="`imageBuildConfig`" pulumi-lang-dotnet="`ImageBuildConfig`" pulumi-lang-go="`imageBuildConfig`" pulumi-lang-python="`image_build_config`" pulumi-lang-yaml="`imageBuildConfig`" pulumi-lang-java="`imageBuildConfig`" pulumi-lang-hcl="`image_build_config`">`imageBuildConfig`</span> is set.
+        Docker image URI. Populated by the provider after a completed image build when <span pulumi-lang-nodejs="`source`" pulumi-lang-dotnet="`Source`" pulumi-lang-go="`source`" pulumi-lang-python="`source`" pulumi-lang-yaml="`source`" pulumi-lang-java="`source`" pulumi-lang-hcl="`source`">`source`</span> and <span pulumi-lang-nodejs="`imageBuildConfig`" pulumi-lang-dotnet="`ImageBuildConfig`" pulumi-lang-go="`imageBuildConfig`" pulumi-lang-python="`image_build_config`" pulumi-lang-yaml="`imageBuildConfig`" pulumi-lang-java="`imageBuildConfig`" pulumi-lang-hcl="`image_build_config`">`imageBuildConfig`</span> are set. May be set explicitly when not using source-driven builds.
         """
         return pulumi.get(self, "image_uri")
 
@@ -876,6 +968,18 @@ class ArtifactSpecContainerGroupContainerArgs:
         pulumi.set(self, "readiness_probe", value)
 
     @_builtins.property
+    @pulumi.getter
+    def routes(self) -> pulumi.Input[Optional[Sequence[pulumi.Input['ArtifactSpecContainerGroupContainerRouteArgs']]]]:
+        """
+        Routes to expose publicly from this container. Primary containers only, at most 50. The workload root (`/`) is authenticated by default unless declared here with another policy. Route configuration is a cluster-level capability that is disabled by default: setting this on a cluster where it is not enabled fails with `Route configuration is disabled on this cluster`.
+        """
+        return pulumi.get(self, "routes")
+
+    @routes.setter
+    def routes(self, value: pulumi.Input[Optional[Sequence[pulumi.Input['ArtifactSpecContainerGroupContainerRouteArgs']]]]):
+        pulumi.set(self, "routes", value)
+
+    @_builtins.property
     @pulumi.getter(name="startupProbe")
     def startup_probe(self) -> pulumi.Input[Optional['ArtifactSpecContainerGroupContainerStartupProbeArgs']]:
         """
@@ -886,6 +990,75 @@ class ArtifactSpecContainerGroupContainerArgs:
     @startup_probe.setter
     def startup_probe(self, value: pulumi.Input[Optional['ArtifactSpecContainerGroupContainerStartupProbeArgs']]):
         pulumi.set(self, "startup_probe", value)
+
+
+class ArtifactSpecContainerGroupContainerBuildArgsDict(TypedDict):
+    artifact_image_build_id: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Artifact image build ID.
+    """
+    created_at: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Build creation timestamp (UTC).
+    """
+    status: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Image build status. With `source.wait_for_build` enabled (the default) this is the terminal status of the build the provider waited on; otherwise it is the status at submit time.
+    """
+
+@pulumi.input_type
+class ArtifactSpecContainerGroupContainerBuildArgs:
+    def __init__(__self__, *,
+                 artifact_image_build_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 created_at: pulumi.Input[Optional[_builtins.str]] = None,
+                 status: pulumi.Input[Optional[_builtins.str]] = None):
+        """
+        :param pulumi.Input[_builtins.str] artifact_image_build_id: Artifact image build ID.
+        :param pulumi.Input[_builtins.str] created_at: Build creation timestamp (UTC).
+        :param pulumi.Input[_builtins.str] status: Image build status. With `source.wait_for_build` enabled (the default) this is the terminal status of the build the provider waited on; otherwise it is the status at submit time.
+        """
+        if artifact_image_build_id is not None:
+            pulumi.set(__self__, "artifact_image_build_id", artifact_image_build_id)
+        if created_at is not None:
+            pulumi.set(__self__, "created_at", created_at)
+        if status is not None:
+            pulumi.set(__self__, "status", status)
+
+    @_builtins.property
+    @pulumi.getter(name="artifactImageBuildId")
+    def artifact_image_build_id(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Artifact image build ID.
+        """
+        return pulumi.get(self, "artifact_image_build_id")
+
+    @artifact_image_build_id.setter
+    def artifact_image_build_id(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "artifact_image_build_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="createdAt")
+    def created_at(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Build creation timestamp (UTC).
+        """
+        return pulumi.get(self, "created_at")
+
+    @created_at.setter
+    def created_at(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "created_at", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def status(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Image build status. With `source.wait_for_build` enabled (the default) this is the terminal status of the build the provider waited on; otherwise it is the status at submit time.
+        """
+        return pulumi.get(self, "status")
+
+    @status.setter
+    def status(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "status", value)
 
 
 class ArtifactSpecContainerGroupContainerEnvironmentVarArgsDict(TypedDict):
@@ -899,11 +1072,11 @@ class ArtifactSpecContainerGroupContainerEnvironmentVarArgsDict(TypedDict):
     """
     name: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
-    Name of the environment variable. Required when source is "string" or "dr-credential". Optional for "api-key": when omitted, the platform injects the token as DATAROBOT*API*TOKEN.
+    Name of the environment variable. Required when source is "string" or "dr-credential". Optional for "api-key" (defaults to DATAROBOT*API*TOKEN).
     """
     source: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
-    Source type: "string" for plain text values, "dr-credential" for DataRobot credentials, "api-key" for a platform-managed DataRobot API token. Defaults to "string".
+    Source type: "string" for plain text values, "dr-credential" for DataRobot credentials, or "api-key" for a platform-managed per-workload DataRobot API token. Defaults to "string".
     """
     value: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
@@ -921,8 +1094,8 @@ class ArtifactSpecContainerGroupContainerEnvironmentVarArgs:
         """
         :param pulumi.Input[_builtins.str] dr_credential_id: DataRobot credential ID. Required when source is "dr-credential".
         :param pulumi.Input[_builtins.str] key: Key within the credential. Required when source is "dr-credential".
-        :param pulumi.Input[_builtins.str] name: Name of the environment variable. Required when source is "string" or "dr-credential". Optional for "api-key": when omitted, the platform injects the token as DATAROBOT*API*TOKEN.
-        :param pulumi.Input[_builtins.str] source: Source type: "string" for plain text values, "dr-credential" for DataRobot credentials, "api-key" for a platform-managed DataRobot API token. Defaults to "string".
+        :param pulumi.Input[_builtins.str] name: Name of the environment variable. Required when source is "string" or "dr-credential". Optional for "api-key" (defaults to DATAROBOT*API*TOKEN).
+        :param pulumi.Input[_builtins.str] source: Source type: "string" for plain text values, "dr-credential" for DataRobot credentials, or "api-key" for a platform-managed per-workload DataRobot API token. Defaults to "string".
         :param pulumi.Input[_builtins.str] value: Value of the environment variable. Required when source is "string".
         """
         if dr_credential_id is not None:
@@ -964,7 +1137,7 @@ class ArtifactSpecContainerGroupContainerEnvironmentVarArgs:
     @pulumi.getter
     def name(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        Name of the environment variable. Required when source is "string" or "dr-credential". Optional for "api-key": when omitted, the platform injects the token as DATAROBOT*API*TOKEN.
+        Name of the environment variable. Required when source is "string" or "dr-credential". Optional for "api-key" (defaults to DATAROBOT*API*TOKEN).
         """
         return pulumi.get(self, "name")
 
@@ -976,7 +1149,7 @@ class ArtifactSpecContainerGroupContainerEnvironmentVarArgs:
     @pulumi.getter
     def source(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        Source type: "string" for plain text values, "dr-credential" for DataRobot credentials, "api-key" for a platform-managed DataRobot API token. Defaults to "string".
+        Source type: "string" for plain text values, "dr-credential" for DataRobot credentials, or "api-key" for a platform-managed per-workload DataRobot API token. Defaults to "string".
         """
         return pulumi.get(self, "source")
 
@@ -1108,7 +1281,7 @@ class ArtifactSpecContainerGroupContainerImageBuildConfigDockerfileArgsDict(Type
     """
     path: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
-    Relative path to the Dockerfile in the source code. Used when source is <span pulumi-lang-nodejs="`provided`" pulumi-lang-dotnet="`Provided`" pulumi-lang-go="`provided`" pulumi-lang-python="`provided`" pulumi-lang-yaml="`provided`" pulumi-lang-java="`provided`" pulumi-lang-hcl="`provided`">`provided`</span>. Defaults to `./Dockerfile`.
+    Relative path to the Dockerfile in the source code. Used when source is <span pulumi-lang-nodejs="`provided`" pulumi-lang-dotnet="`Provided`" pulumi-lang-go="`provided`" pulumi-lang-python="`provided`" pulumi-lang-yaml="`provided`" pulumi-lang-java="`provided`" pulumi-lang-hcl="`provided`">`provided`</span>. Defaults to `./Dockerfile`. Null when source is <span pulumi-lang-nodejs="`generated`" pulumi-lang-dotnet="`Generated`" pulumi-lang-go="`generated`" pulumi-lang-python="`generated`" pulumi-lang-yaml="`generated`" pulumi-lang-java="`generated`" pulumi-lang-hcl="`generated`">`generated`</span>.
     """
     source: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
@@ -1127,7 +1300,7 @@ class ArtifactSpecContainerGroupContainerImageBuildConfigDockerfileArgs:
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] entrypoints: Entrypoint baked into the generated Dockerfile CMD. Required when source is <span pulumi-lang-nodejs="`generated`" pulumi-lang-dotnet="`Generated`" pulumi-lang-go="`generated`" pulumi-lang-python="`generated`" pulumi-lang-yaml="`generated`" pulumi-lang-java="`generated`" pulumi-lang-hcl="`generated`">`generated`</span>.
         :param pulumi.Input[_builtins.str] execution_environment_id: Execution environment ID for the base Docker image. Required when source is <span pulumi-lang-nodejs="`generated`" pulumi-lang-dotnet="`Generated`" pulumi-lang-go="`generated`" pulumi-lang-python="`generated`" pulumi-lang-yaml="`generated`" pulumi-lang-java="`generated`" pulumi-lang-hcl="`generated`">`generated`</span>.
         :param pulumi.Input[_builtins.str] execution_environment_version_id: Execution environment version ID that pins the base image. Required when source is <span pulumi-lang-nodejs="`generated`" pulumi-lang-dotnet="`Generated`" pulumi-lang-go="`generated`" pulumi-lang-python="`generated`" pulumi-lang-yaml="`generated`" pulumi-lang-java="`generated`" pulumi-lang-hcl="`generated`">`generated`</span>.
-        :param pulumi.Input[_builtins.str] path: Relative path to the Dockerfile in the source code. Used when source is <span pulumi-lang-nodejs="`provided`" pulumi-lang-dotnet="`Provided`" pulumi-lang-go="`provided`" pulumi-lang-python="`provided`" pulumi-lang-yaml="`provided`" pulumi-lang-java="`provided`" pulumi-lang-hcl="`provided`">`provided`</span>. Defaults to `./Dockerfile`.
+        :param pulumi.Input[_builtins.str] path: Relative path to the Dockerfile in the source code. Used when source is <span pulumi-lang-nodejs="`provided`" pulumi-lang-dotnet="`Provided`" pulumi-lang-go="`provided`" pulumi-lang-python="`provided`" pulumi-lang-yaml="`provided`" pulumi-lang-java="`provided`" pulumi-lang-hcl="`provided`">`provided`</span>. Defaults to `./Dockerfile`. Null when source is <span pulumi-lang-nodejs="`generated`" pulumi-lang-dotnet="`Generated`" pulumi-lang-go="`generated`" pulumi-lang-python="`generated`" pulumi-lang-yaml="`generated`" pulumi-lang-java="`generated`" pulumi-lang-hcl="`generated`">`generated`</span>.
         :param pulumi.Input[_builtins.str] source: How the Dockerfile is obtained: <span pulumi-lang-nodejs="`provided`" pulumi-lang-dotnet="`Provided`" pulumi-lang-go="`provided`" pulumi-lang-python="`provided`" pulumi-lang-yaml="`provided`" pulumi-lang-java="`provided`" pulumi-lang-hcl="`provided`">`provided`</span> (from source code) or <span pulumi-lang-nodejs="`generated`" pulumi-lang-dotnet="`Generated`" pulumi-lang-go="`generated`" pulumi-lang-python="`generated`" pulumi-lang-yaml="`generated`" pulumi-lang-java="`generated`" pulumi-lang-hcl="`generated`">`generated`</span> (from an execution environment). Defaults to <span pulumi-lang-nodejs="`provided`" pulumi-lang-dotnet="`Provided`" pulumi-lang-go="`provided`" pulumi-lang-python="`provided`" pulumi-lang-yaml="`provided`" pulumi-lang-java="`provided`" pulumi-lang-hcl="`provided`">`provided`</span>.
         """
         if entrypoints is not None:
@@ -1181,7 +1354,7 @@ class ArtifactSpecContainerGroupContainerImageBuildConfigDockerfileArgs:
     @pulumi.getter
     def path(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        Relative path to the Dockerfile in the source code. Used when source is <span pulumi-lang-nodejs="`provided`" pulumi-lang-dotnet="`Provided`" pulumi-lang-go="`provided`" pulumi-lang-python="`provided`" pulumi-lang-yaml="`provided`" pulumi-lang-java="`provided`" pulumi-lang-hcl="`provided`">`provided`</span>. Defaults to `./Dockerfile`.
+        Relative path to the Dockerfile in the source code. Used when source is <span pulumi-lang-nodejs="`provided`" pulumi-lang-dotnet="`Provided`" pulumi-lang-go="`provided`" pulumi-lang-python="`provided`" pulumi-lang-yaml="`provided`" pulumi-lang-java="`provided`" pulumi-lang-hcl="`provided`">`provided`</span>. Defaults to `./Dockerfile`. Null when source is <span pulumi-lang-nodejs="`generated`" pulumi-lang-dotnet="`Generated`" pulumi-lang-go="`generated`" pulumi-lang-python="`generated`" pulumi-lang-yaml="`generated`" pulumi-lang-java="`generated`" pulumi-lang-hcl="`generated`">`generated`</span>.
         """
         return pulumi.get(self, "path")
 
@@ -1576,6 +1749,53 @@ class ArtifactSpecContainerGroupContainerReadinessProbeArgs:
     @timeout_seconds.setter
     def timeout_seconds(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "timeout_seconds", value)
+
+
+class ArtifactSpecContainerGroupContainerRouteArgsDict(TypedDict):
+    auth: pulumi.Input[_builtins.str]
+    """
+    Authentication applied to this route: "required" rejects unauthenticated requests, "optional" authenticates when an Authorization header is present, "disabled" never attempts authentication.
+    """
+    path: pulumi.Input[_builtins.str]
+    """
+    Route path relative to the workload root, excluding the URL prefix the workload is mounted on. Must start with `/` and be at most 1024 characters. Paths must be unique within a container.
+    """
+
+@pulumi.input_type
+class ArtifactSpecContainerGroupContainerRouteArgs:
+    def __init__(__self__, *,
+                 auth: pulumi.Input[_builtins.str],
+                 path: pulumi.Input[_builtins.str]):
+        """
+        :param pulumi.Input[_builtins.str] auth: Authentication applied to this route: "required" rejects unauthenticated requests, "optional" authenticates when an Authorization header is present, "disabled" never attempts authentication.
+        :param pulumi.Input[_builtins.str] path: Route path relative to the workload root, excluding the URL prefix the workload is mounted on. Must start with `/` and be at most 1024 characters. Paths must be unique within a container.
+        """
+        pulumi.set(__self__, "auth", auth)
+        pulumi.set(__self__, "path", path)
+
+    @_builtins.property
+    @pulumi.getter
+    def auth(self) -> pulumi.Input[_builtins.str]:
+        """
+        Authentication applied to this route: "required" rejects unauthenticated requests, "optional" authenticates when an Authorization header is present, "disabled" never attempts authentication.
+        """
+        return pulumi.get(self, "auth")
+
+    @auth.setter
+    def auth(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "auth", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def path(self) -> pulumi.Input[_builtins.str]:
+        """
+        Route path relative to the workload root, excluding the URL prefix the workload is mounted on. Must start with `/` and be at most 1024 characters. Paths must be unique within a container.
+        """
+        return pulumi.get(self, "path")
+
+    @path.setter
+    def path(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "path", value)
 
 
 class ArtifactSpecContainerGroupContainerStartupProbeArgsDict(TypedDict):

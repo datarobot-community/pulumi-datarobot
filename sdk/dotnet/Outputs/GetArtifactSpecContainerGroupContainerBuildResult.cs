@@ -23,7 +23,7 @@ namespace DataRobotPulumi.Datarobot.Outputs
         /// </summary>
         public readonly string CreatedAt;
         /// <summary>
-        /// Image build status at submit time.
+        /// Image build status. With `source.wait_for_build` enabled (the default) this is the terminal status of the build the provider waited on; otherwise it is the status at submit time.
         /// </summary>
         public readonly string Status;
 

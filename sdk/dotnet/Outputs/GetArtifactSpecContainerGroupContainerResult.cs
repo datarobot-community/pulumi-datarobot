@@ -59,6 +59,10 @@ namespace DataRobotPulumi.Datarobot.Outputs
         /// </summary>
         public readonly Outputs.GetArtifactSpecContainerGroupContainerReadinessProbeResult ReadinessProbe;
         /// <summary>
+        /// Routes exposed publicly from this container.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.GetArtifactSpecContainerGroupContainerRouteResult> Routes;
+        /// <summary>
         /// Container security context.
         /// </summary>
         public readonly Outputs.GetArtifactSpecContainerGroupContainerSecurityContextResult SecurityContext;
@@ -91,6 +95,8 @@ namespace DataRobotPulumi.Datarobot.Outputs
 
             Outputs.GetArtifactSpecContainerGroupContainerReadinessProbeResult readinessProbe,
 
+            ImmutableArray<Outputs.GetArtifactSpecContainerGroupContainerRouteResult> routes,
+
             Outputs.GetArtifactSpecContainerGroupContainerSecurityContextResult securityContext,
 
             Outputs.GetArtifactSpecContainerGroupContainerStartupProbeResult startupProbe)
@@ -106,6 +112,7 @@ namespace DataRobotPulumi.Datarobot.Outputs
             Port = port;
             Primary = primary;
             ReadinessProbe = readinessProbe;
+            Routes = routes;
             SecurityContext = securityContext;
             StartupProbe = startupProbe;
         }

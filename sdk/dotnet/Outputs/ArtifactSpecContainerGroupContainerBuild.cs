@@ -12,28 +12,28 @@ namespace DataRobotPulumi.Datarobot.Outputs
 {
 
     [OutputType]
-    public sealed class GetArtifactsArtifactSpecContainerGroupContainerBuildResult
+    public sealed class ArtifactSpecContainerGroupContainerBuild
     {
         /// <summary>
         /// Artifact image build ID.
         /// </summary>
-        public readonly string ArtifactImageBuildId;
+        public readonly string? ArtifactImageBuildId;
         /// <summary>
         /// Build creation timestamp (UTC).
         /// </summary>
-        public readonly string CreatedAt;
+        public readonly string? CreatedAt;
         /// <summary>
         /// Image build status. With `source.wait_for_build` enabled (the default) this is the terminal status of the build the provider waited on; otherwise it is the status at submit time.
         /// </summary>
-        public readonly string Status;
+        public readonly string? Status;
 
         [OutputConstructor]
-        private GetArtifactsArtifactSpecContainerGroupContainerBuildResult(
-            string artifactImageBuildId,
+        private ArtifactSpecContainerGroupContainerBuild(
+            string? artifactImageBuildId,
 
-            string createdAt,
+            string? createdAt,
 
-            string status)
+            string? status)
         {
             ArtifactImageBuildId = artifactImageBuildId;
             CreatedAt = createdAt;

@@ -27,7 +27,7 @@ namespace DataRobotPulumi.Datarobot.Outputs
         /// </summary>
         public readonly string Name;
         /// <summary>
-        /// Source type: "string" for plain text values, "dr-credential" for DataRobot credentials, "api-key" for a platform-managed DataRobot API token.
+        /// Source type: "string" for plain text values, "dr-credential" for DataRobot credentials, or "api-key" for a platform-managed per-workload DataRobot API token.
         /// </summary>
         public readonly string Source;
         /// <summary>

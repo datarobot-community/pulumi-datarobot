@@ -41,6 +41,12 @@ import (
 //				return err
 //			}
 //			exampleCustomApplicationFromEnvironment, err := datarobot.NewCustomApplicationFromEnvironment(ctx, "example", &datarobot.CustomApplicationFromEnvironmentArgs{
+//				Resources: &datarobot.CustomApplicationFromEnvironmentResourcesArgs{
+//					Replicas:                     pulumi.Int(1),
+//					ResourceLabel:                pulumi.String("cpu.small"),
+//					SessionAffinity:              pulumi.Bool(false),
+//					ServiceWebRequestsOnRootPath: pulumi.Bool(true),
+//				},
 //				Name:                  pulumi.String("example-custom-app-from-environment"),
 //				EnvironmentId:         example.ID().ToIDOutput().ToStringOutput(),
 //				ExternalAccessEnabled: pulumi.Bool(true),
@@ -48,12 +54,6 @@ import (
 //					pulumi.String("recipient@example.com"),
 //				},
 //				AllowAutoStopping: pulumi.Bool(false),
-//				Resources: &datarobot.CustomApplicationFromEnvironmentResourcesArgs{
-//					Replicas:                     pulumi.Int(1),
-//					ResourceLabel:                pulumi.String("cpu.small"),
-//					SessionAffinity:              pulumi.Bool(false),
-//					ServiceWebRequestsOnRootPath: pulumi.Bool(true),
-//				},
 //			})
 //			if err != nil {
 //				return err

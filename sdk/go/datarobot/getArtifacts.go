@@ -46,12 +46,8 @@ type GetArtifactsResult struct {
 }
 
 func GetArtifactsOutput(ctx *pulumi.Context, args GetArtifactsOutputArgs, opts ...pulumi.InvokeOption) GetArtifactsResultOutput {
-	return pulumi.ToOutputWithContext(ctx.Context(), args).
-		ApplyT(func(v interface{}) (GetArtifactsResultOutput, error) {
-			args := v.(GetArtifactsArgs)
-			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
-			return ctx.InvokeOutput("datarobot:index/getArtifacts:getArtifacts", args, GetArtifactsResultOutput{}, options).(GetArtifactsResultOutput), nil
-		}).(GetArtifactsResultOutput)
+	options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+	return ctx.InvokeOutput("datarobot:index/getArtifacts:getArtifacts", args, GetArtifactsResultOutput{}, options).(GetArtifactsResultOutput)
 }
 
 // A collection of arguments for invoking getArtifacts.

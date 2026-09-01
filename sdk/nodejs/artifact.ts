@@ -54,7 +54,7 @@ export class Artifact extends pulumi.CustomResource {
      */
     declare public readonly name: pulumi.Output<string>;
     /**
-     * Local source directory to upload to the DataRobot catalog and attach to the primary container's `image_build_config.code_ref`. On draft artifacts, uploads are applied in-place. On locked artifacts, source changes clone to a new draft version, upload, patch <span pulumi-lang-nodejs="`codeRef`" pulumi-lang-dotnet="`CodeRef`" pulumi-lang-go="`codeRef`" pulumi-lang-python="`code_ref`" pulumi-lang-yaml="`codeRef`" pulumi-lang-java="`codeRef`" pulumi-lang-hcl="`code_ref`">`codeRef`</span>, and lock the new version.
+     * Local source directory to upload to the DataRobot catalog and attach to the primary container's `image_build_config.code_ref`. When source content changes, the provider uploads, triggers an image build on the draft artifact, and (by default) waits for completion before proceeding. On draft artifacts, uploads are applied in-place. On locked artifacts, source changes clone to a new draft version, upload, build, patch <span pulumi-lang-nodejs="`codeRef`" pulumi-lang-dotnet="`CodeRef`" pulumi-lang-go="`codeRef`" pulumi-lang-python="`code_ref`" pulumi-lang-yaml="`codeRef`" pulumi-lang-java="`codeRef`" pulumi-lang-hcl="`code_ref`">`codeRef`</span>, and lock the new version.
      */
     declare public readonly source: pulumi.Output<outputs.ArtifactSource | undefined>;
     /**
@@ -66,7 +66,7 @@ export class Artifact extends pulumi.CustomResource {
      */
     declare public readonly status: pulumi.Output<string>;
     /**
-     * The artifact type: <span pulumi-lang-nodejs="`service`" pulumi-lang-dotnet="`Service`" pulumi-lang-go="`service`" pulumi-lang-python="`service`" pulumi-lang-yaml="`service`" pulumi-lang-java="`service`" pulumi-lang-hcl="`service`">`service`</span> or <span pulumi-lang-nodejs="`nim`" pulumi-lang-dotnet="`Nim`" pulumi-lang-go="`nim`" pulumi-lang-python="`nim`" pulumi-lang-yaml="`nim`" pulumi-lang-java="`nim`" pulumi-lang-hcl="`nim`">`nim`</span>. Defaults to <span pulumi-lang-nodejs="`service`" pulumi-lang-dotnet="`Service`" pulumi-lang-go="`service`" pulumi-lang-python="`service`" pulumi-lang-yaml="`service`" pulumi-lang-java="`service`" pulumi-lang-hcl="`service`">`service`</span>.
+     * The artifact type: <span pulumi-lang-nodejs="`service`" pulumi-lang-dotnet="`Service`" pulumi-lang-go="`service`" pulumi-lang-python="`service`" pulumi-lang-yaml="`service`" pulumi-lang-java="`service`" pulumi-lang-hcl="`service`">`service`</span>, <span pulumi-lang-nodejs="`nim`" pulumi-lang-dotnet="`Nim`" pulumi-lang-go="`nim`" pulumi-lang-python="`nim`" pulumi-lang-yaml="`nim`" pulumi-lang-java="`nim`" pulumi-lang-hcl="`nim`">`nim`</span>, <span pulumi-lang-nodejs="`agent`" pulumi-lang-dotnet="`Agent`" pulumi-lang-go="`agent`" pulumi-lang-python="`agent`" pulumi-lang-yaml="`agent`" pulumi-lang-java="`agent`" pulumi-lang-hcl="`agent`">`agent`</span>, or <span pulumi-lang-nodejs="`mcp`" pulumi-lang-dotnet="`Mcp`" pulumi-lang-go="`mcp`" pulumi-lang-python="`mcp`" pulumi-lang-yaml="`mcp`" pulumi-lang-java="`mcp`" pulumi-lang-hcl="`mcp`">`mcp`</span>. Defaults to <span pulumi-lang-nodejs="`service`" pulumi-lang-dotnet="`Service`" pulumi-lang-go="`service`" pulumi-lang-python="`service`" pulumi-lang-yaml="`service`" pulumi-lang-java="`service`" pulumi-lang-hcl="`service`">`service`</span>.
      */
     declare public readonly type: pulumi.Output<string>;
 
@@ -131,7 +131,7 @@ export interface ArtifactState {
      */
     name?: pulumi.Input<string | undefined>;
     /**
-     * Local source directory to upload to the DataRobot catalog and attach to the primary container's `image_build_config.code_ref`. On draft artifacts, uploads are applied in-place. On locked artifacts, source changes clone to a new draft version, upload, patch <span pulumi-lang-nodejs="`codeRef`" pulumi-lang-dotnet="`CodeRef`" pulumi-lang-go="`codeRef`" pulumi-lang-python="`code_ref`" pulumi-lang-yaml="`codeRef`" pulumi-lang-java="`codeRef`" pulumi-lang-hcl="`code_ref`">`codeRef`</span>, and lock the new version.
+     * Local source directory to upload to the DataRobot catalog and attach to the primary container's `image_build_config.code_ref`. When source content changes, the provider uploads, triggers an image build on the draft artifact, and (by default) waits for completion before proceeding. On draft artifacts, uploads are applied in-place. On locked artifacts, source changes clone to a new draft version, upload, build, patch <span pulumi-lang-nodejs="`codeRef`" pulumi-lang-dotnet="`CodeRef`" pulumi-lang-go="`codeRef`" pulumi-lang-python="`code_ref`" pulumi-lang-yaml="`codeRef`" pulumi-lang-java="`codeRef`" pulumi-lang-hcl="`code_ref`">`codeRef`</span>, and lock the new version.
      */
     source?: pulumi.Input<inputs.ArtifactSource | undefined>;
     /**
@@ -143,7 +143,7 @@ export interface ArtifactState {
      */
     status?: pulumi.Input<string | undefined>;
     /**
-     * The artifact type: <span pulumi-lang-nodejs="`service`" pulumi-lang-dotnet="`Service`" pulumi-lang-go="`service`" pulumi-lang-python="`service`" pulumi-lang-yaml="`service`" pulumi-lang-java="`service`" pulumi-lang-hcl="`service`">`service`</span> or <span pulumi-lang-nodejs="`nim`" pulumi-lang-dotnet="`Nim`" pulumi-lang-go="`nim`" pulumi-lang-python="`nim`" pulumi-lang-yaml="`nim`" pulumi-lang-java="`nim`" pulumi-lang-hcl="`nim`">`nim`</span>. Defaults to <span pulumi-lang-nodejs="`service`" pulumi-lang-dotnet="`Service`" pulumi-lang-go="`service`" pulumi-lang-python="`service`" pulumi-lang-yaml="`service`" pulumi-lang-java="`service`" pulumi-lang-hcl="`service`">`service`</span>.
+     * The artifact type: <span pulumi-lang-nodejs="`service`" pulumi-lang-dotnet="`Service`" pulumi-lang-go="`service`" pulumi-lang-python="`service`" pulumi-lang-yaml="`service`" pulumi-lang-java="`service`" pulumi-lang-hcl="`service`">`service`</span>, <span pulumi-lang-nodejs="`nim`" pulumi-lang-dotnet="`Nim`" pulumi-lang-go="`nim`" pulumi-lang-python="`nim`" pulumi-lang-yaml="`nim`" pulumi-lang-java="`nim`" pulumi-lang-hcl="`nim`">`nim`</span>, <span pulumi-lang-nodejs="`agent`" pulumi-lang-dotnet="`Agent`" pulumi-lang-go="`agent`" pulumi-lang-python="`agent`" pulumi-lang-yaml="`agent`" pulumi-lang-java="`agent`" pulumi-lang-hcl="`agent`">`agent`</span>, or <span pulumi-lang-nodejs="`mcp`" pulumi-lang-dotnet="`Mcp`" pulumi-lang-go="`mcp`" pulumi-lang-python="`mcp`" pulumi-lang-yaml="`mcp`" pulumi-lang-java="`mcp`" pulumi-lang-hcl="`mcp`">`mcp`</span>. Defaults to <span pulumi-lang-nodejs="`service`" pulumi-lang-dotnet="`Service`" pulumi-lang-go="`service`" pulumi-lang-python="`service`" pulumi-lang-yaml="`service`" pulumi-lang-java="`service`" pulumi-lang-hcl="`service`">`service`</span>.
      */
     type?: pulumi.Input<string | undefined>;
 }
@@ -165,7 +165,7 @@ export interface ArtifactArgs {
      */
     name?: pulumi.Input<string | undefined>;
     /**
-     * Local source directory to upload to the DataRobot catalog and attach to the primary container's `image_build_config.code_ref`. On draft artifacts, uploads are applied in-place. On locked artifacts, source changes clone to a new draft version, upload, patch <span pulumi-lang-nodejs="`codeRef`" pulumi-lang-dotnet="`CodeRef`" pulumi-lang-go="`codeRef`" pulumi-lang-python="`code_ref`" pulumi-lang-yaml="`codeRef`" pulumi-lang-java="`codeRef`" pulumi-lang-hcl="`code_ref`">`codeRef`</span>, and lock the new version.
+     * Local source directory to upload to the DataRobot catalog and attach to the primary container's `image_build_config.code_ref`. When source content changes, the provider uploads, triggers an image build on the draft artifact, and (by default) waits for completion before proceeding. On draft artifacts, uploads are applied in-place. On locked artifacts, source changes clone to a new draft version, upload, build, patch <span pulumi-lang-nodejs="`codeRef`" pulumi-lang-dotnet="`CodeRef`" pulumi-lang-go="`codeRef`" pulumi-lang-python="`code_ref`" pulumi-lang-yaml="`codeRef`" pulumi-lang-java="`codeRef`" pulumi-lang-hcl="`code_ref`">`codeRef`</span>, and lock the new version.
      */
     source?: pulumi.Input<inputs.ArtifactSource | undefined>;
     /**
@@ -177,7 +177,7 @@ export interface ArtifactArgs {
      */
     status?: pulumi.Input<string | undefined>;
     /**
-     * The artifact type: <span pulumi-lang-nodejs="`service`" pulumi-lang-dotnet="`Service`" pulumi-lang-go="`service`" pulumi-lang-python="`service`" pulumi-lang-yaml="`service`" pulumi-lang-java="`service`" pulumi-lang-hcl="`service`">`service`</span> or <span pulumi-lang-nodejs="`nim`" pulumi-lang-dotnet="`Nim`" pulumi-lang-go="`nim`" pulumi-lang-python="`nim`" pulumi-lang-yaml="`nim`" pulumi-lang-java="`nim`" pulumi-lang-hcl="`nim`">`nim`</span>. Defaults to <span pulumi-lang-nodejs="`service`" pulumi-lang-dotnet="`Service`" pulumi-lang-go="`service`" pulumi-lang-python="`service`" pulumi-lang-yaml="`service`" pulumi-lang-java="`service`" pulumi-lang-hcl="`service`">`service`</span>.
+     * The artifact type: <span pulumi-lang-nodejs="`service`" pulumi-lang-dotnet="`Service`" pulumi-lang-go="`service`" pulumi-lang-python="`service`" pulumi-lang-yaml="`service`" pulumi-lang-java="`service`" pulumi-lang-hcl="`service`">`service`</span>, <span pulumi-lang-nodejs="`nim`" pulumi-lang-dotnet="`Nim`" pulumi-lang-go="`nim`" pulumi-lang-python="`nim`" pulumi-lang-yaml="`nim`" pulumi-lang-java="`nim`" pulumi-lang-hcl="`nim`">`nim`</span>, <span pulumi-lang-nodejs="`agent`" pulumi-lang-dotnet="`Agent`" pulumi-lang-go="`agent`" pulumi-lang-python="`agent`" pulumi-lang-yaml="`agent`" pulumi-lang-java="`agent`" pulumi-lang-hcl="`agent`">`agent`</span>, or <span pulumi-lang-nodejs="`mcp`" pulumi-lang-dotnet="`Mcp`" pulumi-lang-go="`mcp`" pulumi-lang-python="`mcp`" pulumi-lang-yaml="`mcp`" pulumi-lang-java="`mcp`" pulumi-lang-hcl="`mcp`">`mcp`</span>. Defaults to <span pulumi-lang-nodejs="`service`" pulumi-lang-dotnet="`Service`" pulumi-lang-go="`service`" pulumi-lang-python="`service`" pulumi-lang-yaml="`service`" pulumi-lang-java="`service`" pulumi-lang-hcl="`service`">`service`</span>.
      */
     type?: pulumi.Input<string | undefined>;
 }

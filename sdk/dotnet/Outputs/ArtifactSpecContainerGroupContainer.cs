@@ -15,6 +15,10 @@ namespace DataRobotPulumi.Datarobot.Outputs
     public sealed class ArtifactSpecContainerGroupContainer
     {
         /// <summary>
+        /// Server-set image build metadata.
+        /// </summary>
+        public readonly Outputs.ArtifactSpecContainerGroupContainerBuild? Build;
+        /// <summary>
         /// Description of the container.
         /// </summary>
         public readonly string? Description;
@@ -31,7 +35,7 @@ namespace DataRobotPulumi.Datarobot.Outputs
         /// </summary>
         public readonly Outputs.ArtifactSpecContainerGroupContainerImageBuildConfig? ImageBuildConfig;
         /// <summary>
-        /// Docker image URI. Omit when using &lt;span pulumi-lang-nodejs="`imageBuildConfig`" pulumi-lang-dotnet="`ImageBuildConfig`" pulumi-lang-go="`imageBuildConfig`" pulumi-lang-python="`image_build_config`" pulumi-lang-yaml="`imageBuildConfig`" pulumi-lang-java="`imageBuildConfig`" pulumi-lang-hcl="`image_build_config`"&gt;`imageBuildConfig`&lt;/span&gt; on draft artifacts; required when status is &lt;span pulumi-lang-nodejs="`locked`" pulumi-lang-dotnet="`Locked`" pulumi-lang-go="`locked`" pulumi-lang-python="`locked`" pulumi-lang-yaml="`locked`" pulumi-lang-java="`locked`" pulumi-lang-hcl="`locked`"&gt;`locked`&lt;/span&gt; and &lt;span pulumi-lang-nodejs="`imageBuildConfig`" pulumi-lang-dotnet="`ImageBuildConfig`" pulumi-lang-go="`imageBuildConfig`" pulumi-lang-python="`image_build_config`" pulumi-lang-yaml="`imageBuildConfig`" pulumi-lang-java="`imageBuildConfig`" pulumi-lang-hcl="`image_build_config`"&gt;`imageBuildConfig`&lt;/span&gt; is set.
+        /// Docker image URI. Populated by the provider after a completed image build when &lt;span pulumi-lang-nodejs="`source`" pulumi-lang-dotnet="`Source`" pulumi-lang-go="`source`" pulumi-lang-python="`source`" pulumi-lang-yaml="`source`" pulumi-lang-java="`source`" pulumi-lang-hcl="`source`"&gt;`source`&lt;/span&gt; and &lt;span pulumi-lang-nodejs="`imageBuildConfig`" pulumi-lang-dotnet="`ImageBuildConfig`" pulumi-lang-go="`imageBuildConfig`" pulumi-lang-python="`image_build_config`" pulumi-lang-yaml="`imageBuildConfig`" pulumi-lang-java="`imageBuildConfig`" pulumi-lang-hcl="`image_build_config`"&gt;`imageBuildConfig`&lt;/span&gt; are set. May be set explicitly when not using source-driven builds.
         /// </summary>
         public readonly string? ImageUri;
         /// <summary>
@@ -55,12 +59,18 @@ namespace DataRobotPulumi.Datarobot.Outputs
         /// </summary>
         public readonly Outputs.ArtifactSpecContainerGroupContainerReadinessProbe? ReadinessProbe;
         /// <summary>
+        /// Routes to expose publicly from this container. Primary containers only, at most 50. The workload root (`/`) is authenticated by default unless declared here with another policy. Route configuration is a cluster-level capability that is disabled by default: setting this on a cluster where it is not enabled fails with `Route configuration is disabled on this cluster`.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.ArtifactSpecContainerGroupContainerRoute> Routes;
+        /// <summary>
         /// Container startup check configuration.
         /// </summary>
         public readonly Outputs.ArtifactSpecContainerGroupContainerStartupProbe? StartupProbe;
 
         [OutputConstructor]
         private ArtifactSpecContainerGroupContainer(
+            Outputs.ArtifactSpecContainerGroupContainerBuild? build,
+
             string? description,
 
             ImmutableArray<string> entrypoints,
@@ -81,8 +91,11 @@ namespace DataRobotPulumi.Datarobot.Outputs
 
             Outputs.ArtifactSpecContainerGroupContainerReadinessProbe? readinessProbe,
 
+            ImmutableArray<Outputs.ArtifactSpecContainerGroupContainerRoute> routes,
+
             Outputs.ArtifactSpecContainerGroupContainerStartupProbe? startupProbe)
         {
+            Build = build;
             Description = description;
             Entrypoints = entrypoints;
             EnvironmentVars = environmentVars;
@@ -93,6 +106,7 @@ namespace DataRobotPulumi.Datarobot.Outputs
             Port = port;
             Primary = primary;
             ReadinessProbe = readinessProbe;
+            Routes = routes;
             StartupProbe = startupProbe;
         }
     }

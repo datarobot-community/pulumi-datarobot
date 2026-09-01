@@ -353,17 +353,17 @@ class CustomApplication(pulumi.CustomResource):
             ["streamlit-app.py"],
         ])
         example_custom_application = datarobot.CustomApplication("example",
-            name="example-custom-application",
-            source_version_id=example.version_id,
-            external_access_enabled=True,
-            external_access_recipients=["recipient@example.com"],
-            allow_auto_stopping=False,
             resources={
                 "replicas": 2,
                 "resource_label": "cpu.medium",
                 "session_affinity": True,
                 "service_web_requests_on_root_path": False,
-            })
+            },
+            name="example-custom-application",
+            source_version_id=example.version_id,
+            external_access_enabled=True,
+            external_access_recipients=["recipient@example.com"],
+            allow_auto_stopping=False)
         pulumi.export("datarobotCustomApplicationId", example_custom_application.id)
         pulumi.export("datarobotCustomApplicationSourceId", example_custom_application.source_id)
         pulumi.export("datarobotCustomApplicationSourceVersionId", example_custom_application.source_version_id)
@@ -405,17 +405,17 @@ class CustomApplication(pulumi.CustomResource):
             ["streamlit-app.py"],
         ])
         example_custom_application = datarobot.CustomApplication("example",
-            name="example-custom-application",
-            source_version_id=example.version_id,
-            external_access_enabled=True,
-            external_access_recipients=["recipient@example.com"],
-            allow_auto_stopping=False,
             resources={
                 "replicas": 2,
                 "resource_label": "cpu.medium",
                 "session_affinity": True,
                 "service_web_requests_on_root_path": False,
-            })
+            },
+            name="example-custom-application",
+            source_version_id=example.version_id,
+            external_access_enabled=True,
+            external_access_recipients=["recipient@example.com"],
+            allow_auto_stopping=False)
         pulumi.export("datarobotCustomApplicationId", example_custom_application.id)
         pulumi.export("datarobotCustomApplicationSourceId", example_custom_application.source_id)
         pulumi.export("datarobotCustomApplicationSourceVersionId", example_custom_application.source_version_id)

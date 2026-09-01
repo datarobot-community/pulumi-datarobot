@@ -24,14 +24,18 @@ Regenerating a section preserves that subsection.
 
 ## [Unreleased]
 
-### Added
+## [0.11.0] - 2026-09-01
+
+### Provider changes
+
+#### Added
 
 - `CHANGELOG.md` plus `scripts/upstream-changelog.sh`, `scripts/schema-diff.sh`, and
   `scripts/changelog.sh`. Upstream bumps now record what changed upstream and what
   reached the generated SDKs; the same text is posted on the upgrade PR and reused as
   the GitHub Release body.
 
-### Changed
+#### Changed
 
 - Upgraded `pulumi-terraform-bridge` from `v3.106.0` to `v3.137.0` (31 releases), and with
   it `pulumi/pulumi` `v3.160.0` → `v3.256.0`. This unblocks SDK generation under Go 1.26:
@@ -54,7 +58,7 @@ Regenerating a section preserves that subsection.
   per-language `<span pulumi-lang-*>` markup, which renders as the language-correct
   spelling on the Pulumi registry but appears as raw markup in editor tooltips.
 
-### Removed
+#### Removed
 
 - **Breaking.** The `id` output is gone from the `getArtifact` and `getArtifacts` data
   sources. The bridge stopped synthesizing an `id` for Plugin Framework data sources
@@ -68,11 +72,112 @@ Regenerating a section preserves that subsection.
   their `id` is a real upstream attribute. These two data sources shipped in v0.10.43, so the
   exposure is one release cycle.
 
-### Fixed
+#### Fixed
 
 - Removed the `sed` post-processing in `build_nodejs` and `build_python` that rewrote
   `./utilities` to `../utilities` in generated subdirectory files. The generator now emits
   correct relative imports, so the workaround was a no-op.
+
+### Upstream provider changes
+
+[terraform-provider-datarobot](https://github.com/datarobot-community/terraform-provider-datarobot) `v0.10.46` → `v0.11.0`
+
+#### [v0.11.0](https://github.com/datarobot-community/terraform-provider-datarobot/releases/tag/v0.11.0) — 2026-09-01
+
+##### Fixed
+
+- `datarobot_artifact` `source.dir_hash` is no longer recomputed from the local tree during Read/refresh. Refresh runs before plan, so overwriting the last-applied hash with the current disk contents made `terraform plan` report no changes after editing source files. The hash is still computed at plan time and stored after a successful apply.
+- `datarobot_workload` replacement wait no longer fails when `GET /workloads/{id}/replacement` returns 404. The Workload API detaches a finished replacement from the workload, so that 404 means the replacement completed. Apply now treats it as success.
+
+##### Added
+
+- `source.generate_ignore` on `datarobot_artifact` (default `true`): when `source.dir` has neither `.drignore` nor `.wapiignore`, write a default `.drignore` at apply (never overwrite). Uploads and `source.dir_hash` honor `.drignore` (gitignore syntax) plus system excludes (`.datarobot.yaml` is never uploaded).
+- Plan-time warnings on `datarobot_artifact` when `source.dir` uses the deprecated `.wapiignore` name, or holds both `.drignore` and `.wapiignore` (in which case `.drignore` wins and the other file's patterns are not applied).
+- `source` block on `datarobot_artifact`: upload a local directory (`source.dir`) to the DataRobot catalog on create and update, auto-populate the primary container's `image_build_config.code_ref`, and track changes via computed `source.dir_hash`. After a successful upload on a draft artifact with `image_build_config`, the provider triggers an image build and, by default (`source.wait_for_build`, default `true`), polls until completion and populates the primary container's computed `image_uri`. Set `wait_for_build = false` to trigger a build without blocking apply. Requires a primary container with `image_build_config`. On draft artifacts, uploads are applied in-place; on locked artifacts, source changes clone to a new draft version, upload, build, patch `code_ref`, and lock the new version. Manual `code_ref` and `source` are mutually exclusive.
+- Automatic artifact image build trigger after source upload on `datarobot_artifact`: when `source` is configured on a draft artifact with `image_build_config`, the provider triggers an image build and polls until completion by default (`source.wait_for_build`, default `true`), populating the primary container's computed `image_uri`. Set `wait_for_build = false` to trigger a build without blocking apply.
+- Computed `build` block on `datarobot_artifact` container specs (`artifact_image_build_id`, `status`, `created_at`) exposing server-set image build metadata in resource state after a source-triggered build.
+- `DATAROBOT_ARTIFACT_BUILD_POLL_INTERVAL` and `DATAROBOT_ARTIFACT_BUILD_POLL_TIMEOUT` environment variables to tune artifact image build polling (defaults: `10s` and `10m`; Go duration syntax). Set `DATAROBOT_SKIP_ARTIFACT_BUILD_ACC=1` to skip acceptance tests that require the Image Build Service.
+- `datarobot_artifact` now streams artifact image build OTEL logs to the provider's stderr while waiting for a source-triggered image build to complete (`source.wait_for_build = true`, the default). Terraform routes provider stderr through its own logging pipeline, so this progress output is visible when `TF_LOG` is set (e.g. `TF_LOG=DEBUG`), not on a plain `terraform apply`. On failure, the apply error always includes a tailed excerpt of build logs (WAPI build logs with OTEL fallback) and a link to the full build log page in the DataRobot UI, regardless of `TF_LOG`. Default tail length is 30 lines; override with `DATAROBOT_ARTIFACT_BUILD_LOGS_TAIL_LINES`.
+- `DATAROBOT_DEBUG` environment variable to opt into verbose HTTP request/response dumps and curl reproductions in error messages.
+- `examples/resources/datarobot_workload` example: end-to-end code-to-workload flow (`datarobot_artifact` with `source` + build wait → `datarobot_workload`).
+- `routes` attribute on `datarobot_artifact` container specs (primary containers only, at most 50): a list of `{ path, auth }` objects exposing additional paths from the workload's public endpoint with per-route authentication (`required`, `optional`, or `disabled`). Paths must start with `/`, be at most 1024 characters, and be unique within a container; all of this is checked at plan time. Route configuration is a cluster-level capability that is disabled by default — on a cluster without it, an artifact declaring `routes` fails with `Route configuration is disabled on this cluster`.
+- `datarobot_execution_environment` now surfaces the execution environment version's build logs (via the OTel logs API, falling back to the legacy per-version build log file when OTel has nothing recorded yet, tailed to the last 30 lines by default and overridable via `DATAROBOT_EXECUTION_ENVIRONMENT_BUILD_LOG_TAIL_LINES`) and a link to the build logs in the DataRobot UI in the error message when a version fails to build.
+- `datarobot_artifact` `type = "mcp"` for Workload API MCP server artifacts (same spec shape as `service`; scheduled and built like `service`). The computed `type` on `datarobot_workload` mirrors it, so a workload deploying an MCP artifact reports `type = "mcp"`.
+
+##### Changed
+
+- `datarobot_artifact`: `source.dir_hash` is computed by a different algorithm. 0.10.46 walked the whole directory, hashed each file's contents, concatenated those hashes in path order and hashed the result, so the file names never entered the digest. The hash now folds each file's path in beside its content hash and skips whatever `.drignore` and the system excludes cover. Both changes move the value, so every configuration already on 0.10.46 sees a one-time `source.dir_hash` diff on the first plan after upgrading, and that diff re-uploads the source. On a locked artifact the upload clones to a new draft version, rebuilds the image and locks again, so plan the upgrade for a window where that is acceptable. Subsequent plans are stable.
+- `datarobot_artifact`: `*.tfvars` and `*.tfvars.json` under `source.dir` are never uploaded. They are system excludes alongside `terraform.tfstate` and `.terraform`, for the same reason: they hold the credentials the configuration was given, and they are input to Terraform rather than to the image being built. Unlike the entries in the generated `.drignore`, a system exclude cannot be re-enabled with a negation pattern, and it applies to projects that already have an ignore file and so never receive the generated template.
+- Verbose HTTP request/response logging is no longer enabled implicitly by `TF_LOG=DEBUG`/`TRACE`; it now requires `DATAROBOT_DEBUG`. This keeps `TF_LOG=DEBUG` usable for provider progress output (such as artifact image build log tailing) without also dumping every API payload.
+- Provider diagnostic output (HTTP dumps, `TRACE_API_CALLS` traces) now goes to stderr instead of stdout. Terraform reserves a plugin's stdout for the go-plugin handshake and reported anything written there as `[WARN] unexpected data`; these lines now appear as ordinary provider log entries.
+- `datarobot_artifact`: `spec.container_groups.*.containers.*.image_uri` is now `Computed` in addition to `Optional`, allowing the provider to populate the image URI after a source-driven build.
+
+Full upstream diff: [https://github.com/datarobot-community/terraform-provider-datarobot/compare/v0.10.46...v0.11.0](https://github.com/datarobot-community/terraform-provider-datarobot/compare/v0.10.46...v0.11.0)
+
+### Pulumi SDK surface
+
+_Diff of the generated `schema.json` — what actually reached the SDKs._
+
+**Changed resources (1)**
+
+- `datarobot:index/workload:Workload`
+  - new outputs: `type`
+
+<details><summary>Nested types: 4 added, 0 removed, 7 changed</summary>
+
+Added:
+
+- `datarobot:index/ArtifactSpecContainerGroupContainerBuild:ArtifactSpecContainerGroupContainerBuild`
+- `datarobot:index/ArtifactSpecContainerGroupContainerRoute:ArtifactSpecContainerGroupContainerRoute`
+- `datarobot:index/getArtifactSpecContainerGroupContainerRoute:getArtifactSpecContainerGroupContainerRoute`
+- `datarobot:index/getArtifactsArtifactSpecContainerGroupContainerRoute:getArtifactsArtifactSpecContainerGroupContainerRoute`
+
+Changed:
+
+- `datarobot:index/ArtifactSource:ArtifactSource`
+  - new: `generateIgnore`, `waitForBuild`
+- `datarobot:index/ArtifactSpec:ArtifactSpec`
+  - new: `a2aEnabled`
+- `datarobot:index/ArtifactSpecContainerGroupContainer:ArtifactSpecContainerGroupContainer`
+  - new: `build`, `routes`
+- `datarobot:index/getArtifactSpec:getArtifactSpec`
+  - new: `a2aEnabled`
+- `datarobot:index/getArtifactSpecContainerGroupContainer:getArtifactSpecContainerGroupContainer`
+  - new: `routes`
+- `datarobot:index/getArtifactsArtifactSpec:getArtifactsArtifactSpec`
+  - new: `a2aEnabled`
+- `datarobot:index/getArtifactsArtifactSpecContainerGroupContainer:getArtifactsArtifactSpecContainerGroupContainer`
+  - new: `routes`
+
+</details>
+
+<details><summary>schema-tools compare</summary>
+
+```
+### Does the PR have any schema changes?
+
+_Generated by schema-tools v0.8.1._
+
+Found 4 breaking changes:
+
+#### Types
+- `🟡` "datarobot:index/getArtifactSpec:getArtifactSpec":
+    - required:
+        - `🟡` "a2aEnabled" property has changed to Required
+- `🟡` "datarobot:index/getArtifactSpecContainerGroupContainer:getArtifactSpecContainerGroupContainer":
+    - required:
+        - `🟡` "routes" property has changed to Required
+- `🟡` "datarobot:index/getArtifactsArtifactSpec:getArtifactsArtifactSpec":
+    - required:
+        - `🟡` "a2aEnabled" property has changed to Required
+- `🟡` "datarobot:index/getArtifactsArtifactSpecContainerGroupContainer:getArtifactsArtifactSpecContainerGroupContainer":
+    - required:
+        - `🟡` "routes" property has changed to Required
+
+#### New types: 4
+```
+
+</details>
 
 ## [0.10.46] - 2026-08-25
 

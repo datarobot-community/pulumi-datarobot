@@ -8,36 +8,32 @@ using System.Threading.Tasks;
 using Pulumi.Serialization;
 using Pulumi;
 
-namespace DataRobotPulumi.Datarobot.Outputs
+namespace DataRobotPulumi.Datarobot.Inputs
 {
 
-    [OutputType]
-    public sealed class GetArtifactsArtifactSpecContainerGroupContainerBuildResult
+    public sealed class ArtifactSpecContainerGroupContainerBuildGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Artifact image build ID.
         /// </summary>
-        public readonly string ArtifactImageBuildId;
+        [Input("artifactImageBuildId")]
+        public Input<string>? ArtifactImageBuildId { get; set; }
+
         /// <summary>
         /// Build creation timestamp (UTC).
         /// </summary>
-        public readonly string CreatedAt;
+        [Input("createdAt")]
+        public Input<string>? CreatedAt { get; set; }
+
         /// <summary>
         /// Image build status. With `source.wait_for_build` enabled (the default) this is the terminal status of the build the provider waited on; otherwise it is the status at submit time.
         /// </summary>
-        public readonly string Status;
+        [Input("status")]
+        public Input<string>? Status { get; set; }
 
-        [OutputConstructor]
-        private GetArtifactsArtifactSpecContainerGroupContainerBuildResult(
-            string artifactImageBuildId,
-
-            string createdAt,
-
-            string status)
+        public ArtifactSpecContainerGroupContainerBuildGetArgs()
         {
-            ArtifactImageBuildId = artifactImageBuildId;
-            CreatedAt = createdAt;
-            Status = status;
         }
+        public static new ArtifactSpecContainerGroupContainerBuildGetArgs Empty => new ArtifactSpecContainerGroupContainerBuildGetArgs();
     }
 }

@@ -87,12 +87,24 @@ export interface ArtifactSource {
      */
     dir: string;
     /**
-     * SHA-256 fingerprint of <span pulumi-lang-nodejs="`dir`" pulumi-lang-dotnet="`Dir`" pulumi-lang-go="`dir`" pulumi-lang-python="`dir`" pulumi-lang-yaml="`dir`" pulumi-lang-java="`dir`" pulumi-lang-hcl="`dir`">`dir`</span> contents, used to detect changes and skip re-upload when unchanged.
+     * SHA-256 fingerprint of uploadable files under <span pulumi-lang-nodejs="`dir`" pulumi-lang-dotnet="`Dir`" pulumi-lang-go="`dir`" pulumi-lang-python="`dir`" pulumi-lang-yaml="`dir`" pulumi-lang-java="`dir`" pulumi-lang-hcl="`dir`">`dir`</span> after `.drignore` / system excludes. Used to detect changes and skip re-upload when unchanged. Files covered by a system exclude are never part of this hash.
      */
     dirHash: string;
+    /**
+     * When <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> (default), if <span pulumi-lang-nodejs="`dir`" pulumi-lang-dotnet="`Dir`" pulumi-lang-go="`dir`" pulumi-lang-python="`dir`" pulumi-lang-yaml="`dir`" pulumi-lang-java="`dir`" pulumi-lang-hcl="`dir`">`dir`</span> has neither `.drignore` nor `.wapiignore`, the provider writes a default `.drignore` at the start of apply. Existing ignore files are never overwritten. Set to <span pulumi-lang-nodejs="`false`" pulumi-lang-dotnet="`False`" pulumi-lang-go="`false`" pulumi-lang-python="`false`" pulumi-lang-yaml="`false`" pulumi-lang-java="`false`" pulumi-lang-hcl="`false`">`false`</span> to skip autogeneration. System excludes always apply and cannot be re-enabled from `.drignore`: `.datarobot.yaml`, `.git`, `.gitignore`, `.wapi`, `.datarobot/workload`, and Terraform's own `.terraform`, `terraform.tfstate*` and `*.tfvars` files.
+     */
+    generateIgnore: boolean;
+    /**
+     * When <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> (default), after a source upload the provider triggers an image build and polls until it completes before proceeding (for example, before locking). When <span pulumi-lang-nodejs="`false`" pulumi-lang-dotnet="`False`" pulumi-lang-go="`false`" pulumi-lang-python="`false`" pulumi-lang-yaml="`false`" pulumi-lang-java="`false`" pulumi-lang-hcl="`false`">`false`</span>, the build is triggered but apply does not wait for <span pulumi-lang-nodejs="`imageUri`" pulumi-lang-dotnet="`ImageUri`" pulumi-lang-go="`imageUri`" pulumi-lang-python="`image_uri`" pulumi-lang-yaml="`imageUri`" pulumi-lang-java="`imageUri`" pulumi-lang-hcl="`image_uri`">`imageUri`</span> to be populated.
+     */
+    waitForBuild: boolean;
 }
 
 export interface ArtifactSpec {
+    /**
+     * Turns on agent-to-agent (A2A) card management and the A2A surface for this agent. Valid only when <span pulumi-lang-nodejs="`type`" pulumi-lang-dotnet="`Type`" pulumi-lang-go="`type`" pulumi-lang-python="`type`" pulumi-lang-yaml="`type`" pulumi-lang-java="`type`" pulumi-lang-hcl="`type`">`type`</span> is <span pulumi-lang-nodejs="`agent`" pulumi-lang-dotnet="`Agent`" pulumi-lang-go="`agent`" pulumi-lang-python="`agent`" pulumi-lang-yaml="`agent`" pulumi-lang-java="`agent`" pulumi-lang-hcl="`agent`">`agent`</span>. Defaults to off in the Workload API.
+     */
+    a2aEnabled?: boolean;
     /**
      * List of container groups.
      */
@@ -107,6 +119,10 @@ export interface ArtifactSpecContainerGroup {
 }
 
 export interface ArtifactSpecContainerGroupContainer {
+    /**
+     * Server-set image build metadata.
+     */
+    build: outputs.ArtifactSpecContainerGroupContainerBuild;
     /**
      * Description of the container.
      */
@@ -124,9 +140,9 @@ export interface ArtifactSpecContainerGroupContainer {
      */
     imageBuildConfig?: outputs.ArtifactSpecContainerGroupContainerImageBuildConfig;
     /**
-     * Docker image URI. Omit when using <span pulumi-lang-nodejs="`imageBuildConfig`" pulumi-lang-dotnet="`ImageBuildConfig`" pulumi-lang-go="`imageBuildConfig`" pulumi-lang-python="`image_build_config`" pulumi-lang-yaml="`imageBuildConfig`" pulumi-lang-java="`imageBuildConfig`" pulumi-lang-hcl="`image_build_config`">`imageBuildConfig`</span> on draft artifacts; required when status is <span pulumi-lang-nodejs="`locked`" pulumi-lang-dotnet="`Locked`" pulumi-lang-go="`locked`" pulumi-lang-python="`locked`" pulumi-lang-yaml="`locked`" pulumi-lang-java="`locked`" pulumi-lang-hcl="`locked`">`locked`</span> and <span pulumi-lang-nodejs="`imageBuildConfig`" pulumi-lang-dotnet="`ImageBuildConfig`" pulumi-lang-go="`imageBuildConfig`" pulumi-lang-python="`image_build_config`" pulumi-lang-yaml="`imageBuildConfig`" pulumi-lang-java="`imageBuildConfig`" pulumi-lang-hcl="`image_build_config`">`imageBuildConfig`</span> is set.
+     * Docker image URI. Populated by the provider after a completed image build when <span pulumi-lang-nodejs="`source`" pulumi-lang-dotnet="`Source`" pulumi-lang-go="`source`" pulumi-lang-python="`source`" pulumi-lang-yaml="`source`" pulumi-lang-java="`source`" pulumi-lang-hcl="`source`">`source`</span> and <span pulumi-lang-nodejs="`imageBuildConfig`" pulumi-lang-dotnet="`ImageBuildConfig`" pulumi-lang-go="`imageBuildConfig`" pulumi-lang-python="`image_build_config`" pulumi-lang-yaml="`imageBuildConfig`" pulumi-lang-java="`imageBuildConfig`" pulumi-lang-hcl="`image_build_config`">`imageBuildConfig`</span> are set. May be set explicitly when not using source-driven builds.
      */
-    imageUri?: string;
+    imageUri: string;
     /**
      * Container liveness check configuration.
      */
@@ -148,9 +164,28 @@ export interface ArtifactSpecContainerGroupContainer {
      */
     readinessProbe?: outputs.ArtifactSpecContainerGroupContainerReadinessProbe;
     /**
+     * Routes to expose publicly from this container. Primary containers only, at most 50. The workload root (`/`) is authenticated by default unless declared here with another policy. Route configuration is a cluster-level capability that is disabled by default: setting this on a cluster where it is not enabled fails with `Route configuration is disabled on this cluster`.
+     */
+    routes?: outputs.ArtifactSpecContainerGroupContainerRoute[];
+    /**
      * Container startup check configuration.
      */
     startupProbe?: outputs.ArtifactSpecContainerGroupContainerStartupProbe;
+}
+
+export interface ArtifactSpecContainerGroupContainerBuild {
+    /**
+     * Artifact image build ID.
+     */
+    artifactImageBuildId: string;
+    /**
+     * Build creation timestamp (UTC).
+     */
+    createdAt: string;
+    /**
+     * Image build status. With `source.wait_for_build` enabled (the default) this is the terminal status of the build the provider waited on; otherwise it is the status at submit time.
+     */
+    status: string;
 }
 
 export interface ArtifactSpecContainerGroupContainerEnvironmentVar {
@@ -163,11 +198,11 @@ export interface ArtifactSpecContainerGroupContainerEnvironmentVar {
      */
     key?: string;
     /**
-     * Name of the environment variable. Required when source is "string" or "dr-credential". Optional for "api-key": when omitted, the platform injects the token as DATAROBOT*API*TOKEN.
+     * Name of the environment variable. Required when source is "string" or "dr-credential". Optional for "api-key" (defaults to DATAROBOT*API*TOKEN).
      */
     name?: string;
     /**
-     * Source type: "string" for plain text values, "dr-credential" for DataRobot credentials, "api-key" for a platform-managed DataRobot API token. Defaults to "string".
+     * Source type: "string" for plain text values, "dr-credential" for DataRobot credentials, or "api-key" for a platform-managed per-workload DataRobot API token. Defaults to "string".
      */
     source: string;
     /**
@@ -212,7 +247,7 @@ export interface ArtifactSpecContainerGroupContainerImageBuildConfigDockerfile {
      */
     executionEnvironmentVersionId?: string;
     /**
-     * Relative path to the Dockerfile in the source code. Used when source is <span pulumi-lang-nodejs="`provided`" pulumi-lang-dotnet="`Provided`" pulumi-lang-go="`provided`" pulumi-lang-python="`provided`" pulumi-lang-yaml="`provided`" pulumi-lang-java="`provided`" pulumi-lang-hcl="`provided`">`provided`</span>. Defaults to `./Dockerfile`.
+     * Relative path to the Dockerfile in the source code. Used when source is <span pulumi-lang-nodejs="`provided`" pulumi-lang-dotnet="`Provided`" pulumi-lang-go="`provided`" pulumi-lang-python="`provided`" pulumi-lang-yaml="`provided`" pulumi-lang-java="`provided`" pulumi-lang-hcl="`provided`">`provided`</span>. Defaults to `./Dockerfile`. Null when source is <span pulumi-lang-nodejs="`generated`" pulumi-lang-dotnet="`Generated`" pulumi-lang-go="`generated`" pulumi-lang-python="`generated`" pulumi-lang-yaml="`generated`" pulumi-lang-java="`generated`" pulumi-lang-hcl="`generated`">`generated`</span>.
      */
     path: string;
     /**
@@ -297,6 +332,17 @@ export interface ArtifactSpecContainerGroupContainerReadinessProbe {
      * Number of seconds after which the probe times out.
      */
     timeoutSeconds: number;
+}
+
+export interface ArtifactSpecContainerGroupContainerRoute {
+    /**
+     * Authentication applied to this route: "required" rejects unauthenticated requests, "optional" authenticates when an Authorization header is present, "disabled" never attempts authentication.
+     */
+    auth: string;
+    /**
+     * Route path relative to the workload root, excluding the URL prefix the workload is mounted on. Must start with `/` and be at most 1024 characters. Paths must be unique within a container.
+     */
+    path: string;
 }
 
 export interface ArtifactSpecContainerGroupContainerStartupProbe {
@@ -1503,6 +1549,10 @@ export interface GetArtifactCreator {
 
 export interface GetArtifactSpec {
     /**
+     * Whether A2A card management and the A2A surface are enabled. Set on <span pulumi-lang-nodejs="`agent`" pulumi-lang-dotnet="`Agent`" pulumi-lang-go="`agent`" pulumi-lang-python="`agent`" pulumi-lang-yaml="`agent`" pulumi-lang-java="`agent`" pulumi-lang-hcl="`agent`">`agent`</span> artifacts; omitted otherwise.
+     */
+    a2aEnabled: boolean;
+    /**
      * List of container groups.
      */
     containerGroups: outputs.GetArtifactSpecContainerGroup[];
@@ -1573,6 +1623,10 @@ export interface GetArtifactSpecContainerGroupContainer {
      */
     readinessProbe: outputs.GetArtifactSpecContainerGroupContainerReadinessProbe;
     /**
+     * Routes exposed publicly from this container.
+     */
+    routes: outputs.GetArtifactSpecContainerGroupContainerRoute[];
+    /**
      * Container security context.
      */
     securityContext: outputs.GetArtifactSpecContainerGroupContainerSecurityContext;
@@ -1592,7 +1646,7 @@ export interface GetArtifactSpecContainerGroupContainerBuild {
      */
     createdAt: string;
     /**
-     * Image build status at submit time.
+     * Image build status. With `source.wait_for_build` enabled (the default) this is the terminal status of the build the provider waited on; otherwise it is the status at submit time.
      */
     status: string;
 }
@@ -1611,7 +1665,7 @@ export interface GetArtifactSpecContainerGroupContainerEnvironmentVar {
      */
     name: string;
     /**
-     * Source type: "string" for plain text values, "dr-credential" for DataRobot credentials, "api-key" for a platform-managed DataRobot API token.
+     * Source type: "string" for plain text values, "dr-credential" for DataRobot credentials, or "api-key" for a platform-managed per-workload DataRobot API token.
      */
     source: string;
     /**
@@ -1756,6 +1810,17 @@ export interface GetArtifactSpecContainerGroupContainerReadinessProbe {
      * Number of seconds after which the probe times out.
      */
     timeoutSeconds: number;
+}
+
+export interface GetArtifactSpecContainerGroupContainerRoute {
+    /**
+     * Authentication applied to this route.
+     */
+    auth: string;
+    /**
+     * Route path relative to the workload root.
+     */
+    path: string;
 }
 
 export interface GetArtifactSpecContainerGroupContainerSecurityContext {
@@ -1906,7 +1971,7 @@ export interface GetArtifactsArtifact {
      */
     tags: outputs.GetArtifactsArtifactTag[];
     /**
-     * The artifact type: <span pulumi-lang-nodejs="`service`" pulumi-lang-dotnet="`Service`" pulumi-lang-go="`service`" pulumi-lang-python="`service`" pulumi-lang-yaml="`service`" pulumi-lang-java="`service`" pulumi-lang-hcl="`service`">`service`</span> or <span pulumi-lang-nodejs="`nim`" pulumi-lang-dotnet="`Nim`" pulumi-lang-go="`nim`" pulumi-lang-python="`nim`" pulumi-lang-yaml="`nim`" pulumi-lang-java="`nim`" pulumi-lang-hcl="`nim`">`nim`</span>.
+     * The artifact type: <span pulumi-lang-nodejs="`service`" pulumi-lang-dotnet="`Service`" pulumi-lang-go="`service`" pulumi-lang-python="`service`" pulumi-lang-yaml="`service`" pulumi-lang-java="`service`" pulumi-lang-hcl="`service`">`service`</span>, <span pulumi-lang-nodejs="`nim`" pulumi-lang-dotnet="`Nim`" pulumi-lang-go="`nim`" pulumi-lang-python="`nim`" pulumi-lang-yaml="`nim`" pulumi-lang-java="`nim`" pulumi-lang-hcl="`nim`">`nim`</span>, <span pulumi-lang-nodejs="`agent`" pulumi-lang-dotnet="`Agent`" pulumi-lang-go="`agent`" pulumi-lang-python="`agent`" pulumi-lang-yaml="`agent`" pulumi-lang-java="`agent`" pulumi-lang-hcl="`agent`">`agent`</span>, or <span pulumi-lang-nodejs="`mcp`" pulumi-lang-dotnet="`Mcp`" pulumi-lang-go="`mcp`" pulumi-lang-python="`mcp`" pulumi-lang-yaml="`mcp`" pulumi-lang-java="`mcp`" pulumi-lang-hcl="`mcp`">`mcp`</span>.
      */
     type: string;
     /**
@@ -1943,6 +2008,10 @@ export interface GetArtifactsArtifactCreator {
 }
 
 export interface GetArtifactsArtifactSpec {
+    /**
+     * Whether A2A card management and the A2A surface are enabled. Set on <span pulumi-lang-nodejs="`agent`" pulumi-lang-dotnet="`Agent`" pulumi-lang-go="`agent`" pulumi-lang-python="`agent`" pulumi-lang-yaml="`agent`" pulumi-lang-java="`agent`" pulumi-lang-hcl="`agent`">`agent`</span> artifacts; omitted otherwise.
+     */
+    a2aEnabled: boolean;
     /**
      * List of container groups.
      */
@@ -2014,6 +2083,10 @@ export interface GetArtifactsArtifactSpecContainerGroupContainer {
      */
     readinessProbe: outputs.GetArtifactsArtifactSpecContainerGroupContainerReadinessProbe;
     /**
+     * Routes exposed publicly from this container.
+     */
+    routes: outputs.GetArtifactsArtifactSpecContainerGroupContainerRoute[];
+    /**
      * Container security context.
      */
     securityContext: outputs.GetArtifactsArtifactSpecContainerGroupContainerSecurityContext;
@@ -2033,7 +2106,7 @@ export interface GetArtifactsArtifactSpecContainerGroupContainerBuild {
      */
     createdAt: string;
     /**
-     * Image build status at submit time.
+     * Image build status. With `source.wait_for_build` enabled (the default) this is the terminal status of the build the provider waited on; otherwise it is the status at submit time.
      */
     status: string;
 }
@@ -2052,7 +2125,7 @@ export interface GetArtifactsArtifactSpecContainerGroupContainerEnvironmentVar {
      */
     name: string;
     /**
-     * Source type: "string" for plain text values, "dr-credential" for DataRobot credentials, "api-key" for a platform-managed DataRobot API token.
+     * Source type: "string" for plain text values, "dr-credential" for DataRobot credentials, or "api-key" for a platform-managed per-workload DataRobot API token.
      */
     source: string;
     /**
@@ -2197,6 +2270,17 @@ export interface GetArtifactsArtifactSpecContainerGroupContainerReadinessProbe {
      * Number of seconds after which the probe times out.
      */
     timeoutSeconds: number;
+}
+
+export interface GetArtifactsArtifactSpecContainerGroupContainerRoute {
+    /**
+     * Authentication applied to this route.
+     */
+    auth: string;
+    /**
+     * Route path relative to the workload root.
+     */
+    path: string;
 }
 
 export interface GetArtifactsArtifactSpecContainerGroupContainerSecurityContext {
