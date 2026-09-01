@@ -58,6 +58,9 @@
                                                                 }
                                                             }
                                                         }
+                                                    },
+                                                    "routes": {
+                                                        "maxItemsOne": false
                                                     }
                                                 }
                                             }
@@ -594,6 +597,9 @@
                                                             }
                                                         }
                                                     },
+                                                    "routes": {
+                                                        "maxItemsOne": false
+                                                    },
                                                     "security_context": {
                                                         "fields": {
                                                             "capabilities": {
@@ -657,6 +663,9 @@
                                                                             }
                                                                         }
                                                                     }
+                                                                },
+                                                                "routes": {
+                                                                    "maxItemsOne": false
                                                                 },
                                                                 "security_context": {
                                                                     "fields": {
