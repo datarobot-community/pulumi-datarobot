@@ -1,6 +1,6 @@
 module github.com/datarobot-community/pulumi-datarobot/provider
 
-go 1.26.6
+go 1.27.1
 
 require (
 	github.com/datarobot-community/terraform-provider-datarobot v0.11.1

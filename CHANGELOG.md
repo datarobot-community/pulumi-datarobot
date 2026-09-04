@@ -24,6 +24,16 @@ Regenerating a section preserves that subsection.
 
 ## [Unreleased]
 
+### Changed
+
+- Bumped the Go toolchain in all three modules' `go.mod` from `1.26.6` (`provider`,
+  `sdk`) and `1.26.4` (`examples`) to `1.27.1`, the current Go release. Not a security
+  bump: `govulncheck` reports the same findings before and after, with no standard
+  library advisories under either toolchain. All CI jobs resolve Go via
+  `go-version-file: provider/go.mod`, so this also raises the version used to build
+  releases. Toolchain-only change; `go mod tidy` produced no dependency changes and no
+  provider behavior changes.
+
 ## [0.11.1] - 2026-09-01
 
 ### Upstream provider changes
