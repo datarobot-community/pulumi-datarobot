@@ -1,6 +1,6 @@
 module github.com/datarobot-community/pulumi-datarobot/sdk
 
-go 1.26.6
+go 1.27.1
 
 require (
 	github.com/blang/semver v3.5.1+incompatible
