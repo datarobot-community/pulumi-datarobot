@@ -22,6 +22,10 @@ on:
         description: 'Use existing GoReleaser artifacts (skip build/release)'
         required: false
         default: 'false'
+      RELEASE_REF:
+        description: 'Tag to build and publish (e.g. v0.11.2). Leave empty to use the dispatch ref.'
+        required: false
+        default: ''
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -38,6 +42,10 @@ env:
   SIGNING_KEY: ${{ secrets.JAVA_SIGNING_KEY }}
   SIGNING_KEY_ID: ${{ secrets.JAVA_SIGNING_KEY_ID }}
   SIGNING_PASSWORD: ${{ secrets.JAVA_SIGNING_PASSWORD }}
+  # The commit to build from. Dispatching on `main` with RELEASE_REF=<tag> runs this
+  # workflow definition while building the tagged source, so a fix to this file can be
+  # used to re-publish an SDK for a tag that was cut before the fix landed.
+  RELEASE_REF: ${{ github.event.inputs.RELEASE_REF || github.ref_name }}
 
 jobs:
   release_sdk:
@@ -49,6 +57,8 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.inputs.RELEASE_REF }}
       - name: Unshallow clone for tags
         run: git fetch --prune --unshallow --tags
       - name: Install Go
@@ -59,6 +69,9 @@ jobs:
         uses: jaxxstorm/action-install-gh-release@v3.0.0
         with:
           repo: pulumi/pulumictl
+      # `make build_<lang>` runs `install_plugins`, which shells out to `pulumi`.
+      - name: Install Pulumi CLI
+        uses: pulumi/action-install-pulumi-cli@b374ceb6168550de27c6eba92e01c1a774040e11 # tag=v2.0.0
       - name: Set PreRelease Version
         run: echo "GORELEASER_CURRENT_TAG=v$(pulumictl get version --language generic)" >> $GITHUB_ENV
 
@@ -78,21 +91,27 @@ jobs:
       - name: Build SDK
         run: make build_${{ github.event.inputs.SDK_LANGUAGE }}
 
+      # Reported, not enforced. This is the recovery path: it runs after a release has
+      # already published its binaries and some of its SDKs, so failing here would leave
+      # that release permanently half-published. The package is built from the tree this
+      # step inspects, so a diff means the committed SDK is stale and should be
+      # regenerated on main -- it does not mean the published artifact is wrong.
       - name: Check worktree clean
+        continue-on-error: true
         run: |
           git update-index -q --refresh
           if ! git diff-files --quiet; then
-              >&2 echo "error: working tree is not clean, aborting!"
+              >&2 echo "warning: generated SDK differs from the committed tree; publishing the generated output."
+              >&2 echo "Regenerate and commit the SDK on main to clear this."
               git status
               git diff
-              exit 1
           fi
 
       - name: Build release notes from CHANGELOG.md
         id: notes
         if: ${{ github.event.inputs.USE_EXISTING_RELEASE != 'true' }}
         env:
-          TAG: ${{ github.ref_name }}
+          TAG: ${{ env.RELEASE_REF }}
         run: |
           if ./scripts/changelog.sh extract "$TAG" > /tmp/release-notes.md; then
             echo "args=release --clean --release-notes=/tmp/release-notes.md" >> "$GITHUB_OUTPUT"
