@@ -18,7 +18,7 @@ env:
   # not from the pulumi/pulumi/pkg/v3 pin in provider/go.mod, so an unpinned CLI silently
   # changes generated output. Keep in sync across the workflows that generate SDKs;
   # bumping it regenerates them.
-  PULUMI_VERSION: 3.261.0
+  PULUMI_VERSION: 3.260.0
 
 jobs:
   lint:
