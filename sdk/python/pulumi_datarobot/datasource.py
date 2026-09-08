@@ -137,7 +137,7 @@ class Datasource(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  canonical_name: pulumi.Input[Optional[_builtins.str]] = None,
                  data_source_type: pulumi.Input[Optional[_builtins.str]] = None,
-                 params: pulumi.Input[Optional[Union['DatasourceParamsArgs', 'DatasourceParamsArgsDict']]] = None,
+                 params: pulumi.Input[Optional[Union['DatasourceParamsArgs', 'DatasourceParamsArgsDict', 'outputs.DatasourceParams']]] = None,
                  __props__=None):
         """
         Data source
@@ -199,7 +199,7 @@ class Datasource(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] canonical_name: The user-friendly name of the data source.
         :param pulumi.Input[_builtins.str] data_source_type: The type of data source.
-        :param pulumi.Input[Union['DatasourceParamsArgs', 'DatasourceParamsArgsDict']] params: The data source parameters.
+        :param pulumi.Input[Union['DatasourceParamsArgs', 'DatasourceParamsArgsDict', 'outputs.DatasourceParams']] params: The data source parameters.
         """
         ...
     @overload
@@ -280,7 +280,7 @@ class Datasource(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  canonical_name: pulumi.Input[Optional[_builtins.str]] = None,
                  data_source_type: pulumi.Input[Optional[_builtins.str]] = None,
-                 params: pulumi.Input[Optional[Union['DatasourceParamsArgs', 'DatasourceParamsArgsDict']]] = None,
+                 params: pulumi.Input[Optional[Union['DatasourceParamsArgs', 'DatasourceParamsArgsDict', 'outputs.DatasourceParams']]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -311,7 +311,7 @@ class Datasource(pulumi.CustomResource):
             opts: Optional[pulumi.ResourceOptions] = None,
             canonical_name: pulumi.Input[Optional[_builtins.str]] = None,
             data_source_type: pulumi.Input[Optional[_builtins.str]] = None,
-            params: pulumi.Input[Optional[Union['DatasourceParamsArgs', 'DatasourceParamsArgsDict']]] = None) -> 'Datasource':
+            params: pulumi.Input[Optional[Union['DatasourceParamsArgs', 'DatasourceParamsArgsDict', 'outputs.DatasourceParams']]] = None) -> 'Datasource':
         """
         Get an existing Datasource resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -321,7 +321,7 @@ class Datasource(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] canonical_name: The user-friendly name of the data source.
         :param pulumi.Input[_builtins.str] data_source_type: The type of data source.
-        :param pulumi.Input[Union['DatasourceParamsArgs', 'DatasourceParamsArgsDict']] params: The data source parameters.
+        :param pulumi.Input[Union['DatasourceParamsArgs', 'DatasourceParamsArgsDict', 'outputs.DatasourceParams']] params: The data source parameters.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 

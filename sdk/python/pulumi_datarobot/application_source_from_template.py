@@ -350,8 +350,8 @@ class ApplicationSourceFromTemplate(pulumi.CustomResource):
                  files: Optional[Any] = None,
                  folder_path: pulumi.Input[Optional[_builtins.str]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
-                 resources: pulumi.Input[Optional[Union['ApplicationSourceFromTemplateResourcesArgs', 'ApplicationSourceFromTemplateResourcesArgsDict']]] = None,
-                 runtime_parameter_values: pulumi.Input[Optional[Sequence[pulumi.Input[Union['ApplicationSourceFromTemplateRuntimeParameterValueArgs', 'ApplicationSourceFromTemplateRuntimeParameterValueArgsDict']]]]] = None,
+                 resources: pulumi.Input[Optional[Union['ApplicationSourceFromTemplateResourcesArgs', 'ApplicationSourceFromTemplateResourcesArgsDict', 'outputs.ApplicationSourceFromTemplateResources']]] = None,
+                 runtime_parameter_values: pulumi.Input[Optional[Sequence[pulumi.Input[Union['ApplicationSourceFromTemplateRuntimeParameterValueArgs', 'ApplicationSourceFromTemplateRuntimeParameterValueArgsDict', 'outputs.ApplicationSourceFromTemplateRuntimeParameterValue']]]]] = None,
                  template_id: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         """
@@ -397,8 +397,8 @@ class ApplicationSourceFromTemplate(pulumi.CustomResource):
         :param Any files: The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Application Source. If list is of strings, then basenames will be used for tuples.
         :param pulumi.Input[_builtins.str] folder_path: The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
         :param pulumi.Input[_builtins.str] name: The name of the Application Source.
-        :param pulumi.Input[Union['ApplicationSourceFromTemplateResourcesArgs', 'ApplicationSourceFromTemplateResourcesArgsDict']] resources: The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['ApplicationSourceFromTemplateRuntimeParameterValueArgs', 'ApplicationSourceFromTemplateRuntimeParameterValueArgsDict']]]] runtime_parameter_values: The runtime parameter values for the Application Source.
+        :param pulumi.Input[Union['ApplicationSourceFromTemplateResourcesArgs', 'ApplicationSourceFromTemplateResourcesArgsDict', 'outputs.ApplicationSourceFromTemplateResources']] resources: The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['ApplicationSourceFromTemplateRuntimeParameterValueArgs', 'ApplicationSourceFromTemplateRuntimeParameterValueArgsDict', 'outputs.ApplicationSourceFromTemplateRuntimeParameterValue']]]] runtime_parameter_values: The runtime parameter values for the Application Source.
         :param pulumi.Input[_builtins.str] template_id: The ID of the template used to create the Application Source.
         """
         ...
@@ -463,8 +463,8 @@ class ApplicationSourceFromTemplate(pulumi.CustomResource):
                  files: Optional[Any] = None,
                  folder_path: pulumi.Input[Optional[_builtins.str]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
-                 resources: pulumi.Input[Optional[Union['ApplicationSourceFromTemplateResourcesArgs', 'ApplicationSourceFromTemplateResourcesArgsDict']]] = None,
-                 runtime_parameter_values: pulumi.Input[Optional[Sequence[pulumi.Input[Union['ApplicationSourceFromTemplateRuntimeParameterValueArgs', 'ApplicationSourceFromTemplateRuntimeParameterValueArgsDict']]]]] = None,
+                 resources: pulumi.Input[Optional[Union['ApplicationSourceFromTemplateResourcesArgs', 'ApplicationSourceFromTemplateResourcesArgsDict', 'outputs.ApplicationSourceFromTemplateResources']]] = None,
+                 runtime_parameter_values: pulumi.Input[Optional[Sequence[pulumi.Input[Union['ApplicationSourceFromTemplateRuntimeParameterValueArgs', 'ApplicationSourceFromTemplateRuntimeParameterValueArgsDict', 'outputs.ApplicationSourceFromTemplateRuntimeParameterValue']]]]] = None,
                  template_id: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
@@ -505,8 +505,8 @@ class ApplicationSourceFromTemplate(pulumi.CustomResource):
             folder_path: pulumi.Input[Optional[_builtins.str]] = None,
             folder_path_hash: pulumi.Input[Optional[_builtins.str]] = None,
             name: pulumi.Input[Optional[_builtins.str]] = None,
-            resources: pulumi.Input[Optional[Union['ApplicationSourceFromTemplateResourcesArgs', 'ApplicationSourceFromTemplateResourcesArgsDict']]] = None,
-            runtime_parameter_values: pulumi.Input[Optional[Sequence[pulumi.Input[Union['ApplicationSourceFromTemplateRuntimeParameterValueArgs', 'ApplicationSourceFromTemplateRuntimeParameterValueArgsDict']]]]] = None,
+            resources: pulumi.Input[Optional[Union['ApplicationSourceFromTemplateResourcesArgs', 'ApplicationSourceFromTemplateResourcesArgsDict', 'outputs.ApplicationSourceFromTemplateResources']]] = None,
+            runtime_parameter_values: pulumi.Input[Optional[Sequence[pulumi.Input[Union['ApplicationSourceFromTemplateRuntimeParameterValueArgs', 'ApplicationSourceFromTemplateRuntimeParameterValueArgsDict', 'outputs.ApplicationSourceFromTemplateRuntimeParameterValue']]]]] = None,
             template_id: pulumi.Input[Optional[_builtins.str]] = None,
             version_id: pulumi.Input[Optional[_builtins.str]] = None) -> 'ApplicationSourceFromTemplate':
         """
@@ -523,8 +523,8 @@ class ApplicationSourceFromTemplate(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] folder_path: The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
         :param pulumi.Input[_builtins.str] folder_path_hash: The hash of the folder path contents.
         :param pulumi.Input[_builtins.str] name: The name of the Application Source.
-        :param pulumi.Input[Union['ApplicationSourceFromTemplateResourcesArgs', 'ApplicationSourceFromTemplateResourcesArgsDict']] resources: The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['ApplicationSourceFromTemplateRuntimeParameterValueArgs', 'ApplicationSourceFromTemplateRuntimeParameterValueArgsDict']]]] runtime_parameter_values: The runtime parameter values for the Application Source.
+        :param pulumi.Input[Union['ApplicationSourceFromTemplateResourcesArgs', 'ApplicationSourceFromTemplateResourcesArgsDict', 'outputs.ApplicationSourceFromTemplateResources']] resources: The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['ApplicationSourceFromTemplateRuntimeParameterValueArgs', 'ApplicationSourceFromTemplateRuntimeParameterValueArgsDict', 'outputs.ApplicationSourceFromTemplateRuntimeParameterValue']]]] runtime_parameter_values: The runtime parameter values for the Application Source.
         :param pulumi.Input[_builtins.str] template_id: The ID of the template used to create the Application Source.
         :param pulumi.Input[_builtins.str] version_id: The version ID of the Application Source.
         """

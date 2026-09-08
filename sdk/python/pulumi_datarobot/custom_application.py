@@ -334,7 +334,7 @@ class CustomApplication(pulumi.CustomResource):
                  external_access_recipients: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  required_key_scope_level: pulumi.Input[Optional[_builtins.str]] = None,
-                 resources: pulumi.Input[Optional[Union['CustomApplicationResourcesArgs', 'CustomApplicationResourcesArgsDict']]] = None,
+                 resources: pulumi.Input[Optional[Union['CustomApplicationResourcesArgs', 'CustomApplicationResourcesArgsDict', 'outputs.CustomApplicationResources']]] = None,
                  source_version_id: pulumi.Input[Optional[_builtins.str]] = None,
                  use_case_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  __props__=None):
@@ -380,7 +380,7 @@ class CustomApplication(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] external_access_recipients: The list of external email addresses that have access to the Custom Application.
         :param pulumi.Input[_builtins.str] name: The name of the Custom Application.
         :param pulumi.Input[_builtins.str] required_key_scope_level: The API key scope level required for requests to this custom application. Can be set to 'viewer', 'user', or 'admin'.
-        :param pulumi.Input[Union['CustomApplicationResourcesArgs', 'CustomApplicationResourcesArgsDict']] resources: The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.
+        :param pulumi.Input[Union['CustomApplicationResourcesArgs', 'CustomApplicationResourcesArgsDict', 'outputs.CustomApplicationResources']] resources: The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.
         :param pulumi.Input[_builtins.str] source_version_id: The version ID of the Custom Application Source.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] use_case_ids: The list of Use Case IDs to add the Custom Application to.
         """
@@ -445,7 +445,7 @@ class CustomApplication(pulumi.CustomResource):
                  external_access_recipients: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  required_key_scope_level: pulumi.Input[Optional[_builtins.str]] = None,
-                 resources: pulumi.Input[Optional[Union['CustomApplicationResourcesArgs', 'CustomApplicationResourcesArgsDict']]] = None,
+                 resources: pulumi.Input[Optional[Union['CustomApplicationResourcesArgs', 'CustomApplicationResourcesArgsDict', 'outputs.CustomApplicationResources']]] = None,
                  source_version_id: pulumi.Input[Optional[_builtins.str]] = None,
                  use_case_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  __props__=None):
@@ -485,7 +485,7 @@ class CustomApplication(pulumi.CustomResource):
             external_access_recipients: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
             name: pulumi.Input[Optional[_builtins.str]] = None,
             required_key_scope_level: pulumi.Input[Optional[_builtins.str]] = None,
-            resources: pulumi.Input[Optional[Union['CustomApplicationResourcesArgs', 'CustomApplicationResourcesArgsDict']]] = None,
+            resources: pulumi.Input[Optional[Union['CustomApplicationResourcesArgs', 'CustomApplicationResourcesArgsDict', 'outputs.CustomApplicationResources']]] = None,
             source_id: pulumi.Input[Optional[_builtins.str]] = None,
             source_version_id: pulumi.Input[Optional[_builtins.str]] = None,
             use_case_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None) -> 'CustomApplication':
@@ -502,7 +502,7 @@ class CustomApplication(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] external_access_recipients: The list of external email addresses that have access to the Custom Application.
         :param pulumi.Input[_builtins.str] name: The name of the Custom Application.
         :param pulumi.Input[_builtins.str] required_key_scope_level: The API key scope level required for requests to this custom application. Can be set to 'viewer', 'user', or 'admin'.
-        :param pulumi.Input[Union['CustomApplicationResourcesArgs', 'CustomApplicationResourcesArgsDict']] resources: The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.
+        :param pulumi.Input[Union['CustomApplicationResourcesArgs', 'CustomApplicationResourcesArgsDict', 'outputs.CustomApplicationResources']] resources: The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.
         :param pulumi.Input[_builtins.str] source_id: The ID of the Custom Application Source.
         :param pulumi.Input[_builtins.str] source_version_id: The version ID of the Custom Application Source.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] use_case_ids: The list of Use Case IDs to add the Custom Application to.

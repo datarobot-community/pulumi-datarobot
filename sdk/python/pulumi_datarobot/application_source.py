@@ -344,8 +344,8 @@ class ApplicationSource(pulumi.CustomResource):
                  folder_path: pulumi.Input[Optional[_builtins.str]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  required_key_scope_level: pulumi.Input[Optional[_builtins.str]] = None,
-                 resources: pulumi.Input[Optional[Union['ApplicationSourceResourcesArgs', 'ApplicationSourceResourcesArgsDict']]] = None,
-                 runtime_parameter_values: pulumi.Input[Optional[Sequence[pulumi.Input[Union['ApplicationSourceRuntimeParameterValueArgs', 'ApplicationSourceRuntimeParameterValueArgsDict']]]]] = None,
+                 resources: pulumi.Input[Optional[Union['ApplicationSourceResourcesArgs', 'ApplicationSourceResourcesArgsDict', 'outputs.ApplicationSourceResources']]] = None,
+                 runtime_parameter_values: pulumi.Input[Optional[Sequence[pulumi.Input[Union['ApplicationSourceRuntimeParameterValueArgs', 'ApplicationSourceRuntimeParameterValueArgsDict', 'outputs.ApplicationSourceRuntimeParameterValue']]]]] = None,
                  __props__=None):
         """
         Application Source
@@ -390,7 +390,7 @@ class ApplicationSource(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] folder_path: The path to a folder containing files to build the Application Source. Each file in the folder is uploaded under path relative to a folder path.
         :param pulumi.Input[_builtins.str] name: The name of the Application Source.
         :param pulumi.Input[_builtins.str] required_key_scope_level: The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.
-        :param pulumi.Input[Union['ApplicationSourceResourcesArgs', 'ApplicationSourceResourcesArgsDict']] resources: The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.
+        :param pulumi.Input[Union['ApplicationSourceResourcesArgs', 'ApplicationSourceResourcesArgsDict', 'outputs.ApplicationSourceResources']] resources: The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.
         """
         ...
     @overload
@@ -454,8 +454,8 @@ class ApplicationSource(pulumi.CustomResource):
                  folder_path: pulumi.Input[Optional[_builtins.str]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  required_key_scope_level: pulumi.Input[Optional[_builtins.str]] = None,
-                 resources: pulumi.Input[Optional[Union['ApplicationSourceResourcesArgs', 'ApplicationSourceResourcesArgsDict']]] = None,
-                 runtime_parameter_values: pulumi.Input[Optional[Sequence[pulumi.Input[Union['ApplicationSourceRuntimeParameterValueArgs', 'ApplicationSourceRuntimeParameterValueArgsDict']]]]] = None,
+                 resources: pulumi.Input[Optional[Union['ApplicationSourceResourcesArgs', 'ApplicationSourceResourcesArgsDict', 'outputs.ApplicationSourceResources']]] = None,
+                 runtime_parameter_values: pulumi.Input[Optional[Sequence[pulumi.Input[Union['ApplicationSourceRuntimeParameterValueArgs', 'ApplicationSourceRuntimeParameterValueArgsDict', 'outputs.ApplicationSourceRuntimeParameterValue']]]]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -494,8 +494,8 @@ class ApplicationSource(pulumi.CustomResource):
             folder_path_hash: pulumi.Input[Optional[_builtins.str]] = None,
             name: pulumi.Input[Optional[_builtins.str]] = None,
             required_key_scope_level: pulumi.Input[Optional[_builtins.str]] = None,
-            resources: pulumi.Input[Optional[Union['ApplicationSourceResourcesArgs', 'ApplicationSourceResourcesArgsDict']]] = None,
-            runtime_parameter_values: pulumi.Input[Optional[Sequence[pulumi.Input[Union['ApplicationSourceRuntimeParameterValueArgs', 'ApplicationSourceRuntimeParameterValueArgsDict']]]]] = None,
+            resources: pulumi.Input[Optional[Union['ApplicationSourceResourcesArgs', 'ApplicationSourceResourcesArgsDict', 'outputs.ApplicationSourceResources']]] = None,
+            runtime_parameter_values: pulumi.Input[Optional[Sequence[pulumi.Input[Union['ApplicationSourceRuntimeParameterValueArgs', 'ApplicationSourceRuntimeParameterValueArgsDict', 'outputs.ApplicationSourceRuntimeParameterValue']]]]] = None,
             version_id: pulumi.Input[Optional[_builtins.str]] = None) -> 'ApplicationSource':
         """
         Get an existing ApplicationSource resource's state with the given name, id, and optional extra
@@ -512,7 +512,7 @@ class ApplicationSource(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] folder_path_hash: The hash of the folder path contents.
         :param pulumi.Input[_builtins.str] name: The name of the Application Source.
         :param pulumi.Input[_builtins.str] required_key_scope_level: The API key scope level. The API Key with this level will be added in users' requests to a custom application. If set to None, no API Key will be provided.
-        :param pulumi.Input[Union['ApplicationSourceResourcesArgs', 'ApplicationSourceResourcesArgsDict']] resources: The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.
+        :param pulumi.Input[Union['ApplicationSourceResourcesArgs', 'ApplicationSourceResourcesArgsDict', 'outputs.ApplicationSourceResources']] resources: The resources for the Application Source. If not specified, default values will be computed by the API based on the cluster configuration.
         :param pulumi.Input[_builtins.str] version_id: The version ID of the Application Source.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
