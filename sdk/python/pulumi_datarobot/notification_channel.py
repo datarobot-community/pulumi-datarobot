@@ -457,8 +457,8 @@ class NotificationChannel(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  channel_type: pulumi.Input[Optional[_builtins.str]] = None,
                  content_type: pulumi.Input[Optional[_builtins.str]] = None,
-                 custom_headers: pulumi.Input[Optional[Sequence[pulumi.Input[Union['NotificationChannelCustomHeaderArgs', 'NotificationChannelCustomHeaderArgsDict']]]]] = None,
-                 dr_entities: pulumi.Input[Optional[Sequence[pulumi.Input[Union['NotificationChannelDrEntityArgs', 'NotificationChannelDrEntityArgsDict']]]]] = None,
+                 custom_headers: pulumi.Input[Optional[Sequence[pulumi.Input[Union['NotificationChannelCustomHeaderArgs', 'NotificationChannelCustomHeaderArgsDict', 'outputs.NotificationChannelCustomHeader']]]]] = None,
+                 dr_entities: pulumi.Input[Optional[Sequence[pulumi.Input[Union['NotificationChannelDrEntityArgs', 'NotificationChannelDrEntityArgsDict', 'outputs.NotificationChannelDrEntity']]]]] = None,
                  email_address: pulumi.Input[Optional[_builtins.str]] = None,
                  language_code: pulumi.Input[Optional[_builtins.str]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
@@ -508,8 +508,8 @@ class NotificationChannel(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] channel_type: The Type of Notification Channel.
         :param pulumi.Input[_builtins.str] content_type: The content type of the messages of the Notification Channel.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['NotificationChannelCustomHeaderArgs', 'NotificationChannelCustomHeaderArgsDict']]]] custom_headers: Custom headers and their values to be sent in the Notification Channel.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['NotificationChannelDrEntityArgs', 'NotificationChannelDrEntityArgsDict']]]] dr_entities: The IDs of the DataRobot Users, Group or Custom Job associated with the DataRobotUser, DataRobotGroup or DataRobotCustomJob channel types.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['NotificationChannelCustomHeaderArgs', 'NotificationChannelCustomHeaderArgsDict', 'outputs.NotificationChannelCustomHeader']]]] custom_headers: Custom headers and their values to be sent in the Notification Channel.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['NotificationChannelDrEntityArgs', 'NotificationChannelDrEntityArgsDict', 'outputs.NotificationChannelDrEntity']]]] dr_entities: The IDs of the DataRobot Users, Group or Custom Job associated with the DataRobotUser, DataRobotGroup or DataRobotCustomJob channel types.
         :param pulumi.Input[_builtins.str] email_address: The email address to be used in the Notification Channel.
         :param pulumi.Input[_builtins.str] language_code: The preferred language code.
         :param pulumi.Input[_builtins.str] name: The name of the Notification Channel.
@@ -578,8 +578,8 @@ class NotificationChannel(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  channel_type: pulumi.Input[Optional[_builtins.str]] = None,
                  content_type: pulumi.Input[Optional[_builtins.str]] = None,
-                 custom_headers: pulumi.Input[Optional[Sequence[pulumi.Input[Union['NotificationChannelCustomHeaderArgs', 'NotificationChannelCustomHeaderArgsDict']]]]] = None,
-                 dr_entities: pulumi.Input[Optional[Sequence[pulumi.Input[Union['NotificationChannelDrEntityArgs', 'NotificationChannelDrEntityArgsDict']]]]] = None,
+                 custom_headers: pulumi.Input[Optional[Sequence[pulumi.Input[Union['NotificationChannelCustomHeaderArgs', 'NotificationChannelCustomHeaderArgsDict', 'outputs.NotificationChannelCustomHeader']]]]] = None,
+                 dr_entities: pulumi.Input[Optional[Sequence[pulumi.Input[Union['NotificationChannelDrEntityArgs', 'NotificationChannelDrEntityArgsDict', 'outputs.NotificationChannelDrEntity']]]]] = None,
                  email_address: pulumi.Input[Optional[_builtins.str]] = None,
                  language_code: pulumi.Input[Optional[_builtins.str]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
@@ -629,8 +629,8 @@ class NotificationChannel(pulumi.CustomResource):
             opts: Optional[pulumi.ResourceOptions] = None,
             channel_type: pulumi.Input[Optional[_builtins.str]] = None,
             content_type: pulumi.Input[Optional[_builtins.str]] = None,
-            custom_headers: pulumi.Input[Optional[Sequence[pulumi.Input[Union['NotificationChannelCustomHeaderArgs', 'NotificationChannelCustomHeaderArgsDict']]]]] = None,
-            dr_entities: pulumi.Input[Optional[Sequence[pulumi.Input[Union['NotificationChannelDrEntityArgs', 'NotificationChannelDrEntityArgsDict']]]]] = None,
+            custom_headers: pulumi.Input[Optional[Sequence[pulumi.Input[Union['NotificationChannelCustomHeaderArgs', 'NotificationChannelCustomHeaderArgsDict', 'outputs.NotificationChannelCustomHeader']]]]] = None,
+            dr_entities: pulumi.Input[Optional[Sequence[pulumi.Input[Union['NotificationChannelDrEntityArgs', 'NotificationChannelDrEntityArgsDict', 'outputs.NotificationChannelDrEntity']]]]] = None,
             email_address: pulumi.Input[Optional[_builtins.str]] = None,
             language_code: pulumi.Input[Optional[_builtins.str]] = None,
             name: pulumi.Input[Optional[_builtins.str]] = None,
@@ -649,8 +649,8 @@ class NotificationChannel(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] channel_type: The Type of Notification Channel.
         :param pulumi.Input[_builtins.str] content_type: The content type of the messages of the Notification Channel.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['NotificationChannelCustomHeaderArgs', 'NotificationChannelCustomHeaderArgsDict']]]] custom_headers: Custom headers and their values to be sent in the Notification Channel.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['NotificationChannelDrEntityArgs', 'NotificationChannelDrEntityArgsDict']]]] dr_entities: The IDs of the DataRobot Users, Group or Custom Job associated with the DataRobotUser, DataRobotGroup or DataRobotCustomJob channel types.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['NotificationChannelCustomHeaderArgs', 'NotificationChannelCustomHeaderArgsDict', 'outputs.NotificationChannelCustomHeader']]]] custom_headers: Custom headers and their values to be sent in the Notification Channel.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['NotificationChannelDrEntityArgs', 'NotificationChannelDrEntityArgsDict', 'outputs.NotificationChannelDrEntity']]]] dr_entities: The IDs of the DataRobot Users, Group or Custom Job associated with the DataRobotUser, DataRobotGroup or DataRobotCustomJob channel types.
         :param pulumi.Input[_builtins.str] email_address: The email address to be used in the Notification Channel.
         :param pulumi.Input[_builtins.str] language_code: The preferred language code.
         :param pulumi.Input[_builtins.str] name: The name of the Notification Channel.

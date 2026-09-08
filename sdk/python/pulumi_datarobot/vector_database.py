@@ -184,7 +184,7 @@ class VectorDatabase(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 chunking_parameters: pulumi.Input[Optional[Union['VectorDatabaseChunkingParametersArgs', 'VectorDatabaseChunkingParametersArgsDict']]] = None,
+                 chunking_parameters: pulumi.Input[Optional[Union['VectorDatabaseChunkingParametersArgs', 'VectorDatabaseChunkingParametersArgsDict', 'outputs.VectorDatabaseChunkingParameters']]] = None,
                  dataset_id: pulumi.Input[Optional[_builtins.str]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  use_case_id: pulumi.Input[Optional[_builtins.str]] = None,
@@ -216,7 +216,7 @@ class VectorDatabase(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Union['VectorDatabaseChunkingParametersArgs', 'VectorDatabaseChunkingParametersArgsDict']] chunking_parameters: The chunking parameters for the Model.
+        :param pulumi.Input[Union['VectorDatabaseChunkingParametersArgs', 'VectorDatabaseChunkingParametersArgsDict', 'outputs.VectorDatabaseChunkingParameters']] chunking_parameters: The chunking parameters for the Model.
         :param pulumi.Input[_builtins.str] dataset_id: The id of the Vector Database.
         :param pulumi.Input[_builtins.str] name: The name of the VectorDatabase.
         :param pulumi.Input[_builtins.str] use_case_id: The id of the Use Case.
@@ -267,7 +267,7 @@ class VectorDatabase(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 chunking_parameters: pulumi.Input[Optional[Union['VectorDatabaseChunkingParametersArgs', 'VectorDatabaseChunkingParametersArgsDict']]] = None,
+                 chunking_parameters: pulumi.Input[Optional[Union['VectorDatabaseChunkingParametersArgs', 'VectorDatabaseChunkingParametersArgsDict', 'outputs.VectorDatabaseChunkingParameters']]] = None,
                  dataset_id: pulumi.Input[Optional[_builtins.str]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  use_case_id: pulumi.Input[Optional[_builtins.str]] = None,
@@ -299,7 +299,7 @@ class VectorDatabase(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            chunking_parameters: pulumi.Input[Optional[Union['VectorDatabaseChunkingParametersArgs', 'VectorDatabaseChunkingParametersArgsDict']]] = None,
+            chunking_parameters: pulumi.Input[Optional[Union['VectorDatabaseChunkingParametersArgs', 'VectorDatabaseChunkingParametersArgsDict', 'outputs.VectorDatabaseChunkingParameters']]] = None,
             dataset_id: pulumi.Input[Optional[_builtins.str]] = None,
             name: pulumi.Input[Optional[_builtins.str]] = None,
             use_case_id: pulumi.Input[Optional[_builtins.str]] = None,
@@ -311,7 +311,7 @@ class VectorDatabase(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Union['VectorDatabaseChunkingParametersArgs', 'VectorDatabaseChunkingParametersArgsDict']] chunking_parameters: The chunking parameters for the Model.
+        :param pulumi.Input[Union['VectorDatabaseChunkingParametersArgs', 'VectorDatabaseChunkingParametersArgsDict', 'outputs.VectorDatabaseChunkingParameters']] chunking_parameters: The chunking parameters for the Model.
         :param pulumi.Input[_builtins.str] dataset_id: The id of the Vector Database.
         :param pulumi.Input[_builtins.str] name: The name of the VectorDatabase.
         :param pulumi.Input[_builtins.str] use_case_id: The id of the Use Case.

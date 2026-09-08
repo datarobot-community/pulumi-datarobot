@@ -252,7 +252,7 @@ class RegisteredModel(pulumi.CustomResource):
                  custom_model_version_id: pulumi.Input[Optional[_builtins.str]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
-                 tags: pulumi.Input[Optional[Sequence[pulumi.Input[Union['RegisteredModelTagArgs', 'RegisteredModelTagArgsDict']]]]] = None,
+                 tags: pulumi.Input[Optional[Sequence[pulumi.Input[Union['RegisteredModelTagArgs', 'RegisteredModelTagArgsDict', 'outputs.RegisteredModelTag']]]]] = None,
                  use_case_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  version_name: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
@@ -298,7 +298,7 @@ class RegisteredModel(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] custom_model_version_id: The ID of the custom model version for this Registered Model.
         :param pulumi.Input[_builtins.str] description: The description of the Registered Model.
         :param pulumi.Input[_builtins.str] name: The name of the Registered Model.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['RegisteredModelTagArgs', 'RegisteredModelTagArgsDict']]]] tags: The list of tags to assign to the Registered Model version.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['RegisteredModelTagArgs', 'RegisteredModelTagArgsDict', 'outputs.RegisteredModelTag']]]] tags: The list of tags to assign to the Registered Model version.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] use_case_ids: The list of Use Case IDs to add the Registered Model version to.
         :param pulumi.Input[_builtins.str] version_name: The name of the Registered Model Version.
         """
@@ -363,7 +363,7 @@ class RegisteredModel(pulumi.CustomResource):
                  custom_model_version_id: pulumi.Input[Optional[_builtins.str]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
-                 tags: pulumi.Input[Optional[Sequence[pulumi.Input[Union['RegisteredModelTagArgs', 'RegisteredModelTagArgsDict']]]]] = None,
+                 tags: pulumi.Input[Optional[Sequence[pulumi.Input[Union['RegisteredModelTagArgs', 'RegisteredModelTagArgsDict', 'outputs.RegisteredModelTag']]]]] = None,
                  use_case_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  version_name: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
@@ -397,7 +397,7 @@ class RegisteredModel(pulumi.CustomResource):
             custom_model_version_id: pulumi.Input[Optional[_builtins.str]] = None,
             description: pulumi.Input[Optional[_builtins.str]] = None,
             name: pulumi.Input[Optional[_builtins.str]] = None,
-            tags: pulumi.Input[Optional[Sequence[pulumi.Input[Union['RegisteredModelTagArgs', 'RegisteredModelTagArgsDict']]]]] = None,
+            tags: pulumi.Input[Optional[Sequence[pulumi.Input[Union['RegisteredModelTagArgs', 'RegisteredModelTagArgsDict', 'outputs.RegisteredModelTag']]]]] = None,
             use_case_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
             version_id: pulumi.Input[Optional[_builtins.str]] = None,
             version_name: pulumi.Input[Optional[_builtins.str]] = None) -> 'RegisteredModel':
@@ -411,7 +411,7 @@ class RegisteredModel(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] custom_model_version_id: The ID of the custom model version for this Registered Model.
         :param pulumi.Input[_builtins.str] description: The description of the Registered Model.
         :param pulumi.Input[_builtins.str] name: The name of the Registered Model.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['RegisteredModelTagArgs', 'RegisteredModelTagArgsDict']]]] tags: The list of tags to assign to the Registered Model version.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['RegisteredModelTagArgs', 'RegisteredModelTagArgsDict', 'outputs.RegisteredModelTag']]]] tags: The list of tags to assign to the Registered Model version.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] use_case_ids: The list of Use Case IDs to add the Registered Model version to.
         :param pulumi.Input[_builtins.str] version_id: The ID of the Registered Model Version.
         :param pulumi.Input[_builtins.str] version_name: The name of the Registered Model Version.

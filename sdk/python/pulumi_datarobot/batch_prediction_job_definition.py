@@ -843,28 +843,28 @@ class BatchPredictionJobDefinition(pulumi.CustomResource):
                  abort_on_error: pulumi.Input[Optional[_builtins.bool]] = None,
                  chunk_size: Optional[Any] = None,
                  column_names_remapping: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
-                 csv_settings: pulumi.Input[Optional[Union['BatchPredictionJobDefinitionCsvSettingsArgs', 'BatchPredictionJobDefinitionCsvSettingsArgsDict']]] = None,
+                 csv_settings: pulumi.Input[Optional[Union['BatchPredictionJobDefinitionCsvSettingsArgs', 'BatchPredictionJobDefinitionCsvSettingsArgsDict', 'outputs.BatchPredictionJobDefinitionCsvSettings']]] = None,
                  deployment_id: pulumi.Input[Optional[_builtins.str]] = None,
                  enabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  explanation_algorithm: pulumi.Input[Optional[_builtins.str]] = None,
                  include_prediction_status: pulumi.Input[Optional[_builtins.bool]] = None,
                  include_probabilities: pulumi.Input[Optional[_builtins.bool]] = None,
                  include_probabilities_classes: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 intake_settings: pulumi.Input[Optional[Union['BatchPredictionJobDefinitionIntakeSettingsArgs', 'BatchPredictionJobDefinitionIntakeSettingsArgsDict']]] = None,
+                 intake_settings: pulumi.Input[Optional[Union['BatchPredictionJobDefinitionIntakeSettingsArgs', 'BatchPredictionJobDefinitionIntakeSettingsArgsDict', 'outputs.BatchPredictionJobDefinitionIntakeSettings']]] = None,
                  max_explanations: pulumi.Input[Optional[_builtins.int]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  num_concurrent: pulumi.Input[Optional[_builtins.int]] = None,
-                 output_settings: pulumi.Input[Optional[Union['BatchPredictionJobDefinitionOutputSettingsArgs', 'BatchPredictionJobDefinitionOutputSettingsArgsDict']]] = None,
+                 output_settings: pulumi.Input[Optional[Union['BatchPredictionJobDefinitionOutputSettingsArgs', 'BatchPredictionJobDefinitionOutputSettingsArgsDict', 'outputs.BatchPredictionJobDefinitionOutputSettings']]] = None,
                  passthrough_columns: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  passthrough_columns_set: pulumi.Input[Optional[_builtins.str]] = None,
-                 prediction_instance: pulumi.Input[Optional[Union['BatchPredictionJobDefinitionPredictionInstanceArgs', 'BatchPredictionJobDefinitionPredictionInstanceArgsDict']]] = None,
+                 prediction_instance: pulumi.Input[Optional[Union['BatchPredictionJobDefinitionPredictionInstanceArgs', 'BatchPredictionJobDefinitionPredictionInstanceArgsDict', 'outputs.BatchPredictionJobDefinitionPredictionInstance']]] = None,
                  prediction_threshold: pulumi.Input[Optional[_builtins.float]] = None,
                  prediction_warning_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
-                 schedule: pulumi.Input[Optional[Union['BatchPredictionJobDefinitionScheduleArgs', 'BatchPredictionJobDefinitionScheduleArgsDict']]] = None,
+                 schedule: pulumi.Input[Optional[Union['BatchPredictionJobDefinitionScheduleArgs', 'BatchPredictionJobDefinitionScheduleArgsDict', 'outputs.BatchPredictionJobDefinitionSchedule']]] = None,
                  skip_drift_tracking: pulumi.Input[Optional[_builtins.bool]] = None,
                  threshold_high: pulumi.Input[Optional[_builtins.float]] = None,
                  threshold_low: pulumi.Input[Optional[_builtins.float]] = None,
-                 timeseries_settings: pulumi.Input[Optional[Union['BatchPredictionJobDefinitionTimeseriesSettingsArgs', 'BatchPredictionJobDefinitionTimeseriesSettingsArgsDict']]] = None,
+                 timeseries_settings: pulumi.Input[Optional[Union['BatchPredictionJobDefinitionTimeseriesSettingsArgs', 'BatchPredictionJobDefinitionTimeseriesSettingsArgsDict', 'outputs.BatchPredictionJobDefinitionTimeseriesSettings']]] = None,
                  __props__=None):
         """
         Batch Prediction Job Definition
@@ -948,28 +948,28 @@ class BatchPredictionJobDefinition(pulumi.CustomResource):
         :param pulumi.Input[_builtins.bool] abort_on_error: Default behavior is to abort the job if too many rows fail scoring. This will free up resources for other jobs that may score successfully. Set to false to unconditionally score every row no matter how many errors are encountered. Defaults to True.
         :param Any chunk_size: Which strategy should be used to determine the chunk size. Can be either a named strategy or a fixed size in bytes.
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] column_names_remapping: Mapping with column renaming for output table.
-        :param pulumi.Input[Union['BatchPredictionJobDefinitionCsvSettingsArgs', 'BatchPredictionJobDefinitionCsvSettingsArgsDict']] csv_settings: CSV intake and output settings.
+        :param pulumi.Input[Union['BatchPredictionJobDefinitionCsvSettingsArgs', 'BatchPredictionJobDefinitionCsvSettingsArgsDict', 'outputs.BatchPredictionJobDefinitionCsvSettings']] csv_settings: CSV intake and output settings.
         :param pulumi.Input[_builtins.str] deployment_id: The ID of the deployment to use for the batch prediction job.
         :param pulumi.Input[_builtins.bool] enabled: Whether or not the job definition should be active on a scheduled basis. If True, schedule is required.
         :param pulumi.Input[_builtins.str] explanation_algorithm: Which algorithm will be used to calculate prediction explanations.
         :param pulumi.Input[_builtins.bool] include_prediction_status: Include the<span pulumi-lang-nodejs=" predictionStatus " pulumi-lang-dotnet=" PredictionStatus " pulumi-lang-go=" predictionStatus " pulumi-lang-python=" prediction_status " pulumi-lang-yaml=" predictionStatus " pulumi-lang-java=" predictionStatus " pulumi-lang-hcl=" prediction_status "> predictionStatus </span>column in the output. Defaults to False.
         :param pulumi.Input[_builtins.bool] include_probabilities: Flag that enables returning of all probability columns. Defaults to True.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] include_probabilities_classes: List the subset of classes if a user doesn’t want all the classes. Defaults to [].
-        :param pulumi.Input[Union['BatchPredictionJobDefinitionIntakeSettingsArgs', 'BatchPredictionJobDefinitionIntakeSettingsArgsDict']] intake_settings: A dict configuring how data is coming from.
+        :param pulumi.Input[Union['BatchPredictionJobDefinitionIntakeSettingsArgs', 'BatchPredictionJobDefinitionIntakeSettingsArgsDict', 'outputs.BatchPredictionJobDefinitionIntakeSettings']] intake_settings: A dict configuring how data is coming from.
         :param pulumi.Input[_builtins.int] max_explanations: Compute prediction explanations for this amount of features.
         :param pulumi.Input[_builtins.str] name: The name you want your job to be identified with. Must be unique across the organization’s existing jobs.
         :param pulumi.Input[_builtins.int] num_concurrent: Number of concurrent chunks to score simultaneously. Defaults to the available number of cores of the deployment. Lower it to leave resources for real-time scoring.
-        :param pulumi.Input[Union['BatchPredictionJobDefinitionOutputSettingsArgs', 'BatchPredictionJobDefinitionOutputSettingsArgsDict']] output_settings: A dict configuring how scored data is to be saved.
+        :param pulumi.Input[Union['BatchPredictionJobDefinitionOutputSettingsArgs', 'BatchPredictionJobDefinitionOutputSettingsArgsDict', 'outputs.BatchPredictionJobDefinitionOutputSettings']] output_settings: A dict configuring how scored data is to be saved.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] passthrough_columns: Keep these columns from the scoring dataset in the scored dataset. This is useful for correlating predictions with source data.
         :param pulumi.Input[_builtins.str] passthrough_columns_set: To pass through every column from the scoring dataset, set this to all.
-        :param pulumi.Input[Union['BatchPredictionJobDefinitionPredictionInstanceArgs', 'BatchPredictionJobDefinitionPredictionInstanceArgsDict']] prediction_instance: Defaults to instance specified by deployment or system configuration.
+        :param pulumi.Input[Union['BatchPredictionJobDefinitionPredictionInstanceArgs', 'BatchPredictionJobDefinitionPredictionInstanceArgsDict', 'outputs.BatchPredictionJobDefinitionPredictionInstance']] prediction_instance: Defaults to instance specified by deployment or system configuration.
         :param pulumi.Input[_builtins.float] prediction_threshold: Threshold is the point that sets the class boundary for a predicted value. This value can be set between 0.0 and 1.0.
         :param pulumi.Input[_builtins.bool] prediction_warning_enabled: Add prediction warnings to the scored data. Currently only supported for regression models. Defaults to False.
-        :param pulumi.Input[Union['BatchPredictionJobDefinitionScheduleArgs', 'BatchPredictionJobDefinitionScheduleArgsDict']] schedule: Defines at what intervals the job should run.
+        :param pulumi.Input[Union['BatchPredictionJobDefinitionScheduleArgs', 'BatchPredictionJobDefinitionScheduleArgsDict', 'outputs.BatchPredictionJobDefinitionSchedule']] schedule: Defines at what intervals the job should run.
         :param pulumi.Input[_builtins.bool] skip_drift_tracking: Skips drift tracking on any predictions made from this job. This is useful when running non-production workloads to not affect drift tracking and cause unnecessary alerts. Defaults to false.
         :param pulumi.Input[_builtins.float] threshold_high: Only compute prediction explanations for predictions above this threshold. Can be combined with threshold_low.
         :param pulumi.Input[_builtins.float] threshold_low: Only compute prediction explanations for predictions below this threshold. Can be combined with threshold_high.
-        :param pulumi.Input[Union['BatchPredictionJobDefinitionTimeseriesSettingsArgs', 'BatchPredictionJobDefinitionTimeseriesSettingsArgsDict']] timeseries_settings: Configuration for time-series scoring.
+        :param pulumi.Input[Union['BatchPredictionJobDefinitionTimeseriesSettingsArgs', 'BatchPredictionJobDefinitionTimeseriesSettingsArgsDict', 'outputs.BatchPredictionJobDefinitionTimeseriesSettings']] timeseries_settings: Configuration for time-series scoring.
         """
         ...
     @overload
@@ -1072,28 +1072,28 @@ class BatchPredictionJobDefinition(pulumi.CustomResource):
                  abort_on_error: pulumi.Input[Optional[_builtins.bool]] = None,
                  chunk_size: Optional[Any] = None,
                  column_names_remapping: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
-                 csv_settings: pulumi.Input[Optional[Union['BatchPredictionJobDefinitionCsvSettingsArgs', 'BatchPredictionJobDefinitionCsvSettingsArgsDict']]] = None,
+                 csv_settings: pulumi.Input[Optional[Union['BatchPredictionJobDefinitionCsvSettingsArgs', 'BatchPredictionJobDefinitionCsvSettingsArgsDict', 'outputs.BatchPredictionJobDefinitionCsvSettings']]] = None,
                  deployment_id: pulumi.Input[Optional[_builtins.str]] = None,
                  enabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  explanation_algorithm: pulumi.Input[Optional[_builtins.str]] = None,
                  include_prediction_status: pulumi.Input[Optional[_builtins.bool]] = None,
                  include_probabilities: pulumi.Input[Optional[_builtins.bool]] = None,
                  include_probabilities_classes: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
-                 intake_settings: pulumi.Input[Optional[Union['BatchPredictionJobDefinitionIntakeSettingsArgs', 'BatchPredictionJobDefinitionIntakeSettingsArgsDict']]] = None,
+                 intake_settings: pulumi.Input[Optional[Union['BatchPredictionJobDefinitionIntakeSettingsArgs', 'BatchPredictionJobDefinitionIntakeSettingsArgsDict', 'outputs.BatchPredictionJobDefinitionIntakeSettings']]] = None,
                  max_explanations: pulumi.Input[Optional[_builtins.int]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  num_concurrent: pulumi.Input[Optional[_builtins.int]] = None,
-                 output_settings: pulumi.Input[Optional[Union['BatchPredictionJobDefinitionOutputSettingsArgs', 'BatchPredictionJobDefinitionOutputSettingsArgsDict']]] = None,
+                 output_settings: pulumi.Input[Optional[Union['BatchPredictionJobDefinitionOutputSettingsArgs', 'BatchPredictionJobDefinitionOutputSettingsArgsDict', 'outputs.BatchPredictionJobDefinitionOutputSettings']]] = None,
                  passthrough_columns: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  passthrough_columns_set: pulumi.Input[Optional[_builtins.str]] = None,
-                 prediction_instance: pulumi.Input[Optional[Union['BatchPredictionJobDefinitionPredictionInstanceArgs', 'BatchPredictionJobDefinitionPredictionInstanceArgsDict']]] = None,
+                 prediction_instance: pulumi.Input[Optional[Union['BatchPredictionJobDefinitionPredictionInstanceArgs', 'BatchPredictionJobDefinitionPredictionInstanceArgsDict', 'outputs.BatchPredictionJobDefinitionPredictionInstance']]] = None,
                  prediction_threshold: pulumi.Input[Optional[_builtins.float]] = None,
                  prediction_warning_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
-                 schedule: pulumi.Input[Optional[Union['BatchPredictionJobDefinitionScheduleArgs', 'BatchPredictionJobDefinitionScheduleArgsDict']]] = None,
+                 schedule: pulumi.Input[Optional[Union['BatchPredictionJobDefinitionScheduleArgs', 'BatchPredictionJobDefinitionScheduleArgsDict', 'outputs.BatchPredictionJobDefinitionSchedule']]] = None,
                  skip_drift_tracking: pulumi.Input[Optional[_builtins.bool]] = None,
                  threshold_high: pulumi.Input[Optional[_builtins.float]] = None,
                  threshold_low: pulumi.Input[Optional[_builtins.float]] = None,
-                 timeseries_settings: pulumi.Input[Optional[Union['BatchPredictionJobDefinitionTimeseriesSettingsArgs', 'BatchPredictionJobDefinitionTimeseriesSettingsArgsDict']]] = None,
+                 timeseries_settings: pulumi.Input[Optional[Union['BatchPredictionJobDefinitionTimeseriesSettingsArgs', 'BatchPredictionJobDefinitionTimeseriesSettingsArgsDict', 'outputs.BatchPredictionJobDefinitionTimeseriesSettings']]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -1145,28 +1145,28 @@ class BatchPredictionJobDefinition(pulumi.CustomResource):
             abort_on_error: pulumi.Input[Optional[_builtins.bool]] = None,
             chunk_size: Optional[Any] = None,
             column_names_remapping: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
-            csv_settings: pulumi.Input[Optional[Union['BatchPredictionJobDefinitionCsvSettingsArgs', 'BatchPredictionJobDefinitionCsvSettingsArgsDict']]] = None,
+            csv_settings: pulumi.Input[Optional[Union['BatchPredictionJobDefinitionCsvSettingsArgs', 'BatchPredictionJobDefinitionCsvSettingsArgsDict', 'outputs.BatchPredictionJobDefinitionCsvSettings']]] = None,
             deployment_id: pulumi.Input[Optional[_builtins.str]] = None,
             enabled: pulumi.Input[Optional[_builtins.bool]] = None,
             explanation_algorithm: pulumi.Input[Optional[_builtins.str]] = None,
             include_prediction_status: pulumi.Input[Optional[_builtins.bool]] = None,
             include_probabilities: pulumi.Input[Optional[_builtins.bool]] = None,
             include_probabilities_classes: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
-            intake_settings: pulumi.Input[Optional[Union['BatchPredictionJobDefinitionIntakeSettingsArgs', 'BatchPredictionJobDefinitionIntakeSettingsArgsDict']]] = None,
+            intake_settings: pulumi.Input[Optional[Union['BatchPredictionJobDefinitionIntakeSettingsArgs', 'BatchPredictionJobDefinitionIntakeSettingsArgsDict', 'outputs.BatchPredictionJobDefinitionIntakeSettings']]] = None,
             max_explanations: pulumi.Input[Optional[_builtins.int]] = None,
             name: pulumi.Input[Optional[_builtins.str]] = None,
             num_concurrent: pulumi.Input[Optional[_builtins.int]] = None,
-            output_settings: pulumi.Input[Optional[Union['BatchPredictionJobDefinitionOutputSettingsArgs', 'BatchPredictionJobDefinitionOutputSettingsArgsDict']]] = None,
+            output_settings: pulumi.Input[Optional[Union['BatchPredictionJobDefinitionOutputSettingsArgs', 'BatchPredictionJobDefinitionOutputSettingsArgsDict', 'outputs.BatchPredictionJobDefinitionOutputSettings']]] = None,
             passthrough_columns: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
             passthrough_columns_set: pulumi.Input[Optional[_builtins.str]] = None,
-            prediction_instance: pulumi.Input[Optional[Union['BatchPredictionJobDefinitionPredictionInstanceArgs', 'BatchPredictionJobDefinitionPredictionInstanceArgsDict']]] = None,
+            prediction_instance: pulumi.Input[Optional[Union['BatchPredictionJobDefinitionPredictionInstanceArgs', 'BatchPredictionJobDefinitionPredictionInstanceArgsDict', 'outputs.BatchPredictionJobDefinitionPredictionInstance']]] = None,
             prediction_threshold: pulumi.Input[Optional[_builtins.float]] = None,
             prediction_warning_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
-            schedule: pulumi.Input[Optional[Union['BatchPredictionJobDefinitionScheduleArgs', 'BatchPredictionJobDefinitionScheduleArgsDict']]] = None,
+            schedule: pulumi.Input[Optional[Union['BatchPredictionJobDefinitionScheduleArgs', 'BatchPredictionJobDefinitionScheduleArgsDict', 'outputs.BatchPredictionJobDefinitionSchedule']]] = None,
             skip_drift_tracking: pulumi.Input[Optional[_builtins.bool]] = None,
             threshold_high: pulumi.Input[Optional[_builtins.float]] = None,
             threshold_low: pulumi.Input[Optional[_builtins.float]] = None,
-            timeseries_settings: pulumi.Input[Optional[Union['BatchPredictionJobDefinitionTimeseriesSettingsArgs', 'BatchPredictionJobDefinitionTimeseriesSettingsArgsDict']]] = None) -> 'BatchPredictionJobDefinition':
+            timeseries_settings: pulumi.Input[Optional[Union['BatchPredictionJobDefinitionTimeseriesSettingsArgs', 'BatchPredictionJobDefinitionTimeseriesSettingsArgsDict', 'outputs.BatchPredictionJobDefinitionTimeseriesSettings']]] = None) -> 'BatchPredictionJobDefinition':
         """
         Get an existing BatchPredictionJobDefinition resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -1177,28 +1177,28 @@ class BatchPredictionJobDefinition(pulumi.CustomResource):
         :param pulumi.Input[_builtins.bool] abort_on_error: Default behavior is to abort the job if too many rows fail scoring. This will free up resources for other jobs that may score successfully. Set to false to unconditionally score every row no matter how many errors are encountered. Defaults to True.
         :param Any chunk_size: Which strategy should be used to determine the chunk size. Can be either a named strategy or a fixed size in bytes.
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] column_names_remapping: Mapping with column renaming for output table.
-        :param pulumi.Input[Union['BatchPredictionJobDefinitionCsvSettingsArgs', 'BatchPredictionJobDefinitionCsvSettingsArgsDict']] csv_settings: CSV intake and output settings.
+        :param pulumi.Input[Union['BatchPredictionJobDefinitionCsvSettingsArgs', 'BatchPredictionJobDefinitionCsvSettingsArgsDict', 'outputs.BatchPredictionJobDefinitionCsvSettings']] csv_settings: CSV intake and output settings.
         :param pulumi.Input[_builtins.str] deployment_id: The ID of the deployment to use for the batch prediction job.
         :param pulumi.Input[_builtins.bool] enabled: Whether or not the job definition should be active on a scheduled basis. If True, schedule is required.
         :param pulumi.Input[_builtins.str] explanation_algorithm: Which algorithm will be used to calculate prediction explanations.
         :param pulumi.Input[_builtins.bool] include_prediction_status: Include the<span pulumi-lang-nodejs=" predictionStatus " pulumi-lang-dotnet=" PredictionStatus " pulumi-lang-go=" predictionStatus " pulumi-lang-python=" prediction_status " pulumi-lang-yaml=" predictionStatus " pulumi-lang-java=" predictionStatus " pulumi-lang-hcl=" prediction_status "> predictionStatus </span>column in the output. Defaults to False.
         :param pulumi.Input[_builtins.bool] include_probabilities: Flag that enables returning of all probability columns. Defaults to True.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] include_probabilities_classes: List the subset of classes if a user doesn’t want all the classes. Defaults to [].
-        :param pulumi.Input[Union['BatchPredictionJobDefinitionIntakeSettingsArgs', 'BatchPredictionJobDefinitionIntakeSettingsArgsDict']] intake_settings: A dict configuring how data is coming from.
+        :param pulumi.Input[Union['BatchPredictionJobDefinitionIntakeSettingsArgs', 'BatchPredictionJobDefinitionIntakeSettingsArgsDict', 'outputs.BatchPredictionJobDefinitionIntakeSettings']] intake_settings: A dict configuring how data is coming from.
         :param pulumi.Input[_builtins.int] max_explanations: Compute prediction explanations for this amount of features.
         :param pulumi.Input[_builtins.str] name: The name you want your job to be identified with. Must be unique across the organization’s existing jobs.
         :param pulumi.Input[_builtins.int] num_concurrent: Number of concurrent chunks to score simultaneously. Defaults to the available number of cores of the deployment. Lower it to leave resources for real-time scoring.
-        :param pulumi.Input[Union['BatchPredictionJobDefinitionOutputSettingsArgs', 'BatchPredictionJobDefinitionOutputSettingsArgsDict']] output_settings: A dict configuring how scored data is to be saved.
+        :param pulumi.Input[Union['BatchPredictionJobDefinitionOutputSettingsArgs', 'BatchPredictionJobDefinitionOutputSettingsArgsDict', 'outputs.BatchPredictionJobDefinitionOutputSettings']] output_settings: A dict configuring how scored data is to be saved.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] passthrough_columns: Keep these columns from the scoring dataset in the scored dataset. This is useful for correlating predictions with source data.
         :param pulumi.Input[_builtins.str] passthrough_columns_set: To pass through every column from the scoring dataset, set this to all.
-        :param pulumi.Input[Union['BatchPredictionJobDefinitionPredictionInstanceArgs', 'BatchPredictionJobDefinitionPredictionInstanceArgsDict']] prediction_instance: Defaults to instance specified by deployment or system configuration.
+        :param pulumi.Input[Union['BatchPredictionJobDefinitionPredictionInstanceArgs', 'BatchPredictionJobDefinitionPredictionInstanceArgsDict', 'outputs.BatchPredictionJobDefinitionPredictionInstance']] prediction_instance: Defaults to instance specified by deployment or system configuration.
         :param pulumi.Input[_builtins.float] prediction_threshold: Threshold is the point that sets the class boundary for a predicted value. This value can be set between 0.0 and 1.0.
         :param pulumi.Input[_builtins.bool] prediction_warning_enabled: Add prediction warnings to the scored data. Currently only supported for regression models. Defaults to False.
-        :param pulumi.Input[Union['BatchPredictionJobDefinitionScheduleArgs', 'BatchPredictionJobDefinitionScheduleArgsDict']] schedule: Defines at what intervals the job should run.
+        :param pulumi.Input[Union['BatchPredictionJobDefinitionScheduleArgs', 'BatchPredictionJobDefinitionScheduleArgsDict', 'outputs.BatchPredictionJobDefinitionSchedule']] schedule: Defines at what intervals the job should run.
         :param pulumi.Input[_builtins.bool] skip_drift_tracking: Skips drift tracking on any predictions made from this job. This is useful when running non-production workloads to not affect drift tracking and cause unnecessary alerts. Defaults to false.
         :param pulumi.Input[_builtins.float] threshold_high: Only compute prediction explanations for predictions above this threshold. Can be combined with threshold_low.
         :param pulumi.Input[_builtins.float] threshold_low: Only compute prediction explanations for predictions below this threshold. Can be combined with threshold_high.
-        :param pulumi.Input[Union['BatchPredictionJobDefinitionTimeseriesSettingsArgs', 'BatchPredictionJobDefinitionTimeseriesSettingsArgsDict']] timeseries_settings: Configuration for time-series scoring.
+        :param pulumi.Input[Union['BatchPredictionJobDefinitionTimeseriesSettingsArgs', 'BatchPredictionJobDefinitionTimeseriesSettingsArgsDict', 'outputs.BatchPredictionJobDefinitionTimeseriesSettings']] timeseries_settings: Configuration for time-series scoring.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 

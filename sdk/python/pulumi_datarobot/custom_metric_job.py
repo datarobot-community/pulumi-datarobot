@@ -532,7 +532,7 @@ class CustomMetricJob(pulumi.CustomResource):
                  is_model_specific: pulumi.Input[Optional[_builtins.bool]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  resource_bundle_id: pulumi.Input[Optional[_builtins.str]] = None,
-                 runtime_parameter_values: pulumi.Input[Optional[Sequence[pulumi.Input[Union['CustomMetricJobRuntimeParameterValueArgs', 'CustomMetricJobRuntimeParameterValueArgsDict']]]]] = None,
+                 runtime_parameter_values: pulumi.Input[Optional[Sequence[pulumi.Input[Union['CustomMetricJobRuntimeParameterValueArgs', 'CustomMetricJobRuntimeParameterValueArgsDict', 'outputs.CustomMetricJobRuntimeParameterValue']]]]] = None,
                  time_step: pulumi.Input[Optional[_builtins.str]] = None,
                  type: pulumi.Input[Optional[_builtins.str]] = None,
                  units: pulumi.Input[Optional[_builtins.str]] = None,
@@ -583,7 +583,7 @@ class CustomMetricJob(pulumi.CustomResource):
         :param pulumi.Input[_builtins.bool] is_model_specific: Determines whether the metric is related to the model or deployment.
         :param pulumi.Input[_builtins.str] name: The name of the Custom Metric Job.
         :param pulumi.Input[_builtins.str] resource_bundle_id: A single identifier that represents a bundle of resources: Memory, CPU, GPU, etc.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['CustomMetricJobRuntimeParameterValueArgs', 'CustomMetricJobRuntimeParameterValueArgsDict']]]] runtime_parameter_values: Additional parameters to be injected into a Job at runtime.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['CustomMetricJobRuntimeParameterValueArgs', 'CustomMetricJobRuntimeParameterValueArgsDict', 'outputs.CustomMetricJobRuntimeParameterValue']]]] runtime_parameter_values: Additional parameters to be injected into a Job at runtime.
         :param pulumi.Input[_builtins.str] time_step: Custom metric time bucket size.
         :param pulumi.Input[_builtins.str] type: The aggregation type of the custom metric.
         :param pulumi.Input[_builtins.str] units: The units, or the y-axis label, of the given custom metric.
@@ -653,7 +653,7 @@ class CustomMetricJob(pulumi.CustomResource):
                  is_model_specific: pulumi.Input[Optional[_builtins.bool]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  resource_bundle_id: pulumi.Input[Optional[_builtins.str]] = None,
-                 runtime_parameter_values: pulumi.Input[Optional[Sequence[pulumi.Input[Union['CustomMetricJobRuntimeParameterValueArgs', 'CustomMetricJobRuntimeParameterValueArgsDict']]]]] = None,
+                 runtime_parameter_values: pulumi.Input[Optional[Sequence[pulumi.Input[Union['CustomMetricJobRuntimeParameterValueArgs', 'CustomMetricJobRuntimeParameterValueArgsDict', 'outputs.CustomMetricJobRuntimeParameterValue']]]]] = None,
                  time_step: pulumi.Input[Optional[_builtins.str]] = None,
                  type: pulumi.Input[Optional[_builtins.str]] = None,
                  units: pulumi.Input[Optional[_builtins.str]] = None,
@@ -704,7 +704,7 @@ class CustomMetricJob(pulumi.CustomResource):
             is_model_specific: pulumi.Input[Optional[_builtins.bool]] = None,
             name: pulumi.Input[Optional[_builtins.str]] = None,
             resource_bundle_id: pulumi.Input[Optional[_builtins.str]] = None,
-            runtime_parameter_values: pulumi.Input[Optional[Sequence[pulumi.Input[Union['CustomMetricJobRuntimeParameterValueArgs', 'CustomMetricJobRuntimeParameterValueArgsDict']]]]] = None,
+            runtime_parameter_values: pulumi.Input[Optional[Sequence[pulumi.Input[Union['CustomMetricJobRuntimeParameterValueArgs', 'CustomMetricJobRuntimeParameterValueArgsDict', 'outputs.CustomMetricJobRuntimeParameterValue']]]]] = None,
             time_step: pulumi.Input[Optional[_builtins.str]] = None,
             type: pulumi.Input[Optional[_builtins.str]] = None,
             units: pulumi.Input[Optional[_builtins.str]] = None) -> 'CustomMetricJob':
@@ -727,7 +727,7 @@ class CustomMetricJob(pulumi.CustomResource):
         :param pulumi.Input[_builtins.bool] is_model_specific: Determines whether the metric is related to the model or deployment.
         :param pulumi.Input[_builtins.str] name: The name of the Custom Metric Job.
         :param pulumi.Input[_builtins.str] resource_bundle_id: A single identifier that represents a bundle of resources: Memory, CPU, GPU, etc.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['CustomMetricJobRuntimeParameterValueArgs', 'CustomMetricJobRuntimeParameterValueArgsDict']]]] runtime_parameter_values: Additional parameters to be injected into a Job at runtime.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['CustomMetricJobRuntimeParameterValueArgs', 'CustomMetricJobRuntimeParameterValueArgsDict', 'outputs.CustomMetricJobRuntimeParameterValue']]]] runtime_parameter_values: Additional parameters to be injected into a Job at runtime.
         :param pulumi.Input[_builtins.str] time_step: Custom metric time bucket size.
         :param pulumi.Input[_builtins.str] type: The aggregation type of the custom metric.
         :param pulumi.Input[_builtins.str] units: The units, or the y-axis label, of the given custom metric.

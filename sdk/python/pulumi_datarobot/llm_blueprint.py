@@ -329,15 +329,15 @@ class LlmBlueprint(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 custom_model_llm_settings: pulumi.Input[Optional[Union['LlmBlueprintCustomModelLlmSettingsArgs', 'LlmBlueprintCustomModelLlmSettingsArgsDict']]] = None,
+                 custom_model_llm_settings: pulumi.Input[Optional[Union['LlmBlueprintCustomModelLlmSettingsArgs', 'LlmBlueprintCustomModelLlmSettingsArgsDict', 'outputs.LlmBlueprintCustomModelLlmSettings']]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
                  llm_id: pulumi.Input[Optional[_builtins.str]] = None,
-                 llm_settings: pulumi.Input[Optional[Union['LlmBlueprintLlmSettingsArgs', 'LlmBlueprintLlmSettingsArgsDict']]] = None,
+                 llm_settings: pulumi.Input[Optional[Union['LlmBlueprintLlmSettingsArgs', 'LlmBlueprintLlmSettingsArgsDict', 'outputs.LlmBlueprintLlmSettings']]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  playground_id: pulumi.Input[Optional[_builtins.str]] = None,
                  prompt_type: pulumi.Input[Optional[_builtins.str]] = None,
                  vector_database_id: pulumi.Input[Optional[_builtins.str]] = None,
-                 vector_database_settings: pulumi.Input[Optional[Union['LlmBlueprintVectorDatabaseSettingsArgs', 'LlmBlueprintVectorDatabaseSettingsArgsDict']]] = None,
+                 vector_database_settings: pulumi.Input[Optional[Union['LlmBlueprintVectorDatabaseSettingsArgs', 'LlmBlueprintVectorDatabaseSettingsArgsDict', 'outputs.LlmBlueprintVectorDatabaseSettings']]] = None,
                  __props__=None):
         """
         LLMBlueprint
@@ -382,15 +382,15 @@ class LlmBlueprint(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Union['LlmBlueprintCustomModelLlmSettingsArgs', 'LlmBlueprintCustomModelLlmSettingsArgsDict']] custom_model_llm_settings: The custom model LLM settings for the LLM Blueprint.
+        :param pulumi.Input[Union['LlmBlueprintCustomModelLlmSettingsArgs', 'LlmBlueprintCustomModelLlmSettingsArgsDict', 'outputs.LlmBlueprintCustomModelLlmSettings']] custom_model_llm_settings: The custom model LLM settings for the LLM Blueprint.
         :param pulumi.Input[_builtins.str] description: The description of the LLM Blueprint.
         :param pulumi.Input[_builtins.str] llm_id: The id of the LLM for the LLM Blueprint. If custom*model*llm_settings is set, this value must be 'custom-model'.
-        :param pulumi.Input[Union['LlmBlueprintLlmSettingsArgs', 'LlmBlueprintLlmSettingsArgsDict']] llm_settings: The LLM settings for the LLM Blueprint.
+        :param pulumi.Input[Union['LlmBlueprintLlmSettingsArgs', 'LlmBlueprintLlmSettingsArgsDict', 'outputs.LlmBlueprintLlmSettings']] llm_settings: The LLM settings for the LLM Blueprint.
         :param pulumi.Input[_builtins.str] name: The name of the LLM Blueprint.
         :param pulumi.Input[_builtins.str] playground_id: The id of the Playground for the LLM Blueprint.
         :param pulumi.Input[_builtins.str] prompt_type: The prompt type for the LLM Blueprint.
         :param pulumi.Input[_builtins.str] vector_database_id: The id of the Vector Database for the LLM Blueprint.
-        :param pulumi.Input[Union['LlmBlueprintVectorDatabaseSettingsArgs', 'LlmBlueprintVectorDatabaseSettingsArgsDict']] vector_database_settings: The Vector Database settings for the LLM Blueprint.
+        :param pulumi.Input[Union['LlmBlueprintVectorDatabaseSettingsArgs', 'LlmBlueprintVectorDatabaseSettingsArgsDict', 'outputs.LlmBlueprintVectorDatabaseSettings']] vector_database_settings: The Vector Database settings for the LLM Blueprint.
         """
         ...
     @overload
@@ -454,15 +454,15 @@ class LlmBlueprint(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 custom_model_llm_settings: pulumi.Input[Optional[Union['LlmBlueprintCustomModelLlmSettingsArgs', 'LlmBlueprintCustomModelLlmSettingsArgsDict']]] = None,
+                 custom_model_llm_settings: pulumi.Input[Optional[Union['LlmBlueprintCustomModelLlmSettingsArgs', 'LlmBlueprintCustomModelLlmSettingsArgsDict', 'outputs.LlmBlueprintCustomModelLlmSettings']]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
                  llm_id: pulumi.Input[Optional[_builtins.str]] = None,
-                 llm_settings: pulumi.Input[Optional[Union['LlmBlueprintLlmSettingsArgs', 'LlmBlueprintLlmSettingsArgsDict']]] = None,
+                 llm_settings: pulumi.Input[Optional[Union['LlmBlueprintLlmSettingsArgs', 'LlmBlueprintLlmSettingsArgsDict', 'outputs.LlmBlueprintLlmSettings']]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  playground_id: pulumi.Input[Optional[_builtins.str]] = None,
                  prompt_type: pulumi.Input[Optional[_builtins.str]] = None,
                  vector_database_id: pulumi.Input[Optional[_builtins.str]] = None,
-                 vector_database_settings: pulumi.Input[Optional[Union['LlmBlueprintVectorDatabaseSettingsArgs', 'LlmBlueprintVectorDatabaseSettingsArgsDict']]] = None,
+                 vector_database_settings: pulumi.Input[Optional[Union['LlmBlueprintVectorDatabaseSettingsArgs', 'LlmBlueprintVectorDatabaseSettingsArgsDict', 'outputs.LlmBlueprintVectorDatabaseSettings']]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -493,15 +493,15 @@ class LlmBlueprint(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            custom_model_llm_settings: pulumi.Input[Optional[Union['LlmBlueprintCustomModelLlmSettingsArgs', 'LlmBlueprintCustomModelLlmSettingsArgsDict']]] = None,
+            custom_model_llm_settings: pulumi.Input[Optional[Union['LlmBlueprintCustomModelLlmSettingsArgs', 'LlmBlueprintCustomModelLlmSettingsArgsDict', 'outputs.LlmBlueprintCustomModelLlmSettings']]] = None,
             description: pulumi.Input[Optional[_builtins.str]] = None,
             llm_id: pulumi.Input[Optional[_builtins.str]] = None,
-            llm_settings: pulumi.Input[Optional[Union['LlmBlueprintLlmSettingsArgs', 'LlmBlueprintLlmSettingsArgsDict']]] = None,
+            llm_settings: pulumi.Input[Optional[Union['LlmBlueprintLlmSettingsArgs', 'LlmBlueprintLlmSettingsArgsDict', 'outputs.LlmBlueprintLlmSettings']]] = None,
             name: pulumi.Input[Optional[_builtins.str]] = None,
             playground_id: pulumi.Input[Optional[_builtins.str]] = None,
             prompt_type: pulumi.Input[Optional[_builtins.str]] = None,
             vector_database_id: pulumi.Input[Optional[_builtins.str]] = None,
-            vector_database_settings: pulumi.Input[Optional[Union['LlmBlueprintVectorDatabaseSettingsArgs', 'LlmBlueprintVectorDatabaseSettingsArgsDict']]] = None) -> 'LlmBlueprint':
+            vector_database_settings: pulumi.Input[Optional[Union['LlmBlueprintVectorDatabaseSettingsArgs', 'LlmBlueprintVectorDatabaseSettingsArgsDict', 'outputs.LlmBlueprintVectorDatabaseSettings']]] = None) -> 'LlmBlueprint':
         """
         Get an existing LlmBlueprint resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -509,15 +509,15 @@ class LlmBlueprint(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Union['LlmBlueprintCustomModelLlmSettingsArgs', 'LlmBlueprintCustomModelLlmSettingsArgsDict']] custom_model_llm_settings: The custom model LLM settings for the LLM Blueprint.
+        :param pulumi.Input[Union['LlmBlueprintCustomModelLlmSettingsArgs', 'LlmBlueprintCustomModelLlmSettingsArgsDict', 'outputs.LlmBlueprintCustomModelLlmSettings']] custom_model_llm_settings: The custom model LLM settings for the LLM Blueprint.
         :param pulumi.Input[_builtins.str] description: The description of the LLM Blueprint.
         :param pulumi.Input[_builtins.str] llm_id: The id of the LLM for the LLM Blueprint. If custom*model*llm_settings is set, this value must be 'custom-model'.
-        :param pulumi.Input[Union['LlmBlueprintLlmSettingsArgs', 'LlmBlueprintLlmSettingsArgsDict']] llm_settings: The LLM settings for the LLM Blueprint.
+        :param pulumi.Input[Union['LlmBlueprintLlmSettingsArgs', 'LlmBlueprintLlmSettingsArgsDict', 'outputs.LlmBlueprintLlmSettings']] llm_settings: The LLM settings for the LLM Blueprint.
         :param pulumi.Input[_builtins.str] name: The name of the LLM Blueprint.
         :param pulumi.Input[_builtins.str] playground_id: The id of the Playground for the LLM Blueprint.
         :param pulumi.Input[_builtins.str] prompt_type: The prompt type for the LLM Blueprint.
         :param pulumi.Input[_builtins.str] vector_database_id: The id of the Vector Database for the LLM Blueprint.
-        :param pulumi.Input[Union['LlmBlueprintVectorDatabaseSettingsArgs', 'LlmBlueprintVectorDatabaseSettingsArgsDict']] vector_database_settings: The Vector Database settings for the LLM Blueprint.
+        :param pulumi.Input[Union['LlmBlueprintVectorDatabaseSettingsArgs', 'LlmBlueprintVectorDatabaseSettingsArgsDict', 'outputs.LlmBlueprintVectorDatabaseSettings']] vector_database_settings: The Vector Database settings for the LLM Blueprint.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 

@@ -467,8 +467,8 @@ class CustomJob(pulumi.CustomResource):
                  job_type: pulumi.Input[Optional[_builtins.str]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  resource_bundle_id: pulumi.Input[Optional[_builtins.str]] = None,
-                 runtime_parameter_values: pulumi.Input[Optional[Sequence[pulumi.Input[Union['CustomJobRuntimeParameterValueArgs', 'CustomJobRuntimeParameterValueArgsDict']]]]] = None,
-                 schedule: pulumi.Input[Optional[Union['CustomJobScheduleArgs', 'CustomJobScheduleArgsDict']]] = None,
+                 runtime_parameter_values: pulumi.Input[Optional[Sequence[pulumi.Input[Union['CustomJobRuntimeParameterValueArgs', 'CustomJobRuntimeParameterValueArgsDict', 'outputs.CustomJobRuntimeParameterValue']]]]] = None,
+                 schedule: pulumi.Input[Optional[Union['CustomJobScheduleArgs', 'CustomJobScheduleArgsDict', 'outputs.CustomJobSchedule']]] = None,
                  schedule_id: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         """
@@ -523,8 +523,8 @@ class CustomJob(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] job_type: The type of the Custom Job.
         :param pulumi.Input[_builtins.str] name: The name of the Custom Job.
         :param pulumi.Input[_builtins.str] resource_bundle_id: A single identifier that represents a bundle of resources: Memory, CPU, GPU, etc.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['CustomJobRuntimeParameterValueArgs', 'CustomJobRuntimeParameterValueArgsDict']]]] runtime_parameter_values: The runtime parameters for the Custom Job.
-        :param pulumi.Input[Union['CustomJobScheduleArgs', 'CustomJobScheduleArgsDict']] schedule: The schedule configuration for the custom job.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['CustomJobRuntimeParameterValueArgs', 'CustomJobRuntimeParameterValueArgsDict', 'outputs.CustomJobRuntimeParameterValue']]]] runtime_parameter_values: The runtime parameters for the Custom Job.
+        :param pulumi.Input[Union['CustomJobScheduleArgs', 'CustomJobScheduleArgsDict', 'outputs.CustomJobSchedule']] schedule: The schedule configuration for the custom job.
         :param pulumi.Input[_builtins.str] schedule_id: The ID of the schedule associated with the custom job.
         """
         ...
@@ -598,8 +598,8 @@ class CustomJob(pulumi.CustomResource):
                  job_type: pulumi.Input[Optional[_builtins.str]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  resource_bundle_id: pulumi.Input[Optional[_builtins.str]] = None,
-                 runtime_parameter_values: pulumi.Input[Optional[Sequence[pulumi.Input[Union['CustomJobRuntimeParameterValueArgs', 'CustomJobRuntimeParameterValueArgsDict']]]]] = None,
-                 schedule: pulumi.Input[Optional[Union['CustomJobScheduleArgs', 'CustomJobScheduleArgsDict']]] = None,
+                 runtime_parameter_values: pulumi.Input[Optional[Sequence[pulumi.Input[Union['CustomJobRuntimeParameterValueArgs', 'CustomJobRuntimeParameterValueArgsDict', 'outputs.CustomJobRuntimeParameterValue']]]]] = None,
+                 schedule: pulumi.Input[Optional[Union['CustomJobScheduleArgs', 'CustomJobScheduleArgsDict', 'outputs.CustomJobSchedule']]] = None,
                  schedule_id: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
@@ -645,8 +645,8 @@ class CustomJob(pulumi.CustomResource):
             job_type: pulumi.Input[Optional[_builtins.str]] = None,
             name: pulumi.Input[Optional[_builtins.str]] = None,
             resource_bundle_id: pulumi.Input[Optional[_builtins.str]] = None,
-            runtime_parameter_values: pulumi.Input[Optional[Sequence[pulumi.Input[Union['CustomJobRuntimeParameterValueArgs', 'CustomJobRuntimeParameterValueArgsDict']]]]] = None,
-            schedule: pulumi.Input[Optional[Union['CustomJobScheduleArgs', 'CustomJobScheduleArgsDict']]] = None,
+            runtime_parameter_values: pulumi.Input[Optional[Sequence[pulumi.Input[Union['CustomJobRuntimeParameterValueArgs', 'CustomJobRuntimeParameterValueArgsDict', 'outputs.CustomJobRuntimeParameterValue']]]]] = None,
+            schedule: pulumi.Input[Optional[Union['CustomJobScheduleArgs', 'CustomJobScheduleArgsDict', 'outputs.CustomJobSchedule']]] = None,
             schedule_id: pulumi.Input[Optional[_builtins.str]] = None) -> 'CustomJob':
         """
         Get an existing CustomJob resource's state with the given name, id, and optional extra
@@ -666,8 +666,8 @@ class CustomJob(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] job_type: The type of the Custom Job.
         :param pulumi.Input[_builtins.str] name: The name of the Custom Job.
         :param pulumi.Input[_builtins.str] resource_bundle_id: A single identifier that represents a bundle of resources: Memory, CPU, GPU, etc.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['CustomJobRuntimeParameterValueArgs', 'CustomJobRuntimeParameterValueArgsDict']]]] runtime_parameter_values: The runtime parameters for the Custom Job.
-        :param pulumi.Input[Union['CustomJobScheduleArgs', 'CustomJobScheduleArgsDict']] schedule: The schedule configuration for the custom job.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['CustomJobRuntimeParameterValueArgs', 'CustomJobRuntimeParameterValueArgsDict', 'outputs.CustomJobRuntimeParameterValue']]]] runtime_parameter_values: The runtime parameters for the Custom Job.
+        :param pulumi.Input[Union['CustomJobScheduleArgs', 'CustomJobScheduleArgsDict', 'outputs.CustomJobSchedule']] schedule: The schedule configuration for the custom job.
         :param pulumi.Input[_builtins.str] schedule_id: The ID of the schedule associated with the custom job.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))

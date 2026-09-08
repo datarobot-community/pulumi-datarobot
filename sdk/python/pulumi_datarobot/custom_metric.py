@@ -453,18 +453,18 @@ class CustomMetric(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  baseline_value: pulumi.Input[Optional[_builtins.float]] = None,
-                 batch: pulumi.Input[Optional[Union['CustomMetricBatchArgs', 'CustomMetricBatchArgsDict']]] = None,
+                 batch: pulumi.Input[Optional[Union['CustomMetricBatchArgs', 'CustomMetricBatchArgsDict', 'outputs.CustomMetricBatch']]] = None,
                  deployment_id: pulumi.Input[Optional[_builtins.str]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
                  directionality: pulumi.Input[Optional[_builtins.str]] = None,
                  is_geospatial: pulumi.Input[Optional[_builtins.bool]] = None,
                  is_model_specific: pulumi.Input[Optional[_builtins.bool]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
-                 sample_count: pulumi.Input[Optional[Union['CustomMetricSampleCountArgs', 'CustomMetricSampleCountArgsDict']]] = None,
-                 timestamp: pulumi.Input[Optional[Union['CustomMetricTimestampArgs', 'CustomMetricTimestampArgsDict']]] = None,
+                 sample_count: pulumi.Input[Optional[Union['CustomMetricSampleCountArgs', 'CustomMetricSampleCountArgsDict', 'outputs.CustomMetricSampleCount']]] = None,
+                 timestamp: pulumi.Input[Optional[Union['CustomMetricTimestampArgs', 'CustomMetricTimestampArgsDict', 'outputs.CustomMetricTimestamp']]] = None,
                  type: pulumi.Input[Optional[_builtins.str]] = None,
                  units: pulumi.Input[Optional[_builtins.str]] = None,
-                 value: pulumi.Input[Optional[Union['CustomMetricValueArgs', 'CustomMetricValueArgsDict']]] = None,
+                 value: pulumi.Input[Optional[Union['CustomMetricValueArgs', 'CustomMetricValueArgsDict', 'outputs.CustomMetricValue']]] = None,
                  __props__=None):
         """
         Custom Metric
@@ -527,18 +527,18 @@ class CustomMetric(pulumi.CustomResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.float] baseline_value: The baseline value used to add “reference dots” to the values over time chart.
-        :param pulumi.Input[Union['CustomMetricBatchArgs', 'CustomMetricBatchArgsDict']] batch: A Custom Metric batch ID source when reading values from columnar dataset.
+        :param pulumi.Input[Union['CustomMetricBatchArgs', 'CustomMetricBatchArgsDict', 'outputs.CustomMetricBatch']] batch: A Custom Metric batch ID source when reading values from columnar dataset.
         :param pulumi.Input[_builtins.str] deployment_id: ID of the Deployment for the Custom Metric.
         :param pulumi.Input[_builtins.str] description: Description of the Custom Metric.
         :param pulumi.Input[_builtins.str] directionality: Directionality of the Custom Metric
         :param pulumi.Input[_builtins.bool] is_geospatial: Determines whether the metric is geospatial.
         :param pulumi.Input[_builtins.bool] is_model_specific: Determines whether the metric is related to the model or deployment.
         :param pulumi.Input[_builtins.str] name: Name of the Custom Metric.
-        :param pulumi.Input[Union['CustomMetricSampleCountArgs', 'CustomMetricSampleCountArgsDict']] sample_count: A Custom Metric sample source when reading values from columnar dataset.
-        :param pulumi.Input[Union['CustomMetricTimestampArgs', 'CustomMetricTimestampArgsDict']] timestamp: A Custom Metric timestamp column source when reading values from columnar dataset.
+        :param pulumi.Input[Union['CustomMetricSampleCountArgs', 'CustomMetricSampleCountArgsDict', 'outputs.CustomMetricSampleCount']] sample_count: A Custom Metric sample source when reading values from columnar dataset.
+        :param pulumi.Input[Union['CustomMetricTimestampArgs', 'CustomMetricTimestampArgsDict', 'outputs.CustomMetricTimestamp']] timestamp: A Custom Metric timestamp column source when reading values from columnar dataset.
         :param pulumi.Input[_builtins.str] type: Aggregation type of the Custom Metric.
         :param pulumi.Input[_builtins.str] units: The units, or the y-axis label, of the given Custom Metric.
-        :param pulumi.Input[Union['CustomMetricValueArgs', 'CustomMetricValueArgsDict']] value: A Custom Metric value source when reading values from columnar dataset.
+        :param pulumi.Input[Union['CustomMetricValueArgs', 'CustomMetricValueArgsDict', 'outputs.CustomMetricValue']] value: A Custom Metric value source when reading values from columnar dataset.
         """
         ...
     @overload
@@ -620,18 +620,18 @@ class CustomMetric(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  baseline_value: pulumi.Input[Optional[_builtins.float]] = None,
-                 batch: pulumi.Input[Optional[Union['CustomMetricBatchArgs', 'CustomMetricBatchArgsDict']]] = None,
+                 batch: pulumi.Input[Optional[Union['CustomMetricBatchArgs', 'CustomMetricBatchArgsDict', 'outputs.CustomMetricBatch']]] = None,
                  deployment_id: pulumi.Input[Optional[_builtins.str]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
                  directionality: pulumi.Input[Optional[_builtins.str]] = None,
                  is_geospatial: pulumi.Input[Optional[_builtins.bool]] = None,
                  is_model_specific: pulumi.Input[Optional[_builtins.bool]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
-                 sample_count: pulumi.Input[Optional[Union['CustomMetricSampleCountArgs', 'CustomMetricSampleCountArgsDict']]] = None,
-                 timestamp: pulumi.Input[Optional[Union['CustomMetricTimestampArgs', 'CustomMetricTimestampArgsDict']]] = None,
+                 sample_count: pulumi.Input[Optional[Union['CustomMetricSampleCountArgs', 'CustomMetricSampleCountArgsDict', 'outputs.CustomMetricSampleCount']]] = None,
+                 timestamp: pulumi.Input[Optional[Union['CustomMetricTimestampArgs', 'CustomMetricTimestampArgsDict', 'outputs.CustomMetricTimestamp']]] = None,
                  type: pulumi.Input[Optional[_builtins.str]] = None,
                  units: pulumi.Input[Optional[_builtins.str]] = None,
-                 value: pulumi.Input[Optional[Union['CustomMetricValueArgs', 'CustomMetricValueArgsDict']]] = None,
+                 value: pulumi.Input[Optional[Union['CustomMetricValueArgs', 'CustomMetricValueArgsDict', 'outputs.CustomMetricValue']]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -677,18 +677,18 @@ class CustomMetric(pulumi.CustomResource):
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
             baseline_value: pulumi.Input[Optional[_builtins.float]] = None,
-            batch: pulumi.Input[Optional[Union['CustomMetricBatchArgs', 'CustomMetricBatchArgsDict']]] = None,
+            batch: pulumi.Input[Optional[Union['CustomMetricBatchArgs', 'CustomMetricBatchArgsDict', 'outputs.CustomMetricBatch']]] = None,
             deployment_id: pulumi.Input[Optional[_builtins.str]] = None,
             description: pulumi.Input[Optional[_builtins.str]] = None,
             directionality: pulumi.Input[Optional[_builtins.str]] = None,
             is_geospatial: pulumi.Input[Optional[_builtins.bool]] = None,
             is_model_specific: pulumi.Input[Optional[_builtins.bool]] = None,
             name: pulumi.Input[Optional[_builtins.str]] = None,
-            sample_count: pulumi.Input[Optional[Union['CustomMetricSampleCountArgs', 'CustomMetricSampleCountArgsDict']]] = None,
-            timestamp: pulumi.Input[Optional[Union['CustomMetricTimestampArgs', 'CustomMetricTimestampArgsDict']]] = None,
+            sample_count: pulumi.Input[Optional[Union['CustomMetricSampleCountArgs', 'CustomMetricSampleCountArgsDict', 'outputs.CustomMetricSampleCount']]] = None,
+            timestamp: pulumi.Input[Optional[Union['CustomMetricTimestampArgs', 'CustomMetricTimestampArgsDict', 'outputs.CustomMetricTimestamp']]] = None,
             type: pulumi.Input[Optional[_builtins.str]] = None,
             units: pulumi.Input[Optional[_builtins.str]] = None,
-            value: pulumi.Input[Optional[Union['CustomMetricValueArgs', 'CustomMetricValueArgsDict']]] = None) -> 'CustomMetric':
+            value: pulumi.Input[Optional[Union['CustomMetricValueArgs', 'CustomMetricValueArgsDict', 'outputs.CustomMetricValue']]] = None) -> 'CustomMetric':
         """
         Get an existing CustomMetric resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -697,18 +697,18 @@ class CustomMetric(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.float] baseline_value: The baseline value used to add “reference dots” to the values over time chart.
-        :param pulumi.Input[Union['CustomMetricBatchArgs', 'CustomMetricBatchArgsDict']] batch: A Custom Metric batch ID source when reading values from columnar dataset.
+        :param pulumi.Input[Union['CustomMetricBatchArgs', 'CustomMetricBatchArgsDict', 'outputs.CustomMetricBatch']] batch: A Custom Metric batch ID source when reading values from columnar dataset.
         :param pulumi.Input[_builtins.str] deployment_id: ID of the Deployment for the Custom Metric.
         :param pulumi.Input[_builtins.str] description: Description of the Custom Metric.
         :param pulumi.Input[_builtins.str] directionality: Directionality of the Custom Metric
         :param pulumi.Input[_builtins.bool] is_geospatial: Determines whether the metric is geospatial.
         :param pulumi.Input[_builtins.bool] is_model_specific: Determines whether the metric is related to the model or deployment.
         :param pulumi.Input[_builtins.str] name: Name of the Custom Metric.
-        :param pulumi.Input[Union['CustomMetricSampleCountArgs', 'CustomMetricSampleCountArgsDict']] sample_count: A Custom Metric sample source when reading values from columnar dataset.
-        :param pulumi.Input[Union['CustomMetricTimestampArgs', 'CustomMetricTimestampArgsDict']] timestamp: A Custom Metric timestamp column source when reading values from columnar dataset.
+        :param pulumi.Input[Union['CustomMetricSampleCountArgs', 'CustomMetricSampleCountArgsDict', 'outputs.CustomMetricSampleCount']] sample_count: A Custom Metric sample source when reading values from columnar dataset.
+        :param pulumi.Input[Union['CustomMetricTimestampArgs', 'CustomMetricTimestampArgsDict', 'outputs.CustomMetricTimestamp']] timestamp: A Custom Metric timestamp column source when reading values from columnar dataset.
         :param pulumi.Input[_builtins.str] type: Aggregation type of the Custom Metric.
         :param pulumi.Input[_builtins.str] units: The units, or the y-axis label, of the given Custom Metric.
-        :param pulumi.Input[Union['CustomMetricValueArgs', 'CustomMetricValueArgsDict']] value: A Custom Metric value source when reading values from columnar dataset.
+        :param pulumi.Input[Union['CustomMetricValueArgs', 'CustomMetricValueArgsDict', 'outputs.CustomMetricValue']] value: A Custom Metric value source when reading values from columnar dataset.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 

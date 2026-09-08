@@ -393,16 +393,16 @@ class CustomMetricFromJob(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  baseline_value: pulumi.Input[Optional[_builtins.float]] = None,
-                 batch: pulumi.Input[Optional[Union['CustomMetricFromJobBatchArgs', 'CustomMetricFromJobBatchArgsDict']]] = None,
+                 batch: pulumi.Input[Optional[Union['CustomMetricFromJobBatchArgs', 'CustomMetricFromJobBatchArgsDict', 'outputs.CustomMetricFromJobBatch']]] = None,
                  custom_job_id: pulumi.Input[Optional[_builtins.str]] = None,
                  deployment_id: pulumi.Input[Optional[_builtins.str]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
-                 parameter_overrides: pulumi.Input[Optional[Sequence[pulumi.Input[Union['CustomMetricFromJobParameterOverrideArgs', 'CustomMetricFromJobParameterOverrideArgsDict']]]]] = None,
-                 sample_count: pulumi.Input[Optional[Union['CustomMetricFromJobSampleCountArgs', 'CustomMetricFromJobSampleCountArgsDict']]] = None,
-                 schedule: pulumi.Input[Optional[Union['CustomMetricFromJobScheduleArgs', 'CustomMetricFromJobScheduleArgsDict']]] = None,
-                 timestamp: pulumi.Input[Optional[Union['CustomMetricFromJobTimestampArgs', 'CustomMetricFromJobTimestampArgsDict']]] = None,
-                 value: pulumi.Input[Optional[Union['CustomMetricFromJobValueArgs', 'CustomMetricFromJobValueArgsDict']]] = None,
+                 parameter_overrides: pulumi.Input[Optional[Sequence[pulumi.Input[Union['CustomMetricFromJobParameterOverrideArgs', 'CustomMetricFromJobParameterOverrideArgsDict', 'outputs.CustomMetricFromJobParameterOverride']]]]] = None,
+                 sample_count: pulumi.Input[Optional[Union['CustomMetricFromJobSampleCountArgs', 'CustomMetricFromJobSampleCountArgsDict', 'outputs.CustomMetricFromJobSampleCount']]] = None,
+                 schedule: pulumi.Input[Optional[Union['CustomMetricFromJobScheduleArgs', 'CustomMetricFromJobScheduleArgsDict', 'outputs.CustomMetricFromJobSchedule']]] = None,
+                 timestamp: pulumi.Input[Optional[Union['CustomMetricFromJobTimestampArgs', 'CustomMetricFromJobTimestampArgsDict', 'outputs.CustomMetricFromJobTimestamp']]] = None,
+                 value: pulumi.Input[Optional[Union['CustomMetricFromJobValueArgs', 'CustomMetricFromJobValueArgsDict', 'outputs.CustomMetricFromJobValue']]] = None,
                  __props__=None):
         """
         Custom Metric From Job
@@ -426,16 +426,16 @@ class CustomMetricFromJob(pulumi.CustomResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.float] baseline_value: Baseline value for the metric.
-        :param pulumi.Input[Union['CustomMetricFromJobBatchArgs', 'CustomMetricFromJobBatchArgsDict']] batch: Batch ID source when reading values from columnar dataset like a file.
+        :param pulumi.Input[Union['CustomMetricFromJobBatchArgs', 'CustomMetricFromJobBatchArgsDict', 'outputs.CustomMetricFromJobBatch']] batch: Batch ID source when reading values from columnar dataset like a file.
         :param pulumi.Input[_builtins.str] custom_job_id: ID of the Custom Job.
         :param pulumi.Input[_builtins.str] deployment_id: ID of the Deployment.
         :param pulumi.Input[_builtins.str] description: Description of the metric.
         :param pulumi.Input[_builtins.str] name: Name of the metric.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['CustomMetricFromJobParameterOverrideArgs', 'CustomMetricFromJobParameterOverrideArgsDict']]]] parameter_overrides: Additional parameters to be injected into the Metric Job at runtime.
-        :param pulumi.Input[Union['CustomMetricFromJobSampleCountArgs', 'CustomMetricFromJobSampleCountArgsDict']] sample_count: Points to a weight column if users provide pre-aggregated metric values. Used with columnar datasets.
-        :param pulumi.Input[Union['CustomMetricFromJobScheduleArgs', 'CustomMetricFromJobScheduleArgsDict']] schedule: Defines at what intervals the metric job should run.
-        :param pulumi.Input[Union['CustomMetricFromJobTimestampArgs', 'CustomMetricFromJobTimestampArgsDict']] timestamp: Timestamp spoofing when reading values from file, like dataset. By default, we replicate pd.to_datetime formatting behaviour.
-        :param pulumi.Input[Union['CustomMetricFromJobValueArgs', 'CustomMetricFromJobValueArgsDict']] value: Value source when reading values from columnar dataset like a file.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['CustomMetricFromJobParameterOverrideArgs', 'CustomMetricFromJobParameterOverrideArgsDict', 'outputs.CustomMetricFromJobParameterOverride']]]] parameter_overrides: Additional parameters to be injected into the Metric Job at runtime.
+        :param pulumi.Input[Union['CustomMetricFromJobSampleCountArgs', 'CustomMetricFromJobSampleCountArgsDict', 'outputs.CustomMetricFromJobSampleCount']] sample_count: Points to a weight column if users provide pre-aggregated metric values. Used with columnar datasets.
+        :param pulumi.Input[Union['CustomMetricFromJobScheduleArgs', 'CustomMetricFromJobScheduleArgsDict', 'outputs.CustomMetricFromJobSchedule']] schedule: Defines at what intervals the metric job should run.
+        :param pulumi.Input[Union['CustomMetricFromJobTimestampArgs', 'CustomMetricFromJobTimestampArgsDict', 'outputs.CustomMetricFromJobTimestamp']] timestamp: Timestamp spoofing when reading values from file, like dataset. By default, we replicate pd.to_datetime formatting behaviour.
+        :param pulumi.Input[Union['CustomMetricFromJobValueArgs', 'CustomMetricFromJobValueArgsDict', 'outputs.CustomMetricFromJobValue']] value: Value source when reading values from columnar dataset like a file.
         """
         ...
     @overload
@@ -478,16 +478,16 @@ class CustomMetricFromJob(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  baseline_value: pulumi.Input[Optional[_builtins.float]] = None,
-                 batch: pulumi.Input[Optional[Union['CustomMetricFromJobBatchArgs', 'CustomMetricFromJobBatchArgsDict']]] = None,
+                 batch: pulumi.Input[Optional[Union['CustomMetricFromJobBatchArgs', 'CustomMetricFromJobBatchArgsDict', 'outputs.CustomMetricFromJobBatch']]] = None,
                  custom_job_id: pulumi.Input[Optional[_builtins.str]] = None,
                  deployment_id: pulumi.Input[Optional[_builtins.str]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
-                 parameter_overrides: pulumi.Input[Optional[Sequence[pulumi.Input[Union['CustomMetricFromJobParameterOverrideArgs', 'CustomMetricFromJobParameterOverrideArgsDict']]]]] = None,
-                 sample_count: pulumi.Input[Optional[Union['CustomMetricFromJobSampleCountArgs', 'CustomMetricFromJobSampleCountArgsDict']]] = None,
-                 schedule: pulumi.Input[Optional[Union['CustomMetricFromJobScheduleArgs', 'CustomMetricFromJobScheduleArgsDict']]] = None,
-                 timestamp: pulumi.Input[Optional[Union['CustomMetricFromJobTimestampArgs', 'CustomMetricFromJobTimestampArgsDict']]] = None,
-                 value: pulumi.Input[Optional[Union['CustomMetricFromJobValueArgs', 'CustomMetricFromJobValueArgsDict']]] = None,
+                 parameter_overrides: pulumi.Input[Optional[Sequence[pulumi.Input[Union['CustomMetricFromJobParameterOverrideArgs', 'CustomMetricFromJobParameterOverrideArgsDict', 'outputs.CustomMetricFromJobParameterOverride']]]]] = None,
+                 sample_count: pulumi.Input[Optional[Union['CustomMetricFromJobSampleCountArgs', 'CustomMetricFromJobSampleCountArgsDict', 'outputs.CustomMetricFromJobSampleCount']]] = None,
+                 schedule: pulumi.Input[Optional[Union['CustomMetricFromJobScheduleArgs', 'CustomMetricFromJobScheduleArgsDict', 'outputs.CustomMetricFromJobSchedule']]] = None,
+                 timestamp: pulumi.Input[Optional[Union['CustomMetricFromJobTimestampArgs', 'CustomMetricFromJobTimestampArgsDict', 'outputs.CustomMetricFromJobTimestamp']]] = None,
+                 value: pulumi.Input[Optional[Union['CustomMetricFromJobValueArgs', 'CustomMetricFromJobValueArgsDict', 'outputs.CustomMetricFromJobValue']]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -523,16 +523,16 @@ class CustomMetricFromJob(pulumi.CustomResource):
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
             baseline_value: pulumi.Input[Optional[_builtins.float]] = None,
-            batch: pulumi.Input[Optional[Union['CustomMetricFromJobBatchArgs', 'CustomMetricFromJobBatchArgsDict']]] = None,
+            batch: pulumi.Input[Optional[Union['CustomMetricFromJobBatchArgs', 'CustomMetricFromJobBatchArgsDict', 'outputs.CustomMetricFromJobBatch']]] = None,
             custom_job_id: pulumi.Input[Optional[_builtins.str]] = None,
             deployment_id: pulumi.Input[Optional[_builtins.str]] = None,
             description: pulumi.Input[Optional[_builtins.str]] = None,
             name: pulumi.Input[Optional[_builtins.str]] = None,
-            parameter_overrides: pulumi.Input[Optional[Sequence[pulumi.Input[Union['CustomMetricFromJobParameterOverrideArgs', 'CustomMetricFromJobParameterOverrideArgsDict']]]]] = None,
-            sample_count: pulumi.Input[Optional[Union['CustomMetricFromJobSampleCountArgs', 'CustomMetricFromJobSampleCountArgsDict']]] = None,
-            schedule: pulumi.Input[Optional[Union['CustomMetricFromJobScheduleArgs', 'CustomMetricFromJobScheduleArgsDict']]] = None,
-            timestamp: pulumi.Input[Optional[Union['CustomMetricFromJobTimestampArgs', 'CustomMetricFromJobTimestampArgsDict']]] = None,
-            value: pulumi.Input[Optional[Union['CustomMetricFromJobValueArgs', 'CustomMetricFromJobValueArgsDict']]] = None) -> 'CustomMetricFromJob':
+            parameter_overrides: pulumi.Input[Optional[Sequence[pulumi.Input[Union['CustomMetricFromJobParameterOverrideArgs', 'CustomMetricFromJobParameterOverrideArgsDict', 'outputs.CustomMetricFromJobParameterOverride']]]]] = None,
+            sample_count: pulumi.Input[Optional[Union['CustomMetricFromJobSampleCountArgs', 'CustomMetricFromJobSampleCountArgsDict', 'outputs.CustomMetricFromJobSampleCount']]] = None,
+            schedule: pulumi.Input[Optional[Union['CustomMetricFromJobScheduleArgs', 'CustomMetricFromJobScheduleArgsDict', 'outputs.CustomMetricFromJobSchedule']]] = None,
+            timestamp: pulumi.Input[Optional[Union['CustomMetricFromJobTimestampArgs', 'CustomMetricFromJobTimestampArgsDict', 'outputs.CustomMetricFromJobTimestamp']]] = None,
+            value: pulumi.Input[Optional[Union['CustomMetricFromJobValueArgs', 'CustomMetricFromJobValueArgsDict', 'outputs.CustomMetricFromJobValue']]] = None) -> 'CustomMetricFromJob':
         """
         Get an existing CustomMetricFromJob resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -541,16 +541,16 @@ class CustomMetricFromJob(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.float] baseline_value: Baseline value for the metric.
-        :param pulumi.Input[Union['CustomMetricFromJobBatchArgs', 'CustomMetricFromJobBatchArgsDict']] batch: Batch ID source when reading values from columnar dataset like a file.
+        :param pulumi.Input[Union['CustomMetricFromJobBatchArgs', 'CustomMetricFromJobBatchArgsDict', 'outputs.CustomMetricFromJobBatch']] batch: Batch ID source when reading values from columnar dataset like a file.
         :param pulumi.Input[_builtins.str] custom_job_id: ID of the Custom Job.
         :param pulumi.Input[_builtins.str] deployment_id: ID of the Deployment.
         :param pulumi.Input[_builtins.str] description: Description of the metric.
         :param pulumi.Input[_builtins.str] name: Name of the metric.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['CustomMetricFromJobParameterOverrideArgs', 'CustomMetricFromJobParameterOverrideArgsDict']]]] parameter_overrides: Additional parameters to be injected into the Metric Job at runtime.
-        :param pulumi.Input[Union['CustomMetricFromJobSampleCountArgs', 'CustomMetricFromJobSampleCountArgsDict']] sample_count: Points to a weight column if users provide pre-aggregated metric values. Used with columnar datasets.
-        :param pulumi.Input[Union['CustomMetricFromJobScheduleArgs', 'CustomMetricFromJobScheduleArgsDict']] schedule: Defines at what intervals the metric job should run.
-        :param pulumi.Input[Union['CustomMetricFromJobTimestampArgs', 'CustomMetricFromJobTimestampArgsDict']] timestamp: Timestamp spoofing when reading values from file, like dataset. By default, we replicate pd.to_datetime formatting behaviour.
-        :param pulumi.Input[Union['CustomMetricFromJobValueArgs', 'CustomMetricFromJobValueArgsDict']] value: Value source when reading values from columnar dataset like a file.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['CustomMetricFromJobParameterOverrideArgs', 'CustomMetricFromJobParameterOverrideArgsDict', 'outputs.CustomMetricFromJobParameterOverride']]]] parameter_overrides: Additional parameters to be injected into the Metric Job at runtime.
+        :param pulumi.Input[Union['CustomMetricFromJobSampleCountArgs', 'CustomMetricFromJobSampleCountArgsDict', 'outputs.CustomMetricFromJobSampleCount']] sample_count: Points to a weight column if users provide pre-aggregated metric values. Used with columnar datasets.
+        :param pulumi.Input[Union['CustomMetricFromJobScheduleArgs', 'CustomMetricFromJobScheduleArgsDict', 'outputs.CustomMetricFromJobSchedule']] schedule: Defines at what intervals the metric job should run.
+        :param pulumi.Input[Union['CustomMetricFromJobTimestampArgs', 'CustomMetricFromJobTimestampArgsDict', 'outputs.CustomMetricFromJobTimestamp']] timestamp: Timestamp spoofing when reading values from file, like dataset. By default, we replicate pd.to_datetime formatting behaviour.
+        :param pulumi.Input[Union['CustomMetricFromJobValueArgs', 'CustomMetricFromJobValueArgsDict', 'outputs.CustomMetricFromJobValue']] value: Value source when reading values from columnar dataset like a file.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 

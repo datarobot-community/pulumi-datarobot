@@ -425,16 +425,16 @@ class DeploymentRetrainingPolicy(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  action: pulumi.Input[Optional[_builtins.str]] = None,
-                 autopilot_options: pulumi.Input[Optional[Union['DeploymentRetrainingPolicyAutopilotOptionsArgs', 'DeploymentRetrainingPolicyAutopilotOptionsArgsDict']]] = None,
+                 autopilot_options: pulumi.Input[Optional[Union['DeploymentRetrainingPolicyAutopilotOptionsArgs', 'DeploymentRetrainingPolicyAutopilotOptionsArgsDict', 'outputs.DeploymentRetrainingPolicyAutopilotOptions']]] = None,
                  deployment_id: pulumi.Input[Optional[_builtins.str]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
                  feature_list_strategy: pulumi.Input[Optional[_builtins.str]] = None,
                  model_selection_strategy: pulumi.Input[Optional[_builtins.str]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
-                 project_options: pulumi.Input[Optional[Union['DeploymentRetrainingPolicyProjectOptionsArgs', 'DeploymentRetrainingPolicyProjectOptionsArgsDict']]] = None,
+                 project_options: pulumi.Input[Optional[Union['DeploymentRetrainingPolicyProjectOptionsArgs', 'DeploymentRetrainingPolicyProjectOptionsArgsDict', 'outputs.DeploymentRetrainingPolicyProjectOptions']]] = None,
                  project_options_strategy: pulumi.Input[Optional[_builtins.str]] = None,
-                 time_series_options: pulumi.Input[Optional[Union['DeploymentRetrainingPolicyTimeSeriesOptionsArgs', 'DeploymentRetrainingPolicyTimeSeriesOptionsArgsDict']]] = None,
-                 trigger: pulumi.Input[Optional[Union['DeploymentRetrainingPolicyTriggerArgs', 'DeploymentRetrainingPolicyTriggerArgsDict']]] = None,
+                 time_series_options: pulumi.Input[Optional[Union['DeploymentRetrainingPolicyTimeSeriesOptionsArgs', 'DeploymentRetrainingPolicyTimeSeriesOptionsArgsDict', 'outputs.DeploymentRetrainingPolicyTimeSeriesOptions']]] = None,
+                 trigger: pulumi.Input[Optional[Union['DeploymentRetrainingPolicyTriggerArgs', 'DeploymentRetrainingPolicyTriggerArgsDict', 'outputs.DeploymentRetrainingPolicyTrigger']]] = None,
                  use_case_id: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         """
@@ -495,16 +495,16 @@ class DeploymentRetrainingPolicy(pulumi.CustomResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] action: The the action to take on the resultant new model.
-        :param pulumi.Input[Union['DeploymentRetrainingPolicyAutopilotOptionsArgs', 'DeploymentRetrainingPolicyAutopilotOptionsArgsDict']] autopilot_options: Options for projects used to build new models.
+        :param pulumi.Input[Union['DeploymentRetrainingPolicyAutopilotOptionsArgs', 'DeploymentRetrainingPolicyAutopilotOptionsArgsDict', 'outputs.DeploymentRetrainingPolicyAutopilotOptions']] autopilot_options: Options for projects used to build new models.
         :param pulumi.Input[_builtins.str] deployment_id: The ID of the Deployment for the Retraining Policy.
         :param pulumi.Input[_builtins.str] description: The description of the Retraining Policy.
         :param pulumi.Input[_builtins.str] feature_list_strategy: The feature list strategy used for modeling.
         :param pulumi.Input[_builtins.str] model_selection_strategy: Determines how the new model is selected when the retraining policy runs.
         :param pulumi.Input[_builtins.str] name: The name of the Retraining Policy.
-        :param pulumi.Input[Union['DeploymentRetrainingPolicyProjectOptionsArgs', 'DeploymentRetrainingPolicyProjectOptionsArgsDict']] project_options: Options for projects used to build new models.
+        :param pulumi.Input[Union['DeploymentRetrainingPolicyProjectOptionsArgs', 'DeploymentRetrainingPolicyProjectOptionsArgsDict', 'outputs.DeploymentRetrainingPolicyProjectOptions']] project_options: Options for projects used to build new models.
         :param pulumi.Input[_builtins.str] project_options_strategy: The project option strategy used for modeling.
-        :param pulumi.Input[Union['DeploymentRetrainingPolicyTimeSeriesOptionsArgs', 'DeploymentRetrainingPolicyTimeSeriesOptionsArgsDict']] time_series_options: Time Series project options used to build new models.
-        :param pulumi.Input[Union['DeploymentRetrainingPolicyTriggerArgs', 'DeploymentRetrainingPolicyTriggerArgsDict']] trigger: Retraining policy trigger.
+        :param pulumi.Input[Union['DeploymentRetrainingPolicyTimeSeriesOptionsArgs', 'DeploymentRetrainingPolicyTimeSeriesOptionsArgsDict', 'outputs.DeploymentRetrainingPolicyTimeSeriesOptions']] time_series_options: Time Series project options used to build new models.
+        :param pulumi.Input[Union['DeploymentRetrainingPolicyTriggerArgs', 'DeploymentRetrainingPolicyTriggerArgsDict', 'outputs.DeploymentRetrainingPolicyTrigger']] trigger: Retraining policy trigger.
         :param pulumi.Input[_builtins.str] use_case_id: The ID of the use case to which the retraining policy belongs.
         """
         ...
@@ -584,16 +584,16 @@ class DeploymentRetrainingPolicy(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  action: pulumi.Input[Optional[_builtins.str]] = None,
-                 autopilot_options: pulumi.Input[Optional[Union['DeploymentRetrainingPolicyAutopilotOptionsArgs', 'DeploymentRetrainingPolicyAutopilotOptionsArgsDict']]] = None,
+                 autopilot_options: pulumi.Input[Optional[Union['DeploymentRetrainingPolicyAutopilotOptionsArgs', 'DeploymentRetrainingPolicyAutopilotOptionsArgsDict', 'outputs.DeploymentRetrainingPolicyAutopilotOptions']]] = None,
                  deployment_id: pulumi.Input[Optional[_builtins.str]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
                  feature_list_strategy: pulumi.Input[Optional[_builtins.str]] = None,
                  model_selection_strategy: pulumi.Input[Optional[_builtins.str]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
-                 project_options: pulumi.Input[Optional[Union['DeploymentRetrainingPolicyProjectOptionsArgs', 'DeploymentRetrainingPolicyProjectOptionsArgsDict']]] = None,
+                 project_options: pulumi.Input[Optional[Union['DeploymentRetrainingPolicyProjectOptionsArgs', 'DeploymentRetrainingPolicyProjectOptionsArgsDict', 'outputs.DeploymentRetrainingPolicyProjectOptions']]] = None,
                  project_options_strategy: pulumi.Input[Optional[_builtins.str]] = None,
-                 time_series_options: pulumi.Input[Optional[Union['DeploymentRetrainingPolicyTimeSeriesOptionsArgs', 'DeploymentRetrainingPolicyTimeSeriesOptionsArgsDict']]] = None,
-                 trigger: pulumi.Input[Optional[Union['DeploymentRetrainingPolicyTriggerArgs', 'DeploymentRetrainingPolicyTriggerArgsDict']]] = None,
+                 time_series_options: pulumi.Input[Optional[Union['DeploymentRetrainingPolicyTimeSeriesOptionsArgs', 'DeploymentRetrainingPolicyTimeSeriesOptionsArgsDict', 'outputs.DeploymentRetrainingPolicyTimeSeriesOptions']]] = None,
+                 trigger: pulumi.Input[Optional[Union['DeploymentRetrainingPolicyTriggerArgs', 'DeploymentRetrainingPolicyTriggerArgsDict', 'outputs.DeploymentRetrainingPolicyTrigger']]] = None,
                  use_case_id: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
@@ -631,16 +631,16 @@ class DeploymentRetrainingPolicy(pulumi.CustomResource):
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
             action: pulumi.Input[Optional[_builtins.str]] = None,
-            autopilot_options: pulumi.Input[Optional[Union['DeploymentRetrainingPolicyAutopilotOptionsArgs', 'DeploymentRetrainingPolicyAutopilotOptionsArgsDict']]] = None,
+            autopilot_options: pulumi.Input[Optional[Union['DeploymentRetrainingPolicyAutopilotOptionsArgs', 'DeploymentRetrainingPolicyAutopilotOptionsArgsDict', 'outputs.DeploymentRetrainingPolicyAutopilotOptions']]] = None,
             deployment_id: pulumi.Input[Optional[_builtins.str]] = None,
             description: pulumi.Input[Optional[_builtins.str]] = None,
             feature_list_strategy: pulumi.Input[Optional[_builtins.str]] = None,
             model_selection_strategy: pulumi.Input[Optional[_builtins.str]] = None,
             name: pulumi.Input[Optional[_builtins.str]] = None,
-            project_options: pulumi.Input[Optional[Union['DeploymentRetrainingPolicyProjectOptionsArgs', 'DeploymentRetrainingPolicyProjectOptionsArgsDict']]] = None,
+            project_options: pulumi.Input[Optional[Union['DeploymentRetrainingPolicyProjectOptionsArgs', 'DeploymentRetrainingPolicyProjectOptionsArgsDict', 'outputs.DeploymentRetrainingPolicyProjectOptions']]] = None,
             project_options_strategy: pulumi.Input[Optional[_builtins.str]] = None,
-            time_series_options: pulumi.Input[Optional[Union['DeploymentRetrainingPolicyTimeSeriesOptionsArgs', 'DeploymentRetrainingPolicyTimeSeriesOptionsArgsDict']]] = None,
-            trigger: pulumi.Input[Optional[Union['DeploymentRetrainingPolicyTriggerArgs', 'DeploymentRetrainingPolicyTriggerArgsDict']]] = None,
+            time_series_options: pulumi.Input[Optional[Union['DeploymentRetrainingPolicyTimeSeriesOptionsArgs', 'DeploymentRetrainingPolicyTimeSeriesOptionsArgsDict', 'outputs.DeploymentRetrainingPolicyTimeSeriesOptions']]] = None,
+            trigger: pulumi.Input[Optional[Union['DeploymentRetrainingPolicyTriggerArgs', 'DeploymentRetrainingPolicyTriggerArgsDict', 'outputs.DeploymentRetrainingPolicyTrigger']]] = None,
             use_case_id: pulumi.Input[Optional[_builtins.str]] = None) -> 'DeploymentRetrainingPolicy':
         """
         Get an existing DeploymentRetrainingPolicy resource's state with the given name, id, and optional extra
@@ -650,16 +650,16 @@ class DeploymentRetrainingPolicy(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] action: The the action to take on the resultant new model.
-        :param pulumi.Input[Union['DeploymentRetrainingPolicyAutopilotOptionsArgs', 'DeploymentRetrainingPolicyAutopilotOptionsArgsDict']] autopilot_options: Options for projects used to build new models.
+        :param pulumi.Input[Union['DeploymentRetrainingPolicyAutopilotOptionsArgs', 'DeploymentRetrainingPolicyAutopilotOptionsArgsDict', 'outputs.DeploymentRetrainingPolicyAutopilotOptions']] autopilot_options: Options for projects used to build new models.
         :param pulumi.Input[_builtins.str] deployment_id: The ID of the Deployment for the Retraining Policy.
         :param pulumi.Input[_builtins.str] description: The description of the Retraining Policy.
         :param pulumi.Input[_builtins.str] feature_list_strategy: The feature list strategy used for modeling.
         :param pulumi.Input[_builtins.str] model_selection_strategy: Determines how the new model is selected when the retraining policy runs.
         :param pulumi.Input[_builtins.str] name: The name of the Retraining Policy.
-        :param pulumi.Input[Union['DeploymentRetrainingPolicyProjectOptionsArgs', 'DeploymentRetrainingPolicyProjectOptionsArgsDict']] project_options: Options for projects used to build new models.
+        :param pulumi.Input[Union['DeploymentRetrainingPolicyProjectOptionsArgs', 'DeploymentRetrainingPolicyProjectOptionsArgsDict', 'outputs.DeploymentRetrainingPolicyProjectOptions']] project_options: Options for projects used to build new models.
         :param pulumi.Input[_builtins.str] project_options_strategy: The project option strategy used for modeling.
-        :param pulumi.Input[Union['DeploymentRetrainingPolicyTimeSeriesOptionsArgs', 'DeploymentRetrainingPolicyTimeSeriesOptionsArgsDict']] time_series_options: Time Series project options used to build new models.
-        :param pulumi.Input[Union['DeploymentRetrainingPolicyTriggerArgs', 'DeploymentRetrainingPolicyTriggerArgsDict']] trigger: Retraining policy trigger.
+        :param pulumi.Input[Union['DeploymentRetrainingPolicyTimeSeriesOptionsArgs', 'DeploymentRetrainingPolicyTimeSeriesOptionsArgsDict', 'outputs.DeploymentRetrainingPolicyTimeSeriesOptions']] time_series_options: Time Series project options used to build new models.
+        :param pulumi.Input[Union['DeploymentRetrainingPolicyTriggerArgs', 'DeploymentRetrainingPolicyTriggerArgsDict', 'outputs.DeploymentRetrainingPolicyTrigger']] trigger: Retraining policy trigger.
         :param pulumi.Input[_builtins.str] use_case_id: The ID of the use case to which the retraining policy belongs.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))

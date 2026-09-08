@@ -1041,22 +1041,22 @@ class CustomModel(pulumi.CustomResource):
                  description: pulumi.Input[Optional[_builtins.str]] = None,
                  files: Optional[Any] = None,
                  folder_path: pulumi.Input[Optional[_builtins.str]] = None,
-                 guard_configurations: pulumi.Input[Optional[Sequence[pulumi.Input[Union['CustomModelGuardConfigurationArgs', 'CustomModelGuardConfigurationArgsDict']]]]] = None,
+                 guard_configurations: pulumi.Input[Optional[Sequence[pulumi.Input[Union['CustomModelGuardConfigurationArgs', 'CustomModelGuardConfigurationArgsDict', 'outputs.CustomModelGuardConfiguration']]]]] = None,
                  is_proxy: pulumi.Input[Optional[_builtins.bool]] = None,
                  language: pulumi.Input[Optional[_builtins.str]] = None,
                  memory_mb: pulumi.Input[Optional[_builtins.int]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  negative_class_label: pulumi.Input[Optional[_builtins.str]] = None,
                  network_access: pulumi.Input[Optional[_builtins.str]] = None,
-                 overall_moderation_configuration: pulumi.Input[Optional[Union['CustomModelOverallModerationConfigurationArgs', 'CustomModelOverallModerationConfigurationArgsDict']]] = None,
+                 overall_moderation_configuration: pulumi.Input[Optional[Union['CustomModelOverallModerationConfigurationArgs', 'CustomModelOverallModerationConfigurationArgsDict', 'outputs.CustomModelOverallModerationConfiguration']]] = None,
                  positive_class_label: pulumi.Input[Optional[_builtins.str]] = None,
                  prediction_threshold: pulumi.Input[Optional[_builtins.float]] = None,
                  replicas: pulumi.Input[Optional[_builtins.int]] = None,
                  resource_bundle_id: pulumi.Input[Optional[_builtins.str]] = None,
-                 runtime_parameter_values: pulumi.Input[Optional[Sequence[pulumi.Input[Union['CustomModelRuntimeParameterValueArgs', 'CustomModelRuntimeParameterValueArgsDict']]]]] = None,
+                 runtime_parameter_values: pulumi.Input[Optional[Sequence[pulumi.Input[Union['CustomModelRuntimeParameterValueArgs', 'CustomModelRuntimeParameterValueArgsDict', 'outputs.CustomModelRuntimeParameterValue']]]]] = None,
                  source_llm_blueprint_id: pulumi.Input[Optional[_builtins.str]] = None,
-                 source_remote_repositories: pulumi.Input[Optional[Sequence[pulumi.Input[Union['CustomModelSourceRemoteRepositoryArgs', 'CustomModelSourceRemoteRepositoryArgsDict']]]]] = None,
-                 tags: pulumi.Input[Optional[Sequence[pulumi.Input[Union['CustomModelTagArgs', 'CustomModelTagArgsDict']]]]] = None,
+                 source_remote_repositories: pulumi.Input[Optional[Sequence[pulumi.Input[Union['CustomModelSourceRemoteRepositoryArgs', 'CustomModelSourceRemoteRepositoryArgsDict', 'outputs.CustomModelSourceRemoteRepository']]]]] = None,
+                 tags: pulumi.Input[Optional[Sequence[pulumi.Input[Union['CustomModelTagArgs', 'CustomModelTagArgsDict', 'outputs.CustomModelTag']]]]] = None,
                  target_name: pulumi.Input[Optional[_builtins.str]] = None,
                  target_type: pulumi.Input[Optional[_builtins.str]] = None,
                  training_data_partition_column: pulumi.Input[Optional[_builtins.str]] = None,
@@ -1102,22 +1102,22 @@ class CustomModel(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] description: The description of the Custom Model.
         :param Any files: The list of tuples, where values in each tuple are the local filesystem path and the path the file should be placed in the Custom Model. If list is of strings, then basenames will be used for tuples.
         :param pulumi.Input[_builtins.str] folder_path: The path to a folder containing files to build the Custom Model. Each file in the folder is uploaded under path relative to a folder path.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['CustomModelGuardConfigurationArgs', 'CustomModelGuardConfigurationArgsDict']]]] guard_configurations: The guard configurations for the Custom Model.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['CustomModelGuardConfigurationArgs', 'CustomModelGuardConfigurationArgsDict', 'outputs.CustomModelGuardConfiguration']]]] guard_configurations: The guard configurations for the Custom Model.
         :param pulumi.Input[_builtins.bool] is_proxy: Flag indicating if the Custom Model is a proxy model.
         :param pulumi.Input[_builtins.str] language: The language used to build the Custom Model.
         :param pulumi.Input[_builtins.int] memory_mb: The memory in MB for the Custom Model.
         :param pulumi.Input[_builtins.str] name: The name of the Custom Model.
         :param pulumi.Input[_builtins.str] negative_class_label: The negative class label of the Custom Model.
         :param pulumi.Input[_builtins.str] network_access: The network access for the Custom Model.
-        :param pulumi.Input[Union['CustomModelOverallModerationConfigurationArgs', 'CustomModelOverallModerationConfigurationArgsDict']] overall_moderation_configuration: The overall moderation configuration for the Custom Model.
+        :param pulumi.Input[Union['CustomModelOverallModerationConfigurationArgs', 'CustomModelOverallModerationConfigurationArgsDict', 'outputs.CustomModelOverallModerationConfiguration']] overall_moderation_configuration: The overall moderation configuration for the Custom Model.
         :param pulumi.Input[_builtins.str] positive_class_label: The positive class label of the Custom Model.
         :param pulumi.Input[_builtins.float] prediction_threshold: The prediction threshold of the Custom Model.
         :param pulumi.Input[_builtins.int] replicas: The replicas for the Custom Model.
         :param pulumi.Input[_builtins.str] resource_bundle_id: A single identifier that represents a bundle of resources: Memory, CPU, GPU, etc.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['CustomModelRuntimeParameterValueArgs', 'CustomModelRuntimeParameterValueArgsDict']]]] runtime_parameter_values: The runtime parameter values for the Custom Model.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['CustomModelRuntimeParameterValueArgs', 'CustomModelRuntimeParameterValueArgsDict', 'outputs.CustomModelRuntimeParameterValue']]]] runtime_parameter_values: The runtime parameter values for the Custom Model.
         :param pulumi.Input[_builtins.str] source_llm_blueprint_id: The ID of the source LLM Blueprint for the Custom Model.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['CustomModelSourceRemoteRepositoryArgs', 'CustomModelSourceRemoteRepositoryArgsDict']]]] source_remote_repositories: The source remote repositories for the Custom Model.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['CustomModelTagArgs', 'CustomModelTagArgsDict']]]] tags: The list of tags to assign to the Custom Model.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['CustomModelSourceRemoteRepositoryArgs', 'CustomModelSourceRemoteRepositoryArgsDict', 'outputs.CustomModelSourceRemoteRepository']]]] source_remote_repositories: The source remote repositories for the Custom Model.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['CustomModelTagArgs', 'CustomModelTagArgsDict', 'outputs.CustomModelTag']]]] tags: The list of tags to assign to the Custom Model.
         :param pulumi.Input[_builtins.str] target_name: The target name of the Custom Model.
         :param pulumi.Input[_builtins.str] target_type: The target type of the Custom Model.
         :param pulumi.Input[_builtins.str] training_data_partition_column: The name of the partition column in the training dataset assigned to the Custom Model.
@@ -1182,22 +1182,22 @@ class CustomModel(pulumi.CustomResource):
                  description: pulumi.Input[Optional[_builtins.str]] = None,
                  files: Optional[Any] = None,
                  folder_path: pulumi.Input[Optional[_builtins.str]] = None,
-                 guard_configurations: pulumi.Input[Optional[Sequence[pulumi.Input[Union['CustomModelGuardConfigurationArgs', 'CustomModelGuardConfigurationArgsDict']]]]] = None,
+                 guard_configurations: pulumi.Input[Optional[Sequence[pulumi.Input[Union['CustomModelGuardConfigurationArgs', 'CustomModelGuardConfigurationArgsDict', 'outputs.CustomModelGuardConfiguration']]]]] = None,
                  is_proxy: pulumi.Input[Optional[_builtins.bool]] = None,
                  language: pulumi.Input[Optional[_builtins.str]] = None,
                  memory_mb: pulumi.Input[Optional[_builtins.int]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  negative_class_label: pulumi.Input[Optional[_builtins.str]] = None,
                  network_access: pulumi.Input[Optional[_builtins.str]] = None,
-                 overall_moderation_configuration: pulumi.Input[Optional[Union['CustomModelOverallModerationConfigurationArgs', 'CustomModelOverallModerationConfigurationArgsDict']]] = None,
+                 overall_moderation_configuration: pulumi.Input[Optional[Union['CustomModelOverallModerationConfigurationArgs', 'CustomModelOverallModerationConfigurationArgsDict', 'outputs.CustomModelOverallModerationConfiguration']]] = None,
                  positive_class_label: pulumi.Input[Optional[_builtins.str]] = None,
                  prediction_threshold: pulumi.Input[Optional[_builtins.float]] = None,
                  replicas: pulumi.Input[Optional[_builtins.int]] = None,
                  resource_bundle_id: pulumi.Input[Optional[_builtins.str]] = None,
-                 runtime_parameter_values: pulumi.Input[Optional[Sequence[pulumi.Input[Union['CustomModelRuntimeParameterValueArgs', 'CustomModelRuntimeParameterValueArgsDict']]]]] = None,
+                 runtime_parameter_values: pulumi.Input[Optional[Sequence[pulumi.Input[Union['CustomModelRuntimeParameterValueArgs', 'CustomModelRuntimeParameterValueArgsDict', 'outputs.CustomModelRuntimeParameterValue']]]]] = None,
                  source_llm_blueprint_id: pulumi.Input[Optional[_builtins.str]] = None,
-                 source_remote_repositories: pulumi.Input[Optional[Sequence[pulumi.Input[Union['CustomModelSourceRemoteRepositoryArgs', 'CustomModelSourceRemoteRepositoryArgsDict']]]]] = None,
-                 tags: pulumi.Input[Optional[Sequence[pulumi.Input[Union['CustomModelTagArgs', 'CustomModelTagArgsDict']]]]] = None,
+                 source_remote_repositories: pulumi.Input[Optional[Sequence[pulumi.Input[Union['CustomModelSourceRemoteRepositoryArgs', 'CustomModelSourceRemoteRepositoryArgsDict', 'outputs.CustomModelSourceRemoteRepository']]]]] = None,
+                 tags: pulumi.Input[Optional[Sequence[pulumi.Input[Union['CustomModelTagArgs', 'CustomModelTagArgsDict', 'outputs.CustomModelTag']]]]] = None,
                  target_name: pulumi.Input[Optional[_builtins.str]] = None,
                  target_type: pulumi.Input[Optional[_builtins.str]] = None,
                  training_data_partition_column: pulumi.Input[Optional[_builtins.str]] = None,
@@ -1266,22 +1266,22 @@ class CustomModel(pulumi.CustomResource):
             files_hashes: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
             folder_path: pulumi.Input[Optional[_builtins.str]] = None,
             folder_path_hash: pulumi.Input[Optional[_builtins.str]] = None,
-            guard_configurations: pulumi.Input[Optional[Sequence[pulumi.Input[Union['CustomModelGuardConfigurationArgs', 'CustomModelGuardConfigurationArgsDict']]]]] = None,
+            guard_configurations: pulumi.Input[Optional[Sequence[pulumi.Input[Union['CustomModelGuardConfigurationArgs', 'CustomModelGuardConfigurationArgsDict', 'outputs.CustomModelGuardConfiguration']]]]] = None,
             is_proxy: pulumi.Input[Optional[_builtins.bool]] = None,
             language: pulumi.Input[Optional[_builtins.str]] = None,
             memory_mb: pulumi.Input[Optional[_builtins.int]] = None,
             name: pulumi.Input[Optional[_builtins.str]] = None,
             negative_class_label: pulumi.Input[Optional[_builtins.str]] = None,
             network_access: pulumi.Input[Optional[_builtins.str]] = None,
-            overall_moderation_configuration: pulumi.Input[Optional[Union['CustomModelOverallModerationConfigurationArgs', 'CustomModelOverallModerationConfigurationArgsDict']]] = None,
+            overall_moderation_configuration: pulumi.Input[Optional[Union['CustomModelOverallModerationConfigurationArgs', 'CustomModelOverallModerationConfigurationArgsDict', 'outputs.CustomModelOverallModerationConfiguration']]] = None,
             positive_class_label: pulumi.Input[Optional[_builtins.str]] = None,
             prediction_threshold: pulumi.Input[Optional[_builtins.float]] = None,
             replicas: pulumi.Input[Optional[_builtins.int]] = None,
             resource_bundle_id: pulumi.Input[Optional[_builtins.str]] = None,
-            runtime_parameter_values: pulumi.Input[Optional[Sequence[pulumi.Input[Union['CustomModelRuntimeParameterValueArgs', 'CustomModelRuntimeParameterValueArgsDict']]]]] = None,
+            runtime_parameter_values: pulumi.Input[Optional[Sequence[pulumi.Input[Union['CustomModelRuntimeParameterValueArgs', 'CustomModelRuntimeParameterValueArgsDict', 'outputs.CustomModelRuntimeParameterValue']]]]] = None,
             source_llm_blueprint_id: pulumi.Input[Optional[_builtins.str]] = None,
-            source_remote_repositories: pulumi.Input[Optional[Sequence[pulumi.Input[Union['CustomModelSourceRemoteRepositoryArgs', 'CustomModelSourceRemoteRepositoryArgsDict']]]]] = None,
-            tags: pulumi.Input[Optional[Sequence[pulumi.Input[Union['CustomModelTagArgs', 'CustomModelTagArgsDict']]]]] = None,
+            source_remote_repositories: pulumi.Input[Optional[Sequence[pulumi.Input[Union['CustomModelSourceRemoteRepositoryArgs', 'CustomModelSourceRemoteRepositoryArgsDict', 'outputs.CustomModelSourceRemoteRepository']]]]] = None,
+            tags: pulumi.Input[Optional[Sequence[pulumi.Input[Union['CustomModelTagArgs', 'CustomModelTagArgsDict', 'outputs.CustomModelTag']]]]] = None,
             target_name: pulumi.Input[Optional[_builtins.str]] = None,
             target_type: pulumi.Input[Optional[_builtins.str]] = None,
             training_data_partition_column: pulumi.Input[Optional[_builtins.str]] = None,
@@ -1307,22 +1307,22 @@ class CustomModel(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] files_hashes: The hash of file contents for each file in files.
         :param pulumi.Input[_builtins.str] folder_path: The path to a folder containing files to build the Custom Model. Each file in the folder is uploaded under path relative to a folder path.
         :param pulumi.Input[_builtins.str] folder_path_hash: The hash of the folder path contents.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['CustomModelGuardConfigurationArgs', 'CustomModelGuardConfigurationArgsDict']]]] guard_configurations: The guard configurations for the Custom Model.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['CustomModelGuardConfigurationArgs', 'CustomModelGuardConfigurationArgsDict', 'outputs.CustomModelGuardConfiguration']]]] guard_configurations: The guard configurations for the Custom Model.
         :param pulumi.Input[_builtins.bool] is_proxy: Flag indicating if the Custom Model is a proxy model.
         :param pulumi.Input[_builtins.str] language: The language used to build the Custom Model.
         :param pulumi.Input[_builtins.int] memory_mb: The memory in MB for the Custom Model.
         :param pulumi.Input[_builtins.str] name: The name of the Custom Model.
         :param pulumi.Input[_builtins.str] negative_class_label: The negative class label of the Custom Model.
         :param pulumi.Input[_builtins.str] network_access: The network access for the Custom Model.
-        :param pulumi.Input[Union['CustomModelOverallModerationConfigurationArgs', 'CustomModelOverallModerationConfigurationArgsDict']] overall_moderation_configuration: The overall moderation configuration for the Custom Model.
+        :param pulumi.Input[Union['CustomModelOverallModerationConfigurationArgs', 'CustomModelOverallModerationConfigurationArgsDict', 'outputs.CustomModelOverallModerationConfiguration']] overall_moderation_configuration: The overall moderation configuration for the Custom Model.
         :param pulumi.Input[_builtins.str] positive_class_label: The positive class label of the Custom Model.
         :param pulumi.Input[_builtins.float] prediction_threshold: The prediction threshold of the Custom Model.
         :param pulumi.Input[_builtins.int] replicas: The replicas for the Custom Model.
         :param pulumi.Input[_builtins.str] resource_bundle_id: A single identifier that represents a bundle of resources: Memory, CPU, GPU, etc.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['CustomModelRuntimeParameterValueArgs', 'CustomModelRuntimeParameterValueArgsDict']]]] runtime_parameter_values: The runtime parameter values for the Custom Model.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['CustomModelRuntimeParameterValueArgs', 'CustomModelRuntimeParameterValueArgsDict', 'outputs.CustomModelRuntimeParameterValue']]]] runtime_parameter_values: The runtime parameter values for the Custom Model.
         :param pulumi.Input[_builtins.str] source_llm_blueprint_id: The ID of the source LLM Blueprint for the Custom Model.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['CustomModelSourceRemoteRepositoryArgs', 'CustomModelSourceRemoteRepositoryArgsDict']]]] source_remote_repositories: The source remote repositories for the Custom Model.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['CustomModelTagArgs', 'CustomModelTagArgsDict']]]] tags: The list of tags to assign to the Custom Model.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['CustomModelSourceRemoteRepositoryArgs', 'CustomModelSourceRemoteRepositoryArgsDict', 'outputs.CustomModelSourceRemoteRepository']]]] source_remote_repositories: The source remote repositories for the Custom Model.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['CustomModelTagArgs', 'CustomModelTagArgsDict', 'outputs.CustomModelTag']]]] tags: The list of tags to assign to the Custom Model.
         :param pulumi.Input[_builtins.str] target_name: The target name of the Custom Model.
         :param pulumi.Input[_builtins.str] target_type: The target type of the Custom Model.
         :param pulumi.Input[_builtins.str] training_data_partition_column: The name of the partition column in the training dataset assigned to the Custom Model.

@@ -711,26 +711,26 @@ class Deployment(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 association_id_settings: pulumi.Input[Optional[Union['DeploymentAssociationIdSettingsArgs', 'DeploymentAssociationIdSettingsArgsDict']]] = None,
-                 batch_monitoring_settings: pulumi.Input[Optional[Union['DeploymentBatchMonitoringSettingsArgs', 'DeploymentBatchMonitoringSettingsArgsDict']]] = None,
-                 bias_and_fairness_settings: pulumi.Input[Optional[Union['DeploymentBiasAndFairnessSettingsArgs', 'DeploymentBiasAndFairnessSettingsArgsDict']]] = None,
-                 challenger_models_settings: pulumi.Input[Optional[Union['DeploymentChallengerModelsSettingsArgs', 'DeploymentChallengerModelsSettingsArgsDict']]] = None,
-                 challenger_replay_settings: pulumi.Input[Optional[Union['DeploymentChallengerReplaySettingsArgs', 'DeploymentChallengerReplaySettingsArgsDict']]] = None,
-                 drift_tracking_settings: pulumi.Input[Optional[Union['DeploymentDriftTrackingSettingsArgs', 'DeploymentDriftTrackingSettingsArgsDict']]] = None,
-                 feature_cache_settings: pulumi.Input[Optional[Union['DeploymentFeatureCacheSettingsArgs', 'DeploymentFeatureCacheSettingsArgsDict']]] = None,
-                 health_settings: pulumi.Input[Optional[Union['DeploymentHealthSettingsArgs', 'DeploymentHealthSettingsArgsDict']]] = None,
+                 association_id_settings: pulumi.Input[Optional[Union['DeploymentAssociationIdSettingsArgs', 'DeploymentAssociationIdSettingsArgsDict', 'outputs.DeploymentAssociationIdSettings']]] = None,
+                 batch_monitoring_settings: pulumi.Input[Optional[Union['DeploymentBatchMonitoringSettingsArgs', 'DeploymentBatchMonitoringSettingsArgsDict', 'outputs.DeploymentBatchMonitoringSettings']]] = None,
+                 bias_and_fairness_settings: pulumi.Input[Optional[Union['DeploymentBiasAndFairnessSettingsArgs', 'DeploymentBiasAndFairnessSettingsArgsDict', 'outputs.DeploymentBiasAndFairnessSettings']]] = None,
+                 challenger_models_settings: pulumi.Input[Optional[Union['DeploymentChallengerModelsSettingsArgs', 'DeploymentChallengerModelsSettingsArgsDict', 'outputs.DeploymentChallengerModelsSettings']]] = None,
+                 challenger_replay_settings: pulumi.Input[Optional[Union['DeploymentChallengerReplaySettingsArgs', 'DeploymentChallengerReplaySettingsArgsDict', 'outputs.DeploymentChallengerReplaySettings']]] = None,
+                 drift_tracking_settings: pulumi.Input[Optional[Union['DeploymentDriftTrackingSettingsArgs', 'DeploymentDriftTrackingSettingsArgsDict', 'outputs.DeploymentDriftTrackingSettings']]] = None,
+                 feature_cache_settings: pulumi.Input[Optional[Union['DeploymentFeatureCacheSettingsArgs', 'DeploymentFeatureCacheSettingsArgsDict', 'outputs.DeploymentFeatureCacheSettings']]] = None,
+                 health_settings: pulumi.Input[Optional[Union['DeploymentHealthSettingsArgs', 'DeploymentHealthSettingsArgsDict', 'outputs.DeploymentHealthSettings']]] = None,
                  importance: pulumi.Input[Optional[_builtins.str]] = None,
                  label: pulumi.Input[Optional[_builtins.str]] = None,
                  prediction_environment_id: pulumi.Input[Optional[_builtins.str]] = None,
-                 prediction_intervals_settings: pulumi.Input[Optional[Union['DeploymentPredictionIntervalsSettingsArgs', 'DeploymentPredictionIntervalsSettingsArgsDict']]] = None,
-                 prediction_warning_settings: pulumi.Input[Optional[Union['DeploymentPredictionWarningSettingsArgs', 'DeploymentPredictionWarningSettingsArgsDict']]] = None,
-                 predictions_by_forecast_date_settings: pulumi.Input[Optional[Union['DeploymentPredictionsByForecastDateSettingsArgs', 'DeploymentPredictionsByForecastDateSettingsArgsDict']]] = None,
-                 predictions_data_collection_settings: pulumi.Input[Optional[Union['DeploymentPredictionsDataCollectionSettingsArgs', 'DeploymentPredictionsDataCollectionSettingsArgsDict']]] = None,
-                 predictions_settings: pulumi.Input[Optional[Union['DeploymentPredictionsSettingsArgs', 'DeploymentPredictionsSettingsArgsDict']]] = None,
+                 prediction_intervals_settings: pulumi.Input[Optional[Union['DeploymentPredictionIntervalsSettingsArgs', 'DeploymentPredictionIntervalsSettingsArgsDict', 'outputs.DeploymentPredictionIntervalsSettings']]] = None,
+                 prediction_warning_settings: pulumi.Input[Optional[Union['DeploymentPredictionWarningSettingsArgs', 'DeploymentPredictionWarningSettingsArgsDict', 'outputs.DeploymentPredictionWarningSettings']]] = None,
+                 predictions_by_forecast_date_settings: pulumi.Input[Optional[Union['DeploymentPredictionsByForecastDateSettingsArgs', 'DeploymentPredictionsByForecastDateSettingsArgsDict', 'outputs.DeploymentPredictionsByForecastDateSettings']]] = None,
+                 predictions_data_collection_settings: pulumi.Input[Optional[Union['DeploymentPredictionsDataCollectionSettingsArgs', 'DeploymentPredictionsDataCollectionSettingsArgsDict', 'outputs.DeploymentPredictionsDataCollectionSettings']]] = None,
+                 predictions_settings: pulumi.Input[Optional[Union['DeploymentPredictionsSettingsArgs', 'DeploymentPredictionsSettingsArgsDict', 'outputs.DeploymentPredictionsSettings']]] = None,
                  registered_model_version_id: pulumi.Input[Optional[_builtins.str]] = None,
-                 retraining_settings: pulumi.Input[Optional[Union['DeploymentRetrainingSettingsArgs', 'DeploymentRetrainingSettingsArgsDict']]] = None,
-                 runtime_parameter_values: pulumi.Input[Optional[Sequence[pulumi.Input[Union['DeploymentRuntimeParameterValueArgs', 'DeploymentRuntimeParameterValueArgsDict']]]]] = None,
-                 segment_analysis_settings: pulumi.Input[Optional[Union['DeploymentSegmentAnalysisSettingsArgs', 'DeploymentSegmentAnalysisSettingsArgsDict']]] = None,
+                 retraining_settings: pulumi.Input[Optional[Union['DeploymentRetrainingSettingsArgs', 'DeploymentRetrainingSettingsArgsDict', 'outputs.DeploymentRetrainingSettings']]] = None,
+                 runtime_parameter_values: pulumi.Input[Optional[Sequence[pulumi.Input[Union['DeploymentRuntimeParameterValueArgs', 'DeploymentRuntimeParameterValueArgsDict', 'outputs.DeploymentRuntimeParameterValue']]]]] = None,
+                 segment_analysis_settings: pulumi.Input[Optional[Union['DeploymentSegmentAnalysisSettingsArgs', 'DeploymentSegmentAnalysisSettingsArgsDict', 'outputs.DeploymentSegmentAnalysisSettings']]] = None,
                  use_case_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  __props__=None):
         """
@@ -788,26 +788,26 @@ class Deployment(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Union['DeploymentAssociationIdSettingsArgs', 'DeploymentAssociationIdSettingsArgsDict']] association_id_settings: Association ID settings for this Deployment.
-        :param pulumi.Input[Union['DeploymentBatchMonitoringSettingsArgs', 'DeploymentBatchMonitoringSettingsArgsDict']] batch_monitoring_settings: The batch monitoring settings for the Deployment.
-        :param pulumi.Input[Union['DeploymentBiasAndFairnessSettingsArgs', 'DeploymentBiasAndFairnessSettingsArgsDict']] bias_and_fairness_settings: Bias and fairness settings for the Deployment.
-        :param pulumi.Input[Union['DeploymentChallengerModelsSettingsArgs', 'DeploymentChallengerModelsSettingsArgsDict']] challenger_models_settings: The challenger models settings for the Deployment.
-        :param pulumi.Input[Union['DeploymentChallengerReplaySettingsArgs', 'DeploymentChallengerReplaySettingsArgsDict']] challenger_replay_settings: The challenger replay settings for the Deployment.
-        :param pulumi.Input[Union['DeploymentDriftTrackingSettingsArgs', 'DeploymentDriftTrackingSettingsArgsDict']] drift_tracking_settings: The drift tracking settings for the Deployment.
-        :param pulumi.Input[Union['DeploymentFeatureCacheSettingsArgs', 'DeploymentFeatureCacheSettingsArgsDict']] feature_cache_settings: The feature cache settings for this Deployment.
-        :param pulumi.Input[Union['DeploymentHealthSettingsArgs', 'DeploymentHealthSettingsArgsDict']] health_settings: The health settings for this Deployment.
+        :param pulumi.Input[Union['DeploymentAssociationIdSettingsArgs', 'DeploymentAssociationIdSettingsArgsDict', 'outputs.DeploymentAssociationIdSettings']] association_id_settings: Association ID settings for this Deployment.
+        :param pulumi.Input[Union['DeploymentBatchMonitoringSettingsArgs', 'DeploymentBatchMonitoringSettingsArgsDict', 'outputs.DeploymentBatchMonitoringSettings']] batch_monitoring_settings: The batch monitoring settings for the Deployment.
+        :param pulumi.Input[Union['DeploymentBiasAndFairnessSettingsArgs', 'DeploymentBiasAndFairnessSettingsArgsDict', 'outputs.DeploymentBiasAndFairnessSettings']] bias_and_fairness_settings: Bias and fairness settings for the Deployment.
+        :param pulumi.Input[Union['DeploymentChallengerModelsSettingsArgs', 'DeploymentChallengerModelsSettingsArgsDict', 'outputs.DeploymentChallengerModelsSettings']] challenger_models_settings: The challenger models settings for the Deployment.
+        :param pulumi.Input[Union['DeploymentChallengerReplaySettingsArgs', 'DeploymentChallengerReplaySettingsArgsDict', 'outputs.DeploymentChallengerReplaySettings']] challenger_replay_settings: The challenger replay settings for the Deployment.
+        :param pulumi.Input[Union['DeploymentDriftTrackingSettingsArgs', 'DeploymentDriftTrackingSettingsArgsDict', 'outputs.DeploymentDriftTrackingSettings']] drift_tracking_settings: The drift tracking settings for the Deployment.
+        :param pulumi.Input[Union['DeploymentFeatureCacheSettingsArgs', 'DeploymentFeatureCacheSettingsArgsDict', 'outputs.DeploymentFeatureCacheSettings']] feature_cache_settings: The feature cache settings for this Deployment.
+        :param pulumi.Input[Union['DeploymentHealthSettingsArgs', 'DeploymentHealthSettingsArgsDict', 'outputs.DeploymentHealthSettings']] health_settings: The health settings for this Deployment.
         :param pulumi.Input[_builtins.str] importance: The importance of the Deployment.
         :param pulumi.Input[_builtins.str] label: The label of the Deployment.
         :param pulumi.Input[_builtins.str] prediction_environment_id: The ID of the predication environment for this Deployment.
-        :param pulumi.Input[Union['DeploymentPredictionIntervalsSettingsArgs', 'DeploymentPredictionIntervalsSettingsArgsDict']] prediction_intervals_settings: The prediction intervals settings for this Deployment.
-        :param pulumi.Input[Union['DeploymentPredictionWarningSettingsArgs', 'DeploymentPredictionWarningSettingsArgsDict']] prediction_warning_settings: The prediction warning settings for the Deployment.
-        :param pulumi.Input[Union['DeploymentPredictionsByForecastDateSettingsArgs', 'DeploymentPredictionsByForecastDateSettingsArgsDict']] predictions_by_forecast_date_settings: The predictions by forecase date settings for the Deployment.
-        :param pulumi.Input[Union['DeploymentPredictionsDataCollectionSettingsArgs', 'DeploymentPredictionsDataCollectionSettingsArgsDict']] predictions_data_collection_settings: The predictions data collection settings for the Deployment.
-        :param pulumi.Input[Union['DeploymentPredictionsSettingsArgs', 'DeploymentPredictionsSettingsArgsDict']] predictions_settings: Settings for the predictions.
+        :param pulumi.Input[Union['DeploymentPredictionIntervalsSettingsArgs', 'DeploymentPredictionIntervalsSettingsArgsDict', 'outputs.DeploymentPredictionIntervalsSettings']] prediction_intervals_settings: The prediction intervals settings for this Deployment.
+        :param pulumi.Input[Union['DeploymentPredictionWarningSettingsArgs', 'DeploymentPredictionWarningSettingsArgsDict', 'outputs.DeploymentPredictionWarningSettings']] prediction_warning_settings: The prediction warning settings for the Deployment.
+        :param pulumi.Input[Union['DeploymentPredictionsByForecastDateSettingsArgs', 'DeploymentPredictionsByForecastDateSettingsArgsDict', 'outputs.DeploymentPredictionsByForecastDateSettings']] predictions_by_forecast_date_settings: The predictions by forecase date settings for the Deployment.
+        :param pulumi.Input[Union['DeploymentPredictionsDataCollectionSettingsArgs', 'DeploymentPredictionsDataCollectionSettingsArgsDict', 'outputs.DeploymentPredictionsDataCollectionSettings']] predictions_data_collection_settings: The predictions data collection settings for the Deployment.
+        :param pulumi.Input[Union['DeploymentPredictionsSettingsArgs', 'DeploymentPredictionsSettingsArgsDict', 'outputs.DeploymentPredictionsSettings']] predictions_settings: Settings for the predictions.
         :param pulumi.Input[_builtins.str] registered_model_version_id: The ID of the registered model version for this Deployment.
-        :param pulumi.Input[Union['DeploymentRetrainingSettingsArgs', 'DeploymentRetrainingSettingsArgsDict']] retraining_settings: The retraining settings for this Deployment.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['DeploymentRuntimeParameterValueArgs', 'DeploymentRuntimeParameterValueArgsDict']]]] runtime_parameter_values: The runtime parameter values for the Deployment.
-        :param pulumi.Input[Union['DeploymentSegmentAnalysisSettingsArgs', 'DeploymentSegmentAnalysisSettingsArgsDict']] segment_analysis_settings: The segment analysis settings for the Deployment.
+        :param pulumi.Input[Union['DeploymentRetrainingSettingsArgs', 'DeploymentRetrainingSettingsArgsDict', 'outputs.DeploymentRetrainingSettings']] retraining_settings: The retraining settings for this Deployment.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['DeploymentRuntimeParameterValueArgs', 'DeploymentRuntimeParameterValueArgsDict', 'outputs.DeploymentRuntimeParameterValue']]]] runtime_parameter_values: The runtime parameter values for the Deployment.
+        :param pulumi.Input[Union['DeploymentSegmentAnalysisSettingsArgs', 'DeploymentSegmentAnalysisSettingsArgsDict', 'outputs.DeploymentSegmentAnalysisSettings']] segment_analysis_settings: The segment analysis settings for the Deployment.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] use_case_ids: The list of Use Case IDs to add the Deployment to.
         """
         ...
@@ -884,26 +884,26 @@ class Deployment(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 association_id_settings: pulumi.Input[Optional[Union['DeploymentAssociationIdSettingsArgs', 'DeploymentAssociationIdSettingsArgsDict']]] = None,
-                 batch_monitoring_settings: pulumi.Input[Optional[Union['DeploymentBatchMonitoringSettingsArgs', 'DeploymentBatchMonitoringSettingsArgsDict']]] = None,
-                 bias_and_fairness_settings: pulumi.Input[Optional[Union['DeploymentBiasAndFairnessSettingsArgs', 'DeploymentBiasAndFairnessSettingsArgsDict']]] = None,
-                 challenger_models_settings: pulumi.Input[Optional[Union['DeploymentChallengerModelsSettingsArgs', 'DeploymentChallengerModelsSettingsArgsDict']]] = None,
-                 challenger_replay_settings: pulumi.Input[Optional[Union['DeploymentChallengerReplaySettingsArgs', 'DeploymentChallengerReplaySettingsArgsDict']]] = None,
-                 drift_tracking_settings: pulumi.Input[Optional[Union['DeploymentDriftTrackingSettingsArgs', 'DeploymentDriftTrackingSettingsArgsDict']]] = None,
-                 feature_cache_settings: pulumi.Input[Optional[Union['DeploymentFeatureCacheSettingsArgs', 'DeploymentFeatureCacheSettingsArgsDict']]] = None,
-                 health_settings: pulumi.Input[Optional[Union['DeploymentHealthSettingsArgs', 'DeploymentHealthSettingsArgsDict']]] = None,
+                 association_id_settings: pulumi.Input[Optional[Union['DeploymentAssociationIdSettingsArgs', 'DeploymentAssociationIdSettingsArgsDict', 'outputs.DeploymentAssociationIdSettings']]] = None,
+                 batch_monitoring_settings: pulumi.Input[Optional[Union['DeploymentBatchMonitoringSettingsArgs', 'DeploymentBatchMonitoringSettingsArgsDict', 'outputs.DeploymentBatchMonitoringSettings']]] = None,
+                 bias_and_fairness_settings: pulumi.Input[Optional[Union['DeploymentBiasAndFairnessSettingsArgs', 'DeploymentBiasAndFairnessSettingsArgsDict', 'outputs.DeploymentBiasAndFairnessSettings']]] = None,
+                 challenger_models_settings: pulumi.Input[Optional[Union['DeploymentChallengerModelsSettingsArgs', 'DeploymentChallengerModelsSettingsArgsDict', 'outputs.DeploymentChallengerModelsSettings']]] = None,
+                 challenger_replay_settings: pulumi.Input[Optional[Union['DeploymentChallengerReplaySettingsArgs', 'DeploymentChallengerReplaySettingsArgsDict', 'outputs.DeploymentChallengerReplaySettings']]] = None,
+                 drift_tracking_settings: pulumi.Input[Optional[Union['DeploymentDriftTrackingSettingsArgs', 'DeploymentDriftTrackingSettingsArgsDict', 'outputs.DeploymentDriftTrackingSettings']]] = None,
+                 feature_cache_settings: pulumi.Input[Optional[Union['DeploymentFeatureCacheSettingsArgs', 'DeploymentFeatureCacheSettingsArgsDict', 'outputs.DeploymentFeatureCacheSettings']]] = None,
+                 health_settings: pulumi.Input[Optional[Union['DeploymentHealthSettingsArgs', 'DeploymentHealthSettingsArgsDict', 'outputs.DeploymentHealthSettings']]] = None,
                  importance: pulumi.Input[Optional[_builtins.str]] = None,
                  label: pulumi.Input[Optional[_builtins.str]] = None,
                  prediction_environment_id: pulumi.Input[Optional[_builtins.str]] = None,
-                 prediction_intervals_settings: pulumi.Input[Optional[Union['DeploymentPredictionIntervalsSettingsArgs', 'DeploymentPredictionIntervalsSettingsArgsDict']]] = None,
-                 prediction_warning_settings: pulumi.Input[Optional[Union['DeploymentPredictionWarningSettingsArgs', 'DeploymentPredictionWarningSettingsArgsDict']]] = None,
-                 predictions_by_forecast_date_settings: pulumi.Input[Optional[Union['DeploymentPredictionsByForecastDateSettingsArgs', 'DeploymentPredictionsByForecastDateSettingsArgsDict']]] = None,
-                 predictions_data_collection_settings: pulumi.Input[Optional[Union['DeploymentPredictionsDataCollectionSettingsArgs', 'DeploymentPredictionsDataCollectionSettingsArgsDict']]] = None,
-                 predictions_settings: pulumi.Input[Optional[Union['DeploymentPredictionsSettingsArgs', 'DeploymentPredictionsSettingsArgsDict']]] = None,
+                 prediction_intervals_settings: pulumi.Input[Optional[Union['DeploymentPredictionIntervalsSettingsArgs', 'DeploymentPredictionIntervalsSettingsArgsDict', 'outputs.DeploymentPredictionIntervalsSettings']]] = None,
+                 prediction_warning_settings: pulumi.Input[Optional[Union['DeploymentPredictionWarningSettingsArgs', 'DeploymentPredictionWarningSettingsArgsDict', 'outputs.DeploymentPredictionWarningSettings']]] = None,
+                 predictions_by_forecast_date_settings: pulumi.Input[Optional[Union['DeploymentPredictionsByForecastDateSettingsArgs', 'DeploymentPredictionsByForecastDateSettingsArgsDict', 'outputs.DeploymentPredictionsByForecastDateSettings']]] = None,
+                 predictions_data_collection_settings: pulumi.Input[Optional[Union['DeploymentPredictionsDataCollectionSettingsArgs', 'DeploymentPredictionsDataCollectionSettingsArgsDict', 'outputs.DeploymentPredictionsDataCollectionSettings']]] = None,
+                 predictions_settings: pulumi.Input[Optional[Union['DeploymentPredictionsSettingsArgs', 'DeploymentPredictionsSettingsArgsDict', 'outputs.DeploymentPredictionsSettings']]] = None,
                  registered_model_version_id: pulumi.Input[Optional[_builtins.str]] = None,
-                 retraining_settings: pulumi.Input[Optional[Union['DeploymentRetrainingSettingsArgs', 'DeploymentRetrainingSettingsArgsDict']]] = None,
-                 runtime_parameter_values: pulumi.Input[Optional[Sequence[pulumi.Input[Union['DeploymentRuntimeParameterValueArgs', 'DeploymentRuntimeParameterValueArgsDict']]]]] = None,
-                 segment_analysis_settings: pulumi.Input[Optional[Union['DeploymentSegmentAnalysisSettingsArgs', 'DeploymentSegmentAnalysisSettingsArgsDict']]] = None,
+                 retraining_settings: pulumi.Input[Optional[Union['DeploymentRetrainingSettingsArgs', 'DeploymentRetrainingSettingsArgsDict', 'outputs.DeploymentRetrainingSettings']]] = None,
+                 runtime_parameter_values: pulumi.Input[Optional[Sequence[pulumi.Input[Union['DeploymentRuntimeParameterValueArgs', 'DeploymentRuntimeParameterValueArgsDict', 'outputs.DeploymentRuntimeParameterValue']]]]] = None,
+                 segment_analysis_settings: pulumi.Input[Optional[Union['DeploymentSegmentAnalysisSettingsArgs', 'DeploymentSegmentAnalysisSettingsArgsDict', 'outputs.DeploymentSegmentAnalysisSettings']]] = None,
                  use_case_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
@@ -951,26 +951,26 @@ class Deployment(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            association_id_settings: pulumi.Input[Optional[Union['DeploymentAssociationIdSettingsArgs', 'DeploymentAssociationIdSettingsArgsDict']]] = None,
-            batch_monitoring_settings: pulumi.Input[Optional[Union['DeploymentBatchMonitoringSettingsArgs', 'DeploymentBatchMonitoringSettingsArgsDict']]] = None,
-            bias_and_fairness_settings: pulumi.Input[Optional[Union['DeploymentBiasAndFairnessSettingsArgs', 'DeploymentBiasAndFairnessSettingsArgsDict']]] = None,
-            challenger_models_settings: pulumi.Input[Optional[Union['DeploymentChallengerModelsSettingsArgs', 'DeploymentChallengerModelsSettingsArgsDict']]] = None,
-            challenger_replay_settings: pulumi.Input[Optional[Union['DeploymentChallengerReplaySettingsArgs', 'DeploymentChallengerReplaySettingsArgsDict']]] = None,
-            drift_tracking_settings: pulumi.Input[Optional[Union['DeploymentDriftTrackingSettingsArgs', 'DeploymentDriftTrackingSettingsArgsDict']]] = None,
-            feature_cache_settings: pulumi.Input[Optional[Union['DeploymentFeatureCacheSettingsArgs', 'DeploymentFeatureCacheSettingsArgsDict']]] = None,
-            health_settings: pulumi.Input[Optional[Union['DeploymentHealthSettingsArgs', 'DeploymentHealthSettingsArgsDict']]] = None,
+            association_id_settings: pulumi.Input[Optional[Union['DeploymentAssociationIdSettingsArgs', 'DeploymentAssociationIdSettingsArgsDict', 'outputs.DeploymentAssociationIdSettings']]] = None,
+            batch_monitoring_settings: pulumi.Input[Optional[Union['DeploymentBatchMonitoringSettingsArgs', 'DeploymentBatchMonitoringSettingsArgsDict', 'outputs.DeploymentBatchMonitoringSettings']]] = None,
+            bias_and_fairness_settings: pulumi.Input[Optional[Union['DeploymentBiasAndFairnessSettingsArgs', 'DeploymentBiasAndFairnessSettingsArgsDict', 'outputs.DeploymentBiasAndFairnessSettings']]] = None,
+            challenger_models_settings: pulumi.Input[Optional[Union['DeploymentChallengerModelsSettingsArgs', 'DeploymentChallengerModelsSettingsArgsDict', 'outputs.DeploymentChallengerModelsSettings']]] = None,
+            challenger_replay_settings: pulumi.Input[Optional[Union['DeploymentChallengerReplaySettingsArgs', 'DeploymentChallengerReplaySettingsArgsDict', 'outputs.DeploymentChallengerReplaySettings']]] = None,
+            drift_tracking_settings: pulumi.Input[Optional[Union['DeploymentDriftTrackingSettingsArgs', 'DeploymentDriftTrackingSettingsArgsDict', 'outputs.DeploymentDriftTrackingSettings']]] = None,
+            feature_cache_settings: pulumi.Input[Optional[Union['DeploymentFeatureCacheSettingsArgs', 'DeploymentFeatureCacheSettingsArgsDict', 'outputs.DeploymentFeatureCacheSettings']]] = None,
+            health_settings: pulumi.Input[Optional[Union['DeploymentHealthSettingsArgs', 'DeploymentHealthSettingsArgsDict', 'outputs.DeploymentHealthSettings']]] = None,
             importance: pulumi.Input[Optional[_builtins.str]] = None,
             label: pulumi.Input[Optional[_builtins.str]] = None,
             prediction_environment_id: pulumi.Input[Optional[_builtins.str]] = None,
-            prediction_intervals_settings: pulumi.Input[Optional[Union['DeploymentPredictionIntervalsSettingsArgs', 'DeploymentPredictionIntervalsSettingsArgsDict']]] = None,
-            prediction_warning_settings: pulumi.Input[Optional[Union['DeploymentPredictionWarningSettingsArgs', 'DeploymentPredictionWarningSettingsArgsDict']]] = None,
-            predictions_by_forecast_date_settings: pulumi.Input[Optional[Union['DeploymentPredictionsByForecastDateSettingsArgs', 'DeploymentPredictionsByForecastDateSettingsArgsDict']]] = None,
-            predictions_data_collection_settings: pulumi.Input[Optional[Union['DeploymentPredictionsDataCollectionSettingsArgs', 'DeploymentPredictionsDataCollectionSettingsArgsDict']]] = None,
-            predictions_settings: pulumi.Input[Optional[Union['DeploymentPredictionsSettingsArgs', 'DeploymentPredictionsSettingsArgsDict']]] = None,
+            prediction_intervals_settings: pulumi.Input[Optional[Union['DeploymentPredictionIntervalsSettingsArgs', 'DeploymentPredictionIntervalsSettingsArgsDict', 'outputs.DeploymentPredictionIntervalsSettings']]] = None,
+            prediction_warning_settings: pulumi.Input[Optional[Union['DeploymentPredictionWarningSettingsArgs', 'DeploymentPredictionWarningSettingsArgsDict', 'outputs.DeploymentPredictionWarningSettings']]] = None,
+            predictions_by_forecast_date_settings: pulumi.Input[Optional[Union['DeploymentPredictionsByForecastDateSettingsArgs', 'DeploymentPredictionsByForecastDateSettingsArgsDict', 'outputs.DeploymentPredictionsByForecastDateSettings']]] = None,
+            predictions_data_collection_settings: pulumi.Input[Optional[Union['DeploymentPredictionsDataCollectionSettingsArgs', 'DeploymentPredictionsDataCollectionSettingsArgsDict', 'outputs.DeploymentPredictionsDataCollectionSettings']]] = None,
+            predictions_settings: pulumi.Input[Optional[Union['DeploymentPredictionsSettingsArgs', 'DeploymentPredictionsSettingsArgsDict', 'outputs.DeploymentPredictionsSettings']]] = None,
             registered_model_version_id: pulumi.Input[Optional[_builtins.str]] = None,
-            retraining_settings: pulumi.Input[Optional[Union['DeploymentRetrainingSettingsArgs', 'DeploymentRetrainingSettingsArgsDict']]] = None,
-            runtime_parameter_values: pulumi.Input[Optional[Sequence[pulumi.Input[Union['DeploymentRuntimeParameterValueArgs', 'DeploymentRuntimeParameterValueArgsDict']]]]] = None,
-            segment_analysis_settings: pulumi.Input[Optional[Union['DeploymentSegmentAnalysisSettingsArgs', 'DeploymentSegmentAnalysisSettingsArgsDict']]] = None,
+            retraining_settings: pulumi.Input[Optional[Union['DeploymentRetrainingSettingsArgs', 'DeploymentRetrainingSettingsArgsDict', 'outputs.DeploymentRetrainingSettings']]] = None,
+            runtime_parameter_values: pulumi.Input[Optional[Sequence[pulumi.Input[Union['DeploymentRuntimeParameterValueArgs', 'DeploymentRuntimeParameterValueArgsDict', 'outputs.DeploymentRuntimeParameterValue']]]]] = None,
+            segment_analysis_settings: pulumi.Input[Optional[Union['DeploymentSegmentAnalysisSettingsArgs', 'DeploymentSegmentAnalysisSettingsArgsDict', 'outputs.DeploymentSegmentAnalysisSettings']]] = None,
             use_case_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None) -> 'Deployment':
         """
         Get an existing Deployment resource's state with the given name, id, and optional extra
@@ -979,26 +979,26 @@ class Deployment(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Union['DeploymentAssociationIdSettingsArgs', 'DeploymentAssociationIdSettingsArgsDict']] association_id_settings: Association ID settings for this Deployment.
-        :param pulumi.Input[Union['DeploymentBatchMonitoringSettingsArgs', 'DeploymentBatchMonitoringSettingsArgsDict']] batch_monitoring_settings: The batch monitoring settings for the Deployment.
-        :param pulumi.Input[Union['DeploymentBiasAndFairnessSettingsArgs', 'DeploymentBiasAndFairnessSettingsArgsDict']] bias_and_fairness_settings: Bias and fairness settings for the Deployment.
-        :param pulumi.Input[Union['DeploymentChallengerModelsSettingsArgs', 'DeploymentChallengerModelsSettingsArgsDict']] challenger_models_settings: The challenger models settings for the Deployment.
-        :param pulumi.Input[Union['DeploymentChallengerReplaySettingsArgs', 'DeploymentChallengerReplaySettingsArgsDict']] challenger_replay_settings: The challenger replay settings for the Deployment.
-        :param pulumi.Input[Union['DeploymentDriftTrackingSettingsArgs', 'DeploymentDriftTrackingSettingsArgsDict']] drift_tracking_settings: The drift tracking settings for the Deployment.
-        :param pulumi.Input[Union['DeploymentFeatureCacheSettingsArgs', 'DeploymentFeatureCacheSettingsArgsDict']] feature_cache_settings: The feature cache settings for this Deployment.
-        :param pulumi.Input[Union['DeploymentHealthSettingsArgs', 'DeploymentHealthSettingsArgsDict']] health_settings: The health settings for this Deployment.
+        :param pulumi.Input[Union['DeploymentAssociationIdSettingsArgs', 'DeploymentAssociationIdSettingsArgsDict', 'outputs.DeploymentAssociationIdSettings']] association_id_settings: Association ID settings for this Deployment.
+        :param pulumi.Input[Union['DeploymentBatchMonitoringSettingsArgs', 'DeploymentBatchMonitoringSettingsArgsDict', 'outputs.DeploymentBatchMonitoringSettings']] batch_monitoring_settings: The batch monitoring settings for the Deployment.
+        :param pulumi.Input[Union['DeploymentBiasAndFairnessSettingsArgs', 'DeploymentBiasAndFairnessSettingsArgsDict', 'outputs.DeploymentBiasAndFairnessSettings']] bias_and_fairness_settings: Bias and fairness settings for the Deployment.
+        :param pulumi.Input[Union['DeploymentChallengerModelsSettingsArgs', 'DeploymentChallengerModelsSettingsArgsDict', 'outputs.DeploymentChallengerModelsSettings']] challenger_models_settings: The challenger models settings for the Deployment.
+        :param pulumi.Input[Union['DeploymentChallengerReplaySettingsArgs', 'DeploymentChallengerReplaySettingsArgsDict', 'outputs.DeploymentChallengerReplaySettings']] challenger_replay_settings: The challenger replay settings for the Deployment.
+        :param pulumi.Input[Union['DeploymentDriftTrackingSettingsArgs', 'DeploymentDriftTrackingSettingsArgsDict', 'outputs.DeploymentDriftTrackingSettings']] drift_tracking_settings: The drift tracking settings for the Deployment.
+        :param pulumi.Input[Union['DeploymentFeatureCacheSettingsArgs', 'DeploymentFeatureCacheSettingsArgsDict', 'outputs.DeploymentFeatureCacheSettings']] feature_cache_settings: The feature cache settings for this Deployment.
+        :param pulumi.Input[Union['DeploymentHealthSettingsArgs', 'DeploymentHealthSettingsArgsDict', 'outputs.DeploymentHealthSettings']] health_settings: The health settings for this Deployment.
         :param pulumi.Input[_builtins.str] importance: The importance of the Deployment.
         :param pulumi.Input[_builtins.str] label: The label of the Deployment.
         :param pulumi.Input[_builtins.str] prediction_environment_id: The ID of the predication environment for this Deployment.
-        :param pulumi.Input[Union['DeploymentPredictionIntervalsSettingsArgs', 'DeploymentPredictionIntervalsSettingsArgsDict']] prediction_intervals_settings: The prediction intervals settings for this Deployment.
-        :param pulumi.Input[Union['DeploymentPredictionWarningSettingsArgs', 'DeploymentPredictionWarningSettingsArgsDict']] prediction_warning_settings: The prediction warning settings for the Deployment.
-        :param pulumi.Input[Union['DeploymentPredictionsByForecastDateSettingsArgs', 'DeploymentPredictionsByForecastDateSettingsArgsDict']] predictions_by_forecast_date_settings: The predictions by forecase date settings for the Deployment.
-        :param pulumi.Input[Union['DeploymentPredictionsDataCollectionSettingsArgs', 'DeploymentPredictionsDataCollectionSettingsArgsDict']] predictions_data_collection_settings: The predictions data collection settings for the Deployment.
-        :param pulumi.Input[Union['DeploymentPredictionsSettingsArgs', 'DeploymentPredictionsSettingsArgsDict']] predictions_settings: Settings for the predictions.
+        :param pulumi.Input[Union['DeploymentPredictionIntervalsSettingsArgs', 'DeploymentPredictionIntervalsSettingsArgsDict', 'outputs.DeploymentPredictionIntervalsSettings']] prediction_intervals_settings: The prediction intervals settings for this Deployment.
+        :param pulumi.Input[Union['DeploymentPredictionWarningSettingsArgs', 'DeploymentPredictionWarningSettingsArgsDict', 'outputs.DeploymentPredictionWarningSettings']] prediction_warning_settings: The prediction warning settings for the Deployment.
+        :param pulumi.Input[Union['DeploymentPredictionsByForecastDateSettingsArgs', 'DeploymentPredictionsByForecastDateSettingsArgsDict', 'outputs.DeploymentPredictionsByForecastDateSettings']] predictions_by_forecast_date_settings: The predictions by forecase date settings for the Deployment.
+        :param pulumi.Input[Union['DeploymentPredictionsDataCollectionSettingsArgs', 'DeploymentPredictionsDataCollectionSettingsArgsDict', 'outputs.DeploymentPredictionsDataCollectionSettings']] predictions_data_collection_settings: The predictions data collection settings for the Deployment.
+        :param pulumi.Input[Union['DeploymentPredictionsSettingsArgs', 'DeploymentPredictionsSettingsArgsDict', 'outputs.DeploymentPredictionsSettings']] predictions_settings: Settings for the predictions.
         :param pulumi.Input[_builtins.str] registered_model_version_id: The ID of the registered model version for this Deployment.
-        :param pulumi.Input[Union['DeploymentRetrainingSettingsArgs', 'DeploymentRetrainingSettingsArgsDict']] retraining_settings: The retraining settings for this Deployment.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['DeploymentRuntimeParameterValueArgs', 'DeploymentRuntimeParameterValueArgsDict']]]] runtime_parameter_values: The runtime parameter values for the Deployment.
-        :param pulumi.Input[Union['DeploymentSegmentAnalysisSettingsArgs', 'DeploymentSegmentAnalysisSettingsArgsDict']] segment_analysis_settings: The segment analysis settings for the Deployment.
+        :param pulumi.Input[Union['DeploymentRetrainingSettingsArgs', 'DeploymentRetrainingSettingsArgsDict', 'outputs.DeploymentRetrainingSettings']] retraining_settings: The retraining settings for this Deployment.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['DeploymentRuntimeParameterValueArgs', 'DeploymentRuntimeParameterValueArgsDict', 'outputs.DeploymentRuntimeParameterValue']]]] runtime_parameter_values: The runtime parameter values for the Deployment.
+        :param pulumi.Input[Union['DeploymentSegmentAnalysisSettingsArgs', 'DeploymentSegmentAnalysisSettingsArgsDict', 'outputs.DeploymentSegmentAnalysisSettings']] segment_analysis_settings: The segment analysis settings for the Deployment.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] use_case_ids: The list of Use Case IDs to add the Deployment to.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))

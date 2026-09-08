@@ -302,7 +302,7 @@ class CustomApplicationFromEnvironment(pulumi.CustomResource):
                  external_access_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  external_access_recipients: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
-                 resources: pulumi.Input[Optional[Union['CustomApplicationFromEnvironmentResourcesArgs', 'CustomApplicationFromEnvironmentResourcesArgsDict']]] = None,
+                 resources: pulumi.Input[Optional[Union['CustomApplicationFromEnvironmentResourcesArgs', 'CustomApplicationFromEnvironmentResourcesArgsDict', 'outputs.CustomApplicationFromEnvironmentResources']]] = None,
                  use_case_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  __props__=None):
         """
@@ -346,7 +346,7 @@ class CustomApplicationFromEnvironment(pulumi.CustomResource):
         :param pulumi.Input[_builtins.bool] external_access_enabled: Whether external access is enabled for the Custom Application.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] external_access_recipients: The list of external email addresses that have access to the Custom Application.
         :param pulumi.Input[_builtins.str] name: The name of the Custom Application.
-        :param pulumi.Input[Union['CustomApplicationFromEnvironmentResourcesArgs', 'CustomApplicationFromEnvironmentResourcesArgsDict']] resources: The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.
+        :param pulumi.Input[Union['CustomApplicationFromEnvironmentResourcesArgs', 'CustomApplicationFromEnvironmentResourcesArgsDict', 'outputs.CustomApplicationFromEnvironmentResources']] resources: The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] use_case_ids: The list of Use Case IDs to add the Custom Application to.
         """
         ...
@@ -409,7 +409,7 @@ class CustomApplicationFromEnvironment(pulumi.CustomResource):
                  external_access_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  external_access_recipients: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
-                 resources: pulumi.Input[Optional[Union['CustomApplicationFromEnvironmentResourcesArgs', 'CustomApplicationFromEnvironmentResourcesArgsDict']]] = None,
+                 resources: pulumi.Input[Optional[Union['CustomApplicationFromEnvironmentResourcesArgs', 'CustomApplicationFromEnvironmentResourcesArgsDict', 'outputs.CustomApplicationFromEnvironmentResources']]] = None,
                  use_case_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
@@ -448,7 +448,7 @@ class CustomApplicationFromEnvironment(pulumi.CustomResource):
             external_access_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
             external_access_recipients: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
             name: pulumi.Input[Optional[_builtins.str]] = None,
-            resources: pulumi.Input[Optional[Union['CustomApplicationFromEnvironmentResourcesArgs', 'CustomApplicationFromEnvironmentResourcesArgsDict']]] = None,
+            resources: pulumi.Input[Optional[Union['CustomApplicationFromEnvironmentResourcesArgs', 'CustomApplicationFromEnvironmentResourcesArgsDict', 'outputs.CustomApplicationFromEnvironmentResources']]] = None,
             use_case_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None) -> 'CustomApplicationFromEnvironment':
         """
         Get an existing CustomApplicationFromEnvironment resource's state with the given name, id, and optional extra
@@ -464,7 +464,7 @@ class CustomApplicationFromEnvironment(pulumi.CustomResource):
         :param pulumi.Input[_builtins.bool] external_access_enabled: Whether external access is enabled for the Custom Application.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] external_access_recipients: The list of external email addresses that have access to the Custom Application.
         :param pulumi.Input[_builtins.str] name: The name of the Custom Application.
-        :param pulumi.Input[Union['CustomApplicationFromEnvironmentResourcesArgs', 'CustomApplicationFromEnvironmentResourcesArgsDict']] resources: The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.
+        :param pulumi.Input[Union['CustomApplicationFromEnvironmentResourcesArgs', 'CustomApplicationFromEnvironmentResourcesArgsDict', 'outputs.CustomApplicationFromEnvironmentResources']] resources: The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] use_case_ids: The list of Use Case IDs to add the Custom Application to.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))

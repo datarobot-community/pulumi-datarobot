@@ -252,7 +252,7 @@ class Workload(pulumi.CustomResource):
                  description: pulumi.Input[Optional[_builtins.str]] = None,
                  importance: pulumi.Input[Optional[_builtins.str]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
-                 runtime: pulumi.Input[Optional[Union['WorkloadRuntimeArgs', 'WorkloadRuntimeArgsDict']]] = None,
+                 runtime: pulumi.Input[Optional[Union['WorkloadRuntimeArgs', 'WorkloadRuntimeArgsDict', 'outputs.WorkloadRuntime']]] = None,
                  __props__=None):
         """
         A Workload runs a containerized artifact in the cluster and exposes an inference endpoint.
@@ -266,7 +266,7 @@ class Workload(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] description: A human-readable description of the Workload.
         :param pulumi.Input[_builtins.str] importance: Priority level for the Workload: <span pulumi-lang-nodejs="`critical`" pulumi-lang-dotnet="`Critical`" pulumi-lang-go="`critical`" pulumi-lang-python="`critical`" pulumi-lang-yaml="`critical`" pulumi-lang-java="`critical`" pulumi-lang-hcl="`critical`">`critical`</span>, <span pulumi-lang-nodejs="`high`" pulumi-lang-dotnet="`High`" pulumi-lang-go="`high`" pulumi-lang-python="`high`" pulumi-lang-yaml="`high`" pulumi-lang-java="`high`" pulumi-lang-hcl="`high`">`high`</span>, <span pulumi-lang-nodejs="`moderate`" pulumi-lang-dotnet="`Moderate`" pulumi-lang-go="`moderate`" pulumi-lang-python="`moderate`" pulumi-lang-yaml="`moderate`" pulumi-lang-java="`moderate`" pulumi-lang-hcl="`moderate`">`moderate`</span>, or <span pulumi-lang-nodejs="`low`" pulumi-lang-dotnet="`Low`" pulumi-lang-go="`low`" pulumi-lang-python="`low`" pulumi-lang-yaml="`low`" pulumi-lang-java="`low`" pulumi-lang-hcl="`low`">`low`</span>. Defaults to <span pulumi-lang-nodejs="`low`" pulumi-lang-dotnet="`Low`" pulumi-lang-go="`low`" pulumi-lang-python="`low`" pulumi-lang-yaml="`low`" pulumi-lang-java="`low`" pulumi-lang-hcl="`low`">`low`</span>.
         :param pulumi.Input[_builtins.str] name: The name of the Workload.
-        :param pulumi.Input[Union['WorkloadRuntimeArgs', 'WorkloadRuntimeArgsDict']] runtime: Runtime configuration for the Workload. Changes trigger an in-place workload replacement.
+        :param pulumi.Input[Union['WorkloadRuntimeArgs', 'WorkloadRuntimeArgsDict', 'outputs.WorkloadRuntime']] runtime: Runtime configuration for the Workload. Changes trigger an in-place workload replacement.
         """
         ...
     @overload
@@ -299,7 +299,7 @@ class Workload(pulumi.CustomResource):
                  description: pulumi.Input[Optional[_builtins.str]] = None,
                  importance: pulumi.Input[Optional[_builtins.str]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
-                 runtime: pulumi.Input[Optional[Union['WorkloadRuntimeArgs', 'WorkloadRuntimeArgsDict']]] = None,
+                 runtime: pulumi.Input[Optional[Union['WorkloadRuntimeArgs', 'WorkloadRuntimeArgsDict', 'outputs.WorkloadRuntime']]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -336,7 +336,7 @@ class Workload(pulumi.CustomResource):
             endpoint: pulumi.Input[Optional[_builtins.str]] = None,
             importance: pulumi.Input[Optional[_builtins.str]] = None,
             name: pulumi.Input[Optional[_builtins.str]] = None,
-            runtime: pulumi.Input[Optional[Union['WorkloadRuntimeArgs', 'WorkloadRuntimeArgsDict']]] = None,
+            runtime: pulumi.Input[Optional[Union['WorkloadRuntimeArgs', 'WorkloadRuntimeArgsDict', 'outputs.WorkloadRuntime']]] = None,
             status: pulumi.Input[Optional[_builtins.str]] = None,
             type: pulumi.Input[Optional[_builtins.str]] = None) -> 'Workload':
         """
@@ -351,7 +351,7 @@ class Workload(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] endpoint: The inference endpoint URL for the Workload.
         :param pulumi.Input[_builtins.str] importance: Priority level for the Workload: <span pulumi-lang-nodejs="`critical`" pulumi-lang-dotnet="`Critical`" pulumi-lang-go="`critical`" pulumi-lang-python="`critical`" pulumi-lang-yaml="`critical`" pulumi-lang-java="`critical`" pulumi-lang-hcl="`critical`">`critical`</span>, <span pulumi-lang-nodejs="`high`" pulumi-lang-dotnet="`High`" pulumi-lang-go="`high`" pulumi-lang-python="`high`" pulumi-lang-yaml="`high`" pulumi-lang-java="`high`" pulumi-lang-hcl="`high`">`high`</span>, <span pulumi-lang-nodejs="`moderate`" pulumi-lang-dotnet="`Moderate`" pulumi-lang-go="`moderate`" pulumi-lang-python="`moderate`" pulumi-lang-yaml="`moderate`" pulumi-lang-java="`moderate`" pulumi-lang-hcl="`moderate`">`moderate`</span>, or <span pulumi-lang-nodejs="`low`" pulumi-lang-dotnet="`Low`" pulumi-lang-go="`low`" pulumi-lang-python="`low`" pulumi-lang-yaml="`low`" pulumi-lang-java="`low`" pulumi-lang-hcl="`low`">`low`</span>. Defaults to <span pulumi-lang-nodejs="`low`" pulumi-lang-dotnet="`Low`" pulumi-lang-go="`low`" pulumi-lang-python="`low`" pulumi-lang-yaml="`low`" pulumi-lang-java="`low`" pulumi-lang-hcl="`low`">`low`</span>.
         :param pulumi.Input[_builtins.str] name: The name of the Workload.
-        :param pulumi.Input[Union['WorkloadRuntimeArgs', 'WorkloadRuntimeArgsDict']] runtime: Runtime configuration for the Workload. Changes trigger an in-place workload replacement.
+        :param pulumi.Input[Union['WorkloadRuntimeArgs', 'WorkloadRuntimeArgsDict', 'outputs.WorkloadRuntime']] runtime: Runtime configuration for the Workload. Changes trigger an in-place workload replacement.
         :param pulumi.Input[_builtins.str] status: Current status of the Workload: <span pulumi-lang-nodejs="`unknown`" pulumi-lang-dotnet="`Unknown`" pulumi-lang-go="`unknown`" pulumi-lang-python="`unknown`" pulumi-lang-yaml="`unknown`" pulumi-lang-java="`unknown`" pulumi-lang-hcl="`unknown`">`unknown`</span>, <span pulumi-lang-nodejs="`submitted`" pulumi-lang-dotnet="`Submitted`" pulumi-lang-go="`submitted`" pulumi-lang-python="`submitted`" pulumi-lang-yaml="`submitted`" pulumi-lang-java="`submitted`" pulumi-lang-hcl="`submitted`">`submitted`</span>, <span pulumi-lang-nodejs="`initializing`" pulumi-lang-dotnet="`Initializing`" pulumi-lang-go="`initializing`" pulumi-lang-python="`initializing`" pulumi-lang-yaml="`initializing`" pulumi-lang-java="`initializing`" pulumi-lang-hcl="`initializing`">`initializing`</span>, <span pulumi-lang-nodejs="`running`" pulumi-lang-dotnet="`Running`" pulumi-lang-go="`running`" pulumi-lang-python="`running`" pulumi-lang-yaml="`running`" pulumi-lang-java="`running`" pulumi-lang-hcl="`running`">`running`</span>, <span pulumi-lang-nodejs="`stopping`" pulumi-lang-dotnet="`Stopping`" pulumi-lang-go="`stopping`" pulumi-lang-python="`stopping`" pulumi-lang-yaml="`stopping`" pulumi-lang-java="`stopping`" pulumi-lang-hcl="`stopping`">`stopping`</span>, <span pulumi-lang-nodejs="`stopped`" pulumi-lang-dotnet="`Stopped`" pulumi-lang-go="`stopped`" pulumi-lang-python="`stopped`" pulumi-lang-yaml="`stopped`" pulumi-lang-java="`stopped`" pulumi-lang-hcl="`stopped`">`stopped`</span>, or <span pulumi-lang-nodejs="`errored`" pulumi-lang-dotnet="`Errored`" pulumi-lang-go="`errored`" pulumi-lang-python="`errored`" pulumi-lang-yaml="`errored`" pulumi-lang-java="`errored`" pulumi-lang-hcl="`errored`">`errored`</span>.
         :param pulumi.Input[_builtins.str] type: Artifact type mirrored by this workload: <span pulumi-lang-nodejs="`service`" pulumi-lang-dotnet="`Service`" pulumi-lang-go="`service`" pulumi-lang-python="`service`" pulumi-lang-yaml="`service`" pulumi-lang-java="`service`" pulumi-lang-hcl="`service`">`service`</span>, <span pulumi-lang-nodejs="`nim`" pulumi-lang-dotnet="`Nim`" pulumi-lang-go="`nim`" pulumi-lang-python="`nim`" pulumi-lang-yaml="`nim`" pulumi-lang-java="`nim`" pulumi-lang-hcl="`nim`">`nim`</span>, <span pulumi-lang-nodejs="`agent`" pulumi-lang-dotnet="`Agent`" pulumi-lang-go="`agent`" pulumi-lang-python="`agent`" pulumi-lang-yaml="`agent`" pulumi-lang-java="`agent`" pulumi-lang-hcl="`agent`">`agent`</span>, or <span pulumi-lang-nodejs="`mcp`" pulumi-lang-dotnet="`Mcp`" pulumi-lang-go="`mcp`" pulumi-lang-python="`mcp`" pulumi-lang-yaml="`mcp`" pulumi-lang-java="`mcp`" pulumi-lang-hcl="`mcp`">`mcp`</span>. Set from the deployed artifact; not user-configurable.
         """

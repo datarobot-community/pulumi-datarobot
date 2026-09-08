@@ -75,7 +75,7 @@ prepare::
 		find ./ ! -path './.git/*' -type f -exec sed -i '' 's/[a]bc/${ORG}/g' {} \; &> /dev/null; \
 	fif
 
-.PHONY: development provider build_sdks build_nodejs build_dotnet build_go build_python cleanup schema_diff changelog
+.PHONY: development provider build_sdks build_nodejs build_dotnet build_go build_python regenerate_sdks cleanup schema_diff changelog
 
 development:: install_plugins provider lint_provider build_sdks install_sdks cleanup # Build the provider & SDKs for a development environment
 
@@ -108,6 +108,15 @@ generate_sdks build_sdks:: install_plugins provider # build all the sdks
 	@echo "Generating language-specific READMEs..."
 	@./build-readme.sh
 	@$(MAKE) build_nodejs build_python build_go build_dotnet
+
+# Emit the generated SDK sources without compiling or packaging them. Used by CI to
+# prove the committed SDKs match codegen; the build_* targets below also install
+# dependencies and produce artifacts, which a drift check has no use for.
+regenerate_sdks:: install_plugins tfgen # regenerate SDK sources only, no compile
+	$(WORKING_DIR)/bin/$(TFGEN) nodejs --overlays provider/overlays/nodejs --out sdk/nodejs/
+	$(WORKING_DIR)/bin/$(TFGEN) python --overlays provider/overlays/python --out sdk/python/
+	$(WORKING_DIR)/bin/$(TFGEN) go     --overlays provider/overlays/go     --out sdk/go/
+	$(WORKING_DIR)/bin/$(TFGEN) dotnet --overlays provider/overlays/dotnet --out sdk/dotnet/
 
 build_nodejs:: install_plugins tfgen # build the node sdk
 	$(WORKING_DIR)/bin/$(TFGEN) nodejs --overlays provider/overlays/nodejs --out sdk/nodejs/
