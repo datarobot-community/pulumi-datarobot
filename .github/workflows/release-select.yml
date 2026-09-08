@@ -42,6 +42,11 @@ env:
   SIGNING_KEY: ${{ secrets.JAVA_SIGNING_KEY }}
   SIGNING_KEY_ID: ${{ secrets.JAVA_SIGNING_KEY_ID }}
   SIGNING_PASSWORD: ${{ secrets.JAVA_SIGNING_PASSWORD }}
+  # Language SDK codegen comes from the pulumi-language-* plugins bundled with the CLI,
+  # not from the pulumi/pulumi/pkg/v3 pin in provider/go.mod, so an unpinned CLI silently
+  # changes generated output. Keep in sync with release.yml, build.yml and
+  # upgrade-provider.yml; bumping it regenerates the SDKs.
+  PULUMI_VERSION: 3.261.0
   # The commit to build from. Dispatching on `main` with RELEASE_REF=<tag> runs this
   # workflow definition while building the tagged source, so a fix to this file can be
   # used to re-publish an SDK for a tag that was cut before the fix landed.
@@ -72,6 +77,8 @@ jobs:
       # `make build_<lang>` runs `install_plugins`, which shells out to `pulumi`.
       - name: Install Pulumi CLI
         uses: pulumi/action-install-pulumi-cli@b374ceb6168550de27c6eba92e01c1a774040e11 # tag=v2.0.0
+        with:
+          pulumi-version: ${{ env.PULUMI_VERSION }}
       - name: Set PreRelease Version
         run: echo "GORELEASER_CURRENT_TAG=v$(pulumictl get version --language generic)" >> $GITHUB_ENV
 
