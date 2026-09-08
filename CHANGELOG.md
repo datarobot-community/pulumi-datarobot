@@ -22,18 +22,6 @@ Changes made in this repo rather than upstream go under `Unreleased` while unrel
 and under a `### Provider changes` subsection once they ship in a version.
 Regenerating a section preserves that subsection.
 
-## [Unreleased]
-
-### Changed
-
-- Bumped the Go toolchain in all three modules' `go.mod` from `1.26.6` (`provider`,
-  `sdk`) and `1.26.4` (`examples`) to `1.27.1`, the current Go release. Not a security
-  bump: `govulncheck` reports the same findings before and after, with no standard
-  library advisories under either toolchain. All CI jobs resolve Go via
-  `go-version-file: provider/go.mod`, so this also raises the version used to build
-  releases. Toolchain-only change; `go mod tidy` produced no dependency changes and no
-  provider behavior changes.
-
 ## [0.11.2] - 2026-09-08
 
 ### Upstream provider changes
@@ -49,6 +37,14 @@ Regenerating a section preserves that subsection.
 - `source.dir_hash` on `datarobot_artifact` plans as known after apply whenever the directory differs from state or the catalog moved, since the sync can add or remove files; the value recorded is the digest of the directory once the sync is done.
 
 ##### Changed
+
+- Bumped the Go toolchain in all three modules' `go.mod` from `1.26.6` (`provider`,
+  `sdk`) and `1.26.4` (`examples`) to `1.27.1`, the current Go release. Not a security
+  bump: `govulncheck` reports the same findings before and after, with no standard
+  library advisories under either toolchain. All CI jobs resolve Go via
+  `go-version-file: provider/go.mod`, so this also raises the version used to build
+  releases. Toolchain-only change; `go mod tidy` produced no dependency changes and no
+  provider behavior changes.
 
 - **`datarobot_artifact` apply now needs write access to `source.dir`.** The sync keeps its last-synced manifest there (`source.dir/.datarobot/workload/`), so a directory the provider cannot write to, such as a read-only checkout mounted into CI or a `0555` tree, fails the apply with `create sync state directory (source.dir must be writable ...)`. The push-only upload in earlier releases never wrote into the directory, so this can break an existing pipeline on upgrade with no configuration change: make the directory writable, or point `source.dir` at a writable copy.
 - **One `source.dir` per `datarobot_artifact` resource.** The sync state under a directory is bound to one catalog, so a second resource over a directory that already backs a live artifact from another artifact repository is refused with the cause (checked under the directory's sync lock, so a parallel apply cannot slip past it), and two resources racing for the same directory fail on its lock the same way. Give each resource its own directory. A destroyed and re-created resource, a locked artifact cloning to a new version, and a checkout whose directory last synced an older version of the same resource are not affected; two resources deliberately sharing one `artifact_repository_id` and one directory are not told apart from one resource's versions, so do not do that.
