@@ -34,6 +34,60 @@ Regenerating a section preserves that subsection.
   releases. Toolchain-only change; `go mod tidy` produced no dependency changes and no
   provider behavior changes.
 
+## [0.11.2] - 2026-09-08
+
+### Upstream provider changes
+
+[terraform-provider-datarobot](https://github.com/datarobot-community/terraform-provider-datarobot) `v0.11.1` → `v0.11.2`
+
+#### [v0.11.2](https://github.com/datarobot-community/terraform-provider-datarobot/releases/tag/v0.11.2) — 2026-09-08
+
+##### Added
+
+- `datarobot_artifact` `source.dir` is now synchronized with the catalog using the same three-way algorithm as the DataRobot CLI (last-synced state vs. local files vs. catalog) instead of a one-way upload. **Apply can now write to `source.dir`**: it keeps sync bookkeeping in `source.dir/.datarobot/workload/` (the same state directory the CLI uses: last-synced manifest, catalog pointers, lock file, with its own `.gitignore`), downloads files that exist in the catalog but not locally, and removes local files that were deleted from the catalog; every file it writes or removes is listed in a warning on apply. A file changed on both sides since the last sync (edited or deleted locally, and edited or deleted in the catalog) fails the apply before anything is uploaded or written, the way `dr artifact code sync --yes` refuses it, and unlike the CLI this includes a file deleted locally that the catalog edited, which is not restored: resolve it in that directory with `dr artifact code sync` (interactive) or `dr artifact code sync --yes --accept-remote` and apply again. Only changed files are uploaded, files deleted locally are removed from the catalog (500 paths per request), and an unchanged tree whose catalog version has not moved makes no Files API calls at all. Directories already uploaded by an earlier provider version keep their existing catalog: the first sync seeds the state directory from Terraform state instead of creating a second catalog. A destroyed and re-created resource, or a locked artifact that clones to a new draft on a source change, keeps using the directory's catalog too. Matching the CLI, a single sync that would rewrite more than 1000 local files (downloads, local removals) is refused rather than run without a usable rollback; uploads do not count towards that limit. A rollback left by an apply that was interrupted mid-sync is applied before the next sync plans, and reported as a warning on `source.dir`.
+- `datarobot_artifact` plans now notice when the artifact's catalog version moved since `source.dir` last synced (the DataRobot CLI synced the artifact from another checkout, or the resource was last applied from one): `source.dir_hash` plans as known after apply, a warning names the version, and apply brings the catalog's changes down (on a locked artifact, through a new version that includes them). Before, an unchanged local tree planned as "no changes" whatever the catalog held.
+- `source.dir_hash` on `datarobot_artifact` plans as known after apply whenever the directory differs from state or the catalog moved, since the sync can add or remove files; the value recorded is the digest of the directory once the sync is done.
+
+##### Changed
+
+- **`datarobot_artifact` apply now needs write access to `source.dir`.** The sync keeps its last-synced manifest there (`source.dir/.datarobot/workload/`), so a directory the provider cannot write to, such as a read-only checkout mounted into CI or a `0555` tree, fails the apply with `create sync state directory (source.dir must be writable ...)`. The push-only upload in earlier releases never wrote into the directory, so this can break an existing pipeline on upgrade with no configuration change: make the directory writable, or point `source.dir` at a writable copy.
+- **One `source.dir` per `datarobot_artifact` resource.** The sync state under a directory is bound to one catalog, so a second resource over a directory that already backs a live artifact from another artifact repository is refused with the cause (checked under the directory's sync lock, so a parallel apply cannot slip past it), and two resources racing for the same directory fail on its lock the same way. Give each resource its own directory. A destroyed and re-created resource, a locked artifact cloning to a new version, and a checkout whose directory last synced an older version of the same resource are not affected; two resources deliberately sharing one `artifact_repository_id` and one directory are not told apart from one resource's versions, so do not do that.
+- `datarobot_artifact`: a catalog that moved backwards since the directory last synced (the artifact re-pointed at an older catalog version, a rollback) is refused at apply with the way out, instead of being merged. Merging against it would have read every file added since as deleted and removed it from `source.dir`.
+- `datarobot_artifact`: a locked artifact whose catalog moved but whose directory then matches it (identical bytes re-uploaded, or a directory behind on paper only) keeps its version: the sync records the directory as up to date instead of cloning, building and locking a new version with the same code. Only a plan with work clones.
+- `datarobot_artifact`: `<path>.LOCAL.<timestamp>` copies, the backups the DataRobot CLI's sync keeps when the catalog wins over a local file, are now a system exclude under `source.dir`, so they are never uploaded and never change `source.dir_hash`, whatever `.drignore` says. The starter `.drignore` still lists the pattern for readers and for older CLIs.
+- `datarobot_artifact`: a nested `.datarobot/workload/` directory anywhere under `source.dir` (a subproject the CLI or another resource syncs) is now a system exclude like the one at the root, so its manifest, rewritten on every deploy, no longer changes `source.dir_hash` or gets uploaded. Other tool state under `.datarobot/`, such as `.datarobot/cli/`, still syncs.
+- `datarobot_artifact`: the provider's writes to `source.dir/.datarobot/workload/config.json` and `manifest.json` now carry through every key they do not know, so a newer DataRobot CLI can add keys to those files without the next apply dropping them.
+- Bumped the Go toolchain in `go.mod` from `1.26.6` to `1.27.1`. Not security-motivated — `govulncheck` reports no vulnerabilities on either version; this moves the provider onto the current Go release line so future patch fixes land there. Toolchain-only change; no dependency or provider behavior change. All CI jobs resolve Go via `go-version-file: go.mod`, so this also raises the version used to build releases. Note that linting requires golangci-lint `v2.13.2` or newer (the first release built with go1.27); the `build-and-test` workflow pins `version: latest`, so it picks this up automatically, but local installs older than `v2.13.2` will fail with "the Go language version (go1.26) used to build golangci-lint is lower than the targeted Go version (1.27.1)".
+
+##### Fixed
+
+- `datarobot_artifact` `source.dir` uploads that took the zip path (more than 20 files or 50 MB in one upload) never replaced files already in the catalog: the Files API reads the overwrite mode from the multipart form, and the provider sent it only as a query parameter, which the server accepts and ignores. Every re-upload of an existing path was renamed (`app (2).py`) instead of replaced, so the image kept building from the old file. The mode is now sent in the form. The DataRobot CLI has the same bug.
+- `datarobot_artifact`: updating a locked artifact with a change that touches nothing on the server (`source.wait_for_build`, `source.generate_ignore`, or a `source.dir` path whose content matches state) no longer creates another locked version and then fails the apply against it. The existing version is kept.
+- `datarobot_artifact`: an apply that could not fingerprint `source.dir` after a successful sync, or that failed after cloning a locked artifact whose state had no `source` block yet, no longer hands Terraform an unknown `source.dir_hash`, which Terraform rejects together with the rest of the new state (leaking the artifact just created). The hash is left unset with a warning, and the next plan syncs the directory again.
+- `datarobot_artifact`: a source upload or remote delete whose Files API response carries no catalog version is now an error that restores `source.dir`, instead of a sync that records the change as done while the artifact keeps building from the previous version.
+- `datarobot_artifact`: when the sync's final bookkeeping write fails after the catalog has advanced, the files it wrote into `source.dir` are still listed in a warning next to the error.
+
+Full upstream diff: [https://github.com/datarobot-community/terraform-provider-datarobot/compare/v0.11.1...v0.11.2](https://github.com/datarobot-community/terraform-provider-datarobot/compare/v0.11.1...v0.11.2)
+
+### Pulumi SDK surface
+
+_Diff of the generated `schema.json` — what actually reached the SDKs._
+
+No change to the Pulumi schema surface.
+
+<details><summary>schema-tools compare</summary>
+
+```
+### Does the PR have any schema changes?
+
+_Generated by schema-tools v0.8.1._
+
+Looking good! No breaking changes found.
+No new resources/functions/types.
+```
+
+</details>
+
 ## [0.11.1] - 2026-09-01
 
 ### Upstream provider changes
