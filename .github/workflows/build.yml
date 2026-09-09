@@ -14,6 +14,11 @@ on:
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   CGO_ENABLED: 0
+  # Language SDK codegen comes from the pulumi-language-* plugins bundled with the CLI,
+  # not from the pulumi/pulumi/pkg/v3 pin in provider/go.mod, so an unpinned CLI silently
+  # changes generated output. Keep in sync across the workflows that generate SDKs;
+  # bumping it regenerates them.
+  PULUMI_VERSION: 3.261.0
 
 jobs:
   lint:
@@ -74,11 +79,32 @@ jobs:
       with:
         repo: pulumi/pulumictl
 
+    - name: Install Pulumi CLI
+      uses: pulumi/action-install-pulumi-cli@b374ceb6168550de27c6eba92e01c1a774040e11 # tag=v2.0.0
+      with:
+        pulumi-version: ${{ env.PULUMI_VERSION }}
+
     - name: Download dependencies
       run: make tidy
 
-    - name: Build
-      run: make tfgen
+    - name: Build and regenerate SDKs
+      run: make regenerate_sdks
+
+    # The committed SDKs have to match codegen, or the release job's worktree check
+    # fails after it has already published the binaries and some of the SDKs. READMEs
+    # are stamped with the release version at build time, so they only match on a tag;
+    # compare the generated code and the schema instead.
+    - name: Check SDKs are up to date
+      run: |
+        git checkout -- 'sdk/*/README.md'
+        paths=(sdk provider/cmd/pulumi-resource-datarobot/schema.json)
+        if ! git diff --quiet -- "${paths[@]}"; then
+          >&2 echo "error: the committed SDKs do not match what codegen produces."
+          >&2 echo "Run 'make regenerate_sdks' with Pulumi CLI ${PULUMI_VERSION} and commit the result."
+          git --no-pager diff --stat -- "${paths[@]}"
+          git --no-pager diff -- "${paths[@]}"
+          exit 1
+        fi
 
     - name: Test
       run: make test
