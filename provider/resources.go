@@ -139,6 +139,10 @@ func Provider() tfbridge.ProviderInfo {
 		// The GitHub Org for the provider - defaults to `terraform-providers`. Note that this should
 		// match the TF provider module's require directive, not any replace directives.
 		GitHubOrg:    "datarobot-community",
+		// TEMP: the upstream Enclave change is not released yet, so docs are read
+		// from a sibling checkout instead of the module cache. Drop with the replace
+		// directive in provider/go.mod once terraform-provider-datarobot is tagged.
+		UpstreamRepoPath: "../tfp",
 		MetadataInfo: tfbridge.NewProviderMetadata(metadata),
 		Config:       map[string]*tfbridge.SchemaInfo{
 			// Add any required configuration here, or remove the example below if
