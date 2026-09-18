@@ -22,6 +22,92 @@ Changes made in this repo rather than upstream go under `Unreleased` while unrel
 and under a `### Provider changes` subsection once they ship in a version.
 Regenerating a section preserves that subsection.
 
+## [0.12.2] - 2026-09-18
+
+### Upstream provider changes
+
+[terraform-provider-datarobot](https://github.com/datarobot-community/terraform-provider-datarobot) `v0.11.3` → `v0.12.2`
+
+#### [v0.12.0](https://github.com/datarobot-community/terraform-provider-datarobot/releases/tag/v0.12.0)
+
+_No entry in the upstream CHANGELOG.md. Commits in this range:_
+
+- [RAPTOR 20022] Non/literal imageUri and executionEnvironmentId (#411)
+- [PLT-23757] Add datarobot_group data source and datarobot_deployment_shared_role resource (#410)
+- [RAPTOR 20387] Add Enclave placement to datarobot_workload (#416)
+
+#### [v0.12.1](https://github.com/datarobot-community/terraform-provider-datarobot/releases/tag/v0.12.1)
+
+_No entry in the upstream CHANGELOG.md. Commits in this range:_
+
+- Released 0.12.1
+
+#### [v0.12.2](https://github.com/datarobot-community/terraform-provider-datarobot/releases/tag/v0.12.2) — 2026-09-17
+
+##### Fixed
+
+- `datarobot_artifact` no longer rejects a value that comes from a variable, a data source, or another resource. Terraform runs its validate walk before any of those resolve, so every non-literal value reaches `ValidateConfig` as *unknown*, and the resource's rules read unknown as "not set". A configuration that was in fact complete failed at plan time with `Missing image source` (`image_uri`), `Missing execution environment ID` / `Missing execution environment version ID` (`image_build_config.dockerfile`), `Missing source directory` (`source.dir`), `Invalid wait_for_build on locked artifact`, `Incomplete build configuration for locked artifact`, or `Unsupported on non-primary container` (`primary`). Unknown now means "set, not resolved yet"; only a null value counts as absent. This unblocks `examples/workflows/workload_replacement` (`image_uri = var.container_image`), which the workload docs link to as a runnable walkthrough, and lets the `datarobot_execution_environment` data source feed `execution_environment_id` and `execution_environment_version_id` instead of them being hardcoded. `pulumi preview` failed the same way, since the bridge validates the configuration with unresolved outputs; only `pulumi up --skip-preview` got through.
+- No check is lost by deferring. Terraform validates the configuration a second time during the plan walk, where variables and data sources have resolved, so `image_uri = var.image` with an empty `var.image` is still refused at plan. A reference to a resource created in the same apply is still unknown then, so `Create` and `Update` re-run the container rules against the resolved configuration and refuse it there, before the artifact is created. Acceptance tests could not catch any of this because their HCL is assembled with `fmt.Sprintf`, which yields a literal for every value; the new cases are written as configurations with real `variable` blocks.
+
+##### Added
+
+- `datarobot_workload` can place a Workload on an Enclave. A new top-level `use_case_id`, plus `runtime.enclave_selection_policy` and `runtime.enclaves`, serialized as `useCaseId`, `runtime.enclaveSelectionPolicy` and `runtime.enclaves`. Until now no released version of the provider exposed these at all, so a Workload that had to be Enclave-placed could not be created through infrastructure-as-code: create failed with `422 useCaseId is required: this workload will be placed on an Enclave, and Enclave placement is governed by a use case. (MISSING_USE_CASE)` and there was no upgrade path. The `enclaves-finance-agent-demo` project worked around it with a Pulumi dynamic resource calling `POST /workloads/` directly, which that project can now retire.
+- The selection policy is derived from the rest of the configuration, because both of the obvious ways to write it out are ones the platform refuses. It rejects `enclaves` under any policy but `manual`, so naming an Enclave means `manual`; and it rejects `useCaseId` on a Workload that targets no Enclave, so referencing a Use Case without naming an Enclave means `availability`. Setting `enclave_selection_policy` explicitly overrides both. The derived value is not written to state, so the configuration and the state agree; every request that carries a runtime sends it, including `PATCH /workloads/{id}/settings`, which replaces the runtime wholesale and would otherwise read an omission as "move this Workload out of its Enclave".
+- The combinations the Workload API refuses are refused at plan time instead of as a 422 partway through an apply: `enclaves` or a policy without `use_case_id`, `enclaves` with a policy other than `manual`, `manual` without `enclaves`, more than one Enclave, and a policy that is not `availability` or `manual`. A value that is unknown during the validate walk counts as set rather than absent, so a placement assembled from variables or another resource is deferred to the plan walk rather than rejected — the same rule the `datarobot_artifact` fix above establishes.
+- All three attributes replace the Workload when changed, which means a new ID and a new endpoint. This is not the in-place replacement the rest of `datarobot_workload` does: the Use Case link is fixed at creation, so repointing it cannot be an update. None of the three is read back from the platform. `use_case_id` is write-only — the link is recorded outside the Workload entity and no response carries it, so it cannot be refreshed and an imported Workload has it empty regardless of the Use Case it is linked to. `enclave_selection_policy` and `enclaves` are stripped from responses on clusters without the Enclave entitlement, so the provider keeps the configured values in state rather than blanking a placement the user did write; the cost is that a placement changed outside Terraform is not detected, which for `enclaves` — desired state the platform never rewrites — only happens if someone edits the Workload by hand.
+
+- `datarobot_group` data source, which resolves a directory group name to its ID via `GET /api/v2/directoryEntities/`. Pipelines know a group by the name it carries in the identity provider, but every sharing API takes the internal group ID, so until now that ID had to be hardcoded into the stack and updated by hand whenever a group was rebuilt or re-provisioned. Names are matched in full and case sensitively, and results are scoped to the caller's organization. The endpoint returns every match with a total count rather than erroring when a name is ambiguous, so the data source asserts on that count and fails instead of silently resolving to whichever match sorted first: a name matching nothing fails pointing at capitalisation, which is the usual cause, and a name matching more than one fails naming how many. Any authenticated user with an organization can call it, so no administrator credentials are required.
+- `datarobot_deployment_shared_role` resource, which grants a directory group a role on a deployment by group name. `role` defaults to `CONSUMER`, the read-only tier; note that consumers can make predictions but cannot see the deployment, so `USER` is the right choice when the group needs it visible. Destroying the resource revokes the grant. Changing `group_name` or `deployment_id` replaces the resource, so repointing it revokes the previous grant before creating the new one rather than leaving the old grant behind. The underlying `updateRoles` operation has set rather than append semantics, so a re-applied unchanged role is a no-op and repeated applies are safe. A grant revoked outside Terraform is removed from state on the next read rather than failing the plan, and importing takes an ID of the form `<deployment_id>:<group_id>`.
+
+Full upstream diff: [https://github.com/datarobot-community/terraform-provider-datarobot/compare/v0.11.3...v0.12.2](https://github.com/datarobot-community/terraform-provider-datarobot/compare/v0.11.3...v0.12.2)
+
+### Pulumi SDK surface
+
+_Diff of the generated `schema.json` — what actually reached the SDKs._
+
+**New resources (1)**
+
+- `datarobot:index/deploymentSharedRole:DeploymentSharedRole`
+
+**New functions (1)**
+
+- `datarobot:index/getGroup:getGroup`
+
+**Changed resources (1)**
+
+- `datarobot:index/workload:Workload`
+  - new inputs: `useCaseId`
+  - new outputs: `useCaseId`
+
+<details><summary>Nested types: 0 added, 0 removed, 1 changed</summary>
+
+Changed:
+
+- `datarobot:index/WorkloadRuntime:WorkloadRuntime`
+  - new: `enclaveSelectionPolicy`, `enclaves`
+
+</details>
+
+<details><summary>schema-tools compare</summary>
+
+```
+### Does the PR have any schema changes?
+
+_Generated by schema-tools v0.8.1._
+
+Looking good! No breaking changes found.
+
+#### New resources:
+
+- `index/deploymentSharedRole.DeploymentSharedRole`
+
+#### New functions:
+
+- `index/getGroup.getGroup`
+```
+
+</details>
+
 ## [0.11.3] - 2026-09-09
 
 ### Upstream provider changes
