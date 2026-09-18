@@ -26,13 +26,13 @@ namespace DataRobotPulumi.Datarobot.Inputs
         }
 
         /// <summary>
-        /// Execution environment ID for the base Docker image. Required when source is &lt;span pulumi-lang-nodejs="`generated`" pulumi-lang-dotnet="`Generated`" pulumi-lang-go="`generated`" pulumi-lang-python="`generated`" pulumi-lang-yaml="`generated`" pulumi-lang-java="`generated`" pulumi-lang-hcl="`generated`"&gt;`generated`&lt;/span&gt;.
+        /// Execution environment ID for the base Docker image. Required when source is &lt;span pulumi-lang-nodejs="`generated`" pulumi-lang-dotnet="`Generated`" pulumi-lang-go="`generated`" pulumi-lang-python="`generated`" pulumi-lang-yaml="`generated`" pulumi-lang-java="`generated`" pulumi-lang-hcl="`generated`"&gt;`generated`&lt;/span&gt;. Read it from the &lt;span pulumi-lang-nodejs="`datarobot.ExecutionEnvironment`" pulumi-lang-dotnet="`datarobot.ExecutionEnvironment`" pulumi-lang-go="`ExecutionEnvironment`" pulumi-lang-python="`ExecutionEnvironment`" pulumi-lang-yaml="`datarobot.ExecutionEnvironment`" pulumi-lang-java="`datarobot.ExecutionEnvironment`" pulumi-lang-hcl="`datarobot_execution_environment`"&gt;`datarobot.ExecutionEnvironment`&lt;/span&gt; data source rather than hardcoding it.
         /// </summary>
         [Input("executionEnvironmentId")]
         public Input<string>? ExecutionEnvironmentId { get; set; }
 
         /// <summary>
-        /// Execution environment version ID that pins the base image. Required when source is &lt;span pulumi-lang-nodejs="`generated`" pulumi-lang-dotnet="`Generated`" pulumi-lang-go="`generated`" pulumi-lang-python="`generated`" pulumi-lang-yaml="`generated`" pulumi-lang-java="`generated`" pulumi-lang-hcl="`generated`"&gt;`generated`&lt;/span&gt;.
+        /// Execution environment version ID that pins the base image. Required when source is &lt;span pulumi-lang-nodejs="`generated`" pulumi-lang-dotnet="`Generated`" pulumi-lang-go="`generated`" pulumi-lang-python="`generated`" pulumi-lang-yaml="`generated`" pulumi-lang-java="`generated`" pulumi-lang-hcl="`generated`"&gt;`generated`&lt;/span&gt;. Available as &lt;span pulumi-lang-nodejs="`versionId`" pulumi-lang-dotnet="`VersionId`" pulumi-lang-go="`versionId`" pulumi-lang-python="`version_id`" pulumi-lang-yaml="`versionId`" pulumi-lang-java="`versionId`" pulumi-lang-hcl="`version_id`"&gt;`versionId`&lt;/span&gt; on the &lt;span pulumi-lang-nodejs="`datarobot.ExecutionEnvironment`" pulumi-lang-dotnet="`datarobot.ExecutionEnvironment`" pulumi-lang-go="`ExecutionEnvironment`" pulumi-lang-python="`ExecutionEnvironment`" pulumi-lang-yaml="`datarobot.ExecutionEnvironment`" pulumi-lang-java="`datarobot.ExecutionEnvironment`" pulumi-lang-hcl="`datarobot_execution_environment`"&gt;`datarobot.ExecutionEnvironment`&lt;/span&gt; data source.
         /// </summary>
         [Input("executionEnvironmentVersionId")]
         public Input<string>? ExecutionEnvironmentVersionId { get; set; }

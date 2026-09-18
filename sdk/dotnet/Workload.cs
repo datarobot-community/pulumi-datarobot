@@ -16,6 +16,73 @@ namespace DataRobotPulumi.Datarobot
     /// Changes to &lt;span pulumi-lang-nodejs="`artifactId`" pulumi-lang-dotnet="`ArtifactId`" pulumi-lang-go="`artifactId`" pulumi-lang-python="`artifact_id`" pulumi-lang-yaml="`artifactId`" pulumi-lang-java="`artifactId`" pulumi-lang-hcl="`artifact_id`"&gt;`artifactId`&lt;/span&gt; or &lt;span pulumi-lang-nodejs="`runtime`" pulumi-lang-dotnet="`Runtime`" pulumi-lang-go="`runtime`" pulumi-lang-python="`runtime`" pulumi-lang-yaml="`runtime`" pulumi-lang-java="`runtime`" pulumi-lang-hcl="`runtime`"&gt;`runtime`&lt;/span&gt; trigger an in-place workload replacement via the Workload API. The workload ID and endpoint remain stable across artifact and runtime updates.
     /// 
     /// When the new version never becomes ready, the platform abandons the rollout: it stops the new replica and the previous version keeps serving. Apply fails in that case, naming the artifact the workload is still on and linking its logs, so a rollout that did not happen is not reported as a successful update.
+    /// 
+    /// ## Enclave placement
+    /// 
+    /// On clusters with Enclaves enabled, a workload can be confined to an Enclave. Placement is governed by a Use Case: the platform restricts a workload to the Enclaves an administrator has granted to its Use Case, which is why &lt;span pulumi-lang-nodejs="`useCaseId`" pulumi-lang-dotnet="`UseCaseId`" pulumi-lang-go="`useCaseId`" pulumi-lang-python="`use_case_id`" pulumi-lang-yaml="`useCaseId`" pulumi-lang-java="`useCaseId`" pulumi-lang-hcl="`use_case_id`"&gt;`useCaseId`&lt;/span&gt; is required for any placed workload and rejected for an unplaced one.
+    /// 
+    /// | Configuration | Where the workload runs |
+    /// |---------------|-------------------------|
+    /// | neither &lt;span pulumi-lang-nodejs="`useCaseId`" pulumi-lang-dotnet="`UseCaseId`" pulumi-lang-go="`useCaseId`" pulumi-lang-python="`use_case_id`" pulumi-lang-yaml="`useCaseId`" pulumi-lang-java="`useCaseId`" pulumi-lang-hcl="`use_case_id`"&gt;`useCaseId`&lt;/span&gt; nor any `runtime.enclave_*` attribute | Outside any Enclave |
+    /// | &lt;span pulumi-lang-nodejs="`useCaseId`" pulumi-lang-dotnet="`UseCaseId`" pulumi-lang-go="`useCaseId`" pulumi-lang-python="`use_case_id`" pulumi-lang-yaml="`useCaseId`" pulumi-lang-java="`useCaseId`" pulumi-lang-hcl="`use_case_id`"&gt;`useCaseId`&lt;/span&gt; only | Any Enclave granted to that Use Case, chosen by the scheduler (&lt;span pulumi-lang-nodejs="`enclaveSelectionPolicy`" pulumi-lang-dotnet="`EnclaveSelectionPolicy`" pulumi-lang-go="`enclaveSelectionPolicy`" pulumi-lang-python="`enclave_selection_policy`" pulumi-lang-yaml="`enclaveSelectionPolicy`" pulumi-lang-java="`enclaveSelectionPolicy`" pulumi-lang-hcl="`enclave_selection_policy`"&gt;`enclaveSelectionPolicy`&lt;/span&gt; is sent as &lt;span pulumi-lang-nodejs="`availability`" pulumi-lang-dotnet="`Availability`" pulumi-lang-go="`availability`" pulumi-lang-python="`availability`" pulumi-lang-yaml="`availability`" pulumi-lang-java="`availability`" pulumi-lang-hcl="`availability`"&gt;`availability`&lt;/span&gt;) |
+    /// | &lt;span pulumi-lang-nodejs="`useCaseId`" pulumi-lang-dotnet="`UseCaseId`" pulumi-lang-go="`useCaseId`" pulumi-lang-python="`use_case_id`" pulumi-lang-yaml="`useCaseId`" pulumi-lang-java="`useCaseId`" pulumi-lang-hcl="`use_case_id`"&gt;`useCaseId`&lt;/span&gt; + `runtime.enclaves` | Pinned to the named Enclave (&lt;span pulumi-lang-nodejs="`enclaveSelectionPolicy`" pulumi-lang-dotnet="`EnclaveSelectionPolicy`" pulumi-lang-go="`enclaveSelectionPolicy`" pulumi-lang-python="`enclave_selection_policy`" pulumi-lang-yaml="`enclaveSelectionPolicy`" pulumi-lang-java="`enclaveSelectionPolicy`" pulumi-lang-hcl="`enclave_selection_policy`"&gt;`enclaveSelectionPolicy`&lt;/span&gt; is sent as &lt;span pulumi-lang-nodejs="`manual`" pulumi-lang-dotnet="`Manual`" pulumi-lang-go="`manual`" pulumi-lang-python="`manual`" pulumi-lang-yaml="`manual`" pulumi-lang-java="`manual`" pulumi-lang-hcl="`manual`"&gt;`manual`&lt;/span&gt;) |
+    /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Datarobot = DataRobotPulumi.Datarobot;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var agent = new Datarobot.Workload("agent", new()
+    ///     {
+    ///         Name = "finance-agent",
+    ///         ArtifactId = agentDatarobotArtifact.ArtifactId,
+    ///         UseCaseId = finance.Id,
+    ///         Runtime = new Datarobot.Inputs.WorkloadRuntimeArgs
+    ///         {
+    ///             Enclaves = new[]
+    ///             {
+    ///                 "finance-enclave",
+    ///             },
+    ///             ContainerGroups = new[]
+    ///             {
+    ///                 new Datarobot.Inputs.WorkloadRuntimeContainerGroupArgs
+    ///                 {
+    ///                     ReplicaCount = 1,
+    ///                     ResourceBundles = new[]
+    ///                     {
+    ///                         "cpu.small",
+    ///                     },
+    ///                 },
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
+    /// The provider fills in &lt;span pulumi-lang-nodejs="`enclaveSelectionPolicy`" pulumi-lang-dotnet="`EnclaveSelectionPolicy`" pulumi-lang-go="`enclaveSelectionPolicy`" pulumi-lang-python="`enclave_selection_policy`" pulumi-lang-yaml="`enclaveSelectionPolicy`" pulumi-lang-java="`enclaveSelectionPolicy`" pulumi-lang-hcl="`enclave_selection_policy`"&gt;`enclaveSelectionPolicy`&lt;/span&gt; from the rest of the configuration, so you only need to set it to say something the rest does not — and the derived value stays out of state, so your configuration and your state agree. Setting it explicitly is still accepted: &lt;span pulumi-lang-nodejs="`availability`" pulumi-lang-dotnet="`Availability`" pulumi-lang-go="`availability`" pulumi-lang-python="`availability`" pulumi-lang-yaml="`availability`" pulumi-lang-java="`availability`" pulumi-lang-hcl="`availability`"&gt;`availability`&lt;/span&gt; to let the scheduler choose, &lt;span pulumi-lang-nodejs="`manual`" pulumi-lang-dotnet="`Manual`" pulumi-lang-go="`manual`" pulumi-lang-python="`manual`" pulumi-lang-yaml="`manual`" pulumi-lang-java="`manual`" pulumi-lang-hcl="`manual`"&gt;`manual`&lt;/span&gt; to pin. &lt;span pulumi-lang-nodejs="`manual`" pulumi-lang-dotnet="`Manual`" pulumi-lang-go="`manual`" pulumi-lang-python="`manual`" pulumi-lang-yaml="`manual`" pulumi-lang-java="`manual`" pulumi-lang-hcl="`manual`"&gt;`manual`&lt;/span&gt; additionally requires the `CAN_OVERRIDE_WORKLOAD_PLACEMENT` permission.
+    /// 
+    /// Only one Enclave is accepted today. &lt;span pulumi-lang-nodejs="`enclaves`" pulumi-lang-dotnet="`Enclaves`" pulumi-lang-go="`enclaves`" pulumi-lang-python="`enclaves`" pulumi-lang-yaml="`enclaves`" pulumi-lang-java="`enclaves`" pulumi-lang-hcl="`enclaves`"&gt;`enclaves`&lt;/span&gt; is a list because the platform intends to support several later.
+    /// 
+    /// ### What placement does not do
+    /// 
+    /// &lt;span pulumi-lang-nodejs="`useCaseId`" pulumi-lang-dotnet="`UseCaseId`" pulumi-lang-go="`useCaseId`" pulumi-lang-python="`use_case_id`" pulumi-lang-yaml="`useCaseId`" pulumi-lang-java="`useCaseId`" pulumi-lang-hcl="`use_case_id`"&gt;`useCaseId`&lt;/span&gt;, &lt;span pulumi-lang-nodejs="`enclaveSelectionPolicy`" pulumi-lang-dotnet="`EnclaveSelectionPolicy`" pulumi-lang-go="`enclaveSelectionPolicy`" pulumi-lang-python="`enclave_selection_policy`" pulumi-lang-yaml="`enclaveSelectionPolicy`" pulumi-lang-java="`enclaveSelectionPolicy`" pulumi-lang-hcl="`enclave_selection_policy`"&gt;`enclaveSelectionPolicy`&lt;/span&gt; and &lt;span pulumi-lang-nodejs="`enclaves`" pulumi-lang-dotnet="`Enclaves`" pulumi-lang-go="`enclaves`" pulumi-lang-python="`enclaves`" pulumi-lang-yaml="`enclaves`" pulumi-lang-java="`enclaves`" pulumi-lang-hcl="`enclaves`"&gt;`enclaves`&lt;/span&gt; all **replace** the workload when changed — a destroy and create, which means a **new workload ID and a new endpoint**. This is not the in-place replacement the rest of this page describes: the Use Case link is fixed at creation and cannot be moved.
+    /// 
+    /// None of the three is read back from the platform:
+    /// 
+    /// - &lt;span pulumi-lang-nodejs="`useCaseId`" pulumi-lang-dotnet="`UseCaseId`" pulumi-lang-go="`useCaseId`" pulumi-lang-python="`use_case_id`" pulumi-lang-yaml="`useCaseId`" pulumi-lang-java="`useCaseId`" pulumi-lang-hcl="`use_case_id`"&gt;`useCaseId`&lt;/span&gt; is write-only. The link lives outside the workload entity and no API response carries it, so it cannot be refreshed or imported — an imported workload has it empty no matter which Use Case it is linked to, and a link changed outside Terraform is invisible to the plan.
+    /// - &lt;span pulumi-lang-nodejs="`enclaveSelectionPolicy`" pulumi-lang-dotnet="`EnclaveSelectionPolicy`" pulumi-lang-go="`enclaveSelectionPolicy`" pulumi-lang-python="`enclave_selection_policy`" pulumi-lang-yaml="`enclaveSelectionPolicy`" pulumi-lang-java="`enclaveSelectionPolicy`" pulumi-lang-hcl="`enclave_selection_policy`"&gt;`enclaveSelectionPolicy`&lt;/span&gt; and &lt;span pulumi-lang-nodejs="`enclaves`" pulumi-lang-dotnet="`Enclaves`" pulumi-lang-go="`enclaves`" pulumi-lang-python="`enclaves`" pulumi-lang-yaml="`enclaves`" pulumi-lang-java="`enclaves`" pulumi-lang-hcl="`enclaves`"&gt;`enclaves`&lt;/span&gt; are stripped from API responses on clusters without the Enclave entitlement, so the provider keeps your configured values in state rather than reading them back. A placement changed outside Terraform is not detected; &lt;span pulumi-lang-nodejs="`enclaves`" pulumi-lang-dotnet="`Enclaves`" pulumi-lang-go="`enclaves`" pulumi-lang-python="`enclaves`" pulumi-lang-yaml="`enclaves`" pulumi-lang-java="`enclaves`" pulumi-lang-hcl="`enclaves`"&gt;`enclaves`&lt;/span&gt; is desired state the platform never rewrites, so that only happens if someone edits the workload by hand.
+    /// 
+    /// ## Apply duration
+    /// 
+    /// Replacement is asynchronous. The provider polls `GET /workloads/{id}/replacement` until the rollout completes or errors. A single replacement can block `pulumi up` for **several minutes** while the platform performs rolling cutover.
+    /// 
+    /// If apply is interrupted mid-replacement, run `pulumi up` again — refresh reads the current replacement status and the provider reconciles.
     /// </summary>
     [DatarobotResourceType("datarobot:index/workload:Workload")]
     public partial class Workload : global::Pulumi.CustomResource
@@ -67,6 +134,12 @@ namespace DataRobotPulumi.Datarobot
         /// </summary>
         [Output("type")]
         public Output<string> Type { get; private set; } = null!;
+
+        /// <summary>
+        /// The Use Case that governs where this Workload may run. Required when `runtime.enclave_selection_policy` or `runtime.enclaves` is set, and rejected by the platform when neither is: placement is restricted to the Enclaves an administrator has granted to this Use Case. Setting it implies `runtime.enclave_selection_policy = "availability"` unless a policy or a named Enclave says otherwise.
+        /// </summary>
+        [Output("useCaseId")]
+        public Output<string?> UseCaseId { get; private set; } = null!;
 
 
         /// <summary>
@@ -145,6 +218,12 @@ namespace DataRobotPulumi.Datarobot
         [Input("runtime", required: true)]
         public Input<Inputs.WorkloadRuntimeArgs> Runtime { get; set; } = null!;
 
+        /// <summary>
+        /// The Use Case that governs where this Workload may run. Required when `runtime.enclave_selection_policy` or `runtime.enclaves` is set, and rejected by the platform when neither is: placement is restricted to the Enclaves an administrator has granted to this Use Case. Setting it implies `runtime.enclave_selection_policy = "availability"` unless a policy or a named Enclave says otherwise.
+        /// </summary>
+        [Input("useCaseId")]
+        public Input<string>? UseCaseId { get; set; }
+
         public WorkloadArgs()
         {
         }
@@ -200,6 +279,12 @@ namespace DataRobotPulumi.Datarobot
         /// </summary>
         [Input("type")]
         public Input<string>? Type { get; set; }
+
+        /// <summary>
+        /// The Use Case that governs where this Workload may run. Required when `runtime.enclave_selection_policy` or `runtime.enclaves` is set, and rejected by the platform when neither is: placement is restricted to the Enclaves an administrator has granted to this Use Case. Setting it implies `runtime.enclave_selection_policy = "availability"` unless a policy or a named Enclave says otherwise.
+        /// </summary>
+        [Input("useCaseId")]
+        public Input<string>? UseCaseId { get; set; }
 
         public WorkloadState()
         {

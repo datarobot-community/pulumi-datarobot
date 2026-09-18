@@ -130,6 +130,11 @@ export type DeploymentRetrainingPolicy = import("./deploymentRetrainingPolicy").
 export const DeploymentRetrainingPolicy: typeof import("./deploymentRetrainingPolicy").DeploymentRetrainingPolicy = null as any;
 utilities.lazyLoad(exports, ["DeploymentRetrainingPolicy"], () => require("./deploymentRetrainingPolicy"));
 
+export { DeploymentSharedRoleArgs, DeploymentSharedRoleState } from "./deploymentSharedRole";
+export type DeploymentSharedRole = import("./deploymentSharedRole").DeploymentSharedRole;
+export const DeploymentSharedRole: typeof import("./deploymentSharedRole").DeploymentSharedRole = null as any;
+utilities.lazyLoad(exports, ["DeploymentSharedRole"], () => require("./deploymentSharedRole"));
+
 export { ExecutionEnvironmentArgs, ExecutionEnvironmentState } from "./executionEnvironment";
 export type ExecutionEnvironment = import("./executionEnvironment").ExecutionEnvironment;
 export const ExecutionEnvironment: typeof import("./executionEnvironment").ExecutionEnvironment = null as any;
@@ -154,6 +159,11 @@ export { GetGlobalModelArgs, GetGlobalModelResult, GetGlobalModelOutputArgs } fr
 export const getGlobalModel: typeof import("./getGlobalModel").getGlobalModel = null as any;
 export const getGlobalModelOutput: typeof import("./getGlobalModel").getGlobalModelOutput = null as any;
 utilities.lazyLoad(exports, ["getGlobalModel","getGlobalModelOutput"], () => require("./getGlobalModel"));
+
+export { GetGroupArgs, GetGroupResult, GetGroupOutputArgs } from "./getGroup";
+export const getGroup: typeof import("./getGroup").getGroup = null as any;
+export const getGroupOutput: typeof import("./getGroup").getGroupOutput = null as any;
+utilities.lazyLoad(exports, ["getGroup","getGroupOutput"], () => require("./getGroup"));
 
 export { GoogleCloudCredentialArgs, GoogleCloudCredentialState } from "./googleCloudCredential";
 export type GoogleCloudCredential = import("./googleCloudCredential").GoogleCloudCredential;
@@ -317,6 +327,8 @@ const _module = {
                 return new Deployment(name, <any>undefined, { urn })
             case "datarobot:index/deploymentRetrainingPolicy:DeploymentRetrainingPolicy":
                 return new DeploymentRetrainingPolicy(name, <any>undefined, { urn })
+            case "datarobot:index/deploymentSharedRole:DeploymentSharedRole":
+                return new DeploymentSharedRole(name, <any>undefined, { urn })
             case "datarobot:index/executionEnvironment:ExecutionEnvironment":
                 return new ExecutionEnvironment(name, <any>undefined, { urn })
             case "datarobot:index/googleCloudCredential:GoogleCloudCredential":
@@ -387,6 +399,7 @@ pulumi.runtime.registerResourceModule("datarobot", "index/datasource", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/datastore", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/deployment", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/deploymentRetrainingPolicy", _module)
+pulumi.runtime.registerResourceModule("datarobot", "index/deploymentSharedRole", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/executionEnvironment", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/googleCloudCredential", _module)
 pulumi.runtime.registerResourceModule("datarobot", "index/llmBlueprint", _module)
