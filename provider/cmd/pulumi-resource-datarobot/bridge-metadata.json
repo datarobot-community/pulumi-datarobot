@@ -426,6 +426,9 @@
                     }
                 }
             },
+            "datarobot_deployment_shared_role": {
+                "current": "datarobot:index/deploymentSharedRole:DeploymentSharedRole"
+            },
             "datarobot_execution_environment": {
                 "current": "datarobot:index/executionEnvironment:ExecutionEnvironment",
                 "fields": {
@@ -557,6 +560,9 @@
                                         }
                                     }
                                 }
+                            },
+                            "enclaves": {
+                                "maxItemsOne": false
                             }
                         }
                     }
@@ -702,6 +708,9 @@
             },
             "datarobot_global_model": {
                 "current": "datarobot:index/getGlobalModel:getGlobalModel"
+            },
+            "datarobot_group": {
+                "current": "datarobot:index/getGroup:getGroup"
             }
         }
     },
@@ -733,6 +742,7 @@
             "datarobot_datastore": {},
             "datarobot_deployment": {},
             "datarobot_deployment_retraining_policy": {},
+            "datarobot_deployment_shared_role": {},
             "datarobot_execution_environment": {},
             "datarobot_google_cloud_credential": {},
             "datarobot_llm_blueprint": {},

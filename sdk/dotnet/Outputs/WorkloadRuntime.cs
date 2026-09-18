@@ -19,6 +19,16 @@ namespace DataRobotPulumi.Datarobot.Outputs
         /// </summary>
         public readonly ImmutableArray<Outputs.WorkloadRuntimeContainerGroup> ContainerGroups;
         /// <summary>
+        /// How the scheduler chooses an Enclave: &lt;span pulumi-lang-nodejs="`availability`" pulumi-lang-dotnet="`Availability`" pulumi-lang-go="`availability`" pulumi-lang-python="`availability`" pulumi-lang-yaml="`availability`" pulumi-lang-java="`availability`" pulumi-lang-hcl="`availability`"&gt;`availability`&lt;/span&gt; to let it pick any Enclave the Workload is eligible for, or &lt;span pulumi-lang-nodejs="`manual`" pulumi-lang-dotnet="`Manual`" pulumi-lang-go="`manual`" pulumi-lang-python="`manual`" pulumi-lang-yaml="`manual`" pulumi-lang-java="`manual`" pulumi-lang-hcl="`manual`"&gt;`manual`&lt;/span&gt; to pin the Workload to the Enclave named in &lt;span pulumi-lang-nodejs="`enclaves`" pulumi-lang-dotnet="`Enclaves`" pulumi-lang-go="`enclaves`" pulumi-lang-python="`enclaves`" pulumi-lang-yaml="`enclaves`" pulumi-lang-java="`enclaves`" pulumi-lang-hcl="`enclaves`"&gt;`enclaves`&lt;/span&gt;. Omit it to run outside any Enclave. Both values require &lt;span pulumi-lang-nodejs="`useCaseId`" pulumi-lang-dotnet="`UseCaseId`" pulumi-lang-go="`useCaseId`" pulumi-lang-python="`use_case_id`" pulumi-lang-yaml="`useCaseId`" pulumi-lang-java="`useCaseId`" pulumi-lang-hcl="`use_case_id`"&gt;`useCaseId`&lt;/span&gt;; &lt;span pulumi-lang-nodejs="`manual`" pulumi-lang-dotnet="`Manual`" pulumi-lang-go="`manual`" pulumi-lang-python="`manual`" pulumi-lang-yaml="`manual`" pulumi-lang-java="`manual`" pulumi-lang-hcl="`manual`"&gt;`manual`&lt;/span&gt; additionally requires the `CAN_OVERRIDE_WORKLOAD_PLACEMENT` permission. Defaults to &lt;span pulumi-lang-nodejs="`availability`" pulumi-lang-dotnet="`Availability`" pulumi-lang-go="`availability`" pulumi-lang-python="`availability`" pulumi-lang-yaml="`availability`" pulumi-lang-java="`availability`" pulumi-lang-hcl="`availability`"&gt;`availability`&lt;/span&gt; when &lt;span pulumi-lang-nodejs="`useCaseId`" pulumi-lang-dotnet="`UseCaseId`" pulumi-lang-go="`useCaseId`" pulumi-lang-python="`use_case_id`" pulumi-lang-yaml="`useCaseId`" pulumi-lang-java="`useCaseId`" pulumi-lang-hcl="`use_case_id`"&gt;`useCaseId`&lt;/span&gt; is set, or to &lt;span pulumi-lang-nodejs="`manual`" pulumi-lang-dotnet="`Manual`" pulumi-lang-go="`manual`" pulumi-lang-python="`manual`" pulumi-lang-yaml="`manual`" pulumi-lang-java="`manual`" pulumi-lang-hcl="`manual`"&gt;`manual`&lt;/span&gt; when &lt;span pulumi-lang-nodejs="`enclaves`" pulumi-lang-dotnet="`Enclaves`" pulumi-lang-go="`enclaves`" pulumi-lang-python="`enclaves`" pulumi-lang-yaml="`enclaves`" pulumi-lang-java="`enclaves`" pulumi-lang-hcl="`enclaves`"&gt;`enclaves`&lt;/span&gt; names one.
+        /// </summary>
+        public readonly string? EnclaveSelectionPolicy;
+        /// <summary>
+        /// Name of the Enclave to pin this Workload to. Exactly one entry is accepted today; the list shape is forward-compatible with running on several Enclaves. Requires &lt;span pulumi-lang-nodejs="`useCaseId`" pulumi-lang-dotnet="`UseCaseId`" pulumi-lang-go="`useCaseId`" pulumi-lang-python="`use_case_id`" pulumi-lang-yaml="`useCaseId`" pulumi-lang-java="`useCaseId`" pulumi-lang-hcl="`use_case_id`"&gt;`useCaseId`&lt;/span&gt;, and only applies with &lt;span pulumi-lang-nodejs="`enclaveSelectionPolicy " pulumi-lang-dotnet="`EnclaveSelectionPolicy " pulumi-lang-go="`enclaveSelectionPolicy " pulumi-lang-python="`enclave_selection_policy " pulumi-lang-yaml="`enclaveSelectionPolicy " pulumi-lang-java="`enclaveSelectionPolicy " pulumi-lang-hcl="`enclave_selection_policy "&gt;`enclaveSelectionPolicy &lt;/span&gt;= "manual"`, which is assumed when this is set and no policy is given. The named Enclave must be granted to the Use Case and the caller must hold deploy access to it.
+        /// 
+        /// This is desired state that the platform never rewrites; where the Workload actually runs is reported by the platform, not by this attribute. Changing it replaces the Workload, which means a new ID and a new endpoint.
+        /// </summary>
+        public readonly ImmutableArray<string> Enclaves;
+        /// <summary>
         /// Replacement policy for in-place workload replacement (rolling strategy). Applied when &lt;span pulumi-lang-nodejs="`artifactId`" pulumi-lang-dotnet="`ArtifactId`" pulumi-lang-go="`artifactId`" pulumi-lang-python="`artifact_id`" pulumi-lang-yaml="`artifactId`" pulumi-lang-java="`artifactId`" pulumi-lang-hcl="`artifact_id`"&gt;`artifactId`&lt;/span&gt; changes or when replacement policy settings change. Runtime-only changes use `PATCH /workloads/{id}/settings`, which does not accept custom replacement timing (WAPI uses platform defaults).
         /// </summary>
         public readonly Outputs.WorkloadRuntimeReplacementPolicy? ReplacementPolicy;
@@ -27,9 +37,15 @@ namespace DataRobotPulumi.Datarobot.Outputs
         private WorkloadRuntime(
             ImmutableArray<Outputs.WorkloadRuntimeContainerGroup> containerGroups,
 
+            string? enclaveSelectionPolicy,
+
+            ImmutableArray<string> enclaves,
+
             Outputs.WorkloadRuntimeReplacementPolicy? replacementPolicy)
         {
             ContainerGroups = containerGroups;
+            EnclaveSelectionPolicy = enclaveSelectionPolicy;
+            Enclaves = enclaves;
             ReplacementPolicy = replacementPolicy;
         }
     }

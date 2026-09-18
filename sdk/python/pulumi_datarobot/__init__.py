@@ -31,11 +31,13 @@ from .datasource import *
 from .datastore import *
 from .deployment import *
 from .deployment_retraining_policy import *
+from .deployment_shared_role import *
 from .execution_environment import *
 from .get_artifact import *
 from .get_artifacts import *
 from .get_execution_environment import *
 from .get_global_model import *
+from .get_group import *
 from .google_cloud_credential import *
 from .llm_blueprint import *
 from .memory_space import *
@@ -267,6 +269,14 @@ _utilities.register(
   "fqn": "pulumi_datarobot",
   "classes": {
    "datarobot:index/deploymentRetrainingPolicy:DeploymentRetrainingPolicy": "DeploymentRetrainingPolicy"
+  }
+ },
+ {
+  "pkg": "datarobot",
+  "mod": "index/deploymentSharedRole",
+  "fqn": "pulumi_datarobot",
+  "classes": {
+   "datarobot:index/deploymentSharedRole:DeploymentSharedRole": "DeploymentSharedRole"
   }
  },
  {
