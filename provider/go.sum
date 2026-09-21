@@ -158,8 +158,8 @@ github.com/cpuguy83/go-md2man/v2 v2.0.6/go.mod h1:oOW0eioCTA6cOiMLiUPZOpcVxMig6N
 github.com/creack/pty v1.1.9/go.mod h1:oKZEueFk5CKHvIhNR5MUki03XCEU+Q6VDXinZuGJ33E=
 github.com/danieljoos/wincred v1.2.3 h1:v7dZC2x32Ut3nEfRH+vhoZGvN72+dQ/snVXo/vMFLdQ=
 github.com/danieljoos/wincred v1.2.3/go.mod h1:6qqX0WNrS4RzPZ1tnroDzq9kY3fu1KwE7MRLQK4X0bs=
-github.com/datarobot-community/terraform-provider-datarobot v0.12.2 h1:ZxQ/OeUD74bAnFbSk0zw1q/CNPPDSCwX1buN2xcUeL8=
-github.com/datarobot-community/terraform-provider-datarobot v0.12.2/go.mod h1:MRhkS/Fd7PYWMVS3yhmWnxYM/YNoMZHTkGpt4U1APjc=
+github.com/datarobot-community/terraform-provider-datarobot v0.12.3 h1:VUFIAxAkcsnaN9hVF+6WLB9bDFgS/F46k9ltAYayLFY=
+github.com/datarobot-community/terraform-provider-datarobot v0.12.3/go.mod h1:MRhkS/Fd7PYWMVS3yhmWnxYM/YNoMZHTkGpt4U1APjc=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc h1:U9qPSI2PIWSS1VwoXQT9A3Wy9MM3WgvqSxFWenqJduM=
