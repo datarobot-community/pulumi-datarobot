@@ -2529,7 +2529,7 @@ export interface WorkloadRuntime {
     /**
      * Name of the Enclave to pin this Workload to. Exactly one entry is accepted today; the list shape is forward-compatible with running on several Enclaves. Requires <span pulumi-lang-nodejs="`useCaseId`" pulumi-lang-dotnet="`UseCaseId`" pulumi-lang-go="`useCaseId`" pulumi-lang-python="`use_case_id`" pulumi-lang-yaml="`useCaseId`" pulumi-lang-java="`useCaseId`" pulumi-lang-hcl="`use_case_id`">`useCaseId`</span>, and only applies with <span pulumi-lang-nodejs="`enclaveSelectionPolicy " pulumi-lang-dotnet="`EnclaveSelectionPolicy " pulumi-lang-go="`enclaveSelectionPolicy " pulumi-lang-python="`enclave_selection_policy " pulumi-lang-yaml="`enclaveSelectionPolicy " pulumi-lang-java="`enclaveSelectionPolicy " pulumi-lang-hcl="`enclave_selection_policy ">`enclaveSelectionPolicy </span>= "manual"`, which is assumed when this is set and no policy is given. The named Enclave must be granted to the Use Case and the caller must hold deploy access to it.
      *
-     * This is desired state that the platform never rewrites; where the Workload actually runs is reported by the platform, not by this attribute. Changing it replaces the Workload, which means a new ID and a new endpoint.
+     * This is desired state that the platform never rewrites; where the Workload actually runs is reported by the platform, not by this attribute. Changing it updates the running Workload in place through a rolling replacement, keeping its ID; the new pin is recorded on the platform and the endpoint is re-read afterwards.
      */
     enclaves?: string[];
     /**
