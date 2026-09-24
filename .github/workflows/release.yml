@@ -33,6 +33,12 @@ env:
 
   # --- Added for Slack notification & link rendering ---
   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+  # Fine-grained PAT with Contents: write and Pull requests: write on the repos
+  # that pin this provider, used only by bump_downstream. GITHUB_TOKEN can't
+  # touch another repository, so this has to be a separate credential. Absent
+  # secret => the job warns and skips, exactly like SLACK_WEBHOOK_URL above.
+  DOWNSTREAM_BUMP_TOKEN: ${{ secrets.DOWNSTREAM_BUMP_TOKEN }}
   PACKAGE_NPM: "@datarobot/pulumi-datarobot"
   PACKAGE_PYPI: pulumi-datarobot
   PACKAGE_NUGET: DataRobotPulumi.Datarobot
@@ -405,6 +411,47 @@ jobs:
         if: ${{ env.SLACK_WEBHOOK_URL != '' }}
         run: |
           curl -X POST -H 'Content-type: application/json' --data @payload.json "${{ env.SLACK_WEBHOOK_URL }}"
+
+  bump_downstream:
+    name: Bump downstream pins
+    runs-on: ubuntu-latest
+    needs: publish_sdk
+    if: success()
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
+
+      # Opens a PR in each repo that pins this provider. Hung off publish_sdk
+      # rather than the `release` event on purpose: publish_binary creates the
+      # GitHub release earlier in this pipeline, so reacting to
+      # `release: published` would bump downstream pins to a version that is
+      # not on PyPI yet.
+      #
+      # The PRs are opened with a PAT rather than GITHUB_TOKEN, which means
+      # each one triggers that repo's normal CI -- a GITHUB_TOKEN-opened PR
+      # would not.
+      - name: Open bump PRs in downstream repos
+        if: ${{ env.DOWNSTREAM_BUMP_TOKEN != '' }}
+        env:
+          GH_TOKEN: ${{ env.DOWNSTREAM_BUMP_TOKEN }}
+          GITHUB_REF_NAME: ${{ github.ref_name }}
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+
+          # A downstream repo that can't be bumped must not fail the release --
+          # the provider is already published by this point. Surface it as a
+          # warning so it's visible on the run without turning a good release
+          # red. The script's own output names which repo and why.
+          if ! scripts/bump_downstream_pins.sh "$VERSION"; then
+            echo "::warning::One or more downstream repos could not be bumped to ${VERSION}. The release itself succeeded; see this step's log for which repo and why, then bump it manually or re-run this job."
+          fi
+
+      - name: Warn that no downstream repo was bumped
+        if: ${{ env.DOWNSTREAM_BUMP_TOKEN == '' }}
+        run: |
+          echo "::warning::DOWNSTREAM_BUMP_TOKEN is not set, so no bump PR was opened for this release. Set it to enable automatic bump PRs in af-component-base, nbx-kernels and datarobot-user-models."
 
   release_summary:
     name: Release Summary
