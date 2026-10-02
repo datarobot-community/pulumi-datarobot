@@ -22,6 +22,53 @@ Changes made in this repo rather than upstream go under `Unreleased` while unrel
 and under a `### Provider changes` subsection once they ship in a version.
 Regenerating a section preserves that subsection.
 
+## [0.12.5] - 2026-10-02
+
+### Upstream provider changes
+
+[terraform-provider-datarobot](https://github.com/datarobot-community/terraform-provider-datarobot) `v0.12.4` → `v0.12.5`
+
+#### [v0.12.5](https://github.com/datarobot-community/terraform-provider-datarobot/releases/tag/v0.12.5) — 2026-10-02
+
+##### Fixed
+
+- `datarobot_workload` refuses at plan time to remove the Enclave placement while `use_case_id` stays the same, instead of sending a change the platform ignores or refuses (`422 ENCLAVE_POLICY_REQUIRED`). Set `enclave_selection_policy = "availability"`, name another Enclave, or also remove `use_case_id`, which replaces the Workload. A Workload whose policy 0.12.4 already removed keeps running on its Enclave; set the policy again.
+- `datarobot_workload` changes `use_case_id` in place instead of destroying the Workload first: it is linked to the new Use Case and unlinked from the old one, keeping its ID and endpoint. A Workload on an Enclave stays there, and its next rollout is refused until the new Use Case grants that Enclave. Changing `use_case_id` together with the placement still replaces the Workload.
+- Changing `use_case_ids` on deployments, datasets, custom applications and registered models no longer unlinks Use Cases that stay in the list.
+- Docs: adding a policy or a pin to a Workload that runs outside any Enclave does not reliably move it onto one in place; replace the Workload instead.
+- `datarobot_artifact` destroy deletes the artifact's repository only when the resource created it. Destroy always deleted the whole repository, which deletes every version in it, locked ones included, so a resource whose `artifact_repository_id` named a repository created by the DataRobot CLI deleted the CLI's locked versions, which `dr artifact delete` refuses to delete (`409 Cannot delete locked artifact`), and reported success. Replacing the resource did the same: a Terraform replacement (`type` change, `terraform taint`, `-replace`) then tried to create the new version in the repository it had just deleted, and Pulumi, which creates first by default, deleted the new version along with the repository.
+- **After upgrading, run `terraform apply` (or `pulumi up`) once.** Ownership is recorded in a new computed attribute, `created_artifact_repository_id`. State written by earlier versions has none, and that first plan fills it in from the configuration, shown as an update of that attribute only: a repository named in `artifact_repository_id` counts as created elsewhere, any other as created by the resource. Until then, destroy and replace treat the repository as created elsewhere, so they never delete it: a repository the resource did create is left behind, and the destroy warning says so. An artifact imported under an earlier version without `artifact_repository_id` in its configuration counts as created by the resource after that apply; to keep its repository, add `artifact_repository_id` to the configuration first, or run `terraform state rm` followed by `terraform import`, which records no ownership.
+- In a repository the resource did not create (one named in `artifact_repository_id`, or any imported artifact), destroy deletes only the current version, and only if it is a draft. The Workload API does not delete a locked artifact on its own, so a locked version stays in the repository, and so does every earlier version the resource created there; destroy warns and lists the versions left in the repository. Two cases still remove the repository: the Workload API deletes a repository together with its last artifact, so deleting a draft that was its only version removes it too, and destroy says so; and setting `artifact_repository_id` to the repository the resource created does not change its ownership.
+- A resource moved to another repository by changing `artifact_repository_id` still deletes the repository it created when destroyed, instead of leaving it behind.
+- Destroying a locked version that has to stay releases its `source.dir` from it, so a resource re-created over the same directory is not refused with `directory already backs another artifact repository`.
+- A draft locked outside Terraform since the last refresh (`-refresh=false`, a saved destroy plan) now takes the locked path with a warning instead of failing on `409`. A `404` to the delete of a version or of a repository the resource created, while it still exists or cannot be read back, is now an error instead of a silent success: it is how the Workload API refuses a principal without the owner role on the repository.
+- A create that fails partway in a repository named in `artifact_repository_id` deletes the draft it created there instead of leaving it behind; one in a repository it created still deletes that repository. A create whose image build outlives `wait_for_build` is now saved to state (Terraform marks it tainted, so the next apply replaces it) instead of being lost together with the repository it created.
+- The Workload API's `DELETE /artifactRepositories/{id}/` still removes locked versions; that is a platform decision this change does not touch.
+
+Full upstream diff: [https://github.com/datarobot-community/terraform-provider-datarobot/compare/v0.12.4...v0.12.5](https://github.com/datarobot-community/terraform-provider-datarobot/compare/v0.12.4...v0.12.5)
+
+### Pulumi SDK surface
+
+_Diff of the generated `schema.json` — what actually reached the SDKs._
+
+**Changed resources (1)**
+
+- `datarobot:index/artifact:Artifact`
+  - new outputs: `createdArtifactRepositoryId`
+
+<details><summary>schema-tools compare</summary>
+
+```
+### Does the PR have any schema changes?
+
+_Generated by schema-tools v0.8.1._
+
+Looking good! No breaking changes found.
+No new resources/functions/types.
+```
+
+</details>
+
 ## [0.12.4] - 2026-09-23
 
 ### Upstream provider changes
