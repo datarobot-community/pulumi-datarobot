@@ -29,7 +29,9 @@ env:
   NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
   NPM_REGISTRY_URL: https://registry.npmjs.org
   PUBLISH_NPM: ${{ github.event.inputs.PUBLISH_NPM || 'true' }}
-  NUGET_PUBLISH_KEY: ${{ secrets.NUGET_PUBLISH_KEY }}
+  # nuget.org publishes via Trusted Publishing (OIDC); see release.yml. The policy is bound
+  # to the workflow FILE NAME, so this file needs its own policy (Workflow File = release-select.yml).
+  NUGET_USER: ${{ secrets.NUGET_USER }}
   NUGET_FEED_URL: https://api.nuget.org/v3/index.json
   PUBLISH_NUGET: ${{ github.event.inputs.PUBLISH_NUGET || 'true' }}
   PYPI_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
@@ -131,8 +133,16 @@ jobs:
         working-directory: ${{github.workspace}}/sdk/nodejs/bin
         run: npm publish --access public --tag latest
 
+      # Mint the short-lived key immediately before the push: it is valid for 1 hour.
+      - name: NuGet login (OIDC -> short-lived API key)
+        if: ${{ github.event.inputs.SDK_LANGUAGE == 'dotnet' && env.PUBLISH_NUGET == 'true' }}
+        id: nuget_login
+        uses: NuGet/login@8d196754b4036150537f80ac539e15c2f1028841 # v1.2.0
+        with:
+          user: ${{ env.NUGET_USER }}
+
       - name: Publish .NET SDK
         if: ${{ github.event.inputs.SDK_LANGUAGE == 'dotnet' && env.PUBLISH_NUGET == 'true' }}
         run: |
-          dotnet nuget push ${{github.workspace}}/sdk/dotnet/bin/Debug/*.nupkg -s ${{ env.NUGET_FEED_URL }} -k ${{ env.NUGET_PUBLISH_KEY }}
+          dotnet nuget push ${{github.workspace}}/sdk/dotnet/bin/Debug/*.nupkg -s ${{ env.NUGET_FEED_URL }} -k ${{ steps.nuget_login.outputs.NUGET_API_KEY }}
           echo "done publishing packages"
