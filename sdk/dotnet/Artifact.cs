@@ -23,10 +23,16 @@ namespace DataRobotPulumi.Datarobot
         public Output<string> ArtifactId { get; private set; } = null!;
 
         /// <summary>
-        /// ID of the artifact repository for versioning. Computed on first create if not provided; subsequent updates create new versions in the same repository.
+        /// ID of the artifact repository for versioning. Computed on first create if not provided; subsequent updates create new versions in the same repository. What destroy deletes depends on whether this resource created the repository; see &lt;span pulumi-lang-nodejs="`createdArtifactRepositoryId`" pulumi-lang-dotnet="`CreatedArtifactRepositoryId`" pulumi-lang-go="`createdArtifactRepositoryId`" pulumi-lang-python="`created_artifact_repository_id`" pulumi-lang-yaml="`createdArtifactRepositoryId`" pulumi-lang-java="`createdArtifactRepositoryId`" pulumi-lang-hcl="`created_artifact_repository_id`"&gt;`createdArtifactRepositoryId`&lt;/span&gt;.
         /// </summary>
         [Output("artifactRepositoryId")]
         public Output<string> ArtifactRepositoryId { get; private set; } = null!;
+
+        /// <summary>
+        /// ID of the artifact repository this resource created, or empty when it created none: &lt;span pulumi-lang-nodejs="`artifactRepositoryId`" pulumi-lang-dotnet="`ArtifactRepositoryId`" pulumi-lang-go="`artifactRepositoryId`" pulumi-lang-python="`artifact_repository_id`" pulumi-lang-yaml="`artifactRepositoryId`" pulumi-lang-java="`artifactRepositoryId`" pulumi-lang-hcl="`artifact_repository_id`"&gt;`artifactRepositoryId`&lt;/span&gt; names a repository created elsewhere, or the artifact was imported. Recorded at create, and kept when &lt;span pulumi-lang-nodejs="`artifactRepositoryId`" pulumi-lang-dotnet="`ArtifactRepositoryId`" pulumi-lang-go="`artifactRepositoryId`" pulumi-lang-python="`artifact_repository_id`" pulumi-lang-yaml="`artifactRepositoryId`" pulumi-lang-java="`artifactRepositoryId`" pulumi-lang-hcl="`artifact_repository_id`"&gt;`artifactRepositoryId`&lt;/span&gt; later changes; setting &lt;span pulumi-lang-nodejs="`artifactRepositoryId`" pulumi-lang-dotnet="`ArtifactRepositoryId`" pulumi-lang-go="`artifactRepositoryId`" pulumi-lang-python="`artifact_repository_id`" pulumi-lang-yaml="`artifactRepositoryId`" pulumi-lang-java="`artifactRepositoryId`" pulumi-lang-hcl="`artifact_repository_id`"&gt;`artifactRepositoryId`&lt;/span&gt; to this same ID does not change it. Destroy deletes this repository with every version in it, locked versions and versions created outside Terraform included. In any other repository destroy deletes only the current version, and only if it is a draft: the Workload API does not delete a locked artifact, so a locked version stays, and destroy warns and lists the versions left there. The Workload API removes a repository together with its last artifact, so deleting a draft that was its only version removes that repository too. State written before this attribute existed gets it on the next plan, inferred from the configuration: a repository named in &lt;span pulumi-lang-nodejs="`artifactRepositoryId`" pulumi-lang-dotnet="`ArtifactRepositoryId`" pulumi-lang-go="`artifactRepositoryId`" pulumi-lang-python="`artifact_repository_id`" pulumi-lang-yaml="`artifactRepositoryId`" pulumi-lang-java="`artifactRepositoryId`" pulumi-lang-hcl="`artifact_repository_id`"&gt;`artifactRepositoryId`&lt;/span&gt; counts as created elsewhere, any other as created by this resource. Until that plan is applied, destroy treats the repository as created elsewhere, so it keeps a repository the resource did create, and says so in its warning.
+        /// </summary>
+        [Output("createdArtifactRepositoryId")]
+        public Output<string> CreatedArtifactRepositoryId { get; private set; } = null!;
 
         /// <summary>
         /// The description of the Artifact.
@@ -112,7 +118,7 @@ namespace DataRobotPulumi.Datarobot
     public sealed class ArtifactArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// ID of the artifact repository for versioning. Computed on first create if not provided; subsequent updates create new versions in the same repository.
+        /// ID of the artifact repository for versioning. Computed on first create if not provided; subsequent updates create new versions in the same repository. What destroy deletes depends on whether this resource created the repository; see &lt;span pulumi-lang-nodejs="`createdArtifactRepositoryId`" pulumi-lang-dotnet="`CreatedArtifactRepositoryId`" pulumi-lang-go="`createdArtifactRepositoryId`" pulumi-lang-python="`created_artifact_repository_id`" pulumi-lang-yaml="`createdArtifactRepositoryId`" pulumi-lang-java="`createdArtifactRepositoryId`" pulumi-lang-hcl="`created_artifact_repository_id`"&gt;`createdArtifactRepositoryId`&lt;/span&gt;.
         /// </summary>
         [Input("artifactRepositoryId")]
         public Input<string>? ArtifactRepositoryId { get; set; }
@@ -168,10 +174,16 @@ namespace DataRobotPulumi.Datarobot
         public Input<string>? ArtifactId { get; set; }
 
         /// <summary>
-        /// ID of the artifact repository for versioning. Computed on first create if not provided; subsequent updates create new versions in the same repository.
+        /// ID of the artifact repository for versioning. Computed on first create if not provided; subsequent updates create new versions in the same repository. What destroy deletes depends on whether this resource created the repository; see &lt;span pulumi-lang-nodejs="`createdArtifactRepositoryId`" pulumi-lang-dotnet="`CreatedArtifactRepositoryId`" pulumi-lang-go="`createdArtifactRepositoryId`" pulumi-lang-python="`created_artifact_repository_id`" pulumi-lang-yaml="`createdArtifactRepositoryId`" pulumi-lang-java="`createdArtifactRepositoryId`" pulumi-lang-hcl="`created_artifact_repository_id`"&gt;`createdArtifactRepositoryId`&lt;/span&gt;.
         /// </summary>
         [Input("artifactRepositoryId")]
         public Input<string>? ArtifactRepositoryId { get; set; }
+
+        /// <summary>
+        /// ID of the artifact repository this resource created, or empty when it created none: &lt;span pulumi-lang-nodejs="`artifactRepositoryId`" pulumi-lang-dotnet="`ArtifactRepositoryId`" pulumi-lang-go="`artifactRepositoryId`" pulumi-lang-python="`artifact_repository_id`" pulumi-lang-yaml="`artifactRepositoryId`" pulumi-lang-java="`artifactRepositoryId`" pulumi-lang-hcl="`artifact_repository_id`"&gt;`artifactRepositoryId`&lt;/span&gt; names a repository created elsewhere, or the artifact was imported. Recorded at create, and kept when &lt;span pulumi-lang-nodejs="`artifactRepositoryId`" pulumi-lang-dotnet="`ArtifactRepositoryId`" pulumi-lang-go="`artifactRepositoryId`" pulumi-lang-python="`artifact_repository_id`" pulumi-lang-yaml="`artifactRepositoryId`" pulumi-lang-java="`artifactRepositoryId`" pulumi-lang-hcl="`artifact_repository_id`"&gt;`artifactRepositoryId`&lt;/span&gt; later changes; setting &lt;span pulumi-lang-nodejs="`artifactRepositoryId`" pulumi-lang-dotnet="`ArtifactRepositoryId`" pulumi-lang-go="`artifactRepositoryId`" pulumi-lang-python="`artifact_repository_id`" pulumi-lang-yaml="`artifactRepositoryId`" pulumi-lang-java="`artifactRepositoryId`" pulumi-lang-hcl="`artifact_repository_id`"&gt;`artifactRepositoryId`&lt;/span&gt; to this same ID does not change it. Destroy deletes this repository with every version in it, locked versions and versions created outside Terraform included. In any other repository destroy deletes only the current version, and only if it is a draft: the Workload API does not delete a locked artifact, so a locked version stays, and destroy warns and lists the versions left there. The Workload API removes a repository together with its last artifact, so deleting a draft that was its only version removes that repository too. State written before this attribute existed gets it on the next plan, inferred from the configuration: a repository named in &lt;span pulumi-lang-nodejs="`artifactRepositoryId`" pulumi-lang-dotnet="`ArtifactRepositoryId`" pulumi-lang-go="`artifactRepositoryId`" pulumi-lang-python="`artifact_repository_id`" pulumi-lang-yaml="`artifactRepositoryId`" pulumi-lang-java="`artifactRepositoryId`" pulumi-lang-hcl="`artifact_repository_id`"&gt;`artifactRepositoryId`&lt;/span&gt; counts as created elsewhere, any other as created by this resource. Until that plan is applied, destroy treats the repository as created elsewhere, so it keeps a repository the resource did create, and says so in its warning.
+        /// </summary>
+        [Input("createdArtifactRepositoryId")]
+        public Input<string>? CreatedArtifactRepositoryId { get; set; }
 
         /// <summary>
         /// The description of the Artifact.
