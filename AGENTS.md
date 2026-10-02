@@ -122,7 +122,9 @@ Pulumi config:
 ## CI/CD
 
 - **build.yml**: Runs on PRs, builds provider and SDKs
-- **release.yml**: Triggered on tags, publishes to package registries
+- **release.yml**: Triggered on tags, publishes to package registries. Run it manually with
+  `validate_only` checked (`gh workflow run release.yml -f validate_only=true`) to check the
+  publishing credentials, including the NuGet trusted publishing (OIDC) policy, without releasing
 - **upgrade-provider.yml**: Automatically upgrades terraform provider version
 
 ## Important Notes

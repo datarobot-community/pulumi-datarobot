@@ -1,6 +1,11 @@
 name: Release
 on:
   workflow_dispatch:
+    inputs:
+      validate_only:
+        description: 'Only run the credentials check (PyPI, npm, NuGet OIDC, GitHub) - build and publish nothing'
+        type: boolean
+        default: false
   push:
     tags:
       - v*.*.*
@@ -19,7 +24,11 @@ env:
   NPM_REGISTRY_URL: https://registry.npmjs.org
   PUBLISH_NPM: true
 
-  NUGET_PUBLISH_KEY: ${{ secrets.NUGET_PUBLISH_KEY }}
+  # nuget.org publishes via Trusted Publishing (OIDC), not a long-lived API key:
+  # NuGet/login exchanges the job's GitHub OIDC token for a key that lives 1 hour.
+  # The policy on nuget.org is bound to this workflow's FILE NAME (release.yml) --
+  # a copy of these steps in another workflow file needs its own policy.
+  NUGET_USER: ${{ secrets.NUGET_USER }}
   NUGET_FEED_URL: https://api.nuget.org/v3/index.json
   PUBLISH_NUGET: true
 
@@ -133,49 +142,42 @@ jobs:
           echo "✅ NPM OIDC capability validated (version $NPM_VERSION >= $REQUIRED_VERSION)"
           echo "::notice::NPM publish will use OIDC trusted publishing - ensure trusted publisher is configured on npmjs.com"
 
-      - name: Validate NuGet API key
+      # Pre-flight for Trusted Publishing. Performs the same OIDC -> API key exchange
+      # the publish job will do, so a policy that is missing, inactive, scoped to the
+      # wrong packages or bound to a different workflow file fails here in seconds
+      # instead of 15 minutes into the release, after the other SDKs have shipped.
+      - name: Check NuGet trusted publishing is configured
         if: ${{ env.PUBLISH_NUGET == 'true' }}
-        env:
-          NUGET_API_KEY: ${{ secrets.NUGET_PUBLISH_KEY }}
         run: |
-          # Check key is set
-          if [ -z "$NUGET_API_KEY" ]; then
-            echo "::error::NUGET_PUBLISH_KEY secret is not set"
+          if [ -z "$NUGET_USER" ]; then
+            echo "::error::NUGET_USER secret is not set - it must be the nuget.org profile name that owns the trusted publishing policy (not an email address)"
             exit 1
           fi
+          echo "Exchanging GitHub OIDC token for a short-lived nuget.org API key as '$NUGET_USER'"
 
-          # Check key length (NuGet API keys are typically 46+ characters)
-          if [ ${#NUGET_API_KEY} -lt 40 ]; then
-            echo "::error::NUGET_PUBLISH_KEY appears to be invalid (too short, expected 40+ characters)"
+      - name: Validate NuGet trusted publishing policy
+        if: ${{ env.PUBLISH_NUGET == 'true' }}
+        id: nuget_login_check
+        continue-on-error: true
+        uses: NuGet/login@8d196754b4036150537f80ac539e15c2f1028841 # v1.2.0
+        with:
+          user: ${{ env.NUGET_USER }}
+
+      - name: Report NuGet trusted publishing result
+        if: ${{ env.PUBLISH_NUGET == 'true' }}
+        run: |
+          if [ "${{ steps.nuget_login_check.outcome }}" != "success" ]; then
+            echo "::error::nuget.org refused to issue a short-lived API key for ${PACKAGE_NUGET}"
+            echo "::error::Check the Trusted Publishing policy at https://www.nuget.org/account/trustedpublishing:"
+            echo "::error::  Repository Owner = ${GITHUB_REPOSITORY%%/*}, Repository = ${GITHUB_REPOSITORY##*/}, Workflow File = release.yml"
+            echo "::error::  the policy must be active (not pending/expired) and its scope glob must cover ${PACKAGE_NUGET}"
             exit 1
           fi
-
-          # Validate NuGet API key by calling the API
-          # The verify-api-key endpoint validates the key without publishing
-          HTTP_RESPONSE=$(curl -s -w "\n%{http_code}" \
-            -H "X-NuGet-ApiKey: $NUGET_API_KEY" \
-            "https://api.nuget.org/v3/index.json")
-
-          HTTP_STATUS=$(echo "$HTTP_RESPONSE" | tail -n1)
-
-          # Check if we can access the API (200 = success)
-          if [ "$HTTP_STATUS" != "200" ]; then
-            echo "::warning::Could not verify NuGet API connectivity (HTTP $HTTP_STATUS)"
-          fi
-
-          # Try to verify key by attempting to get package versions (requires auth for push)
-          VERIFY_RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" \
-            -H "X-NuGet-ApiKey: $NUGET_API_KEY" \
-            -X PUT \
-            "https://www.nuget.org/api/v2/package/verify" 2>/dev/null || echo "000")
-
-          # 400 = bad request (but key format valid), 401/403 = invalid key
-          if [ "$VERIFY_RESPONSE" = "401" ] || [ "$VERIFY_RESPONSE" = "403" ]; then
-            echo "::error::NuGet API key authentication failed"
+          if [ -z "${{ steps.nuget_login_check.outputs.NUGET_API_KEY }}" ]; then
+            echo "::error::NuGet/login succeeded but returned no API key"
             exit 1
           fi
-
-          echo "✅ NuGet API key validated successfully"
+          echo "✅ nuget.org issued a short-lived API key - trusted publishing is working"
 
       - name: Validate GitHub token permissions
         env:
@@ -214,7 +216,7 @@ jobs:
           echo "|----------|--------|" >> $GITHUB_STEP_SUMMARY
           echo "| PyPI | ✅ Token valid |" >> $GITHUB_STEP_SUMMARY
           echo "| npm | ✅ OIDC ready |" >> $GITHUB_STEP_SUMMARY
-          echo "| NuGet | ✅ API key valid |" >> $GITHUB_STEP_SUMMARY
+          echo "| NuGet | ✅ Trusted publishing (OIDC) |" >> $GITHUB_STEP_SUMMARY
           echo "| GitHub | ✅ Token valid |" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "✅ All publishing credentials validated successfully" >> $GITHUB_STEP_SUMMARY
@@ -223,6 +225,9 @@ jobs:
     name: publish
     runs-on: ubuntu-latest
     needs: validate_credentials
+    # A validate_only dispatch stops here; publish_sdk and notify_slack are skipped with it.
+    # On tag pushes `inputs` is empty, so this is always true.
+    if: ${{ !inputs.validate_only }}
 
     steps:
     - name: Checkout Repo
@@ -339,10 +344,18 @@ jobs:
         name: Publish package to NPM
         working-directory: ${{github.workspace}}/sdk/nodejs/bin
         run: npm publish --access public --tag latest
+      # Mint the short-lived key immediately before the push: it is valid for 1 hour
+      # and each OIDC token can be exchanged exactly once.
+      - if: ${{ matrix.language == 'dotnet' && env.PUBLISH_NUGET == 'true' }}
+        name: NuGet login (OIDC -> short-lived API key)
+        id: nuget_login
+        uses: NuGet/login@8d196754b4036150537f80ac539e15c2f1028841 # v1.2.0
+        with:
+          user: ${{ env.NUGET_USER }}
       - if: ${{ matrix.language == 'dotnet' && env.PUBLISH_NUGET == 'true' }}
         name: publish nuget package
         run: |
-          dotnet nuget push ${{github.workspace}}/sdk/dotnet/bin/Debug/*.nupkg -s ${{ env.NUGET_FEED_URL }} -k ${{ env.NUGET_PUBLISH_KEY }}
+          dotnet nuget push ${{github.workspace}}/sdk/dotnet/bin/Debug/*.nupkg -s ${{ env.NUGET_FEED_URL }} -k ${{ steps.nuget_login.outputs.NUGET_API_KEY }}
           echo "done publishing packages"
     strategy:
       fail-fast: false
@@ -410,7 +423,7 @@ jobs:
     name: Release Summary
     runs-on: ubuntu-latest
     needs: [validate_credentials, publish_binary, publish_sdk]
-    if: always()
+    if: ${{ always() && !inputs.validate_only }}
     steps:
       - name: Generate Release Summary
         env:
