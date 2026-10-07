@@ -15,7 +15,7 @@ namespace DataRobotPulumi.Datarobot.Outputs
     public sealed class WorkloadRuntimeReplacementPolicy
     {
         /// <summary>
-        /// Duration in minutes to keep the old version during replacement. Maps to WAPI `config.keepOldVersionMinutes`.
+        /// Duration in minutes to keep the old version during replacement. Maps to WAPI `config.keepOldVersionMinutes`, which current platform versions accept but do not apply: how long the old version is kept is a cluster setting (300 seconds by default).
         /// </summary>
         public readonly int? KeepOldVersionMinutes;
         /// <summary>

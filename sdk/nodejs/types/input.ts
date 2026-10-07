@@ -1762,7 +1762,7 @@ export interface WorkloadRuntimeContainerGroupContainerResourceAllocation {
 
 export interface WorkloadRuntimeReplacementPolicy {
     /**
-     * Duration in minutes to keep the old version during replacement. Maps to WAPI `config.keepOldVersionMinutes`.
+     * Duration in minutes to keep the old version during replacement. Maps to WAPI `config.keepOldVersionMinutes`, which current platform versions accept but do not apply: how long the old version is kept is a cluster setting (300 seconds by default).
      */
     keepOldVersionMinutes?: pulumi.Input<number | undefined>;
     /**

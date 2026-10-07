@@ -16556,7 +16556,7 @@ func (o WorkloadRuntimeContainerGroupContainerResourceAllocationPtrOutput) Memor
 }
 
 type WorkloadRuntimeReplacementPolicy struct {
-	// Duration in minutes to keep the old version during replacement. Maps to WAPI `config.keepOldVersionMinutes`.
+	// Duration in minutes to keep the old version during replacement. Maps to WAPI `config.keepOldVersionMinutes`, which current platform versions accept but do not apply: how long the old version is kept is a cluster setting (300 seconds by default).
 	KeepOldVersionMinutes *int `pulumi:"keepOldVersionMinutes"`
 	// Duration in minutes for the warmup phase during replacement. Maps to WAPI `config.warmupDurationMinutes`.
 	WarmupMinutes *int `pulumi:"warmupMinutes"`
@@ -16574,7 +16574,7 @@ type WorkloadRuntimeReplacementPolicyInput interface {
 }
 
 type WorkloadRuntimeReplacementPolicyArgs struct {
-	// Duration in minutes to keep the old version during replacement. Maps to WAPI `config.keepOldVersionMinutes`.
+	// Duration in minutes to keep the old version during replacement. Maps to WAPI `config.keepOldVersionMinutes`, which current platform versions accept but do not apply: how long the old version is kept is a cluster setting (300 seconds by default).
 	KeepOldVersionMinutes pulumi.IntPtrInput `pulumi:"keepOldVersionMinutes"`
 	// Duration in minutes for the warmup phase during replacement. Maps to WAPI `config.warmupDurationMinutes`.
 	WarmupMinutes pulumi.IntPtrInput `pulumi:"warmupMinutes"`
@@ -16657,7 +16657,7 @@ func (o WorkloadRuntimeReplacementPolicyOutput) ToWorkloadRuntimeReplacementPoli
 	}).(WorkloadRuntimeReplacementPolicyPtrOutput)
 }
 
-// Duration in minutes to keep the old version during replacement. Maps to WAPI `config.keepOldVersionMinutes`.
+// Duration in minutes to keep the old version during replacement. Maps to WAPI `config.keepOldVersionMinutes`, which current platform versions accept but do not apply: how long the old version is kept is a cluster setting (300 seconds by default).
 func (o WorkloadRuntimeReplacementPolicyOutput) KeepOldVersionMinutes() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v WorkloadRuntimeReplacementPolicy) *int { return v.KeepOldVersionMinutes }).(pulumi.IntPtrOutput)
 }
@@ -16691,7 +16691,7 @@ func (o WorkloadRuntimeReplacementPolicyPtrOutput) Elem() WorkloadRuntimeReplace
 	}).(WorkloadRuntimeReplacementPolicyOutput)
 }
 
-// Duration in minutes to keep the old version during replacement. Maps to WAPI `config.keepOldVersionMinutes`.
+// Duration in minutes to keep the old version during replacement. Maps to WAPI `config.keepOldVersionMinutes`, which current platform versions accept but do not apply: how long the old version is kept is a cluster setting (300 seconds by default).
 func (o WorkloadRuntimeReplacementPolicyPtrOutput) KeepOldVersionMinutes() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *WorkloadRuntimeReplacementPolicy) *int {
 		if v == nil {

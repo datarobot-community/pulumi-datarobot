@@ -6623,7 +6623,7 @@ class WorkloadRuntimeReplacementPolicy(dict):
                  keep_old_version_minutes: Optional[_builtins.int] = None,
                  warmup_minutes: Optional[_builtins.int] = None):
         """
-        :param _builtins.int keep_old_version_minutes: Duration in minutes to keep the old version during replacement. Maps to WAPI `config.keepOldVersionMinutes`.
+        :param _builtins.int keep_old_version_minutes: Duration in minutes to keep the old version during replacement. Maps to WAPI `config.keepOldVersionMinutes`, which current platform versions accept but do not apply: how long the old version is kept is a cluster setting (300 seconds by default).
         :param _builtins.int warmup_minutes: Duration in minutes for the warmup phase during replacement. Maps to WAPI `config.warmupDurationMinutes`.
         """
         if keep_old_version_minutes is not None:
@@ -6635,7 +6635,7 @@ class WorkloadRuntimeReplacementPolicy(dict):
     @pulumi.getter(name="keepOldVersionMinutes")
     def keep_old_version_minutes(self) -> Optional[_builtins.int]:
         """
-        Duration in minutes to keep the old version during replacement. Maps to WAPI `config.keepOldVersionMinutes`.
+        Duration in minutes to keep the old version during replacement. Maps to WAPI `config.keepOldVersionMinutes`, which current platform versions accept but do not apply: how long the old version is kept is a cluster setting (300 seconds by default).
         """
         return pulumi.get(self, "keep_old_version_minutes")
 
