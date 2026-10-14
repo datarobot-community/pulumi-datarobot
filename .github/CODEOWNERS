@@ -2,21 +2,21 @@
 # https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
 
 # Default owners for everything in the repo
-* @datarobot-community/dsx
+* @datarobot-community/agent-lifecycle
 
 # Provider core code
-/provider/ @datarobot-community/dsx
+/provider/ @datarobot-community/agent-lifecycle
 
 # SDK directories (auto-generated, but review changes)
-/sdk/ @datarobot-community/dsx
+/sdk/ @datarobot-community/agent-lifecycle
 
 # CI/CD workflows
-/.github/ @datarobot-community/dsx
+/.github/ @datarobot-community/agent-lifecycle
 
 # Documentation
-/docs/ @datarobot-community/dsx
-README.md @datarobot-community/dsx
-CONTRIBUTING.md @datarobot-community/dsx
+/docs/ @datarobot-community/agent-lifecycle
+README.md @datarobot-community/agent-lifecycle
+CONTRIBUTING.md @datarobot-community/agent-lifecycle
 
 # Examples
-/examples/ @datarobot-community/dsx
+/examples/ @datarobot-community/agent-lifecycle
