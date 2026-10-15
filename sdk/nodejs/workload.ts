@@ -13,6 +13,8 @@ import * as utilities from "./utilities";
  *
  * When the new version never becomes ready, the platform abandons the rollout: it stops the new replica and the previous version keeps serving. Apply fails in that case, naming the artifact the workload is still on and linking its logs, so a rollout that did not happen is not reported as a successful update.
  *
+ * A create whose Workload errors on start, or whose tags are refused, deletes the Workload again, so the failed apply leaves nothing behind; for a Workload that errors on start, the error quotes the platform's reason and the last lines of its log. A create interrupted or timed out while the Workload starts records the Workload in state with a warning instead, since it may still come up.
+ *
  * ## Enclave placement
  *
  * On clusters with Enclaves enabled, a workload can be confined to an Enclave. Placement is governed by a Use Case: the platform restricts a workload to the Enclaves an administrator has granted to its Use Case, which is why <span pulumi-lang-nodejs="`useCaseId`" pulumi-lang-dotnet="`UseCaseId`" pulumi-lang-go="`useCaseId`" pulumi-lang-python="`use_case_id`" pulumi-lang-yaml="`useCaseId`" pulumi-lang-java="`useCaseId`" pulumi-lang-hcl="`use_case_id`">`useCaseId`</span> is required for any placed workload.
@@ -81,7 +83,7 @@ import * as utilities from "./utilities";
  * - A workload linked to several Use Cases is imported with <span pulumi-lang-nodejs="`useCaseId`" pulumi-lang-dotnet="`UseCaseId`" pulumi-lang-go="`useCaseId`" pulumi-lang-python="`use_case_id`" pulumi-lang-yaml="`useCaseId`" pulumi-lang-java="`useCaseId`" pulumi-lang-hcl="`use_case_id`">`useCaseId`</span> empty and a warning that names them, and so is one imported by a provider version that did not read the link. Set it to the one Terraform should manage: the provider records that existing link without linking the workload again, the others stay linked, and it is an in-place update even together with a placement change. If it names a Use Case the workload is not linked to, the provider links it and warns that the other links stay. Until it is set, removing the placement of such a workload is refused at plan.
  * - <span pulumi-lang-nodejs="`enclaveSelectionPolicy`" pulumi-lang-dotnet="`EnclaveSelectionPolicy`" pulumi-lang-go="`enclaveSelectionPolicy`" pulumi-lang-python="`enclave_selection_policy`" pulumi-lang-yaml="`enclaveSelectionPolicy`" pulumi-lang-java="`enclaveSelectionPolicy`" pulumi-lang-hcl="`enclave_selection_policy`">`enclaveSelectionPolicy`</span> and <span pulumi-lang-nodejs="`enclaves`" pulumi-lang-dotnet="`Enclaves`" pulumi-lang-go="`enclaves`" pulumi-lang-python="`enclaves`" pulumi-lang-yaml="`enclaves`" pulumi-lang-java="`enclaves`" pulumi-lang-hcl="`enclaves`">`enclaves`</span> are stripped from API responses on clusters without the Enclave entitlement, so the provider keeps your configured values in state rather than reading them back. A placement changed outside Terraform is not detected; <span pulumi-lang-nodejs="`enclaves`" pulumi-lang-dotnet="`Enclaves`" pulumi-lang-go="`enclaves`" pulumi-lang-python="`enclaves`" pulumi-lang-yaml="`enclaves`" pulumi-lang-java="`enclaves`" pulumi-lang-hcl="`enclaves`">`enclaves`</span> is desired state the platform never rewrites, so that only happens if someone edits the workload by hand.
  *
- * After an import, attributes the API returns in another form, or that the configuration leaves to the platform, can still plan a one-time update: <span pulumi-lang-nodejs="`memory`" pulumi-lang-dotnet="`Memory`" pulumi-lang-go="`memory`" pulumi-lang-python="`memory`" pulumi-lang-yaml="`memory`" pulumi-lang-java="`memory`" pulumi-lang-hcl="`memory`">`memory`</span> and <span pulumi-lang-nodejs="`gpuMemory`" pulumi-lang-dotnet="`GpuMemory`" pulumi-lang-go="`gpuMemory`" pulumi-lang-python="`gpu_memory`" pulumi-lang-yaml="`gpuMemory`" pulumi-lang-java="`gpuMemory`" pulumi-lang-hcl="`gpu_memory`">`gpuMemory`</span> come back in bytes, <span pulumi-lang-nodejs="`replacementPolicy`" pulumi-lang-dotnet="`ReplacementPolicy`" pulumi-lang-go="`replacementPolicy`" pulumi-lang-python="`replacement_policy`" pulumi-lang-yaml="`replacementPolicy`" pulumi-lang-java="`replacementPolicy`" pulumi-lang-hcl="`replacement_policy`">`replacementPolicy`</span> is not returned, <span pulumi-lang-nodejs="`containerGroups`" pulumi-lang-dotnet="`ContainerGroups`" pulumi-lang-go="`containerGroups`" pulumi-lang-python="`container_groups`" pulumi-lang-yaml="`containerGroups`" pulumi-lang-java="`containerGroups`" pulumi-lang-hcl="`container_groups`">`containerGroups`</span> and <span pulumi-lang-nodejs="`autoscaling`" pulumi-lang-dotnet="`Autoscaling`" pulumi-lang-go="`autoscaling`" pulumi-lang-python="`autoscaling`" pulumi-lang-yaml="`autoscaling`" pulumi-lang-java="`autoscaling`" pulumi-lang-hcl="`autoscaling`">`autoscaling`</span> left out of the configuration are imported as the platform reports them, and a workload pinned with <span pulumi-lang-nodejs="`enclaves`" pulumi-lang-dotnet="`Enclaves`" pulumi-lang-go="`enclaves`" pulumi-lang-python="`enclaves`" pulumi-lang-yaml="`enclaves`" pulumi-lang-java="`enclaves`" pulumi-lang-hcl="`enclaves`">`enclaves`</span> alone is imported with the <span pulumi-lang-nodejs="`manual`" pulumi-lang-dotnet="`Manual`" pulumi-lang-go="`manual`" pulumi-lang-python="`manual`" pulumi-lang-yaml="`manual`" pulumi-lang-java="`manual`" pulumi-lang-hcl="`manual`">`manual`</span> policy that the pin implies. All but the last roll the workload out again.
+ * After an import, attributes the API returns in another form, or that the configuration leaves to the platform, can still plan a one-time update: <span pulumi-lang-nodejs="`memory`" pulumi-lang-dotnet="`Memory`" pulumi-lang-go="`memory`" pulumi-lang-python="`memory`" pulumi-lang-yaml="`memory`" pulumi-lang-java="`memory`" pulumi-lang-hcl="`memory`">`memory`</span> and <span pulumi-lang-nodejs="`gpuMemory`" pulumi-lang-dotnet="`GpuMemory`" pulumi-lang-go="`gpuMemory`" pulumi-lang-python="`gpu_memory`" pulumi-lang-yaml="`gpuMemory`" pulumi-lang-java="`gpuMemory`" pulumi-lang-hcl="`gpu_memory`">`gpuMemory`</span> come back in bytes, <span pulumi-lang-nodejs="`replacementPolicy`" pulumi-lang-dotnet="`ReplacementPolicy`" pulumi-lang-go="`replacementPolicy`" pulumi-lang-python="`replacement_policy`" pulumi-lang-yaml="`replacementPolicy`" pulumi-lang-java="`replacementPolicy`" pulumi-lang-hcl="`replacement_policy`">`replacementPolicy`</span> is not returned, <span pulumi-lang-nodejs="`containerGroups`" pulumi-lang-dotnet="`ContainerGroups`" pulumi-lang-go="`containerGroups`" pulumi-lang-python="`container_groups`" pulumi-lang-yaml="`containerGroups`" pulumi-lang-java="`containerGroups`" pulumi-lang-hcl="`container_groups`">`containerGroups`</span> and <span pulumi-lang-nodejs="`autoscaling`" pulumi-lang-dotnet="`Autoscaling`" pulumi-lang-go="`autoscaling`" pulumi-lang-python="`autoscaling`" pulumi-lang-yaml="`autoscaling`" pulumi-lang-java="`autoscaling`" pulumi-lang-hcl="`autoscaling`">`autoscaling`</span> left out of the configuration are imported as the platform reports them, a workload pinned with <span pulumi-lang-nodejs="`enclaves`" pulumi-lang-dotnet="`Enclaves`" pulumi-lang-go="`enclaves`" pulumi-lang-python="`enclaves`" pulumi-lang-yaml="`enclaves`" pulumi-lang-java="`enclaves`" pulumi-lang-hcl="`enclaves`">`enclaves`</span> alone is imported with the <span pulumi-lang-nodejs="`manual`" pulumi-lang-dotnet="`Manual`" pulumi-lang-go="`manual`" pulumi-lang-python="`manual`" pulumi-lang-yaml="`manual`" pulumi-lang-java="`manual`" pulumi-lang-hcl="`manual`">`manual`</span> policy that the pin implies, and `tags = []` on a workload without tags plans an update that changes nothing. All but the last two roll the workload out again.
  *
  * ## Apply duration
  *
@@ -152,11 +154,19 @@ export class Workload extends pulumi.CustomResource {
      */
     declare public /*out*/ readonly status: pulumi.Output<string>;
     /**
+     * Tags on the Workload: the tags the DataRobot UI shows and `GET /workloads/?tagKeys=` filters on. They are recorded outside the Workload entity, so they are written once the Workload exists, and changing them updates them in place, without replacing the Workload or rolling it out.
+     */
+    declare public readonly tags: pulumi.Output<outputs.WorkloadTag[]>;
+    /**
      * Artifact type mirrored by this workload: <span pulumi-lang-nodejs="`service`" pulumi-lang-dotnet="`Service`" pulumi-lang-go="`service`" pulumi-lang-python="`service`" pulumi-lang-yaml="`service`" pulumi-lang-java="`service`" pulumi-lang-hcl="`service`">`service`</span>, <span pulumi-lang-nodejs="`nim`" pulumi-lang-dotnet="`Nim`" pulumi-lang-go="`nim`" pulumi-lang-python="`nim`" pulumi-lang-yaml="`nim`" pulumi-lang-java="`nim`" pulumi-lang-hcl="`nim`">`nim`</span>, <span pulumi-lang-nodejs="`agent`" pulumi-lang-dotnet="`Agent`" pulumi-lang-go="`agent`" pulumi-lang-python="`agent`" pulumi-lang-yaml="`agent`" pulumi-lang-java="`agent`" pulumi-lang-hcl="`agent`">`agent`</span>, or <span pulumi-lang-nodejs="`mcp`" pulumi-lang-dotnet="`Mcp`" pulumi-lang-go="`mcp`" pulumi-lang-python="`mcp`" pulumi-lang-yaml="`mcp`" pulumi-lang-java="`mcp`" pulumi-lang-hcl="`mcp`">`mcp`</span>. Set from the deployed artifact; not user-configurable.
      */
     declare public /*out*/ readonly type: pulumi.Output<string>;
     /**
      * The Use Case to link this Workload to, which groups it with the Use Case's other assets. Setting it alone has no effect on placement. It is additionally required when `runtime.enclave_selection_policy` or `runtime.enclaves` is set, because Enclave placement is restricted to the Enclaves an administrator has granted to this Use Case.
+     *
+     * Not refreshed: the link is recorded outside the Workload entity, so a link changed outside Terraform is invisible to the plan. Import does read it: a Workload linked to exactly one Use Case is imported with its ID, and one linked to several is imported with this attribute empty and a warning that names them.
+     *
+     * Changing it on its own moves the link in place: the Workload is linked to the new Use Case and unlinked from the old one, and keeps its ID and endpoint. A Workload on an Enclave stays there, and the platform refuses its next rollout while the new Use Case does not grant that Enclave. Changing it together with the Enclave placement replaces the Workload, which means a new ID and a new endpoint. Terraform destroys the current Workload first, so if the platform refuses the create nothing is left: set `lifecycle {<span pulumi-lang-nodejs=" createBeforeDestroy " pulumi-lang-dotnet=" CreateBeforeDestroy " pulumi-lang-go=" createBeforeDestroy " pulumi-lang-python=" create_before_destroy " pulumi-lang-yaml=" createBeforeDestroy " pulumi-lang-java=" createBeforeDestroy " pulumi-lang-hcl=" create_before_destroy "> createBeforeDestroy </span>= true }` on a Workload that serves traffic.
      */
     declare public readonly useCaseId: pulumi.Output<string | undefined>;
 
@@ -180,6 +190,7 @@ export class Workload extends pulumi.CustomResource {
             resourceInputs["name"] = state?.name;
             resourceInputs["runtime"] = state?.runtime;
             resourceInputs["status"] = state?.status;
+            resourceInputs["tags"] = state?.tags;
             resourceInputs["type"] = state?.type;
             resourceInputs["useCaseId"] = state?.useCaseId;
         } else {
@@ -195,6 +206,7 @@ export class Workload extends pulumi.CustomResource {
             resourceInputs["importance"] = args?.importance;
             resourceInputs["name"] = args?.name;
             resourceInputs["runtime"] = args?.runtime;
+            resourceInputs["tags"] = args?.tags;
             resourceInputs["useCaseId"] = args?.useCaseId;
             resourceInputs["endpoint"] = undefined /*out*/;
             resourceInputs["status"] = undefined /*out*/;
@@ -238,11 +250,19 @@ export interface WorkloadState {
      */
     status?: pulumi.Input<string | undefined>;
     /**
+     * Tags on the Workload: the tags the DataRobot UI shows and `GET /workloads/?tagKeys=` filters on. They are recorded outside the Workload entity, so they are written once the Workload exists, and changing them updates them in place, without replacing the Workload or rolling it out.
+     */
+    tags?: pulumi.Input<pulumi.Input<inputs.WorkloadTag>[] | undefined>;
+    /**
      * Artifact type mirrored by this workload: <span pulumi-lang-nodejs="`service`" pulumi-lang-dotnet="`Service`" pulumi-lang-go="`service`" pulumi-lang-python="`service`" pulumi-lang-yaml="`service`" pulumi-lang-java="`service`" pulumi-lang-hcl="`service`">`service`</span>, <span pulumi-lang-nodejs="`nim`" pulumi-lang-dotnet="`Nim`" pulumi-lang-go="`nim`" pulumi-lang-python="`nim`" pulumi-lang-yaml="`nim`" pulumi-lang-java="`nim`" pulumi-lang-hcl="`nim`">`nim`</span>, <span pulumi-lang-nodejs="`agent`" pulumi-lang-dotnet="`Agent`" pulumi-lang-go="`agent`" pulumi-lang-python="`agent`" pulumi-lang-yaml="`agent`" pulumi-lang-java="`agent`" pulumi-lang-hcl="`agent`">`agent`</span>, or <span pulumi-lang-nodejs="`mcp`" pulumi-lang-dotnet="`Mcp`" pulumi-lang-go="`mcp`" pulumi-lang-python="`mcp`" pulumi-lang-yaml="`mcp`" pulumi-lang-java="`mcp`" pulumi-lang-hcl="`mcp`">`mcp`</span>. Set from the deployed artifact; not user-configurable.
      */
     type?: pulumi.Input<string | undefined>;
     /**
      * The Use Case to link this Workload to, which groups it with the Use Case's other assets. Setting it alone has no effect on placement. It is additionally required when `runtime.enclave_selection_policy` or `runtime.enclaves` is set, because Enclave placement is restricted to the Enclaves an administrator has granted to this Use Case.
+     *
+     * Not refreshed: the link is recorded outside the Workload entity, so a link changed outside Terraform is invisible to the plan. Import does read it: a Workload linked to exactly one Use Case is imported with its ID, and one linked to several is imported with this attribute empty and a warning that names them.
+     *
+     * Changing it on its own moves the link in place: the Workload is linked to the new Use Case and unlinked from the old one, and keeps its ID and endpoint. A Workload on an Enclave stays there, and the platform refuses its next rollout while the new Use Case does not grant that Enclave. Changing it together with the Enclave placement replaces the Workload, which means a new ID and a new endpoint. Terraform destroys the current Workload first, so if the platform refuses the create nothing is left: set `lifecycle {<span pulumi-lang-nodejs=" createBeforeDestroy " pulumi-lang-dotnet=" CreateBeforeDestroy " pulumi-lang-go=" createBeforeDestroy " pulumi-lang-python=" create_before_destroy " pulumi-lang-yaml=" createBeforeDestroy " pulumi-lang-java=" createBeforeDestroy " pulumi-lang-hcl=" create_before_destroy "> createBeforeDestroy </span>= true }` on a Workload that serves traffic.
      */
     useCaseId?: pulumi.Input<string | undefined>;
 }
@@ -272,7 +292,15 @@ export interface WorkloadArgs {
      */
     runtime: pulumi.Input<inputs.WorkloadRuntime>;
     /**
+     * Tags on the Workload: the tags the DataRobot UI shows and `GET /workloads/?tagKeys=` filters on. They are recorded outside the Workload entity, so they are written once the Workload exists, and changing them updates them in place, without replacing the Workload or rolling it out.
+     */
+    tags?: pulumi.Input<pulumi.Input<inputs.WorkloadTag>[] | undefined>;
+    /**
      * The Use Case to link this Workload to, which groups it with the Use Case's other assets. Setting it alone has no effect on placement. It is additionally required when `runtime.enclave_selection_policy` or `runtime.enclaves` is set, because Enclave placement is restricted to the Enclaves an administrator has granted to this Use Case.
+     *
+     * Not refreshed: the link is recorded outside the Workload entity, so a link changed outside Terraform is invisible to the plan. Import does read it: a Workload linked to exactly one Use Case is imported with its ID, and one linked to several is imported with this attribute empty and a warning that names them.
+     *
+     * Changing it on its own moves the link in place: the Workload is linked to the new Use Case and unlinked from the old one, and keeps its ID and endpoint. A Workload on an Enclave stays there, and the platform refuses its next rollout while the new Use Case does not grant that Enclave. Changing it together with the Enclave placement replaces the Workload, which means a new ID and a new endpoint. Terraform destroys the current Workload first, so if the platform refuses the create nothing is left: set `lifecycle {<span pulumi-lang-nodejs=" createBeforeDestroy " pulumi-lang-dotnet=" CreateBeforeDestroy " pulumi-lang-go=" createBeforeDestroy " pulumi-lang-python=" create_before_destroy " pulumi-lang-yaml=" createBeforeDestroy " pulumi-lang-java=" createBeforeDestroy " pulumi-lang-hcl=" create_before_destroy "> createBeforeDestroy </span>= true }` on a Workload that serves traffic.
      */
     useCaseId?: pulumi.Input<string | undefined>;
 }

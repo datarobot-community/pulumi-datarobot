@@ -98,6 +98,10 @@ export class CustomApplicationFromEnvironment extends pulumi.CustomResource {
      */
     declare public readonly name: pulumi.Output<string>;
     /**
+     * The API key scope level required for requests to this custom application. Can be set to 'viewer', 'user', or 'admin'.
+     */
+    declare public readonly requiredKeyScopeLevel: pulumi.Output<string | undefined>;
+    /**
      * The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.
      */
     declare public readonly resources: pulumi.Output<outputs.CustomApplicationFromEnvironmentResources>;
@@ -126,6 +130,7 @@ export class CustomApplicationFromEnvironment extends pulumi.CustomResource {
             resourceInputs["externalAccessEnabled"] = state?.externalAccessEnabled;
             resourceInputs["externalAccessRecipients"] = state?.externalAccessRecipients;
             resourceInputs["name"] = state?.name;
+            resourceInputs["requiredKeyScopeLevel"] = state?.requiredKeyScopeLevel;
             resourceInputs["resources"] = state?.resources;
             resourceInputs["useCaseIds"] = state?.useCaseIds;
         } else {
@@ -138,6 +143,7 @@ export class CustomApplicationFromEnvironment extends pulumi.CustomResource {
             resourceInputs["externalAccessEnabled"] = args?.externalAccessEnabled;
             resourceInputs["externalAccessRecipients"] = args?.externalAccessRecipients;
             resourceInputs["name"] = args?.name;
+            resourceInputs["requiredKeyScopeLevel"] = args?.requiredKeyScopeLevel;
             resourceInputs["resources"] = args?.resources;
             resourceInputs["useCaseIds"] = args?.useCaseIds;
             resourceInputs["applicationUrl"] = undefined /*out*/;
@@ -181,6 +187,10 @@ export interface CustomApplicationFromEnvironmentState {
      */
     name?: pulumi.Input<string | undefined>;
     /**
+     * The API key scope level required for requests to this custom application. Can be set to 'viewer', 'user', or 'admin'.
+     */
+    requiredKeyScopeLevel?: pulumi.Input<string | undefined>;
+    /**
      * The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.
      */
     resources?: pulumi.Input<inputs.CustomApplicationFromEnvironmentResources | undefined>;
@@ -214,6 +224,10 @@ export interface CustomApplicationFromEnvironmentArgs {
      * The name of the Custom Application.
      */
     name?: pulumi.Input<string | undefined>;
+    /**
+     * The API key scope level required for requests to this custom application. Can be set to 'viewer', 'user', or 'admin'.
+     */
+    requiredKeyScopeLevel?: pulumi.Input<string | undefined>;
     /**
      * The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.
      */

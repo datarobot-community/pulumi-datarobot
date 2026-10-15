@@ -1770,3 +1770,14 @@ export interface WorkloadRuntimeReplacementPolicy {
      */
     warmupMinutes?: pulumi.Input<number | undefined>;
 }
+
+export interface WorkloadTag {
+    /**
+     * The name of the tag: 1 to 4096 characters, without `{`, `}`, `;` or `|`, and not starting with `datarobot.` or `integrations.`, which the platform reserves.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * The value of the tag: 1 to 4096 characters.
+     */
+    value: pulumi.Input<string>;
+}

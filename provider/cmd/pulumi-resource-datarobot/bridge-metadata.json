@@ -565,6 +565,9 @@
                                 "maxItemsOne": false
                             }
                         }
+                    },
+                    "tags": {
+                        "maxItemsOne": false
                     }
                 }
             }

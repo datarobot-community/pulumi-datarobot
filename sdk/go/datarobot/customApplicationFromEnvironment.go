@@ -84,6 +84,8 @@ type CustomApplicationFromEnvironment struct {
 	ExternalAccessRecipients pulumi.StringArrayOutput `pulumi:"externalAccessRecipients"`
 	// The name of the Custom Application.
 	Name pulumi.StringOutput `pulumi:"name"`
+	// The API key scope level required for requests to this custom application. Can be set to 'viewer', 'user', or 'admin'.
+	RequiredKeyScopeLevel pulumi.StringPtrOutput `pulumi:"requiredKeyScopeLevel"`
 	// The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.
 	Resources CustomApplicationFromEnvironmentResourcesOutput `pulumi:"resources"`
 	// The list of Use Case IDs to add the Custom Application to.
@@ -137,6 +139,8 @@ type customApplicationFromEnvironmentState struct {
 	ExternalAccessRecipients []string `pulumi:"externalAccessRecipients"`
 	// The name of the Custom Application.
 	Name *string `pulumi:"name"`
+	// The API key scope level required for requests to this custom application. Can be set to 'viewer', 'user', or 'admin'.
+	RequiredKeyScopeLevel *string `pulumi:"requiredKeyScopeLevel"`
 	// The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.
 	Resources *CustomApplicationFromEnvironmentResources `pulumi:"resources"`
 	// The list of Use Case IDs to add the Custom Application to.
@@ -158,6 +162,8 @@ type CustomApplicationFromEnvironmentState struct {
 	ExternalAccessRecipients pulumi.StringArrayInput
 	// The name of the Custom Application.
 	Name pulumi.StringPtrInput
+	// The API key scope level required for requests to this custom application. Can be set to 'viewer', 'user', or 'admin'.
+	RequiredKeyScopeLevel pulumi.StringPtrInput
 	// The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.
 	Resources CustomApplicationFromEnvironmentResourcesPtrInput
 	// The list of Use Case IDs to add the Custom Application to.
@@ -179,6 +185,8 @@ type customApplicationFromEnvironmentArgs struct {
 	ExternalAccessRecipients []string `pulumi:"externalAccessRecipients"`
 	// The name of the Custom Application.
 	Name *string `pulumi:"name"`
+	// The API key scope level required for requests to this custom application. Can be set to 'viewer', 'user', or 'admin'.
+	RequiredKeyScopeLevel *string `pulumi:"requiredKeyScopeLevel"`
 	// The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.
 	Resources *CustomApplicationFromEnvironmentResources `pulumi:"resources"`
 	// The list of Use Case IDs to add the Custom Application to.
@@ -197,6 +205,8 @@ type CustomApplicationFromEnvironmentArgs struct {
 	ExternalAccessRecipients pulumi.StringArrayInput
 	// The name of the Custom Application.
 	Name pulumi.StringPtrInput
+	// The API key scope level required for requests to this custom application. Can be set to 'viewer', 'user', or 'admin'.
+	RequiredKeyScopeLevel pulumi.StringPtrInput
 	// The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.
 	Resources CustomApplicationFromEnvironmentResourcesPtrInput
 	// The list of Use Case IDs to add the Custom Application to.
@@ -323,6 +333,11 @@ func (o CustomApplicationFromEnvironmentOutput) ExternalAccessRecipients() pulum
 // The name of the Custom Application.
 func (o CustomApplicationFromEnvironmentOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *CustomApplicationFromEnvironment) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
+}
+
+// The API key scope level required for requests to this custom application. Can be set to 'viewer', 'user', or 'admin'.
+func (o CustomApplicationFromEnvironmentOutput) RequiredKeyScopeLevel() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CustomApplicationFromEnvironment) pulumi.StringPtrOutput { return v.RequiredKeyScopeLevel }).(pulumi.StringPtrOutput)
 }
 
 // The resources for the Custom Application. If not specified, default values will be computed by the API based on the cluster configuration.

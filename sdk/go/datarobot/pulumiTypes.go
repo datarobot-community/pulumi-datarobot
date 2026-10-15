@@ -16711,6 +16711,112 @@ func (o WorkloadRuntimeReplacementPolicyPtrOutput) WarmupMinutes() pulumi.IntPtr
 	}).(pulumi.IntPtrOutput)
 }
 
+type WorkloadTag struct {
+	// The name of the tag: 1 to 4096 characters, without `{`, `}`, `;` or `|`, and not starting with `datarobot.` or `integrations.`, which the platform reserves.
+	Name string `pulumi:"name"`
+	// The value of the tag: 1 to 4096 characters.
+	Value string `pulumi:"value"`
+}
+
+// WorkloadTagInput is an input type that accepts WorkloadTagArgs and WorkloadTagOutput values.
+// You can construct a concrete instance of `WorkloadTagInput` via:
+//
+//	WorkloadTagArgs{...}
+type WorkloadTagInput interface {
+	pulumi.Input
+
+	ToWorkloadTagOutput() WorkloadTagOutput
+	ToWorkloadTagOutputWithContext(context.Context) WorkloadTagOutput
+}
+
+type WorkloadTagArgs struct {
+	// The name of the tag: 1 to 4096 characters, without `{`, `}`, `;` or `|`, and not starting with `datarobot.` or `integrations.`, which the platform reserves.
+	Name pulumi.StringInput `pulumi:"name"`
+	// The value of the tag: 1 to 4096 characters.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (WorkloadTagArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*WorkloadTag)(nil)).Elem()
+}
+
+func (i WorkloadTagArgs) ToWorkloadTagOutput() WorkloadTagOutput {
+	return i.ToWorkloadTagOutputWithContext(context.Background())
+}
+
+func (i WorkloadTagArgs) ToWorkloadTagOutputWithContext(ctx context.Context) WorkloadTagOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WorkloadTagOutput)
+}
+
+// WorkloadTagArrayInput is an input type that accepts WorkloadTagArray and WorkloadTagArrayOutput values.
+// You can construct a concrete instance of `WorkloadTagArrayInput` via:
+//
+//	WorkloadTagArray{ WorkloadTagArgs{...} }
+type WorkloadTagArrayInput interface {
+	pulumi.Input
+
+	ToWorkloadTagArrayOutput() WorkloadTagArrayOutput
+	ToWorkloadTagArrayOutputWithContext(context.Context) WorkloadTagArrayOutput
+}
+
+type WorkloadTagArray []WorkloadTagInput
+
+func (WorkloadTagArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]WorkloadTag)(nil)).Elem()
+}
+
+func (i WorkloadTagArray) ToWorkloadTagArrayOutput() WorkloadTagArrayOutput {
+	return i.ToWorkloadTagArrayOutputWithContext(context.Background())
+}
+
+func (i WorkloadTagArray) ToWorkloadTagArrayOutputWithContext(ctx context.Context) WorkloadTagArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WorkloadTagArrayOutput)
+}
+
+type WorkloadTagOutput struct{ *pulumi.OutputState }
+
+func (WorkloadTagOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*WorkloadTag)(nil)).Elem()
+}
+
+func (o WorkloadTagOutput) ToWorkloadTagOutput() WorkloadTagOutput {
+	return o
+}
+
+func (o WorkloadTagOutput) ToWorkloadTagOutputWithContext(ctx context.Context) WorkloadTagOutput {
+	return o
+}
+
+// The name of the tag: 1 to 4096 characters, without `{`, `}`, `;` or `|`, and not starting with `datarobot.` or `integrations.`, which the platform reserves.
+func (o WorkloadTagOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v WorkloadTag) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// The value of the tag: 1 to 4096 characters.
+func (o WorkloadTagOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v WorkloadTag) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type WorkloadTagArrayOutput struct{ *pulumi.OutputState }
+
+func (WorkloadTagArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]WorkloadTag)(nil)).Elem()
+}
+
+func (o WorkloadTagArrayOutput) ToWorkloadTagArrayOutput() WorkloadTagArrayOutput {
+	return o
+}
+
+func (o WorkloadTagArrayOutput) ToWorkloadTagArrayOutputWithContext(ctx context.Context) WorkloadTagArrayOutput {
+	return o
+}
+
+func (o WorkloadTagArrayOutput) Index(i pulumi.IntInput) WorkloadTagOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) WorkloadTag {
+		return vs[0].([]WorkloadTag)[vs[1].(int)]
+	}).(WorkloadTagOutput)
+}
+
 type GetArtifactCreator struct {
 	// User email address.
 	Email string `pulumi:"email"`
@@ -20854,6 +20960,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*WorkloadRuntimeContainerGroupContainerResourceAllocationPtrInput)(nil)).Elem(), WorkloadRuntimeContainerGroupContainerResourceAllocationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*WorkloadRuntimeReplacementPolicyInput)(nil)).Elem(), WorkloadRuntimeReplacementPolicyArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*WorkloadRuntimeReplacementPolicyPtrInput)(nil)).Elem(), WorkloadRuntimeReplacementPolicyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WorkloadTagInput)(nil)).Elem(), WorkloadTagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WorkloadTagArrayInput)(nil)).Elem(), WorkloadTagArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactCreatorInput)(nil)).Elem(), GetArtifactCreatorArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactSpecInput)(nil)).Elem(), GetArtifactSpecArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetArtifactSpecContainerGroupInput)(nil)).Elem(), GetArtifactSpecContainerGroupArgs{})
@@ -21095,6 +21203,8 @@ func init() {
 	pulumi.RegisterOutputType(WorkloadRuntimeContainerGroupContainerResourceAllocationPtrOutput{})
 	pulumi.RegisterOutputType(WorkloadRuntimeReplacementPolicyOutput{})
 	pulumi.RegisterOutputType(WorkloadRuntimeReplacementPolicyPtrOutput{})
+	pulumi.RegisterOutputType(WorkloadTagOutput{})
+	pulumi.RegisterOutputType(WorkloadTagArrayOutput{})
 	pulumi.RegisterOutputType(GetArtifactCreatorOutput{})
 	pulumi.RegisterOutputType(GetArtifactSpecOutput{})
 	pulumi.RegisterOutputType(GetArtifactSpecContainerGroupOutput{})
