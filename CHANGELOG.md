@@ -22,6 +22,70 @@ Changes made in this repo rather than upstream go under `Unreleased` while unrel
 and under a `### Provider changes` subsection once they ship in a version.
 Regenerating a section preserves that subsection.
 
+## [0.13.0] - 2026-10-15
+
+### Upstream provider changes
+
+[terraform-provider-datarobot](https://github.com/datarobot-community/terraform-provider-datarobot) `v0.12.6` → `v0.13.0`
+
+#### [v0.13.0](https://github.com/datarobot-community/terraform-provider-datarobot/releases/tag/v0.13.0) — 2026-10-15
+
+##### Added
+
+- `datarobot_workload` has a `tags` attribute: a set of `name`/`value` pairs, written once the Workload exists and changed in place without a rollout. Names and values the platform refuses are refused at plan; a tag refused while the Workload is created, for example over its per-installation tag limit, deletes the Workload again together with the tags already written and its Use Case link, and destroying a Workload removes its tags.
+- Tags are managed only when `tags` is set: they are then refreshed, so tags changed outside Terraform show as a change on the next plan (with Pulumi, with `--refresh`), and `tags = []` removes them all. A configuration without `tags` leaves the Workload's tags alone and never reads them.
+
+##### Changed
+
+- Built with Go 1.27.2 and `golang.org/x/net` v0.60.0 (which brings `golang.org/x/crypto` v0.57.0), fixing nine `govulncheck` advisories in the HTTP/2, HTTP/1, TLS and MIME header handling of Go 1.27.1 and `golang.org/x/net` v0.58.0. Local linting needs golangci-lint v2.14.0 or newer, since older releases cannot read Go 1.27.2's export data.
+
+##### Fixed
+
+- `datarobot_custom_application_from_environment` can be created again. Every create failed with `Struct defines fields not found in object: required_key_scope_level`, because the resource model had the field and the schema did not. The resource now accepts `required_key_scope_level` and sends it on create, as `datarobot_custom_application` does. Changing it replaces the resource.
+- `datarobot_custom_application` no longer fails an apply that changes `source_version_id` with `Provider produced inconsistent result after apply ... .resources: was null`. The API fills an application's `resources` from its source version and returns none until a source version sets them, so a change of the source version, such as a new `replicas` on the `datarobot_application_source`, changed `resources` while the plan kept the old value or null. The plan now shows `resources` as `(known after apply)` when the source version changes and `resources` is not set in the configuration.
+- `datarobot_execution_environment` with `docker_context_path` no longer plans an update on every run from a fresh checkout. The hash that detects a changed context was computed from an archive that carried each file's modification time, and a checkout writes new times every run, so a CI job rebuilt the environment and everything built on it with no change to the context. The archive now uses a fixed time. **After upgrading, the first plan shows one update of `docker_context_hash`.** Apply it once, and later plans stay empty until the context changes.
+- A failed `datarobot_artifact` image build now reports the platform's failure reason and the last lines of the build log, instead of an error naming a build log endpoint the Workload API has removed. The provider searched the log stream by a field the platform does not index, which also left the build log lines printed under `TF_LOG` empty.
+- Build log lines reach the log stream with a delay, so an apply that fails after starting an image build now waits up to a minute for them; `DATAROBOT_ARTIFACT_BUILD_LOGS_SETTLE_TIMEOUT` changes the wait, and `0` reads the log once. On clusters whose log stream does not index builds this way (Workload API before v11.12.0), the error has no log lines and the wait stops after three empty reads.
+- `datarobot_workload` no longer leaves a Workload that does not start on the platform outside state, where the next apply created a second one. One that errors on start is deleted again, and the error quotes the platform's reason and the last lines of its log; one whose wait times out or is interrupted is recorded in state with a warning, since it may still come up.
+- An update no longer fails with `Provider produced inconsistent result after apply` when the Workload's status changed after the plan: `status` is planned as known after apply and records what the update reads.
+
+Full upstream diff: [https://github.com/datarobot-community/terraform-provider-datarobot/compare/v0.12.6...v0.13.0](https://github.com/datarobot-community/terraform-provider-datarobot/compare/v0.12.6...v0.13.0)
+
+### Pulumi SDK surface
+
+_Diff of the generated `schema.json` — what actually reached the SDKs._
+
+**Changed resources (2)**
+
+- `datarobot:index/customApplicationFromEnvironment:CustomApplicationFromEnvironment`
+  - new inputs: `requiredKeyScopeLevel`
+  - new outputs: `requiredKeyScopeLevel`
+- `datarobot:index/workload:Workload`
+  - new inputs: `tags`
+  - new outputs: `tags`
+
+<details><summary>Nested types: 1 added, 0 removed, 0 changed</summary>
+
+Added:
+
+- `datarobot:index/WorkloadTag:WorkloadTag`
+
+</details>
+
+<details><summary>schema-tools compare</summary>
+
+```
+### Does the PR have any schema changes?
+
+_Generated by schema-tools v0.8.1._
+
+Looking good! No breaking changes found.
+
+#### New types: 1
+```
+
+</details>
+
 ## [0.12.6] - 2026-10-07
 
 ### Upstream provider changes
