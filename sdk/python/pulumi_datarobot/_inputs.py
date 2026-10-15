@@ -207,6 +207,8 @@ __all__ = [
     'WorkloadRuntimeContainerGroupContainerResourceAllocationArgsDict',
     'WorkloadRuntimeReplacementPolicyArgs',
     'WorkloadRuntimeReplacementPolicyArgsDict',
+    'WorkloadTagArgs',
+    'WorkloadTagArgsDict',
 ]
 
 class ApplicationSourceFromTemplateResourcesArgsDict(TypedDict):
@@ -8344,5 +8346,52 @@ class WorkloadRuntimeReplacementPolicyArgs:
     @warmup_minutes.setter
     def warmup_minutes(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "warmup_minutes", value)
+
+
+class WorkloadTagArgsDict(TypedDict):
+    name: pulumi.Input[_builtins.str]
+    """
+    The name of the tag: 1 to 4096 characters, without `{`, `}`, `;` or `|`, and not starting with `datarobot.` or `integrations.`, which the platform reserves.
+    """
+    value: pulumi.Input[_builtins.str]
+    """
+    The value of the tag: 1 to 4096 characters.
+    """
+
+@pulumi.input_type
+class WorkloadTagArgs:
+    def __init__(__self__, *,
+                 name: pulumi.Input[_builtins.str],
+                 value: pulumi.Input[_builtins.str]):
+        """
+        :param pulumi.Input[_builtins.str] name: The name of the tag: 1 to 4096 characters, without `{`, `}`, `;` or `|`, and not starting with `datarobot.` or `integrations.`, which the platform reserves.
+        :param pulumi.Input[_builtins.str] value: The value of the tag: 1 to 4096 characters.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "value", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> pulumi.Input[_builtins.str]:
+        """
+        The name of the tag: 1 to 4096 characters, without `{`, `}`, `;` or `|`, and not starting with `datarobot.` or `integrations.`, which the platform reserves.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "name", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def value(self) -> pulumi.Input[_builtins.str]:
+        """
+        The value of the tag: 1 to 4096 characters.
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "value", value)
 
 

@@ -112,6 +112,7 @@ __all__ = [
     'WorkloadRuntimeContainerGroupContainer',
     'WorkloadRuntimeContainerGroupContainerResourceAllocation',
     'WorkloadRuntimeReplacementPolicy',
+    'WorkloadTag',
     'GetArtifactCreatorResult',
     'GetArtifactSpecResult',
     'GetArtifactSpecContainerGroupResult',
@@ -6646,6 +6647,35 @@ class WorkloadRuntimeReplacementPolicy(dict):
         Duration in minutes for the warmup phase during replacement. Maps to WAPI `config.warmupDurationMinutes`.
         """
         return pulumi.get(self, "warmup_minutes")
+
+
+@pulumi.output_type
+class WorkloadTag(dict):
+    def __init__(__self__, *,
+                 name: _builtins.str,
+                 value: _builtins.str):
+        """
+        :param _builtins.str name: The name of the tag: 1 to 4096 characters, without `{`, `}`, `;` or `|`, and not starting with `datarobot.` or `integrations.`, which the platform reserves.
+        :param _builtins.str value: The value of the tag: 1 to 4096 characters.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "value", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        """
+        The name of the tag: 1 to 4096 characters, without `{`, `}`, `;` or `|`, and not starting with `datarobot.` or `integrations.`, which the platform reserves.
+        """
+        return pulumi.get(self, "name")
+
+    @_builtins.property
+    @pulumi.getter
+    def value(self) -> _builtins.str:
+        """
+        The value of the tag: 1 to 4096 characters.
+        """
+        return pulumi.get(self, "value")
 
 
 @pulumi.output_type
