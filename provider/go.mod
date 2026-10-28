@@ -5,7 +5,7 @@ go 1.27.2
 require (
 	github.com/datarobot-community/terraform-provider-datarobot v0.13.0
 	github.com/pulumi/pulumi-terraform-bridge/v3 v3.137.0
-	github.com/pulumi/pulumi/sdk/v3 v3.270.0
+	github.com/pulumi/pulumi/sdk/v3 v3.272.0
 )
 
 require (
