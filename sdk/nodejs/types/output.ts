@@ -95,7 +95,7 @@ export interface ArtifactSource {
      */
     generateIgnore: boolean;
     /**
-     * When <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> (default), after a source upload the provider triggers an image build and polls until it completes before proceeding (for example, before locking). When <span pulumi-lang-nodejs="`false`" pulumi-lang-dotnet="`False`" pulumi-lang-go="`false`" pulumi-lang-python="`false`" pulumi-lang-yaml="`false`" pulumi-lang-java="`false`" pulumi-lang-hcl="`false`">`false`</span>, the build is triggered but apply does not wait for <span pulumi-lang-nodejs="`imageUri`" pulumi-lang-dotnet="`ImageUri`" pulumi-lang-go="`imageUri`" pulumi-lang-python="`image_uri`" pulumi-lang-yaml="`imageUri`" pulumi-lang-java="`imageUri`" pulumi-lang-hcl="`image_uri`">`imageUri`</span> to be populated.
+     * When <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> (default), after a source upload the provider triggers an image build and polls until it completes before proceeding (for example, before locking). When <span pulumi-lang-nodejs="`false`" pulumi-lang-dotnet="`False`" pulumi-lang-go="`false`" pulumi-lang-python="`false`" pulumi-lang-yaml="`false`" pulumi-lang-java="`false`" pulumi-lang-hcl="`false`">`false`</span>, the build is triggered but apply does not wait for <span pulumi-lang-nodejs="`imageUri`" pulumi-lang-dotnet="`ImageUri`" pulumi-lang-go="`imageUri`" pulumi-lang-python="`image_uri`" pulumi-lang-yaml="`imageUri`" pulumi-lang-java="`imageUri`" pulumi-lang-hcl="`image_uri`">`imageUri`</span> to be populated; only a draft artifact can skip the wait, since an artifact is locked only once its build has completed. A create whose build is still running at the end of the wait fails: under Terraform the artifact is saved to state and marked tainted, so the next apply replaces it; under Pulumi a failed create keeps no state, so the artifact stays on the platform untracked and has to be deleted by hand.
      */
     waitForBuild: boolean;
 }
@@ -140,7 +140,7 @@ export interface ArtifactSpecContainerGroupContainer {
      */
     imageBuildConfig?: outputs.ArtifactSpecContainerGroupContainerImageBuildConfig;
     /**
-     * Docker image URI. Populated by the provider after a completed image build when <span pulumi-lang-nodejs="`source`" pulumi-lang-dotnet="`Source`" pulumi-lang-go="`source`" pulumi-lang-python="`source`" pulumi-lang-yaml="`source`" pulumi-lang-java="`source`" pulumi-lang-hcl="`source`">`source`</span> and <span pulumi-lang-nodejs="`imageBuildConfig`" pulumi-lang-dotnet="`ImageBuildConfig`" pulumi-lang-go="`imageBuildConfig`" pulumi-lang-python="`image_build_config`" pulumi-lang-yaml="`imageBuildConfig`" pulumi-lang-java="`imageBuildConfig`" pulumi-lang-hcl="`image_build_config`">`imageBuildConfig`</span> are set. May be set explicitly when not using source-driven builds.
+     * Docker image URI. Set this for a prebuilt image. When <span pulumi-lang-nodejs="`source`" pulumi-lang-dotnet="`Source`" pulumi-lang-go="`source`" pulumi-lang-python="`source`" pulumi-lang-yaml="`source`" pulumi-lang-java="`source`" pulumi-lang-hcl="`source`">`source`</span> and <span pulumi-lang-nodejs="`imageBuildConfig`" pulumi-lang-dotnet="`ImageBuildConfig`" pulumi-lang-go="`imageBuildConfig`" pulumi-lang-python="`image_build_config`" pulumi-lang-yaml="`imageBuildConfig`" pulumi-lang-java="`imageBuildConfig`" pulumi-lang-hcl="`image_build_config`">`imageBuildConfig`</span> are both set, apply builds the image and populates this attribute, and configuring it is rejected because the build would overwrite it.
      */
     imageUri: string;
     /**
@@ -2475,6 +2475,151 @@ export interface QuotaDefaultRule {
     window: string;
 }
 
+export interface RegisteredModelFromExternalDatasets {
+    /**
+     * The ID of the holdout dataset.
+     */
+    holdoutDataCatalogId?: string;
+    /**
+     * The version ID of the holdout dataset.
+     */
+    holdoutDataCatalogVersionId?: string;
+    /**
+     * The ID of the training dataset.
+     */
+    trainingDataCatalogId?: string;
+    /**
+     * The version ID of the training dataset.
+     */
+    trainingDataCatalogVersionId?: string;
+}
+
+export interface RegisteredModelFromExternalGeospatialMonitoring {
+    /**
+     * The name of the geospatial column to analyze.
+     */
+    primaryLocationColumn: string;
+}
+
+export interface RegisteredModelFromExternalModelDescription {
+    /**
+     * The build environment type of the model.
+     */
+    buildEnvironmentType?: string;
+    /**
+     * A description of the model. Changing it updates the latest version in place; removing it creates a new version.
+     */
+    description?: string;
+    /**
+     * The location of the model.
+     */
+    location?: string;
+    /**
+     * The model name.
+     */
+    modelName?: string;
+}
+
+export interface RegisteredModelFromExternalTag {
+    /**
+     * The name of the tag.
+     */
+    name: string;
+    /**
+     * The value of the tag.
+     */
+    value: string;
+}
+
+export interface RegisteredModelFromExternalTarget {
+    /**
+     * The class names for prediction results. For a `Binary` target, the first element is the minority (positive) class and the second is the majority (negative) class. Changing it replaces the Registered Model.
+     */
+    classNames?: string[];
+    /**
+     * The name of the target column. Required unless <span pulumi-lang-nodejs="`type`" pulumi-lang-dotnet="`Type`" pulumi-lang-go="`type`" pulumi-lang-python="`type`" pulumi-lang-yaml="`type`" pulumi-lang-java="`type`" pulumi-lang-hcl="`type`">`type`</span> is `AgenticWorkflow` or `MCP`. Changing it replaces the Registered Model.
+     */
+    name?: string;
+    /**
+     * The column containing prediction probabilities.
+     */
+    predictionProbabilitiesColumn?: string;
+    /**
+     * The prediction threshold used for binary classification models, between 0 and 1.
+     */
+    predictionThreshold?: number;
+    /**
+     * The target type of the model. Changing it replaces the Registered Model.
+     */
+    type: string;
+}
+
+export interface RegisteredModelFromExternalTextGeneration {
+    /**
+     * The name of the prompt column.
+     */
+    prompt: string;
+}
+
+export interface RegisteredModelFromExternalTimeseries {
+    /**
+     * The date format of the forecast date and forecast point columns. Changing it replaces the Registered Model.
+     */
+    datetimeColumnFormat: string;
+    /**
+     * The name of the forecast date column. Changing it replaces the Registered Model.
+     */
+    datetimeColumnName: string;
+    /**
+     * A negative number or zero: the end of the effective feature derivation window.
+     */
+    effectiveFeatureDerivationWindowEnd?: number;
+    /**
+     * A negative number or zero: the start of the effective feature derivation window.
+     */
+    effectiveFeatureDerivationWindowStart?: number;
+    /**
+     * A negative number or zero: the end of the feature derivation window, relative to the forecast point, in forecast distance time units.
+     */
+    featureDerivationWindowEnd?: number;
+    /**
+     * A negative number or zero: the start of the feature derivation window, relative to the forecast point, in forecast distance time units.
+     */
+    featureDerivationWindowStart?: number;
+    /**
+     * The name of the forecast distance column.
+     */
+    forecastDistanceColumnName: string;
+    /**
+     * The list of forecast distances. Changing it replaces the Registered Model.
+     */
+    forecastDistances?: number[];
+    /**
+     * The time unit of the forecast distances. Changing it replaces the Registered Model.
+     */
+    forecastDistancesTimeUnit: string;
+    /**
+     * The name of the forecast point column.
+     */
+    forecastPointColumnName: string;
+    /**
+     * Whether the model is cross-series.
+     */
+    isCrossSeries?: boolean;
+    /**
+     * Whether the model is optimized to support new series.
+     */
+    isNewSeriesSupport?: boolean;
+    /**
+     * Whether the model is a traditional time series model.
+     */
+    isTraditionalTimeSeries?: boolean;
+    /**
+     * The name of the series column of a multiseries model. Setting or removing it replaces the Registered Model.
+     */
+    seriesColumnName?: string;
+}
+
 export interface RegisteredModelTag {
     /**
      * The name of the tag.
@@ -2515,6 +2660,21 @@ export interface VectorDatabaseChunkingParameters {
      * The separators used to split the data.
      */
     separators: string[];
+}
+
+export interface WorkloadPlacement {
+    /**
+     * The name of the Enclave.
+     */
+    enclave: string;
+    /**
+     * The ID of the Enclave.
+     */
+    enclaveId: string;
+    /**
+     * The region the Enclave is deployed in, when the platform reports one.
+     */
+    region: string;
 }
 
 export interface WorkloadRuntime {

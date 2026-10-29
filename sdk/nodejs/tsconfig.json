@@ -66,6 +66,7 @@
         "qaApplication.ts",
         "quota.ts",
         "registeredModel.ts",
+        "registeredModelFromExternal.ts",
         "registeredModelFromLeaderboard.ts",
         "remoteRepository.ts",
         "types/index.ts",

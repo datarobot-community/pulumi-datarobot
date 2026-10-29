@@ -676,7 +676,7 @@ type ArtifactSource struct {
 	DirHash *string `pulumi:"dirHash"`
 	// When <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> (default), if <span pulumi-lang-nodejs="`dir`" pulumi-lang-dotnet="`Dir`" pulumi-lang-go="`dir`" pulumi-lang-python="`dir`" pulumi-lang-yaml="`dir`" pulumi-lang-java="`dir`" pulumi-lang-hcl="`dir`">`dir`</span> has neither `.drignore` nor `.wapiignore`, the provider writes a default `.drignore` at the start of apply. Existing ignore files are never overwritten. Set to <span pulumi-lang-nodejs="`false`" pulumi-lang-dotnet="`False`" pulumi-lang-go="`false`" pulumi-lang-python="`false`" pulumi-lang-yaml="`false`" pulumi-lang-java="`false`" pulumi-lang-hcl="`false`">`false`</span> to skip autogeneration. System excludes always apply and cannot be re-enabled from `.drignore`: `.datarobot.yaml`, `.git`, `.gitignore`, `.wapi`, `.datarobot/workload`, the `<path>.LOCAL.<timestamp>` copies the DataRobot CLI's sync keeps, and Terraform's own `.terraform`, `terraform.tfstate*` and `*.tfvars` files.
 	GenerateIgnore *bool `pulumi:"generateIgnore"`
-	// When <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> (default), after a source upload the provider triggers an image build and polls until it completes before proceeding (for example, before locking). When <span pulumi-lang-nodejs="`false`" pulumi-lang-dotnet="`False`" pulumi-lang-go="`false`" pulumi-lang-python="`false`" pulumi-lang-yaml="`false`" pulumi-lang-java="`false`" pulumi-lang-hcl="`false`">`false`</span>, the build is triggered but apply does not wait for <span pulumi-lang-nodejs="`imageUri`" pulumi-lang-dotnet="`ImageUri`" pulumi-lang-go="`imageUri`" pulumi-lang-python="`image_uri`" pulumi-lang-yaml="`imageUri`" pulumi-lang-java="`imageUri`" pulumi-lang-hcl="`image_uri`">`imageUri`</span> to be populated.
+	// When <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> (default), after a source upload the provider triggers an image build and polls until it completes before proceeding (for example, before locking). When <span pulumi-lang-nodejs="`false`" pulumi-lang-dotnet="`False`" pulumi-lang-go="`false`" pulumi-lang-python="`false`" pulumi-lang-yaml="`false`" pulumi-lang-java="`false`" pulumi-lang-hcl="`false`">`false`</span>, the build is triggered but apply does not wait for <span pulumi-lang-nodejs="`imageUri`" pulumi-lang-dotnet="`ImageUri`" pulumi-lang-go="`imageUri`" pulumi-lang-python="`image_uri`" pulumi-lang-yaml="`imageUri`" pulumi-lang-java="`imageUri`" pulumi-lang-hcl="`image_uri`">`imageUri`</span> to be populated; only a draft artifact can skip the wait, since an artifact is locked only once its build has completed. A create whose build is still running at the end of the wait fails: under Terraform the artifact is saved to state and marked tainted, so the next apply replaces it; under Pulumi a failed create keeps no state, so the artifact stays on the platform untracked and has to be deleted by hand.
 	WaitForBuild *bool `pulumi:"waitForBuild"`
 }
 
@@ -698,7 +698,7 @@ type ArtifactSourceArgs struct {
 	DirHash pulumi.StringPtrInput `pulumi:"dirHash"`
 	// When <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> (default), if <span pulumi-lang-nodejs="`dir`" pulumi-lang-dotnet="`Dir`" pulumi-lang-go="`dir`" pulumi-lang-python="`dir`" pulumi-lang-yaml="`dir`" pulumi-lang-java="`dir`" pulumi-lang-hcl="`dir`">`dir`</span> has neither `.drignore` nor `.wapiignore`, the provider writes a default `.drignore` at the start of apply. Existing ignore files are never overwritten. Set to <span pulumi-lang-nodejs="`false`" pulumi-lang-dotnet="`False`" pulumi-lang-go="`false`" pulumi-lang-python="`false`" pulumi-lang-yaml="`false`" pulumi-lang-java="`false`" pulumi-lang-hcl="`false`">`false`</span> to skip autogeneration. System excludes always apply and cannot be re-enabled from `.drignore`: `.datarobot.yaml`, `.git`, `.gitignore`, `.wapi`, `.datarobot/workload`, the `<path>.LOCAL.<timestamp>` copies the DataRobot CLI's sync keeps, and Terraform's own `.terraform`, `terraform.tfstate*` and `*.tfvars` files.
 	GenerateIgnore pulumi.BoolPtrInput `pulumi:"generateIgnore"`
-	// When <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> (default), after a source upload the provider triggers an image build and polls until it completes before proceeding (for example, before locking). When <span pulumi-lang-nodejs="`false`" pulumi-lang-dotnet="`False`" pulumi-lang-go="`false`" pulumi-lang-python="`false`" pulumi-lang-yaml="`false`" pulumi-lang-java="`false`" pulumi-lang-hcl="`false`">`false`</span>, the build is triggered but apply does not wait for <span pulumi-lang-nodejs="`imageUri`" pulumi-lang-dotnet="`ImageUri`" pulumi-lang-go="`imageUri`" pulumi-lang-python="`image_uri`" pulumi-lang-yaml="`imageUri`" pulumi-lang-java="`imageUri`" pulumi-lang-hcl="`image_uri`">`imageUri`</span> to be populated.
+	// When <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> (default), after a source upload the provider triggers an image build and polls until it completes before proceeding (for example, before locking). When <span pulumi-lang-nodejs="`false`" pulumi-lang-dotnet="`False`" pulumi-lang-go="`false`" pulumi-lang-python="`false`" pulumi-lang-yaml="`false`" pulumi-lang-java="`false`" pulumi-lang-hcl="`false`">`false`</span>, the build is triggered but apply does not wait for <span pulumi-lang-nodejs="`imageUri`" pulumi-lang-dotnet="`ImageUri`" pulumi-lang-go="`imageUri`" pulumi-lang-python="`image_uri`" pulumi-lang-yaml="`imageUri`" pulumi-lang-java="`imageUri`" pulumi-lang-hcl="`image_uri`">`imageUri`</span> to be populated; only a draft artifact can skip the wait, since an artifact is locked only once its build has completed. A create whose build is still running at the end of the wait fails: under Terraform the artifact is saved to state and marked tainted, so the next apply replaces it; under Pulumi a failed create keeps no state, so the artifact stays on the platform untracked and has to be deleted by hand.
 	WaitForBuild pulumi.BoolPtrInput `pulumi:"waitForBuild"`
 }
 
@@ -794,7 +794,7 @@ func (o ArtifactSourceOutput) GenerateIgnore() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ArtifactSource) *bool { return v.GenerateIgnore }).(pulumi.BoolPtrOutput)
 }
 
-// When <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> (default), after a source upload the provider triggers an image build and polls until it completes before proceeding (for example, before locking). When <span pulumi-lang-nodejs="`false`" pulumi-lang-dotnet="`False`" pulumi-lang-go="`false`" pulumi-lang-python="`false`" pulumi-lang-yaml="`false`" pulumi-lang-java="`false`" pulumi-lang-hcl="`false`">`false`</span>, the build is triggered but apply does not wait for <span pulumi-lang-nodejs="`imageUri`" pulumi-lang-dotnet="`ImageUri`" pulumi-lang-go="`imageUri`" pulumi-lang-python="`image_uri`" pulumi-lang-yaml="`imageUri`" pulumi-lang-java="`imageUri`" pulumi-lang-hcl="`image_uri`">`imageUri`</span> to be populated.
+// When <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> (default), after a source upload the provider triggers an image build and polls until it completes before proceeding (for example, before locking). When <span pulumi-lang-nodejs="`false`" pulumi-lang-dotnet="`False`" pulumi-lang-go="`false`" pulumi-lang-python="`false`" pulumi-lang-yaml="`false`" pulumi-lang-java="`false`" pulumi-lang-hcl="`false`">`false`</span>, the build is triggered but apply does not wait for <span pulumi-lang-nodejs="`imageUri`" pulumi-lang-dotnet="`ImageUri`" pulumi-lang-go="`imageUri`" pulumi-lang-python="`image_uri`" pulumi-lang-yaml="`imageUri`" pulumi-lang-java="`imageUri`" pulumi-lang-hcl="`image_uri`">`imageUri`</span> to be populated; only a draft artifact can skip the wait, since an artifact is locked only once its build has completed. A create whose build is still running at the end of the wait fails: under Terraform the artifact is saved to state and marked tainted, so the next apply replaces it; under Pulumi a failed create keeps no state, so the artifact stays on the platform untracked and has to be deleted by hand.
 func (o ArtifactSourceOutput) WaitForBuild() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ArtifactSource) *bool { return v.WaitForBuild }).(pulumi.BoolPtrOutput)
 }
@@ -853,7 +853,7 @@ func (o ArtifactSourcePtrOutput) GenerateIgnore() pulumi.BoolPtrOutput {
 	}).(pulumi.BoolPtrOutput)
 }
 
-// When <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> (default), after a source upload the provider triggers an image build and polls until it completes before proceeding (for example, before locking). When <span pulumi-lang-nodejs="`false`" pulumi-lang-dotnet="`False`" pulumi-lang-go="`false`" pulumi-lang-python="`false`" pulumi-lang-yaml="`false`" pulumi-lang-java="`false`" pulumi-lang-hcl="`false`">`false`</span>, the build is triggered but apply does not wait for <span pulumi-lang-nodejs="`imageUri`" pulumi-lang-dotnet="`ImageUri`" pulumi-lang-go="`imageUri`" pulumi-lang-python="`image_uri`" pulumi-lang-yaml="`imageUri`" pulumi-lang-java="`imageUri`" pulumi-lang-hcl="`image_uri`">`imageUri`</span> to be populated.
+// When <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> (default), after a source upload the provider triggers an image build and polls until it completes before proceeding (for example, before locking). When <span pulumi-lang-nodejs="`false`" pulumi-lang-dotnet="`False`" pulumi-lang-go="`false`" pulumi-lang-python="`false`" pulumi-lang-yaml="`false`" pulumi-lang-java="`false`" pulumi-lang-hcl="`false`">`false`</span>, the build is triggered but apply does not wait for <span pulumi-lang-nodejs="`imageUri`" pulumi-lang-dotnet="`ImageUri`" pulumi-lang-go="`imageUri`" pulumi-lang-python="`image_uri`" pulumi-lang-yaml="`imageUri`" pulumi-lang-java="`imageUri`" pulumi-lang-hcl="`image_uri`">`imageUri`</span> to be populated; only a draft artifact can skip the wait, since an artifact is locked only once its build has completed. A create whose build is still running at the end of the wait fails: under Terraform the artifact is saved to state and marked tainted, so the next apply replaces it; under Pulumi a failed create keeps no state, so the artifact stays on the platform untracked and has to be deleted by hand.
 func (o ArtifactSourcePtrOutput) WaitForBuild() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ArtifactSource) *bool {
 		if v == nil {
@@ -1127,7 +1127,7 @@ type ArtifactSpecContainerGroupContainer struct {
 	EnvironmentVars []ArtifactSpecContainerGroupContainerEnvironmentVar `pulumi:"environmentVars"`
 	// Configuration for server-side image builds from source code.
 	ImageBuildConfig *ArtifactSpecContainerGroupContainerImageBuildConfig `pulumi:"imageBuildConfig"`
-	// Docker image URI. Populated by the provider after a completed image build when <span pulumi-lang-nodejs="`source`" pulumi-lang-dotnet="`Source`" pulumi-lang-go="`source`" pulumi-lang-python="`source`" pulumi-lang-yaml="`source`" pulumi-lang-java="`source`" pulumi-lang-hcl="`source`">`source`</span> and <span pulumi-lang-nodejs="`imageBuildConfig`" pulumi-lang-dotnet="`ImageBuildConfig`" pulumi-lang-go="`imageBuildConfig`" pulumi-lang-python="`image_build_config`" pulumi-lang-yaml="`imageBuildConfig`" pulumi-lang-java="`imageBuildConfig`" pulumi-lang-hcl="`image_build_config`">`imageBuildConfig`</span> are set. May be set explicitly when not using source-driven builds.
+	// Docker image URI. Set this for a prebuilt image. When <span pulumi-lang-nodejs="`source`" pulumi-lang-dotnet="`Source`" pulumi-lang-go="`source`" pulumi-lang-python="`source`" pulumi-lang-yaml="`source`" pulumi-lang-java="`source`" pulumi-lang-hcl="`source`">`source`</span> and <span pulumi-lang-nodejs="`imageBuildConfig`" pulumi-lang-dotnet="`ImageBuildConfig`" pulumi-lang-go="`imageBuildConfig`" pulumi-lang-python="`image_build_config`" pulumi-lang-yaml="`imageBuildConfig`" pulumi-lang-java="`imageBuildConfig`" pulumi-lang-hcl="`image_build_config`">`imageBuildConfig`</span> are both set, apply builds the image and populates this attribute, and configuring it is rejected because the build would overwrite it.
 	ImageUri *string `pulumi:"imageUri"`
 	// Container liveness check configuration.
 	LivenessProbe *ArtifactSpecContainerGroupContainerLivenessProbe `pulumi:"livenessProbe"`
@@ -1167,7 +1167,7 @@ type ArtifactSpecContainerGroupContainerArgs struct {
 	EnvironmentVars ArtifactSpecContainerGroupContainerEnvironmentVarArrayInput `pulumi:"environmentVars"`
 	// Configuration for server-side image builds from source code.
 	ImageBuildConfig ArtifactSpecContainerGroupContainerImageBuildConfigPtrInput `pulumi:"imageBuildConfig"`
-	// Docker image URI. Populated by the provider after a completed image build when <span pulumi-lang-nodejs="`source`" pulumi-lang-dotnet="`Source`" pulumi-lang-go="`source`" pulumi-lang-python="`source`" pulumi-lang-yaml="`source`" pulumi-lang-java="`source`" pulumi-lang-hcl="`source`">`source`</span> and <span pulumi-lang-nodejs="`imageBuildConfig`" pulumi-lang-dotnet="`ImageBuildConfig`" pulumi-lang-go="`imageBuildConfig`" pulumi-lang-python="`image_build_config`" pulumi-lang-yaml="`imageBuildConfig`" pulumi-lang-java="`imageBuildConfig`" pulumi-lang-hcl="`image_build_config`">`imageBuildConfig`</span> are set. May be set explicitly when not using source-driven builds.
+	// Docker image URI. Set this for a prebuilt image. When <span pulumi-lang-nodejs="`source`" pulumi-lang-dotnet="`Source`" pulumi-lang-go="`source`" pulumi-lang-python="`source`" pulumi-lang-yaml="`source`" pulumi-lang-java="`source`" pulumi-lang-hcl="`source`">`source`</span> and <span pulumi-lang-nodejs="`imageBuildConfig`" pulumi-lang-dotnet="`ImageBuildConfig`" pulumi-lang-go="`imageBuildConfig`" pulumi-lang-python="`image_build_config`" pulumi-lang-yaml="`imageBuildConfig`" pulumi-lang-java="`imageBuildConfig`" pulumi-lang-hcl="`image_build_config`">`imageBuildConfig`</span> are both set, apply builds the image and populates this attribute, and configuring it is rejected because the build would overwrite it.
 	ImageUri pulumi.StringPtrInput `pulumi:"imageUri"`
 	// Container liveness check configuration.
 	LivenessProbe ArtifactSpecContainerGroupContainerLivenessProbePtrInput `pulumi:"livenessProbe"`
@@ -1265,7 +1265,7 @@ func (o ArtifactSpecContainerGroupContainerOutput) ImageBuildConfig() ArtifactSp
 	}).(ArtifactSpecContainerGroupContainerImageBuildConfigPtrOutput)
 }
 
-// Docker image URI. Populated by the provider after a completed image build when <span pulumi-lang-nodejs="`source`" pulumi-lang-dotnet="`Source`" pulumi-lang-go="`source`" pulumi-lang-python="`source`" pulumi-lang-yaml="`source`" pulumi-lang-java="`source`" pulumi-lang-hcl="`source`">`source`</span> and <span pulumi-lang-nodejs="`imageBuildConfig`" pulumi-lang-dotnet="`ImageBuildConfig`" pulumi-lang-go="`imageBuildConfig`" pulumi-lang-python="`image_build_config`" pulumi-lang-yaml="`imageBuildConfig`" pulumi-lang-java="`imageBuildConfig`" pulumi-lang-hcl="`image_build_config`">`imageBuildConfig`</span> are set. May be set explicitly when not using source-driven builds.
+// Docker image URI. Set this for a prebuilt image. When <span pulumi-lang-nodejs="`source`" pulumi-lang-dotnet="`Source`" pulumi-lang-go="`source`" pulumi-lang-python="`source`" pulumi-lang-yaml="`source`" pulumi-lang-java="`source`" pulumi-lang-hcl="`source`">`source`</span> and <span pulumi-lang-nodejs="`imageBuildConfig`" pulumi-lang-dotnet="`ImageBuildConfig`" pulumi-lang-go="`imageBuildConfig`" pulumi-lang-python="`image_build_config`" pulumi-lang-yaml="`imageBuildConfig`" pulumi-lang-java="`imageBuildConfig`" pulumi-lang-hcl="`image_build_config`">`imageBuildConfig`</span> are both set, apply builds the image and populates this attribute, and configuring it is rejected because the build would overwrite it.
 func (o ArtifactSpecContainerGroupContainerOutput) ImageUri() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ArtifactSpecContainerGroupContainer) *string { return v.ImageUri }).(pulumi.StringPtrOutput)
 }
@@ -15250,6 +15250,1371 @@ func (o QuotaDefaultRuleArrayOutput) Index(i pulumi.IntInput) QuotaDefaultRuleOu
 	}).(QuotaDefaultRuleOutput)
 }
 
+type RegisteredModelFromExternalDatasets struct {
+	// The ID of the holdout dataset.
+	HoldoutDataCatalogId *string `pulumi:"holdoutDataCatalogId"`
+	// The version ID of the holdout dataset.
+	HoldoutDataCatalogVersionId *string `pulumi:"holdoutDataCatalogVersionId"`
+	// The ID of the training dataset.
+	TrainingDataCatalogId *string `pulumi:"trainingDataCatalogId"`
+	// The version ID of the training dataset.
+	TrainingDataCatalogVersionId *string `pulumi:"trainingDataCatalogVersionId"`
+}
+
+// RegisteredModelFromExternalDatasetsInput is an input type that accepts RegisteredModelFromExternalDatasetsArgs and RegisteredModelFromExternalDatasetsOutput values.
+// You can construct a concrete instance of `RegisteredModelFromExternalDatasetsInput` via:
+//
+//	RegisteredModelFromExternalDatasetsArgs{...}
+type RegisteredModelFromExternalDatasetsInput interface {
+	pulumi.Input
+
+	ToRegisteredModelFromExternalDatasetsOutput() RegisteredModelFromExternalDatasetsOutput
+	ToRegisteredModelFromExternalDatasetsOutputWithContext(context.Context) RegisteredModelFromExternalDatasetsOutput
+}
+
+type RegisteredModelFromExternalDatasetsArgs struct {
+	// The ID of the holdout dataset.
+	HoldoutDataCatalogId pulumi.StringPtrInput `pulumi:"holdoutDataCatalogId"`
+	// The version ID of the holdout dataset.
+	HoldoutDataCatalogVersionId pulumi.StringPtrInput `pulumi:"holdoutDataCatalogVersionId"`
+	// The ID of the training dataset.
+	TrainingDataCatalogId pulumi.StringPtrInput `pulumi:"trainingDataCatalogId"`
+	// The version ID of the training dataset.
+	TrainingDataCatalogVersionId pulumi.StringPtrInput `pulumi:"trainingDataCatalogVersionId"`
+}
+
+func (RegisteredModelFromExternalDatasetsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RegisteredModelFromExternalDatasets)(nil)).Elem()
+}
+
+func (i RegisteredModelFromExternalDatasetsArgs) ToRegisteredModelFromExternalDatasetsOutput() RegisteredModelFromExternalDatasetsOutput {
+	return i.ToRegisteredModelFromExternalDatasetsOutputWithContext(context.Background())
+}
+
+func (i RegisteredModelFromExternalDatasetsArgs) ToRegisteredModelFromExternalDatasetsOutputWithContext(ctx context.Context) RegisteredModelFromExternalDatasetsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RegisteredModelFromExternalDatasetsOutput)
+}
+
+func (i RegisteredModelFromExternalDatasetsArgs) ToRegisteredModelFromExternalDatasetsPtrOutput() RegisteredModelFromExternalDatasetsPtrOutput {
+	return i.ToRegisteredModelFromExternalDatasetsPtrOutputWithContext(context.Background())
+}
+
+func (i RegisteredModelFromExternalDatasetsArgs) ToRegisteredModelFromExternalDatasetsPtrOutputWithContext(ctx context.Context) RegisteredModelFromExternalDatasetsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RegisteredModelFromExternalDatasetsOutput).ToRegisteredModelFromExternalDatasetsPtrOutputWithContext(ctx)
+}
+
+// RegisteredModelFromExternalDatasetsPtrInput is an input type that accepts RegisteredModelFromExternalDatasetsArgs, RegisteredModelFromExternalDatasetsPtr and RegisteredModelFromExternalDatasetsPtrOutput values.
+// You can construct a concrete instance of `RegisteredModelFromExternalDatasetsPtrInput` via:
+//
+//	        RegisteredModelFromExternalDatasetsArgs{...}
+//
+//	or:
+//
+//	        nil
+type RegisteredModelFromExternalDatasetsPtrInput interface {
+	pulumi.Input
+
+	ToRegisteredModelFromExternalDatasetsPtrOutput() RegisteredModelFromExternalDatasetsPtrOutput
+	ToRegisteredModelFromExternalDatasetsPtrOutputWithContext(context.Context) RegisteredModelFromExternalDatasetsPtrOutput
+}
+
+type registeredModelFromExternalDatasetsPtrType RegisteredModelFromExternalDatasetsArgs
+
+func RegisteredModelFromExternalDatasetsPtr(v *RegisteredModelFromExternalDatasetsArgs) RegisteredModelFromExternalDatasetsPtrInput {
+	return (*registeredModelFromExternalDatasetsPtrType)(v)
+}
+
+func (*registeredModelFromExternalDatasetsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**RegisteredModelFromExternalDatasets)(nil)).Elem()
+}
+
+func (i *registeredModelFromExternalDatasetsPtrType) ToRegisteredModelFromExternalDatasetsPtrOutput() RegisteredModelFromExternalDatasetsPtrOutput {
+	return i.ToRegisteredModelFromExternalDatasetsPtrOutputWithContext(context.Background())
+}
+
+func (i *registeredModelFromExternalDatasetsPtrType) ToRegisteredModelFromExternalDatasetsPtrOutputWithContext(ctx context.Context) RegisteredModelFromExternalDatasetsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RegisteredModelFromExternalDatasetsPtrOutput)
+}
+
+type RegisteredModelFromExternalDatasetsOutput struct{ *pulumi.OutputState }
+
+func (RegisteredModelFromExternalDatasetsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RegisteredModelFromExternalDatasets)(nil)).Elem()
+}
+
+func (o RegisteredModelFromExternalDatasetsOutput) ToRegisteredModelFromExternalDatasetsOutput() RegisteredModelFromExternalDatasetsOutput {
+	return o
+}
+
+func (o RegisteredModelFromExternalDatasetsOutput) ToRegisteredModelFromExternalDatasetsOutputWithContext(ctx context.Context) RegisteredModelFromExternalDatasetsOutput {
+	return o
+}
+
+func (o RegisteredModelFromExternalDatasetsOutput) ToRegisteredModelFromExternalDatasetsPtrOutput() RegisteredModelFromExternalDatasetsPtrOutput {
+	return o.ToRegisteredModelFromExternalDatasetsPtrOutputWithContext(context.Background())
+}
+
+func (o RegisteredModelFromExternalDatasetsOutput) ToRegisteredModelFromExternalDatasetsPtrOutputWithContext(ctx context.Context) RegisteredModelFromExternalDatasetsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v RegisteredModelFromExternalDatasets) *RegisteredModelFromExternalDatasets {
+		return &v
+	}).(RegisteredModelFromExternalDatasetsPtrOutput)
+}
+
+// The ID of the holdout dataset.
+func (o RegisteredModelFromExternalDatasetsOutput) HoldoutDataCatalogId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RegisteredModelFromExternalDatasets) *string { return v.HoldoutDataCatalogId }).(pulumi.StringPtrOutput)
+}
+
+// The version ID of the holdout dataset.
+func (o RegisteredModelFromExternalDatasetsOutput) HoldoutDataCatalogVersionId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RegisteredModelFromExternalDatasets) *string { return v.HoldoutDataCatalogVersionId }).(pulumi.StringPtrOutput)
+}
+
+// The ID of the training dataset.
+func (o RegisteredModelFromExternalDatasetsOutput) TrainingDataCatalogId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RegisteredModelFromExternalDatasets) *string { return v.TrainingDataCatalogId }).(pulumi.StringPtrOutput)
+}
+
+// The version ID of the training dataset.
+func (o RegisteredModelFromExternalDatasetsOutput) TrainingDataCatalogVersionId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RegisteredModelFromExternalDatasets) *string { return v.TrainingDataCatalogVersionId }).(pulumi.StringPtrOutput)
+}
+
+type RegisteredModelFromExternalDatasetsPtrOutput struct{ *pulumi.OutputState }
+
+func (RegisteredModelFromExternalDatasetsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**RegisteredModelFromExternalDatasets)(nil)).Elem()
+}
+
+func (o RegisteredModelFromExternalDatasetsPtrOutput) ToRegisteredModelFromExternalDatasetsPtrOutput() RegisteredModelFromExternalDatasetsPtrOutput {
+	return o
+}
+
+func (o RegisteredModelFromExternalDatasetsPtrOutput) ToRegisteredModelFromExternalDatasetsPtrOutputWithContext(ctx context.Context) RegisteredModelFromExternalDatasetsPtrOutput {
+	return o
+}
+
+func (o RegisteredModelFromExternalDatasetsPtrOutput) Elem() RegisteredModelFromExternalDatasetsOutput {
+	return o.ApplyT(func(v *RegisteredModelFromExternalDatasets) RegisteredModelFromExternalDatasets {
+		if v != nil {
+			return *v
+		}
+		var ret RegisteredModelFromExternalDatasets
+		return ret
+	}).(RegisteredModelFromExternalDatasetsOutput)
+}
+
+// The ID of the holdout dataset.
+func (o RegisteredModelFromExternalDatasetsPtrOutput) HoldoutDataCatalogId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RegisteredModelFromExternalDatasets) *string {
+		if v == nil {
+			return nil
+		}
+		return v.HoldoutDataCatalogId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The version ID of the holdout dataset.
+func (o RegisteredModelFromExternalDatasetsPtrOutput) HoldoutDataCatalogVersionId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RegisteredModelFromExternalDatasets) *string {
+		if v == nil {
+			return nil
+		}
+		return v.HoldoutDataCatalogVersionId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The ID of the training dataset.
+func (o RegisteredModelFromExternalDatasetsPtrOutput) TrainingDataCatalogId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RegisteredModelFromExternalDatasets) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TrainingDataCatalogId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The version ID of the training dataset.
+func (o RegisteredModelFromExternalDatasetsPtrOutput) TrainingDataCatalogVersionId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RegisteredModelFromExternalDatasets) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TrainingDataCatalogVersionId
+	}).(pulumi.StringPtrOutput)
+}
+
+type RegisteredModelFromExternalGeospatialMonitoring struct {
+	// The name of the geospatial column to analyze.
+	PrimaryLocationColumn string `pulumi:"primaryLocationColumn"`
+}
+
+// RegisteredModelFromExternalGeospatialMonitoringInput is an input type that accepts RegisteredModelFromExternalGeospatialMonitoringArgs and RegisteredModelFromExternalGeospatialMonitoringOutput values.
+// You can construct a concrete instance of `RegisteredModelFromExternalGeospatialMonitoringInput` via:
+//
+//	RegisteredModelFromExternalGeospatialMonitoringArgs{...}
+type RegisteredModelFromExternalGeospatialMonitoringInput interface {
+	pulumi.Input
+
+	ToRegisteredModelFromExternalGeospatialMonitoringOutput() RegisteredModelFromExternalGeospatialMonitoringOutput
+	ToRegisteredModelFromExternalGeospatialMonitoringOutputWithContext(context.Context) RegisteredModelFromExternalGeospatialMonitoringOutput
+}
+
+type RegisteredModelFromExternalGeospatialMonitoringArgs struct {
+	// The name of the geospatial column to analyze.
+	PrimaryLocationColumn pulumi.StringInput `pulumi:"primaryLocationColumn"`
+}
+
+func (RegisteredModelFromExternalGeospatialMonitoringArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RegisteredModelFromExternalGeospatialMonitoring)(nil)).Elem()
+}
+
+func (i RegisteredModelFromExternalGeospatialMonitoringArgs) ToRegisteredModelFromExternalGeospatialMonitoringOutput() RegisteredModelFromExternalGeospatialMonitoringOutput {
+	return i.ToRegisteredModelFromExternalGeospatialMonitoringOutputWithContext(context.Background())
+}
+
+func (i RegisteredModelFromExternalGeospatialMonitoringArgs) ToRegisteredModelFromExternalGeospatialMonitoringOutputWithContext(ctx context.Context) RegisteredModelFromExternalGeospatialMonitoringOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RegisteredModelFromExternalGeospatialMonitoringOutput)
+}
+
+func (i RegisteredModelFromExternalGeospatialMonitoringArgs) ToRegisteredModelFromExternalGeospatialMonitoringPtrOutput() RegisteredModelFromExternalGeospatialMonitoringPtrOutput {
+	return i.ToRegisteredModelFromExternalGeospatialMonitoringPtrOutputWithContext(context.Background())
+}
+
+func (i RegisteredModelFromExternalGeospatialMonitoringArgs) ToRegisteredModelFromExternalGeospatialMonitoringPtrOutputWithContext(ctx context.Context) RegisteredModelFromExternalGeospatialMonitoringPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RegisteredModelFromExternalGeospatialMonitoringOutput).ToRegisteredModelFromExternalGeospatialMonitoringPtrOutputWithContext(ctx)
+}
+
+// RegisteredModelFromExternalGeospatialMonitoringPtrInput is an input type that accepts RegisteredModelFromExternalGeospatialMonitoringArgs, RegisteredModelFromExternalGeospatialMonitoringPtr and RegisteredModelFromExternalGeospatialMonitoringPtrOutput values.
+// You can construct a concrete instance of `RegisteredModelFromExternalGeospatialMonitoringPtrInput` via:
+//
+//	        RegisteredModelFromExternalGeospatialMonitoringArgs{...}
+//
+//	or:
+//
+//	        nil
+type RegisteredModelFromExternalGeospatialMonitoringPtrInput interface {
+	pulumi.Input
+
+	ToRegisteredModelFromExternalGeospatialMonitoringPtrOutput() RegisteredModelFromExternalGeospatialMonitoringPtrOutput
+	ToRegisteredModelFromExternalGeospatialMonitoringPtrOutputWithContext(context.Context) RegisteredModelFromExternalGeospatialMonitoringPtrOutput
+}
+
+type registeredModelFromExternalGeospatialMonitoringPtrType RegisteredModelFromExternalGeospatialMonitoringArgs
+
+func RegisteredModelFromExternalGeospatialMonitoringPtr(v *RegisteredModelFromExternalGeospatialMonitoringArgs) RegisteredModelFromExternalGeospatialMonitoringPtrInput {
+	return (*registeredModelFromExternalGeospatialMonitoringPtrType)(v)
+}
+
+func (*registeredModelFromExternalGeospatialMonitoringPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**RegisteredModelFromExternalGeospatialMonitoring)(nil)).Elem()
+}
+
+func (i *registeredModelFromExternalGeospatialMonitoringPtrType) ToRegisteredModelFromExternalGeospatialMonitoringPtrOutput() RegisteredModelFromExternalGeospatialMonitoringPtrOutput {
+	return i.ToRegisteredModelFromExternalGeospatialMonitoringPtrOutputWithContext(context.Background())
+}
+
+func (i *registeredModelFromExternalGeospatialMonitoringPtrType) ToRegisteredModelFromExternalGeospatialMonitoringPtrOutputWithContext(ctx context.Context) RegisteredModelFromExternalGeospatialMonitoringPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RegisteredModelFromExternalGeospatialMonitoringPtrOutput)
+}
+
+type RegisteredModelFromExternalGeospatialMonitoringOutput struct{ *pulumi.OutputState }
+
+func (RegisteredModelFromExternalGeospatialMonitoringOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RegisteredModelFromExternalGeospatialMonitoring)(nil)).Elem()
+}
+
+func (o RegisteredModelFromExternalGeospatialMonitoringOutput) ToRegisteredModelFromExternalGeospatialMonitoringOutput() RegisteredModelFromExternalGeospatialMonitoringOutput {
+	return o
+}
+
+func (o RegisteredModelFromExternalGeospatialMonitoringOutput) ToRegisteredModelFromExternalGeospatialMonitoringOutputWithContext(ctx context.Context) RegisteredModelFromExternalGeospatialMonitoringOutput {
+	return o
+}
+
+func (o RegisteredModelFromExternalGeospatialMonitoringOutput) ToRegisteredModelFromExternalGeospatialMonitoringPtrOutput() RegisteredModelFromExternalGeospatialMonitoringPtrOutput {
+	return o.ToRegisteredModelFromExternalGeospatialMonitoringPtrOutputWithContext(context.Background())
+}
+
+func (o RegisteredModelFromExternalGeospatialMonitoringOutput) ToRegisteredModelFromExternalGeospatialMonitoringPtrOutputWithContext(ctx context.Context) RegisteredModelFromExternalGeospatialMonitoringPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v RegisteredModelFromExternalGeospatialMonitoring) *RegisteredModelFromExternalGeospatialMonitoring {
+		return &v
+	}).(RegisteredModelFromExternalGeospatialMonitoringPtrOutput)
+}
+
+// The name of the geospatial column to analyze.
+func (o RegisteredModelFromExternalGeospatialMonitoringOutput) PrimaryLocationColumn() pulumi.StringOutput {
+	return o.ApplyT(func(v RegisteredModelFromExternalGeospatialMonitoring) string { return v.PrimaryLocationColumn }).(pulumi.StringOutput)
+}
+
+type RegisteredModelFromExternalGeospatialMonitoringPtrOutput struct{ *pulumi.OutputState }
+
+func (RegisteredModelFromExternalGeospatialMonitoringPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**RegisteredModelFromExternalGeospatialMonitoring)(nil)).Elem()
+}
+
+func (o RegisteredModelFromExternalGeospatialMonitoringPtrOutput) ToRegisteredModelFromExternalGeospatialMonitoringPtrOutput() RegisteredModelFromExternalGeospatialMonitoringPtrOutput {
+	return o
+}
+
+func (o RegisteredModelFromExternalGeospatialMonitoringPtrOutput) ToRegisteredModelFromExternalGeospatialMonitoringPtrOutputWithContext(ctx context.Context) RegisteredModelFromExternalGeospatialMonitoringPtrOutput {
+	return o
+}
+
+func (o RegisteredModelFromExternalGeospatialMonitoringPtrOutput) Elem() RegisteredModelFromExternalGeospatialMonitoringOutput {
+	return o.ApplyT(func(v *RegisteredModelFromExternalGeospatialMonitoring) RegisteredModelFromExternalGeospatialMonitoring {
+		if v != nil {
+			return *v
+		}
+		var ret RegisteredModelFromExternalGeospatialMonitoring
+		return ret
+	}).(RegisteredModelFromExternalGeospatialMonitoringOutput)
+}
+
+// The name of the geospatial column to analyze.
+func (o RegisteredModelFromExternalGeospatialMonitoringPtrOutput) PrimaryLocationColumn() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RegisteredModelFromExternalGeospatialMonitoring) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.PrimaryLocationColumn
+	}).(pulumi.StringPtrOutput)
+}
+
+type RegisteredModelFromExternalModelDescription struct {
+	// The build environment type of the model.
+	BuildEnvironmentType *string `pulumi:"buildEnvironmentType"`
+	// A description of the model. Changing it updates the latest version in place; removing it creates a new version.
+	Description *string `pulumi:"description"`
+	// The location of the model.
+	Location *string `pulumi:"location"`
+	// The model name.
+	ModelName *string `pulumi:"modelName"`
+}
+
+// RegisteredModelFromExternalModelDescriptionInput is an input type that accepts RegisteredModelFromExternalModelDescriptionArgs and RegisteredModelFromExternalModelDescriptionOutput values.
+// You can construct a concrete instance of `RegisteredModelFromExternalModelDescriptionInput` via:
+//
+//	RegisteredModelFromExternalModelDescriptionArgs{...}
+type RegisteredModelFromExternalModelDescriptionInput interface {
+	pulumi.Input
+
+	ToRegisteredModelFromExternalModelDescriptionOutput() RegisteredModelFromExternalModelDescriptionOutput
+	ToRegisteredModelFromExternalModelDescriptionOutputWithContext(context.Context) RegisteredModelFromExternalModelDescriptionOutput
+}
+
+type RegisteredModelFromExternalModelDescriptionArgs struct {
+	// The build environment type of the model.
+	BuildEnvironmentType pulumi.StringPtrInput `pulumi:"buildEnvironmentType"`
+	// A description of the model. Changing it updates the latest version in place; removing it creates a new version.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	// The location of the model.
+	Location pulumi.StringPtrInput `pulumi:"location"`
+	// The model name.
+	ModelName pulumi.StringPtrInput `pulumi:"modelName"`
+}
+
+func (RegisteredModelFromExternalModelDescriptionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RegisteredModelFromExternalModelDescription)(nil)).Elem()
+}
+
+func (i RegisteredModelFromExternalModelDescriptionArgs) ToRegisteredModelFromExternalModelDescriptionOutput() RegisteredModelFromExternalModelDescriptionOutput {
+	return i.ToRegisteredModelFromExternalModelDescriptionOutputWithContext(context.Background())
+}
+
+func (i RegisteredModelFromExternalModelDescriptionArgs) ToRegisteredModelFromExternalModelDescriptionOutputWithContext(ctx context.Context) RegisteredModelFromExternalModelDescriptionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RegisteredModelFromExternalModelDescriptionOutput)
+}
+
+func (i RegisteredModelFromExternalModelDescriptionArgs) ToRegisteredModelFromExternalModelDescriptionPtrOutput() RegisteredModelFromExternalModelDescriptionPtrOutput {
+	return i.ToRegisteredModelFromExternalModelDescriptionPtrOutputWithContext(context.Background())
+}
+
+func (i RegisteredModelFromExternalModelDescriptionArgs) ToRegisteredModelFromExternalModelDescriptionPtrOutputWithContext(ctx context.Context) RegisteredModelFromExternalModelDescriptionPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RegisteredModelFromExternalModelDescriptionOutput).ToRegisteredModelFromExternalModelDescriptionPtrOutputWithContext(ctx)
+}
+
+// RegisteredModelFromExternalModelDescriptionPtrInput is an input type that accepts RegisteredModelFromExternalModelDescriptionArgs, RegisteredModelFromExternalModelDescriptionPtr and RegisteredModelFromExternalModelDescriptionPtrOutput values.
+// You can construct a concrete instance of `RegisteredModelFromExternalModelDescriptionPtrInput` via:
+//
+//	        RegisteredModelFromExternalModelDescriptionArgs{...}
+//
+//	or:
+//
+//	        nil
+type RegisteredModelFromExternalModelDescriptionPtrInput interface {
+	pulumi.Input
+
+	ToRegisteredModelFromExternalModelDescriptionPtrOutput() RegisteredModelFromExternalModelDescriptionPtrOutput
+	ToRegisteredModelFromExternalModelDescriptionPtrOutputWithContext(context.Context) RegisteredModelFromExternalModelDescriptionPtrOutput
+}
+
+type registeredModelFromExternalModelDescriptionPtrType RegisteredModelFromExternalModelDescriptionArgs
+
+func RegisteredModelFromExternalModelDescriptionPtr(v *RegisteredModelFromExternalModelDescriptionArgs) RegisteredModelFromExternalModelDescriptionPtrInput {
+	return (*registeredModelFromExternalModelDescriptionPtrType)(v)
+}
+
+func (*registeredModelFromExternalModelDescriptionPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**RegisteredModelFromExternalModelDescription)(nil)).Elem()
+}
+
+func (i *registeredModelFromExternalModelDescriptionPtrType) ToRegisteredModelFromExternalModelDescriptionPtrOutput() RegisteredModelFromExternalModelDescriptionPtrOutput {
+	return i.ToRegisteredModelFromExternalModelDescriptionPtrOutputWithContext(context.Background())
+}
+
+func (i *registeredModelFromExternalModelDescriptionPtrType) ToRegisteredModelFromExternalModelDescriptionPtrOutputWithContext(ctx context.Context) RegisteredModelFromExternalModelDescriptionPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RegisteredModelFromExternalModelDescriptionPtrOutput)
+}
+
+type RegisteredModelFromExternalModelDescriptionOutput struct{ *pulumi.OutputState }
+
+func (RegisteredModelFromExternalModelDescriptionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RegisteredModelFromExternalModelDescription)(nil)).Elem()
+}
+
+func (o RegisteredModelFromExternalModelDescriptionOutput) ToRegisteredModelFromExternalModelDescriptionOutput() RegisteredModelFromExternalModelDescriptionOutput {
+	return o
+}
+
+func (o RegisteredModelFromExternalModelDescriptionOutput) ToRegisteredModelFromExternalModelDescriptionOutputWithContext(ctx context.Context) RegisteredModelFromExternalModelDescriptionOutput {
+	return o
+}
+
+func (o RegisteredModelFromExternalModelDescriptionOutput) ToRegisteredModelFromExternalModelDescriptionPtrOutput() RegisteredModelFromExternalModelDescriptionPtrOutput {
+	return o.ToRegisteredModelFromExternalModelDescriptionPtrOutputWithContext(context.Background())
+}
+
+func (o RegisteredModelFromExternalModelDescriptionOutput) ToRegisteredModelFromExternalModelDescriptionPtrOutputWithContext(ctx context.Context) RegisteredModelFromExternalModelDescriptionPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v RegisteredModelFromExternalModelDescription) *RegisteredModelFromExternalModelDescription {
+		return &v
+	}).(RegisteredModelFromExternalModelDescriptionPtrOutput)
+}
+
+// The build environment type of the model.
+func (o RegisteredModelFromExternalModelDescriptionOutput) BuildEnvironmentType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RegisteredModelFromExternalModelDescription) *string { return v.BuildEnvironmentType }).(pulumi.StringPtrOutput)
+}
+
+// A description of the model. Changing it updates the latest version in place; removing it creates a new version.
+func (o RegisteredModelFromExternalModelDescriptionOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RegisteredModelFromExternalModelDescription) *string { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// The location of the model.
+func (o RegisteredModelFromExternalModelDescriptionOutput) Location() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RegisteredModelFromExternalModelDescription) *string { return v.Location }).(pulumi.StringPtrOutput)
+}
+
+// The model name.
+func (o RegisteredModelFromExternalModelDescriptionOutput) ModelName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RegisteredModelFromExternalModelDescription) *string { return v.ModelName }).(pulumi.StringPtrOutput)
+}
+
+type RegisteredModelFromExternalModelDescriptionPtrOutput struct{ *pulumi.OutputState }
+
+func (RegisteredModelFromExternalModelDescriptionPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**RegisteredModelFromExternalModelDescription)(nil)).Elem()
+}
+
+func (o RegisteredModelFromExternalModelDescriptionPtrOutput) ToRegisteredModelFromExternalModelDescriptionPtrOutput() RegisteredModelFromExternalModelDescriptionPtrOutput {
+	return o
+}
+
+func (o RegisteredModelFromExternalModelDescriptionPtrOutput) ToRegisteredModelFromExternalModelDescriptionPtrOutputWithContext(ctx context.Context) RegisteredModelFromExternalModelDescriptionPtrOutput {
+	return o
+}
+
+func (o RegisteredModelFromExternalModelDescriptionPtrOutput) Elem() RegisteredModelFromExternalModelDescriptionOutput {
+	return o.ApplyT(func(v *RegisteredModelFromExternalModelDescription) RegisteredModelFromExternalModelDescription {
+		if v != nil {
+			return *v
+		}
+		var ret RegisteredModelFromExternalModelDescription
+		return ret
+	}).(RegisteredModelFromExternalModelDescriptionOutput)
+}
+
+// The build environment type of the model.
+func (o RegisteredModelFromExternalModelDescriptionPtrOutput) BuildEnvironmentType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RegisteredModelFromExternalModelDescription) *string {
+		if v == nil {
+			return nil
+		}
+		return v.BuildEnvironmentType
+	}).(pulumi.StringPtrOutput)
+}
+
+// A description of the model. Changing it updates the latest version in place; removing it creates a new version.
+func (o RegisteredModelFromExternalModelDescriptionPtrOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RegisteredModelFromExternalModelDescription) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Description
+	}).(pulumi.StringPtrOutput)
+}
+
+// The location of the model.
+func (o RegisteredModelFromExternalModelDescriptionPtrOutput) Location() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RegisteredModelFromExternalModelDescription) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Location
+	}).(pulumi.StringPtrOutput)
+}
+
+// The model name.
+func (o RegisteredModelFromExternalModelDescriptionPtrOutput) ModelName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RegisteredModelFromExternalModelDescription) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ModelName
+	}).(pulumi.StringPtrOutput)
+}
+
+type RegisteredModelFromExternalTag struct {
+	// The name of the tag.
+	Name string `pulumi:"name"`
+	// The value of the tag.
+	Value string `pulumi:"value"`
+}
+
+// RegisteredModelFromExternalTagInput is an input type that accepts RegisteredModelFromExternalTagArgs and RegisteredModelFromExternalTagOutput values.
+// You can construct a concrete instance of `RegisteredModelFromExternalTagInput` via:
+//
+//	RegisteredModelFromExternalTagArgs{...}
+type RegisteredModelFromExternalTagInput interface {
+	pulumi.Input
+
+	ToRegisteredModelFromExternalTagOutput() RegisteredModelFromExternalTagOutput
+	ToRegisteredModelFromExternalTagOutputWithContext(context.Context) RegisteredModelFromExternalTagOutput
+}
+
+type RegisteredModelFromExternalTagArgs struct {
+	// The name of the tag.
+	Name pulumi.StringInput `pulumi:"name"`
+	// The value of the tag.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (RegisteredModelFromExternalTagArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RegisteredModelFromExternalTag)(nil)).Elem()
+}
+
+func (i RegisteredModelFromExternalTagArgs) ToRegisteredModelFromExternalTagOutput() RegisteredModelFromExternalTagOutput {
+	return i.ToRegisteredModelFromExternalTagOutputWithContext(context.Background())
+}
+
+func (i RegisteredModelFromExternalTagArgs) ToRegisteredModelFromExternalTagOutputWithContext(ctx context.Context) RegisteredModelFromExternalTagOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RegisteredModelFromExternalTagOutput)
+}
+
+// RegisteredModelFromExternalTagArrayInput is an input type that accepts RegisteredModelFromExternalTagArray and RegisteredModelFromExternalTagArrayOutput values.
+// You can construct a concrete instance of `RegisteredModelFromExternalTagArrayInput` via:
+//
+//	RegisteredModelFromExternalTagArray{ RegisteredModelFromExternalTagArgs{...} }
+type RegisteredModelFromExternalTagArrayInput interface {
+	pulumi.Input
+
+	ToRegisteredModelFromExternalTagArrayOutput() RegisteredModelFromExternalTagArrayOutput
+	ToRegisteredModelFromExternalTagArrayOutputWithContext(context.Context) RegisteredModelFromExternalTagArrayOutput
+}
+
+type RegisteredModelFromExternalTagArray []RegisteredModelFromExternalTagInput
+
+func (RegisteredModelFromExternalTagArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]RegisteredModelFromExternalTag)(nil)).Elem()
+}
+
+func (i RegisteredModelFromExternalTagArray) ToRegisteredModelFromExternalTagArrayOutput() RegisteredModelFromExternalTagArrayOutput {
+	return i.ToRegisteredModelFromExternalTagArrayOutputWithContext(context.Background())
+}
+
+func (i RegisteredModelFromExternalTagArray) ToRegisteredModelFromExternalTagArrayOutputWithContext(ctx context.Context) RegisteredModelFromExternalTagArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RegisteredModelFromExternalTagArrayOutput)
+}
+
+type RegisteredModelFromExternalTagOutput struct{ *pulumi.OutputState }
+
+func (RegisteredModelFromExternalTagOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RegisteredModelFromExternalTag)(nil)).Elem()
+}
+
+func (o RegisteredModelFromExternalTagOutput) ToRegisteredModelFromExternalTagOutput() RegisteredModelFromExternalTagOutput {
+	return o
+}
+
+func (o RegisteredModelFromExternalTagOutput) ToRegisteredModelFromExternalTagOutputWithContext(ctx context.Context) RegisteredModelFromExternalTagOutput {
+	return o
+}
+
+// The name of the tag.
+func (o RegisteredModelFromExternalTagOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v RegisteredModelFromExternalTag) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// The value of the tag.
+func (o RegisteredModelFromExternalTagOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v RegisteredModelFromExternalTag) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type RegisteredModelFromExternalTagArrayOutput struct{ *pulumi.OutputState }
+
+func (RegisteredModelFromExternalTagArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]RegisteredModelFromExternalTag)(nil)).Elem()
+}
+
+func (o RegisteredModelFromExternalTagArrayOutput) ToRegisteredModelFromExternalTagArrayOutput() RegisteredModelFromExternalTagArrayOutput {
+	return o
+}
+
+func (o RegisteredModelFromExternalTagArrayOutput) ToRegisteredModelFromExternalTagArrayOutputWithContext(ctx context.Context) RegisteredModelFromExternalTagArrayOutput {
+	return o
+}
+
+func (o RegisteredModelFromExternalTagArrayOutput) Index(i pulumi.IntInput) RegisteredModelFromExternalTagOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) RegisteredModelFromExternalTag {
+		return vs[0].([]RegisteredModelFromExternalTag)[vs[1].(int)]
+	}).(RegisteredModelFromExternalTagOutput)
+}
+
+type RegisteredModelFromExternalTarget struct {
+	// The class names for prediction results. For a `Binary` target, the first element is the minority (positive) class and the second is the majority (negative) class. Changing it replaces the Registered Model.
+	ClassNames []string `pulumi:"classNames"`
+	// The name of the target column. Required unless <span pulumi-lang-nodejs="`type`" pulumi-lang-dotnet="`Type`" pulumi-lang-go="`type`" pulumi-lang-python="`type`" pulumi-lang-yaml="`type`" pulumi-lang-java="`type`" pulumi-lang-hcl="`type`">`type`</span> is `AgenticWorkflow` or `MCP`. Changing it replaces the Registered Model.
+	Name *string `pulumi:"name"`
+	// The column containing prediction probabilities.
+	PredictionProbabilitiesColumn *string `pulumi:"predictionProbabilitiesColumn"`
+	// The prediction threshold used for binary classification models, between 0 and 1.
+	PredictionThreshold *float64 `pulumi:"predictionThreshold"`
+	// The target type of the model. Changing it replaces the Registered Model.
+	Type string `pulumi:"type"`
+}
+
+// RegisteredModelFromExternalTargetInput is an input type that accepts RegisteredModelFromExternalTargetArgs and RegisteredModelFromExternalTargetOutput values.
+// You can construct a concrete instance of `RegisteredModelFromExternalTargetInput` via:
+//
+//	RegisteredModelFromExternalTargetArgs{...}
+type RegisteredModelFromExternalTargetInput interface {
+	pulumi.Input
+
+	ToRegisteredModelFromExternalTargetOutput() RegisteredModelFromExternalTargetOutput
+	ToRegisteredModelFromExternalTargetOutputWithContext(context.Context) RegisteredModelFromExternalTargetOutput
+}
+
+type RegisteredModelFromExternalTargetArgs struct {
+	// The class names for prediction results. For a `Binary` target, the first element is the minority (positive) class and the second is the majority (negative) class. Changing it replaces the Registered Model.
+	ClassNames pulumi.StringArrayInput `pulumi:"classNames"`
+	// The name of the target column. Required unless <span pulumi-lang-nodejs="`type`" pulumi-lang-dotnet="`Type`" pulumi-lang-go="`type`" pulumi-lang-python="`type`" pulumi-lang-yaml="`type`" pulumi-lang-java="`type`" pulumi-lang-hcl="`type`">`type`</span> is `AgenticWorkflow` or `MCP`. Changing it replaces the Registered Model.
+	Name pulumi.StringPtrInput `pulumi:"name"`
+	// The column containing prediction probabilities.
+	PredictionProbabilitiesColumn pulumi.StringPtrInput `pulumi:"predictionProbabilitiesColumn"`
+	// The prediction threshold used for binary classification models, between 0 and 1.
+	PredictionThreshold pulumi.Float64PtrInput `pulumi:"predictionThreshold"`
+	// The target type of the model. Changing it replaces the Registered Model.
+	Type pulumi.StringInput `pulumi:"type"`
+}
+
+func (RegisteredModelFromExternalTargetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RegisteredModelFromExternalTarget)(nil)).Elem()
+}
+
+func (i RegisteredModelFromExternalTargetArgs) ToRegisteredModelFromExternalTargetOutput() RegisteredModelFromExternalTargetOutput {
+	return i.ToRegisteredModelFromExternalTargetOutputWithContext(context.Background())
+}
+
+func (i RegisteredModelFromExternalTargetArgs) ToRegisteredModelFromExternalTargetOutputWithContext(ctx context.Context) RegisteredModelFromExternalTargetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RegisteredModelFromExternalTargetOutput)
+}
+
+func (i RegisteredModelFromExternalTargetArgs) ToRegisteredModelFromExternalTargetPtrOutput() RegisteredModelFromExternalTargetPtrOutput {
+	return i.ToRegisteredModelFromExternalTargetPtrOutputWithContext(context.Background())
+}
+
+func (i RegisteredModelFromExternalTargetArgs) ToRegisteredModelFromExternalTargetPtrOutputWithContext(ctx context.Context) RegisteredModelFromExternalTargetPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RegisteredModelFromExternalTargetOutput).ToRegisteredModelFromExternalTargetPtrOutputWithContext(ctx)
+}
+
+// RegisteredModelFromExternalTargetPtrInput is an input type that accepts RegisteredModelFromExternalTargetArgs, RegisteredModelFromExternalTargetPtr and RegisteredModelFromExternalTargetPtrOutput values.
+// You can construct a concrete instance of `RegisteredModelFromExternalTargetPtrInput` via:
+//
+//	        RegisteredModelFromExternalTargetArgs{...}
+//
+//	or:
+//
+//	        nil
+type RegisteredModelFromExternalTargetPtrInput interface {
+	pulumi.Input
+
+	ToRegisteredModelFromExternalTargetPtrOutput() RegisteredModelFromExternalTargetPtrOutput
+	ToRegisteredModelFromExternalTargetPtrOutputWithContext(context.Context) RegisteredModelFromExternalTargetPtrOutput
+}
+
+type registeredModelFromExternalTargetPtrType RegisteredModelFromExternalTargetArgs
+
+func RegisteredModelFromExternalTargetPtr(v *RegisteredModelFromExternalTargetArgs) RegisteredModelFromExternalTargetPtrInput {
+	return (*registeredModelFromExternalTargetPtrType)(v)
+}
+
+func (*registeredModelFromExternalTargetPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**RegisteredModelFromExternalTarget)(nil)).Elem()
+}
+
+func (i *registeredModelFromExternalTargetPtrType) ToRegisteredModelFromExternalTargetPtrOutput() RegisteredModelFromExternalTargetPtrOutput {
+	return i.ToRegisteredModelFromExternalTargetPtrOutputWithContext(context.Background())
+}
+
+func (i *registeredModelFromExternalTargetPtrType) ToRegisteredModelFromExternalTargetPtrOutputWithContext(ctx context.Context) RegisteredModelFromExternalTargetPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RegisteredModelFromExternalTargetPtrOutput)
+}
+
+type RegisteredModelFromExternalTargetOutput struct{ *pulumi.OutputState }
+
+func (RegisteredModelFromExternalTargetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RegisteredModelFromExternalTarget)(nil)).Elem()
+}
+
+func (o RegisteredModelFromExternalTargetOutput) ToRegisteredModelFromExternalTargetOutput() RegisteredModelFromExternalTargetOutput {
+	return o
+}
+
+func (o RegisteredModelFromExternalTargetOutput) ToRegisteredModelFromExternalTargetOutputWithContext(ctx context.Context) RegisteredModelFromExternalTargetOutput {
+	return o
+}
+
+func (o RegisteredModelFromExternalTargetOutput) ToRegisteredModelFromExternalTargetPtrOutput() RegisteredModelFromExternalTargetPtrOutput {
+	return o.ToRegisteredModelFromExternalTargetPtrOutputWithContext(context.Background())
+}
+
+func (o RegisteredModelFromExternalTargetOutput) ToRegisteredModelFromExternalTargetPtrOutputWithContext(ctx context.Context) RegisteredModelFromExternalTargetPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v RegisteredModelFromExternalTarget) *RegisteredModelFromExternalTarget {
+		return &v
+	}).(RegisteredModelFromExternalTargetPtrOutput)
+}
+
+// The class names for prediction results. For a `Binary` target, the first element is the minority (positive) class and the second is the majority (negative) class. Changing it replaces the Registered Model.
+func (o RegisteredModelFromExternalTargetOutput) ClassNames() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v RegisteredModelFromExternalTarget) []string { return v.ClassNames }).(pulumi.StringArrayOutput)
+}
+
+// The name of the target column. Required unless <span pulumi-lang-nodejs="`type`" pulumi-lang-dotnet="`Type`" pulumi-lang-go="`type`" pulumi-lang-python="`type`" pulumi-lang-yaml="`type`" pulumi-lang-java="`type`" pulumi-lang-hcl="`type`">`type`</span> is `AgenticWorkflow` or `MCP`. Changing it replaces the Registered Model.
+func (o RegisteredModelFromExternalTargetOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RegisteredModelFromExternalTarget) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+// The column containing prediction probabilities.
+func (o RegisteredModelFromExternalTargetOutput) PredictionProbabilitiesColumn() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RegisteredModelFromExternalTarget) *string { return v.PredictionProbabilitiesColumn }).(pulumi.StringPtrOutput)
+}
+
+// The prediction threshold used for binary classification models, between 0 and 1.
+func (o RegisteredModelFromExternalTargetOutput) PredictionThreshold() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v RegisteredModelFromExternalTarget) *float64 { return v.PredictionThreshold }).(pulumi.Float64PtrOutput)
+}
+
+// The target type of the model. Changing it replaces the Registered Model.
+func (o RegisteredModelFromExternalTargetOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v RegisteredModelFromExternalTarget) string { return v.Type }).(pulumi.StringOutput)
+}
+
+type RegisteredModelFromExternalTargetPtrOutput struct{ *pulumi.OutputState }
+
+func (RegisteredModelFromExternalTargetPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**RegisteredModelFromExternalTarget)(nil)).Elem()
+}
+
+func (o RegisteredModelFromExternalTargetPtrOutput) ToRegisteredModelFromExternalTargetPtrOutput() RegisteredModelFromExternalTargetPtrOutput {
+	return o
+}
+
+func (o RegisteredModelFromExternalTargetPtrOutput) ToRegisteredModelFromExternalTargetPtrOutputWithContext(ctx context.Context) RegisteredModelFromExternalTargetPtrOutput {
+	return o
+}
+
+func (o RegisteredModelFromExternalTargetPtrOutput) Elem() RegisteredModelFromExternalTargetOutput {
+	return o.ApplyT(func(v *RegisteredModelFromExternalTarget) RegisteredModelFromExternalTarget {
+		if v != nil {
+			return *v
+		}
+		var ret RegisteredModelFromExternalTarget
+		return ret
+	}).(RegisteredModelFromExternalTargetOutput)
+}
+
+// The class names for prediction results. For a `Binary` target, the first element is the minority (positive) class and the second is the majority (negative) class. Changing it replaces the Registered Model.
+func (o RegisteredModelFromExternalTargetPtrOutput) ClassNames() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *RegisteredModelFromExternalTarget) []string {
+		if v == nil {
+			return nil
+		}
+		return v.ClassNames
+	}).(pulumi.StringArrayOutput)
+}
+
+// The name of the target column. Required unless <span pulumi-lang-nodejs="`type`" pulumi-lang-dotnet="`Type`" pulumi-lang-go="`type`" pulumi-lang-python="`type`" pulumi-lang-yaml="`type`" pulumi-lang-java="`type`" pulumi-lang-hcl="`type`">`type`</span> is `AgenticWorkflow` or `MCP`. Changing it replaces the Registered Model.
+func (o RegisteredModelFromExternalTargetPtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RegisteredModelFromExternalTarget) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
+// The column containing prediction probabilities.
+func (o RegisteredModelFromExternalTargetPtrOutput) PredictionProbabilitiesColumn() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RegisteredModelFromExternalTarget) *string {
+		if v == nil {
+			return nil
+		}
+		return v.PredictionProbabilitiesColumn
+	}).(pulumi.StringPtrOutput)
+}
+
+// The prediction threshold used for binary classification models, between 0 and 1.
+func (o RegisteredModelFromExternalTargetPtrOutput) PredictionThreshold() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v *RegisteredModelFromExternalTarget) *float64 {
+		if v == nil {
+			return nil
+		}
+		return v.PredictionThreshold
+	}).(pulumi.Float64PtrOutput)
+}
+
+// The target type of the model. Changing it replaces the Registered Model.
+func (o RegisteredModelFromExternalTargetPtrOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RegisteredModelFromExternalTarget) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Type
+	}).(pulumi.StringPtrOutput)
+}
+
+type RegisteredModelFromExternalTextGeneration struct {
+	// The name of the prompt column.
+	Prompt string `pulumi:"prompt"`
+}
+
+// RegisteredModelFromExternalTextGenerationInput is an input type that accepts RegisteredModelFromExternalTextGenerationArgs and RegisteredModelFromExternalTextGenerationOutput values.
+// You can construct a concrete instance of `RegisteredModelFromExternalTextGenerationInput` via:
+//
+//	RegisteredModelFromExternalTextGenerationArgs{...}
+type RegisteredModelFromExternalTextGenerationInput interface {
+	pulumi.Input
+
+	ToRegisteredModelFromExternalTextGenerationOutput() RegisteredModelFromExternalTextGenerationOutput
+	ToRegisteredModelFromExternalTextGenerationOutputWithContext(context.Context) RegisteredModelFromExternalTextGenerationOutput
+}
+
+type RegisteredModelFromExternalTextGenerationArgs struct {
+	// The name of the prompt column.
+	Prompt pulumi.StringInput `pulumi:"prompt"`
+}
+
+func (RegisteredModelFromExternalTextGenerationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RegisteredModelFromExternalTextGeneration)(nil)).Elem()
+}
+
+func (i RegisteredModelFromExternalTextGenerationArgs) ToRegisteredModelFromExternalTextGenerationOutput() RegisteredModelFromExternalTextGenerationOutput {
+	return i.ToRegisteredModelFromExternalTextGenerationOutputWithContext(context.Background())
+}
+
+func (i RegisteredModelFromExternalTextGenerationArgs) ToRegisteredModelFromExternalTextGenerationOutputWithContext(ctx context.Context) RegisteredModelFromExternalTextGenerationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RegisteredModelFromExternalTextGenerationOutput)
+}
+
+func (i RegisteredModelFromExternalTextGenerationArgs) ToRegisteredModelFromExternalTextGenerationPtrOutput() RegisteredModelFromExternalTextGenerationPtrOutput {
+	return i.ToRegisteredModelFromExternalTextGenerationPtrOutputWithContext(context.Background())
+}
+
+func (i RegisteredModelFromExternalTextGenerationArgs) ToRegisteredModelFromExternalTextGenerationPtrOutputWithContext(ctx context.Context) RegisteredModelFromExternalTextGenerationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RegisteredModelFromExternalTextGenerationOutput).ToRegisteredModelFromExternalTextGenerationPtrOutputWithContext(ctx)
+}
+
+// RegisteredModelFromExternalTextGenerationPtrInput is an input type that accepts RegisteredModelFromExternalTextGenerationArgs, RegisteredModelFromExternalTextGenerationPtr and RegisteredModelFromExternalTextGenerationPtrOutput values.
+// You can construct a concrete instance of `RegisteredModelFromExternalTextGenerationPtrInput` via:
+//
+//	        RegisteredModelFromExternalTextGenerationArgs{...}
+//
+//	or:
+//
+//	        nil
+type RegisteredModelFromExternalTextGenerationPtrInput interface {
+	pulumi.Input
+
+	ToRegisteredModelFromExternalTextGenerationPtrOutput() RegisteredModelFromExternalTextGenerationPtrOutput
+	ToRegisteredModelFromExternalTextGenerationPtrOutputWithContext(context.Context) RegisteredModelFromExternalTextGenerationPtrOutput
+}
+
+type registeredModelFromExternalTextGenerationPtrType RegisteredModelFromExternalTextGenerationArgs
+
+func RegisteredModelFromExternalTextGenerationPtr(v *RegisteredModelFromExternalTextGenerationArgs) RegisteredModelFromExternalTextGenerationPtrInput {
+	return (*registeredModelFromExternalTextGenerationPtrType)(v)
+}
+
+func (*registeredModelFromExternalTextGenerationPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**RegisteredModelFromExternalTextGeneration)(nil)).Elem()
+}
+
+func (i *registeredModelFromExternalTextGenerationPtrType) ToRegisteredModelFromExternalTextGenerationPtrOutput() RegisteredModelFromExternalTextGenerationPtrOutput {
+	return i.ToRegisteredModelFromExternalTextGenerationPtrOutputWithContext(context.Background())
+}
+
+func (i *registeredModelFromExternalTextGenerationPtrType) ToRegisteredModelFromExternalTextGenerationPtrOutputWithContext(ctx context.Context) RegisteredModelFromExternalTextGenerationPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RegisteredModelFromExternalTextGenerationPtrOutput)
+}
+
+type RegisteredModelFromExternalTextGenerationOutput struct{ *pulumi.OutputState }
+
+func (RegisteredModelFromExternalTextGenerationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RegisteredModelFromExternalTextGeneration)(nil)).Elem()
+}
+
+func (o RegisteredModelFromExternalTextGenerationOutput) ToRegisteredModelFromExternalTextGenerationOutput() RegisteredModelFromExternalTextGenerationOutput {
+	return o
+}
+
+func (o RegisteredModelFromExternalTextGenerationOutput) ToRegisteredModelFromExternalTextGenerationOutputWithContext(ctx context.Context) RegisteredModelFromExternalTextGenerationOutput {
+	return o
+}
+
+func (o RegisteredModelFromExternalTextGenerationOutput) ToRegisteredModelFromExternalTextGenerationPtrOutput() RegisteredModelFromExternalTextGenerationPtrOutput {
+	return o.ToRegisteredModelFromExternalTextGenerationPtrOutputWithContext(context.Background())
+}
+
+func (o RegisteredModelFromExternalTextGenerationOutput) ToRegisteredModelFromExternalTextGenerationPtrOutputWithContext(ctx context.Context) RegisteredModelFromExternalTextGenerationPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v RegisteredModelFromExternalTextGeneration) *RegisteredModelFromExternalTextGeneration {
+		return &v
+	}).(RegisteredModelFromExternalTextGenerationPtrOutput)
+}
+
+// The name of the prompt column.
+func (o RegisteredModelFromExternalTextGenerationOutput) Prompt() pulumi.StringOutput {
+	return o.ApplyT(func(v RegisteredModelFromExternalTextGeneration) string { return v.Prompt }).(pulumi.StringOutput)
+}
+
+type RegisteredModelFromExternalTextGenerationPtrOutput struct{ *pulumi.OutputState }
+
+func (RegisteredModelFromExternalTextGenerationPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**RegisteredModelFromExternalTextGeneration)(nil)).Elem()
+}
+
+func (o RegisteredModelFromExternalTextGenerationPtrOutput) ToRegisteredModelFromExternalTextGenerationPtrOutput() RegisteredModelFromExternalTextGenerationPtrOutput {
+	return o
+}
+
+func (o RegisteredModelFromExternalTextGenerationPtrOutput) ToRegisteredModelFromExternalTextGenerationPtrOutputWithContext(ctx context.Context) RegisteredModelFromExternalTextGenerationPtrOutput {
+	return o
+}
+
+func (o RegisteredModelFromExternalTextGenerationPtrOutput) Elem() RegisteredModelFromExternalTextGenerationOutput {
+	return o.ApplyT(func(v *RegisteredModelFromExternalTextGeneration) RegisteredModelFromExternalTextGeneration {
+		if v != nil {
+			return *v
+		}
+		var ret RegisteredModelFromExternalTextGeneration
+		return ret
+	}).(RegisteredModelFromExternalTextGenerationOutput)
+}
+
+// The name of the prompt column.
+func (o RegisteredModelFromExternalTextGenerationPtrOutput) Prompt() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RegisteredModelFromExternalTextGeneration) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Prompt
+	}).(pulumi.StringPtrOutput)
+}
+
+type RegisteredModelFromExternalTimeseries struct {
+	// The date format of the forecast date and forecast point columns. Changing it replaces the Registered Model.
+	DatetimeColumnFormat string `pulumi:"datetimeColumnFormat"`
+	// The name of the forecast date column. Changing it replaces the Registered Model.
+	DatetimeColumnName string `pulumi:"datetimeColumnName"`
+	// A negative number or zero: the end of the effective feature derivation window.
+	EffectiveFeatureDerivationWindowEnd *int `pulumi:"effectiveFeatureDerivationWindowEnd"`
+	// A negative number or zero: the start of the effective feature derivation window.
+	EffectiveFeatureDerivationWindowStart *int `pulumi:"effectiveFeatureDerivationWindowStart"`
+	// A negative number or zero: the end of the feature derivation window, relative to the forecast point, in forecast distance time units.
+	FeatureDerivationWindowEnd *int `pulumi:"featureDerivationWindowEnd"`
+	// A negative number or zero: the start of the feature derivation window, relative to the forecast point, in forecast distance time units.
+	FeatureDerivationWindowStart *int `pulumi:"featureDerivationWindowStart"`
+	// The name of the forecast distance column.
+	ForecastDistanceColumnName string `pulumi:"forecastDistanceColumnName"`
+	// The list of forecast distances. Changing it replaces the Registered Model.
+	ForecastDistances []int `pulumi:"forecastDistances"`
+	// The time unit of the forecast distances. Changing it replaces the Registered Model.
+	ForecastDistancesTimeUnit string `pulumi:"forecastDistancesTimeUnit"`
+	// The name of the forecast point column.
+	ForecastPointColumnName string `pulumi:"forecastPointColumnName"`
+	// Whether the model is cross-series.
+	IsCrossSeries *bool `pulumi:"isCrossSeries"`
+	// Whether the model is optimized to support new series.
+	IsNewSeriesSupport *bool `pulumi:"isNewSeriesSupport"`
+	// Whether the model is a traditional time series model.
+	IsTraditionalTimeSeries *bool `pulumi:"isTraditionalTimeSeries"`
+	// The name of the series column of a multiseries model. Setting or removing it replaces the Registered Model.
+	SeriesColumnName *string `pulumi:"seriesColumnName"`
+}
+
+// RegisteredModelFromExternalTimeseriesInput is an input type that accepts RegisteredModelFromExternalTimeseriesArgs and RegisteredModelFromExternalTimeseriesOutput values.
+// You can construct a concrete instance of `RegisteredModelFromExternalTimeseriesInput` via:
+//
+//	RegisteredModelFromExternalTimeseriesArgs{...}
+type RegisteredModelFromExternalTimeseriesInput interface {
+	pulumi.Input
+
+	ToRegisteredModelFromExternalTimeseriesOutput() RegisteredModelFromExternalTimeseriesOutput
+	ToRegisteredModelFromExternalTimeseriesOutputWithContext(context.Context) RegisteredModelFromExternalTimeseriesOutput
+}
+
+type RegisteredModelFromExternalTimeseriesArgs struct {
+	// The date format of the forecast date and forecast point columns. Changing it replaces the Registered Model.
+	DatetimeColumnFormat pulumi.StringInput `pulumi:"datetimeColumnFormat"`
+	// The name of the forecast date column. Changing it replaces the Registered Model.
+	DatetimeColumnName pulumi.StringInput `pulumi:"datetimeColumnName"`
+	// A negative number or zero: the end of the effective feature derivation window.
+	EffectiveFeatureDerivationWindowEnd pulumi.IntPtrInput `pulumi:"effectiveFeatureDerivationWindowEnd"`
+	// A negative number or zero: the start of the effective feature derivation window.
+	EffectiveFeatureDerivationWindowStart pulumi.IntPtrInput `pulumi:"effectiveFeatureDerivationWindowStart"`
+	// A negative number or zero: the end of the feature derivation window, relative to the forecast point, in forecast distance time units.
+	FeatureDerivationWindowEnd pulumi.IntPtrInput `pulumi:"featureDerivationWindowEnd"`
+	// A negative number or zero: the start of the feature derivation window, relative to the forecast point, in forecast distance time units.
+	FeatureDerivationWindowStart pulumi.IntPtrInput `pulumi:"featureDerivationWindowStart"`
+	// The name of the forecast distance column.
+	ForecastDistanceColumnName pulumi.StringInput `pulumi:"forecastDistanceColumnName"`
+	// The list of forecast distances. Changing it replaces the Registered Model.
+	ForecastDistances pulumi.IntArrayInput `pulumi:"forecastDistances"`
+	// The time unit of the forecast distances. Changing it replaces the Registered Model.
+	ForecastDistancesTimeUnit pulumi.StringInput `pulumi:"forecastDistancesTimeUnit"`
+	// The name of the forecast point column.
+	ForecastPointColumnName pulumi.StringInput `pulumi:"forecastPointColumnName"`
+	// Whether the model is cross-series.
+	IsCrossSeries pulumi.BoolPtrInput `pulumi:"isCrossSeries"`
+	// Whether the model is optimized to support new series.
+	IsNewSeriesSupport pulumi.BoolPtrInput `pulumi:"isNewSeriesSupport"`
+	// Whether the model is a traditional time series model.
+	IsTraditionalTimeSeries pulumi.BoolPtrInput `pulumi:"isTraditionalTimeSeries"`
+	// The name of the series column of a multiseries model. Setting or removing it replaces the Registered Model.
+	SeriesColumnName pulumi.StringPtrInput `pulumi:"seriesColumnName"`
+}
+
+func (RegisteredModelFromExternalTimeseriesArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RegisteredModelFromExternalTimeseries)(nil)).Elem()
+}
+
+func (i RegisteredModelFromExternalTimeseriesArgs) ToRegisteredModelFromExternalTimeseriesOutput() RegisteredModelFromExternalTimeseriesOutput {
+	return i.ToRegisteredModelFromExternalTimeseriesOutputWithContext(context.Background())
+}
+
+func (i RegisteredModelFromExternalTimeseriesArgs) ToRegisteredModelFromExternalTimeseriesOutputWithContext(ctx context.Context) RegisteredModelFromExternalTimeseriesOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RegisteredModelFromExternalTimeseriesOutput)
+}
+
+func (i RegisteredModelFromExternalTimeseriesArgs) ToRegisteredModelFromExternalTimeseriesPtrOutput() RegisteredModelFromExternalTimeseriesPtrOutput {
+	return i.ToRegisteredModelFromExternalTimeseriesPtrOutputWithContext(context.Background())
+}
+
+func (i RegisteredModelFromExternalTimeseriesArgs) ToRegisteredModelFromExternalTimeseriesPtrOutputWithContext(ctx context.Context) RegisteredModelFromExternalTimeseriesPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RegisteredModelFromExternalTimeseriesOutput).ToRegisteredModelFromExternalTimeseriesPtrOutputWithContext(ctx)
+}
+
+// RegisteredModelFromExternalTimeseriesPtrInput is an input type that accepts RegisteredModelFromExternalTimeseriesArgs, RegisteredModelFromExternalTimeseriesPtr and RegisteredModelFromExternalTimeseriesPtrOutput values.
+// You can construct a concrete instance of `RegisteredModelFromExternalTimeseriesPtrInput` via:
+//
+//	        RegisteredModelFromExternalTimeseriesArgs{...}
+//
+//	or:
+//
+//	        nil
+type RegisteredModelFromExternalTimeseriesPtrInput interface {
+	pulumi.Input
+
+	ToRegisteredModelFromExternalTimeseriesPtrOutput() RegisteredModelFromExternalTimeseriesPtrOutput
+	ToRegisteredModelFromExternalTimeseriesPtrOutputWithContext(context.Context) RegisteredModelFromExternalTimeseriesPtrOutput
+}
+
+type registeredModelFromExternalTimeseriesPtrType RegisteredModelFromExternalTimeseriesArgs
+
+func RegisteredModelFromExternalTimeseriesPtr(v *RegisteredModelFromExternalTimeseriesArgs) RegisteredModelFromExternalTimeseriesPtrInput {
+	return (*registeredModelFromExternalTimeseriesPtrType)(v)
+}
+
+func (*registeredModelFromExternalTimeseriesPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**RegisteredModelFromExternalTimeseries)(nil)).Elem()
+}
+
+func (i *registeredModelFromExternalTimeseriesPtrType) ToRegisteredModelFromExternalTimeseriesPtrOutput() RegisteredModelFromExternalTimeseriesPtrOutput {
+	return i.ToRegisteredModelFromExternalTimeseriesPtrOutputWithContext(context.Background())
+}
+
+func (i *registeredModelFromExternalTimeseriesPtrType) ToRegisteredModelFromExternalTimeseriesPtrOutputWithContext(ctx context.Context) RegisteredModelFromExternalTimeseriesPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RegisteredModelFromExternalTimeseriesPtrOutput)
+}
+
+type RegisteredModelFromExternalTimeseriesOutput struct{ *pulumi.OutputState }
+
+func (RegisteredModelFromExternalTimeseriesOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RegisteredModelFromExternalTimeseries)(nil)).Elem()
+}
+
+func (o RegisteredModelFromExternalTimeseriesOutput) ToRegisteredModelFromExternalTimeseriesOutput() RegisteredModelFromExternalTimeseriesOutput {
+	return o
+}
+
+func (o RegisteredModelFromExternalTimeseriesOutput) ToRegisteredModelFromExternalTimeseriesOutputWithContext(ctx context.Context) RegisteredModelFromExternalTimeseriesOutput {
+	return o
+}
+
+func (o RegisteredModelFromExternalTimeseriesOutput) ToRegisteredModelFromExternalTimeseriesPtrOutput() RegisteredModelFromExternalTimeseriesPtrOutput {
+	return o.ToRegisteredModelFromExternalTimeseriesPtrOutputWithContext(context.Background())
+}
+
+func (o RegisteredModelFromExternalTimeseriesOutput) ToRegisteredModelFromExternalTimeseriesPtrOutputWithContext(ctx context.Context) RegisteredModelFromExternalTimeseriesPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v RegisteredModelFromExternalTimeseries) *RegisteredModelFromExternalTimeseries {
+		return &v
+	}).(RegisteredModelFromExternalTimeseriesPtrOutput)
+}
+
+// The date format of the forecast date and forecast point columns. Changing it replaces the Registered Model.
+func (o RegisteredModelFromExternalTimeseriesOutput) DatetimeColumnFormat() pulumi.StringOutput {
+	return o.ApplyT(func(v RegisteredModelFromExternalTimeseries) string { return v.DatetimeColumnFormat }).(pulumi.StringOutput)
+}
+
+// The name of the forecast date column. Changing it replaces the Registered Model.
+func (o RegisteredModelFromExternalTimeseriesOutput) DatetimeColumnName() pulumi.StringOutput {
+	return o.ApplyT(func(v RegisteredModelFromExternalTimeseries) string { return v.DatetimeColumnName }).(pulumi.StringOutput)
+}
+
+// A negative number or zero: the end of the effective feature derivation window.
+func (o RegisteredModelFromExternalTimeseriesOutput) EffectiveFeatureDerivationWindowEnd() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v RegisteredModelFromExternalTimeseries) *int { return v.EffectiveFeatureDerivationWindowEnd }).(pulumi.IntPtrOutput)
+}
+
+// A negative number or zero: the start of the effective feature derivation window.
+func (o RegisteredModelFromExternalTimeseriesOutput) EffectiveFeatureDerivationWindowStart() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v RegisteredModelFromExternalTimeseries) *int { return v.EffectiveFeatureDerivationWindowStart }).(pulumi.IntPtrOutput)
+}
+
+// A negative number or zero: the end of the feature derivation window, relative to the forecast point, in forecast distance time units.
+func (o RegisteredModelFromExternalTimeseriesOutput) FeatureDerivationWindowEnd() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v RegisteredModelFromExternalTimeseries) *int { return v.FeatureDerivationWindowEnd }).(pulumi.IntPtrOutput)
+}
+
+// A negative number or zero: the start of the feature derivation window, relative to the forecast point, in forecast distance time units.
+func (o RegisteredModelFromExternalTimeseriesOutput) FeatureDerivationWindowStart() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v RegisteredModelFromExternalTimeseries) *int { return v.FeatureDerivationWindowStart }).(pulumi.IntPtrOutput)
+}
+
+// The name of the forecast distance column.
+func (o RegisteredModelFromExternalTimeseriesOutput) ForecastDistanceColumnName() pulumi.StringOutput {
+	return o.ApplyT(func(v RegisteredModelFromExternalTimeseries) string { return v.ForecastDistanceColumnName }).(pulumi.StringOutput)
+}
+
+// The list of forecast distances. Changing it replaces the Registered Model.
+func (o RegisteredModelFromExternalTimeseriesOutput) ForecastDistances() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v RegisteredModelFromExternalTimeseries) []int { return v.ForecastDistances }).(pulumi.IntArrayOutput)
+}
+
+// The time unit of the forecast distances. Changing it replaces the Registered Model.
+func (o RegisteredModelFromExternalTimeseriesOutput) ForecastDistancesTimeUnit() pulumi.StringOutput {
+	return o.ApplyT(func(v RegisteredModelFromExternalTimeseries) string { return v.ForecastDistancesTimeUnit }).(pulumi.StringOutput)
+}
+
+// The name of the forecast point column.
+func (o RegisteredModelFromExternalTimeseriesOutput) ForecastPointColumnName() pulumi.StringOutput {
+	return o.ApplyT(func(v RegisteredModelFromExternalTimeseries) string { return v.ForecastPointColumnName }).(pulumi.StringOutput)
+}
+
+// Whether the model is cross-series.
+func (o RegisteredModelFromExternalTimeseriesOutput) IsCrossSeries() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v RegisteredModelFromExternalTimeseries) *bool { return v.IsCrossSeries }).(pulumi.BoolPtrOutput)
+}
+
+// Whether the model is optimized to support new series.
+func (o RegisteredModelFromExternalTimeseriesOutput) IsNewSeriesSupport() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v RegisteredModelFromExternalTimeseries) *bool { return v.IsNewSeriesSupport }).(pulumi.BoolPtrOutput)
+}
+
+// Whether the model is a traditional time series model.
+func (o RegisteredModelFromExternalTimeseriesOutput) IsTraditionalTimeSeries() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v RegisteredModelFromExternalTimeseries) *bool { return v.IsTraditionalTimeSeries }).(pulumi.BoolPtrOutput)
+}
+
+// The name of the series column of a multiseries model. Setting or removing it replaces the Registered Model.
+func (o RegisteredModelFromExternalTimeseriesOutput) SeriesColumnName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RegisteredModelFromExternalTimeseries) *string { return v.SeriesColumnName }).(pulumi.StringPtrOutput)
+}
+
+type RegisteredModelFromExternalTimeseriesPtrOutput struct{ *pulumi.OutputState }
+
+func (RegisteredModelFromExternalTimeseriesPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**RegisteredModelFromExternalTimeseries)(nil)).Elem()
+}
+
+func (o RegisteredModelFromExternalTimeseriesPtrOutput) ToRegisteredModelFromExternalTimeseriesPtrOutput() RegisteredModelFromExternalTimeseriesPtrOutput {
+	return o
+}
+
+func (o RegisteredModelFromExternalTimeseriesPtrOutput) ToRegisteredModelFromExternalTimeseriesPtrOutputWithContext(ctx context.Context) RegisteredModelFromExternalTimeseriesPtrOutput {
+	return o
+}
+
+func (o RegisteredModelFromExternalTimeseriesPtrOutput) Elem() RegisteredModelFromExternalTimeseriesOutput {
+	return o.ApplyT(func(v *RegisteredModelFromExternalTimeseries) RegisteredModelFromExternalTimeseries {
+		if v != nil {
+			return *v
+		}
+		var ret RegisteredModelFromExternalTimeseries
+		return ret
+	}).(RegisteredModelFromExternalTimeseriesOutput)
+}
+
+// The date format of the forecast date and forecast point columns. Changing it replaces the Registered Model.
+func (o RegisteredModelFromExternalTimeseriesPtrOutput) DatetimeColumnFormat() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RegisteredModelFromExternalTimeseries) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.DatetimeColumnFormat
+	}).(pulumi.StringPtrOutput)
+}
+
+// The name of the forecast date column. Changing it replaces the Registered Model.
+func (o RegisteredModelFromExternalTimeseriesPtrOutput) DatetimeColumnName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RegisteredModelFromExternalTimeseries) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.DatetimeColumnName
+	}).(pulumi.StringPtrOutput)
+}
+
+// A negative number or zero: the end of the effective feature derivation window.
+func (o RegisteredModelFromExternalTimeseriesPtrOutput) EffectiveFeatureDerivationWindowEnd() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *RegisteredModelFromExternalTimeseries) *int {
+		if v == nil {
+			return nil
+		}
+		return v.EffectiveFeatureDerivationWindowEnd
+	}).(pulumi.IntPtrOutput)
+}
+
+// A negative number or zero: the start of the effective feature derivation window.
+func (o RegisteredModelFromExternalTimeseriesPtrOutput) EffectiveFeatureDerivationWindowStart() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *RegisteredModelFromExternalTimeseries) *int {
+		if v == nil {
+			return nil
+		}
+		return v.EffectiveFeatureDerivationWindowStart
+	}).(pulumi.IntPtrOutput)
+}
+
+// A negative number or zero: the end of the feature derivation window, relative to the forecast point, in forecast distance time units.
+func (o RegisteredModelFromExternalTimeseriesPtrOutput) FeatureDerivationWindowEnd() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *RegisteredModelFromExternalTimeseries) *int {
+		if v == nil {
+			return nil
+		}
+		return v.FeatureDerivationWindowEnd
+	}).(pulumi.IntPtrOutput)
+}
+
+// A negative number or zero: the start of the feature derivation window, relative to the forecast point, in forecast distance time units.
+func (o RegisteredModelFromExternalTimeseriesPtrOutput) FeatureDerivationWindowStart() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *RegisteredModelFromExternalTimeseries) *int {
+		if v == nil {
+			return nil
+		}
+		return v.FeatureDerivationWindowStart
+	}).(pulumi.IntPtrOutput)
+}
+
+// The name of the forecast distance column.
+func (o RegisteredModelFromExternalTimeseriesPtrOutput) ForecastDistanceColumnName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RegisteredModelFromExternalTimeseries) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ForecastDistanceColumnName
+	}).(pulumi.StringPtrOutput)
+}
+
+// The list of forecast distances. Changing it replaces the Registered Model.
+func (o RegisteredModelFromExternalTimeseriesPtrOutput) ForecastDistances() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v *RegisteredModelFromExternalTimeseries) []int {
+		if v == nil {
+			return nil
+		}
+		return v.ForecastDistances
+	}).(pulumi.IntArrayOutput)
+}
+
+// The time unit of the forecast distances. Changing it replaces the Registered Model.
+func (o RegisteredModelFromExternalTimeseriesPtrOutput) ForecastDistancesTimeUnit() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RegisteredModelFromExternalTimeseries) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ForecastDistancesTimeUnit
+	}).(pulumi.StringPtrOutput)
+}
+
+// The name of the forecast point column.
+func (o RegisteredModelFromExternalTimeseriesPtrOutput) ForecastPointColumnName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RegisteredModelFromExternalTimeseries) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ForecastPointColumnName
+	}).(pulumi.StringPtrOutput)
+}
+
+// Whether the model is cross-series.
+func (o RegisteredModelFromExternalTimeseriesPtrOutput) IsCrossSeries() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *RegisteredModelFromExternalTimeseries) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.IsCrossSeries
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Whether the model is optimized to support new series.
+func (o RegisteredModelFromExternalTimeseriesPtrOutput) IsNewSeriesSupport() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *RegisteredModelFromExternalTimeseries) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.IsNewSeriesSupport
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Whether the model is a traditional time series model.
+func (o RegisteredModelFromExternalTimeseriesPtrOutput) IsTraditionalTimeSeries() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *RegisteredModelFromExternalTimeseries) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.IsTraditionalTimeSeries
+	}).(pulumi.BoolPtrOutput)
+}
+
+// The name of the series column of a multiseries model. Setting or removing it replaces the Registered Model.
+func (o RegisteredModelFromExternalTimeseriesPtrOutput) SeriesColumnName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RegisteredModelFromExternalTimeseries) *string {
+		if v == nil {
+			return nil
+		}
+		return v.SeriesColumnName
+	}).(pulumi.StringPtrOutput)
+}
+
 type RegisteredModelTag struct {
 	// The name of the tag.
 	Name string `pulumi:"name"`
@@ -15605,6 +16970,121 @@ func (o VectorDatabaseChunkingParametersPtrOutput) Separators() pulumi.StringArr
 		}
 		return v.Separators
 	}).(pulumi.StringArrayOutput)
+}
+
+type WorkloadPlacement struct {
+	// The name of the Enclave.
+	Enclave *string `pulumi:"enclave"`
+	// The ID of the Enclave.
+	EnclaveId *string `pulumi:"enclaveId"`
+	// The region the Enclave is deployed in, when the platform reports one.
+	Region *string `pulumi:"region"`
+}
+
+// WorkloadPlacementInput is an input type that accepts WorkloadPlacementArgs and WorkloadPlacementOutput values.
+// You can construct a concrete instance of `WorkloadPlacementInput` via:
+//
+//	WorkloadPlacementArgs{...}
+type WorkloadPlacementInput interface {
+	pulumi.Input
+
+	ToWorkloadPlacementOutput() WorkloadPlacementOutput
+	ToWorkloadPlacementOutputWithContext(context.Context) WorkloadPlacementOutput
+}
+
+type WorkloadPlacementArgs struct {
+	// The name of the Enclave.
+	Enclave pulumi.StringPtrInput `pulumi:"enclave"`
+	// The ID of the Enclave.
+	EnclaveId pulumi.StringPtrInput `pulumi:"enclaveId"`
+	// The region the Enclave is deployed in, when the platform reports one.
+	Region pulumi.StringPtrInput `pulumi:"region"`
+}
+
+func (WorkloadPlacementArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*WorkloadPlacement)(nil)).Elem()
+}
+
+func (i WorkloadPlacementArgs) ToWorkloadPlacementOutput() WorkloadPlacementOutput {
+	return i.ToWorkloadPlacementOutputWithContext(context.Background())
+}
+
+func (i WorkloadPlacementArgs) ToWorkloadPlacementOutputWithContext(ctx context.Context) WorkloadPlacementOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WorkloadPlacementOutput)
+}
+
+// WorkloadPlacementArrayInput is an input type that accepts WorkloadPlacementArray and WorkloadPlacementArrayOutput values.
+// You can construct a concrete instance of `WorkloadPlacementArrayInput` via:
+//
+//	WorkloadPlacementArray{ WorkloadPlacementArgs{...} }
+type WorkloadPlacementArrayInput interface {
+	pulumi.Input
+
+	ToWorkloadPlacementArrayOutput() WorkloadPlacementArrayOutput
+	ToWorkloadPlacementArrayOutputWithContext(context.Context) WorkloadPlacementArrayOutput
+}
+
+type WorkloadPlacementArray []WorkloadPlacementInput
+
+func (WorkloadPlacementArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]WorkloadPlacement)(nil)).Elem()
+}
+
+func (i WorkloadPlacementArray) ToWorkloadPlacementArrayOutput() WorkloadPlacementArrayOutput {
+	return i.ToWorkloadPlacementArrayOutputWithContext(context.Background())
+}
+
+func (i WorkloadPlacementArray) ToWorkloadPlacementArrayOutputWithContext(ctx context.Context) WorkloadPlacementArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WorkloadPlacementArrayOutput)
+}
+
+type WorkloadPlacementOutput struct{ *pulumi.OutputState }
+
+func (WorkloadPlacementOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*WorkloadPlacement)(nil)).Elem()
+}
+
+func (o WorkloadPlacementOutput) ToWorkloadPlacementOutput() WorkloadPlacementOutput {
+	return o
+}
+
+func (o WorkloadPlacementOutput) ToWorkloadPlacementOutputWithContext(ctx context.Context) WorkloadPlacementOutput {
+	return o
+}
+
+// The name of the Enclave.
+func (o WorkloadPlacementOutput) Enclave() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v WorkloadPlacement) *string { return v.Enclave }).(pulumi.StringPtrOutput)
+}
+
+// The ID of the Enclave.
+func (o WorkloadPlacementOutput) EnclaveId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v WorkloadPlacement) *string { return v.EnclaveId }).(pulumi.StringPtrOutput)
+}
+
+// The region the Enclave is deployed in, when the platform reports one.
+func (o WorkloadPlacementOutput) Region() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v WorkloadPlacement) *string { return v.Region }).(pulumi.StringPtrOutput)
+}
+
+type WorkloadPlacementArrayOutput struct{ *pulumi.OutputState }
+
+func (WorkloadPlacementArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]WorkloadPlacement)(nil)).Elem()
+}
+
+func (o WorkloadPlacementArrayOutput) ToWorkloadPlacementArrayOutput() WorkloadPlacementArrayOutput {
+	return o
+}
+
+func (o WorkloadPlacementArrayOutput) ToWorkloadPlacementArrayOutputWithContext(ctx context.Context) WorkloadPlacementArrayOutput {
+	return o
+}
+
+func (o WorkloadPlacementArrayOutput) Index(i pulumi.IntInput) WorkloadPlacementOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) WorkloadPlacement {
+		return vs[0].([]WorkloadPlacement)[vs[1].(int)]
+	}).(WorkloadPlacementOutput)
 }
 
 type WorkloadRuntime struct {
@@ -20942,10 +22422,26 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*NotificationChannelDrEntityArrayInput)(nil)).Elem(), NotificationChannelDrEntityArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*QuotaDefaultRuleInput)(nil)).Elem(), QuotaDefaultRuleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*QuotaDefaultRuleArrayInput)(nil)).Elem(), QuotaDefaultRuleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RegisteredModelFromExternalDatasetsInput)(nil)).Elem(), RegisteredModelFromExternalDatasetsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RegisteredModelFromExternalDatasetsPtrInput)(nil)).Elem(), RegisteredModelFromExternalDatasetsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RegisteredModelFromExternalGeospatialMonitoringInput)(nil)).Elem(), RegisteredModelFromExternalGeospatialMonitoringArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RegisteredModelFromExternalGeospatialMonitoringPtrInput)(nil)).Elem(), RegisteredModelFromExternalGeospatialMonitoringArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RegisteredModelFromExternalModelDescriptionInput)(nil)).Elem(), RegisteredModelFromExternalModelDescriptionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RegisteredModelFromExternalModelDescriptionPtrInput)(nil)).Elem(), RegisteredModelFromExternalModelDescriptionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RegisteredModelFromExternalTagInput)(nil)).Elem(), RegisteredModelFromExternalTagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RegisteredModelFromExternalTagArrayInput)(nil)).Elem(), RegisteredModelFromExternalTagArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RegisteredModelFromExternalTargetInput)(nil)).Elem(), RegisteredModelFromExternalTargetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RegisteredModelFromExternalTargetPtrInput)(nil)).Elem(), RegisteredModelFromExternalTargetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RegisteredModelFromExternalTextGenerationInput)(nil)).Elem(), RegisteredModelFromExternalTextGenerationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RegisteredModelFromExternalTextGenerationPtrInput)(nil)).Elem(), RegisteredModelFromExternalTextGenerationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RegisteredModelFromExternalTimeseriesInput)(nil)).Elem(), RegisteredModelFromExternalTimeseriesArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RegisteredModelFromExternalTimeseriesPtrInput)(nil)).Elem(), RegisteredModelFromExternalTimeseriesArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*RegisteredModelTagInput)(nil)).Elem(), RegisteredModelTagArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*RegisteredModelTagArrayInput)(nil)).Elem(), RegisteredModelTagArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*VectorDatabaseChunkingParametersInput)(nil)).Elem(), VectorDatabaseChunkingParametersArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*VectorDatabaseChunkingParametersPtrInput)(nil)).Elem(), VectorDatabaseChunkingParametersArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WorkloadPlacementInput)(nil)).Elem(), WorkloadPlacementArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WorkloadPlacementArrayInput)(nil)).Elem(), WorkloadPlacementArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*WorkloadRuntimeInput)(nil)).Elem(), WorkloadRuntimeArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*WorkloadRuntimePtrInput)(nil)).Elem(), WorkloadRuntimeArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*WorkloadRuntimeContainerGroupInput)(nil)).Elem(), WorkloadRuntimeContainerGroupArgs{})
@@ -21185,10 +22681,26 @@ func init() {
 	pulumi.RegisterOutputType(NotificationChannelDrEntityArrayOutput{})
 	pulumi.RegisterOutputType(QuotaDefaultRuleOutput{})
 	pulumi.RegisterOutputType(QuotaDefaultRuleArrayOutput{})
+	pulumi.RegisterOutputType(RegisteredModelFromExternalDatasetsOutput{})
+	pulumi.RegisterOutputType(RegisteredModelFromExternalDatasetsPtrOutput{})
+	pulumi.RegisterOutputType(RegisteredModelFromExternalGeospatialMonitoringOutput{})
+	pulumi.RegisterOutputType(RegisteredModelFromExternalGeospatialMonitoringPtrOutput{})
+	pulumi.RegisterOutputType(RegisteredModelFromExternalModelDescriptionOutput{})
+	pulumi.RegisterOutputType(RegisteredModelFromExternalModelDescriptionPtrOutput{})
+	pulumi.RegisterOutputType(RegisteredModelFromExternalTagOutput{})
+	pulumi.RegisterOutputType(RegisteredModelFromExternalTagArrayOutput{})
+	pulumi.RegisterOutputType(RegisteredModelFromExternalTargetOutput{})
+	pulumi.RegisterOutputType(RegisteredModelFromExternalTargetPtrOutput{})
+	pulumi.RegisterOutputType(RegisteredModelFromExternalTextGenerationOutput{})
+	pulumi.RegisterOutputType(RegisteredModelFromExternalTextGenerationPtrOutput{})
+	pulumi.RegisterOutputType(RegisteredModelFromExternalTimeseriesOutput{})
+	pulumi.RegisterOutputType(RegisteredModelFromExternalTimeseriesPtrOutput{})
 	pulumi.RegisterOutputType(RegisteredModelTagOutput{})
 	pulumi.RegisterOutputType(RegisteredModelTagArrayOutput{})
 	pulumi.RegisterOutputType(VectorDatabaseChunkingParametersOutput{})
 	pulumi.RegisterOutputType(VectorDatabaseChunkingParametersPtrOutput{})
+	pulumi.RegisterOutputType(WorkloadPlacementOutput{})
+	pulumi.RegisterOutputType(WorkloadPlacementArrayOutput{})
 	pulumi.RegisterOutputType(WorkloadRuntimeOutput{})
 	pulumi.RegisterOutputType(WorkloadRuntimePtrOutput{})
 	pulumi.RegisterOutputType(WorkloadRuntimeContainerGroupOutput{})

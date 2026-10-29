@@ -56,7 +56,7 @@ namespace DataRobotPulumi.Datarobot.Inputs
         public Input<Inputs.ArtifactSpecContainerGroupContainerImageBuildConfigArgs>? ImageBuildConfig { get; set; }
 
         /// <summary>
-        /// Docker image URI. Populated by the provider after a completed image build when &lt;span pulumi-lang-nodejs="`source`" pulumi-lang-dotnet="`Source`" pulumi-lang-go="`source`" pulumi-lang-python="`source`" pulumi-lang-yaml="`source`" pulumi-lang-java="`source`" pulumi-lang-hcl="`source`"&gt;`source`&lt;/span&gt; and &lt;span pulumi-lang-nodejs="`imageBuildConfig`" pulumi-lang-dotnet="`ImageBuildConfig`" pulumi-lang-go="`imageBuildConfig`" pulumi-lang-python="`image_build_config`" pulumi-lang-yaml="`imageBuildConfig`" pulumi-lang-java="`imageBuildConfig`" pulumi-lang-hcl="`image_build_config`"&gt;`imageBuildConfig`&lt;/span&gt; are set. May be set explicitly when not using source-driven builds.
+        /// Docker image URI. Set this for a prebuilt image. When &lt;span pulumi-lang-nodejs="`source`" pulumi-lang-dotnet="`Source`" pulumi-lang-go="`source`" pulumi-lang-python="`source`" pulumi-lang-yaml="`source`" pulumi-lang-java="`source`" pulumi-lang-hcl="`source`"&gt;`source`&lt;/span&gt; and &lt;span pulumi-lang-nodejs="`imageBuildConfig`" pulumi-lang-dotnet="`ImageBuildConfig`" pulumi-lang-go="`imageBuildConfig`" pulumi-lang-python="`image_build_config`" pulumi-lang-yaml="`imageBuildConfig`" pulumi-lang-java="`imageBuildConfig`" pulumi-lang-hcl="`image_build_config`"&gt;`imageBuildConfig`&lt;/span&gt; are both set, apply builds the image and populates this attribute, and configuring it is rejected because the build would overwrite it.
         /// </summary>
         [Input("imageUri")]
         public Input<string>? ImageUri { get; set; }

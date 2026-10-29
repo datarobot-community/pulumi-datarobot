@@ -189,10 +189,26 @@ __all__ = [
     'NotificationChannelDrEntityArgsDict',
     'QuotaDefaultRuleArgs',
     'QuotaDefaultRuleArgsDict',
+    'RegisteredModelFromExternalDatasetsArgs',
+    'RegisteredModelFromExternalDatasetsArgsDict',
+    'RegisteredModelFromExternalGeospatialMonitoringArgs',
+    'RegisteredModelFromExternalGeospatialMonitoringArgsDict',
+    'RegisteredModelFromExternalModelDescriptionArgs',
+    'RegisteredModelFromExternalModelDescriptionArgsDict',
+    'RegisteredModelFromExternalTagArgs',
+    'RegisteredModelFromExternalTagArgsDict',
+    'RegisteredModelFromExternalTargetArgs',
+    'RegisteredModelFromExternalTargetArgsDict',
+    'RegisteredModelFromExternalTextGenerationArgs',
+    'RegisteredModelFromExternalTextGenerationArgsDict',
+    'RegisteredModelFromExternalTimeseriesArgs',
+    'RegisteredModelFromExternalTimeseriesArgsDict',
     'RegisteredModelTagArgs',
     'RegisteredModelTagArgsDict',
     'VectorDatabaseChunkingParametersArgs',
     'VectorDatabaseChunkingParametersArgsDict',
+    'WorkloadPlacementArgs',
+    'WorkloadPlacementArgsDict',
     'WorkloadRuntimeArgs',
     'WorkloadRuntimeArgsDict',
     'WorkloadRuntimeContainerGroupArgs',
@@ -576,7 +592,7 @@ class ArtifactSourceArgsDict(TypedDict):
     """
     wait_for_build: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
     """
-    When <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> (default), after a source upload the provider triggers an image build and polls until it completes before proceeding (for example, before locking). When <span pulumi-lang-nodejs="`false`" pulumi-lang-dotnet="`False`" pulumi-lang-go="`false`" pulumi-lang-python="`false`" pulumi-lang-yaml="`false`" pulumi-lang-java="`false`" pulumi-lang-hcl="`false`">`false`</span>, the build is triggered but apply does not wait for <span pulumi-lang-nodejs="`imageUri`" pulumi-lang-dotnet="`ImageUri`" pulumi-lang-go="`imageUri`" pulumi-lang-python="`image_uri`" pulumi-lang-yaml="`imageUri`" pulumi-lang-java="`imageUri`" pulumi-lang-hcl="`image_uri`">`imageUri`</span> to be populated.
+    When <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> (default), after a source upload the provider triggers an image build and polls until it completes before proceeding (for example, before locking). When <span pulumi-lang-nodejs="`false`" pulumi-lang-dotnet="`False`" pulumi-lang-go="`false`" pulumi-lang-python="`false`" pulumi-lang-yaml="`false`" pulumi-lang-java="`false`" pulumi-lang-hcl="`false`">`false`</span>, the build is triggered but apply does not wait for <span pulumi-lang-nodejs="`imageUri`" pulumi-lang-dotnet="`ImageUri`" pulumi-lang-go="`imageUri`" pulumi-lang-python="`image_uri`" pulumi-lang-yaml="`imageUri`" pulumi-lang-java="`imageUri`" pulumi-lang-hcl="`image_uri`">`imageUri`</span> to be populated; only a draft artifact can skip the wait, since an artifact is locked only once its build has completed. A create whose build is still running at the end of the wait fails: under Terraform the artifact is saved to state and marked tainted, so the next apply replaces it; under Pulumi a failed create keeps no state, so the artifact stays on the platform untracked and has to be deleted by hand.
     """
 
 @pulumi.input_type
@@ -590,7 +606,7 @@ class ArtifactSourceArgs:
         :param pulumi.Input[_builtins.str] dir: Path to the local directory containing application source files to synchronize. Apply may add, overwrite, or remove files in this directory, and keeps sync state under `dir/.datarobot/workload/`, so the directory must be writable; see the <span pulumi-lang-nodejs="`source`" pulumi-lang-dotnet="`Source`" pulumi-lang-go="`source`" pulumi-lang-python="`source`" pulumi-lang-yaml="`source`" pulumi-lang-java="`source`" pulumi-lang-hcl="`source`">`source`</span> description.
         :param pulumi.Input[_builtins.str] dir_hash: SHA-256 fingerprint of uploadable files under <span pulumi-lang-nodejs="`dir`" pulumi-lang-dotnet="`Dir`" pulumi-lang-go="`dir`" pulumi-lang-python="`dir`" pulumi-lang-yaml="`dir`" pulumi-lang-java="`dir`" pulumi-lang-hcl="`dir`">`dir`</span> after `.drignore` / system excludes. Used to detect changes and skip the sync when unchanged. Files covered by a system exclude, including the sync state directory, are never part of this hash. When the directory differs from state, or the catalog moved since the directory last synced, it plans as known after apply, because the sync may add or remove files under <span pulumi-lang-nodejs="`dir`" pulumi-lang-dotnet="`Dir`" pulumi-lang-go="`dir`" pulumi-lang-python="`dir`" pulumi-lang-yaml="`dir`" pulumi-lang-java="`dir`" pulumi-lang-hcl="`dir`">`dir`</span>; the value recorded is the digest of the directory once the sync is done.
         :param pulumi.Input[_builtins.bool] generate_ignore: When <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> (default), if <span pulumi-lang-nodejs="`dir`" pulumi-lang-dotnet="`Dir`" pulumi-lang-go="`dir`" pulumi-lang-python="`dir`" pulumi-lang-yaml="`dir`" pulumi-lang-java="`dir`" pulumi-lang-hcl="`dir`">`dir`</span> has neither `.drignore` nor `.wapiignore`, the provider writes a default `.drignore` at the start of apply. Existing ignore files are never overwritten. Set to <span pulumi-lang-nodejs="`false`" pulumi-lang-dotnet="`False`" pulumi-lang-go="`false`" pulumi-lang-python="`false`" pulumi-lang-yaml="`false`" pulumi-lang-java="`false`" pulumi-lang-hcl="`false`">`false`</span> to skip autogeneration. System excludes always apply and cannot be re-enabled from `.drignore`: `.datarobot.yaml`, `.git`, `.gitignore`, `.wapi`, `.datarobot/workload`, the `<path>.LOCAL.<timestamp>` copies the DataRobot CLI's sync keeps, and Terraform's own `.terraform`, `terraform.tfstate*` and `*.tfvars` files.
-        :param pulumi.Input[_builtins.bool] wait_for_build: When <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> (default), after a source upload the provider triggers an image build and polls until it completes before proceeding (for example, before locking). When <span pulumi-lang-nodejs="`false`" pulumi-lang-dotnet="`False`" pulumi-lang-go="`false`" pulumi-lang-python="`false`" pulumi-lang-yaml="`false`" pulumi-lang-java="`false`" pulumi-lang-hcl="`false`">`false`</span>, the build is triggered but apply does not wait for <span pulumi-lang-nodejs="`imageUri`" pulumi-lang-dotnet="`ImageUri`" pulumi-lang-go="`imageUri`" pulumi-lang-python="`image_uri`" pulumi-lang-yaml="`imageUri`" pulumi-lang-java="`imageUri`" pulumi-lang-hcl="`image_uri`">`imageUri`</span> to be populated.
+        :param pulumi.Input[_builtins.bool] wait_for_build: When <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> (default), after a source upload the provider triggers an image build and polls until it completes before proceeding (for example, before locking). When <span pulumi-lang-nodejs="`false`" pulumi-lang-dotnet="`False`" pulumi-lang-go="`false`" pulumi-lang-python="`false`" pulumi-lang-yaml="`false`" pulumi-lang-java="`false`" pulumi-lang-hcl="`false`">`false`</span>, the build is triggered but apply does not wait for <span pulumi-lang-nodejs="`imageUri`" pulumi-lang-dotnet="`ImageUri`" pulumi-lang-go="`imageUri`" pulumi-lang-python="`image_uri`" pulumi-lang-yaml="`imageUri`" pulumi-lang-java="`imageUri`" pulumi-lang-hcl="`image_uri`">`imageUri`</span> to be populated; only a draft artifact can skip the wait, since an artifact is locked only once its build has completed. A create whose build is still running at the end of the wait fails: under Terraform the artifact is saved to state and marked tainted, so the next apply replaces it; under Pulumi a failed create keeps no state, so the artifact stays on the platform untracked and has to be deleted by hand.
         """
         pulumi.set(__self__, "dir", dir)
         if dir_hash is not None:
@@ -640,7 +656,7 @@ class ArtifactSourceArgs:
     @pulumi.getter(name="waitForBuild")
     def wait_for_build(self) -> pulumi.Input[Optional[_builtins.bool]]:
         """
-        When <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> (default), after a source upload the provider triggers an image build and polls until it completes before proceeding (for example, before locking). When <span pulumi-lang-nodejs="`false`" pulumi-lang-dotnet="`False`" pulumi-lang-go="`false`" pulumi-lang-python="`false`" pulumi-lang-yaml="`false`" pulumi-lang-java="`false`" pulumi-lang-hcl="`false`">`false`</span>, the build is triggered but apply does not wait for <span pulumi-lang-nodejs="`imageUri`" pulumi-lang-dotnet="`ImageUri`" pulumi-lang-go="`imageUri`" pulumi-lang-python="`image_uri`" pulumi-lang-yaml="`imageUri`" pulumi-lang-java="`imageUri`" pulumi-lang-hcl="`image_uri`">`imageUri`</span> to be populated.
+        When <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> (default), after a source upload the provider triggers an image build and polls until it completes before proceeding (for example, before locking). When <span pulumi-lang-nodejs="`false`" pulumi-lang-dotnet="`False`" pulumi-lang-go="`false`" pulumi-lang-python="`false`" pulumi-lang-yaml="`false`" pulumi-lang-java="`false`" pulumi-lang-hcl="`false`">`false`</span>, the build is triggered but apply does not wait for <span pulumi-lang-nodejs="`imageUri`" pulumi-lang-dotnet="`ImageUri`" pulumi-lang-go="`imageUri`" pulumi-lang-python="`image_uri`" pulumi-lang-yaml="`imageUri`" pulumi-lang-java="`imageUri`" pulumi-lang-hcl="`image_uri`">`imageUri`</span> to be populated; only a draft artifact can skip the wait, since an artifact is locked only once its build has completed. A create whose build is still running at the end of the wait fails: under Terraform the artifact is saved to state and marked tainted, so the next apply replaces it; under Pulumi a failed create keeps no state, so the artifact stays on the platform untracked and has to be deleted by hand.
         """
         return pulumi.get(self, "wait_for_build")
 
@@ -748,7 +764,7 @@ class ArtifactSpecContainerGroupContainerArgsDict(TypedDict):
     """
     image_uri: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
-    Docker image URI. Populated by the provider after a completed image build when <span pulumi-lang-nodejs="`source`" pulumi-lang-dotnet="`Source`" pulumi-lang-go="`source`" pulumi-lang-python="`source`" pulumi-lang-yaml="`source`" pulumi-lang-java="`source`" pulumi-lang-hcl="`source`">`source`</span> and <span pulumi-lang-nodejs="`imageBuildConfig`" pulumi-lang-dotnet="`ImageBuildConfig`" pulumi-lang-go="`imageBuildConfig`" pulumi-lang-python="`image_build_config`" pulumi-lang-yaml="`imageBuildConfig`" pulumi-lang-java="`imageBuildConfig`" pulumi-lang-hcl="`image_build_config`">`imageBuildConfig`</span> are set. May be set explicitly when not using source-driven builds.
+    Docker image URI. Set this for a prebuilt image. When <span pulumi-lang-nodejs="`source`" pulumi-lang-dotnet="`Source`" pulumi-lang-go="`source`" pulumi-lang-python="`source`" pulumi-lang-yaml="`source`" pulumi-lang-java="`source`" pulumi-lang-hcl="`source`">`source`</span> and <span pulumi-lang-nodejs="`imageBuildConfig`" pulumi-lang-dotnet="`ImageBuildConfig`" pulumi-lang-go="`imageBuildConfig`" pulumi-lang-python="`image_build_config`" pulumi-lang-yaml="`imageBuildConfig`" pulumi-lang-java="`imageBuildConfig`" pulumi-lang-hcl="`image_build_config`">`imageBuildConfig`</span> are both set, apply builds the image and populates this attribute, and configuring it is rejected because the build would overwrite it.
     """
     liveness_probe: NotRequired[pulumi.Input[Optional['ArtifactSpecContainerGroupContainerLivenessProbeArgsDict']]]
     """
@@ -801,7 +817,7 @@ class ArtifactSpecContainerGroupContainerArgs:
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] entrypoints: Container entrypoint.
         :param pulumi.Input[Sequence[pulumi.Input['ArtifactSpecContainerGroupContainerEnvironmentVarArgs']]] environment_vars: Environment variables for the container.
         :param pulumi.Input['ArtifactSpecContainerGroupContainerImageBuildConfigArgs'] image_build_config: Configuration for server-side image builds from source code.
-        :param pulumi.Input[_builtins.str] image_uri: Docker image URI. Populated by the provider after a completed image build when <span pulumi-lang-nodejs="`source`" pulumi-lang-dotnet="`Source`" pulumi-lang-go="`source`" pulumi-lang-python="`source`" pulumi-lang-yaml="`source`" pulumi-lang-java="`source`" pulumi-lang-hcl="`source`">`source`</span> and <span pulumi-lang-nodejs="`imageBuildConfig`" pulumi-lang-dotnet="`ImageBuildConfig`" pulumi-lang-go="`imageBuildConfig`" pulumi-lang-python="`image_build_config`" pulumi-lang-yaml="`imageBuildConfig`" pulumi-lang-java="`imageBuildConfig`" pulumi-lang-hcl="`image_build_config`">`imageBuildConfig`</span> are set. May be set explicitly when not using source-driven builds.
+        :param pulumi.Input[_builtins.str] image_uri: Docker image URI. Set this for a prebuilt image. When <span pulumi-lang-nodejs="`source`" pulumi-lang-dotnet="`Source`" pulumi-lang-go="`source`" pulumi-lang-python="`source`" pulumi-lang-yaml="`source`" pulumi-lang-java="`source`" pulumi-lang-hcl="`source`">`source`</span> and <span pulumi-lang-nodejs="`imageBuildConfig`" pulumi-lang-dotnet="`ImageBuildConfig`" pulumi-lang-go="`imageBuildConfig`" pulumi-lang-python="`image_build_config`" pulumi-lang-yaml="`imageBuildConfig`" pulumi-lang-java="`imageBuildConfig`" pulumi-lang-hcl="`image_build_config`">`imageBuildConfig`</span> are both set, apply builds the image and populates this attribute, and configuring it is rejected because the build would overwrite it.
         :param pulumi.Input['ArtifactSpecContainerGroupContainerLivenessProbeArgs'] liveness_probe: Container liveness check configuration.
         :param pulumi.Input[_builtins.str] name: Name of the container.
         :param pulumi.Input[_builtins.int] port: Container access port (1024-65535). Required for primary containers; omit for non-primary.
@@ -901,7 +917,7 @@ class ArtifactSpecContainerGroupContainerArgs:
     @pulumi.getter(name="imageUri")
     def image_uri(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        Docker image URI. Populated by the provider after a completed image build when <span pulumi-lang-nodejs="`source`" pulumi-lang-dotnet="`Source`" pulumi-lang-go="`source`" pulumi-lang-python="`source`" pulumi-lang-yaml="`source`" pulumi-lang-java="`source`" pulumi-lang-hcl="`source`">`source`</span> and <span pulumi-lang-nodejs="`imageBuildConfig`" pulumi-lang-dotnet="`ImageBuildConfig`" pulumi-lang-go="`imageBuildConfig`" pulumi-lang-python="`image_build_config`" pulumi-lang-yaml="`imageBuildConfig`" pulumi-lang-java="`imageBuildConfig`" pulumi-lang-hcl="`image_build_config`">`imageBuildConfig`</span> are set. May be set explicitly when not using source-driven builds.
+        Docker image URI. Set this for a prebuilt image. When <span pulumi-lang-nodejs="`source`" pulumi-lang-dotnet="`Source`" pulumi-lang-go="`source`" pulumi-lang-python="`source`" pulumi-lang-yaml="`source`" pulumi-lang-java="`source`" pulumi-lang-hcl="`source`">`source`</span> and <span pulumi-lang-nodejs="`imageBuildConfig`" pulumi-lang-dotnet="`ImageBuildConfig`" pulumi-lang-go="`imageBuildConfig`" pulumi-lang-python="`image_build_config`" pulumi-lang-yaml="`imageBuildConfig`" pulumi-lang-java="`imageBuildConfig`" pulumi-lang-hcl="`image_build_config`">`imageBuildConfig`</span> are both set, apply builds the image and populates this attribute, and configuring it is rejected because the build would overwrite it.
         """
         return pulumi.get(self, "image_uri")
 
@@ -7607,6 +7623,679 @@ class QuotaDefaultRuleArgs:
         pulumi.set(self, "window", value)
 
 
+class RegisteredModelFromExternalDatasetsArgsDict(TypedDict):
+    holdout_data_catalog_id: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The ID of the holdout dataset.
+    """
+    holdout_data_catalog_version_id: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The version ID of the holdout dataset.
+    """
+    training_data_catalog_id: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The ID of the training dataset.
+    """
+    training_data_catalog_version_id: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The version ID of the training dataset.
+    """
+
+@pulumi.input_type
+class RegisteredModelFromExternalDatasetsArgs:
+    def __init__(__self__, *,
+                 holdout_data_catalog_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 holdout_data_catalog_version_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 training_data_catalog_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 training_data_catalog_version_id: pulumi.Input[Optional[_builtins.str]] = None):
+        """
+        :param pulumi.Input[_builtins.str] holdout_data_catalog_id: The ID of the holdout dataset.
+        :param pulumi.Input[_builtins.str] holdout_data_catalog_version_id: The version ID of the holdout dataset.
+        :param pulumi.Input[_builtins.str] training_data_catalog_id: The ID of the training dataset.
+        :param pulumi.Input[_builtins.str] training_data_catalog_version_id: The version ID of the training dataset.
+        """
+        if holdout_data_catalog_id is not None:
+            pulumi.set(__self__, "holdout_data_catalog_id", holdout_data_catalog_id)
+        if holdout_data_catalog_version_id is not None:
+            pulumi.set(__self__, "holdout_data_catalog_version_id", holdout_data_catalog_version_id)
+        if training_data_catalog_id is not None:
+            pulumi.set(__self__, "training_data_catalog_id", training_data_catalog_id)
+        if training_data_catalog_version_id is not None:
+            pulumi.set(__self__, "training_data_catalog_version_id", training_data_catalog_version_id)
+
+    @_builtins.property
+    @pulumi.getter(name="holdoutDataCatalogId")
+    def holdout_data_catalog_id(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The ID of the holdout dataset.
+        """
+        return pulumi.get(self, "holdout_data_catalog_id")
+
+    @holdout_data_catalog_id.setter
+    def holdout_data_catalog_id(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "holdout_data_catalog_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="holdoutDataCatalogVersionId")
+    def holdout_data_catalog_version_id(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The version ID of the holdout dataset.
+        """
+        return pulumi.get(self, "holdout_data_catalog_version_id")
+
+    @holdout_data_catalog_version_id.setter
+    def holdout_data_catalog_version_id(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "holdout_data_catalog_version_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="trainingDataCatalogId")
+    def training_data_catalog_id(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The ID of the training dataset.
+        """
+        return pulumi.get(self, "training_data_catalog_id")
+
+    @training_data_catalog_id.setter
+    def training_data_catalog_id(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "training_data_catalog_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="trainingDataCatalogVersionId")
+    def training_data_catalog_version_id(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The version ID of the training dataset.
+        """
+        return pulumi.get(self, "training_data_catalog_version_id")
+
+    @training_data_catalog_version_id.setter
+    def training_data_catalog_version_id(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "training_data_catalog_version_id", value)
+
+
+class RegisteredModelFromExternalGeospatialMonitoringArgsDict(TypedDict):
+    primary_location_column: pulumi.Input[_builtins.str]
+    """
+    The name of the geospatial column to analyze.
+    """
+
+@pulumi.input_type
+class RegisteredModelFromExternalGeospatialMonitoringArgs:
+    def __init__(__self__, *,
+                 primary_location_column: pulumi.Input[_builtins.str]):
+        """
+        :param pulumi.Input[_builtins.str] primary_location_column: The name of the geospatial column to analyze.
+        """
+        pulumi.set(__self__, "primary_location_column", primary_location_column)
+
+    @_builtins.property
+    @pulumi.getter(name="primaryLocationColumn")
+    def primary_location_column(self) -> pulumi.Input[_builtins.str]:
+        """
+        The name of the geospatial column to analyze.
+        """
+        return pulumi.get(self, "primary_location_column")
+
+    @primary_location_column.setter
+    def primary_location_column(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "primary_location_column", value)
+
+
+class RegisteredModelFromExternalModelDescriptionArgsDict(TypedDict):
+    build_environment_type: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The build environment type of the model.
+    """
+    description: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    A description of the model. Changing it updates the latest version in place; removing it creates a new version.
+    """
+    location: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The location of the model.
+    """
+    model_name: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The model name.
+    """
+
+@pulumi.input_type
+class RegisteredModelFromExternalModelDescriptionArgs:
+    def __init__(__self__, *,
+                 build_environment_type: pulumi.Input[Optional[_builtins.str]] = None,
+                 description: pulumi.Input[Optional[_builtins.str]] = None,
+                 location: pulumi.Input[Optional[_builtins.str]] = None,
+                 model_name: pulumi.Input[Optional[_builtins.str]] = None):
+        """
+        :param pulumi.Input[_builtins.str] build_environment_type: The build environment type of the model.
+        :param pulumi.Input[_builtins.str] description: A description of the model. Changing it updates the latest version in place; removing it creates a new version.
+        :param pulumi.Input[_builtins.str] location: The location of the model.
+        :param pulumi.Input[_builtins.str] model_name: The model name.
+        """
+        if build_environment_type is not None:
+            pulumi.set(__self__, "build_environment_type", build_environment_type)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if location is not None:
+            pulumi.set(__self__, "location", location)
+        if model_name is not None:
+            pulumi.set(__self__, "model_name", model_name)
+
+    @_builtins.property
+    @pulumi.getter(name="buildEnvironmentType")
+    def build_environment_type(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The build environment type of the model.
+        """
+        return pulumi.get(self, "build_environment_type")
+
+    @build_environment_type.setter
+    def build_environment_type(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "build_environment_type", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def description(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        A description of the model. Changing it updates the latest version in place; removing it creates a new version.
+        """
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "description", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def location(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The location of the model.
+        """
+        return pulumi.get(self, "location")
+
+    @location.setter
+    def location(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "location", value)
+
+    @_builtins.property
+    @pulumi.getter(name="modelName")
+    def model_name(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The model name.
+        """
+        return pulumi.get(self, "model_name")
+
+    @model_name.setter
+    def model_name(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "model_name", value)
+
+
+class RegisteredModelFromExternalTagArgsDict(TypedDict):
+    name: pulumi.Input[_builtins.str]
+    """
+    The name of the tag.
+    """
+    value: pulumi.Input[_builtins.str]
+    """
+    The value of the tag.
+    """
+
+@pulumi.input_type
+class RegisteredModelFromExternalTagArgs:
+    def __init__(__self__, *,
+                 name: pulumi.Input[_builtins.str],
+                 value: pulumi.Input[_builtins.str]):
+        """
+        :param pulumi.Input[_builtins.str] name: The name of the tag.
+        :param pulumi.Input[_builtins.str] value: The value of the tag.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "value", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> pulumi.Input[_builtins.str]:
+        """
+        The name of the tag.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "name", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def value(self) -> pulumi.Input[_builtins.str]:
+        """
+        The value of the tag.
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "value", value)
+
+
+class RegisteredModelFromExternalTargetArgsDict(TypedDict):
+    type: pulumi.Input[_builtins.str]
+    """
+    The target type of the model. Changing it replaces the Registered Model.
+    """
+    class_names: NotRequired[pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]]
+    """
+    The class names for prediction results. For a `Binary` target, the first element is the minority (positive) class and the second is the majority (negative) class. Changing it replaces the Registered Model.
+    """
+    name: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The name of the target column. Required unless <span pulumi-lang-nodejs="`type`" pulumi-lang-dotnet="`Type`" pulumi-lang-go="`type`" pulumi-lang-python="`type`" pulumi-lang-yaml="`type`" pulumi-lang-java="`type`" pulumi-lang-hcl="`type`">`type`</span> is `AgenticWorkflow` or `MCP`. Changing it replaces the Registered Model.
+    """
+    prediction_probabilities_column: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The column containing prediction probabilities.
+    """
+    prediction_threshold: NotRequired[pulumi.Input[Optional[_builtins.float]]]
+    """
+    The prediction threshold used for binary classification models, between 0 and 1.
+    """
+
+@pulumi.input_type
+class RegisteredModelFromExternalTargetArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[_builtins.str],
+                 class_names: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 prediction_probabilities_column: pulumi.Input[Optional[_builtins.str]] = None,
+                 prediction_threshold: pulumi.Input[Optional[_builtins.float]] = None):
+        """
+        :param pulumi.Input[_builtins.str] type: The target type of the model. Changing it replaces the Registered Model.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] class_names: The class names for prediction results. For a `Binary` target, the first element is the minority (positive) class and the second is the majority (negative) class. Changing it replaces the Registered Model.
+        :param pulumi.Input[_builtins.str] name: The name of the target column. Required unless <span pulumi-lang-nodejs="`type`" pulumi-lang-dotnet="`Type`" pulumi-lang-go="`type`" pulumi-lang-python="`type`" pulumi-lang-yaml="`type`" pulumi-lang-java="`type`" pulumi-lang-hcl="`type`">`type`</span> is `AgenticWorkflow` or `MCP`. Changing it replaces the Registered Model.
+        :param pulumi.Input[_builtins.str] prediction_probabilities_column: The column containing prediction probabilities.
+        :param pulumi.Input[_builtins.float] prediction_threshold: The prediction threshold used for binary classification models, between 0 and 1.
+        """
+        pulumi.set(__self__, "type", type)
+        if class_names is not None:
+            pulumi.set(__self__, "class_names", class_names)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if prediction_probabilities_column is not None:
+            pulumi.set(__self__, "prediction_probabilities_column", prediction_probabilities_column)
+        if prediction_threshold is not None:
+            pulumi.set(__self__, "prediction_threshold", prediction_threshold)
+
+    @_builtins.property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[_builtins.str]:
+        """
+        The target type of the model. Changing it replaces the Registered Model.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "type", value)
+
+    @_builtins.property
+    @pulumi.getter(name="classNames")
+    def class_names(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
+        """
+        The class names for prediction results. For a `Binary` target, the first element is the minority (positive) class and the second is the majority (negative) class. Changing it replaces the Registered Model.
+        """
+        return pulumi.get(self, "class_names")
+
+    @class_names.setter
+    def class_names(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
+        pulumi.set(self, "class_names", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The name of the target column. Required unless <span pulumi-lang-nodejs="`type`" pulumi-lang-dotnet="`Type`" pulumi-lang-go="`type`" pulumi-lang-python="`type`" pulumi-lang-yaml="`type`" pulumi-lang-java="`type`" pulumi-lang-hcl="`type`">`type`</span> is `AgenticWorkflow` or `MCP`. Changing it replaces the Registered Model.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "name", value)
+
+    @_builtins.property
+    @pulumi.getter(name="predictionProbabilitiesColumn")
+    def prediction_probabilities_column(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The column containing prediction probabilities.
+        """
+        return pulumi.get(self, "prediction_probabilities_column")
+
+    @prediction_probabilities_column.setter
+    def prediction_probabilities_column(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "prediction_probabilities_column", value)
+
+    @_builtins.property
+    @pulumi.getter(name="predictionThreshold")
+    def prediction_threshold(self) -> pulumi.Input[Optional[_builtins.float]]:
+        """
+        The prediction threshold used for binary classification models, between 0 and 1.
+        """
+        return pulumi.get(self, "prediction_threshold")
+
+    @prediction_threshold.setter
+    def prediction_threshold(self, value: pulumi.Input[Optional[_builtins.float]]):
+        pulumi.set(self, "prediction_threshold", value)
+
+
+class RegisteredModelFromExternalTextGenerationArgsDict(TypedDict):
+    prompt: pulumi.Input[_builtins.str]
+    """
+    The name of the prompt column.
+    """
+
+@pulumi.input_type
+class RegisteredModelFromExternalTextGenerationArgs:
+    def __init__(__self__, *,
+                 prompt: pulumi.Input[_builtins.str]):
+        """
+        :param pulumi.Input[_builtins.str] prompt: The name of the prompt column.
+        """
+        pulumi.set(__self__, "prompt", prompt)
+
+    @_builtins.property
+    @pulumi.getter
+    def prompt(self) -> pulumi.Input[_builtins.str]:
+        """
+        The name of the prompt column.
+        """
+        return pulumi.get(self, "prompt")
+
+    @prompt.setter
+    def prompt(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "prompt", value)
+
+
+class RegisteredModelFromExternalTimeseriesArgsDict(TypedDict):
+    datetime_column_format: pulumi.Input[_builtins.str]
+    """
+    The date format of the forecast date and forecast point columns. Changing it replaces the Registered Model.
+    """
+    datetime_column_name: pulumi.Input[_builtins.str]
+    """
+    The name of the forecast date column. Changing it replaces the Registered Model.
+    """
+    forecast_distance_column_name: pulumi.Input[_builtins.str]
+    """
+    The name of the forecast distance column.
+    """
+    forecast_distances_time_unit: pulumi.Input[_builtins.str]
+    """
+    The time unit of the forecast distances. Changing it replaces the Registered Model.
+    """
+    forecast_point_column_name: pulumi.Input[_builtins.str]
+    """
+    The name of the forecast point column.
+    """
+    effective_feature_derivation_window_end: NotRequired[pulumi.Input[Optional[_builtins.int]]]
+    """
+    A negative number or zero: the end of the effective feature derivation window.
+    """
+    effective_feature_derivation_window_start: NotRequired[pulumi.Input[Optional[_builtins.int]]]
+    """
+    A negative number or zero: the start of the effective feature derivation window.
+    """
+    feature_derivation_window_end: NotRequired[pulumi.Input[Optional[_builtins.int]]]
+    """
+    A negative number or zero: the end of the feature derivation window, relative to the forecast point, in forecast distance time units.
+    """
+    feature_derivation_window_start: NotRequired[pulumi.Input[Optional[_builtins.int]]]
+    """
+    A negative number or zero: the start of the feature derivation window, relative to the forecast point, in forecast distance time units.
+    """
+    forecast_distances: NotRequired[pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]]]
+    """
+    The list of forecast distances. Changing it replaces the Registered Model.
+    """
+    is_cross_series: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
+    """
+    Whether the model is cross-series.
+    """
+    is_new_series_support: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
+    """
+    Whether the model is optimized to support new series.
+    """
+    is_traditional_time_series: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
+    """
+    Whether the model is a traditional time series model.
+    """
+    series_column_name: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The name of the series column of a multiseries model. Setting or removing it replaces the Registered Model.
+    """
+
+@pulumi.input_type
+class RegisteredModelFromExternalTimeseriesArgs:
+    def __init__(__self__, *,
+                 datetime_column_format: pulumi.Input[_builtins.str],
+                 datetime_column_name: pulumi.Input[_builtins.str],
+                 forecast_distance_column_name: pulumi.Input[_builtins.str],
+                 forecast_distances_time_unit: pulumi.Input[_builtins.str],
+                 forecast_point_column_name: pulumi.Input[_builtins.str],
+                 effective_feature_derivation_window_end: pulumi.Input[Optional[_builtins.int]] = None,
+                 effective_feature_derivation_window_start: pulumi.Input[Optional[_builtins.int]] = None,
+                 feature_derivation_window_end: pulumi.Input[Optional[_builtins.int]] = None,
+                 feature_derivation_window_start: pulumi.Input[Optional[_builtins.int]] = None,
+                 forecast_distances: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]] = None,
+                 is_cross_series: pulumi.Input[Optional[_builtins.bool]] = None,
+                 is_new_series_support: pulumi.Input[Optional[_builtins.bool]] = None,
+                 is_traditional_time_series: pulumi.Input[Optional[_builtins.bool]] = None,
+                 series_column_name: pulumi.Input[Optional[_builtins.str]] = None):
+        """
+        :param pulumi.Input[_builtins.str] datetime_column_format: The date format of the forecast date and forecast point columns. Changing it replaces the Registered Model.
+        :param pulumi.Input[_builtins.str] datetime_column_name: The name of the forecast date column. Changing it replaces the Registered Model.
+        :param pulumi.Input[_builtins.str] forecast_distance_column_name: The name of the forecast distance column.
+        :param pulumi.Input[_builtins.str] forecast_distances_time_unit: The time unit of the forecast distances. Changing it replaces the Registered Model.
+        :param pulumi.Input[_builtins.str] forecast_point_column_name: The name of the forecast point column.
+        :param pulumi.Input[_builtins.int] effective_feature_derivation_window_end: A negative number or zero: the end of the effective feature derivation window.
+        :param pulumi.Input[_builtins.int] effective_feature_derivation_window_start: A negative number or zero: the start of the effective feature derivation window.
+        :param pulumi.Input[_builtins.int] feature_derivation_window_end: A negative number or zero: the end of the feature derivation window, relative to the forecast point, in forecast distance time units.
+        :param pulumi.Input[_builtins.int] feature_derivation_window_start: A negative number or zero: the start of the feature derivation window, relative to the forecast point, in forecast distance time units.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.int]]] forecast_distances: The list of forecast distances. Changing it replaces the Registered Model.
+        :param pulumi.Input[_builtins.bool] is_cross_series: Whether the model is cross-series.
+        :param pulumi.Input[_builtins.bool] is_new_series_support: Whether the model is optimized to support new series.
+        :param pulumi.Input[_builtins.bool] is_traditional_time_series: Whether the model is a traditional time series model.
+        :param pulumi.Input[_builtins.str] series_column_name: The name of the series column of a multiseries model. Setting or removing it replaces the Registered Model.
+        """
+        pulumi.set(__self__, "datetime_column_format", datetime_column_format)
+        pulumi.set(__self__, "datetime_column_name", datetime_column_name)
+        pulumi.set(__self__, "forecast_distance_column_name", forecast_distance_column_name)
+        pulumi.set(__self__, "forecast_distances_time_unit", forecast_distances_time_unit)
+        pulumi.set(__self__, "forecast_point_column_name", forecast_point_column_name)
+        if effective_feature_derivation_window_end is not None:
+            pulumi.set(__self__, "effective_feature_derivation_window_end", effective_feature_derivation_window_end)
+        if effective_feature_derivation_window_start is not None:
+            pulumi.set(__self__, "effective_feature_derivation_window_start", effective_feature_derivation_window_start)
+        if feature_derivation_window_end is not None:
+            pulumi.set(__self__, "feature_derivation_window_end", feature_derivation_window_end)
+        if feature_derivation_window_start is not None:
+            pulumi.set(__self__, "feature_derivation_window_start", feature_derivation_window_start)
+        if forecast_distances is not None:
+            pulumi.set(__self__, "forecast_distances", forecast_distances)
+        if is_cross_series is not None:
+            pulumi.set(__self__, "is_cross_series", is_cross_series)
+        if is_new_series_support is not None:
+            pulumi.set(__self__, "is_new_series_support", is_new_series_support)
+        if is_traditional_time_series is not None:
+            pulumi.set(__self__, "is_traditional_time_series", is_traditional_time_series)
+        if series_column_name is not None:
+            pulumi.set(__self__, "series_column_name", series_column_name)
+
+    @_builtins.property
+    @pulumi.getter(name="datetimeColumnFormat")
+    def datetime_column_format(self) -> pulumi.Input[_builtins.str]:
+        """
+        The date format of the forecast date and forecast point columns. Changing it replaces the Registered Model.
+        """
+        return pulumi.get(self, "datetime_column_format")
+
+    @datetime_column_format.setter
+    def datetime_column_format(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "datetime_column_format", value)
+
+    @_builtins.property
+    @pulumi.getter(name="datetimeColumnName")
+    def datetime_column_name(self) -> pulumi.Input[_builtins.str]:
+        """
+        The name of the forecast date column. Changing it replaces the Registered Model.
+        """
+        return pulumi.get(self, "datetime_column_name")
+
+    @datetime_column_name.setter
+    def datetime_column_name(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "datetime_column_name", value)
+
+    @_builtins.property
+    @pulumi.getter(name="forecastDistanceColumnName")
+    def forecast_distance_column_name(self) -> pulumi.Input[_builtins.str]:
+        """
+        The name of the forecast distance column.
+        """
+        return pulumi.get(self, "forecast_distance_column_name")
+
+    @forecast_distance_column_name.setter
+    def forecast_distance_column_name(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "forecast_distance_column_name", value)
+
+    @_builtins.property
+    @pulumi.getter(name="forecastDistancesTimeUnit")
+    def forecast_distances_time_unit(self) -> pulumi.Input[_builtins.str]:
+        """
+        The time unit of the forecast distances. Changing it replaces the Registered Model.
+        """
+        return pulumi.get(self, "forecast_distances_time_unit")
+
+    @forecast_distances_time_unit.setter
+    def forecast_distances_time_unit(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "forecast_distances_time_unit", value)
+
+    @_builtins.property
+    @pulumi.getter(name="forecastPointColumnName")
+    def forecast_point_column_name(self) -> pulumi.Input[_builtins.str]:
+        """
+        The name of the forecast point column.
+        """
+        return pulumi.get(self, "forecast_point_column_name")
+
+    @forecast_point_column_name.setter
+    def forecast_point_column_name(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "forecast_point_column_name", value)
+
+    @_builtins.property
+    @pulumi.getter(name="effectiveFeatureDerivationWindowEnd")
+    def effective_feature_derivation_window_end(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        A negative number or zero: the end of the effective feature derivation window.
+        """
+        return pulumi.get(self, "effective_feature_derivation_window_end")
+
+    @effective_feature_derivation_window_end.setter
+    def effective_feature_derivation_window_end(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "effective_feature_derivation_window_end", value)
+
+    @_builtins.property
+    @pulumi.getter(name="effectiveFeatureDerivationWindowStart")
+    def effective_feature_derivation_window_start(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        A negative number or zero: the start of the effective feature derivation window.
+        """
+        return pulumi.get(self, "effective_feature_derivation_window_start")
+
+    @effective_feature_derivation_window_start.setter
+    def effective_feature_derivation_window_start(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "effective_feature_derivation_window_start", value)
+
+    @_builtins.property
+    @pulumi.getter(name="featureDerivationWindowEnd")
+    def feature_derivation_window_end(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        A negative number or zero: the end of the feature derivation window, relative to the forecast point, in forecast distance time units.
+        """
+        return pulumi.get(self, "feature_derivation_window_end")
+
+    @feature_derivation_window_end.setter
+    def feature_derivation_window_end(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "feature_derivation_window_end", value)
+
+    @_builtins.property
+    @pulumi.getter(name="featureDerivationWindowStart")
+    def feature_derivation_window_start(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        A negative number or zero: the start of the feature derivation window, relative to the forecast point, in forecast distance time units.
+        """
+        return pulumi.get(self, "feature_derivation_window_start")
+
+    @feature_derivation_window_start.setter
+    def feature_derivation_window_start(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "feature_derivation_window_start", value)
+
+    @_builtins.property
+    @pulumi.getter(name="forecastDistances")
+    def forecast_distances(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]]:
+        """
+        The list of forecast distances. Changing it replaces the Registered Model.
+        """
+        return pulumi.get(self, "forecast_distances")
+
+    @forecast_distances.setter
+    def forecast_distances(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]]):
+        pulumi.set(self, "forecast_distances", value)
+
+    @_builtins.property
+    @pulumi.getter(name="isCrossSeries")
+    def is_cross_series(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Whether the model is cross-series.
+        """
+        return pulumi.get(self, "is_cross_series")
+
+    @is_cross_series.setter
+    def is_cross_series(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "is_cross_series", value)
+
+    @_builtins.property
+    @pulumi.getter(name="isNewSeriesSupport")
+    def is_new_series_support(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Whether the model is optimized to support new series.
+        """
+        return pulumi.get(self, "is_new_series_support")
+
+    @is_new_series_support.setter
+    def is_new_series_support(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "is_new_series_support", value)
+
+    @_builtins.property
+    @pulumi.getter(name="isTraditionalTimeSeries")
+    def is_traditional_time_series(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Whether the model is a traditional time series model.
+        """
+        return pulumi.get(self, "is_traditional_time_series")
+
+    @is_traditional_time_series.setter
+    def is_traditional_time_series(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "is_traditional_time_series", value)
+
+    @_builtins.property
+    @pulumi.getter(name="seriesColumnName")
+    def series_column_name(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The name of the series column of a multiseries model. Setting or removing it replaces the Registered Model.
+        """
+        return pulumi.get(self, "series_column_name")
+
+    @series_column_name.setter
+    def series_column_name(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "series_column_name", value)
+
+
 class RegisteredModelTagArgsDict(TypedDict):
     name: pulumi.Input[_builtins.str]
     """
@@ -7801,6 +8490,75 @@ class VectorDatabaseChunkingParametersArgs:
     @separators.setter
     def separators(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "separators", value)
+
+
+class WorkloadPlacementArgsDict(TypedDict):
+    enclave: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The name of the Enclave.
+    """
+    enclave_id: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The ID of the Enclave.
+    """
+    region: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The region the Enclave is deployed in, when the platform reports one.
+    """
+
+@pulumi.input_type
+class WorkloadPlacementArgs:
+    def __init__(__self__, *,
+                 enclave: pulumi.Input[Optional[_builtins.str]] = None,
+                 enclave_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 region: pulumi.Input[Optional[_builtins.str]] = None):
+        """
+        :param pulumi.Input[_builtins.str] enclave: The name of the Enclave.
+        :param pulumi.Input[_builtins.str] enclave_id: The ID of the Enclave.
+        :param pulumi.Input[_builtins.str] region: The region the Enclave is deployed in, when the platform reports one.
+        """
+        if enclave is not None:
+            pulumi.set(__self__, "enclave", enclave)
+        if enclave_id is not None:
+            pulumi.set(__self__, "enclave_id", enclave_id)
+        if region is not None:
+            pulumi.set(__self__, "region", region)
+
+    @_builtins.property
+    @pulumi.getter
+    def enclave(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The name of the Enclave.
+        """
+        return pulumi.get(self, "enclave")
+
+    @enclave.setter
+    def enclave(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "enclave", value)
+
+    @_builtins.property
+    @pulumi.getter(name="enclaveId")
+    def enclave_id(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The ID of the Enclave.
+        """
+        return pulumi.get(self, "enclave_id")
+
+    @enclave_id.setter
+    def enclave_id(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "enclave_id", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def region(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The region the Enclave is deployed in, when the platform reports one.
+        """
+        return pulumi.get(self, "region")
+
+    @region.setter
+    def region(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "region", value)
 
 
 class WorkloadRuntimeArgsDict(TypedDict):

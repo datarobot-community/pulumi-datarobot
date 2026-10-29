@@ -132,6 +132,12 @@ namespace DataRobotPulumi.Datarobot
         public Output<string> Directionality { get; private set; } = null!;
 
         /// <summary>
+        /// Name of the column that contains geospatial values. Required when &lt;span pulumi-lang-nodejs="`isGeospatial`" pulumi-lang-dotnet="`IsGeospatial`" pulumi-lang-go="`isGeospatial`" pulumi-lang-python="`is_geospatial`" pulumi-lang-yaml="`isGeospatial`" pulumi-lang-java="`isGeospatial`" pulumi-lang-hcl="`is_geospatial`"&gt;`isGeospatial`&lt;/span&gt; is &lt;span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`"&gt;`true`&lt;/span&gt; and not allowed otherwise. It must be a segment attribute of the Deployment, segment analysis must be enabled on the Deployment, and the corresponding feature must be of geospatial type. It can only be set when the Custom Metric is created, so changing it replaces the Custom Metric.
+        /// </summary>
+        [Output("geospatialSegmentAttribute")]
+        public Output<string?> GeospatialSegmentAttribute { get; private set; } = null!;
+
+        /// <summary>
         /// Determines whether the metric is geospatial.
         /// </summary>
         [Output("isGeospatial")]
@@ -257,6 +263,12 @@ namespace DataRobotPulumi.Datarobot
         public Input<string> Directionality { get; set; } = null!;
 
         /// <summary>
+        /// Name of the column that contains geospatial values. Required when &lt;span pulumi-lang-nodejs="`isGeospatial`" pulumi-lang-dotnet="`IsGeospatial`" pulumi-lang-go="`isGeospatial`" pulumi-lang-python="`is_geospatial`" pulumi-lang-yaml="`isGeospatial`" pulumi-lang-java="`isGeospatial`" pulumi-lang-hcl="`is_geospatial`"&gt;`isGeospatial`&lt;/span&gt; is &lt;span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`"&gt;`true`&lt;/span&gt; and not allowed otherwise. It must be a segment attribute of the Deployment, segment analysis must be enabled on the Deployment, and the corresponding feature must be of geospatial type. It can only be set when the Custom Metric is created, so changing it replaces the Custom Metric.
+        /// </summary>
+        [Input("geospatialSegmentAttribute")]
+        public Input<string>? GeospatialSegmentAttribute { get; set; }
+
+        /// <summary>
         /// Determines whether the metric is geospatial.
         /// </summary>
         [Input("isGeospatial", required: true)]
@@ -341,6 +353,12 @@ namespace DataRobotPulumi.Datarobot
         /// </summary>
         [Input("directionality")]
         public Input<string>? Directionality { get; set; }
+
+        /// <summary>
+        /// Name of the column that contains geospatial values. Required when &lt;span pulumi-lang-nodejs="`isGeospatial`" pulumi-lang-dotnet="`IsGeospatial`" pulumi-lang-go="`isGeospatial`" pulumi-lang-python="`is_geospatial`" pulumi-lang-yaml="`isGeospatial`" pulumi-lang-java="`isGeospatial`" pulumi-lang-hcl="`is_geospatial`"&gt;`isGeospatial`&lt;/span&gt; is &lt;span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`"&gt;`true`&lt;/span&gt; and not allowed otherwise. It must be a segment attribute of the Deployment, segment analysis must be enabled on the Deployment, and the corresponding feature must be of geospatial type. It can only be set when the Custom Metric is created, so changing it replaces the Custom Metric.
+        /// </summary>
+        [Input("geospatialSegmentAttribute")]
+        public Input<string>? GeospatialSegmentAttribute { get; set; }
 
         /// <summary>
         /// Determines whether the metric is geospatial.

@@ -97,6 +97,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &Quota{}
 	case "datarobot:index/registeredModel:RegisteredModel":
 		r = &RegisteredModel{}
+	case "datarobot:index/registeredModelFromExternal:RegisteredModelFromExternal":
+		r = &RegisteredModelFromExternal{}
 	case "datarobot:index/registeredModelFromLeaderboard:RegisteredModelFromLeaderboard":
 		r = &RegisteredModelFromLeaderboard{}
 	case "datarobot:index/remoteRepository:RemoteRepository":
@@ -332,6 +334,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"datarobot",
 		"index/registeredModel",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"datarobot",
+		"index/registeredModelFromExternal",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
