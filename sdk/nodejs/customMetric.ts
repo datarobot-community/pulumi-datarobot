@@ -117,6 +117,10 @@ export class CustomMetric extends pulumi.CustomResource {
      */
     declare public readonly directionality: pulumi.Output<string>;
     /**
+     * Name of the column that contains geospatial values. Required when <span pulumi-lang-nodejs="`isGeospatial`" pulumi-lang-dotnet="`IsGeospatial`" pulumi-lang-go="`isGeospatial`" pulumi-lang-python="`is_geospatial`" pulumi-lang-yaml="`isGeospatial`" pulumi-lang-java="`isGeospatial`" pulumi-lang-hcl="`is_geospatial`">`isGeospatial`</span> is <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> and not allowed otherwise. It must be a segment attribute of the Deployment, segment analysis must be enabled on the Deployment, and the corresponding feature must be of geospatial type. It can only be set when the Custom Metric is created, so changing it replaces the Custom Metric.
+     */
+    declare public readonly geospatialSegmentAttribute: pulumi.Output<string | undefined>;
+    /**
      * Determines whether the metric is geospatial.
      */
     declare public readonly isGeospatial: pulumi.Output<boolean>;
@@ -167,6 +171,7 @@ export class CustomMetric extends pulumi.CustomResource {
             resourceInputs["deploymentId"] = state?.deploymentId;
             resourceInputs["description"] = state?.description;
             resourceInputs["directionality"] = state?.directionality;
+            resourceInputs["geospatialSegmentAttribute"] = state?.geospatialSegmentAttribute;
             resourceInputs["isGeospatial"] = state?.isGeospatial;
             resourceInputs["isModelSpecific"] = state?.isModelSpecific;
             resourceInputs["name"] = state?.name;
@@ -200,6 +205,7 @@ export class CustomMetric extends pulumi.CustomResource {
             resourceInputs["deploymentId"] = args?.deploymentId;
             resourceInputs["description"] = args?.description;
             resourceInputs["directionality"] = args?.directionality;
+            resourceInputs["geospatialSegmentAttribute"] = args?.geospatialSegmentAttribute;
             resourceInputs["isGeospatial"] = args?.isGeospatial;
             resourceInputs["isModelSpecific"] = args?.isModelSpecific;
             resourceInputs["name"] = args?.name;
@@ -238,6 +244,10 @@ export interface CustomMetricState {
      * Directionality of the Custom Metric
      */
     directionality?: pulumi.Input<string | undefined>;
+    /**
+     * Name of the column that contains geospatial values. Required when <span pulumi-lang-nodejs="`isGeospatial`" pulumi-lang-dotnet="`IsGeospatial`" pulumi-lang-go="`isGeospatial`" pulumi-lang-python="`is_geospatial`" pulumi-lang-yaml="`isGeospatial`" pulumi-lang-java="`isGeospatial`" pulumi-lang-hcl="`is_geospatial`">`isGeospatial`</span> is <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> and not allowed otherwise. It must be a segment attribute of the Deployment, segment analysis must be enabled on the Deployment, and the corresponding feature must be of geospatial type. It can only be set when the Custom Metric is created, so changing it replaces the Custom Metric.
+     */
+    geospatialSegmentAttribute?: pulumi.Input<string | undefined>;
     /**
      * Determines whether the metric is geospatial.
      */
@@ -296,6 +306,10 @@ export interface CustomMetricArgs {
      * Directionality of the Custom Metric
      */
     directionality: pulumi.Input<string>;
+    /**
+     * Name of the column that contains geospatial values. Required when <span pulumi-lang-nodejs="`isGeospatial`" pulumi-lang-dotnet="`IsGeospatial`" pulumi-lang-go="`isGeospatial`" pulumi-lang-python="`is_geospatial`" pulumi-lang-yaml="`isGeospatial`" pulumi-lang-java="`isGeospatial`" pulumi-lang-hcl="`is_geospatial`">`isGeospatial`</span> is <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> and not allowed otherwise. It must be a segment attribute of the Deployment, segment analysis must be enabled on the Deployment, and the corresponding feature must be of geospatial type. It can only be set when the Custom Metric is created, so changing it replaces the Custom Metric.
+     */
+    geospatialSegmentAttribute?: pulumi.Input<string | undefined>;
     /**
      * Determines whether the metric is geospatial.
      */

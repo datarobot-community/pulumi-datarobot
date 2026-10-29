@@ -50,6 +50,7 @@ from .provider import *
 from .qa_application import *
 from .quota import *
 from .registered_model import *
+from .registered_model_from_external import *
 from .registered_model_from_leaderboard import *
 from .remote_repository import *
 from .use_case import *
@@ -373,6 +374,14 @@ _utilities.register(
   "fqn": "pulumi_datarobot",
   "classes": {
    "datarobot:index/registeredModel:RegisteredModel": "RegisteredModel"
+  }
+ },
+ {
+  "pkg": "datarobot",
+  "mod": "index/registeredModelFromExternal",
+  "fqn": "pulumi_datarobot",
+  "classes": {
+   "datarobot:index/registeredModelFromExternal:RegisteredModelFromExternal": "RegisteredModelFromExternal"
   }
  },
  {

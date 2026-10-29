@@ -501,6 +501,31 @@
                     }
                 }
             },
+            "datarobot_registered_model_from_external": {
+                "current": "datarobot:index/registeredModelFromExternal:RegisteredModelFromExternal",
+                "fields": {
+                    "tags": {
+                        "maxItemsOne": false
+                    },
+                    "target": {
+                        "fields": {
+                            "class_names": {
+                                "maxItemsOne": false
+                            }
+                        }
+                    },
+                    "timeseries": {
+                        "fields": {
+                            "forecast_distances": {
+                                "maxItemsOne": false
+                            }
+                        }
+                    },
+                    "use_case_ids": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
             "datarobot_registered_model_from_leaderboard": {
                 "current": "datarobot:index/registeredModelFromLeaderboard:RegisteredModelFromLeaderboard",
                 "fields": {
@@ -539,6 +564,9 @@
             "datarobot_workload": {
                 "current": "datarobot:index/workload:Workload",
                 "fields": {
+                    "placements": {
+                        "maxItemsOne": false
+                    },
                     "runtime": {
                         "fields": {
                             "container_groups": {
@@ -758,6 +786,7 @@
             "datarobot_qa_application": {},
             "datarobot_quota": {},
             "datarobot_registered_model": {},
+            "datarobot_registered_model_from_external": {},
             "datarobot_registered_model_from_leaderboard": {},
             "datarobot_remote_repository": {},
             "datarobot_use_case": {},

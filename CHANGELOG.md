@@ -22,6 +22,94 @@ Changes made in this repo rather than upstream go under `Unreleased` while unrel
 and under a `### Provider changes` subsection once they ship in a version.
 Regenerating a section preserves that subsection.
 
+## [0.14.0] - 2026-10-29
+
+### Upstream provider changes
+
+[terraform-provider-datarobot](https://github.com/datarobot-community/terraform-provider-datarobot) `v0.13.0` → `v0.14.0`
+
+#### [v0.14.0](https://github.com/datarobot-community/terraform-provider-datarobot/releases/tag/v0.14.0) — 2026-10-28
+
+##### Added
+
+- `datarobot_registered_model_from_external`: a Registered Model for a model that runs outside of DataRobot, created through `POST /modelPackages/fromJSON/` from `target`, `model_description`, `datasets`, `timeseries`, `text_generation` and `geospatial_monitoring`, with optional `model_id`, `tags` and `use_case_ids`. How a change is applied depends on what changes:
+  - `name`, `description`, `version_name` and `model_description.description` are updated in place on the Registered Model or its latest version. Removing `model_description.description` creates a new version, because the API cannot clear it in place.
+  - `target.type`, `target.name`, `target.class_names`, adding or removing `timeseries`, setting or removing `timeseries.series_column_name`, and changing `timeseries.datetime_column_name`, `datetime_column_format`, `forecast_distances_time_unit` or `forecast_distances` replace the Registered Model, because DataRobot rejects a new version that differs from the previous one in these.
+  - Any other change creates a new version of the Registered Model.
+  - Checked at plan time, as DataRobot checks them on create: `target.name` is required unless `target.type` is `AgenticWorkflow` or `MCP`, and is required for every target type when `datasets` has training or holdout data, by catalog or version ID; an `AgenticWorkflow` target refuses dataset IDs, `timeseries` and `geospatial_monitoring`.
+  - Import reads the model package fields from the latest version, so the first plan after an import does not replace the Registered Model. Values DataRobot uses by default when they are left out are imported as unset, and `use_case_ids` is not imported.
+- `datarobot_workload` has a computed `placements` attribute: the Enclaves the Workload runs on, with `enclave_id`, `enclave` and `region`, as the platform reports them. With `enclave_selection_policy = "availability"`, it names the Enclave the scheduler chose. It is empty for a Workload outside any Enclave and is known only after apply when `artifact_id` or `runtime` changes, since the rollout that follows can move the Workload.
+- `datarobot_custom_metric` accepts `geospatial_segment_attribute`, the name of the column that contains geospatial values, serialized as `geospatialSegmentAttribute` on `POST /deployments/{deploymentId}/customMetrics/`. It must be a segment attribute of the Deployment, segment analysis must be enabled on the Deployment, and the corresponding feature must be of geospatial type. The API accepts it on create only, so changing it replaces the Custom Metric.
+- The attribute is required when `is_geospatial` is `true` and rejected when it is `false`, checked at plan time. The API does not enforce this on create: a geospatial Custom Metric with no attribute is accepted, but it has no column to read geospatial values from and, because the attribute cannot be changed in place, can only be fixed by replacing it. A configuration that already sets `is_geospatial = true` without the attribute now fails to plan until the attribute is set.
+
+##### Changed
+
+- Built with Go 1.27.3, fixing a `govulncheck` advisory in Go 1.27.2's `crypto/x509`: certificate verification now refuses intermediate certificates that are known to be compromised, also on systems whose trust store has not been updated.
+
+##### Fixed
+
+- `datarobot_registered_model` and `datarobot_registered_model_from_leaderboard` clear the Registered Model's description when `description` is removed or set to `""`. Formerly, the update left the description out of the request, so DataRobot kept the old value, the next refresh read it back, and every plan showed the same update again. The same applied when the description was set outside Terraform on a Registered Model whose configuration has none.
+- `datarobot_registered_model_from_leaderboard` no longer crashes the provider on an update that neither creates a new version nor sets `version_name`, such as changing `name` or `description` with `version_name` left out of the configuration. The update now keeps the latest version's name.
+- `datarobot_artifact` refuses an `image_uri` on a container built from `source` before anything is created. Such a configuration failed apply with `Provider produced inconsistent result after apply` once the artifact existed, and under Pulumi showed a diff on every preview. **After upgrading, remove `image_uri` from such containers:** plan and destroy refuse the configuration until then, and the built value stays in state.
+- A locked artifact with `source.wait_for_build = false` is refused at plan time, with or without `image_uri`. The platform locks an artifact only once its build has completed, so the apply failed after creating the artifact. When `status` comes from a variable, this check now waits for it instead of assuming locked.
+- A sidecar's `image_uri` no longer keeps the primary container's `image_uri` at its previous build in the plan, which failed the apply after a source change. A change that creates a new version of such an artifact now rebuilds the primary image, as it already did without a sidecar.
+- A `datarobot_artifact` destroy that the platform refuses with `409 Conflict` because workloads still use its version or repository now names those workloads, with their ID, name and status. A workload that an earlier version left out of state after it failed to start could block every destroy, and the platform's error did not say which workload to delete.
+- The deployment unit tests no longer hang or fail when the whole `pkg/provider` suite runs. Fixes made to tests: `TestUnitDeploymentModelReplacementSuccess`, `TestUnitDeploymentModelReplacementMismatch`, `TestWaitForDeploymentStatusErroredIncludesLogsAndUIURL` and `TestWaitForDeploymentStatusErroredLogRetrievalFailure`. This changes tests only; the provider's behavior is unchanged.
+- Docs: the `datarobot_workload` page has a "Failed applies" section, and the `datarobot_artifact` page says what a create that fails partway leaves behind, under Terraform and under Pulumi. Neither engine rolls completed resources back: an artifact created before a `datarobot_workload` the platform refuses stays in state, the retry reuses it without another upload or build, and `terraform destroy` removes it.
+- `datarobot_artifact` removes a file deleted from `source.dir` from the catalog when the directory has no sync state yet, as in a fresh clone or a CI checkout (`.datarobot/workload/` is git-ignored); the file used to stay in the catalog and reach the image build, or was downloaded back when the catalog had moved on. **After upgrading, the first apply that syncs such a checkout removes every catalog file that is not in `source.dir`, including files `.drignore` excludes, and names them in a warning, so the checkout must hold every file the image needs.**
+- An apply retried after a failed image build builds again when the sync finds the catalog already matching `source.dir`, instead of recording the source over the failed build.
+
+Full upstream diff: [https://github.com/datarobot-community/terraform-provider-datarobot/compare/v0.13.0...v0.14.0](https://github.com/datarobot-community/terraform-provider-datarobot/compare/v0.13.0...v0.14.0)
+
+### Pulumi SDK surface
+
+_Diff of the generated `schema.json` — what actually reached the SDKs._
+
+**New resources (1)**
+
+- `datarobot:index/registeredModelFromExternal:RegisteredModelFromExternal`
+
+**Changed resources (2)**
+
+- `datarobot:index/customMetric:CustomMetric`
+  - new inputs: `geospatialSegmentAttribute`
+  - new outputs: `geospatialSegmentAttribute`
+- `datarobot:index/workload:Workload`
+  - new outputs: `placements`
+
+<details><summary>Nested types: 8 added, 0 removed, 0 changed</summary>
+
+Added:
+
+- `datarobot:index/RegisteredModelFromExternalDatasets:RegisteredModelFromExternalDatasets`
+- `datarobot:index/RegisteredModelFromExternalGeospatialMonitoring:RegisteredModelFromExternalGeospatialMonitoring`
+- `datarobot:index/RegisteredModelFromExternalModelDescription:RegisteredModelFromExternalModelDescription`
+- `datarobot:index/RegisteredModelFromExternalTag:RegisteredModelFromExternalTag`
+- `datarobot:index/RegisteredModelFromExternalTarget:RegisteredModelFromExternalTarget`
+- `datarobot:index/RegisteredModelFromExternalTextGeneration:RegisteredModelFromExternalTextGeneration`
+- `datarobot:index/RegisteredModelFromExternalTimeseries:RegisteredModelFromExternalTimeseries`
+- `datarobot:index/WorkloadPlacement:WorkloadPlacement`
+
+</details>
+
+<details><summary>schema-tools compare</summary>
+
+```
+### Does the PR have any schema changes?
+
+_Generated by schema-tools v0.8.1._
+
+Looking good! No breaking changes found.
+
+#### New resources:
+
+- `index/registeredModelFromExternal.RegisteredModelFromExternal`
+
+#### New types: 8
+```
+
+</details>
+
 ## [0.13.0] - 2026-10-15
 
 ### Upstream provider changes

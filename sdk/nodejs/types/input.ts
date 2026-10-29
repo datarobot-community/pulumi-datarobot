@@ -95,7 +95,7 @@ export interface ArtifactSource {
      */
     generateIgnore?: pulumi.Input<boolean | undefined>;
     /**
-     * When <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> (default), after a source upload the provider triggers an image build and polls until it completes before proceeding (for example, before locking). When <span pulumi-lang-nodejs="`false`" pulumi-lang-dotnet="`False`" pulumi-lang-go="`false`" pulumi-lang-python="`false`" pulumi-lang-yaml="`false`" pulumi-lang-java="`false`" pulumi-lang-hcl="`false`">`false`</span>, the build is triggered but apply does not wait for <span pulumi-lang-nodejs="`imageUri`" pulumi-lang-dotnet="`ImageUri`" pulumi-lang-go="`imageUri`" pulumi-lang-python="`image_uri`" pulumi-lang-yaml="`imageUri`" pulumi-lang-java="`imageUri`" pulumi-lang-hcl="`image_uri`">`imageUri`</span> to be populated.
+     * When <span pulumi-lang-nodejs="`true`" pulumi-lang-dotnet="`True`" pulumi-lang-go="`true`" pulumi-lang-python="`true`" pulumi-lang-yaml="`true`" pulumi-lang-java="`true`" pulumi-lang-hcl="`true`">`true`</span> (default), after a source upload the provider triggers an image build and polls until it completes before proceeding (for example, before locking). When <span pulumi-lang-nodejs="`false`" pulumi-lang-dotnet="`False`" pulumi-lang-go="`false`" pulumi-lang-python="`false`" pulumi-lang-yaml="`false`" pulumi-lang-java="`false`" pulumi-lang-hcl="`false`">`false`</span>, the build is triggered but apply does not wait for <span pulumi-lang-nodejs="`imageUri`" pulumi-lang-dotnet="`ImageUri`" pulumi-lang-go="`imageUri`" pulumi-lang-python="`image_uri`" pulumi-lang-yaml="`imageUri`" pulumi-lang-java="`imageUri`" pulumi-lang-hcl="`image_uri`">`imageUri`</span> to be populated; only a draft artifact can skip the wait, since an artifact is locked only once its build has completed. A create whose build is still running at the end of the wait fails: under Terraform the artifact is saved to state and marked tainted, so the next apply replaces it; under Pulumi a failed create keeps no state, so the artifact stays on the platform untracked and has to be deleted by hand.
      */
     waitForBuild?: pulumi.Input<boolean | undefined>;
 }
@@ -140,7 +140,7 @@ export interface ArtifactSpecContainerGroupContainer {
      */
     imageBuildConfig?: pulumi.Input<inputs.ArtifactSpecContainerGroupContainerImageBuildConfig | undefined>;
     /**
-     * Docker image URI. Populated by the provider after a completed image build when <span pulumi-lang-nodejs="`source`" pulumi-lang-dotnet="`Source`" pulumi-lang-go="`source`" pulumi-lang-python="`source`" pulumi-lang-yaml="`source`" pulumi-lang-java="`source`" pulumi-lang-hcl="`source`">`source`</span> and <span pulumi-lang-nodejs="`imageBuildConfig`" pulumi-lang-dotnet="`ImageBuildConfig`" pulumi-lang-go="`imageBuildConfig`" pulumi-lang-python="`image_build_config`" pulumi-lang-yaml="`imageBuildConfig`" pulumi-lang-java="`imageBuildConfig`" pulumi-lang-hcl="`image_build_config`">`imageBuildConfig`</span> are set. May be set explicitly when not using source-driven builds.
+     * Docker image URI. Set this for a prebuilt image. When <span pulumi-lang-nodejs="`source`" pulumi-lang-dotnet="`Source`" pulumi-lang-go="`source`" pulumi-lang-python="`source`" pulumi-lang-yaml="`source`" pulumi-lang-java="`source`" pulumi-lang-hcl="`source`">`source`</span> and <span pulumi-lang-nodejs="`imageBuildConfig`" pulumi-lang-dotnet="`ImageBuildConfig`" pulumi-lang-go="`imageBuildConfig`" pulumi-lang-python="`image_build_config`" pulumi-lang-yaml="`imageBuildConfig`" pulumi-lang-java="`imageBuildConfig`" pulumi-lang-hcl="`image_build_config`">`imageBuildConfig`</span> are both set, apply builds the image and populates this attribute, and configuring it is rejected because the build would overwrite it.
      */
     imageUri?: pulumi.Input<string | undefined>;
     /**
@@ -1610,6 +1610,151 @@ export interface QuotaDefaultRule {
     window: pulumi.Input<string>;
 }
 
+export interface RegisteredModelFromExternalDatasets {
+    /**
+     * The ID of the holdout dataset.
+     */
+    holdoutDataCatalogId?: pulumi.Input<string | undefined>;
+    /**
+     * The version ID of the holdout dataset.
+     */
+    holdoutDataCatalogVersionId?: pulumi.Input<string | undefined>;
+    /**
+     * The ID of the training dataset.
+     */
+    trainingDataCatalogId?: pulumi.Input<string | undefined>;
+    /**
+     * The version ID of the training dataset.
+     */
+    trainingDataCatalogVersionId?: pulumi.Input<string | undefined>;
+}
+
+export interface RegisteredModelFromExternalGeospatialMonitoring {
+    /**
+     * The name of the geospatial column to analyze.
+     */
+    primaryLocationColumn: pulumi.Input<string>;
+}
+
+export interface RegisteredModelFromExternalModelDescription {
+    /**
+     * The build environment type of the model.
+     */
+    buildEnvironmentType?: pulumi.Input<string | undefined>;
+    /**
+     * A description of the model. Changing it updates the latest version in place; removing it creates a new version.
+     */
+    description?: pulumi.Input<string | undefined>;
+    /**
+     * The location of the model.
+     */
+    location?: pulumi.Input<string | undefined>;
+    /**
+     * The model name.
+     */
+    modelName?: pulumi.Input<string | undefined>;
+}
+
+export interface RegisteredModelFromExternalTag {
+    /**
+     * The name of the tag.
+     */
+    name: pulumi.Input<string>;
+    /**
+     * The value of the tag.
+     */
+    value: pulumi.Input<string>;
+}
+
+export interface RegisteredModelFromExternalTarget {
+    /**
+     * The class names for prediction results. For a `Binary` target, the first element is the minority (positive) class and the second is the majority (negative) class. Changing it replaces the Registered Model.
+     */
+    classNames?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+    /**
+     * The name of the target column. Required unless <span pulumi-lang-nodejs="`type`" pulumi-lang-dotnet="`Type`" pulumi-lang-go="`type`" pulumi-lang-python="`type`" pulumi-lang-yaml="`type`" pulumi-lang-java="`type`" pulumi-lang-hcl="`type`">`type`</span> is `AgenticWorkflow` or `MCP`. Changing it replaces the Registered Model.
+     */
+    name?: pulumi.Input<string | undefined>;
+    /**
+     * The column containing prediction probabilities.
+     */
+    predictionProbabilitiesColumn?: pulumi.Input<string | undefined>;
+    /**
+     * The prediction threshold used for binary classification models, between 0 and 1.
+     */
+    predictionThreshold?: pulumi.Input<number | undefined>;
+    /**
+     * The target type of the model. Changing it replaces the Registered Model.
+     */
+    type: pulumi.Input<string>;
+}
+
+export interface RegisteredModelFromExternalTextGeneration {
+    /**
+     * The name of the prompt column.
+     */
+    prompt: pulumi.Input<string>;
+}
+
+export interface RegisteredModelFromExternalTimeseries {
+    /**
+     * The date format of the forecast date and forecast point columns. Changing it replaces the Registered Model.
+     */
+    datetimeColumnFormat: pulumi.Input<string>;
+    /**
+     * The name of the forecast date column. Changing it replaces the Registered Model.
+     */
+    datetimeColumnName: pulumi.Input<string>;
+    /**
+     * A negative number or zero: the end of the effective feature derivation window.
+     */
+    effectiveFeatureDerivationWindowEnd?: pulumi.Input<number | undefined>;
+    /**
+     * A negative number or zero: the start of the effective feature derivation window.
+     */
+    effectiveFeatureDerivationWindowStart?: pulumi.Input<number | undefined>;
+    /**
+     * A negative number or zero: the end of the feature derivation window, relative to the forecast point, in forecast distance time units.
+     */
+    featureDerivationWindowEnd?: pulumi.Input<number | undefined>;
+    /**
+     * A negative number or zero: the start of the feature derivation window, relative to the forecast point, in forecast distance time units.
+     */
+    featureDerivationWindowStart?: pulumi.Input<number | undefined>;
+    /**
+     * The name of the forecast distance column.
+     */
+    forecastDistanceColumnName: pulumi.Input<string>;
+    /**
+     * The list of forecast distances. Changing it replaces the Registered Model.
+     */
+    forecastDistances?: pulumi.Input<pulumi.Input<number>[] | undefined>;
+    /**
+     * The time unit of the forecast distances. Changing it replaces the Registered Model.
+     */
+    forecastDistancesTimeUnit: pulumi.Input<string>;
+    /**
+     * The name of the forecast point column.
+     */
+    forecastPointColumnName: pulumi.Input<string>;
+    /**
+     * Whether the model is cross-series.
+     */
+    isCrossSeries?: pulumi.Input<boolean | undefined>;
+    /**
+     * Whether the model is optimized to support new series.
+     */
+    isNewSeriesSupport?: pulumi.Input<boolean | undefined>;
+    /**
+     * Whether the model is a traditional time series model.
+     */
+    isTraditionalTimeSeries?: pulumi.Input<boolean | undefined>;
+    /**
+     * The name of the series column of a multiseries model. Setting or removing it replaces the Registered Model.
+     */
+    seriesColumnName?: pulumi.Input<string | undefined>;
+}
+
 export interface RegisteredModelTag {
     /**
      * The name of the tag.
@@ -1650,6 +1795,21 @@ export interface VectorDatabaseChunkingParameters {
      * The separators used to split the data.
      */
     separators?: pulumi.Input<pulumi.Input<string>[] | undefined>;
+}
+
+export interface WorkloadPlacement {
+    /**
+     * The name of the Enclave.
+     */
+    enclave?: pulumi.Input<string | undefined>;
+    /**
+     * The ID of the Enclave.
+     */
+    enclaveId?: pulumi.Input<string | undefined>;
+    /**
+     * The region the Enclave is deployed in, when the platform reports one.
+     */
+    region?: pulumi.Input<string | undefined>;
 }
 
 export interface WorkloadRuntime {
