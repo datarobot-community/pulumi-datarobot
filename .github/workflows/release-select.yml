@@ -58,7 +58,7 @@ jobs:
         with:
           go-version-file: provider/go.mod
       - name: Install pulumictl
-        uses: jaxxstorm/action-install-gh-release@v3.0.0
+        uses: jaxxstorm/action-install-gh-release@v4.0.0
         with:
           repo: pulumi/pulumictl
       - name: Set PreRelease Version
