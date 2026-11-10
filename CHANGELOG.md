@@ -22,7 +22,35 @@ Changes made in this repo rather than upstream go under `Unreleased` while unrel
 and under a `### Provider changes` subsection once they ship in a version.
 Regenerating a section preserves that subsection.
 
+## [0.14.2] - 2026-11-10
+
+### Provider changes
+
+#### Security
+
+- Bumped `golang.org/x/crypto` from `v0.58.0` to `v0.58.1-0.20261009181718-2f1f834330b2`,
+  the fixed version for [GO-2026-5932](https://pkg.go.dev/vuln/GO-2026-5932) (the
+  deprecated `golang.org/x/crypto/openpgp` package). No tagged `x/crypto` release has the
+  fix yet. The provider never linked `openpgp`, so its behavior is unchanged; the bump
+  clears module-level scanners such as trivy, which flagged the plugin binary. Upstream
+  moved `openpgp` into its own `golang.org/x/crypto/openpgp` module, which only a test in a
+  dependency imports. It is not compiled into the provider binary.
+
 ## [0.14.1] - 2026-11-09
+
+### Provider changes
+
+#### Security
+
+- Bumped `github.com/klauspost/compress` from `v1.18.7` to `v1.20.2`, fixing
+  [GO-2026-6865](https://pkg.go.dev/vuln/GO-2026-6865) (panic on two-block frames), which
+  `govulncheck` reported as reachable from the provider (#410).
+
+#### Fixed
+
+- The release workflow's `publish` job now installs the pinned Pulumi CLI. It relied on
+  the copy that came with the runner image, and `ubuntu-latest` (now ubuntu-26.04) no
+  longer includes it, which broke GoReleaser's `make tfgen` hook (#412).
 
 ### Upstream provider changes
 
