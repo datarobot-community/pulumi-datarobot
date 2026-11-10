@@ -22,6 +22,20 @@ Changes made in this repo rather than upstream go under `Unreleased` while unrel
 and under a `### Provider changes` subsection once they ship in a version.
 Regenerating a section preserves that subsection.
 
+## [0.14.3] - 2026-11-10
+
+### Provider changes
+
+#### Security
+
+- Bumped `github.com/hashicorp/go-getter` from `v1.8.6` to `v1.8.10`, fixing
+  [CVE-2026-19585](https://nvd.nist.gov/vuln/detail/CVE-2026-19585) and
+  [CVE-2026-88922](https://nvd.nist.gov/vuln/detail/CVE-2026-88922) (both Medium), which
+  Grype reported in the plugin binary. `go-getter` is linked in through
+  `pulumi-terraform-bridge`'s `tf2pulumi` converter. `v1.8.10` raises its minimum AWS SDK,
+  Google Cloud client, `grpc` and `protobuf` versions, so those indirect dependencies
+  move up with it.
+
 ## [0.14.2] - 2026-11-10
 
 ### Provider changes
