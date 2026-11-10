@@ -36,6 +36,13 @@ Regenerating a section preserves that subsection.
   Google Cloud client, `grpc` and `protobuf` versions, so those indirect dependencies
   move up with it.
 
+#### Fixed
+
+- Regenerated the SDK READMEs for `v0.14.3`. They embed the release version, and the
+  release workflow's worktree check aborts when the committed copies don't match the
+  tag. That's why `v0.14.2` published only the GitHub Release and plugin binaries, not
+  the npm, PyPI, or NuGet packages. `v0.14.3` contains everything from `v0.14.2`.
+
 ## [0.14.2] - 2026-11-10
 
 ### Provider changes
