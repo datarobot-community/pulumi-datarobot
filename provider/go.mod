@@ -1,9 +1,9 @@
 module github.com/datarobot-community/pulumi-datarobot/provider
 
-go 1.27.3
+go 1.27.4
 
 require (
-	github.com/datarobot-community/terraform-provider-datarobot v0.14.1
+	github.com/datarobot-community/terraform-provider-datarobot v0.14.2
 	github.com/pulumi/pulumi-terraform-bridge/v3 v3.137.0
 	github.com/pulumi/pulumi/sdk/v3 v3.273.0
 )
@@ -228,7 +228,7 @@ require (
 	golang.org/x/net v0.62.0 // indirect
 	golang.org/x/oauth2 v0.37.0 // indirect
 	golang.org/x/sync v0.24.0 // indirect
-	golang.org/x/sys v0.49.0 // indirect
+	golang.org/x/sys v0.50.0 // indirect
 	golang.org/x/term v0.47.0 // indirect
 	golang.org/x/text v0.43.0 // indirect
 	golang.org/x/time v0.16.0 // indirect
