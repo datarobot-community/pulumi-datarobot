@@ -24,6 +24,18 @@ Regenerating a section preserves that subsection.
 
 ## [0.14.4] - 2026-11-12
 
+### Provider changes
+
+#### Security
+
+- Built the provider with Go 1.27.4, fixing
+  [GO-2026-6859](https://pkg.go.dev/vuln/GO-2026-6859) in Go 1.27.3's `net/http`.
+- Go SDK (`sdk/go.mod`): raised the `go` directive from `1.27.1` to `1.27.4`, bumped
+  `github.com/klauspost/compress` from `v1.18.7` to `v1.20.2`
+  ([GO-2026-6865](https://pkg.go.dev/vuln/GO-2026-6865)), and pinned
+  `golang.org/x/crypto` to `v0.58.1-0.20261009181718-2f1f834330b2`
+  ([GO-2026-5932](https://pkg.go.dev/vuln/GO-2026-5932)), matching the provider module.
+
 ### Upstream provider changes
 
 [terraform-provider-datarobot](https://github.com/datarobot-community/terraform-provider-datarobot) `v0.14.1` → `v0.14.2`
