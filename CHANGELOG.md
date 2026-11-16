@@ -22,6 +22,23 @@ Changes made in this repo rather than upstream go under `Unreleased` while unrel
 and under a `### Provider changes` subsection once they ship in a version.
 Regenerating a section preserves that subsection.
 
+## [0.14.5] - 2026-11-16
+
+### Provider changes
+
+#### Security
+
+- Bumped OpenTelemetry-Go from `v1.45.0` to `v1.47.0` in both the provider module and
+  the Go SDK (`sdk/go.mod`), fixing
+  [CVE-2026-128085](https://nvd.nist.gov/vuln/detail/CVE-2026-128085) (Medium), a
+  denial of service via attribute truncation bypass in `go.opentelemetry.io/otel/sdk`,
+  `go.opentelemetry.io/otel/sdk/log` and `go.opentelemetry.io/otel/trace`. The scanner
+  reported it in the plugin binary. The rest of the `otel` family moves with it to stay
+  in lockstep: `otel/log` and `otel/sdk/log` to `v1.47.0`, the `otlptrace` exporters and
+  `bridge/opentracing` to `v1.47.0`, `otlploggrpc` to `v0.23.0`, and the `otelgrpc` and
+  `otelhttp` contrib instrumentation to `v0.70.0`. `grpc-gateway`, `genproto` and
+  `protobuf` get minor indirect bumps.
+
 ## [0.14.4] - 2026-11-12
 
 ### Provider changes
