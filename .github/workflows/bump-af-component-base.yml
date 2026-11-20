@@ -1,0 +1,182 @@
+# Opens a PR against af-component-base bumping its pinned pulumi-datarobot
+# version whenever a real release of this repo publishes successfully.
+# See CFX-7002. Runs after Release completes (not on `release: published`,
+# which fires before SDKs are actually live on PyPI/npm/NuGet).
+name: Bump af-component-base
+
+on:
+  workflow_run:
+    workflows: ["Release"]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      version_override:
+        description: 'Version to bump to (e.g. v0.10.44), for manual testing'
+        required: false
+        type: string
+      target_repo:
+        description: 'Target repo to open the PR against (owner/repo)'
+        required: false
+        default: 'datarobot-community/af-component-base'
+        type: string
+      dry_run:
+        description: 'Skip PR creation; just print the computed diff'
+        required: false
+        type: boolean
+        default: false
+
+env:
+  SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+jobs:
+  bump:
+    name: bump-af-component-base
+    runs-on: ubuntu-latest
+    if: >
+      github.event_name == 'workflow_dispatch' ||
+      github.event.workflow_run.conclusion == 'success'
+    concurrency:
+      group: bump-af-component-base
+      cancel-in-progress: false
+    permissions:
+      contents: read
+    steps:
+      # Only needed to run `git describe` against the tag that triggered the
+      # upstream Release run; this checkout never gets pushed to.
+      - name: Checkout pulumi-datarobot
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+
+      - name: Resolve release tag
+        id: tag
+        env:
+          HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          if [[ -n "${{ inputs.version_override }}" ]]; then
+            TAG="${{ inputs.version_override }}"
+            echo "Using manual version override: $TAG"
+          else
+            git fetch --prune --tags --force
+            # workflow_run doesn't reliably expose the triggering tag via
+            # head_branch, so resolve it from the exact commit instead.
+            TAG=$(git describe --tags --exact-match "$HEAD_SHA" 2>/dev/null || echo "")
+            if [[ -z "$TAG" ]]; then
+              echo "::notice::Triggering commit is not an exact release tag (e.g. a manual Release dispatch); nothing to bump."
+              echo "skip=true" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+          fi
+          echo "skip=false" >> "$GITHUB_OUTPUT"
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "version=${TAG#v}" >> "$GITHUB_OUTPUT"
+
+      # Short-lived installation token scoped only to af-component-base.
+      # Requires secrets.BUMP_BOT_APP_ID / BUMP_BOT_APP_PRIVATE_KEY to be
+      # provisioned (a GitHub App installed on af-component-base with
+      # contents:write + pull-requests:write) — see CFX-7002 plan, Step 0.
+      - name: Generate app token
+        if: steps.tag.outputs.skip != 'true'
+        id: app_token
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ secrets.BUMP_BOT_APP_ID }}
+          private-key: ${{ secrets.BUMP_BOT_APP_PRIVATE_KEY }}
+          owner: datarobot-community
+          repositories: af-component-base
+
+      - name: Checkout af-component-base
+        if: steps.tag.outputs.skip != 'true'
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          repository: ${{ inputs.target_repo || 'datarobot-community/af-component-base' }}
+          token: ${{ steps.app_token.outputs.token }}
+          path: af-component-base
+
+      - name: Compute version bump
+        if: steps.tag.outputs.skip != 'true'
+        id: bump
+        working-directory: af-component-base
+        env:
+          NEW_VERSION: ${{ steps.tag.outputs.version }}
+        run: |
+          set -euo pipefail
+          PYPROJECT=template/infra/pyproject.toml.jinja
+          TASKFILE=template/infra/Taskfile.yaml.jinja
+
+          CURRENT_PLAIN=$(grep -oP 'pulumi-datarobot>=\K[0-9]+\.[0-9]+\.[0-9]+' "$PYPROJECT")
+          CURRENT_TAGGED=$(grep -oP 'echo "v\K[0-9]+\.[0-9]+\.[0-9]+(?=")' "$TASKFILE" | head -1)
+
+          if [[ -z "$CURRENT_PLAIN" || -z "$CURRENT_TAGGED" ]]; then
+            echo "::error::Could not locate the currently pinned version in $PYPROJECT or $TASKFILE"
+            exit 1
+          fi
+
+          # Numeric semver comparison — skip (no PR) if the pin is already
+          # current, protecting against reruns or a race with a manual bump.
+          ver_ge() { [ "$(printf '%s\n%s' "$1" "$2" | sort -V | tail -n1)" = "$1" ]; }
+
+          if ver_ge "$CURRENT_PLAIN" "$NEW_VERSION"; then
+            echo "Pinned version $CURRENT_PLAIN is already >= $NEW_VERSION; nothing to bump."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          sed -i "s/pulumi-datarobot>=${CURRENT_PLAIN}/pulumi-datarobot>=${NEW_VERSION}/" "$PYPROJECT"
+          sed -i "s/v${CURRENT_TAGGED}/v${NEW_VERSION}/g" "$TASKFILE"
+
+          echo "skip=false" >> "$GITHUB_OUTPUT"
+          echo "old_version=$CURRENT_PLAIN" >> "$GITHUB_OUTPUT"
+
+      - name: Show diff
+        if: steps.tag.outputs.skip != 'true' && steps.bump.outputs.skip != 'true'
+        working-directory: af-component-base
+        run: git diff
+
+      - name: Dry run summary
+        if: >
+          inputs.dry_run == true &&
+          steps.tag.outputs.skip != 'true' &&
+          steps.bump.outputs.skip != 'true'
+        working-directory: af-component-base
+        run: |
+          {
+            echo "## Dry run: computed diff for bumping to ${{ steps.tag.outputs.tag }}"
+            echo '```diff'
+            git diff
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Open PR
+        if: >
+          steps.tag.outputs.skip != 'true' &&
+          steps.bump.outputs.skip != 'true' &&
+          inputs.dry_run != true
+        id: pr
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ steps.app_token.outputs.token }}
+          path: af-component-base
+          branch: bump-pulumi-datarobot-${{ steps.tag.outputs.version }}
+          delete-branch: true
+          commit-message: "Bump pulumi-datarobot to ${{ steps.tag.outputs.tag }}"
+          title: "Bump pulumi-datarobot to ${{ steps.tag.outputs.tag }}"
+          body: |
+            Automated bump of the pinned `pulumi-datarobot` version following the [${{ steps.tag.outputs.tag }} release](https://github.com/datarobot-community/pulumi-datarobot/releases/tag/${{ steps.tag.outputs.tag }}).
+
+            - `template/infra/pyproject.toml.jinja`: `pulumi-datarobot>=${{ steps.bump.outputs.old_version }}` → `pulumi-datarobot>=${{ steps.tag.outputs.version }}`
+            - `template/infra/Taskfile.yaml.jinja`: plugin version/URL bumped to `${{ steps.tag.outputs.tag }}`
+
+            Opened automatically by [pulumi-datarobot's bump-af-component-base workflow](https://github.com/${{ github.repository }}/actions/workflows/bump-af-component-base.yml).
+
+      - name: Notify Slack
+        if: >
+          steps.tag.outputs.skip != 'true' &&
+          steps.bump.outputs.skip != 'true' &&
+          inputs.dry_run != true &&
+          env.SLACK_WEBHOOK_URL != ''
+        env:
+          PR_URL: ${{ steps.pr.outputs.pull-request-url }}
+        run: |
+          curl -X POST -H 'Content-type: application/json' --data "{\"text\": \":arrow_up: Opened af-component-base bump PR for pulumi-datarobot ${{ steps.tag.outputs.tag }}: ${PR_URL}\"}" "$SLACK_WEBHOOK_URL"
